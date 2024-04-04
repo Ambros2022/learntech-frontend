@@ -1,0 +1,66 @@
+// ** React Imports
+import { ReactNode, ReactElement, useEffect } from 'react'
+
+// ** Next Import
+import { useRouter } from 'next/router'
+import authConfig from 'src/configs/auth'
+// ** Hooks Import
+import { useAuth } from 'src/hooks/useAuth'
+// ** Cookies
+import Cookies from 'js-cookie';
+interface AuthGuardProps {
+  children: ReactNode
+  fallback: ReactElement | null
+}
+
+const AuthGuard = (props: AuthGuardProps) => {
+  const { children, fallback } = props
+  const auth = useAuth()
+  const router = useRouter()
+  const getAuthToken = () => {
+    return Cookies.get(authConfig.storageTokenKeyName);
+  }
+  const storedToken = getAuthToken()!;
+  console.log("storedToken", storedToken)
+  console.log("auth", auth.user)
+  useEffect(
+    () => {
+      if (!router.isReady) {
+        return
+      }
+      console.log("AuthGuard", 1);
+      if (!storedToken) {
+        console.log("AuthGuard", 2);
+        if (router.asPath !== '/') {
+          router.replace({
+            pathname: '/admin/login',
+            query: { returnUrl: router.asPath }
+          })
+        } else {
+          router.replace('/admin/login')
+        }
+      }
+      // if (auth.user === null && !storedToken) {
+      //   if (router.asPath !== '/') {
+      //     router.replace({
+      //       pathname: '/admin/login',
+      //       query: { returnUrl: router.asPath }
+      //     })
+      //   } else {
+      //     router.replace('/admin/login')
+      //   }
+      // }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [router.route]
+  )
+
+  // if (auth.loading || auth.user === null) {
+  //   console.log("AuthGuard", 3);
+  //   return fallback
+  // }
+  console.log("AuthGuard", 4);
+  return <>{children}</>
+}
+
+export default AuthGuard
