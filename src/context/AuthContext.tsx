@@ -69,7 +69,7 @@ const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
-      // console.log("initAuth", user);
+      console.log("initAuth", user);
       setLoading(false)
 
       const storedToken = getAuthToken()!

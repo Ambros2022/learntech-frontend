@@ -37,7 +37,7 @@ interface Props {
 const AppBrand = () => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <img src='/images/apple-touch-icon.png' style={{objectFit:"contain"}} alt='logo' width='200' height='100' />
+      <img src='/images/logo.png' style={{objectFit:"contain"}} alt='logo' width='200' height='100' />
     
     </Box>
   )
