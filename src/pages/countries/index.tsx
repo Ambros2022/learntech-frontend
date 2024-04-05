@@ -1,29 +1,170 @@
+// ** React Imports
+import { useEffect, useState, useCallback, ChangeEvent } from 'react'
 // ** MUI Imports
-import { useEffect, useState, useCallback, ChangeEvent, useContext } from 'react'
-import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
+import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
-import CardContent from '@mui/material/CardContent'
-import CustomTextField from 'src/@core/components/mui/text-field'
-import { Divider, Fab, Link, MenuItem } from '@mui/material'
-import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
-
-
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-
+import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
+import Link from 'next/link'
 import axios1 from '../../configs/axios'
-
-
-import Icon from 'src/@core/components/icon'
-
 // ** Context
 import { useAuth } from 'src/hooks/useAuth'
+import { useParams } from "react-router-dom";
+// ** Custom Components
+import CustomChip from 'src/@core/components/mui/chip'
+import CustomAvatar from 'src/@core/components/mui/avatar'
+import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
+// ** Types Imports
+import { ThemeColor } from 'src/@core/layouts/types'
+// import { DataGridRowType } from 'src/@fake-db/types'
+// ** Utils Import
+import { getInitials } from 'src/@core/utils/get-initials'
+import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import IconButton from '@mui/material/IconButton'
+import { GridToolbarExport } from '@mui/x-data-grid'
+// ** Custom Component Import
+import CustomTextField from 'src/@core/components/mui/text-field'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import NotAuthorized from 'src/pages/401'
+// ** React Imports
+import { useContext } from 'react'
+import { AbilityContext } from 'src/layouts/components/acl/Can'
+// ** Icon Imports
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/router'
+import Fab from '@mui/material/Fab'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 import axios from 'axios'
 
+interface StatusObj {
+  [key: number]: {
+    title: string
+    color: ThemeColor
+  }
+}
 
 let cancelToken: any;
+
+type SortType = 'asc' | 'desc' | undefined | null
+
+// ** renders client column
+const renderClient = (params: GridRenderCellParams) => {
+  const { row } = params
+  const stateNum = Math.floor(Math.random() * 6)
+  const states = ['success', 'error', 'warning', 'info', 'primary', 'secondary']
+  const color = states[stateNum]
+  return (
+    <CustomAvatar
+      skin='light'
+      color={color as ThemeColor}
+      sx={{ mr: 3, fontSize: '.8rem', width: '1.875rem', height: '1.875rem' }}
+    >
+      {getInitials(row.name ? row.name : 'John Doe')}
+    </CustomAvatar>
+  )
+}
+
+const statusObj: StatusObj = {
+  1: { title: 'current', color: 'primary' },
+  2: { title: 'professional', color: 'success' },
+  3: { title: 'rejected', color: 'error' },
+  4: { title: 'resigned', color: 'warning' },
+  5: { title: 'applied', color: 'info' }
+}
+
+const RowOptions = ({ id }: { id: number | string }) => {
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const [show, setShow] = useState<boolean>(false)
+  const ability = useContext(AbilityContext)
+  const handleRowOptionsClose = () => {
+    setShow(true);
+  }
+
+  const handleDelete = () => {
+    setOpen(true);
+  }
+  const handleClosePopup = () => {
+    setOpen(false);
+  };
+  const handleConfirmRemove = async () => {
+    await DeleteRow();
+    setOpen(false);
+  }
+
+  const DeleteRow = async () => {
+    try {
+      await axios1.delete('/api/admin/class/delete/' + id)
+        .then(response => {
+          console.log(response);
+
+          if (response.data.status == 1) {
+            toast.success(response.data.message)
+            router.reload();
+          } else {
+            toast.error(response.data.message)
+
+          }
+        })
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "please try again")
+
+    }
+
+  };
+
+  return (
+    <>
+      <MenuItem sx={{ '& svg': { mr: 1 } }}>
+        <Link href={`/class/edit/` + id} >
+          <Icon icon='tabler:edit' fontSize={20} />
+        </Link>
+      </MenuItem>
+
+
+      <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
+        <Icon icon='tabler:trash' fontSize={20} />
+
+      </MenuItem>
+
+      <Grid>
+
+        <Dialog
+          open={open}
+          onClose={handleClosePopup}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle className="popup-title" id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+          <DialogContent style={{ paddingTop: '20px' }}>
+            <DialogContentText id="alert-dialog-description">
+              Would you like to delete?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClosePopup} color="primary">
+              No
+            </Button>
+            <Button onClick={() => handleConfirmRemove()} color="primary" autoFocus>
+              Yes
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Grid>
+    </>
+
+
+  )
+}
+
+interface Props {
+  value: string
+  clearSearch: () => void
+  onChange: (e: ChangeEvent) => void
+}
 
 type DataGridRowType = {
   id: number
@@ -33,42 +174,38 @@ type DataGridRowType = {
   status: any
 }
 
-type SortType = 'asc' | 'desc' | undefined | null
-
 const SecondPage = () => {
+  // ** States
   const { user } = useAuth();
-
-  const [loading, setLoading] = useState(true);
-  const [rows, setRows] = useState<DataGridRowType[]>([])
-  const [total, setTotal] = useState<number>(0)
-  const [searchtext, setSearchtext] = useState<string>('')
-  const [city_id, setCity_id] = useState('')
-
-
+  const [schoolId, setschoolId] = useState<string>('')
+  const [roles, setRoles] = useState([])
+  const [schools, setSchools] = useState([])
   const [reloadpage, setReloadpage] = useState("0");
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
-  const [searchfrom, setSearchfrom] = useState<any>('name,school.name')
-  const [fieldname, setFieldname] = useState<string>('name')
-  const ability = useContext(AbilityContext)
-
-
+  const [city_id, setcity_id] = useState('')
+  const [status, setStatus] = useState('')
+  const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
   const [page, setPage] = useState<number>(1)
   const [orderby, setOrderby] = useState<SortType>('asc')
+  const [rows, setRows] = useState<DataGridRowType[]>([])
+  const [searchtext, setSearchtext] = useState<string>('')
+  const [searchfrom, setSearchfrom] = useState<any>('name')
+  const [fieldname, setFieldname] = useState<string>('name')
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
+  const isMountedRef = useIsMountedRef();
+  const ability = useContext(AbilityContext)
+  const [roleshow, setRoleshow] = useState<boolean>(false)
+  const params: any = {}
 
-
-
-  const handleReloadPage = useCallback(() => {
-    setLoading(true);
-    setReloadpage('1');
-  }, []);
-
+  params['page'] = 1;
+  params['size'] = 10000;
 
   let columns: GridColDef[] = [
 
     {
-      flex: 0.1,
-      minWidth: 100,
+      flex: 0.175,
+      minWidth: 200,
       field: 'name',
       headerName: 'Countries',
       renderCell: (params: GridRenderCellParams) => {
@@ -81,16 +218,37 @@ const SecondPage = () => {
         )
       }
     },
+
+
+    {
+      flex: 0.175,
+      minWidth: 100,
+      sortable: false,
+      field: 'actions',
+      headerName: 'Actions',
+      renderCell: ({ row }: any) => (
+        row.role && row.role[0]?.name === "superadmin" ? null : <RowOptions id={row._id} />
+      )
+
+    }
   ]
+
+  // if (user && user.role !== "superadmin") {
+  //   columns = columns.filter(column => column.field !== 'school.name');
+  // }
+
 
   const fetchTableData = useCallback(
     async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, city_id: string) => {
       setLoading(true);
-      console.log("apicall schoolId",);
-
+      console.log("apicall schoolId", schoolId);
+      console.log(user, "user")
       // Check if schoolId has data
-      if (user && user.role == "admin") {
-
+      // if (user && user.role == "admin") {
+        console.log("")
+        if (typeof cancelToken !== typeof undefined) {
+          cancelToken.cancel("Operation canceled due to new request.");
+        }
         cancelToken = axios.CancelToken.source();
 
         await axios1
@@ -106,6 +264,10 @@ const SecondPage = () => {
               city_id,
 
             },
+            // headers: {
+            //   Authorization: `Bearer ${[{"key":"x-access-token","value":"{{token}}","type":"text"}]}`, // 
+            // },
+            
           })
           .then((res) => {
             setTotal(res.data.totalRecords);
@@ -119,16 +281,16 @@ const SecondPage = () => {
             setLoading(false);
             console.error("API call error:", error);
           });
-      } else {
-        // schoolId is empty, handle accordingly (e.g., set loading to false)
-        setLoading(false);
-      }
+      // } 
+      
+      // else {
+      //   // schoolId is empty, handle accordingly (e.g., set loading to false)
+      //   setLoading(false);
+      // }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationModel, reloadpage]
   );
-
-
 
   const paginationchange = (model: GridPaginationModel, details: GridCallbackDetails) => {
     setSize(model.pageSize);
@@ -137,11 +299,9 @@ const SecondPage = () => {
 
   }
 
-
   useEffect(() => {
     fetchTableData(orderby, searchtext, searchfrom, size, page, fieldname, city_id)
   }, [fetchTableData, searchtext, orderby, searchfrom, size, page, fieldname, city_id])
-
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -157,11 +317,43 @@ const SecondPage = () => {
     setSearchtext(value)
   }
 
+
+  // useEffect(() => {
+  //   setRoleshow(false);
+  //   if (user && user.role !== "superadmin" && user.schoolId) {
+
+  //     let schid = user.schoolId;
+  //     setschoolId(schid);
+  //   }
+  //   if (schoolId) {
+
+  //   }
+  // }, [schoolId]);
+
+
+  // Get all schools
+  // const getschools = useCallback(async () => {
+  //   try {
+  //     const response = await axios1.get('api/admin/countries/get', { params: params });
+  //     if (isMountedRef.current) {
+
+  //       setSchools(response.data.data);
+
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }, [isMountedRef]);
+
+  // useEffect(() => {
+
+  //   getschools();
+  // }, []);
+
   const AddButtonToolbar = () => {
 
     return (
       <>
-
         <Link href={`/countries/add/`} >
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
@@ -175,68 +367,52 @@ const SecondPage = () => {
 
   const AddButtonComponent = <AddButtonToolbar />;
 
-
-
-
-
-
-
-
-
-
-
-
   return (
     <Grid container spacing={6}>
+
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Search Filters'></CardHeader>
-          <CardContent>
-            <Grid item sm={4} xs={12}>
-              <CustomTextField
-                select
-                fullWidth
-                defaultValue="Select School"
-                value={""}
+          <>
+            <CardHeader title="Search Filters" />
+            <CardContent>
+              <Grid container spacing={6}>
+                <Grid item sm={4} xs={12}>
+                  <CustomTextField
+                    select
+                    fullWidth
+                    defaultValue="Select Country"
+                    value={schoolId}
+                    onChange={(e: any) => {
+                      setschoolId(e.target.value);
+                      console.log(setschoolId, "setschoolId");
+                      setRoleshow(true);
+                    }}
+                    SelectProps={{
+                      displayEmpty: true,
+                    }}
+                  >
+                    <MenuItem value=''>Select Country</MenuItem>
+                    {schools && schools.map((val: any) => (
+                      <MenuItem value={val._id}>{val.name}</MenuItem>
+                    ))}
+                    {schools.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                  </CustomTextField>
+                </Grid>
+                <Grid item sm={4} xs={12}>
+                  <Button sx={{ mt: 0 }} variant="contained" color='error'
+                    onClick={(e: any) => {
+                      // setClassId('');
+                      setschoolId('');
+                      // setStatus('');
+                    }}
+                    startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </>
 
-                SelectProps={{
-                  displayEmpty: true,
-                }}
-              >
-                <MenuItem value=''>Select Countries</MenuItem>
-
-              </CustomTextField>
-            </Grid>
-          </CardContent>
           <Divider sx={{ m: '0 !important' }} />
           {/* <TableHeader value={value} handleFilter={handleFilter} toggle={toggleAddUserDrawer} /> */}
-          {/* <DataGrid
-            autoHeight
-            pagination
-            loading={loading}
-            rows={rows}
-            rowCount={total}
-            columns={columns}
-            // checkboxSelection/
-            sortingMode='server'
-            paginationMode='server'
-            pageSizeOptions={[10, 15, 25, 50]}
-            getRowId={(row) => row._id}
-            slots={{ toolbar: ServerSideToolbar }}
-            slotProps={{
-              baseButton: {
-                size: 'medium',
-                variant: 'tonal',
-              },
-              toolbar: {
-                value: searchtext,
-                clearSearch: () => handleSearch(''),
-                onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value),
-                CustomToolbar: AddButtonComponent
-              },
-            }}
-          /> */}
-
           <DataGrid
             autoHeight
             pagination
@@ -268,8 +444,9 @@ const SecondPage = () => {
           />
         </Card>
       </Grid>
+
     </Grid>
-  )
+  );
 }
 
 export default SecondPage
