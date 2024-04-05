@@ -32,7 +32,8 @@ import AclGuard from 'src/@core/components/auth/AclGuard'
 import ThemeComponent from 'src/@core/theme/ThemeComponent'
 import AuthGuard from 'src/@core/components/auth/AuthGuard'
 import GuestGuard from 'src/@core/components/auth/GuestGuard'
-import Frontend from 'src/pages/Frontend'
+import Redirection from 'src/@core/components/redirection/redirect301'
+import Frontend from 'src/pages/home'
 
 // ** Spinner Import
 import Spinner from 'src/@core/components/spinner'
@@ -121,41 +122,40 @@ const App = (props: ExtendedAppProps) => {
 
 
   return (
-    
-      <CacheProvider value={emotionCache}>
-        <Head>
-          <title>{`${themeConfig.templateName} -Learntechweb`}</title>
-          <meta
-            name='description'
-            content={`${themeConfig.templateName} – Learntechweb`}
-          />
-          <meta name='keywords' content='Learntechweb' />
-          <meta name='viewport' content='initial-scale=1, width=device-width' />
-        </Head>
 
-        <AuthProvider>
-          <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
-            <SettingsConsumer>
-              {({ settings }) => {
-                return (
-                  <ThemeComponent settings={settings}>
-                    <Guard authGuard={authGuard} guestGuard={guestGuard}>
-                     
-                        {getLayout(<Component {...pageProps} />)}
-                     
-                    </Guard>
-                    
-                    <ReactHotToast>
-                      <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
-                    </ReactHotToast>
-                  </ThemeComponent>
-                )
-              }}
-            </SettingsConsumer>
-          </SettingsProvider>
-        </AuthProvider>
-      </CacheProvider>
-   
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
+        {/* <meta
+          name='description'
+          content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!'
+        />
+        <meta name='keywords' content='Learntechweb' />
+        <meta name='viewport' content='initial-scale=1, width=device-width' /> */}
+      </Head>
+
+      <AuthProvider>
+        <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+          <SettingsConsumer>
+            {({ settings }) => {
+              return (
+                <ThemeComponent settings={settings}>
+                  {/* <Redirection > */}
+                  <Guard authGuard={authGuard} guestGuard={guestGuard}>
+                    {getLayout(<Component {...pageProps} />)}
+                  </Guard>
+                  {/* </Redirection> */}
+                  <ReactHotToast>
+                    <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
+                  </ReactHotToast>
+                </ThemeComponent>
+              )
+            }}
+          </SettingsConsumer>
+        </SettingsProvider>
+      </AuthProvider>
+    </CacheProvider>
+
   )
 }
 

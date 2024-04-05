@@ -9,23 +9,30 @@ import { ReactNode } from 'react'
 
 
 // ** Layout Import
-import BlankLayout from 'src/@core/layouts/BlankLayout'
+import FrontLayout from 'src/@core/layouts/FrontLayout'
 
 const Home = () => {
   return (
-    <Grid container spacing={6}>
-      <Grid item xs={12}>
-        <Card>
-          <CardContent>
-            <Typography sx={{ mb: 2 }}>Dashboard</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
+    <section>
+      {/* Include shared UI here e.g. a header or sidebar */}
 
-    </Grid>
+      <nav className="navbar navbar-light bg-black">
+        <div className="container-fluid">
+          <a className="navbar-brand">Navbar</a>
+          <form className="d-flex" action="javascript:void(0)">
+            <input className="form-control me-sm-2" type="search" placeholder="Search" aria-label="Search" />
+            <button className="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+    </section>
+
   )
 }
 
+Home.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
 
+Home.guestGuard = true
 
 export default Home
