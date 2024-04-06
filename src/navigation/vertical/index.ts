@@ -8,8 +8,8 @@ const navigation = (): VerticalNavItemsType => {
   return [
     
     {
-      title: 'Dashboard',
-      path: '/home',
+      title:'Dashboard',
+      path: 'dashboard/',
       icon: 'tabler:smart-home',
       action:'manage',
       subject:'dashboard',
@@ -23,7 +23,7 @@ const navigation = (): VerticalNavItemsType => {
       children: [
         {
           title: 'Countries',
-          path: '/countries',
+          path: 'dashboard/countries',
           action: 'read',
           auth:false
         },

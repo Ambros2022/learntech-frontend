@@ -17,7 +17,7 @@ import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
-import axios1 from '../../configs/axios'
+import axios1 from '../../../configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
@@ -109,7 +109,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     toast.error(response.data.message)
                     setError(response.data.message)
                 }
-              
+
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
