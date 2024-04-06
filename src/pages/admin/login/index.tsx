@@ -40,6 +40,7 @@ import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wr
 
 // ** Third Party Imports
 import toast from 'react-hot-toast'
+import Head from 'next/head'
 
 interface State {
   password: string
@@ -104,7 +105,7 @@ const LoginV1 = () => {
 
 
   const onSubmit = async (data: any) => {
-    console.log(data ,"data")
+    console.log(data, "data")
     setLoading(true)
     const { email, password } = data
     auth.login({ email, password }, (data) => {
@@ -118,115 +119,120 @@ const LoginV1 = () => {
 
   }
 
- 
+
 
   return (
-    <Box className='content-center'>
-      <AuthIllustrationV1Wrapper>
-        <Card>
-          <CardContent sx={{ p: theme => `${theme.spacing(10.5, 8, 8)} !important` }}>
-            <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-              <img src='/images/apple-touch-icon.png' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' />
-              <Typography variant='h3' sx={{ ml: 2.5, fontWeight: 700 }}>
-                {themeConfig.templateName}
-              </Typography>
-            </Box>
+    <>
+      {/* <Head>
+        <title>Login in India | Study Abroad | Learntech Edu Solutions</title>
+        <meta
+          name='description'
+          content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!' />
+        <meta name='keywords' content='Learntechweb' />
+        <meta name='viewport' content='initial-scale=1, width=device-width' />
+      </Head> */}
+      <Box className='content-center'>
+        <AuthIllustrationV1Wrapper>
+          <Card>
+            <CardContent sx={{ p: theme => `${theme.spacing(10.5, 8, 8)} !important` }}>
+              <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                <Link href="/">
+                  <img src='/images/logo.png' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' /></Link>
+                <Typography variant='h3' sx={{ ml: 2.5, fontWeight: 700 }}>
+                  {themeConfig.templateName}
+                </Typography>
+              </Box>
 
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Grid container spacing={5}>
-                <Grid item xs={12}>
-                  <Controller
-                    name='email'
-                    control={control}
-                    // rules={{ required: true }}
-                    rules={{
-                      required: 'email is required',
-                      validate: {
-                        noWhiteSpace: value => !/^\s*$/.test(value) || 'email cannot be empty or contain only whitespace'
-                      }
-                    }}
-                    render={({ field: { value, onChange } }) => (
-                      <CustomTextField
-                        fullWidth
-                        value={value}
-                        label='Email'
-                        onChange={onChange}
-                        placeholder=''
-                        error={Boolean(errors.email)}
-                        aria-describedby='validation-async-first-name'
-                        {...(errors.email && { helperText: 'The email is required' })}
-                      />
-                    )}
-                  />
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Grid container spacing={5}>
+                  <Grid item xs={12}>
+                    <Controller
+                      name='email'
+                      control={control}
+                      // rules={{ required: true }}
+                      rules={{
+                        required: 'email is required',
+                        validate: {
+                          noWhiteSpace: value => !/^\s*$/.test(value) || 'email cannot be empty or contain only whitespace'
+                        }
+                      }}
+                      render={({ field: { value, onChange } }) => (
+                        <CustomTextField
+                          fullWidth
+                          value={value}
+                          label='Email'
+                          onChange={onChange}
+                          placeholder=''
+                          error={Boolean(errors.email)}
+                          aria-describedby='validation-async-first-name'
+                          {...(errors.email && { helperText: 'The email is required' })} />
+                      )} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Controller
+                      name='password'
+                      control={control}
+                      rules={{
+                        required: 'Password is required',
+                        validate: {
+                          noWhiteSpace: value => !/^\s*$/.test(value) || 'email cannot be empty or contain only whitespace'
+                        }
+                      }}
+                      render={({ field: { value, onChange } }) => (
+                        <CustomTextField
+                          fullWidth
+                          value={value}
+                          label='Password'
+                          onChange={onChange}
+                          id='validation-async-password'
+                          error={Boolean(errors.password)}
+                          type={values.showPassword ? 'text' : 'password'}
+                          {...(errors.password && { helperText: 'This Password is required' })}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position='end'>
+                                <IconButton
+                                  edge='end'
+                                  onClick={handleClickShowPassword}
+                                  onMouseDown={e => e.preventDefault()}
+                                  aria-label='toggle password visibility'
+                                >
+                                  <Icon fontSize='1.25rem' icon={values.showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
+                                </IconButton>
+                              </InputAdornment>
+                            )
+                          }} />
+                      )} />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    {/* <Typography component={LinkStyled} href='/forgot-password'>
+      Forgot Password?
+    </Typography> */}
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
+
+                      Login
+                      {loading ? (
+                        <CircularProgress
+                          sx={{
+                            color: 'common.white',
+                            width: '20px !important',
+                            height: '20px !important',
+                            mr: theme => theme.spacing(2)
+                          }} />
+                      ) : null}
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    name='password'
-                    control={control}
-                    rules={{
-                      required: 'Password is required',
-                      validate: {
-                        noWhiteSpace: value => !/^\s*$/.test(value) || 'email cannot be empty or contain only whitespace'
-                      }
-                    }}
-                    render={({ field: { value, onChange } }) => (
-                      <CustomTextField
-                        fullWidth
-                        value={value}
-                        label='Password'
-                        onChange={onChange}
-                        id='validation-async-password'
-                        error={Boolean(errors.password)}
-                        type={values.showPassword ? 'text' : 'password'}
-                        {...(errors.password && { helperText: 'This Password is required' })}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position='end'>
-                              <IconButton
-                                edge='end'
-                                onClick={handleClickShowPassword}
-                                onMouseDown={e => e.preventDefault()}
-                                aria-label='toggle password visibility'
-                              >
-                                <Icon fontSize='1.25rem' icon={values.showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
-                              </IconButton>
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                    )}
-                  />
-                </Grid>
+              </form>
 
-                <Grid item xs={12}>
-                  <Typography component={LinkStyled} href='/forgot-password'>
-                    Forgot Password?
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
-
-                    Login
-                    {loading ? (
-                      <CircularProgress
-                        sx={{
-                          color: 'common.white',
-                          width: '20px !important',
-                          height: '20px !important',
-                          mr: theme => theme.spacing(2)
-                        }}
-                      />
-                    ) : null}
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-
-          </CardContent>
-        </Card>
-      </AuthIllustrationV1Wrapper>
-    </Box>
+            </CardContent>
+          </Card>
+        </AuthIllustrationV1Wrapper>
+      </Box></>
   )
 }
 
