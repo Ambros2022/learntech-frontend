@@ -55,10 +55,10 @@ const AuthGuard = (props: AuthGuardProps) => {
     [router.route]
   )
 
-  // if (auth.loading || auth.user === null) {
-  //   console.log("AuthGuard", 3);
-  //   return fallback
-  // }
+  if (auth.loading || auth.user === null) {
+    console.log("AuthGuard", 3);
+    return fallback
+  }
   console.log("AuthGuard", 4);
   return <>{children}</>
 }
