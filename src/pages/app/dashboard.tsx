@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
-import axios1 from '../../../../configs/axios'
+import axios1 from '../../configs/axios'
 import { ReactNode } from 'react'
 
 
@@ -23,7 +23,7 @@ const Home = () => {
       <Grid item xs={12}>
         <Card>
           <CardContent>
-            <Typography sx={{ mb: 2 }}>Dashboard</Typography>
+            <Typography sx={{ mb: 2 }}>Home</Typography>
           </CardContent>
         </Card>
       </Grid>

@@ -77,39 +77,39 @@ const AuthProvider = ({ children }: Props) => {
       setisAuthenticated(true);
       // setUser(response.data.data)
 
-      // if (storedToken) {
-      //   setLoading(true)
-      //   await axios1
-      //     .post(authConfig.meEndpoint, {}, {
-      //       headers: {
-      //         "x-access-token": storedToken
-      //       }
-      //     })
-      //     .then(async response => {
-      //       setLoading(false);
-      //       setisAuthenticated(true);
-      //       setUser(response.data.data);
-      //       const privileges = response.data.privileges;
-      //       setPermission(privileges);
+      if (storedToken) {
+        setLoading(true)
+        await axios1
+          .post(authConfig.meEndpoint, {}, {
+            headers: {
+              "x-access-token": storedToken
+            }
+          })
+          .then(async response => {
+            setLoading(false);
+            setisAuthenticated(true);
+            setUser(response.data.data);
+            // const privileges = response.data.privileges;
+            // setPermission(privileges);
 
 
-      //       axios1.defaults.headers.common["x-access-token"] = storedToken;
+            axios1.defaults.headers.common["x-access-token"] = storedToken;
 
 
-      //     })
-      //     .catch(() => {
-      //       // localStorage.removeItem('userData')
-      //       // localStorage.removeItem('refreshToken')
-      //       // localStorage.removeItem('accessToken')
-      //       setUser(null)
-      //       setLoading(false)
-      //       if (authConfig.onTokenExpiration === 'logout' && !router.pathname.includes('login')) {
-      //         router.replace('/login')
-      //       }
-      //     })
-      // } else {
-      //   setLoading(false)
-      // }
+          })
+          .catch(() => {
+            // localStorage.removeItem('userData')
+            // localStorage.removeItem('refreshToken')
+            // localStorage.removeItem('accessToken')
+            setUser(null)
+            setLoading(false)
+            if (authConfig.onTokenExpiration === 'logout' && !router.pathname.includes('login')) {
+              router.replace('/login')
+            }
+          })
+      } else {
+        setLoading(false)
+      }
     }
     //
     initAuth()
@@ -129,12 +129,18 @@ const AuthProvider = ({ children }: Props) => {
       if (response && response.status == 200) {
         const data = response.data.data;
         const accessToken = response.data.data.accessToken;
-        // console.log(accessToken, "accessToken");
+        
 
         setAuthToken(response.data.data.accessToken);
         // window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
         if (accessToken) {
+          alert(accessToken);
           axios1.defaults.headers.common["x-access-token"] = accessToken;
+          if (axios1.defaults.headers.common["x-access-token"]) {
+            console.log("x-access-token header is set:", axios1.defaults.headers.common["x-access-token"]);
+          } else {
+            console.log("x-access-token header is not set.");
+          }
         }
         console.log(data, "data");
         setUser(data)

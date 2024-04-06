@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
-import axios1 from '../../configs/axios'
+import axios1 from '../../../../configs/axios'
 // ** Context
 import { useAuth } from 'src/hooks/useAuth'
 import { useParams } from "react-router-dom";
@@ -74,91 +74,91 @@ const statusObj: StatusObj = {
   5: { title: 'applied', color: 'info' }
 }
 
-const RowOptions = ({ id }: { id: number | string }) => {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const [show, setShow] = useState<boolean>(false)
-  const ability = useContext(AbilityContext)
-  const handleRowOptionsClose = () => {
-    setShow(true);
-  }
+// const RowOptions = ({ id }: { id: number | string }) => {
+//   const [open, setOpen] = useState(false);
+//   const router = useRouter();
+//   const [show, setShow] = useState<boolean>(false)
+//   const ability = useContext(AbilityContext)
+//   const handleRowOptionsClose = () => {
+//     setShow(true);
+//   }
 
-  const handleDelete = () => {
-    setOpen(true);
-  }
-  const handleClosePopup = () => {
-    setOpen(false);
-  };
-  const handleConfirmRemove = async () => {
-    await DeleteRow();
-    setOpen(false);
-  }
+//   const handleDelete = () => {
+//     setOpen(true);
+//   }
+//   const handleClosePopup = () => {
+//     setOpen(false);
+//   };
+//   const handleConfirmRemove = async () => {
+//     await DeleteRow();
+//     setOpen(false);
+//   }
 
-  const DeleteRow = async () => {
-    try {
-      await axios1.delete('/api/admin/class/delete/' + id)
-        .then(response => {
-          console.log(response);
+//   const DeleteRow = async () => {
+//     try {
+//       await axios1.delete('/api/admin/class/delete/' + id)
+//         .then(response => {
+//           console.log(response);
 
-          if (response.data.status == 1) {
-            toast.success(response.data.message)
-            router.reload();
-          } else {
-            toast.error(response.data.message)
+//           if (response.data.status == 1) {
+//             toast.success(response.data.message)
+//             router.reload();
+//           } else {
+//             toast.error(response.data.message)
 
-          }
-        })
-    } catch (err: any) {
-      console.error(err);
-      toast.error(err.message || "please try again")
+//           }
+//         })
+//     } catch (err: any) {
+//       console.error(err);
+//       toast.error(err.message || "please try again")
 
-    }
+//     }
 
-  };
+//   };
 
-  return (
-    <>
-      <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`/class/edit/` + id} >
-          <Icon icon='tabler:edit' fontSize={20} />
-        </Link>
-      </MenuItem>
-
-
-      <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
-        <Icon icon='tabler:trash' fontSize={20} />
-
-      </MenuItem>
-
-      <Grid>
-
-        <Dialog
-          open={open}
-          onClose={handleClosePopup}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle className="popup-title" id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-          <DialogContent style={{ paddingTop: '20px' }}>
-            <DialogContentText id="alert-dialog-description">
-              Would you like to delete?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClosePopup} color="primary">
-              No
-            </Button>
-            <Button onClick={() => handleConfirmRemove()} color="primary" autoFocus>
-              Yes
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Grid>
-    </>
+//   return (
+//     <>
+//       <MenuItem sx={{ '& svg': { mr: 1 } }}>
+//         <Link href={`/class/edit/` + id} >
+//           <Icon icon='tabler:edit' fontSize={20} />
+//         </Link>
+//       </MenuItem>
 
 
-  )
-}
+//       <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
+//         <Icon icon='tabler:trash' fontSize={20} />
+
+//       </MenuItem>
+
+//       <Grid>
+
+//         <Dialog
+//           open={open}
+//           onClose={handleClosePopup}
+//           aria-labelledby="alert-dialog-title"
+//           aria-describedby="alert-dialog-description"
+//         >
+//           <DialogTitle className="popup-title" id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+//           <DialogContent style={{ paddingTop: '20px' }}>
+//             <DialogContentText id="alert-dialog-description">
+//               Would you like to delete?
+//             </DialogContentText>
+//           </DialogContent>
+//           <DialogActions>
+//             <Button onClick={handleClosePopup} color="primary">
+//               No
+//             </Button>
+//             <Button onClick={() => handleConfirmRemove()} color="primary" autoFocus>
+//               Yes
+//             </Button>
+//           </DialogActions>
+//         </Dialog>
+//       </Grid>
+//     </>
+
+
+//   )
+// }
 
 interface Props {
   value: string
@@ -220,17 +220,17 @@ const SecondPage = () => {
     },
 
 
-    {
-      flex: 0.175,
-      minWidth: 100,
-      sortable: false,
-      field: 'actions',
-      headerName: 'Actions',
-      renderCell: ({ row }: any) => (
-        row.role && row.role[0]?.name === "superadmin" ? null : <RowOptions id={row._id} />
-      )
+    // {
+    //   flex: 0.175,
+    //   minWidth: 100,
+    //   sortable: false,
+    //   field: 'actions',
+    //   headerName: 'Actions',
+    //   renderCell: ({ row }: any) => (
+    //     row.role && row.role[0]?.name === "superadmin" ? null : <RowOptions id={row._id} />
+    //   )
 
-    }
+    // }
   ]
 
   // if (user && user.role !== "superadmin") {
@@ -242,18 +242,16 @@ const SecondPage = () => {
     async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, city_id: string) => {
       setLoading(true);
       console.log("apicall schoolId", schoolId);
-      console.log(user, "user")
-      // Check if schoolId has data
-      // if (user && user.role == "admin") {
-        console.log("")
-        if (typeof cancelToken !== typeof undefined) {
-          cancelToken.cancel("Operation canceled due to new request.");
-        }
-        cancelToken = axios.CancelToken.source();
+    
+        console.log(axios1);
+        // if (typeof cancelToken !== typeof undefined) {
+        //   cancelToken.cancel("Operation canceled due to new request.");
+        // }
+        // cancelToken = axios.CancelToken.source();
 
         await axios1
           .get('api/admin/countries/get', {
-            cancelToken: cancelToken.token,
+            // cancelToken: cancelToken.token,
             params: {
               searchtext,
               searchfrom,
@@ -263,12 +261,9 @@ const SecondPage = () => {
               fieldname,
               city_id,
 
-            },
-            // headers: {
-            //   Authorization: `Bearer ${[{"key":"x-access-token","value":"{{token}}","type":"text"}]}`, // 
-            // },
-            
+            }, 
           })
+          
           .then((res) => {
             setTotal(res.data.totalRecords);
             setRows(res.data.data);
