@@ -3,12 +3,12 @@ import { ReactNode } from 'react'
 
 // ** Layout Import
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import Frontend from 'src/pages/home/index'
+
 
 
 
 const Home = () => {
-  return <Frontend />
+  return <>D</>
 }
 
 Home.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
