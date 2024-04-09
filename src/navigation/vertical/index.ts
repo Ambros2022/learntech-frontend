@@ -3,45 +3,49 @@ import { VerticalNavItemsType } from 'src/@core/layouts/types'
 import { useAuth } from 'src/hooks/useAuth'
 
 const navigation = (): VerticalNavItemsType => {
-  const { user } = useAuth()
-
   return [
-    
     {
-      title:'Dashboard',
-      path: 'dashboard/',
+      title: 'Dashboard',
+      path: '/app/dashboard',
       icon: 'tabler:smart-home',
-      action:'manage',
-      subject:'dashboard',
-      auth:false
+      action: 'manage',
+      subject: 'dashboard',
+      auth: false
     },
     {
-      title: 'Location',
-      auth:false,
+      title: 'Locations',
       icon: 'tabler:location',
-     
+      auth: false,
       children: [
         {
           title: 'Countries',
-          path: 'dashboard/countries',
-          action: 'read',
-          auth:false
+          path: '/app/dashboard/locations/countries',
+          auth: false
         },
-
+        {
+          title: 'States',
+          path: '/app/dashboard/locations/states',
+          auth: false
+        },
+        {
+          title: 'Cities',
+          path: '/app/dashboard/locations/cities',
+          auth: false
+        }
       ]
     },
     {
       title: 'Second Page',
       path: '/second-page',
       icon: 'tabler:mail',
-      auth:false
+      auth: false
     },
     {
       path: '/acl',
       action: 'read',
       subject: 'acl-page',
       title: 'Access Control',
-      icon: 'tabler:shield',
+      icon: 'tabler:shield'
     }
   ]
 }

@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
-import axios1 from '../../../../configs/axios'
+import axios1 from '../../../../../configs/axios'
 // ** Context
 import { useAuth } from 'src/hooks/useAuth'
 import { useParams } from "react-router-dom";
@@ -408,7 +408,7 @@ const SecondPage = () => {
 
           <Divider sx={{ m: '0 !important' }} />
           {/* <TableHeader value={value} handleFilter={handleFilter} toggle={toggleAddUserDrawer} /> */}
-          <DataGrid
+          {/* <DataGrid
             autoHeight
             pagination
             loading={loading}
@@ -436,7 +436,7 @@ const SecondPage = () => {
                 CustomToolbar: AddButtonComponent
               },
             }}
-          />
+          /> */}
         </Card>
       </Grid>
 

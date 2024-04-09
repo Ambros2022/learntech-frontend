@@ -15,7 +15,7 @@ class CustomDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          {/* <link rel='preconnect' href='https://fonts.googleapis.com' />
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link
             rel='stylesheet'
@@ -23,7 +23,7 @@ class CustomDocument extends Document {
           />
           <link rel='logo' sizes='180x180' href='/images/logo.png' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
-          <link rel="icon" type="image/webp" href="/images/fav-icon.webp" /> */}
+          <link rel="icon" type="image/webp" href="/images/fav-icon.webp" />
         </Head>
         <body>
           <Main />
