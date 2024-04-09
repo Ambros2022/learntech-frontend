@@ -2,16 +2,19 @@ import { ReactNode } from 'react'
 
 
 // ** Layout Import
-import BlankLayout from 'src/@core/layouts/BlankLayout'
+import FrontLayout from 'src/@core/layouts/FrontLayout'
+import Work from './RamandeepWork'
 
 
 
 
 const Home = () => {
-  return <>D</>
+  return <>
+    <Work />
+  </>
 }
 
-Home.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
+Home.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
 
 Home.guestGuard = true
 
