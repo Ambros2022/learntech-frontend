@@ -5,11 +5,11 @@ import axios from '../../../configs/axios'
 import { useRouter } from 'next/router'
 
 const Redirect301 = ({ children }) => {
-  console.log(children);
+
   console.log("Redirect301");
   const router = useRouter();
   const currentPath = router.pathname;
-  
+  console.log(currentPath);
  
   const fetchRedirectUrls = async () => {
     try {

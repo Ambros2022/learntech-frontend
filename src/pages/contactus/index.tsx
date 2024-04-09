@@ -19,7 +19,7 @@ const Home = () => {
 
       <nav className="navbar navbar-light bg-black">
         <div className="container-fluid">
-          <a className="navbar-brand">About</a>
+          <a className="navbar-brand">Conatct</a>
           <form className="d-flex">
             <input className="form-control me-sm-2" type="search" placeholder="Search" aria-label="Search" />
             <button className="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
