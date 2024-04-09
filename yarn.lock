@@ -2553,13 +2553,6 @@
     "@types/react" "*"
     "hoist-non-react-statics" "^3.3.0"
 
-"@types/jquery@^3.5.29":
-  "integrity" "sha512-oXQQC9X9MOPRrMhPHHOsXqeQDnWeCDT3PelUIg/Oy8FAbzSZtFHRjc7IpbfFVmpLtJ+UOoywpRsuO5Jxjybyeg=="
-  "resolved" "https://registry.npmjs.org/@types/jquery/-/jquery-3.5.29.tgz"
-  "version" "3.5.29"
-  dependencies:
-    "@types/sizzle" "*"
-
 "@types/js-cookie@^3.0.6":
   "integrity" "sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ=="
   "resolved" "https://registry.npmjs.org/@types/js-cookie/-/js-cookie-3.0.6.tgz"
@@ -2696,11 +2689,6 @@
   "integrity" "sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw=="
   "resolved" "https://registry.npmjs.org/@types/semver/-/semver-7.3.13.tgz"
   "version" "7.3.13"
-
-"@types/sizzle@*":
-  "integrity" "sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg=="
-  "resolved" "https://registry.npmjs.org/@types/sizzle/-/sizzle-2.3.8.tgz"
-  "version" "2.3.8"
 
 "@types/styled-jsx@^2.2.8":
   "integrity" "sha512-W/iTlIkGEyTBGTEvZCey8EgQlQ5l0DwMqi3iOXlLs2kyBwYTXHKEiU6IZ5EwoRwngL8/dGYuzezSup89ttVHLw=="
@@ -2845,19 +2833,6 @@
     "@ucast/core" "^1.6.1"
     "@ucast/js" "^3.0.0"
     "@ucast/mongo" "^2.4.0"
-
-"@vercel/edge-config-fs@0.1.0":
-  "integrity" "sha512-NRIBwfcS0bUoUbRWlNGetqjvLSwgYH/BqKqDN7vK1g32p7dN96k0712COgaz6VFizAm9b0g6IG6hR6+hc0KCPg=="
-  "resolved" "https://registry.npmjs.org/@vercel/edge-config-fs/-/edge-config-fs-0.1.0.tgz"
-  "version" "0.1.0"
-
-"@vercel/edge-config@^1.1.0":
-  "integrity" "sha512-es/4BzzKfyUilL5E1knR42MZHJqHMRfqitrnv18gVZZUha9ywrX3qNoCrPsNMJ1HS8xAAz/FJEyel7YFIDfKoQ=="
-  "resolved" "https://registry.npmjs.org/@vercel/edge-config/-/edge-config-1.1.0.tgz"
-  "version" "1.1.0"
-  dependencies:
-    "@vercel/edge-config-fs" "0.1.0"
-    "ts-essentials" "9.4.1"
 
 "acorn-jsx@^5.3.2":
   "integrity" "sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ=="
@@ -6864,11 +6839,6 @@
   "integrity" "sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw=="
   "resolved" "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
   "version" "0.0.3"
-
-"ts-essentials@9.4.1":
-  "integrity" "sha512-oke0rI2EN9pzHsesdmrOrnqv1eQODmJpd/noJjwj2ZPC3Z4N2wbjrOEqnsEgmvlO2+4fBb0a794DCna2elEVIQ=="
-  "resolved" "https://registry.npmjs.org/ts-essentials/-/ts-essentials-9.4.1.tgz"
-  "version" "9.4.1"
 
 "ts-interface-checker@^0.1.9":
   "integrity" "sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA=="

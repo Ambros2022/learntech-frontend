@@ -2,12 +2,10 @@ import { ReactNode } from 'react'
 
 
 // ** Layout Import
-import BlankLayout from 'src/@core/layouts/BlankLayout'
+import FrontLayout from 'src/@core/layouts/FrontLayout'
 import Work from './RamandeepWork'
 
-//**  Bootstrap css and js
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
+
 
 
 const Home = () => {
@@ -16,7 +14,7 @@ const Home = () => {
   </>
 }
 
-Home.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
+Home.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
 
 Home.guestGuard = true
 
