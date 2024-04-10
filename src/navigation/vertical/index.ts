@@ -35,6 +35,12 @@ const navigation = (): VerticalNavItemsType => {
       ]
     },
     {
+      title: 'Amenities',
+      path: '/app/dashboard/amenity',
+      icon: 'tabler:mail',
+      auth: false
+    },
+    {
       title: 'Second Page',
       path: '/second-page',
       icon: 'tabler:mail',

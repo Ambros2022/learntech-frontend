@@ -9,7 +9,7 @@ import AddEditForm from 'src/views/app/dashboard/locations/states/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios1 from '../../../../../../configs/axios'
+import axios1 from 'src/configs/axios'
 // import Resetpasswordform from 'src/views/users/ResetPassword'
 import LinearProgress from '@mui/material/LinearProgress'
 import NotAuthorized from 'src/pages/401'

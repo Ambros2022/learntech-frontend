@@ -1,4 +1,4 @@
-// ** React Imports
+
 import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Fade, { FadeProps } from '@mui/material/Fade'
@@ -21,26 +21,13 @@ import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
-import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
 import type { FC } from 'react';
-import { useAuth } from 'src/hooks/useAuth'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
 import { Alert } from '@mui/material'
+import FileUpload from 'src/@core/components/dropzone/FileUpload';
 
-// const Transition = forwardRef(function Transition(
-//     props: FadeProps & { children?: ReactElement<any, any> },
-//     ref: Ref<unknown>
-// ) {
-//     return <Fade ref={ref} {...props} />
-// })
 
-interface FormInputs {
-    name: string
-    country_id: any
 
-}
 
 
 
@@ -51,55 +38,60 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
-    const { user } = useAuth();
     const [loading, setLoading] = useState<boolean>(false)
-    const [superadmin, setSuperadmin] = useState<boolean>(true)
     const [error, setError] = useState("")
-    const [countries, setCountries] = useState([])
+    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
+    const [selectedphoto, setSelectedphoto] = useState('');
 
+    const handleFileChangephoto = (files: any[]) => {
+        setSelectedphoto(files[0]);
+        setFileNamesphoto(
+            files.map((file) => ({
+                name: file.name,
+                preview: URL.createObjectURL(file),
+            }))
+        );
 
-    const isMountedRef = useIsMountedRef();
-    const params: any = {}
-    params['page'] = 1;
-    params['size'] = 10000;
+    };
 
     const schema: any = yup.object().shape({
-        name: yup
+        amenities_name: yup
+            .string()
+            .trim()
+            .required(),
+        amenities_slug: yup
             .string()
             .trim()
             .required(),
     })
 
     const defaultValues = {
-        name: isAddMode ? '' : olddata.name,
-        country_id: isAddMode ? '' : olddata.country_id.name,
+        amenities_name: isAddMode ? '' : olddata.amenities_name,
+        amenities_slug: isAddMode ? '' : olddata.amenities_slug,
     }
 
     const {
         control,
         handleSubmit,
         reset,
-        resetField: admfiledReset,
         formState: { errors }
-    } = useForm<FormInputs>({
+    } = useForm<any>({
         defaultValues,
         mode: 'onChange',
         resolver: yupResolver(schema)
     })
 
     const onSubmit = async (data: any) => {
-        // console.log(data, "data")
 
-        // return
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/state/update';
-            let formData: any = {};
-            formData.id = updateid;
-            formData.name = data.name;
-            formData.country_id = data.country_id.id;
-
+            let url = 'api/admin/amenities/update';
+            const formData = new FormData();
+            formData.append('id', updateid);
+            formData.append('amenities_name', data.amenities_name);
+            formData.append('amenities_slug', data.amenities_slug);
+            formData.append('amenities_logo', selectedphoto);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -117,7 +109,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-                console.error(err);
+         
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -131,16 +123,29 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/state/add';
-            let formData: any = {};
-            formData.name = data.name;
-            formData.country_id = data.country_id.id;
+            let url = 'api/admin/amenities/add';
+
+            const formData = new FormData();
+            formData.append('amenities_name', data.amenities_name);
+            formData.append('amenities_slug', data.amenities_slug);
+            if (selectedphoto == '') {
+
+                toast.error('Please Upload Image', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
+
+            formData.append('amenities_logo', selectedphoto);
+
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-                    console.log("response.data", response.data)
+             
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -171,80 +176,61 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
-    //get all countries
-    const getcountries = useCallback(async () => {
-
-        try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            // roleparams['schoolId'] = school_id; 
-            const response = await axios1.get('api/admin/countries/get', { params: roleparams });
-
-            setCountries(response.data.data);
-
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-    useEffect(() => {
-
-        getcountries();
-
-    }, [getcountries]);
-
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
-                            name='name'
+                            name='amenities_name'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Name'
+                                    label='Amenitie Name'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.name)}
+                                    error={Boolean(errors.amenities_name)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.name && { helperText: 'This field is required' })}
+                                    {...(errors.amenities_name && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
-                            name='country_id'
+                            name='amenities_slug'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field }) => (
-                                <CustomAutocomplete
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
                                     fullWidth
-                                    options={countries}
-                                    loading={!countries.length}
-                                    value={field.value}
-                                    onChange={(event, newValue) => {
-                                        field.onChange(newValue);
-                                    }}
-                                    getOptionLabel={(option: any) => option.name || ''}
-                                    renderInput={(params: any) => (
-                                        <CustomTextField
-                                            {...params}
-                                            error={Boolean(errors.country_id)}
-                                            {...(errors.country_id && { helperText: 'This field is required' })}
-                                            label='Select Countries'
-                                        />
-                                    )}
+                                    value={value}
+                                    label='Amenitie Slug'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.amenities_slug)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.amenities_slug && { helperText: 'This field is required' })}
                                 />
                             )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <FileUpload
+                            isAddMode={isAddMode}
+                            olddata={!isAddMode && olddata.amenities_logo ? olddata.amenities_logo : ""}
+                            onFileChange={handleFileChangephoto}
+                            maxFiles={1}
+                            maxSize={2000000}
+                            fileNames={fileNamesphoto}
+                            label=" Upload Amenities Image"
+                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                            rejectionMessage='Try another file for upload.'
                         />
                     </Grid>
 
@@ -262,7 +248,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         >
 
                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                                {/* <Button variant='contained' type='submit' sx={{ mr: 1 }} onClick={() => setShow(false)}> */}
                                 Submit
                                 {loading ? (
                                     <CircularProgress
@@ -275,9 +260,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 ) : null}
                             </Button>
-                            {/* <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
-                                Discard
-                            </Button> */}
+
                         </DialogActions>
                     </Grid>
                 </Grid>

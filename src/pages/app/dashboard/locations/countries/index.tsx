@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
-import axios1 from '../../../../../configs/axios'
+import axios1 from 'src/configs/axios'
 // ** Context
 import { useAuth } from 'src/hooks/useAuth'
 import { useParams } from "react-router-dom";
@@ -98,7 +98,7 @@ const RowOptions = ({ id }: { id: number | string }) => {
 
   const DeleteRow = async () => {
     try {
-      await axios1.delete('api/admin/countries/delete/' + id)
+      await axios1.post('api/admin/countries/delete/' + id)
         .then(response => {
           // console.log(response);
 
@@ -233,7 +233,7 @@ const SecondPage = () => {
       field: 'actions',
       headerName: 'Actions',
       renderCell: ({ row }: any) => (
-         <RowOptions id={row.id} />
+        <RowOptions id={row.id} />
       )
 
     }
@@ -248,44 +248,44 @@ const SecondPage = () => {
     async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
       setLoading(true);
       // console.log("apicall schoolId", schoolId);
-    
-        // console.log(axios1);
-        if (typeof cancelToken !== typeof undefined) {
-          cancelToken.cancel("Operation canceled due to new request.");
-        }
-        cancelToken = axios.CancelToken.source();
 
-        await axios1
-          .get('api/admin/countries/get', {
-            cancelToken: cancelToken.token,
-            params: {
-              columnname,
-              orderby,
-              page,
-              size,
-              searchtext,
-              searchfrom,
-              
-             
-             
-              
-            }, 
-          })
-          
-          .then((res) => {
-            setTotal(res.data.totalItems);
-            setRows(res.data.data);
-            // console.log(res.data.data);
+      // console.log(axios1);
+      if (typeof cancelToken !== typeof undefined) {
+        cancelToken.cancel("Operation canceled due to new request.");
+      }
+      cancelToken = axios.CancelToken.source();
 
-            setLoading(false);
-          })
-          .catch((error) => {
-            // Handle error if needed
-            setLoading(false);
-            // console.error("API call error:", error);
-          });
+      await axios1
+        .get('api/admin/countries/get', {
+          cancelToken: cancelToken.token,
+          params: {
+            columnname,
+            orderby,
+            page,
+            size,
+            searchtext,
+            searchfrom,
+
+
+
+
+          },
+        })
+
+        .then((res) => {
+          setTotal(res.data.totalItems);
+          setRows(res.data.data);
+          // console.log(res.data.data);
+
+          setLoading(false);
+        })
+        .catch((error) => {
+          // Handle error if needed
+          setLoading(false);
+          // console.error("API call error:", error);
+        });
       // } 
-      
+
       // else {
       //   // schoolId is empty, handle accordingly (e.g., set loading to false)
       //   setLoading(false);
@@ -375,7 +375,7 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
-         
+
           <DataGrid
             autoHeight
             pagination
