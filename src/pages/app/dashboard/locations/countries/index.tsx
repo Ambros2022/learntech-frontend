@@ -250,21 +250,25 @@ const SecondPage = () => {
       // console.log("apicall schoolId", schoolId);
     
         // console.log(axios1);
-        // if (typeof cancelToken !== typeof undefined) {
-        //   cancelToken.cancel("Operation canceled due to new request.");
-        // }
-        // cancelToken = axios.CancelToken.source();
+        if (typeof cancelToken !== typeof undefined) {
+          cancelToken.cancel("Operation canceled due to new request.");
+        }
+        cancelToken = axios.CancelToken.source();
 
         await axios1
           .get('api/admin/countries/get', {
-            // cancelToken: cancelToken.token,
+            cancelToken: cancelToken.token,
             params: {
+              columnname,
+              orderby,
+              page,
+              size,
               searchtext,
               searchfrom,
-              orderby,
-              size,
-              page,
-              columnname,
+              
+             
+             
+              
             }, 
           })
           
