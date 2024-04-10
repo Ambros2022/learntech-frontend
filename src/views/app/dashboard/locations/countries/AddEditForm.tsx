@@ -17,7 +17,7 @@ import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
-import axios1 from '../../../../../configs/axios'
+import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
@@ -25,16 +25,10 @@ import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import type { FC } from 'react';
 import { useAuth } from 'src/hooks/useAuth'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
+
 import { Alert } from '@mui/material'
 
-// const Transition = forwardRef(function Transition(
-//     props: FadeProps & { children?: ReactElement<any, any> },
-//     ref: Ref<unknown>
-// ) {
-//     return <Fade ref={ref} {...props} />
-// })
+
 
 interface FormInputs {
 
@@ -86,7 +80,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const onSubmit = async (data: any) => {
         // console.log(data, "data")
-        
+
         // return
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
@@ -97,7 +91,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.name = data.name;
 
             try {
-                let response = await axios1.put(url, formData)
+                let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)

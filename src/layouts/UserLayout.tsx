@@ -1,6 +1,6 @@
 // ** React Imports
 import { ReactNode } from 'react'
-
+import NextLink from 'next/link'
 // ** MUI Imports
 import { Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -27,6 +27,7 @@ import Typography from '@mui/material/Typography'
 
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
+import Link from 'src/@core/theme/overrides/link'
 
 interface Props {
   children: ReactNode
@@ -37,8 +38,9 @@ interface Props {
 const AppBrand = () => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
+       <NextLink href="/" >
       <img src='/images/logo.png' style={{objectFit:"contain"}} alt='logo' width='200' height='100' />
-    
+      </NextLink>
     </Box>
   )
 }
@@ -61,10 +63,10 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
       settings={settings}
       saveSettings={saveSettings}
       contentHeightFixed={contentHeightFixed}
-      footerProps={{
-        content: () => '© 2024 All Right Reserved Ambros tech solutions.',
-        sx: { textAlign: 'center'}
-      }}
+      // footerProps={{
+      //   content: () => '© 2024 All Right Reserved Ambros tech solutions.',
+      //   sx: { textAlign: 'center'}
+      // }}
       verticalLayoutProps={{
         navMenu: {
           navItems: VerticalNavItems(),

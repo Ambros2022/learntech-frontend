@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 // ** Axios
 import axios from 'axios'
 
-import axios1 from './../configs/axios'
+import axios1 from 'src/configs/axios'
 
 
 // ** Config

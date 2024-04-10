@@ -17,7 +17,7 @@ import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
-import axios1 from '../../../../../configs/axios'
+import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
@@ -39,7 +39,7 @@ import { Alert } from '@mui/material'
 interface FormInputs {
 
     name: string
-    state_id:any
+    state_id: any
 
 }
 
@@ -68,7 +68,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-    
+
     })
 
     const defaultValues = {
@@ -89,7 +89,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const onSubmit = async (data: any) => {
         // console.log(data, "data")
-        
+
         // return
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
@@ -102,7 +102,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
             try {
-                let response = await axios1.put(url, formData)
+                let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
@@ -171,9 +171,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
-      //get all states
-      const getstates = useCallback(async () => {
-        
+    //get all states
+    const getstates = useCallback(async () => {
+
         try {
             const roleparams: any = {};
             roleparams['page'] = 1;
@@ -189,9 +189,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }, [isMountedRef]);
 
     useEffect(() => {
-       
+
         getstates();
-        
+
     }, [getstates]);
 
     return (
@@ -220,33 +220,33 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12} sm={4}>
-                            <Controller
-                                name='state_id'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field }) => (
-                                    <CustomAutocomplete
-                                        fullWidth
-                                        options={states}
-                                        loading={!states.length}
-                                        value={field.value}
-                                        onChange={(event, newValue) => {
-                                            field.onChange(newValue);
-                                        }}
-                                        getOptionLabel={(option: any) => option.name || ''}
-                                        renderInput={(params: any) => (
-                                            <CustomTextField
+                        <Controller
+                            name='state_id'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    fullWidth
+                                    options={states}
+                                    loading={!states.length}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue);
+                                    }}
+                                    getOptionLabel={(option: any) => option.name || ''}
+                                    renderInput={(params: any) => (
+                                        <CustomTextField
                                             required
-                                                {...params}
-                                                error={Boolean(errors.state_id)}
-                                                {...(errors.state_id && { helperText: 'This field is required' })}
-                                                label='Select states'
-                                            />
-                                        )}
-                                    />
-                                )}
-                            />
-                        </Grid>
+                                            {...params}
+                                            error={Boolean(errors.state_id)}
+                                            {...(errors.state_id && { helperText: 'This field is required' })}
+                                            label='Select states'
+                                        />
+                                    )}
+                                />
+                            )}
+                        />
+                    </Grid>
 
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}
