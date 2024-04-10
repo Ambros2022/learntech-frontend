@@ -74,91 +74,91 @@ const statusObj: StatusObj = {
   5: { title: 'applied', color: 'info' }
 }
 
-// const RowOptions = ({ id }: { id: number | string }) => {
-//   const [open, setOpen] = useState(false);
-//   const router = useRouter();
-//   const [show, setShow] = useState<boolean>(false)
-//   const ability = useContext(AbilityContext)
-//   const handleRowOptionsClose = () => {
-//     setShow(true);
-//   }
+const RowOptions = ({ id }: { id: number | string }) => {
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const [show, setShow] = useState<boolean>(false)
+  const ability = useContext(AbilityContext)
+  const handleRowOptionsClose = () => {
+    setShow(true);
+  }
 
-//   const handleDelete = () => {
-//     setOpen(true);
-//   }
-//   const handleClosePopup = () => {
-//     setOpen(false);
-//   };
-//   const handleConfirmRemove = async () => {
-//     await DeleteRow();
-//     setOpen(false);
-//   }
+  const handleDelete = () => {
+    setOpen(true);
+  }
+  const handleClosePopup = () => {
+    setOpen(false);
+  };
+  const handleConfirmRemove = async () => {
+    await DeleteRow();
+    setOpen(false);
+  }
 
-//   const DeleteRow = async () => {
-//     try {
-//       await axios1.delete('/api/admin/class/delete/' + id)
-//         .then(response => {
-//           console.log(response);
+  const DeleteRow = async () => {
+    try {
+      await axios1.delete('api/admin/state/delete/' + id)
+        .then(response => {
+          // console.log(response);
 
-//           if (response.data.status == 1) {
-//             toast.success(response.data.message)
-//             router.reload();
-//           } else {
-//             toast.error(response.data.message)
+          if (response.data.status == 1) {
+            toast.success(response.data.message)
+            router.reload();
+          } else {
+            toast.error(response.data.message)
 
-//           }
-//         })
-//     } catch (err: any) {
-//       console.error(err);
-//       toast.error(err.message || "please try again")
+          }
+        })
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "please try again")
 
-//     }
+    }
 
-//   };
+  };
 
-//   return (
-//     <>
-//       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-//         <Link href={`/class/edit/` + id} >
-//           <Icon icon='tabler:edit' fontSize={20} />
-//         </Link>
-//       </MenuItem>
-
-
-//       <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
-//         <Icon icon='tabler:trash' fontSize={20} />
-
-//       </MenuItem>
-
-//       <Grid>
-
-//         <Dialog
-//           open={open}
-//           onClose={handleClosePopup}
-//           aria-labelledby="alert-dialog-title"
-//           aria-describedby="alert-dialog-description"
-//         >
-//           <DialogTitle className="popup-title" id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-//           <DialogContent style={{ paddingTop: '20px' }}>
-//             <DialogContentText id="alert-dialog-description">
-//               Would you like to delete?
-//             </DialogContentText>
-//           </DialogContent>
-//           <DialogActions>
-//             <Button onClick={handleClosePopup} color="primary">
-//               No
-//             </Button>
-//             <Button onClick={() => handleConfirmRemove()} color="primary" autoFocus>
-//               Yes
-//             </Button>
-//           </DialogActions>
-//         </Dialog>
-//       </Grid>
-//     </>
+  return (
+    <>
+      <MenuItem sx={{ '& svg': { mr: 1 } }}>
+        <Link href={`./states/edit/` + id} >
+          <Icon icon='tabler:edit' fontSize={20} />
+        </Link>
+      </MenuItem>
 
 
-//   )
-// }
+      <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
+        <Icon icon='tabler:trash' fontSize={20} />
+
+      </MenuItem>
+
+      <Grid>
+
+        <Dialog
+          open={open}
+          onClose={handleClosePopup}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle className="popup-title" id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+          <DialogContent style={{ paddingTop: '20px' }}>
+            <DialogContentText id="alert-dialog-description">
+              Would you like to delete?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClosePopup} color="primary">
+              No
+            </Button>
+            <Button onClick={() => handleConfirmRemove()} color="primary" autoFocus>
+              Yes
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Grid>
+    </>
+
+
+  )
+}
 
 interface Props {
   value: string
@@ -207,7 +207,7 @@ const SecondPage = () => {
       flex: 0.175,
       minWidth: 200,
       field: 'name',
-      headerName: 'Countries',
+      headerName: 'States',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
@@ -218,19 +218,32 @@ const SecondPage = () => {
         )
       }
     },
+    {
+      flex: 0.175,
+      minWidth: 200,
+      field: 'country.name',
+      headerName: 'Country',
+      renderCell: (params: GridRenderCellParams) => {
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {params.row.country && params.row.country ? params.row.country.name : ""}
+          </Typography>
+        );
+      }
+    },
 
 
-    // {
-    //   flex: 0.175,
-    //   minWidth: 100,
-    //   sortable: false,
-    //   field: 'actions',
-    //   headerName: 'Actions',
-    //   renderCell: ({ row }: any) => (
-    //     row.role && row.role[0]?.name === "superadmin" ? null : <RowOptions id={row._id} />
-    //   )
+    {
+      flex: 0.175,
+      minWidth: 100,
+      sortable: false,
+      field: 'actions',
+      headerName: 'Actions',
+      renderCell: ({ row }: any) => (
+         <RowOptions id={row.id} />
+      )
 
-    // }
+    }
   ]
 
   // if (user && user.role !== "superadmin") {
@@ -241,16 +254,16 @@ const SecondPage = () => {
   const fetchTableData = useCallback(
     async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, city_id: string) => {
       setLoading(true);
-      console.log("apicall schoolId", schoolId);
+      // console.log("apicall schoolId", schoolId);
     
-        console.log(axios1);
+        // console.log(axios1);
         // if (typeof cancelToken !== typeof undefined) {
         //   cancelToken.cancel("Operation canceled due to new request.");
         // }
         // cancelToken = axios.CancelToken.source();
 
         await axios1
-          .get('api/admin/countries/get', {
+          .get('api/admin/state/get', {
             // cancelToken: cancelToken.token,
             params: {
               searchtext,
@@ -267,7 +280,7 @@ const SecondPage = () => {
           .then((res) => {
             setTotal(res.data.totalRecords);
             setRows(res.data.data);
-            console.log(res.data.data);
+            // console.log(res.data.data);
 
             setLoading(false);
           })
@@ -349,7 +362,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={`/countries/add/`} >
+        <Link href={`./states/add`} >
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add
@@ -379,7 +392,7 @@ const SecondPage = () => {
                     value={schoolId}
                     onChange={(e: any) => {
                       setschoolId(e.target.value);
-                      console.log(setschoolId, "setschoolId");
+                      // console.log(setschoolId, "setschoolId");
                       setRoleshow(true);
                     }}
                     SelectProps={{
@@ -408,7 +421,7 @@ const SecondPage = () => {
 
           <Divider sx={{ m: '0 !important' }} />
           {/* <TableHeader value={value} handleFilter={handleFilter} toggle={toggleAddUserDrawer} /> */}
-          {/* <DataGrid
+          <DataGrid
             autoHeight
             pagination
             loading={loading}
@@ -419,7 +432,9 @@ const SecondPage = () => {
             sortingMode='server'
             paginationMode='server'
             pageSizeOptions={[10, 15, 25, 50]}
-            getRowId={(row) => row._id}
+            // getRowId={(row) => row.id}
+            getRowId={(row) => row.id}
+
             paginationModel={paginationModel}
             onSortModelChange={handleSortModel}
             slots={{ toolbar: ServerSideToolbar }}
@@ -436,7 +451,7 @@ const SecondPage = () => {
                 CustomToolbar: AddButtonComponent
               },
             }}
-          /> */}
+          />
         </Card>
       </Grid>
 

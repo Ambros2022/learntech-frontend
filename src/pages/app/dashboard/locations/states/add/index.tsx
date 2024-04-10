@@ -4,7 +4,7 @@ import Card from '@mui/material/Card'
 import Fab from '@mui/material/Fab'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditFormnew from 'src/views/app/countries/AddEditForm'
+import AddEditFormnew from 'src/views/app/dashboard/locations/states/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 import NotAuthorized from 'src/pages/401'
 import Grid from '@mui/material/Grid';
@@ -33,9 +33,9 @@ const Adduserlayout = () => {
                         p: theme => theme.spacing(2, 5, 4, 5)
                     }}
                 >
-                    <h2>Add Country Details</h2>
-                    <Link href={`/countries`} >
-                        <Button variant='contained'>View All Country</Button>
+                    <h2>Add States  Details</h2>
+                    <Link href={`../states`} >
+                        <Button variant='contained'>View All states</Button>
                     </Link>
                 </Box>
                 <CardContent>

@@ -98,9 +98,9 @@ const RowOptions = ({ id }: { id: number | string }) => {
 
   const DeleteRow = async () => {
     try {
-      await axios1.delete('api/admin/countries/delete/' + id)
+      await axios1.delete('api/admin/city/delete/' + id)
         .then(response => {
-          // console.log(response);
+          console.log(response);
 
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -111,7 +111,7 @@ const RowOptions = ({ id }: { id: number | string }) => {
           }
         })
     } catch (err: any) {
-      // console.error(err);
+      console.error(err);
       toast.error(err.message || "please try again")
 
     }
@@ -121,7 +121,7 @@ const RowOptions = ({ id }: { id: number | string }) => {
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./countries/edit/` + id} >
+        <Link href={`./cities/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -207,9 +207,9 @@ const SecondPage = () => {
 
     {
       flex: 0.175,
-      minWidth: 200,
+      minWidth: 100,
       field: 'name',
-      headerName: 'Countries',
+      headerName: 'Cities',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
@@ -218,6 +218,20 @@ const SecondPage = () => {
             {row.name}
           </Typography>
         )
+      }
+    },
+
+    {
+      flex: 0.175,
+      minWidth: 100,
+      field: 'state.name',
+      headerName: 'States',
+      renderCell: (params: GridRenderCellParams) => {
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {params.row.state && params.row.state ? params.row.state.name : ""}
+          </Typography>
+        );
       }
     },
 
@@ -252,7 +266,7 @@ const SecondPage = () => {
         // cancelToken = axios.CancelToken.source();
 
         await axios1
-          .get('api/admin/countries/get', {
+          .get('api/admin/city/get', {
             // cancelToken: cancelToken.token,
             params: {
               searchtext,
@@ -267,16 +281,16 @@ const SecondPage = () => {
           })
           
           .then((res) => {
-            setTotal(res.data.totalRecords);
+            setTotal(res.data.totalItems);
             setRows(res.data.data);
-            // console.log(res.data.data);
+            console.log(res.data.data);
 
             setLoading(false);
           })
           .catch((error) => {
             // Handle error if needed
             setLoading(false);
-            // console.error("API call error:", error);
+            console.error("API call error:", error);
           });
       // } 
       
@@ -351,7 +365,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={'./countries/add'}>
+        <Link href={'./cities/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add
@@ -369,7 +383,47 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
+          <>
+            {/* <CardHeader title="Search Filters" /> */}
+            <CardContent>
+              {/* <Grid container spacing={6}>
+                <Grid item sm={4} xs={12}>
+                  <CustomTextField
+                    select
+                    fullWidth
+                    defaultValue="Select Country"
+                    value={schoolId}
+                    onChange={(e: any) => {
+                      setschoolId(e.target.value);
+                      console.log(setschoolId, "setschoolId");
+                      setRoleshow(true);
+                    }}
+                    SelectProps={{
+                      displayEmpty: true,
+                    }}
+                  >
+                    <MenuItem value=''>Select Country</MenuItem>
+                    {schools && schools.map((val: any) => (
+                      <MenuItem value={val._id}>{val.name}</MenuItem>
+                    ))}
+                    {schools.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                  </CustomTextField>
+                </Grid>
+                <Grid item sm={4} xs={12}>
+                  <Button sx={{ mt: 0 }} variant="contained" color='error'
+                    onClick={(e: any) => {
+                      // setClassId('');
+                      setschoolId('');
+                      // setStatus('');
+                    }}
+                    startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+                </Grid>
+              </Grid> */}
+            </CardContent>
+          </>
+
          
+          {/* <TableHeader value={value} handleFilter={handleFilter} toggle={toggleAddUserDrawer} /> */}
           <DataGrid
             autoHeight
             pagination

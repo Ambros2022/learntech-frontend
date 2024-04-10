@@ -17,7 +17,7 @@ import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
-import axios1 from '../../../configs/axios'
+import axios1 from '../../../../../configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
@@ -37,8 +37,8 @@ import { Alert } from '@mui/material'
 // })
 
 interface FormInputs {
-
     name: string
+    country_id: any
 
 }
 
@@ -55,7 +55,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [superadmin, setSuperadmin] = useState<boolean>(true)
     const [error, setError] = useState("")
-    const [schools, setSchools] = useState([])
+    const [countries, setCountries] = useState([])
+
+  
     const isMountedRef = useIsMountedRef();
     const params: any = {}
     params['page'] = 1;
@@ -70,6 +72,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
+        country_id: isAddMode ? '' : olddata.country_id.name,
     }
 
     const {
@@ -85,15 +88,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const onSubmit = async (data: any) => {
-        console.log(data, "data")
+        // console.log(data, "data")
+      
         // return
-        if (!isAddMode && olddata._id) {
-            let updateid = olddata._id;
+        if (!isAddMode && olddata.id) {
+            let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/countries/update';
+            let url = 'api/admin/state/update';
             let formData: any = {};
             formData.id = updateid;
             formData.name = data.name;
+            formData.country_id = data.country_id.id;
+
 
             try {
                 let response = await axios1.put(url, formData)
@@ -125,9 +131,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/countries/add';
+            let url = 'api/admin/state/add';
             let formData: any = {};
             formData.name = data.name;
+            formData.country_id = data.country_id.id;
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
@@ -138,7 +145,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     setLoading(false)
                     setError('')
                     reset();
-                    router.push('/countries');
+                    router.push('./');
+
 
                 }
                 else {
@@ -163,13 +171,36 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
+     //get all countries
+     const getcountries = useCallback(async () => {
+        
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            // roleparams['schoolId'] = school_id; 
+            const response = await axios1.get('api/admin/countries/get', { params: roleparams });
+
+            setCountries(response.data.data);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+       
+            getcountries();
+        
+    }, [getcountries]);
+
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='name'
                             control={control}
@@ -189,6 +220,34 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
+                    <Grid item xs={12} sm={4}>
+                            <Controller
+                                name='country_id'
+                                control={control}
+                                rules={{ required: true }}
+                                render={({ field }) => (
+                                    <CustomAutocomplete
+                                        fullWidth
+                                        options={countries}
+                                        loading={!countries.length}
+                                        value={field.value}
+                                        onChange={(event, newValue) => {
+                                            field.onChange(newValue);
+                                        }}
+                                        getOptionLabel={(option: any) => option.name || ''}
+                                        renderInput={(params: any) => (
+                                            <CustomTextField
+                                                {...params}
+                                                error={Boolean(errors.country_id)}
+                                                {...(errors.country_id && { helperText: 'This field is required' })}
+                                                label='Select Countries'
+                                            />
+                                        )}
+                                    />
+                                )}
+                            />
+                        </Grid>
+            
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}
                     </Grid>

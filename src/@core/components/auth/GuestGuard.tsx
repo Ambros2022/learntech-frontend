@@ -21,9 +21,9 @@ const GuestGuard = (props: GuestGuardProps) => {
     if (!router.isReady) {
       return
     }
-    console.log("GuestGuard", 1);
+    // console.log("GuestGuard", 1);
     if (window.localStorage.getItem('userData')) {
-      console.log("GuestGuard", 2);
+      // console.log("GuestGuard", 2);
       router.replace('/')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,7 +33,7 @@ const GuestGuard = (props: GuestGuardProps) => {
   //   console.log("GuestGuard", 3);
   //   return fallback
   // }
-  console.log("GuestGuard", 4);
+  // console.log("GuestGuard", 4);
   return <>{children}</>
 }
 

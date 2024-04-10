@@ -21,8 +21,8 @@ const AuthGuard = (props: AuthGuardProps) => {
     return Cookies.get(authConfig.storageTokenKeyName);
   }
   const storedToken = getAuthToken()!;
-  console.log("storedToken", storedToken)
-  console.log("auth", auth.user)
+  // console.log("storedToken", storedToken)
+  // console.log("auth", auth.user)
   useEffect(
     () => {
       if (!router.isReady) {
@@ -30,7 +30,7 @@ const AuthGuard = (props: AuthGuardProps) => {
       }
       console.log("AuthGuard", 1);
       if (!storedToken) {
-        console.log("AuthGuard", 2);
+        // console.log("AuthGuard", 2);
         if (router.asPath !== '/') {
           router.replace({
             pathname: '/admin/login',
@@ -56,10 +56,10 @@ const AuthGuard = (props: AuthGuardProps) => {
   )
 
   if (auth.loading || auth.user === null) {
-    console.log("AuthGuard", 3);
+    // console.log("AuthGuard", 3);
     return fallback
   }
-  console.log("AuthGuard", 4);
+  // console.log("AuthGuard", 4);
   return <>{children}</>
 }
 
