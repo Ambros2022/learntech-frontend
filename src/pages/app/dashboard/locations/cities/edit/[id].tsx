@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditForm from 'src/views/app/dashboard/locations/states/AddEditForm'
+import AddEditForm from 'src/views/app/dashboard/locations/cities/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
@@ -23,6 +23,7 @@ const Edituserlayout = () => {
   const isMountedRef = useIsMountedRef();
   const router = useRouter();
   const { id } = router.query;
+  // console.log(router.query , "router.query")
   const isAddMode = !id;
   const [olddata, setolddata] = useState<any>(null);
   const [formloading, setFormloading] = useState(true);
@@ -32,7 +33,7 @@ const Edituserlayout = () => {
   const getolddata = useCallback(async () => {
     try {
       // this route needs to be swapped out to /Patient/, but it's currently returning 500
-      const response = await axios1.get('api/admin/state/get/' + id);
+      const response = await axios1.get('api/admin/city/get/' + id);
       // console.log(response);
 
       if (isMountedRef.current) {
@@ -55,7 +56,7 @@ const Edituserlayout = () => {
 
   return (
     <>
-
+     
         <Card>
           <Box
             sx={{
@@ -67,11 +68,11 @@ const Edituserlayout = () => {
               p: theme => theme.spacing(2, 5, 4, 5)
             }}
           >
-            <h2>Edit States</h2>
+            <h2>Edit Cities</h2>
             {/* {formloading ? "" : <Resetpasswordform olddata={olddata} />} */}
 
             <Link href={`../`} >
-              <Button variant='contained'>View All States</Button>
+              <Button variant='contained'>View All Cities</Button>
             </Link>
           </Box>
           <CardContent>
@@ -80,6 +81,12 @@ const Edituserlayout = () => {
 
           </CardContent>
         </Card>
+        
+       
+          {/* <Grid item xs={12}>
+            <NotAuthorized />
+          </Grid> */}
+      
     </>
   )
 }

@@ -1,6 +1,7 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
 // ** MUI Imports
+
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
@@ -37,6 +38,7 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
+import Add from '../../../../../views/app/dashboard/locations/countries/AddEditForm'
 
 interface StatusObj {
   [key: number]: {
@@ -96,9 +98,9 @@ const RowOptions = ({ id }: { id: number | string }) => {
 
   const DeleteRow = async () => {
     try {
-      await axios1.delete('api/admin/state/delete/' + id)
+      await axios1.delete('api/admin/city/delete/' + id)
         .then(response => {
-          // console.log(response);
+          console.log(response);
 
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -119,7 +121,7 @@ const RowOptions = ({ id }: { id: number | string }) => {
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./states/edit/` + id} >
+        <Link href={`./cities/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -205,9 +207,9 @@ const SecondPage = () => {
 
     {
       flex: 0.175,
-      minWidth: 200,
+      minWidth: 100,
       field: 'name',
-      headerName: 'States',
+      headerName: 'Cities',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
@@ -218,15 +220,16 @@ const SecondPage = () => {
         )
       }
     },
+
     {
       flex: 0.175,
-      minWidth: 200,
-      field: 'country.name',
-      headerName: 'Country',
+      minWidth: 100,
+      field: 'state.name',
+      headerName: 'States',
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {params.row.country && params.row.country ? params.row.country.name : ""}
+            {params.row.state && params.row.state ? params.row.state.name : ""}
           </Typography>
         );
       }
@@ -263,7 +266,7 @@ const SecondPage = () => {
         // cancelToken = axios.CancelToken.source();
 
         await axios1
-          .get('api/admin/state/get', {
+          .get('api/admin/city/get', {
             // cancelToken: cancelToken.token,
             params: {
               searchtext,
@@ -280,7 +283,7 @@ const SecondPage = () => {
           .then((res) => {
             setTotal(res.data.totalItems);
             setRows(res.data.data);
-            // console.log(res.data.data);
+            console.log(res.data.data);
 
             setLoading(false);
           })
@@ -362,7 +365,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={`./states/add`} >
+        <Link href={'./cities/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add
@@ -380,6 +383,7 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
+  
           <DataGrid
             autoHeight
             pagination
@@ -391,9 +395,8 @@ const SecondPage = () => {
             sortingMode='server'
             paginationMode='server'
             pageSizeOptions={[10, 15, 25, 50]}
-            // getRowId={(row) => row.id}
+            // getRowId={(row) => row._id}
             getRowId={(row) => row.id}
-
             paginationModel={paginationModel}
             onSortModelChange={handleSortModel}
             slots={{ toolbar: ServerSideToolbar }}

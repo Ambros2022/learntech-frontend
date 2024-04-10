@@ -62,14 +62,12 @@ const AuthProvider = ({ children }: Props) => {
     Cookies.remove(authConfig.storageTokenKeyName);
   }
 
-
-
   // ** Hooks
   const router = useRouter()
 
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
-      console.log("initAuth", user);
+      // console.log("initAuth", user);
       setLoading(false)
 
       const storedToken = getAuthToken()!
@@ -98,9 +96,6 @@ const AuthProvider = ({ children }: Props) => {
 
           })
           .catch(() => {
-            // localStorage.removeItem('userData')
-            // localStorage.removeItem('refreshToken')
-            // localStorage.removeItem('accessToken')
             setUser(null)
             setLoading(false)
             if (authConfig.onTokenExpiration === 'logout' && !router.pathname.includes('login')) {
@@ -134,15 +129,15 @@ const AuthProvider = ({ children }: Props) => {
         setAuthToken(response.data.data.accessToken);
         // window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
         if (accessToken) {
-          alert(accessToken);
+          // alert(accessToken);
           axios1.defaults.headers.common["x-access-token"] = accessToken;
           if (axios1.defaults.headers.common["x-access-token"]) {
-            console.log("x-access-token header is set:", axios1.defaults.headers.common["x-access-token"]);
+            // console.log("x-access-token header is set:", axios1.defaults.headers.common["x-access-token"]);
           } else {
             console.log("x-access-token header is not set.");
           }
         }
-        console.log(data, "data");
+        // console.log(data, "data");
         setUser(data)
         const returnUrl = router.query.returnUrl
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
@@ -184,7 +179,6 @@ const AuthProvider = ({ children }: Props) => {
   const handelforgotpassword = async (params: ForgotPasswordParams, errorCallback?: ErrCallbackType) => {
 
     try {
-
       const { email } = params;
       const response = await axios1.post('/api/auth/user/forgotPassword', { email });
 
@@ -193,8 +187,6 @@ const AuthProvider = ({ children }: Props) => {
         // console.log(data, "`sdfv`");
         return data;
       }
-
-
 
     }
     catch (err: any) {
@@ -255,12 +247,7 @@ const AuthProvider = ({ children }: Props) => {
 
   const handleLogout = async () => {
 
-
-
-
-
     try {
-
 
       const response = await axios1.post('/api/auth/user/signout');
 
