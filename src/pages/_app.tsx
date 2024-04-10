@@ -1,5 +1,5 @@
 // ** React Imports
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 
 // ** Next Imports
 import Head from 'next/head'
@@ -61,6 +61,9 @@ import 'src/iconify-bundle/icons-bundle-react'
 
 // ** Global css styles
 import '../../styles/globals.css'
+//**  Bootstrap css and js
+import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/js/bootstrap.min.js'
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -104,7 +107,9 @@ const Guard = ({ children, authGuard, guestGuard }: GuardProps) => {
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
-
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.min.js')
+  }, [])
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false
   const getLayout =

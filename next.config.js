@@ -15,5 +15,25 @@ module.exports = {
     }
 
     return config
-  }
+  },
+  // async redirects() {
+  //   console.log('redirect next')
+  //   let array =  [
+
+  //     {
+  //       source: '/homes',
+  //       destination: '/about',
+  //       permanent: true,
+  //     },]
+  //   return [
+
+  //     {
+  //       source: '/homes',
+  //       destination: '/about',
+  //       permanent: true,
+  //     },
+
+     
+  //   ]
+  // },
 }

@@ -30,9 +30,11 @@ const BlankLayoutWrapper = styled(Box)<BoxProps>(({ theme }) => ({
 const BlankLayout = ({ children }: BlankLayoutProps) => {
   return (
     <BlankLayoutWrapper className='layout-wrapper'>
+
       <Box className='app-content' sx={{ overflow: 'hidden', minHeight: '100vh', position: 'relative' }}>
         {children}
       </Box>
+      
     </BlankLayoutWrapper>
   )
 }
