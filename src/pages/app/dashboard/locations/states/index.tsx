@@ -278,7 +278,7 @@ const SecondPage = () => {
           })
           
           .then((res) => {
-            setTotal(res.data.totalRecords);
+            setTotal(res.data.totalItems);
             setRows(res.data.data);
             // console.log(res.data.data);
 
@@ -380,47 +380,6 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
-          <>
-            <CardHeader title="Search Filters" />
-            <CardContent>
-              <Grid container spacing={6}>
-                <Grid item sm={4} xs={12}>
-                  <CustomTextField
-                    select
-                    fullWidth
-                    defaultValue="Select Country"
-                    value={schoolId}
-                    onChange={(e: any) => {
-                      setschoolId(e.target.value);
-                      // console.log(setschoolId, "setschoolId");
-                      setRoleshow(true);
-                    }}
-                    SelectProps={{
-                      displayEmpty: true,
-                    }}
-                  >
-                    <MenuItem value=''>Select Country</MenuItem>
-                    {schools && schools.map((val: any) => (
-                      <MenuItem value={val._id}>{val.name}</MenuItem>
-                    ))}
-                    {schools.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
-                  </CustomTextField>
-                </Grid>
-                <Grid item sm={4} xs={12}>
-                  <Button sx={{ mt: 0 }} variant="contained" color='error'
-                    onClick={(e: any) => {
-                      // setClassId('');
-                      setschoolId('');
-                      // setStatus('');
-                    }}
-                    startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </>
-
-          <Divider sx={{ m: '0 !important' }} />
-          {/* <TableHeader value={value} handleFilter={handleFilter} toggle={toggleAddUserDrawer} /> */}
           <DataGrid
             autoHeight
             pagination

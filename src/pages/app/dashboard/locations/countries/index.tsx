@@ -183,8 +183,6 @@ const SecondPage = () => {
   const [roles, setRoles] = useState([])
   const [schools, setSchools] = useState([])
   const [reloadpage, setReloadpage] = useState("0");
-  const [city_id, setcity_id] = useState('')
-  const [status, setStatus] = useState('')
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
@@ -193,7 +191,7 @@ const SecondPage = () => {
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
   const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [fieldname, setFieldname] = useState<string>('name')
+  const [columnname, setColumnname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const isMountedRef = useIsMountedRef();
   const ability = useContext(AbilityContext)
@@ -214,9 +212,15 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.name}
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {renderClient(params)}
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+                {row.name}
+              </Typography>
+
+            </Box>
+          </Box>
         )
       }
     },
@@ -241,7 +245,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, city_id: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
       setLoading(true);
       // console.log("apicall schoolId", schoolId);
     
@@ -260,14 +264,12 @@ const SecondPage = () => {
               orderby,
               size,
               page,
-              fieldname,
-              city_id,
-
+              columnname,
             }, 
           })
           
           .then((res) => {
-            setTotal(res.data.totalRecords);
+            setTotal(res.data.totalItems);
             setRows(res.data.data);
             // console.log(res.data.data);
 
@@ -297,16 +299,16 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, fieldname, city_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, fieldname, city_id])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
       setOrderby(newModel[0].sort)
-      setFieldname(newModel[0].field)
+      setColumnname(newModel[0].field)
     } else {
       setOrderby('asc')
-      setFieldname('name')
+      setColumnname('name')
     }
   }
 
