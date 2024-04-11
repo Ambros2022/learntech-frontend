@@ -65,6 +65,7 @@ import '../../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import 'bootstrap/dist/js/bootstrap.min.js'
 
+
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
   Component: NextPage
@@ -108,7 +109,9 @@ const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
   useEffect(() => {
-    import('bootstrap/dist/js/bootstrap.min.js')
+    import('bootstrap/dist/js/bootstrap.min.js');
+    import('jquery');
+    import('owl.carousel');
   }, [])
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false
@@ -126,40 +129,40 @@ const App = (props: ExtendedAppProps) => {
 
 
   return (
+    <>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
+          <meta
+            name='description'
+            content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!'
+          />
+          <meta name='keywords' content='Learntechweb' />
+          <meta name='viewport' content='initial-scale=1, width=device-width' />
+        </Head>
 
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
-        <meta
-          name='description'
-          content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!'
-        />
-        <meta name='keywords' content='Learntechweb' />
-        <meta name='viewport' content='initial-scale=1, width=device-width' />
-      </Head>
-
-      <AuthProvider>
-        <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
-          <SettingsConsumer>
-            {({ settings }) => {
-              return (
-                <ThemeComponent settings={settings}>
-                  {/* <Redirection > */}
-                  <Guard authGuard={authGuard} guestGuard={guestGuard}>
-                    {getLayout(<Component {...pageProps} />)}
-                  </Guard>
-                  {/* </Redirection> */}
-                  <ReactHotToast>
-                    <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
-                  </ReactHotToast>
-                </ThemeComponent>
-              )
-            }}
-          </SettingsConsumer>
-        </SettingsProvider>
-      </AuthProvider>
-    </CacheProvider>
-
+        <AuthProvider>
+          <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+            <SettingsConsumer>
+              {({ settings }) => {
+                return (
+                  <ThemeComponent settings={settings}>
+                    {/* <Redirection > */}
+                    <Guard authGuard={authGuard} guestGuard={guestGuard}>
+                      {getLayout(<Component {...pageProps} />)}
+                    </Guard>
+                    {/* </Redirection> */}
+                    <ReactHotToast>
+                      <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
+                    </ReactHotToast>
+                  </ThemeComponent>
+                )
+              }}
+            </SettingsConsumer>
+          </SettingsProvider>
+        </AuthProvider>
+      </CacheProvider>
+    </>
   )
 }
 

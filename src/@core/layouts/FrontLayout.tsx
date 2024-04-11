@@ -45,7 +45,7 @@ const BlankLayout = ({ children }: BlankLayoutProps) => {
                 <img className="me-2" src='images/icons/instagram.svg'></img>
                 <img className="me-2" src='images/icons/youtube.svg'></img>
               </div>
-              <div className="col-md-8 d-flex align-items-center justify-content-end socialIcon socialText">
+              <div className="col-md-8 d-flex align-items-center justify-content-end socialText">
                 <div>
                   <img className="m-0" src="images/icons/Phone blue.svg"></img>
                   <text className="mx-2 " style={{ color: '#274896' }}>1800 120 8969</text>
@@ -57,16 +57,16 @@ const BlankLayout = ({ children }: BlankLayoutProps) => {
             </div>
           </div>
         </header >
-        <nav className="navbar navbar-expand-xl bg-white">
+        <nav className="top-nav navbar navbar-expand-lg bg-white">
           <div className="container-lg">
             <a className="navbar-brand" href="#"><img src="images/icons/learntech-logo.png"></img></a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active-link" aria-current="page" href="#">Home</a>
+                  <a className="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -146,11 +146,12 @@ const BlankLayout = ({ children }: BlankLayoutProps) => {
                   </ul>
                 </li>
               </ul>
-              <form className="d-flex" role="search">
+              <div className='ms-auto'>
                 <a className='mx-2 mt-3 socialIcon' href="#"><img src="images/icons/user-icon.svg" alt="" /></a>
-                <button className="btn counsellingBtn" type="submit">Get Counselling</button>
-              </form>
+                <button className=" btn counsellingBtn" type="submit">Get Counselling</button>
+              </div>
             </div>
+
           </div>
         </nav>
         {children}
@@ -220,7 +221,7 @@ const BlankLayout = ({ children }: BlankLayoutProps) => {
 
         {/* footer Start */}
 
-        <footer>
+        <footer className='mainFooter'>
           <div className="container text-white pt-3">
             <div className="row">
               <div className="col-md-6 text-sm-center">
