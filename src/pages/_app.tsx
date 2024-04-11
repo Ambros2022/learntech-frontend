@@ -110,8 +110,7 @@ const App = (props: ExtendedAppProps) => {
 
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap.min.js');
-    import('jquery');
-    import('owl.carousel');
+    
   }, [])
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false

@@ -3,6 +3,7 @@ import AnimatedCounter from "./animatedCounter";
 import AnimatedCounter2 from "./animatedCounter2";
 import AnimatedCounter3 from "./animatedCounter3";
 import OwlCarousel from "src/@core/components/OwlCarousel";
+import Reactcrousel from "src/@core/components/crousel";
 
 
 const Work = () => {
@@ -13,6 +14,14 @@ const Work = () => {
     ];
     return (
         <>
+
+            <div className="container">
+                <h1>My Next.js App</h1>
+                <Reactcrousel />
+            </div>
+            {/* <section className="FeaturedClgCon">
+                <Reactcrousel />
+            </section> */}
 
             {/* Header Start */}
 
@@ -221,7 +230,7 @@ const Work = () => {
             {/* Featured College Section start*/}
 
             <section className="FeaturedClgCon">
-                <OwlCarousel items={items} />
+                {/* <OwlCarousel /> */}
             </section>
 
             {/* Featured College Section start*/}
