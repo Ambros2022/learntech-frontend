@@ -24,6 +24,8 @@ class CustomDocument extends Document {
           <link rel='logo' sizes='180x180' href='/images/logo.png' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
           <link rel="icon" type="image/webp" href="/images/fav-icon.webp" />
+          {/* <link rel="stylesheet" href="/owl.carousel.min.css" /> */}
+          {/* <link rel="stylesheet" href="/owl.theme.default.min.css" /> */}
         </Head>
         <body>
           <Main />
@@ -42,12 +44,12 @@ CustomDocument.getInitialProps = async ctx => {
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: App => props =>
-        (
-          <App
-            {...props} // @ts-ignore
-            emotionCache={cache}
-          />
-        )
+      (
+        <App
+          {...props} // @ts-ignore
+          emotionCache={cache}
+        />
+      )
     })
 
   const initialProps = await Document.getInitialProps(ctx)

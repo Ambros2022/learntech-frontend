@@ -2,20 +2,36 @@ import React from "react";
 import AnimatedCounter from "./animatedCounter";
 import AnimatedCounter2 from "./animatedCounter2";
 import AnimatedCounter3 from "./animatedCounter3";
+import OwlCarousel from "src/@core/components/OwlCarousel";
+import Reactcrousel from "src/@core/components/crousel";
+
 
 const Work = () => {
+    const items = [
+        <div>Item 1</div>,
+        <div>Item 2</div>,
+        <div>Item 3</div>
+    ];
     return (
         <>
 
+            <div className="container">
+                <h1>My Next.js App</h1>
+                <Reactcrousel />
+            </div>
+            {/* <section className="FeaturedClgCon">
+                <Reactcrousel />
+            </section> */}
+
             {/* Header Start */}
 
-       
+
 
             {/* Header End */}
 
             {/* Navbar Start */}
 
-        
+
 
             {/* Navbar End */}
 
@@ -31,7 +47,7 @@ const Work = () => {
                     <div className="carousel-inner d-flex align-content-end">
                         <div className="carousel-item active">
                             <div className="row">
-                                <div className="searchBox-con col-md-6">
+                                <div className="searchBox-con col-md-7">
                                     <div className="searchBox">
                                         <p className="pb-3">Find Colleges, Courses & Exams that are best for you</p>
                                         <div className="row">
@@ -44,7 +60,7 @@ const Work = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-6 bannerFormCon">
+                                <div className="col-md-5 bannerFormCon">
                                     <div>
                                         <form className="my-5">
                                             <h5 className="py-5 text-center">Let’s build a better future for you</h5>
@@ -73,7 +89,7 @@ const Work = () => {
                         </div>
                         <div className="carousel-item">
                             <div className="row">
-                                <div className="searchBox-con col-md-6">
+                                <div className="searchBox-con col-md-7">
                                     <div className="searchBox">
                                         <p className="pb-3">Find Colleges, Courses & Exams that are best for you</p>
                                         <div className="row">
@@ -86,7 +102,7 @@ const Work = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-6 bannerFormCon">
+                                <div className="col-md-5 bannerFormCon">
                                     <div>
                                         <form className="my-5">
                                             <h5 className="py-5 text-center">Let’s build a better future for you</h5>
@@ -115,7 +131,7 @@ const Work = () => {
                         </div>
                         <div className="carousel-item">
                             <div className="row">
-                                <div className="searchBox-con col-md-6">
+                                <div className="searchBox-con col-md-7">
                                     <div className="searchBox">
                                         <p className="pb-3">Find Colleges, Courses & Exams that are best for you</p>
                                         <div className="row">
@@ -128,7 +144,7 @@ const Work = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-6 bannerFormCon">
+                                <div className="col-md-5 bannerFormCon">
                                     <div>
                                         <form className="my-5">
                                             <h5 className="py-5 text-center">Let’s build a better future for you</h5>
@@ -211,191 +227,551 @@ const Work = () => {
 
             {/* Analysis Section End */}
 
+            {/* Featured College Section start*/}
+
+            <section className="FeaturedClgCon">
+                {/* <OwlCarousel /> */}
+            </section>
+
+            {/* Featured College Section start*/}
+
+
             {/* Explore Section Start */}
 
             <section className="exploreCon">
                 <div className="container pt-5">
                     <h4 className="fw-bold text-blue text-center">Explore Colleges, Courses and Exams That Are Curated For You</h4>
-                    <div className="d-flex exploreNav justify-content-center mb-5">
-                        <a href="#" className="btn">Colleges</a>
-                        <a href="#" className="active-tab btn">Courses</a>
-                        <a href="#" className="btn">Exams</a>
+                    <div className="d-flex exploreNav justify-content-center mb-5" role="tablist">
+                        <a href="#" id="aColleges" className="active btn" data-bs-toggle="tab" data-bs-target="#a-Colleges" type="button" role="tab" aria-controls="a-Colleges" aria-selected="true">Colleges</a>
+                        <a href="#" id="aCourses" className="btn" data-bs-toggle="tab" data-bs-target="#a-Courses" type="button" role="tab" aria-controls="a-Courses" aria-selected="true">Courses</a>
+                        <a href="#" id="aExams" className="btn" data-bs-toggle="tab" data-bs-target="#a-Exams" type="button" role="tab" aria-controls="a-Exams" aria-selected="true">Exams</a>
                     </div>
-                    <div className="exploreCardCon">
-                        <div className="row">
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Paramedical</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Architecture</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Arts</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Law</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Medical</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Management</h6>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="tab-content" id="nav-tabContent">
 
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Paramedical</h6>
+                        <div className="tab-pane fade show active exploreCardCon" id="a-Colleges" role="tabpanel" aria-labelledby="aColleges">
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Paramedical</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Architecture</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Arts</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Law</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Medical</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Management</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Paramedical</h6>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Paramedical</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Architecture</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Arts</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Law</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Medical</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-2 mb-5 d-flex">
-                                <div className="card text-center flex-fill">
-                                    <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
-                                    <div className="card-body">
-                                        <p className="card-text m-0 text-blue">18 Courses</p>
-                                        <h6 className="card-title">Management</h6>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Paramedical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
+                        <div className="tab-pane fade exploreCardCon" id="a-Courses" role="tabpanel" aria-labelledby="aCourses">
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Paramedical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Engineering.svg" className="img-fluid mx-auto mt-3" alt="Engineering-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Engineering</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Paramedical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className="tab-pane fade exploreCardCon" id="a-Exams" role="tabpanel" aria-labelledby="aExams">
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Paramedical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Paramedical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="row">
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Paramedical.svg" className="img-fluid mx-auto mt-3" alt="Paramedical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Paramedical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Architecture.svg" className="img-fluid mx-auto mt-3" alt="architecture-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Architecture</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Art.svg" className="img-fluid mx-auto mt-3" alt="Arts-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Arts</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Law.svg" className="img-fluid mx-auto mt-3" alt="law-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Law</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Medical.svg" className="img-fluid mx-auto mt-3" alt="Medical-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Medical</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-lg-2 mb-5 d-flex">
+                                    <div className="card text-center flex-fill">
+                                        <img src="images/icons/Management.svg" className="img-fluid mx-auto mt-3" alt="Management-logo"></img>
+                                        <div className="card-body">
+                                            <p className="card-text m-0 text-blue">18 Courses</p>
+                                            <h6 className="card-title">Management</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
-            </section>
+            </section >
 
             {/* Explore Section Start */}
 
@@ -404,39 +780,75 @@ const Work = () => {
             <section className="latestNewsCon">
                 <div className="container pt-5">
                     <h3 className="fw-bold text-center">Latest News & Blogs</h3>
-                    <div className="justify-content-center pt-3 gap-2 d-flex">
-                        <button className="btn px-4 newsBtn">News</button>
-                        <button className="btn px-4 blgBtn">Blogs</button>
+                    <div className="nav-pills justify-content-center pt-3 gap-2 d-flex" role="tablist">
+                        <button className="active btn px-4 newsBtn" id="pills-news-tab" data-bs-toggle="pill" data-bs-target="#pills-news" type="button" role="tab" aria-controls="pills-news" aria-selected="true">News</button>
+                        <button className="btn px-4 blgBtn" id="pills-blogs-tab" data-bs-toggle="pill" data-bs-target="#pills-blogs" type="button" role="tab" aria-controls="pills-blogs" aria-selected="false">Blogs</button>
                     </div>
-                    <div className="card-con pt-5">
-                        <div className="row">
-                            <div className="col-md-4 mb-5">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
-                                        <h4 className="card-title fw-bold text-blue">Card title</h4>
-                                        <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <a href="#" className="btn readBtn card-link">Read More</a>
+                    <div className="tab-content" id="pills-tabContent">
+                        <div className="card-con pt-5 tab-pane fade show active" id="pills-news" role="tabpanel" aria-labelledby="pills-news-tab" >
+                            <div className="row">
+                                <div className="col-md-4 mb-5">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
+                                            <h4 className="card-title fw-bold text-blue">Card title</h4>
+                                            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <a href="#" className="btn readBtn card-link">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 mb-5">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
+                                            <h4 className="card-title fw-bold text-blue">Card title</h4>
+                                            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <a href="#" className="btn readBtn card-link">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 mb-5">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
+                                            <h4 className="card-title fw-bold text-blue">Card title</h4>
+                                            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <a href="#" className="btn readBtn card-link">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-4 mb-5">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
-                                        <h4 className="card-title fw-bold text-blue">Card title</h4>
-                                        <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <a href="#" className="btn readBtn card-link">Read More</a>
+                        </div>
+                        <div className="card-con pt-5 tab-pane fade" id="pills-blogs" role="tabpanel" aria-labelledby="pills-blogs-tab" >
+                            <div className="row">
+                                <div className="col-md-4 mb-5">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
+                                            <h4 className="card-title fw-bold text-blue">Card title</h4>
+                                            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <a href="#" className="btn readBtn card-link">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 mb-5">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
-                                        <h4 className="card-title fw-bold text-blue">Card title</h4>
-                                        <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <a href="#" className="btn readBtn card-link">Read More</a>
+                                <div className="col-md-4 mb-5">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
+                                            <h4 className="card-title fw-bold text-blue">Card title</h4>
+                                            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <a href="#" className="btn readBtn card-link">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4 mb-5">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h6 className="card-subtitle mb-2 text-body-secondary">24 Jan, 2024</h6>
+                                            <h4 className="card-title fw-bold text-blue">Card title</h4>
+                                            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <a href="#" className="btn readBtn card-link">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -487,14 +899,6 @@ const Work = () => {
             </section>
 
             {/* Expret Counsellor form */}
-
-            {/* Footer Section Start */}
-
-            <section>
-
-            </section>
-
-      
 
         </>
     );
