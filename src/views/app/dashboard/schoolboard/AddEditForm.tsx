@@ -1,4 +1,4 @@
-// ** React Imports
+
 import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Fade, { FadeProps } from '@mui/material/Fade'
@@ -21,19 +21,10 @@ import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
-import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
 import type { FC } from 'react';
-import { useAuth } from 'src/hooks/useAuth'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
 import { Alert } from '@mui/material'
-
-
-interface FormInputs {
-    name: string
-    state_id: any
-}
+import FileUpload from 'src/@core/components/dropzone/FileUpload';
 
 
 
@@ -44,55 +35,54 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
-    const { user } = useAuth();
     const [loading, setLoading] = useState<boolean>(false)
-    const [superadmin, setSuperadmin] = useState<boolean>(true)
     const [error, setError] = useState("")
-    const [schools, setSchools] = useState([])
-    const [states, setStates] = useState([])
-    const isMountedRef = useIsMountedRef();
-    const params: any = {}
-    params['page'] = 1;
-    params['size'] = 10000;
+    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
+    const [selectedphoto, setSelectedphoto] = useState('');
+
+    const handleFileChangephoto = (files: any[]) => {
+        setSelectedphoto(files[0]);
+        setFileNamesphoto(
+            files.map((file) => ({
+                name: file.name,
+                preview: URL.createObjectURL(file),
+            }))
+        );
+
+    };
 
     const schema: any = yup.object().shape({
-        name: yup
-            .string()
-            .trim()
-            .required(),
-
+      
     })
 
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
+        slug: isAddMode ? '' : olddata.slug,
+       
     }
 
     const {
         control,
         handleSubmit,
         reset,
-        resetField: admfiledReset,
         formState: { errors }
-    } = useForm<FormInputs>({
+    } = useForm<any>({
         defaultValues,
         mode: 'onChange',
         resolver: yupResolver(schema)
     })
 
     const onSubmit = async (data: any) => {
-        // console.log(data, "data")
 
-        // return
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/city/update/';
-            let formData: any = {};
-            formData.id = updateid;
-            formData.name = data.name;
-            formData.state_id = data.state_id.id;
-
-
+            let url = 'api/admin/schoolboard/update';
+            const formData = new FormData();
+            formData.append('id', updateid);
+            formData.append('name', data.name);
+            formData.append('slug', data.slug);
+           
             try {
                 let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
@@ -109,7 +99,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-                console.error(err);
+         
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -123,16 +113,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/city/add';
-            let formData: any = {};
-            formData.name = data.name;
-            formData.state_id = data.state_id.id;
+            let url = 'api/admin/schoolboard/add';
+
+            const formData = new FormData();
+            formData.append('name', data.name);
+            formData.append('slug', data.slug);
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-                    console.log("response.data", response.data)
+             
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -163,28 +154,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
-    //get all states
-    const getstates = useCallback(async () => {
-
-        try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            // roleparams['schoolId'] = school_id; 
-            const response = await axios1.get('api/admin/state/get/', { params: roleparams });
-
-            setStates(response.data.data);
-
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-    useEffect(() => {
-
-        getstates();
-
-    }, [getstates]);
 
     return (
         <>
@@ -200,7 +169,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Name'
+                                    label=' Name'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.name)}
@@ -210,35 +179,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-
                     <Grid item xs={12} sm={4}>
                         <Controller
-                            name='state_id'
+                            name='slug'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field }) => (
-                                <CustomAutocomplete
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
                                     fullWidth
-                                    options={states}
-                                    loading={!states.length}
-                                    value={field.value}
-                                    onChange={(event, newValue) => {
-                                        field.onChange(newValue);
-                                    }}
-                                    getOptionLabel={(option: any) => option.name || ''}
-                                    renderInput={(params: any) => (
-                                        <CustomTextField
-                                            required
-                                            {...params}
-                                            error={Boolean(errors.state_id)}
-                                            {...(errors.state_id && { helperText: 'This field is required' })}
-                                            label='Select states'
-                                        />
-                                    )}
+                                    value={value}
+                                    label=' Slug'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.slug)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.slug && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
+                  
 
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}
@@ -254,7 +214,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         >
 
                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                                {/* <Button variant='contained' type='submit' sx={{ mr: 1 }} onClick={() => setShow(false)}> */}
                                 Submit
                                 {loading ? (
                                     <CircularProgress
@@ -267,9 +226,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 ) : null}
                             </Button>
-                            {/* <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
-                                Discard
-                            </Button> */}
+
                         </DialogActions>
                     </Grid>
                 </Grid>

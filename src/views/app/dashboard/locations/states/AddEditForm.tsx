@@ -4,8 +4,6 @@ import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCal
 import Fade, { FadeProps } from '@mui/material/Fade'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
@@ -24,25 +22,15 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import type { FC } from 'react';
-import { useAuth } from 'src/hooks/useAuth'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
+
+
 import { Alert } from '@mui/material'
 
-// const Transition = forwardRef(function Transition(
-//     props: FadeProps & { children?: ReactElement<any, any> },
-//     ref: Ref<unknown>
-// ) {
-//     return <Fade ref={ref} {...props} />
-// })
 
 interface FormInputs {
     name: string
     country_id: any
-
 }
-
-
 
 interface Authordata {
     olddata?: any;
@@ -51,13 +39,9 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
-    const { user } = useAuth();
     const [loading, setLoading] = useState<boolean>(false)
-    const [superadmin, setSuperadmin] = useState<boolean>(true)
     const [error, setError] = useState("")
     const [countries, setCountries] = useState([])
-
-
     const isMountedRef = useIsMountedRef();
     const params: any = {}
     params['page'] = 1;
@@ -71,15 +55,16 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const defaultValues = {
-        name: isAddMode ? '' : olddata.name,
-        country_id: isAddMode ? '' : olddata.country_id.name,
+        name: isAddMode || !olddata ? '' : olddata.name,
+        country_id: isAddMode || !olddata ? '' : olddata.country_id,
     }
+    
+// console.log(olddata.country.name ,"olddata.country_id")
 
     const {
         control,
         handleSubmit,
         reset,
-        resetField: admfiledReset,
         formState: { errors }
     } = useForm<FormInputs>({
         defaultValues,
@@ -88,9 +73,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const onSubmit = async (data: any) => {
-        // console.log(data, "data")
-
-        // return
+       
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
@@ -99,7 +82,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.id = updateid;
             formData.name = data.name;
             formData.country_id = data.country_id.id;
-
 
             try {
                 let response = await axios1.post(url, formData)
@@ -178,7 +160,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const roleparams: any = {};
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
-            // roleparams['schoolId'] = school_id; 
             const response = await axios1.get('api/admin/countries/get', { params: roleparams });
 
             setCountries(response.data.data);
@@ -240,7 +221,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             {...params}
                                             error={Boolean(errors.country_id)}
                                             {...(errors.country_id && { helperText: 'This field is required' })}
-                                            label='Select Countries'
+                                            label='Select Country'
                                         />
                                     )}
                                 />

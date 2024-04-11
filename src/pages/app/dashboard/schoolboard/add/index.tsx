@@ -1,22 +1,14 @@
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import Fab from '@mui/material/Fab'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditFormnew from 'src/views/app/dashboard/locations/countries/AddEditForm'
+import AddEditFormnew from 'src/views/app/dashboard/schoolboard/AddEditForm'
 import CardContent from '@mui/material/CardContent'
-import NotAuthorized from 'src/pages/401'
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
-// ** React Imports
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-import { useState, useEffect, useContext } from 'react';
+
 
 const Adduserlayout = () => {
-    const ability = useContext(AbilityContext)
+
     return (
         <>
             <Card>
@@ -30,19 +22,15 @@ const Adduserlayout = () => {
                         p: theme => theme.spacing(2, 5, 4, 5)
                     }}
                 >
-                    <h5>Add Country Details</h5>
+                    <h5>Add School Board Details</h5>
                     <Link href={`./`} >
-                        <Button variant='contained'>View All Countries</Button>
+                        <Button variant='contained'>View All schoolboard</Button>
                     </Link>
                 </Box>
                 <CardContent>
-                  
                     <AddEditFormnew isAddMode={true} />
                 </CardContent>
             </Card>
-            <Grid container spacing={6}>
-
-            </Grid >
 
         </>
     )

@@ -28,9 +28,6 @@ import FileUpload from 'src/@core/components/dropzone/FileUpload';
 
 
 
-
-
-
 interface Authordata {
     olddata?: any;
     isAddMode: boolean;

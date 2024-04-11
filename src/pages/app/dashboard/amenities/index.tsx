@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('/api/admin/amenities/delete/' + id)
+      await axios1.delete('/api/admin/amenities/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)

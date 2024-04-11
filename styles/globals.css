@@ -26,6 +26,25 @@ code:not([class*='language-']):after {
 code[class*='language-'] {
   padding: 0;
 }
+
+
+.css-z0juvp-MuiTablePagination-root .MuiTablePagination-selectLabel {
+  display: block;
+  margin-bottom: 0px !important;
+}
+.MuiToolbar-root .MuiToolbar-gutters .MuiToolbar-regular .MuiTablePagination-toolbar .css-1iu2446-MuiToolbar-root-MuiTablePagination-toolbar p{
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}
+
+.css-lrt3ob-MuiDataGrid-footerContainer .MuiTablePagination-displayedRows, .css-lrt3ob-MuiDataGrid-footerContainer .MuiTablePagination-selectLabel {
+  color: rgba(47, 43, 61, 0.78);
+  margin-bottom: 0px !important;
+}
+/* .MuiDataGrid-footerContainer .MuiTablePagination-selectLabel p{
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+} */
 .socialIcon img {
   width: 28px;
   height: 28px;
