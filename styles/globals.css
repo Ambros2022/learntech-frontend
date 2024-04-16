@@ -65,6 +65,38 @@ code[class*='language-'] {
   font-size: 12px !important;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+.top-nav .dropdown-menu .dropdown-item:hover,
+.top-nav .dropdown-menu .dropdown-item:focus {
+  border-left: 3px solid #254692 !important;
+  color: black !important;
+  background-color: rgba(39, 72, 150, 0.04) !important;
+}
+.top-nav .dropdown-menu .btn:hover,
+.top-nav .dropdown-menu .btn:focus {
+  font-weight: bold !important;
+}
+.top-nav .dropdown-menu img {
+  filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(324deg) brightness(96%) contrast(104%);
+}
+.top-nav .dropdown-menu .btn {
+  color: #254692 !important;
+}
+.dropdown-menu li {
+  position: relative !important;
+}
+.dropdown-menu .dropdown-submenu {
+  display: none !important;
+  position: absolute !important;
+  left: 100% !important;
+  top: -7px !important;
+}
+.dropdown-menu .dropdown-left-submenu {
+  right: 100% !important;
+  left: auto !important;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+  display: block !important;
+}
 .latestNewsCon .nav-pills button {
   background-color: rgb(208, 208, 208) !important;
   color: #254692 !important;
@@ -97,33 +129,42 @@ nav a {
 .sbtBtn {
   background-color: #254692 !important;
 }
-.banner {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/icons/Banner Image.jpg') !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-  height: 700px !important;
+.bannerCon {
+  position: relative !important;
+  height: 600px !important;
 }
-.searchBox {
+.carousel {
+  position: relative !important;
+}
+.bannerCon .carousel img {
+  object-fit: cover !important;
+  height: 600px !important;
+}
+.bannerFormSec {
+  position: absolute !important;
+  top: 12%;
+  width: 100%;
+}
+.searchSec {
   background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: saturate(180%) blur(10px) !important;
+  backdrop-filter: saturate(180%) blur(8px) !important;
   color: white !important;
   border: 1px solid white !important;
   font-size: 16px !important;
   padding: 20px !important;
+  border-radius: 10px !important;
+  margin-top: 232px !important;
 }
-.searchBox-con {
-  padding-top: 400px !important;
-}
-.searchBox input[type='text'] {
+.searchSec input[type='search'] {
   background: transparent !important;
   border: 1px solid white !important;
   padding: 10px 20px !important;
   font-size: 16px !important;
 }
-.searchBox input::placeholder {
+.searchSec input::placeholder {
   color: white !important;
 }
-.searchBox input:focus {
+.searchSec input:focus {
   outline: none !important;
 }
 .form-control {
@@ -135,8 +176,24 @@ nav a {
   color: white !important;
   background-color: #254692 !important;
 }
+.searchForm {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+.submitBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  border-radius: 6px !important;
+}
 .carousel-indicators {
-  top: 645px !important;
+  top: 530px !important;
+}
+.bannerCon .carousel-control-prev {
+  left: -70px;
+}
+.bannerCon .carousel-control-next {
+  right: -70px;
 }
 .item {
   align-items: center;
@@ -145,19 +202,6 @@ nav a {
   display: flex;
   height: 300px;
   justify-content: center;
-}
-.bannerFormCon h5 {
-  font-size: 18px !important;
-  color: rgba(39, 72, 150, 1) !important;
-}
-.bannerFormCon form {
-  background-color: white !important;
-  height: 500px;
-  border-radius: 10px !important;
-  margin-top: 100px !important;
-}
-.bannerFormCon form input {
-  color: rgba(143, 143, 143, 1) !important;
 }
 .carousel-indicators [data-bs-target] {
   border-radius: 50%;
@@ -247,6 +291,30 @@ nav a {
 .exploreCardCon .card h6 {
   font-size: 15px !important;
 }
+.studyAbroadNav a {
+  border-radius: 0 !important;
+  color: #8f8f8f !important;
+  text-decoration: none !important;
+}
+.studyAbroadNav a:hover,
+.studyAbroadNav a:focus {
+  font-weight: bold !important;
+  padding-bottom: 15px !important;
+  border-bottom-style: solid !important;
+  border-bottom-width: 3.1px !important;
+  width: fit-content !important;
+  color: #254692 !important;
+}
+.studyAbroadNav .active,
+.studyAbroadNav .active :focus,
+.studyAbroadNav .active :hover {
+  font-weight: bold !important;
+  padding-bottom: 15px !important;
+  border-bottom-style: solid !important;
+  border-bottom-width: 3.1px !important;
+  width: fit-content !important;
+  color: #254692 !important;
+}
 .footerCon {
   background-color: rgba(21, 41, 88, 1);
   font-size: 16px !important;
@@ -330,8 +398,114 @@ footer img {
   right: 30px !important;
   transform: rotate(270deg) !important;
 }
+.featuredClgCard .card-text img {
+  filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
+}
+.featuredClgCard .card-text {
+  filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
+}
+.featuredClgCard a {
+  background-color: white;
+  color: #254692;
+  border: 1px solid #254692 !important;
+}
+.featuredClgCard .active,
+.featuredClgCard .active :focus,
+.featuredClgCard .active :hover {
+  background-color: #254692 !important;
+  color: white !important;
+  box-shadow: #254692 0px 0px 10px !important;
+}
+.featuredClgCard {
+  margin-right: 10px !important;
+}
+.newsLinkSec {
+  background-color: #274896;
+  color: white;
+}
+.StudyAbroadCard .card-text img {
+  filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
+}
+.StudyAbroadCard .card-text {
+  filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
+}
+.StudyAbroadCard a {
+  background-color: white;
+  color: #254692;
+  border: 1px solid #254692 !important;
+}
+.StudyAbroadCard {
+  margin-right: 10px !important;
+}
+.nav-pills {
+  border: 0 !important;
+}
+.carousel-container {
+  overflow: visible !important;
+}
+.carousel-container {
+  position: relative !important;
+}
+.newsLinkSec .carousel-button-group {
+  margin: -50px 0px 0px 0px !important;
+}
+.FeaturedClgCon .carousel-button-group {
+  position: absolute !important;
+  top: 260px !important;
+  width: 100%;
+}
+.FeaturedClgCon .fi-left {
+  margin-left: -30px !important;
+}
+.FeaturedClgCon .fi-right {
+  margin-right: -10px !important;
+}
+.StudyAbroadCon .carousel-button-group {
+  position: absolute !important;
+  top: 390px !important;
+  width: 100%;
+}
+.StudyAbroadCon .fi-left {
+  margin-left: -30px !important;
+}
+.StudyAbroadCon .fi-right {
+  margin-right: -10px !important;
+}
+.arrowIcon.show {
+  opacity: 1;
+}
+
+.arrowIcon.hide {
+  opacity: 0;
+}
+/* .react-multi-carousel-list {
+  overflow: visible !important;
+} */
+/* .react-multiple-carousel__arrow {
+  position: absolute !important;
+}
+
+.react-multiple-carousel__arrow--left {
+  left: calc(-3% + 1px) !important;
+}
+
+.react-multiple-carousel__arrow--right {
+  right: calc(-3% + 1px) !important;
+} */
 
 /* Media Queries */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .featuredClgCard a {
+    font-size: 12px !important;
+  }
+  .bannerCon .carousel-control-prev {
+    left: -50px;
+  }
+  .bannerCon .carousel-control-next {
+    right: -50px;
+  }
+}
+
 @media (max-width: 1139px) {
   .counsellingBtn {
     font-size: 10px !important;
@@ -340,6 +514,9 @@ footer img {
 @media (max-width: 1024px) {
   .top-nav {
     font-size: 12px !important;
+  }
+  .searchForm h5 {
+    font-size: 19px !important;
   }
 }
 
@@ -356,6 +533,9 @@ footer img {
   .footerCon h6 {
     font-weight: 500 !important;
     font-size: 15px !important;
+  }
+  .searchForm h5 {
+    font-size: 19px !important;
   }
 
   .phone-icon {
@@ -403,8 +583,60 @@ footer img {
     color: #274896 !important;
     font-size: 12px !important;
   }
+  .featuredClgCard .card-title {
+    font-size: 18px !important;
+  }
+  .featuredClgCard .card-text {
+    font-size: 12px !important;
+  }
+  .featuredClgCard a {
+    font-size: 12px !important;
+  }
+  .bannerCon .carousel-control-prev {
+    left: -35px;
+  }
+  .bannerCon .carousel-control-next {
+    right: -35px;
+  }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .bannerCon .carousel-control-prev {
+    left: -22px;
+  }
+  .bannerCon .carousel-control-next {
+    right: -22px;
+  }
+  .bannerFormSec {
+    position: relative !important;
+  }
+  .searchBtn {
+    padding: 4px 20px !important;
+    font-size: 16px !important;
+    color: white !important;
+    background-color: #254692 !important;
+  }
+  .searchSec input[type='search'] {
+    background: transparent !important;
+    border: 1px solid white !important;
+    padding: 4px 20px !important;
+    font-size: 16px !important;
+  }
+  .searchSec {
+    font-size: 12px !important;
+    padding: 10px !important;
+  }
+  .bannerCon {
+    height: 800px !important;
+  }
+  .bannerCon .carousel img {
+    height: auto !important;
+  }
+  .bannerFormSec {
+    top: -15% !important;
+  }
+  .searchSec {
+    margin-top: 0px !important;
+  }
   header {
     display: none !important ;
   }
@@ -419,20 +651,11 @@ footer img {
     right: 30px !important;
     transform: rotate(270deg) !important;
   }
-  .searchBox-con {
-    padding-top: 50px !important;
-  }
-  .bannerFormCon .my-5 {
-    margin: 20px 4px !important;
-  }
   .banner {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/icons/Banner Image.jpg') !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
     height: 850px !important;
-  }
-  .carousel-indicators {
-    top: 771px !important;
   }
   .footerCon .img-fluid {
     width: 100px !important;
@@ -468,5 +691,82 @@ footer img {
   }
   footer {
     font-size: 12px !important;
+  }
+  .featuredClgCard {
+    margin-right: 0px !important;
+  }
+  .StudyAbroadCard {
+    margin-right: 0px !important;
+  }
+  .StudyAbroadCon .carousel-button-group {
+    top: 530px !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 424px) {
+  .studyAbroadNav a {
+    font-size: 10px !important;
+  }
+  .bannerCon .carousel-control-prev {
+    left: -15px;
+  }
+  .bannerCon .carousel-control-next {
+    right: -15px;
+  }
+  .bannerCon {
+    height: 730px !important;
+  }
+  .carousel-indicators {
+    top: 675px !important;
+  }
+}
+@media (max-width: 575px) {
+  .FeaturedClgCon .fi-left {
+    margin-left: 8px !important;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2px 8px;
+  }
+  .FeaturedClgCon .fi-right {
+    margin-right: 32px !important;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2px 8px;
+  }
+  .StudyAbroadCon .fi-left {
+    margin-left: 8px !important;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2px 8px;
+  }
+  .StudyAbroadCon .fi-right {
+    margin-right: 32px !important;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2px 8px;
+  }
+  .StudyAbroadCon .carousel-button-group {
+    top: 530px !important;
+  }
+}
+@media (min-width: 425px) and (max-width: 575px) {
+  .carousel-indicators {
+    top: 725px !important;
+  }
+}
+@media (min-width: 575px) and (max-width: 767px) {
+  .carousel-indicators {
+    top: 790px !important;
+  }
+  .bannerCon {
+    height: 840px !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 374px) {
+  .carousel-indicators {
+    top: 670px !important;
+  }
+  .searchBtn {
+    padding: 8px 20px !important;
+    font-size: 10px !important;
   }
 }

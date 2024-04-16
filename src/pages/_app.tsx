@@ -110,7 +110,7 @@ const App = (props: ExtendedAppProps) => {
 
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap.min.js');
-    
+
   }, [])
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false
@@ -138,6 +138,8 @@ const App = (props: ExtendedAppProps) => {
           />
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
+         
+
         </Head>
 
         <AuthProvider>
@@ -161,6 +163,7 @@ const App = (props: ExtendedAppProps) => {
           </SettingsProvider>
         </AuthProvider>
       </CacheProvider>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     </>
   )
 }

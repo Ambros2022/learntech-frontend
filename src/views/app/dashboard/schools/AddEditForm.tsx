@@ -38,6 +38,7 @@ import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import toast from 'react-hot-toast'
 import router from 'next/router'
 
+import ImageUploading, { ImageListType } from "react-images-uploading";
 
 interface Authordata {
     olddata?: any;
@@ -491,9 +492,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         setFormvalue(newValue)
     }
 
-    const handleBack = () => {
-        // setActiveStep(prevActiveStep => prevActiveStep - 1)
-    }
+    const [images, setImages] = useState<ImageListType>([]);
+    const maxNumber = 69;
+  
+    const onChangeimages = (
+      imageList: ImageListType,
+      addUpdateIndex: number[] | undefined
+    ) => {
+      // data for submit
+      console.log(imageList, addUpdateIndex);
+      setImages(imageList);
+    };
 
     return (
         <Card>
@@ -820,7 +829,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => {
-                                            console.log(value); // Log value here
+                                            // console.log(value); // Log value here
 
                                             return (
                                                 <CustomAutocomplete
@@ -853,7 +862,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => {
-                                            console.log(value); // Log value here
+                                            // console.log(value); // Log value here
 
                                             return (
                                                 <CustomAutocomplete
@@ -1225,7 +1234,51 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </TabPanel>
 
                     <TabPanel sx={{ p: 0 }} value='social-links'>
+                        {isAddMode ? <> <h6>Please add School First.</h6> </> : <>
+                            <div className="App">
+                                <ImageUploading
+                                    multiple
+                                    value={images}
+                                    onChange={onChangeimages}
+                                    maxNumber={maxNumber}
+                                >
+                                    {({
+                                        imageList,
+                                        onImageUpload,
+                                        onImageRemoveAll,
+                                        onImageUpdate,
+                                        onImageRemove,
+                                        isDragging,
+                                        dragProps
+                                    }) => (
+                                        // Building UI
+                                        <div className="upload__image-wrapper">
+                                            <button
+                                                style={isDragging ? { color: "red" } : undefined}
+                                                onClick={onImageUpload}
+                                                {...dragProps}
+                                            >
+                                                Click or Drop here
+                                            </button>
+                                            &nbsp;
+                                            <button onClick={onImageRemoveAll}>Remove all images</button>
+                                            {imageList.map((image, index) => (
+                                                <div key={index} className="image-item">
+                                                    <img src={image.dataURL} alt="" width="100" />
+                                                    <div className="image-item__btn-wrapper">
+                                                        <button onClick={() => onImageUpdate(index)}>Update</button>
+                                                        <button onClick={() => onImageRemove(index)}>Remove</button>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </ImageUploading>
+                            </div>
 
+
+
+                        </>}
                     </TabPanel>
                 </CardContent>
                 {/* <Divider sx={{ m: '0 !important' }} /> */}
