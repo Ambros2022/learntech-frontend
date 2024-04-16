@@ -26,6 +26,7 @@ class CustomDocument extends Document {
           <link rel="icon" type="image/webp" href="/images/fav-icon.webp" />
           {/* <link rel="stylesheet" href="/owl.carousel.min.css" /> */}
           {/* <link rel="stylesheet" href="/owl.theme.default.min.css" /> */}
+          <script src="jquery-3.7.1.min.js"></script>
         </Head>
         <body>
           <Main />
