@@ -56,11 +56,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const defaultValues = {
         name: isAddMode || !olddata ? '' : olddata.name,
-        country_id: (isAddMode || !olddata) ? '' : olddata.country.name,
+        country_id: (isAddMode || !olddata) ? '' : olddata.country,
 
     }
-    
-console.log(olddata.country.name ,"olddata.country_id")
+
 
     const {
         control,

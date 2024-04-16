@@ -13,6 +13,24 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
     {
+      title: 'School',
+      icon: 'tabler:school',
+      auth: false,
+      children: [
+        {
+          title: 'School Board',
+          path: '/app/dashboard/schoolboard',
+          auth: false
+        },
+        {
+          title: 'Schools',
+          path: '/app/dashboard/schools',
+          // icon: 'tabler:mail',
+          auth: false
+        }
+      ]
+    },
+    {
       title: 'Locations',
       icon: 'tabler:location',
       auth: false,
@@ -34,12 +52,7 @@ const navigation = (): VerticalNavItemsType => {
         }
       ]
     },
-    {
-      title: 'Schools',
-      path: '/app/dashboard/schools',
-      icon: 'tabler:mail',
-      auth: false
-    },
+
     {
       title: 'Amenities',
       path: '/app/dashboard/amenities',
@@ -72,21 +85,24 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
 
-    {
-      title: 'School',
-      icon: 'tabler:school',
-      auth: false,
-      children: [
-
-          {
-      title: 'School Board',
-      path: '/app/dashboard/schoolboard',
-      auth: false
-    },
-       
-      ]
-    },
-
+    // {
+    //   title: 'School',
+    //   icon: 'tabler:school',
+    //   auth: false,
+    //   children: [
+    //     {
+    //       title: 'School Board',
+    //       path: '/app/dashboard/schoolboard',
+    //       auth: false
+    //     },
+    //     {
+    //       title: 'Schools',
+    //       path: '/app/dashboard/schools',
+    //       // icon: 'tabler:mail',
+    //       auth: false
+    //     }
+    //   ]
+    // },
 
     // {
     //   title: 'School Board',
@@ -94,7 +110,6 @@ const navigation = (): VerticalNavItemsType => {
     //   icon: 'tabler:school',
     //   auth: false
     // },
-
 
     // {
     //   title: 'Second Page',
