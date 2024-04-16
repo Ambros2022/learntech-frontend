@@ -8,11 +8,6 @@ import AddEditFormnew from 'src/views/app/dashboard/locations/states/AddEditForm
 import CardContent from '@mui/material/CardContent'
 import NotAuthorized from 'src/pages/401'
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography'
-
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
-// ** React Imports
 
 import { AbilityContext } from 'src/layouts/components/acl/Can'
 import { useState, useEffect, useContext } from 'react';
@@ -21,7 +16,6 @@ const Adduserlayout = () => {
     const ability = useContext(AbilityContext)
     return (
         <>
-
             <Card>
                 <Box
                     sx={{
@@ -33,7 +27,7 @@ const Adduserlayout = () => {
                         p: theme => theme.spacing(2, 5, 4, 5)
                     }}
                 >
-                    <h2>Add States  Details</h2>
+                    <h5>Add States  Details</h5>
                     <Link href={`../states`} >
                         <Button variant='contained'>View All states</Button>
                     </Link>
@@ -43,10 +37,6 @@ const Adduserlayout = () => {
                     <AddEditFormnew isAddMode={true} />
                 </CardContent>
             </Card>
-            <Grid container spacing={6}>
-
-            </Grid >
-
         </>
     )
 }

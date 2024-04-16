@@ -40,13 +40,11 @@ const Edituserlayout = () => {
         setFormloading(false);
       }
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
 
 
   }, [isMountedRef]);
-
-
 
   useEffect(() => {
 
@@ -67,9 +65,7 @@ const Edituserlayout = () => {
               p: theme => theme.spacing(2, 5, 4, 5)
             }}
           >
-            <h2>Edit States</h2>
-            {/* {formloading ? "" : <Resetpasswordform olddata={olddata} />} */}
-
+            <h5>Edit States</h5>
             <Link href={`../`} >
               <Button variant='contained'>View All States</Button>
             </Link>

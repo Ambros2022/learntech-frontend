@@ -1,33 +1,21 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
 // ** MUI Imports
+
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import CardHeader from '@mui/material/CardHeader'
 import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
 import axios1 from 'src/configs/axios'
-// ** Context
-import { useAuth } from 'src/hooks/useAuth'
-import { useParams } from "react-router-dom";
-// ** Custom Components
-import CustomChip from 'src/@core/components/mui/chip'
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
-// import { DataGridRowType } from 'src/@fake-db/types'
-// ** Utils Import
 import { getInitials } from 'src/@core/utils/get-initials'
 import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
 
-import CustomTextField from 'src/@core/components/mui/text-field'
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import NotAuthorized from 'src/pages/401'
-// ** React Imports
-import { useContext } from 'react'
-import { AbilityContext } from 'src/layouts/components/acl/Can'
+
 // ** Icon Imports
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
@@ -36,12 +24,9 @@ import Fab from '@mui/material/Fab'
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
 
-interface StatusObj {
-  [key: number]: {
-    title: string
-    color: ThemeColor
-  }
-}
+
+
+
 
 let cancelToken: any;
 
@@ -64,23 +49,10 @@ const renderClient = (params: GridRenderCellParams) => {
   )
 }
 
-const statusObj: StatusObj = {
-  1: { title: 'current', color: 'primary' },
-  2: { title: 'professional', color: 'success' },
-  3: { title: 'rejected', color: 'error' },
-  4: { title: 'resigned', color: 'warning' },
-  5: { title: 'applied', color: 'info' }
-}
+
 
 const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
-
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const [show, setShow] = useState<boolean>(false)
-  const ability = useContext(AbilityContext)
-  const handleRowOptionsClose = () => {
-    setShow(true);
-  }
 
   const handleDelete = () => {
     setOpen(true);
@@ -95,14 +67,13 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/state/delete/' + id)
+      await axios1.post('api/admin/recognition/delete/' + id)
         .then(response => {
-          // console.log(response);
-
           if (response.data.status == 1) {
             toast.success(response.data.message)
             // router.reload();
             onReloadPage();
+
           } else {
             toast.error(response.data.message)
 
@@ -119,7 +90,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./states/edit/` + id} >
+        <Link href={`./recognition/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -160,11 +131,6 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   )
 }
 
-interface Props {
-  value: string
-  clearSearch: () => void
-  onChange: (e: ChangeEvent) => void
-}
 
 type DataGridRowType = {
   id: number
@@ -176,10 +142,9 @@ type DataGridRowType = {
 
 const SecondPage = () => {
   // ** States
-  const { user } = useAuth();
+
+
   const [reloadpage, setReloadpage] = useState("0");
-  const [city_id, setcity_id] = useState('')
-  const [status, setStatus] = useState('')
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
@@ -187,11 +152,9 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [fieldname, setFieldname] = useState<string>('name')
+  const [searchfrom, setSearchfrom] = useState<any>('recognition_approval_name')
+  const [columnname, setColumnname] = useState<string>('recognition_approval_name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
-  const isMountedRef = useIsMountedRef();
-  const ability = useContext(AbilityContext)
   const params: any = {}
 
   params['page'] = 1;
@@ -202,14 +165,13 @@ const SecondPage = () => {
     setReloadpage('1');
   }, []);
 
-
   let columns: GridColDef[] = [
 
     {
-      flex: 0.175,
-      minWidth: 200,
-      field: 'name',
-      headerName: 'States',
+      flex: 0.3,
+      minWidth: 110,
+      field: 'recognition_approval_name',
+      headerName: 'Recognition & Approval name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
@@ -218,7 +180,7 @@ const SecondPage = () => {
             {renderClient(params)}
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.name}
+                {row.recognition_approval_name}
               </Typography>
 
             </Box>
@@ -226,19 +188,45 @@ const SecondPage = () => {
         )
       }
     },
+
     {
       flex: 0.175,
-      minWidth: 200,
-      field: 'country.name',
-      headerName: 'Country',
+      minWidth: 100,
+      field: 'recognition_approval_slug',
+      headerName: 'Slug',
       renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
         return (
+
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {params.row.country && params.row.country ? params.row.country.name : ""}
+            {row.recognition_approval_slug}
           </Typography>
-        );
+
+
+        )
       }
     },
+    {
+      flex: 0.175,
+      minWidth: 100,
+      field: 'recognition_approval_full_name',
+      headerName: 'Full name',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.recognition_approval_full_name}
+          </Typography>
+
+
+        )
+      }
+    },
+
+
     {
       flex: 0.175,
       minWidth: 100,
@@ -252,25 +240,25 @@ const SecondPage = () => {
     }
   ]
 
+
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, city_id: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
       }
       cancelToken = axios.CancelToken.source();
-      
+
       await axios1
-        .get('api/admin/state/get', {
+        .get('api/admin/recognition/get', {
           cancelToken: cancelToken.token,
           params: {
+            columnname,
+            orderby,
+            page,
+            size,
             searchtext,
             searchfrom,
-            orderby,
-            size,
-            page,
-            fieldname,
-            city_id,
 
           },
         })
@@ -278,16 +266,16 @@ const SecondPage = () => {
         .then((res) => {
           setTotal(res.data.totalItems);
           setRows(res.data.data);
-          // console.log(res.data.data);
+
 
           setLoading(false);
         })
         .catch((error) => {
-          // Handle error if needed
+
           setLoading(false);
-          console.error("API call error:", error);
+          // console.error("API call error:", error);
         });
-    
+
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationModel, reloadpage]
@@ -301,16 +289,16 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, fieldname, city_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, fieldname, city_id])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
       setOrderby(newModel[0].sort)
-      setFieldname(newModel[0].field)
+      setColumnname(newModel[0].field)
     } else {
       setOrderby('asc')
-      setFieldname('name')
+      setColumnname('name')
     }
   }
 
@@ -318,10 +306,13 @@ const SecondPage = () => {
     setSearchtext(value)
   }
 
+
+
   const AddButtonToolbar = () => {
+
     return (
       <>
-        <Link href={`./states/add`} >
+        <Link href={'./recognition/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add

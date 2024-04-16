@@ -68,25 +68,16 @@ const Edituserlayout = () => {
               p: theme => theme.spacing(2, 5, 4, 5)
             }}
           >
-            <h2>Edit Countries</h2>
-            {/* {formloading ? "" : <Resetpasswordform olddata={olddata} />} */}
-
+            <h5>Edit Country</h5>
             <Link href={`../`} >
               <Button variant='contained'>View All Countries</Button>
             </Link>
           </Box>
           <CardContent>
-
             {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
-
           </CardContent>
         </Card>
         
-       
-          {/* <Grid item xs={12}>
-            <NotAuthorized />
-          </Grid> */}
-      
     </>
   )
 }
