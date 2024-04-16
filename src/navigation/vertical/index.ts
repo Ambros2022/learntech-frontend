@@ -84,6 +84,12 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'tabler:baseline-density-small',
       auth: false
     },
+    {
+      title: 'Substream',
+      path: '/app/dashboard/substream',
+      icon: 'tabler:clipboard-text',
+      auth: false
+    },
 
     // {
     //   title: 'School',
