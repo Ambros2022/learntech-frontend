@@ -201,26 +201,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={4}>
                         <Controller
-                            name='name'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Name'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.name)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.name && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
                             name='state_id'
                             control={control}
                             rules={{ required: true }}
@@ -247,6 +227,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
+
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='name'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Name'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.name)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.name && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
 
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}

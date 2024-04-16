@@ -1,5 +1,5 @@
-// ** React Imports
-import {  useState,  useEffect, useCallback } from 'react'
+'use client'
+import { useState, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -18,6 +18,7 @@ const Edituserlayout = () => {
   const isMountedRef = useIsMountedRef();
   const router = useRouter();
   const { id } = router.query;
+
   const isAddMode = !id;
   const [olddata, setolddata] = useState<any>(null);
   const [formloading, setFormloading] = useState(true);
@@ -48,33 +49,33 @@ const Edituserlayout = () => {
 
   return (
     <>
-     
-        <Card>
-          <Box
-            sx={{
-              gap: 2,
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              p: theme => theme.spacing(2, 5, 4, 5)
-            }}
-          >
-            <h5>Edit School</h5>
-    
 
-            <Link href={`../`} >
-              <Button variant='contained'>View All Schools</Button>
-            </Link>
-          </Box>
-          <CardContent>
+      <Card>
+        <Box
+          sx={{
+            gap: 2,
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            p: theme => theme.spacing(2, 5, 4, 5)
+          }}
+        >
+          <h5>Edit School</h5>
 
-            {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
 
-          </CardContent>
-        </Card>
+          <Link href={`../`} >
+            <Button variant='contained'>View All Schools</Button>
+          </Link>
+        </Box>
+        <CardContent>
 
-      
+          {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
+
+        </CardContent>
+      </Card>
+
+
     </>
   )
 }
