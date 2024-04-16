@@ -4,6 +4,8 @@ import Box, { BoxProps } from '@mui/material/Box'
 
 // ** Types
 import { BlankLayoutProps } from './types'
+import React, { useState, useEffect } from 'react';
+
 
 
 // Styled component for Blank Layout component
@@ -29,13 +31,41 @@ const BlankLayoutWrapper = styled(Box)<BoxProps>(({ theme }) => ({
 }))
 
 const BlankLayout = ({ children }: BlankLayoutProps) => {
+
+  const [showButton, setShowButton] = useState(false);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const halfwayPoint = window.innerHeight / 2;
+      if (window.scrollY > halfwayPoint) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling
+    });
+  };
+
+
   return (
 
     <BlankLayoutWrapper className='layout-wrapper'>
 
       <Box className='app-content' sx={{ overflow: 'hidden', minHeight: '100vh', position: 'relative' }}>
 
-        <header className="bg-white py-2">
+        <header className="bg-gray py-2">
           <div className="container-lg">
             <div className="row">
               <div className="col-md-4 d-flex align-items-center socialIcon">
@@ -69,14 +99,66 @@ const BlankLayout = ({ children }: BlankLayoutProps) => {
                   <a className="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    aria-expanded="false">
                     Universities
                   </a>
-                  <ul className="dropdown-menu">
-                    <li className="dropdown-item">Colleges By location</li>
-                    <li><a className="dropdown-item" href="#">Action</a></li>
-                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                    <li><a className="dropdown-item" href="#">Something else here</a></li>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li>
+                      <a className="d-flex justify-content-between dropdown-item" href="#">
+                        Karnataka <img className="ms-auto" src="images/icons/right arrow.svg"></img>
+                      </a>
+                      <ul className="dropdown-menu dropdown-submenu">
+                        <li>
+                          <a className="dropdown-item" href="#">Bangalore</a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="#">Mangalore</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a className="d-flex justify-content-between dropdown-item" href="#">
+                        Tamil Nadu <img className="ms-auto" src="images/icons/right arrow.svg"></img>
+                      </a>
+                      <ul className="dropdown-menu dropdown-submenu">
+                        <li>
+                          <a className="dropdown-item" href="#">Bangalore</a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="#">Mangalore</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a className="d-flex justify-content-between dropdown-item" href="#">
+                        Karela <img className="ms-auto" src="images/icons/right arrow.svg"></img>
+                      </a>
+                      <ul className="dropdown-menu dropdown-submenu">
+                        <li>
+                          <a className="dropdown-item" href="#">Bangalore</a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="#">Mangalore</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a className="d-flex justify-content-between dropdown-item" href="#">
+                        Andhra Pradesh <img className="ms-auto" src="images/icons/right arrow.svg"></img>
+                      </a>
+                      <ul className="dropdown-menu dropdown-submenu">
+                        <li>
+                          <a className="dropdown-item" href="#">Bangalore</a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="#">Mangalore</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <div className='text-center text-blue'>
+                      <a href="#" className='btn'>View More</a>
+                    </div>
                   </ul>
                 </li>
                 <li className="nav-item dropdown">
@@ -212,7 +294,7 @@ const BlankLayout = ({ children }: BlankLayoutProps) => {
             </div>
             <div className="mt-3 col-md-4 mb-3 text-md-end">
               <a href="#" className="whatsappIcon" ><img className="footer-arrow" src="images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
-              <a href="#" className="arrowIcon" ><img className="footer-arrow" src="images/icons/left arrow.svg" alt="arrow-icon" /></a>
+              <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><img className="footer-arrow" src="images/icons/left arrow.svg" alt="arrow-icon" /></button>
             </div>
           </div>
         </section>
