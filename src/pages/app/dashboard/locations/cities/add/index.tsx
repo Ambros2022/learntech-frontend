@@ -8,11 +8,6 @@ import AddEditFormnew from 'src/views/app/dashboard/locations/cities/AddEditForm
 import CardContent from '@mui/material/CardContent'
 import NotAuthorized from 'src/pages/401'
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography'
-
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
-// ** React Imports
 
 import { AbilityContext } from 'src/layouts/components/acl/Can'
 import { useState, useEffect, useContext } from 'react';
@@ -33,7 +28,7 @@ const Adduserlayout = () => {
                         p: theme => theme.spacing(2, 5, 4, 5)
                     }}
                 >
-                    <h2>Add Cities Details</h2>
+                    <h5>Add City Details</h5>
                     <Link href={`./`} >
                         <Button variant='contained'>View All Cities</Button>
                     </Link>

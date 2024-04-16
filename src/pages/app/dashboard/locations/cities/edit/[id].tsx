@@ -68,7 +68,7 @@ const Edituserlayout = () => {
               p: theme => theme.spacing(2, 5, 4, 5)
             }}
           >
-            <h2>Edit Cities</h2>
+            <h5>Edit City</h5>
             {/* {formloading ? "" : <Resetpasswordform olddata={olddata} />} */}
 
             <Link href={`../`} >
@@ -81,12 +81,6 @@ const Edituserlayout = () => {
 
           </CardContent>
         </Card>
-        
-       
-          {/* <Grid item xs={12}>
-            <NotAuthorized />
-          </Grid> */}
-      
     </>
   )
 }

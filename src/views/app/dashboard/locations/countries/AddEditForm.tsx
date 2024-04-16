@@ -31,12 +31,8 @@ import { Alert } from '@mui/material'
 
 
 interface FormInputs {
-
     name: string
-
 }
-
-
 
 interface Authordata {
     olddata?: any;
@@ -79,9 +75,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const onSubmit = async (data: any) => {
-        // console.log(data, "data")
-
-        // return
+       
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
@@ -125,10 +119,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.name = data.name;
             try {
                 let response = await axios1.post(url, formData)
-                console.log(response, "response")
+                // console.log(response, "response")
 
                 if (response.data.status == 1) {
-                    console.log("response.data", response.data)
+                    // console.log("response.data", response.data)
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -143,7 +137,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     setError(response.data.message)
                 }
             } catch (err: any) {
-                console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -158,13 +151,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
-
-
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
-
                     <Grid item xs={12} sm={6}>
                         <Controller
                             name='name'
@@ -199,7 +189,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         >
 
                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                                {/* <Button variant='contained' type='submit' sx={{ mr: 1 }} onClick={() => setShow(false)}> */}
+                               
                                 Submit
                                 {loading ? (
                                     <CircularProgress
@@ -212,9 +202,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 ) : null}
                             </Button>
-                            {/* <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
-                                Discard
-                            </Button> */}
+                         
                         </DialogActions>
                     </Grid>
                 </Grid>

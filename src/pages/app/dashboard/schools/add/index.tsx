@@ -28,9 +28,9 @@ const Adduserlayout = () => {
                         <Button variant='contained'>View All Schools</Button>
                     </Link>
                 </Box>
-                <CardContent>
-                    <AddEditFormnew isAddMode={true} />
-                </CardContent>
+                {/* <CardContent> */}
+                    <AddEditFormnew  isAddMode={true} />
+                {/* </CardContent> */}
             </Card>
 
         </>
