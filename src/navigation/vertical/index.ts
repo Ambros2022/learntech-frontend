@@ -42,16 +42,66 @@ const navigation = (): VerticalNavItemsType => {
     },
     {
       title: 'Amenities',
-      path: '/app/dashboard/amenity',
-      icon: 'tabler:mail',
+      path: '/app/dashboard/amenities',
+      icon: 'tabler:user',
+      auth: false
+    },
+
+    {
+      title: 'Recognition',
+      path: '/app/dashboard/recognition',
+      icon: 'tabler:text-recognition',
       auth: false
     },
     {
-      title: 'Second Page',
-      path: '/second-page',
-      icon: 'tabler:mail',
+      title: 'Pages',
+      path: '/app/dashboard/Pagess',
+      icon: 'tabler:book',
       auth: false
     },
+    {
+      title: 'Banner',
+      path: '/app/dashboard/banner',
+      icon: 'tabler:frame',
+      auth: false
+    },
+    {
+      title: 'Stream',
+      path: '/app/dashboard/stream',
+      icon: 'tabler:baseline-density-small',
+      auth: false
+    },
+
+    {
+      title: 'School',
+      icon: 'tabler:school',
+      auth: false,
+      children: [
+
+          {
+      title: 'School Board',
+      path: '/app/dashboard/schoolboard',
+      auth: false
+    },
+       
+      ]
+    },
+
+
+    // {
+    //   title: 'School Board',
+    //   path: '/app/dashboard/schoolboard',
+    //   icon: 'tabler:school',
+    //   auth: false
+    // },
+
+
+    // {
+    //   title: 'Second Page',
+    //   path: '/second-page',
+    //   icon: 'tabler:mail',
+    //   auth: false
+    // },
     {
       path: '/acl',
       action: 'read',

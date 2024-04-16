@@ -1,41 +1,33 @@
 // ** React Imports
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
+import {  useState,  useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditForm from 'src/views/app/dashboard/locations/countries/AddEditForm'
+import AddEditForm from 'src/views/app/dashboard/schoolboard/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios1 from 'src/configs/axios'
-// import Resetpasswordform from 'src/views/users/ResetPassword'
 import LinearProgress from '@mui/material/LinearProgress'
-import NotAuthorized from 'src/pages/401'
-import Grid from '@mui/material/Grid';
-// ** React Imports
-import { useContext } from 'react'
-import { AbilityContext } from 'src/layouts/components/acl/Can'
+
 
 
 const Edituserlayout = () => {
   const isMountedRef = useIsMountedRef();
   const router = useRouter();
   const { id } = router.query;
-  // console.log(router.query , "router.query")
   const isAddMode = !id;
   const [olddata, setolddata] = useState<any>(null);
   const [formloading, setFormloading] = useState(true);
-  const ability = useContext(AbilityContext)
+
 
   //get old data
   const getolddata = useCallback(async () => {
     try {
-      // this route needs to be swapped out to /Patient/, but it's currently returning 500
-      const response = await axios1.get('api/admin/countries/get/' + id);
-      // console.log(response);
 
+      const response = await axios1.get('api/admin/schoolboard/get/' + id);
       if (isMountedRef.current) {
         setolddata(response.data.data);
         setFormloading(false);
@@ -68,16 +60,21 @@ const Edituserlayout = () => {
               p: theme => theme.spacing(2, 5, 4, 5)
             }}
           >
-            <h5>Edit Country</h5>
+            <h5>Edit School Board</h5>
+    
+
             <Link href={`../`} >
-              <Button variant='contained'>View All Countries</Button>
+              <Button variant='contained'>View All schoolboard</Button>
             </Link>
           </Box>
           <CardContent>
+
             {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
+
           </CardContent>
         </Card>
-        
+
+      
     </>
   )
 }

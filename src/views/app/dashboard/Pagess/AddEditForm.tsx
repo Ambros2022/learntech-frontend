@@ -2,6 +2,9 @@
 import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Fade, { FadeProps } from '@mui/material/Fade'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // import styles
+
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import { SelectChangeEvent } from '@mui/material/Select'
@@ -23,8 +26,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 import type { FC } from 'react';
-import { Alert } from '@mui/material'
+import { Alert, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
+import dynamic from 'next/dynamic';
 
 
 
@@ -32,6 +36,11 @@ interface Authordata {
     olddata?: any;
     isAddMode: boolean;
 }
+
+
+
+const DynamicReactQuill = dynamic(() => import('react-quill'), { ssr: false }); // Dynamically import ReactQuill
+
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
@@ -52,19 +61,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     };
 
     const schema: any = yup.object().shape({
-        amenities_name: yup
+        url: yup
             .string()
             .trim()
             .required(),
-        amenities_slug: yup
-            .string()
-            .trim()
-            .required(),
+        
     })
 
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true); // Set isClient to true when component mounts
+    }, []);
+
     const defaultValues = {
-        amenities_name: isAddMode ? '' : olddata.amenities_name,
-        amenities_slug: isAddMode ? '' : olddata.amenities_slug,
+        url: isAddMode ? '' : olddata.url,
+        top_description: isAddMode ? '' : olddata.top_description,
+        bottom_description: isAddMode ? '' : olddata.bottom_description,
+        meta_title: isAddMode ? '' : olddata.meta_title,
+        meta_description: isAddMode ? '' : olddata.meta_description,
+        meta_keyword: isAddMode ? '' : olddata.meta_keyword,
     }
 
     const {
@@ -83,12 +99,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/amenities/update';
+            let url = 'api/admin/page/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('amenities_name', data.amenities_name);
-            formData.append('amenities_slug', data.amenities_slug);
-            formData.append('amenities_logo', selectedphoto);
+            formData.append('url', data.url);
+            formData.append('top_description', data.top_description);
+            formData.append('bottom_description', data.bottom_description);
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keyword', data.meta_keyword);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -120,22 +139,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/amenities/add';
+            let url = 'api/admin/page/add';
 
             const formData = new FormData();
-            formData.append('amenities_name', data.amenities_name);
-            formData.append('amenities_slug', data.amenities_slug);
-            if (selectedphoto == '') {
+            formData.append('url', data.url);
+            formData.append('top_description', data.top_description);
+            formData.append('bottom_description', data.bottom_description);
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keyword', data.meta_keyword);
+            
 
-                toast.error('Please Upload Image', {
-                    duration: 2000
-                })
-                setLoading(false);
-                return false;
-
-            }
-
-            formData.append('amenities_logo', selectedphoto);
+            
 
             try {
                 let response = await axios1.post(url, formData)
@@ -181,55 +196,152 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='amenities_name'
+                            name='url'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Amenitie Name'
+                                    label='Url'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.amenities_name)}
+                                    error={Boolean(errors.url)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.amenities_name && { helperText: 'This field is required' })}
+                                    {...(errors.url && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
+
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='amenities_slug'
+                            name='meta_title'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Amenitie Slug'
+                                    label='Title'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.amenities_slug)}
+                                    error={Boolean(errors.meta_title)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.amenities_slug && { helperText: 'This field is required' })}
+                                    {...(errors.meta_title && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={3}>
-                        <FileUpload
-                            isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.amenities_logo ? olddata.amenities_logo : ""}
-                            onFileChange={handleFileChangephoto}
-                            maxFiles={1}
-                            maxSize={2000000}
-                            fileNames={fileNamesphoto}
-                            label=" Upload Amenities Image"
-                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                            rejectionMessage='Try another file for upload.'
+
+                    <Grid item xs={12} sm={12}>
+                        <Controller
+                            name='meta_description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    multiline
+                                    rows={3}
+                                    value={value}
+                                    label='Meta Description'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.meta_description)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.meta_description && { helperText: 'This field is required' })}
+                                />
+                            )}
                         />
                     </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                        <Controller
+                            name='meta_keyword'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    multiline
+                                    rows={3}
+                                    label='Meta Title'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.meta_keyword)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.meta_keyword && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                        <Controller
+                            name='top_description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    multiline
+                                    rows={3}
+                                    label='Top Description'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.top_description)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.top_description && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+
+                    <Grid item xs={12} sm={12}>
+    <Typography>Bottom Description</Typography>
+    {isClient && ( // Render ReactQuill only on the client-side
+        <Controller
+            name='bottom_description'
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { value, onChange } }) => (
+                <>
+                    <DynamicReactQuill
+                        value={value}
+                        onChange={(newVal) => onChange(newVal)}
+                        placeholder='Start Writing...'
+                        modules={{
+                            toolbar: [
+                                [{ 'header': '1' }, { 'header': '2' }, { 'font': [9] }],
+                                [{ size: [] }],
+                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+                                ['link', 'image', 'video'],
+                                ['clean']
+                            ],
+                        }}
+                        formats={[
+                            'header', 'font', 'size',
+                            'bold', 'italic', 'underline', 'strike', 'blockquote',
+                            'list', 'bullet', 'indent',
+                            'link', 'image', 'video'
+                        ]}
+                    />
+                    {errors.bottom_description && <span>This field is required</span>}
+                </>
+            )}
+        />
+    )}
+                    </Grid>
+
+                 
+                
+                 
+                
 
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}

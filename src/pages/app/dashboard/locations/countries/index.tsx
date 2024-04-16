@@ -11,9 +11,7 @@ import Link from 'next/link'
 import axios1 from 'src/configs/axios'
 // ** Context
 import { useAuth } from 'src/hooks/useAuth'
-import { useParams } from "react-router-dom";
-// ** Custom Components
-import CustomChip from 'src/@core/components/mui/chip'
+
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
@@ -38,7 +36,7 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
-import Add from '../../../../../views/app/dashboard/locations/countries/AddEditForm'
+
 
 interface StatusObj {
   [key: number]: {
@@ -76,7 +74,7 @@ const statusObj: StatusObj = {
   5: { title: 'applied', color: 'info' }
 }
 
-const RowOptions = ({ id }: { id: number | string }) => {
+const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [show, setShow] = useState<boolean>(false)
@@ -98,16 +96,15 @@ const RowOptions = ({ id }: { id: number | string }) => {
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/countries/delete/' + id)
+      await axios1.delete('api/admin/countries/delete/' + id)
         .then(response => {
-          // console.log(response);
-
+      
           if (response.data.status == 1) {
             toast.success(response.data.message)
-            router.reload();
+            // router.reload();
+            onReloadPage();
           } else {
             toast.error(response.data.message)
-
           }
         })
     } catch (err: any) {
@@ -179,9 +176,6 @@ type DataGridRowType = {
 const SecondPage = () => {
   // ** States
   const { user } = useAuth();
-  const [schoolId, setschoolId] = useState<string>('')
-  const [roles, setRoles] = useState([])
-  const [schools, setSchools] = useState([])
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -195,11 +189,16 @@ const SecondPage = () => {
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const isMountedRef = useIsMountedRef();
   const ability = useContext(AbilityContext)
-  const [roleshow, setRoleshow] = useState<boolean>(false)
   const params: any = {}
 
   params['page'] = 1;
   params['size'] = 10000;
+
+
+  const handleReloadPage = useCallback(() => {
+    setLoading(true);
+    setReloadpage('1');
+  }, []);
 
   let columns: GridColDef[] = [
 
@@ -207,7 +206,7 @@ const SecondPage = () => {
       flex: 0.175,
       minWidth: 200,
       field: 'name',
-      headerName: 'Countries',
+      headerName: 'Country Name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
@@ -233,23 +232,16 @@ const SecondPage = () => {
       field: 'actions',
       headerName: 'Actions',
       renderCell: ({ row }: any) => (
-        <RowOptions id={row.id} />
+        <RowOptions id={row.id} onReloadPage={handleReloadPage} />
       )
 
     }
   ]
 
-  // if (user && user.role !== "superadmin") {
-  //   columns = columns.filter(column => column.field !== 'school.name');
-  // }
-
-
   const fetchTableData = useCallback(
     async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
       setLoading(true);
-      // console.log("apicall schoolId", schoolId);
-
-      // console.log(axios1);
+     
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
       }
@@ -265,10 +257,6 @@ const SecondPage = () => {
             size,
             searchtext,
             searchfrom,
-
-
-
-
           },
         })
 
@@ -282,14 +270,9 @@ const SecondPage = () => {
         .catch((error) => {
           // Handle error if needed
           setLoading(false);
-          // console.error("API call error:", error);
+         
         });
-      // } 
-
-      // else {
-      //   // schoolId is empty, handle accordingly (e.g., set loading to false)
-      //   setLoading(false);
-      // }
+   
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationModel, reloadpage]
@@ -321,38 +304,7 @@ const SecondPage = () => {
   }
 
 
-  // useEffect(() => {
-  //   setRoleshow(false);
-  //   if (user && user.role !== "superadmin" && user.schoolId) {
-
-  //     let schid = user.schoolId;
-  //     setschoolId(schid);
-  //   }
-  //   if (schoolId) {
-
-  //   }
-  // }, [schoolId]);
-
-
-  // Get all schools
-  // const getschools = useCallback(async () => {
-  //   try {
-  //     const response = await axios1.get('api/admin/countries/get', { params: params });
-  //     if (isMountedRef.current) {
-
-  //       setSchools(response.data.data);
-
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }, [isMountedRef]);
-
-  // useEffect(() => {
-
-  //   getschools();
-  // }, []);
-
+ 
   const AddButtonToolbar = () => {
 
     return (
@@ -375,7 +327,6 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
-
           <DataGrid
             autoHeight
             pagination
