@@ -1027,7 +1027,7 @@ const Work = () => {
                 <div className="container pt-5 position-relative">
                     <h4 className="fw-bold text-blue text-center">Study Abroad</h4>
                     <p className="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div className="d-flex flex-wrap justify-content-center gap-md-4 gap-1 studyAbroadNav" role=" tablist">
+                    <div className="d-flex flex-wrap justify-content-center gap-md-4 gap-1 studyAbroadNav" role="tablist">
                         <a className="mb-3 active" id="nav-USA-tab" data-bs-toggle="tab" data-bs-target="#nav-USA" type="button" role="tab" aria-controls="nav-USA" aria-selected="true">USA</a>
                         <a className="mb-3" id="nav-UK-tab" data-bs-toggle="tab" data-bs-target="#nav-UK" type="button" role="tab" aria-controls="nav-UK" aria-selected="false">UK</a>
                         <a className="mb-3" id="nav-Canada-tab" data-bs-toggle="tab" data-bs-target="#nav-Canada" type="button" role="tab" aria-controls="nav-Canada" aria-selected="false">Canada</a>

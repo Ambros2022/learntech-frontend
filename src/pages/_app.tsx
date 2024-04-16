@@ -138,7 +138,7 @@ const App = (props: ExtendedAppProps) => {
           />
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
-          <link rel="stylesheet" href="bower_components/aos/dist/aos.css" />
+         
 
         </Head>
 

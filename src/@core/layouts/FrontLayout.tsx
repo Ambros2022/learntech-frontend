@@ -87,6 +87,7 @@ const BlankLayout = ({ children }: BlankLayoutProps) => {
             </div>
           </div>
         </header >
+        
         <nav className="top-nav navbar navbar-expand-lg bg-white">
           <div className="container-lg">
             <a className="navbar-brand" href="#"><img src="images/icons/learntech-logo.png"></img></a>
