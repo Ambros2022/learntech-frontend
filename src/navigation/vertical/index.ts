@@ -53,6 +53,24 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'tabler:text-recognition',
       auth: false
     },
+    {
+      title: 'Pages',
+      path: '/app/dashboard/Pagess',
+      icon: 'tabler:book',
+      auth: false
+    },
+    {
+      title: 'Banner',
+      path: '/app/dashboard/banner',
+      icon: 'tabler:frame',
+      auth: false
+    },
+    {
+      title: 'Stream',
+      path: '/app/dashboard/stream',
+      icon: 'tabler:baseline-density-small',
+      auth: false
+    },
 
     {
       title: 'School',
