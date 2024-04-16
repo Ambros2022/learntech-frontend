@@ -18,16 +18,17 @@ const navigation = (): VerticalNavItemsType => {
       auth: false,
       children: [
         {
-          title: 'School Board',
-          path: '/app/dashboard/schoolboard',
-          auth: false
-        },
-        {
           title: 'Schools',
           path: '/app/dashboard/schools',
           // icon: 'tabler:mail',
           auth: false
-        }
+        },
+        {
+          title: 'School Board',
+          path: '/app/dashboard/schoolboard',
+          auth: false
+        },
+        
       ]
     },
     {

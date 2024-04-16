@@ -3,14 +3,14 @@ import { ReactNode } from 'react'
 
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
-import Work from './RamandeepWork'
+import Homepage from 'src/views/Homepage'
 
 
 
 
 const Home = () => {
   return <>
-    <Work />
+    <Homepage />
   </>
 }
 
