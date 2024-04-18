@@ -1,4 +1,4 @@
-// ** React Imports
+
 import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Fade, { FadeProps } from '@mui/material/Fade'
@@ -22,18 +22,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
+
 import type { FC } from 'react';
-import { useAuth } from 'src/hooks/useAuth'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
 import { Alert } from '@mui/material'
-
-
-interface FormInputs {
-    name: string
-    state_id: any
-}
+import FileUpload from 'src/@core/components/dropzone/FileUpload';
+import useIsMountedRef from 'src/hooks/useIsMountedRef'
 
 
 
@@ -44,57 +38,91 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
-    const { user } = useAuth();
     const [loading, setLoading] = useState<boolean>(false)
-    const [superadmin, setSuperadmin] = useState<boolean>(true)
     const [error, setError] = useState("")
-    const [schools, setSchools] = useState([])
-    const [states, setStates] = useState([])
+    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
+    const [selectedphoto, setSelectedphoto] = useState('');
+    const [stream, setStream] = useState([]);
     const isMountedRef = useIsMountedRef();
-    const params: any = {}
-    params['page'] = 1;
-    params['size'] = 10000;
+
+
+
+    const handleFileChangephoto = (files: any[]) => {
+        setSelectedphoto(files[0]);
+        setFileNamesphoto(
+            files.map((file) => ({
+                name: file.name,
+                preview: URL.createObjectURL(file),
+            }))
+        );
+
+    };
 
     const schema: any = yup.object().shape({
-        name: yup
+        sub_stream_name: yup
             .string()
             .trim()
             .required(),
-
+        sub_stream_slug: yup
+            .string()
+            .trim()
+            .required(),
     })
 
     const defaultValues = {
-        name: isAddMode ? '' : olddata.name,
-        // state_id: isAddMode ? '' : olddata.state,
-        state_id: (isAddMode || !olddata) ? '' : olddata.state,
-
+        sub_stream_name: isAddMode ? '' : olddata.sub_stream_name,
+        sub_stream_slug: isAddMode ? '' : olddata.sub_stream_slug,
+        sub_stream_description: isAddMode ? '' : olddata.sub_stream_description,
+        stream_id: isAddMode ? '' : olddata.stream,
     }
 
     const {
         control,
         handleSubmit,
         reset,
-        resetField: admfiledReset,
         formState: { errors }
-    } = useForm<FormInputs>({
+    } = useForm<any>({
         defaultValues,
         mode: 'onChange',
         resolver: yupResolver(schema)
     })
 
-    const onSubmit = async (data: any) => {
-        // console.log(data, "data")
 
-        // return
+    //get all countries
+    const getstream = useCallback(async () => {
+
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/stream/get', { params: roleparams });
+
+            setStream(response.data.data);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+
+        getstream();
+
+    }, [getstream]);
+
+
+    const onSubmit = async (data: any) => {
+
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/city/update/';
-            let formData: any = {};
-            formData.id = updateid;
-            formData.name = data.name;
-            formData.state_id = data.state_id.id;
-
+            let url = 'api/admin/substream/update';
+            const formData = new FormData();
+            formData.append('id', updateid);
+            formData.append('sub_stream_name', data.sub_stream_name);
+            formData.append('sub_stream_slug', data.sub_stream_slug);
+            formData.append('sub_stream_description', data.sub_stream_description);
+            formData.append('stream_id', data.stream_id.id);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -112,7 +140,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-                console.error(err);
+         
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -126,16 +154,21 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/city/add';
-            let formData: any = {};
-            formData.name = data.name;
-            formData.state_id = data.state_id.id;
+            let url = 'api/admin/substream/add';
+
+            const formData = new FormData();
+            formData.append('sub_stream_name', data.sub_stream_name);
+            formData.append('sub_stream_slug', data.sub_stream_slug);
+            formData.append('sub_stream_description', data.sub_stream_description);
+            formData.append('stream_id', data.stream_id.id);
+         
+
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-                    console.log("response.data", response.data)
+             
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -166,44 +199,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
-    //get all states
-    const getstates = useCallback(async () => {
-
-        try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            // roleparams['schoolId'] = school_id; 
-            const response = await axios1.get('api/admin/state/get/', { params: roleparams });
-
-            setStates(response.data.data);
-
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-    useEffect(() => {
-
-        getstates();
-
-    }, [getstates]);
+    
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
-                    <Grid item xs={12} sm={4}>
+
+                <Grid item xs={12} sm={6}>
                         <Controller
-                            name='state_id'
+                            name='stream_id'
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
-                                    options={states}
-                                    loading={!states.length}
+                                
+                                    options={stream}
+                                    loading={!stream.length}
                                     value={field.value}
                                     onChange={(event, newValue) => {
                                         field.onChange(newValue);
@@ -211,11 +225,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     getOptionLabel={(option: any) => option.name || ''}
                                     renderInput={(params: any) => (
                                         <CustomTextField
-                                            required
                                             {...params}
-                                            error={Boolean(errors.state_id)}
-                                            {...(errors.state_id && { helperText: 'This field is required' })}
-                                            label='Select states'
+                                            required
+                                            error={Boolean(errors.stream_id)}
+                                            {...(errors.stream_id && { helperText: 'This field is required' })}
+                                            label='Select Stream'
                                         />
                                     )}
                                 />
@@ -223,21 +237,66 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={4}>
+
+
+
+                    <Grid item xs={12} sm={6}>
                         <Controller
-                            name='name'
+                            name='sub_stream_name'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Name'
+                                    label='substream Name'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.name)}
+                                    error={Boolean(errors.sub_stream_name)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.name && { helperText: 'This field is required' })}
+                                    {...(errors.sub_stream_name && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Controller
+                            name='sub_stream_slug'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    multiline
+                                    rows={3}
+                                    label='Slug'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.sub_stream_slug)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.sub_stream_slug && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Controller
+                            name='sub_stream_description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    multiline
+                                    rows={3}
+                                    label='Description'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.sub_stream_description)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.sub_stream_description && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
@@ -258,7 +317,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         >
 
                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                                {/* <Button variant='contained' type='submit' sx={{ mr: 1 }} onClick={() => setShow(false)}> */}
                                 Submit
                                 {loading ? (
                                     <CircularProgress
@@ -271,9 +329,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 ) : null}
                             </Button>
-                            {/* <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
-                                Discard
-                            </Button> */}
+
                         </DialogActions>
                     </Grid>
                 </Grid>

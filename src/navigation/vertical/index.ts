@@ -14,7 +14,7 @@ const navigation = (): VerticalNavItemsType => {
     },
     {
       title: 'School',
-      icon: 'tabler:school',
+      icon: 'tabler:building',
       auth: false,
       children: [
         {
@@ -31,6 +31,25 @@ const navigation = (): VerticalNavItemsType => {
         
       ]
     },
+
+    {
+      title: 'University/Colleges',
+      icon: 'tabler:school',
+      auth: false,
+      children: [
+        {
+          title: 'College',
+          path: '/app/dashboard/college',
+          // icon: 'tabler:mail',
+          auth: false
+        },
+       
+        
+      ]
+    },
+
+
+
     {
       title: 'Locations',
       icon: 'tabler:location',
@@ -83,6 +102,12 @@ const navigation = (): VerticalNavItemsType => {
       title: 'Stream',
       path: '/app/dashboard/stream',
       icon: 'tabler:baseline-density-small',
+      auth: false
+    },
+    {
+      title: 'Substream',
+      path: '/app/dashboard/substream',
+      icon: 'tabler:clipboard-text',
       auth: false
     },
 
