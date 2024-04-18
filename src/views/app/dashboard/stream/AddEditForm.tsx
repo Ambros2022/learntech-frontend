@@ -244,7 +244,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             questions: '',
             answers: '',
 
-        }] : olddata.schfaqs || [{
+        }] : olddata.streamfaqs || [{
             questions: '',
             answers: '',
         }],
@@ -291,7 +291,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = '/api/admin/school/updatefaqs';
+            let url = 'api/admin/stream/updatefaq';
             const formData = new FormData();
             formData.append('id', updateid);
             formData.append('faqs', JSON.stringify(data.faqs));

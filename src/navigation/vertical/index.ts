@@ -14,7 +14,7 @@ const navigation = (): VerticalNavItemsType => {
     },
     {
       title: 'School',
-      icon: 'tabler:school',
+      icon: 'tabler:building',
       auth: false,
       children: [
         {
@@ -31,6 +31,25 @@ const navigation = (): VerticalNavItemsType => {
         
       ]
     },
+
+    {
+      title: 'University/Colleges',
+      icon: 'tabler:school',
+      auth: false,
+      children: [
+        {
+          title: 'College',
+          path: '/app/dashboard/college',
+          // icon: 'tabler:mail',
+          auth: false
+        },
+       
+        
+      ]
+    },
+
+
+
     {
       title: 'Locations',
       icon: 'tabler:location',

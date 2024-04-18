@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/stream/delete/' + id)
+      await axios1.delete('api/admin/College/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -90,7 +90,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./stream/edit/` + id} >
+        <Link href={`./college/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -152,8 +152,8 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [columnname, setColumnname] = useState<string>('name')
+  const [searchfrom, setSearchfrom] = useState<any>('college_name')
+  const [columnname, setColumnname] = useState<string>('college_name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
 
@@ -168,88 +168,38 @@ const SecondPage = () => {
   let columns: GridColDef[] = [
 
     {
-      flex: 0.1,
+      flex: 0.175,
       minWidth: 100,
-      field: 'name',
-      headerName: 'Stream',
+      field: 'type',
+      headerName: 'type',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {renderClient(params)}
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.name}
+                {row.type}
               </Typography>
-        )
-      }
-    },
-    {
-      flex: 0.1,
-      minWidth: 100,
-      field: 'slug',
-      headerName: 'Slug',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
 
-        return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.slug}
-          </Typography>
-
-
-        )
-      }
-    },
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'meta_title',
-      headerName: 'Meta Title',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.meta_title}
-          </Typography>
-
-
-        )
-      }
-    },
-
-
-    {
-      flex: 0.3,
-      minWidth: 200,
-      field: 'meta_description',
-      headerName: 'Stream Description',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.meta_description}
-          </Typography>
-
-
+            </Box>
+          </Box>
         )
       }
     },
     {
       flex: 0.175,
       minWidth: 200,
-      field: 'listing_order',
-      headerName: 'Listing Order',
+      field: 'name',
+      headerName: 'name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
 
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.listing_order}
+            {row.name}
           </Typography>
 
 
@@ -257,6 +207,53 @@ const SecondPage = () => {
       }
     },
 
+
+    {
+      flex: 0.175,
+      minWidth: 200,
+      field: 'city_id',
+      headerName: 'city',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.city_id}
+          </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.state_id}
+
+
+          </Typography>
+
+        </Box>
+
+
+
+        )
+      }
+    },
+
+
+    {
+      flex: 0.175,
+      minWidth: 200,
+      field: 'status',
+      headerName: 'status',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.status}
+          </Typography>
+
+
+        )
+      }
+    },
 
     {
       flex: 0.175,
@@ -283,7 +280,7 @@ const SecondPage = () => {
       cancelToken = axios.CancelToken.source();
 
       await axios1
-        .get('api/admin/stream/get', {
+        .get('api/admin/College/get', {
           cancelToken: cancelToken.token,
           params: {
             columnname,
@@ -345,7 +342,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={'./stream/add'}>
+        <Link href={'./college/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add

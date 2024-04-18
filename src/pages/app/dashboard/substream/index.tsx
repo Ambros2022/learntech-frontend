@@ -152,8 +152,8 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('stream.id')
-  const [columnname, setColumnname] = useState<string>('stream.id')
+  const [searchfrom, setSearchfrom] = useState<any>('sub_stream_name')
+  const [columnname, setColumnname] = useState<string>('sub_stream_name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
 
@@ -170,24 +170,24 @@ const SecondPage = () => {
     {
       flex: 0.2,
       minWidth: 200,
-      field: 'stream_id',
+      field: 'stream.name',
       headerName: 'Stream',
       renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
+        const { row } = params;
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.stream_id}
-              </Typography>
-        )
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.stream.name}
+          </Typography>
+        );
       }
     },
+    
 
     {
       flex: 0.3,
-      minWidth: 200,
+      minWidth: 100,
       field: 'sub_stream_name',
-      headerName: ' Sub-Stream name',
+      headerName: 'Sub-Stream name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
