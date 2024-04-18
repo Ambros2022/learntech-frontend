@@ -72,7 +72,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const handleFileChangelogo = (files: any[]) => {
         setSelectedlogo(files[0]);
-        setFileNamesbanner(
+        setFileNameslogo(
             files.map((file) => ({
                 name: file.name,
                 preview: URL.createObjectURL(file),
@@ -83,7 +83,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const handleFileChangephoto = (files: any[]) => {
         setSelectedphoto(files[0]);
-        setFileNameslogo(
+        setFileNamesphoto(
             files.map((file) => ({
                 name: file.name,
                 preview: URL.createObjectURL(file),
@@ -97,17 +97,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-        sub_stream_slug: yup
-            .string()
-            .trim()
-            .required(),
+       
     })
 
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
-        sub_stream_slug: isAddMode ? '' : olddata.sub_stream_slug,
-        sub_stream_description: isAddMode ? '' : olddata.sub_stream_description,
-        stream_id: isAddMode ? '' : olddata.stream,
+       
     }
 
     const {
@@ -254,17 +249,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('ranking', data.ranking);
             formData.append('Scholarships', data.Scholarships);
             formData.append('hostel', data.hostel);
-            formData.append('country_id', data.country_id);
-            formData.append('state_id', data.state_id);
+            formData.append('country_id', data.country_id.id);
+            formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
-            formData.append('city_id', data.city_id.id);
+           
 
             formData.append('banner_image', selectedbanner);
             formData.append('icon', selectedphoto);
             formData.append('logo', selectedlogo);
 
          
-
+            setLoading(false)
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
@@ -855,7 +850,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         <FileUpload
                             isAddMode={isAddMode}
                             olddata={!isAddMode && olddata.logo ? olddata.logo : ""}
-                            onFileChange={handleFileChangephoto}
+                            onFileChange={handleFileChangelogo}
                             maxFiles={1}
                             maxSize={2000000}
                             fileNames={fileNameslogo}

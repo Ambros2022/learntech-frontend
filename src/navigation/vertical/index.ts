@@ -48,6 +48,12 @@ const navigation = (): VerticalNavItemsType => {
       ]
     },
 
+    {
+      title: 'General Course',
+      path: '/app/dashboard/generalcourse',
+      icon: 'tabler:book-filled',
+      auth: false
+    },
 
 
     {

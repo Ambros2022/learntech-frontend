@@ -351,7 +351,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                             <Grid container spacing={5}>
 
-                            <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='name'
                             control={control}
