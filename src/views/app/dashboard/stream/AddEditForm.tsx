@@ -37,6 +37,11 @@ import FileUpload from 'src/@core/components/dropzone/FileUpload';
 
 import toast from 'react-hot-toast'
 import router from 'next/router'
+import { Config } from 'src/configs/mainconfig'
+// import { ImageListType } from 'react-images-uploading'
+import ImageUploading, { ImageListType } from "react-images-uploading";
+import { FaTrash } from 'react-icons/fa'
+
 
 
 interface Authordata {
@@ -336,6 +341,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         // setActiveStep(prevActiveStep => prevActiveStep - 1)
     }
 
+   
+
     return (
         <Card>
             <TabContext value={formvalue}>
@@ -347,7 +354,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 >
                     <Tab value='basic-info' label='Basic Info' />
                     <Tab value='account-details' label='FAQS' />
-                    <Tab value='social-links' label='Gallery Images' />
+                    {/* <Tab value='social-links' label='Gallery Images' /> */}
                 </TabList>
 
                 <CardContent>
@@ -733,9 +740,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     </TabPanel>
 
-                    <TabPanel sx={{ p: 0 }} value='social-links'>
-
-                    </TabPanel>
+                  
                 </CardContent>
                 {/* <Divider sx={{ m: '0 !important' }} /> */}
                 {/* <CardActions>

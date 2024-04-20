@@ -34,9 +34,12 @@ import * as yup from 'yup'
 import axios1 from 'src/configs/axios'
 import { Checkbox, DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-
+import { FaTrash } from 'react-icons/fa';
 import toast from 'react-hot-toast'
 import router from 'next/router'
+import { Config } from 'src/configs/mainconfig'
+import ImageUploading, { ImageListType } from "react-images-uploading";
+
 
 
 interface Authordata {
@@ -50,7 +53,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
-    const [typesData, setTypesData] = useState([])
+    const [typesData, setTypesData] = useState([]);
 
     const [streams, setStreams] = useState([])
     const [substreams, setSubStreams] = useState([])
@@ -91,7 +94,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const roleparams: any = {}
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
-            roleparams['sub_streams_id'] = streamId;
+            roleparams['stream_id'] = streamId;
             const response = await axios1.get('api/admin/substream/get', { params: roleparams });
             setSubStreams(response.data.data);
         } catch (err) {
@@ -106,7 +109,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
             const response = await axios1.get('api/admin/systemconfig/coursetype', { params: roleparams });
-            setTypesData(response.data.data);
+            setTypesData(response.data.data.concat('Diploma')); 
         } catch (err) {
             console.error(err);
         }
@@ -117,8 +120,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             getsubstream();
         }
     }, [streamId]);
-    useEffect(() => {
 
+
+    useEffect(() => {
         getstreams();
         gettypes();
     }, []);
@@ -253,7 +257,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('admissions', data.admissions);
             formData.append('career_opportunities', data.career_opportunities);
             formData.append('is_trending', data.is_trending);
-            // formData.append('is_top_rank', data.is_top_rank);
+            formData.append('is_top_rank', data.is_top_rank);
             formData.append('status', data.status);
             formData.append('description', data.description);
             formData.append('top_college', data.top_college);
@@ -305,7 +309,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             questions: '',
             answers: '',
 
-        }] : olddata.streamfaqs || [{
+        }] : olddata.generalcoursefaqs && olddata.generalcoursefaqs.length > 0 ? olddata.generalcoursefaqs : [{
+            questions: '',
+            answers: '',
+        }] || [{
             questions: '',
             answers: '',
         }],
@@ -352,7 +359,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/stream/updatefaq';
+            let url = 'api/admin/generalcourse/updatefaq';
             const formData = new FormData();
             formData.append('id', updateid);
             formData.append('faqs', JSON.stringify(data.faqs));
@@ -389,10 +396,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         setFormvalue(newValue)
     }
 
-    const handleBack = () => {
-        // setActiveStep(prevActiveStep => prevActiveStep - 1)
-    }
-
     return (
         <Card>
             <TabContext value={formvalue}>
@@ -404,7 +407,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 >
                     <Tab value='basic-info' label='Basic Info' />
                     <Tab value='account-details' label='FAQS' />
-                    <Tab value='social-links' label='Gallery Images' />
+                    {/* <Tab value='social-links' label='Gallery Images' /> */}
                 </TabList>
 
                 <CardContent>
@@ -471,29 +474,31 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             </Grid>
 
                             <Grid item xs={12} sm={6}>
-                        <Controller
-                        name='course_type'
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field: { value, onChange } }) => (
-                            <CustomTextField
-                        fullWidth
-                        select
-                        value={value}
-                        label='Select Course Type'
-                        onChange={onChange}
-                        placeholder=''
-                        error={Boolean(errors.course_type)}
-                        aria-describedby='validation-basic-first-name'
-                        {...(errors.course_type && { helperText: 'This field is required' })}
-                    >
-                        {typesData.map(type => (
-                            <MenuItem key={type} value={type}>{type}</MenuItem>
-                        ))}
-                    </CustomTextField>
-                            )}
-                        />
+                                <Controller
+                                    name='course_type'
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field: { value, onChange } }) => (
+                                        <CustomTextField
+                                            fullWidth
+                                            select
+                                            value={value || ''} // Ensure value is not null or undefined
+                                            label='Select Course Type'
+                                            onChange={onChange}
+                                            placeholder=''
+                                            error={Boolean(errors.course_type)}
+                                            aria-describedby='validation-basic-first-name'
+                                            {...(errors.course_type && { helperText: 'This field is required' })}
+                                        >
+                                            {/* Render options only if typesData is not empty */}
+                                            {typesData.map(type => (
+                                                <MenuItem key={type} value={type}>{type}</MenuItem>
+                                            ))}
+                                        </CustomTextField>
+                                    )}
+                                />
                             </Grid>
+
 
                             <Grid item xs={12} sm={6}>
                             <Controller
@@ -1001,9 +1006,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     </TabPanel>
 
-                    <TabPanel sx={{ p: 0 }} value='social-links'>
-
-                    </TabPanel>
+                   
                 </CardContent>
                 {/* <Divider sx={{ m: '0 !important' }} /> */}
                 {/* <CardActions>

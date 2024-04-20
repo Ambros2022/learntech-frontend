@@ -55,10 +55,9 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
 
-
     {
       title: 'Locations',
-      icon: 'tabler:location',
+      icon: 'tabler:map-pin',
       auth: false,
       children: [
         {

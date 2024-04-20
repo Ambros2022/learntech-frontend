@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/stream/delete/' + id)
+      await axios1.post('api/admin/generalcourse/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -170,17 +170,18 @@ const SecondPage = () => {
     {
       flex: 0.2,
       minWidth: 200,
-      field: 'stream.name',
+      field: 'streams.name',
       headerName: 'Stream',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.stream}
+            {row.streams.name}
           </Typography>
         );
       }
     },
+    
     {
       flex: 0.5,
       minWidth: 100,
