@@ -16,18 +16,24 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
+import ImageUploading, { ImageListType } from "react-images-uploading";
+import { FaTrash } from 'react-icons/fa'; 
 
 
-import type { FC } from 'react';
-import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup } from '@mui/material'
+import type { FC, SyntheticEvent } from 'react';
+import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import TabContext from '@mui/lab/TabContext'
+import TabPanel from '@mui/lab/TabPanel'
+import TabList from '@mui/lab/TabList'
+import { Config } from 'src/configs/mainconfig'
 
 
 
@@ -38,6 +44,8 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
+    const { setValue } = useForm();
+    const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
@@ -45,6 +53,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [fileNameslogo, setFileNameslogo] = useState<any>([]);
     const [selectedlogo, setSelectedlogo] = useState('');
     
+    const [amenitiesdata, setAmenitiesdata] = useState([])
+    const [streamsdata, setStreamsdata] = useState([])
+    const [recoginationsdata, setRecoginationsdata] = useState([])
     
     const [countryId, setCountryId] = useState<any>(isAddMode ? "" : olddata?.country?.id || '');
     const [stateId, setStateId] = useState<any>(isAddMode ? "" : olddata?.state?.id || '');
@@ -97,11 +108,44 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
+        slug: yup
+            .string()
+            .trim()
+            .required(),
+        country_id: yup.object().required("This field is required"),
+        state_id: yup.object().required("This field is required"),
+        city_id: yup.object().required("This field is required"),
+
        
     })
 
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
+        slug: isAddMode ? '' : olddata.slug,
+        type: isAddMode ? '' : olddata.type,
+        home_view_status: isAddMode ? '' : olddata.home_view_status,
+        college_type: isAddMode ? '' : olddata.college_type,
+        listing_order: isAddMode ? '' : olddata.listing_order,
+        established: isAddMode ? '' : olddata.established,
+        meta_title: isAddMode ? '' : olddata.meta_title,
+        meta_description: isAddMode ? '' : olddata.meta_description,
+        meta_keyword: isAddMode ? '' : olddata.meta_keyword,
+        address: isAddMode ? '' : olddata.address,
+        map: isAddMode ? '' : olddata.map,
+        video_url: isAddMode ? '' : olddata.video_url,
+        info: isAddMode ? '' : olddata.info,
+        admissions: isAddMode ? '' : olddata.admissions,
+        placements: isAddMode ? '' : olddata.placements,
+        rankings: isAddMode ? '' : olddata.rankings,
+        scholarship: isAddMode ? '' : olddata.scholarship,
+        hostel: isAddMode ? '' : olddata.hostel,
+        status: isAddMode ? 'Draft' : olddata.status,
+        country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
+        state_id: isAddMode ? '' : olddata.state ? olddata.state : '',
+        city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
+        collegeamenities: [],
+        streams: [],
+        recoginations: [],
        
     }
 
@@ -176,25 +220,123 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }, [isMountedRef]);
 
+   
+
+    const getamenities = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('/api/admin/amenities/get', { params: roleparams });
+            setAmenitiesdata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+
+    const getstreams = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/stream/get', { params: roleparams });
+            setStreamsdata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+    const getrecognition = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/recognition/get', { params: roleparams });
+            setRecoginationsdata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+
+
     useEffect(() => {
 
         getcountries();
+        getamenities();
+        getstreams();
+        getrecognition();
 
     }, [getcountries]);
 
 
+
+    useEffect(() => {
+
+        if (!isAddMode && olddata.collegeamenities) {
+            const amenities = olddata.collegeamenities.map((item) => ({
+                id: item.clgamenities.id,
+                amenities_name: item.clgamenities.amenities_name,
+            }));
+            admfiledReset("amenities", { defaultValue: amenities })
+        }
+        if (!isAddMode && olddata.collegestreams) {
+            const STREAM = olddata.collegestreams.map((item) => ({
+                id: item.clgstreams.id,
+                name: item.clgstreams.name,
+            }));
+            admfiledReset("streams", { defaultValue: STREAM })
+        }
+        if (!isAddMode && olddata.collegerecognitions) {
+            const RECOGINATION = olddata.collegerecognitions.map((item) => ({
+                id: item.clgrecognitions.id,
+                recognition_approval_name: item.clgrecognitions.recognition_approval_name,
+            }));
+            admfiledReset("recoginations", { defaultValue: RECOGINATION })
+        }
+
+    }, []);
     const onSubmit = async (data: any) => {
 
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/substream/update';
+            let url = 'api/admin/college/update';
             const formData = new FormData();
             formData.append('id', updateid);
             formData.append('name', data.name);
-            formData.append('sub_stream_slug', data.sub_stream_slug);
-            formData.append('sub_stream_description', data.sub_stream_description);
-            formData.append('stream_id', data.stream_id.id);
+            formData.append('slug', data.slug);
+            formData.append('type', data.type);
+            formData.append('status', data.status);
+            formData.append('home_view_status', data.home_view_status);
+            formData.append('college_type', data.college_type);
+            formData.append('listing_order', data.listing_order);
+            formData.append('established', data.established);
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keyword', data.meta_keyword);
+            formData.append('address', data.address);
+            formData.append('map', data.map);
+            formData.append('video_url', data.video_url);
+            formData.append('avg_rating', data.avg_rating);
+            formData.append('info', data.info);
+            formData.append('admissions', data.admissions);
+            formData.append('placements', data.placements);
+            formData.append('rankings', data.rankings);
+            formData.append('scholarship', data.scholarship);
+            formData.append('hostel', data.hostel);
+            formData.append('country_id', data.country_id.id);
+            formData.append('state_id', data.state_id.id);
+            formData.append('city_id', data.city_id.id);
+            formData.append('banner_image', selectedbanner);
+            formData.append('icon', selectedphoto);
+            formData.append('logo', selectedlogo);
+            formData.append('amenities', JSON.stringify(data.amenities));
+            formData.append('streams', JSON.stringify(data.streams));
+            formData.append('recoginations', JSON.stringify(data.recoginations));
+
+          
 
             try {
                 let response = await axios1.post(url, formData)
@@ -239,6 +381,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('established', data.established);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
+            formData.append('meta_keyword', data.meta_keyword);
             formData.append('address', data.address);
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
@@ -246,17 +389,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('info', data.info);
             formData.append('admissions', data.admissions);
             formData.append('placements', data.placements);
-            formData.append('ranking', data.ranking);
-            formData.append('Scholarships', data.Scholarships);
+            formData.append('rankings', data.rankings);
+            formData.append('scholarship', data.scholarship);
             formData.append('hostel', data.hostel);
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
-           
-
             formData.append('banner_image', selectedbanner);
             formData.append('icon', selectedphoto);
             formData.append('logo', selectedlogo);
+            formData.append('amenities', JSON.stringify(data.amenities));
+            formData.append('streams', JSON.stringify(data.streams));
+            formData.append('recoginations', JSON.stringify(data.recoginations));
 
          
             setLoading(false)
@@ -295,59 +439,222 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
+    const faqdefaultValues = {
+        faqs: isAddMode ? [{
+            questions: '',
+            answers: '',
+
+        }] :
+            olddata.collegefaqs && olddata.collegefaqs.length > 0 ? olddata.collegefaqs : [{
+                questions: '',
+                answers: '',
+            }] || [{
+                questions: '',
+                answers: '',
+            }],
+
+
+
+
+    }
+
+
+
+    const {
+        control: faqcontrol,
+        handleSubmit: faqhandleSubmit,
+        formState: { errors: faqerrors }
+    } = useForm<any>({
+        defaultValues: faqdefaultValues,
+        mode: 'onChange',
+        // resolver: yupResolver(schema)
+    })
+    const { fields, append, remove } = useFieldArray({
+        control: faqcontrol,
+        name: 'faqs',
+    });
+
+    const handleAddFaq = () => {
+
+        append({
+            questions: '',
+            answers: '',
+
+
+        });
+
+    };
+
+    const handleRemoveFaq = (index: number | number[] | undefined) => {
+        remove(index);
+    };
+
+    const faqonSubmit = async (data: any) => {
+        console.log(data.faqs);
+        // return
+
+        if (!isAddMode && olddata.id) {
+            let updateid = olddata.id;
+            setLoading(true)
+            let url = 'api/admin/college/updatefaqs';
+            const formData = new FormData();
+            formData.append('id', updateid);
+            formData.append('faqs', JSON.stringify(data.faqs));
+
+            try {
+                let response = await axios1.post(url, formData)
+                if (response.data.status == 1) {
+                    toast.success(response.data.message)
+                    setLoading(false)
+                    setError('')
+                    reset();
+                    router.back();
+                }
+                else {
+
+                    setLoading(false)
+                    toast.error(response.data.message)
+                    setError(response.data.message)
+                }
+                // history.push('/app/products');
+            } catch (err: any) {
+                console.error(err);
+                setLoading(false)
+                setError(err.message)
+                toast.error(err.message || "please try again")
+
+            }
+
+        }
+    }
+
+
+    const handleTabsChange = (event: SyntheticEvent, newValue: string) => {
+        setFormvalue(newValue)
+    }
+
+    const [images, setImages] = useState<ImageListType>(() => {
+        if (olddata && olddata.clggallery && Array.isArray(olddata.clggallery)) {
+            return olddata.clggallery.map(item => ({ dataURL: Config.API_URL + '/' + item.image }));
+        } else {
+            return [];
+        }
+    });
+    const maxNumber = 69;
+
+    const onChangeimages = (
+        imageList: ImageListType,
+        addUpdateIndex: number[] | undefined
+    ) => {
+        // data for submit
+        // console.log(imageList, addUpdateIndex);
+        setImages(imageList);
+    };
+
+
+    const GalleryImage = async () => {
+        // console.log(images, "imageLists");
+        try {
+            const formData = new FormData();
+            formData.append('id', olddata.id);
+
+            let oldimages: any = [];
+            images.forEach((image, index) => {
+                console.log(image);
+                if (image.file) {
+                    formData.append(`image${index}`, image.file);
+                } else {
+                    oldimages.push(image);
+                }
+            });
+            // formData.append("oldimages", oldimages);
+            formData.append("oldimages", JSON.stringify(oldimages));
+
+            const url = '/api/admin/school/updategallery';
+            const response = await axios1.post(url, formData);
+            if (response.data.status === 1) {
+                toast.success(response.data.message);
+                setLoading(false);
+                setError('');
+                reset();
+                router.back();
+            } else {
+                setLoading(false);
+                toast.error(response.data.message);
+                setError(response.data.message);
+            }
+        } catch (err) {
+            console.error(err);
+            setLoading(false);
+
+        }
+    }
 
     
 
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
+          <Card>
+            <TabContext value={formvalue}>
+                <TabList
+                    variant='scrollable'
+                    scrollButtons={false}
+                    onChange={handleTabsChange}
+                    sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}`, '& .MuiTab-root': { py: 3.5 } }}
+                >
+                    <Tab value='basic-info' label='Basic Info' />
+                    <Tab value='account-details' label='FAQS' />
+                    <Tab value='social-links' label='Gallery Images' />
+                </TabList>
+
+                <CardContent>
+                    <TabPanel sx={{ p: 0 }} value='basic-info'>
+                    <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
 
-                <Grid item xs={12} sm={6}>
-                                    <Controller
-                                        name='country_id'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field }) => (
-                                            <CustomAutocomplete
-                                                fullWidth
-                                                options={countries}
-                                                loading={!countries.length}
-                                                value={field.value}
-                                                onChange={(event, newValue) => {
-                                                    if (newValue) {
+                    <Grid item xs={12} sm={4}>
+                                        <Controller
+                                            name='country_id'
+                                            control={control}
+                                            rules={{ required: true }}
+                                            render={({ field }) => (
+                                                <CustomAutocomplete
+                                                    fullWidth
+                                                    options={countries}
+                                                    loading={!countries.length}
+                                                    value={field.value}
+                                                    onChange={(event, newValue) => {
+                                                        if (newValue) {
 
-                                                        setCountryId(newValue ? newValue.id : null);
-                                                        admfiledReset("state_id", { defaultValue: "New" })
-                                                        admfiledReset("city_id", { defaultValue: "New" })
-                                                        field.onChange(newValue);
-
-
-
-                                                    }
-                                                    else {
-                                                        console.log(newValue, "newValue2")
-
-                                                        setCountryId(null);
-
-                                                        admfiledReset("state_id", { defaultValue: "New" })
-                                                        admfiledReset("city_id", { defaultValue: "New" })
+                                                            setCountryId(newValue ? newValue.id : null);
+                                                            admfiledReset("state_id", { defaultValue: "New" })
+                                                            admfiledReset("city_id", { defaultValue: "New" })
+                                                            field.onChange(newValue);
 
 
 
-                                                    }
+                                                        }
+                                                        else {
+                                                            console.log(newValue, "newValue2")
 
-                                                }}
-                                                getOptionLabel={(option: any) => option.name || ''}
-                                                renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.country_id)}
-                                                    {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
-                                            />
-                                        )}
-                                    />
-                </Grid>
+                                                            setCountryId(null);
 
-                   <Grid item xs={12} sm={6}>
+                                                            admfiledReset("state_id", { defaultValue: "New" })
+                                                            admfiledReset("city_id", { defaultValue: "New" })
+
+
+
+                                                        }
+
+                                                    }}
+                                                    getOptionLabel={(option: any) => option.name || ''}
+                                                    renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.country_id)}
+                                                        {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
+                                                />
+                                            )}
+                                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
 
                                     <Controller
                                         name='state_id'
@@ -385,32 +692,133 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             />
                                         )}
                                     />
-                 </Grid>
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
 
-                 <Grid item xs={12} sm={6}>
-
-<Controller
-    name='city_id'
-    control={control}
-    rules={{ required: true }}
-    render={({ field }) => (
-        <CustomAutocomplete
-            fullWidth
-            options={cities}
-            loading={!cities.length}
-            value={field.value}
-            onChange={(event, newValue) => {
-                field.onChange(newValue)
-            }}
-            getOptionLabel={(option: any) => option.name || ''}
-            renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.city_id)}
-                {...(errors.city_id && { helperText: 'This field is required' })} label='Select Cities' />}
-        />
-    )}
-/>
+                        <Controller
+                            name='city_id'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    fullWidth
+                                    options={cities}
+                                    loading={!cities.length}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue)
+                                    }}
+                                    getOptionLabel={(option: any) => option.name || ''}
+                                    renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.city_id)}
+                                        {...(errors.city_id && { helperText: 'This field is required' })} label='Select Cities' />}
+                                />
+                            )}
+                        />
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="amenities"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={amenitiesdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.amenities_name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select amenities'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.amenities)}
+                                                            {...(errors.amenities && { helperText: 'This field is required' })}
+                                                            placeholder='amenities' />}
+                                                />
+                                            );
+                                        }}
+                                    />
+                    </Grid>
+
+                    <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="streams"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={streamsdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select streams'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.streams)}
+                                                            {...(errors.streams && { helperText: 'This field is required' })}
+                                                            placeholder='streams' />}
+                                                />
+                                            );
+                                        }}
+                                    />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="recoginations"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={recoginationsdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.recognition_approval_name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select recoginations'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.recoginations)}
+                                                            {...(errors.recoginations && { helperText: 'This field is required' })}
+                                                            placeholder='recoginations' />}
+                                                />
+                                            );
+                                        }}
+                                    />
+                    </Grid>
+
+
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='type'
                             control={control}
@@ -435,7 +843,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='home_view_status'
                             control={control}
@@ -462,7 +870,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='college_type'
                             control={control}
@@ -489,7 +897,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='name'
                             control={control}
@@ -508,7 +916,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='slug'
                             control={control}
@@ -532,28 +940,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
 
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='listing_order'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    type='number'
-                                    label='Listing Order'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.listing_order)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.listing_order && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
+                   
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='established'
                             control={control}
@@ -572,7 +960,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='meta_title'
                             control={control}
@@ -591,7 +979,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='meta_description'
                             control={control}
@@ -610,7 +998,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='meta_keyword'
                             control={control}
@@ -631,7 +1019,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='address'
                             control={control}
@@ -650,7 +1038,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='map'
                             control={control}
@@ -669,7 +1057,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='video_url'
                             control={control}
@@ -691,7 +1079,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
 
-                    <Grid item xs={12} sm={6}>
+                    {/* <Grid item xs={12} sm={4}>
                         <Controller
                             name='avg_rating'
                             control={control}
@@ -709,8 +1097,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             )}
                         />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
+                    </Grid> */}
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='info'
                             control={control}
@@ -731,7 +1119,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='admissions'
                             control={control}
@@ -752,7 +1140,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='placements'
                             control={control}
@@ -771,47 +1159,47 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
-                            name='ranking'
+                            name='rankings'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Ranking'
+                                    label='rankings'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.ranking)}
+                                    error={Boolean(errors.rankings)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.ranking && { helperText: 'This field is required' })}
+                                    {...(errors.rankings && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
-                            name='Scholarships'
+                            name='scholarship'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Scholarships'
+                                    label='scholarship'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.Scholarships)}
+                                    error={Boolean(errors.scholarship)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.Scholarships && { helperText: 'This field is required' })}
+                                    {...(errors.scholarship && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='hostel'
                             control={control}
@@ -830,6 +1218,28 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
+
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='listing_order'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    type='number'
+                                    label='Listing Order'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.listing_order)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.listing_order && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
 
 
                     <Grid item xs={12} sm={3}>
@@ -923,8 +1333,244 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         </DialogActions>
                     </Grid>
                 </Grid>
-            </form >
-        </>
+                    </form >
+                    </TabPanel>
+
+                    <TabPanel sx={{ p: 0 }} value='account-details'>
+                        {isAddMode ? <> <h6>Please add College First.</h6> </> : <>
+                            <form onSubmit={faqhandleSubmit(faqonSubmit)} encType="application/x-www-form-urlencoded">
+                                <Grid container spacing={5}>
+                                    {fields.map((val, index) => (
+                                        <Grid item xs={12} key={val.id}>
+                                            <Grid container spacing={2} alignItems="center">
+                                                <Grid item xs={12} sm={5}>
+                                                    <Controller
+                                                        //@ts-ignore
+                                                        name={`faqs[${index}].questions`}
+                                                        control={faqcontrol}
+                                                        rules={{ required: true }}
+                                                        //@ts-ignore
+                                                        defaultValue={val.questions}
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <CustomTextField
+                                                                fullWidth
+                                                                value={value}
+                                                                label='Questions'
+                                                                onChange={(e) => {
+                                                                    onChange(e);
+                                                                    setValue(`faqs[${index}].questions`, e.target.value);
+                                                                }}
+                                                                placeholder=''
+                                                            />
+                                                        )}
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12} sm={5}>
+                                                    <Controller
+                                                        //@ts-ignore
+                                                        name={`faqs[${index}].answers`}
+                                                        control={faqcontrol}
+                                                        rules={{ required: true }}
+                                                        //@ts-ignore
+                                                        defaultValue={val.answers}
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <CustomTextField
+                                                                fullWidth
+                                                                value={value}
+                                                                label='Answers'
+                                                                onChange={(e) => {
+                                                                    onChange(e);
+                                                                    setValue(`faqs[${index}].answers`, e.target.value);
+                                                                }}
+                                                                placeholder=''
+                                                            />
+                                                        )}
+                                                    />
+                                                </Grid>
+
+
+
+                                                <Grid item xs={2}>
+                                                    {index !== 0 && (
+                                                        <Button
+                                                            variant="contained"
+                                                            color="secondary"
+                                                            onClick={() => handleRemoveFaq(index)}
+                                                            style={{ margin: '17px 0 0 0px' }}
+                                                        >
+                                                            -
+                                                        </Button>
+                                                    )}
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    ))}
+                                    {fields.length === 0 && (
+                                        <Grid item xs={12}>
+
+                                            <Grid container spacing={2} alignItems="center">
+                                                <Grid item xs={12} sm={5}>
+                                                    <CustomTextField
+                                                        fullWidth
+                                                        label='Questions'
+                                                        placeholder=''
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12} sm={5}>
+                                                    <CustomTextField
+                                                        fullWidth
+                                                        label='Answers'
+                                                        placeholder=''
+                                                    />
+                                                </Grid>
+
+                                            </Grid>
+                                        </Grid>
+                                    )}
+                                    <Grid item xs={3}>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={handleAddFaq}
+                                            style={{ margin: '18px 0', fontSize: '12px' }}
+                                        >
+                                            Add More
+                                        </Button>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <DialogActions
+                                            sx={{
+                                                justifyContent: 'center',
+                                                px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+                                                pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+                                            }}
+                                        >
+
+                                            <Button variant='contained' type='submit' sx={{ mr: 1 }} >
+                                                {/* <Button variant='contained' type='submit' sx={{ mr: 1 }} onClick={() => setShow(false)}> */}
+                                                Update
+                                                {loading ? (
+                                                    <CircularProgress
+                                                        sx={{
+                                                            color: 'common.white',
+                                                            width: '20px !important',
+                                                            height: '20px !important',
+                                                            mr: theme => theme.spacing(2)
+                                                        }}
+                                                    />
+                                                ) : null}
+                                            </Button>
+                                            {/* <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
+                                Discard
+                            </Button> */}
+                                        </DialogActions>
+                                    </Grid>
+
+                                </Grid>
+                            </form >
+
+
+
+                        </>}
+
+                    </TabPanel>
+
+                    <TabPanel sx={{ p: 0 }} value='social-links'>
+                    {isAddMode ? <> <h6>Please add College First.</h6> </> : <>
+                            <div className="App">
+                                <ImageUploading
+                                    multiple
+                                    value={images}
+                                    onChange={onChangeimages}
+                                    maxNumber={maxNumber}
+                                >
+                                    {({
+                                        imageList,
+                                        onImageUpload,
+                                        onImageRemoveAll,
+                                        onImageUpdate,
+                                        onImageRemove,
+                                        isDragging,
+                                        dragProps
+                                    }) => (
+                                        // Building UI
+                                        <div className="upload__image-wrapper">
+                                            <button
+                                                style={isDragging ? { color: "red" } : undefined}
+                                                onClick={onImageUpload}
+                                                {...dragProps}
+                                            >
+                                                Click or Drop here
+                                            </button>
+                                            &nbsp;
+                                            {/* <button onClick={onImageRemoveAll}>Remove all images</button> */}
+                                            <div className="container pt-3 pb-3">
+                                                <div className="row">
+                                                    {imageList.map((image, index) => (
+
+
+                                                        <div className="col-sm-6 col-md-4 col-lg-3">
+                                                            <div className="image-item ">
+                                                                {/* <img src={image.dataURL} className="img-fluid rounded" alt="" /> */}
+                                                                <img
+                                                                    src={image.dataURL}
+                                                                    style={{ width: '100%', height: '100px', maxWidth: '200px', maxHeight: '500px' }}
+                                                                    className="rounded"
+                                                                    alt=""
+                                                                />
+
+                                                                <div className="image-item__btn-wrapper d-flex justify-content-between align-items-center mt-2">
+                                                                    {/* <button className="btn btn-primary btn-block" onClick={() => onImageUpdate(index)}>Update</button> */}
+                                                                    <button className="btn btn-danger btn-block" onClick={() => onImageRemove(index)}><FaTrash /></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                    ))}
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    )}
+                                </ImageUploading>
+
+
+
+                                {loading ? (
+                                    <CircularProgress
+                                        sx={{
+                                            color: 'common.white',
+                                            width: '20px !important',
+                                            height: '20px !important',
+                                            mr: theme => theme.spacing(2)
+                                        }}
+                                    />
+                                ) : <Button variant='contained' type='submit' sx={{ mr: 1, mt: 2 }} onClick={() => GalleryImage()}>
+                                    Update                                </Button>}
+                            </div>
+
+
+
+                        </>}
+                    </TabPanel>
+                </CardContent>
+                {/* <Divider sx={{ m: '0 !important' }} /> */}
+                {/* <CardActions>
+                    <Button type='submit' sx={{ mr: 2 }} variant='contained'>
+                        Submit
+                    </Button>
+                    <Button type='reset' variant='tonal' color='secondary'>
+                        Reset
+                    </Button>
+                </CardActions> */}
+                {/* </form> */}
+            </TabContext>
+        </Card>
     )
 }
 

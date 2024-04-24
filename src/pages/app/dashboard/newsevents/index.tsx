@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/college/delete/' + id)
+      await axios1.post('api/admin/newsevents/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -90,7 +90,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./college/edit/` + id} >
+        <Link href={`./newsevents/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -167,27 +167,34 @@ const SecondPage = () => {
 
   let columns: GridColDef[] = [
 
-
-
     {
-      flex: 0.175,
-      minWidth: 200,
+      flex: 0.4,
+      minWidth: 100,
       field: 'name',
       headerName: 'name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+          {row.name}
+        </Typography>
+        )
+      }
+    },
+    {
+      flex: 0.3,
+      minWidth: 100,
+      field: 'slug',
+      headerName: 'slug',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
 
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(params)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.name}
-            </Typography>
+        return (
 
-          </Box>
-        </Box>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.slug}
+          </Typography>
 
 
         )
@@ -196,62 +203,13 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 100,
-      field: 'type',
-      headerName: 'type',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-          
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.type}
-              </Typography>
-
-            
-        )
-      }
-    },
-    
-
-
-    {
-      flex: 0.175,
-      minWidth: 200,
-      field: 'country.name',
-      headerName: 'Country',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.country.name}
-          </Typography>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.state.name}
-
-
-          </Typography>
-
-        </Box>
-
-
-
-        )
-      }
-    },
-
-
-    {
-      flex: 0.175,
-      minWidth: 200,
       field: 'status',
       headerName: 'status',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
+
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {row.status}
           </Typography>
@@ -260,6 +218,7 @@ const SecondPage = () => {
         )
       }
     },
+
 
     {
       flex: 0.175,
@@ -286,7 +245,7 @@ const SecondPage = () => {
       cancelToken = axios.CancelToken.source();
 
       await axios1
-        .get('api/admin/College/get', {
+        .get('api/admin/newsevents/get', {
           cancelToken: cancelToken.token,
           params: {
             columnname,
@@ -348,7 +307,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={'./college/add'}>
+        <Link href={'./newsevents/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add

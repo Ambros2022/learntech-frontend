@@ -28,7 +28,8 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 import type { FC } from 'react';
 import { Alert, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic'
+import ExampleComponent from '../../../../@core/components/Example/index';
 
 
 
@@ -39,7 +40,7 @@ interface Authordata {
 
 
 
-const DynamicReactQuill = dynamic(() => import('react-quill'), { ssr: false }); // Dynamically import ReactQuill
+// const DynamicJoditEditor = dynamic(() => import('jodit-react'), { ssr: false });ReactQuill
 
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
@@ -59,6 +60,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         );
 
     };
+
+    
 
     const schema: any = yup.object().shape({
         url: yup
@@ -234,7 +237,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='meta_description'
                             control={control}
@@ -256,7 +259,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='meta_keyword'
                             control={control}
@@ -278,7 +281,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='top_description'
                             control={control}
@@ -302,41 +305,22 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
                     <Grid item xs={12} sm={12}>
-    <Typography>Bottom Description</Typography>
-    {isClient && ( // Render ReactQuill only on the client-side
-        <Controller
-            name='bottom_description'
-            control={control}
-            rules={{ required: true }}
-            render={({ field: { value, onChange } }) => (
-                <>
-                    <DynamicReactQuill
-                        value={value}
-                        onChange={(newVal) => onChange(newVal)}
-                        placeholder='Start Writing...'
-                        modules={{
-                            toolbar: [
-                                [{ 'header': '1' }, { 'header': '2' }, { 'font': [9] }],
-                                [{ size: [] }],
-                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                                [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-                                ['link', 'image', 'video'],
-                                ['clean']
-                            ],
-                        }}
-                        formats={[
-                            'header', 'font', 'size',
-                            'bold', 'italic', 'underline', 'strike', 'blockquote',
-                            'list', 'bullet', 'indent',
-                            'link', 'image', 'video'
-                        ]}
-                    />
-                    {errors.bottom_description && <span>This field is required</span>}
-                </>
-            )}
-        />
-    )}
+                    <Typography style={{ marginBottom: '10px' }}>Bottom Description</Typography>
+                    {isClient && ( // Render Jodit Editor only on the client-side
+                        <Controller
+                            name='bottom_description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                    <ExampleComponent placeholder='Start Writing...' initialValue={value} onChange={onChange} />
+                                    {errors.bottom_description && <span>This field is required</span>}
+                                </>
+                            )}
+                        />
+                    )}
                     </Grid>
+
 
                  
                 

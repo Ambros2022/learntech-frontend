@@ -56,6 +56,40 @@ const navigation = (): VerticalNavItemsType => {
     },
 
     {
+      title: 'Course',
+      path: '/app/dashboard/course',
+      icon: 'tabler:notes',
+      auth: false
+    },
+
+
+    {
+      title: 'Landing Page',
+      path: '/app/dashboard/landingpage ',
+      icon: 'tabler:notes',
+      auth: false
+    },
+
+    {
+      title: 'News',
+      icon: 'tabler:news',
+      auth: false,
+      children: [
+        {
+          title: 'News Categories',
+          path: '/app/dashboard/newscategories',
+          auth: false
+        },
+        {
+          title: 'News & Events',
+          path: '/app/dashboard/newsevents',
+          auth: false
+        },
+       
+      ]
+    },
+
+    {
       title: 'Locations',
       icon: 'tabler:map-pin',
       auth: false,
@@ -82,6 +116,13 @@ const navigation = (): VerticalNavItemsType => {
       title: 'Amenities',
       path: '/app/dashboard/amenities',
       icon: 'tabler:user',
+      auth: false
+    },
+
+    {
+      title: 'Blog',
+      path: '/app/dashboard/blog',
+      icon: 'tabler:file-pencil',
       auth: false
     },
 
@@ -113,6 +154,13 @@ const navigation = (): VerticalNavItemsType => {
       title: 'Substream',
       path: '/app/dashboard/substream',
       icon: 'tabler:clipboard-text',
+      auth: false
+    },
+
+    {
+      title: 'Abroad Page',
+      path: '/app/dashboard/abroadpage',
+      icon: 'tabler:notebook',
       auth: false
     },
 
