@@ -164,6 +164,13 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
 
+    {
+      title: 'Exam',
+      path: '/app/dashboard/exam',
+      icon: 'tabler:file-pencil',
+      auth: false
+    },
+
     // {
     //   title: 'School',
     //   icon: 'tabler:school',
