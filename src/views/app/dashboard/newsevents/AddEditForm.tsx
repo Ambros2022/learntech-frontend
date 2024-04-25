@@ -25,10 +25,8 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 import type { FC } from 'react';
 import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-
-
-
-
+import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
+import useIsMountedRef from 'src/hooks/useIsMountedRef'
 
 interface Authordata {
     olddata?: any;
@@ -42,6 +40,13 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
 
+    const [fileNamespdf, setFileNamespdf] = useState<any>([]);
+    const [selectedpdf, setSelectedpdf] = useState('');
+    const [category, setCategory] = useState([]);
+    const isMountedRef = useIsMountedRef();
+
+
+
     const handleFileChangephoto = (files: any[]) => {
         setSelectedphoto(files[0]);
         setFileNamesphoto(
@@ -53,39 +58,41 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     };
 
-    const options = [
-        'Draft',
-        'All_Exam_page',
-        'All_News_page',
-        'All_Scholarship_page',
-        'Nri_page',
-        'Study_Abroad_page',
-        'All_college_page',
-        'All_university_page',
-        'All_school_page'
-      ];
+    const handleFileChangepdf = (files: any[]) => {
+        setSelectedpdf(files[0]);
+        setFileNamespdf(
+            files.map((file) => ({
+                name: file.name,
+                preview: URL.createObjectURL(file),
+            }))
+        );
 
+    };
+
+ 
     const schema: any = yup.object().shape({
-        link: yup
+        slug: yup
             .string()
             .trim()
             .required(),
-            title: yup
+        name: yup
             .string()
             .trim()
             .required(),
-            status: yup
-            .string()
-            .trim()
-            .required(),
+
+        category_id: yup.object().required("This field is required"),
+
+          
     })
 
     const defaultValues = {
-        link: isAddMode ? '' : olddata.link,
-        promo_banner: isAddMode ? '' : olddata.promo_banner,
-        title: isAddMode ? '' : olddata.title,
-        image: isAddMode ? '' : olddata.image,
-        description: isAddMode ? '' : olddata.description,
+        slug: isAddMode ? '' : olddata.slug,
+        category_id: isAddMode ? '' : olddata.newscategories,
+        meta_title: isAddMode ? '' : olddata.meta_title,
+        name: isAddMode ? '' : olddata.name,
+        meta_description: isAddMode ? '' : olddata.meta_description,
+        meta_keywords: isAddMode ? '' : olddata.meta_keywords,
+        overview: isAddMode ? '' : olddata.overview,
         status: isAddMode ? 'Draft' : olddata.status,
     }
 
@@ -105,18 +112,21 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let link = 'api/admin/banner/update';
+            let url = 'api/admin/newsevents/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('link', data.link);
-            formData.append('title', data.title);
-            formData.append('promo_banner', data.promo_banner);
+            formData.append('slug', data.slug);
+            formData.append('name', data.name);
+            formData.append('category_id', data.category_id.id);
             formData.append('status', data.status);
-            formData.append('description', data.description);
-            formData.append('image', selectedphoto);
-
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keywords', data.meta_keywords);
+            formData.append('overview', data.overview);
+            formData.append('pdf_file', selectedpdf);
+            formData.append('banner_image', selectedphoto);
             try {
-                let response = await axios1.post(link, formData)
+                let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
@@ -145,28 +155,23 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let link = 'api/admin/banner/add';
+            let url = 'api/admin/newsevents/add';
 
             const formData = new FormData();
-            formData.append('link', data.link);
-            formData.append('title', data.title);
-            formData.append('promo_banner', data.promo_banner);
+            formData.append('slug', data.slug);
+            formData.append('name', data.name);
+            formData.append('category_id', data.category_id.id);
             formData.append('status', data.status);
-            formData.append('description', data.description);
-            if (selectedphoto == '') {
-
-                toast.error('Please Upload Image', {
-                    duration: 2000
-                })
-                setLoading(false);
-                return false;
-
-            }
-
-            formData.append('image', selectedphoto);
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keywords', data.meta_keywords);
+            formData.append('overview', data.overview);
+           
+            formData.append('banner_image', selectedphoto);
+            formData.append('pdf_file', selectedpdf);
 
             try {
-                let response = await axios1.post(link, formData)
+                let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
@@ -200,81 +205,130 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
+    //get all Catogry
+    const getcategory = useCallback(async () => {
+
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/newscategories/get', { params: roleparams });
+
+            setCategory(response.data.data);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+
+        getcategory();
+
+    }, [getcategory]);
+
+
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-linkencoded">
+            <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
+
                 <Grid item xs={12} sm={6}>
                         <Controller
-                            name='title'
+                            name='category_id'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    fullWidth
+                                
+                                    options={category}
+                                    loading={!category.length}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue);
+                                    }}
+                                    getOptionLabel={(option: any) => option.name || ''}
+                                    renderInput={(params: any) => (
+                                        <CustomTextField
+                                            {...params}
+                                            required
+                                            error={Boolean(errors.category_id)}
+                                            {...(errors.category_id && { helperText: 'This field is required' })}
+                                            label='Select Category'
+                                        />
+                                    )}
+                                />
+                            )}
+                        />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='name'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
+                                    value={value}
+                                    label='Name'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.name)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.name && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='slug'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Slug'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.slug)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.slug && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+                 
+                
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='meta_title'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    multiline
+                                    rows={3}
                                     value={value}
                                     label='Title'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.title)}
+                                    error={Boolean(errors.meta_title)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.title && { helperText: 'This field is required' })}
+                                    {...(errors.meta_title && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='link'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='link'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.link)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.link && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                        name='promo_banner'
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field: { value, onChange } }) => (
-                            <CustomTextField
-                     fullWidth
-                      select
-                   value={value}
-                 label='Make Promotional Banner'
-                    onChange={onChange}
-                error={Boolean(errors.promo_banner)}
-                     helperText={errors.promo_banner && 'This field is required'}
-                         >
-                            {options.map((option, value) => (
-                            <MenuItem key={value} value={option}>
-                            {option}
-                             </MenuItem>
-            ))}
-          </CustomTextField>
-        )}
-      />
-                     </Grid>
-
-                  
-
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='description'
+                            name='meta_description'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
@@ -286,13 +340,56 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     label='Description'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.description)}
+                                    error={Boolean(errors.meta_description)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.description && { helperText: 'This field is required' })}
+                                    {...(errors.meta_description && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='meta_keywords'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    multiline
+                                    rows={3}
+                                    value={value}
+                                    label='keywords'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.meta_keywords)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.meta_keywords && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='overview'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    multiline
+                                    rows={3}
+                                    value={value}
+                                    label='Overview'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.overview)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.overview && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
 
                     <Grid item xs={12} sm={6}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
@@ -313,12 +410,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     <Grid item xs={12} sm={3}>
                         <FileUpload
                             isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.image ? olddata.image : ""}
+                            olddata={!isAddMode && olddata.banner_image ? olddata.banner_image : ""}
                             onFileChange={handleFileChangephoto}
                             maxFiles={1}
                             maxSize={2000000}
                             fileNames={fileNamesphoto}
                             label=" Upload  Image"
+                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                            rejectionMessage='Try another file for upload.'
+                        />
+                    </Grid>
+
+
+                    <Grid item xs={12} sm={3}>
+                        <FileUpload
+                            isAddMode={isAddMode}
+                            olddata={!isAddMode && olddata.pdf_file ? olddata.pdf_file : ""}
+                            onFileChange={handleFileChangepdf}
+                            maxFiles={1}
+                            maxSize={2000000}
+                            fileNames={fileNamespdf}
+                            label=" Upload Pdf"
                             acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                             rejectionMessage='Try another file for upload.'
                         />

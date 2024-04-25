@@ -53,8 +53,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
-    const [typesData, setTypesData] = useState([]);
-
     const [streams, setStreams] = useState([])
     const [substreams, setSubStreams] = useState([])
     const [streamId, setStreamId] = useState<any>(isAddMode ? "" : olddata?.stream?.id || '');
@@ -102,19 +100,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }, [streamId]);
 
-    const gettypes = useCallback(async () => {
-
-        try {
-            const roleparams: any = {}
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/admin/systemconfig/coursetype', { params: roleparams });
-            setTypesData(response.data.data.concat('Diploma')); 
-        } catch (err) {
-            console.error(err);
-        }
-    }, []);
-
+    
     useEffect(() => {
         if (streamId) {
             getsubstream();
@@ -124,7 +110,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     useEffect(() => {
         getstreams();
-        gettypes();
     }, []);
 
   
@@ -152,14 +137,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         meta_title: isAddMode ? '' : olddata.meta_title,
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
-        // is_trending: isAddMode ? '' : olddata.is_trending,
-        // is_top_rank: isAddMode ? '' : olddata.is_top_rank,
         short_name: isAddMode ? '' : olddata.short_name,
         duration: isAddMode ? '' : olddata.duration,
         syllabus: isAddMode ? '' : olddata.syllabus,
         admissions: isAddMode ? '' : olddata.admissions,
         career_opportunities: isAddMode ? '' : olddata.career_opportunities,
-        status: isAddMode ? '' : olddata.status,
+        status: isAddMode ? 'Draft' : olddata.status,
         stream_id: isAddMode ? '' : olddata.streams ? olddata.streams : '',
         sub_streams_id: isAddMode ? '' : olddata.sub_streams ? olddata.sub_streams : '',
         is_trending: isAddMode ? false : olddata.is_trending ? olddata.is_trending : false,
@@ -479,24 +462,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     control={control}
                                     rules={{ required: true }}
                                     render={({ field: { value, onChange } }) => (
-                                        <CustomTextField
-                                            fullWidth
-                                            select
-                                            value={value || ''} // Ensure value is not null or undefined
-                                            label='Select Course Type'
-                                            onChange={onChange}
-                                            placeholder=''
-                                            error={Boolean(errors.course_type)}
-                                            aria-describedby='validation-basic-first-name'
-                                            {...(errors.course_type && { helperText: 'This field is required' })}
-                                        >
-                                            {/* Render options only if typesData is not empty */}
-                                            {typesData.map(type => (
-                                                <MenuItem key={type} value={type}>{type}</MenuItem>
-                                            ))}
-                                        </CustomTextField>
-                                    )}
-                                />
+                                <CustomTextField
+                                    fullWidth
+                                    select
+                                    value={value}
+                                    label='Select Course_type'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.course_type)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.course_type && { helperText: 'This field is required' })}
+                                >
+                                     <MenuItem value='UG'>UG</MenuItem>
+                                     <MenuItem value='Diploma'>Diploma</MenuItem>
+                                    <MenuItem value='PG'>PG</MenuItem>
+                                    <MenuItem value='Doctorate'>Doctorate</MenuItem>
+                                     <MenuItem value='Default'>Default</MenuItem>
+                                              
+                                    </CustomTextField>
+                            )}
+                                    />
                             </Grid>
 
 
@@ -599,7 +584,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     )}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={12}>
+                            <Grid item xs={12} sm={6}>
                                 <Controller
                                     name='syllabus'
                                     control={control}
@@ -621,7 +606,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             </Grid>
 
-                            <Grid item xs={12} sm={12}>
+                            <Grid item xs={12} sm={6}>
                                 <Controller
                                     name='meta_title'
                                     control={control}
@@ -643,7 +628,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     )}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={12}>
+                            <Grid item xs={12} sm={6}>
                                 <Controller
                                     name='top_college'
                                     control={control}
@@ -667,7 +652,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             </Grid>
 
 
-                            <Grid item xs={12} sm={12}>
+                            <Grid item xs={12} sm={6}>
                                 <Controller
                                     name='meta_description'
                                     control={control}
@@ -690,7 +675,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             </Grid>
 
-                            <Grid item xs={12} sm={12}>
+                            <Grid item xs={12} sm={6}>
                                 <Controller
                                     name='description'
                                     control={control}
@@ -713,7 +698,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             </Grid>
 
-                            <Grid item xs={12} sm={12}>
+                            <Grid item xs={12} sm={6}>
                                 <Controller
                                     name='admissions'
                                     control={control}
@@ -735,7 +720,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     )}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={12}>
+                            <Grid item xs={12} sm={6}>
                                 <Controller
                                     name='career_opportunities'
                                     control={control}
@@ -758,26 +743,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             </Grid>
 
-                            {/* <Grid item xs={12} sm={6}>
-                                <Controller
-                                    name='is_trending'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <CustomTextField
-                                            fullWidth
-                                            value={value}
-                                            label='Is_trending'
-                                            onChange={onChange}
-                                            placeholder=''
-                                            error={Boolean(errors.is_trending)}
-                                            aria-describedby='validation-basic-first-name'
-                                            {...(errors.is_trending && { helperText: 'This field is required' })}
-                                        />
-                                    )}
-                                />
-                            </Grid> */}
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={6} style={{ marginTop: 14 }}>
                                 <Controller
                                     name='is_trending'
                                     control={control}

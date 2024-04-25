@@ -3,8 +3,6 @@ import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCal
 // ** MUI Imports
 import Fade, { FadeProps } from '@mui/material/Fade'
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // import styles
-
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import { SelectChangeEvent } from '@mui/material/Select'
@@ -24,12 +22,11 @@ import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
-
 import type { FC } from 'react';
 import { Alert, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import dynamic from 'next/dynamic';
-
+import dynamic from 'next/dynamic'
+import QuillEditor from 'src/@core/components/html-editor/index';
 
 
 interface Authordata {
@@ -37,10 +34,7 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-
-
-const DynamicReactQuill = dynamic(() => import('react-quill'), { ssr: false }); // Dynamically import ReactQuill
-
+// const DynamicJoditEditor = dynamic(() => import('jodit-react'), { ssr: false });ReactQuill
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
@@ -60,6 +54,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     };
 
+    const [fieldvalue, setEditorValue] = useState('');
+
+    const handleEditorChange = (newValue) => {
+        // Set the new value to editorValue state
+        setEditorValue(newValue);
+    };
+
+    
+
     const schema: any = yup.object().shape({
         url: yup
             .string()
@@ -68,11 +71,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         
     })
 
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true); // Set isClient to true when component mounts
-    }, []);
 
     const defaultValues = {
         url: isAddMode ? '' : olddata.url,
@@ -95,6 +93,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const onSubmit = async (data: any) => {
+console.log(data,"data");
+        return
 
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
@@ -234,7 +234,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='meta_description'
                             control={control}
@@ -256,7 +256,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='meta_keyword'
                             control={control}
@@ -278,7 +278,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='top_description'
                             control={control}
@@ -302,41 +302,21 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
                     <Grid item xs={12} sm={12}>
-    <Typography>Bottom Description</Typography>
-    {isClient && ( // Render ReactQuill only on the client-side
-        <Controller
-            name='bottom_description'
-            control={control}
-            rules={{ required: true }}
-            render={({ field: { value, onChange } }) => (
-                <>
-                    <DynamicReactQuill
-                        value={value}
-                        onChange={(newVal) => onChange(newVal)}
-                        placeholder='Start Writing...'
-                        modules={{
-                            toolbar: [
-                                [{ 'header': '1' }, { 'header': '2' }, { 'font': [9] }],
-                                [{ size: [] }],
-                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                                [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-                                ['link', 'image', 'video'],
-                                ['clean']
-                            ],
-                        }}
-                        formats={[
-                            'header', 'font', 'size',
-                            'bold', 'italic', 'underline', 'strike', 'blockquote',
-                            'list', 'bullet', 'indent',
-                            'link', 'image', 'video'
-                        ]}
-                    />
-                    {errors.bottom_description && <span>This field is required</span>}
-                </>
-            )}
-        />
-    )}
+                    <Typography style={{ marginBottom: '10px' }}>Bottom Description</Typography>
+                        <Controller
+                            name='bottom_description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                    <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                     onChange={(value)=>console.log(value)} />
+                                </>
+                            )}
+                        />
+                   
                     </Grid>
+
 
                  
                 
