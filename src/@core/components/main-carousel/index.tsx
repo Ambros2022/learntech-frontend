@@ -44,7 +44,7 @@ const MainCarousel = ({ items }) => {
             arrows={false}
             infinite
             autoPlay
-            autoPlaySpeed={1000}
+            autoPlaySpeed={2000}
             ssr  // SSR true for server-side rendering
             responsive={responsive}
             renderButtonGroupOutside
