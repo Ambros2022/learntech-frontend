@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/college/delete/' + id)
+      await axios1.post('api/admin/exam/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -90,7 +90,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./college/edit/` + id} >
+        <Link href={`./exam/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -152,8 +152,8 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [columnname, setColumnname] = useState<string>('name')
+  const [searchfrom, setSearchfrom] = useState<any>('exam_title')
+  const [columnname, setColumnname] = useState<string>('exam_title')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
 
@@ -172,8 +172,8 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 200,
-      field: 'name',
-      headerName: 'name',
+      field: 'exam_title',
+      headerName: 'Exam',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
@@ -183,7 +183,7 @@ const SecondPage = () => {
           {renderClient(params)}
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.name}
+              {row.exam_title}
             </Typography>
 
           </Box>
@@ -196,15 +196,15 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 100,
-      field: 'type',
-      headerName: 'type',
+      field: 'slug',
+      headerName: 'slug',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
           
               <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.type}
+                {row.slug}
               </Typography>
 
             
@@ -212,37 +212,6 @@ const SecondPage = () => {
       }
     },
     
-
-
-    {
-      flex: 0.175,
-      minWidth: 200,
-      field: 'country.name',
-      headerName: 'Country',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.country.name}
-          </Typography>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.state.name}
-
-
-          </Typography>
-
-        </Box>
-
-
-
-        )
-      }
-    },
-
-
     {
       flex: 0.175,
       minWidth: 200,
@@ -275,8 +244,6 @@ const SecondPage = () => {
   ]
 
 
-
-
   const fetchTableData = useCallback(
     async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
       setLoading(true);
@@ -286,7 +253,7 @@ const SecondPage = () => {
       cancelToken = axios.CancelToken.source();
 
       await axios1
-        .get('api/admin/College/get', {
+        .get('api/admin/exam/get', {
           cancelToken: cancelToken.token,
           params: {
             columnname,
@@ -348,7 +315,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={'./college/add'}>
+        <Link href={'./exam/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add

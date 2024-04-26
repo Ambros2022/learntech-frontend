@@ -1329,7 +1329,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                                 {/* <img src={image.dataURL} className="img-fluid rounded" alt="" /> */}
                                                                 <img
                                                                     src={image.dataURL}
-                                                                    style={{ width: '100%', height: 'auto', maxWidth: '200px', maxHeight: '500px' }}
+                                                                    style={{ width: '100%', height: '150px', maxWidth: '200px', maxHeight: '500px' }}
                                                                     className="rounded"
                                                                     alt=""
                                                                 />

@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/college/delete/' + id)
+      await axios1.post('api/admin/landingpage/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -90,7 +90,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./college/edit/` + id} >
+        <Link href={`./landingpage/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -167,27 +167,41 @@ const SecondPage = () => {
 
   let columns: GridColDef[] = [
 
-
-
     {
       flex: 0.175,
-      minWidth: 200,
+      minWidth: 110,
       field: 'name',
       headerName: 'name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
-
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(params)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.name}
-            </Typography>
+            {renderClient(params)}
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+                {row.name}
+              </Typography>
 
+            </Box>
           </Box>
-        </Box>
+        )
+      }
+    },
+
+    {
+      flex: 0.3,
+      minWidth: 100,
+      field: 'link',
+      headerName: 'link',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.link}
+          </Typography>
 
 
         )
@@ -196,62 +210,13 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 100,
-      field: 'type',
-      headerName: 'type',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-          
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.type}
-              </Typography>
-
-            
-        )
-      }
-    },
-    
-
-
-    {
-      flex: 0.175,
-      minWidth: 200,
-      field: 'country.name',
-      headerName: 'Country',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.country.name}
-          </Typography>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.state.name}
-
-
-          </Typography>
-
-        </Box>
-
-
-
-        )
-      }
-    },
-
-
-    {
-      flex: 0.175,
-      minWidth: 200,
       field: 'status',
       headerName: 'status',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
+
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {row.status}
           </Typography>
@@ -260,6 +225,7 @@ const SecondPage = () => {
         )
       }
     },
+
 
     {
       flex: 0.175,
@@ -275,8 +241,6 @@ const SecondPage = () => {
   ]
 
 
-
-
   const fetchTableData = useCallback(
     async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
       setLoading(true);
@@ -286,7 +250,7 @@ const SecondPage = () => {
       cancelToken = axios.CancelToken.source();
 
       await axios1
-        .get('api/admin/College/get', {
+        .get('api/admin/landingpage/get', {
           cancelToken: cancelToken.token,
           params: {
             columnname,
@@ -348,7 +312,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={'./college/add'}>
+        <Link href={'./landingpage/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add
@@ -366,7 +330,6 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
-
           <DataGrid
             autoHeight
             pagination

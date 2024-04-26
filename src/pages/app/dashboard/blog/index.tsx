@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/college/delete/' + id)
+      await axios1.post('api/admin/blog/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -90,7 +90,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./college/edit/` + id} >
+        <Link href={`./blog/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -167,8 +167,6 @@ const SecondPage = () => {
 
   let columns: GridColDef[] = [
 
-
-
     {
       flex: 0.175,
       minWidth: 200,
@@ -178,70 +176,55 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(params)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.name}
-            </Typography>
+            {renderClient(params)}
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+                {row.name}
+              </Typography>
 
+            </Box>
           </Box>
-        </Box>
-
-
         )
       }
     },
     {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'type',
-      headerName: 'type',
+      flex: 0.3,
+      minWidth: 200,
+      field: 'slug',
+      headerName: 'Slug',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
-          
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.type}
-              </Typography>
 
-            
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.slug}
+          </Typography>
+
+
         )
       }
     },
-    
-
-
+ 
     {
       flex: 0.175,
       minWidth: 200,
-      field: 'country.name',
-      headerName: 'Country',
+      field: 'meta_description',
+      headerName: 'description',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
 
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.country.name}
+            {row.meta_description}
           </Typography>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.state.name}
-
-
-          </Typography>
-
-        </Box>
-
 
 
         )
       }
     },
-
 
     {
       flex: 0.175,
@@ -252,6 +235,7 @@ const SecondPage = () => {
         const { row } = params
 
         return (
+
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {row.status}
           </Typography>
@@ -260,6 +244,8 @@ const SecondPage = () => {
         )
       }
     },
+
+
 
     {
       flex: 0.175,
@@ -286,7 +272,7 @@ const SecondPage = () => {
       cancelToken = axios.CancelToken.source();
 
       await axios1
-        .get('api/admin/College/get', {
+        .get('api/admin/blog/get', {
           cancelToken: cancelToken.token,
           params: {
             columnname,
@@ -348,7 +334,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={'./college/add'}>
+        <Link href={'./blog/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add

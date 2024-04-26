@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditForm from 'src/views/app/dashboard/college/AddEditForm'
+import AddEditForm from 'src/views/app/dashboard/landingpage/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
@@ -27,7 +27,7 @@ const Edituserlayout = () => {
   const getolddata = useCallback(async () => {
     try {
 
-      const response = await axios1.get('api/admin/College/get/' + id);
+      const response = await axios1.get('api/admin/landingpage/get/' + id);
       if (isMountedRef.current) {
         setolddata(response.data.data);
         setFormloading(false);
@@ -60,11 +60,11 @@ const Edituserlayout = () => {
               p: theme => theme.spacing(2, 5, 4, 5)
             }}
           >
-            <h5>Edit College</h5>
+            <h5>Edit Landing_page</h5>
     
 
             <Link href={`../`} >
-              <Button variant='contained'>View All colleges</Button>
+              <Button variant='contained'>View All landing_page</Button>
             </Link>
           </Box>
           <CardContent>
