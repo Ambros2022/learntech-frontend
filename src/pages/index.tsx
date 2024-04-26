@@ -1,11 +1,9 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 
 
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
 import Homepage from 'src/views/Homepage'
-
-
 
 
 const Home = () => {
