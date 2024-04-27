@@ -94,6 +94,22 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
+        exam_short_name: yup
+            .string()
+            .trim()
+            .required(),
+        meta_title: yup
+            .string()
+            .trim()
+            .required(),
+        meta_description: yup
+            .string()
+            .trim()
+            .required(),
+        meta_keywords: yup
+            .string()
+            .trim()
+            .required(),
         stream_id: yup.object().required("This field is required"),
        
 
@@ -104,10 +120,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         exam_title: isAddMode ? '' : olddata.exam_title,
         slug: isAddMode ? '' : olddata.slug,
         upcoming_date: isAddMode ? null : new Date(olddata.upcoming_date),
+        exam_dates: isAddMode ? null : new Date(olddata.exam_dates),
         exam_short_name: isAddMode ? '' : olddata.exam_short_name,
         college_type: isAddMode ? '' : olddata.college_type,
         overview: isAddMode ? '' : olddata.overview,
-        exam_dates: isAddMode ? '' : olddata.exam_dates,
+        // exam_dates: isAddMode ? '' : olddata.exam_dates,
         meta_title: isAddMode ? '' : olddata.meta_title,
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
@@ -121,7 +138,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         counseling: isAddMode ? '' : olddata.counseling,
         accept_colleges: isAddMode ? '' : olddata.accept_colleges,
         status: isAddMode ? 'Draft' : olddata.status,
-        promo_banner_status: isAddMode ? 'Published' : olddata.promo_banner_status,
+        promo_banner_status: isAddMode ? '' : olddata.promo_banner_status,
         stream_id: isAddMode ? '' : olddata.stream ? olddata.stream : '',   
     }
 
@@ -274,9 +291,29 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('counseling', data.counseling);
             formData.append('accept_colleges', data.accept_colleges);
             formData.append('promo_banner_status', data.promo_banner_status);
-            formData.append('cover_image', selectedphoto);
-            formData.append('promo_banner', selectedlogo);
             formData.append('status', data.status);
+            if (selectedphoto == '') {
+
+                toast.error('Please Upload Photo', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
+            
+            formData.append('cover_image', selectedphoto);
+            if (selectedlogo == '') {
+
+                toast.error('Please Upload Logo', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
+            formData.append('promo_banner', selectedlogo);
+           
         
             setLoading(false)
             try {
@@ -506,7 +543,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     renderInput={(params: any) => (
                                         <CustomTextField
                                             {...params}
-                                            required
+                                            
                                             error={Boolean(errors.stream_id)}
                                             {...(errors.stream_id && { helperText: 'This field is required' })}
                                             label='Select Stream'
@@ -576,89 +613,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='upcoming_date'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <DatePickerWrapper>
-                                <DatePicker
-                                    selected={value}
-                                    id='basic-input'
-                                    showYearDropdown
-                                    showMonthDropdown
-                                    dateFormat='MMMM d, yyyy'
-                                    popperPlacement={popperPlacement}
-                                    onChange={onChange}
-                                    placeholderText='Click to select a date'
-                                    customInput={<CustomInput label='Date' 
-                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
-                                    />}
-
-
-                                />
-                            </DatePickerWrapper>
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='meta_title'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Meta Title'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_title)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_title && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='meta_description'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Meta Description'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_description)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_description && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='meta_keywords'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Meta keyword'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_keywords)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_keywords && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                 
 
                     <Grid item xs={12} sm={4}>
                         <Controller
@@ -679,25 +634,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='exam_dates'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Exam Date'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.exam_dates)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.exam_dates && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                   
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='eligibility_criteria'
@@ -834,7 +771,118 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='meta_title'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Meta Title'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.meta_title)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.meta_title && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='meta_description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Meta Description'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.meta_description)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.meta_description && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='meta_keywords'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Meta keyword'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.meta_keywords)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.meta_keywords && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
 
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='upcoming_date'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <DatePickerWrapper>
+                                <DatePicker
+                                    selected={value}
+                                    id='basic-input'
+                                    showYearDropdown
+                                    showMonthDropdown
+                                    dateFormat='MMMM d, yyyy'
+                                    popperPlacement={popperPlacement}
+                                    onChange={onChange}
+                                    placeholderText='Click to select a date'
+                                    customInput={<CustomInput label='Date' 
+                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
+                                    />}
+
+
+                                />
+                            </DatePickerWrapper>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='exam_dates'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <DatePickerWrapper>
+                                <DatePicker
+                                    selected={value}
+                                    id='basic-input'
+                                    showYearDropdown
+                                    showMonthDropdown
+                                    dateFormat='MMMM d, yyyy'
+                                    popperPlacement={popperPlacement}
+                                    onChange={onChange}
+                                    placeholderText='Click to select a date'
+                                    customInput={<CustomInput label='Exam Date' 
+                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
+                                    />}
+
+
+                                />
+                            </DatePickerWrapper>
+                            )}
+                        />
+                    </Grid>
+                  
 
                     <Grid item xs={12} sm={4}>
                         <Controller

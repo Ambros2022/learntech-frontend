@@ -20,19 +20,49 @@ const Home = () => {
     // console.log("x-access-token header is not set.");
   }
   return (
-    <Grid container spacing={6}>
-      <Grid item xs={12}>
+    <Grid container spacing={3}>
+      <Grid item xs={12} sm={6} md={3}>
         <Card>
+          <CardHeader title="Card 1" />
           <CardContent>
-            <Typography sx={{ mb: 2 }}>Dashboard</Typography>
+            <Typography variant="body1" color="textSecondary">
+              College
+            </Typography>
           </CardContent>
         </Card>
       </Grid>
-
+      <Grid item xs={12} sm={6} md={3}>
+        <Card>
+          <CardHeader title="Card 2" />
+          <CardContent>
+            <Typography variant="body1" color="textSecondary">
+              Content for Card 2
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <Card>
+          <CardHeader title="Card 3" />
+          <CardContent>
+            <Typography variant="body1" color="textSecondary">
+              Content for Card 3
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <Card>
+          <CardHeader title="Card 4" />
+          <CardContent>
+            <Typography variant="body1" color="textSecondary">
+              Content for Card 4
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
     </Grid>
   )
 }
-
-
 
 export default Home

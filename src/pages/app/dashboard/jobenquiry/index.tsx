@@ -1,6 +1,7 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
 // ** MUI Imports
+
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
@@ -10,9 +11,7 @@ import Link from 'next/link'
 import axios1 from 'src/configs/axios'
 // ** Context
 import { useAuth } from 'src/hooks/useAuth'
-import { useParams } from "react-router-dom";
-// ** Custom Components
-import CustomChip from 'src/@core/components/mui/chip'
+
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
@@ -21,7 +20,9 @@ import { ThemeColor } from 'src/@core/layouts/types'
 // ** Utils Import
 import { getInitials } from 'src/@core/utils/get-initials'
 import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
-
+import IconButton from '@mui/material/IconButton'
+import { GridToolbarExport } from '@mui/x-data-grid'
+// ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import NotAuthorized from 'src/pages/401'
@@ -35,6 +36,7 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
+
 
 interface StatusObj {
   [key: number]: {
@@ -73,7 +75,6 @@ const statusObj: StatusObj = {
 }
 
 const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
-
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [show, setShow] = useState<boolean>(false)
@@ -95,21 +96,19 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/state/delete/' + id)
+      await axios1.post('api/admin/jobsenquires/delete/' + id)
         .then(response => {
-          // console.log(response);
-
+      
           if (response.data.status == 1) {
             toast.success(response.data.message)
             // router.reload();
             onReloadPage();
           } else {
             toast.error(response.data.message)
-
           }
         })
     } catch (err: any) {
-      console.error(err);
+      // console.error(err);
       toast.error(err.message || "please try again")
 
     }
@@ -119,7 +118,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./states/edit/` + id} >
+        <Link href={`./jobenquiry/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -178,10 +177,6 @@ const SecondPage = () => {
   // ** States
   const { user } = useAuth();
   const [reloadpage, setReloadpage] = useState("0");
-  const [country_id, setCountry_id] = useState('')
-  const [countryId, setcountryId] = useState<string>('')
-  const [countries, setCountries] = useState([])
-  const [status, setStatus] = useState('')
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
@@ -190,7 +185,7 @@ const SecondPage = () => {
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
   const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [fieldname, setFieldname] = useState<string>('name')
+  const [columnname, setColumnname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const isMountedRef = useIsMountedRef();
   const ability = useContext(AbilityContext)
@@ -199,51 +194,86 @@ const SecondPage = () => {
   params['page'] = 1;
   params['size'] = 10000;
 
+
   const handleReloadPage = useCallback(() => {
     setLoading(true);
     setReloadpage('1');
   }, []);
-
-   
-
-
 
   let columns: GridColDef[] = [
 
     {
       flex: 0.175,
       minWidth: 200,
-      field: 'name',
-      headerName: 'States',
+      field: 'nameAndEmail',
+      headerName: 'Name and Email',
       renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
+        const { row } = params;
         return (
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {renderClient(params)}
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.name}
-              </Typography>
-
-            </Box>
-          </Box>
-        )
+          <div>
+            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+              Name: {row.name}
+            </Typography>
+            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+              Email: {row.email}
+            </Typography>
+          </div>
+        );
       }
     },
+
     {
       flex: 0.175,
-      minWidth: 200,
-      field: 'country.name',
-      headerName: 'Country',
+      minWidth: 100,
+      field: 'phone',
+      headerName: 'phone',
       renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {params.row.country && params.row.country ? params.row.country.name : ""}
+            {row.phone}
           </Typography>
         );
       }
     },
+
+    
+   
+
+    {
+      flex: 0.175,
+      minWidth: 100,
+      field: 'current_location',
+      headerName: 'current location',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.current_location}
+          </Typography>
+        );
+      }
+    },
+
+    {
+      flex: 0.175,
+      minWidth: 200,
+      field: 'jobspositions.name',
+      headerName: 'Job Position',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.jobspositions.name}
+          </Typography>
+        );
+      }
+    },
+  
+  
+
+
+
     {
       flex: 0.175,
       minWidth: 100,
@@ -258,25 +288,24 @@ const SecondPage = () => {
   ]
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, country_id: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
       setLoading(true);
+     
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
       }
       cancelToken = axios.CancelToken.source();
-      
+
       await axios1
-        .get('api/admin/state/get', {
+        .get('api/admin/jobsenquires/get', {
           cancelToken: cancelToken.token,
           params: {
+            columnname,
+            orderby,
+            page,
+            size,
             searchtext,
             searchfrom,
-            orderby,
-            size,
-            page,
-            fieldname,
-            country_id,
-
           },
         })
 
@@ -290,9 +319,9 @@ const SecondPage = () => {
         .catch((error) => {
           // Handle error if needed
           setLoading(false);
-          console.error("API call error:", error);
+         
         });
-    
+   
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationModel, reloadpage]
@@ -306,16 +335,16 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, fieldname, country_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, fieldname, country_id])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
       setOrderby(newModel[0].sort)
-      setFieldname(newModel[0].field)
+      setColumnname(newModel[0].field)
     } else {
       setOrderby('asc')
-      setFieldname('name')
+      setColumnname('name')
     }
   }
 
@@ -323,10 +352,13 @@ const SecondPage = () => {
     setSearchtext(value)
   }
 
+
+ 
   const AddButtonToolbar = () => {
+
     return (
       <>
-        <Link href={`./states/add`} >
+        <Link href={'./jobenquiry/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add
@@ -339,71 +371,11 @@ const SecondPage = () => {
 
   const AddButtonComponent = <AddButtonToolbar />;
 
-  //get all countries
-  const getcountries = useCallback(async () => {
-
-    try {
-        const roleparams: any = {};
-        roleparams['page'] = 1;
-        roleparams['size'] = 10000;
-        const response = await axios1.get('api/admin/countries/get', { params: roleparams });
-
-        setCountries(response.data.data);
-
-    } catch (err) {
-        console.error(err);
-    }
-}, [isMountedRef]);
-
-useEffect(() => {
-
-    getcountries();
-
-}, [getcountries]);
   return (
     <Grid container spacing={6}>
-  
-      <Grid item xs={12}>
-      <Card>
-      <CardHeader title="Search Filters" />
-                <CardContent>
-                  <Grid container spacing={6}>
-                    <Grid item sm={4} xs={12}>
-                      <CustomTextField
-                        select
-                        fullWidth
-                        defaultValue="Select School"
-                        value={country_id}
-                        onChange={(e: any) => {
-                          setCountry_id(e.target.value);
-                          // console.log(setschoolId, "setschoolId");
-                          
-                        }}
-                        SelectProps={{
-                          displayEmpty: true,
-                        }}
-                      >
-                        <MenuItem value=''>Select Country</MenuItem>
-                        {countries && countries.map((val: any) => (
-                          <MenuItem value={val.id}>{val.name}</MenuItem>
-                        ))}
-                        {countries.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
-                      </CustomTextField>
-                    </Grid>
-                    <Grid item sm={4} xs={12}>
-                      <Button sx={{ mt: 0 }} variant="contained" color='error'
-                        onClick={(e: any) => {
-                          // setClassId('');
-                          setCountry_id('');
-                          // setStatus('');
-                        }}
-                        startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-       
 
-                <Divider sx={{ m: '0 !important' }} />
+      <Grid item xs={12}>
+        <Card>
           <DataGrid
             autoHeight
             pagination
@@ -415,6 +387,7 @@ useEffect(() => {
             sortingMode='server'
             paginationMode='server'
             pageSizeOptions={[10, 15, 25, 50]}
+            // getRowId={(row) => row._id}
             getRowId={(row) => row.id}
             paginationModel={paginationModel}
             onSortModelChange={handleSortModel}

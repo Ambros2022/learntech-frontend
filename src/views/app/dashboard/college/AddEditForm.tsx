@@ -108,6 +108,34 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
+        type: yup
+            .string()
+            .trim()
+            .required(),
+        college_type: yup
+            .string()
+            .trim()
+            .required(),
+        meta_title: yup
+            .string()
+            .trim()
+            .required(),
+        meta_description: yup
+            .string()
+            .trim()
+            .required(),
+        address: yup
+            .string()
+            .trim()
+            .required(),
+        home_view_status: yup
+            .string()
+            .trim()
+            .required(),
+        status: yup
+            .string()
+            .trim()
+            .required(),
         slug: yup
             .string()
             .trim()
@@ -329,12 +357,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
-            formData.append('banner_image', selectedbanner);
-            formData.append('icon', selectedphoto);
-            formData.append('logo', selectedlogo);
             formData.append('amenities', JSON.stringify(data.amenities));
             formData.append('streams', JSON.stringify(data.streams));
             formData.append('recoginations', JSON.stringify(data.recoginations));
+            formData.append('banner_image', selectedbanner);
+            formData.append('icon', selectedphoto);
+            formData.append('logo', selectedlogo);
 
           
 
@@ -395,6 +423,34 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
+            if (selectedphoto == '') {
+
+                toast.error('Please Upload Icon', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
+            if (selectedbanner == '') {
+
+                toast.error('Please Upload BannerImage', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
+            if (selectedlogo == '') {
+
+                toast.error('Please Upload Logo', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
+
             formData.append('banner_image', selectedbanner);
             formData.append('icon', selectedphoto);
             formData.append('logo', selectedlogo);
@@ -716,106 +772,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={4}>
-                                    <Controller
-                                        name="amenities"
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => {
-                                            // console.log(value); // Log value here
-
-                                            return (
-                                                <CustomAutocomplete
-                                                    multiple
-                                                    fullWidth
-                                                    value={value || []}
-                                                    options={amenitiesdata}
-                                                    onChange={(event, newValue) => {
-                                                        onChange(newValue);
-                                                    }}
-                                                    filterSelectedOptions
-                                                    id='autocomplete-multiple-outlined'
-                                                    getOptionLabel={(option: any) => option.amenities_name}
-                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
-                                                    renderInput={params =>
-                                                        <CustomTextField {...params}
-                                                            label='Select amenities'
-                                                            variant="outlined"
-                                                            error={Boolean(errors.amenities)}
-                                                            {...(errors.amenities && { helperText: 'This field is required' })}
-                                                            placeholder='amenities' />}
-                                                />
-                                            );
-                                        }}
-                                    />
-                    </Grid>
-
-                    <Grid item xs={12} sm={4}>
-                                    <Controller
-                                        name="streams"
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => {
-                                            // console.log(value); // Log value here
-
-                                            return (
-                                                <CustomAutocomplete
-                                                    multiple
-                                                    fullWidth
-                                                    value={value || []}
-                                                    options={streamsdata}
-                                                    onChange={(event, newValue) => {
-                                                        onChange(newValue);
-                                                    }}
-                                                    filterSelectedOptions
-                                                    id='autocomplete-multiple-outlined'
-                                                    getOptionLabel={(option: any) => option.name}
-                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
-                                                    renderInput={params =>
-                                                        <CustomTextField {...params}
-                                                            label='Select streams'
-                                                            variant="outlined"
-                                                            error={Boolean(errors.streams)}
-                                                            {...(errors.streams && { helperText: 'This field is required' })}
-                                                            placeholder='streams' />}
-                                                />
-                                            );
-                                        }}
-                                    />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                                    <Controller
-                                        name="recoginations"
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => {
-                                            // console.log(value); // Log value here
-
-                                            return (
-                                                <CustomAutocomplete
-                                                    multiple
-                                                    fullWidth
-                                                    value={value || []}
-                                                    options={recoginationsdata}
-                                                    onChange={(event, newValue) => {
-                                                        onChange(newValue);
-                                                    }}
-                                                    filterSelectedOptions
-                                                    id='autocomplete-multiple-outlined'
-                                                    getOptionLabel={(option: any) => option.recognition_approval_name}
-                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
-                                                    renderInput={params =>
-                                                        <CustomTextField {...params}
-                                                            label='Select recoginations'
-                                                            variant="outlined"
-                                                            error={Boolean(errors.recoginations)}
-                                                            {...(errors.recoginations && { helperText: 'This field is required' })}
-                                                            placeholder='recoginations' />}
-                                                />
-                                            );
-                                        }}
-                                    />
-                    </Grid>
+                   
 
 
                     <Grid item xs={12} sm={4}>
@@ -936,11 +893,47 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='meta_keyword'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='keywords'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.meta_keyword)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.meta_keyword && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
 
 
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='address'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Address'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.address)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.address && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
 
-
-                   
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='established'
@@ -960,6 +953,109 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
+
+                    <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="amenities"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={amenitiesdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.amenities_name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select amenities'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.amenities)}
+                                                            {...(errors.amenities && { helperText: 'This field is required' })}
+                                                            placeholder='amenities' />}
+                                                />
+                                            );
+                                        }}
+                                    />
+                    </Grid>
+
+                    <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="streams"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={streamsdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select streams'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.streams)}
+                                                            {...(errors.streams && { helperText: 'This field is required' })}
+                                                            placeholder='streams' />}
+                                                />
+                                            );
+                                        }}
+                                    />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="recoginations"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={recoginationsdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.recognition_approval_name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select recoginations'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.recoginations)}
+                                                            {...(errors.recoginations && { helperText: 'This field is required' })}
+                                                            placeholder='recoginations' />}
+                                                />
+                                            );
+                                        }}
+                                    />
+                    </Grid>
+
+                    
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='meta_title'
@@ -994,46 +1090,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.meta_description)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.meta_description && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='meta_keyword'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Meta keyword'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_keyword)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_keyword && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='address'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Address'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.address)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.address && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
@@ -1107,7 +1163,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='info'
+                                    label='Info'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.info)}
@@ -1168,7 +1224,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='rankings'
+                                    label='Rankings'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.rankings)}
@@ -1187,7 +1243,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='scholarship'
+                                    label='Scholarship'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.scholarship)}
@@ -1218,29 +1274,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='listing_order'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    type='number'
-                                    label='Listing Order'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.listing_order)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.listing_order && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-
 
                     <Grid item xs={12} sm={3}>
                         <FileUpload
@@ -1285,9 +1318,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='listing_order'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    type='number'
+                                    label='Listing Order'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.listing_order)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.listing_order && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
 
 
-                    <Grid item xs={12} sm={12}>
+
+                    <Grid item xs={12} sm={6}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                                 <Controller
                                     name='status'
