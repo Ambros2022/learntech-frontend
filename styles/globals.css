@@ -27,17 +27,22 @@ code[class*='language-'] {
   padding: 0;
 }
 
-
 .css-z0juvp-MuiTablePagination-root .MuiTablePagination-selectLabel {
   display: block;
   margin-bottom: 0px !important;
 }
-.MuiToolbar-root .MuiToolbar-gutters .MuiToolbar-regular .MuiTablePagination-toolbar .css-1iu2446-MuiToolbar-root-MuiTablePagination-toolbar p{
+.MuiToolbar-root
+  .MuiToolbar-gutters
+  .MuiToolbar-regular
+  .MuiTablePagination-toolbar
+  .css-1iu2446-MuiToolbar-root-MuiTablePagination-toolbar
+  p {
   margin-bottom: 0px !important;
   margin-top: 0px !important;
 }
 
-.css-lrt3ob-MuiDataGrid-footerContainer .MuiTablePagination-displayedRows, .css-lrt3ob-MuiDataGrid-footerContainer .MuiTablePagination-selectLabel {
+.css-lrt3ob-MuiDataGrid-footerContainer .MuiTablePagination-displayedRows,
+.css-lrt3ob-MuiDataGrid-footerContainer .MuiTablePagination-selectLabel {
   color: rgba(47, 43, 61, 0.78);
   margin-bottom: 0px !important;
 }
@@ -45,6 +50,12 @@ code[class*='language-'] {
   margin-bottom: 0px !important;
   margin-top: 0px !important;
 } */
+.bg-header {
+  background-color: rgba(39, 72, 150, 0.1) !important;
+}
+a {
+  text-decoration: none !important;
+}
 .socialIcon img {
   width: 22px;
 }
@@ -155,6 +166,9 @@ nav a {
   border-radius: 10px !important;
   margin-top: 232px !important;
 }
+.searchSec .form-control {
+  color: white !important;
+}
 .searchSec input[type='search'] {
   background: transparent !important;
   border: 1px solid white !important;
@@ -167,9 +181,9 @@ nav a {
 .searchSec input:focus {
   outline: none !important;
 }
-.form-control {
+/* .form-control {
   color: white !important;
-}
+} */
 .searchBtn {
   padding: 10px 20px !important;
   font-size: 16px !important;
@@ -273,22 +287,26 @@ nav a {
   color: white !important;
   border-radius: 0 !important;
 }
+.viewMoreCollegeBtn {
+  background-color: #254692 !important;
+  color: white !important;
+}
 .exploreNav a:focus {
   background-color: #254692 !important;
   color: white !important;
   border-radius: 0 !important;
 }
-.exploreCardCon img {
+#exploreCardCon .col-4 img {
   width: 60px;
   padding: 10px;
   filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%);
   background-color: rgba(39, 72, 150, 0.1);
 }
-.exploreCardCon .card {
+#exploreCardCon .card {
   border: none !important;
   box-shadow: rgba(51, 51, 51, 0.361) 0px 0px 15px !important;
 }
-.exploreCardCon .card h6 {
+#exploreCardCon .card h6 {
   font-size: 15px !important;
 }
 .studyAbroadNav a {
@@ -363,7 +381,7 @@ footer img {
   position: fixed !important;
   z-index: 100 !important;
   bottom: 45px !important;
-  left: 30px !important;
+  left: 20px !important;
 }
 .DownloadBrchrBtn {
   border-radius: 10px !important;
@@ -383,9 +401,9 @@ footer img {
   width: 64px !important;
   box-shadow: #00000073 0px 0px 15px !important;
   position: fixed !important;
+  bottom: 130px !important;
+  right: 23px !important;
   z-index: 100 !important;
-  bottom: 45px !important;
-  right: 30px !important;
 }
 .whatsappIcon {
   background-color: white !important;
@@ -394,8 +412,8 @@ footer img {
   box-shadow: #00000073 0px 0px 15px !important;
   position: fixed !important;
   z-index: 100 !important;
-  bottom: 130px !important;
-  right: 30px !important;
+  bottom: 45px !important;
+  right: 20px !important;
   transform: rotate(270deg) !important;
 }
 .featuredClgCard .card-text img {
@@ -478,6 +496,13 @@ footer img {
 .arrowIcon.hide {
   opacity: 0;
 }
+.cardArrow {
+  display: none !important;
+}
+#exploreCardCon .cardArrow span a img {
+  filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(143deg) brightness(95%) contrast(90%);
+  background-color: none !important;
+}
 /* .react-multi-carousel-list {
   overflow: visible !important;
 } */
@@ -494,6 +519,21 @@ footer img {
 } */
 
 /* Media Queries */
+/* @media (max-width: 991.98px) {
+        .navbar-collapse {
+            animation: slideInRight 0.5s forwards;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(-100%);
+        }
+
+        to {
+            transform: translateX(0%);
+        }
+    } */
 @media (min-width: 1024px) and (max-width: 1199px) {
   .featuredClgCard a {
     font-size: 12px !important;
@@ -521,6 +561,20 @@ footer img {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+  .top-nav .dropdown-menu img {
+    width: 14px !important;
+  }
+  .dropdownBtn .btn {
+    font-size: 12px !important;
+  }
+  .dropdown-menu {
+    width: 50% !important;
+    font-size: 12px !important;
+  }
+  .dropdown-menu .dropdown-submenu {
+    width: 100% !important;
+    font-size: 12px !important;
+  }
   header .fs-5 {
     font-size: 16px !important;
   }
@@ -571,8 +625,6 @@ footer img {
     box-shadow: #00000073 0px 0px 15px !important;
     position: fixed !important;
     z-index: 100 !important;
-    bottom: 130px !important;
-    right: 30px !important;
     transform: rotate(270deg) !important;
   }
   .mainFooter {
@@ -600,6 +652,15 @@ footer img {
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .carousel-indicators {
+    display: none !important;
+  }
+  .top-nav .dropdown-menu img {
+    width: 12px !important;
+  }
+  .dropdownBtn .btn {
+    font-size: 12px !important;
+  }
   .bannerCon .carousel-control-prev {
     left: -22px;
   }
@@ -609,9 +670,13 @@ footer img {
   .bannerFormSec {
     position: relative !important;
   }
+  .newsLinkSec .react-multi-carousel-list {
+    width: 240px;
+    margin: auto;
+  }
   .searchBtn {
     padding: 4px 20px !important;
-    font-size: 16px !important;
+    font-size: 12px !important;
     color: white !important;
     background-color: #254692 !important;
   }
@@ -619,14 +684,11 @@ footer img {
     background: transparent !important;
     border: 1px solid white !important;
     padding: 4px 20px !important;
-    font-size: 16px !important;
+    font-size: 12px !important;
   }
   .searchSec {
     font-size: 12px !important;
     padding: 10px !important;
-  }
-  .bannerCon {
-    height: 800px !important;
   }
   .bannerCon .carousel img {
     height: auto !important;
@@ -634,8 +696,11 @@ footer img {
   .bannerFormSec {
     top: -15% !important;
   }
+  .searchSec p {
+    margin-bottom: 7px !important;
+  }
   .searchSec {
-    margin-top: 0px !important;
+    margin-top: -10px !important;
   }
   header {
     display: none !important ;
@@ -647,8 +712,6 @@ footer img {
     box-shadow: #00000073 0px 0px 15px !important;
     position: fixed !important;
     z-index: 100 !important;
-    bottom: 130px !important;
-    right: 30px !important;
     transform: rotate(270deg) !important;
   }
   .banner {
@@ -701,6 +764,17 @@ footer img {
   .StudyAbroadCon .carousel-button-group {
     top: 530px !important;
   }
+  #exploreCardCon .mt-3 {
+    margin: 1rem 0 !important;
+  }
+  #exploreCardCon .card-body {
+    padding: 20px 0px 0px 0px !important;
+  }
+  .cardArrow {
+    display: block !important;
+    font-size: 30px;
+    padding: 0.7rem 0px 0px 0px !important;
+  }
 }
 @media (min-width: 320px) and (max-width: 424px) {
   .studyAbroadNav a {
@@ -711,12 +785,6 @@ footer img {
   }
   .bannerCon .carousel-control-next {
     right: -15px;
-  }
-  .bannerCon {
-    height: 730px !important;
-  }
-  .carousel-indicators {
-    top: 675px !important;
   }
 }
 @media (max-width: 575px) {
@@ -748,25 +816,470 @@ footer img {
     top: 530px !important;
   }
 }
-@media (min-width: 425px) and (max-width: 575px) {
-  .carousel-indicators {
-    top: 725px !important;
-  }
-}
-@media (min-width: 575px) and (max-width: 767px) {
-  .carousel-indicators {
-    top: 790px !important;
-  }
-  .bannerCon {
-    height: 840px !important;
-  }
-}
 @media (min-width: 320px) and (max-width: 374px) {
-  .carousel-indicators {
-    top: 670px !important;
-  }
   .searchBtn {
     padding: 8px 20px !important;
     font-size: 10px !important;
+  }
+}
+@media (min-width: 336px) and (max-width: 767px) {
+  .dropdown-menu {
+    width: 50% !important;
+    font-size: 12px !important;
+  }
+  .dropdown-menu .dropdown-submenu {
+    width: 100% !important;
+    font-size: 12px !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 335px) {
+  .dropdown-menu {
+    width: 40% !important;
+    font-size: 12px !important;
+  }
+  .dropdown-submenu {
+    width: 50% !important;
+    font-size: 12px !important;
+  }
+}
+@media (min-width: 650px) and (max-width: 767px) {
+  .bannerCon {
+    height: 800px !important;
+  }
+}
+@media (min-width: 426px) and (max-width: 649px) {
+  .bannerCon {
+    height: 750px !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 425px) {
+  .bannerCon {
+    height: 700px !important;
+  }
+}
+
+/* College Page CSS */
+
+/* Banner Section */
+.collegeBannerCon {
+  height: 300px !important;
+}
+/* College Filter Section */
+.bg-skyBlue {
+  background-color: #f6f8fb !important;
+}
+.icon-rtl {
+  padding-right: 25px !important;
+  background: url('../public/images/icons/search.svg') no-repeat right;
+  background-size: 23px !important;
+}
+.searchCheckBox {
+  font-size: 20px !important;
+}
+.collegeSearchFilter {
+  font-size: 20px !important;
+  /* height: 2000px; */
+}
+.collegeSearchFilter .form-control::placeholder {
+  font-size: 20px !important;
+}
+.filterSelectedSec {
+  border-radius: 10px;
+}
+.filterCardCon img {
+  width: 134px;
+  height: 154px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.activeBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  border-radius: 6px !important;
+  padding: 10px 20px !important;
+}
+.viewMoreBtn {
+  background-color: white !important;
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+  border-radius: 6px !important;
+  padding: 10px 20px !important;
+}
+.filterCardBorder {
+  border: 1px solid gray;
+  border-radius: 6px !important;
+}
+.selectedFilterBtn {
+  background-color: #254692 !important;
+  color: white !important;
+}
+.bg-blue {
+  background-color: #254692;
+}
+.ExpertSbtBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  padding: 10px 20px !important;
+  box-shadow: rgba(21, 41, 88, 1) 0px 0px 15px !important;
+}
+.ApplyNowBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  font-size: 10px !important;
+}
+.viewDetailsBtn {
+  background-color: white !important;
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+  border-radius: 10px !important;
+  font-size: 10px !important;
+}
+.topFeaturedClgCard {
+  margin-right: 10px !important;
+}
+.topFeaturedClgSec .carousel-button-group {
+  position: absolute !important;
+  top: 240px !important;
+  width: 100%;
+}
+.topFeaturedClgSec .fi-left {
+  margin-left: -30px !important;
+}
+.topFeaturedClgSec .fi-right {
+  margin-right: 0px !important;
+}
+.intl-tel-input {
+  display: table-cell;
+}
+.intl-tel-input .selected-flag {
+  z-index: 4;
+}
+.intl-tel-input .country-list {
+  z-index: 5;
+}
+.input-group .intl-tel-input .form-control {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0;
+}
+.iti {
+  width: 100% !important;
+}
+.phoneInput input::placeholder {
+  color: transparent !important;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .filterCardText h6 {
+    font-size: 12px !important;
+  }
+  .clgfilterCardBtn .btn {
+    font-size: 12px !important;
+  }
+  .activeBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    border-radius: 6px !important;
+    padding: 10px 20px !important;
+    font-size: 12px !important;
+  }
+  .viewMoreBtn {
+    background-color: white !important;
+    color: #254692 !important;
+    border: 1px solid #254692 !important;
+    border-radius: 6px !important;
+    padding: 10px 20px !important;
+    font-size: 12px !important;
+  }
+  .text-spacing {
+    margin: 0px 20px !important;
+  }
+  .text-spacing h2 {
+    font-size: 25px !important;
+  }
+}
+@media (max-width: 575px) {
+  .topFeaturedClgSec .fi-left {
+    margin-left: 8px !important;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2px 8px;
+  }
+  .topFeaturedClgSec .fi-right {
+    margin-right: 40px !important;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2px 8px;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .collegeSearchFilter {
+    font-size: 10px !important;
+  }
+  .collegeSearchFilter input[type='search']::placeholder {
+    font-size: 10px !important;
+  }
+  .collegeSearchFilter .form-check {
+    font-size: 12px !important;
+  }
+  .activeBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    border-radius: 6px !important;
+    padding: 5px 10px !important;
+    font-size: 10px !important;
+  }
+  .viewMoreBtn {
+    background-color: white !important;
+    color: #254692 !important;
+    border: 1px solid #254692 !important;
+    border-radius: 6px !important;
+    padding: 5px 10px !important;
+    font-size: 10px !important;
+  }
+  .text-spacing {
+    padding: 20px 0px !important;
+  }
+}
+
+/* College Details Page */
+.collegeDetailBanner {
+  height: 300px;
+}
+.collegeDetailCard {
+  width: 700px !important;
+}
+.collegeDetailCard {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: saturate(180%) blur(8px) !important;
+  padding: 20px;
+}
+.collegeDetailCard img {
+  width: 100% !important;
+  height: auto;
+  object-fit: cover;
+}
+.location-img img {
+  width: 20px !important;
+}
+.collegeDetailCard p {
+  font-size: 12px !important;
+}
+.PrivateBtn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: saturate(180%) blur(8px) !important;
+  color: white !important;
+}
+.downloadBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  box-shadow: #254692 0px 2px 25px;
+}
+.freeBtn {
+  background-color: white !important;
+  color: #254692 !important;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .collegeDetailCard {
+    width: 100vw !important;
+    height: auto !important;
+  }
+  .collegeDetailCard img {
+    width: 40% !important;
+    height: auto;
+    object-fit: cover;
+  }
+  .location-img img {
+    width: 20px !important;
+  }
+  .PrivateBtn {
+    font-size: 12px !important;
+  }
+  .downloadBtn {
+    font-size: 12px !important;
+    width: 100%;
+  }
+  .freeBtn {
+    font-size: 12px !important;
+    width: 100%;
+  }
+}
+@media (min-width: 320px) and (max-width: 374px) {
+  .downloadBtn {
+    font-size: 10px !important;
+  }
+  .freeBtn {
+    font-size: 10px !important;
+  }
+}
+
+/* College Info Section */
+.infoBtn .btn {
+  border: 1px solid rgba(212, 218, 234, 1);
+  border-radius: 0;
+  color: #254692;
+}
+.infoBtn .btn:active {
+  border: 1px solid rgba(212, 218, 234, 1) !important;
+  border-radius: 0 !important;
+  color: #254692 !important;
+}
+.infoBtn .btn:hover {
+  border: 1px solid rgba(212, 218, 234, 1) !important;
+  border-radius: 0 !important;
+  color: #254692 !important;
+}
+.infoBtn .btn:focus {
+  border: 1px solid rgba(212, 218, 234, 1) !important;
+  border-radius: 0 !important;
+  color: #254692 !important;
+}
+.infoBtn .active {
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #254692 !important;
+}
+.infoBtn .active:focus {
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #254692 !important;
+}
+.applyNowImg {
+  background-image: url('../public/images/icons/filter-card.jpg') !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 58vh;
+}
+.applyNowImg a.btn {
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.yotubeImg {
+  background-image: url('../public/images/icons/youtubeClg.jpg') !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 70vh;
+}
+.yotubeImg a.btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.facilitiesSec .card {
+  border: none !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+}
+.facilitiesSec .card-title {
+  font-size: 12px !important;
+}
+.facilitiesSec .card img {
+  filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%);
+}
+.locatedSec {
+  background-color: #254692 !important;
+}
+.locatedSec .location-img h6 {
+  font-size: 14px !important;
+}
+.locatedSec .location-img p {
+  font-size: 12px !important;
+}
+.locatedSec .location-img img {
+  width: 14px !important;
+}
+.PrivateCardBtn {
+  font-size: 12px !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+.bg-lightCard {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+}
+.clgImg {
+  width: 100% !important;
+  height: auto;
+  object-fit: cover;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .clgImg {
+    width: 50% !important;
+    height: 100px;
+    object-fit: cover;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .clgImg {
+    width: 30% !important;
+    height: 100px;
+    object-fit: cover;
+  }
+}
+
+/* Courses Page */
+.courseSec .form-control {
+  background-color: transparent !important;
+}
+.courseSec input[type='search']::placeholder {
+  color: white !important;
+}
+.courseSec input[type='search'] {
+  color: white !important;
+}
+.checkBtn {
+  border: 1px solid white !important;
+}
+.trendCrsBtn {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+.coursesCardImg img {
+  width: 100%;
+}
+.coursesBtn .btn {
+  font-size: 12px;
+}
+.viewAllBtn {
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+  padding: 10px 15px !important;
+  font-size: 10px !important;
+}
+.min-vh-card {
+  min-height: 75px !important;
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+  .coursesCardImg img {
+    width: 6.5vw;
+    height: 22vh;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .coursesCardImg img {
+    width: 100%;
+    height: 90%;
+  }
+  .min-vh-card {
+    min-height: 0 !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 375px) {
+  .checkBtn {
+    font-size: 12px !important;
+  }
+  .srchBtn {
+    font-size: 12px !important;
+  }
+  .courseSec input[type='search']::placeholder {
+    font-size: 12px !important;
   }
 }

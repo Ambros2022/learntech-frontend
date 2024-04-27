@@ -1,49 +1,34 @@
-import React, { useEffect, forwardRef, PropsWithoutRef } from 'react';
-import dynamic from 'next/dynamic'; // Import dynamic from Next.js
-import type { IJoditEditorProps } from 'jodit-react';
-
-interface ExampleComponentProps {
-    placeholder?: string;
-    initialValue?: string;
-    onChange: (newContent: string) => void;
+'use client';
+import React, { useState, useRef, useMemo, ChangeEvent, useEffect } from 'react';
+// import JoditEditor from 'jodit-react';
+import dynamic from 'next/dynamic';
+interface ExampleProps {
+	placeholder?: string;
+	intaialvalue?: string;
+	onChange?: any;
 }
+const DynamicJoditEditor = dynamic<any>(() => import('jodit-react'), { ssr: false });
 
-interface CustomConfig extends IJoditEditorProps {
-    config?: {
-        placeholderText?: string;
-        readonly?: boolean;
-    };
+const Example: React.FC<ExampleProps> = ({ placeholder, intaialvalue = '', onChange }) => {
+	const editor = useRef(null);
+	const [values, setValues] = useState(intaialvalue);
+	function onChanges(content) {
+		setValues(content)
+		onChange(content);
+	}
+	useEffect(() => {
+		onChanges(values);
+	}, [values]);
+	return (
+		<DynamicJoditEditor
+			ref={editor}
+			value={values}
+			onChange={onChanges}
+		// config={config}
+		// tabIndex={1} // tabIndex of textarea
+		// onBlur={handleBlur} // preferred to use only this option to update the content for performance reasons
+		// onChange={handleChange}
+		/>
+	);
 }
-
-const DynamicJoditEditor = dynamic<CustomConfig>(() => import('jodit-react'), { ssr: false });
-
-interface JoditEditorProps extends PropsWithoutRef<CustomConfig> {
-    value: string;
-    onBlur: (newContent: string) => void;
-    onChange: (newContent: string) => void;
-}
-
-const ForwardedDynamicJoditEditor = forwardRef((props: JoditEditorProps, ref: any) => (
-    <DynamicJoditEditor {...props} ref={ref} />
-));
-
-const ExampleComponent: React.FC<ExampleComponentProps> = ({ placeholder, initialValue = '', onChange }) => {
-    useEffect(() => {
-        // Update the editor content when initialValue changes
-        onChange(initialValue);
-    }, [initialValue, onChange]);
-
-    return (
-        <ForwardedDynamicJoditEditor
-            value={initialValue}
-            config={{
-                readonly: false,
-                placeholderText: placeholder || 'Start typing...',
-            }}
-            onBlur={(newContent) => onChange(newContent)}
-            onChange={(newContent) => onChange(newContent)}
-        />
-    );
-};
-
-export default ExampleComponent;
+export default Example;

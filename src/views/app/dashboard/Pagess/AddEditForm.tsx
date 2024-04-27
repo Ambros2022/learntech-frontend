@@ -1,8 +1,7 @@
-
+'use client';
 import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Fade, { FadeProps } from '@mui/material/Fade'
-import ReactQuill from 'react-quill';
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import { SelectChangeEvent } from '@mui/material/Select'
@@ -61,14 +60,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         setEditorValue(newValue);
     };
 
-    
+
 
     const schema: any = yup.object().shape({
         url: yup
             .string()
             .trim()
             .required(),
-        
+
     })
 
 
@@ -84,6 +83,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control,
         handleSubmit,
+        setValue,
         reset,
         formState: { errors }
     } = useForm<any>({
@@ -93,7 +93,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const onSubmit = async (data: any) => {
-console.log(data,"data");
+        console.log(data, "data");
         return
 
         if (!isAddMode && olddata.id) {
@@ -125,7 +125,7 @@ console.log(data,"data");
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -148,16 +148,16 @@ console.log(data,"data");
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keyword', data.meta_keyword);
-            
 
-            
+
+
 
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -290,7 +290,7 @@ console.log(data,"data");
                                     multiline
                                     rows={3}
                                     label='Top Description'
-                                    onChange={onChange}
+                                    onChange={(e) => setValue("bottom_description", e.target.value)}
                                     placeholder=''
                                     error={Boolean(errors.top_description)}
                                     aria-describedby='validation-basic-first-name'
@@ -302,26 +302,29 @@ console.log(data,"data");
 
 
                     <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>Bottom Description</Typography>
+                        <Typography style={{ marginBottom: '10px' }}>Bottom Description</Typography>
                         <Controller
                             name='bottom_description'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <>
-                                    <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                     onChange={(value)=>console.log(value)} />
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("bottom_description", value)} />
+                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                    onChange={(value)=>console.log(value)} /> */}
                                 </>
                             )}
                         />
-                   
+
                     </Grid>
 
 
-                 
-                
-                 
-                
+
+
+
+
 
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}

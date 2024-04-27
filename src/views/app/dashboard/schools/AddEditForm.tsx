@@ -35,6 +35,7 @@ import axios1 from 'src/configs/axios'
 import { DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import { Config } from 'src/configs/mainconfig';
+import JoditEditor from 'src/@core/components/html-editor';
 // import { Config } from '../../../configs/mainconfig';
 import toast from 'react-hot-toast'
 import router from 'next/router'
@@ -987,6 +988,20 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={4}>
+                                    {/* <Controller
+                                        name='info'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <JoditEditor // Replace CustomTextField with Example
+                                                placeholder='Enter text here...' // Example-specific prop
+                                                value={value} // Example-specific prop (if needed)
+                                                onChange={onChange} // Example-specific prop (if needed)
+                                            />
+                                        )}
+                                    /> */}
+                                </Grid>
+                                {/* <Grid item xs={12} sm={4}>
                                     <Controller
                                         name='info'
                                         control={control}
@@ -1004,7 +1019,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             />
                                         )}
                                     />
-                                </Grid>
+                                </Grid> */}
+
                                 <Grid item xs={12} sm={4}>
                                     <Controller
                                         name='admissions_process'

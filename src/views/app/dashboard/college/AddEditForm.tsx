@@ -626,7 +626,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             // formData.append("oldimages", oldimages);
             formData.append("oldimages", JSON.stringify(oldimages));
 
-            const url = '/api/admin/school/updategallery';
+            const url = '/api/admin/college/updategallery';
             const response = await axios1.post(url, formData);
             if (response.data.status === 1) {
                 toast.success(response.data.message);
