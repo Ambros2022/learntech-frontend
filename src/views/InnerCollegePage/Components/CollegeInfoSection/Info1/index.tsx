@@ -26,10 +26,10 @@ function Info1() {
                 </div>
                 <div className="col-md-5 mb-md-5 order-1 order-md-2">
                   <div className="row">
-                    <div className="col-12 applyNowImg position-relative mb-5">
+                    <div className="col-12 applyNowImg position-relative mb-md-5 mb-2">
                       <a href="#" className='btn'>Apply Now</a>
                     </div>
-                    <div className="col-12 yotubeImg position-relative  mb-5">
+                    <div className="col-12 yotubeImg position-relative  mb-md-5 mb-2">
                       <a href="#" className='btn'><Image src="/images/icons/Youtube-logo.png" width={60} height={34} alt="Youtube Logo" /></a>
                     </div>
                   </div>

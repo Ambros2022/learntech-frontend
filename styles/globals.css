@@ -66,15 +66,12 @@ a {
   border: 1px solid #274896 !important;
   color: #274896 !important;
 }
-.navbar-brand img {
-  width: 150px;
-}
 .counsellingBtn {
   background-color: #274896 !important;
   color: white !important;
   padding: 15px !important;
   font-size: 12px !important;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
 }
 .top-nav .dropdown-menu .dropdown-item:hover,
 .top-nav .dropdown-menu .dropdown-item:focus {
@@ -118,6 +115,12 @@ a {
   background-color: #254692 !important;
   color: white !important;
 }
+.modal-open .page-content {
+  filter: blur(5px); /* Adjust the blur intensity as needed */
+}
+.modal-open .page-content {
+  pointer-events: none; /* Ensure that the blurred background cannot be interacted with */
+}
 .top-nav .active,
 .top-nav .active :focus,
 .top-nav .active :hover {
@@ -127,6 +130,10 @@ a {
   border-bottom-style: solid !important;
   border-bottom-width: 3.1px !important;
   width: fit-content !important;
+}
+.activeDrpDwn {
+  color: #254692 !important;
+  font-weight: bold !important;
 }
 .top-nav {
   font-size: 15px !important;
@@ -147,9 +154,13 @@ nav a {
 .carousel {
   position: relative !important;
 }
-.bannerCon .carousel img {
-  object-fit: cover !important;
-  height: 600px !important;
+.carousel-item {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+}
+.bg-formClr {
+  background-color: rgba(0, 0, 0, 0.8) !important;
 }
 .bannerFormSec {
   position: absolute !important;
@@ -233,7 +244,6 @@ nav a {
   background-color: rgba(39, 72, 150, 0.04) !important;
 }
 .Analysis-Section img {
-  width: 70px;
   margin-top: 11px;
 }
 .Analysis-Section h1 {
@@ -257,9 +267,9 @@ nav a {
   font-size: 16px;
 }
 .reqBtn button {
-  background-color: #254692;
-  color: white;
-  padding: 10px 30px;
+  background-color: #254692 !important;
+  color: white !important;
+  padding: 10px 30px !important;
 }
 .text-blue {
   color: #254692 !important;
@@ -396,13 +406,13 @@ footer img {
 .arrowIcon {
   background-color: white !important;
   border-radius: 50% !important;
-  padding: 16px 18px !important;
+  padding: 9px !important;
   border: none !important;
-  width: 64px !important;
+  width: 50px !important;
   box-shadow: #00000073 0px 0px 15px !important;
   position: fixed !important;
-  bottom: 130px !important;
-  right: 23px !important;
+  bottom: 150px !important;
+  right: 32px !important;
   z-index: 100 !important;
 }
 .whatsappIcon {
@@ -415,6 +425,14 @@ footer img {
   bottom: 45px !important;
   right: 20px !important;
   transform: rotate(270deg) !important;
+}
+.Analysis-Section img {
+  width: 60%;
+  height: auto;
+}
+.featuredClgCard img {
+  width: auto;
+  height: auto;
 }
 .featuredClgCard .card-text img {
   filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
@@ -443,6 +461,10 @@ footer img {
 }
 .StudyAbroadCard .card-text img {
   filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
+}
+.StudyAbroadCard img {
+  width: auto;
+  height: auto;
 }
 .StudyAbroadCard .card-text {
   filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
@@ -503,37 +525,7 @@ footer img {
   filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(143deg) brightness(95%) contrast(90%);
   background-color: none !important;
 }
-/* .react-multi-carousel-list {
-  overflow: visible !important;
-} */
-/* .react-multiple-carousel__arrow {
-  position: absolute !important;
-}
 
-.react-multiple-carousel__arrow--left {
-  left: calc(-3% + 1px) !important;
-}
-
-.react-multiple-carousel__arrow--right {
-  right: calc(-3% + 1px) !important;
-} */
-
-/* Media Queries */
-/* @media (max-width: 991.98px) {
-        .navbar-collapse {
-            animation: slideInRight 0.5s forwards;
-        }
-    }
-
-    @keyframes slideInRight {
-        from {
-            transform: translateX(-100%);
-        }
-
-        to {
-            transform: translateX(0%);
-        }
-    } */
 @media (min-width: 1024px) and (max-width: 1199px) {
   .featuredClgCard a {
     font-size: 12px !important;
@@ -561,6 +553,10 @@ footer img {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+  .Analysis-Section img {
+    width: 80%;
+    height: auto;
+  }
   .top-nav .dropdown-menu img {
     width: 14px !important;
   }
@@ -613,9 +609,11 @@ footer img {
   .arrowIcon {
     background-color: white !important;
     border-radius: 50% !important;
-    padding: 11px 13px !important;
+    padding: 5px !important;
     border: none !important;
-    width: 50px !important;
+    width: 40px !important;
+    right: 25px !important;
+    bottom: 120px !important;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
   }
   .whatsappIcon {
@@ -650,8 +648,19 @@ footer img {
   .bannerCon .carousel-control-next {
     right: -35px;
   }
+  .phone-icon img {
+    width: 100%;
+  }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .searchSec {
+    width: 80%;
+    margin: auto;
+  }
+  .Analysis-Section img {
+    width: 70%;
+    height: auto;
+  }
   .carousel-indicators {
     display: none !important;
   }
@@ -662,10 +671,10 @@ footer img {
     font-size: 12px !important;
   }
   .bannerCon .carousel-control-prev {
-    left: -22px;
+    left: 0px;
   }
   .bannerCon .carousel-control-next {
-    right: -22px;
+    right: 0px;
   }
   .bannerFormSec {
     position: relative !important;
@@ -689,9 +698,6 @@ footer img {
   .searchSec {
     font-size: 12px !important;
     padding: 10px !important;
-  }
-  .bannerCon .carousel img {
-    height: auto !important;
   }
   .bannerFormSec {
     top: -15% !important;
@@ -744,12 +750,16 @@ footer img {
   .DownloadBrchrBtn img {
     width: 120px !important;
   }
+  .studyAbroadNav a {
+    font-size: 12px !important;
+  }
   .arrowIcon {
     background-color: white !important;
     border-radius: 50% !important;
-    padding: 9px !important;
+    padding: 7px !important;
     border: none !important;
-    width: 46px !important;
+    width: 35px !important;
+    right: 30px !important;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
   }
   footer {
@@ -775,16 +785,19 @@ footer img {
     font-size: 30px;
     padding: 0.7rem 0px 0px 0px !important;
   }
+  .phone-icon img {
+    width: 90%;
+  }
 }
 @media (min-width: 320px) and (max-width: 424px) {
   .studyAbroadNav a {
     font-size: 10px !important;
   }
   .bannerCon .carousel-control-prev {
-    left: -15px;
+    left: 0px;
   }
   .bannerCon .carousel-control-next {
-    right: -15px;
+    right: 0px;
   }
 }
 @media (max-width: 575px) {
@@ -846,15 +859,35 @@ footer img {
   .bannerCon {
     height: 800px !important;
   }
+  .carousel-item {
+    width: 100%;
+    height: 800px;
+    overflow: hidden;
+  }
 }
 @media (min-width: 426px) and (max-width: 649px) {
   .bannerCon {
     height: 750px !important;
   }
+  .carousel-item {
+    width: 100%;
+    height: 750px;
+    overflow: hidden;
+  }
 }
 @media (min-width: 320px) and (max-width: 425px) {
   .bannerCon {
     height: 700px !important;
+  }
+  .carousel-item {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+}
+@media (min-width: 320px) and (max-width: 374px) {
+  .searchSec input[type='search'] {
+    padding: 6px 20px !important;
   }
 }
 
@@ -935,7 +968,12 @@ footer img {
   font-size: 10px !important;
 }
 .topFeaturedClgCard {
-  margin-right: 10px !important;
+  margin-right: 20px !important; /* Gap between cards */
+}
+.topFeaturedClgCard img {
+  width: auto;
+  height: auto;
+  object-fit: cover;
 }
 .topFeaturedClgSec .carousel-button-group {
   position: absolute !important;
@@ -1006,13 +1044,16 @@ footer img {
     padding: 2px 8px;
   }
   .topFeaturedClgSec .fi-right {
-    margin-right: 40px !important;
+    margin-right: 32px !important;
     background-color: white;
     border-radius: 25px;
     padding: 2px 8px;
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .topFeaturedClgCard {
+    margin-right: 0px !important;
+  }
   .collegeSearchFilter {
     font-size: 10px !important;
   }
@@ -1043,6 +1084,9 @@ footer img {
 }
 
 /* College Details Page */
+.InnerCollegeNavigationLink a {
+  color: black;
+}
 .collegeDetailBanner {
   height: 300px;
 }
@@ -1073,7 +1117,7 @@ footer img {
 .downloadBtn {
   background-color: #254692 !important;
   color: white !important;
-  box-shadow: #254692 0px 2px 25px;
+  box-shadow: #254692 0px 2px 25px !important;
 }
 .freeBtn {
   background-color: white !important;
@@ -1097,11 +1141,14 @@ footer img {
   }
   .downloadBtn {
     font-size: 12px !important;
-    width: 100%;
+    width: 100% !important;
   }
   .freeBtn {
     font-size: 12px !important;
-    width: 100%;
+    width: 100% !important;
+  }
+  .arrowIcon {
+    bottom: 119px !important;
   }
 }
 @media (min-width: 320px) and (max-width: 374px) {
@@ -1115,9 +1162,9 @@ footer img {
 
 /* College Info Section */
 .infoBtn .btn {
-  border: 1px solid rgba(212, 218, 234, 1);
-  border-radius: 0;
-  color: #254692;
+  border: 1px solid rgba(212, 218, 234, 1) !important;
+  border-radius: 0 !important;
+  color: #254692 !important;
 }
 .infoBtn .btn:active {
   border: 1px solid rgba(212, 218, 234, 1) !important;
@@ -1152,14 +1199,14 @@ footer img {
   height: 58vh;
 }
 .applyNowImg a.btn {
-  border: 1px solid white;
-  border-radius: 5px;
-  background-color: transparent;
-  color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  border: 1px solid white !important;
+  border-radius: 5px !important;
+  background-color: transparent !important;
+  color: white !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
 }
 .yotubeImg {
   background-image: url('../public/images/icons/youtubeClg.jpg') !important;
@@ -1169,10 +1216,10 @@ footer img {
   height: 70vh;
 }
 .yotubeImg a.btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
 }
 .facilitiesSec .card {
   border: none !important;
@@ -1207,20 +1254,20 @@ footer img {
 }
 .clgImg {
   width: 100% !important;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 @media (min-width: 768px) and (max-width: 992px) {
   .clgImg {
-    width: 50% !important;
-    height: 100px;
+    width: 70% !important;
+    height: 100%;
     object-fit: cover;
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
   .clgImg {
-    width: 30% !important;
-    height: 100px;
+    width: 70% !important;
+    height: 100%;
     object-fit: cover;
   }
 }
@@ -1244,9 +1291,11 @@ footer img {
 }
 .coursesCardImg img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .coursesBtn .btn {
-  font-size: 12px;
+  font-size: 12px !important;
 }
 .viewAllBtn {
   color: #254692 !important;
@@ -1257,16 +1306,15 @@ footer img {
 .min-vh-card {
   min-height: 75px !important;
 }
-@media (min-width: 992px) and (max-width: 1024px) {
-  .coursesCardImg img {
-    width: 6.5vw;
-    height: 22vh;
-  }
+.CourseNavigationLink a {
+  text-decoration: none;
+  color: black;
 }
 @media (min-width: 320px) and (max-width: 767px) {
   .coursesCardImg img {
     width: 100%;
-    height: 90%;
+    height: 100%;
+    object-fit: cover;
   }
   .min-vh-card {
     min-height: 0 !important;
@@ -1280,6 +1328,317 @@ footer img {
     font-size: 12px !important;
   }
   .courseSec input[type='search']::placeholder {
+    font-size: 12px !important;
+  }
+}
+
+/* Modal Img */
+.formImage img {
+  width: auto;
+  height: auto;
+}
+.formImgCon {
+  background-color: rgba(39, 72, 150, 0.2);
+}
+.signForm .nav-link {
+  font-weight: normal; /* Normal weight for inactive tabs */
+  text-decoration: none; /* No underline by default */
+  color: black; /* Default color for inactive tabs */
+}
+.signForm .nav-link.active {
+  font-weight: bold; /* Bold for active tab */
+  color: #254692; /* Blue color for active tab */
+  border-bottom: 2px solid #254692;
+  padding-bottom: 5px;
+}
+.signForm label {
+  font-weight: 500;
+}
+.signForm input[type='tel'] {
+  width: 100%;
+}
+.btn-eye {
+  background-color: transparent;
+  border-top: 1px solid #dee2e6 !important;
+  border-bottom: 1px solid #dee2e6 !important;
+  border-right: 1px solid #dee2e6 !important;
+  border-left: 0px !important;
+}
+.bi-eye-slash {
+  color: #254692;
+}
+.bi-eye {
+  color: #254692;
+}
+.signForm input[type='password'] {
+  border-right: 0 !important;
+}
+.btnSignUp {
+  background-color: #254692 !important;
+  color: white !important;
+}
+.btnSignUp:hover {
+  color: #254692 !important;
+  background-color: white !important;
+  border: 1px solid #254692 !important;
+}
+.signForm .form-check-label {
+  font-weight: 500 !important;
+  font-size: 13px !important;
+}
+.orTxtHr {
+  border-bottom: 1px solid rgba(39, 72, 150, 0.2);
+  line-height: 16px;
+  text-align: center;
+}
+.orTxtSpan {
+  background: #fff;
+  position: relative;
+  bottom: -8px; /* half of line-height */
+  padding: 0 15px;
+}
+.frgtBtn {
+  color: #254692 !important;
+  text-decoration: underline !important;
+  border: 0 !important;
+}
+.fadeModal {
+  background: rgba(21, 41, 88, 0.7);
+  backdrop-filter: blur(5px);
+}
+.modal-dialog {
+  margin: 100px auto !important;
+}
+.modal-content .z-3 {
+  top: -50px;
+  left: 25%;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .modal-md {
+    --bs-modal-width: 700px !important;
+  }
+  .formImage img {
+    width: 100%;
+    height: 50%;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .w-sm-form {
+    width: 300px !important;
+    margin: 10px auto !important;
+  }
+  .modal-content .z-3 {
+    top: -40px;
+    left: 2%;
+  }
+  .modal-content h4 {
+    font-size: 18px !important;
+  }
+}
+
+/* InnnerCourse */
+
+.dentalCourseCon {
+  height: 300px;
+}
+.applyNowCourseBtn {
+  background-color: white !important;
+  color: #254692 !important;
+}
+.dental-crs-img {
+  border: 1px solid rgba(39, 72, 150, 0.2);
+  border-radius: 5px;
+}
+.dental-crs-img img {
+  height: 60%;
+  width: 50%;
+  margin: auto;
+}
+.chkEligBtn {
+  background-color: white !important;
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+  width: 50% !important;
+  margin: auto !important;
+}
+.cardConBrdr {
+  border: 1px solid rgba(39, 72, 150, 0.2);
+  border-radius: 5px;
+}
+.carouselCardsCon .card img {
+  background-color: rgba(39, 72, 150, 0.1);
+  filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%);
+}
+.carouselCardsCon .carousel-button-group {
+  position: absolute !important;
+  top: 40px !important;
+  width: 100%;
+}
+.carouselCardsCon .fi-left {
+  margin-left: -30px !important;
+}
+.carouselCardsCon .fi-right {
+  margin-right: 60px !important;
+}
+.topCarouselCardsCon .carousel-button-group {
+  position: absolute !important;
+  top: 15px !important;
+  width: 100%;
+}
+.topCarouselCardsCon .fi-left {
+  margin-left: -30px !important;
+}
+.topCarouselCardsCon .fi-right {
+  margin-right: 60px !important;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .imgCardConCrs {
+    width: 90% !important;
+    margin: auto !important;
+  }
+  .chkEligBtn {
+    font-size: 12px !important;
+  }
+}
+
+/* Study In Usa */
+
+.studyInUsaCon {
+  background: linear-gradient(rgba(0, 0, 0, 0.356), rgba(28, 28, 28, 0.419)),
+    url('../public/images/icons/Study-Banner-Image.jpg');
+  height: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.studyInUsaCon .searchSec {
+  background: rgba(7, 7, 7, 0.183) !important;
+  backdrop-filter: saturate(180%) blur(12px) !important;
+  color: white !important;
+  border: 1px solid white !important;
+  font-size: 16px !important;
+  padding: 20px !important;
+  border-radius: 10px !important;
+  margin-top: 20px !important;
+}
+.studyInUsaCon .searchSec .form-control {
+  color: white !important;
+}
+.studyInUsaCon .searchSec input[type='search'] {
+  background: transparent !important;
+  border: 1px solid white !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+}
+.studyInUsaCon .searchSec input::placeholder {
+  color: white !important;
+}
+.studyInUsaCon .searchSec input:focus {
+  outline: none !important;
+}
+.studyInUsaCon .searchBtn {
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  color: white !important;
+  background-color: #254692 !important;
+}
+.helpMeBtn {
+  background-color: white !important;
+  color: #254692 !important;
+}
+.onBrdBtn {
+  background-color: #254692 !important;
+  color: white !important;
+}
+.formBrdr {
+  border: 1px solid rgba(39, 72, 150, 0.6);
+}
+.topUniSec {
+  background-color: #f6f8fb;
+}
+.topApplyBtn {
+  background-color: white !important;
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+  font-size: 12px !important;
+}
+.topUniCardCon img {
+  width: auto !important;
+  height: auto !important;
+}
+.topUniCardCon .carousel-button-group {
+  position: absolute !important;
+  top: 100px !important;
+  width: 100%;
+}
+.topUniCardCon .fi-left {
+  margin-left: -30px !important;
+}
+.topUniCardCon .fi-right {
+  margin-right: -10px !important;
+}
+.faqImgSec img {
+  width: auto;
+  height: auto;
+}
+.faqSec .accordion-header {
+  background-color: rgba(249, 60, 60, 0.2) !important;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .studyInUsaCon h4 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 575px) {
+  .topUniCardCon .carousel-button-group {
+    position: absolute !important;
+    top: 150px !important;
+  }
+  .topUniCardCon .fi-left {
+    margin-left: 20px !important;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2px 8px;
+  }
+  .topUniCardCon .fi-right {
+    margin-right: 45px !important;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2px 8px;
+  }
+}
+@media (min-width: 320px) and (max-width: 374px) {
+  .topUniCardCon .carousel-button-group {
+    position: absolute !important;
+    top: 125px !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .studyInUsaCon {
+    height: 400px;
+  }
+  .studyInUsaCon h4 {
+    font-size: 13px;
+  }
+  .studyInUsaCon .searchSec {
+    width: 100%;
+    margin: auto;
+  }
+  .studyInUsaCon .searchSec input[type='search'] {
+    background: transparent !important;
+    border: 1px solid white !important;
+    padding: 10px 20px !important;
+    font-size: 12px !important;
+  }
+  .studyInUsaCon .searchSec {
+    font-size: 12px !important;
+    padding: 10px !important;
+  }
+  .studyInUsaCon .searchBtn {
+    font-size: 12px !important;
+  }
+  .studyInUsaCon .helpMeBtn {
     font-size: 12px !important;
   }
 }

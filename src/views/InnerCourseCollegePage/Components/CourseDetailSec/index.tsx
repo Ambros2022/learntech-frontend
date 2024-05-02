@@ -19,7 +19,7 @@ function CourseDetailSec() {
                 </div>
                 <div className="col-md-12 mb-md-5 order-1 order-md-2">
                   <div className="row">
-                    <table className="table table-bordered w-75 m-auto">
+                    <table className="table table-bordered w-75 mt-4 m-auto mb-3">
                       <thead>
                         <tr>
                           <th>Particulars</th>
