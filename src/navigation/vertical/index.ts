@@ -33,6 +33,29 @@ const navigation = (): VerticalNavItemsType => {
     },
 
     {
+      title: 'Locations',
+      icon: 'tabler:map-pin',
+      auth: false,
+      children: [
+        {
+          title: 'Countries',
+          path: '/app/dashboard/locations/countries',
+          auth: false
+        },
+        {
+          title: 'States',
+          path: '/app/dashboard/locations/states',
+          auth: false
+        },
+        {
+          title: 'Cities',
+          path: '/app/dashboard/locations/cities',
+          auth: false
+        }
+      ]
+    },
+
+    {
       title: 'University/Colleges',
       icon: 'tabler:school',
       auth: false,
@@ -56,17 +79,21 @@ const navigation = (): VerticalNavItemsType => {
     },
 
     {
-      title: 'Course',
+      title: 'Exam',
+      path: '/app/dashboard/exam',
+      icon: 'tabler:file-pencil',
+      auth: false
+    },
+    {
+      title: 'Main Course',
       path: '/app/dashboard/course',
       icon: 'tabler:notes',
       auth: false
     },
-
-
     {
       title: 'Landing Page',
       path: '/app/dashboard/landingpage ',
-      icon: 'tabler:notes',
+      icon: 'tabler:note',
       auth: false
     },
 
@@ -86,29 +113,6 @@ const navigation = (): VerticalNavItemsType => {
           auth: false
         },
        
-      ]
-    },
-
-    {
-      title: 'Locations',
-      icon: 'tabler:map-pin',
-      auth: false,
-      children: [
-        {
-          title: 'Countries',
-          path: '/app/dashboard/locations/countries',
-          auth: false
-        },
-        {
-          title: 'States',
-          path: '/app/dashboard/locations/states',
-          auth: false
-        },
-        {
-          title: 'Cities',
-          path: '/app/dashboard/locations/cities',
-          auth: false
-        }
       ]
     },
 
@@ -165,12 +169,73 @@ const navigation = (): VerticalNavItemsType => {
     },
 
     {
-      title: 'Exam',
-      path: '/app/dashboard/exam',
-      icon: 'tabler:file-pencil',
-      auth: false
+      title: 'Scholarship',
+      icon: 'tabler:layout-sidebar-left-collapse',
+      auth: false,
+      children: [
+        {
+          title: 'Scholar Type',
+          path: '/app/dashboard/scholar_type ',
+          // icon: 'tabler:layout-sidebar-left-collapse',
+          auth: false
+        },
+    
+        {
+          title: 'Scholar Level',
+          path: '/app/dashboard/scholar_level ',
+          // icon: 'tabler:notes',
+          auth: false
+        },
+        {
+          title: 'Scholarship',
+          path: '/app/dashboard/scholarship ',
+          // icon: 'tabler:notes',
+          auth: false
+        },
+       
+        
+      ]
     },
 
+    {
+      title: 'Job',
+      icon: 'tabler:weight',
+      auth: false,
+      children: [
+        {
+          title: 'All Job Location',
+          path: '/app/dashboard/job_locations ',
+          // icon: 'tabler:layout-sidebar-left-collapse',
+          auth: false
+        },
+    
+        {
+          title: 'Jobs Positions',
+          path: '/app/dashboard/jobs_positions ',
+          // icon: 'tabler:notes',
+          auth: false
+        },
+
+        {
+          title: 'Job Location',
+          path: '/app/dashboard/joblocation ',
+          // icon: 'tabler:notes',
+          auth: false
+        },
+
+        {
+          title: 'Job Enquiry',
+          path: '/app/dashboard/jobenquiry',
+          // icon: 'tabler:notes',
+          auth: false
+        },
+        
+      ]
+    },
+   
+   
+
+   
     // {
     //   title: 'School',
     //   icon: 'tabler:school',

@@ -60,6 +60,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     };
 
     const schema: any = yup.object().shape({
+        course_type: yup
+        .string()
+        .trim()
+        .required(),
+        slug: yup
+        .string()
+        .trim()
+        .required(),
+        meta_title: yup
+        .string()
+        .trim()
+        .required(),
+        meta_description: yup
+        .string()
+        .trim()
+        .required(),
+        meta_keywords: yup
+        .string()
+        .trim()
+        .required(),
        
         college_id: yup.object().required("This field is required"),
         general_course_id: yup.object().required("This field is required"),

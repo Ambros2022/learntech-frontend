@@ -106,6 +106,22 @@ useEffect(() => {
             .string()
             .trim()
             .required(),
+            info: yup
+            .string()
+            .trim()
+            .required(),
+            meta_title: yup
+            .string()
+            .trim()
+            .required(),
+            meta_description: yup
+            .string()
+            .trim()
+            .required(),
+            meta_keyword: yup
+            .string()
+            .trim()
+            .required(),
         country_id: yup.object().required("This field is required"),          
     })
 
@@ -193,6 +209,15 @@ useEffect(() => {
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keyword', data.meta_keyword);
+            if (selectedphoto == '') {
+
+                toast.error('Please Upload Icon', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
             formData.append('backgroundimage', selectedphoto);
 
             try {

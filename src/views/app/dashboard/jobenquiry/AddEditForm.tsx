@@ -1,6 +1,8 @@
-
+// ** React Imports
 import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
 // ** MUI Imports
+import CustomInput from 'src/@core/components/pickersCoustomInput/index'
+
 import Fade, { FadeProps } from '@mui/material/Fade'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
@@ -15,18 +17,20 @@ import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
+import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
-
-import type { FC } from 'react';
-import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup, Typography } from '@mui/material'
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import type { FC } from 'react';
+import { useAuth } from 'src/hooks/useAuth'
+
+import { Alert, FormControlLabel, FormLabel, RadioGroup, useTheme } from '@mui/material'
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+
 
 interface Authordata {
     olddata?: any;
@@ -35,77 +39,57 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
+    const { user } = useAuth();
     const [loading, setLoading] = useState<boolean>(false)
+    const [superadmin, setSuperadmin] = useState<boolean>(true)
     const [error, setError] = useState("")
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
-
-    const [fileNamespdf, setFileNamespdf] = useState<any>([]);
-    const [selectedpdf, setSelectedpdf] = useState('');
-    const [category, setCategory] = useState([]);
+    const [schools, setSchools] = useState([])
+    const [joblocations, setJoblocations] = useState([])
+    const [jobposition, setJobPosition] = useState([])
     const isMountedRef = useIsMountedRef();
+    const params: any = {}
+    params['page'] = 1;
+    params['size'] = 10000;
+    const theme = useTheme()
+    const { direction } = theme
+
+    const popperPlacement: ReactDatePickerProps['popperPlacement'] = direction === 'ltr' ? 'bottom-start' : 'bottom-end'
 
 
 
-    const handleFileChangephoto = (files: any[]) => {
-        setSelectedphoto(files[0]);
-        setFileNamesphoto(
-            files.map((file) => ({
-                name: file.name,
-                preview: URL.createObjectURL(file),
-            }))
-        );
-
-    };
-
-    const handleFileChangepdf = (files: any[]) => {
-        setSelectedpdf(files[0]);
-        setFileNamespdf(
-            files.map((file) => ({
-                name: file.name,
-                preview: URL.createObjectURL(file),
-            }))
-        );
-
-    };
-
- 
     const schema: any = yup.object().shape({
-        slug: yup
-            .string()
-            .trim()
-            .required(),
         name: yup
-            .string()
-            .trim()
-            .required(),
-            meta_title: yup
-            .string()
-            .trim()
-            .required(),
-            meta_description: yup
-            .string()
-            .trim()
-            .required(),
-            meta_keywords: yup
-            .string()
-            .trim()
-            .required(),
+        .string()
+        .trim()
+        .required(),
+        email: yup
+        .string()
+        .trim()
+        .required(),
+        resume: yup
+        .string()
+        .trim()
+        .required(),
+        current_location: yup
+        .string()
+        .trim()
+        .required(),
+        job_location_id: yup.object().required("This field is required"),
+        jobs_position_id: yup.object().required("This field is required"),
 
-        category_id: yup.object().required("This field is required"),
-
-          
     })
 
     const defaultValues = {
-        slug: isAddMode ? '' : olddata.slug,
-        category_id: isAddMode ? '' : olddata.newscategories,
-        meta_title: isAddMode ? '' : olddata.meta_title,
         name: isAddMode ? '' : olddata.name,
-        meta_description: isAddMode ? '' : olddata.meta_description,
-        meta_keywords: isAddMode ? '' : olddata.meta_keywords,
-        overview: isAddMode ? '' : olddata.overview,
-        status: isAddMode ? 'Draft' : olddata.status,
+        email: isAddMode ? '' : olddata.email,
+        phone: isAddMode ? '' : olddata.phone,
+        d_o_b: isAddMode ? null : new Date(olddata.d_o_b),
+        current_location: isAddMode ? '' : olddata.current_location,
+        total_exp: isAddMode ? '' : olddata.total_exp,
+        resume: isAddMode ? '' : olddata.resume,
+        job_location_id: isAddMode ? '' : olddata.alljoblocations,
+        jobs_position_id: isAddMode ? '' : olddata.jobspositions,
+
     }
 
     const {
@@ -119,24 +103,65 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
-    const onSubmit = async (data: any) => {
+    //get all job locations
+    const getlocation = useCallback(async () => {
 
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/alljoblocation/get', { params: roleparams });
+
+            setJoblocations(response.data.data);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+
+    //get all position
+    const getposition = useCallback(async () => {
+
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/jobsposition/get', { params: roleparams });
+
+            setJobPosition(response.data.data);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+
+        getlocation();
+        getposition();
+
+    }, [getlocation]);
+
+    const onSubmit = async (data: any) => {
+       
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/newsevents/update';
-            const formData = new FormData();
-            formData.append('id', updateid);
-            formData.append('slug', data.slug);
-            formData.append('name', data.name);
-            formData.append('category_id', data.category_id.id);
-            formData.append('status', data.status);
-            formData.append('meta_title', data.meta_title);
-            formData.append('meta_description', data.meta_description);
-            formData.append('meta_keywords', data.meta_keywords);
-            formData.append('overview', data.overview);
-            formData.append('pdf_file', selectedpdf);
-            formData.append('banner_image', selectedphoto);
+            let url = 'api/admin/jobsenquires/update';
+            let formData: any = {};
+            formData.id = updateid;
+            formData.name = data.name;
+            formData.email = data.email;
+            formData.phone = data.phone;
+            formData.d_o_b = data.d_o_b;
+            formData.current_location = data.current_location;
+            formData.total_exp = data.total_exp;
+            formData.resume = data.resume;
+            formData.status = data.status;
+            formData.job_location_id = data.job_location_id.id;
+            formData.jobs_position_id = data.jobs_position_id.id;
+
             try {
                 let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
@@ -153,7 +178,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+                console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -167,45 +192,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/newsevents/add';
-
-            const formData = new FormData();
-            formData.append('slug', data.slug);
-            formData.append('name', data.name);
-            formData.append('category_id', data.category_id.id);
-            formData.append('status', data.status);
-            formData.append('meta_title', data.meta_title);
-            formData.append('meta_description', data.meta_description);
-            formData.append('meta_keywords', data.meta_keywords);
-            formData.append('overview', data.overview);
-            if (selectedphoto == '') {
-
-                toast.error('Please Upload Photo', {
-                    duration: 2000
-                })
-                setLoading(false);
-                return false;
-
-            }
-           
-            formData.append('banner_image', selectedphoto);
-            if (selectedpdf == '') {
-
-                toast.error('Please Upload Pdf', {
-                    duration: 2000
-                })
-                setLoading(false);
-                return false;
-
-            }
-            formData.append('pdf_file', selectedpdf);
-
+            let url = 'api/admin/jobsenquires/add';
+            let formData: any = {};
+            formData.job_location_id = data.job_location_id.id;
+            formData.jobs_position_id = data.jobs_position_id.id;
+            formData.name = data.name;
+            formData.email = data.email;
+            formData.phone = data.phone;
+            formData.d_o_b = data.d_o_b;
+            formData.current_location = data.current_location;
+            formData.total_exp = data.total_exp;
+            formData.resume = data.resume;
+            formData.status = data.status;
+          
             try {
                 let response = await axios1.post(url, formData)
-                console.log(response, "response")
+                // console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+                    // console.log("response.data", response.data)
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -220,7 +225,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     setError(response.data.message)
                 }
             } catch (err: any) {
-                console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -235,46 +239,23 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
-    //get all Catogry
-    const getcategory = useCallback(async () => {
-
-        try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/admin/newscategories/get', { params: roleparams });
-
-            setCategory(response.data.data);
-
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-    useEffect(() => {
-
-        getcategory();
-
-    }, [getcategory]);
-
-
-
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
-                <Grid item xs={12} sm={6}>
+
+                <Grid item xs={12} sm={4}>
                         <Controller
-                            name='category_id'
+                            name='job_location_id'
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
                                 
-                                    options={category}
-                                    loading={!category.length}
+                                    options={joblocations}
+                                    loading={!joblocations.length}
                                     value={field.value}
                                     onChange={(event, newValue) => {
                                         field.onChange(newValue);
@@ -284,16 +265,47 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         <CustomTextField
                                             {...params}
                                             required
-                                            error={Boolean(errors.category_id)}
-                                            {...(errors.category_id && { helperText: 'This field is required' })}
-                                            label='Select Category'
+                                            error={Boolean(errors.job_location_id)}
+                                            {...(errors.job_location_id && { helperText: 'This field is required' })}
+                                            label='Select Job Location'
                                         />
                                     )}
                                 />
                             )}
                         />
-                </Grid>
-                <Grid item xs={12} sm={6}>
+                    </Grid>
+                  
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='jobs_position_id'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    fullWidth
+                                
+                                    options={jobposition}
+                                    loading={!jobposition.length}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue);
+                                    }}
+                                    getOptionLabel={(option: any) => option.name || ''}
+                                    renderInput={(params: any) => (
+                                        <CustomTextField
+                                            {...params}
+                                            required
+                                            error={Boolean(errors.jobs_position_id)}
+                                            {...(errors.jobs_position_id && { helperText: 'This field is required' })}
+                                            label='Select Job Position'
+                                        />
+                                    )}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='name'
                             control={control}
@@ -311,120 +323,135 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             )}
                         />
-                </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='slug'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Slug'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.slug)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.slug && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
                     </Grid>
 
-                 
-                
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
-                            name='meta_title'
+                            name='email'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
-                                    multiline
-                                    rows={3}
                                     value={value}
-                                    label='Title'
+                                    label='Email'
                                     onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_title)}
+                                    placeholder='example@mail.com'
+                                    error={Boolean(errors.email)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_title && { helperText: 'This field is required' })}
+                                    {...(errors.email && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
-                            name='meta_description'
+                            name='phone'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
-                                    multiline
-                                    rows={3}
                                     value={value}
-                                    label='Description'
+                                    label='Phone'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.meta_description)}
+                                    error={Boolean(errors.phone)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_description && { helperText: 'This field is required' })}
+                                    {...(errors.phone && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
-                            name='meta_keywords'
+                            name='current_location'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
-                                    multiline
-                                    rows={3}
                                     value={value}
-                                    label='keywords'
+                                    label='Current Location'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.meta_keywords)}
+                                    error={Boolean(errors.current_location)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_keywords && { helperText: 'This field is required' })}
+                                    {...(errors.current_location && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
-                            name='overview'
+                            name='total_exp'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
-                                    multiline
-                                    rows={3}
                                     value={value}
-                                    label='Overview'
+                                    label='Total Experience'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.overview)}
+                                    error={Boolean(errors.total_exp)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.overview && { helperText: 'This field is required' })}
+                                    {...(errors.total_exp && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='resume'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Resume'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.resume)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.resume && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
 
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='d_o_b'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <DatePickerWrapper>
+                                <DatePicker
+                                    selected={value}
+                                    id='basic-input'
+                                    showYearDropdown
+                                    showMonthDropdown
+                                    dateFormat='MMMM d, yyyy'
+                                    popperPlacement={popperPlacement}
+                                    onChange={onChange}
+                                    placeholderText='Click to select a date'
+                                    customInput={<CustomInput label='Date of birth' 
+                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
+                                    />}
 
-                    <Grid item xs={12} sm={6}>
+
+                                />
+                            </DatePickerWrapper>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={4}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                                 <Controller
-                                    name='status'
+                                    name='promo_banner_status'
                                     control={control}
                                     rules={{ required: true }}
                                     render={({ field: { value, onChange } }) => (
@@ -437,35 +464,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                               
                     </Grid>
 
-                    <Grid item xs={12} sm={3}>
-                        <FileUpload
-                            isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.banner_image ? olddata.banner_image : ""}
-                            onFileChange={handleFileChangephoto}
-                            maxFiles={1}
-                            maxSize={2000000}
-                            fileNames={fileNamesphoto}
-                            label=" Upload  Image"
-                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                            rejectionMessage='Try another file for upload.'
-                        />
-                    </Grid>
 
 
-                    <Grid item xs={12} sm={3}>
-                        <FileUpload
-                            isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.pdf_file ? olddata.pdf_file : ""}
-                            onFileChange={handleFileChangepdf}
-                            maxFiles={1}
-                            maxSize={2000000}
-                            fileNames={fileNamespdf}
-                            label=" Upload Pdf"
-                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                            rejectionMessage='Try another file for upload.'
-                        />
-                    </Grid>
-                
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}
                     </Grid>
@@ -480,6 +480,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         >
 
                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
+                               
                                 Submit
                                 {loading ? (
                                     <CircularProgress
@@ -492,7 +493,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 ) : null}
                             </Button>
-
+                         
                         </DialogActions>
                     </Grid>
                 </Grid>
