@@ -24,7 +24,8 @@ function ExpertSection() {
               <div className="col-md-6" id="animation17">
                 <div className="mb-3 me-md-5">
                   <label htmlFor="expertPhoneNumber2" className="form-label">Phone Number</label>
-                  <PhoneInput onChange={handlePhoneChange} />
+                  <PhoneInput onChange={handlePhoneChange} ariaDescribedby="expertPhoneNumber2"
+                    id="expertPhoneNumber2" />
                 </div>
               </div>
             </div>

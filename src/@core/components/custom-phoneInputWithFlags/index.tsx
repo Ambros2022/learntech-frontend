@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import 'intl-tel-input/build/css/intlTelInput.css';
 
-const PhoneInput = ({ onChange }) => {
+const PhoneInput = ({ onChange, ariaDescribedby, id }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -23,7 +23,8 @@ const PhoneInput = ({ onChange }) => {
     }
   }, []);
 
-  return <span className='phoneInput'><input type="tel" ref={inputRef} className="form-control" placeholder="" id="expertPhoneNumber" aria-describedby="expertPhoneNumber" onChange={onChange} value="" /></span>;
+  return <span className='phoneInput'><input type="tel" ref={inputRef} className="form-control" placeholder="" id={id}
+    aria-describedby={ariaDescribedby} onChange={onChange} value="" /></span>;
 };
 
 export default PhoneInput;

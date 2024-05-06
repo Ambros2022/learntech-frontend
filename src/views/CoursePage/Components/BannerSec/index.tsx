@@ -1,12 +1,13 @@
 import React from 'react'
+import Link from 'next/link'
 
 function BannerSec() {
 
   return (
     <>
-      <hr />
-      <section className="container">
-        <p>Home {'>'} <span className='text-blue'>Courses</span></p>
+      <hr className='mt-0' />
+      <section className="container CourseNavigationLink">
+        <p><Link href={"/home"}>Home</Link>{'>'} <span className='text-blue'><Link className="text-blue" href={"/courses"}>Courses</Link></span></p>
       </section>
       <section className='bg-blue courseSec'>
         <div className="container">

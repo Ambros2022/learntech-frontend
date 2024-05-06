@@ -1,84 +1,122 @@
+import Image from 'next/image'
 import React from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 function BannerSection() {
-    return (
-        <section className="bannerCon" id="animation1" data-aos="fade-up">
-            <div id="carouselExampleIndicators" className="carousel slide">
-                <div className="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <img src="images/icons/Banner Image.jpg" className="d-block w-100" alt="Banner-image"></img>
-                    </div>
-                    <div className="carousel-item">
-                        <img src="images/icons/Banner Image.jpg" className="d-block w-100" alt="Banner-image"></img>
-                    </div>
-                    <div className="carousel-item">
-                        <img src="images/icons/Banner Image.jpg" className="d-block w-100" alt="Banner-image"></img>
-                    </div>
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
-            </div>
-            <div className="bannerFormSec">
-                <div className="container-fluid">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-7 mb-5" id="animation2" data-aos="slide-right">
-                                <div className="searchSec">
-                                    <p>Find Colleges, Courses & Exams that are best for you</p>
-                                    <div className="row">
-                                        <div className="col-8 col-md-8 col-lg-9">
-                                            <input type="search" placeholder="Search" className="form-control" id="exampleInputSearch" aria-describedby="searchHelp" />
-                                        </div>
-                                        <div className="col-4 text-center col-md-4 col-lg-3 p-0">
-                                            <button className="btn  searchBtn">Search</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-5 mb-5" id="animation3" data-aos="slide-left">
-                                <div className="searchForm">
-                                    <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
-                                    <form>
-                                        <div className="mb-3">
-                                            <input type="text" placeholder="Enter Name" className="form-control" id="exampleInputName" aria-describedby="NameHelp" />
-                                        </div>
-                                        <div className="mb-3">
-                                            <input type="email" placeholder="Enter Email" className="form-control" id="exampleInputEmail" aria-describedby="EmailHelp" />
-                                        </div>
-                                        <div className="mb-3">
-                                            <input type="text" placeholder="Enter Phone Number" className="form-control" id="exampleInputPhoneNumber" aria-describedby="PhoneNumberHelp" />
-                                        </div>
-                                        <div className="mb-3">
-                                            <input type="text" placeholder="Enter Course" className="form-control" id="exampleInputCourse" aria-describedby="courseHelp" />
-                                        </div>
-                                        <div className="mb-3">
-                                            <input type="text" placeholder="Enter Location" className="form-control" id="exampleInputLocation" aria-describedby="locationHelp" />
-                                        </div>
 
-                                        <div className="d-grid">
-                                            <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
+    phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone NUmber is required"),
+    course: Yup.string().required('Course is required'),
+    location: Yup.string().required('Location is required'),
+  });
+
+  const handleSubmit = (values, { resetForm }) => {
+    alert("Successfully Submitted");
+    console.log("Values:", values);
+    resetForm();
+  };
+
+  return (
+    <section className="bannerCon bg-formClr" id="animation1">
+      <div id="carouselExampleIndicators" className="carousel slide">
+        <div className="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div className="carousel-inner">
+          <div className="carousel-item active position-relative">
+            <Image fill src="/images/icons/Banner Image.jpg" priority={true} className="w-100" alt="Banner-image" />
+          </div>
+          <div className="carousel-item">
+            <Image fill src="/images/icons/Banner Image.jpg" priority={true} className="w-100" alt="Banner-image" />
+          </div>
+          <div className="carousel-item">
+            <Image fill src="/images/icons/Banner Image.jpg" priority={true} className="w-100" alt="Banner-image" />
+          </div>
+        </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div className="bannerFormSec">
+        <div className="container-fluid">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-7 mb-5" id="animation2">
+                <div className="searchSec">
+                  <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
+                  <div className="row">
+                    <div className="col-7 col-md-8 col-lg-9">
+                      <input type="search" placeholder="Search" className="form-control" id="exampleInputSearch" aria-describedby="searchHelp" />
+                    </div>
+                    <div className="col-5 text-center col-md-4 col-lg-3 p-0">
+                      <button className="btn  searchBtn">Search</button>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div className="col-md-5 mb-5" id="animation3">
+                <div className="searchForm">
+                  <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
+                  <Formik
+                    initialValues={{
+                      name: '',
+                      email: '',
+                      phoneNumber: '',
+                      course: '',
+                      location: '',
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}
+                    resetForm
+                  >
+                    <Form>
+                      <div className="mb-3">
+                        <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
+                        <ErrorMessage name="name" component="div" className="error text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
+                        <ErrorMessage name="email" component="div" className="error text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" />
+                        <ErrorMessage name="phoneNumber" component="div" className="error text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
+                        <ErrorMessage name="course" component="div" className="error text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
+                        <ErrorMessage name="location" component="div" className="error text-danger" />
+                      </div>
+
+                      <div className="d-grid">
+                        <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
+                      </div>
+                    </Form>
+                  </Formik>
+                </div>
+              </div>
             </div>
-        </section>
-    )
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )
 }
-
 export default BannerSection

@@ -174,6 +174,7 @@ const SecondPage = () => {
       headerName: 'Country Name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
+
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {row.country.name}
@@ -181,7 +182,7 @@ const SecondPage = () => {
         );
       }
     },
-    
+
     {
       flex: 0.175,
       minWidth: 100,
@@ -305,11 +306,13 @@ const SecondPage = () => {
         .catch((error) => {
 
           setLoading(false);
+
           // console.error("API call error:", error);
         });
 
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
     [paginationModel, reloadpage]
   );
 
@@ -370,6 +373,7 @@ const SecondPage = () => {
             rows={rows}
             rowCount={total}
             columns={columns}
+
             // checkboxSelection/
             sortingMode='server'
             paginationMode='server'

@@ -10,7 +10,7 @@ function CoursesCard({ course }) {
         <div className="card mb-3 p-2">
           <div className="row g-0">
             <div className="col-lg-4 coursesCardImg p-0 mb-3 mb-md-3 text-md-start text-center">
-              <Image width={104} height={80} src={course.imageUrl} className="rounded" alt="Courses-Card-img" />
+              <Image width={200} height={200} src={course.imageUrl} className="rounded" alt="Courses-Card-img" />
             </div>
             <div className="col-lg-8 d-flex align-items-center ">
               <div className="card-body p-0 ps-lg-2">
