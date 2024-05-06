@@ -12,27 +12,27 @@ import ExpertSection from "./Components/ExpertSection";
 
 
 const Work = () => {
-    useEffect(() => {
-        AOS.init({
-            once: true,
-            offset: 200,
-            easing: 'ease-in-sine',
-            delay: 100,
-            duration: 500,
-        })
-    }, []);
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      offset: 200,
+      easing: 'ease-in-sine',
+      delay: 100,
+      duration: 1000,
+    })
+  }, []);
 
-    return (
-        <>
-            <BannerSection />
-            <NewsLinkSection />
-            <AnalysisSection />
-            <FeaturedCollegeSection />
-            <ExploreSection />
-            <StudyAbroadSection />
-            <LatestNewsSection />
-            <ExpertSection />
-        </>
-    );
+  return (
+    <>
+      <BannerSection />
+      <NewsLinkSection />
+      <AnalysisSection />
+      <FeaturedCollegeSection />
+      <ExploreSection />
+      <StudyAbroadSection />
+      <LatestNewsSection />
+      <ExpertSection />
+    </>
+  );
 }
 export default Work;

@@ -15,7 +15,7 @@ function AnalysisSection() {
                 <Image src="/images/icons/applications-filled.svg" width={70} height={70} alt="applications-filled-icon" />
               </div>
               <div className="col-md-8 col-8 text-start mt-2 mt-md-0">
-                <h1 className="fw-bold"><AnimatedCounter /></h1>
+                <h4 className="fw-bold"><AnimatedCounter /></h4>
                 <h6>Application Filled</h6>
               </div>
             </div>
@@ -26,7 +26,7 @@ function AnalysisSection() {
                 <Image src="/images/icons/admission-done.svg" width={70} height={70} alt="admission-done-icon" />
               </div>
               <div className="col-md-8 col-8 text-start mt-2 mt-md-0">
-                <h1 className="fw-bold"><AnimatedCounter2 /></h1>
+                <h4 className="fw-bold"><AnimatedCounter2 /></h4>
                 <h6>Admission Done</h6>
               </div>
             </div>
@@ -37,7 +37,7 @@ function AnalysisSection() {
                 <Image src="/images/icons/expert-counsellor.svg" width={70} height={70} alt="expert-counsellor-icon" />
               </div>
               <div className="col-md-8 col-8 text-start mt-2 mt-md-0">
-                <h1 className="fw-bold"><AnimatedCounter3 /></h1>
+                <h4 className="fw-bold"><AnimatedCounter3 /></h4>
                 <h6>Expert Counsellors</h6>
               </div>
             </div>

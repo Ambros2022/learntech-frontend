@@ -59,6 +59,15 @@ a {
 .socialIcon img {
   width: 22px;
 }
+/* .socialIcon img:hover {
+  filter: invert(9%) sepia(99%) saturate(6672%) hue-rotate(248deg) brightness(91%) contrast(145%);
+} */
+.icon-white {
+  filter: invert(100%) sepia(100%) saturate(38%) hue-rotate(254deg) brightness(110%) contrast(110%) !important;
+}
+/* .icon-white:hover {
+  filter: invert(9%) sepia(99%) saturate(6672%) hue-rotate(248deg) brightness(91%) contrast(145%) !important;
+} */
 .socialText img {
   width: 18px;
 }
@@ -71,7 +80,11 @@ a {
   color: white !important;
   padding: 15px !important;
   font-size: 12px !important;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.counsellingBtn:hover {
+  color: white !important;
+  background-color: darkblue !important;
 }
 .top-nav .dropdown-menu .dropdown-item:hover,
 .top-nav .dropdown-menu .dropdown-item:focus {
@@ -149,7 +162,7 @@ nav a {
 }
 .bannerCon {
   position: relative !important;
-  height: 600px !important;
+  height: auto !important;
 }
 .carousel {
   position: relative !important;
@@ -177,6 +190,10 @@ nav a {
   border-radius: 10px !important;
   margin-top: 232px !important;
 }
+.searchSec h1 {
+  font-size: 1rem !important;
+  cursor: pointer;
+}
 .searchSec .form-control {
   color: white !important;
 }
@@ -201,6 +218,10 @@ nav a {
   color: white !important;
   background-color: #254692 !important;
 }
+.searchBtn:hover {
+  background-color: darkblue !important;
+  color: white !important;
+}
 .searchForm {
   background-color: white;
   padding: 30px;
@@ -209,6 +230,11 @@ nav a {
 .submitBtn {
   background-color: #254692 !important;
   color: white !important;
+  border-radius: 6px !important;
+}
+.submitBtn:hover {
+  color: #ffffff !important;
+  background-color: darkblue !important;
   border-radius: 6px !important;
 }
 .carousel-indicators {
@@ -243,10 +269,8 @@ nav a {
 .Analysis-Section {
   background-color: rgba(39, 72, 150, 0.04) !important;
 }
-.Analysis-Section img {
-  margin-top: 11px;
-}
-.Analysis-Section h1 {
+
+.Analysis-Section h4 {
   color: #254692;
 }
 .Analysis-Section h6 {
@@ -299,6 +323,10 @@ nav a {
 }
 .viewMoreCollegeBtn {
   background-color: #254692 !important;
+  color: white !important;
+}
+.viewMoreCollegeBtn:hover {
+  background-color: darkblue !important;
   color: white !important;
 }
 .exploreNav a:focus {
@@ -525,7 +553,21 @@ footer img {
   filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(143deg) brightness(95%) contrast(90%);
   background-color: none !important;
 }
-
+.telHover a:hover {
+  color: blue !important;
+}
+.mailHover a:hover {
+  color: blue !important;
+}
+.reviewBtn:hover {
+  border: none !important;
+  background-color: #274896 !important;
+  color: white !important;
+  border: 1px solid #274896 !important;
+}
+.bannerCon .carousel-item img {
+  object-fit: cover;
+}
 @media (min-width: 1024px) and (max-width: 1199px) {
   .featuredClgCard a {
     font-size: 12px !important;
@@ -553,6 +595,17 @@ footer img {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+  .bannerCon .carousel-item img {
+    object-fit: cover;
+  }
+  .searchSec h1 {
+    font-size: 1rem !important;
+    cursor: pointer;
+  }
+
+  .Analysis-Section h6 {
+    font-size: 0.8rem;
+  }
   .Analysis-Section img {
     width: 80%;
     height: auto;
@@ -651,11 +704,27 @@ footer img {
   .phone-icon img {
     width: 100%;
   }
+  .top-nav .active,
+  .top-nav .active :focus,
+  .top-nav .active :hover {
+    color: #254692 !important;
+    font-weight: bold !important;
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
 }
 @media (min-width: 320px) and (max-width: 767px) {
   .searchSec {
     width: 80%;
     margin: auto;
+  }
+  .top-nav .active,
+  .top-nav .active :focus,
+  .top-nav .active :hover {
+    color: #254692 !important;
+    font-weight: bold !important;
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
   .Analysis-Section img {
     width: 70%;
@@ -663,6 +732,10 @@ footer img {
   }
   .carousel-indicators {
     display: none !important;
+  }
+  .searchSec h1 {
+    font-size: 0.8rem !important;
+    cursor: pointer;
   }
   .top-nav .dropdown-menu img {
     width: 12px !important;
@@ -1354,8 +1427,22 @@ footer img {
 .signForm label {
   font-weight: 500;
 }
+.signForm input[type='text'] {
+  background-color: white !important;
+}
+.react-tel-input .form-control {
+  border: 1px solid #dee2e6 !important;
+}
+.react-tel-input .flag-dropdown {
+  border: 1px solid #dee2e6 !important;
+}
 .signForm input[type='tel'] {
   width: 100%;
+}
+.signform input:-internal-autofill-selected {
+  background-image: none !important;
+  background-color: white !important;
+  color: transparent !important;
 }
 .btn-eye {
   background-color: transparent;
@@ -1364,39 +1451,49 @@ footer img {
   border-right: 1px solid #dee2e6 !important;
   border-left: 0px !important;
 }
-.bi-eye-slash {
+.fa-eye-slash {
   color: #254692;
 }
-.bi-eye {
+.fa-eye {
   color: #254692;
-}
-.signForm input[type='password'] {
-  border-right: 0 !important;
 }
 .btnSignUp {
   background-color: #254692 !important;
   color: white !important;
 }
 .btnSignUp:hover {
-  color: #254692 !important;
-  background-color: white !important;
-  border: 1px solid #254692 !important;
+  background-color: darkblue !important;
+  color: white !important;
+}
+.signForm .passwordInput input[type='text'] {
+  border-right: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.signForm .passwordInput input[type='password'] {
+  border-right: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 .signForm .form-check-label {
   font-weight: 500 !important;
   font-size: 13px !important;
 }
-.orTxtHr {
-  border-bottom: 1px solid rgba(39, 72, 150, 0.2);
-  line-height: 16px;
+.fake-legend {
+  height: 15px;
+  width: 100%;
+  border-bottom: solid 1px #dee2e6;
   text-align: center;
 }
-.orTxtSpan {
+.fake-legend span {
   background: #fff;
   position: relative;
-  bottom: -8px; /* half of line-height */
-  padding: 0 15px;
+  top: 0;
+  padding: 0 20px;
+  line-height: 30px;
+  color: black;
 }
+
 .frgtBtn {
   color: #254692 !important;
   text-decoration: underline !important;
@@ -1413,6 +1510,15 @@ footer img {
   top: -50px;
   left: 25%;
 }
+.eyeBtn {
+  border-left: 0 !important;
+  border-bottom: 1px solid #dee2e6 !important;
+  border-top: 1px solid #dee2e6 !important;
+  border-right: 1px solid #dee2e6 !important;
+}
+.react-tel-input .flag-dropdown {
+  background-color: white !important;
+}
 
 @media (min-width: 768px) and (max-width: 992px) {
   .modal-md {
@@ -1425,7 +1531,7 @@ footer img {
 }
 @media (min-width: 320px) and (max-width: 767px) {
   .w-sm-form {
-    width: 300px !important;
+    width: 90% !important;
     margin: 10px auto !important;
   }
   .modal-content .z-3 {
@@ -1581,8 +1687,29 @@ footer img {
   width: auto;
   height: auto;
 }
-.faqSec .accordion-header {
-  background-color: rgba(249, 60, 60, 0.2) !important;
+.faqSec .accordion-header button {
+  background-color: #3d5aa0 !important;
+  color: white !important;
+}
+.faqSec .accordion-header:focus {
+  outline: 0 !important;
+  border: 0 !important;
+}
+.faqSec .accordion-header:active {
+  outline: 0 !important;
+  border: 0 !important;
+}
+.faqSec .accordion-item {
+  border: 0;
+  border-radius: 0;
+}
+.accordion-item:first-of-type {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+.accordion-item:last-of-type {
+  border-radius: 0 !important;
+  border: 0 !important;
 }
 @media (min-width: 768px) and (max-width: 992px) {
   .studyInUsaCon h4 {
@@ -1641,4 +1768,40 @@ footer img {
   .studyInUsaCon .helpMeBtn {
     font-size: 12px !important;
   }
+}
+
+/* Write Review Page */
+
+.writeReviewSec {
+  background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
+    url('../public/images/icons/werite-review-img.jpeg');
+  height: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.guidanceCon {
+  background-color: rgba(39, 72, 150, 0.04);
+  border: 1px solid rgba(39, 72, 150, 0.2) !important;
+}
+.detailsFillSec select {
+  background-color: rgba(39, 72, 150, 0.04) !important;
+  color: rgba(143, 143, 143, 1);
+}
+.detailsFillSec input {
+  background-color: rgba(39, 72, 150, 0.04) !important;
+}
+.detailsFillSec input::placeholder {
+  color: rgba(143, 143, 143, 1);
+}
+.detailsFillSec textarea {
+  background-color: rgba(39, 72, 150, 0.04) !important;
+  width: 100%;
+  border: 1px solid rgba(39, 72, 150, 0.2) !important;
+  border-radius: 5px;
+}
+.detailsFillSec input::placeholder {
+  color: rgba(143, 143, 143, 1) !important;
+}
+.detailsFillSec .submitBtn {
+  width: auto !important;
 }
