@@ -1,4 +1,4 @@
-'use client';
+
 import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Fade, { FadeProps } from '@mui/material/Fade'
@@ -21,11 +21,12 @@ import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
+import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import type { FC } from 'react';
-import { Alert, Typography } from '@mui/material'
+import { Alert } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import dynamic from 'next/dynamic'
-import QuillEditor from 'src/@core/components/html-editor/index';
+import useIsMountedRef from 'src/hooks/useIsMountedRef'
+
 
 
 interface Authordata {
@@ -33,12 +34,12 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-// const DynamicJoditEditor = dynamic(() => import('jodit-react'), { ssr: false });ReactQuill
-
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
+    const [stream, setStream] = useState([]);
+    const isMountedRef = useIsMountedRef();
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
 
@@ -53,36 +54,22 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     };
 
-    const [fieldvalue, setEditorValue] = useState('');
-
-    const handleEditorChange = (newValue) => {
-        // Set the new value to editorValue state
-        setEditorValue(newValue);
-    };
-
-
-
     const schema: any = yup.object().shape({
-        url: yup
+        name: yup
             .string()
             .trim()
             .required(),
     })
 
-
     const defaultValues = {
-        url: isAddMode ? '' : olddata.url,
-        top_description: isAddMode ? '' : olddata.top_description,
-        bottom_description: isAddMode ? '' : olddata.bottom_description,
-        meta_title: isAddMode ? '' : olddata.meta_title,
-        meta_description: isAddMode ? '' : olddata.meta_description,
-        meta_keyword: isAddMode ? '' : olddata.meta_keyword,
+        name: isAddMode ? '' : olddata.name,
+        designation: isAddMode ? '' : olddata.designation,
+        linked_in_link: isAddMode ? '' : olddata.linked_in_link,
     }
 
     const {
         control,
         handleSubmit,
-        setValue,
         reset,
         formState: { errors }
     } = useForm<any>({
@@ -92,21 +79,20 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const onSubmit = async (data: any) => {
-        console.log(data, "data");
-        // return
 
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/page/update';
+            let url = 'api/admin/ourteams/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('url', data.url);
-            formData.append('top_description', data.top_description);
-            formData.append('bottom_description', data.bottom_description);
-            formData.append('meta_title', data.meta_title);
-            formData.append('meta_description', data.meta_description);
-            formData.append('meta_keyword', data.meta_keyword);
+            formData.append('title', data.title);
+            formData.append('name', data.name);
+            formData.append('designation', data.designation);
+            formData.append('linked_in_link', data.linked_in_link);
+            formData.append('image', selectedphoto);
+
+           
 
             try {
                 let response = await axios1.post(url, formData)
@@ -124,7 +110,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-
+         
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -138,25 +124,31 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/page/add';
-
+            let url = 'api/admin/ourteams/add';
             const formData = new FormData();
-            formData.append('url', data.url);
-            formData.append('top_description', data.top_description);
-            formData.append('bottom_description', data.bottom_description);
-            formData.append('meta_title', data.meta_title);
-            formData.append('meta_description', data.meta_description);
-            formData.append('meta_keyword', data.meta_keyword);
+            formData.append('title', data.title);
+            formData.append('name', data.name);
+            formData.append('designation', data.designation);
+            formData.append('linked_in_link', data.linked_in_link);
+            if (selectedphoto == '') {
 
+                toast.error('Please Upload Image', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
 
+            }
 
+            formData.append('image', selectedphoto);
+         
 
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-
+             
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -187,133 +179,87 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
+    
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
+                   
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='url'
+                            name='name'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Url'
+                                    label='Name'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.url)}
+                                    error={Boolean(errors.name)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.url && { helperText: 'This field is required' })}
+                                    {...(errors.name && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='meta_title'
+                            name='designation'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Title'
+                                    label='Designation'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.meta_title)}
+                                    error={Boolean(errors.designation)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_title && { helperText: 'This field is required' })}
+                                    {...(errors.designation && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='meta_description'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    multiline
-                                    rows={3}
-                                    value={value}
-                                    label='Meta Description'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_description)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_description && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='meta_keyword'
+                            name='linked_in_link'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    multiline
-                                    rows={3}
-                                    label='Meta Title'
+                                    label='Linked In'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.meta_keyword)}
+                                    error={Boolean(errors.linked_in_link)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_keyword && { helperText: 'This field is required' })}
+                                    {...(errors.linked_in_link && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>top Description</Typography>
-
-                        <Controller
-                            name='top_description'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("top_description", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                            </>
-                            )}
+                    <Grid item xs={12} sm={3}>
+                        <FileUpload
+                            isAddMode={isAddMode}
+                            olddata={!isAddMode && olddata.image ? olddata.image : ""}
+                            onFileChange={handleFileChangephoto}
+                            maxFiles={1}
+                            maxSize={2000000}
+                            fileNames={fileNamesphoto}
+                            label=" Upload Amenities Image"
+                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                            rejectionMessage='Try another file for upload.'
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={12}>
-                        <Typography style={{ marginBottom: '10px' }}>Bottom Description</Typography>
-                        <Controller
-                            name='bottom_description'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <>
-                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                        onChange={(value) => setValue("bottom_description", value)} />
-                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                    onChange={(value)=>console.log(value)} /> */}
-                                </>
-                            )}
-                        />
-
-                    </Grid>
+                  
 
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}

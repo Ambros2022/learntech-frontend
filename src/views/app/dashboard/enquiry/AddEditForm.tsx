@@ -2,8 +2,6 @@
 import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Fade, { FadeProps } from '@mui/material/Fade'
-import CustomInput from 'src/@core/components/pickersCoustomInput/index'
-
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import { SelectChangeEvent } from '@mui/material/Select'
@@ -17,22 +15,19 @@ import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
+import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
+import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
+
 
 import type { FC } from 'react';
-import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup, Typography, useTheme } from '@mui/material'
+import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
-
-import QuillEditor from 'src/@core/components/html-editor/index';
-
 
 
 
@@ -47,15 +42,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
-    const [levels, setLevels] = useState([]);
-    const [types, setTypes] = useState([]);
-    const [countries, setCountries] = useState([]);
+    const [college, setCollege] = useState([]);
+    const [generalcollege, setGeneralcollege] = useState([]);
     const isMountedRef = useIsMountedRef();
 
-    const theme = useTheme()
-    const { direction } = theme
 
-    const popperPlacement: ReactDatePickerProps['popperPlacement'] = direction === 'ltr' ? 'bottom-start' : 'bottom-end'
 
     const handleFileChangephoto = (files: any[]) => {
         setSelectedphoto(files[0]);
@@ -68,64 +59,51 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     };
 
-    const options = [
-        'male',
-        'female',
-        'others',
-      ];
-
     const schema: any = yup.object().shape({
-        name: yup
-            .string()
-            .trim()
-            .required(),
-            slug: yup
-            .string()
-            .trim()
-            .required(),
-            meta_title: yup
-            .string()
-            .trim()
-            .required(),
-            meta_description: yup
-            .string()
-            .trim()
-            .required(),
-            gender: yup
-            .string()
-            .trim()
-            .required(),
-            level_id: yup.object().required("This field is required"),
-            type_id: yup.object().required("This field is required"),
-            country_id: yup.object().required("This field is required"),
+        course_type: yup
+        .string()
+        .trim()
+        .required(),
+        slug: yup
+        .string()
+        .trim()
+        .required(),
+        meta_title: yup
+        .string()
+        .trim()
+        .required(),
+        meta_description: yup
+        .string()
+        .trim()
+        .required(),
+        meta_keywords: yup
+        .string()
+        .trim()
+        .required(),
+       
+        college_id: yup.object().required("This field is required"),
+        general_course_id: yup.object().required("This field is required"),
+
     })
 
     const defaultValues = {
-        name: isAddMode ? '' : olddata.name,
+        college_id: isAddMode ? '' : olddata.college ? olddata.college : '',
+        general_course_id: isAddMode ? '' : olddata.generalcourse ? olddata.generalcourse : '',
+        course_type: isAddMode ? '' : olddata.course_type,
         slug: isAddMode ? '' : olddata.slug,
-        gender: isAddMode ? '' : olddata.gender,
-        amount: isAddMode ? '' : olddata.amount,
-        // last_date: isAddMode ? '' : olddata.last_date,
-        total_scholarships: isAddMode ? '' : olddata.total_scholarships,
-        is_eligible: isAddMode ? '' : olddata.is_eligible,
         meta_title: isAddMode ? '' : olddata.meta_title,
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
-        overview: isAddMode ? '' : olddata.overview,
+        course_details: isAddMode ? '' : olddata.course_details,
+        eligibility: isAddMode ? '' : olddata.eligibility,
+        fee_structure: isAddMode ? '' : olddata.fee_structure,
         status: isAddMode ? 'Draft' : olddata.status,
-        last_date: isAddMode ? null : new Date(olddata.last_date),
-        level_id: isAddMode ? '' : olddata.scholarlevels ? olddata.scholarlevels : '',   
-        type_id: isAddMode ? '' : olddata.scholartypes ? olddata.scholartypes : '',   
-        country_id: isAddMode ? '' : olddata.country ? olddata.country : '',   
-
     }
 
     const {
         control,
         handleSubmit,
         reset,
-        setValue,
-
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -133,33 +111,69 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
+
+    //get all colleges
+    const getcollege = useCallback(async () => {
+
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/college/get', { params: roleparams });
+
+            setCollege(response.data.data);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+
+    //get all general courses
+    const getgeneralcourse = useCallback(async () => {
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/generalcourse/get', { params: roleparams });
+
+            setGeneralcollege(response.data.data);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+
+        getcollege();
+        getgeneralcourse();
+
+    }, [getcollege,getgeneralcourse]);
+
+
     const onSubmit = async (data: any) => {
 
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let link = 'api/admin/scholarship/update';
+            let url = 'api/admin/courses/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('level_id', data.level_id.id);
-            formData.append('type_id', data.type_id.id);
-            formData.append('country_id', data.country_id.id);
-            formData.append('name', data.name);
+            formData.append('course_type', data.course_type);
             formData.append('slug', data.slug);
-            formData.append('gender', data.gender);
-            formData.append('amount', data.amount);
-            formData.append('last_date', data.last_date);
-            formData.append('total_scholarships', data.total_scholarships);
-            formData.append('is_eligible', data.is_eligible);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
-            formData.append('overview', data.overview);
+            formData.append('course_details', data.course_details);
+            formData.append('eligibility', data.eligibility);
+            formData.append('fee_structure', data.fee_structure);
             formData.append('status', data.status);
-            formData.append('logo', selectedphoto);
+            formData.append('college_id', data.college_id.id);
+            formData.append('general_course_id', data.general_course_id.id);
 
             try {
-                let response = await axios1.post(link, formData)
+                let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
@@ -188,38 +202,24 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let link = 'api/admin/scholarship/add';
+            let url = 'api/admin/courses/add';
 
             const formData = new FormData();
-            formData.append('level_id', data.level_id.id);
-            formData.append('type_id', data.type_id.id);
-            formData.append('country_id', data.country_id.id);
-            formData.append('name', data.name);
+            formData.append('course_type', data.course_type);
             formData.append('slug', data.slug);
-            formData.append('gender', data.gender);
-            formData.append('amount', data.amount);
-            formData.append('last_date', data.last_date);
-            formData.append('total_scholarships', data.total_scholarships);
-            formData.append('is_eligible', data.is_eligible);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
-            formData.append('overview', data.overview);
+            formData.append('course_details', data.course_details);
+            formData.append('eligibility', data.eligibility);
+            formData.append('fee_structure', data.fee_structure);
             formData.append('status', data.status);
-            if (selectedphoto == '') {
-
-                toast.error('Please Upload Image', {
-                    duration: 2000
-                })
-                setLoading(false);
-                return false;
-
-            }
-
-            formData.append('logo', selectedphoto);
+            formData.append('college_id', data.college_id.id);
+            formData.append('general_course_id', data.general_course_id.id);
+         
 
             try {
-                let response = await axios1.post(link, formData)
+                let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
@@ -253,81 +253,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
-     //get all levels
-     const getlevels = useCallback(async () => {
 
-        try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/admin/scholarlevel/get', { params: roleparams });
-
-            setLevels(response.data.data);
-
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-     //get all types
-     const gettypes= useCallback(async () => {
-
-        try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/admin/scholartype/get', { params: roleparams });
-
-            setTypes(response.data.data);
-
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-
-     //get all countries
-     const getcountry= useCallback(async () => {
-
-        try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/admin/countries/get', { params: roleparams });
-
-            setCountries(response.data.data);
-
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-
-    useEffect(() => {
-
-        getlevels();
-        gettypes();
-        getcountry();
-
-    }, [getlevels]);
-
+    
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-linkencoded">
+            <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
-                <Grid item xs={12} sm={4}>
+
+                <Grid item xs={12} sm={6}>
                         <Controller
-                            name='level_id'
+                            name='college_id'
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
                                 
-                                    options={levels}
-                                    loading={!levels.length}
+                                    options={college}
+                                    loading={!college.length}
                                     value={field.value}
                                     onChange={(event, newValue) => {
                                         field.onChange(newValue);
@@ -336,93 +281,77 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     renderInput={(params: any) => (
                                         <CustomTextField
                                             {...params}
-                                            required
-                                            error={Boolean(errors.level_id)}
-                                            {...(errors.level_id && { helperText: 'This field is required' })}
-                                            label='Select Level'
-                                        />
-                                    )}
-                                />
-                            )}
-                        />
-                </Grid>
-
-                <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='type_id'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field }) => (
-                                <CustomAutocomplete
-                                    fullWidth
-                                
-                                    options={types}
-                                    loading={!types.length}
-                                    value={field.value}
-                                    onChange={(event, newValue) => {
-                                        field.onChange(newValue);
-                                    }}
-                                    getOptionLabel={(option: any) => option.name || ''}
-                                    renderInput={(params: any) => (
-                                        <CustomTextField
-                                            {...params}
-                                            required
-                                            error={Boolean(errors.type_id)}
-                                            {...(errors.type_id && { helperText: 'This field is required' })}
-                                            label='Select Level'
-                                        />
-                                    )}
-                                />
-                            )}
-                        />
-                </Grid>
-
-                <Grid item xs={12} sm={4}>
-                                    <Controller
-                                        name='country_id'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field }) => (
-                                            <CustomAutocomplete
-                                                fullWidth
                                             
-                                                options={countries}
-                                                loading={!countries.length}
-                                                value={field.value}
-                                                onChange={(event, newValue) => {
-                                                    field.onChange(newValue);
-                                                }}
-                                                getOptionLabel={(option: any) => option.name || ''}
-                                                renderInput={(params: any) => <CustomTextField {...params} 
-                                                required error={Boolean(errors.country_id)}
-                                                    {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
-                                            />
-                                        )}
-                                    />
-                </Grid>
-
-
-                <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='name'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Name'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.name)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.name && { helperText: 'This field is required' })}
+                                            error={Boolean(errors.college_id)}
+                                            {...(errors.college_id && { helperText: 'This field is required' })}
+                                            label='Select College'
+                                        />
+                                    )}
                                 />
                             )}
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='general_course_id'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    fullWidth
+                                
+                                    options={generalcollege}
+                                    loading={!generalcollege.length}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue);
+                                    }}
+                                    getOptionLabel={(option: any) => option.name || ''}
+                                    renderInput={(params: any) => (
+                                        <CustomTextField
+                                            {...params}
+                                            
+                                            error={Boolean(errors.general_course_id)}
+                                            {...(errors.general_course_id && { helperText: 'This field is required' })}
+                                            label='Select General Course'
+                                        />
+                                    )}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+                 
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='course_type'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    select
+                                    value={value}
+                                    label='Select course_type'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.course_type)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.course_type && { helperText: 'This field is required' })}
+                                >
+                                     <MenuItem value='UG'>UG</MenuItem>
+                                                <MenuItem value='PG'>PG</MenuItem>
+                                                <MenuItem value='Diploma'>Diploma</MenuItem>
+                                                <MenuItem value='Doctorate'>Doctorate</MenuItem>
+                                                <MenuItem value='Default'>Default</MenuItem>
+                                              
+                                                </CustomTextField>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='slug'
                             control={control}
@@ -442,118 +371,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                        name='gender'
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field: { value, onChange } }) => (
-                            <CustomTextField
-                     fullWidth
-                      select
-                   value={value}
-                 label='Select Gender'
-                    onChange={onChange}
-                error={Boolean(errors.gender)}
-                     helperText={errors.gender && 'This field is required'}
-                         >
-                            {options.map((option, value) => (
-                            <MenuItem key={value} value={option}>
-                            {option}
-                             </MenuItem>
-                                ))}
-                            </CustomTextField>
-                            )}
-                        />
-                     </Grid>
-                   
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='amount'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    type='number'
-                                    value={value}
-                                    label='Amount'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.amount)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.amount && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='total_scholarships'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    type='number'
-                                    value={value}
-                                    label='Total Scholarships'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.total_scholarships)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.total_scholarships && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='is_eligible'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    type='number'
-                                    value={value}
-                                    label='Is_eligible'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.is_eligible)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.is_eligible && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
 
-                  
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='meta_description'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    multiline
-                                    rows={3}
-                                    value={value}
-                                    label='Description'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_description)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_description && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='meta_title'
                             control={control}
@@ -561,10 +381,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
+                                    value={value}
                                     multiline
                                     rows={3}
-                                    value={value}
-                                    label='Meta_title'
+                                    label='meta_title'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.meta_title)}
@@ -574,8 +394,28 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='meta_description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    multiline
+                                    rows={3}
+                                    label='meta_description'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.meta_description)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.meta_description && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='meta_keywords'
                             control={control}
@@ -583,10 +423,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
+                                    value={value}
                                     multiline
                                     rows={3}
-                                    value={value}
-                                    label='Meta_keywords'
+                                    label='meta_keywords'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.meta_keywords)}
@@ -596,55 +436,70 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
-                            name='last_date'
+                            name='course_details'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <DatePickerWrapper>
-                                <DatePicker
-                                    selected={value}
-                                    id='basic-input'
-                                    showYearDropdown
-                                    showMonthDropdown
-                                    dateFormat='MMMM d, yyyy'
-                                    popperPlacement={popperPlacement}
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    multiline
+                                    rows={3}
+                                    label='course_details'
                                     onChange={onChange}
-                                    placeholderText='Click to select a date'
-                                    customInput={<CustomInput label='Last date' 
-                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
-                                    />}
-
-
+                                    placeholder=''
+                                    error={Boolean(errors.course_details)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.course_details && { helperText: 'This field is required' })}
                                 />
-                            </DatePickerWrapper>
                             )}
                         />
                     </Grid>
-
-
-                    <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>overview</Typography>
-
+                    <Grid item xs={12} sm={6}>
                         <Controller
-                            name='overview'
+                            name='eligibility'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("top_description", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                            </>
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    multiline
+                                    rows={3}
+                                    label='eligibility'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.eligibility)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.eligibility && { helperText: 'This field is required' })}
+                                />
                             )}
                         />
                     </Grid>
-
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='fee_structure'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    multiline
+                                    rows={3}
+                                    label='fee_structure'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.fee_structure)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.fee_structure && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                                 <Controller
                                     name='status'
@@ -660,20 +515,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                               
                     </Grid>
 
-                    <Grid item xs={12} sm={3}>
-                        <FileUpload
-                            isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.logo ? olddata.logo : ""}
-                            onFileChange={handleFileChangephoto}
-                            maxFiles={1}
-                            maxSize={2000000}
-                            fileNames={fileNamesphoto}
-                            label=" Upload Logo"
-                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                            rejectionMessage='Try another file for upload.'
-                        />
-                    </Grid>
-                
+
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}
                     </Grid>

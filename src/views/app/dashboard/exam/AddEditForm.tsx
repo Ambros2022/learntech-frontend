@@ -28,13 +28,15 @@ import { FaTrash } from 'react-icons/fa';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, useTheme } from '@mui/material'
+import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
 import TabList from '@mui/lab/TabList'
 import { Config } from 'src/configs/mainconfig'
+import QuillEditor from 'src/@core/components/html-editor/index';
+
 
 
 
@@ -45,7 +47,7 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
-    const { setValue } = useForm();
+    // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
@@ -147,6 +149,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         handleSubmit,
         resetField: admfiledReset,
         reset,
+        setValue,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -613,164 +616,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                 
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='overview'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Overview'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.overview)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.overview && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
                    
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='eligibility_criteria'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Eligibility_criteria'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.eligibility_criteria)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.eligibility_criteria && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='syllabus'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Syllabus'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.syllabus)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.syllabus && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='cutoff'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Cutoff'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.cutoff)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.cutoff && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='admit_card'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Admit_card'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.admit_card)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.admit_card && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='exam_centers'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Exam_center'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.exam_centers)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.exam_centers && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='results'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Results'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.results)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.results && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='prepretion_tips'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Prepretion_tips'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.prepretion_tips)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.prepretion_tips && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                    
+                   
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='meta_title'
@@ -884,41 +732,194 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
                   
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='counseling'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Counseling'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.counseling)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.counseling && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
+                    
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Accept_colleges</Typography>
+
                         <Controller
                             name='accept_colleges'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Accept_colleges'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.accept_colleges)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.accept_colleges && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("accept_colleges", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Overview</Typography>
+
+                        <Controller
+                            name='overview'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("overview", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Counseling</Typography>
+
+                        <Controller
+                            name='counseling'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("counseling", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                </>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Prepretion_tips</Typography>
+
+                        <Controller
+                            name='prepretion_tips'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("prepretion_tips", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Results</Typography>
+
+                        <Controller
+                            name='results'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("results", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
+                            )}
+                        />
+                    </Grid>
+
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Exam_center</Typography>
+
+                        <Controller
+                            name='exam_centers'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("exam_centers", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Admit_card</Typography>
+
+                        <Controller
+                            name='admit_card'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("admit_card", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Eligibility_criteria</Typography>
+
+                        <Controller
+                            name='eligibility_criteria'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("eligibility_criteria", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Syllabus</Typography>
+
+                        <Controller
+                            name='syllabus'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("syllabus", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Cutoff</Typography>
+
+                        <Controller
+                            name='cutoff'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("cutoff", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
                             )}
                         />
                     </Grid>

@@ -77,6 +77,12 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'tabler:book-filled',
       auth: false
     },
+    {
+      title: 'Enquiries',
+      path: '/app/dashboard/enquiry',
+      icon: 'tabler:phone-outgoing',
+      auth: false
+    },
 
     {
       title: 'Exam',
@@ -233,7 +239,28 @@ const navigation = (): VerticalNavItemsType => {
       ]
     },
    
-   
+    {
+      title: 'Testimonial',
+      path: '/app/dashboard/testimonial',
+      icon: 'tabler:device-tv',
+      auth: false
+    },
+
+
+    {
+      title: 'Team',
+      path: '/app/dashboard/ourteam',
+      icon: 'tabler:users',
+      auth: false
+    },
+
+
+    {
+      title: 'Data Backup',
+      path: '/app/dashboard/databackup',
+      icon: 'tabler:cloud-download',
+      auth: false
+    },
 
    
     // {

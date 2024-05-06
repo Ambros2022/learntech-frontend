@@ -25,9 +25,11 @@ import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 
 
 import type { FC } from 'react';
-import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup } from '@mui/material'
+import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import QuillEditor from 'src/@core/components/html-editor/index';
+
 
 
 
@@ -104,6 +106,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         control,
         handleSubmit,
         reset,
+        setValue,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -436,66 +439,57 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>course_details</Typography>
+
                         <Controller
                             name='course_details'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    multiline
-                                    rows={3}
-                                    label='course_details'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.course_details)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.course_details && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("course_details", value)} />
+                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                    onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>eligibility</Typography>
+
                         <Controller
                             name='eligibility'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    multiline
-                                    rows={3}
-                                    label='eligibility'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.eligibility)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.eligibility && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("eligibility", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>fee_structure</Typography>
+
                         <Controller
                             name='fee_structure'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    multiline
-                                    rows={3}
-                                    label='fee_structure'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.fee_structure)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.fee_structure && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("fee_structure", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
                             )}
                         />
                     </Grid>
