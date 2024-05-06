@@ -588,10 +588,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
-                              
-
-
-
                                 <Grid item xs={12} sm={4}>
                                     <Controller
                                         name='name'
@@ -725,12 +721,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-                  
-
-                                <Grid item xs={12}>
-                                    {error ? <Alert severity='error'>{error}</Alert> : null}
-                                </Grid>
-
+                
                                 <Grid item xs={12} sm={4}>
                         <Controller
                             name='result_date'
@@ -888,6 +879,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
+                                <Grid item xs={12}>
+                                    {error ? <Alert severity='error'>{error}</Alert> : null}
+                                </Grid>
+
 
                     <Grid item xs={12}>
                         <DialogActions
@@ -925,7 +920,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     {fields.map((val, index) => (
                                         <Grid item xs={12} key={val.id}>
                                             <Grid container spacing={2} alignItems="center">
-                                                <Grid item xs={12} sm={5}>
+                                                <Grid item xs={12} sm={12}>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].questions`}
@@ -947,7 +942,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                         )}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} sm={5}>
+                                                {/* <Grid item xs={12} sm={5}>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].answers`}
@@ -968,6 +963,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                             />
                                                         )}
                                                     />
+                                                </Grid> */}
+
+
+                                                <Grid item xs={12} sm={12}>
+                                                <Typography>Answers</Typography>
+                                    <Controller
+                                        name={`faqs[${index}].answers`}
+                                        control={faqcontrol}
+                                        rules={{ required: true }}
+                                        // defaultValue={val.answers}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                 onChange={(e) => {
+                                                    onChange(e);
+                                                    setValue(`faqs[${index}].answers`);
+                                                }} />
+                                          
+                                        </>
+                                        )}
+                                    />
                                                 </Grid>
 
 

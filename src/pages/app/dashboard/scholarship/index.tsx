@@ -178,18 +178,9 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(params)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
               {row.name}
             </Typography>
-
-          </Box>
-        </Box>
-
-
         )
       }
     },
