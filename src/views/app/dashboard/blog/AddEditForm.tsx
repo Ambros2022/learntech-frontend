@@ -23,8 +23,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 import type { FC } from 'react';
-import { Alert, FormControlLabel, FormLabel, RadioGroup } from '@mui/material'
+import { Alert, FormControlLabel, FormLabel, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
+import QuillEditor from 'src/@core/components/html-editor/index';
+
 
 
 
@@ -88,6 +90,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         control,
         handleSubmit,
         reset,
+        setValue,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -308,22 +311,21 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>overview</Typography>
+
                         <Controller
                             name='overview'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Overview'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.overview)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.overview && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("bottom_description", value)} />
+                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                    onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>

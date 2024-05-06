@@ -27,6 +27,8 @@ import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup, Typography } 
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import QuillEditor from 'src/@core/components/html-editor/index';
+
 
 interface Authordata {
     olddata?: any;
@@ -112,6 +114,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         control,
         handleSubmit,
         reset,
+        setValue,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -398,46 +401,29 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>overview</Typography>
+
                         <Controller
                             name='overview'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    multiline
-                                    rows={3}
-                                    value={value}
-                                    label='Overview'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.overview)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.overview && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("overview", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
                             )}
                         />
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6}>
-                        <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
-                                <Controller
-                                    name='status'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
-                                            <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
-                                            <FormControlLabel value='Published' control={<Radio />} label='Published' />
-                                        </RadioGroup>
-                                    )}
-                                />
-                              
-                    </Grid>
+                  
 
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12} sm={4}>
                         <FileUpload
                             isAddMode={isAddMode}
                             olddata={!isAddMode && olddata.banner_image ? olddata.banner_image : ""}
@@ -452,7 +438,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12} sm={4}>
                         <FileUpload
                             isAddMode={isAddMode}
                             olddata={!isAddMode && olddata.pdf_file ? olddata.pdf_file : ""}
@@ -464,6 +450,22 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                             rejectionMessage='Try another file for upload.'
                         />
+                    </Grid>
+
+                    <Grid item xs={12} sm={4}>
+                        <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
+                                <Controller
+                                    name='status'
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field: { value, onChange } }) => (
+                                        <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                            <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                            <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                        </RadioGroup>
+                                    )}
+                                />
+                              
                     </Grid>
                 
                     <Grid item xs={12}>

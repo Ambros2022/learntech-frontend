@@ -27,13 +27,15 @@ import { FaTrash } from 'react-icons/fa';
 
 
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab } from '@mui/material'
+import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
 import TabList from '@mui/lab/TabList'
 import { Config } from 'src/configs/mainconfig'
+import QuillEditor from 'src/@core/components/html-editor/index';
+
 
 
 
@@ -44,7 +46,7 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
-    const { setValue } = useForm();
+    // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
@@ -181,6 +183,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         control,
         handleSubmit,
         resetField: admfiledReset,
+        setValue,
         reset,
         formState: { errors }
     } = useForm<any>({
@@ -1154,123 +1157,117 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid> */}
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>info</Typography>
+
                         <Controller
                             name='info'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Info'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.info)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.info && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("info", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>
 
 
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Admissions</Typography>
+
                         <Controller
                             name='admissions'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Admissions'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.admissions)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.admissions && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("admissions", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>
 
 
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Placements</Typography>
+
                         <Controller
                             name='placements'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Placements'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.placements)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.placements && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("placements", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Rankings</Typography>
+
                         <Controller
                             name='rankings'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Rankings'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.rankings)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.rankings && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("rankings", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={12}>
+                        
+                    <Typography style={{ marginBottom: '10px' }}>Scholarship</Typography>
                         <Controller
                             name='scholarship'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Scholarship'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.scholarship)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.scholarship && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("scholarship", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>
 
 
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>Hostel</Typography>
+
                         <Controller
                             name='hostel'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Hostel'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.hostel)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.hostel && { helperText: 'This field is required' })}
-                                />
+                                <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("hostel", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>

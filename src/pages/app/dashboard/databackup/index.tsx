@@ -1,6 +1,7 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
 // ** MUI Imports
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -13,7 +14,7 @@ import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
 import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, IconButton, Menu, MenuItem } from '@mui/material'
 
 
 // ** Icon Imports
@@ -51,80 +52,49 @@ const renderClient = (params: GridRenderCellParams) => {
 
 
 
-const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
-  const [open, setOpen] = useState(false);
+const RowOptions = ({ path, onReloadPage }: { path: any  | string; onReloadPage: () => void }) => {
 
-  const handleDelete = () => {
-    setOpen(true);
-  }
-  const handleClosePopup = () => {
-    setOpen(false);
-  };
-  const handleConfirmRemove = async () => {
-    await DeleteRow();
-    setOpen(false);
-  }
-
-  const DeleteRow = async () => {
+  const handledownloadfile = async () => {
     try {
-      await axios1.post('api/admin/schoolboard/delete/' + id)
-        .then(response => {
-          if (response.data.status == 1) {
-            toast.success(response.data.message)
-            // router.reload();
-            onReloadPage();
+      const response = await axios1.get('api/admin/backup/download/' + path, { responseType: 'blob' });
 
-          } else {
-            toast.error(response.data.message)
+      // Create a Blob object from the response data
+      const blob = new Blob([response.data], { type: response.headers['content-type'] });
 
-          }
-        })
-    } catch (err: any) {
-      console.error(err);
-      toast.error(err.message || "please try again")
+      // Create a temporary URL for the blob
+      const url = window.URL.createObjectURL(blob);
 
+      // Create a temporary anchor element
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'filename'; // Specify the filename you want to download
+      document.body.appendChild(a);
+
+      // Programmatically trigger a click event on the anchor element
+      a.click();
+
+      // Cleanup: remove the temporary anchor element and URL object
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      
+      toast.success('File downloaded successfully');
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred. Please try again.');
     }
-
   };
-
+  
   return (
     <>
-      <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./schoolboard/edit/` + id} >
-          <Icon icon='tabler:edit' fontSize={20} />
-        </Link>
-      </MenuItem>
+    
 
+<MenuItem onClick={() => handledownloadfile()} sx={{ '& svg': { mr: 1 }, backgroundColor: '#3949ab', color: 'white', borderRadius: '8px', padding: '5px' }}>
+<IconButton size="small" color="inherit">
+        <CloudDownloadIcon />
+      </IconButton>
+  Download
+</MenuItem>
 
-      <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
-        <Icon icon='tabler:trash' fontSize={20} />
-
-      </MenuItem>
-
-      <Grid>
-
-        <Dialog
-          open={open}
-          onClose={handleClosePopup}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle className="popup-title" id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-          <DialogContent style={{ paddingTop: '20px' }}>
-            <DialogContentText id="alert-dialog-description">
-              Would you like to delete?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClosePopup} color="primary">
-              No
-            </Button>
-            <Button onClick={() => handleConfirmRemove()} color="primary" autoFocus>
-              Yes
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Grid>
     </>
 
 
@@ -149,11 +119,11 @@ const SecondPage = () => {
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
   const [page, setPage] = useState<number>(1)
-  const [orderby, setOrderby] = useState<SortType>('asc')
+  const [orderby, setOrderby] = useState<SortType>('desc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [columnname, setColumnname] = useState<string>('name')
+  const [searchfrom, setSearchfrom] = useState<any>('created_at')
+  const [columnname, setColumnname] = useState<string>('created_at')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
 
@@ -170,21 +140,15 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 200,
-      field: 'name',
-      headerName: 'name',
+      field: 'id',
+      headerName: 'ID',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {renderClient(params)}
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.name}
+                {row.id}
               </Typography>
-
-            </Box>
-          </Box>
         )
       }
     },
@@ -192,91 +156,69 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 100,
-      field: 'slug',
-      headerName: 'Slug',
+      field: 'title',
+      headerName: 'title',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.slug}
-          </Typography>
-
-
+              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+                {row.title}
+              </Typography>
         )
       }
     },
 
     {
       flex: 0.175,
-      minWidth: 100,
-      field: 'citys.name',
-      headerName: 'City',
+      minWidth: 200,
+      field: 'status',
+      headerName: 'Status',
       renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
+        const { row } = params;
+    
+        let button;
+        switch (row.status) {
+          case 0:
+            button = <Button variant="contained" color="warning" sx={{ width: '100px', height: '40px' }}>Pending</Button>;
+            break;
+          case 1:
+            button = <Button variant="contained" color="info" sx={{ width: '100px', height: '40px' }}>Process</Button>;
+            break;
+          case 2:
+            button = <Button variant="contained" color="success" sx={{ width: '100px', height: '40px' }}>Completed</Button>;
+            break;
+          case 3:
+            button = <Button variant="contained" color="error" sx={{ width: '100px', height: '40px' }}>Cancelled</Button>;
+            break;
+          default:
+            button = <Button variant="contained" color="primary" sx={{ width: '100px', height: '40px' }}>Unknown</Button>;
+            break;
+        }
+    
         return (
-
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.citys.name}
+            {button}
           </Typography>
-
-
-        )
+        );
       }
     },
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'state.name',
-      headerName: 'Area',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.state.name}
-          </Typography>
-
-
-        )
-      }
-    },
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'gender',
-      headerName: 'Gender',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.gender}
-          </Typography>
-
-
-        )
-      }
-    },
-  
-
+    
 
     {
       flex: 0.175,
-      minWidth: 100,
+      minWidth: 200,
       sortable: false,
       field: 'actions',
       headerName: 'Actions',
       renderCell: ({ row }: any) => (
-        <RowOptions id={row.id} onReloadPage={handleReloadPage} />
+        <RowOptions path={row.path} onReloadPage={handleReloadPage} />
       )
 
     }
   ]
+
+
 
 
   const fetchTableData = useCallback(
@@ -288,7 +230,7 @@ const SecondPage = () => {
       cancelToken = axios.CancelToken.source();
 
       await axios1
-        .get('api/admin/schoolboard/get', {
+        .get('api/admin/backup/get', {
           cancelToken: cancelToken.token,
           params: {
             columnname,
@@ -335,7 +277,7 @@ const SecondPage = () => {
       setOrderby(newModel[0].sort)
       setColumnname(newModel[0].field)
     } else {
-      setOrderby('asc')
+      setOrderby('desc')
       setColumnname('name')
     }
   }
@@ -347,17 +289,31 @@ const SecondPage = () => {
 
 
   const AddButtonToolbar = () => {
-
+    const handleRequestBackup = async () => {
+      try {
+        // Make a GET request to your API endpoint
+        const response = await axios1.get('api/admin/backup/request');
+        
+        // Handle the response
+        if (response.data.status === 1) {
+          // Request was successful, display a success message or perform any other actions
+          toast.success(response.data.message);
+        } else {
+          // Request failed, display an error message or perform error handling
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        // Handle any errors that occur during the API call
+        console.error(error);
+        toast.error("An error occurred. Please try again.");
+      }
+    };
+  
     return (
-      <>
-        <Link href={'./schoolboard/add'}>
-          <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
-            <Icon icon='tabler:plus' />
-            Add
-          </Fab>
-        </Link>
-
-      </>
+      <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }} onClick={handleRequestBackup}>
+        <Icon icon='tabler:plus' />
+        REQUEST BACKUP
+      </Fab>
     );
   };
 
@@ -368,6 +324,7 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
+
           <DataGrid
             autoHeight
             pagination
@@ -390,9 +347,9 @@ const SecondPage = () => {
                 variant: 'tonal',
               },
               toolbar: {
-                value: searchtext,
-                clearSearch: () => handleSearch(''),
-                onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value),
+                // value: searchtext,
+                // clearSearch: () => handleSearch(''),
+                // onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value),
                 CustomToolbar: AddButtonComponent
               },
             }}

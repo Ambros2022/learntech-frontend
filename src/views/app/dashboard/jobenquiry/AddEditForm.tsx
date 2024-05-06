@@ -87,6 +87,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         current_location: isAddMode ? '' : olddata.current_location,
         total_exp: isAddMode ? '' : olddata.total_exp,
         resume: isAddMode ? '' : olddata.resume,
+        status: isAddMode ? '' : olddata.status,
         job_location_id: isAddMode ? '' : olddata.alljoblocations,
         jobs_position_id: isAddMode ? '' : olddata.jobspositions,
 
@@ -451,7 +452,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     <Grid item xs={12} sm={4}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                                 <Controller
-                                    name='promo_banner_status'
+                                    name='status'
                                     control={control}
                                     rules={{ required: true }}
                                     render={({ field: { value, onChange } }) => (

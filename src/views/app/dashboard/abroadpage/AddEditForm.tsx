@@ -32,7 +32,7 @@ import Icon from 'src/@core/components/icon'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios1 from 'src/configs/axios'
-import { Checkbox, DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
+import { Checkbox, DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import { FaTrash } from 'react-icons/fa';
 import toast from 'react-hot-toast'
@@ -40,6 +40,8 @@ import router from 'next/router'
 import { Config } from 'src/configs/mainconfig'
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import QuillEditor from 'src/@core/components/html-editor/index';
+
 
 
 
@@ -50,7 +52,7 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     // ** States
-    const { setValue } = useForm();
+    // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
@@ -143,6 +145,7 @@ useEffect(() => {
         handleSubmit,
         resetField: admfiledReset,
         reset,
+        setValue,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -430,25 +433,7 @@ useEffect(() => {
                                     )}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Controller
-                                    name='info'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <CustomTextField
-                                            fullWidth
-                                            value={value}
-                                            label='info'
-                                            onChange={onChange}
-                                            placeholder=''
-                                            error={Boolean(errors.info)}
-                                            aria-describedby='validation-basic-first-name'
-                                            {...(errors.info && { helperText: 'This field is required' })}
-                                        />
-                                    )}
-                                />
-                            </Grid>
+                           
 
 
                             <Grid item xs={12} sm={6}>
@@ -470,6 +455,8 @@ useEffect(() => {
                                     )}
                                 />
                             </Grid>
+
+                            
                          
 
                             <Grid item xs={12} sm={6}>
@@ -515,6 +502,25 @@ useEffect(() => {
                                             {...(errors.meta_description && { helperText: 'This field is required' })}
                                         
                                         />
+                                    )}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12} sm={12}>
+                    <Typography style={{ marginBottom: '10px' }}>info</Typography>
+
+                                <Controller
+                                    name='info'
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field: { value, onChange } }) => (
+                                        <>
+                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                    onChange={(value) => setValue("info", value)} />
+                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                            </>
                                     )}
                                 />
                             </Grid>
