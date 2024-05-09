@@ -1416,7 +1416,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                         )}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} sm={5}>
+                                                <Grid item xs={12} sm={11}>
+                                                <Typography>Answers</Typography>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].answers`}
@@ -1425,23 +1426,21 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                         //@ts-ignore
                                                         defaultValue={val.answers}
                                                         render={({ field: { value, onChange } }) => (
-                                                            <CustomTextField
-                                                                fullWidth
-                                                                value={value}
-                                                                label='Answers'
-                                                                onChange={(e) => {
-                                                                    onChange(e);
-                                                                    setValue(`faqs[${index}].answers`, e.target.value);
-                                                                }}
-                                                                placeholder=''
-                                                            />
+                                                            <>
+                                                        <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                        onChange={(e) => {
+                                                        onChange(e);
+                                                        setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                         }} />
+                                          
+                                                        </>
                                                         )}
                                                     />
                                                 </Grid>
 
 
 
-                                                <Grid item xs={2}>
+                                                <Grid item xs={1}>
                                                     {index !== 0 && (
                                                         <Button
                                                             variant="contained"

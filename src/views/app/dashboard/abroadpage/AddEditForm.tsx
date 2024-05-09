@@ -41,6 +41,8 @@ import { Config } from 'src/configs/mainconfig'
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import QuillEditor from 'src/@core/components/html-editor/index';
+import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
+
 
 
 
@@ -568,7 +570,7 @@ useEffect(() => {
                                     {fields.map((val, index) => (
                                         <Grid item xs={12} key={val.id}>
                                             <Grid container spacing={2} alignItems="center">
-                                                <Grid item xs={12} sm={5}>
+                                                <Grid item xs={12} sm={11}>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].questions`}
@@ -590,7 +592,8 @@ useEffect(() => {
                                                         )}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} sm={5}>
+                                                <Grid item xs={12} sm={11}>
+                                                <Typography>Answers</Typography>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].answers`}
@@ -599,31 +602,29 @@ useEffect(() => {
                                                         //@ts-ignore
                                                         defaultValue={val.answers}
                                                         render={({ field: { value, onChange } }) => (
-                                                            <CustomTextField
-                                                                fullWidth
-                                                                value={value}
-                                                                label='Answers'
-                                                                onChange={(e) => {
-                                                                    onChange(e);
-                                                                    setValue(`faqs[${index}].answers`, e.target.value);
-                                                                }}
-                                                                placeholder=''
-                                                            />
+                                                            <>
+                                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(e) => {
+                                                    onChange(e);
+                                                    setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                    }} />
+                                          
+                                                    </>
                                                         )}
                                                     />
                                                 </Grid>
 
 
 
-                                                <Grid item xs={2}>
+                                                <Grid item xs={1}>
                                                     {index !== 0 && (
                                                         <Button
-                                                            variant="contained"
-                                                            color="secondary"
-                                                            onClick={() => handleRemoveFaq(index)}
-                                                            style={{ margin: '17px 0 0 0px' }}
+                                                        variant="contained"
+                                                        color="error"
+                                                        onClick={() => handleRemoveFaq(index)}
+                                                        style={{ margin: '17px 0 0 0px', padding: '8px' }}
                                                         >
-                                                            -
+                                                            <CloseIcon />
                                                         </Button>
                                                     )}
                                                 </Grid>
