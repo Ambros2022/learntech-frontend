@@ -5,6 +5,9 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GoogleLoginButton from '../google-login';
+
+// import TwitterLoginButton from '../twitter-login';
 
 
 interface FormValues {
@@ -27,6 +30,16 @@ const SignupForm: React.FC = () => {
 
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const handleLoginSuccess = (response) => {
+    // Handle successful login, e.g., set user state or redirect
+    console.log('User Logged In:', response.profileObj);
+  };
+
+  const handleLoginFailure = (error) => {
+    // Handle login failure, e.g., show error message
+    console.error('Login Error:', error);
   };
 
   return (
@@ -137,6 +150,9 @@ const SignupForm: React.FC = () => {
       <div className='text-black mb-3 text-center'>
         <small>Sign up with social media</small>
       </div>
+      <GoogleLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
+      {/* <TwitterLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} /> */}
+      {/* <LinkedInLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} /> */}
       <div className='text-black mb-3 text-center'>
         <small>Already have an account? <span className='text-blue fw-bold'>Sign In</span></small>
       </div>

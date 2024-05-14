@@ -43,7 +43,6 @@ const MainCarousel = ({ items }) => {
       showDots={false}
       arrows={false}
       infinite
-
       autoPlay
       autoPlaySpeed={2000}
       ssr  // SSR true for server-side rendering

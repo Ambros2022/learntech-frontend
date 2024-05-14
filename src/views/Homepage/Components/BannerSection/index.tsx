@@ -54,15 +54,17 @@ function BannerSection() {
         <div className="container-fluid">
           <div className="container">
             <div className="row">
-              <div className="col-md-7 mb-5" id="animation2">
-                <div className="searchSec">
-                  <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
-                  <div className="row">
-                    <div className="col-7 col-md-8 col-lg-9">
-                      <input type="search" placeholder="Search" className="form-control" id="exampleInputSearch" aria-describedby="searchHelp" />
-                    </div>
-                    <div className="col-5 text-center col-md-4 col-lg-3 p-0">
-                      <button className="btn  searchBtn">Search</button>
+              <div className="col-md-7 d-flex justify-content-md-center mb-5" id="animation2">
+                <div className="align-content-md-center w-90">
+                  <div className="searchSec">
+                    <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
+                    <div className="row">
+                      <div className="col-7 col-md-8 col-lg-9">
+                        <input type="search" placeholder="Search" className="form-control" id="exampleInputSearch" aria-describedby="searchHelp" />
+                      </div>
+                      <div className="col-5 text-center col-md-4 col-lg-3 p-0">
+                        <button className="btn  searchBtn">Search</button>
+                      </div>
                     </div>
                   </div>
                 </div>

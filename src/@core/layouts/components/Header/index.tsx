@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import { useState } from "react";
 import SignupForm from "src/@core/components/sign-up";
-import SignInForm from "src/@core/components/sing-in";
+import SignInForm from "src/@core/components/sign-in";
 
 const Header = () => {
 
@@ -54,7 +54,7 @@ const Header = () => {
                 <Link className={`nav-link ${isLinkActive('/home') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/home">Home</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Universities
                 </Link>
@@ -117,7 +117,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/college') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/college" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/college') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/college" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Colleges
                 </Link>
@@ -180,7 +180,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Courses
                 </Link>
@@ -243,7 +243,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/Exams') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/Exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Exams
                 </Link>
@@ -306,7 +306,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/studyAbroad') ? 'activeDrpDwn' : ''}`} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/studyAbroad') ? 'active' : ''}`} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Study Abroad
                 </Link>
@@ -369,7 +369,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Latest News
                 </Link>
@@ -432,7 +432,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className="nav-item dropdown d-lg-inline-block d-none">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   More
                 </Link>
