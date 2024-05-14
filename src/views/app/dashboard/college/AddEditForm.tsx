@@ -25,7 +25,6 @@ import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { FaTrash } from 'react-icons/fa'; 
 
-
 import type { FC, SyntheticEvent } from 'react';
 import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
@@ -35,6 +34,7 @@ import TabPanel from '@mui/lab/TabPanel'
 import TabList from '@mui/lab/TabList'
 import { Config } from 'src/configs/mainconfig'
 import QuillEditor from 'src/@core/components/html-editor/index';
+import { Checkbox } from '@material-ui/core'
 
 
 
@@ -173,6 +173,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
         state_id: isAddMode ? '' : olddata.state ? olddata.state : '',
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
+        is_associated: isAddMode ? false : olddata.is_associated ? olddata.is_associated : false,
+
         collegeamenities: [],
         streams: [],
         recoginations: [],
@@ -351,6 +353,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
             formData.append('avg_rating', data.avg_rating);
+            formData.append('is_associated', data.is_associated);
             formData.append('info', data.info);
             formData.append('admissions', data.admissions);
             formData.append('placements', data.placements);
@@ -416,6 +419,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('address', data.address);
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
+            formData.append('is_associated', data.is_associated);
             formData.append('avg_rating', data.avg_rating);
             formData.append('info', data.info);
             formData.append('admissions', data.admissions);
@@ -1272,6 +1276,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
+
+                 
+
                     <Grid item xs={12} sm={3}>
                         <FileUpload
                             isAddMode={isAddMode}
@@ -1315,6 +1322,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
+                    <Grid item xs={12} sm={3} style={{ marginTop: '15px' }}>
+                                <Controller
+                                    name='is_associated'
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field: { value, onChange } }) => (
+                                        <FormControlLabel
+                                            label='is_associated'
+                                            control={
+                                                <Checkbox
+                                                    checked={value}
+                                                    onChange={(e) => onChange(e.target.checked ? 1 : 0)}
+                                                    color="primary"
+                                                />
+                                            }
+                                        />
+                                    )}
+                                />
+                            </Grid>
+
+
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='listing_order'
@@ -1336,6 +1364,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
+                    
+
+                    
 
 
                     <Grid item xs={12} sm={6}>

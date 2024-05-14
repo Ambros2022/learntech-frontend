@@ -1,10 +1,12 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios1 from 'src/configs/axios'
 
 function BannerSection() {
-
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -21,6 +23,25 @@ function BannerSection() {
     console.log("Values:", values);
     resetForm();
   };
+
+  const handleSearch = async () => {
+    try {
+      setLoading(true);
+      const inputElement = document.getElementById('exampleInputSearch') as HTMLInputElement | null;
+      if (!inputElement) {
+        throw new Error('Input element not found');
+      }
+      const searchQuery = inputElement.value;
+      const response = await axios1.get(`api/website/home/searchbar`);
+      setSearchResults(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setLoading(false);
+      // Handle errors
+    }
+  };
+  
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
@@ -62,10 +83,12 @@ function BannerSection() {
                       <input type="search" placeholder="Search" className="form-control" id="exampleInputSearch" aria-describedby="searchHelp" />
                     </div>
                     <div className="col-5 text-center col-md-4 col-lg-3 p-0">
-                      <button className="btn  searchBtn">Search</button>
+                    <button className="btn searchBtn" onClick={handleSearch}>Search</button>
                     </div>
+
                   </div>
                 </div>
+               
               </div>
               <div className="col-md-5 mb-5" id="animation3">
                 <div className="searchForm">

@@ -186,13 +186,13 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 100,
-      field: 'generalcourse.name',
+      field: 'contact_number',
       headerName: 'Contact Number',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.generalcourse.name}
+            {row.contact_number}
           </Typography>
         );
       }
@@ -203,7 +203,7 @@ const SecondPage = () => {
     {
       flex: 0.4,
       minWidth: 100,
-      field: 'url',
+      field: 'current_url',
       headerName: 'Url',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
@@ -211,33 +211,14 @@ const SecondPage = () => {
         return (
 
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.url}
+            {row.current_url}
           </Typography>
 
 
         )
       }
     },
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'slug',
-      headerName: 'Date',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.slug}
-          </Typography>
-
-
-        )
-      }
-    },
-
-
+  
     {
       flex: 0.175,
       minWidth: 100,
