@@ -5,23 +5,37 @@ import * as Yup from 'yup';
 import axios1 from 'src/configs/axios'
 
 function BannerSection() {
-  const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(false);
+
+  const [, setSearchResults] = useState([]);
+
+  const [, setLoading] = useState(false);
+
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-    phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone NUmber is required"),
+    contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone NUmber is required"),
     course: Yup.string().required('Course is required'),
     location: Yup.string().required('Location is required'),
+    current_url: Yup.string().required('Location is required'),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
-    alert("Successfully Submitted");
-    console.log("Values:", values);
-    resetForm();
+  
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
+      const response = await axios1.post('api/website/enquiry', values);
+      alert('Successfully Submitted');
+      console.log('Response:', response.data);
+      resetForm();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSearch = async () => {
@@ -31,16 +45,15 @@ function BannerSection() {
       if (!inputElement) {
         throw new Error('Input element not found');
       }
-      const searchQuery = inputElement.value;
-      const response = await axios1.get(`api/website/home/searchbar`);
+      const response = await axios1.get('api/website/home/searchbar');
       setSearchResults(response.data);
-      setLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
+    } finally {
       setLoading(false);
-      // Handle errors
     }
   };
+
   
 
   return (
@@ -97,7 +110,8 @@ function BannerSection() {
                     initialValues={{
                       name: '',
                       email: '',
-                      phoneNumber: '',
+                      contact_number: '',
+                      current_url: '',
                       course: '',
                       location: '',
                     }}
@@ -115,8 +129,8 @@ function BannerSection() {
                         <ErrorMessage name="email" component="div" className="error text-danger" />
                       </div>
                       <div className="mb-3">
-                        <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" />
-                        <ErrorMessage name="phoneNumber" component="div" className="error text-danger" />
+                        <Field type="text" name="contact_number" placeholder="Enter Phone Number" className="form-control" />
+                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                       </div>
                       <div className="mb-3">
                         <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
@@ -125,6 +139,10 @@ function BannerSection() {
                       <div className="mb-3">
                         <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
                         <ErrorMessage name="location" component="div" className="error text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <Field type="text" name="current_url" placeholder="Enter Url" className="form-control" />
+                        <ErrorMessage name="current_url" component="div" className="error text-danger" />
                       </div>
 
                       <div className="d-grid">

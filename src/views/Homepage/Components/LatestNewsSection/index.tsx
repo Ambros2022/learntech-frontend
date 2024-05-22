@@ -1,61 +1,59 @@
-import React, { useState } from 'react';
+import { format } from 'date-fns';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios1 from 'src/configs/axios';
 
 function LatestNewsSection() {
-    const [activeTab, setActiveTab] = useState('news');
+    const [activeTab, setActiveTab] = useState<'news' | 'blogs'>('news');
+    const [items, setItems] = useState<{
+        created_at: any;
+        link: string | undefined; id: number; meta_title: string; meta_description: string 
+}[]>([]);
+    const [loading, setLoading] = useState(true);
 
-    const newsCards = [
-        {
-            id: 1,
-            date: '24 Jan, 2024',
-            title: 'News Title 1',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            link: '#'
-        },
-        {
-            id: 2,
-            date: '25 Jan, 2024',
-            title: 'News Title 2',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            link: '#'
-        },
-        {
-            id: 3,
-            date: '25 Jan, 2024',
-            title: 'News Title 3',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            link: '#'
-        },
-        // Add more news cards as needed
-    ];
+    const getNewsBlogs = useCallback(async (tab: 'news' | 'blogs') => {
+        setLoading(true); // Set loading to true when fetching data
+        try {
+            const roleparams = { page: 1, size: 10000, type: tab }; // Add type parameter to distinguish between news and blogs
+            const response = await axios1.get('api/website/newsandblogs/get', { params: roleparams });
 
-    const blogCards = [
-        {
-            id: 1,
-            date: '24 Jan, 2024',
-            title: 'Blog Title 1',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            link: '#'
-        },
-        {
-            id: 2,
-            date: '25 Jan, 2024',
-            title: 'Blog Title 2',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            link: '#'
-        },
-        {
-            id: 3,
-            date: '25 Jan, 2024',
-            title: 'Blog Title 3',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            link: '#'
-        },
-        // Add more blog cards as needed
-    ];
+            // Log the entire response for debugging
+            console.log('API Response:', response);
 
-    const handleTabClick = (tab) => {
+            // Ensure the response has the expected data structure
+            if (response.data && response.data.status === 1) {
+                const data = response.data[tab].data;
+                console.log(`${tab}:`, data);
+
+                // Set the state based on the active tab
+                setItems(data);
+            } else {
+                console.error('Invalid API response structure:', response);
+                setItems([]);
+            }
+        } catch (err) {
+            console.error('Error fetching data:', err);
+            setItems([]);
+        } finally {
+            setLoading(false); // Set loading to false once data is fetched
+        }
+    }, []);
+
+    useEffect(() => {
+        getNewsBlogs(activeTab);
+    }, [activeTab, getNewsBlogs]);
+
+    const handleTabClick = (tab: 'news' | 'blogs') => {
         setActiveTab(tab);
+        getNewsBlogs(tab); // Fetch data when tab is clicked
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    // Log the items to display for debugging
+    console.log('Active Tab:', activeTab);
+    console.log('Items to display:', items);
 
     return (
         <section className="latestNewsCon" id="animation8" data-aos="fade-down">
@@ -77,18 +75,30 @@ function LatestNewsSection() {
                 </div>
                 <div className="card-con pt-5">
                     <div className="row">
-                        {(activeTab === 'news' ? newsCards : blogCards).map(card => (
-                            <div className="col-md-4 mb-5" key={card.id}>
-                                <div className="card" id={`animation${card.id}`} data-aos="fade-up">
-                                    <div className="card-body">
-                                        <h6 className="card-subtitle mb-2 text-body-secondary">{card.date}</h6>
-                                        <h4 className="card-title fw-bold text-blue">{card.title}</h4>
-                                        <p className="card-text">{card.text}</p>
-                                        <a href={card.link} className="btn readBtn card-link">Read More</a>
+                        {items.length > 0 ? (
+                            items.map((item) => (
+                                <div className="col-md-4 mb-1" key={item.id}>
+                                    <div className="newsBlosCards">
+                                        <div className="mb-5">
+                                            <div className="card h-100">
+                                                <div className="card-body">
+                                                <h6 className="card-subtitle mb-2 text-body-secondary">
+                                                        {item.created_at ? format(new Date(item.created_at), 'yyyy-MM-dd') : 'No Date Available'}
+                                                    </h6>
+                                                    <h5 className="card-title fw-bold text-blue">{item.meta_title}</h5>
+                                                    <p className="card-text">{item.meta_description}</p>
+                                                    <a href={item.link} className="btn readBtn card-link">Read More</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div className="col-12">
+                                <p className="text-center">No items to display</p>
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
             </div>

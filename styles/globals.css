@@ -1805,3 +1805,20 @@ footer img {
 .detailsFillSec .submitBtn {
   width: auto !important;
 }
+
+
+.dropdown-row-news {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.news-item {
+ width: 60% !important;
+  list-style: none;
+}
+
+.card-news {
+  width: 100%;
+}
+
