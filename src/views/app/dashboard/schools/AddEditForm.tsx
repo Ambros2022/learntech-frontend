@@ -32,13 +32,17 @@ import Icon from 'src/@core/components/icon'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios1 from 'src/configs/axios'
-import { DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
+import { DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-
+import { Config } from 'src/configs/mainconfig';
+import JoditEditor from 'src/@core/components/html-editor';
+// import { Config } from '../../../configs/mainconfig';
 import toast from 'react-hot-toast'
 import router from 'next/router'
-
+import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
 import ImageUploading, { ImageListType } from "react-images-uploading";
+import QuillEditor from 'src/@core/components/html-editor/index';
+
 
 interface Authordata {
     olddata?: any;
@@ -234,6 +238,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         control,
         handleSubmit,
         resetField: admfiledReset,
+        // setValue,
         reset,
         formState: { errors }
     } = useForm<any>({
@@ -262,10 +267,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }, []);
 
     const onSubmit = async (data: any) => {
-
         // console.log(data);
         // return
-
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
@@ -408,10 +411,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             questions: '',
             answers: '',
 
-        }] : olddata.schfaqs || [{
-            questions: '',
-            answers: '',
-        }],
+        }] :
+            olddata.schfaqs && olddata.schfaqs.length > 0 ? olddata.schfaqs : [{
+                questions: '',
+                answers: '',
+            }] || [{
+                questions: '',
+                answers: '',
+            }],
+
 
 
 
@@ -492,17 +500,68 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         setFormvalue(newValue)
     }
 
-    const [images, setImages] = useState<ImageListType>([]);
+    // const [images, setImages] = useState<ImageListType>([
+    //     { "dataURL": "http://localhost:3000/images/logo.png" }
+    // ]);
+    const [images, setImages] = useState<ImageListType>(() => {
+        if (olddata && olddata.schgallery && Array.isArray(olddata.schgallery)) {
+            return olddata.schgallery.map(item => ({ dataURL: Config.API_URL + '/' + item.image }));
+        } else {
+            return [];
+        }
+    });
     const maxNumber = 69;
-  
+
     const onChangeimages = (
-      imageList: ImageListType,
-      addUpdateIndex: number[] | undefined
+        imageList: ImageListType,
+        addUpdateIndex: number[] | undefined
     ) => {
-      // data for submit
-      console.log(imageList, addUpdateIndex);
-      setImages(imageList);
+        // data for submit
+        // console.log(imageList, addUpdateIndex);
+        setImages(imageList);
     };
+
+
+    const GalleryImage = async () => {
+        // console.log(images, "imageLists");
+        try {
+            const formData = new FormData();
+            formData.append('id', olddata.id);
+
+            let oldimages: any = [];
+            images.forEach((image, index) => {
+                console.log(image);
+                if (image.file) {
+                    formData.append(`image${index}`, image.file);
+                } else {
+                    oldimages.push(image);
+                }
+            });
+            // formData.append("oldimages", oldimages);
+            formData.append("oldimages", JSON.stringify(oldimages));
+
+            const url = '/api/admin/school/updategallery';
+            const response = await axios1.post(url, formData);
+            if (response.data.status === 1) {
+                toast.success(response.data.message);
+                setLoading(false);
+                setError('');
+                reset();
+                router.back();
+            } else {
+                setLoading(false);
+                toast.error(response.data.message);
+                setError(response.data.message);
+            }
+        } catch (err) {
+            console.error(err);
+            setLoading(false);
+
+        }
+    }
+
+
+
 
     return (
         <Card>
@@ -636,7 +695,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={4}>
-
                                     <Controller
                                         name='state_id'
                                         control={control}
@@ -930,62 +988,68 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={4}>
-                                    <Controller
+                                    {/* <Controller
                                         name='info'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
-                                            <CustomTextField
-                                                fullWidth
-                                                value={value}
-                                                label='info'
-                                                onChange={onChange}
-                                                placeholder=''
-                                                error={Boolean(errors.info)}
-                                                aria-describedby='validation-basic-first-name'
-                                                {...(errors.info && { helperText: 'This field is required' })}
+                                            <JoditEditor // Replace CustomTextField with Example
+                                                placeholder='Enter text here...' // Example-specific prop
+                                                value={value} // Example-specific prop (if needed)
+                                                onChange={onChange} // Example-specific prop (if needed)
                                             />
                                         )}
-                                    />
+                                    /> */}
                                 </Grid>
-                                <Grid item xs={12} sm={4}>
+                                
+
+                                {/* <Grid item xs={12} sm={12}>
+                                <Typography style={{ marginBottom: '10px' }}>admissions_process</Typography>
                                     <Controller
                                         name='admissions_process'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
-                                            <CustomTextField
-                                                fullWidth
-                                                value={value}
-                                                label='admissions_process'
-                                                onChange={onChange}
-                                                placeholder=''
-                                                error={Boolean(errors.admissions_process)}
-                                                aria-describedby='validation-basic-first-name'
-                                                {...(errors.admissions_process && { helperText: 'This field is required' })}
-                                            />
+                                            <>
+                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                onChange={(value) => setValue("admissions_process", value)} />
+                                          
+                                        </>
+                                        )}
+                                    />
+                                </Grid> 
+
+                                <Grid item xs={12} sm={12}>
+                                <Typography style={{ marginBottom: '10px' }}>info</Typography>
+                                    <Controller
+                                        name='info'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                onChange={(value) => setValue("info", value)} />
+                                           
+                                        </>
                                         )}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4}>
+
+                                <Grid item xs={12} sm={12}>
+                                <Typography style={{ marginBottom: '10px' }}>extracurriculars</Typography>
                                     <Controller
                                         name='extracurriculars'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
-                                            <CustomTextField
-                                                fullWidth
-                                                value={value}
-                                                label='extracurriculars'
-                                                onChange={onChange}
-                                                placeholder=''
-                                                error={Boolean(errors.extracurriculars)}
-                                                aria-describedby='validation-basic-first-name'
-                                                {...(errors.extracurriculars && { helperText: 'This field is required' })}
-                                            />
+                                            <>
+                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                onChange={(value) => setValue("extracurriculars", value)} />
+                                           
+                                        </>
                                         )}
                                     />
-                                </Grid>
+                                </Grid> */}
                                 <Grid item xs={12} sm={4}>
                                     <FileUpload
                                         isAddMode={isAddMode}
@@ -1100,7 +1164,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     {fields.map((val, index) => (
                                         <Grid item xs={12} key={val.id}>
                                             <Grid container spacing={2} alignItems="center">
-                                                <Grid item xs={12} sm={5}>
+                                                <Grid item xs={12} sm={11}>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].questions`}
@@ -1122,7 +1186,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                         )}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} sm={5}>
+                                                <Grid item xs={12} sm={11}>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].answers`}
@@ -1131,31 +1195,29 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                         //@ts-ignore
                                                         defaultValue={val.answers}
                                                         render={({ field: { value, onChange } }) => (
-                                                            <CustomTextField
-                                                                fullWidth
-                                                                value={value}
-                                                                label='Answers'
-                                                                onChange={(e) => {
-                                                                    onChange(e);
-                                                                    setValue(`faqs[${index}].answers`, e.target.value);
-                                                                }}
-                                                                placeholder=''
-                                                            />
+                                                            <>
+                                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                             onChange={(e) => {
+                                                                onChange(e);
+                                                                setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                            }} />
+                                                      
+                                                            </>
                                                         )}
                                                     />
                                                 </Grid>
 
 
 
-                                                <Grid item xs={2}>
+                                                <Grid item xs={1}>
                                                     {index !== 0 && (
                                                         <Button
                                                             variant="contained"
-                                                            color="secondary"
+                                                            color="error"
                                                             onClick={() => handleRemoveFaq(index)}
-                                                            style={{ margin: '17px 0 0 0px' }}
+                                                            style={{ margin: '17px 0 0 0px' , padding: '8px' }}
                                                         >
-                                                            -
+                                                            <CloseIcon />
                                                         </Button>
                                                     )}
                                                 </Grid>
@@ -1261,19 +1323,54 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                 Click or Drop here
                                             </button>
                                             &nbsp;
-                                            <button onClick={onImageRemoveAll}>Remove all images</button>
-                                            {imageList.map((image, index) => (
-                                                <div key={index} className="image-item">
-                                                    <img src={image.dataURL} alt="" width="100" />
-                                                    <div className="image-item__btn-wrapper">
-                                                        <button onClick={() => onImageUpdate(index)}>Update</button>
-                                                        <button onClick={() => onImageRemove(index)}>Remove</button>
-                                                    </div>
+                                            {/* <button onClick={onImageRemoveAll}>Remove all images</button> */}
+                                            <div className="container">
+                                                <div className="row">
+                                                    {imageList.map((image, index) => (
+
+
+                                                        <div className="col-sm-6 col-md-4 col-lg-3">
+                                                            <div className="image-item ">
+                                                                {/* <img src={image.dataURL} className="img-fluid rounded" alt="" /> */}
+                                                                <img
+                                                                    src={image.dataURL}
+                                                                    style={{ width: '100%', height: '150px', maxWidth: '200px', maxHeight: '500px' }}
+                                                                    className="rounded"
+                                                                    alt=""
+                                                                />
+
+                                                                <div className="image-item__btn-wrapper d-flex justify-content-between align-items-center mt-2">
+                                                                    {/* <button className="btn btn-primary btn-block" onClick={() => onImageUpdate(index)}>Update</button> */}
+                                                                    <button className="btn btn-danger btn-block" onClick={() => onImageRemove(index)}>Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                    ))}
+
                                                 </div>
-                                            ))}
+                                            </div>
+
                                         </div>
                                     )}
                                 </ImageUploading>
+
+
+
+                                {loading ? (
+                                    <CircularProgress
+                                        sx={{
+                                            color: 'common.white',
+                                            width: '20px !important',
+                                            height: '20px !important',
+                                            mr: theme => theme.spacing(2)
+                                        }}
+                                    />
+                                ) : <Button variant='contained' type='submit' sx={{ mr: 1, mt: 2 }} onClick={() => GalleryImage()}>
+                                    Update                                </Button>}
                             </div>
 
 

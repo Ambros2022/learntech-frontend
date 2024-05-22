@@ -1,29 +1,32 @@
 // ** React Imports
-import { ChangeEvent, ReactNode, useState } from 'react'
+import {  ReactNode, useState } from 'react'
 
 // ** Next Import
 import Link from 'next/link'
 
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import CardHeader from '@mui/material/CardHeader'
+
 import CircularProgress from '@mui/material/CircularProgress'
+
 // ** MUI Components
+
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
-import Checkbox from '@mui/material/Checkbox'
+
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
-import { styled, useTheme } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import MuiCard, { CardProps } from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
-import MuiFormControlLabel, { FormControlLabelProps } from '@mui/material/FormControlLabel'
+
 import { useForm, Controller } from 'react-hook-form'
 
 import { useAuth } from 'src/hooks/useAuth'
+
 // ** Custom Component Import
+
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 // ** Icon Imports
@@ -40,7 +43,7 @@ import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wr
 
 // ** Third Party Imports
 import toast from 'react-hot-toast'
-import Head from 'next/head'
+
 
 interface State {
   password: string
@@ -52,10 +55,10 @@ const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '25rem' }
 }))
 
-const LinkStyled = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  color: `${theme.palette.primary.main} !important`
-}))
+// const LinkStyled = styled(Link)(({ theme }) => ({
+//   textDecoration: 'none',
+//   color: `${theme.palette.primary.main} !important`
+// }))
 
 
 
@@ -83,10 +86,8 @@ const LoginV1 = () => {
 
   // ** States
   const [loading, setLoading] = useState<boolean>(false)
-  const [state, setState] = useState<State>({
-    password: '',
-    showPassword: false
-  })
+
+
 
 
   const handleClickShowPassword = () => {
@@ -99,7 +100,7 @@ const LoginV1 = () => {
   const {
     control,
     handleSubmit,
-    setError,
+    
     formState: { errors }
   } = useForm<FormInputs>({ defaultValues })
 
@@ -112,6 +113,7 @@ const LoginV1 = () => {
       if (data.error) {
         toast.error(data.error)
         setLoading(false)
+        
         return
       }
       setLoading(false)
@@ -123,14 +125,7 @@ const LoginV1 = () => {
 
   return (
     <>
-      {/* <Head>
-        <title>Login in India | Study Abroad | Learntech Edu Solutions</title>
-        <meta
-          name='description'
-          content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!' />
-        <meta name='keywords' content='Learntechweb' />
-        <meta name='viewport' content='initial-scale=1, width=device-width' />
-      </Head> */}
+    
       <Box className='content-center'>
         <AuthIllustrationV1Wrapper>
           <Card>
@@ -150,7 +145,7 @@ const LoginV1 = () => {
                     <Controller
                       name='email'
                       control={control}
-                      // rules={{ required: true }}
+                     
                       rules={{
                         required: 'email is required',
                         validate: {

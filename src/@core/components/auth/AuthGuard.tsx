@@ -4,10 +4,14 @@ import { ReactNode, ReactElement, useEffect } from 'react'
 // ** Next Import
 import { useRouter } from 'next/router'
 import authConfig from 'src/configs/auth'
+
 // ** Hooks Import
 import { useAuth } from 'src/hooks/useAuth'
+
 // ** Cookies
+
 import Cookies from 'js-cookie';
+
 interface AuthGuardProps {
   children: ReactNode
   fallback: ReactElement | null
@@ -28,8 +32,9 @@ const AuthGuard = (props: AuthGuardProps) => {
       if (!router.isReady) {
         return
       }
-      console.log("AuthGuard", 1);
-      if (!storedToken) {
+   
+
+      if (!storedToken  && router.route !== "/404") {
         // console.log("AuthGuard", 2);
         if (router.asPath !== '/') {
           router.replace({
@@ -47,11 +52,11 @@ const AuthGuard = (props: AuthGuardProps) => {
   if (!router.isReady) {
     return fallback; // Return fallback if router is not ready
   }
-  if (auth.loading || auth.user === null) {
+  if (auth.loading || auth.user === null && router.route !== "/404") {
     // console.log("AuthGuard", 3);
     return fallback
   }
-  // console.log("AuthGuard", 4);
+  
   return <>{children}</>
 }
 

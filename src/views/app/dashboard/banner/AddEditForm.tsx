@@ -86,7 +86,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         title: isAddMode ? '' : olddata.title,
         image: isAddMode ? '' : olddata.image,
         description: isAddMode ? '' : olddata.description,
-        status: isAddMode ? '' : olddata.status,
+        status: isAddMode ? 'Draft' : olddata.status,
     }
 
     const {
@@ -270,6 +270,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
       />
                      </Grid>
 
+                  
+
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    multiline
+                                    rows={3}
+                                    value={value}
+                                    label='Description'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.description)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.description && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
                     <Grid item xs={12} sm={6}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                                 <Controller
@@ -284,26 +308,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     )}
                                 />
                               
-                    </Grid>
-
-                    <Grid item xs={12} sm={12}>
-                        <Controller
-                            name='description'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Description'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.description)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.description && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
                     </Grid>
 
                     <Grid item xs={12} sm={3}>

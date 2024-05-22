@@ -6,8 +6,6 @@ import FrontLayout from 'src/@core/layouts/FrontLayout'
 import Homepage from 'src/views/Homepage'
 
 
-
-
 const Home = () => {
   return <>
     <Homepage />

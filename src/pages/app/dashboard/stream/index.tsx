@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.delete('api/admin/stream/delete/' + id)
+      await axios1.post('api/admin/stream/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -240,7 +240,7 @@ const SecondPage = () => {
     },
     {
       flex: 0.175,
-      minWidth: 100,
+      minWidth: 200,
       field: 'listing_order',
       headerName: 'Listing Order',
       renderCell: (params: GridRenderCellParams) => {

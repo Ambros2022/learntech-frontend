@@ -207,6 +207,61 @@ const SecondPage = () => {
         )
       }
     },
+
+    {
+      flex: 0.175,
+      minWidth: 100,
+      field: 'citys.name',
+      headerName: 'City',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.citys.name}
+          </Typography>
+
+
+        )
+      }
+    },
+    {
+      flex: 0.175,
+      minWidth: 100,
+      field: 'state.name',
+      headerName: 'Area',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.state.name}
+          </Typography>
+
+
+        )
+      }
+    },
+    {
+      flex: 0.175,
+      minWidth: 100,
+      field: 'gender',
+      headerName: 'Gender',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.gender}
+          </Typography>
+
+
+        )
+      }
+    },
   
 
 

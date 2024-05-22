@@ -178,7 +178,9 @@ const SecondPage = () => {
   // ** States
   const { user } = useAuth();
   const [reloadpage, setReloadpage] = useState("0");
-  const [city_id, setcity_id] = useState('')
+  const [country_id, setCountry_id] = useState('')
+  const [countryId, setcountryId] = useState<string>('')
+  const [countries, setCountries] = useState([])
   const [status, setStatus] = useState('')
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -201,6 +203,9 @@ const SecondPage = () => {
     setLoading(true);
     setReloadpage('1');
   }, []);
+
+   
+
 
 
   let columns: GridColDef[] = [
@@ -253,7 +258,7 @@ const SecondPage = () => {
   ]
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, city_id: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, country_id: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -270,7 +275,7 @@ const SecondPage = () => {
             size,
             page,
             fieldname,
-            city_id,
+            country_id,
 
           },
         })
@@ -301,8 +306,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, fieldname, city_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, fieldname, city_id])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, fieldname, country_id)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, fieldname, country_id])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -334,11 +339,71 @@ const SecondPage = () => {
 
   const AddButtonComponent = <AddButtonToolbar />;
 
+  //get all countries
+  const getcountries = useCallback(async () => {
+
+    try {
+        const roleparams: any = {};
+        roleparams['page'] = 1;
+        roleparams['size'] = 10000;
+        const response = await axios1.get('api/admin/countries/get', { params: roleparams });
+
+        setCountries(response.data.data);
+
+    } catch (err) {
+        console.error(err);
+    }
+}, [isMountedRef]);
+
+useEffect(() => {
+
+    getcountries();
+
+}, [getcountries]);
   return (
     <Grid container spacing={6}>
-
+  
       <Grid item xs={12}>
-        <Card>
+      <Card>
+      <CardHeader title="Search Filters" />
+                <CardContent>
+                  <Grid container spacing={6}>
+                    <Grid item sm={4} xs={12}>
+                      <CustomTextField
+                        select
+                        fullWidth
+                        defaultValue="Select School"
+                        value={country_id}
+                        onChange={(e: any) => {
+                          setCountry_id(e.target.value);
+                          // console.log(setschoolId, "setschoolId");
+                          
+                        }}
+                        SelectProps={{
+                          displayEmpty: true,
+                        }}
+                      >
+                        <MenuItem value=''>Select Country</MenuItem>
+                        {countries && countries.map((val: any) => (
+                          <MenuItem value={val.id}>{val.name}</MenuItem>
+                        ))}
+                        {countries.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                      </CustomTextField>
+                    </Grid>
+                    <Grid item sm={4} xs={12}>
+                      <Button sx={{ mt: 0 }} variant="contained" color='error'
+                        onClick={(e: any) => {
+                          // setClassId('');
+                          setCountry_id('');
+                          // setStatus('');
+                        }}
+                        startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+       
+
+                <Divider sx={{ m: '0 !important' }} />
           <DataGrid
             autoHeight
             pagination
