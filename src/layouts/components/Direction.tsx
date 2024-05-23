@@ -2,6 +2,7 @@
 import { useEffect, ReactNode } from 'react'
 
 // ** MUI Imports
+ //@ts-ignore
 import { Direction } from '@mui/material'
 
 // ** Emotion Imports

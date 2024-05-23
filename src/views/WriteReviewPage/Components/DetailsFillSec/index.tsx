@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+    //@ts-ignore
 import Rating from 'react-rating-stars-component';
 
 function DetailsFillSec() {
@@ -123,12 +124,14 @@ function DetailsFillSec() {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label htmlFor="rating" className="text-black fw-bold form-label"><small>Rating</small></label>
+            
                       <Rating
+                          //@ts-ignore
                         name="rating"
                         count={5}
                         size={30}
                         value={values.rating}
-                        onChange={(newValue) => setFieldValue('rating', newValue)}
+                        onChange={(newValue: any) => setFieldValue('rating', newValue)}
                       />
                       <ErrorMessage name="rating" component="div" className="error text-danger" />
                     </div>
