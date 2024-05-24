@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
-import * as Yup from 'yup';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import emailjs from 'emailjs-com';
-import { Modal } from 'react-bootstrap';
-import { toast } from 'react-hot-toast'
+import React, { useState } from 'react'
 import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Config } from 'src/configs/mainconfig';
+
 
 function CollegeFilterSection() {
+
+
+    const ImgUrl = Config.IMG_URL;
+
     type Option = {
         label: string;
         value: string;
@@ -19,179 +18,9 @@ function CollegeFilterSection() {
         label: string;
         options: Option[];
     };
-
-    const [showScrollButton, setShowScrollButton] = useState(false);
-
-
-    // const [showModal, setShowModal] = useState(false);
-    // const handleShowModal = () => setShowModal(true);
-    // const handleCloseModal = () => setShowModal(false);
-
-    // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-    // const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-    // const validationSchema = Yup.object().shape({
-    //     name: Yup.string().required('Name is required'),
-    //     email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-    //     phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-    //     course: Yup.string().required('Course is required'),
-    //     location: Yup.string().required('Location is required'),
-    // });
-
-    // const handleSubmit = async (values, { resetForm }) => {
-    //     try {
-    //         toast.loading('Processing'); // Display loading toast while processing
-    //         setShowModal(false); // Assuming setShowModal is a state setter for hiding modal
-    //         await emailjs.send("service_lrx8r36", "template_fsa8zp6", values, "8xItMn8QYmHOyfncY");
-    //         toast.dismiss();
-    //         toast.success('Message sent successfully!'); // Display success toast if email is sent successfully
-    //         resetForm(); // Reset the form
-    //         // Close the modal here if needed
-    //     } catch (error) {
-    //         toast.error('Failed!'); // Display error toast if sending email fails
-    //         console.error('Error sending email:', error);
-    //         alert("Error sending email. Please try again later."); // Fall back to alert if toast is not available
-    //     }
-    // };
-
-
-    const colleges = [
-        {
-            id: 1,
-            name: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-            slug: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-            type: 'Private',
-            rating: 4.5,
-            location: 'Bangalore',
-            state: 'karnataka',
-            ownership: 'private',
-            streams: ['management', 'education'],
-            courses: ['bsc', 'mba'],
-            courseType: 'bachelors',
-            established: 1992,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 2,
-            name: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-            slug: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Vidyaniketan',
-            state: 'Bangalore',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 3,
-            name: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-            slug: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'karnataka',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 4,
-            name: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-            slug: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Manipal',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 5,
-            name: "ST. JOSEPH'S UNIVERSITY",
-            slug: "ST. JOSEPH'S UNIVERSITY",
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 6,
-            name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 7,
-            name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-
-        // Add more college objects as needed
-    ];
-
-
-    // const stateOptions: Option[] = Array.from(new Set(colleges.map(college => college.state))).map(state => ({ label: state, value: state }));
-    // const locationOptions: Option[] = Array.from(new Set(colleges.map(college => college.location))).map(location => ({ label: location, value: location }));
-    // const ownershipOptions: Option[] = Array.from(new Set(colleges.map(college => college.ownership))).map(ownership => ({ label: ownership, value: ownership }));
-
-    // const options: OptionGroup[] = [
-    //     {
-    //         id: 'state',
-    //         label: 'States',
-    //         options: options
-    //     },
-    //     {
-    //         id: 'location',
-    //         label: 'City',
-    //         options: locationOptions
-    //     },
-    //     {
-    //         id: 'ownership',
-    //         label: 'Ownership',
-    //         options: ownershipOptions
-    //     },
-    //     // Add other filter options...
-    // ];
-
     const options: OptionGroup[] = [
         {
-            id: 'state',
+            id: 'collegeStates',
             label: 'States',
             options: [
                 { label: 'Maharashtra', value: 'maharashtra' },
@@ -201,7 +30,7 @@ function CollegeFilterSection() {
             ]
         },
         {
-            id: 'location',
+            id: 'collegeCity',
             label: 'City',
             options: [
                 { label: 'Pune', value: 'pune' },
@@ -211,7 +40,7 @@ function CollegeFilterSection() {
             ]
         },
         {
-            id: 'ownership',
+            id: 'collegeOwnership',
             label: 'Ownership',
             options: [
                 { label: 'Private (2334)', value: 'private' },
@@ -219,7 +48,7 @@ function CollegeFilterSection() {
             ]
         },
         {
-            id: 'streams',
+            id: 'collegeStreams',
             label: 'Streams',
             options: [
                 { label: 'Management', value: 'management' },
@@ -229,7 +58,7 @@ function CollegeFilterSection() {
             ]
         },
         {
-            id: 'courses',
+            id: 'collegeCourses',
             label: 'Courses',
             options: [
                 { label: 'BSc (3233)', value: 'bsc' },
@@ -239,7 +68,7 @@ function CollegeFilterSection() {
             ]
         },
         {
-            id: 'courseType',
+            id: 'collegeCourseType',
             label: 'Course Type',
             options: [
                 { label: 'Bachelors (3233)', value: 'bachelors' },
@@ -249,43 +78,273 @@ function CollegeFilterSection() {
             ]
         }
     ];
+    const colleges = [
+        {
+            id: 1,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 2,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 3,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 4,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 5,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 6,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 7,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 8,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 9,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 10,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 11,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 12,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 13,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 14,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 15,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 16,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 17,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+        {
+            id: 18,
+            name: 'Yenepoya Medical College',
+            type: 'Private',
+            rating: 4.5,
+            location: 'Mangalore',
+            state: 'Karnataka',
+            ownership: 'Private',
+            streams: ['Management', 'Education'],
+            courses: ['BSc', 'MBA'],
+            courseType: 'Bachelors',
+            established: 1992,
+            imageUrl: '/images/icons/filter-card.jpg'
+        },
+    ];
 
     const [visibleCards, setVisibleCards] = useState(6);
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
-    const router = useRouter();
-
 
     const handleViewMore = () => {
-        // Check if there are any filtered colleges left to display
-        const filteredColleges = colleges.filter(college => {
-            return Object.keys(selectedCheckboxes).every(groupId => {
-                const selectedValues = selectedCheckboxes[groupId];
-                if (!selectedValues || selectedValues.length === 0) {
-                    return true;
-                }
-
-                if (Array.isArray(college[groupId])) {
-                    return selectedValues.some(value => college[groupId].includes(value));
-                }
-
-                return selectedValues.includes(college[groupId]);
-            });
-        });
-
-        console.log('Filtered Colleges:', filteredColleges);
-        console.log('Visible Cards:', visibleCards);
-
-        // If there are more filtered colleges to show, increment visibleCards
-        if (visibleCards < filteredColleges.length) {
-            setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
-        }
-
-        console.log('Updated Visible Cards:', visibleCards);
+        setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
     };
+    // State to store selected checkboxes
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
 
+    // Check if any filters are selected
+    const areFiltersSelected = Object.keys(selectedCheckboxes).some(group => selectedCheckboxes[group].length > 0);
 
-
-
+    // Function to handle checkbox change
     const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
@@ -298,6 +357,7 @@ function CollegeFilterSection() {
         });
     };
 
+    // Function to remove a selected checkbox
     const removeSelectedCheckbox = (groupId: string, value: string) => {
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
@@ -306,44 +366,32 @@ function CollegeFilterSection() {
         });
     };
 
-
-    const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
-
+    function CollegeCard({ id, slug, name, type, rating, location, state, established, imageUrl }) {
         return (
-            <div className='col-md-12 mb-3'>
-                <div className="mx-2 filterCardBorder">
-                    <div className="p-2">
-                        <div className="row">
-                            <div className="col-md-3 col-xl-3 clgCardImg">
-                                <Image width={180} height={200} src={imageUrl} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
+            <div className='mb-3'>
+                <div className="row p-2 filterCardBorder">
+                    <div className="col-md-4 text-md-start text-center col-lg-3 col-xl-3 col-12">
+                        <img src='/images/icons/filter-card.jpg' width={120} height={100} alt="College Logo" />
+                    </div>
+                    <div className="col-md-8 col-lg-9 col-xl-9 col-12">
+                        <div className="row d-flex justify-content-md-between justify-content-center filterCardText">
+                            <div className="col-12 mb-2 col-md-6 col-xl-8 text-md-start text-center">
+                                <h6 className='fw-bold text-black my-2'>{name}</h6>
                             </div>
-                            <div className="col-md-9 col-xl-9">
-                                <div className="row">
-                                    <div className="col-md-7 col-xl-7">
-                                        <div className="card-title">
-                                            <h6 className='fw-bold text-black my-2'>{name}</h6>
-                                        </div>
-                                        <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' />{`${location}, ${state}`}</p>
-                                            <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' /> Est. Year {established} <button className='btn typeBtn'>{type}</button></p>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
-                                        <button className='btn ratingBtn d-flex justify-content-center'><Image src='/images/icons/star-24.png' width={20} height={20} alt='star-icon' /><span className='align-content-center'>{rating}</span></button>
-                                    </div>
-                                    <div className="col-md-3 col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid">
-                                        <a className="activeBtn btn mb-3 d-flex justify-content-center"
-                                        // onClick={handleShowModal}
-                                        ><span className='align-content-center'>Apply Now</span></a>
-                                        <Link href={`/college/${id}/${slug}`} className="mb-3 viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
-                                    </div>
-                                </div>
-
-
-                                {/* <button className='btn bg-warning text-white' style={{ minWidth: '50px', minHeight: '20px' }}>{rating}</button> */}
-
-                                <div className='d-flex gap-2 btns'>
-
+                            <div className='col-12 mb-2 col-md-6 col-xl-4 d-flex gap-2 justify-content-md-end justify-content-center clgfilterCardBtn'>
+                                <button className='btn bg-skyBlue text-blue fw-bold'>{type}</button>
+                                <button className='btn bg-warning text-white'>{rating}</button>
+                            </div>
+                            <div className="col-12 mb-2 text-black text-md-start text-center">
+                                <p className="m-0">{`${location}, ${state}`}</p>
+                            </div>
+                            <div className='col-12 mb-2 text-black text-md-start text-center'>
+                                <p className="m-0">Est. Year {established}</p>
+                            </div>
+                            <div className="col-12 mb-2">
+                                <div className="d-flex justify-content-md-end justify-content-center gap-2">
+                                    <a href="#" className="activeBtn btn">Apply Now</a>
+                                    <Link href={``} className="viewMoreBtn btn">View More</Link>
                                 </div>
                             </div>
                         </div>
@@ -352,49 +400,30 @@ function CollegeFilterSection() {
             </div>
         );
     }
-
-
-
     function CollegeList({ selectedCheckboxes }: { selectedCheckboxes: Record<string, string[]> }) {
+        // Filter the colleges based on selected checkboxes
         const filteredColleges = colleges.filter(college => {
-            return Object.keys(selectedCheckboxes).every(groupId => {
+            // Check if at least one filter matches for any option group
+            return Object.keys(selectedCheckboxes).some(groupId => {
                 const selectedValues = selectedCheckboxes[groupId];
+                // If no values are selected for the current option group, return true to include the college
                 if (!selectedValues || selectedValues.length === 0) {
                     return true;
                 }
-
-                if (Array.isArray(college[groupId])) {
-                    return selectedValues.some(value => college[groupId].includes(value));
-                }
-
-                return selectedValues.includes(college[groupId]);
+                // Check if the college has at least one of the selected values for the current option group
+                return selectedValues.some(selectedValue => {
+                    // Check if the college has the selected value
+                    return options.find(optionGroup => optionGroup.id === groupId)?.options.find(option => option.value === selectedValue)?.value === college[groupId];
+                });
             });
         });
 
-        if (filteredColleges.length === 0) {
-            return (
-                <div className="text-center my-5">
-                    <p>No colleges found for the selected filters.</p>
-                </div>
-            );
-        }
-
-        if (filteredColleges.length > 0 && filteredColleges.slice(0, visibleCards).length === 0) {
-            return (
-                <div className="text-center my-5">
-                    <p>No more colleges to display.</p>
-                </div>
-            );
-        }
-
-
         return (
-            <div className='row'>
-                {filteredColleges.slice(0, visibleCards).map(college => (
+            <div>
+                {filteredColleges.map(college => (
                     <CollegeCard
-                        key={college.id}
                         id={college.id}
-                        slug={college.name}
+                        slug={college.slug}
                         name={college.name}
                         type={college.type}
                         rating={college.rating}
@@ -408,63 +437,22 @@ function CollegeFilterSection() {
         );
     }
 
-    useEffect(() => {
-        collegeFilterRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [visibleCards, selectedCheckboxes]);
 
-    const [accordionOpen, setAccordionOpen] = useState<string | null>(null);
-
-    const toggleAccordion = (groupId: string) => {
-        setAccordionOpen(groupId === accordionOpen ? null : groupId);
-    };
-
-    const collegeFilterRef = useRef<HTMLDivElement>(null); // Specify the type of ref
-
-
-    const StateButtons: React.FC<{ options: Option[]; setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>> }> = ({ options, setSelectedCheckboxes }) => {
-        const handleStateButtonClick = (state: string) => {
-            setSelectedCheckboxes({ state: [state] });
-            if (collegeFilterRef.current) {
-                collegeFilterRef.current.scrollIntoView({ behavior: 'smooth' });
-            }
-        };
-
-        return (
-            <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2">
-                <div className="col-12">
-                    <h6 className="text-black">Filters By Location</h6>
-                    <div className="btn-group">
-                        {options.map((option, index) => (
-                            <button key={index} className="btn d-inline-flex align-items-center rounded m-1 p-2 filterItemBtn" onClick={() => handleStateButtonClick(option.value)}>
-                                {option.label}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
+    // MultiSelectOptions component to display filter options
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
         return (
             <div>
                 {options.map((optionGroup, index) => (
                     <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2">
                         <div className="col-10">
-                            <a className='text-blue'
-                            >{optionGroup.label}</a>
+                            <a className='text-blue'>{optionGroup.label}</a>
                         </div>
                         <div className="col-2 text-center">
-                            <a
-                                className='text-blue'
-                                onClick={() => toggleAccordion(optionGroup.id)}
-                                aria-expanded={accordionOpen === optionGroup.id}
-                                aria-controls={`${optionGroup.id}Collapse`}
-                            >
+                            <a data-bs-toggle="collapse" href={`#${optionGroup.id}Collapse`} role="button" aria-expanded="false" aria-controls={`${optionGroup.id}Collapse`}>
                                 &#11205;
                             </a>
                         </div>
-                        <div className={`collapse ${accordionOpen === optionGroup.id ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
+                        <div className="collapse bg-white" id={`${optionGroup.id}Collapse`}>
                             <div className='my-3'>
                                 <hr></hr>
                                 <input type="search" placeholder="Search" className="icon-rtl form-control" id={`${optionGroup.id}Search`} aria-describedby={`${optionGroup.id}SearchHelp`} />
@@ -474,17 +462,11 @@ function CollegeFilterSection() {
                                             className="form-check-input"
                                             type="checkbox"
                                             value={option.value}
-                                            id={`${optionGroup.id}-${index}`}
-                                            onChange={(e) =>
-                                                handleCheckboxChange(
-                                                    optionGroup.id,
-                                                    option.value,
-                                                    e.target.checked
-                                                )
-                                            }
+                                            id={`${optionGroup.id}-${option.value.replace(/\s+/g, '-')}`}
                                             checked={selectedCheckboxes[optionGroup.id]?.includes(option.value)}
+                                            onChange={(e) => handleCheckboxChange(optionGroup.id, option.value, e.target.checked)}
                                         />
-                                        <label className="form-check-label" htmlFor={`${optionGroup.id}-${index}`}>
+                                        <label className="form-check-label" htmlFor={`${optionGroup.id}-${option.value.replace(/\s+/g, '-')}`}>
                                             {option.label}
                                         </label>
                                     </div>
@@ -492,135 +474,66 @@ function CollegeFilterSection() {
                             </div>
                         </div>
                     </div>
-                ))
-                }
-            </div >
-        );
-    };
-
-    const SelectedFilters: React.FC<{ selectedCheckboxes: Record<string, string[]> }> = ({ selectedCheckboxes }) => {
-        const getLabelForValue = (groupId: string, value: string) => {
-            const group = options.find(optionGroup => optionGroup.id === groupId);
-            const option = group?.options.find(option => option.value === value);
-            return option ? option.label : value;
-        };
-
-        return (
-            <div className="row bg-skyBlue gx-0 px-3 py-2 mb-3 mx-2">
-                <div className="col-12">
-                    <h6 className='text-black'>Selected Filters</h6>
-                </div>
-                <div className='my-2'>
-                    {Object.entries(selectedCheckboxes).map(([groupId, values]) => (
-                        values.map(value => (
-                            <div key={value} className="btn d-inline-flex align-items-center filterItemBtn rounded m-1 p-2">
-                                <span className="me-2">{getLabelForValue(groupId, value)}</span>
-                                <button
-                                    className="btn-close"
-                                    onClick={() => removeSelectedCheckbox(groupId, value)}
-                                />
-                            </div>
-                        ))
-                    ))}
-                </div>
+                ))}
             </div>
         );
     };
 
-    // Calculate filtered colleges outside of handleViewMore
-    const filteredColleges = colleges.filter(college => {
-        return Object.keys(selectedCheckboxes).every(groupId => {
-            const selectedValues = selectedCheckboxes[groupId];
-            if (!selectedValues || selectedValues.length === 0) {
-                return true;
-            }
-
-            if (Array.isArray(college[groupId])) {
-                return selectedValues.some(value => college[groupId].includes(value));
-            }
-
-            return selectedValues.includes(college[groupId]);
-        });
-    });
-
+    // Function to render selected checkboxes
+    const renderSelectedCheckboxes = () => {
+        const selectedOptions: JSX.Element[] = [];
+        for (const groupId in selectedCheckboxes) {
+            selectedCheckboxes[groupId].forEach((value, index) => {
+                selectedOptions.push(
+                    <button
+                        key={`${groupId}-${value}`}
+                        className="btn selectedFilterBtn me-2 mb-2"
+                        onClick={() => removeSelectedCheckbox(groupId, value)}
+                    >
+                        {options.find(optionGroup => optionGroup.id === groupId)?.options.find(option => option.value === value)?.label}
+                        <span className="ms-2">&times;</span>
+                    </button>
+                );
+            });
+        }
+        return selectedOptions;
+    };
 
     return (
         <>
-            <div ref={collegeFilterRef} className='bg-white py-3'>
+            <section className="bg-white CollegeFilterSection">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 mb-3 mb-lg-0 bg-skyBlue">
-                            <MultiSelectOptions options={options} />
+                        <div className="col-md-4 col-lg-3 col-5 pb-5 bg-skyBlue collegeSearchFilter">
+                            <div>
+                                <MultiSelectOptions options={options} />
+                            </div>
                         </div>
-                        <div className="col-lg-9">
-                            <SelectedFilters selectedCheckboxes={selectedCheckboxes} />
-                            <CollegeList selectedCheckboxes={selectedCheckboxes} />
-                            {filteredColleges.length > visibleCards && (
-                                <div className="text-center my-3">
-                                    <button className="btn viewMoreCardBtn"
-                                        onClick={handleViewMore}
-                                    >
-                                        Load More
-                                    </button>
-                                </div>
-                            )}
-                            <StateButtons options={options.find(option => option.id === 'state')?.options || []} setSelectedCheckboxes={setSelectedCheckboxes} />
+                        <div className="col-7 col-md-8 col-lg-9 collegeFilterCards">
+                            <div className='bg-skyBlue pb-3 text-black alert filterSelectedSec'>
+                                {areFiltersSelected ? (
+                                    // Render selected checkboxes if filters are selected
+                                    renderSelectedCheckboxes()
+                                ) : (
+                                    // Render "No Filters Selected" if no filters are selected
+                                    <p className='m-0'>No Filters Selected</p>
+                                )}
+                            </div>
+                            <div className='filterCardCon container-fluid'>
+                                <CollegeList selectedCheckboxes={selectedCheckboxes} />
+                                {visibleCards < colleges.length && (
+                                    <div className="text-center mt-3">
+                                        <button className="btn viewMoreBtn" onClick={handleViewMore}>Load More</button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/* Modal
-
-            <Modal className="modal fade px-3" id="exampleModal" show={showModal} onHide={handleCloseModal}>
-                <div className="modal-content">
-                    <div className="searchForm">
-                        <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
-                        <Formik
-                            initialValues={{
-                                name: '',
-                                email: '',
-                                phoneNumber: '',
-                                course: '',
-                                location: '',
-                            }}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                            resetForm
-                        >
-                            <Form>
-                                <div className="mb-3">
-                                    <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
-                                    <ErrorMessage name="name" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                                    <ErrorMessage name="email" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" />
-                                    <ErrorMessage name="phoneNumber" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
-                                    <ErrorMessage name="course" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                                    <ErrorMessage name="location" component="div" className="error text-danger" />
-                                </div>
-
-                                <div className="d-grid">
-                                    <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                                </div>
-                            </Form>
-                        </Formik>
-                    </div>
-                </div>
-            </Modal> */}
+            </section>
         </>
-
-    );
+    )
 }
 
-export default CollegeFilterSection;
+export default CollegeFilterSection
+

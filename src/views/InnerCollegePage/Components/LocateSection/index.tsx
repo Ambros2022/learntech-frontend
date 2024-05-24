@@ -8,7 +8,7 @@ function LocationSection() {
         <div className="container">
           <h1 className='pt-0 text-center mb-4 text-blue fw-bold'>Locate The College</h1>
           <div className="row">
-            <div className="col-md-6 d-flex justify-content-start locatedSec px-md-5 g-0">
+            {/* <div className="col-md-6 d-flex justify-content-start locatedSec px-md-5 g-0">
               <div className="align-self-center card mb-3 bg-lightCard p-3">
                 <div className="row g-0">
                   <div className="col-lg-2 text-center text-md-center text-lg-start">
@@ -22,8 +22,8 @@ function LocationSection() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-6 g-0"><GoogleMap /></div>
+            </div> */}
+            <div className="col-md-12 g-0"><GoogleMap /></div>
           </div>
         </div>
       </section>

@@ -7,8 +7,8 @@ function BannerSection() {
     <>
       <hr className='mt-0' />
       <section className='bg-blue collegeDetailBanner'>
-        <div className="container">
-          <div className="collegeDetailCard mb-md-5 w-100">
+        <div className="container h-100 d-flex justify-content-center">
+          <div className="align-content-center collegeDetailCard w-100">
             <div className="row">
               <div className="col-12 mb-3 col-md-2 text-md-start text-center">
                 <Image src="/images/icons/filter-card.jpg" width={200} height={200} alt="College Image" />

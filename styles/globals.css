@@ -319,12 +319,9 @@ select:focus {
   font-size: 16px;
 }
 .reqBtn button {
-  background-color: white !important;
-  color: #254692 !important;
+  background-color: #254692 !important;
+  color: white !important;
   padding: 10px 30px !important;
-}
-.reqBtn button:hover {
-  color: blue !important;
 }
 .text-blue {
   color: #254692 !important;
@@ -1033,7 +1030,7 @@ footer img {
 }
 @media (min-width: 320px) and (max-width: 425px) {
   .bannerCon {
-    height: 700px !important;
+    height: 750px !important;
   }
   .carousel-item {
     width: 100%;
@@ -2011,7 +2008,32 @@ footer img {
   background-color: #f6f8fb !important;
   color: #254692 !important;
 }
+.collegeBannerCon .form-control {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  padding: 12px 10px !important;
+}
+.collegeBannerCon input::placeholder {
+  color: white !important;
+}
+.collegeBannerCon h1 {
+  font-size: 33px !important;
+}
+.ExpertCon {
+  background-color: white !important;
+}
+/* .ExpertCon .form-control {
+  background-color: transparent !important;
+}
+.ExpertCon input::placeholder {
+  color: white !important;
+}
+.ExpertCon .form-label {
+  color: white !important;
+} */
 @media (min-width: 992px) and (max-width: 1024px) {
+  .collegeBannerCon h1 {
+    font-size: 24px !important;
+  }
   .ratingBtn {
     background-color: rgb(255, 174, 0) !important;
     color: white !important;
@@ -2026,6 +2048,9 @@ footer img {
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
+  .collegeBannerCon h1 {
+    font-size: 23px !important;
+  }
   .ratingBtn {
     background-color: rgb(255, 174, 0) !important;
     color: white !important;
@@ -2040,6 +2065,12 @@ footer img {
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .innerClg h2 {
+    font-size: 21px !important;
+  }
+  .collegeBannerCon h1 {
+    font-size: 19px !important;
+  }
   .ratingBtn {
     background-color: rgb(255, 174, 0) !important;
     color: white !important;

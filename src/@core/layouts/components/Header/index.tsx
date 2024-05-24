@@ -144,10 +144,10 @@ const Header = () => {
           <div className={`${isOpen ? 'show' : ''} collapse navbar-collapse`} id="navbarSupportedContent">
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/home">Home</Link>
+                <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/">Home</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Universities
                 </Link>
