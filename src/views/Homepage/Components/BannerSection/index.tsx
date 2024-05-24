@@ -1,26 +1,61 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios1 from 'src/configs/axios'
 
 function BannerSection() {
 
+  const [, setSearchResults] = useState([]);
+
+  const [, setLoading] = useState(false);
+
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-    phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone NUmber is required"),
+    contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone NUmber is required"),
     course: Yup.string().required('Course is required'),
     location: Yup.string().required('Location is required'),
+    current_url: Yup.string().required('Location is required'),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
-    alert("Successfully Submitted");
-    console.log("Values:", values);
-    resetForm();
+
+
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
+      const response = await axios1.post('api/website/enquiry', values);
+      alert('Successfully Submitted');
+      console.log('Response:', response.data);
+      resetForm();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const handleSearch = async () => {
+    try {
+      setLoading(true);
+      const inputElement = document.getElementById('exampleInputSearch') as HTMLInputElement | null;
+      if (!inputElement) {
+        throw new Error('Input element not found');
+      }
+      const response = await axios1.get('api/website/home/searchbar');
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
@@ -54,20 +89,20 @@ function BannerSection() {
         <div className="container-fluid">
           <div className="container">
             <div className="row">
-              <div className="col-md-7 d-flex justify-content-md-center mb-5" id="animation2">
-                <div className="align-content-md-center w-90">
-                  <div className="searchSec">
-                    <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
-                    <div className="row">
-                      <div className="col-7 col-md-8 col-lg-9">
-                        <input type="search" placeholder="Search" className="form-control" id="exampleInputSearch" aria-describedby="searchHelp" />
-                      </div>
-                      <div className="col-5 text-center col-md-4 col-lg-3 p-0">
-                        <button className="btn  searchBtn">Search</button>
-                      </div>
+              <div className="col-md-7 mb-5" id="animation2">
+                <div className="searchSec">
+                  <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
+                  <div className="row">
+                    <div className="col-7 col-md-8 col-lg-9">
+                      <input type="search" placeholder="Search" className="form-control" id="exampleInputSearch" aria-describedby="searchHelp" />
                     </div>
+                    <div className="col-5 text-center col-md-4 col-lg-3 p-0">
+                      <button className="btn searchBtn" onClick={handleSearch}>Search</button>
+                    </div>
+
                   </div>
                 </div>
+
               </div>
               <div className="col-md-5 mb-5" id="animation3">
                 <div className="searchForm">
@@ -76,7 +111,8 @@ function BannerSection() {
                     initialValues={{
                       name: '',
                       email: '',
-                      phoneNumber: '',
+                      contact_number: '',
+                      current_url: '',
                       course: '',
                       location: '',
                     }}
@@ -94,8 +130,8 @@ function BannerSection() {
                         <ErrorMessage name="email" component="div" className="error text-danger" />
                       </div>
                       <div className="mb-3">
-                        <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" />
-                        <ErrorMessage name="phoneNumber" component="div" className="error text-danger" />
+                        <Field type="text" name="contact_number" placeholder="Enter Phone Number" className="form-control" />
+                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                       </div>
                       <div className="mb-3">
                         <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
@@ -104,6 +140,10 @@ function BannerSection() {
                       <div className="mb-3">
                         <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
                         <ErrorMessage name="location" component="div" className="error text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <Field type="text" name="current_url" placeholder="Enter Url" className="form-control" />
+                        <ErrorMessage name="current_url" component="div" className="error text-danger" />
                       </div>
 
                       <div className="d-grid">

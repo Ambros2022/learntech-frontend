@@ -35,6 +35,8 @@ import { ImageListType } from 'react-images-uploading'
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
+import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
+
 
 
 
@@ -588,10 +590,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
-                              
-
-
-
                                 <Grid item xs={12} sm={4}>
                                     <Controller
                                         name='name'
@@ -725,12 +723,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-                  
-
-                                <Grid item xs={12}>
-                                    {error ? <Alert severity='error'>{error}</Alert> : null}
-                                </Grid>
-
+                
                                 <Grid item xs={12} sm={4}>
                         <Controller
                             name='result_date'
@@ -888,6 +881,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
+                                <Grid item xs={12}>
+                                    {error ? <Alert severity='error'>{error}</Alert> : null}
+                                </Grid>
+
 
                     <Grid item xs={12}>
                         <DialogActions
@@ -925,7 +922,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     {fields.map((val, index) => (
                                         <Grid item xs={12} key={val.id}>
                                             <Grid container spacing={2} alignItems="center">
-                                                <Grid item xs={12} sm={5}>
+                                                <Grid item xs={12} sm={11}>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].questions`}
@@ -947,7 +944,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                         )}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} sm={5}>
+                                                {/* <Grid item xs={12} sm={5}>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].answers`}
@@ -968,19 +965,41 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                             />
                                                         )}
                                                     />
+                                                </Grid> */}
+
+
+                                                <Grid item xs={12} sm={11}>
+                                                <Typography>Answers</Typography>
+                                                <Controller
+                                                name={`faqs[${index}].answers`}
+                                                control={faqcontrol}
+                                                rules={{ required: true }}
+                                                // defaultValue={val.answers}
+                                                render={({ field: { value, onChange } }) => (
+                                                <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                 onChange={(e) => {
+                                                    onChange(e);
+                                                    setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                }} />
+                                          
+                                                </>
+                                                    )}
+                                                />
                                                 </Grid>
 
 
 
-                                                <Grid item xs={2}>
+                                                <Grid item xs={1}>
                                                     {index !== 0 && (
                                                         <Button
                                                             variant="contained"
-                                                            color="secondary"
+                                                            color="error"
                                                             onClick={() => handleRemoveFaq(index)}
-                                                            style={{ margin: '17px 0 0 0px' }}
+                                                            style={{ margin: '17px 0 0 0px', padding: '8px' }}
+                                                            
                                                         >
-                                                            -
+                                                            <CloseIcon />
                                                         </Button>
                                                     )}
                                                 </Grid>

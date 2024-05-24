@@ -1,13 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SignupForm from "src/@core/components/sign-up";
 import SignInForm from "src/@core/components/sign-in";
+import axios1 from 'src/configs/axios'
+
 
 const Header = () => {
 
   const router = useRouter();
+  const [universities, setUniversities] = useState<any[]>([]);
+  const [exams, setExams] = useState<any[]>([]);
+
+  const [news, setNews] = useState<any[]>([]);
+
+  const [country, setCountry] = useState<any[]>([]);
+
+
+
   const isLinkActive = (href) => {
     return router.pathname === href;
   };
@@ -15,6 +26,88 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
+
+  const getnews = useCallback(async () => {
+    setNews([]);
+    try {
+      const roleparams: any = {}
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/website/news/get', { params: roleparams });
+      setNews(response.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  const getCountry = useCallback(async () => {
+    setCountry([]);
+    try {
+      const roleparams: any = {}
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/countries/get', { params: roleparams });
+      setCountry(response.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+
+  const getuniversities = useCallback(async () => {
+    setUniversities([]);
+    try {
+      const roleparams: any = {}
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/website/states/get', { params: roleparams });
+      setUniversities(response.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+
+  const getexams = useCallback(async () => {
+    setExams([]);
+    try {
+      const roleparams: any = {}
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/website/exams/get', { params: roleparams });
+      setExams(response.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  useEffect(() => {
+
+    getuniversities();
+    getexams();
+
+    getnews();
+
+    getCountry();
+
+  }, [getuniversities, getexams, getnews, getCountry]);
+
+
+  // useEffect(() => {
+  //   // Fetch data when the component mounts
+  //   async function fetchData() {
+  //     try {
+  //       const response = await axios1.get('api/website/college/get');
+  //       setUniversities(response.data);
+  //       console.log("data",response.data ) // Assuming the API returns an array of universities
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []); // Empty dependency array ensures the effect runs only once on mount
+
 
   return (
 
@@ -54,130 +147,85 @@ const Header = () => {
                 <Link className={`nav-link ${isLinkActive('/home') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/home">Home</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Universities
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karnataka <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
+                {universities.length > 0 && (
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div className="text-center"><p style={{ color: '#274896', fontWeight: '700' }}>Universities by location</p></div>
+                    {universities.map(university => (
+                      <li key={university.id}>
+                        <Link href={`/university/${university.name}`} className="dropdown-item">
+                          <div className="d-flex justify-content-between">
+                            {university.name}
+                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={50} height={25} alt='arrow-img' />
+                          </div>
+                        </Link>
+
+                        <ul className="dropdown-menu dropdown-submenu">
+                          {university.city.map(city => (
+                            <li key={city.id}>
+                              <Link className="dropdown-item" href={`/${city.name.toLowerCase()}`}>
+                                {city.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+
                       </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Tamil Nadu <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karela <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Andhra Pradesh <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <div className='text-center text-blue dropdownBtn'>
-                    <Link href="#" className='btn'>View More</Link>
-                  </div>
-                </ul>
+                    ))}
+                    <div className='text-center text-blue dropdownBtn'>
+                      <Link href="#" className='btn'>View More</Link>
+                    </div>
+                  </ul>
+                )}
+
               </li>
               <li className="nav-item dropdown">
                 <Link className={`nav-link dropdown-toggle ${isLinkActive('/college') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/college" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Colleges
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karnataka <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
+
+                {universities.length > 0 && (
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div className="text-center"><p style={{ fontWeight: 'bold', color: '#274896' }}>College by location</p></div>
+                    {universities.map(university => (
+
+                      <li key={university.id}>
+
+                        <Link href={`/university/${university.name}`} className="dropdown-item">
+
+                          <div className="d-flex justify-content-between">
+
+                            {university.name}
+
+                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={20} height={25} alt='arrow-img' />
+                          </div>
+                        </Link>
+
+                        <ul className="dropdown-menu dropdown-submenu">
+                          {university.city.map(city => (
+                            <li key={city.id}>
+                              <Link className="dropdown-item" href={`/${city.name.toLowerCase()}`}>
+                                {city.name}
+                              </Link>
+                            </li>
+
+                          ))}
+                          <div className='text-center text-blue dropdownBtn'>
+                            <Link href="#" className='btn'>View More</Link>
+                          </div>
+                        </ul>
+
                       </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Tamil Nadu <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karela <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Andhra Pradesh <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <div className='text-center text-blue dropdownBtn'>
-                    <Link href="#" className='btn'>View More</Link>
-                  </div>
-                </ul>
+                    ))}
+                    <div className='text-center text-blue dropdownBtn'>
+                      <Link href="#" className='btn'>View More</Link>
+                    </div>
+                  </ul>
+                )}
               </li>
               <li className="nav-item dropdown">
                 <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
@@ -247,190 +295,108 @@ const Header = () => {
                   aria-expanded="false">
                   Exams
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karnataka <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
+                {exams.length > 0 && (
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div className="text-center "><p style={{ color: '#274896', fontWeight: '700' }}>Top Enterance Exams</p></div>
+                    {exams.map(exam => (
+                      <li key={exam.id}>
+                        <Link href={`/university/${exam.name}`} className="dropdown-item">
+                          <div className="d-flex justify-content-between">
+                            {exam.name}
+                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={70} height={25} alt='arrow-img' />
+                          </div>
+                        </Link>
+
+                        <ul className="dropdown-menu dropdown-submenu">
+                          {exam.exam.map((examItem) => (
+                            <li key={examItem.id}>
+                              <Link className="dropdown-item" href={`/${examItem.exam_title.toLowerCase()}`}>
+                                {examItem.exam_title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+
                       </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Tamil Nadu <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karela <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Andhra Pradesh <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <div className='text-center text-blue dropdownBtn'>
-                    <Link href="#" className='btn'>View More</Link>
-                  </div>
-                </ul>
+                    ))}
+                    <div className='text-center text-blue dropdownBtn'>
+                      <Link href="#" className='btn'>View More</Link>
+                    </div>
+                  </ul>
+                )}
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/studyAbroad') ? 'active' : ''}`} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Study Abroad
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karnataka <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
+                {country.length > 0 && (
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div className="text-center "><p style={{ color: '#274896', fontWeight: '700' }}>Best Country for Study</p></div>
+                    {country.map(countrie => (
+                      <li key={countrie.id}>
+                        <Link href={`/university/${countrie.name}`} className="dropdown-item">
+                          <div className="d-flex justify-content-between">
+                            {countrie.name}
+                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={50} height={25} alt='arrow-img' />
+                          </div>
+                        </Link>
+
+                        {/* <ul className="dropdown-menu dropdown-submenu">
+                  {countrie.city.map(city => (
+                    <li key={city.id}>
+                      <Link className="dropdown-item" href={`/${city.name.toLowerCase()}`}>
+                        {city.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul> */}
+
                       </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Tamil Nadu <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karela <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Andhra Pradesh <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <div className='text-center text-blue dropdownBtn'>
-                    <Link href="#" className='btn'>View More</Link>
-                  </div>
-                </ul>
+                    ))}
+                    <div className='text-center text-blue dropdownBtn'>
+                      <Link href="#" className='btn'>View More</Link>
+                    </div>
+                  </ul>
+                )}
+
               </li>
+
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
-                  aria-expanded="false">
+                <Link
+                  className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'activeDrpDwn' : ''}`}
+                  onClick={() => setIsOpen(false)}
+                  href="/home"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  aria-expanded="false"
+                >
                   Latest News
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karnataka <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Tamil Nadu <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karela <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Andhra Pradesh <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <div className='text-center text-blue dropdownBtn'>
-                    <Link href="#" className='btn'>View More</Link>
-                  </div>
-                </ul>
+                <div className="container-fluid">
+                  <ul className="dropdown-menu-news dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div className="dropdown-row-news dropdown-row p-2">
+                      {news.slice(0, 3).map((item) => (
+                        <li key={item.id} className="news-item col-md-5">
+                          <div className="card-news card">
+                            <img src={item.banner_image} className="card-img-top" alt="News Banner" />
+                            <div className="card-body">
+                              <h5 className="card-title">{item.meta_title}</h5>
+                              <p className="card-text">{item.meta_description}</p>
+
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </div>
+                    <div className="read-more-container text-center mt-3">
+                      <Link href="/latestNews" className="btn btn-secondary">Read More</Link>
+                    </div>
+                  </ul>
+                </div>
               </li>
+
+
               <li className="nav-item dropdown d-lg-inline-block d-none">
                 <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
@@ -533,4 +499,6 @@ const Header = () => {
     </>
   );
 }
+
+
 export default Header;

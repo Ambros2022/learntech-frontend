@@ -1,150 +1,65 @@
-import React, { useState } from 'react';
-import MainCarousel from 'src/@core/components/main-carousel';
+import { format } from 'date-fns';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios1 from 'src/configs/axios';
 
 function LatestNewsSection() {
-  const [activeTab, setActiveTab] = useState('news');
+  const [activeTab, setActiveTab] = useState<'news' | 'blogs'>('news');
+  const [items, setItems] = useState<{
+    created_at: any;
+    link: string | undefined; id: number; meta_title: string; meta_description: string
+  }[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const cardData = {
-    news: [
-      {
-        id: 1,
-        date: '24 Jan, 2024',
-        title: 'News Title 1',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 2,
-        date: '25 Jan, 2024',
-        title: 'News Title 2',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 3,
-        date: '25 Jan, 2024',
-        title: 'News Title 3',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 4,
-        date: '25 Jan, 2024',
-        title: 'News Title 4',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 5,
-        date: '25 Jan, 2024',
-        title: 'News Title 5',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 6,
-        date: '25 Jan, 2024',
-        title: 'News Title 6',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-    ],
+  const getNewsBlogs = useCallback(async (tab: 'news' | 'blogs') => {
+    setLoading(true); // Set loading to true when fetching data
+    try {
+      const roleparams = { page: 1, size: 10000, type: tab }; // Add type parameter to distinguish between news and blogs
+      const response = await axios1.get('api/website/newsandblogs/get', { params: roleparams });
 
-    blogs: [
-      {
-        id: 1,
-        date: '24 Jan, 2024',
-        title: 'Blog Title 1',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 2,
-        date: '25 Jan, 2024',
-        title: 'Blog Title 2',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 3,
-        date: '25 Jan, 2024',
-        title: 'Blog Title 3',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 4,
-        date: '24 Jan, 2024',
-        title: 'Blog Title 4',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 5,
-        date: '25 Jan, 2024',
-        title: 'Blog Title 5',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-      {
-        id: 6,
-        date: '25 Jan, 2024',
-        title: 'Blog Title 6',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        link: '#'
-      },
-    ]
-  }
+      // Log the entire response for debugging
+      console.log('API Response:', response);
 
-  const handleTabClick = (tab) => {
+      // Ensure the response has the expected data structure
+      if (response.data && response.data.status === 1) {
+        const data = response.data[tab].data;
+        console.log(`${tab}:`, data);
+
+        // Set the state based on the active tab
+        setItems(data);
+      } else {
+        console.error('Invalid API response structure:', response);
+        setItems([]);
+      }
+    } catch (err) {
+      console.error('Error fetching data:', err);
+      setItems([]);
+    } finally {
+      setLoading(false); // Set loading to false once data is fetched
+    }
+  }, []);
+
+  useEffect(() => {
+    getNewsBlogs(activeTab);
+  }, [activeTab, getNewsBlogs]);
+
+  const handleTabClick = (tab: 'news' | 'blogs') => {
     setActiveTab(tab);
+    getNewsBlogs(tab); // Fetch data when tab is clicked
   };
 
-  function CardComponent({ id, date, title, text, link }) {
-    return (
-      <div className="newsBlosCards">
-        <div className="mb-5" key={id}>
-          <div className="card">
-            <div className="card-body">
-              <h6 className="card-subtitle mb-2 text-body-secondary">{date}</h6>
-              <h4 className="card-title fw-bold text-blue">{title}</h4>
-              <p className="card-text">{text}</p>
-              <a href={link} className="btn readBtn card-link">Read More</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  function CardList({ activeTab }) {
-    const data = cardData[activeTab]
-
-    // Check if data is defined before mapping over it
-    if (!data) {
-      return <div>No data available for this tab.</div>;
-    }
-
-    // Map over data and create an array of CardComponent elements
-    const cards = data.map(card => (
-      <CardComponent
-        id={card.id}
-        key={card.id}
-        title={card.title}
-        date={card.date}
-        text={card.text}
-        link={card.link}
-      />
-    ));
-
-    return <MainCarousel items={cards} />; // Pass cards to MainCarousel as items prop
-  }
+  // Log the items to display for debugging
+  console.log('Active Tab:', activeTab);
+  console.log('Items to display:', items);
 
   return (
     <section className="latestNewsCon" id="animation8" data-aos="fade-down">
       <div className="container pt-5">
         <h3 className="fw-bold text-center">Latest News & Blogs</h3>
-        <div className="nav-pills justify-content-center pt-3  mb-md-0 mb-4 gap-2 d-flex" role="tablist">
+        <div className="nav-pills justify-content-center pt-3 gap-2 d-flex" role="tablist">
           <button
             className={`btn px-4 newsBtn ${activeTab === 'news' ? 'active' : ''}`}
             onClick={() => handleTabClick('news')}
@@ -159,10 +74,35 @@ function LatestNewsSection() {
           </button>
         </div>
         <div className="card-con pt-5">
-          <CardList activeTab={activeTab} />
+          <div className="row">
+            {items.length > 0 ? (
+              items.map((item) => (
+                <div className="col-md-4 mb-1" key={item.id}>
+                  <div className="newsBlosCards">
+                    <div className="mb-5">
+                      <div className="card h-100">
+                        <div className="card-body">
+                          <h6 className="card-subtitle mb-2 text-body-secondary">
+                            {item.created_at ? format(new Date(item.created_at), 'yyyy-MM-dd') : 'No Date Available'}
+                          </h6>
+                          <h5 className="card-title fw-bold text-blue">{item.meta_title}</h5>
+                          <p className="card-text">{item.meta_description}</p>
+                          <a href={item.link} className="btn readBtn card-link">Read More</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-12">
+                <p className="text-center">No items to display</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </section >
+    </section>
   );
 }
 

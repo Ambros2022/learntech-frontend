@@ -1,40 +1,32 @@
 
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
+import {  useState, useEffect, useCallback } from 'react'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useRouter } from 'next/router';
-// ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
-// ** Custom Component Import
+
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { FaTrash } from 'react-icons/fa'; 
 
-
 import type { FC, SyntheticEvent } from 'react';
 import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
 import TabList from '@mui/lab/TabList'
 import { Config } from 'src/configs/mainconfig'
 import QuillEditor from 'src/@core/components/html-editor/index';
+import { Checkbox} from '@mui/material'
 
 
 
@@ -44,9 +36,9 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     const router = useRouter();
-    // const { setValue } = useForm();
+   
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
@@ -69,7 +61,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [selectedbanner, setSelectedbanner] = useState('');
    
 
-    const isMountedRef = useIsMountedRef();
 
 
     const handleFileChangebanner = (files: any[]) => {
@@ -173,6 +164,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
         state_id: isAddMode ? '' : olddata.state ? olddata.state : '',
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
+        is_associated: isAddMode ? false : olddata.is_associated ? olddata.is_associated : false,
+
         collegeamenities: [],
         streams: [],
         recoginations: [],
@@ -211,7 +204,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (stateId) {
             getcities();
         }
-    }, [stateId]);
+    }, [getcities, stateId]);
 
     //get all countries
     const getstates = useCallback(async () => {
@@ -232,7 +225,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (countryId) {
             getstates();
         }
-    }, [countryId]);
+    }, [countryId, getstates]);
 
 
     //get all countries
@@ -249,7 +242,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         } catch (err) {
             console.error(err);
         }
-    }, [isMountedRef]);
+    }, []);
 
    
 
@@ -299,7 +292,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         getstreams();
         getrecognition();
 
-    }, [getcountries]);
+    }, [getamenities, getcountries, getrecognition, getstreams]);
 
 
 
@@ -331,9 +324,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const onSubmit = async (data: any) => {
 
         if (!isAddMode && olddata.id) {
-            let updateid = olddata.id;
+            const updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/college/update';
+            const url = 'api/admin/college/update';
             const formData = new FormData();
             formData.append('id', updateid);
             formData.append('name', data.name);
@@ -351,6 +344,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
             formData.append('avg_rating', data.avg_rating);
+            formData.append('is_associated', data.is_associated);
             formData.append('info', data.info);
             formData.append('admissions', data.admissions);
             formData.append('placements', data.placements);
@@ -370,7 +364,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
           
 
             try {
-                let response = await axios1.post(url, formData)
+                const response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
@@ -399,7 +393,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/College/add';
+            const url = 'api/admin/College/add';
 
             const formData = new FormData();
             formData.append('name', data.name);
@@ -416,6 +410,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('address', data.address);
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
+            formData.append('is_associated', data.is_associated);
             formData.append('avg_rating', data.avg_rating);
             formData.append('info', data.info);
             formData.append('admissions', data.admissions);
@@ -432,6 +427,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     duration: 2000
                 })
                 setLoading(false);
+
                 return false;
 
             }
@@ -441,6 +437,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     duration: 2000
                 })
                 setLoading(false);
+
                 return false;
 
             }
@@ -450,6 +447,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     duration: 2000
                 })
                 setLoading(false);
+
                 return false;
 
             }
@@ -464,7 +462,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
          
             setLoading(false)
             try {
-                let response = await axios1.post(url, formData)
+                const response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
@@ -522,10 +520,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
+        
         // resolver: yupResolver(schema)
     })
     const { fields, append, remove } = useFieldArray({
@@ -549,19 +549,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     };
 
     const faqonSubmit = async (data: any) => {
-        console.log(data.faqs);
-        // return
+       
 
         if (!isAddMode && olddata.id) {
-            let updateid = olddata.id;
+            const updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/college/updatefaqs';
+            const url = 'api/admin/college/updatefaqs';
             const formData = new FormData();
             formData.append('id', updateid);
             formData.append('faqs', JSON.stringify(data.faqs));
 
             try {
-                let response = await axios1.post(url, formData)
+                const response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
@@ -575,7 +574,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     toast.error(response.data.message)
                     setError(response.data.message)
                 }
+                
                 // history.push('/app/products');
+
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
@@ -602,9 +603,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const maxNumber = 69;
 
     const onChangeimages = (
-        imageList: ImageListType,
-        addUpdateIndex: number[] | undefined
-    ) => {
+        imageList: ImageListType    ) => {
         // data for submit
         // console.log(imageList, addUpdateIndex);
         setImages(imageList);
@@ -617,7 +616,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const formData = new FormData();
             formData.append('id', olddata.id);
 
-            let oldimages: any = [];
+            const oldimages: any = [];
             images.forEach((image, index) => {
                 console.log(image);
                 if (image.file) {
@@ -626,6 +625,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     oldimages.push(image);
                 }
             });
+            
             // formData.append("oldimages", oldimages);
             formData.append("oldimages", JSON.stringify(oldimages));
 
@@ -1164,7 +1164,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='info'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value } }) => (
                                 <>
                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                     onChange={(value) => setValue("info", value)} />
@@ -1184,7 +1184,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='admissions'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value } }) => (
                                 <>
                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                     onChange={(value) => setValue("admissions", value)} />
@@ -1204,7 +1204,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='placements'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value } }) => (
                                 <>
                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                     onChange={(value) => setValue("placements", value)} />
@@ -1222,7 +1222,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='rankings'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value } }) => (
                                 <>
                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                     onChange={(value) => setValue("rankings", value)} />
@@ -1240,7 +1240,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='scholarship'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value } }) => (
                                 <>
                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                     onChange={(value) => setValue("scholarship", value)} />
@@ -1260,7 +1260,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='hostel'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value, } }) => (
                                 <>
                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                     onChange={(value) => setValue("hostel", value)} />
@@ -1271,6 +1271,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
+
+
+                 
 
                     <Grid item xs={12} sm={3}>
                         <FileUpload
@@ -1315,6 +1318,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
+                    <Grid item xs={12} sm={3} style={{ marginTop: '15px' }}>
+                                <Controller
+                                    name='is_associated'
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field: { value, onChange } }) => (
+                                        <FormControlLabel
+                                            label='is_associated'
+                                            control={
+                                                <Checkbox
+                                                    checked={value}
+                                                    onChange={(e) => onChange(e.target.checked ? 1 : 0)}
+                                                    
+                                                />
+                                            }
+                                        />
+                                    )}
+                                />
+                            </Grid>
+
+
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='listing_order'
@@ -1335,8 +1359,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-
-
 
                     <Grid item xs={12} sm={6}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
@@ -1396,10 +1418,13 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             <Grid container spacing={2} alignItems="center">
                                                 <Grid item xs={12} sm={5}>
                                                     <Controller
+
                                                         //@ts-ignore
+
                                                         name={`faqs[${index}].questions`}
                                                         control={faqcontrol}
                                                         rules={{ required: true }}
+
                                                         //@ts-ignore
                                                         defaultValue={val.questions}
                                                         render={({ field: { value, onChange } }) => (
@@ -1416,32 +1441,33 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                         )}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} sm={5}>
+                                                <Grid item xs={12} sm={11}>
+                                                <Typography>Answers</Typography>
                                                     <Controller
+
                                                         //@ts-ignore
                                                         name={`faqs[${index}].answers`}
                                                         control={faqcontrol}
                                                         rules={{ required: true }}
+
                                                         //@ts-ignore
                                                         defaultValue={val.answers}
                                                         render={({ field: { value, onChange } }) => (
-                                                            <CustomTextField
-                                                                fullWidth
-                                                                value={value}
-                                                                label='Answers'
-                                                                onChange={(e) => {
-                                                                    onChange(e);
-                                                                    setValue(`faqs[${index}].answers`, e.target.value);
-                                                                }}
-                                                                placeholder=''
-                                                            />
+                                                            <>
+                                                        <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                        onChange={(e) => {
+                                                        onChange(e);
+                                                        setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                         }} />
+                                          
+                                                        </>
                                                         )}
                                                     />
                                                 </Grid>
 
 
 
-                                                <Grid item xs={2}>
+                                                <Grid item xs={1}>
                                                     {index !== 0 && (
                                                         <Button
                                                             variant="contained"
@@ -1530,6 +1556,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     <TabPanel sx={{ p: 0 }} value='social-links'>
                     {isAddMode ? <> <h6>Please add College First.</h6> </> : <>
                             <div className="App">
+                                
                                 <ImageUploading
                                     multiple
                                     value={images}
@@ -1539,12 +1566,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     {({
                                         imageList,
                                         onImageUpload,
-                                        onImageRemoveAll,
-                                        onImageUpdate,
+                                       
                                         onImageRemove,
                                         isDragging,
                                         dragProps
                                     }) => (
+
                                         // Building UI
                                         <div className="upload__image-wrapper">
                                             <button
@@ -1560,10 +1587,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                 <div className="row">
                                                     {imageList.map((image, index) => (
 
-
+<>
                                                         <div className="col-sm-6 col-md-4 col-lg-3">
                                                             <div className="image-item ">
-                                                                {/* <img src={image.dataURL} className="img-fluid rounded" alt="" /> */}
+                                                              
                                                                 <img
                                                                     src={image.dataURL}
                                                                     style={{ width: '100%', height: '100px', maxWidth: '200px', maxHeight: '500px' }}
@@ -1577,6 +1604,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        </>
 
 
 

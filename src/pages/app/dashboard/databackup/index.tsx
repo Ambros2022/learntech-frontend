@@ -289,8 +289,10 @@ const SecondPage = () => {
 
 
   const AddButtonToolbar = () => {
+    
     const handleRequestBackup = async () => {
       try {
+        window.location.reload();
         // Make a GET request to your API endpoint
         const response = await axios1.get('api/admin/backup/request');
         
@@ -298,6 +300,7 @@ const SecondPage = () => {
         if (response.data.status === 1) {
           // Request was successful, display a success message or perform any other actions
           toast.success(response.data.message);
+          setLoading(true);
         } else {
           // Request failed, display an error message or perform error handling
           toast.error(response.data.message);

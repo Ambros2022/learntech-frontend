@@ -88,6 +88,7 @@ const restoreSettings = (): Settings | null => {
     if (storedData) {
       settings = { ...JSON.parse(storedData), ...staticSettings }
     } else {
+       //@ts-ignore
       settings = initialSettings
     }
   } catch (err) {
