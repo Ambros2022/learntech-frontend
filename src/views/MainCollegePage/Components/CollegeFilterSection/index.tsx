@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import emailjs from 'emailjs-com';
@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast'
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import axios1 from 'src/configs/axios'
 
 function CollegeFilterSection() {
     type Option = {
@@ -21,39 +22,34 @@ function CollegeFilterSection() {
     };
 
     const [showScrollButton, setShowScrollButton] = useState(false);
+    const [states, setStates] = useState<Option[]>([]);
+
+    console.log(states, "states")
 
 
-    // const [showModal, setShowModal] = useState(false);
-    // const handleShowModal = () => setShowModal(true);
-    // const handleCloseModal = () => setShowModal(false);
+   
 
-    // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-    // const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const fetchStatesData = useCallback(async () => {
+        try {
+            const response = await axios1.get('api/website/states/get');
+            if (response.data.status === 1) {
+                const statesData = response.data.data.map((state: any) => ({
+                    label: state.name,
+                    value: state.name.toLowerCase().replace(' ', '_')
+                }));
+                setStates(statesData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, []);
 
-    // const validationSchema = Yup.object().shape({
-    //     name: Yup.string().required('Name is required'),
-    //     email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-    //     phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-    //     course: Yup.string().required('Course is required'),
-    //     location: Yup.string().required('Location is required'),
-    // });
 
-    // const handleSubmit = async (values, { resetForm }) => {
-    //     try {
-    //         toast.loading('Processing'); // Display loading toast while processing
-    //         setShowModal(false); // Assuming setShowModal is a state setter for hiding modal
-    //         await emailjs.send("service_lrx8r36", "template_fsa8zp6", values, "8xItMn8QYmHOyfncY");
-    //         toast.dismiss();
-    //         toast.success('Message sent successfully!'); // Display success toast if email is sent successfully
-    //         resetForm(); // Reset the form
-    //         // Close the modal here if needed
-    //     } catch (error) {
-    //         toast.error('Failed!'); // Display error toast if sending email fails
-    //         console.error('Error sending email:', error);
-    //         alert("Error sending email. Please try again later."); // Fall back to alert if toast is not available
-    //     }
-    // };
-
+    useEffect(() => {
+        fetchStatesData();
+    }, []);
 
     const colleges = [
         {
@@ -166,39 +162,12 @@ function CollegeFilterSection() {
     ];
 
 
-    // const stateOptions: Option[] = Array.from(new Set(colleges.map(college => college.state))).map(state => ({ label: state, value: state }));
-    // const locationOptions: Option[] = Array.from(new Set(colleges.map(college => college.location))).map(location => ({ label: location, value: location }));
-    // const ownershipOptions: Option[] = Array.from(new Set(colleges.map(college => college.ownership))).map(ownership => ({ label: ownership, value: ownership }));
-
-    // const options: OptionGroup[] = [
-    //     {
-    //         id: 'state',
-    //         label: 'States',
-    //         options: options
-    //     },
-    //     {
-    //         id: 'location',
-    //         label: 'City',
-    //         options: locationOptions
-    //     },
-    //     {
-    //         id: 'ownership',
-    //         label: 'Ownership',
-    //         options: ownershipOptions
-    //     },
-    //     // Add other filter options...
-    // ];
-
+   
     const options: OptionGroup[] = [
         {
             id: 'state',
             label: 'States',
-            options: [
-                { label: 'Maharashtra', value: 'maharashtra' },
-                { label: 'Tamil Nadu', value: 'tamil_nadu' },
-                { label: 'Uttar Pradesh', value: 'uttar_pradesh' },
-                { label: 'Karnataka', value: 'karnataka' }
-            ]
+            options: states
         },
         {
             id: 'location',
@@ -569,54 +538,7 @@ function CollegeFilterSection() {
                 </div>
             </div>
 
-            {/* Modal
-
-            <Modal className="modal fade px-3" id="exampleModal" show={showModal} onHide={handleCloseModal}>
-                <div className="modal-content">
-                    <div className="searchForm">
-                        <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
-                        <Formik
-                            initialValues={{
-                                name: '',
-                                email: '',
-                                phoneNumber: '',
-                                course: '',
-                                location: '',
-                            }}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                            resetForm
-                        >
-                            <Form>
-                                <div className="mb-3">
-                                    <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
-                                    <ErrorMessage name="name" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                                    <ErrorMessage name="email" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" />
-                                    <ErrorMessage name="phoneNumber" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
-                                    <ErrorMessage name="course" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                                    <ErrorMessage name="location" component="div" className="error text-danger" />
-                                </div>
-
-                                <div className="d-grid">
-                                    <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                                </div>
-                            </Form>
-                        </Formik>
-                    </div>
-                </div>
-            </Modal> */}
+  
         </>
 
     );
