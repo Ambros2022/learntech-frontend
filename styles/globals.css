@@ -1974,3 +1974,95 @@ footer img {
 .google-login-button div span {
   display: none !important;
 }
+.ratingBtn {
+  background-color: rgb(255, 174, 0) !important;
+  color: white !important;
+  max-width: 90px !important;
+  min-width: 90px !important;
+}
+.filterCardBorder .card-Image-top {
+  object-fit: cover !important;
+  height: 140px;
+}
+.filterItemBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  text-align: center !important;
+}
+.btn-close {
+  --bs-btn-close-bg: url('../public/images/icons/close-icon-white.png') !important;
+}
+.viewMoreCardBtn {
+  background-color: white !important;
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+}
+.clgCardImg img {
+  width: 100%;
+  height: 100%;
+}
+.filterCardBorder .card-title {
+  min-height: 50px !important;
+}
+.filterCardBorder .card-text {
+  min-height: 50px !important;
+}
+.typeBtn {
+  background-color: #f6f8fb !important;
+  color: #254692 !important;
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+  .ratingBtn {
+    background-color: rgb(255, 174, 0) !important;
+    color: white !important;
+    max-width: 70px !important;
+    min-width: 70px !important;
+  }
+  .activeBtn {
+    font-size: 11px !important;
+  }
+  .viewMoreBtn {
+    font-size: 11px !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .ratingBtn {
+    background-color: rgb(255, 174, 0) !important;
+    color: white !important;
+    max-width: 70px !important;
+    min-width: 70px !important;
+  }
+  .activeBtn {
+    font-size: 11px !important;
+  }
+  .viewMoreBtn {
+    font-size: 11px !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .ratingBtn {
+    background-color: rgb(255, 174, 0) !important;
+    color: white !important;
+    max-width: 70px !important;
+    min-width: 70px !important;
+  }
+  .activeBtn {
+    font-size: 11px !important;
+  }
+  .viewMoreBtn {
+    font-size: 11px !important;
+  }
+  .clgCardImg .card-Image-top {
+    height: 200px !important;
+    object-fit: cover !important;
+  }
+  .activeBtn {
+    font-size: 17px !important;
+  }
+  .viewMoreBtn {
+    font-size: 17px !important;
+  }
+  .ratingBtn {
+    font-size: 15px !important;
+  }
+}
