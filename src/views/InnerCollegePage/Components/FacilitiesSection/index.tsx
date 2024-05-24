@@ -27,12 +27,12 @@ function FacilitiesSection() {
 
   function CardComponent({ title, imageSrc }) {
     return (
-      <div className="col-6 col-md-2 col-lg-2 mb-3 d-flex" key={title}>
+      <div className="col-4 col-md-2 col-lg-2 mb-3 d-flex p-2" key={title}>
         <div className="card text-center flex-fill">
           <div className="row">
             <div className="col-md-12 col-12 col-sm-12">
-              <Image src={imageSrc} width={50} height={30} className="img-fluid mx-auto mt-3" alt={`${title}-logo`} />
-              <p className="card-title fw-bold">{title}</p>
+              <Image src={imageSrc} width={30} height={30} className="img-fluid mx-auto mt-3" alt={`${title}-logo`} />
+              <p className="card-title fw-bold"><small>{title}</small></p>
             </div>
           </div>
         </div>

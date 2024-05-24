@@ -1,10 +1,15 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function Info1() {
   return (
     <>
+
       <section className='clgInfoSec bg-white'>
+        <section className="container InnerCollegeNavigationLink pt-2">
+          <p className='mb-3'><Link href="/home">Home</Link> {'>'} <Link href={"/college"}>Colleges</Link> {'>'} <Link href="#">Yenepoya Medical College</Link> {'>'} <span className='text-blue'><Link href="#" className="text-blue">MBBS</Link></span></p>
+        </section>
         <div className="container">
           <div className="pt-5 text-center justify-content-center d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
             <button className='active mb-3 btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">Info</button>
@@ -21,11 +26,11 @@ function Info1() {
           <div className="tab-content" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
               <div className="row">
-                <div className="order-2 order-md-1 col-md-7 text-black mb-5">
+                <div className="order-2 order-md-1 col-md-7 text-black bg-skyBlue py-3 mb-5">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br></br><br></br> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </div>
                 <div className="col-md-5 mb-md-5 order-1 order-md-2">
-                  <div className="row">
+                  <div className="row gx-2">
                     <div className="col-12 applyNowImg position-relative mb-md-5 mb-2">
                       <a href="#" className='btn'>Apply Now</a>
                     </div>

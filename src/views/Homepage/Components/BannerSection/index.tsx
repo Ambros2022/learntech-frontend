@@ -7,14 +7,14 @@ import Autocomplete from 'src/@core/components/mui/autocomplete';
 import { CircularProgress, TextField } from '@mui/material';
 
 function BannerSection() {
-  
+
   const [banners, setBanners] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  console.log(searchResults ,"searchResults")
-  
+  console.log(searchResults, "searchResults")
+
   const [inputValue, setInputValue] = useState('');
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
@@ -31,30 +31,30 @@ function BannerSection() {
   });
 
 
-   //get all banners
-   const getbanner = useCallback(async () => {
+  //get all banners
+  const getbanner = useCallback(async () => {
     try {
-        const roleparams: any = {};
-        roleparams['page'] = 1;
-        roleparams['size'] = 10000;
-        const response = await axios1.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
+      const roleparams: any = {};
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
 
-        setBanners(response.data.data);
+      setBanners(response.data.data);
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
-}, []);
+  }, []);
 
-console.log("banners" , banners)
+  console.log("banners", banners)
 
-useEffect(() => {
- 
-  getbanner();
-  
-}, [getbanner]);
+  useEffect(() => {
+
+    getbanner();
+
+  }, [getbanner]);
 
 
-  
+
   const handleSubmit = async (values, { resetForm }) => {
     try {
       setLoading(true);
@@ -69,13 +69,13 @@ useEffect(() => {
     }
   };
 
- 
+
 
   const handleSearch = async (value) => {
     if (value.length < 3) {
       setSearchResults([]);
-      
-return;
+
+      return;
     }
     try {
       setLoading(true);
@@ -99,53 +99,53 @@ return;
     handleSearch(value);
   };
 
-  
-// console.log("banner" , banners)
+
+  // console.log("banner" , banners)
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
-    <div id="carouselExampleIndicators" className="carousel slide">
-  <div className="carousel-indicators">
-    {banners.map((banner, index) => (
-      <button
-        key={index}
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide-to={index}
-        className={index === 0 ? "active" : ""}
-        aria-label={`Slide ${index + 1}`}
-      ></button>
-    ))}
-  </div>
-  <div className="carousel-inner">
-    {banners.map((banner, index) => (
-      <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-        <Image
-       fill
-          src={`${process.env.NEXT_PUBLIC_API_URI}/${banner.image}`}
-        
-          priority={true}
-          className="w-100"
-          alt={`Banner ${index}`}
-        />
+      <div id="carouselExampleIndicators" className="carousel slide">
+        <div className="carousel-indicators">
+          {banners.map((banner, index) => (
+            <button
+              key={index}
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to={index}
+              className={index === 0 ? "active" : ""}
+              aria-label={`Slide ${index + 1}`}
+            ></button>
+          ))}
+        </div>
+        <div className="carousel-inner">
+          {banners.map((banner, index) => (
+            <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+              <Image
+                fill
+                src={`${process.env.NEXT_PUBLIC_API_URI}/${banner.image}`}
+
+                priority={true}
+                className="w-100"
+                alt={`Banner ${index}`}
+              />
+            </div>
+          ))}
+        </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
       </div>
-    ))}
-  </div>
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
-  </button>
-    </div>
 
       <div className="bannerFormSec">
         <div className="container-fluid">
           <div className="container">
             <div className="row">
-            <div className="col-md-7 mb-5" id="animation2">
+              <div className="col-md-7 mb-5" id="animation2">
                 <div className="searchSec">
                   <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
                   <div className="row">

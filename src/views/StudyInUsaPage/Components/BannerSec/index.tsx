@@ -9,9 +9,8 @@ function BannerSec() {
       <section className='studyInUsaCon'>
         <div className="container h-100 d-flex justify-content-center">
           <div className='text-white align-content-center text-center'>
-            <h4>Explore Top Universities and Colleges in USA.</h4>
-            <h4>Get Updates on Tuition, Courses Offered, Duration and more.</h4>
-            <div className="searchSec text-start mb-4">
+            <h1 className='fw-bold'>Study in USA.</h1>
+            <div className="searchSec1 text-start mb-4">
               <p className='mb-0'>Explore Top Universities and Colleges in USA.</p>
               <p>Get Updates on Tuition, Courses Offered, Duration and more.</p>
               <div className="row">

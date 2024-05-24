@@ -7,7 +7,7 @@ function CoursesCard({ course }) {
   return (
     <>
       <div className="col-md-4 col-lg-3">
-        <div className="card mb-3 p-2">
+        <div className="card mb-3 p-2 bg-crsCard">
           <div className="row g-0">
             <div className="col-lg-4 coursesCardImg p-0 mb-3 mb-md-3 text-md-start text-center">
               <Image width={200} height={200} src={course.imageUrl} className="rounded" alt="Courses-Card-img" />
@@ -194,7 +194,7 @@ function CoursesContainer() {
   ];
 
   return (
-    <section className="bg-white pt-5">
+    <section className="bg-white pt-5 pb-5">
       <div className="container">
         <div className="row">
           {courses.slice(0, visibleCount).map((course, index) => (
@@ -204,7 +204,7 @@ function CoursesContainer() {
         {visibleCount < courses.length && ( // Only show the button if there are more courses to show
           <div className="row">
             <div className="col-12 d-flex justify-content-center mb-3">
-              <button className='btn viewMoreBtn' onClick={showMoreCourses}>View More</button>
+              <button className='btn viewMoreBtnCourse' onClick={showMoreCourses}>View More</button>
             </div>
           </div>
         )}
