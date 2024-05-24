@@ -4,6 +4,7 @@ import TopCollegesSection from './Components/TopCollegesSection';
 import ExpertSection from './Components/ExpertSection';
 import TopFeaturedColleges from './Components/TopFeaturedColleges';
 import CollegeFilterSection from './Components/CollegeFilterSection';
+import BestCollegeSec from './Components/BestCollegeSec';
 
 function MainCollegePage() {
     return (
@@ -11,6 +12,7 @@ function MainCollegePage() {
             <BannerSection />
             <TopCollegesSection />
             <CollegeFilterSection />
+            <BestCollegeSec />
             <ExpertSection />
             <TopFeaturedColleges />
         </>

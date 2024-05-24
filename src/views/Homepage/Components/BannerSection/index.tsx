@@ -145,8 +145,8 @@ function BannerSection() {
         <div className="container-fluid">
           <div className="container">
             <div className="row">
-              <div className="col-md-7 mb-5" id="animation2">
-                <div className="searchSec">
+              <div className="col-md-7 mb-5 d-flex" id="animation2">
+                <div className="searchSec align-content-center">
                   <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
                   <div className="row">
                     <div className="col-7 col-md-8 col-lg-9 position-relative">

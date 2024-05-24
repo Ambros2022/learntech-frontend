@@ -6,14 +6,14 @@ import FrontLayout from 'src/@core/layouts/FrontLayout'
 import InnerCollegePage from 'src/views/InnerCollegePage'
 
 
-const InnerCollege = () => {
+const college = () => {
   return <>
     <InnerCollegePage />
   </>
 }
 
-InnerCollege.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+college.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
 
-InnerCollege.guestGuard = true
+college.guestGuard = true
 
-export default InnerCollege;
+export default college
