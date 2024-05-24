@@ -252,7 +252,6 @@ function CollegeFilterSection() {
 
     const [visibleCards, setVisibleCards] = useState(6);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
-    const router = useRouter();
 
 
     const handleViewMore = () => {
@@ -324,8 +323,8 @@ function CollegeFilterSection() {
                                             <h6 className='fw-bold text-black my-2'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' />{`${location}, ${state}`}</p>
-                                            <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' /> Est. Year {established} <button className='btn typeBtn'>{type}</button></p>
+                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state}`}</p>
+                                            <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                         </div>
                                     </div>
                                     <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
@@ -433,9 +432,9 @@ function CollegeFilterSection() {
             <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2">
                 <div className="col-12">
                     <h6 className="text-black">Filters By Location</h6>
-                    <div className="btn-group">
+                    <div className="btn-group d-flex flex-wrap">
                         {options.map((option, index) => (
-                            <button key={index} className="btn d-inline-flex align-items-center rounded m-1 p-2 filterItemBtn" onClick={() => handleStateButtonClick(option.value)}>
+                            <button key={index} className="btn text-center rounded m-1 p-2 filterItemBtn" onClick={() => handleStateButtonClick(option.value)}>
                                 {option.label}
                             </button>
                         ))}
