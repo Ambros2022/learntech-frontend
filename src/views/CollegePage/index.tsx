@@ -1,6 +1,4 @@
 import React from 'react'
-import Footer from 'src/@core/layouts/components/Footer';
-import Header from 'src/@core/layouts/components/Header';
 import BannerSection from './Components/BannerSection';
 import TopCollegesSection from './Components/TopCollegesSection';
 import ExpertSection from './Components/ExpertSection';
@@ -12,7 +10,7 @@ function CollegePage() {
         <>
             <BannerSection />
             <TopCollegesSection />
-            {/* <CollegeFilterSection /> */}
+            <CollegeFilterSection />
             <ExpertSection />
             <TopFeaturedColleges />
         </>

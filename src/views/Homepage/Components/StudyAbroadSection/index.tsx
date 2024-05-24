@@ -237,17 +237,32 @@ function StudyAbroadSection() {
 
 
   // Function to fetch card data from the backend API
+  // const fetchCardData = useCallback(async () => {
+  //   try {
+  //     const response = await axios1.get('api/website/colleges/get');
+  //     const responseData = response.data.data;
+  //     setCardData(responseData);
+  //   } catch (error) {
+  //     console.error('Error fetching card data:', error);
+  //   }
+  // }, []);
+
+  // useEffect to fetch card data when component mounts
+  
+
+
   const fetchCardData = useCallback(async () => {
     try {
-      const response = await axios1.get('api/website/abroadpages/get');
+      // Construct params object with country_id if activeCountry is not null
+      const params = activeCountry ? { country_id: activeCountry } : {};
+      const response = await axios1.get('api/website/colleges/get', { params });
       const responseData = response.data.data;
       setCardData(responseData);
     } catch (error) {
       console.error('Error fetching card data:', error);
     }
-  }, []);
+  }, [activeCountry]);
 
-  // useEffect to fetch card data when component mounts
   useEffect(() => {
     fetchCardData();
   }, [fetchCardData]);
@@ -256,12 +271,12 @@ function StudyAbroadSection() {
   const renderCards = () => {
     return cardData.map((card) => (
       <div key={card.id} className="card StudyAbroadCard mb-5 h-100">
-        <img src={card.imageUrl} width={300} height={200} className="card-img-top" alt={card.title} />
+        <img src={`${process.env.NEXT_PUBLIC_API_URI}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
         <div className="card-body">
           <h5 className="card-title text-blue" style={{fontSize : '18px'}}>{card.name}</h5>
           <p className="card-text">
             <img width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
-            {card.location}
+            {card.address}
           </p>
           <div className="d-flex justify-content-center">
             <a href="#" className="btn">Apply Now</a>

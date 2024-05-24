@@ -4,11 +4,7 @@ import { createContext, useEffect, useState, ReactNode } from 'react'
 // ** Next Import
 import { useRouter } from 'next/router'
 
-// ** Axios
-import axios from 'axios'
-
 import axios1 from 'src/configs/axios'
-
 
 // ** Config
 import authConfig from 'src/configs/auth'
@@ -18,7 +14,8 @@ import authConfig from 'src/configs/auth'
 import Cookies from 'js-cookie';
 
 // ** Types
-import { AuthValuesType, LoginParams, ErrCallbackType, ForgotPasswordParams, handelVerifyemailOtpParams, handelhandelResetPasswordParams, UserDataType } from './types'
+import { AuthValuesType, LoginParams, ErrCallbackType, ForgotPasswordParams, handelVerifyemailOtpParams, 
+  handelhandelResetPasswordParams, UserDataType } from './types'
 
 // ** Defaults
 const defaultProvider: AuthValuesType = {
@@ -48,6 +45,7 @@ const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<any>(defaultProvider.user)
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading)
   const [isAuthenticated, setisAuthenticated] = useState<boolean>(defaultProvider.isAuthenticated)
+
   const [permission, setPermission] = useState<any>(null);
   const setAuthToken = (token: string) => {
     Cookies.set(authConfig.storageTokenKeyName, token, { expires: 1 });
@@ -73,7 +71,9 @@ const AuthProvider = ({ children }: Props) => {
       const storedToken = getAuthToken()!
       setLoading(false);
       setisAuthenticated(true);
+
       // setUser(response.data.data)
+
 
       if (storedToken) {
         setLoading(true)
@@ -87,6 +87,7 @@ const AuthProvider = ({ children }: Props) => {
             setLoading(false);
             setisAuthenticated(true);
             setUser(response.data.data);
+
             // const privileges = response.data.privileges;
             // setPermission(privileges);
 
@@ -117,8 +118,10 @@ const AuthProvider = ({ children }: Props) => {
     try {
 
       const { email, password } = params;
+
       // console.log("login", email, password)
       const response = await axios1.post('/api/auth/signinadmin', { email, password });
+
       // console.log(response.data.data.accessToken, "response")
       // return
       if (response && response.status == 200) {
@@ -127,6 +130,7 @@ const AuthProvider = ({ children }: Props) => {
         
 
         setAuthToken(response.data.data.accessToken);
+
         // window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
         if (accessToken) {
           // alert(accessToken);
@@ -137,11 +141,14 @@ const AuthProvider = ({ children }: Props) => {
             console.log("x-access-token header is not set.");
           }
         }
+
         // console.log(data, "data");
+
         setUser(data)
         const returnUrl = router.query.returnUrl
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
         setisAuthenticated(true);
+
         // const privileges = response.data.privileges;
         // setPermission(privileges);
         router.replace(redirectURL as string)
@@ -184,6 +191,7 @@ const AuthProvider = ({ children }: Props) => {
 
       if (response && response.status === 200) {
         const data = response.data;
+
         // console.log(data, "`sdfv`");
         return data;
       }

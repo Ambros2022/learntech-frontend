@@ -1,14 +1,21 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios1 from 'src/configs/axios'
+import Autocomplete from 'src/@core/components/mui/autocomplete';
+import { CircularProgress, TextField } from '@mui/material';
 
 function BannerSection() {
+  
+  const [banners, setBanners] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const [, setSearchResults] = useState([]);
-
-  const [, setLoading] = useState(false);
+  console.log(searchResults ,"searchResults")
+  
+  const [inputValue, setInputValue] = useState('');
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -20,8 +27,32 @@ function BannerSection() {
     contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone NUmber is required"),
     course: Yup.string().required('Course is required'),
     location: Yup.string().required('Location is required'),
-    current_url: Yup.string().required('Location is required'),
+    current_url: Yup.string().required('Url is required'),
   });
+
+
+   //get all banners
+   const getbanner = useCallback(async () => {
+    try {
+        const roleparams: any = {};
+        roleparams['page'] = 1;
+        roleparams['size'] = 10000;
+        const response = await axios1.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
+
+        setBanners(response.data.data);
+    } catch (err) {
+        console.error(err);
+    }
+}, []);
+
+console.log("banners" , banners)
+
+useEffect(() => {
+ 
+  getbanner();
+  
+}, [getbanner]);
+
 
   
   const handleSubmit = async (values, { resetForm }) => {
@@ -38,15 +69,24 @@ function BannerSection() {
     }
   };
 
-  const handleSearch = async () => {
+ 
+
+  const handleSearch = async (value) => {
+    if (value.length < 3) {
+      setSearchResults([]);
+      
+return;
+    }
     try {
       setLoading(true);
-      const inputElement = document.getElementById('exampleInputSearch') as HTMLInputElement | null;
-      if (!inputElement) {
-        throw new Error('Input element not found');
-      }
-      const response = await axios1.get('api/website/home/searchbar');
-      setSearchResults(response.data);
+      const response = await axios1.get('api/website/home/searchbar', { params: { query: value } });
+      const suggestions = response.data.data.flatMap((item: { data: any[]; type: any; }) => item.data.map(entry => ({
+        name: entry.name,
+        slug: entry.slug,
+        type: item.type,
+      })));
+      setSearchResults(suggestions);
+      setOpen(true);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -54,54 +94,98 @@ function BannerSection() {
     }
   };
 
+  const handleInputChange = (event, value) => {
+    setInputValue(value);
+    handleSearch(value);
+  };
+
   
+// console.log("banner" , banners)
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
-      <div id="carouselExampleIndicators" className="carousel slide">
-        <div className="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div className="carousel-inner">
-          <div className="carousel-item active position-relative">
-            <Image fill src="/images/icons/Banner Image.jpg" priority={true} className="w-100" alt="Banner-image" />
-          </div>
-          <div className="carousel-item">
-            <Image fill src="/images/icons/Banner Image.jpg" priority={true} className="w-100" alt="Banner-image" />
-          </div>
-          <div className="carousel-item">
-            <Image fill src="/images/icons/Banner Image.jpg" priority={true} className="w-100" alt="Banner-image" />
-          </div>
-        </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+    <div id="carouselExampleIndicators" className="carousel slide">
+  <div className="carousel-indicators">
+    {banners.map((banner, index) => (
+      <button
+        key={index}
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to={index}
+        className={index === 0 ? "active" : ""}
+        aria-label={`Slide ${index + 1}`}
+      ></button>
+    ))}
+  </div>
+  <div className="carousel-inner">
+    {banners.map((banner, index) => (
+      <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+        <Image
+       fill
+          src={`${process.env.NEXT_PUBLIC_API_URI}/${banner.image}`}
+        
+          priority={true}
+          className="w-100"
+          alt={`Banner ${index}`}
+        />
       </div>
+    ))}
+  </div>
+  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Previous</span>
+  </button>
+  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Next</span>
+  </button>
+    </div>
+
       <div className="bannerFormSec">
         <div className="container-fluid">
           <div className="container">
             <div className="row">
-              <div className="col-md-7 mb-5" id="animation2">
+            <div className="col-md-7 mb-5" id="animation2">
                 <div className="searchSec">
                   <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
                   <div className="row">
-                    <div className="col-7 col-md-8 col-lg-9">
-                      <input type="search" placeholder="Search" className="form-control" id="exampleInputSearch" aria-describedby="searchHelp" />
+                    <div className="col-7 col-md-8 col-lg-9 position-relative">
+                      <Autocomplete
+                        open={open}
+                        onClose={() => setOpen(false)}
+                        onInputChange={handleInputChange}
+                        options={searchResults}
+                        getOptionLabel={(option) => option.name}
+                        renderOption={(props, option) => (
+                          <li {...props}>
+                            <a href={`/${option.type}/${option.slug}`} style={{ color: "#000" }}>
+                              {option.name}
+                            </a>
+                          </li>
+                        )}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            placeholder="Search"
+                            className="form-control"
+                            InputProps={{
+                              ...params.InputProps,
+                              endAdornment: (
+                                <React.Fragment>
+                                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                  {params.InputProps.endAdornment}
+                                </React.Fragment>
+                              ),
+                            }}
+                          />
+                        )}
+                      />
                     </div>
                     <div className="col-5 text-center col-md-4 col-lg-3 p-0">
-                    <button className="btn searchBtn" onClick={handleSearch}>Search</button>
+                      <button className="btn searchBtn" onClick={() => handleSearch(inputValue)}>Search</button>
                     </div>
-
                   </div>
                 </div>
-               
               </div>
               <div className="col-md-5 mb-5" id="animation3">
                 <div className="searchForm">

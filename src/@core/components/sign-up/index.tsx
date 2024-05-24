@@ -59,7 +59,8 @@ const SignupForm: React.FC = () => {
         })}
         onSubmit={(values: FormValues, { setSubmitting, resetForm }) => {
           alert("submit successfully")
-          console.log('Values:', values)
+          
+          // console.log('Values:', values)
           setSubmitting(false);
           resetForm();
         }}
