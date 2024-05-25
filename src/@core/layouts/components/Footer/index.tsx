@@ -91,7 +91,7 @@ const Footer = () => {
         </div>
         <div className="row container-fluid">
           <div className="mt-md-3 col-md-4 text-md-start">
-            <a href="tel:18001208969" className="phone-icon "><Image src="/images/icons/Phone Blue.svg" width={30} height={30} alt="phone-icon" /></a>
+            <a href="tel:18001208969" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a>
           </div>
           <div className="col-md-4 mb-md-3 text-md-center">
             <a href="#" className="DownloadBrchrBtn" ><Image src="/images/icons/Download Brochure.svg" width={150} height={70} alt="download-brochure-icon" /></a>

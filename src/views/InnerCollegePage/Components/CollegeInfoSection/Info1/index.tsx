@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import YoutubeVideo from 'src/@core/components/youtube-videos'
 
 function Info1() {
   return (
@@ -31,11 +32,14 @@ function Info1() {
                 </div>
                 <div className="col-md-5 mb-md-5 order-1 order-md-2">
                   <div className="row gx-2">
-                    <div className="col-12 applyNowImg position-relative mb-md-5 mb-2">
+                    <div className="col-12 applyNowImg position-relative mb-2">
+                      <Image src='/images/icons/filter-card.jpg' width={300} height={300} alt='College Card' />
                       <a href="#" className='btn'>Apply Now</a>
                     </div>
-                    <div className="col-12 yotubeImg position-relative  mb-md-5 mb-2">
-                      <a href="#" className='btn'><Image src="/images/icons/Youtube-logo.png" width={60} height={34} alt="Youtube Logo" /></a>
+                    <div className="col-12 yotubeImg position-relative mb-2">
+                      <YoutubeVideo videoId={'dQw4w9WgXcQ'} />
+                      {/* <Image src='/images/icons/youtubeClg.jpg' width={300} height={300} alt='College Card' />
+                      <a href="#" className='btn'><Image src="/images/icons/Youtube-logo.png" width={60} height={34} alt="Youtube Logo" /></a> */}
                     </div>
                   </div>
                 </div>
@@ -56,7 +60,7 @@ function Info1() {
         </div>
 
 
-      </section>
+      </section >
     </>
   )
 }

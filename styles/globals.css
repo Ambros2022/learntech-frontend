@@ -192,6 +192,7 @@ li > a > ul > .dropdown:hover .dropdown-menu {
   font-size: 16px !important;
   padding: 20px !important;
   border-radius: 10px !important;
+  width: 100% !important;
   margin: auto 0 !important;
 }
 .w-90 {
@@ -761,7 +762,7 @@ footer img {
 }
 @media (min-width: 320px) and (max-width: 767px) {
   .searchSec {
-    width: 80%;
+    width: 80% !important;
     margin: auto;
   }
   .top-nav .active,
@@ -1362,12 +1363,9 @@ footer img {
   font-weight: bold !important;
   background-color: #254692 !important;
 }
-.applyNowImg {
-  background-image: url('../public/images/icons/filter-card.jpg') !important;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 50vh;
+.applyNowImg img {
+  width: 100%;
+  height: 100%;
 }
 .applyNowImg a.btn {
   border: 1px solid white !important;
@@ -1379,12 +1377,9 @@ footer img {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
 }
-.yotubeImg {
-  background-image: url('../public/images/icons/youtubeClg.jpg') !important;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 50vh;
+.yotubeImg img {
+  width: 100%;
+  height: 100%;
 }
 .yotubeImg a.btn {
   position: absolute !important;
@@ -1393,17 +1388,22 @@ footer img {
   transform: translate(-50%, -50%) !important;
 }
 .facilitiesSec .card {
+  min-height: 100px;
   border: none !important;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
 }
 .facilitiesSec .card-title {
   font-size: 12px !important;
 }
+.facilitiesSec .card-img-top {
+  height: 50px !important;
+}
 .facilitiesSec .card img {
   filter: invert(23%) sepia(43%) saturate(2015%) hue-rotate(200deg) brightness(93%) contrast(95%) !important;
 }
 .locatedSec {
   background-color: #254692 !important;
+  height: 300px !important;
 }
 .locatedSec .location-img h6 {
   font-size: 14px !important;
@@ -1424,8 +1424,8 @@ footer img {
   background-color: transparent !important;
 }
 .clgImg {
-  width: auto !important;
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
 @media (min-width: 768px) and (max-width: 992px) {
   .clgImg {
@@ -2020,6 +2020,14 @@ footer img {
 }
 .ExpertCon {
   background-color: white !important;
+}
+.reqBtnInnerClg .btn {
+  background-color: white !important;
+  color: #254692 !important;
+}
+.locatedSec .clgImg img {
+  width: 100%;
+  height: 100%;
 }
 /* .ExpertCon .form-control {
   background-color: transparent !important;
