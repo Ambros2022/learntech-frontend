@@ -308,15 +308,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
             
             formData.append('cover_image', selectedphoto);
-            if (selectedlogo == '') {
+            // if (selectedlogo == '') {
 
-                toast.error('Please Upload Logo', {
-                    duration: 2000
-                })
-                setLoading(false);
-                return false;
+            //     toast.error('Please Upload Logo', {
+            //         duration: 2000
+            //     })
+            //     setLoading(false);
+            //     return false;
 
-            }
+            // }
             formData.append('promo_banner', selectedlogo);
            
         

@@ -3,9 +3,20 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from "react";
 import SignupForm from "src/@core/components/sign-up";
-import SignInForm from "src/@core/components/sing-in";
+import SignInForm from "src/@core/components/sign-in";
 import axios1 from 'src/configs/axios'
 
+
+
+interface Country {
+  id: number;
+  name: string;
+}
+
+interface Courses {
+  id: number;
+  slug: string;
+}
 
 const Header = () => {
 
@@ -13,10 +24,11 @@ const Header = () => {
   const [universities, setUniversities] = useState<any[]>([]);
   const [exams, setExams] = useState<any[]>([]);
 
+
   const [news, setNews] = useState<any[]>([]);
 
-  const [country, setCountry] = useState<any[]>([]);
-
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [courses, setCourses] = useState<Courses[]>([]);
 
 
   const isLinkActive = (href) => {
@@ -36,23 +48,39 @@ const Header = () => {
       roleparams['size'] = 10000;
       const response = await axios1.get('api/website/news/get', { params: roleparams });
       setNews(response.data.data);
+
     } catch (err) {
+      console.error(err);
       console.error(err);
     }
   }, []);
 
   const getCountry = useCallback(async () => {
-    setCountry([]);
     try {
-      const roleparams: any = {}
-      roleparams['page'] = 1;
-      roleparams['size'] = 12;
+      const roleparams = { page: 1, size: 10000 };
       const response = await axios1.get('api/website/country/get', { params: roleparams });
-      setCountry(response.data.data);
+      setCountries(response.data.data);
+    } catch (err) {
+      console.error(err);
+      console.error(err);
+    }
+  }, []);
+
+
+  const getCourses = useCallback(async () => {
+    setCourses([]);
+    try {
+      const roleparams = { page: 1, size: 10000, orderby: "asc", columnname: "listing_order" };
+      const response = await axios1.get('api/website/stream/get', { params: roleparams });
+      setCourses(response.data.data);
     } catch (err) {
       console.error(err);
     }
   }, []);
+
+  useEffect(() => {
+    getCountry();
+  }, [getCountry]);
 
 
   const getuniversities = useCallback(async () => {
@@ -60,10 +88,12 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 12;
+      roleparams['size'] = 10000;
       const response = await axios1.get('api/website/states/get', { params: roleparams });
       setUniversities(response.data.data);
+
     } catch (err) {
+      console.error(err);
       console.error(err);
     }
   }, []);
@@ -75,9 +105,11 @@ const Header = () => {
       const roleparams: any = {}
       roleparams['page'] = 1;
       roleparams['size'] = 10000;
-      const response = await axios1.get('api/website/exams/get', { params: roleparams });
+      const response = await axios1.get('api/website/stream_exams/get', { params: roleparams });
       setExams(response.data.data);
+
     } catch (err) {
+      console.error(err);
       console.error(err);
     }
   }, []);
@@ -86,12 +118,11 @@ const Header = () => {
 
     getuniversities();
     getexams();
-
     getnews();
+    getCourses();
 
-    getCountry();
 
-  }, [getuniversities, getexams, getnews, getCountry]);
+  }, [getuniversities, getexams, getnews, getCourses]);
 
 
   // useEffect(() => {
@@ -124,9 +155,9 @@ const Header = () => {
             </div>
             <div className="col-md-8 d-flex align-items-center justify-content-end socialText">
               <div>
-                <span className='telHover'><Image className="m-0" src="/images/icons/Phone blue.svg" width={26} height={22} alt="phone-icon" />
+                <span className='telHover'><Image className="m-0" src="/images/icons/Phone-blue.svg" width={26} height={22} alt="phone-icon" />
                   <a href="tel:18001208969" target="_blank" className="mx-2 " style={{ color: '#274896' }}>1800 120 8969</a></span>
-                <span className="mailHover"><Image className="ms-2" src="/images/icons/Email-icon.svg" width={26} height={22} alt="email-icon" />
+                <span className="mailHover"><Image className="ms-2" src="/images/icons/email-icon.svg" width={26} height={22} alt="email-icon" />
                   <a href="mailto:info@learntech.com" className="mx-2" style={{ color: '#274896' }}>info@learntech.com</a></span>
                 <Link href='/write-review' className="ms-2 btn reviewBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Write a Review</Link>
               </div>
@@ -137,22 +168,22 @@ const Header = () => {
 
       <nav className="top-nav navbar navbar-expand-lg bg-white">
         <div className="container-lg">
-          <Link className="navbar-brand" href="/home"><Image src="/images/icons/learntech-logo.png" width={160} height={50} alt="learntech-logo" /></Link>
+          <Link className="navbar-brand" href="/"><Image src="/images/icons/learntech-logo.png" width={160} height={50} alt="learntech-logo" /></Link>
           <button className="navbar-toggler" type="button" onClick={toggle} data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className={`${isOpen ? 'show' : ''} collapse navbar-collapse`} id="navbarSupportedContent">
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className={`nav-link ${isLinkActive('/home') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/home">Home</Link>
+                <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/">Home</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Universities
                 </Link>
                 {universities.length > 0 && (
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
                     <div className="text-center"><p style={{ color: '#274896', fontWeight: '700' }}>Universities by location</p></div>
                     {universities.map(university => (
                       <li key={university.id}>
@@ -163,7 +194,7 @@ const Header = () => {
                           </div>
                         </Link>
 
-                        <ul className="dropdown-menu dropdown-submenu">
+                        <ul className="dropdown-menu menu-icon dropdown-submenu">
                           {university.city.map(city => (
                             <li key={city.id}>
                               <Link className="dropdown-item" href={`/${city.name.toLowerCase()}`}>
@@ -183,13 +214,14 @@ const Header = () => {
 
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/college') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/college" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/colleges') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/colleges" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Colleges
                 </Link>
 
+
                 {universities.length > 0 && (
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
                     <div className="text-center"><p style={{ fontWeight: 'bold', color: '#274896' }}>College by location</p></div>
                     {universities.map(university => (
 
@@ -205,7 +237,7 @@ const Header = () => {
                           </div>
                         </Link>
 
-                        <ul className="dropdown-menu dropdown-submenu">
+                        <ul className="dropdown-menu dropdown-submenu menu-icon">
                           {university.city.map(city => (
                             <li key={city.id}>
                               <Link className="dropdown-item" href={`/${city.name.toLowerCase()}`}>
@@ -228,75 +260,38 @@ const Header = () => {
                 )}
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Courses
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karnataka <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
+                {courses.length > 0 && (
+                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
+                    <div className="text-center">
+                      <p style={{ color: '#274896', fontWeight: '700' }}>Popular Courses</p>
+                    </div>
+                    {courses.map((course) => (
+                      <li key={course.id}>
+                        <Link href={`/university/${course.slug}`} className="dropdown-item">
+                          <div className="d-flex justify-content-between">
+                            {course.slug}
+                            {/* <Image className="ms-auto" src="/images/icons/right arrow.svg" width={50} height={25} alt="arrow-img" /> */}
+                          </div>
+                        </Link>
                       </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Tamil Nadu <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karela <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Andhra Pradesh <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <div className='text-center text-blue dropdownBtn'>
-                    <Link href="#" className='btn'>View More</Link>
-                  </div>
-                </ul>
+                    ))}
+                    <div className="text-center text-blue dropdownBtn">
+                      <Link href="#" className="btn">View More</Link>
+                    </div>
+                  </ul>
+                )}
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/Exams') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/Exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Exams
                 </Link>
                 {exams.length > 0 && (
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
                     <div className="text-center "><p style={{ color: '#274896', fontWeight: '700' }}>Top Enterance Exams</p></div>
                     {exams.map(exam => (
                       <li key={exam.id}>
@@ -307,7 +302,7 @@ const Header = () => {
                           </div>
                         </Link>
 
-                        <ul className="dropdown-menu dropdown-submenu">
+                        <ul className="dropdown-menu dropdown-submenu menu-icon">
                           {exam.exam.map((examItem) => (
                             <li key={examItem.id}>
                               <Link className="dropdown-item" href={`/${examItem.exam_title.toLowerCase()}`}>
@@ -325,42 +320,40 @@ const Header = () => {
                   </ul>
                 )}
               </li>
+
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
-                  aria-expanded="false">
+                <Link
+                  className={`nav-link dropdown-toggle ${isLinkActive('/country') ? 'activeDrpDwn' : ''}`}
+                  onClick={() => setIsOpen(!isOpen)}
+                  href="/home"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  aria-expanded={isOpen}
+                >
                   Study Abroad
                 </Link>
-                {country.length > 0 && (
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <div className="text-center "><p style={{ color: '#274896', fontWeight: '700' }}>Best Country for Study</p></div>
-                    {country.map(countrie => (
-                      <li key={countrie.id}>
-                        <Link href={`/university/${countrie.name}`} className="dropdown-item">
+                {countries.length > 0 && (
+                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
+                    <div className="text-center">
+                      <p style={{ color: '#274896', fontWeight: '700' }}>Best Country for Study</p>
+                    </div>
+                    {countries.map((country) => (
+                      <li key={country.id}>
+                        <Link href={`/university/${country.name}`} className="dropdown-item">
                           <div className="d-flex justify-content-between">
-                            {countrie.name}
-                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={50} height={25} alt='arrow-img' />
+                            {country.name}
+                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={50} height={25} alt="arrow-img" />
                           </div>
                         </Link>
-
-                        {/* <ul className="dropdown-menu dropdown-submenu">
-                  {countrie.city.map(city => (
-                    <li key={city.id}>
-                      <Link className="dropdown-item" href={`/${city.name.toLowerCase()}`}>
-                        {city.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul> */}
-
                       </li>
                     ))}
-                    <div className='text-center text-blue dropdownBtn'>
-                      <Link href="#" className='btn'>View More</Link>
+                    <div className="text-center text-blue dropdownBtn">
+                      <Link href="#" className="btn">Explore More Countries</Link>
                     </div>
                   </ul>
                 )}
-
               </li>
+
 
               <li className="nav-item dropdown">
                 <Link
@@ -374,90 +367,59 @@ const Header = () => {
                   Latest News
                 </Link>
                 <div className="container-fluid">
-                  <ul className="dropdown-menu-news dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <ul className="newsDrpDwn dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <div className="dropdown-row-news dropdown-row p-2">
-                      {news.slice(0, 3).map((item) => (
-                        <li key={item.id} className="news-item col-md-5">
-                          <div className="card-news card">
-                            <img src={item.banner_image} className="card-img-top" alt="News Banner" />
-                            <div className="card-body">
-                              <h5 className="card-title">{item.meta_title}</h5>
-                              <p className="card-text">{item.meta_description}</p>
+                      <div className="row">
+                        {news.slice(0, 4).map((item) => (
+                          <li key={item.id} className="news-item mb-3 col-md-3">
+                            <div className="card-news card">
 
+                              <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
+                              <div className="card-body">
+                                <h5 className="card-title">{item.meta_title}</h5>
+                                <p className="card-text">{item.meta_description}</p>
+                              </div>
                             </div>
-                          </div>
-                        </li>
-                      ))}
+                          </li>
+                        ))}
+                      </div>
+
                     </div>
-                    <div className="read-more-container text-center mt-3">
-                      <Link href="/latestNews" className="btn btn-secondary">Read More</Link>
+                    <div className="text-end mt-3 me-2">
+                      <Link href="/latestNews" className="btn ">Read All News</Link>
                     </div>
                   </ul>
                 </div>
               </li>
 
-
               <li className="nav-item dropdown d-lg-inline-block d-none">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   More
                 </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li>
                     <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karnataka <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
+                      About US
                     </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
+
                   </li>
                   <li>
                     <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Tamil Nadu <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
+                      Our Team
                     </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
+
                   </li>
                   <li>
                     <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Karela <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
+                      Services
                     </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
+
                   </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                      Andhra Pradesh <Image className="ms-auto" src="/images/icons/right arrow.svg" width={25} height={25} alt='arrow-img' />
-                    </Link>
-                    <ul className="dropdown-menu dropdown-submenu">
-                      <li>
-                        <Link className="dropdown-item" href="#">Bangalore</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="#">Mangalore</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <div className='text-center text-blue dropdownBtn'>
+
+                  {/* <div className='text-center text-blue dropdownBtn'>
                     <Link href="#" className='btn'>View More</Link>
-                  </div>
+                  </div> */}
                 </ul>
               </li>
             </ul>

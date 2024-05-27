@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios'; // Import Axios
 
 function ExpertSection() {
 
@@ -24,19 +25,25 @@ function ExpertSection() {
       email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
       stream: Yup.string().required('Stream is required')
     }),
-    onSubmit: (values, { resetForm }) => {
-      console.log('Form data', values);
-      alert('Form submitted successfully!');
-      resetForm();  // Reset the form to initial values
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const response = await axios.post('https://api/website/enquiry', values);
+        console.log('Form data submitted', response.data);
+        alert('Form submitted successfully!');
+        resetForm();  // Reset the form to initial values
+      } catch (error) {
+        console.error('There was an error submitting the form', error);
+        alert('There was an error submitting the form. Please try again.');
+      }
     },
   });
 
   return (
-    <section className="ExpertCon" id="animation15" data-aos="fade-up">
+    <section className="ExpertCon" id="animation15">
       <div className="container py-5">
-        <h3 className="fw-bold text-center">Get In Touch With Our Expert Counsellor</h3>
+        <h3 className="fw-bold text-center text-blue">Get In Touch With Our Expert Counsellor</h3>
         <p className="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        <form onSubmit={formik.handleSubmit} className="container">
+        <form onSubmit={formik.handleSubmit} className="container " >
           <div className="row">
             <div className="col-md-6" id="animation16">
               <div className="mb-3 ms-md-5">

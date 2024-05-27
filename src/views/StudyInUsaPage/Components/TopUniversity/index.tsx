@@ -83,7 +83,12 @@ function TopUniversity() {
   function CardComponent({ title, imageSrc, description }) {
     return (
       <div className="mx-2 card d-flex rounded text-center">
-        <Image src={imageSrc} className='rounded-top m-0' width={200} height={200} alt="clg-card" />
+        <div className="position-relative">
+          <Image src={imageSrc} className='rounded-top m-0' width={200} height={200} alt="clg-card" />
+          <div className="position-absolute topClgIcon">
+            <Image src={"/images/icons/topClg.png"} className='rounded-top m-0' width={40} height={40} alt="clg-card" />
+          </div>
+        </div>
         <div className='p-2'>
           <p className='m-0 text-black fw-bold'>{title}</p>
           <small className='text-blue mb-3'>{description}</small>

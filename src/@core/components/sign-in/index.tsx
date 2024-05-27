@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 interface FormValues {
   email: string;
   password: string;
