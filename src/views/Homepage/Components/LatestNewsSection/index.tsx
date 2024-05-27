@@ -81,12 +81,12 @@ function LatestNewsSection() {
                                     <div className="newsBlosCards">
                                         <div className="mb-5">
                                             <div className="card h-100">
-                                                <div className="card-body">
-                                                    <h6 className="card-subtitle mb-2 text-body-secondary">
+                                                <div className="card-body newsheight ">
+                                                    <h6 className="card-subtitle  mb-2 text-body-secondary">
                                                         {item.created_at ? format(new Date(item.created_at), 'yyyy-MM-dd') : 'No Date Available'}
                                                     </h6>
-                                                    <h5 className="card-title fw-bold text-blue">{item.meta_title}</h5>
-                                                    <p className="card-text">{item.meta_description}</p>
+                                                    <h5 className="card-title  fw-bold text-blue">{item.meta_title}</h5>
+                                                    <p className="card-text ">{item.meta_description}</p>
                                                     <a href={item.link} className="btn readBtn card-link">Read More</a>
                                                 </div>
                                             </div>

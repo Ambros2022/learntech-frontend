@@ -9,7 +9,23 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios1 from 'src/configs/axios'
 
+interface College {
+    id: number;
+    name: string;
+    state: number;
+    address: string;
+    banner_image: string;
+    established: string;
+    avg_rating: number;
+    college_type: string;
+   
+}
+
 function CollegeFilterSection() {
+
+
+    const [colleges, setColleges] = useState<College[]>([]);
+
     type Option = {
         label: string;
         value: string;
@@ -26,8 +42,8 @@ function CollegeFilterSection() {
 
     console.log(states, "states")
 
+    
 
-   
 
     const fetchStatesData = useCallback(async () => {
         try {
@@ -46,120 +62,140 @@ function CollegeFilterSection() {
         }
     }, []);
 
+    
+
+    //get all banners
+    const getcollegedata = useCallback(async () => {
+        try {
+        const roleparams: any = {};
+        roleparams['page'] = 1;
+        roleparams['size'] = 10000;
+        const response = await axios1.get('api/website/colleges/get', { params: roleparams });
+
+        setColleges(response.data.data);
+        } catch (err) {
+        console.error(err);
+        }
+    }, []);
+
+  
+
 
     useEffect(() => {
         fetchStatesData();
+        getcollegedata();
+        
     }, []);
 
-    const colleges = [
-        {
-            id: 1,
-            name: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-            slug: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-            type: 'Private',
-            rating: 4.5,
-            location: 'Bangalore',
-            state: 'karnataka',
-            ownership: 'private',
-            streams: ['management', 'education'],
-            courses: ['bsc', 'mba'],
-            courseType: 'bachelors',
-            established: 1992,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 2,
-            name: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-            slug: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Vidyaniketan',
-            state: 'Bangalore',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 3,
-            name: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-            slug: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'karnataka',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 4,
-            name: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-            slug: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Manipal',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 5,
-            name: "ST. JOSEPH'S UNIVERSITY",
-            slug: "ST. JOSEPH'S UNIVERSITY",
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 6,
-            name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 7,
-            name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
+    // const colleges = [
+    //     {
+    //         id: 1,
+    //         name: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
+    //         slug: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
+    //         type: 'Private',
+    //         rating: 4.5,
+    //         location: 'Bangalore',
+    //         state: 'karnataka',
+    //         ownership: 'private',
+    //         streams: ['management', 'education'],
+    //         courses: ['bsc', 'mba'],
+    //         courseType: 'bachelors',
+    //         established: 1992,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
+    //         slug: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Vidyaniketan',
+    //         state: 'Bangalore',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
+    //         slug: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Bangalore',
+    //         state: 'karnataka',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
+    //         slug: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Manipal',
+    //         state: 'India',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "ST. JOSEPH'S UNIVERSITY",
+    //         slug: "ST. JOSEPH'S UNIVERSITY",
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Bangalore',
+    //         state: 'India',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 6,
+    //         name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
+    //         slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Bangalore',
+    //         state: 'India',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 7,
+    //         name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
+    //         slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Bangalore',
+    //         state: 'India',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
 
-        // Add more college objects as needed
-    ];
+    //     // Add more college objects as needed
+    // ];
 
 
    
@@ -283,7 +319,7 @@ function CollegeFilterSection() {
                     <div className="p-2">
                         <div className="row">
                             <div className="col-md-3 col-xl-3 clgCardImg">
-                                <Image width={180} height={200} src={imageUrl} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
+                                <Image width={180} height={200} src={`${process.env.NEXT_PUBLIC_API_URI}/${imageUrl}`} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
                             </div>
                             <div className="col-md-9 col-xl-9">
                                 <div className="row">
@@ -292,7 +328,7 @@ function CollegeFilterSection() {
                                             <h6 className='fw-bold text-black my-2'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state}`}</p>
+                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state.name}`}</p>
                                             <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                         </div>
                                     </div>
@@ -362,14 +398,13 @@ function CollegeFilterSection() {
                     <CollegeCard
                         key={college.id}
                         id={college.id}
-                        slug={college.name}
                         name={college.name}
-                        type={college.type}
-                        rating={college.rating}
-                        location={college.location}
+                        type={college.college_type}
+                        rating={college.avg_rating}
+                        location={college.address}
                         state={college.state}
                         established={college.established}
-                        imageUrl={college.imageUrl}
+                        imageUrl={college.banner_image}
                     />
                 ))}
             </div>

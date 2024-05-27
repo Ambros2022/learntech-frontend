@@ -167,7 +167,7 @@ function BannerSection() {
                           <TextField
                             {...params}
                             placeholder="Search"
-                            // className="form-control"
+                            className="form-control"
                             InputProps={{
                               ...params.InputProps,
                               endAdornment: (

@@ -216,6 +216,7 @@ li > a > ul > .dropdown:hover .dropdown-menu {
 }
 
 .searchSec {
+  width: 100%;
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: saturate(180%) blur(8px) !important;
   color: white !important;
@@ -2478,3 +2479,18 @@ footer img {
 .newsDrpDwn .card-body {
   min-height: 100px !important;
 }
+
+.text-whitecolor{
+  color: white !important;
+}
+
+
+.text-whitecolor:hover{
+  color: black !important;
+}
+
+.newsheight {
+  min-height: 220px !important;
+}
+
+
