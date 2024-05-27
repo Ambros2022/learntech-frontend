@@ -191,10 +191,12 @@ nav a {
   position: relative !important;
   height: auto !important;
 }
-li > a > ul > .dropdown:hover .dropdown-menu {
+
+li>a>ul>.dropdown:hover .dropdown-menu {
   display: block;
   margin-top: 30px;
 }
+
 .carousel {
   position: relative !important;
 }
@@ -224,11 +226,14 @@ li > a > ul > .dropdown:hover .dropdown-menu {
   font-size: 16px !important;
   padding: 20px !important;
   border-radius: 10px !important;
+  width: 100% !important;
   margin: auto 0 !important;
 }
+
 .w-90 {
   width: 90% !important;
 }
+
 .searchSec h1 {
   font-size: 1rem !important;
   cursor: pointer;
@@ -340,21 +345,26 @@ li > a > ul > .dropdown:hover .dropdown-menu {
 .latestNewsCon h3 {
   color: #254692;
 }
+
 .innerCollege {
   background-color: rgba(39, 72, 150, 1) !important;
 }
+
 .innerCollege input,
 select {
   background-color: transparent !important;
   color: white !important;
 }
+
 .innerCollege label {
   color: white !important;
 }
+
 .innerCollege input,
 select:focus {
   border-color: white !important;
 }
+
 /* Selects the arrow inside the select element */
 .innerCollege select {
   --bs-form-select-bg-img: url(../public/images/icons/white-arrow.png) !important;
@@ -375,6 +385,7 @@ select:focus {
   color: white !important;
   padding: 10px 30px !important;
 }
+
 .text-blue {
   color: #254692 !important;
 }
@@ -674,20 +685,25 @@ footer img {
 .StudyAbroadCon .fi-right {
   margin-right: -10px !important;
 }
+
 .card-con {
   position: relative !important;
 }
+
 .card-con .carousel-button-group {
   position: absolute !important;
   top: 160px !important;
   width: 100%;
 }
+
 .card-con .fi-left {
   margin-left: -30px !important;
 }
+
 .card-con .fi-right {
   margin-right: -25px !important;
 }
+
 .arrowIcon.show {
   opacity: 1;
 }
@@ -723,9 +739,11 @@ footer img {
 .bannerCon .carousel-item img {
   object-fit: cover;
 }
+
 .newsBlosCards {
   margin-right: 10px !important;
 }
+
 @media (min-width: 1024px) and (max-width: 1199px) {
   .featuredClgCard a {
     font-size: 12px !important;
@@ -907,7 +925,7 @@ footer img {
 
 @media (min-width: 320px) and (max-width: 767px) {
   .searchSec {
-    width: 80%;
+    width: 80% !important;
     margin: auto;
   }
 
@@ -928,9 +946,11 @@ footer img {
   .carousel-indicators {
     display: none !important;
   }
+
   .w-90 {
     width: auto !important;
   }
+
   .searchSec h1 {
     font-size: 0.8rem !important;
     cursor: pointer;
@@ -1042,9 +1062,11 @@ footer img {
     width: 46px !important;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
   }
+
   .newsBlosCards {
     margin-right: 0px !important;
   }
+
   .DownloadBrchrBtn img {
     width: 120px !important;
   }
@@ -1144,34 +1166,41 @@ footer img {
   .StudyAbroadCon .carousel-button-group {
     top: 530px !important;
   }
+
   .card-con .fi-left {
     margin-left: 0px !important;
     border: 1px solid #254692;
     border-radius: 5px;
     padding: 1px 10px;
   }
+
   .card-con .fi-right {
     margin-right: 0px !important;
     border: 1px solid #254692;
     border-radius: 5px;
     padding: 0px 10px;
   }
+
   .card-con .fi-left svg {
     height: 0.7em !important;
   }
+
   .card-con .fi-right svg {
     height: 0.7em !important;
   }
+
   .footer-logo {
     width: 60% !important;
     height: auto !important;
   }
+
   .card-con .carousel-button-group {
     justify-content: center !important;
     top: -2px !important;
     gap: 1rem !important;
   }
 }
+
 @media (min-width: 320px) and (max-width: 374px) {
   .searchBtn {
     padding: 8px 20px !important;
@@ -1293,18 +1322,21 @@ footer img {
   border-radius: 6px !important;
   padding: 10px 20px !important;
 }
+
 .viewMoreBtnCourse {
   background-color: #254692 !important;
   color: white !important;
   border-radius: 6px !important;
   padding: 10px 20px !important;
 }
+
 .viewMoreBtnCourse:hover {
   background-color: darkblue !important;
   color: white !important;
   border-radius: 6px !important;
   padding: 10px 20px !important;
 }
+
 .viewMoreBtn {
   background-color: white !important;
   color: #254692 !important;
@@ -1532,15 +1564,18 @@ footer img {
   border: 1px solid white !important;
   color: white !important;
 }
+
 .downloadBtn:hover {
   background-color: white !important;
   box-shadow: none !important;
 }
+
 .freeBtn:hover {
   border: 1px solid white !important;
   color: white !important;
   box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 15px;
 }
+
 @media (min-width: 320px) and (max-width: 767px) {
   .collegeDetailCard {
     width: 100vw !important;
@@ -1560,9 +1595,11 @@ footer img {
   .PrivateBtn {
     font-size: 12px !important;
   }
+
   .ratingBtn {
     font-size: 12px !important;
   }
+
   .downloadBtn {
     font-size: 12px !important;
     width: 100% !important;
@@ -1625,12 +1662,9 @@ footer img {
   background-color: #254692 !important;
 }
 
-.applyNowImg {
-  background-image: url('../public/images/icons/filter-card.jpg') !important;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 50vh;
+.applyNowImg img {
+  width: 100%;
+  height: 100%;
 }
 
 .applyNowImg a.btn {
@@ -1644,12 +1678,9 @@ footer img {
   transform: translate(-50%, -50%) !important;
 }
 
-.yotubeImg {
-  background-image: url('../public/images/icons/youtubeClg.jpg') !important;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 50vh;
+.yotubeImg img {
+  width: 100%;
+  height: 100%;
 }
 
 .yotubeImg a.btn {
@@ -1660,6 +1691,7 @@ footer img {
 }
 
 .facilitiesSec .card {
+  min-height: 100px;
   border: none !important;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
 }
@@ -1668,12 +1700,17 @@ footer img {
   font-size: 12px !important;
 }
 
+.facilitiesSec .card-img-top {
+  height: 50px !important;
+}
+
 .facilitiesSec .card img {
   filter: invert(23%) sepia(43%) saturate(2015%) hue-rotate(200deg) brightness(93%) contrast(95%) !important;
 }
 
 .locatedSec {
   background-color: #254692 !important;
+  height: 300px !important;
 }
 
 .locatedSec .location-img h6 {
@@ -1700,8 +1737,8 @@ footer img {
 }
 
 .clgImg {
-  width: auto !important;
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
@@ -1720,6 +1757,7 @@ footer img {
 .courseSec h1 {
   font-size: 2rem !important;
 }
+
 .courseSec .form-control {
   background-color: rgba(255, 255, 255, 0.2) !important;
 }
@@ -1727,9 +1765,11 @@ footer img {
 .courseSec input[type='search']::placeholder {
   color: white !important;
 }
+
 .bg-crsCard {
   background-color: rgba(39, 72, 150, 0.04) !important;
 }
+
 .courseSec input[type='search'] {
   color: white !important;
 }
@@ -2055,6 +2095,7 @@ footer img {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .studyInUsaCon .searchSec1 {
   color: white !important;
   font-size: 16px !important;
@@ -2062,18 +2103,22 @@ footer img {
   border-radius: 10px !important;
   margin-top: 20px !important;
 }
+
 .studyInUsaCon .searchSec1 .form-control {
   color: white !important;
 }
+
 .studyInUsaCon .searchSec1 input[type='search'] {
   background: rgba(255, 255, 255, 0.2) !important;
   border: 1px solid white !important;
   padding: 10px 20px !important;
   font-size: 16px !important;
 }
+
 .studyInUsaCon .searchSec1 input::placeholder {
   color: white !important;
 }
+
 .studyInUsaCon .searchSec1 input:focus {
   outline: none !important;
 }
@@ -2117,10 +2162,12 @@ footer img {
   height: 100% !important;
   object-fit: cover !important;
 }
+
 .topClgIcon {
   top: 9px !important;
   left: 4px !important;
 }
+
 .topClgIcon img {
   width: auto !important;
   height: auto !important;
@@ -2139,14 +2186,17 @@ footer img {
 .topUniCardCon .fi-right {
   margin-right: -10px !important;
 }
-.accordion-item:first-of-type > .accordion-header .accordion-button {
+
+.accordion-item:first-of-type>.accordion-header .accordion-button {
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
 }
-.accordion-item:last-of-type > .accordion-header .accordion-button.collapsed {
+
+.accordion-item:last-of-type>.accordion-header .accordion-button.collapsed {
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
+
 /* .faqImgSec img {
   width: auto;
   height: auto;
@@ -2160,19 +2210,23 @@ footer img {
   background-color: rgba(39, 72, 150, 0.2) !important;
   color: black !important;
 }
+
 .faqSec .accordion-header button:focus {
   box-shadow: none !important;
 }
+
 .faqSec .accordion-header button:hover {
   background-color: #3d5aa0 !important;
   color: white !important;
   --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
 }
+
 .faqSec .accordion-header button:focus {
   background-color: #3d5aa0 !important;
   color: white !important;
   --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
 }
+
 .faqSec .accordion-header:focus {
   outline: 0 !important;
   border: 0 !important;
@@ -2209,10 +2263,12 @@ footer img {
     top: 13px;
     left: 15px;
   }
+
   .topClgIcon img {
     width: 150% !important;
     height: 100% !important;
   }
+
   .topUniCardCon .carousel-button-group {
     position: absolute !important;
     top: 150px !important;
@@ -2231,11 +2287,13 @@ footer img {
     border-radius: 25px;
     padding: 2px 8px;
   }
+
   .faqImgSec img {
     width: 330px;
     height: 200px;
   }
 }
+
 @media (min-width: 320px) and (max-width: 374px) {
   .topUniCardCon .carousel-button-group {
     position: absolute !important;
@@ -2251,16 +2309,19 @@ footer img {
   .studyInUsaCon h4 {
     font-size: 13px;
   }
+
   .studyInUsaCon .searchSec1 {
     width: 100%;
     margin: auto;
   }
+
   .studyInUsaCon .searchSec1 input[type='search'] {
     background: transparent !important;
     border: 1px solid white !important;
     padding: 10px 20px !important;
     font-size: 12px !important;
   }
+
   .studyInUsaCon .searchSec1 {
     font-size: 12px !important;
     padding: 10px !important;
@@ -2317,77 +2378,106 @@ footer img {
 .detailsFillSec .submitBtn {
   width: auto !important;
 }
+
 .google-login-button {
   color: white !important;
   border: 1px solid #dee2e6 !important;
   padding: 5px !important;
   border-radius: 5px !important;
 }
-.google-login-button > div {
+
+.google-login-button>div {
   margin: 0 !important;
   padding: 2px !important;
   box-shadow: none !important;
 }
+
 .google-login-button div svg {
   width: 27px !important;
   height: 30px !important;
 }
+
 .google-login-button div svg g {
   transform: scale(1.5) !important;
 }
+
 .google-login-button div span {
   display: none !important;
 }
+
 .ratingBtn {
   background-color: rgb(255, 174, 0) !important;
   color: white !important;
   max-width: 90px !important;
   min-width: 90px !important;
 }
+
 .filterCardBorder .card-Image-top {
   object-fit: cover !important;
   height: 140px;
 }
+
 .filterItemBtn {
   background-color: #254692 !important;
   color: white !important;
   text-align: center !important;
 }
+
 .btn-close {
   --bs-btn-close-bg: url('../public/images/icons/close-icon-white.png') !important;
 }
+
 .viewMoreCardBtn {
   background-color: white !important;
   color: #254692 !important;
   border: 1px solid #254692 !important;
 }
+
 .clgCardImg img {
   width: 100%;
   height: 100%;
 }
+
 .filterCardBorder .card-title {
   min-height: 50px !important;
 }
+
 .filterCardBorder .card-text {
   min-height: 50px !important;
 }
+
 .typeBtn {
   background-color: #f6f8fb !important;
   color: #254692 !important;
 }
+
 .collegeBannerCon .form-control {
   background-color: rgba(255, 255, 255, 0.2) !important;
   padding: 12px 10px !important;
 }
+
 .collegeBannerCon input::placeholder {
   color: white !important;
 }
+
 .collegeBannerCon h1 {
   font-size: 33px !important;
 }
+
 .ExpertCon {
   background-color: white !important;
 }
+
+.reqBtnInnerClg .btn {
+  background-color: white !important;
+  color: #254692 !important;
+}
+
+.locatedSec .clgImg img {
+  width: 100%;
+  height: 100%;
+}
+
 /* .ExpertCon .form-control {
   background-color: transparent !important;
 }
@@ -2401,65 +2491,81 @@ footer img {
   .collegeBannerCon h1 {
     font-size: 24px !important;
   }
+
   .ratingBtn {
     background-color: rgb(255, 174, 0) !important;
     color: white !important;
     max-width: 70px !important;
     min-width: 70px !important;
   }
+
   .activeBtn {
     font-size: 11px !important;
   }
+
   .viewMoreBtn {
     font-size: 11px !important;
   }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .collegeBannerCon h1 {
     font-size: 23px !important;
   }
+
   .ratingBtn {
     background-color: rgb(255, 174, 0) !important;
     color: white !important;
     max-width: 70px !important;
     min-width: 70px !important;
   }
+
   .activeBtn {
     font-size: 11px !important;
   }
+
   .viewMoreBtn {
     font-size: 11px !important;
   }
 }
+
 @media (min-width: 320px) and (max-width: 767px) {
   .innerClg h2 {
     font-size: 21px !important;
   }
+
   .collegeBannerCon h1 {
     font-size: 19px !important;
   }
+
   .ratingBtn {
     background-color: rgb(255, 174, 0) !important;
     color: white !important;
     max-width: 70px !important;
     min-width: 70px !important;
   }
+
   .activeBtn {
     font-size: 11px !important;
   }
+
   .viewMoreBtn {
     font-size: 11px !important;
   }
+
   .clgCardImg .card-Image-top {
     height: 200px !important;
     object-fit: cover !important;
   }
+
   .activeBtn {
     font-size: 17px !important;
   }
+
   .viewMoreBtn {
     font-size: 17px !important;
   }
+
   .ratingBtn {
     font-size: 15px !important;
   }
@@ -2480,17 +2586,15 @@ footer img {
   min-height: 100px !important;
 }
 
-.text-whitecolor{
+.text-whitecolor {
   color: white !important;
 }
 
 
-.text-whitecolor:hover{
+.text-whitecolor:hover {
   color: black !important;
 }
 
 .newsheight {
   min-height: 220px !important;
 }
-
-

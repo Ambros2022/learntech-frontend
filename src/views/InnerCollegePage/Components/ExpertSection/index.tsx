@@ -10,7 +10,7 @@ function ExpertSection() {
 
   return (
     <>
-      <section className="ExpertCon innerCollege">
+      <section className=" innerCollege bg-blue">
         <div className="container py-5">
           <h2 className="fw-bold text-white text-center">Get In Touch With Our Expert Counsellor</h2>
           <div className="pt-3 form container">
@@ -48,7 +48,7 @@ function ExpertSection() {
                 </div>
               </div>
             </div>
-            <div className="text-center reqBtn mt-3">
+            <div className="text-center reqBtnInnerClg mt-3">
               <button className="btn">Request for a Call Back</button>
             </div>
           </div>
