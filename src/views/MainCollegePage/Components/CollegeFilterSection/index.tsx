@@ -18,11 +18,10 @@ interface College {
     established: string;
     avg_rating: number;
     college_type: string;
-   
+
 }
 
 function CollegeFilterSection() {
-
 
     const [colleges, setColleges] = useState<College[]>([]);
 
@@ -42,7 +41,7 @@ function CollegeFilterSection() {
 
     console.log(states, "states")
 
-    
+
 
 
     const fetchStatesData = useCallback(async () => {
@@ -62,29 +61,29 @@ function CollegeFilterSection() {
         }
     }, []);
 
-    
+
 
     //get all banners
     const getcollegedata = useCallback(async () => {
         try {
-        const roleparams: any = {};
-        roleparams['page'] = 1;
-        roleparams['size'] = 10000;
-        const response = await axios1.get('api/website/colleges/get', { params: roleparams });
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/website/colleges/get', { params: roleparams });
 
-        setColleges(response.data.data);
+            setColleges(response.data.data);
         } catch (err) {
-        console.error(err);
+            console.error(err);
         }
     }, []);
 
-  
+
 
 
     useEffect(() => {
         fetchStatesData();
         getcollegedata();
-        
+
     }, []);
 
     // const colleges = [
@@ -198,7 +197,7 @@ function CollegeFilterSection() {
     // ];
 
 
-   
+
     const options: OptionGroup[] = [
         {
             id: 'state',
@@ -294,13 +293,14 @@ function CollegeFilterSection() {
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             if (isChecked) {
-                updatedSelected[groupId] = [...(updatedSelected[groupId] || []), value];
+                updatedSelected[groupId] = [value]; // Set the selected state(s)
             } else {
-                updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
+                delete updatedSelected[groupId]; // Remove the selected state(s)
             }
             return updatedSelected;
         });
     };
+    
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
         setSelectedCheckboxes(prevSelected => {
@@ -361,18 +361,10 @@ function CollegeFilterSection() {
 
     function CollegeList({ selectedCheckboxes }: { selectedCheckboxes: Record<string, string[]> }) {
         const filteredColleges = colleges.filter(college => {
-            return Object.keys(selectedCheckboxes).every(groupId => {
-                const selectedValues = selectedCheckboxes[groupId];
-                if (!selectedValues || selectedValues.length === 0) {
-                    return true;
-                }
-
-                if (Array.isArray(college[groupId])) {
-                    return selectedValues.some(value => college[groupId].includes(value));
-                }
-
-                return selectedValues.includes(college[groupId]);
-            });
+            if (!selectedCheckboxes.state || selectedCheckboxes.state.length === 0) {
+                return true; // Return true if no state is selected
+            }
+            return selectedCheckboxes.state.includes(college.state.toString().toLowerCase().replace(' ', '_')); // Convert to string and filter based on selected state(s)
         });
 
         if (filteredColleges.length === 0) {
@@ -573,10 +565,11 @@ function CollegeFilterSection() {
                 </div>
             </div>
 
-  
+
         </>
 
     );
 }
 
 export default CollegeFilterSection;
+
