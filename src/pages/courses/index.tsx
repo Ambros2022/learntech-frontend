@@ -3,17 +3,17 @@ import { ReactNode } from 'react'
 
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
-import CoursesPage from 'src/views/CoursePage'
+import MainCoursePage from 'src/views/MainCoursePage'
 
 
-const Courses = () => {
-  return <>
-    <CoursesPage />
-  </>
+const courses = () => {
+    return <>
+        <MainCoursePage />
+    </>
 }
 
-Courses.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+courses.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
 
-Courses.guestGuard = true
+courses.guestGuard = true
 
-export default Courses;
+export default courses

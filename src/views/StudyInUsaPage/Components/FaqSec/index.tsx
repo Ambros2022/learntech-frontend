@@ -9,7 +9,7 @@ function FaqSec() {
           <h2 className='text-center text-blue fw-bold pt-5'>FAQs</h2>
           <div className="row">
             <div className="col-md-6 faqImgSec container d-flex justify-content-center">
-              <Image src="/images/icons/faq-img.png" className='px-md-0 px-3 align-self-center' width={400} height={300} alt='faq-img' />
+              <Image src="/images/icons/faq-img.png" className='img-fluid px-md-0 px-3 align-self-center' width={300} height={300} alt='faq-img' />
             </div>
             <div className="col-md-6 py-5">
               <div className="accordion px-5" id="accordionExample">

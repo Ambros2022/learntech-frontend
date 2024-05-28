@@ -12,7 +12,7 @@ function ExpertSection() {
     <>
       <section className="ExpertCon bg-white pt-5">
         <div className="container pb-5">
-          <h3 className="fw-bold text-center">Get In Touch With Our Expert Counsellor</h3>
+          <h3 className="fw-bold text-blue text-center">Get In Touch With Our Expert Counsellor</h3>
           <div className="pt-3 form container">
             <div className="row">
               <div className="col-md-6" id="animation16">

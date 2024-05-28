@@ -4,8 +4,6 @@ import React from 'react'
 function BannerSec() {
   return (
     <>
-      <hr className='m-0' />
-      <p className='text-black container py-3 mb-0'><Link href={'/home'} className='text-black'>Home</Link> {'>'} <Link className="text-blue" href={'/study-in-usa'}>Study In USA</Link></p>
       <section className='studyInUsaCon'>
         <div className="container h-100 d-flex justify-content-center">
           <div className='text-white align-content-center text-center'>
@@ -26,6 +24,9 @@ function BannerSec() {
           </div>
         </div>
       </section>
+      <div className='bg-white'>
+        <p className='text-black container py-3 mb-0'><Link href={'/home'} className='text-black'>Home</Link> {'>'} <Link className="text-blue" href={'/study-in-usa'}>Study In USA</Link></p>
+      </div>
     </>
   )
 }
