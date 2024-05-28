@@ -23,7 +23,6 @@ interface College {
 
 function CollegeFilterSection() {
 
-
     const [colleges, setColleges] = useState<College[]>([]);
 
     type Option = {
@@ -300,14 +299,15 @@ function CollegeFilterSection() {
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             if (isChecked) {
-                updatedSelected[groupId] = [...(updatedSelected[groupId] || []), value];
+                updatedSelected[groupId] = [value]; // Set the selected state(s)
             } else {
-                updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
+                delete updatedSelected[groupId]; // Remove the selected state(s)
             }
             return updatedSelected;
         });
 
     };
+    
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
 
@@ -369,18 +369,10 @@ function CollegeFilterSection() {
 
     function CollegeList({ selectedCheckboxes }: { selectedCheckboxes: Record<string, string[]> }) {
         const filteredColleges = colleges.filter(college => {
-            return Object.keys(selectedCheckboxes).every(groupId => {
-                const selectedValues = selectedCheckboxes[groupId];
-                if (!selectedValues || selectedValues.length === 0) {
-                    return true;
-                }
-
-                if (Array.isArray(college[groupId])) {
-                    return selectedValues.some(value => college[groupId].includes(value));
-                }
-
-                return selectedValues.includes(college[groupId]);
-            });
+            if (!selectedCheckboxes.state || selectedCheckboxes.state.length === 0) {
+                return true; // Return true if no state is selected
+            }
+            return selectedCheckboxes.state.includes(college.state.toString().toLowerCase().replace(' ', '_')); // Convert to string and filter based on selected state(s)
         });
 
         if (filteredColleges.length === 0) {
@@ -593,3 +585,4 @@ function CollegeFilterSection() {
 }
 
 export default CollegeFilterSection;
+

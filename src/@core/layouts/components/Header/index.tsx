@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import SignupForm from "src/@core/components/sign-up";
 import SignInForm from "src/@core/components/sign-in";
 import axios1 from 'src/configs/axios'
-
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 
 interface Country {
@@ -23,13 +23,11 @@ const Header = () => {
   const router = useRouter();
   const [universities, setUniversities] = useState<any[]>([]);
   const [exams, setExams] = useState<any[]>([]);
-
+  const isMountedRef = useIsMountedRef();
 
   const [news, setNews] = useState<any[]>([]);
-
   const [countries, setCountries] = useState<Country[]>([]);
   const [courses, setCourses] = useState<Courses[]>([]);
-
 
   const isLinkActive = (href) => {
     return router.pathname === href;
@@ -45,7 +43,7 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 10000;
+      roleparams['size'] = 4;
       const response = await axios1.get('api/website/news/get', { params: roleparams });
       setNews(response.data.data);
 
@@ -53,30 +51,30 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
   const getCountry = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10000 };
+      const roleparams = { page: 1, size: 15 };
       const response = await axios1.get('api/website/country/get', { params: roleparams });
       setCountries(response.data.data);
     } catch (err) {
       console.error(err);
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
 
   const getCourses = useCallback(async () => {
     setCourses([]);
     try {
-      const roleparams = { page: 1, size: 10000, orderby: "asc", columnname: "listing_order" };
+      const roleparams = { page: 1, size: 15, orderby: "asc", columnname: "listing_order" };
       const response = await axios1.get('api/website/stream/get', { params: roleparams });
       setCourses(response.data.data);
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
   useEffect(() => {
     getCountry();
@@ -88,7 +86,7 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 10000;
+      roleparams['size'] = 15;
       const response = await axios1.get('api/website/states/get', { params: roleparams });
       setUniversities(response.data.data);
 
@@ -96,7 +94,7 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
 
   const getexams = useCallback(async () => {
@@ -112,7 +110,7 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
   useEffect(() => {
 
