@@ -49,7 +49,7 @@ function ExploreSection() {
       <CardComponent
         key={item.id}
         title={item.name}
-        imageSrc={`${process.env.NEXT_PUBLIC_API_URI}/${item.logo}`}  // Adjust the path as needed
+        imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`}  // Adjust the path as needed
         count={item.uniqueCollegeCount}
       />
     ));

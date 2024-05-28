@@ -271,7 +271,7 @@ function StudyAbroadSection() {
   const renderCards = () => {
     return cardData.map((card) => (
       <div key={card.id} className="card StudyAbroadCard mb-5 h-100">
-        <img src={`${process.env.NEXT_PUBLIC_API_URI}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
+        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
         <div className="card-body">
           <h5 className="card-title text-blue" style={{fontSize : '18px'}}>{card.name}</h5>
           <p className="card-text">

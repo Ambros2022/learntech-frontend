@@ -122,7 +122,7 @@ function BannerSection() {
             <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
               <Image
                 fill
-                src={`${process.env.NEXT_PUBLIC_API_URI}/${banner.image}`}
+                src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
 
                 priority={true}
                 className="w-100"

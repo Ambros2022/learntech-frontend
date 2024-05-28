@@ -30,7 +30,6 @@ const Header = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [courses, setCourses] = useState<Courses[]>([]);
 
-  // console.log(countries , "countries")
 
   const isLinkActive = (href) => {
     return router.pathname === href;
@@ -49,7 +48,7 @@ const Header = () => {
       roleparams['size'] = 10000;
       const response = await axios1.get('api/website/news/get', { params: roleparams });
       setNews(response.data.data);
-     
+
     } catch (err) {
       console.error(err);
       console.error(err);
@@ -71,8 +70,8 @@ const Header = () => {
   const getCourses = useCallback(async () => {
     setCourses([]);
     try {
-      const roleparams = { page: 1, size: 10000 };
-      const response = await axios1.get('api/website/courses/get', { params: roleparams });
+      const roleparams = { page: 1, size: 10000, orderby: "asc", columnname: "listing_order" };
+      const response = await axios1.get('api/website/stream/get', { params: roleparams });
       setCourses(response.data.data);
     } catch (err) {
       console.error(err);
@@ -92,7 +91,7 @@ const Header = () => {
       roleparams['size'] = 10000;
       const response = await axios1.get('api/website/states/get', { params: roleparams });
       setUniversities(response.data.data);
-     
+
     } catch (err) {
       console.error(err);
       console.error(err);
@@ -106,9 +105,9 @@ const Header = () => {
       const roleparams: any = {}
       roleparams['page'] = 1;
       roleparams['size'] = 10000;
-      const response = await axios1.get('api/website/exams/get', { params: roleparams });
+      const response = await axios1.get('api/website/stream_exams/get', { params: roleparams });
       setExams(response.data.data);
-      
+
     } catch (err) {
       console.error(err);
       console.error(err);
@@ -139,7 +138,6 @@ const Header = () => {
   //   }
   //   fetchData();
   // }, []); // Empty dependency array ensures the effect runs only once on mount
-
 
 
   return (
@@ -376,7 +374,7 @@ const Header = () => {
                           <li key={item.id} className="news-item mb-3 col-md-3">
                             <div className="card-news card">
 
-                              <img src={`${process.env.NEXT_PUBLIC_API_URI}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
+                              <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
                               <div className="card-body">
                                 <h5 className="card-title">{item.meta_title}</h5>
                                 <p className="card-text">{item.meta_description}</p>
