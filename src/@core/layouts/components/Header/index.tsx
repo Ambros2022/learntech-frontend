@@ -34,8 +34,14 @@ const Header = () => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const handleViewMore = () => {
+    setIsExpanded(!isExpanded);
+  };
+
 
 
   const getnews = useCallback(async () => {
@@ -205,7 +211,9 @@ const Header = () => {
                       </li>
                     ))}
                     <div className='text-center text-blue dropdownBtn'>
-                      <Link href="#" className='btn'>View More</Link>
+                    <button onClick={handleViewMore} className='btn'>
+              {isExpanded ? 'View Less' : 'View More'}
+            </button>
                     </div>
                   </ul>
                 )}
@@ -225,7 +233,7 @@ const Header = () => {
 
                       <li key={university.id}>
 
-                        <Link href={`/university/${university.name}`} className="dropdown-item">
+                        <Link href={`/colleges/${university.name}`} className="dropdown-item">
 
                           <div className="d-flex justify-content-between">
 
@@ -411,6 +419,42 @@ const Header = () => {
                   <li>
                     <Link className="d-flex justify-content-between dropdown-item" href="#">
                       Services
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    Boards
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    Schools
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    NRI Quota
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    Scholarships
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    MBBS Abroad
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    Medical Edu Studio
                     </Link>
 
                   </li>

@@ -8,6 +8,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios1 from 'src/configs/axios'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
 
 interface College {
     id: number;
@@ -24,6 +26,7 @@ interface College {
 function CollegeFilterSection() {
 
     const [colleges, setColleges] = useState<College[]>([]);
+    const isMountedRef = useIsMountedRef();
 
     type Option = {
         label: string;
@@ -59,7 +62,7 @@ function CollegeFilterSection() {
         } catch (error) {
             console.error('Error fetching states:', error);
         }
-    }, []);
+    }, [isMountedRef]);
 
 
 
@@ -75,7 +78,7 @@ function CollegeFilterSection() {
         } catch (err) {
             console.error(err);
         }
-    }, []);
+    }, [isMountedRef]);
 
 
 
@@ -341,7 +344,17 @@ function CollegeFilterSection() {
                                         </div>
                                     </div>
                                     <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
-                                        <button className='btn ratingBtn d-flex justify-content-center'><Image src='/images/icons/star-24.png' width={20} height={20} alt='star-icon' /><span className='align-content-center'>{rating}</span></button>
+                                    {rating && (
+                                        <button className='btn ratingBtn d-flex justify-content-center'>
+                                            <Image 
+                                                src='/images/icons/star-24.png' 
+                                                width={20} 
+                                                height={20} 
+                                                alt='star-icon' 
+                                            />
+                                            <span className='align-content-center'>{rating}</span>
+                                        </button>
+                                    )}
                                     </div>
                                     <div className="col-md-3 col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid">
                                         <a className="activeBtn btn mb-3 d-flex justify-content-center"
