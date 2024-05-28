@@ -5,7 +5,6 @@ function BannerSection() {
 
   return (
     <>
-      <hr className='mt-0' />
       <section className='bg-blue collegeDetailBanner'>
         <div className="container h-100 d-flex justify-content-center">
           <div className="align-content-center collegeDetailCard w-100">

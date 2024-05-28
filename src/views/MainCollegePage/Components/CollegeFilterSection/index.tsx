@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import emailjs from 'emailjs-com';
@@ -286,6 +286,12 @@ function CollegeFilterSection() {
 
 
     const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
+
+        const collegeFiltersSection = document.getElementById('collegeFiltersSection');
+        if (collegeFiltersSection) {
+            collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             if (isChecked) {
@@ -295,9 +301,11 @@ function CollegeFilterSection() {
             }
             return updatedSelected;
         });
+
     };
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
+
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
@@ -407,9 +415,12 @@ function CollegeFilterSection() {
         );
     }
 
-    useEffect(() => {
-        collegeFilterRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [visibleCards, selectedCheckboxes]);
+    // useEffect(() => {
+    //     const collegeFilterSection = document.getElementById('collegeFilterSection');
+    //     if (collegeFilterSection) {
+    //         collegeFilterSection.scrollIntoView({ behavior: 'smooth' });
+    //     }
+    // }, [visibleCards, selectedCheckboxes]);
 
     const [accordionOpen, setAccordionOpen] = useState<string | null>(null);
 
@@ -417,14 +428,14 @@ function CollegeFilterSection() {
         setAccordionOpen(groupId === accordionOpen ? null : groupId);
     };
 
-    const collegeFilterRef = useRef<HTMLDivElement>(null); // Specify the type of ref
 
 
     const StateButtons: React.FC<{ options: Option[]; setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>> }> = ({ options, setSelectedCheckboxes }) => {
         const handleStateButtonClick = (state: string) => {
             setSelectedCheckboxes({ state: [state] });
-            if (collegeFilterRef.current) {
-                collegeFilterRef.current.scrollIntoView({ behavior: 'smooth' });
+            const collegeFiltersSection = document.getElementById('collegeFiltersSection');
+            if (collegeFiltersSection) {
+                collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
             }
         };
 
@@ -505,7 +516,7 @@ function CollegeFilterSection() {
         };
 
         return (
-            <div className="row bg-skyBlue gx-0 px-3 py-2 mb-3 mx-2">
+            <div id="collegeFiltersSection" className="row bg-skyBlue gx-0 px-3 py-2 mb-3 mx-2">
                 <div className="col-12">
                     <h6 className='text-black'>Selected Filters</h6>
                 </div>
@@ -515,9 +526,9 @@ function CollegeFilterSection() {
                             <div key={value} className="btn d-inline-flex align-items-center filterItemBtn rounded m-1 p-2">
                                 <span className="me-2">{getLabelForValue(groupId, value)}</span>
                                 <button
-                                    className="btn-close"
+                                    className="btn"
                                     onClick={() => removeSelectedCheckbox(groupId, value)}
-                                />
+                                ><Image src="/images/icons/close-icon-white.png" width={18} height={18} alt='close-white' /></button>
                             </div>
                         ))
                     ))}
@@ -545,7 +556,7 @@ function CollegeFilterSection() {
 
     return (
         <>
-            <div ref={collegeFilterRef} className='bg-white py-3'>
+            <div className='bg-white py-3'>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 mb-3 mb-lg-0 bg-skyBlue">

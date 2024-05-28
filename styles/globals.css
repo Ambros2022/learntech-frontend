@@ -369,6 +369,9 @@ select:focus {
   filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%);
   background-color: rgba(39, 72, 150, 0.1);
 }
+.img-blue {
+  filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%) !important;
+}
 #exploreCardCon .card {
   border: none !important;
   box-shadow: rgba(51, 51, 51, 0.361) 0px 0px 15px !important;
@@ -1124,14 +1127,14 @@ footer img {
 .ApplyNowBtn {
   background-color: #254692 !important;
   color: white !important;
-  font-size: 10px !important;
+  font-size: 14px !important;
 }
 .viewDetailsBtn {
   background-color: white !important;
   color: #254692 !important;
   border: 1px solid #254692 !important;
   border-radius: 10px !important;
-  font-size: 10px !important;
+  font-size: 15px !important;
 }
 .topFeaturedClgCard {
   margin-right: 20px !important; /* Gap between cards */
@@ -1174,6 +1177,11 @@ footer img {
   color: transparent !important;
 }
 @media (min-width: 768px) and (max-width: 992px) {
+  .ApplyNowBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    font-size: 10px !important;
+  }
   .filterCardText h6 {
     font-size: 12px !important;
   }
@@ -1217,6 +1225,11 @@ footer img {
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .ApplyNowBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    font-size: 10px !important;
+  }
   .topFeaturedClgCard {
     margin-right: 0px !important;
   }
@@ -1381,6 +1394,26 @@ footer img {
   width: 100%;
   height: 100%;
 }
+.schlBanner {
+  height: 500px;
+}
+.schlBanner img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+.schlBannerTxt {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+.rqBtnSchl {
+  background-color: #254692 !important;
+  color: white !important;
+  padding: 12px 15px !important;
+  border-radius: 12px !important;
+}
 .yotubeImg a.btn {
   position: absolute !important;
   top: 50% !important;
@@ -1427,12 +1460,22 @@ footer img {
   width: 100%;
   height: 100%;
 }
+.bg-gray {
+  background-color: #8f8f8f !important;
+  width: 100%;
+}
 @media (min-width: 768px) and (max-width: 992px) {
   .clgImg {
     width: 70% !important;
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .schlBannerTxt h5 {
+    font-size: 15px;
+  }
+  .schlBannerTxt h2 {
+    font-size: 17px;
+  }
   .clgImg {
     width: 50% !important;
   }
@@ -1479,11 +1522,46 @@ footer img {
 .min-vh-card {
   min-height: 75px !important;
 }
+.CourseNavigationLink {
+  background-color: white !important;
+}
 .CourseNavigationLink a {
   text-decoration: none;
   color: black;
 }
+.innerApplyBtn {
+  color: white !important;
+  border: 1px solid white !important;
+}
+.dentalCourseCon h1 {
+  font-size: 30px !important;
+  font-weight: bold !important;
+}
+.dentalCourseCon img {
+  width: auto;
+  height: auto;
+  padding: 5px !important;
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+  .dentalCourseCon h1 {
+    font-size: 27px !important;
+    font-weight: bold !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .dentalCourseCon h1 {
+    font-size: 20px !important;
+    font-weight: bold !important;
+  }
+}
 @media (min-width: 320px) and (max-width: 767px) {
+  .dentalCourseCon h1 {
+    font-size: 15px !important;
+    font-weight: bold !important;
+  }
+  .innerApplyBtn {
+    font-size: 11px !important;
+  }
   .coursesCardImg img {
     width: 100%;
     height: 100%;
@@ -1799,10 +1877,24 @@ footer img {
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
-/* .faqImgSec img {
+.faqImgSec img {
+  width: 100%;
+  height: auto;
+}
+.errCon img {
   width: auto;
   height: auto;
-} */
+}
+.errBtn {
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+}
+.errCon h1 {
+  font-size: 30px !important;
+}
+.errCon h6 {
+  font-size: 14px !important;
+}
 
 .faqSec .accordion-button {
   --bs-accordion-btn-active-icon: url(../public/images/icons/white-arrow.png) !important;
@@ -1844,6 +1936,14 @@ footer img {
   border-radius: 0 !important;
   border: 0 !important;
 }
+.btn-close1 img {
+  width: auto;
+  height: auto;
+}
+.streamBtn {
+  background-color: #ced6e96b !important;
+}
+
 @media (min-width: 768px) and (max-width: 992px) {
   .studyInUsaCon h4 {
     font-size: 18px;
@@ -1887,6 +1987,9 @@ footer img {
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .overflowScroll {
+    overflow-x: scroll !important;
+  }
   .studyInUsaCon {
     height: 400px;
   }
@@ -1986,9 +2089,6 @@ footer img {
   color: white !important;
   text-align: center !important;
 }
-.btn-close {
-  --bs-btn-close-bg: url('../public/images/icons/close-icon-white.png') !important;
-}
 .viewMoreCardBtn {
   background-color: white !important;
   color: #254692 !important;
@@ -2021,6 +2121,14 @@ footer img {
 .ExpertCon {
   background-color: white !important;
 }
+.socialThnks img {
+  width: 28px !important;
+  height: 28px !important;
+}
+.thnkCon img {
+  width: auto;
+  height: auto;
+}
 .reqBtnInnerClg .btn {
   background-color: white !important;
   color: #254692 !important;
@@ -2039,6 +2147,12 @@ footer img {
   color: white !important;
 } */
 @media (min-width: 992px) and (max-width: 1024px) {
+  .errCon h1 {
+    font-size: 28px !important;
+  }
+  .chkEligBtn {
+    font-size: 12px !important;
+  }
   .collegeBannerCon h1 {
     font-size: 24px !important;
   }
@@ -2056,6 +2170,15 @@ footer img {
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
+  .errCon h1 {
+    font-size: 20px !important;
+  }
+  .schlSrchbtn {
+    font-size: 12px !important;
+  }
+  .chkEligBtn {
+    font-size: 12px !important;
+  }
   .collegeBannerCon h1 {
     font-size: 23px !important;
   }
@@ -2073,6 +2196,15 @@ footer img {
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .disclaimerCon h1 {
+    font-size: 22px !important;
+  }
+  .errCon h1 {
+    font-size: 18px !important;
+  }
+  .chkEligBtn {
+    font-size: 12px !important;
+  }
   .innerClg h2 {
     font-size: 21px !important;
   }
