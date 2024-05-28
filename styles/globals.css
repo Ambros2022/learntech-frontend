@@ -440,13 +440,10 @@ select:focus {
   filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%);
   background-color: rgba(39, 72, 150, 0.1);
 }
-<<<<<<< HEAD
 .img-blue {
   filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%) !important;
 }
-=======
 
->>>>>>> origin/abhishek-work
 #exploreCardCon .card {
   border: none !important;
   box-shadow: rgba(51, 51, 51, 0.361) 0px 0px 15px !important;
@@ -1698,7 +1695,6 @@ footer img {
   width: 100%;
   height: 100%;
 }
-<<<<<<< HEAD
 .schlBanner {
   height: 500px;
 }
@@ -1719,9 +1715,7 @@ footer img {
   padding: 12px 15px !important;
   border-radius: 12px !important;
 }
-=======
 
->>>>>>> origin/abhishek-work
 .yotubeImg a.btn {
   position: absolute !important;
   top: 50% !important;
@@ -1779,14 +1773,11 @@ footer img {
   width: 100%;
   height: 100%;
 }
-<<<<<<< HEAD
 .bg-gray {
   background-color: #8f8f8f !important;
   width: 100%;
 }
-=======
 
->>>>>>> origin/abhishek-work
 @media (min-width: 768px) and (max-width: 992px) {
   .clgImg {
     width: 70% !important;
@@ -1856,18 +1847,14 @@ footer img {
 .min-vh-card {
   min-height: 75px !important;
 }
-<<<<<<< HEAD
 .CourseNavigationLink {
   background-color: white !important;
 }
-=======
 
->>>>>>> origin/abhishek-work
 .CourseNavigationLink a {
   text-decoration: none;
   color: black;
 }
-<<<<<<< HEAD
 .innerApplyBtn {
   color: white !important;
   border: 1px solid white !important;
@@ -1893,9 +1880,7 @@ footer img {
     font-weight: bold !important;
   }
 }
-=======
 
->>>>>>> origin/abhishek-work
 @media (min-width: 320px) and (max-width: 767px) {
   .dentalCourseCon h1 {
     font-size: 15px !important;
@@ -2289,16 +2274,8 @@ footer img {
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
-<<<<<<< HEAD
-.faqImgSec img {
-  width: 100%;
-  height: auto;
-}
-.errCon img {
-=======
 
 /* .faqImgSec img {
->>>>>>> origin/abhishek-work
   width: auto;
   height: auto;
 }
@@ -2362,7 +2339,6 @@ footer img {
   border-radius: 0 !important;
   border: 0 !important;
 }
-<<<<<<< HEAD
 .btn-close1 img {
   width: auto;
   height: auto;
@@ -2370,8 +2346,6 @@ footer img {
 .streamBtn {
   background-color: #ced6e96b !important;
 }
-=======
->>>>>>> origin/abhishek-work
 
 @media (min-width: 768px) and (max-width: 992px) {
   .studyInUsaCon h4 {
@@ -2546,14 +2520,11 @@ footer img {
   color: white !important;
   text-align: center !important;
 }
-<<<<<<< HEAD
-=======
 
 .btn-close {
   --bs-btn-close-bg: url('../public/images/icons/close-icon-white.png') !important;
 }
 
->>>>>>> origin/abhishek-work
 .viewMoreCardBtn {
   background-color: white !important;
   color: #254692 !important;
@@ -2594,7 +2565,6 @@ footer img {
 .ExpertCon {
   background-color: white !important;
 }
-<<<<<<< HEAD
 .socialThnks img {
   width: 28px !important;
   height: 28px !important;
@@ -2603,9 +2573,7 @@ footer img {
   width: auto;
   height: auto;
 }
-=======
 
->>>>>>> origin/abhishek-work
 .reqBtnInnerClg .btn {
   background-color: white !important;
   color: #254692 !important;
