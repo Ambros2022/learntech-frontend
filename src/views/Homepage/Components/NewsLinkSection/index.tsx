@@ -16,7 +16,13 @@ function NewsLinkSection() {
 
             // Map the fetched news data to JSX elements
             const newsItems = newsData.map((item, index) => (
-                <h6 key={index} className="py-2">{item.meta_title}</h6>
+                
+                <a href={`https://your-base-url.com${item.url}`} target="_blank" rel="noopener noreferrer">
+                    <h6 key={index} className="py-2 text-whitecolor">
+                    {item.meta_title}
+                    </h6>
+                </a>
+            
             ));
             setLinkSectionItems(newsItems);
         } catch (error) {

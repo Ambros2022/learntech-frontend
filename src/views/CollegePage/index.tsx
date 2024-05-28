@@ -4,14 +4,14 @@ import TopCollegesSection from './Components/TopCollegesSection';
 import ExpertSection from './Components/ExpertSection';
 import TopFeaturedColleges from './Components/TopFeaturedColleges';
 
-// import CollegeFilterSection from './Components/CollegeFilterSection';
+import CollegeFilterSection from './Components/CollegeFilterSection';
 
 function CollegePage() {
   return (
     <>
       <BannerSection />
       <TopCollegesSection />
-      {/* <CollegeFilterSection /> */}
+      <CollegeFilterSection />
       <ExpertSection />
       <TopFeaturedColleges />
     </>
