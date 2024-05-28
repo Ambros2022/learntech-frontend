@@ -310,7 +310,7 @@ function CollegeFilterSection() {
         });
 
     };
-    
+
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
 
@@ -468,7 +468,11 @@ function CollegeFilterSection() {
         return (
             <div>
                 {options.map((optionGroup, index) => (
-                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2">
+                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2"
+                        onClick={() => toggleAccordion(optionGroup.id)}
+                        aria-expanded={accordionOpen === optionGroup.id}
+                        aria-controls={`${optionGroup.id}Collapse`}
+                    >
                         <div className="col-10">
                             <a className='text-blue'
                             >{optionGroup.label}</a>
@@ -476,9 +480,7 @@ function CollegeFilterSection() {
                         <div className="col-2 text-center">
                             <a
                                 className='text-blue'
-                                onClick={() => toggleAccordion(optionGroup.id)}
-                                aria-expanded={accordionOpen === optionGroup.id}
-                                aria-controls={`${optionGroup.id}Collapse`}
+                                style={{ cursor: "pointer" }}
                             >
                                 &#11205;
                             </a>

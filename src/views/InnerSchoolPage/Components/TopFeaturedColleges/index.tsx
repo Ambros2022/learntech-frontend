@@ -1,6 +1,7 @@
 import React from 'react';
 import MainCarousel from 'src/@core/components/main-carousel';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // Define the Card component
 const Card = ({ imageUrl, title, applyLink, detailsLink }) => {
@@ -105,6 +106,9 @@ function TopFeaturedColleges() {
       <div className="container position-relative">
         <h4 className="pt-5 mb-5 fw-bold text-blue text-center">Top Featured Schools</h4>
         <MainCarousel items={cardComponents} />
+        <div className="d-flex justify-content-center">
+          <Link className='btn viewMoreClgBtn mb-5' href="/schools">View More</Link>
+        </div>
       </div>
     </section>
   );

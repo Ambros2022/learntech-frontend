@@ -7,7 +7,8 @@ function BannerSection() {
       <section className="bg-blue dentalCourseCon py-5">
         <div className="container h-100 flex-column column-gap-0 d-flex justify-content-center">
           <div className='align-items-center'>
-            <h2 className='text-center fw-bold text-white mb-3'>BDS (Bachelor of Dental Surgery)</h2>
+            <h1 className='text-center fw-bold text-white mb-3'>BDS (Bachelor of Dental Surgery): Course, Duration, Eligibility, Fees, Admissions, Opportunities
+            </h1>
             <div className='text-white text-center mb-3'>
               <h6>Duration : 5 years</h6>
             </div>

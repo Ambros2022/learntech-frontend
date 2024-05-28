@@ -14,7 +14,7 @@ function BannerSection() {
               </div>
               <div className="col-md-6 col-12 text-white text-md-start text-center location-img">
                 <h6 className='fw-bold'>Yenepoya Medical College</h6>
-                <p className='mb-0'><Image width={200} height={200} src="/images/icons/Location Icon.svg" className='icon-white me-1' alt={'location-icon'} />Mangalore, Karnataka</p>
+                <p className='mb-2'><Image width={200} height={200} src="/images/icons/Location Icon.svg" className='icon-white me-1' alt={'location-icon'} />Mangalore, Karnataka</p>
                 <p className='mb-3'>Approved by : National Medical Commission (NMC)</p>
               </div>
               <div className="col-12 col-md-4 text-md-end text-center mb-3">
