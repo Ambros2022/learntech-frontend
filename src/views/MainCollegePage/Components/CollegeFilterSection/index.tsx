@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import emailjs from 'emailjs-com';
@@ -7,8 +7,25 @@ import { toast } from 'react-hot-toast'
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import axios1 from 'src/configs/axios'
+
+interface College {
+    id: number;
+    name: string;
+    state: number;
+    address: string;
+    banner_image: string;
+    established: string;
+    avg_rating: number;
+    college_type: string;
+
+}
 
 function CollegeFilterSection() {
+
+
+    const [colleges, setColleges] = useState<College[]>([]);
+
     type Option = {
         label: string;
         value: string;
@@ -21,184 +38,172 @@ function CollegeFilterSection() {
     };
 
     const [showScrollButton, setShowScrollButton] = useState(false);
+    const [states, setStates] = useState<Option[]>([]);
+
+    console.log(states, "states")
 
 
-    // const [showModal, setShowModal] = useState(false);
-    // const handleShowModal = () => setShowModal(true);
-    // const handleCloseModal = () => setShowModal(false);
-
-    // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-    // const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-    // const validationSchema = Yup.object().shape({
-    //     name: Yup.string().required('Name is required'),
-    //     email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-    //     phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-    //     course: Yup.string().required('Course is required'),
-    //     location: Yup.string().required('Location is required'),
-    // });
-
-    // const handleSubmit = async (values, { resetForm }) => {
-    //     try {
-    //         toast.loading('Processing'); // Display loading toast while processing
-    //         setShowModal(false); // Assuming setShowModal is a state setter for hiding modal
-    //         await emailjs.send("service_lrx8r36", "template_fsa8zp6", values, "8xItMn8QYmHOyfncY");
-    //         toast.dismiss();
-    //         toast.success('Message sent successfully!'); // Display success toast if email is sent successfully
-    //         resetForm(); // Reset the form
-    //         // Close the modal here if needed
-    //     } catch (error) {
-    //         toast.error('Failed!'); // Display error toast if sending email fails
-    //         console.error('Error sending email:', error);
-    //         alert("Error sending email. Please try again later."); // Fall back to alert if toast is not available
-    //     }
-    // };
 
 
-    const colleges = [
-        {
-            id: 1,
-            name: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-            slug: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-            type: 'Private',
-            rating: 4.5,
-            location: 'Bangalore',
-            state: 'karnataka',
-            ownership: 'private',
-            streams: ['management', 'education'],
-            courses: ['bsc', 'mba'],
-            courseType: 'bachelors',
-            established: 1992,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 2,
-            name: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-            slug: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Vidyaniketan',
-            state: 'Bangalore',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 3,
-            name: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-            slug: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'karnataka',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 4,
-            name: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-            slug: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Manipal',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 5,
-            name: "ST. JOSEPH'S UNIVERSITY",
-            slug: "ST. JOSEPH'S UNIVERSITY",
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 6,
-            name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 7,
-            name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-
-        // Add more college objects as needed
-    ];
+    const fetchStatesData = useCallback(async () => {
+        try {
+            const response = await axios1.get('api/website/states/get');
+            if (response.data.status === 1) {
+                const statesData = response.data.data.map((state: any) => ({
+                    label: state.name,
+                    value: state.name.toLowerCase().replace(' ', '_')
+                }));
+                setStates(statesData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, []);
 
 
-    // const stateOptions: Option[] = Array.from(new Set(colleges.map(college => college.state))).map(state => ({ label: state, value: state }));
-    // const locationOptions: Option[] = Array.from(new Set(colleges.map(college => college.location))).map(location => ({ label: location, value: location }));
-    // const ownershipOptions: Option[] = Array.from(new Set(colleges.map(college => college.ownership))).map(ownership => ({ label: ownership, value: ownership }));
 
-    // const options: OptionGroup[] = [
+    //get all banners
+    const getcollegedata = useCallback(async () => {
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/website/colleges/get', { params: roleparams });
+
+            setColleges(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+
+
+
+
+    useEffect(() => {
+        fetchStatesData();
+        getcollegedata();
+
+    }, []);
+
+    // const colleges = [
     //     {
-    //         id: 'state',
-    //         label: 'States',
-    //         options: options
+    //         id: 1,
+    //         name: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
+    //         slug: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
+    //         type: 'Private',
+    //         rating: 4.5,
+    //         location: 'Bangalore',
+    //         state: 'karnataka',
+    //         ownership: 'private',
+    //         streams: ['management', 'education'],
+    //         courses: ['bsc', 'mba'],
+    //         courseType: 'bachelors',
+    //         established: 1992,
+    //         imageUrl: '/images/icons/filter-card.jpg'
     //     },
     //     {
-    //         id: 'location',
-    //         label: 'City',
-    //         options: locationOptions
+    //         id: 2,
+    //         name: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
+    //         slug: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Vidyaniketan',
+    //         state: 'Bangalore',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
     //     },
     //     {
-    //         id: 'ownership',
-    //         label: 'Ownership',
-    //         options: ownershipOptions
+    //         id: 3,
+    //         name: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
+    //         slug: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Bangalore',
+    //         state: 'karnataka',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
     //     },
-    //     // Add other filter options...
+    //     {
+    //         id: 4,
+    //         name: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
+    //         slug: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Manipal',
+    //         state: 'India',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "ST. JOSEPH'S UNIVERSITY",
+    //         slug: "ST. JOSEPH'S UNIVERSITY",
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Bangalore',
+    //         state: 'India',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 6,
+    //         name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
+    //         slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Bangalore',
+    //         state: 'India',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+    //     {
+    //         id: 7,
+    //         name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
+    //         slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
+    //         type: 'Public',
+    //         rating: 4.0,
+    //         location: 'Bangalore',
+    //         state: 'India',
+    //         ownership: 'public',
+    //         streams: ['science', 'arts'],
+    //         courses: ['b_tech', 'ba'],
+    //         courseType: 'masters',
+    //         established: 1985,
+    //         imageUrl: '/images/icons/filter-card.jpg'
+    //     },
+
+    //     // Add more college objects as needed
     // ];
+
+
 
     const options: OptionGroup[] = [
         {
             id: 'state',
             label: 'States',
-            options: [
-                { label: 'Maharashtra', value: 'maharashtra' },
-                { label: 'Tamil Nadu', value: 'tamil_nadu' },
-                { label: 'Uttar Pradesh', value: 'uttar_pradesh' },
-                { label: 'Karnataka', value: 'karnataka' }
-            ]
+            options: states
         },
         {
             id: 'location',
@@ -321,9 +326,9 @@ function CollegeFilterSection() {
                 <div className="mx-2 filterCardBorder">
                     <div className="p-2">
                         <div className="row">
-                            <div className="col-md-3 col-xl-3 clgCardImg">
-                                <Image width={180} height={200} src={imageUrl} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
-                            </div>
+                            {/* <div className="col-md-3 col-xl-3 clgCardImg">
+                                <Image width={180} height={200} src={`${process.env.NEXT_PUBLIC_IMG_URLgit}/${imageUrl}`} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
+                            </div> */}
                             <div className="col-md-9 col-xl-9">
                                 <div className="row">
                                     <div className="col-md-7 col-xl-7">
@@ -331,7 +336,7 @@ function CollegeFilterSection() {
                                             <h6 className='fw-bold text-black my-2'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state}`}</p>
+                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state.name}`}</p>
                                             <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                         </div>
                                     </div>
@@ -401,14 +406,13 @@ function CollegeFilterSection() {
                     <CollegeCard
                         key={college.id}
                         id={college.id}
-                        slug={college.name}
                         name={college.name}
-                        type={college.type}
-                        rating={college.rating}
-                        location={college.location}
+                        type={college.college_type}
+                        rating={college.avg_rating}
+                        location={college.address}
                         state={college.state}
                         established={college.established}
-                        imageUrl={college.imageUrl}
+                        imageUrl={college.banner_image}
                     />
                 ))}
             </div>
@@ -459,7 +463,11 @@ function CollegeFilterSection() {
         return (
             <div>
                 {options.map((optionGroup, index) => (
-                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2">
+                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2"
+                        onClick={() => toggleAccordion(optionGroup.id)}
+                        aria-expanded={accordionOpen === optionGroup.id}
+                        aria-controls={`${optionGroup.id}Collapse`}
+                    >
                         <div className="col-10">
                             <a className='text-blue'
                             >{optionGroup.label}</a>
@@ -467,9 +475,7 @@ function CollegeFilterSection() {
                         <div className="col-2 text-center">
                             <a
                                 className='text-blue'
-                                onClick={() => toggleAccordion(optionGroup.id)}
-                                aria-expanded={accordionOpen === optionGroup.id}
-                                aria-controls={`${optionGroup.id}Collapse`}
+                                style={{ cursor: "pointer" }}
                             >
                                 &#11205;
                             </a>
@@ -580,54 +586,7 @@ function CollegeFilterSection() {
                 </div>
             </div>
 
-            {/* Modal
 
-            <Modal className="modal fade px-3" id="exampleModal" show={showModal} onHide={handleCloseModal}>
-                <div className="modal-content">
-                    <div className="searchForm">
-                        <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
-                        <Formik
-                            initialValues={{
-                                name: '',
-                                email: '',
-                                phoneNumber: '',
-                                course: '',
-                                location: '',
-                            }}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                            resetForm
-                        >
-                            <Form>
-                                <div className="mb-3">
-                                    <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
-                                    <ErrorMessage name="name" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                                    <ErrorMessage name="email" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" />
-                                    <ErrorMessage name="phoneNumber" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
-                                    <ErrorMessage name="course" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                                    <ErrorMessage name="location" component="div" className="error text-danger" />
-                                </div>
-
-                                <div className="d-grid">
-                                    <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                                </div>
-                            </Form>
-                        </Formik>
-                    </div>
-                </div>
-            </Modal> */}
         </>
 
     );

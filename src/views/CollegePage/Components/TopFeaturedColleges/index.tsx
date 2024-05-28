@@ -1,11 +1,12 @@
 import React from 'react';
 import MainCarousel from 'src/@core/components/main-carousel';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // Define the Card component
 const Card = ({ imageUrl, title, applyLink, detailsLink }) => {
   return (
-    <div className="card topFeaturedClgCard mb-5">
+    <div className="card topFeaturedClgCard mb-3">
       <Image height={300} width={500} src={imageUrl} alt={title} />
       <div className="card-body">
         <h5 className="card-title text-black text-center">{title}</h5>
@@ -105,6 +106,9 @@ function TopFeaturedColleges() {
       <div className="container position-relative">
         <h4 className="pt-5 mb-5 fw-bold text-blue text-center">Top Featured Colleges</h4>
         <MainCarousel items={cardComponents} />
+        <div className="d-flex justify-content-center">
+          <Link className='btn viewMoreClgBtn mb-5' href="/colleges">View More</Link>
+        </div>
       </div>
     </section>
   );

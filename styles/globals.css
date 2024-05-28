@@ -2237,3 +2237,8 @@ footer img {
     font-size: 15px !important;
   }
 }
+.viewMoreClgBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  padding: 10px 12px !important;
+}

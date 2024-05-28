@@ -12,7 +12,7 @@ function CollegeInfoSection() {
           <p className='mb-3'><Link href="/">Home</Link> {'>'} <Link href={"/college"}>Colleges</Link> {'>'} <Link href="#">Yenepoya Medical College</Link> {'>'} <span className='text-blue'><Link href="#" className="text-blue">MBBS</Link></span></p>
         </section>
         <div className="container">
-          <div className="pt-5 text-center justify-content-center d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
+          <div className="pt-5 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
             <button className='active mb-3 btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">Info</button>
             <button className='mb-3 btn' id="nav-fees-tab" data-bs-toggle="tab" data-bs-target="#nav-fees" type="button" role="tab" aria-controls="nav-fees" aria-selected="false">Courses &amp; Fee </button>
             <button className='mb-3 btn' id="nav-admission-tab" data-bs-toggle="tab" data-bs-target="#nav-admission" type="button" role="tab" aria-controls="nav-admission" aria-selected="false">Admissions</button>
