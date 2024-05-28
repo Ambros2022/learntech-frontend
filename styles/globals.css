@@ -218,7 +218,6 @@ li>a>ul>.dropdown:hover .dropdown-menu {
 }
 
 .searchSec {
-  width: 100%;
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: saturate(180%) blur(8px) !important;
   color: white !important;
@@ -441,11 +440,11 @@ select:focus {
   background-color: rgba(39, 72, 150, 0.1);
 }
 
-<<<<<<< HEAD .img-blue {
+.img-blue {
   filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%) !important;
 }
 
-=======>>>>>>>origin/abhishek-work #exploreCardCon .card {
+#exploreCardCon .card {
   border: none !important;
   box-shadow: rgba(51, 51, 51, 0.361) 0px 0px 15px !important;
 }
@@ -797,12 +796,8 @@ footer img {
     height: auto;
   }
 
-  .top-nav .menu-icon img {
+  .top-nav .dropdown-menu img {
     width: 14px !important;
-  }
-
-  .top-nav .dropdown-menu .newsDrpDwn img {
-    width: auto !important;
   }
 
   .dropdownBtn .btn {
@@ -960,12 +955,8 @@ footer img {
     cursor: pointer;
   }
 
-  .top-nav .menu-icon img {
+  .top-nav .dropdown-menu img {
     width: 12px !important;
-  }
-
-  .top-nav .dropdown-menu .newsDrpDwn img {
-    width: auto !important;
   }
 
   .dropdownBtn .btn {
@@ -1699,7 +1690,7 @@ footer img {
   height: 100%;
 }
 
-<<<<<<< HEAD .schlBanner {
+.schlBanner {
   height: 500px;
 }
 
@@ -1723,7 +1714,7 @@ footer img {
   border-radius: 12px !important;
 }
 
-=======>>>>>>>origin/abhishek-work .yotubeImg a.btn {
+.yotubeImg a.btn {
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
@@ -1781,12 +1772,12 @@ footer img {
   height: 100%;
 }
 
-<<<<<<< HEAD .bg-gray {
+.bg-gray {
   background-color: #8f8f8f !important;
   width: 100%;
 }
 
-=======>>>>>>>origin/abhishek-work @media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 768px) and (max-width: 992px) {
   .clgImg {
     width: 70% !important;
   }
@@ -1858,16 +1849,16 @@ footer img {
   min-height: 75px !important;
 }
 
-<<<<<<< HEAD .CourseNavigationLink {
+.CourseNavigationLink {
   background-color: white !important;
 }
 
-=======>>>>>>>origin/abhishek-work .CourseNavigationLink a {
+.CourseNavigationLink a {
   text-decoration: none;
   color: black;
 }
 
-<<<<<<< HEAD .innerApplyBtn {
+.innerApplyBtn {
   color: white !important;
   border: 1px solid white !important;
 }
@@ -1897,7 +1888,7 @@ footer img {
   }
 }
 
-=======>>>>>>>origin/abhishek-work @media (min-width: 320px) and (max-width: 767px) {
+@media (min-width: 320px) and (max-width: 767px) {
   .dentalCourseCon h1 {
     font-size: 15px !important;
     font-weight: bold !important;
@@ -2293,25 +2284,20 @@ footer img {
   border-bottom-left-radius: 0 !important;
 }
 
-<<<<<<< HEAD .faqImgSec img {
-  width: 100%;
-  height: auto;
-}
-
-.errCon img {
-  =======
-  /* .faqImgSec img {
->>>>>>> origin/abhishek-work
+/* .faqImgSec img {
   width: auto;
   height: auto;
 }
+
 .errBtn {
   color: #254692 !important;
   border: 1px solid #254692 !important;
 }
+
 .errCon h1 {
   font-size: 30px !important;
 }
+
 .errCon h6 {
   font-size: 14px !important;
 }
@@ -2365,16 +2351,14 @@ footer img {
   border-radius: 0 !important;
   border: 0 !important;
 }
-<<<<<<< HEAD
 .btn-close1 img {
   width: auto;
   height: auto;
 }
+
 .streamBtn {
   background-color: #ced6e96b !important;
 }
-=======
->>>>>>> origin/abhishek-work
 
 @media (min-width: 768px) and (max-width: 992px) {
   .studyInUsaCon h4 {
@@ -2429,6 +2413,7 @@ footer img {
   .overflowScroll {
     overflow-x: scroll !important;
   }
+
   .studyInUsaCon {
     height: 400px;
   }
@@ -2465,157 +2450,157 @@ footer img {
 
 /* Write Review Page */
 
-  .writeReviewSec {
-    background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
-      url('../public/images/icons/werite-review-img.jpeg');
-    height: 500px;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
+.writeReviewSec {
+  background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
+    url('../public/images/icons/werite-review-img.jpeg');
+  height: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
-  .guidanceCon {
-    background-color: rgba(39, 72, 150, 0.04);
-    border: 1px solid rgba(39, 72, 150, 0.2) !important;
-  }
+.guidanceCon {
+  background-color: rgba(39, 72, 150, 0.04);
+  border: 1px solid rgba(39, 72, 150, 0.2) !important;
+}
 
-  .detailsFillSec select {
-    background-color: rgba(39, 72, 150, 0.04) !important;
-    color: rgba(143, 143, 143, 1);
-  }
+.detailsFillSec select {
+  background-color: rgba(39, 72, 150, 0.04) !important;
+  color: rgba(143, 143, 143, 1);
+}
 
-  .detailsFillSec input {
-    background-color: rgba(39, 72, 150, 0.04) !important;
-  }
+.detailsFillSec input {
+  background-color: rgba(39, 72, 150, 0.04) !important;
+}
 
-  .detailsFillSec input::placeholder {
-    color: rgba(143, 143, 143, 1);
-  }
+.detailsFillSec input::placeholder {
+  color: rgba(143, 143, 143, 1);
+}
 
-  .detailsFillSec textarea {
-    background-color: rgba(39, 72, 150, 0.04) !important;
-    width: 100%;
-    border: 1px solid rgba(39, 72, 150, 0.2) !important;
-    border-radius: 5px;
-  }
+.detailsFillSec textarea {
+  background-color: rgba(39, 72, 150, 0.04) !important;
+  width: 100%;
+  border: 1px solid rgba(39, 72, 150, 0.2) !important;
+  border-radius: 5px;
+}
 
-  .detailsFillSec input::placeholder {
-    color: rgba(143, 143, 143, 1) !important;
-  }
+.detailsFillSec input::placeholder {
+  color: rgba(143, 143, 143, 1) !important;
+}
 
-  .detailsFillSec .submitBtn {
-    width: auto !important;
-  }
+.detailsFillSec .submitBtn {
+  width: auto !important;
+}
 
-  .google-login-button {
-    color: white !important;
-    border: 1px solid #dee2e6 !important;
-    padding: 5px !important;
-    border-radius: 5px !important;
-  }
+.google-login-button {
+  color: white !important;
+  border: 1px solid #dee2e6 !important;
+  padding: 5px !important;
+  border-radius: 5px !important;
+}
 
-  .google-login-button>div {
-    margin: 0 !important;
-    padding: 2px !important;
-    box-shadow: none !important;
-  }
+.google-login-button>div {
+  margin: 0 !important;
+  padding: 2px !important;
+  box-shadow: none !important;
+}
 
-  .google-login-button div svg {
-    width: 27px !important;
-    height: 30px !important;
-  }
+.google-login-button div svg {
+  width: 27px !important;
+  height: 30px !important;
+}
 
-  .google-login-button div svg g {
-    transform: scale(1.5) !important;
-  }
+.google-login-button div svg g {
+  transform: scale(1.5) !important;
+}
 
-  .google-login-button div span {
-    display: none !important;
-  }
+.google-login-button div span {
+  display: none !important;
+}
 
-  .ratingBtn {
-    background-color: rgb(255, 174, 0) !important;
-    color: white !important;
-    max-width: 90px !important;
-    min-width: 90px !important;
-  }
+.ratingBtn {
+  background-color: rgb(255, 174, 0) !important;
+  color: white !important;
+  max-width: 90px !important;
+  min-width: 90px !important;
+}
 
-  .filterCardBorder .card-Image-top {
-    object-fit: cover !important;
-    height: 140px;
-  }
+.filterCardBorder .card-Image-top {
+  object-fit: cover !important;
+  height: 140px;
+}
 
-  .filterItemBtn {
-    background-color: #254692 !important;
-    color: white !important;
-    text-align: center !important;
-  }
+.filterItemBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  text-align: center !important;
+}
 
-  <<<<<<< HEAD=======.btn-close {
-    --bs-btn-close-bg: url('../public/images/icons/close-icon-white.png') !important;
-  }
+.btn-close {
+  --bs-btn-close-bg: url('../public/images/icons/close-icon-white.png') !important;
+}
 
-  >>>>>>>origin/abhishek-work .viewMoreCardBtn {
-    background-color: white !important;
-    color: #254692 !important;
-    border: 1px solid #254692 !important;
-  }
+.viewMoreCardBtn {
+  background-color: white !important;
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+}
 
-  .clgCardImg img {
-    width: 100%;
-    height: 100%;
-  }
+.clgCardImg img {
+  width: 100%;
+  height: 100%;
+}
 
-  .filterCardBorder .card-title {
-    min-height: 50px !important;
-  }
+.filterCardBorder .card-title {
+  min-height: 50px !important;
+}
 
-  .filterCardBorder .card-text {
-    min-height: 50px !important;
-  }
+.filterCardBorder .card-text {
+  min-height: 50px !important;
+}
 
-  .typeBtn {
-    background-color: #f6f8fb !important;
-    color: #254692 !important;
-  }
+.typeBtn {
+  background-color: #f6f8fb !important;
+  color: #254692 !important;
+}
 
-  .collegeBannerCon .form-control {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    padding: 12px 10px !important;
-  }
+.collegeBannerCon .form-control {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  padding: 12px 10px !important;
+}
 
-  .collegeBannerCon input::placeholder {
-    color: white !important;
-  }
+.collegeBannerCon input::placeholder {
+  color: white !important;
+}
 
-  .collegeBannerCon h1 {
-    font-size: 33px !important;
-  }
+.collegeBannerCon h1 {
+  font-size: 33px !important;
+}
 
-  .ExpertCon {
-    background-color: white !important;
-  }
+.ExpertCon {
+  background-color: white !important;
+}
 
-  <<<<<<< HEAD .socialThnks img {
-    width: 28px !important;
-    height: 28px !important;
-  }
+.socialThnks img {
+  width: 28px !important;
+  height: 28px !important;
+}
 
-  .thnkCon img {
-    width: auto;
-    height: auto;
-  }
+.thnkCon img {
+  width: auto;
+  height: auto;
+}
 
-  =======>>>>>>>origin/abhishek-work .reqBtnInnerClg .btn {
-    background-color: white !important;
-    color: #254692 !important;
-  }
+.reqBtnInnerClg .btn {
+  background-color: white !important;
+  color: #254692 !important;
+}
 
-  .locatedSec .clgImg img {
-    width: 100%;
-    height: 100%;
-  }
+.locatedSec .clgImg img {
+  width: 100%;
+  height: 100%;
+}
 
-  /* .ExpertCon .form-control {
+/* .ExpertCon .form-control {
   background-color: transparent !important;
 }
 .ExpertCon input::placeholder {
@@ -2624,146 +2609,146 @@ footer img {
 .ExpertCon .form-label {
   color: white !important;
 } */
-  @media (min-width: 992px) and (max-width: 1024px) {
-    .errCon h1 {
-      font-size: 28px !important;
-    }
-
-    .chkEligBtn {
-      font-size: 12px !important;
-    }
-
-    .collegeBannerCon h1 {
-      font-size: 24px !important;
-    }
-
-    .ratingBtn {
-      background-color: rgb(255, 174, 0) !important;
-      color: white !important;
-      max-width: 70px !important;
-      min-width: 70px !important;
-    }
-
-    .activeBtn {
-      font-size: 11px !important;
-    }
-
-    .viewMoreBtn {
-      font-size: 11px !important;
-    }
+@media (min-width: 992px) and (max-width: 1024px) {
+  .errCon h1 {
+    font-size: 28px !important;
   }
 
-  @media (min-width: 768px) and (max-width: 991px) {
-    .errCon h1 {
-      font-size: 20px !important;
-    }
-
-    .schlSrchbtn {
-      font-size: 12px !important;
-    }
-
-    .chkEligBtn {
-      font-size: 12px !important;
-    }
-
-    .collegeBannerCon h1 {
-      font-size: 23px !important;
-    }
-
-    .ratingBtn {
-      background-color: rgb(255, 174, 0) !important;
-      color: white !important;
-      max-width: 70px !important;
-      min-width: 70px !important;
-    }
-
-    .activeBtn {
-      font-size: 11px !important;
-    }
-
-    .viewMoreBtn {
-      font-size: 11px !important;
-    }
+  .chkEligBtn {
+    font-size: 12px !important;
   }
 
-  @media (min-width: 320px) and (max-width: 767px) {
-    .disclaimerCon h1 {
-      font-size: 22px !important;
-    }
-
-    .errCon h1 {
-      font-size: 18px !important;
-    }
-
-    .chkEligBtn {
-      font-size: 12px !important;
-    }
-
-    .innerClg h2 {
-      font-size: 21px !important;
-    }
-
-    .collegeBannerCon h1 {
-      font-size: 19px !important;
-    }
-
-    .ratingBtn {
-      background-color: rgb(255, 174, 0) !important;
-      color: white !important;
-      max-width: 70px !important;
-      min-width: 70px !important;
-    }
-
-    .activeBtn {
-      font-size: 11px !important;
-    }
-
-    .viewMoreBtn {
-      font-size: 11px !important;
-    }
-
-    .clgCardImg .card-Image-top {
-      height: 200px !important;
-      object-fit: cover !important;
-    }
-
-    .activeBtn {
-      font-size: 17px !important;
-    }
-
-    .viewMoreBtn {
-      font-size: 17px !important;
-    }
-
-    .ratingBtn {
-      font-size: 15px !important;
-    }
+  .collegeBannerCon h1 {
+    font-size: 24px !important;
   }
 
-  .newsDrpDwn {
-    width: 95vw !important;
-    left: -762px !important;
-    height: auto;
-  }
-
-  .newsDrpDwn .card-img-top {
-    height: auto;
-    object-fit: cover;
-  }
-
-  .newsDrpDwn .card-body {
-    min-height: 100px !important;
-  }
-
-  .text-whitecolor {
+  .ratingBtn {
+    background-color: rgb(255, 174, 0) !important;
     color: white !important;
+    max-width: 70px !important;
+    min-width: 70px !important;
   }
 
-
-  .text-whitecolor:hover {
-    color: black !important;
+  .activeBtn {
+    font-size: 11px !important;
   }
 
-  .newsheight {
-    min-height: 220px !important;
+  .viewMoreBtn {
+    font-size: 11px !important;
   }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .errCon h1 {
+    font-size: 20px !important;
+  }
+
+  .schlSrchbtn {
+    font-size: 12px !important;
+  }
+
+  .chkEligBtn {
+    font-size: 12px !important;
+  }
+
+  .collegeBannerCon h1 {
+    font-size: 23px !important;
+  }
+
+  .ratingBtn {
+    background-color: rgb(255, 174, 0) !important;
+    color: white !important;
+    max-width: 70px !important;
+    min-width: 70px !important;
+  }
+
+  .activeBtn {
+    font-size: 11px !important;
+  }
+
+  .viewMoreBtn {
+    font-size: 11px !important;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .disclaimerCon h1 {
+    font-size: 22px !important;
+  }
+
+  .errCon h1 {
+    font-size: 18px !important;
+  }
+
+  .chkEligBtn {
+    font-size: 12px !important;
+  }
+
+  .innerClg h2 {
+    font-size: 21px !important;
+  }
+
+  .collegeBannerCon h1 {
+    font-size: 19px !important;
+  }
+
+  .ratingBtn {
+    background-color: rgb(255, 174, 0) !important;
+    color: white !important;
+    max-width: 70px !important;
+    min-width: 70px !important;
+  }
+
+  .activeBtn {
+    font-size: 11px !important;
+  }
+
+  .viewMoreBtn {
+    font-size: 11px !important;
+  }
+
+  .clgCardImg .card-Image-top {
+    height: 200px !important;
+    object-fit: cover !important;
+  }
+
+  .activeBtn {
+    font-size: 17px !important;
+  }
+
+  .viewMoreBtn {
+    font-size: 17px !important;
+  }
+
+  .ratingBtn {
+    font-size: 15px !important;
+  }
+}
+
+.newsDrpDwn {
+  width: 95vw !important;
+  left: -762px !important;
+  height: auto;
+}
+
+.newsDrpDwn .card-img-top {
+  height: auto;
+  object-fit: cover;
+}
+
+.newsDrpDwn .card-body {
+  min-height: 100px !important;
+}
+
+.text-whitecolor {
+  color: white !important;
+}
+
+
+.text-whitecolor:hover {
+  color: black !important;
+}
+
+.newsheight {
+  min-height: 220px !important;
+}

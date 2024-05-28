@@ -326,9 +326,9 @@ function CollegeFilterSection() {
                 <div className="mx-2 filterCardBorder">
                     <div className="p-2">
                         <div className="row">
-                            {/* <div className="col-md-3 col-xl-3 clgCardImg">
-                                <Image width={180} height={200} src={`${process.env.NEXT_PUBLIC_IMG_URLgit}/${imageUrl}`} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
-                            </div> */}
+                            <div className="col-md-3 col-xl-3 clgCardImg">
+                                <Image width={180} height={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
+                            </div>
                             <div className="col-md-9 col-xl-9">
                                 <div className="row">
                                     <div className="col-md-7 col-xl-7">
