@@ -2,20 +2,24 @@ import Image from 'next/image'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import axios1 from 'src/configs/axios'
+import axios from 'src/configs/axios'
 import Autocomplete from 'src/@core/components/mui/autocomplete';
-import { CircularProgress, TextField } from '@mui/material';
+import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
+import { toast } from 'react-hot-toast'
+import { useRouter } from 'next/router';
+import axios1 from 'axios'
+import ClearIcon from '@mui/icons-material/Clear';
+import Link from 'next/link'
 
+let cancelToken: any;
 function BannerSection() {
-
+  const router = useRouter();
   const [banners, setBanners] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  console.log(searchResults, "searchResults")
 
-  const [inputValue, setInputValue] = useState('');
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -27,7 +31,6 @@ function BannerSection() {
     contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
     course: Yup.string().required('Course is required'),
     location: Yup.string().required('Location is required'),
-    current_url: Yup.string().required('Url is required'),
   });
 
 
@@ -37,7 +40,7 @@ function BannerSection() {
       const roleparams: any = {};
       roleparams['page'] = 1;
       roleparams['size'] = 10000;
-      const response = await axios1.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
+      const response = await axios.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
 
       setBanners(response.data.data);
     } catch (err) {
@@ -45,7 +48,7 @@ function BannerSection() {
     }
   }, []);
 
-  console.log("banners", banners)
+  // console.log("banners", banners)
 
   useEffect(() => {
 
@@ -57,32 +60,51 @@ function BannerSection() {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      setLoading(true);
-      const response = await axios1.post('api/website/enquiry', values);
-      alert('Successfully Submitted');
-      console.log('Response:', response.data);
-      resetForm();
+      toast.loading('Processing');
+      const formData = new FormData();
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('contact_number', values.contact_number);
+      formData.append('location', values.location);
+      formData.append('course_in_mind', values.course);
+      formData.append('current_url', window.location.href);
+      const response = await axios.post('api/website/enquiry', formData);
+      if (response.status === 200) {
+        toast.dismiss();
+        toast.success('Thank you. We will get back to you.');
+        resetForm();
+
+        router.push('/thank-you');
+      }
+
     } catch (error) {
+      toast.error('try again later!');
       console.error('Error submitting form:', error);
-    } finally {
-      setLoading(false);
     }
   };
 
 
 
   const handleSearch = async (value) => {
-    if (value.length < 3) {
+    if (value.length < 2) {
       setSearchResults([]);
 
       return;
     }
     try {
       setLoading(true);
-      const response = await axios1.get('api/website/home/searchbar', { params: { query: value } });
+      if (typeof cancelToken !== typeof undefined) {
+        cancelToken.cancel("Operation canceled due to new request.");
+      }
+      cancelToken = axios1.CancelToken.source();
+
+      const response = await axios.get('api/website/home/searchbar', { cancelToken: cancelToken.token, params: { searchfrom: "name", searchtext: value } });
+
+
       const suggestions = response.data.data.flatMap((item: { data: any[]; type: any; }) => item.data.map(entry => ({
         name: entry.name,
         slug: entry.slug,
+        id: entry.id,
         type: item.type,
       })));
       setSearchResults(suggestions);
@@ -95,12 +117,10 @@ function BannerSection() {
   };
 
   const handleInputChange = (event, value) => {
-    setInputValue(value);
     handleSearch(value);
   };
 
 
-  // console.log("banner" , banners)
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
@@ -149,7 +169,7 @@ function BannerSection() {
                 <div className="searchSec align-content-center">
                   <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
                   <div className="row">
-                    <div className="col-7 col-md-8 col-lg-9 position-relative">
+                    <div className="col-12 position-relative">
                       <Autocomplete
                         open={open}
                         onClose={() => setOpen(false)}
@@ -158,9 +178,15 @@ function BannerSection() {
                         getOptionLabel={(option) => option.name}
                         renderOption={(props, option) => (
                           <li {...props}>
-                            <a href={`/${option.type}/${option.slug}`} style={{ color: "#000" }}>
-                              {option.name}
-                            </a>
+                            {option.type === "collegedata" ? (
+                              <Link href={`/college/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
+                                {option.name}
+                              </Link>
+                            ) : (
+                              <Link href={`/school/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
+                                {option.name}
+                              </Link>
+                            )}
                           </li>
                         )}
                         renderInput={(params) => (
@@ -170,6 +196,73 @@ function BannerSection() {
                             className="form-control"
                             InputProps={{
                               ...params.InputProps,
+                              sx: {
+                                '& .MuiInputBase-input::placeholder': {
+                                  color: 'black',
+                                },
+                              },
+                              endAdornment: (
+                                <React.Fragment>
+                                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                  {params.InputProps.endAdornment}
+                                  {params.inputProps.value ? (
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        onClick={() => {
+                                          if (params.inputProps.onChange) {
+                                            const event = {
+                                              target: {
+                                                value: ''
+                                              }
+                                            } as React.ChangeEvent<HTMLInputElement>;
+                                            params.inputProps.onChange(event);
+                                          }
+                                        }}
+                                      >
+                                        <ClearIcon />
+                                      </IconButton>
+                                    </InputAdornment>
+                                  ) : null}
+                                </React.Fragment>
+                              ),
+                            }}
+                          />
+                        )}
+                      />
+
+                      {/* <Autocomplete
+                        open={open}
+                        onClose={() => setOpen(false)}
+                        onInputChange={handleInputChange}
+                        options={searchResults}
+                        getOptionLabel={(option) => option.name}
+                        renderOption={(props, option) => (
+                          
+                          <li {...props}>
+                            {option.type === "collegedata" ? (
+                              <a href={`/college/${option.id}/${option.slug}`} style={{ color: "#000" }}>
+                                {option.name}
+                              </a>
+                            ) : (
+                              <a href={`/school/${option.id}/${option.slug}`} style={{ color: "#000" }}>
+                                {option.name}
+                              </a>
+                            )}
+                          </li>
+                          
+                        )}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            placeholder="Search"
+                            className="form-control"
+                            InputProps={{
+                              ...params.InputProps,
+                              sx: {
+                                '& .MuiInputBase-input::placeholder': {
+                                  color: 'black',
+                                },
+                              },
                               endAdornment: (
                                 <React.Fragment>
                                   {loading ? <CircularProgress color="inherit" size={20} /> : null}
@@ -179,11 +272,12 @@ function BannerSection() {
                             }}
                           />
                         )}
-                      />
+                      /> */}
+
                     </div>
-                    <div className="col-5 text-center col-md-4 col-lg-3 p-0">
+                    {/* <div className="col-5 text-center col-md-4 col-lg-3 p-0">
                       <button className="btn searchBtn" onClick={() => handleSearch(inputValue)}>Search</button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -224,11 +318,6 @@ function BannerSection() {
                         <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
                         <ErrorMessage name="location" component="div" className="error text-danger" />
                       </div>
-                      <div className="mb-3">
-                        <Field type="text" name="current_url" placeholder="Enter Url" className="form-control" />
-                        <ErrorMessage name="current_url" component="div" className="error text-danger" />
-                      </div>
-
                       <div className="d-grid">
                         <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
                       </div>

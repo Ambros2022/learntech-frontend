@@ -2,7 +2,8 @@ import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'
 import axios1 from 'src/configs/axios'
-
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import Link from 'next/link';
 
 function FeaturedCollegeSection() {
 
@@ -38,7 +39,7 @@ function FeaturedCollegeSection() {
       <div className="container pt-5 position-relative">
         <h4 className="fw-bold text-blue text-center mb-5">Featured Colleges</h4>
         <MainCarousel items={colleges.map(college => (
-          <div key={college.id} className="card featuredClgCard mb-5">
+          <div key={college.id} className="card featuredClgCard mb-4">
             <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`} width={300} height={300} className="card-Image-top" alt="featured-college" />
             <div className="card-body">
               <h5 className="card-title text-blue text-truncate">{college.name}</h5>
@@ -47,8 +48,9 @@ function FeaturedCollegeSection() {
                 {college.address}
               </p>
               <div className="d-flex justify-content-between">
-                <a href="#" className="active btn">Apply Now</a>
-                <a href="#" className="btn">View More</a>
+                {/* <a href="#" className="active btn">Apply Now</a> */}
+                <GlobalEnquiryForm className="active btn" />
+                <Link href="/colleges" className="btn">View More</Link>
               </div>
             </div>
           </div>

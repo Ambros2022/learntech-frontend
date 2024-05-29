@@ -5,3 +5,4 @@ ok
 npm i @types/react-star-rating-componentnpm install intl-tel-input
 npm install react-rating-stars-component
 npm i react-google-login
+npm i file-saver
