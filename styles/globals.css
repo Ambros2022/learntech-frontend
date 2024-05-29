@@ -667,6 +667,14 @@
     width: 100%;
   }
 
+  .newsLinkSec .fi-left {
+    margin-left: -50px !important;
+  }
+
+  .newsLinkSec .fi-right {
+    margin-right: -50px !important;
+  }
+
   .FeaturedClgCon .fi-left {
     margin-left: -35px !important;
   }
@@ -919,6 +927,12 @@
       font-weight: bold !important;
       border-bottom: 0 !important;
       padding-bottom: 0 !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:992px) {
+    .newsHide {
+      display: none !important;
     }
   }
 
@@ -2156,6 +2170,7 @@
     width: 100%;
   }
 
+
   .topCarouselCardsCon .fi-left {
     margin-left: -30px !important;
   }
@@ -2608,6 +2623,14 @@
   color: white !important;
 } */
   @media (min-width: 992px) and (max-width: 1024px) {
+    .newsLinkSec .fi-left {
+      margin-left: -40px !important;
+    }
+
+    .newsLinkSec .fi-right {
+      margin-right: -40px !important;
+    }
+
     .errCon h1 {
       font-size: 28px !important;
     }
@@ -2637,6 +2660,14 @@
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
+    .newsLinkSec .fi-left {
+      margin-left: -35px !important;
+    }
+
+    .newsLinkSec .fi-right {
+      margin-right: -35px !important;
+    }
+
     .errCon h1 {
       font-size: 20px !important;
     }
@@ -2670,6 +2701,14 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .newsLinkSec .fi-left {
+      margin-left: -10px !important;
+    }
+
+    .newsLinkSec .fi-right {
+      margin-right: -10px !important;
+    }
+
     .disclaimerCon h1 {
       font-size: 22px !important;
     }
@@ -2727,4 +2766,112 @@
     background-color: #254692 !important;
     color: white !important;
     padding: 10px 12px !important;
+  }
+
+  .examsBannerCon {
+    height: 500px !important;
+  }
+
+  .examsCardCarousel .carousel-button-group {
+    position: absolute !important;
+    top: 40px !important;
+    width: 100%;
+  }
+
+  .examsCardCarousel .fi-left svg {
+    stroke: white !important;
+  }
+
+  .examsCardCarousel .fi-right svg {
+    stroke: white !important;
+  }
+
+  .examsCardCarousel .fi-left {
+    stroke: white !important;
+  }
+
+  .examsCardCarousel .fi-right {
+    stroke: white !important;
+  }
+
+  .alertExamBtn {
+    background-color: white !important;
+    color: #254692 !important;
+    padding: 10px 15px !important;
+  }
+
+  .alertExamBtn:hover {
+    color: darkblue !important;
+    padding: 10px 15px !important;
+  }
+
+  .bg-examsCarouselCr {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 10px !important;
+  }
+
+  .examSecItems>.nav-link.active {
+    font-weight: bold !important;
+    color: white !important;
+    background-color: #254692 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
+    width: 100% !important;
+  }
+
+  .examSecItems>.nav-link {
+    color: rgba(125, 145, 192, 1) !important;
+    border: 1px solid rgba(212, 218, 234, 1) !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
+    width: 100% !important;
+  }
+
+  .news-item .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .FeaturedClgCon .card-Image-top {
+    height: 200px !important;
+    object-fit: cover !important;
+  }
+
+  .FeaturedClgCon .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  .StudyAbroadCard .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  .latestNewsCon .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  .StudyAbroadCard .card-img-top {
+    height: 200px !important;
+    object-fit: cover !important;
+  }
+
+  .newsLinkSec h6.newsLinkClr:hover {
+    color: rgb(230, 230, 230) !important;
   }
