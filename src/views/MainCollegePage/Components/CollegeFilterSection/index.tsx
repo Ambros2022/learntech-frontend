@@ -41,8 +41,52 @@ function CollegeFilterSection() {
 
     const [showScrollButton, setShowScrollButton] = useState(false);
     const [states, setStates] = useState<Option[]>([]);
+    const [streams, setStreams] = useState<any[]>([]);
+    const [courses, setCourses] = useState<any[]>([]);
 
-    console.log(states, "states")
+    // console.log(states, "states")
+
+
+    const getstreamdata = useCallback(async () => {
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/website/stream/get');
+            if (response.data.status === 1) {
+                const streamData = response.data.data.map((stream: any) => ({
+                    label: stream.name,
+                    value: stream.id.toString()
+                }));
+                setStreams(streamData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, [isMountedRef]);
+
+
+    const getcoursesdata = useCallback(async () => {
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/website/allcourses/get');
+            if (response.data.status === 1) {
+                const courseData = response.data.data.map((course: any) => ({
+                    label: course.name,
+                    value: course.id.toString()
+                }));
+                setCourses(courseData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, [isMountedRef]);
 
 
 
@@ -89,18 +133,15 @@ function CollegeFilterSection() {
         }
     }, [isMountedRef]);
 
-
-
-
     useEffect(() => {
         fetchStatesData();
         getcollegedata();
+        getstreamdata();
+        getcoursesdata();
 
     }, []);
 
    
-   
-
     const options: OptionGroup[] = [
         {
             id: 'state',
@@ -121,29 +162,19 @@ function CollegeFilterSection() {
             id: 'ownership',
             label: 'Ownership',
             options: [
-                { label: 'Private (2334)', value: 'private' },
-                { label: 'Public (3265)', value: 'public' }
+                { label: 'Private', value: 'Private' },
+                { label: 'Public', value: 'Public' }
             ]
         },
         {
             id: 'streams',
             label: 'Streams',
-            options: [
-                { label: 'Management', value: 'management' },
-                { label: 'Education', value: 'education' },
-                { label: 'Arts', value: 'arts' },
-                { label: 'Science', value: 'science' }
-            ]
+            options: streams
         },
         {
             id: 'courses',
             label: 'Courses',
-            options: [
-                { label: 'BSc (3233)', value: 'bsc' },
-                { label: 'MBA (3233)', value: 'mba' },
-                { label: 'B-Tech (3233)', value: 'b_tech' },
-                { label: 'BA (3233)', value: 'ba' }
-            ]
+            options: courses
         },
         {
             id: 'courseType',
@@ -178,19 +209,15 @@ function CollegeFilterSection() {
             });
         });
 
-        console.log('Filtered Colleges:', filteredColleges);
-        console.log('Visible Cards:', visibleCards);
+        // console.log('Filtered Colleges:', filteredColleges);
+        // console.log('Visible Cards:', visibleCards);
 
         // If there are more filtered colleges to show, increment visibleCards
         if (visibleCards < filteredColleges.length) {
             setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
         }
-
-        console.log('Updated Visible Cards:', visibleCards);
+        // console.log('Updated Visible Cards:', visibleCards);
     };
-
-
-
 
     const handleCheckboxChange = async (groupId: string, value: string, isChecked: boolean) => {
         const collegeFiltersSection = document.getElementById('collegeFiltersSection');
