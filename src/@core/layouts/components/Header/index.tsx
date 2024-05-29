@@ -29,9 +29,13 @@ const Header = () => {
   const [exams, setExams] = useState<any[]>([]);
   const isMountedRef = useIsMountedRef();
 
+
+
   const [news, setNews] = useState<any[]>([]);
+
   const [countries, setCountries] = useState<Country[]>([]);
   const [courses, setCourses] = useState<Courses[]>([]);
+
 
   const isLinkActive = (href) => {
     return router.pathname === href;
@@ -47,7 +51,7 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 4;
+      roleparams['size'] = 10000;
       const response = await axios1.get('api/website/news/get', { params: roleparams });
       setNews(response.data.data);
 
@@ -72,7 +76,7 @@ const Header = () => {
   const getCourses = useCallback(async () => {
     setCourses([]);
     try {
-      const roleparams = { page: 1, size: 15, orderby: "asc", columnname: "listing_order" };
+      const roleparams = { page: 1, size: 10000, orderby: "asc", columnname: "listing_order" };
       const response = await axios1.get('api/website/stream/get', { params: roleparams });
       setCourses(response.data.data);
     } catch (err) {
@@ -90,7 +94,7 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 15;
+      roleparams['size'] = 10000;
       const response = await axios1.get('api/website/states/get', { params: roleparams });
       setStates(response.data.data);
 

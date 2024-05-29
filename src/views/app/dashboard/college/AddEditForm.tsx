@@ -421,26 +421,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
-            if (selectedphoto == '') {
+            // if (selectedphoto == '') {
 
-                toast.error('Please Upload Icon', {
-                    duration: 2000
-                })
-                setLoading(false);
+            //     toast.error('Please Upload Icon', {
+            //         duration: 2000
+            //     })
+            //     setLoading(false);
 
-                return false;
+            //     return false;
 
-            }
-            if (selectedbanner == '') {
+            // }
+            // if (selectedbanner == '') {
 
-                toast.error('Please Upload BannerImage', {
-                    duration: 2000
-                })
-                setLoading(false);
+            //     toast.error('Please Upload BannerImage', {
+            //         duration: 2000
+            //     })
+            //     setLoading(false);
 
-                return false;
+            //     return false;
 
-            }
+            // }
             if (selectedlogo == '') {
 
                 toast.error('Please Upload Logo', {
@@ -509,13 +509,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 questions: '',
                 answers: '',
             }],
-
-
-
-
     }
-
-
 
     const {
         control: faqcontrol,
