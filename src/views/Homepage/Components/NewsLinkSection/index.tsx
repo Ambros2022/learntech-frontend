@@ -17,9 +17,9 @@ function NewsLinkSection() {
             // Map the fetched news data to JSX elements
             const newsItems = newsData.map((item, index) => (
 
-                <a href={`https://your-base-url.com${item.url}`} target="_blank" rel="noopener noreferrer">
+                <a href={`${process.env.NEXT_PUBLIC_API_URI}news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer">
                     <h6 key={index} className="py-2 text-truncate newsLinkClr text-white text-center" style={{ maxWidth: '200px' }}>
-                        {item.meta_title}
+                        {item.name}
                     </h6>
                 </a>
 

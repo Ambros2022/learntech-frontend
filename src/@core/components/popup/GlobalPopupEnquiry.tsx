@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import Image from 'next/image';
 // import './stylesglobalpopup.css';
 import Modal from 'react-bootstrap/Modal';
 import EnquiryForm from 'src/@core/components/popup/form';
@@ -15,10 +16,10 @@ interface Props {
 
 
 
-const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename,buttonText, ...rest }) => {
+const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, ...rest }) => {
     const [modalShow, setModalShow] = React.useState(false);
     function onChanges() {
-     
+
         setModalShow(false);
     }
 
@@ -86,9 +87,33 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename,buttonText, 
                
             } */}
 
-            <a onClick={() => setModalShow(true)} className={className ? className : 'active btn'} style={{ cursor: 'pointer' }}>
-                {buttonText ? buttonText : 'Apply Now'}
-            </a>
+
+            {pagename && pagename == 'CourseList' ?
+                <a onClick={() => setModalShow(true)} className={className ? className : 'active btn'} style={{ cursor: 'pointer' }}>
+                    {buttonText ? buttonText : 'Apply Now'}
+                </a>
+                :
+                <>
+                    {
+                        pagename == 'Brochure' ?
+                            // <a onClick={() => setModalShow(true)} className={className ? className : 'active_bt'}>
+                            //     <img src={require("src/assets/img/left_bt.svg")} alt="Download Brochure" />
+                            // </a>
+                            <a onClick={() => setModalShow(true)} className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
+                                <Image src="/images/icons/Download Brochure.svg" width={150} height={70} alt="download-brochure-icon" />
+
+                            </a>
+                            :
+                            <a onClick={() => setModalShow(true)} className={className ? className : 'active btn'} style={{ cursor: 'pointer' }}>
+                                {buttonText ? buttonText : 'Apply Now'}
+                            </a>
+
+                    }
+                </>
+
+
+            }
+
 
 
 

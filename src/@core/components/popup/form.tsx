@@ -7,7 +7,7 @@ import { useSnackbar } from 'notistack';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers, useField } from 'formik';
 import clsx from 'clsx';
 import * as Yup from 'yup';
-// import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver'
 // 
 // import { pConfig } from 'src/config';
 import axios from 'src/configs/axios';
@@ -26,28 +26,22 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
     // const { enqueueSnackbar } = useSnackbar();
     // const history = useHistory();
 
-    // const downloadPDF = async (): Promise<void> => {
-    //     var oReq = new XMLHttpRequest();
+    const downloadPDF = async (): Promise<void> => {
+        let oReq = new XMLHttpRequest();
+        let URLToPDF = `${process.env.NEXT_PUBLIC_API_URL}` + "storage/brochure/learntech.pdf";
+        oReq.open("GET", URLToPDF, true);
+        oReq.responseType = "blob";
+        oReq.onload = function () {
+            // Once the file is downloaded, open a new window with the PDF
+            // Remember to allow the POP-UPS in your browser
+            const file = new Blob([oReq.response], { type: 'application/pdf' });
+            //const fileURL = URL.createObjectURL(file);
+            saveAs(file, "Learntechww Brochure 2024.pdf");
+            // window.open(fileURL, "_blank");
+        };
 
-    //     var URLToPDF = pConfig.baseUrl + "brochure/B-study-Brochure-2023.pdf";
-
-    //     oReq.open("GET", URLToPDF, true);
-
-    //     oReq.responseType = "blob";
-
-    //     oReq.onload = function () {
-    //         // Once the file is downloaded, open a new window with the PDF
-    //         // Remember to allow the POP-UPS in your browser
-    //         const file = new Blob([oReq.response], { type: 'application/pdf' });
-
-
-    //         //const fileURL = URL.createObjectURL(file);
-    //         saveAs(file, "Bstudy Brochure 2023.pdf");
-    //         // window.open(fileURL, "_blank");
-    //     };
-
-    //     oReq.send();
-    // }
+        oReq.send();
+    }
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -80,6 +74,12 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
                 toast.success('Thank you. We will get back to you.');
                 resetForm();
                 onChanges();
+
+                if (page && page == "Brochure") {
+                    downloadPDF();
+                }
+
+
                 router.push('/thank-you');
             }
 
@@ -140,7 +140,11 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
                 </div>
 
                 <div className="d-grid">
-                    <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
+                    <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">
+                        {page && page == "Brochure" ? "Download Brochure" : "Submit"}
+
+
+                    </button>
                 </div>
             </Form>
         </Formik>
