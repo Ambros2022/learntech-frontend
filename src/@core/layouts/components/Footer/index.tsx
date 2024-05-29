@@ -55,31 +55,31 @@ const Footer = () => {
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Info</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><a href="#">About us</a></li>
-                <li className='mb-2'><a href="#">Our Team</a></li>
-                <li className='mb-2'><a href="#">Services</a></li>
-                <li className='mb-2'><a href="#">Contact us</a></li>
-                <li className='mb-2'><a href="#">Careers</a></li>
-                <li className='mb-2'><a href="#">Site Map</a></li>
+                <li className='mb-2'><a href="/about-us">About us</a></li>
+                <li className='mb-2'><a href="/our-team">Our Team</a></li>
+                <li className='mb-2'><a href="/services">Services</a></li>
+                <li className='mb-2'><a href="/contact-us">Contact us</a></li>
+                <li className='mb-2'><a href="/career">Careers</a></li>
+                <li className='mb-2'><a href="/sitemap">Site Map</a></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Quick Links</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><a href="#">Blogs</a></li>
-                <li className='mb-2'><a href="#">NRI Quata</a></li>
-                <li className='mb-2'><a href="#">Study Abroad</a></li>
-                <li className='mb-2'><a href="#">Scholarships</a></li>
-                <li className='mb-2'><a href="#">Student’s Speak</a></li>
+                <li className='mb-2'><a href="/blogs">Blogs</a></li>
+                <li className='mb-2'><a href="/nri-quota">NRI Quata</a></li>
+                <li className='mb-2'><a href="/study-in-usa">Study Abroad</a></li>
+                <li className='mb-2'><a href="/scholarships">Scholarships</a></li>
+                <li className='mb-2'><a href="/students-speak">Student’s Speak</a></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Legal</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><a href="#">Feed</a></li>
-                <li className='mb-2'><a href="#">Disclaimer</a></li>
-                <li className='mb-2'><a href="#">Privacy Policy</a></li>
-                <li className='mb-2'><a href="#">Terms & Conditions</a></li>
+                <li className='mb-2'><a href="/">Feed</a></li>
+                <li className='mb-2'><a href="/disclaimer">Disclaimer</a></li>
+                <li className='mb-2'><a href="/privacy-policy">Privacy Policy</a></li>
+                <li className='mb-2'><a href="/terms-and-conditions">Terms & Conditions</a></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
