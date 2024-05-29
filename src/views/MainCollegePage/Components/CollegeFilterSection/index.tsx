@@ -307,7 +307,7 @@ function CollegeFilterSection() {
         });
 
     };
-    
+
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
 
