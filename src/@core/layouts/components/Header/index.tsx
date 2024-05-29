@@ -6,7 +6,10 @@ import SignupForm from "src/@core/components/sign-up";
 import SignInForm from "src/@core/components/sign-in";
 import axios1 from 'src/configs/axios'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-
+import Statedropdown from 'src/@core/layouts/components/Header/state-dropdown';
+import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown';
+import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown';
+import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown';
 
 interface Country {
   id: number;
@@ -21,7 +24,7 @@ interface Courses {
 const Header = () => {
 
   const router = useRouter();
-  const [universities, setUniversities] = useState<any[]>([]);
+  const [states, setStates] = useState<any[]>([]);
   const [exams, setExams] = useState<any[]>([]);
   const isMountedRef = useIsMountedRef();
 
@@ -56,7 +59,7 @@ const Header = () => {
   const getCountry = useCallback(async () => {
     try {
       const roleparams = { page: 1, size: 15 };
-      const response = await axios1.get('api/website/country/get', { params: roleparams });
+      const response = await axios1.get('api/website/abroadpages/get', { params: roleparams });
       setCountries(response.data.data);
     } catch (err) {
       console.error(err);
@@ -82,13 +85,13 @@ const Header = () => {
 
 
   const getuniversities = useCallback(async () => {
-    setUniversities([]);
+    setStates([]);
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
       roleparams['size'] = 15;
       const response = await axios1.get('api/website/states/get', { params: roleparams });
-      setUniversities(response.data.data);
+      setStates(response.data.data);
 
     } catch (err) {
       console.error(err);
@@ -123,19 +126,7 @@ const Header = () => {
   }, [getuniversities, getexams, getnews, getCourses]);
 
 
-  // useEffect(() => {
-  //   // Fetch data when the component mounts
-  //   async function fetchData() {
-  //     try {
-  //       const response = await axios1.get('api/website/college/get');
-  //       setUniversities(response.data);
-  //       console.log("data",response.data ) // Assuming the API returns an array of universities
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []); // Empty dependency array ensures the effect runs only once on mount
+
 
 
   return (
@@ -171,185 +162,53 @@ const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className={`${isOpen ? 'show' : ''} collapse navbar-collapse`} id="navbarSupportedContent">
-            <ul className="navbar-nav mb-2 mb-lg-0">
+            <ul className="navbar-nav mb-2 mb-lg-0 ms-xl-5 ms-md-0">
               <li className="nav-item">
                 <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/">Home</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/universities" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Universities
                 </Link>
-                {universities.length > 0 && (
-                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
-                    <div className="text-center"><p style={{ color: '#274896', fontWeight: '700' }}>Universities by location</p></div>
-                    {universities.map(university => (
-                      <li key={university.id}>
-                        <Link href={`/university/${university.name}`} className="dropdown-item">
-                          <div className="d-flex justify-content-between">
-                            {university.name}
-                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={50} height={25} alt='arrow-img' />
-                          </div>
-                        </Link>
 
-                        <ul className="dropdown-menu menu-icon dropdown-submenu">
-                          {university.city.map(city => (
-                            <li key={city.id}>
-                              <Link className="dropdown-item" href={`/${city.name.toLowerCase()}`}>
-                                {city.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-
-                      </li>
-                    ))}
-                    <div className='text-center text-blue dropdownBtn'>
-                      <Link href="#" className='btn'>View More</Link>
-                    </div>
-                  </ul>
-                )}
-
+                <Statedropdown states={states} type="Universities" />
               </li>
               <li className="nav-item dropdown">
                 <Link className={`nav-link dropdown-toggle ${isLinkActive('/colleges') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/colleges" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Colleges
                 </Link>
-
-
-                {universities.length > 0 && (
-                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
-                    <div className="text-center"><p style={{ fontWeight: 'bold', color: '#274896' }}>College by location</p></div>
-                    {universities.map(university => (
-
-                      <li key={university.id}>
-
-                        <Link href={`/university/${university.name}`} className="dropdown-item">
-
-                          <div className="d-flex justify-content-between">
-
-                            {university.name}
-
-                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={20} height={25} alt='arrow-img' />
-                          </div>
-                        </Link>
-
-                        <ul className="dropdown-menu dropdown-submenu menu-icon">
-                          {university.city.map(city => (
-                            <li key={city.id}>
-                              <Link className="dropdown-item" href={`/${city.name.toLowerCase()}`}>
-                                {city.name}
-                              </Link>
-                            </li>
-
-                          ))}
-                          <div className='text-center text-blue dropdownBtn'>
-                            <Link href="#" className='btn'>View More</Link>
-                          </div>
-                        </ul>
-
-                      </li>
-                    ))}
-                    <div className='text-center text-blue dropdownBtn'>
-                      <Link href="#" className='btn'>View More</Link>
-                    </div>
-                  </ul>
-                )}
+                <Statedropdown states={states} type="Colleges" />
               </li>
               <li className="nav-item dropdown">
                 <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Courses
                 </Link>
-                {courses.length > 0 && (
-                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
-                    <div className="text-center">
-                      <p style={{ color: '#274896', fontWeight: '700' }}>Popular Courses</p>
-                    </div>
-                    {courses.map((course) => (
-                      <li key={course.id}>
-                        <Link href={`/university/${course.slug}`} className="dropdown-item">
-                          <div className="d-flex justify-content-between">
-                            {course.slug}
-                            {/* <Image className="ms-auto" src="/images/icons/right arrow.svg" width={50} height={25} alt="arrow-img" /> */}
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                    <div className="text-center text-blue dropdownBtn">
-                      <Link href="#" className="btn">View More</Link>
-                    </div>
-                  </ul>
-                )}
+                <Coursedropdown states={courses} type="Colleges" />
               </li>
               <li className="nav-item dropdown">
                 <Link className={`nav-link dropdown-toggle ${isLinkActive('/exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/exams" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Exams
                 </Link>
-                {exams.length > 0 && (
-                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
-                    <div className="text-center "><p style={{ color: '#274896', fontWeight: '700' }}>Top Enterance Exams</p></div>
-                    {exams.map(exam => (
-                      <li key={exam.id}>
-                        <Link href={`/university/${exam.name}`} className="dropdown-item">
-                          <div className="d-flex justify-content-between">
-                            {exam.name}
-                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={70} height={25} alt='arrow-img' />
-                          </div>
-                        </Link>
-
-                        <ul className="dropdown-menu dropdown-submenu menu-icon">
-                          {exam.exam.map((examItem) => (
-                            <li key={examItem.id}>
-                              <Link className="dropdown-item" href={`/${examItem.exam_title.toLowerCase()}`}>
-                                {examItem.exam_title}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-
-                      </li>
-                    ))}
-                    <div className='text-center text-blue dropdownBtn'>
-                      <Link href="#" className='btn'>View More</Link>
-                    </div>
-                  </ul>
-                )}
+                <Examdropdown states={exams} />
               </li>
 
               <li className="nav-item dropdown">
                 <Link
                   className={`nav-link dropdown-toggle ${isLinkActive('/country') ? 'activeDrpDwn' : ''}`}
                   onClick={() => setIsOpen(!isOpen)}
-                  href="/home"
+                  href="/colleges"
                   id="navbarDropdownMenuLink"
                   role="button"
                   aria-expanded={isOpen}
                 >
                   Study Abroad
                 </Link>
-                {countries.length > 0 && (
-                  <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
-                    <div className="text-center">
-                      <p style={{ color: '#274896', fontWeight: '700' }}>Best Country for Study</p>
-                    </div>
-                    {countries.map((country) => (
-                      <li key={country.id}>
-                        <Link href={`/university/${country.name}`} className="dropdown-item">
-                          <div className="d-flex justify-content-between">
-                            {country.name}
-                            <Image className="ms-auto" src="/images/icons/right arrow.svg" width={50} height={25} alt="arrow-img" />
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                    <div className="text-center text-blue dropdownBtn">
-                      <Link href="#" className="btn">Explore More Countries</Link>
-                    </div>
-                  </ul>
-                )}
+                <Abroaddropdown states={countries} type="Colleges" />
+
               </li>
 
 
@@ -357,7 +216,7 @@ const Header = () => {
                 <Link
                   className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'activeDrpDwn' : ''}`}
                   onClick={() => setIsOpen(false)}
-                  href="/home"
+                  href="/news"
                   id="navbarDropdownMenuLink"
                   role="button"
                   aria-expanded="false"
@@ -397,27 +256,61 @@ const Header = () => {
                 </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    <Link className="d-flex justify-content-between dropdown-item" href="/about-us">
                       About US
                     </Link>
 
                   </li>
                   <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    <Link className="d-flex justify-content-between dropdown-item" href="/our-team">
                       Our Team
                     </Link>
 
                   </li>
                   <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
+                    <Link className="d-flex justify-content-between dropdown-item" href="/services">
                       Services
                     </Link>
 
                   </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="/boards">
+                      Boards
+                    </Link>
 
-                  {/* <div className='text-center text-blue dropdownBtn'>
-                    <Link href="#" className='btn'>View More</Link>
-                  </div> */}
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="/schools">
+                      Schools
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="/nri-quota">
+                      NRI Quota
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="/scholarships">
+                      Scholarships
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="/mbbs-abroad">
+                      MBBS Abroad
+                    </Link>
+
+                  </li>
+                  <li>
+                    <Link className="d-flex justify-content-between dropdown-item" href="/meds">
+                      Medical Edu Studio
+                    </Link>
+
+                  </li>
+
+
                 </ul>
               </li>
             </ul>

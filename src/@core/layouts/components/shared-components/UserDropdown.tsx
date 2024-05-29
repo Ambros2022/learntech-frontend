@@ -140,7 +140,7 @@ const UserDropdown = (props: Props) => {
             My Profile
           </Box>
         </MenuItemStyled> */}
- 
+
         {/* <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} /> */}
         <MenuItemStyled sx={{ p: 0 }} onClick={handleLogout}>
           <Box sx={styles}>
