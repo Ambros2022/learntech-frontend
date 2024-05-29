@@ -937,9 +937,10 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
-    .card-con{
+    .card-con {
       margin: 25px 0px !important;
     }
+
     .searchSec {
       width: 80% !important;
       margin: auto;
@@ -1025,7 +1026,7 @@
     }
 
     .searchSec {
-      margin: -10px auto 0 auto !important;
+      margin: -20px auto 0 auto !important;
     }
 
     header {
@@ -2841,8 +2842,13 @@
   }
 
   .FeaturedClgCon .card-Image-top {
-    height: 200px !important;
-    object-fit: cover !important;
+    height: 235px !important;
+    object-fit: contain !important;
+  }
+
+  .StudyAbroadCard .card-img-top {
+    height: 180px !important;
+    object-fit: contain !important;
   }
 
   .FeaturedClgCon .card-text {
@@ -2873,8 +2879,8 @@
   }
 
   .StudyAbroadCard .card-img-top {
-    height: 200px !important;
-    object-fit: cover !important;
+    height: 235px !important;
+    object-fit: contain !important;
   }
 
   .newsLinkSec h6.newsLinkClr:hover {
@@ -2910,6 +2916,16 @@
   }
 
   @media (min-width:992px) and (max-width:1024px) {
+    .FeaturedClgCon .card-Image-top {
+      height: 166px !important;
+      object-fit: contain !important;
+    }
+
+    .StudyAbroadCard .card-img-top {
+      height: 166px !important;
+      object-fit: contain !important;
+    }
+
     .categorySecCarousel .fi-left {
       margin-left: -60px !important;
     }
@@ -2920,6 +2936,16 @@
   }
 
   @media (min-width:768px) and (max-width:991px) {
+    .FeaturedClgCon .card-Image-top {
+      height: 166px !important;
+      object-fit: contain !important;
+    }
+
+    .StudyAbroadCard .card-img-top {
+      height: 166px !important;
+      object-fit: contain !important;
+    }
+
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
       top: 90px !important;
@@ -2936,6 +2962,16 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .FeaturedClgCon .card-Image-top {
+      height: 262px !important;
+      object-fit: contain !important;
+    }
+
+    .StudyAbroadCard .card-img-top {
+      height: 262px !important;
+      object-fit: contain !important;
+    }
+
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
       top: 90px !important;
@@ -2951,6 +2987,18 @@
     }
   }
 
+  @media (min-width:424px) and (max-width:767px) {
+    .FeaturedClgCon .card-Image-top {
+      height: 300px !important;
+      object-fit: contain !important;
+    }
+
+    .StudyAbroadCard .card-img-top {
+      height: 300px !important;
+      object-fit: contain !important;
+    }
+  }
+
   @media (min-width:320px) and (max-width:374px) {
     .categorySecCarousel h2 {
       font-size: 20px !important;
@@ -2960,6 +3008,16 @@
       position: absolute !important;
       top: 83px !important;
       width: 100% !important;
+    }
+
+    .FeaturedClgCon .card-Image-top {
+      height: 220px !important;
+      object-fit: contain !important;
+    }
+
+    .StudyAbroadCard .card-img-top {
+      height: 220px !important;
+      object-fit: contain !important;
     }
 
   }
