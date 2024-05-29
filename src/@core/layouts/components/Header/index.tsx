@@ -191,7 +191,7 @@ const Header = () => {
                 <Coursedropdown states={courses} type="Colleges" />
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/Exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/exams" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Exams
                 </Link>
@@ -214,7 +214,7 @@ const Header = () => {
               </li>
 
 
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown" style={{ position: 'static' }}>
                 <Link
                   className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'activeDrpDwn' : ''}`}
                   onClick={() => setIsOpen(false)}
@@ -226,17 +226,16 @@ const Header = () => {
                   Latest News
                 </Link>
                 <div className="container-fluid">
-                  <ul className="newsDrpDwn dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <ul className="newsDrpDwn newsHide dropdown-menu" style={{ textAlign: "center", left: '0', right: "0", width: '80%', margin: "0 auto" }} aria-labelledby="navbarDropdownMenuLink">
                     <div className="dropdown-row-news dropdown-row p-2">
                       <div className="row">
                         {news.slice(0, 4).map((item) => (
-                          <li key={item.id} className="news-item mb-3 col-md-3">
+                          <li key={item.id} className="news-item mb-1 col-md-3">
                             <div className="card-news card">
-
                               <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
                               <div className="card-body">
-                                <h5 className="card-title">{item.meta_title}</h5>
-                                <p className="card-text">{item.meta_description}</p>
+                                <h5 className="card-title text-truncate">{item.meta_title}</h5>
+                                <p className="card-text" >{item.meta_description}</p>
                               </div>
                             </div>
                           </li>
@@ -244,7 +243,7 @@ const Header = () => {
                       </div>
 
                     </div>
-                    <div className="text-end mt-3 me-2">
+                    <div className="text-end mt-1 me-2">
                       <Link href="/latestNews" className="btn ">Read All News</Link>
                     </div>
                   </ul>
