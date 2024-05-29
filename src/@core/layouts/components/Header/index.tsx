@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import SignupForm from "src/@core/components/sign-up";
 import SignInForm from "src/@core/components/sign-in";
 import axios1 from 'src/configs/axios'
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
 
 
 interface Country {
@@ -23,25 +23,21 @@ const Header = () => {
   const router = useRouter();
   const [universities, setUniversities] = useState<any[]>([]);
   const [exams, setExams] = useState<any[]>([]);
-  const isMountedRef = useIsMountedRef();
+
 
   const [news, setNews] = useState<any[]>([]);
+
   const [countries, setCountries] = useState<Country[]>([]);
   const [courses, setCourses] = useState<Courses[]>([]);
+
 
   const isLinkActive = (href) => {
     return router.pathname === href;
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-
-  const handleViewMore = () => {
-    setIsExpanded(!isExpanded);
-  };
-
 
 
   const getnews = useCallback(async () => {
@@ -49,7 +45,7 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 4;
+      roleparams['size'] = 10000;
       const response = await axios1.get('api/website/news/get', { params: roleparams });
       setNews(response.data.data);
 
@@ -57,30 +53,30 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, [isMountedRef]);
+  }, []);
 
   const getCountry = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 15 };
+      const roleparams = { page: 1, size: 10000 };
       const response = await axios1.get('api/website/country/get', { params: roleparams });
       setCountries(response.data.data);
     } catch (err) {
       console.error(err);
       console.error(err);
     }
-  }, [isMountedRef]);
+  }, []);
 
 
   const getCourses = useCallback(async () => {
     setCourses([]);
     try {
-      const roleparams = { page: 1, size: 15, orderby: "asc", columnname: "listing_order" };
+      const roleparams = { page: 1, size: 10000, orderby: "asc", columnname: "listing_order" };
       const response = await axios1.get('api/website/stream/get', { params: roleparams });
       setCourses(response.data.data);
     } catch (err) {
       console.error(err);
     }
-  }, [isMountedRef]);
+  }, []);
 
   useEffect(() => {
     getCountry();
@@ -92,7 +88,7 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 15;
+      roleparams['size'] = 10000;
       const response = await axios1.get('api/website/states/get', { params: roleparams });
       setUniversities(response.data.data);
 
@@ -100,7 +96,7 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, [isMountedRef]);
+  }, []);
 
 
   const getexams = useCallback(async () => {
@@ -116,7 +112,7 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, [isMountedRef]);
+  }, []);
 
   useEffect(() => {
 
@@ -211,9 +207,7 @@ const Header = () => {
                       </li>
                     ))}
                     <div className='text-center text-blue dropdownBtn'>
-                    <button onClick={handleViewMore} className='btn'>
-              {isExpanded ? 'View Less' : 'View More'}
-            </button>
+                      <Link href="#" className='btn'>View More</Link>
                     </div>
                   </ul>
                 )}
@@ -233,7 +227,7 @@ const Header = () => {
 
                       <li key={university.id}>
 
-                        <Link href={`/colleges/${university.name}`} className="dropdown-item">
+                        <Link href={`/university/${university.name}`} className="dropdown-item">
 
                           <div className="d-flex justify-content-between">
 
@@ -419,42 +413,6 @@ const Header = () => {
                   <li>
                     <Link className="d-flex justify-content-between dropdown-item" href="#">
                       Services
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                    Boards
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                    Schools
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                    NRI Quota
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                    Scholarships
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                    MBBS Abroad
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="#">
-                    Medical Edu Studio
                     </Link>
 
                   </li>

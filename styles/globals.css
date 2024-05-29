@@ -2728,3 +2728,20 @@
     color: white !important;
     padding: 10px 12px !important;
   }
+
+  .newsDrpDwn {
+    width: 95vw !important;
+    left: -762px !important;
+    height: auto;
+  }
+  
+  .newsDrpDwn .card-img-top {
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .newsDrpDwn .card-body {
+    min-height: 100px !important;
+  }
+  
+  

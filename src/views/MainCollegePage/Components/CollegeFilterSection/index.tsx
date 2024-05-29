@@ -49,11 +49,14 @@ function CollegeFilterSection() {
 
     const fetchStatesData = useCallback(async () => {
         try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
             const response = await axios1.get('api/website/states/get');
             if (response.data.status === 1) {
                 const statesData = response.data.data.map((state: any) => ({
                     label: state.name,
-                    value: state.name.toLowerCase().replace(' ', '_')
+                    value: state.id.toString()
                 }));
                 setStates(statesData);
             } else {
@@ -67,13 +70,19 @@ function CollegeFilterSection() {
 
 
     //get all banners
-    const getcollegedata = useCallback(async () => {
+    const getcollegedata = useCallback(async (stateId?: number) => {
         try {
             const roleparams: any = {};
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
+           
+    
+            if (stateId) {
+                roleparams['state_id'] = `[${stateId}]`; // Adjust parameter format as needed
+            }
+    
             const response = await axios1.get('api/website/colleges/get', { params: roleparams });
-
+    
             setColleges(response.data.data);
         } catch (err) {
             console.error(err);
@@ -89,117 +98,8 @@ function CollegeFilterSection() {
 
     }, []);
 
-    // const colleges = [
-    //     {
-    //         id: 1,
-    //         name: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-    //         slug: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-    //         type: 'Private',
-    //         rating: 4.5,
-    //         location: 'Bangalore',
-    //         state: 'karnataka',
-    //         ownership: 'private',
-    //         streams: ['management', 'education'],
-    //         courses: ['bsc', 'mba'],
-    //         courseType: 'bachelors',
-    //         established: 1992,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-    //         slug: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Vidyaniketan',
-    //         state: 'Bangalore',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-    //         slug: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Bangalore',
-    //         state: 'karnataka',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 4,
-    //         name: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-    //         slug: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Manipal',
-    //         state: 'India',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "ST. JOSEPH'S UNIVERSITY",
-    //         slug: "ST. JOSEPH'S UNIVERSITY",
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Bangalore',
-    //         state: 'India',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 6,
-    //         name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-    //         slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Bangalore',
-    //         state: 'India',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 7,
-    //         name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-    //         slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Bangalore',
-    //         state: 'India',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-
-    //     // Add more college objects as needed
-    // ];
-
-
+   
+   
 
     const options: OptionGroup[] = [
         {
@@ -292,28 +192,30 @@ function CollegeFilterSection() {
 
 
 
-    const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
-
+    const handleCheckboxChange = async (groupId: string, value: string, isChecked: boolean) => {
         const collegeFiltersSection = document.getElementById('collegeFiltersSection');
         if (collegeFiltersSection) {
             collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
         }
-
-        setSelectedCheckboxes(prevSelected => {
+    
+        setSelectedCheckboxes((prevSelected) => {
             const updatedSelected = { ...prevSelected };
             if (isChecked) {
                 updatedSelected[groupId] = [value]; // Set the selected state(s)
             } else {
                 delete updatedSelected[groupId]; // Remove the selected state(s)
             }
+    
+            // Make API call here with selected state ID
+            const selectedStateId = parseInt(value); // Assuming the value is the state ID
+            getcollegedata(selectedStateId); // Pass the selected state ID to the API call function
             return updatedSelected;
         });
-
     };
+    
 
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
-
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
@@ -323,7 +225,6 @@ function CollegeFilterSection() {
 
 
     const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
-
         return (
             <div className='col-md-12 mb-3'>
                 <div className="mx-2 filterCardBorder">
@@ -382,10 +283,10 @@ function CollegeFilterSection() {
 
     function CollegeList({ selectedCheckboxes }: { selectedCheckboxes: Record<string, string[]> }) {
         const filteredColleges = colleges.filter(college => {
-            if (!selectedCheckboxes.state || selectedCheckboxes.state.length === 0) {
+            if (!selectedCheckboxes.stateId || selectedCheckboxes.stateId.length === 0) {
                 return true; // Return true if no state is selected
             }
-            return selectedCheckboxes.state.includes(college.state.toString().toLowerCase().replace(' ', '_')); // Convert to string and filter based on selected state(s)
+            return selectedCheckboxes.stateId.includes(college.state.toString().toLowerCase().replace(' ', '_')); // Convert to string and filter based on selected state(s)
         });
 
         if (filteredColleges.length === 0) {
