@@ -190,14 +190,14 @@ function StudyAbroadSection() {
   // ];
 
   const [activeCountry, setActiveCountry] = useState<number | null>(null);
-  
+
   // const [StudyAbroadItems] = useState(usaItems);
 
   interface Country {
     id: number;
     name: string;
   }
-  
+
   const [countries, setCountries] = useState<Country[]>([]);
 
 
@@ -218,10 +218,10 @@ function StudyAbroadSection() {
   }, []);
 
   useEffect(() => {
-   
+
     getcountries();
   }, [getcountries]);
-  
+
 
   // Function to handle navbar item click
   const handleNavItemClick = (countryId: number) => {
@@ -248,7 +248,7 @@ function StudyAbroadSection() {
   // }, []);
 
   // useEffect to fetch card data when component mounts
-  
+
 
 
   const fetchCardData = useCallback(async () => {
@@ -273,7 +273,7 @@ function StudyAbroadSection() {
       <div key={card.id} className="card StudyAbroadCard mb-5 h-100">
         <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
         <div className="card-body">
-          <h5 className="card-title text-blue" style={{fontSize : '18px'}}>{card.name}</h5>
+          <h5 className="card-title text-blue text-truncate" style={{ fontSize: '18px' }}>{card.name}</h5>
           <p className="card-text">
             <img width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
             {card.address}

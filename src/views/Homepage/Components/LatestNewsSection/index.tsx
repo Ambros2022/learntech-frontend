@@ -56,7 +56,7 @@ function LatestNewsSection() {
     }
 
     return (
-        <section className="latestNewsCon" id="animation8" data-aos="fade-down">
+        <section className="latestNewsCon">
             <div className="container pt-5">
                 <h3 className="fw-bold text-center">Latest News & Blogs</h3>
                 <div className="nav-pills justify-content-center pt-3 gap-2 d-flex" role="tablist">
@@ -85,7 +85,7 @@ function LatestNewsSection() {
                                                     <h6 className="card-subtitle  mb-2 text-body-secondary">
                                                         {item.created_at ? format(new Date(item.created_at), 'yyyy-MM-dd') : 'No Date Available'}
                                                     </h6>
-                                                    <h5 className="card-title  fw-bold text-blue">{item.meta_title}</h5>
+                                                    <h5 className="card-title  fw-bold text-blue text-truncate">{item.meta_title}</h5>
                                                     <p className="card-text ">{item.meta_description}</p>
                                                     <a href={item.link} className="btn readBtn card-link">Read More</a>
                                                 </div>
