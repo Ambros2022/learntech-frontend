@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+// import Link from 'src/@core/theme/overrides/link';
+import Link from "next/link";
 const Footer = () => {
 
   const [showButton, setShowButton] = useState(false);
@@ -55,31 +57,31 @@ const Footer = () => {
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Info</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><a href="/about-us">About us</a></li>
-                <li className='mb-2'><a href="/our-team">Our Team</a></li>
-                <li className='mb-2'><a href="/services">Services</a></li>
-                <li className='mb-2'><a href="/contact-us">Contact us</a></li>
-                <li className='mb-2'><a href="/career">Careers</a></li>
-                <li className='mb-2'><a href="/sitemap">Site Map</a></li>
+                <li className='mb-2'><Link href="/about-us">About us</Link></li>
+                <li className='mb-2'><Link href="/our-team">Our Team</Link></li>
+                <li className='mb-2'><Link href="/services">Services</Link></li>
+                <li className='mb-2'><Link href="/contact-us">Contact us</Link></li>
+                <li className='mb-2'><Link href="/career">Careers</Link></li>
+                <li className='mb-2'><Link href="/sitemap">Site Map</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Quick Links</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><a href="/blogs">Blogs</a></li>
-                <li className='mb-2'><a href="/nri-quota">NRI Quata</a></li>
-                <li className='mb-2'><a href="/study-in-usa">Study Abroad</a></li>
-                <li className='mb-2'><a href="/scholarships">Scholarships</a></li>
-                <li className='mb-2'><a href="/students-speak">Student’s Speak</a></li>
+                <li className='mb-2'><Link href="/blogs">Blogs</Link></li>
+                <li className='mb-2'><Link href="/nri-quota">NRI Quata</Link></li>
+                <li className='mb-2'><Link href="/study-in-usa">Study Abroad</Link></li>
+                <li className='mb-2'><Link href="/scholarships">Scholarships</Link></li>
+                <li className='mb-2'><Link href="/students-speak">Student’s Speak</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Legal</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><a href="/">Feed</a></li>
-                <li className='mb-2'><a href="/disclaimer">Disclaimer</a></li>
-                <li className='mb-2'><a href="/privacy-policy">Privacy Policy</a></li>
-                <li className='mb-2'><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                <li className='mb-2'><Link href="/">Feed</Link></li>
+                <li className='mb-2'><Link href="/disclaimer">Disclaimer</Link></li>
+                <li className='mb-2'><Link href="/privacy-policy">Privacy Policy</Link></li>
+                <li className='mb-2'><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
@@ -94,7 +96,13 @@ const Footer = () => {
             <a href="tel:18001208969" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a>
           </div>
           <div className="col-md-4 mb-md-3 text-md-center">
-            <a href="#" className="DownloadBrchrBtn" ><Image src="/images/icons/Download Brochure.svg" width={150} height={70} alt="download-brochure-icon" /></a>
+
+            {/* <a href="#" className="DownloadBrchrBtn" >
+              <Image src="/images/icons/Download Brochure.svg" width={150} height={70} alt="download-brochure-icon" />
+
+            </a> */}
+
+            <GlobalEnquiryForm pagename="Brochure" title="Get Brochure" />
           </div>
           <div className="mt-md-3 col-md-4 text-md-end">
             <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={20} height={20} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>

@@ -105,9 +105,9 @@
     font-weight: bold !important;
   }
 
-  .top-nav .dropdown-menu img {
+  /* .top-nav .dropdown-menu img {
     filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(324deg) brightness(96%) contrast(104%);
-  }
+  } */
 
   .top-nav .dropdown-menu .btn {
     color: #254692 !important;
@@ -250,7 +250,7 @@
   }
 
   .searchSec input::placeholder {
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
   }
 
   .searchSec input:focus {
@@ -2834,6 +2834,7 @@
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    min-height: 70px !important;
   }
 
   .FeaturedClgCon .card-Image-top {

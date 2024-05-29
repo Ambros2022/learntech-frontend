@@ -462,7 +462,13 @@ function CollegeFilterSection() {
         return (
             <div>
                 {options.map((optionGroup, index) => (
-                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2">
+                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2"
+
+                        data-bs-toggle="collapse" role="button" aria-expanded="false"
+                        // data-bs-toggle="collapse" href={`#${optionGroup.id}Collapse`} role="button" aria-expanded="false" 
+
+                        aria-controls={`${optionGroup.id}Collapse`}
+                    >
                         <div className="col-10">
                             <a className='text-blue'>{optionGroup.label}</a>
                         </div>

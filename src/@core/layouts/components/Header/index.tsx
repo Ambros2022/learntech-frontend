@@ -10,6 +10,7 @@ import Statedropdown from 'src/@core/layouts/components/Header/state-dropdown';
 import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown';
 import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown';
 import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown';
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 interface Country {
   id: number;
@@ -28,9 +29,13 @@ const Header = () => {
   const [exams, setExams] = useState<any[]>([]);
   const isMountedRef = useIsMountedRef();
 
+
+
   const [news, setNews] = useState<any[]>([]);
+
   const [countries, setCountries] = useState<Country[]>([]);
   const [courses, setCourses] = useState<Courses[]>([]);
+
 
   const isLinkActive = (href) => {
     return router.pathname === href;
@@ -46,7 +51,7 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 4;
+      roleparams['size'] = 10000;
       const response = await axios1.get('api/website/news/get', { params: roleparams });
       setNews(response.data.data);
 
@@ -71,7 +76,7 @@ const Header = () => {
   const getCourses = useCallback(async () => {
     setCourses([]);
     try {
-      const roleparams = { page: 1, size: 15, orderby: "asc", columnname: "listing_order" };
+      const roleparams = { page: 1, size: 10000, orderby: "asc", columnname: "listing_order" };
       const response = await axios1.get('api/website/stream/get', { params: roleparams });
       setCourses(response.data.data);
     } catch (err) {
@@ -89,7 +94,7 @@ const Header = () => {
     try {
       const roleparams: any = {}
       roleparams['page'] = 1;
-      roleparams['size'] = 15;
+      roleparams['size'] = 10000;
       const response = await axios1.get('api/website/states/get', { params: roleparams });
       setStates(response.data.data);
 
@@ -229,20 +234,25 @@ const Header = () => {
                       <div className="row">
                         {news.slice(0, 4).map((item) => (
                           <li key={item.id} className="news-item mb-1 col-md-3">
-                            <div className="card-news card">
-                              <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
-                              <div className="card-body">
-                                <h5 className="card-title text-truncate">{item.meta_title}</h5>
-                                <p className="card-text" >{item.meta_description}</p>
+                            <Link 
+                             href={`/news/${item.id}/${item.slug}`}
+                    
+                            >
+                              <div className="card-news card">
+                                <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
+                                <div className="card-body">
+                                  <h5 className="card-title text-truncate">{item.meta_title}</h5>
+                                  <p className="card-text" >{item.meta_description}</p>
+                                </div>
                               </div>
-                            </div>
+                            </Link>
                           </li>
                         ))}
                       </div>
 
                     </div>
                     <div className="text-end mt-1 me-2">
-                      <Link href="/latestNews" className="btn ">Read All News</Link>
+                      <Link href="/news" className="btn ">Read All News</Link>
                     </div>
                   </ul>
                 </div>
@@ -314,8 +324,14 @@ const Header = () => {
               </li>
             </ul>
             <div className='d-lg-flex d-none justify-content-xl-end ms-auto'>
-              <Link className='mx-2  mt-1 socialIcon' href="#"><Image src="/images/icons/user-icon.svg" width={25} height={24} alt="user-icon" /></Link>
-              <button className=" btn counsellingBtn p-2" type="submit">Get Counselling</button>
+              {/* <Link className='mx-2  mt-1 socialIcon' href="#"> */}
+                
+                <Image src="/images/icons/user-icon.svg" className='mx-2  mt-1 socialIcon' width={25} height={24} alt="user-icon" />
+                {/* </Link> */}
+
+              {/* <button className=" btn counsellingBtn p-2" type="submit">Get Counselling</button> */}
+              <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn p-2" />
+
             </div>
           </div>
         </div>

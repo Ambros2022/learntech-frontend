@@ -8,6 +8,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios1 from 'src/configs/axios'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
 
 interface College {
     id: number;
@@ -24,6 +26,7 @@ interface College {
 function CollegeFilterSection() {
 
     const [colleges, setColleges] = useState<College[]>([]);
+    const isMountedRef = useIsMountedRef();
 
     type Option = {
         label: string;
@@ -38,19 +41,64 @@ function CollegeFilterSection() {
 
     const [showScrollButton, setShowScrollButton] = useState(false);
     const [states, setStates] = useState<Option[]>([]);
+    const [streams, setStreams] = useState<any[]>([]);
+    const [courses, setCourses] = useState<any[]>([]);
 
-    console.log(states, "states")
+    // console.log(states, "states")
 
 
+    const getstreamdata = useCallback(async () => {
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/website/stream/get');
+            if (response.data.status === 1) {
+                const streamData = response.data.data.map((stream: any) => ({
+                    label: stream.name,
+                    value: stream.id.toString()
+                }));
+                setStreams(streamData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, [isMountedRef]);
+
+
+    const getcoursesdata = useCallback(async () => {
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/website/allcourses/get');
+            if (response.data.status === 1) {
+                const courseData = response.data.data.map((course: any) => ({
+                    label: course.slug,
+                    value: course.id.toString()
+                }));
+                setCourses(courseData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, [isMountedRef]);
 
 
     const fetchStatesData = useCallback(async () => {
         try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
             const response = await axios1.get('api/website/states/get');
             if (response.data.status === 1) {
                 const statesData = response.data.data.map((state: any) => ({
                     label: state.name,
-                    value: state.name.toLowerCase().replace(' ', '_')
+                    value: state.id.toString()
                 }));
                 setStates(statesData);
             } else {
@@ -59,145 +107,33 @@ function CollegeFilterSection() {
         } catch (error) {
             console.error('Error fetching states:', error);
         }
-    }, []);
-
-
+    }, [isMountedRef]);
 
     //get all banners
-    const getcollegedata = useCallback(async () => {
+    const getcollegedata = useCallback(async (stateId?: number, courseId?: number) => {
         try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/website/colleges/get', { params: roleparams });
-
+            const params: any = {
+                page: 1,
+                size: 10000
+            };
+            if (stateId) params['state_id'] = `[${stateId}]`;
+            if (courseId) params['course_id'] = `[${courseId}]`;
+            const response = await axios1.get('api/website/colleges/get', { params });
             setColleges(response.data.data);
         } catch (err) {
             console.error(err);
         }
-    }, []);
-
-
-
+    }, [isMountedRef]);
 
     useEffect(() => {
         fetchStatesData();
         getcollegedata();
+        getstreamdata();
+        getcoursesdata();
 
     }, []);
 
-    // const colleges = [
-    //     {
-    //         id: 1,
-    //         name: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-    //         slug: 'CHRIST (DEEMED-TO-BE) UNIVERSITY',
-    //         type: 'Private',
-    //         rating: 4.5,
-    //         location: 'Bangalore',
-    //         state: 'karnataka',
-    //         ownership: 'private',
-    //         streams: ['management', 'education'],
-    //         courses: ['bsc', 'mba'],
-    //         courseType: 'bachelors',
-    //         established: 1992,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-    //         slug: 'R.V. COLLEGE OF ENGINEERING (RVCE)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Vidyaniketan',
-    //         state: 'Bangalore',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-    //         slug: 'YENEPOYA (DEEMED-TO-BE UNIVERSITY)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Bangalore',
-    //         state: 'karnataka',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 4,
-    //         name: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-    //         slug: 'MANIPAL ACADEMY OF HIGHER EDUCATION (MAHE)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Manipal',
-    //         state: 'India',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "ST. JOSEPH'S UNIVERSITY",
-    //         slug: "ST. JOSEPH'S UNIVERSITY",
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Bangalore',
-    //         state: 'India',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 6,
-    //         name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-    //         slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Bangalore',
-    //         state: 'India',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-    //     {
-    //         id: 7,
-    //         name: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-    //         slug: 'M.S RAMAIAH DENTAL COLLEGE (MSRDC)',
-    //         type: 'Public',
-    //         rating: 4.0,
-    //         location: 'Bangalore',
-    //         state: 'India',
-    //         ownership: 'public',
-    //         streams: ['science', 'arts'],
-    //         courses: ['b_tech', 'ba'],
-    //         courseType: 'masters',
-    //         established: 1985,
-    //         imageUrl: '/images/icons/filter-card.jpg'
-    //     },
-
-    //     // Add more college objects as needed
-    // ];
-
-
-
+   
     const options: OptionGroup[] = [
         {
             id: 'state',
@@ -218,38 +154,31 @@ function CollegeFilterSection() {
             id: 'ownership',
             label: 'Ownership',
             options: [
-                { label: 'Private (2334)', value: 'private' },
-                { label: 'Public (3265)', value: 'public' }
+                { label: 'Public', value: 'Public' },
+                { label: 'Deemed', value: 'Deemed' },
+                { label: 'Private', value: 'Private' },
+                { label: 'Government', value: 'Government' }
             ]
         },
         {
             id: 'streams',
             label: 'Streams',
-            options: [
-                { label: 'Management', value: 'management' },
-                { label: 'Education', value: 'education' },
-                { label: 'Arts', value: 'arts' },
-                { label: 'Science', value: 'science' }
-            ]
+            options: streams
         },
         {
             id: 'courses',
             label: 'Courses',
-            options: [
-                { label: 'BSc (3233)', value: 'bsc' },
-                { label: 'MBA (3233)', value: 'mba' },
-                { label: 'B-Tech (3233)', value: 'b_tech' },
-                { label: 'BA (3233)', value: 'ba' }
-            ]
+            options: courses
         },
         {
             id: 'courseType',
             label: 'Course Type',
             options: [
-                { label: 'Bachelors (3233)', value: 'bachelors' },
-                { label: 'Masters (3233)', value: 'masters' },
-                { label: 'Diploma (3233)', value: 'diploma' },
-                { label: 'Doctorate (3233)', value: 'doctorate' }
+                { label: 'UG', value: 'UG' },
+                { label: 'PG', value: 'PG' },
+                { label: 'Diploma', value: 'Diploma' },
+                { label: 'Doctorate', value: 'Doctorate' },
+                { label: 'Default', value: 'Default' }
             ]
         }
     ];
@@ -275,42 +204,40 @@ function CollegeFilterSection() {
             });
         });
 
-        console.log('Filtered Colleges:', filteredColleges);
-        console.log('Visible Cards:', visibleCards);
+        // console.log('Filtered Colleges:', filteredColleges);
+        // console.log('Visible Cards:', visibleCards);
 
         // If there are more filtered colleges to show, increment visibleCards
         if (visibleCards < filteredColleges.length) {
             setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
         }
-
-        console.log('Updated Visible Cards:', visibleCards);
+        // console.log('Updated Visible Cards:', visibleCards);
     };
 
-
-
-
-    const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
-
+    const handleCheckboxChange = async (groupId: string, value: string, isChecked: boolean) => {
         const collegeFiltersSection = document.getElementById('collegeFiltersSection');
         if (collegeFiltersSection) {
             collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
         }
-
-        setSelectedCheckboxes(prevSelected => {
+    
+        setSelectedCheckboxes((prevSelected) => {
             const updatedSelected = { ...prevSelected };
             if (isChecked) {
                 updatedSelected[groupId] = [value]; // Set the selected state(s)
             } else {
                 delete updatedSelected[groupId]; // Remove the selected state(s)
             }
+    
+            // Make API call here with selected state ID
+            const selectedStateId = parseInt(value); // Assuming the value is the state ID
+            getcollegedata(selectedStateId); // Pass the selected state ID to the API call function
             return updatedSelected;
         });
-
     };
+    
 
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
-
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
@@ -320,7 +247,6 @@ function CollegeFilterSection() {
 
 
     const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
-
         return (
             <div className='col-md-12 mb-3'>
                 <div className="mx-2 filterCardBorder">
@@ -341,7 +267,17 @@ function CollegeFilterSection() {
                                         </div>
                                     </div>
                                     <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
-                                        <button className='btn ratingBtn d-flex justify-content-center'><Image src='/images/icons/star-24.png' width={20} height={20} alt='star-icon' /><span className='align-content-center'>{rating}</span></button>
+                                    {rating && (
+                                        <button className='btn ratingBtn d-flex justify-content-center'>
+                                            <Image 
+                                                src='/images/icons/star-24.png' 
+                                                width={20} 
+                                                height={20} 
+                                                alt='star-icon' 
+                                            />
+                                            <span className='align-content-center'>{rating}</span>
+                                        </button>
+                                    )}
                                     </div>
                                     <div className="col-md-3 col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid">
                                         <a className="activeBtn btn mb-3 d-flex justify-content-center"
@@ -369,10 +305,10 @@ function CollegeFilterSection() {
 
     function CollegeList({ selectedCheckboxes }: { selectedCheckboxes: Record<string, string[]> }) {
         const filteredColleges = colleges.filter(college => {
-            if (!selectedCheckboxes.state || selectedCheckboxes.state.length === 0) {
+            if (!selectedCheckboxes.stateId || selectedCheckboxes.stateId.length === 0) {
                 return true; // Return true if no state is selected
             }
-            return selectedCheckboxes.state.includes(college.state.toString().toLowerCase().replace(' ', '_')); // Convert to string and filter based on selected state(s)
+            return selectedCheckboxes.stateId.includes(college.state.toString().toLowerCase().replace(' ', '_')); // Convert to string and filter based on selected state(s)
         });
 
         if (filteredColleges.length === 0) {
