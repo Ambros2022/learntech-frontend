@@ -5,7 +5,7 @@ import Link from 'next/link';
 function BannerSection() {
     return (
         <>
-            <section className='bg-blue collegeBannerCon examsBannerCon'>
+            <section className='collegeBannerCon examsBannerCon'>
                 <div className='d-flex justify-content-center w-100 h-100'>
                     <div className='align-content-center w-100 container'>
                         <h1 className='fw-bold text-center text-white mb-3'>
