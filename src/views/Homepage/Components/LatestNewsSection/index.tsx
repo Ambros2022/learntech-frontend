@@ -1,6 +1,9 @@
-import { format } from 'date-fns';
 import React, { useState, useEffect, useCallback } from 'react';
+import { format } from 'date-fns';
 import axios1 from 'src/configs/axios';
+import NewsCarousel from '../NewsCarousel';
+import Link from 'next/link';
+
 
 function LatestNewsSection() {
     const [activeTab, setActiveTab] = useState<'news' | 'blogs'>('news');
@@ -11,7 +14,7 @@ function LatestNewsSection() {
     const fetchData = useCallback(async (tab: 'news' | 'blogs') => {
         setLoading(true);
         try {
-            const roleparams = { page: 1, size: 10000, type: tab };
+            const roleparams = { page: 1, size: 8, type: tab };
             const response = await axios1.get('api/website/newsandblogs/get', { params: roleparams });
 
             if (response.data && response.data.status === 1) {
@@ -51,6 +54,9 @@ function LatestNewsSection() {
         fetchData(tab);
     };
 
+    // Combine news and blog items
+    const combinedItems = activeTab === 'news' ? newsItems : blogItems;
+
     return (
         <section className="latestNewsCon">
             <div className="container pt-5">
@@ -70,38 +76,28 @@ function LatestNewsSection() {
                     </button>
                 </div>
                 <div className="card-con pt-5">
-                    <div className="row">
-                        {loading ? (
-                            <div className="col-12">
-                                <p className="text-center">Loading...</p>
-                            </div>
-                        ) : (
-                            (activeTab === 'news' ? newsItems : blogItems).length > 0 ? (
-                                (activeTab === 'news' ? newsItems : blogItems).map((item) => (
-                                    <div className="col-md-4 mb-1" key={item.id}>
-                                        <div className="newsBlosCards">
-                                            <div className="mb-5">
-                                                <div className="card h-100">
-                                                    <div className="card-body newsheight ">
-                                                        <h6 className="card-subtitle  mb-2 text-body-secondary">
-                                                            {item.created_at ? format(new Date(item.created_at), 'yyyy-MM-dd') : 'No Date Available'}
-                                                        </h6>
-                                                        <h5 className="card-title  fw-bold text-blue text-truncate">{item.meta_title}</h5>
-                                                        <p className="card-text ">{item.meta_description}</p>
-                                                        <a href={item.link} className="btn readBtn card-link">Read More</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                    <NewsCarousel items={combinedItems.map((item) => (
+                        <div className="col-12 mb-1" style={{ margin: '0px 5px' }} key={item.id}>
+                            <div className="newsBlosCards">
+                                <div className="mb-5 mx-lg-3 mx-0">
+                                    <div className="card h-100">
+                                        <div className="card-body newsheight ">
+                                            <h6 className="card-subtitle  mb-2 text-body-secondary">
+                                                {item.created_at ? format(new Date(item.created_at), 'dd-MMM-yyyy') : 'No Date Available'}
+                                            </h6>
+                                            <h5 className="card-title  fw-bold text-blue text-truncate">{item.name}</h5>
+                                            <p className="card-text ">{item.meta_description}</p>
+                                            <Link 
+                                            href={`/${activeTab}/${item.id}/${item.slug}`}
+                                            // href={item.link}
+                                            
+                                            className="btn readBtn card-link">Read More</Link>
                                         </div>
                                     </div>
-                                ))
-                            ) : (
-                                <div className="col-12">
-                                    <p className="text-center">No items to display</p>
                                 </div>
-                            )
-                        )}
-                    </div>
+                            </div>
+                        </div>
+                    ))} />
                 </div>
             </div>
         </section>

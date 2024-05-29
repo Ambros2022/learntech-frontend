@@ -491,7 +491,7 @@
   }
 
   .footer-logo {
-    width: 30% !important;
+    width: 25% !important;
     height: auto !important;
   }
 
@@ -703,7 +703,7 @@
 
   .card-con .carousel-button-group {
     position: absolute !important;
-    top: 160px !important;
+    top: 125px !important;
     width: 100%;
   }
 
@@ -937,6 +937,9 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .card-con{
+      margin: 25px 0px !important;
+    }
     .searchSec {
       width: 80% !important;
       margin: auto;
@@ -1073,7 +1076,7 @@
     }
 
     .newsBlosCards {
-      margin-right: 0px !important;
+      margin: 0px 10px !important;
     }
 
     .DownloadBrchrBtn img {
