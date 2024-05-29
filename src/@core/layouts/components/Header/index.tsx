@@ -10,6 +10,7 @@ import Statedropdown from 'src/@core/layouts/components/Header/state-dropdown';
 import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown';
 import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown';
 import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown';
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 interface Country {
   id: number;
@@ -316,7 +317,10 @@ const Header = () => {
             </ul>
             <div className='d-lg-flex d-none justify-content-xl-end ms-auto'>
               <Link className='mx-2  mt-1 socialIcon' href="#"><Image src="/images/icons/user-icon.svg" width={25} height={24} alt="user-icon" /></Link>
-              <button className=" btn counsellingBtn p-2" type="submit">Get Counselling</button>
+
+              {/* <button className=" btn counsellingBtn p-2" type="submit">Get Counselling</button> */}
+              <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn p-2" />
+
             </div>
           </div>
         </div>
