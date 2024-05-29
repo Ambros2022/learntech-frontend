@@ -284,7 +284,7 @@ const Header = () => {
                 )}
               </li>
               <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/Exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                <Link className={`nav-link dropdown-toggle ${isLinkActive('/exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/exams" id="navbarDropdownMenuLink" role="button"
                   aria-expanded="false">
                   Exams
                 </Link>
@@ -353,7 +353,7 @@ const Header = () => {
               </li>
 
 
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown" style={{ position: 'static' }}>
                 <Link
                   className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'activeDrpDwn' : ''}`}
                   onClick={() => setIsOpen(false)}
@@ -365,7 +365,7 @@ const Header = () => {
                   Latest News
                 </Link>
                 <div className="container-fluid">
-                  <ul className="newsDrpDwn dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <ul className="newsDrpDwn dropdown-menu" style={{ textAlign: "center", left: '0', right: "0", width: '80%', margin: "0 auto" }} aria-labelledby="navbarDropdownMenuLink">
                     <div className="dropdown-row-news dropdown-row p-2">
                       <div className="row">
                         {news.slice(0, 4).map((item) => (
