@@ -27,9 +27,11 @@ function BannerSection() {
                     </div>
                 </div>
             </section>
-            <section className='container py-3'>
-                <Link className="text-black" href='/'>Home</Link> {'>'} <Link className='text-blue' href='/exams'>Exams</Link>
-            </section>
+            <div className="bg-white">
+                <section className='container py-3'>
+                    <Link className="text-black" href='/'>Home</Link> {'>'} <Link className='text-blue' href='/exams'>Exams</Link>
+                </section>
+            </div>
         </>
     )
 }

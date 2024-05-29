@@ -2816,7 +2816,6 @@
     background-color: #254692 !important;
     padding: 10px 12px !important;
     border-radius: 5px !important;
-    width: 100% !important;
   }
 
   .examSecItems>.nav-link {
@@ -2824,8 +2823,10 @@
     border: 1px solid rgba(212, 218, 234, 1) !important;
     padding: 10px 12px !important;
     border-radius: 5px !important;
+    margin: 0px 20px !important;
     width: 100% !important;
   }
+
 
   .news-item .card-text {
     display: -webkit-box !important;
@@ -2874,4 +2875,151 @@
 
   .newsLinkSec h6.newsLinkClr:hover {
     color: rgb(230, 230, 230) !important;
+  }
+
+  .categorySecCarousel .carousel-button-group {
+    position: absolute !important;
+    top: 93px !important;
+    width: 100% !important;
+  }
+
+  .categorySecCarousel .fi-left {
+    margin-left: -60px !important;
+  }
+
+  .categorySecCarousel .fi-right {
+    margin-right: 20px !important;
+  }
+
+  .categorySecCarousel .fi-left svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    padding: 5px !important;
+    border-radius: 5px !important;
+  }
+
+  .categorySecCarousel .fi-right svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    padding: 5px !important;
+    border-radius: 5px !important;
+  }
+
+  @media (min-width:992px) and (max-width:1024px) {
+    .categorySecCarousel .fi-left {
+      margin-left: -60px !important;
+    }
+
+    .categorySecCarousel .fi-right {
+      margin-right: 35px !important;
+    }
+  }
+
+  @media (min-width:768px) and (max-width:991px) {
+    .categorySecCarousel .carousel-button-group {
+      position: absolute !important;
+      top: 90px !important;
+      width: 100% !important;
+    }
+
+    .categorySecCarousel .fi-left {
+      margin-left: -45px !important;
+    }
+
+    .categorySecCarousel .fi-right {
+      margin-right: 45px !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .categorySecCarousel .carousel-button-group {
+      position: absolute !important;
+      top: 90px !important;
+      width: 100% !important;
+    }
+
+    .categorySecCarousel .fi-left {
+      margin-left: -30px !important;
+    }
+
+    .categorySecCarousel .fi-right {
+      margin-right: 65px !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:374px) {
+    .categorySecCarousel h2 {
+      font-size: 20px !important;
+    }
+
+    .categorySecCarousel .carousel-button-group {
+      position: absolute !important;
+      top: 83px !important;
+      width: 100% !important;
+    }
+
+  }
+
+  .examNewsSec .card-img-top {
+    height: 125px !important;
+    object-fit: cover !important;
+  }
+
+  .examNewsSec .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 60px !important;
+  }
+
+  .examsCardRow .card-img-top {
+    height: 150px !important;
+    object-fit: cover !important;
+  }
+
+  .carousel-containerCategory {
+    z-index: 2 !important;
+  }
+
+  .topCourseConCarousel .active>.page-link,
+  .page-link.active {
+    z-index: 3;
+    color: white !important;
+    background-color: #254692 !important;
+    border-color: #254692 !important;
+  }
+
+
+  .topCourseConCarousel .page-link {
+    color: black !important;
+    background-color: transparent !important;
+    border-color: rgba(39, 72, 150, 0.2) !important;
+    box-shadow: none !important;
+    border-radius: 5px !important;
+  }
+
+  .topCourseConCarousel .page-link:focus {
+    box-shadow: none !important;
+  }
+
+  @media (min-width:992px) and (max-width:1024px) {
+    .examsCardRow .card-img-top {
+      height: 100px !important;
+      object-fit: cover !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .examNewsSec {
+      min-height: 1125px !important;
+    }
+  }
+
+  @media (min-width:374px) and (max-width:767px) {
+    .examsCardRow .card-img-top {
+      height: 200px !important;
+      object-fit: cover !important;
+    }
   }
