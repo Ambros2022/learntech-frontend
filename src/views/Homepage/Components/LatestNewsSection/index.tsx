@@ -6,7 +6,7 @@ function LatestNewsSection() {
     const [activeTab, setActiveTab] = useState<'news' | 'blogs'>('news');
     const [newsItems, setNewsItems] = useState<any[]>([]);
     const [blogItems, setBlogItems] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const fetchData = useCallback(async (tab: 'news' | 'blogs') => {
         setLoading(true);
@@ -51,10 +51,6 @@ function LatestNewsSection() {
         fetchData(tab);
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <section className="latestNewsCon">
             <div className="container pt-5">
@@ -75,29 +71,35 @@ function LatestNewsSection() {
                 </div>
                 <div className="card-con pt-5">
                     <div className="row">
-                        {(activeTab === 'news' ? newsItems : blogItems).length > 0 ? (
-                            (activeTab === 'news' ? newsItems : blogItems).map((item) => (
-                                <div className="col-md-4 mb-1" key={item.id}>
-                                    <div className="newsBlosCards">
-                                        <div className="mb-5">
-                                            <div className="card h-100">
-                                                <div className="card-body newsheight ">
-                                                    <h6 className="card-subtitle  mb-2 text-body-secondary">
-                                                        {item.created_at ? format(new Date(item.created_at), 'yyyy-MM-dd') : 'No Date Available'}
-                                                    </h6>
-                                                    <h5 className="card-title  fw-bold text-blue text-truncate">{item.meta_title}</h5>
-                                                    <p className="card-text ">{item.meta_description}</p>
-                                                    <a href={item.link} className="btn readBtn card-link">Read More</a>
+                        {loading ? (
+                            <div className="col-12">
+                                <p className="text-center">Loading...</p>
+                            </div>
+                        ) : (
+                            (activeTab === 'news' ? newsItems : blogItems).length > 0 ? (
+                                (activeTab === 'news' ? newsItems : blogItems).map((item) => (
+                                    <div className="col-md-4 mb-1" key={item.id}>
+                                        <div className="newsBlosCards">
+                                            <div className="mb-5">
+                                                <div className="card h-100">
+                                                    <div className="card-body newsheight ">
+                                                        <h6 className="card-subtitle  mb-2 text-body-secondary">
+                                                            {item.created_at ? format(new Date(item.created_at), 'yyyy-MM-dd') : 'No Date Available'}
+                                                        </h6>
+                                                        <h5 className="card-title  fw-bold text-blue text-truncate">{item.meta_title}</h5>
+                                                        <p className="card-text ">{item.meta_description}</p>
+                                                        <a href={item.link} className="btn readBtn card-link">Read More</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                ))
+                            ) : (
+                                <div className="col-12">
+                                    <p className="text-center">No items to display</p>
                                 </div>
-                            ))
-                        ) : (
-                            <div className="col-12">
-                                <p className="text-center">No items to display</p>
-                            </div>
+                            )
                         )}
                     </div>
                 </div>

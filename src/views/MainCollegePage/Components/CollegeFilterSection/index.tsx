@@ -76,7 +76,7 @@ function CollegeFilterSection() {
             const response = await axios1.get('api/website/allcourses/get');
             if (response.data.status === 1) {
                 const courseData = response.data.data.map((course: any) => ({
-                    label: course.name,
+                    label: course.slug,
                     value: course.id.toString()
                 }));
                 setCourses(courseData);
@@ -87,8 +87,6 @@ function CollegeFilterSection() {
             console.error('Error fetching states:', error);
         }
     }, [isMountedRef]);
-
-
 
 
     const fetchStatesData = useCallback(async () => {
@@ -111,22 +109,16 @@ function CollegeFilterSection() {
         }
     }, [isMountedRef]);
 
-
-
     //get all banners
-    const getcollegedata = useCallback(async (stateId?: number) => {
+    const getcollegedata = useCallback(async (stateId?: number, courseId?: number) => {
         try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-           
-    
-            if (stateId) {
-                roleparams['state_id'] = `[${stateId}]`; // Adjust parameter format as needed
-            }
-    
-            const response = await axios1.get('api/website/colleges/get', { params: roleparams });
-    
+            const params: any = {
+                page: 1,
+                size: 10000
+            };
+            if (stateId) params['state_id'] = `[${stateId}]`;
+            if (courseId) params['course_id'] = `[${courseId}]`;
+            const response = await axios1.get('api/website/colleges/get', { params });
             setColleges(response.data.data);
         } catch (err) {
             console.error(err);
@@ -162,8 +154,10 @@ function CollegeFilterSection() {
             id: 'ownership',
             label: 'Ownership',
             options: [
+                { label: 'Public', value: 'Public' },
+                { label: 'Deemed', value: 'Deemed' },
                 { label: 'Private', value: 'Private' },
-                { label: 'Public', value: 'Public' }
+                { label: 'Government', value: 'Government' }
             ]
         },
         {
@@ -180,10 +174,11 @@ function CollegeFilterSection() {
             id: 'courseType',
             label: 'Course Type',
             options: [
-                { label: 'Bachelors (3233)', value: 'bachelors' },
-                { label: 'Masters (3233)', value: 'masters' },
-                { label: 'Diploma (3233)', value: 'diploma' },
-                { label: 'Doctorate (3233)', value: 'doctorate' }
+                { label: 'UG', value: 'UG' },
+                { label: 'PG', value: 'PG' },
+                { label: 'Diploma', value: 'Diploma' },
+                { label: 'Doctorate', value: 'Doctorate' },
+                { label: 'Default', value: 'Default' }
             ]
         }
     ];

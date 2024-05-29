@@ -27,6 +27,8 @@ const Header = () => {
   const router = useRouter();
   const [states, setStates] = useState<any[]>([]);
   const [exams, setExams] = useState<any[]>([]);
+  const isMountedRef = useIsMountedRef();
+
 
 
   const [news, setNews] = useState<any[]>([]);
@@ -57,7 +59,7 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
   const getCountry = useCallback(async () => {
     try {
@@ -68,7 +70,7 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
 
   const getCourses = useCallback(async () => {
@@ -80,7 +82,7 @@ const Header = () => {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
   useEffect(() => {
     getCountry();
@@ -100,7 +102,7 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
 
   const getexams = useCallback(async () => {
@@ -116,7 +118,7 @@ const Header = () => {
       console.error(err);
       console.error(err);
     }
-  }, []);
+  }, [isMountedRef]);
 
   useEffect(() => {
 
