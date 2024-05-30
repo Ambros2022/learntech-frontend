@@ -220,7 +220,7 @@ const Header = () => {
 
                 <li className="nav-item dropdown" style={{ position: 'static' }}>
                   <Link
-                    className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'activeDrpDwn' : ''}`}
+                    className={`nav-link dropdown-toggle ${isLinkActive('/news') ? 'activeDrpDwn' : ''}`}
                     onClick={() => setIsOpen(false)}
                     href="/news"
                     id="navbarDropdownMenuLink"

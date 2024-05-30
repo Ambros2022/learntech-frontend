@@ -618,12 +618,10 @@
     border: 1px solid #254692 !important;
   }
 
-  .featuredClgCard .active,
-  .featuredClgCard .active :focus,
-  .featuredClgCard .active :hover {
+  .applyNowButton {
     background-color: #254692 !important;
     color: white !important;
-    /* box-shadow: #254692 0px 0px 10px !important; */
+    box-shadow: rgba(21, 41, 88, 0.493) 0px 0px 15px !important;
   }
 
   .featuredClgCard {
@@ -3100,5 +3098,209 @@
     .examsCardRow .card-img-top {
       height: 200px !important;
       object-fit: cover !important;
+    }
+  }
+
+
+  /* News Banner Section */
+
+  .newsBannerSec {
+    height: 400px !important;
+  }
+
+  .newsBannerSec img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .newsBannerSec input {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    padding: 20px 10px !important;
+    margin: 10px 0px !important;
+    color: white !important;
+    font-size: 20px !important;
+  }
+
+  .newsBannerSec input::placeholder {
+    color: white !important;
+    font-size: 20px !important;
+  }
+
+  .topnewsSec .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  .newsCardCarousel .carousel-button-group {
+    position: absolute;
+    top: 100px !important;
+    width: 100%;
+    z-index: -1px !important;
+  }
+
+  .newsCardCarousel .fi-left svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    border-radius: 5px !important;
+  }
+
+  .newsCardCarousel .fi-right svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    border-radius: 5px !important;
+  }
+
+  .newsTabs .nav-link {
+    border: 1px solid rgb(208, 208, 208) !important;
+    color: #254692 !important;
+  }
+
+  .newsTabsClr button {
+    border: 1px solid rgba(212, 218, 234, 1) !important;
+    font-size: 15px !important;
+    max-width: 200px !important;
+    min-width: 200px !important;
+    padding: 15px 12px !important;
+    color: #254692 !important;
+  }
+
+  .newsTabsClr button.active {
+    font-size: 14px !important;
+    background-color: #254692 !important;
+    font-weight: bold !important;
+    color: white !important;
+  }
+
+
+  .newsCardText .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  .browseNews .active>.page-link,
+  .page-link.active {
+    z-index: 3;
+    color: white !important;
+    background-color: #254692 !important;
+    border-color: #254692 !important;
+  }
+
+
+  .browseNews .page-link {
+    color: black !important;
+    background-color: transparent !important;
+    border-color: rgba(39, 72, 150, 0.2) !important;
+    box-shadow: none !important;
+    border-radius: 5px !important;
+  }
+
+  .browseNews .page-link:focus {
+    box-shadow: none !important;
+  }
+
+  .blogCardspage .active>.page-link,
+  .page-link.active {
+    z-index: 3;
+    color: white !important;
+    background-color: #254692 !important;
+    border-color: #254692 !important;
+  }
+
+
+  .blogCardspage .page-link {
+    color: black !important;
+    background-color: transparent !important;
+    border-color: rgba(39, 72, 150, 0.2) !important;
+    box-shadow: none !important;
+    border-radius: 5px !important;
+  }
+
+  .blogCardspage .page-link:focus {
+    box-shadow: none !important;
+  }
+
+  .get-news img {
+    width: auto;
+    height: auto;
+  }
+
+  .flwBtn {
+    background-color: #254692 !important;
+    color: white !important;
+  }
+
+  .askBtn {
+    background-color: transparent !important;
+    color: #254692 !important;
+    border: 1px solid #254692 !important;
+  }
+
+  .newsCardText img {
+    object-fit: contain !important;
+    height: 275px !important;
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .blogSec .card-img-top {
+      height: 150px !important;
+      object-fit: cover !important;
+    }
+
+    .examNewsSec .card-img-top {
+      height: 200px !important;
+      object-fit: cover !important;
+    }
+  }
+
+  @media (min-width:992px) and (max-width:1024px) {
+    .newsCardText .card-img-top {
+      height: 143px !important;
+    }
+  }
+
+  @media (min-width:768px) and (max-width:991px) {
+    .newsCardText .card-img-top {
+      height: 123px !important;
+    }
+  }
+
+  @media (min-width:425px) and (max-width:767px) {
+    .newsCardText .card-img-top {
+      height: 170px !important;
+    }
+  }
+
+  @media (min-width:375px) and (max-width:424px) {
+    .newsCardText .card-img-top {
+      height: 150px !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:374px) {
+    .newsCardText .card-img-top {
+      height: 125px !important;
+    }
+  }
+
+  @media (max-width:320px) {
+    .newsBannerSec h1 {
+      font-size: 25px !important;
+    }
+
+    .newsBannerSec input {
+      font-size: 18px !important;
+    }
+
+    .newsBannerSec input::placeholder {
+      font-size: 18px !important;
     }
   }
