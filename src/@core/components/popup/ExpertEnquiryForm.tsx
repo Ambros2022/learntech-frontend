@@ -56,7 +56,7 @@ const ExpertForm = () => {
     return (
         <form onSubmit={formik.handleSubmit} className="container " >
             <div className="row">
-                <div className="col-md-6" id="animation16">
+                <div className="col-md-3" id="animation16">
                     <div className="mb-3 ms-md-5">
                         <input
                             type="text"
@@ -73,7 +73,7 @@ const ExpertForm = () => {
                         ) : null}
                     </div>
                 </div>
-                <div className="col-md-6" id="animation17">
+                <div className="col-md-3" id="animation17">
                     <div className="mb-3 me-md-5">
                         <input
                             type="text"
@@ -90,9 +90,9 @@ const ExpertForm = () => {
                         ) : null}
                     </div>
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-md-6" id="animation18">
+                {/* </div>
+            <div className="row"> */}
+                <div className="col-md-3" id="animation18">
                     <div className="mb-3 ms-md-5">
                         <input
                             type="email"
@@ -109,7 +109,7 @@ const ExpertForm = () => {
                         ) : null}
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-3">
                     <div className="mb-3 me-md-5" id="animation19">
                         <input
                             type="text"
