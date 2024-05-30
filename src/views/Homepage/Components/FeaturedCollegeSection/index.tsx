@@ -43,8 +43,8 @@ function FeaturedCollegeSection() {
             <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`} width={300} height={300} className="card-Image-top" alt="featured-college" />
             <div className="card-body">
               <h5 className="card-title text-blue text-truncate">{college.name}</h5>
-              <p className="card-text">
-                <Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
+              <p className="card-text text-truncate">
+                <Image width={14} height={14} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
                 {college.address}
               </p>
               <div className="d-flex justify-content-between">

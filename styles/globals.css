@@ -220,7 +220,7 @@
   .searchSec {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: saturate(180%) blur(8px) !important;
-    color: white !important;
+    color: #242424 !important;
     border: 1px solid white !important;
     font-size: 16px !important;
     padding: 20px !important;
@@ -427,6 +427,16 @@
     color: white !important;
   }
 
+  .featuredClgCard .card-text-image {
+    width: auto;
+    height: auto;
+  }
+
+  .StudyAbroadCard .card-text-image {
+    width: auto;
+    height: auto;
+  }
+
   .exploreNav a:focus {
     background-color: #254692 !important;
     color: white !important;
@@ -436,8 +446,12 @@
   #exploreCardCon .col-4 img {
     width: 60px;
     padding: 10px;
-    filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%);
+    /* filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%); */
     background-color: rgba(39, 72, 150, 0.1);
+  }
+
+  .exploreCardHover:hover {
+    box-shadow: rgba(51, 51, 51, 0.361) 0px 0px 15px !important;
   }
 
   .img-blue {
@@ -446,7 +460,6 @@
 
   #exploreCardCon .card {
     border: none !important;
-    box-shadow: rgba(51, 51, 51, 0.361) 0px 0px 15px !important;
   }
 
   #exploreCardCon .card h6 {
@@ -561,11 +574,11 @@
     border-radius: 50% !important;
     padding: 9px !important;
     border: none !important;
-    width: 50px !important;
+    width: 57px !important;
     box-shadow: #00000073 0px 0px 15px !important;
     position: fixed !important;
     bottom: 150px !important;
-    right: 32px !important;
+    right: 29px !important;
     z-index: 100 !important;
   }
 
@@ -610,7 +623,7 @@
   .featuredClgCard .active :hover {
     background-color: #254692 !important;
     color: white !important;
-    box-shadow: #254692 0px 0px 10px !important;
+    /* box-shadow: #254692 0px 0px 10px !important; */
   }
 
   .featuredClgCard {
@@ -870,8 +883,8 @@
       border-radius: 50% !important;
       padding: 5px !important;
       border: none !important;
-      width: 40px !important;
-      right: 25px !important;
+      width: 44px !important;
+      right: 24px !important;
       bottom: 120px !important;
       box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
     }
@@ -1093,8 +1106,8 @@
       border-radius: 50% !important;
       padding: 7px !important;
       border: none !important;
-      width: 35px !important;
-      right: 30px !important;
+      width: 45px !important;
+      right: 22px !important;
       box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
     }
 
@@ -2851,13 +2864,13 @@
     object-fit: contain !important;
   }
 
-  .FeaturedClgCon .card-text {
+  /* .FeaturedClgCon .card-text {
     display: -webkit-box !important;
     -webkit-line-clamp: 3 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    min-height: 70px !important;
+    min-height: 80px !important;
   }
 
   .StudyAbroadCard .card-text {
@@ -2866,8 +2879,12 @@
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    min-height: 70px !important;
-  }
+    min-height: 80px !important;
+  } */
+
+  .StudyAbroadCard {}
+
+
 
   .latestNewsCon .card-text {
     display: -webkit-box !important;

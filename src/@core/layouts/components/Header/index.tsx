@@ -160,174 +160,176 @@ const Header = () => {
         </div>
       </header >
 
-      <nav className="top-nav navbar navbar-expand-lg bg-white">
+      <nav className="navbar navbar-expand-lg bg-white">
         <div className="container-lg">
           <Link className="navbar-brand" href="/"><Image src="/images/icons/learntech-logo.png" width={160} height={50} alt="learntech-logo" /></Link>
           <button className="navbar-toggler" type="button" onClick={toggle} data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className={`${isOpen ? 'show' : ''} collapse navbar-collapse`} id="navbarSupportedContent">
-            <ul className="navbar-nav mb-2 mb-lg-0 ms-xl-5 ms-md-0">
-              <li className="nav-item">
-                <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/">Home</Link>
-              </li>
-              <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/universities" id="navbarDropdownMenuLink" role="button"
-                  aria-expanded="false">
-                  Universities
-                </Link>
+            <span className="top-nav">
+              <ul className="navbar-nav mb-2 mb-lg-0 ms-xl-5 ms-md-0">
+                <li className="nav-item">
+                  <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/">Home</Link>
+                </li>
+                <li className="nav-item dropdown">
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/universities" id="navbarDropdownMenuLink" role="button"
+                    aria-expanded="false">
+                    Universities
+                  </Link>
 
-                <Statedropdown states={states} type="Universities" />
-              </li>
-              <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/colleges') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/colleges" id="navbarDropdownMenuLink" role="button"
-                  aria-expanded="false">
-                  Colleges
-                </Link>
-                <Statedropdown states={states} type="Colleges" />
-              </li>
-              <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
-                  aria-expanded="false">
-                  Courses
-                </Link>
-                <Coursedropdown states={courses} type="Colleges" />
-              </li>
-              <li className="nav-item dropdown">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/exams" id="navbarDropdownMenuLink" role="button"
-                  aria-expanded="false">
-                  Exams
-                </Link>
-                <Examdropdown states={exams} />
-              </li>
+                  <Statedropdown states={states} type="Universities" />
+                </li>
+                <li className="nav-item dropdown">
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/colleges') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/colleges" id="navbarDropdownMenuLink" role="button"
+                    aria-expanded="false">
+                    Colleges
+                  </Link>
+                  <Statedropdown states={states} type="Colleges" />
+                </li>
+                <li className="nav-item dropdown">
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
+                    aria-expanded="false">
+                    Courses
+                  </Link>
+                  <Coursedropdown states={courses} type="Colleges" />
+                </li>
+                <li className="nav-item dropdown">
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/exams" id="navbarDropdownMenuLink" role="button"
+                    aria-expanded="false">
+                    Exams
+                  </Link>
+                  <Examdropdown states={exams} />
+                </li>
 
-              <li className="nav-item dropdown">
-                <Link
-                  className={`nav-link dropdown-toggle ${isLinkActive('/country') ? 'activeDrpDwn' : ''}`}
-                  onClick={() => setIsOpen(!isOpen)}
-                  href="/colleges"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  aria-expanded={isOpen}
-                >
-                  Study Abroad
-                </Link>
-                <Abroaddropdown states={countries} type="Colleges" />
+                <li className="nav-item dropdown">
+                  <Link
+                    className={`nav-link dropdown-toggle ${isLinkActive('/country') ? 'activeDrpDwn' : ''}`}
+                    onClick={() => setIsOpen(!isOpen)}
+                    href="/colleges"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    aria-expanded={isOpen}
+                  >
+                    Study Abroad
+                  </Link>
+                  <Abroaddropdown states={countries} type="Colleges" />
 
-              </li>
+                </li>
 
 
-              <li className="nav-item dropdown" style={{ position: 'static' }}>
-                <Link
-                  className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'activeDrpDwn' : ''}`}
-                  onClick={() => setIsOpen(false)}
-                  href="/news"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  aria-expanded="false"
-                >
-                  Latest News
-                </Link>
-                <div className="container-fluid">
-                  <ul className="newsDrpDwn newsHide dropdown-menu" style={{ textAlign: "center", left: '0', right: "0", width: '80%', margin: "0 auto" }} aria-labelledby="navbarDropdownMenuLink">
-                    <div className="dropdown-row-news dropdown-row p-2">
-                      <div className="row">
-                        {news.slice(0, 4).map((item) => (
-                          <li key={item.id} className="news-item mb-1 col-md-3">
-                            <Link 
-                             href={`/news/${item.id}/${item.slug}`}
-                    
-                            >
-                              <div className="card-news card">
-                                <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
-                                <div className="card-body">
-                                  <h5 className="card-title text-truncate">{item.meta_title}</h5>
-                                  <p className="card-text" >{item.meta_description}</p>
+                <li className="nav-item dropdown" style={{ position: 'static' }}>
+                  <Link
+                    className={`nav-link dropdown-toggle ${isLinkActive('/latestNews') ? 'activeDrpDwn' : ''}`}
+                    onClick={() => setIsOpen(false)}
+                    href="/news"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    aria-expanded="false"
+                  >
+                    Latest News
+                  </Link>
+                  <div className="container-fluid">
+                    <ul className="newsDrpDwn newsHide dropdown-menu" style={{ textAlign: "center", left: '0', right: "0", width: '80%', margin: "0 auto" }} aria-labelledby="navbarDropdownMenuLink">
+                      <div className="dropdown-row-news dropdown-row p-2">
+                        <div className="row">
+                          {news.slice(0, 4).map((item) => (
+                            <li key={item.id} className="news-item mb-1 col-md-3">
+                              <Link
+                                href={`/news/${item.id}/${item.slug}`}
+
+                              >
+                                <div className="card-news card">
+                                  <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
+                                  <div className="card-body">
+                                    <h5 className="card-title text-truncate">{item.meta_title}</h5>
+                                    <p className="card-text" >{item.meta_description}</p>
+                                  </div>
                                 </div>
-                              </div>
-                            </Link>
-                          </li>
-                        ))}
+                              </Link>
+                            </li>
+                          ))}
+                        </div>
+
                       </div>
+                      <div className="text-end mt-1 me-2">
+                        <Link href="/news" className="btn ">Read All News</Link>
+                      </div>
+                    </ul>
+                  </div>
+                </li>
 
-                    </div>
-                    <div className="text-end mt-1 me-2">
-                      <Link href="/news" className="btn ">Read All News</Link>
-                    </div>
+                <li className="nav-item dropdown d-lg-inline-block d-none">
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                    aria-expanded="false">
+                    More
+                  </Link>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/about-us">
+                        About US
+                      </Link>
+
+                    </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/our-team">
+                        Our Team
+                      </Link>
+
+                    </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/services">
+                        Services
+                      </Link>
+
+                    </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/boards">
+                        Boards
+                      </Link>
+
+                    </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/schools">
+                        Schools
+                      </Link>
+
+                    </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/nri-quota">
+                        NRI Quota
+                      </Link>
+
+                    </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/scholarships">
+                        Scholarships
+                      </Link>
+
+                    </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/mbbs-abroad">
+                        MBBS Abroad
+                      </Link>
+
+                    </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/meds">
+                        Medical Edu Studio
+                      </Link>
+
+                    </li>
+
+
                   </ul>
-                </div>
-              </li>
-
-              <li className="nav-item dropdown d-lg-inline-block d-none">
-                <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
-                  aria-expanded="false">
-                  More
-                </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/about-us">
-                      About US
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/our-team">
-                      Our Team
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/services">
-                      Services
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/boards">
-                      Boards
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/schools">
-                      Schools
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/nri-quota">
-                      NRI Quota
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/scholarships">
-                      Scholarships
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/mbbs-abroad">
-                      MBBS Abroad
-                    </Link>
-
-                  </li>
-                  <li>
-                    <Link className="d-flex justify-content-between dropdown-item" href="/meds">
-                      Medical Edu Studio
-                    </Link>
-
-                  </li>
-
-
-                </ul>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </span>
             <div className='d-lg-flex d-none justify-content-xl-end ms-auto'>
               {/* <Link className='mx-2  mt-1 socialIcon' href="#"> */}
-                
-                <Image src="/images/icons/user-icon.svg" className='mx-2  mt-1 socialIcon' width={25} height={24} alt="user-icon" />
-                {/* </Link> */}
+
+              <Image src="/images/icons/user-icon.svg" className='mx-2  mt-1 socialIcon' width={25} height={24} alt="user-icon" />
+              {/* </Link> */}
 
               {/* <button className=" btn counsellingBtn p-2" type="submit">Get Counselling</button> */}
               <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn p-2" />

@@ -281,7 +281,7 @@ function BannerSection() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 mb-5" id="animation3">
+              <div className="col-md-5 mb-5 px-md-3 px-lg-5" id="animation3">
                 <div className="searchForm">
                   <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
                   <Formik

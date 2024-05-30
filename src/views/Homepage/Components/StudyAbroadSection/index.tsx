@@ -274,12 +274,12 @@ function StudyAbroadSection() {
         <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
         <div className="card-body">
           <h5 className="card-title text-blue text-truncate" style={{ fontSize: '18px' }}>{card.name}</h5>
-          <p className="card-text">
-            <img width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
+          <p className="card-text text-truncate">
+            <img width={14} height={14} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
             {card.address}
           </p>
           <div className="d-flex justify-content-center">
-            <a href="#" className="btn">Apply Now</a>
+            <a href="#" className="btn ApplyNowBtn">Apply Now</a>
           </div>
         </div>
       </div>

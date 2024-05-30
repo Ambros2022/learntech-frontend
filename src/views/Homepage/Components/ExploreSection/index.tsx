@@ -5,15 +5,15 @@ import axios1 from 'src/configs/axios';
 function ExploreSection() {
   const [activeTab, setActiveTab] = useState('Colleges');
   const [displayCount, setDisplayCount] = useState(18);
-  
+
   interface data {
     id: number;
     name: string;
     logo: string;
     uniqueCollegeCount: number;
-    
+
   }
-  
+
   const [data, setData] = useState<data[]>([]);
 
 
@@ -54,7 +54,7 @@ function ExploreSection() {
       />
     ));
   };
-  
+
 
   const handleViewMore = () => {
     setDisplayCount((prevCount) => prevCount + 6);
@@ -62,8 +62,8 @@ function ExploreSection() {
 
   function CardComponent({ title, imageSrc, count }) {
     return (
-      <div className="col-md-4 col-lg-2 mb-3 d-flex">
-        <div className="card text-center flex-fill">
+      <div className="col-md-4 col-lg-2 mb-3">
+        <div className="card text-center exploreCardHover">
           <div className="row">
             <div className="col-md-12 col-4 col-sm-3">
               <img
@@ -77,7 +77,7 @@ function ExploreSection() {
             <div className="col-md-12 col-6 col-sm-7 text-md-center text-start">
               <div className="card-body">
                 <p className="card-text m-0 text-blue">{count} {activeTab}</p>
-                <h6 className="card-title">{title}</h6>
+                <h6 className="card-title text-truncate">{title}</h6>
               </div>
             </div>
             <div className="col-2 cardArrow">
