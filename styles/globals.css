@@ -648,11 +648,11 @@
     filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
   }
 
-  .StudyAbroadCard a {
+  /* .StudyAbroadCard a {
     background-color: white;
     color: #254692;
     border: 1px solid #254692 !important;
-  }
+  } */
 
   .StudyAbroadCard {
     margin-right: 10px !important;

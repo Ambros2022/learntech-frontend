@@ -27,21 +27,32 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
     // const history = useHistory();
 
     const downloadPDF = async (): Promise<void> => {
-        let oReq = new XMLHttpRequest();
-        let URLToPDF = `${process.env.NEXT_PUBLIC_API_URL}` + "storage/brochure/learntech.pdf";
-        oReq.open("GET", URLToPDF, true);
-        oReq.responseType = "blob";
-        oReq.onload = function () {
-            // Once the file is downloaded, open a new window with the PDF
-            // Remember to allow the POP-UPS in your browser
-            const file = new Blob([oReq.response], { type: 'application/pdf' });
-            //const fileURL = URL.createObjectURL(file);
-            saveAs(file, "Learntechww Brochure 2024.pdf");
-            // window.open(fileURL, "_blank");
-        };
+        try {
+            const oReq = new XMLHttpRequest();
+            const URLToPDF = `${process.env.NEXT_PUBLIC_API_URI}storage/brochure/learntech.pdf`;
 
-        oReq.send();
-    }
+            oReq.open("GET", URLToPDF, true);
+            oReq.responseType = "blob";
+
+            oReq.onload = function () {
+                if (oReq.status === 200) {
+                    // Once the file is downloaded, save it using FileSaver
+                    const file = new Blob([oReq.response], { type: 'application/pdf' });
+                    saveAs(file, "Learntechww Brochure 2024.pdf");
+                } else {
+                    console.error(`Failed to download file: ${oReq.status} ${oReq.statusText}`);
+                }
+            };
+
+            oReq.onerror = function () {
+                console.error("Request failed");
+            };
+
+            oReq.send();
+        } catch (error) {
+            console.error("An error occurred while downloading the PDF:", error);
+        }
+    };
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -55,7 +66,8 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
     });
 
     const handleSubmit = async (values, { resetForm }) => {
-
+       
+    
 
         try {
             toast.loading('Processing');
@@ -76,6 +88,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
                 onChanges();
 
                 if (page && page == "Brochure") {
+                    alert("z");
                     downloadPDF();
                 }
 
