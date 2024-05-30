@@ -181,34 +181,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         
     }, [getstreams]);
 
-
-
-    // useEffect(() => {
-
-    //     if (!isAddMode && olddata.collegeamenities) {
-    //         const amenities = olddata.collegeamenities.map((item) => ({
-    //             id: item.clgamenities.id,
-    //             amenities_name: item.clgamenities.amenities_name,
-    //         }));
-    //         admfiledReset("amenities", { defaultValue: amenities })
-    //     }
-    //     if (!isAddMode && olddata.collegestreams) {
-    //         const STREAM = olddata.collegestreams.map((item) => ({
-    //             id: item.clgstreams.id,
-    //             name: item.clgstreams.name,
-    //         }));
-    //         admfiledReset("streams", { defaultValue: STREAM })
-    //     }
-    //     if (!isAddMode && olddata.collegerecognitions) {
-    //         const RECOGINATION = olddata.collegerecognitions.map((item) => ({
-    //             id: item.clgrecognitions.id,
-    //             recognition_approval_name: item.clgrecognitions.recognition_approval_name,
-    //         }));
-    //         admfiledReset("recoginations", { defaultValue: RECOGINATION })
-    //     }
-
-    // }, []);
-
     const onSubmit = async (data: any) => {
 
         if (!isAddMode && olddata.id) {
@@ -308,15 +280,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
             
             formData.append('cover_image', selectedphoto);
-            if (selectedlogo == '') {
+            // if (selectedlogo == '') {
 
-                toast.error('Please Upload Logo', {
-                    duration: 2000
-                })
-                setLoading(false);
-                return false;
+            //     toast.error('Please Upload Logo', {
+            //         duration: 2000
+            //     })
+            //     setLoading(false);
+            //     return false;
 
-            }
+            // }
             formData.append('promo_banner', selectedlogo);
            
         
@@ -926,40 +898,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    {/* <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='listing_order'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    type='number'
-                                    label='Listing Order'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.listing_order)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.listing_order && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid> */}
-
-                    {/* <Grid item xs={12} sm={3}>
-                        <FileUpload
-                            isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.banner_image ? olddata.banner_image : ""}
-                            onFileChange={handleFileChangebanner}
-                            maxFiles={1}
-                            maxSize={2000000}
-                            fileNames={fileNamesbanner}
-                            label="Upload banner_image"
-                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                            rejectionMessage='Try another file for upload.'
-                        />
-                    </Grid> */}
+                   
 
                     <Grid item xs={12} sm={4}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
@@ -1274,16 +1213,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         </>}
                     </TabPanel>
                 </CardContent>
-                {/* <Divider sx={{ m: '0 !important' }} /> */}
-                {/* <CardActions>
-                    <Button type='submit' sx={{ mr: 2 }} variant='contained'>
-                        Submit
-                    </Button>
-                    <Button type='reset' variant='tonal' color='secondary'>
-                        Reset
-                    </Button>
-                </CardActions> */}
-                {/* </form> */}
+             
             </TabContext>
         </Card>
     )

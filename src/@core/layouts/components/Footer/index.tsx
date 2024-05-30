@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+// import Link from 'src/@core/theme/overrides/link';
+import Link from "next/link";
 const Footer = () => {
 
   const [showButton, setShowButton] = useState(false);
@@ -32,8 +34,8 @@ const Footer = () => {
   return (
     <>
       <section className="footerCon">
-        <div className="container pt-5">
-          <Image className="footer-logo" src="/images/icons/footer-learntech-logo.png" width={170} height={60} alt="learntech-logo" />
+        <div className="container pt-3">
+          <Image className="footer-logo" src="/images/icons/footer-learntech-logo.png" width={270} height={60} alt="learntech-logo" />
           <div className="row">
             <div className="col-md-4 text-white">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -53,31 +55,37 @@ const Footer = () => {
               </span>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
-              <h6 className="fw-bold mb-3">Info</h6>
-              <a href="#">About us</a><br></br>
-              <a href="#">Our Team</a><br></br>
-              <a href="#">Services</a><br></br>
-              <a href="#">Contact us</a><br></br>
-              <a href="#">Careers</a><br></br>
-              <a href="#">Site Map</a>
+              <h5 className="fw-bold mb-3">Info</h5>
+              <ul className='list-unstyled'>
+                <li className='mb-2'><Link href="/about-us">About us</Link></li>
+                <li className='mb-2'><Link href="/our-team">Our Team</Link></li>
+                <li className='mb-2'><Link href="/services">Services</Link></li>
+                <li className='mb-2'><Link href="/contact-us">Contact us</Link></li>
+                <li className='mb-2'><Link href="/career">Careers</Link></li>
+                <li className='mb-2'><Link href="/sitemap">Site Map</Link></li>
+              </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
-              <h6 className="fw-bold mb-3">Quick Links</h6>
-              <a href="#">Blogs</a><br></br>
-              <a href="#">NRI Quata</a><br></br>
-              <a href="#">Study Abroad</a><br></br>
-              <a href="#">Scholarships</a><br></br>
-              <a href="#">Student’s Speak</a>
+              <h5 className="fw-bold mb-3">Quick Links</h5>
+              <ul className='list-unstyled'>
+                <li className='mb-2'><Link href="/blogs">Blogs</Link></li>
+                <li className='mb-2'><Link href="/nri-quota">NRI Quata</Link></li>
+                <li className='mb-2'><Link href="/study-in-usa">Study Abroad</Link></li>
+                <li className='mb-2'><Link href="/scholarships">Scholarships</Link></li>
+                <li className='mb-2'><Link href="/students-speak">Student’s Speak</Link></li>
+              </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
-              <h6 className="fw-bold mb-3">Legal</h6>
-              <a href="#">Feed</a><br></br>
-              <a href="#">Disclaimer</a><br></br>
-              <a href="#">Privacy Policy</a><br></br>
-              <a href="#">Terms & Conditions</a>
+              <h5 className="fw-bold mb-3">Legal</h5>
+              <ul className='list-unstyled'>
+                <li className='mb-2'><Link href="/">Feed</Link></li>
+                <li className='mb-2'><Link href="/disclaimer">Disclaimer</Link></li>
+                <li className='mb-2'><Link href="/privacy-policy">Privacy Policy</Link></li>
+                <li className='mb-2'><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
+              </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
-              <h6 className="fw-bold mb-3">Download Our App</h6>
+              <h5 className="fw-bold mb-3">Download Our App</h5>
               <a href="https://apps.apple.com/in/app/learntech/id1623567055" target='_blank'><Image className="mb-3 img-fluid" width={150} height={70} alt="app-store-img" src="/images/icons/app-store.png" /></a><br></br>
               <a href="https://play.google.com/store/apps/details?id=com.ilearntech.app" target='_blank'><Image className="img-fluid" width={150} height={70} alt="google-play-img" src="/images/icons/google-play.png" /></a>
             </div>
@@ -85,13 +93,19 @@ const Footer = () => {
         </div>
         <div className="row container-fluid">
           <div className="mt-md-3 col-md-4 text-md-start">
-            <a href="tel:18001208969" className="phone-icon "><Image src="/images/icons/Phone Blue.svg" width={30} height={30} alt="phone-icon" /></a>
+            <a href="tel:18001208969" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a>
           </div>
           <div className="col-md-4 mb-md-3 text-md-center">
-            <a href="#" className="DownloadBrchrBtn" ><Image src="/images/icons/Download Brochure.svg" width={150} height={70} alt="download-brochure-icon" /></a>
+
+            {/* <a href="#" className="DownloadBrchrBtn" >
+              <Image src="/images/icons/Download Brochure.svg" width={150} height={70} alt="download-brochure-icon" />
+
+            </a> */}
+
+            <GlobalEnquiryForm pagename="Brochure" title="Get Brochure" />
           </div>
           <div className="mt-md-3 col-md-4 text-md-end">
-            <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={20} height={20} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
+            <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={30} height={30} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
             <a href="https://wa.me/+919036020076" target='_blank' className="whatsappIcon" ><Image width={30} height={30} className="footer-arrow" src="/images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
           </div>
         </div>

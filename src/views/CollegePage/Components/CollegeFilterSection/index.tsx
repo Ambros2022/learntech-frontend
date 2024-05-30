@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import { Config } from 'src/configs/mainconfig';
+import Link from 'next/link';
 
 
 function CollegeFilterSection() {
@@ -82,6 +83,7 @@ function CollegeFilterSection() {
         {
             id: 1,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -96,6 +98,7 @@ function CollegeFilterSection() {
         {
             id: 2,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -110,6 +113,7 @@ function CollegeFilterSection() {
         {
             id: 3,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -124,6 +128,7 @@ function CollegeFilterSection() {
         {
             id: 4,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -138,6 +143,7 @@ function CollegeFilterSection() {
         {
             id: 5,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -152,6 +158,7 @@ function CollegeFilterSection() {
         {
             id: 6,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -166,6 +173,7 @@ function CollegeFilterSection() {
         {
             id: 7,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -180,6 +188,7 @@ function CollegeFilterSection() {
         {
             id: 8,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -194,6 +203,7 @@ function CollegeFilterSection() {
         {
             id: 9,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -208,6 +218,7 @@ function CollegeFilterSection() {
         {
             id: 10,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -222,6 +233,7 @@ function CollegeFilterSection() {
         {
             id: 11,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -236,6 +248,7 @@ function CollegeFilterSection() {
         {
             id: 12,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -250,6 +263,7 @@ function CollegeFilterSection() {
         {
             id: 13,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -264,6 +278,7 @@ function CollegeFilterSection() {
         {
             id: 14,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -278,6 +293,7 @@ function CollegeFilterSection() {
         {
             id: 15,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -292,6 +308,7 @@ function CollegeFilterSection() {
         {
             id: 16,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -306,6 +323,7 @@ function CollegeFilterSection() {
         {
             id: 17,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -320,6 +338,7 @@ function CollegeFilterSection() {
         {
             id: 18,
             name: 'Yenepoya Medical College',
+            slug: 'Yenepoya Medical College',
             type: 'Private',
             rating: 4.5,
             location: 'Mangalore',
@@ -366,12 +385,12 @@ function CollegeFilterSection() {
         });
     };
 
-    function CollegeCard({ name, type, rating, location, state, established, imageUrl }) {
+    function CollegeCard({ id, slug, name, type, rating, location, state, established, imageUrl }) {
         return (
             <div className='mb-3'>
                 <div className="row p-2 filterCardBorder">
                     <div className="col-md-4 text-md-start text-center col-lg-3 col-xl-3 col-12">
-                        <img src={ImgUrl + imageUrl} alt="College Logo" />
+                        <img src='/images/icons/filter-card.jpg' width={120} height={100} alt="College Logo" />
                     </div>
                     <div className="col-md-8 col-lg-9 col-xl-9 col-12">
                         <div className="row d-flex justify-content-md-between justify-content-center filterCardText">
@@ -391,7 +410,7 @@ function CollegeFilterSection() {
                             <div className="col-12 mb-2">
                                 <div className="d-flex justify-content-md-end justify-content-center gap-2">
                                     <a href="#" className="activeBtn btn">Apply Now</a>
-                                    <a href="#" className="viewMoreBtn btn">View More</a>
+                                    <Link href={`/college/${id}/${slug}`} className="viewMoreBtn btn">View More</Link>
                                 </div>
                             </div>
                         </div>
@@ -422,7 +441,8 @@ function CollegeFilterSection() {
             <div>
                 {filteredColleges.map(college => (
                     <CollegeCard
-                        key={college.id}
+                        id={college.id}
+                        slug={college.slug}
                         name={college.name}
                         type={college.type}
                         rating={college.rating}
@@ -442,7 +462,13 @@ function CollegeFilterSection() {
         return (
             <div>
                 {options.map((optionGroup, index) => (
-                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2">
+                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2"
+
+                        data-bs-toggle="collapse" role="button" aria-expanded="false"
+                        // data-bs-toggle="collapse" href={`#${optionGroup.id}Collapse`} role="button" aria-expanded="false" 
+
+                        aria-controls={`${optionGroup.id}Collapse`}
+                    >
                         <div className="col-10">
                             <a className='text-blue'>{optionGroup.label}</a>
                         </div>

@@ -1,5 +1,5 @@
 
-import {  useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import DialogActions from '@mui/material/DialogActions'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
@@ -16,7 +16,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import ImageUploading, { ImageListType } from "react-images-uploading";
-import { FaTrash } from 'react-icons/fa'; 
+import { FaTrash } from 'react-icons/fa';
 
 import type { FC, SyntheticEvent } from 'react';
 import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
@@ -26,7 +26,7 @@ import TabPanel from '@mui/lab/TabPanel'
 import TabList from '@mui/lab/TabList'
 import { Config } from 'src/configs/mainconfig'
 import QuillEditor from 'src/@core/components/html-editor/index';
-import { Checkbox} from '@mui/material'
+import { Checkbox } from '@mui/material'
 
 
 
@@ -38,7 +38,7 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     const router = useRouter();
-   
+
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
@@ -46,11 +46,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     const [selectedphoto, setSelectedphoto] = useState('');
     const [fileNameslogo, setFileNameslogo] = useState<any>([]);
     const [selectedlogo, setSelectedlogo] = useState('');
-    
+
     const [amenitiesdata, setAmenitiesdata] = useState([])
     const [streamsdata, setStreamsdata] = useState([])
     const [recoginationsdata, setRecoginationsdata] = useState([])
-    
+
     const [countryId, setCountryId] = useState<any>(isAddMode ? "" : olddata?.country?.id || '');
     const [stateId, setStateId] = useState<any>(isAddMode ? "" : olddata?.state?.id || '');
     const [states, setStates] = useState([])
@@ -59,7 +59,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
     const [fileNamesbanner, setFileNamesbanner] = useState<any>([]);
     const [selectedbanner, setSelectedbanner] = useState('');
-   
+
 
 
 
@@ -137,7 +137,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         state_id: yup.object().required("This field is required"),
         city_id: yup.object().required("This field is required"),
 
-       
+
     })
 
     const defaultValues = {
@@ -169,7 +169,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         collegeamenities: [],
         streams: [],
         recoginations: [],
-       
+
     }
 
     const {
@@ -244,7 +244,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         }
     }, []);
 
-   
+
 
     const getamenities = useCallback(async () => {
 
@@ -361,7 +361,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('icon', selectedphoto);
             formData.append('logo', selectedlogo);
 
-          
+
 
             try {
                 const response = await axios1.post(url, formData)
@@ -379,7 +379,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -421,26 +421,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
-            if (selectedphoto == '') {
+            // if (selectedphoto == '') {
 
-                toast.error('Please Upload Icon', {
-                    duration: 2000
-                })
-                setLoading(false);
+            //     toast.error('Please Upload Icon', {
+            //         duration: 2000
+            //     })
+            //     setLoading(false);
 
-                return false;
+            //     return false;
 
-            }
-            if (selectedbanner == '') {
+            // }
+            // if (selectedbanner == '') {
 
-                toast.error('Please Upload BannerImage', {
-                    duration: 2000
-                })
-                setLoading(false);
+            //     toast.error('Please Upload BannerImage', {
+            //         duration: 2000
+            //     })
+            //     setLoading(false);
 
-                return false;
+            //     return false;
 
-            }
+            // }
             if (selectedlogo == '') {
 
                 toast.error('Please Upload Logo', {
@@ -459,14 +459,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('streams', JSON.stringify(data.streams));
             formData.append('recoginations', JSON.stringify(data.recoginations));
 
-         
+
             setLoading(false)
             try {
                 const response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -509,13 +509,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 questions: '',
                 answers: '',
             }],
-
-
-
-
     }
-
-
 
     const {
         control: faqcontrol,
@@ -525,7 +519,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
-        
+
         // resolver: yupResolver(schema)
     })
     const { fields, append, remove } = useFieldArray({
@@ -549,7 +543,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     };
 
     const faqonSubmit = async (data: any) => {
-       
+
 
         if (!isAddMode && olddata.id) {
             const updateid = olddata.id;
@@ -574,7 +568,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                     toast.error(response.data.message)
                     setError(response.data.message)
                 }
-                
+
                 // history.push('/app/products');
 
             } catch (err: any) {
@@ -603,7 +597,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     const maxNumber = 69;
 
     const onChangeimages = (
-        imageList: ImageListType    ) => {
+        imageList: ImageListType) => {
         // data for submit
         // console.log(imageList, addUpdateIndex);
         setImages(imageList);
@@ -625,7 +619,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                     oldimages.push(image);
                 }
             });
-            
+
             // formData.append("oldimages", oldimages);
             formData.append("oldimages", JSON.stringify(oldimages));
 
@@ -649,10 +643,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         }
     }
 
-    
+
 
     return (
-          <Card>
+        <Card>
             <TabContext value={formvalue}>
                 <TabList
                     variant='scrollable'
@@ -667,53 +661,53 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
                 <CardContent>
                     <TabPanel sx={{ p: 0 }} value='basic-info'>
-                    <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
-                <Grid container spacing={5}>
+                        <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
+                            <Grid container spacing={5}>
 
 
-                    <Grid item xs={12} sm={4}>
-                                        <Controller
-                                            name='country_id'
-                                            control={control}
-                                            rules={{ required: true }}
-                                            render={({ field }) => (
-                                                <CustomAutocomplete
-                                                    fullWidth
-                                                    options={countries}
-                                                    loading={!countries.length}
-                                                    value={field.value}
-                                                    onChange={(event, newValue) => {
-                                                        if (newValue) {
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='country_id'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <CustomAutocomplete
+                                                fullWidth
+                                                options={countries}
+                                                loading={!countries.length}
+                                                value={field.value}
+                                                onChange={(event, newValue) => {
+                                                    if (newValue) {
 
-                                                            setCountryId(newValue ? newValue.id : null);
-                                                            admfiledReset("state_id", { defaultValue: "New" })
-                                                            admfiledReset("city_id", { defaultValue: "New" })
-                                                            field.onChange(newValue);
-
-
-
-                                                        }
-                                                        else {
-                                                            console.log(newValue, "newValue2")
-
-                                                            setCountryId(null);
-
-                                                            admfiledReset("state_id", { defaultValue: "New" })
-                                                            admfiledReset("city_id", { defaultValue: "New" })
+                                                        setCountryId(newValue ? newValue.id : null);
+                                                        admfiledReset("state_id", { defaultValue: "New" })
+                                                        admfiledReset("city_id", { defaultValue: "New" })
+                                                        field.onChange(newValue);
 
 
 
-                                                        }
+                                                    }
+                                                    else {
+                                                        console.log(newValue, "newValue2")
 
-                                                    }}
-                                                    getOptionLabel={(option: any) => option.name || ''}
-                                                    renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.country_id)}
-                                                        {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
-                                                />
-                                            )}
-                                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
+                                                        setCountryId(null);
+
+                                                        admfiledReset("state_id", { defaultValue: "New" })
+                                                        admfiledReset("city_id", { defaultValue: "New" })
+
+
+
+                                                    }
+
+                                                }}
+                                                getOptionLabel={(option: any) => option.name || ''}
+                                                renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.country_id)}
+                                                    {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
 
                                     <Controller
                                         name='state_id'
@@ -751,213 +745,213 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             />
                                         )}
                                     />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
 
-                        <Controller
-                            name='city_id'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field }) => (
-                                <CustomAutocomplete
-                                    fullWidth
-                                    options={cities}
-                                    loading={!cities.length}
-                                    value={field.value}
-                                    onChange={(event, newValue) => {
-                                        field.onChange(newValue)
-                                    }}
-                                    getOptionLabel={(option: any) => option.name || ''}
-                                    renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.city_id)}
-                                        {...(errors.city_id && { helperText: 'This field is required' })} label='Select Cities' />}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                   
+                                    <Controller
+                                        name='city_id'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <CustomAutocomplete
+                                                fullWidth
+                                                options={cities}
+                                                loading={!cities.length}
+                                                value={field.value}
+                                                onChange={(event, newValue) => {
+                                                    field.onChange(newValue)
+                                                }}
+                                                getOptionLabel={(option: any) => option.name || ''}
+                                                renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.city_id)}
+                                                    {...(errors.city_id && { helperText: 'This field is required' })} label='Select Cities' />}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
 
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='type'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    select
-                                    value={value}
-                                    label='Select Type'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.type)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.type && { helperText: 'This field is required' })}
-                                >
-                                     <MenuItem value='college'>college</MenuItem>
+
+
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='type'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                select
+                                                value={value}
+                                                label='Select Type'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.type)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.type && { helperText: 'This field is required' })}
+                                            >
+                                                <MenuItem value='college'>college</MenuItem>
                                                 <MenuItem value='university'>university</MenuItem>
                                                 <MenuItem value='board'>board</MenuItem>
-                                              
-                                                </CustomTextField>
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='home_view_status'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    select
-                                    value={value}
-                                    label='Select home_view_status'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.type)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.type && { helperText: 'This field is required' })}
-                                >
-                                     <MenuItem value='top_college'>top_college</MenuItem>
+
+                                            </CustomTextField>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='home_view_status'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                select
+                                                value={value}
+                                                label='Select home_view_status'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.type)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.type && { helperText: 'This field is required' })}
+                                            >
+                                                <MenuItem value='top_college'>top_college</MenuItem>
                                                 <MenuItem value='default'>default</MenuItem>
                                                 {/* <MenuItem value='board'>board</MenuItem> */}
-                                              
-                                                </CustomTextField>
-                            )}
-                        />
-                    </Grid>
+
+                                            </CustomTextField>
+                                        )}
+                                    />
+                                </Grid>
 
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='college_type'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    select
-                                    value={value}
-                                    label='Select college_type'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.college_type)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.college_type && { helperText: 'This field is required' })}
-                                >
-                                     <MenuItem value='Public'>Public</MenuItem>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='college_type'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                select
+                                                value={value}
+                                                label='Select college_type'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.college_type)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.college_type && { helperText: 'This field is required' })}
+                                            >
+                                                <MenuItem value='Public'>Public</MenuItem>
                                                 <MenuItem value='Deemed'>Deemed</MenuItem>
                                                 <MenuItem value='Private'>Private</MenuItem>
                                                 <MenuItem value='Government'>Government</MenuItem>
-                                              
-                                                </CustomTextField>
-                            )}
-                        />
-                    </Grid>
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='name'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='University/College/Board Name'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.name)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.name && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='slug'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Slug'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.slug)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.slug && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                                            </CustomTextField>
+                                        )}
+                                    />
+                                </Grid>
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='meta_keyword'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='keywords'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_keyword)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_keyword && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='name'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='University/College/Board Name'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.name)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.name && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='slug'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Slug'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.slug)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.slug && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='meta_keyword'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='keywords'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.meta_keyword)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_keyword && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
 
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='address'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Address'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.address)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.address && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='address'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Address'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.address)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.address && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
 
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='established'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Established'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.established)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.established && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='established'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Established'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.established)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.established && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
 
-                    <Grid item xs={12} sm={4}>
+                                <Grid item xs={12} sm={4}>
                                     <Controller
                                         name="amenities"
                                         control={control}
@@ -989,9 +983,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             );
                                         }}
                                     />
-                    </Grid>
+                                </Grid>
 
-                    <Grid item xs={12} sm={4}>
+                                <Grid item xs={12} sm={4}>
                                     <Controller
                                         name="streams"
                                         control={control}
@@ -1023,8 +1017,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             );
                                         }}
                                     />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
                                     <Controller
                                         name="recoginations"
                                         control={control}
@@ -1056,89 +1050,89 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             );
                                         }}
                                     />
-                    </Grid>
-
-                    
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='meta_title'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Meta Title'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_title)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_title && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='meta_description'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Meta Description'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.meta_description)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.meta_description && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='map'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Map'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.map)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.map && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='video_url'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Video'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.video_url)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.video_url && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                                </Grid>
 
 
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='meta_title'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Meta Title'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.meta_title)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_title && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='meta_description'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Meta Description'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.meta_description)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_description && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='map'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Map'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.map)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.map && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='video_url'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Video'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.video_url)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.video_url && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
 
-                    {/* <Grid item xs={12} sm={4}>
+
+
+                                {/* <Grid item xs={12} sm={4}>
                         <Controller
                             name='avg_rating'
                             control={control}
@@ -1157,256 +1151,257 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                             )}
                         />
                     </Grid> */}
-                    <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>info</Typography>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>info</Typography>
 
-                        <Controller
-                            name='info'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value } }) => (
-                                <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("info", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    <Controller
+                                        name='info'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("info", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                 //  onChange={(value)=>  setValue("bottom_description", value)} />
                                 onChange={(value)=>console.log(value)} /> */}
-                                </>
-                            )}
-                        />
-                    </Grid>
-
-
-                    <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>Admissions</Typography>
-
-                        <Controller
-                            name='admissions'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value } }) => (
-                                <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("admissions", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                </>
-                            )}
-                        />
-                    </Grid>
-
-
-                    <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>Placements</Typography>
-
-                        <Controller
-                            name='placements'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value } }) => (
-                                <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("placements", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                </>
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>Rankings</Typography>
-
-                        <Controller
-                            name='rankings'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value } }) => (
-                                <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("rankings", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                </>
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        
-                    <Typography style={{ marginBottom: '10px' }}>Scholarship</Typography>
-                        <Controller
-                            name='scholarship'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value } }) => (
-                                <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("scholarship", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                </>
-                            )}
-                        />
-                    </Grid>
-
-
-                    <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>Hostel</Typography>
-
-                        <Controller
-                            name='hostel'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, } }) => (
-                                <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("hostel", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                </>
-                            )}
-                        />
-                    </Grid>
-
-
-                 
-
-                    <Grid item xs={12} sm={3}>
-                        <FileUpload
-                            isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.icon ? olddata.icon : ""}
-                            onFileChange={handleFileChangephoto}
-                            maxFiles={1}
-                            maxSize={2000000}
-                            fileNames={fileNamesphoto}
-                            label=" Upload Icon"
-                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                            rejectionMessage='Try another file for upload.'
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={3}>
-                        <FileUpload
-                            isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.logo ? olddata.logo : ""}
-                            onFileChange={handleFileChangelogo}
-                            maxFiles={1}
-                            maxSize={2000000}
-                            fileNames={fileNameslogo}
-                            label=" Upload Logo"
-                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                            rejectionMessage='Try another file for upload.'
-                        />
-                    </Grid>
-
-
-                    <Grid item xs={12} sm={3}>
-                        <FileUpload
-                            isAddMode={isAddMode}
-                            olddata={!isAddMode && olddata.banner_image ? olddata.banner_image : ""}
-                            onFileChange={handleFileChangebanner}
-                            maxFiles={1}
-                            maxSize={2000000}
-                            fileNames={fileNamesbanner}
-                            label="Upload banner_image"
-                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                            rejectionMessage='Try another file for upload.'
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={3} style={{ marginTop: '15px' }}>
-                                <Controller
-                                    name='is_associated'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <FormControlLabel
-                                            label='is_associated'
-                                            control={
-                                                <Checkbox
-                                                    checked={value}
-                                                    onChange={(e) => onChange(e.target.checked ? 1 : 0)}
-                                                    
-                                                />
-                                            }
-                                        />
-                                    )}
-                                />
-                            </Grid>
-
-
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='listing_order'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    type='number'
-                                    label='Listing Order'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.listing_order)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.listing_order && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
-                                <Controller
-                                    name='status'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
-                                            <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
-                                            <FormControlLabel value='Published' control={<Radio />} label='Published' />
-                                        </RadioGroup>
-                                    )}
-                                />
-                              
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <DialogActions
-                            sx={{
-                                justifyContent: 'center',
-                                px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
-                                pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
-                            }}
-                        >
-
-                            <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                                Submit
-                                {loading ? (
-                                    <CircularProgress
-                                        sx={{
-                                            color: 'common.white',
-                                            width: '20px !important',
-                                            height: '20px !important',
-                                            mr: theme => theme.spacing(2)
-                                        }}
+                                            </>
+                                        )}
                                     />
-                                ) : null}
-                            </Button>
+                                </Grid>
 
-                        </DialogActions>
-                    </Grid>
-                </Grid>
-                    </form >
+
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Admissions</Typography>
+
+                                    <Controller
+                                        name='admissions'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("admissions", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Placements</Typography>
+
+                                    <Controller
+                                        name='placements'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("placements", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Rankings</Typography>
+
+                                    <Controller
+                                        name='rankings'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("rankings", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+
+                                    <Typography style={{ marginBottom: '10px' }}>Scholarship</Typography>
+                                    <Controller
+                                        name='scholarship'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("scholarship", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Hostel</Typography>
+
+                                    <Controller
+                                        name='hostel'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("hostel", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+
+
+
+
+                                <Grid item xs={12} sm={3}>
+                                    <FileUpload
+                                        isAddMode={isAddMode}
+                                        olddata={!isAddMode && olddata.icon ? olddata.icon : ""}
+                                        onFileChange={handleFileChangephoto}
+                                        maxFiles={1}
+                                        maxSize={2000000}
+                                        fileNames={fileNamesphoto}
+                                        label=" Upload Icon"
+                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                        rejectionMessage='Try another file for upload.'
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={3}>
+                                    <FileUpload
+                                        isAddMode={isAddMode}
+                                        olddata={!isAddMode && olddata.logo ? olddata.logo : ""}
+                                        onFileChange={handleFileChangelogo}
+                                        maxFiles={1}
+                                        maxSize={2000000}
+                                        fileNames={fileNameslogo}
+                                        label=" Upload Logo"
+                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                        rejectionMessage='Try another file for upload.'
+                                    />
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={3}>
+                                    <FileUpload
+                                        isAddMode={isAddMode}
+                                        olddata={!isAddMode && olddata.banner_image ? olddata.banner_image : ""}
+                                        onFileChange={handleFileChangebanner}
+                                        maxFiles={1}
+                                        maxSize={2000000}
+                                        fileNames={fileNamesbanner}
+                                        label="Upload banner_image"
+                                        helpertext="Estimated Size: 640*480px"
+                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                        rejectionMessage='Try another file for upload.'
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={3} style={{ marginTop: '15px' }}>
+                                    <Controller
+                                        name='is_associated'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <FormControlLabel
+                                                label='is_associated'
+                                                control={
+                                                    <Checkbox
+                                                        checked={value}
+                                                        onChange={(e) => onChange(e.target.checked ? 1 : 0)}
+
+                                                    />
+                                                }
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='listing_order'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                type='number'
+                                                label='Listing Order'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.listing_order)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.listing_order && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
+                                    <Controller
+                                        name='status'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                                <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                                <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                            </RadioGroup>
+                                        )}
+                                    />
+
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    {error ? <Alert severity='error'>{error}</Alert> : null}
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <DialogActions
+                                        sx={{
+                                            justifyContent: 'center',
+                                            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+                                            pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+                                        }}
+                                    >
+
+                                        <Button variant='contained' type='submit' sx={{ mr: 1 }} >
+                                            Submit
+                                            {loading ? (
+                                                <CircularProgress
+                                                    sx={{
+                                                        color: 'common.white',
+                                                        width: '20px !important',
+                                                        height: '20px !important',
+                                                        mr: theme => theme.spacing(2)
+                                                    }}
+                                                />
+                                            ) : null}
+                                        </Button>
+
+                                    </DialogActions>
+                                </Grid>
+                            </Grid>
+                        </form >
                     </TabPanel>
 
                     <TabPanel sx={{ p: 0 }} value='account-details'>
@@ -1442,7 +1437,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12} sm={11}>
-                                                <Typography>Answers</Typography>
+                                                    <Typography>Answers</Typography>
                                                     <Controller
 
                                                         //@ts-ignore
@@ -1454,13 +1449,13 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                                         defaultValue={val.answers}
                                                         render={({ field: { value, onChange } }) => (
                                                             <>
-                                                        <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                        onChange={(e) => {
-                                                        onChange(e);
-                                                        setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
-                                                         }} />
-                                          
-                                                        </>
+                                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                                    onChange={(e) => {
+                                                                        onChange(e);
+                                                                        setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                                    }} />
+
+                                                            </>
                                                         )}
                                                     />
                                                 </Grid>
@@ -1554,9 +1549,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                     </TabPanel>
 
                     <TabPanel sx={{ p: 0 }} value='social-links'>
-                    {isAddMode ? <> <h6>Please add College First.</h6> </> : <>
+                        {isAddMode ? <> <h6>Please add College First.</h6> </> : <>
                             <div className="App">
-                                
+
                                 <ImageUploading
                                     multiple
                                     value={images}
@@ -1566,7 +1561,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                     {({
                                         imageList,
                                         onImageUpload,
-                                       
+
                                         onImageRemove,
                                         isDragging,
                                         dragProps
@@ -1587,23 +1582,23 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                                 <div className="row">
                                                     {imageList.map((image, index) => (
 
-<>
-                                                        <div className="col-sm-6 col-md-4 col-lg-3">
-                                                            <div className="image-item ">
-                                                              
-                                                                <img
-                                                                    src={image.dataURL}
-                                                                    style={{ width: '100%', height: '100px', maxWidth: '200px', maxHeight: '500px' }}
-                                                                    className="rounded"
-                                                                    alt=""
-                                                                />
+                                                        <>
+                                                            <div className="col-sm-6 col-md-4 col-lg-3">
+                                                                <div className="image-item ">
 
-                                                                <div className="image-item__btn-wrapper d-flex justify-content-between align-items-center mt-2">
-                                                                    {/* <button className="btn btn-primary btn-block" onClick={() => onImageUpdate(index)}>Update</button> */}
-                                                                    <button className="btn btn-danger btn-block" onClick={() => onImageRemove(index)}><FaTrash /></button>
+                                                                    <img
+                                                                        src={image.dataURL}
+                                                                        style={{ width: '100%', height: '100px', maxWidth: '200px', maxHeight: '500px' }}
+                                                                        className="rounded"
+                                                                        alt=""
+                                                                    />
+
+                                                                    <div className="image-item__btn-wrapper d-flex justify-content-between align-items-center mt-2">
+                                                                        {/* <button className="btn btn-primary btn-block" onClick={() => onImageUpdate(index)}>Update</button> */}
+                                                                        <button className="btn btn-danger btn-block" onClick={() => onImageRemove(index)}><FaTrash /></button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
                                                         </>
 

@@ -5,16 +5,22 @@ const path = require('path')
 
 // Remove this if you're not using Fullcalendar features
 
+
 module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
+  images: {
+    domains: ['localhost','preprod.keralastudy.com'],
+  },
   webpack: config => {
     config.resolve.alias = {
       ...config.resolve.alias,
       apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
     }
+
     return config
   }
+  
   // async redirects() {
   //   console.log('redirect next')
   //   let array =  [

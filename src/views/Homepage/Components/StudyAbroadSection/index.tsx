@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'
 import axios1 from 'src/configs/axios';
-
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 function StudyAbroadSection() {
 
@@ -190,20 +190,21 @@ function StudyAbroadSection() {
   // ];
 
   const [activeCountry, setActiveCountry] = useState<number | null>(null);
-  
+
   // const [StudyAbroadItems] = useState(usaItems);
 
   interface Country {
     id: number;
     name: string;
   }
-  
+
   const [countries, setCountries] = useState<Country[]>([]);
 
 
   const getcountries = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10000 };
+      // const roleparams = { page: 1, size: 10,};
+      const roleparams = { page: 1, size: 10, india: false };
       const response = await axios1.get('api/website/country/get', { params: roleparams });
       const countriesData = response.data.data;
       setCountries(countriesData);
@@ -218,10 +219,10 @@ function StudyAbroadSection() {
   }, []);
 
   useEffect(() => {
-   
+
     getcountries();
   }, [getcountries]);
-  
+
 
   // Function to handle navbar item click
   const handleNavItemClick = (countryId: number) => {
@@ -237,17 +238,32 @@ function StudyAbroadSection() {
 
 
   // Function to fetch card data from the backend API
+  // const fetchCardData = useCallback(async () => {
+  //   try {
+  //     const response = await axios1.get('api/website/colleges/get');
+  //     const responseData = response.data.data;
+  //     setCardData(responseData);
+  //   } catch (error) {
+  //     console.error('Error fetching card data:', error);
+  //   }
+  // }, []);
+
+  // useEffect to fetch card data when component mounts
+
+
+
   const fetchCardData = useCallback(async () => {
     try {
-      const response = await axios1.get('api/website/abroadpages/get');
+      // Construct params object with country_id if activeCountry is not null
+      const params = activeCountry ? { country_id: activeCountry } : {};
+      const response = await axios1.get('api/website/colleges/get', { params });
       const responseData = response.data.data;
       setCardData(responseData);
     } catch (error) {
       console.error('Error fetching card data:', error);
     }
-  }, []);
+  }, [activeCountry]);
 
-  // useEffect to fetch card data when component mounts
   useEffect(() => {
     fetchCardData();
   }, [fetchCardData]);
@@ -255,16 +271,17 @@ function StudyAbroadSection() {
 
   const renderCards = () => {
     return cardData.map((card) => (
-      <div key={card.id} className="card StudyAbroadCard mb-5 h-100">
-        <img src={card.imageUrl} width={300} height={200} className="card-img-top" alt={card.title} />
+      <div key={card.id} className="card studyAbroadCard mb-5 h-100">
+        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
         <div className="card-body">
-          <h5 className="card-title text-blue" style={{fontSize : '18px'}}>{card.name}</h5>
-          <p className="card-text">
-            <img width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
-            {card.location}
+          <h5 className="card-title text-blue text-truncate" style={{ fontSize: '18px' }}>{card.name}</h5>
+          <p className="card-text text-truncate">
+            <img width={14} height={14} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
+            {card.address}
           </p>
           <div className="d-flex justify-content-center">
-            <a href="#" className="btn">Apply Now</a>
+            {/* <a href="#" className="btn">Apply Now</a> */}
+            <GlobalEnquiryForm className="active btn" />
           </div>
         </div>
       </div>

@@ -10,9 +10,9 @@ function ExpertSection() {
 
   return (
     <>
-      <section className="ExpertCon bg-white">
+      <section className="ExpertCon bg-skyBlue">
         <div className="container py-5">
-          <h3 className="fw-bold text-center">Get In Touch With Our Expert Counsellor</h3>
+          <h2 className="fw-bold text-blue text-center">Get In Touch With Our Expert Counsellor</h2>
           <div className="pt-3 form container">
             <div className="row">
               <div className="col-md-6" id="animation16">
