@@ -133,7 +133,7 @@ function CollegeFilterSection() {
 
     }, []);
 
-   
+
     const options: OptionGroup[] = [
         {
             id: 'state',
@@ -219,7 +219,7 @@ function CollegeFilterSection() {
         if (collegeFiltersSection) {
             collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
         }
-    
+
         setSelectedCheckboxes((prevSelected) => {
             const updatedSelected = { ...prevSelected };
             if (isChecked) {
@@ -227,14 +227,14 @@ function CollegeFilterSection() {
             } else {
                 delete updatedSelected[groupId]; // Remove the selected state(s)
             }
-    
+
             // Make API call here with selected state ID
             const selectedStateId = parseInt(value); // Assuming the value is the state ID
             getcollegedata(selectedStateId); // Pass the selected state ID to the API call function
             return updatedSelected;
         });
     };
-    
+
 
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
@@ -262,22 +262,22 @@ function CollegeFilterSection() {
                                             <h6 className='fw-bold text-black my-2'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state.name}`}</p>
+                                            <p className="mb-2 text-truncate"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state.name}`}</p>
                                             <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                         </div>
                                     </div>
                                     <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
-                                    {rating && (
-                                        <button className='btn ratingBtn d-flex justify-content-center'>
-                                            <Image 
-                                                src='/images/icons/star-24.png' 
-                                                width={20} 
-                                                height={20} 
-                                                alt='star-icon' 
-                                            />
-                                            <span className='align-content-center'>{rating}</span>
-                                        </button>
-                                    )}
+                                        {rating && (
+                                            <button className='btn ratingBtn d-flex justify-content-center'>
+                                                <Image
+                                                    src='/images/icons/star-24.png'
+                                                    width={20}
+                                                    height={20}
+                                                    alt='star-icon'
+                                                />
+                                                <span className='align-content-center'>{rating}</span>
+                                            </button>
+                                        )}
                                     </div>
                                     <div className="col-md-3 col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid">
                                         <a className="activeBtn btn mb-3 d-flex justify-content-center"
