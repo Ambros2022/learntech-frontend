@@ -1,62 +1,57 @@
-import Image from 'next/image'
-import React, { useCallback, useEffect, useState } from 'react'
+import Image from 'next/image';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import axios from 'src/configs/axios'
-import Autocomplete from 'src/@core/components/mui/autocomplete';
+import axios from 'src/configs/axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
-import { toast } from 'react-hot-toast'
+import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import axios1 from 'axios'
+import axios1 from 'axios';
 import ClearIcon from '@mui/icons-material/Clear';
-import Link from 'next/link'
+import Link from 'next/link';
+import Skeleton from '@mui/material/Skeleton';
+import dynamic from 'next/dynamic';
+// import Skeleton from 'react-loading-skeleton';
+// import 'react-loading-skeleton/dist/skeleton.css';
+// const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
 
+import Autocomplete from 'src/@core/components/mui/autocomplete';
 let cancelToken: any;
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
+  contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+  course: Yup.string().required('Course is required'),
+  location: Yup.string().required('Location is required'),
+});
+
 function BannerSection() {
   const router = useRouter();
   const [banners, setBanners] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
-
-
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
-  const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-    contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-    course: Yup.string().required('Course is required'),
-    location: Yup.string().required('Location is required'),
-  });
-
-
-  //get all banners
   const getbanner = useCallback(async () => {
     try {
-      const roleparams: any = {};
-      roleparams['page'] = 1;
-      roleparams['size'] = 10000;
+      const roleparams: any = { page: 1, size: 10000 };
       const response = await axios.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
-
       setBanners(response.data.data);
     } catch (err) {
       console.error(err);
+    } finally {
+      setImagesLoaded(true);
     }
   }, []);
 
-  // console.log("banners", banners)
-
   useEffect(() => {
-
     getbanner();
-
   }, [getbanner]);
-
-
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -73,22 +68,17 @@ function BannerSection() {
         toast.dismiss();
         toast.success('Thank you. We will get back to you.');
         resetForm();
-
         router.push('/thank-you');
       }
-
     } catch (error) {
       toast.error('try again later!');
       console.error('Error submitting form:', error);
     }
   };
 
-
-
   const handleSearch = async (value) => {
     if (value.length < 2) {
       setSearchResults([]);
-
       return;
     }
     try {
@@ -97,10 +87,7 @@ function BannerSection() {
         cancelToken.cancel("Operation canceled due to new request.");
       }
       cancelToken = axios1.CancelToken.source();
-
       const response = await axios.get('api/website/home/searchbar', { cancelToken: cancelToken.token, params: { searchfrom: "name", searchtext: value } });
-
-
       const suggestions = response.data.data.flatMap((item: { data: any[]; type: any; }) => item.data.map(entry => ({
         name: entry.name,
         slug: entry.slug,
@@ -120,8 +107,6 @@ function BannerSection() {
     handleSearch(value);
   };
 
-
-
   return (
     <section className="bannerCon bg-formClr" id="animation1">
       <div id="carouselExampleIndicators" className="carousel slide">
@@ -140,14 +125,17 @@ function BannerSection() {
         <div className="carousel-inner">
           {banners.map((banner, index) => (
             <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-              <Image
-                fill
-                src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-
-                priority={true}
-                className="w-100"
-                alt={`Banner ${index}`}
-              />
+              {imagesLoaded ? (
+                <Image
+                  fill
+                  src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                  priority={true}
+                  className="w-100"
+                  alt={`Banner ${index}`}
+                />
+              ) : (
+                <Skeleton height={500} />
+              )}
             </div>
           ))}
         </div>
@@ -229,55 +217,7 @@ function BannerSection() {
                           />
                         )}
                       />
-
-                      {/* <Autocomplete
-                        open={open}
-                        onClose={() => setOpen(false)}
-                        onInputChange={handleInputChange}
-                        options={searchResults}
-                        getOptionLabel={(option) => option.name}
-                        renderOption={(props, option) => (
-                          
-                          <li {...props}>
-                            {option.type === "collegedata" ? (
-                              <a href={`/college/${option.id}/${option.slug}`} style={{ color: "#000" }}>
-                                {option.name}
-                              </a>
-                            ) : (
-                              <a href={`/school/${option.id}/${option.slug}`} style={{ color: "#000" }}>
-                                {option.name}
-                              </a>
-                            )}
-                          </li>
-                          
-                        )}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            placeholder="Search"
-                            className="form-control"
-                            InputProps={{
-                              ...params.InputProps,
-                              sx: {
-                                '& .MuiInputBase-input::placeholder': {
-                                  color: 'black',
-                                },
-                              },
-                              endAdornment: (
-                                <React.Fragment>
-                                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                  {params.InputProps.endAdornment}
-                                </React.Fragment>
-                              ),
-                            }}
-                          />
-                        )}
-                      /> */}
-
                     </div>
-                    {/* <div className="col-5 text-center col-md-4 col-lg-3 p-0">
-                      <button className="btn searchBtn" onClick={() => handleSearch(inputValue)}>Search</button>
-                    </div> */}
                   </div>
                 </div>
               </div>
@@ -327,10 +267,10 @@ function BannerSection() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
-  )
+  );
 }
-export default BannerSection
+
+export default BannerSection;
