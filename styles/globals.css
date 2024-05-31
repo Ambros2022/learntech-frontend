@@ -84,7 +84,7 @@
     background-color: #274896 !important;
     color: white !important;
     padding: 15px !important;
-    font-size: 12px !important;
+    font-size: 17px !important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 
@@ -220,7 +220,7 @@
   .searchSec {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: saturate(180%) blur(8px) !important;
-    color: #242424 !important;
+    color: white !important;
     border: 1px solid white !important;
     font-size: 16px !important;
     padding: 20px !important;
@@ -618,12 +618,10 @@
     border: 1px solid #254692 !important;
   }
 
-  .featuredClgCard .active,
-  .featuredClgCard .active :focus,
-  .featuredClgCard .active :hover {
+  .applyNowButton {
     background-color: #254692 !important;
     color: white !important;
-    /* box-shadow: #254692 0px 0px 10px !important; */
+    box-shadow: rgba(21, 41, 88, 0.493) 0px 0px 15px !important;
   }
 
   .featuredClgCard {
@@ -782,11 +780,11 @@
     }
   }
 
-  @media (max-width: 1139px) {
+  /* @media (max-width: 1139px) {
     .counsellingBtn {
       font-size: 10px !important;
     }
-  }
+  } */
 
   @media (max-width: 1024px) {
     .top-nav {
@@ -2813,6 +2811,28 @@
     stroke: white !important;
   }
 
+  .examCardCarousel .carousel-button-group {
+    position: absolute !important;
+    top: 20px !important;
+    width: 100%;
+  }
+
+  .examCardCarousel .fi-left svg {
+    stroke: white !important;
+  }
+
+  .examCardCarousel .fi-right svg {
+    stroke: white !important;
+  }
+
+  .examCardCarousel .fi-left {
+    stroke: white !important;
+  }
+
+  .examCardCarousel .fi-right {
+    stroke: white !important;
+  }
+
   .alertExamBtn {
     background-color: white !important;
     color: #254692 !important;
@@ -3055,6 +3075,20 @@
     min-height: 60px !important;
   }
 
+  .innerNewsCard .card-img-top {
+    height: 100px !important;
+    object-fit: cover !important;
+  }
+
+  .innerNewsCard .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 60px !important;
+  }
+
   .examsCardRow .card-img-top {
     height: 150px !important;
     object-fit: cover !important;
@@ -3085,6 +3119,11 @@
     box-shadow: none !important;
   }
 
+  .innerNewsCard {
+    min-height: 550px;
+    max-height: 550px;
+  }
+
   @media (min-width:992px) and (max-width:1024px) {
     .examsCardRow .card-img-top {
       height: 100px !important;
@@ -3093,8 +3132,18 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .innerNewsCard {
+      min-height: 1440px;
+      max-height: 1440px;
+    }
+
     .examNewsSec {
       min-height: 1125px !important;
+    }
+
+    .innerNewsCard .card-img-top {
+      height: 200px !important;
+      object-fit: cover !important;
     }
   }
 
@@ -3102,5 +3151,252 @@
     .examsCardRow .card-img-top {
       height: 200px !important;
       object-fit: cover !important;
+    }
+  }
+
+
+  /* News Banner Section */
+
+  .newsBannerSec {
+    height: 400px !important;
+  }
+
+  .newsBannerSec img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .newsBannerSec input {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    padding: 20px 10px !important;
+    margin: 10px 0px !important;
+    color: white !important;
+    font-size: 20px !important;
+  }
+
+  .newsBannerSec input::placeholder {
+    color: white !important;
+    font-size: 20px !important;
+  }
+
+  .topnewsSec .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  .newsCardCarousel .carousel-button-group {
+    position: absolute;
+    top: 100px !important;
+    width: 100%;
+    z-index: -1px !important;
+  }
+
+  .newsCardCarousel .fi-left svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    border-radius: 5px !important;
+  }
+
+  .newsCardCarousel .fi-right svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    border-radius: 5px !important;
+  }
+
+  .newsTabs .nav-link {
+    border: 1px solid rgb(208, 208, 208) !important;
+    color: #254692 !important;
+  }
+
+  .newsTabsClr button {
+    border: 1px solid rgba(212, 218, 234, 1) !important;
+    font-size: 15px !important;
+    max-width: 200px !important;
+    min-width: 200px !important;
+    padding: 15px 12px !important;
+    color: #254692 !important;
+  }
+
+  .newsTabsClr button.active {
+    font-size: 14px !important;
+    background-color: #254692 !important;
+    font-weight: bold !important;
+    color: white !important;
+  }
+
+
+  .newsCardText .card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  .browseNews .active>.page-link,
+  .page-link.active {
+    z-index: 3;
+    color: white !important;
+    background-color: #254692 !important;
+    border-color: #254692 !important;
+  }
+
+
+  .browseNews .page-link {
+    color: black !important;
+    background-color: transparent !important;
+    border-color: rgba(39, 72, 150, 0.2) !important;
+    box-shadow: none !important;
+    border-radius: 5px !important;
+  }
+
+  .browseNews .page-link:focus {
+    box-shadow: none !important;
+  }
+
+  .blogCardspage .active>.page-link,
+  .page-link.active {
+    z-index: 3;
+    color: white !important;
+    background-color: #254692 !important;
+    border-color: #254692 !important;
+  }
+
+
+  .blogCardspage .page-link {
+    color: black !important;
+    background-color: transparent !important;
+    border-color: rgba(39, 72, 150, 0.2) !important;
+    box-shadow: none !important;
+    border-radius: 5px !important;
+  }
+
+  .blogCardspage .page-link:focus {
+    box-shadow: none !important;
+  }
+
+  .get-news img {
+    width: auto;
+    height: auto;
+  }
+
+  .flwBtn {
+    background-color: #254692 !important;
+    color: white !important;
+  }
+
+  .askBtn {
+    background-color: transparent !important;
+    color: #254692 !important;
+    border: 1px solid #254692 !important;
+  }
+
+  .newsCardText>img {
+    object-fit: contain !important;
+    height: 275px !important;
+  }
+
+  .innerExam .card {
+    background-color: transparent !important;
+    border: none !important;
+  }
+
+  .examLatest {
+    min-height: 480px;
+    max-height: 480px;
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .examLatest {
+      min-height: 630px;
+      max-height: 630px;
+    }
+
+    .innerExam h3 {
+      font-size: 20px !important;
+    }
+
+    .blogSec .card-img-top {
+      height: 150px !important;
+      object-fit: cover !important;
+    }
+
+    .examNewsSec .card-img-top {
+      height: 200px !important;
+      object-fit: cover !important;
+    }
+  }
+
+  @media (min-width:992px) and (max-width:1024px) {
+    .newsCardText .card-img-top {
+      height: 143px !important;
+    }
+  }
+
+  @media (min-width:768px) and (max-width:991px) {
+    .innerNewsSec h1 {
+      font-size: 30px !important;
+    }
+
+    .innerNewsSec .applyNowButton {
+      font-size: 14px !important;
+    }
+
+    .cardInnerExam h3 {
+      font-size: 15px !important;
+    }
+
+    .cardInnerExam h5 {
+      font-size: 11px !important;
+    }
+
+    .newsCardText .card-img-top {
+      height: 123px !important;
+    }
+  }
+
+  @media (min-width:425px) and (max-width:767px) {
+    .newsCardText .card-img-top {
+      height: 170px !important;
+    }
+  }
+
+  @media (min-width:375px) and (max-width:424px) {
+    .newsCardText .card-img-top {
+      height: 150px !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:374px) {
+    .newsCardText .card-img-top {
+      height: 125px !important;
+    }
+  }
+
+  @media (max-width:320px) {
+    .innerExam h3 {
+      font-size: 18px !important;
+    }
+
+    .newsBannerSec h1 {
+      font-size: 25px !important;
+    }
+
+    .newsBannerSec input {
+      font-size: 18px !important;
+    }
+
+    .newsBannerSec input::placeholder {
+      font-size: 18px !important;
+    }
+
+    .examCardCarousel h6 {
+      font-size: 13px !important;
     }
   }

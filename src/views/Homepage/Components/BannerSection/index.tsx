@@ -155,9 +155,9 @@ function BannerSection() {
             <div className="row">
               <div className="col-md-7 mb-5 d-flex" id="animation2">
                 <div className="searchSec align-content-center">
-                  <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
+                  <h1 className='mb-3 text-black'>Find Colleges, Courses & Exams that are best for you</h1>
                   <div className="row">
-                    <div className="col-12 position-relative">
+                    <div className="col-md-8 position-relative">
                       <Autocomplete
                         open={open}
                         onClose={() => setOpen(false)}
@@ -221,7 +221,7 @@ function BannerSection() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 mb-5 px-md-3 px-lg-5" id="animation3">
+              <div className="col-md-5 col-lg-5 ps-lg-5 col-xl-4 ms-auto mb-5" id="animation3">
                 <div className="searchForm">
                   <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
                   <Formik
