@@ -1867,7 +1867,8 @@
   }
 
   .coursesBtn .btn {
-    font-size: 12px !important;
+    font-size: 14px !important;
+    font-weight: 500;
   }
 
   .viewAllBtn {
@@ -1875,11 +1876,12 @@
     border: 1px solid #254692 !important;
     padding: 10px 15px !important;
     background-color: white !important;
-    font-size: 10px !important;
+    font-size: 14px !important;
+    font-weight: 600;
   }
 
   .min-vh-card {
-    min-height: 75px !important;
+    min-height: 33px !important;
   }
 
   .CourseNavigationLink {
