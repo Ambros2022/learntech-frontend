@@ -140,19 +140,19 @@ const Header = () => {
       <header className="bg-header py-2">
         <div className="container-lg">
           <div className="row">
-            <div className="col-md-4 d-flex align-items-center socialIcon">
+            <div className="col-md-3 d-flex align-items-center socialIcon">
               <a href="https://www.facebook.com/learntechedu" target="_blank"><Image className="mx-2" width={26} height={22} src='/images/icons/Facebook.svg' alt="facebook-img" /></a>
               <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target='_blank'><Image className="me-2" width={26} height={22} alt='linked-in-img' src='/images/icons/linked-in.svg' /></a>
               <a href="https://twitter.com/learntechww" target='_blank'><Image className="me-2" src='/images/icons/twitter.svg' width={26} height={22} alt="twitter-img" /></a>
               <a href="https://www.instagram.com/learntechedus" target='_blank'><Image className="me-2" src='/images/icons/instagram.svg' width={26} height={22} alt='instagram-img' /></a>
               <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target='_blank'><Image className="me-2" src='/images/icons/youtube.svg' width={26} height={22} alt="youtube-img" /></a>
             </div>
-            <div className="col-md-8 d-flex align-items-center justify-content-end socialText">
+            <div className="col-md-9 d-flex align-items-center justify-content-end socialText">
               <div>
                 <span className='telHover'><Image className="m-0" src="/images/icons/Phone-blue.svg" width={26} height={22} alt="phone-icon" />
                   <a href="tel:18001208969" target="_blank" className="mx-2 " style={{ color: '#274896' }}>1800 120 8969</a></span>
                 <span className="mailHover"><Image className="ms-2" src="/images/icons/email-icon.svg" width={26} height={22} alt="email-icon" />
-                  <a href="mailto:info@learntech.com" className="mx-2" style={{ color: '#274896' }}>info@learntech.com</a></span>
+                  <a href="mailto:info@learntechww.com" className="mx-2" style={{ color: '#274896' }}>info@learntechww.com</a></span>
                 <Link href='/write-review' className="ms-2 btn reviewBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Write a Review</Link>
               </div>
             </div>
@@ -161,7 +161,7 @@ const Header = () => {
       </header >
 
       <nav className="navbar navbar-expand-lg bg-white">
-        <div className="container-lg">
+        <div className="container-xl">
           <Link className="navbar-brand" href="/"><Image src="/images/icons/learntech-logo.png" width={160} height={50} alt="learntech-logo" /></Link>
           <button className="navbar-toggler" type="button" onClick={toggle} data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -328,7 +328,7 @@ const Header = () => {
             <div className='d-lg-flex d-none justify-content-xl-end ms-auto'>
               {/* <Link className='mx-2  mt-1 socialIcon' href="#"> */}
 
-              <Image src="/images/icons/user-icon.svg" className='mx-2  mt-1 socialIcon' width={25} height={24} alt="user-icon" />
+              <Image src="/images/icons/user-icon.svg" className='mx-2 mt-xl-2 mt-1 socialIcon' width={30} height={30} alt="user-icon" />
               {/* </Link> */}
 
               {/* <button className=" btn counsellingBtn p-2" type="submit">Get Counselling</button> */}
