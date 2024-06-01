@@ -3,13 +3,13 @@ import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 
 interface PhoneInputProps {
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: any;
   value: string;
   ariaDescribedby: string;
   id: string;
 }
 
-const PhoneInput: React.FC<PhoneInputProps> = ({ onChange, value, ariaDescribedby, id }) => {
+const PhoneInput: React.FC<any> = ({ onChange, value, ariaDescribedby, id }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const iti = useRef<any>(null); // 'any' used here as the type for intlTelInput instance
 
