@@ -3398,3 +3398,8 @@
       font-size: 13px !important;
     }
   }
+
+  .react-tel-input .form-control {
+    width: 100% !important;
+    font-size: 1rem !important;
+  }
