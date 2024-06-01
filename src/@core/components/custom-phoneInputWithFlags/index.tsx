@@ -1,30 +1,59 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, ChangeEvent } from 'react';
+import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
 
-const PhoneInput = ({ onChange, ariaDescribedby, id }) => {
-  const inputRef = useRef(null);
+interface PhoneInputProps {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  ariaDescribedby: string;
+  id: string;
+}
+
+const PhoneInput: React.FC<PhoneInputProps> = ({ onChange, value, ariaDescribedby, id }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const iti = useRef<any>(null); // 'any' used here as the type for intlTelInput instance
 
   useEffect(() => {
     const loadUtils = async () => {
       await import('intl-tel-input/build/js/utils');
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const intlTelInput = require('intl-tel-input');
-      intlTelInput(inputRef.current, {
-        initialCountry: 'in', // Set auto to automatically select the user's country
-        preferredCountries: ['in'],
-        hideDialCode: true,   // Hide country flag icon after selection
-        nationalMode: true,   // Show only the national number part
-        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js'
-      });
+      const input = inputRef.current;
+      if (input) { // Ensure input is not null
+        iti.current = intlTelInput(input, {
+          initialCountry: 'in',
+          preferredCountries: ['in'],
+          utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js'
+        });
+
+        // Listen for changes
+        iti.current?.input?.addEventListener('input', handleInputChange);
+      }
     };
 
-    if (inputRef.current) {
-      loadUtils();
-    }
+    loadUtils();
+
+    return () => {
+      iti.current?.input?.removeEventListener('input', handleInputChange); // Remove event listener
+      iti.current?.destroy();
+    };
   }, []);
 
-  return <span className='phoneInput'><input type="tel" ref={inputRef} className="form-control" placeholder="" id={id}
-    aria-describedby={ariaDescribedby} onChange={onChange} value="" /></span>;
+  const handleInputChange = () => {
+    const number = iti.current?.getNumber();
+    onChange({ target: { value: number, name: id } } as ChangeEvent<HTMLInputElement>);
+  };
+
+  useEffect(() => {
+    if (value && iti.current) {
+      iti.current?.setNumber(value);
+    }
+  }, [value]);
+
+  return (
+    <span className='phoneInput'>
+      <input type="tel" ref={inputRef} className="form-control" placeholder="" id={id}
+        aria-describedby={ariaDescribedby} />
+    </span>
+  );
 };
 
 export default PhoneInput;

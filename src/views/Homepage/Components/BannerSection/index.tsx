@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
@@ -11,16 +11,14 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import dynamic from 'next/dynamic';
+import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 
-// import Skeleton from 'react-loading-skeleton';
-// import 'react-loading-skeleton/dist/skeleton.css';
-// const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
 
 import Autocomplete from 'src/@core/components/mui/autocomplete';
 let cancelToken: any;
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const phoneRegExp = /^(\+\d{1,3}[- ]?)?\d{10,13}$/;
+const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -29,6 +27,7 @@ const validationSchema = Yup.object().shape({
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),
 });
+
 
 function BannerSection() {
   const router = useRouter();
@@ -154,11 +153,11 @@ function BannerSection() {
         <div className="container-fluid">
           <div className="container">
             <div className="row">
-              <div className="col-md-6 mb-5 d-flex" id="animation2">
+              <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2">
                 <div className="searchSec align-content-center">
-                  <h1 className='mb-3 text-black'>Find Colleges, Courses & Exams that are best for you</h1>
+                  <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
                   <div className="row">
-                    <div className="col-md-10 position-relative">
+                    <div className="col-12 position-relative">
                       <Autocomplete
                         open={open}
                         onClose={() => setOpen(false)}
@@ -223,7 +222,7 @@ function BannerSection() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 col-lg-5 ps-lg-3 col-xl-4 ms-auto mb-5" id="animation3">
+              <div className="col-md-5 col-lg-5 ps-lg-5 ms-auto mb-5" id="animation3">
                 <div className="searchForm">
                   <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
                   <Formik
@@ -249,7 +248,7 @@ function BannerSection() {
                         <ErrorMessage name="email" component="div" className="error text-danger" />
                       </div>
                       <div className="mb-3">
-                        <Field type="text" name="contact_number" placeholder="Enter Phone Number" className="form-control" />
+                        <PhoneInputField name="contact_number" />
                         <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                       </div>
                       <div className="mb-3">
