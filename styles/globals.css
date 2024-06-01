@@ -3435,3 +3435,31 @@
       display: none;
     }
   }
+
+  .careerSec {
+    height: 500px !important;
+  }
+
+  .careerSec img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+
+  .currentOpeningBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    padding: 10px 12px !important;
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .careerSec {
+      height: 900px !important;
+    }
+
+    .careerSec img {
+      width: 100%;
+      height: 642px;
+      object-fit: cover;
+    }
+  }
