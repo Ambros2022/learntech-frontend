@@ -27,7 +27,7 @@ function ExploreSection() {
     } catch (err) {
       console.error(err);
     }
-  }, [activeTab,datasize]);
+  }, [activeTab, datasize]);
 
   useEffect(() => {
     fetchData();
@@ -62,8 +62,8 @@ function ExploreSection() {
       // <Link href="/f">
       <div className="col-md-4 col-lg-2 mb-3">
         <div className="card text-center exploreCardHover">
-          <div className="row">
-            <Link href="/f">
+          <Link href="/f">
+            <div className="row">
               <div className="col-md-12 col-4 col-sm-3">
                 <img
                   width={70}
@@ -91,10 +91,10 @@ function ExploreSection() {
                   </a>
                 </span>
               </div>
-            </Link>
-          </div>
-        </div>
-      </div>
+            </div>
+          </Link>
+        </div >
+      </div >
       // </Link>
     );
   }
@@ -136,8 +136,8 @@ function ExploreSection() {
         </div>
         {visibleCount > data.length && (
           <div className="text-center mt-4">
-            {visibleCount}
-            {data.length}
+            {/* {visibleCount} */}
+            {/* {data.length} */}
             <button className="btn viewMoreCollegeBtn" onClick={showMoreCourses}>
               View More
             </button>

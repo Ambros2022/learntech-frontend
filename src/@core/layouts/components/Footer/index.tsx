@@ -57,31 +57,31 @@ const Footer = () => {
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Info</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><Link href="/about-us">About us</Link></li>
-                <li className='mb-2'><Link href="/our-team">Our Team</Link></li>
-                <li className='mb-2'><Link href="/services">Services</Link></li>
-                <li className='mb-2'><Link href="/contact-us">Contact us</Link></li>
-                <li className='mb-2'><Link href="/career">Careers</Link></li>
-                <li className='mb-2'><Link href="/sitemap">Site Map</Link></li>
+                <li className='mb-2'><Link href="/about-us"><i className="bi bi-chevron-double-right"></i> About us</Link></li>
+                <li className='mb-2'><Link href="/our-team"><i className="bi bi-chevron-double-right"></i> Our Team</Link></li>
+                <li className='mb-2'><Link href="/services"><i className="bi bi-chevron-double-right"></i> Services</Link></li>
+                <li className='mb-2'><Link href="/contact-us"><i className="bi bi-chevron-double-right"></i> Contact us</Link></li>
+                <li className='mb-2'><Link href="/career"><i className="bi bi-chevron-double-right"></i> Careers</Link></li>
+                <li className='mb-2'><Link href="/sitemap"><i className="bi bi-chevron-double-right"></i> Site Map</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Quick Links</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><Link href="/blogs">Blogs</Link></li>
-                <li className='mb-2'><Link href="/nri-quota">NRI Quata</Link></li>
-                <li className='mb-2'><Link href="/study-in-usa">Study Abroad</Link></li>
-                <li className='mb-2'><Link href="/scholarships">Scholarships</Link></li>
-                <li className='mb-2'><Link href="/students-speak">Student’s Speak</Link></li>
+                <li className='mb-2'><Link href="/blogs"><i className="bi bi-chevron-double-right"></i> Blogs</Link></li>
+                <li className='mb-2'><Link href="/nri-quota"><i className="bi bi-chevron-double-right"></i> NRI Quata</Link></li>
+                <li className='mb-2'><Link href="/study-in-usa"><i className="bi bi-chevron-double-right"></i> Study Abroad</Link></li>
+                <li className='mb-2'><Link href="/scholarships"><i className="bi bi-chevron-double-right"></i> Scholarships</Link></li>
+                <li className='mb-2'><Link href="/students-speak"><i className="bi bi-chevron-double-right"></i> Student’s Speak</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Legal</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><Link href="/">Feed</Link></li>
-                <li className='mb-2'><Link href="/disclaimer">Disclaimer</Link></li>
-                <li className='mb-2'><Link href="/privacy-policy">Privacy Policy</Link></li>
-                <li className='mb-2'><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
+                <li className='mb-2'><Link href="/"><i className="bi bi-chevron-double-right"></i> Feed</Link></li>
+                <li className='mb-2'><Link href="/disclaimer"><i className="bi bi-chevron-double-right"></i> Disclaimer</Link></li>
+                <li className='mb-2'><Link href="/privacy-policy"><i className="bi bi-chevron-double-right"></i> Privacy Policy</Link></li>
+                <li className='mb-2'><Link href="/terms-and-conditions"><i className="bi bi-chevron-double-right"></i> Terms & Conditions</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">
