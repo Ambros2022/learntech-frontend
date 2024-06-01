@@ -43,7 +43,7 @@ function CoursesCard({ course }) {
 }
 
 // Parent component handling the array
-function CoursesContainer({ data, Changesize }) {
+function CoursesContainer() {
   const isMountedRef = useIsMountedRef();
   const [streamcourses, setStreamcourses] = useState([]);
   const [visibleCount, setVisibleCount] = useState(0);

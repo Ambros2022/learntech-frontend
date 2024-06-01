@@ -11,6 +11,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import dynamic from 'next/dynamic';
+
 // import Skeleton from 'react-loading-skeleton';
 // import 'react-loading-skeleton/dist/skeleton.css';
 // const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
@@ -153,11 +154,11 @@ function BannerSection() {
         <div className="container-fluid">
           <div className="container">
             <div className="row">
-              <div className="col-md-7 mb-5 d-flex" id="animation2">
+              <div className="col-md-6 mb-5 d-flex" id="animation2">
                 <div className="searchSec align-content-center">
                   <h1 className='mb-3 text-black'>Find Colleges, Courses & Exams that are best for you</h1>
                   <div className="row">
-                    <div className="col-md-8 position-relative">
+                    <div className="col-md-10 position-relative">
                       <Autocomplete
                         open={open}
                         onClose={() => setOpen(false)}
@@ -180,6 +181,7 @@ function BannerSection() {
                         renderInput={(params) => (
                           <TextField
                             {...params}
+                            size="small"
                             placeholder="Search"
                             className="form-control"
                             InputProps={{
@@ -221,7 +223,7 @@ function BannerSection() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 col-lg-5 ps-lg-5 col-xl-4 ms-auto mb-5" id="animation3">
+              <div className="col-md-5 col-lg-5 ps-lg-3 col-xl-4 ms-auto mb-5" id="animation3">
                 <div className="searchForm">
                   <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
                   <Formik

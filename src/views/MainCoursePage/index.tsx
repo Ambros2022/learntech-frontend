@@ -12,8 +12,6 @@ function MainCoursePage() {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>();
   const [trendingCourses, setTrendingCourses] = useState([]);
-  const [streamcourses, setStreamcourses] = useState([]);
-  const [datasize,setDatasize] = useState(4);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -44,26 +42,12 @@ function MainCoursePage() {
     }
   }, [isMountedRef]);
 
-  const getStreamwiseCourse = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/stream/general/get', {
-        params: {
-          page: 1,
-          size: datasize,
-        }
-      });
-      if (isMountedRef.current) {
-        setStreamcourses(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
+
 
   useEffect(() => {
     getPagedata();
     getTrendingCourses();
-    getStreamwiseCourse();
+
 
   }, []);
 
@@ -77,7 +61,7 @@ function MainCoursePage() {
       </Head>
       <BannerSec data={trendingCourses} />
       <BestCoursesSec />
-      <CoursesCard data={streamcourses}  />
+      <CoursesCard   />
     </>
   );
 }
