@@ -49,7 +49,7 @@ function FeaturedCollegeSection() {
               </p>
               <div className="d-flex justify-content-between">
                 {/* <a href="#" className="active btn">Apply Now</a> */}
-                <GlobalEnquiryForm className="active btn" />
+                <GlobalEnquiryForm className="applyNowButton btn" />
                 <Link href="/colleges" className="btn">View More</Link>
               </div>
             </div>
