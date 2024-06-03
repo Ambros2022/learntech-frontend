@@ -1,5 +1,5 @@
 import React from 'react';
-import PhoneInput from 'src/@core/components/custom-phoneInputWithFlags';
+import TALKExpertForm from 'src/@core/components/popup/TalkExpertEnqiiry';
 
 function ExpertSection() {
   const handlePhoneChange = (event) => {
@@ -21,7 +21,7 @@ function ExpertSection() {
         </div>
         <div className="col-md-7 bg-blue innerCollege py-3 g-0">
           <h2 className='fw-bold text-center text-white pb-2'>Talk to our Expert</h2>
-          <form className='w-75 m-auto'>
+          {/* <form className='w-75 m-auto'>
             <div className="row">
               <div className="col-md-6">
                 <div className="mb-2">
@@ -37,9 +37,8 @@ function ExpertSection() {
               </div>
               <div className="col-md-6">
                 <div className="mb-2">
-                  <label htmlFor="expertPhoneNumber" className="form-label">Phone Number</label>
-                  <PhoneInput onChange={handlePhoneChange} ariaDescribedby="expertPhoneNumber"
-                    id="expertPhoneNumber" />
+                <label htmlFor="expertPhone" className="form-label">Phone Number</label>
+                  <input type="number" className="form-control" id="expertPhone" aria-describedby="expertPhone" />
                 </div>
               </div>
               <div className="col-md-6">
@@ -63,7 +62,8 @@ function ExpertSection() {
             <div className='mb-2 text-center'>
               <button type="submit" className="btn ExpertSbtBtn">Submit</button>
             </div>
-          </form>
+          </form> */}
+          <TALKExpertForm/>
         </div>
       </div>
     </section>
