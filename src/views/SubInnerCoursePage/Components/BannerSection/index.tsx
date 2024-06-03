@@ -20,7 +20,7 @@ function BannerSection() {
       </section>
       <section className='py-3 bg-white'>
         <div className='container'>
-          <p><Link href={'/home'} className="text-black">Home</Link> {'>'} <Link href={'/courses'} className="text-black">Courses</Link> {'>'} <Link href={'courses/innerCourse'} className="text-black">Dental</Link> {'>'} <Link href={'courses/innerCourse/subInnerCourse'} className="text-blue">BDS</Link></p>
+          <p><Link href={'/'} className="text-black">Home</Link> {'>'} <Link href={'/courses'} className="text-black">Courses</Link> {'>'} <Link href={'courses/innerCourse'} className="text-black">Dental</Link> {'>'} <Link href={'courses/innerCourse/subInnerCourse'} className="text-blue">BDS</Link></p>
         </div>
       </section>
     </>
