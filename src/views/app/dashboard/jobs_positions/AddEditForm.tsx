@@ -69,7 +69,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         job_description: isAddMode ? '' : olddata.job_description,
         exp_required: isAddMode ? '' : olddata.exp_required,
         total_positions: isAddMode ? '' : olddata.total_positions,
-        status: isAddMode ? 'Draft' : olddata.status,
+        status: isAddMode ? 'Published' : olddata.status,
     }
 
     const {
@@ -254,18 +254,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={6}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
-                                <Controller
-                                    name='status'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
-                                            <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
-                                            <FormControlLabel value='Published' control={<Radio />} label='Published' />
-                                        </RadioGroup>
-                                    )}
-                                />
-                              
+                        <Controller
+                            name='status'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                    <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                    <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                </RadioGroup>
+                            )}
+                        />
+
                     </Grid>
 
                     <Grid item xs={12}>
@@ -282,7 +282,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         >
 
                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                               
+
                                 Submit
                                 {loading ? (
                                     <CircularProgress
@@ -295,7 +295,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 ) : null}
                             </Button>
-                         
+
                         </DialogActions>
                     </Grid>
                 </Grid>

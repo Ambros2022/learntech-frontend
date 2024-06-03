@@ -1,20 +1,20 @@
 import React from 'react'
 import 'intl-tel-input/build/css/intlTelInput.css';
 import PhoneInput from 'src/@core/components/custom-phoneInputWithFlags';
+import ExpertEnquiryForm from 'src/@core/components/popup/ExpertEnquiryForm';
 
 function ExpertSection() {
 
-  const handlePhoneChange = (event) => {
-    console.log(event.target.value);
-  };
 
   return (
     <>
       <section className="ExpertCon bg-white pt-5">
         <div className="container pb-5">
           <h3 className="fw-bold text-center">Get In Touch With Our Expert Counsellor</h3>
+     
           <div className="pt-3 form container">
-            <div className="row">
+          <ExpertEnquiryForm></ExpertEnquiryForm>
+            {/* <div className="row">
               <div className="col-md-6" id="animation16">
                 <div className="mb-3 ms-md-5">
                   <label htmlFor="expertNameClgCourse" className="form-label">Name</label>
@@ -50,7 +50,7 @@ function ExpertSection() {
             </div>
             <div className="text-center reqBtn">
               <button className="btn">Request for a Call Back</button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

@@ -166,8 +166,8 @@ const Header = () => {
           <button className="navbar-toggler" type="button" onClick={toggle} data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className={`${isOpen ? 'show' : ''} collapse navbar-collapse`} id="navbarSupportedContent">
-            <span className="top-nav">
+          <div className={`${isOpen ? 'show' : ''}collapse navbar-collapse`} id="navbarSupportedContent">
+            <span className="top-nav ms-auto">
               <ul className="navbar-nav mb-2 mb-lg-0 ms-xl-5 ms-md-0">
                 <li className="nav-item">
                   <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/">Home</Link>
@@ -260,7 +260,7 @@ const Header = () => {
                 </li>
 
                 <li className="nav-item dropdown d-lg-inline-block d-none">
-                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/" id="navbarDropdownMenuLink" role="button"
                     aria-expanded="false">
                     More
                   </Link>
@@ -317,24 +317,17 @@ const Header = () => {
                       <Link className="d-flex justify-content-between dropdown-item" href="/meds">
                         Medical Edu Studio
                       </Link>
-
                     </li>
-
-
                   </ul>
+                </li>
+                <li className="hideBtnTxt">
+                  <Image src="/images/icons/user-icon.svg" className='mx-2 mt-xl-2 mt-1 socialIcon' width={30} height={30} alt="user-icon" />
+                </li>
+                <li className="hideBtnTxt">
+                  <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn p-2" />
                 </li>
               </ul>
             </span>
-            <div className='d-lg-flex d-none justify-content-xl-end ms-auto'>
-              {/* <Link className='mx-2  mt-1 socialIcon' href="#"> */}
-
-              <Image src="/images/icons/user-icon.svg" className='mx-2 mt-xl-2 mt-1 socialIcon' width={30} height={30} alt="user-icon" />
-              {/* </Link> */}
-
-              {/* <button className=" btn counsellingBtn p-2" type="submit">Get Counselling</button> */}
-              <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn p-2" />
-
-            </div>
           </div>
         </div>
       </nav>

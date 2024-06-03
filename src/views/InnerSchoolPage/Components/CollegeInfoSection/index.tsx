@@ -9,7 +9,7 @@ function CollegeInfoSection() {
     <>
       <section className='clgInfoSec bg-white'>
         <section className="container InnerCollegeNavigationLink pt-2">
-          <p className='mb-3'><Link href="/home">Home</Link> {'>'} <Link href={"/schools"}>Schools</Link> {'>'}<span className='text-blue'><Link href="#" className="text-blue"> New Horizon Public School(NHPS)</Link></span></p>
+          <p className='mb-3'><Link href="/">Home</Link> {'>'} <Link href={"/schools"}>Schools</Link> {'>'}<span className='text-blue'><Link href="#" className="text-blue"> New Horizon Public School(NHPS)</Link></span></p>
         </section>
         <div className="container">
           <div className="pt-5 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">

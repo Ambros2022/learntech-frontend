@@ -523,7 +523,7 @@
     /* remove the gap so it doesn't close */
   }
 
-  .top-nav a:hover {
+  .top-nav .nav-item a:hover {
     color: #254692 !important;
   }
 
@@ -2328,161 +2328,162 @@
   border: 1px solid #254692 !important;
 }
 
-.errCon h1 {
-  font-size: 30px !important;
-}
-
-.errCon h6 {
-  font-size: 14px !important;
-}
-
-.faqSec .accordion-button {
-  --bs-accordion-btn-active-icon: url(../public/images/icons/white-arrow.png) !important;
-}
-
-.faqSec .accordion-header button {
-  background-color: rgba(39, 72, 150, 0.2) !important;
-  color: black !important;
-}
-
-.faqSec .accordion-header button:focus {
-  box-shadow: none !important;
-}
-
-.faqSec .accordion-header button:hover {
-  background-color: #3d5aa0 !important;
-  color: white !important;
-  --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
-}
-
-.faqSec .accordion-header button:focus {
-  background-color: #3d5aa0 !important;
-  color: white !important;
-  --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
-}
-
-.faqSec .accordion-header:focus {
-  outline: 0 !important;
-  border: 0 !important;
-}
-
-.faqSec .accordion-header:active {
-  outline: 0 !important;
-  border: 0 !important;
-}
-
-.faqSec .accordion-item {
-  border: 0;
-  border-radius: 0;
-}
-
-.accordion-item:first-of-type {
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
-}
-
-.accordion-item:last-of-type {
-  border-radius: 0 !important;
-  border: 0 !important;
-}
-.btn-close1 img {
-  width: auto;
-  height: auto;
-}
-
-.streamBtn {
-  background-color: #ced6e96b !important;
-}
-
-@media (min-width: 768px) and (max-width: 992px) {
-  .studyInUsaCon h4 {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 575px) {
-  .topClgIcon {
-    top: 13px;
-    left: 15px;
+  .errCon h1 {
+    font-size: 30px !important;
   }
 
-  .topClgIcon img {
-    width: 150% !important;
-    height: 100% !important;
+  .errCon h6 {
+    font-size: 14px !important;
   }
 
-  .topUniCardCon .carousel-button-group {
-    position: absolute !important;
-    top: 150px !important;
+  .faqSec .accordion-button {
+    --bs-accordion-btn-active-icon: url(../public/images/icons/white-arrow.png) !important;
   }
 
-  .topUniCardCon .fi-left {
-    margin-left: 20px !important;
-    background-color: white;
-    border-radius: 25px;
-    padding: 2px 8px;
+  .faqSec .accordion-header button {
+    background-color: rgba(39, 72, 150, 0.2) !important;
+    color: black !important;
   }
 
-  .topUniCardCon .fi-right {
-    margin-right: 45px !important;
-    background-color: white;
-    border-radius: 25px;
-    padding: 2px 8px;
+  .faqSec .accordion-header button:focus {
+    box-shadow: none !important;
   }
 
-  .faqImgSec img {
-    width: 330px;
-    height: 200px;
-  }
-}
-
-@media (min-width: 320px) and (max-width: 374px) {
-  .topUniCardCon .carousel-button-group {
-    position: absolute !important;
-    top: 125px !important;
-  }
-}
-
-@media (min-width: 320px) and (max-width: 767px) {
-  .overflowScroll {
-    overflow-x: scroll !important;
+  .faqSec .accordion-header button:hover {
+    background-color: #3d5aa0 !important;
+    color: white !important;
+    --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
   }
 
-  .studyInUsaCon {
-    height: 400px;
+  .faqSec .accordion-header button:focus {
+    background-color: #3d5aa0 !important;
+    color: white !important;
+    --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
   }
 
-  .studyInUsaCon h4 {
-    font-size: 13px;
+  .faqSec .accordion-header:focus {
+    outline: 0 !important;
+    border: 0 !important;
   }
 
-  .studyInUsaCon .searchSec1 {
-    width: 100%;
-    margin: auto;
+  .faqSec .accordion-header:active {
+    outline: 0 !important;
+    border: 0 !important;
   }
 
-  .studyInUsaCon .searchSec1 input[type='search'] {
-    background: transparent !important;
-    border: 1px solid white !important;
-    padding: 10px 20px !important;
-    font-size: 12px !important;
+  .faqSec .accordion-item {
+    border: 0;
+    border-radius: 0;
   }
 
-  .studyInUsaCon .searchSec1 {
-    font-size: 12px !important;
-    padding: 10px !important;
+  .accordion-item:first-of-type {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
   }
 
-  .studyInUsaCon .searchBtn {
-    font-size: 12px !important;
+  .accordion-item:last-of-type {
+    border-radius: 0 !important;
+    border: 0 !important;
   }
 
-  .studyInUsaCon .helpMeBtn {
-    font-size: 12px !important;
+  .btn-close1 img {
+    width: auto;
+    height: auto;
   }
-}
 
-/* Write Review Page */
+  .streamBtn {
+    background-color: #ced6e96b !important;
+  }
+
+  @media (min-width: 768px) and (max-width: 992px) {
+    .studyInUsaCon h4 {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .topClgIcon {
+      top: 13px;
+      left: 15px;
+    }
+
+    .topClgIcon img {
+      width: 150% !important;
+      height: 100% !important;
+    }
+
+    .topUniCardCon .carousel-button-group {
+      position: absolute !important;
+      top: 150px !important;
+    }
+
+    .topUniCardCon .fi-left {
+      margin-left: 20px !important;
+      background-color: white;
+      border-radius: 25px;
+      padding: 2px 8px;
+    }
+
+    .topUniCardCon .fi-right {
+      margin-right: 45px !important;
+      background-color: white;
+      border-radius: 25px;
+      padding: 2px 8px;
+    }
+
+    .faqImgSec img {
+      width: 330px;
+      height: 200px;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 374px) {
+    .topUniCardCon .carousel-button-group {
+      position: absolute !important;
+      top: 125px !important;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    .overflowScroll {
+      overflow-x: scroll !important;
+    }
+
+    .studyInUsaCon {
+      height: 400px;
+    }
+
+    .studyInUsaCon h4 {
+      font-size: 13px;
+    }
+
+    .studyInUsaCon .searchSec1 {
+      width: 100%;
+      margin: auto;
+    }
+
+    .studyInUsaCon .searchSec1 input[type='search'] {
+      background: transparent !important;
+      border: 1px solid white !important;
+      padding: 10px 20px !important;
+      font-size: 12px !important;
+    }
+
+    .studyInUsaCon .searchSec1 {
+      font-size: 12px !important;
+      padding: 10px !important;
+    }
+
+    .studyInUsaCon .searchBtn {
+      font-size: 12px !important;
+    }
+
+    .studyInUsaCon .helpMeBtn {
+      font-size: 12px !important;
+    }
+  }
+
+  /* Write Review Page */
 
   .writeReviewSec {
     background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
@@ -2549,6 +2550,11 @@
 
   .google-login-button div span {
     display: none !important;
+  }
+
+  .errBtn {
+    color: #254692 !important;
+    border: 1px solid #254692 !important;
   }
 
   .ratingBtn {
@@ -3404,4 +3410,56 @@
   .react-tel-input .form-control {
     width: 100% !important;
     font-size: 1rem !important;
+  }
+
+  .top-nav .nav-link {
+    font-size: 17px !important;
+  }
+
+  a .counsellingBtn:hover {
+    color: white !important;
+  }
+
+  @media (min-width:992px) and (max-width:1024px) {
+    .top-nav .nav-link {
+      font-size: 12px !important;
+    }
+
+    .counsellingBtn {
+      font-size: 14px !important;
+    }
+  }
+
+  @media(max-width:1023px) {
+    .hideBtnTxt {
+      display: none;
+    }
+  }
+
+  .careerSec {
+    height: 500px !important;
+  }
+
+  .careerSec img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+
+  .currentOpeningBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    padding: 10px 12px !important;
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .careerSec {
+      height: 900px !important;
+    }
+
+    .careerSec img {
+      width: 100%;
+      height: 642px;
+      object-fit: cover;
+    }
   }

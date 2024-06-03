@@ -160,7 +160,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         rankings: isAddMode ? '' : olddata.rankings,
         scholarship: isAddMode ? '' : olddata.scholarship,
         hostel: isAddMode ? '' : olddata.hostel,
-        status: isAddMode ? 'Draft' : olddata.status,
+        status: isAddMode ? 'Published' : olddata.status,
         country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
         state_id: isAddMode ? '' : olddata.state ? olddata.state : '',
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
@@ -791,7 +791,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             >
                                                 <MenuItem value='college'>college</MenuItem>
                                                 <MenuItem value='university'>university</MenuItem>
-                                                <MenuItem value='board'>board</MenuItem>
+                                                {/* <MenuItem value='board'>board</MenuItem> */}
 
                                             </CustomTextField>
                                         )}

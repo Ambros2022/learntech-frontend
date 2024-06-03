@@ -1,31 +1,20 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 import MainCarousel2 from 'src/@core/components/carousel2';
 
-function OtherCourses() {
-
-  const items = [
-    { id: 1, title: 'Medical', imageSrc: '/images/icons/Paramedical.svg', courseCount: 18 },
-    { id: 2, title: 'Architecture', imageSrc: '/images/icons/Architecture.svg', courseCount: 18 },
-    { id: 3, title: 'Art', imageSrc: '/images/icons/Art.svg', courseCount: 18 },
-    { id: 4, title: 'Law', imageSrc: '/images/icons/Law.svg', courseCount: 18 },
-    { id: 5, title: 'Paramedical', imageSrc: '/images/icons/Medical.svg', courseCount: 18 },
-    { id: 6, title: 'Management', imageSrc: '/images/icons/Management.svg', courseCount: 18 },
-    { id: 7, title: 'Paramedical', imageSrc: '/images/icons/Paramedical.svg', courseCount: 18 },
-    { id: 8, title: 'Architecture', imageSrc: '/images/icons/Architecture.svg', courseCount: 18 },
-    { id: 9, title: 'Art', imageSrc: '/images/icons/Art.svg', courseCount: 18 },
-    { id: 10, title: 'Law', imageSrc: '/images/icons/Law.svg', courseCount: 18 },
-    { id: 20, title: 'Paramedical', imageSrc: '/images/icons/Paramedical.svg', courseCount: 18 },
-  ]
+function OtherCourses({ streamdata }) {
 
   // Function to create card components
   function createCards() {
-    return items.map(card => (
-      <CardComponent
-        key={card.id}
-        title={card.title}
-        imageSrc={card.imageSrc}
-      />
+    return streamdata.map(card => (
+      <Link href={`/course/${card.id}/${card.slug}`}>
+        <CardComponent
+          key={card.id}
+          title={card.name}
+          imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.logo}`}
+        />
+      </Link>
     ));
   }
 
