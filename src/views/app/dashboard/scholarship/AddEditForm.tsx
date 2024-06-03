@@ -72,32 +72,32 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         'male',
         'female',
         'others',
-      ];
+    ];
 
     const schema: any = yup.object().shape({
         name: yup
             .string()
             .trim()
             .required(),
-            slug: yup
+        slug: yup
             .string()
             .trim()
             .required(),
-            meta_title: yup
+        meta_title: yup
             .string()
             .trim()
             .required(),
-            meta_description: yup
+        meta_description: yup
             .string()
             .trim()
             .required(),
-            gender: yup
+        gender: yup
             .string()
             .trim()
             .required(),
-            level_id: yup.object().required("This field is required"),
-            type_id: yup.object().required("This field is required"),
-            country_id: yup.object().required("This field is required"),
+        level_id: yup.object().required("This field is required"),
+        type_id: yup.object().required("This field is required"),
+        country_id: yup.object().required("This field is required"),
     })
 
     const defaultValues = {
@@ -112,11 +112,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
         overview: isAddMode ? '' : olddata.overview,
-        status: isAddMode ? 'Draft' : olddata.status,
+        status: isAddMode ? 'Published' : olddata.status,
         last_date: isAddMode ? null : new Date(olddata.last_date),
-        level_id: isAddMode ? '' : olddata.scholarlevels ? olddata.scholarlevels : '',   
-        type_id: isAddMode ? '' : olddata.scholartypes ? olddata.scholartypes : '',   
-        country_id: isAddMode ? '' : olddata.country ? olddata.country : '',   
+        level_id: isAddMode ? '' : olddata.scholarlevels ? olddata.scholarlevels : '',
+        type_id: isAddMode ? '' : olddata.scholartypes ? olddata.scholartypes : '',
+        country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
 
     }
 
@@ -174,7 +174,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -223,7 +223,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -253,8 +253,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
-     //get all levels
-     const getlevels = useCallback(async () => {
+    //get all levels
+    const getlevels = useCallback(async () => {
 
         try {
             const roleparams: any = {};
@@ -269,8 +269,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }, [isMountedRef]);
 
-     //get all types
-     const gettypes= useCallback(async () => {
+    //get all types
+    const gettypes = useCallback(async () => {
 
         try {
             const roleparams: any = {};
@@ -286,8 +286,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }, [isMountedRef]);
 
 
-     //get all countries
-     const getcountry= useCallback(async () => {
+    //get all countries
+    const getcountry = useCallback(async () => {
 
         try {
             const roleparams: any = {};
@@ -317,7 +317,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-linkencoded">
                 <Grid container spacing={5}>
 
-                <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='level_id'
                             control={control}
@@ -325,7 +325,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
-                                
+
                                     options={levels}
                                     loading={!levels.length}
                                     value={field.value}
@@ -345,9 +345,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             )}
                         />
-                </Grid>
+                    </Grid>
 
-                <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='type_id'
                             control={control}
@@ -355,7 +355,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
-                                
+
                                     options={types}
                                     loading={!types.length}
                                     value={field.value}
@@ -375,34 +375,34 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             )}
                         />
-                </Grid>
+                    </Grid>
 
-                <Grid item xs={12} sm={4}>
-                                    <Controller
-                                        name='country_id'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field }) => (
-                                            <CustomAutocomplete
-                                                fullWidth
-                                            
-                                                options={countries}
-                                                loading={!countries.length}
-                                                value={field.value}
-                                                onChange={(event, newValue) => {
-                                                    field.onChange(newValue);
-                                                }}
-                                                getOptionLabel={(option: any) => option.name || ''}
-                                                renderInput={(params: any) => <CustomTextField {...params} 
-                                                required error={Boolean(errors.country_id)}
-                                                    {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
-                                            />
-                                        )}
-                                    />
-                </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='country_id'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    fullWidth
+
+                                    options={countries}
+                                    loading={!countries.length}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue);
+                                    }}
+                                    getOptionLabel={(option: any) => option.name || ''}
+                                    renderInput={(params: any) => <CustomTextField {...params}
+                                        required error={Boolean(errors.country_id)}
+                                        {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
+                                />
+                            )}
+                        />
+                    </Grid>
 
 
-                <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='name'
                             control={control}
@@ -444,29 +444,29 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={4}>
                         <Controller
-                        name='gender'
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field: { value, onChange } }) => (
-                            <CustomTextField
-                     fullWidth
-                      select
-                   value={value}
-                 label='Select Gender'
-                    onChange={onChange}
-                error={Boolean(errors.gender)}
-                     helperText={errors.gender && 'This field is required'}
-                         >
-                            {options.map((option, value) => (
-                            <MenuItem key={value} value={option}>
-                            {option}
-                             </MenuItem>
-                                ))}
-                            </CustomTextField>
+                            name='gender'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    select
+                                    value={value}
+                                    label='Select Gender'
+                                    onChange={onChange}
+                                    error={Boolean(errors.gender)}
+                                    helperText={errors.gender && 'This field is required'}
+                                >
+                                    {options.map((option, value) => (
+                                        <MenuItem key={value} value={option}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </CustomTextField>
                             )}
                         />
-                     </Grid>
-                   
+                    </Grid>
+
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='amount'
@@ -529,7 +529,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                  
+
 
                     <Grid item xs={12} sm={4}>
                         <Controller
@@ -604,29 +604,29 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <DatePickerWrapper>
-                                <DatePicker
-                                    selected={value}
-                                    id='basic-input'
-                                    showYearDropdown
-                                    showMonthDropdown
-                                    dateFormat='MMMM d, yyyy'
-                                    popperPlacement={popperPlacement}
-                                    onChange={onChange}
-                                    placeholderText='Click to select a date'
-                                    customInput={<CustomInput label='Last date' 
-                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
-                                    />}
+                                    <DatePicker
+                                        selected={value}
+                                        id='basic-input'
+                                        showYearDropdown
+                                        showMonthDropdown
+                                        dateFormat='MMMM d, yyyy'
+                                        popperPlacement={popperPlacement}
+                                        onChange={onChange}
+                                        placeholderText='Click to select a date'
+                                        customInput={<CustomInput label='Last date'
+                                        // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
+                                        />}
 
 
-                                />
-                            </DatePickerWrapper>
+                                    />
+                                </DatePickerWrapper>
                             )}
                         />
                     </Grid>
 
 
                     <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>overview</Typography>
+                        <Typography style={{ marginBottom: '10px' }}>overview</Typography>
 
                         <Controller
                             name='overview'
@@ -634,30 +634,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("top_description", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("top_description", value)} />
+                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                 //  onChange={(value)=>  setValue("bottom_description", value)} />
                                 onChange={(value)=>console.log(value)} /> */}
-                            </>
+                                </>
                             )}
                         />
                     </Grid>
 
                     <Grid item xs={12} sm={4}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
-                                <Controller
-                                    name='status'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
-                                            <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
-                                            <FormControlLabel value='Published' control={<Radio />} label='Published' />
-                                        </RadioGroup>
-                                    )}
-                                />
-                              
+                        <Controller
+                            name='status'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                    <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                    <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                </RadioGroup>
+                            )}
+                        />
+
                     </Grid>
 
                     <Grid item xs={12} sm={3}>
@@ -673,7 +673,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             rejectionMessage='Try another file for upload.'
                         />
                     </Grid>
-                
+
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}
                     </Grid>

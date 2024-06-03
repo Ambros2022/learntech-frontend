@@ -5,6 +5,7 @@ import ExpertSection from './Components/ExpertSection';
 import PopularCourses from './Components/PopularCourses';
 
 function SubInnerCoursePage() {
+  console.log(SubInnerCoursePage);
   return (
     <>
       <BannerSection />

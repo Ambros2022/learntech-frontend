@@ -63,26 +63,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const schema: any = yup.object().shape({
         course_type: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         slug: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         meta_title: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         meta_description: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         meta_keywords: yup
-        .string()
-        .trim()
-        .required(),
-       
+            .string()
+            .trim()
+            .required(),
+
         college_id: yup.object().required("This field is required"),
         general_course_id: yup.object().required("This field is required"),
 
@@ -99,7 +99,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         course_details: isAddMode ? '' : olddata.course_details,
         eligibility: isAddMode ? '' : olddata.eligibility,
         fee_structure: isAddMode ? '' : olddata.fee_structure,
-        status: isAddMode ? 'Draft' : olddata.status,
+        status: isAddMode ? 'Published' : olddata.status,
     }
 
     const {
@@ -152,7 +152,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         getcollege();
         getgeneralcourse();
 
-    }, [getcollege,getgeneralcourse]);
+    }, [getcollege, getgeneralcourse]);
 
 
     const onSubmit = async (data: any) => {
@@ -191,7 +191,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -219,14 +219,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('status', data.status);
             formData.append('college_id', data.college_id.id);
             formData.append('general_course_id', data.general_course_id.id);
-         
+
 
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -257,7 +257,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
-    
+
 
     return (
         <>
@@ -265,7 +265,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 <Grid container spacing={5}>
 
 
-                <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='college_id'
                             control={control}
@@ -273,7 +273,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
-                                
+
                                     options={college}
                                     loading={!college.length}
                                     value={field.value}
@@ -284,7 +284,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     renderInput={(params: any) => (
                                         <CustomTextField
                                             {...params}
-                                            
+
                                             error={Boolean(errors.college_id)}
                                             {...(errors.college_id && { helperText: 'This field is required' })}
                                             label='Select College'
@@ -303,7 +303,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
-                                
+
                                     options={generalcollege}
                                     loading={!generalcollege.length}
                                     value={field.value}
@@ -314,7 +314,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     renderInput={(params: any) => (
                                         <CustomTextField
                                             {...params}
-                                            
+
                                             error={Boolean(errors.general_course_id)}
                                             {...(errors.general_course_id && { helperText: 'This field is required' })}
                                             label='Select General Course'
@@ -325,7 +325,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                 
+
                     <Grid item xs={12} sm={6}>
                         <Controller
                             name='course_type'
@@ -343,13 +343,13 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.course_type && { helperText: 'This field is required' })}
                                 >
-                                     <MenuItem value='UG'>UG</MenuItem>
-                                                <MenuItem value='PG'>PG</MenuItem>
-                                                <MenuItem value='Diploma'>Diploma</MenuItem>
-                                                <MenuItem value='Doctorate'>Doctorate</MenuItem>
-                                                <MenuItem value='Default'>Default</MenuItem>
-                                              
-                                                </CustomTextField>
+                                    <MenuItem value='UG'>UG</MenuItem>
+                                    <MenuItem value='PG'>PG</MenuItem>
+                                    <MenuItem value='Diploma'>Diploma</MenuItem>
+                                    <MenuItem value='Doctorate'>Doctorate</MenuItem>
+                                    <MenuItem value='Default'>Default</MenuItem>
+
+                                </CustomTextField>
                             )}
                         />
                     </Grid>
@@ -440,7 +440,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>course_details</Typography>
+                        <Typography style={{ marginBottom: '10px' }}>course_details</Typography>
 
                         <Controller
                             name='course_details'
@@ -458,7 +458,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>eligibility</Typography>
+                        <Typography style={{ marginBottom: '10px' }}>eligibility</Typography>
 
                         <Controller
                             name='eligibility'
@@ -466,17 +466,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("eligibility", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("eligibility", value)} />
+                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                 //  onChange={(value)=>  setValue("bottom_description", value)} />
                                 onChange={(value)=>console.log(value)} /> */}
-                            </>
+                                </>
                             )}
                         />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>fee_structure</Typography>
+                        <Typography style={{ marginBottom: '10px' }}>fee_structure</Typography>
 
                         <Controller
                             name='fee_structure'
@@ -484,29 +484,29 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("fee_structure", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("fee_structure", value)} />
+                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                 //  onChange={(value)=>  setValue("bottom_description", value)} />
                                 onChange={(value)=>console.log(value)} /> */}
-                            </>
+                                </>
                             )}
                         />
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
-                                <Controller
-                                    name='status'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
-                                            <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
-                                            <FormControlLabel value='Published' control={<Radio />} label='Published' />
-                                        </RadioGroup>
-                                    )}
-                                />
-                              
+                        <Controller
+                            name='status'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                    <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                    <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                </RadioGroup>
+                            )}
+                        />
+
                     </Grid>
 
 

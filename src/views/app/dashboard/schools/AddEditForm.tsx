@@ -227,7 +227,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         info: isAddMode ? '' : olddata.info,
         admissions_process: isAddMode ? '' : olddata.admissions_process,
         extracurriculars: isAddMode ? '' : olddata.extracurriculars,
-        status: isAddMode ? 'Draft' : olddata.status,
+        status: isAddMode ? 'Published' : olddata.status,
         home_view_status: isAddMode ? 'default' : olddata.home_view_status,
         listing_order: isAddMode ? '' : olddata.listing_order,
         amenities: [],
@@ -1001,7 +1001,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     /> */}
                                 </Grid>
-                                
+
 
                                 {/* <Grid item xs={12} sm={12}>
                                 <Typography style={{ marginBottom: '10px' }}>admissions_process</Typography>
@@ -1196,12 +1196,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                         defaultValue={val.answers}
                                                         render={({ field: { value, onChange } }) => (
                                                             <>
-                                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                             onChange={(e) => {
-                                                                onChange(e);
-                                                                setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
-                                                            }} />
-                                                      
+                                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                                    onChange={(e) => {
+                                                                        onChange(e);
+                                                                        setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                                    }} />
+
                                                             </>
                                                         )}
                                                     />
@@ -1215,7 +1215,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                             variant="contained"
                                                             color="error"
                                                             onClick={() => handleRemoveFaq(index)}
-                                                            style={{ margin: '17px 0 0 0px' , padding: '8px' }}
+                                                            style={{ margin: '17px 0 0 0px', padding: '8px' }}
                                                         >
                                                             <CloseIcon />
                                                         </Button>
