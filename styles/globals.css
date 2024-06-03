@@ -2912,6 +2912,11 @@
 
   .StudyAbroadCard {}
 
+  .options-container {
+    max-height: 300px; /* Adjust this value as needed */
+    overflow-y: auto;
+    padding-right: 15px; /* Space for the scrollbar */
+}
 
 
   .latestNewsCon .card-text {

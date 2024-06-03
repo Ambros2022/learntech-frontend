@@ -13,6 +13,10 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 
+interface City {
+    id: number;
+    name: string;
+}
 
 interface College {
     id: number;
@@ -37,14 +41,14 @@ function CollegeFilterSection() {
     type Option = {
         label: string;
         value: string;
+        cities?: Option[];
     };
-
+    
     type OptionGroup = {
         id: string;
         label: string;
         options: Option[];
     };
-
     const [showScrollButton, setShowScrollButton] = useState(false);
     const [states, setStates] = useState<Option[]>([]);
     const [streams, setStreams] = useState<any[]>([]);
@@ -79,7 +83,7 @@ function CollegeFilterSection() {
             const roleparams: any = {};
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
-            const response = await axios1.get('api/website/allcourses/get');
+            const response = await axios1.get('api/website/generalcourse/get');
             if (response.data.status === 1) {
                 const courseData = response.data.data.map((course: any) => ({
                     label: course.name,
@@ -97,18 +101,17 @@ function CollegeFilterSection() {
 
     const fetchStatesData = useCallback(async () => {
         try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
             const response = await axios1.get('api/website/states/get');
             if (response.data.status === 1) {
                 const statesData = response.data.data.map((state: any) => ({
                     label: state.name,
-                    value: state.id.toString()
+                    value: state.id.toString(),
+                    cities: state.city.map((city: any) => ({
+                        label: city.name,
+                        value: city.id.toString()
+                    }))
                 }));
                 setStates(statesData);
-
-
             } else {
                 console.error('Failed to fetch states');
             }
@@ -116,15 +119,16 @@ function CollegeFilterSection() {
             console.error('Error fetching states:', error);
         }
     }, [isMountedRef]);
+    
 
-
-    const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[]) => {
+    const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[] , cityIds?: string[]) => {
         try {
             const params: any = {
                 page: 1,
                 size: 10000
             };
             if (stateIds && stateIds.length > 0) params['state_id'] = `[${stateIds.join(',')}]`;
+            if (cityIds && cityIds.length > 0) params['city_id'] = `[${cityIds.join(',')}]`;
             if (courseIds && courseIds.length > 0) params['course_id'] = `[${courseIds.join(',')}]`;
             if (streamIds && streamIds.length > 0) params['stream_id'] = `[${streamIds.join(',')}]`;
             if (ownership) params['college_type'] = ownership;
@@ -135,7 +139,7 @@ function CollegeFilterSection() {
             console.error(err);
         }
     }, [isMountedRef]);
-
+    
 
     useEffect(() => {
         fetchStatesData();
@@ -148,6 +152,7 @@ function CollegeFilterSection() {
 
     const options: OptionGroup[] = [
         { id: 'state', label: 'States', options: states },
+        { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
         { id: 'streams', label: 'Streams', options: streams },
         { id: 'courses', label: 'Courses', options: courses },
 
@@ -174,56 +179,7 @@ function CollegeFilterSection() {
         },
     ];
 
-    // const options: OptionGroup[] = [
-    //     {
-    //         id: 'state',
-    //         label: 'States',
-    //         options: states
-    //     },
-    //     {
-    //         id: 'location',
-    //         label: 'City',
-    //         options: [
-    //             { label: 'Pune', value: 'pune' },
-    //             { label: 'Mumbai', value: 'mumbai' },
-    //             { label: 'Delhi', value: 'delhi' },
-    //             { label: 'Hyderabad', value: 'hyderabad' }
-    //         ]
-    //     },
-    //     {
-    //         id: 'ownership',
-    //         label: 'Ownership',
-    //         options: [
-    //             { label: 'Public', value: 'Public' },
-    //             { label: 'Deemed', value: 'Deemed' },
-    //             { label: 'Private', value: 'Private' },
-    //             { label: 'Government', value: 'Government' }
-    //         ]
-    //     },
-    //     {
-    //         id: 'streams',
-    //         label: 'Streams',
-    //         options: streams
-    //     },
-    //     {
-    //         id: 'courses',
-    //         label: 'Courses',
-    //         options: courses
-    //     },
-    //     {
-    //         id: 'courseType',
-    //         label: 'Course Type',
-    //         options: [
-    //             { label: 'UG', value: 'UG' },
-    //             { label: 'PG', value: 'PG' },
-    //             { label: 'Diploma', value: 'Diploma' },
-    //             { label: 'Doctorate', value: 'Doctorate' },
-    //             { label: 'Default', value: 'Default' }
-    //         ]
-    //     }
-    // ];
-
-
+  
 
     const [visibleCards, setVisibleCards] = useState(6);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
@@ -256,41 +212,59 @@ function CollegeFilterSection() {
         // console.log('Updated Visible Cards:', visibleCards);
     };
 
-    const handleCheckboxChange = async (groupId: string, value: string, isChecked: boolean) => {
-        const collegeFiltersSection = document.getElementById('collegeFiltersSection');
-        if (collegeFiltersSection) {
-            collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
+    
+   
+    // Define a debounced version of handleCheckboxChange
+    const debouncedHandleCheckboxChange = debounce((groupId: string, value: string, isChecked: boolean) => {
+    const collegeFiltersSection = document.getElementById('collegeFiltersSection');
+    if (collegeFiltersSection) {
+        collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    setSelectedCheckboxes(prevSelected => {
+        const updatedSelected = { ...prevSelected };
+        if (isChecked) {
+            updatedSelected[groupId] = [...(updatedSelected[groupId] || []), value];
+        } else {
+            updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
         }
 
-        setSelectedCheckboxes((prevSelected) => {
-            const updatedSelected = { ...prevSelected };
-            if (isChecked) {
-                updatedSelected[groupId] = [value]; // Set the selected state(s)
-            } else {
-                delete updatedSelected[groupId]; // Remove the selected state(s)
-            }
+        // Extract selected filter values
+        const { state: selectedStateIds = [], courses: selectedCourseIds = [], streams: selectedStreamIds = [], 
+            ownership: selectedOwnership = [], courseType: selectedCourseType = [], city: selectedCityIds = [] } = updatedSelected;
 
-            // Make API call here with selected state ID
-            const selectedStateId = parseInt(value); // Assuming the value is the state ID
-            getcollegedata(selectedStateId); // Pass the selected state ID to the API call function
-            return updatedSelected;
-        });
-    };
+        // Filter colleges based on selected filters
+        // const filteredColleges = colleges.filter(college => {
+        //     const ownershipMatch = selectedOwnership.length === 0 || selectedOwnership.includes(college.college_type);
+        //     const courseTypeMatch = selectedCourseType.length === 0 || selectedCourseType.includes(college.course_type);
+        //     return ownershipMatch && courseTypeMatch;
+        // });
 
+        // Perform API call with selected filter values
+        getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
+        setLoading(true);
 
+        return updatedSelected;
+    });
+}, 300); // Debounce for 300 milliseconds
+
+    // Use the debounced function in your event handler
+        const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
+            debouncedHandleCheckboxChange(groupId, value, isChecked);
+        };
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
-
+            
             // Make API call here with updated selected state ID
             const selectedStateIds = updatedSelected['state'] || [];
             const selectedCourseIds = updatedSelected['courses'] || [];
             const selectedStreamIds = updatedSelected['streams'] || [];
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds);
             setLoading(true); // Optionally set loading state
-
+    
             return updatedSelected;
         });
     };
@@ -312,7 +286,7 @@ function CollegeFilterSection() {
                                             <h6 className='fw-bold text-black my-2'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
-                                            <p className="mb-2 text-truncate"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state.name}`}</p>
+                                            <p className="m-0"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state}`}</p>
                                             <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                         </div>
                                     </div>
@@ -378,7 +352,7 @@ function CollegeFilterSection() {
             );
         }
         setLoading(true)
-
+           
 
         return (
             <div className='row'>
@@ -407,6 +381,8 @@ function CollegeFilterSection() {
         setAccordionOpen(prev => (prev === groupId ? null : groupId));
     };
 
+
+
     const StateButtons: React.FC<{
         options: Option[];
         setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
@@ -418,14 +394,14 @@ function CollegeFilterSection() {
                 const updatedSelections = stateSelections.includes(state)
                     ? stateSelections.filter(s => s !== state)
                     : [...stateSelections, state];
-
+    
                 const updatedSelected = { ...prevSelected, state: updatedSelections };
                 // Call the API with the selected state IDs
                 getcollegedata(updatedSelected.state);
                 return updatedSelected;
             });
         };
-
+    
         return (
             <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2">
                 <div className="col-12">
@@ -447,10 +423,7 @@ function CollegeFilterSection() {
             </div>
         );
     };
-
-
-
-
+    
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
         return (
@@ -468,11 +441,11 @@ function CollegeFilterSection() {
                             </a>
                         </div>
                         <div className={`collapse ${accordionOpen === optionGroup.id ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
-                            <div className='my-3'>
+                            <div className='my-3 options-container'>
                                 <hr></hr>
                                 <input type="search" placeholder="Search" className="icon-rtl form-control" id={`${optionGroup.id}Search`} aria-describedby={`${optionGroup.id}SearchHelp`} />
                                 {optionGroup.options.map((option, index) => (
-                                    <div key={index} className="form-check text-black searchCheckBox my-2">
+                                    <div key={index} className="form-check text-black searchCheckBox my-2 ">
                                         <input
                                             className="form-check-input"
                                             type="checkbox"
@@ -537,7 +510,8 @@ function CollegeFilterSection() {
     };
 
 
-
+   
+    
 
 
     // Calculate filtered colleges outside of handleViewMore
@@ -577,11 +551,11 @@ function CollegeFilterSection() {
                                     </button>
                                 </div>
                             )}
-                            <StateButtons
-                                options={options.find(option => option.id === 'state')?.options || []}
-                                setSelectedCheckboxes={setSelectedCheckboxes}
-                                selectedCheckboxes={selectedCheckboxes}
-                            />
+                           <StateButtons
+                        options={options.find(option => option.id === 'state')?.options || []}
+                        setSelectedCheckboxes={setSelectedCheckboxes}
+                        selectedCheckboxes={selectedCheckboxes}
+/>
 
                         </div>
                     </div>
@@ -595,4 +569,3 @@ function CollegeFilterSection() {
 }
 
 export default CollegeFilterSection;
-
