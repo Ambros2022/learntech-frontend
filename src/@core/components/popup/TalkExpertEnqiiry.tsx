@@ -111,22 +111,18 @@ const TALKExpertForm = () => {
           </div>
         </div>
         <div className="col-md-6">
-          <div className="mb-2">
-            <label htmlFor="expertCourse" className="form-label">Interested Course</label>
-            <select
-              className="form-select"
-              id="expertCourse"
+          <div className="mb-3">
+            <label htmlFor="expertCollege" className="form-label">Interested Course</label>
+            <input
+              type="text"
+              className="form-control"
+              id="expertCollege"
               name="course"
-              aria-label="expertCourse"
+              aria-describedby="expertCollege"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.course}
-            >
-              <option value="" disabled>Select Course</option>
-              <option value="bca">BCA</option>
-              <option value="btech">Btech</option>
-              <option value="bsc">BSC</option>
-            </select>
+            />
             {formik.touched.course && formik.errors.course ? (
               <div className='text-danger'>{formik.errors.course}</div>
             ) : null}
@@ -152,8 +148,8 @@ const TALKExpertForm = () => {
         </div>
       </div>
       <div className='mb-2 text-center'>
-              <button type="submit" className="btn ExpertSbtBtn">Submit</button>
-            </div>
+        <button type="submit" className="btn ExpertSbtBtn">Submit</button>
+      </div>
     </form>
   );
 };
