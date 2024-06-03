@@ -11,7 +11,8 @@ import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown'
 import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown';
 import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
-
+import dynamic from 'next/dynamic'; // Dynamic import for Next.js
+const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false });
 interface Country {
   id: number;
   name: string;
@@ -130,6 +131,32 @@ const Header = () => {
 
   }, [getuniversities, getexams, getnews, getCourses]);
 
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const replaceStrongWithComponent = () => {
+        const strongElements = document.getElementsByTagName('strong');
+
+        for (let i = 0; i < strongElements.length; i++) {
+          if (strongElements[i].innerText === 'Apply_Now') {
+            const container = document.createElement('div');
+            //@ts-ignore
+            strongElements[i].parentNode.replaceChild(container, strongElements[i]);
+            import('react-dom').then((ReactDOM) => {
+              ReactDOM.render(<EditorEnquiryForm  />, container);
+            });
+          }
+        }
+      };
+
+      replaceStrongWithComponent();
+
+      const observer = new MutationObserver(replaceStrongWithComponent);
+      observer.observe(document.body, { childList: true, subtree: true });
+
+      return () => observer.disconnect();
+    }
+  }, []);
 
 
 
