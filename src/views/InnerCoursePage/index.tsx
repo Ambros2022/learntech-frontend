@@ -4,9 +4,14 @@ import OverviewSection from './Components/OverviewSection';
 import ExpertSection from './Components/ExpertSection';
 import OtherCourses from './Components/OtherCourses';
 
-function InnerCoursePage() {
+
+
+
+function InnerCoursePage({ id }) {
+ 
   return (
     <>
+
       <BannerSection />
       <OverviewSection />
       <OtherCourses />

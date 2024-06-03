@@ -135,7 +135,7 @@ function CollegeFilterSection() {
             console.error(err);
         }
     }, [isMountedRef]);
-    
+
 
     useEffect(() => {
         fetchStatesData();
@@ -256,59 +256,41 @@ function CollegeFilterSection() {
         // console.log('Updated Visible Cards:', visibleCards);
     };
 
-    
-   
-    // Define a debounced version of handleCheckboxChange
-    const debouncedHandleCheckboxChange = debounce((groupId: string, value: string, isChecked: boolean) => {
-    const collegeFiltersSection = document.getElementById('collegeFiltersSection');
-    if (collegeFiltersSection) {
-        collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    setSelectedCheckboxes(prevSelected => {
-        const updatedSelected = { ...prevSelected };
-        if (isChecked) {
-            updatedSelected[groupId] = [...(updatedSelected[groupId] || []), value];
-        } else {
-            updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
+    const handleCheckboxChange = async (groupId: string, value: string, isChecked: boolean) => {
+        const collegeFiltersSection = document.getElementById('collegeFiltersSection');
+        if (collegeFiltersSection) {
+            collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Extract selected filter values
-        const { state: selectedStateIds = [], courses: selectedCourseIds = [], streams: selectedStreamIds = [], 
-            ownership: selectedOwnership = [], courseType: selectedCourseType = [] } = updatedSelected;
+        setSelectedCheckboxes((prevSelected) => {
+            const updatedSelected = { ...prevSelected };
+            if (isChecked) {
+                updatedSelected[groupId] = [value]; // Set the selected state(s)
+            } else {
+                delete updatedSelected[groupId]; // Remove the selected state(s)
+            }
 
-        // Filter colleges based on selected filters
-        // const filteredColleges = colleges.filter(college => {
-        //     const ownershipMatch = selectedOwnership.length === 0 || selectedOwnership.includes(college.college_type);
-        //     const courseTypeMatch = selectedCourseType.length === 0 || selectedCourseType.includes(college.course_type);
-        //     return ownershipMatch && courseTypeMatch;
-        // });
+            // Make API call here with selected state ID
+            const selectedStateId = parseInt(value); // Assuming the value is the state ID
+            getcollegedata(selectedStateId); // Pass the selected state ID to the API call function
+            return updatedSelected;
+        });
+    };
 
-        // Perform API call with selected filter values
-        getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType);
-        setLoading(true);
 
-        return updatedSelected;
-    });
-}, 300); // Debounce for 300 milliseconds
-
-    // Use the debounced function in your event handler
-const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
-    debouncedHandleCheckboxChange(groupId, value, isChecked);
-};
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
-            
+
             // Make API call here with updated selected state ID
             const selectedStateIds = updatedSelected['state'] || [];
             const selectedCourseIds = updatedSelected['courses'] || [];
             const selectedStreamIds = updatedSelected['streams'] || [];
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds);
             setLoading(true); // Optionally set loading state
-    
+
             return updatedSelected;
         });
     };
@@ -330,7 +312,7 @@ const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean
                                             <h6 className='fw-bold text-black my-2'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state}`}</p>
+                                            <p className="mb-2 text-truncate"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state.name}`}</p>
                                             <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                         </div>
                                     </div>
@@ -396,7 +378,7 @@ const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean
             );
         }
         setLoading(true)
-           
+
 
         return (
             <div className='row'>
@@ -436,14 +418,14 @@ const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean
                 const updatedSelections = stateSelections.includes(state)
                     ? stateSelections.filter(s => s !== state)
                     : [...stateSelections, state];
-    
+
                 const updatedSelected = { ...prevSelected, state: updatedSelections };
                 // Call the API with the selected state IDs
                 getcollegedata(updatedSelected.state);
                 return updatedSelected;
             });
         };
-    
+
         return (
             <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2">
                 <div className="col-12">
@@ -465,10 +447,10 @@ const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean
             </div>
         );
     };
-    
-    
 
-   
+
+
+
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
         return (
@@ -555,8 +537,8 @@ const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean
     };
 
 
-   
-   
+
+
 
     // Calculate filtered colleges outside of handleViewMore
     const filteredColleges = colleges.filter(college => {
@@ -595,11 +577,11 @@ const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean
                                     </button>
                                 </div>
                             )}
-                           <StateButtons
-    options={options.find(option => option.id === 'state')?.options || []}
-    setSelectedCheckboxes={setSelectedCheckboxes}
-    selectedCheckboxes={selectedCheckboxes}
-/>
+                            <StateButtons
+                                options={options.find(option => option.id === 'state')?.options || []}
+                                setSelectedCheckboxes={setSelectedCheckboxes}
+                                selectedCheckboxes={selectedCheckboxes}
+                            />
 
                         </div>
                     </div>

@@ -13,25 +13,95 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
     {
+      sectionTitle: 'Main',
+      auth: false
+    },
+
+    {
+      title: 'University/Colleges',
+      icon: 'tabler:school',
+      auth: false,
+      children: [
+        {
+          title: 'College',
+          path: '/app/dashboard/college',
+          // icon: 'tabler:mail',
+          auth: false
+        },
+        {
+          title: 'College Courses',
+          path: '/app/dashboard/course',
+          icon: 'tabler:notes',
+          auth: false
+        }
+      ]
+    },
+
+    {
       title: 'School',
       icon: 'tabler:building',
       auth: false,
       children: [
         {
-          title: 'Schools',
-          path: '/app/dashboard/schools',
-          // icon: 'tabler:mail',
-          auth: false
-        },
-        {
           title: 'School Board',
           path: '/app/dashboard/schoolboard',
           auth: false
         },
-        
+        {
+          title: 'Schools',
+          path: '/app/dashboard/schools',
+          // icon: 'tabler:mail',
+          auth: false
+        }
       ]
     },
+    {
+      title: 'Exam',
+      path: '/app/dashboard/exam',
+      icon: 'tabler:file-pencil',
+      auth: false
+    },
+    {
+      title: 'News',
+      icon: 'tabler:news',
+      auth: false,
+      children: [
+        {
+          title: 'News Categories',
+          path: '/app/dashboard/newscategories',
+          auth: false
+        },
+        {
+          title: 'News & Events',
+          path: '/app/dashboard/newsevents',
+          auth: false
+        }
+      ]
+    },
+    {
+      title: 'Blog',
+      path: '/app/dashboard/blog',
+      icon: 'tabler:file-pencil',
+      auth: false
+    },
 
+    {
+      title: 'Enquiries',
+      path: '/app/dashboard/enquiry',
+      icon: 'tabler:phone-outgoing',
+      auth: false
+    },
+
+    {
+      sectionTitle: 'Starter',
+      auth: false
+    },
+    {
+      title: 'Setup Single Pages',
+      path: '/app/dashboard/Pagess',
+      icon: 'tabler:book',
+      auth: false
+    },
     {
       title: 'Locations',
       icon: 'tabler:map-pin',
@@ -56,70 +126,22 @@ const navigation = (): VerticalNavItemsType => {
     },
 
     {
-      title: 'University/Colleges',
-      icon: 'tabler:school',
-      auth: false,
-      children: [
-        {
-          title: 'College',
-          path: '/app/dashboard/college',
-          // icon: 'tabler:mail',
-          auth: false
-        },
-       
-        
-      ]
+      title: 'Stream',
+      path: '/app/dashboard/stream',
+      icon: 'tabler:baseline-density-small',
+      auth: false
     },
-
+    {
+      title: 'Substream',
+      path: '/app/dashboard/substream',
+      icon: 'tabler:clipboard-text',
+      auth: false
+    },
     {
       title: 'General Course',
       path: '/app/dashboard/generalcourse',
       icon: 'tabler:book-filled',
       auth: false
-    },
-    {
-      title: 'Enquiries',
-      path: '/app/dashboard/enquiry',
-      icon: 'tabler:phone-outgoing',
-      auth: false
-    },
-
-    {
-      title: 'Exam',
-      path: '/app/dashboard/exam',
-      icon: 'tabler:file-pencil',
-      auth: false
-    },
-    {
-      title: 'Main Course',
-      path: '/app/dashboard/course',
-      icon: 'tabler:notes',
-      auth: false
-    },
-    {
-      title: 'Landing Page',
-      path: '/app/dashboard/landingpage ',
-      icon: 'tabler:note',
-      auth: false
-    },
-
-    {
-      title: 'News',
-      icon: 'tabler:news',
-      auth: false,
-      children: [
-        {
-          title: 'News Categories',
-          path: '/app/dashboard/newscategories',
-          auth: false
-        },
-        {
-          title: 'News & Events',
-          path: '/app/dashboard/newsevents',
-          auth: false
-        },
-       
-      ]
     },
 
     {
@@ -130,40 +152,16 @@ const navigation = (): VerticalNavItemsType => {
     },
 
     {
-      title: 'Blog',
-      path: '/app/dashboard/blog',
-      icon: 'tabler:file-pencil',
-      auth: false
-    },
-
-    {
       title: 'Recognition',
       path: '/app/dashboard/recognition',
       icon: 'tabler:text-recognition',
       auth: false
     },
-    {
-      title: 'Pages',
-      path: '/app/dashboard/Pagess',
-      icon: 'tabler:book',
-      auth: false
-    },
+
     {
       title: 'Banner',
       path: '/app/dashboard/banner',
       icon: 'tabler:frame',
-      auth: false
-    },
-    {
-      title: 'Stream',
-      path: '/app/dashboard/stream',
-      icon: 'tabler:baseline-density-small',
-      auth: false
-    },
-    {
-      title: 'Substream',
-      path: '/app/dashboard/substream',
-      icon: 'tabler:clipboard-text',
       auth: false
     },
 
@@ -185,7 +183,7 @@ const navigation = (): VerticalNavItemsType => {
           // icon: 'tabler:layout-sidebar-left-collapse',
           auth: false
         },
-    
+
         {
           title: 'Scholar Level',
           path: '/app/dashboard/scholar_level ',
@@ -197,12 +195,32 @@ const navigation = (): VerticalNavItemsType => {
           path: '/app/dashboard/scholarship ',
           // icon: 'tabler:notes',
           auth: false
-        },
-       
-        
+        }
       ]
     },
 
+    {
+      title: 'Landing Page',
+      path: '/app/dashboard/landingpage ',
+      icon: 'tabler:note',
+      auth: false
+    },
+
+
+    {
+      title: 'Testimonial',
+      path: '/app/dashboard/testimonial',
+      icon: 'tabler:device-tv',
+      auth: false
+    },
+
+    {
+      title: 'Team',
+      path: '/app/dashboard/ourteam',
+      icon: 'tabler:users',
+      auth: false
+    },
+    
     {
       title: 'Job',
       icon: 'tabler:weight',
@@ -214,7 +232,7 @@ const navigation = (): VerticalNavItemsType => {
           // icon: 'tabler:layout-sidebar-left-collapse',
           auth: false
         },
-    
+
         {
           title: 'Jobs Positions',
           path: '/app/dashboard/jobs_positions ',
@@ -234,26 +252,9 @@ const navigation = (): VerticalNavItemsType => {
           path: '/app/dashboard/jobenquiry',
           // icon: 'tabler:notes',
           auth: false
-        },
-        
+        }
       ]
     },
-   
-    {
-      title: 'Testimonial',
-      path: '/app/dashboard/testimonial',
-      icon: 'tabler:device-tv',
-      auth: false
-    },
-
-
-    {
-      title: 'Team',
-      path: '/app/dashboard/ourteam',
-      icon: 'tabler:users',
-      auth: false
-    },
-
 
     {
       title: 'Data Backup',
@@ -262,7 +263,6 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
 
-   
     // {
     //   title: 'School',
     //   icon: 'tabler:school',

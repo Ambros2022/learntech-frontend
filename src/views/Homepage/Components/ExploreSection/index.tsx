@@ -1,21 +1,13 @@
+import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import axios1 from 'src/configs/axios';
 
 
 function ExploreSection() {
   const [activeTab, setActiveTab] = useState('Colleges');
-  const [displayCount, setDisplayCount] = useState(18);
-  
-  interface data {
-    id: number;
-    name: string;
-    logo: string;
-    uniqueCollegeCount: number;
-    
-  }
-  
-  const [data, setData] = useState<data[]>([]);
-
+  const [data, setData] = useState<any[]>([]);
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [datasize, setDatasize] = useState(12);
 
   const fetchData = useCallback(async () => {
     try {
@@ -27,13 +19,15 @@ function ExploreSection() {
       } else if (activeTab === 'Exams') {
         endpoint = 'api/website/exploreexam/get';
       }
+      const roleparams: any = { page: 1, size: datasize };
+      const response = await axios1.get(endpoint, { params: roleparams });
 
-      const response = await axios1.get(endpoint);
       setData(response.data.data);
+      setVisibleCount(response.data.totalItems);
     } catch (err) {
       console.error(err);
     }
-  }, [activeTab]);
+  }, [activeTab,datasize]);
 
   useEffect(() => {
     fetchData();
@@ -41,60 +35,67 @@ function ExploreSection() {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setDisplayCount(18);
+    setDatasize(12);
   };
 
   const renderData = () => {
-    return data.slice(0, displayCount).map((item) => (
+    return data.map((item) => (
+
       <CardComponent
         key={item.id}
         title={item.name}
         imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`}  // Adjust the path as needed
         count={item.uniqueCollegeCount}
       />
+
     ));
   };
-  
 
-  const handleViewMore = () => {
-    setDisplayCount((prevCount) => prevCount + 6);
+
+
+  const showMoreCourses = () => {
+    setDatasize(prevSize => prevSize + 6);
   };
 
   function CardComponent({ title, imageSrc, count }) {
     return (
-      <div className="col-md-4 col-lg-2 mb-3 d-flex">
-        <div className="card text-center flex-fill">
+      // <Link href="/f">
+      <div className="col-md-4 col-lg-2 mb-3">
+        <div className="card text-center exploreCardHover">
           <div className="row">
-            <div className="col-md-12 col-4 col-sm-3">
-              <img
-                width={70}
-                height={30}
-                src={imageSrc}
-                className="img-fluid mx-auto mt-3"
-                alt={`${title}-logo`}
-              />
-            </div>
-            <div className="col-md-12 col-6 col-sm-7 text-md-center text-start">
-              <div className="card-body">
-                <p className="card-text m-0 text-blue">{count} {activeTab}</p>
-                <h6 className="card-title">{title}</h6>
+            <Link href="/f">
+              <div className="col-md-12 col-4 col-sm-3">
+                <img
+                  width={70}
+                  height={30}
+                  src={imageSrc}
+                  className="img-fluid mx-auto mt-3"
+                  alt={`${title}-logo`}
+                />
               </div>
-            </div>
-            <div className="col-2 cardArrow">
-              <span>
-                <a href="#">
-                  <img
-                    width={27}
-                    height={27}
-                    src="/images/icons/right arrow.svg"
-                    alt="right-arrow"
-                  />
-                </a>
-              </span>
-            </div>
+              <div className="col-md-12 col-6 col-sm-7 text-md-center text-start">
+                <div className="card-body">
+                  <p className="card-text m-0 text-blue">{count} {activeTab}</p>
+                  <h6 className="card-title text-truncate">{title}</h6>
+                </div>
+              </div>
+              <div className="col-2 cardArrow">
+                <span>
+                  <a href="#">
+                    <img
+                      width={27}
+                      height={27}
+                      src="/images/icons/right arrow.svg"
+                      alt="right-arrow"
+                    />
+                  </a>
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
+      // </Link>
     );
   }
 
@@ -133,11 +134,15 @@ function ExploreSection() {
         <div id="exploreCardCon">
           <div className="row">{renderData()}</div>
         </div>
-        <div className="text-center mt-4">
-          <button className="btn viewMoreCollegeBtn" onClick={handleViewMore}>
-            View More
-          </button>
-        </div>
+        {visibleCount > data.length && (
+          <div className="text-center mt-4">
+            {visibleCount}
+            {data.length}
+            <button className="btn viewMoreCollegeBtn" onClick={showMoreCourses}>
+              View More
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

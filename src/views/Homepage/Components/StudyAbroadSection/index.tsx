@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'
 import axios1 from 'src/configs/axios';
-
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 function StudyAbroadSection() {
 
@@ -203,7 +203,8 @@ function StudyAbroadSection() {
 
   const getcountries = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10000 };
+      // const roleparams = { page: 1, size: 10,};
+      const roleparams = { page: 1, size: 10, india: false };
       const response = await axios1.get('api/website/country/get', { params: roleparams });
       const countriesData = response.data.data;
       setCountries(countriesData);
@@ -270,16 +271,17 @@ function StudyAbroadSection() {
 
   const renderCards = () => {
     return cardData.map((card) => (
-      <div key={card.id} className="card StudyAbroadCard mb-5 h-100">
+      <div key={card.id} className="card featuredClgCard mb-5 h-100">
         <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
         <div className="card-body">
           <h5 className="card-title text-blue text-truncate" style={{ fontSize: '18px' }}>{card.name}</h5>
-          <p className="card-text">
-            <img width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
+          <p className="card-text text-truncate">
+            <img width={14} height={14} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
             {card.address}
           </p>
           <div className="d-flex justify-content-center">
-            <a href="#" className="btn">Apply Now</a>
+            {/* <a href="#" className="btn">Apply Now</a> */}
+            <GlobalEnquiryForm className="applyNowButton btn" />
           </div>
         </div>
       </div>

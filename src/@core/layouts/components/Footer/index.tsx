@@ -105,7 +105,7 @@ const Footer = () => {
             <GlobalEnquiryForm pagename="Brochure" title="Get Brochure" />
           </div>
           <div className="mt-md-3 col-md-4 text-md-end">
-            <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={20} height={20} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
+            <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={30} height={30} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
             <a href="https://wa.me/+919036020076" target='_blank' className="whatsappIcon" ><Image width={30} height={30} className="footer-arrow" src="/images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
           </div>
         </div>
