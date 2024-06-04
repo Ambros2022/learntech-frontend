@@ -20,7 +20,7 @@ const SignInForm: React.FC = () => {
 
   return (
     <div className="container mt-3">
-      <h6 className="text-center"><small className='text-black'>Welcome back!</small></h6>
+      <h5 className="text-center text-black">Welcome back!</h5>
       <Formik
         initialValues={{
           email: '',
@@ -80,7 +80,7 @@ const SignInForm: React.FC = () => {
         <small>Already have an account? <span className='text-blue fw-bold'>Sign In</span></small>
       </div>
 
-    </div>
+    </div >
   );
 };
 

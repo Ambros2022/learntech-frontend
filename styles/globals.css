@@ -11,8 +11,7 @@
   }
 
   code {
-    font-family: 'Public Sans', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-      'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue';
+    font-family: 'Poppins';
     padding: 0.1rem 0.4rem;
     font-size: 90%;
     color: #274896;
@@ -83,7 +82,7 @@
   .counsellingBtn {
     background-color: #274896 !important;
     color: white !important;
-    padding: 15px !important;
+    padding: 10px !important;
     font-size: 17px !important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
@@ -218,23 +217,27 @@
   }
 
   .searchSec {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: saturate(180%) blur(8px) !important;
-    color: white !important;
+    /* background: rgba(255, 255, 255, 0.1) !important; */
+    /* backdrop-filter: saturate(180%) blur(8px) !important; */
+    background-color: white !important;
+    /* color: #254692 !important; */
+    font-weight: bold !important;
     border: 1px solid white !important;
     font-size: 16px !important;
-    padding: 20px !important;
+    padding: 15px !important;
     border-radius: 10px !important;
     width: 100% !important;
     margin: auto 0 !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px;
   }
 
   .w-90 {
     width: 90% !important;
   }
 
+
   .searchSec h1 {
-    font-size: 1rem !important;
+    font-size: 18px !important;
     cursor: pointer;
   }
 
@@ -504,8 +507,9 @@
   }
 
   .footer-logo {
-    width: 25% !important;
-    height: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin-left: -20px !important;
   }
 
   .footerCon a {
@@ -600,8 +604,8 @@
   }
 
   .featuredClgCard img {
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
   }
 
   .featuredClgCard .card-text img {
@@ -614,6 +618,7 @@
 
   .featuredClgCard a {
     background-color: white;
+    font-size: 12px !important;
     color: #254692;
     border: 1px solid #254692 !important;
   }
@@ -766,6 +771,16 @@
     margin-right: 10px !important;
   }
 
+  @media (min-width:1025px) and (max-width:1321px) {
+    .top-nav .nav-link {
+      font-size: 14px !important;
+    }
+
+    .featuredClgCard a {
+      font-size: 11px !important;
+    }
+  }
+
   @media (min-width: 1024px) and (max-width: 1199px) {
     .featuredClgCard a {
       font-size: 12px !important;
@@ -797,6 +812,12 @@
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
+    .footer-logo {
+      width: 100% !important;
+      height: 100% !important;
+      margin-left: -14px !important;
+    }
+
     .bannerCon .carousel-item img {
       object-fit: cover;
     }
@@ -948,6 +969,12 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .footer-logo {
+      width: 100% !important;
+      height: 100% !important;
+      margin-left: -10px !important;
+    }
+
     .card-con {
       margin: 25px 0px !important;
     }
@@ -1211,11 +1238,6 @@
 
     .card-con .fi-right svg {
       height: 0.7em !important;
-    }
-
-    .footer-logo {
-      width: 60% !important;
-      height: auto !important;
     }
 
     .card-con .carousel-button-group {
@@ -1908,6 +1930,11 @@
   }
 
   @media (min-width: 992px) and (max-width: 1024px) {
+    .searchSec h1 {
+      font-size: 15px !important;
+      cursor: pointer;
+    }
+
     .dentalCourseCon h1 {
       font-size: 27px !important;
       font-weight: bold !important;
@@ -1972,6 +1999,7 @@
     text-decoration: none;
     /* No underline by default */
     color: black;
+    font-size: 20px !important;
     /* Default color for inactive tabs */
   }
 
@@ -1980,7 +2008,7 @@
     /* Bold for active tab */
     color: #254692;
     /* Blue color for active tab */
-    border-bottom: 2px solid #254692;
+    border-bottom: 3px solid #254692;
     padding-bottom: 5px;
   }
 
@@ -2636,6 +2664,7 @@
     height: 100%;
   }
 
+
   /* .ExpertCon .form-control {
   background-color: transparent !important;
 }
@@ -2683,6 +2712,11 @@
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
+    .searchSec h1 {
+      font-size: 15px !important;
+      cursor: pointer;
+    }
+
     .newsLinkSec .fi-left {
       margin-left: -35px !important;
     }
@@ -2883,7 +2917,7 @@
   }
 
   .FeaturedClgCon .card-Image-top {
-    height: 235px !important;
+    /* height: 235px !important; */
     object-fit: contain !important;
   }
 
@@ -2969,7 +3003,7 @@
 
   @media (min-width:992px) and (max-width:1024px) {
     .FeaturedClgCon .card-Image-top {
-      height: 166px !important;
+      /* height: 166px !important; */
       object-fit: contain !important;
     }
 
@@ -2989,7 +3023,7 @@
 
   @media (min-width:768px) and (max-width:991px) {
     .FeaturedClgCon .card-Image-top {
-      height: 166px !important;
+      /* height: 166px !important; */
       object-fit: contain !important;
     }
 
@@ -3015,7 +3049,7 @@
 
   @media (min-width:320px) and (max-width:767px) {
     .FeaturedClgCon .card-Image-top {
-      height: 262px !important;
+      /* height: 262px !important; */
       object-fit: contain !important;
     }
 
@@ -3041,7 +3075,7 @@
 
   @media (min-width:424px) and (max-width:767px) {
     .FeaturedClgCon .card-Image-top {
-      height: 300px !important;
+      /* height: 300px !important; */
       object-fit: contain !important;
     }
 
@@ -3063,7 +3097,7 @@
     }
 
     .FeaturedClgCon .card-Image-top {
-      height: 220px !important;
+      /* height: 220px !important; */
       object-fit: contain !important;
     }
 
@@ -3427,7 +3461,7 @@
   }
 
   .top-nav .nav-link {
-    font-size: 17px !important;
+    font-size: 14px !important;
   }
 
   a .counsellingBtn:hover {
@@ -3464,6 +3498,60 @@
     background-color: #254692 !important;
     color: white !important;
     padding: 10px 12px !important;
+  }
+
+  .img-style {
+    background-color: rgba(39, 72, 150, 0.1) !important;
+    padding: 0px 20px !important;
+    border-radius: 20px !important;
+    filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%) !important;
+  }
+
+  .viewDetailBtn {
+    background-color: transparent !important;
+    color: #254692 !important;
+    border: 1px solid #254692 !important;
+  }
+
+  .social-clr {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .careerContact input {
+    padding: 10px 20px !important;
+  }
+
+  .careerContact input::placeholder {
+    color: rgba(143, 143, 143, 1) !important;
+  }
+
+  .fileInput {
+    display: none !important;
+  }
+
+  .fileLabel {
+    background-color: #254692 !important;
+    color: white !important;
+    padding: 12px 10px !important;
+    border-radius: 5px !important;
+  }
+
+  @media (min-width:768px) and (max-width:992px) {
+    .img-style {
+      width: 80% !important;
+    }
+
+    .careerSec {
+      height: 900px !important;
+    }
+
+    .careerSec img {
+      width: 100%;
+      height: 642px;
+      object-fit: cover;
+    }
   }
 
   @media (min-width:320px) and (max-width:767px) {

@@ -35,7 +35,11 @@ const Footer = () => {
     <>
       <section className="footerCon">
         <div className="container pt-3">
-          <Image className="footer-logo" src="/images/icons/footer-learntech-logo.png" width={270} height={60} alt="learntech-logo" />
+          <div className="row">
+            <div className="col-xl-3 col-lg-4 col-md-4 col-8">
+              <Image className="footer-logo" src="/images/icons/footer-learntech-logo.png" width={200} height={200} alt="learntech-logo" />
+            </div>
+          </div>
           <div className="row">
             <div className="col-md-4 text-white">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>

@@ -7058,11 +7058,6 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-linkedin-login-oauth2@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/react-linkedin-login-oauth2/-/react-linkedin-login-oauth2-2.0.1.tgz"
-  integrity sha512-vlmChbRhLjWZVU/A96I09GcpH3xLFTawQbT/05Dl3kuLVupdaVo7YZf2qrDQmrdfDm4Qj8svX1gkwHkybAMKDg==
-
 react-linkedin-login@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/react-linkedin-login/-/react-linkedin-login-1.0.4.tgz"
