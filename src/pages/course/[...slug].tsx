@@ -22,7 +22,7 @@ const CoursePage = () => {
 
   const slugLength = getSlugLength(router.query.slug);
 
-  
+
 
   if (!isRouterReady) {
     return <Spinner /> // Or a loading spinner
@@ -30,11 +30,14 @@ const CoursePage = () => {
 
   return (
     <>
-      {slugLength <= 2 && Array.isArray(router.query.slug) ? (
-        <InnerCoursePage id={router.query.slug[0]} />
-      ) : (
-        <SubInnerCoursePage />
+      {Array.isArray(router.query.slug) && (
+        router.query.slug.length <= 2 ? (
+          <InnerCoursePage id={router.query.slug[0]} />
+        ) : (
+          <SubInnerCoursePage id={router.query.slug[0]} />
+        )
       )}
+
     </>
   );
 };
