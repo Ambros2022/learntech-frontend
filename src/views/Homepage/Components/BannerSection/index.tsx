@@ -155,74 +155,76 @@ function BannerSection() {
             <div className="row">
               <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2">
                 <div className="searchSec align-content-center">
-                  <h1 className='mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
-                  <div className="row">
-                    <div className="col-12 position-relative">
-                      <Autocomplete
-                        open={open}
-                        onClose={() => setOpen(false)}
-                        onInputChange={handleInputChange}
-                        options={searchResults}
-                        getOptionLabel={(option) => option.name}
-                        renderOption={(props, option) => (
-                          <li {...props}>
-                            {option.type === "collegedata" ? (
-                              <Link href={`/college/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
-                                {option.name}
-                              </Link>
-                            ) : (
-                              <Link href={`/school/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
-                                {option.name}
-                              </Link>
-                            )}
-                          </li>
-                        )}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            size="small"
-                            placeholder="Search"
-                            className="form-control"
-                            InputProps={{
-                              ...params.InputProps,
-                              sx: {
-                                '& .MuiInputBase-input::placeholder': {
-                                  color: 'black',
+                  <div className='outlineSec'>
+                    <h1 className='fw-bold text-blue mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
+                    <div className="row">
+                      <div className="col-12 position-relative">
+                        <Autocomplete
+                          open={open}
+                          onClose={() => setOpen(false)}
+                          onInputChange={handleInputChange}
+                          options={searchResults}
+                          getOptionLabel={(option) => option.name}
+                          renderOption={(props, option) => (
+                            <li {...props}>
+                              {option.type === "collegedata" ? (
+                                <Link href={`/college/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
+                                  {option.name}
+                                </Link>
+                              ) : (
+                                <Link href={`/school/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
+                                  {option.name}
+                                </Link>
+                              )}
+                            </li>
+                          )}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              size="small"
+                              placeholder="Search"
+                              className="form-control"
+                              InputProps={{
+                                ...params.InputProps,
+                                sx: {
+                                  '& .MuiInputBase-input::placeholder': {
+                                    color: 'black',
+                                  },
                                 },
-                              },
-                              endAdornment: (
-                                <React.Fragment>
-                                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                  {params.InputProps.endAdornment}
-                                  {params.inputProps.value ? (
-                                    <InputAdornment position="end">
-                                      <IconButton
-                                        onClick={() => {
-                                          if (params.inputProps.onChange) {
-                                            const event = {
-                                              target: {
-                                                value: ''
-                                              }
-                                            } as React.ChangeEvent<HTMLInputElement>;
-                                            params.inputProps.onChange(event);
-                                          }
-                                        }}
-                                      >
-                                        <ClearIcon />
-                                      </IconButton>
-                                    </InputAdornment>
-                                  ) : null}
-                                </React.Fragment>
-                              ),
-                            }}
-                          />
-                        )}
-                      />
+                                endAdornment: (
+                                  <React.Fragment>
+                                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                    {params.InputProps.endAdornment}
+                                    {params.inputProps.value ? (
+                                      <InputAdornment position="end">
+                                        <IconButton
+                                          onClick={() => {
+                                            if (params.inputProps.onChange) {
+                                              const event = {
+                                                target: {
+                                                  value: ''
+                                                }
+                                              } as React.ChangeEvent<HTMLInputElement>;
+                                              params.inputProps.onChange(event);
+                                            }
+                                          }}
+                                        >
+                                          <ClearIcon />
+                                        </IconButton>
+                                      </InputAdornment>
+                                    ) : null}
+                                  </React.Fragment>
+                                ),
+                              }}
+                            />
+                          )}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 col-lg-5 ps-lg-5 ms-auto mb-5" id="animation3">
+              <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3">
                 <div className="searchForm">
                   <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
                   <Formik

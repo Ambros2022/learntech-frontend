@@ -155,12 +155,13 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         map: isAddMode ? '' : olddata.map,
         video_url: isAddMode ? '' : olddata.video_url,
         info: isAddMode ? '' : olddata.info,
+        course_fees: isAddMode ? '' : olddata.course_fees,
         admissions: isAddMode ? '' : olddata.admissions,
         placements: isAddMode ? '' : olddata.placements,
         rankings: isAddMode ? '' : olddata.rankings,
         scholarship: isAddMode ? '' : olddata.scholarship,
         hostel: isAddMode ? '' : olddata.hostel,
-        status: isAddMode ? 'Draft' : olddata.status,
+        status: isAddMode ? 'Published' : olddata.status,
         country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
         state_id: isAddMode ? '' : olddata.state ? olddata.state : '',
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
@@ -346,6 +347,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('avg_rating', data.avg_rating);
             formData.append('is_associated', data.is_associated);
             formData.append('info', data.info);
+            formData.append('course_fees', data.course_fees);
             formData.append('admissions', data.admissions);
             formData.append('placements', data.placements);
             formData.append('rankings', data.rankings);
@@ -413,6 +415,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('is_associated', data.is_associated);
             formData.append('avg_rating', data.avg_rating);
             formData.append('info', data.info);
+            formData.append('course_fees', data.course_fees);
             formData.append('admissions', data.admissions);
             formData.append('placements', data.placements);
             formData.append('rankings', data.rankings);
@@ -791,7 +794,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             >
                                                 <MenuItem value='college'>college</MenuItem>
                                                 <MenuItem value='university'>university</MenuItem>
-                                                <MenuItem value='board'>board</MenuItem>
+                                                {/* <MenuItem value='board'>board</MenuItem> */}
 
                                             </CustomTextField>
                                         )}
@@ -1172,6 +1175,24 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
 
                                 <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Course & fees</Typography>
+
+                                    <Controller
+                                        name='course_fees'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("course_fees", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>Admissions</Typography>
 
                                     <Controller
@@ -1307,7 +1328,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                         maxSize={2000000}
                                         fileNames={fileNamesbanner}
                                         label="Upload banner_image"
-                                        helpertext="Estimated Size: 640*480px"
+                                        helpertext="Estimated Size: 216*124px"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />

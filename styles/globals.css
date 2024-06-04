@@ -11,8 +11,7 @@
   }
 
   code {
-    font-family: 'Public Sans', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-      'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue';
+    font-family: 'Poppins';
     padding: 0.1rem 0.4rem;
     font-size: 90%;
     color: #274896;
@@ -83,7 +82,7 @@
   .counsellingBtn {
     background-color: #274896 !important;
     color: white !important;
-    padding: 15px !important;
+    padding: 10px !important;
     font-size: 17px !important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
@@ -218,23 +217,27 @@
   }
 
   .searchSec {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: saturate(180%) blur(8px) !important;
-    color: white !important;
+    /* background: rgba(255, 255, 255, 0.1) !important; */
+    /* backdrop-filter: saturate(180%) blur(8px) !important; */
+    background-color: white !important;
+    /* color: #254692 !important; */
+    font-weight: bold !important;
     border: 1px solid white !important;
     font-size: 16px !important;
-    padding: 20px !important;
+    padding: 15px !important;
     border-radius: 10px !important;
     width: 100% !important;
     margin: auto 0 !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px;
   }
 
   .w-90 {
     width: 90% !important;
   }
 
+
   .searchSec h1 {
-    font-size: 1rem !important;
+    font-size: 18px !important;
     cursor: pointer;
   }
 
@@ -468,29 +471,39 @@
 
   .studyAbroadNav a {
     border-radius: 0 !important;
-    color: #8f8f8f !important;
+    color: black !important;
     text-decoration: none !important;
+    padding: 10px 10px !important;
+    border: 1px solid #8f8f8f !important;
+    width: 150px !important;
+    padding: 12px 30px !important;
+    text-align: center !important;
+    background-color: #8f8f8f3f;
   }
 
-  .studyAbroadNav a:hover,
-  .studyAbroadNav a:focus {
+  .studyAbroadNav a:first-child {
+    border-radius: 7px 0px 0px 7px !important;
+  }
+
+  .studyAbroadNav a:last-child {
+    border-radius: 0px 7px 7px 0px !important;
+  }
+
+  .studyAbroadNav a:hover {
     font-weight: bold !important;
-    padding-bottom: 15px !important;
-    border-bottom-style: solid !important;
-    border-bottom-width: 3.1px !important;
-    width: fit-content !important;
     color: #254692 !important;
   }
 
-  .studyAbroadNav .active,
-  .studyAbroadNav .active :focus,
-  .studyAbroadNav .active :hover {
+  .studyAbroadNav .active {
     font-weight: bold !important;
-    padding-bottom: 15px !important;
-    border-bottom-style: solid !important;
-    border-bottom-width: 3.1px !important;
-    width: fit-content !important;
-    color: #254692 !important;
+    color: white !important;
+    background-color: #254692 !important;
+  }
+
+  .studyAbroadNav .active:hover {
+    font-weight: bold !important;
+    color: white !important;
+    background-color: #254692 !important;
   }
 
   .footerCon {
@@ -504,8 +517,9 @@
   }
 
   .footer-logo {
-    width: 25% !important;
-    height: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin-left: -20px !important;
   }
 
   .footerCon a {
@@ -523,7 +537,7 @@
     /* remove the gap so it doesn't close */
   }
 
-  .top-nav a:hover {
+  .top-nav .nav-item a:hover {
     color: #254692 !important;
   }
 
@@ -600,8 +614,8 @@
   }
 
   .featuredClgCard img {
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
   }
 
   .featuredClgCard .card-text img {
@@ -614,6 +628,7 @@
 
   .featuredClgCard a {
     background-color: white;
+    font-size: 12px !important;
     color: #254692;
     border: 1px solid #254692 !important;
   }
@@ -766,6 +781,16 @@
     margin-right: 10px !important;
   }
 
+  @media (min-width:1025px) and (max-width:1321px) {
+    .top-nav .nav-link {
+      font-size: 14px !important;
+    }
+
+    .featuredClgCard a {
+      font-size: 11px !important;
+    }
+  }
+
   @media (min-width: 1024px) and (max-width: 1199px) {
     .featuredClgCard a {
       font-size: 12px !important;
@@ -797,6 +822,12 @@
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
+    .footer-logo {
+      width: 100% !important;
+      height: 100% !important;
+      margin-left: -14px !important;
+    }
+
     .bannerCon .carousel-item img {
       object-fit: cover;
     }
@@ -948,6 +979,31 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .featuredClgCard a {
+      background-color: white;
+      font-size: 10px !important;
+      color: #254692;
+      border: 1px solid #254692 !important;
+    }
+
+    .studyAbroadNav a {
+      width: 120px !important;
+    }
+
+    .studyAbroadNav a:first-child {
+      border-radius: 0 !important;
+    }
+
+    .studyAbroadNav a:last-child {
+      border-radius: 0 !important;
+    }
+
+    .footer-logo {
+      width: 100% !important;
+      height: 100% !important;
+      margin-left: -10px !important;
+    }
+
     .card-con {
       margin: 25px 0px !important;
     }
@@ -1159,6 +1215,10 @@
   }
 
   @media (max-width: 575px) {
+    .FeaturedClgCon .carousel-button-group {
+      top: 215px !important;
+    }
+
     .FeaturedClgCon .fi-left {
       margin-left: 8px !important;
       background-color: white;
@@ -1188,7 +1248,7 @@
     }
 
     .StudyAbroadCon .carousel-button-group {
-      top: 530px !important;
+      top: 620px !important;
     }
 
     .card-con .fi-left {
@@ -1211,11 +1271,6 @@
 
     .card-con .fi-right svg {
       height: 0.7em !important;
-    }
-
-    .footer-logo {
-      width: 60% !important;
-      height: auto !important;
     }
 
     .card-con .carousel-button-group {
@@ -1308,6 +1363,15 @@
   /* College Filter Section */
   .bg-skyBlue {
     background-color: #f6f8fb !important;
+  }
+
+  .Expert-bg-skyBlue {
+    background-color: #f6f8fb !important;
+  }
+
+  .footerCon .bi-chevron-double-right {
+    font-size: 10px;
+    padding-right: 6px;
   }
 
   .icon-rtl {
@@ -1414,7 +1478,7 @@
   .topFeaturedClgCard img {
     width: auto;
     height: auto;
-    object-fit: cover;
+    object-fit: contain !important;
   }
 
   .topFeaturedClgSec .carousel-button-group {
@@ -1908,6 +1972,11 @@
   }
 
   @media (min-width: 992px) and (max-width: 1024px) {
+    .searchSec h1 {
+      font-size: 15px !important;
+      cursor: pointer;
+    }
+
     .dentalCourseCon h1 {
       font-size: 27px !important;
       font-weight: bold !important;
@@ -1972,6 +2041,7 @@
     text-decoration: none;
     /* No underline by default */
     color: black;
+    font-size: 20px !important;
     /* Default color for inactive tabs */
   }
 
@@ -1980,7 +2050,7 @@
     /* Bold for active tab */
     color: #254692;
     /* Blue color for active tab */
-    border-bottom: 2px solid #254692;
+    border-bottom: 3px solid #254692;
     padding-bottom: 5px;
   }
 
@@ -2328,161 +2398,162 @@
   border: 1px solid #254692 !important;
 }
 
-.errCon h1 {
-  font-size: 30px !important;
-}
-
-.errCon h6 {
-  font-size: 14px !important;
-}
-
-.faqSec .accordion-button {
-  --bs-accordion-btn-active-icon: url(../public/images/icons/white-arrow.png) !important;
-}
-
-.faqSec .accordion-header button {
-  background-color: rgba(39, 72, 150, 0.2) !important;
-  color: black !important;
-}
-
-.faqSec .accordion-header button:focus {
-  box-shadow: none !important;
-}
-
-.faqSec .accordion-header button:hover {
-  background-color: #3d5aa0 !important;
-  color: white !important;
-  --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
-}
-
-.faqSec .accordion-header button:focus {
-  background-color: #3d5aa0 !important;
-  color: white !important;
-  --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
-}
-
-.faqSec .accordion-header:focus {
-  outline: 0 !important;
-  border: 0 !important;
-}
-
-.faqSec .accordion-header:active {
-  outline: 0 !important;
-  border: 0 !important;
-}
-
-.faqSec .accordion-item {
-  border: 0;
-  border-radius: 0;
-}
-
-.accordion-item:first-of-type {
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
-}
-
-.accordion-item:last-of-type {
-  border-radius: 0 !important;
-  border: 0 !important;
-}
-.btn-close1 img {
-  width: auto;
-  height: auto;
-}
-
-.streamBtn {
-  background-color: #ced6e96b !important;
-}
-
-@media (min-width: 768px) and (max-width: 992px) {
-  .studyInUsaCon h4 {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 575px) {
-  .topClgIcon {
-    top: 13px;
-    left: 15px;
+  .errCon h1 {
+    font-size: 30px !important;
   }
 
-  .topClgIcon img {
-    width: 150% !important;
-    height: 100% !important;
+  .errCon h6 {
+    font-size: 14px !important;
   }
 
-  .topUniCardCon .carousel-button-group {
-    position: absolute !important;
-    top: 150px !important;
+  .faqSec .accordion-button {
+    --bs-accordion-btn-active-icon: url(../public/images/icons/white-arrow.png) !important;
   }
 
-  .topUniCardCon .fi-left {
-    margin-left: 20px !important;
-    background-color: white;
-    border-radius: 25px;
-    padding: 2px 8px;
+  .faqSec .accordion-header button {
+    background-color: rgba(39, 72, 150, 0.2) !important;
+    color: black !important;
   }
 
-  .topUniCardCon .fi-right {
-    margin-right: 45px !important;
-    background-color: white;
-    border-radius: 25px;
-    padding: 2px 8px;
+  .faqSec .accordion-header button:focus {
+    box-shadow: none !important;
   }
 
-  .faqImgSec img {
-    width: 330px;
-    height: 200px;
-  }
-}
-
-@media (min-width: 320px) and (max-width: 374px) {
-  .topUniCardCon .carousel-button-group {
-    position: absolute !important;
-    top: 125px !important;
-  }
-}
-
-@media (min-width: 320px) and (max-width: 767px) {
-  .overflowScroll {
-    overflow-x: scroll !important;
+  .faqSec .accordion-header button:hover {
+    background-color: #3d5aa0 !important;
+    color: white !important;
+    --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
   }
 
-  .studyInUsaCon {
-    height: 400px;
+  .faqSec .accordion-header button:focus {
+    background-color: #3d5aa0 !important;
+    color: white !important;
+    --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
   }
 
-  .studyInUsaCon h4 {
-    font-size: 13px;
+  .faqSec .accordion-header:focus {
+    outline: 0 !important;
+    border: 0 !important;
   }
 
-  .studyInUsaCon .searchSec1 {
-    width: 100%;
-    margin: auto;
+  .faqSec .accordion-header:active {
+    outline: 0 !important;
+    border: 0 !important;
   }
 
-  .studyInUsaCon .searchSec1 input[type='search'] {
-    background: transparent !important;
-    border: 1px solid white !important;
-    padding: 10px 20px !important;
-    font-size: 12px !important;
+  .faqSec .accordion-item {
+    border: 0;
+    border-radius: 0;
   }
 
-  .studyInUsaCon .searchSec1 {
-    font-size: 12px !important;
-    padding: 10px !important;
+  .accordion-item:first-of-type {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
   }
 
-  .studyInUsaCon .searchBtn {
-    font-size: 12px !important;
+  .accordion-item:last-of-type {
+    border-radius: 0 !important;
+    border: 0 !important;
   }
 
-  .studyInUsaCon .helpMeBtn {
-    font-size: 12px !important;
+  .btn-close1 img {
+    width: auto;
+    height: auto;
   }
-}
 
-/* Write Review Page */
+  .streamBtn {
+    background-color: #ced6e96b !important;
+  }
+
+  @media (min-width: 768px) and (max-width: 992px) {
+    .studyInUsaCon h4 {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .topClgIcon {
+      top: 13px;
+      left: 15px;
+    }
+
+    .topClgIcon img {
+      width: 150% !important;
+      height: 100% !important;
+    }
+
+    .topUniCardCon .carousel-button-group {
+      position: absolute !important;
+      top: 150px !important;
+    }
+
+    .topUniCardCon .fi-left {
+      margin-left: 20px !important;
+      background-color: white;
+      border-radius: 25px;
+      padding: 2px 8px;
+    }
+
+    .topUniCardCon .fi-right {
+      margin-right: 45px !important;
+      background-color: white;
+      border-radius: 25px;
+      padding: 2px 8px;
+    }
+
+    .faqImgSec img {
+      width: 330px;
+      height: 200px;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 374px) {
+    .topUniCardCon .carousel-button-group {
+      position: absolute !important;
+      top: 125px !important;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    .overflowScroll {
+      overflow-x: scroll !important;
+    }
+
+    .studyInUsaCon {
+      height: 400px;
+    }
+
+    .studyInUsaCon h4 {
+      font-size: 13px;
+    }
+
+    .studyInUsaCon .searchSec1 {
+      width: 100%;
+      margin: auto;
+    }
+
+    .studyInUsaCon .searchSec1 input[type='search'] {
+      background: transparent !important;
+      border: 1px solid white !important;
+      padding: 10px 20px !important;
+      font-size: 12px !important;
+    }
+
+    .studyInUsaCon .searchSec1 {
+      font-size: 12px !important;
+      padding: 10px !important;
+    }
+
+    .studyInUsaCon .searchBtn {
+      font-size: 12px !important;
+    }
+
+    .studyInUsaCon .helpMeBtn {
+      font-size: 12px !important;
+    }
+  }
+
+  /* Write Review Page */
 
   .writeReviewSec {
     background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
@@ -2551,6 +2622,11 @@
     display: none !important;
   }
 
+  .errBtn {
+    color: #254692 !important;
+    border: 1px solid #254692 !important;
+  }
+
   .ratingBtn {
     background-color: rgb(255, 174, 0) !important;
     color: white !important;
@@ -2559,7 +2635,7 @@
   }
 
   .filterCardBorder .card-Image-top {
-    object-fit: cover !important;
+    object-fit: contain !important;
     height: 140px;
   }
 
@@ -2580,9 +2656,9 @@
     height: 100%;
   }
 
-  .filterCardBorder .card-title {
+  /* .filterCardBorder .card-title {
     min-height: 50px !important;
-  }
+  } */
 
   .filterCardBorder .card-text {
     min-height: 50px !important;
@@ -2630,15 +2706,8 @@
     height: 100%;
   }
 
-  /* .ExpertCon .form-control {
-  background-color: transparent !important;
-}
-.ExpertCon input::placeholder {
-  color: white !important;
-}
-.ExpertCon .form-label {
-  color: white !important;
-} */
+
+
   @media (min-width: 992px) and (max-width: 1024px) {
     .newsLinkSec .fi-left {
       margin-left: -40px !important;
@@ -2677,6 +2746,11 @@
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
+    .searchSec h1 {
+      font-size: 15px !important;
+      cursor: pointer;
+    }
+
     .newsLinkSec .fi-left {
       margin-left: -35px !important;
     }
@@ -2877,7 +2951,7 @@
   }
 
   .FeaturedClgCon .card-Image-top {
-    height: 235px !important;
+    /* height: 235px !important; */
     object-fit: contain !important;
   }
 
@@ -2904,8 +2978,15 @@
     min-height: 80px !important;
   } */
 
-  .StudyAbroadCard {}
+  
 
+  .options-container {
+    max-height: 300px;
+    /* Adjust this value as needed */
+    overflow-y: auto;
+    padding-right: 15px;
+    /* Space for the scrollbar */
+  }
 
 
   .latestNewsCon .card-text {
@@ -2956,7 +3037,7 @@
 
   @media (min-width:992px) and (max-width:1024px) {
     .FeaturedClgCon .card-Image-top {
-      height: 166px !important;
+      /* height: 166px !important; */
       object-fit: contain !important;
     }
 
@@ -2976,7 +3057,7 @@
 
   @media (min-width:768px) and (max-width:991px) {
     .FeaturedClgCon .card-Image-top {
-      height: 166px !important;
+      /* height: 166px !important; */
       object-fit: contain !important;
     }
 
@@ -3002,7 +3083,7 @@
 
   @media (min-width:320px) and (max-width:767px) {
     .FeaturedClgCon .card-Image-top {
-      height: 262px !important;
+      /* height: 262px !important; */
       object-fit: contain !important;
     }
 
@@ -3028,7 +3109,7 @@
 
   @media (min-width:424px) and (max-width:767px) {
     .FeaturedClgCon .card-Image-top {
-      height: 300px !important;
+      /* height: 300px !important; */
       object-fit: contain !important;
     }
 
@@ -3050,7 +3131,7 @@
     }
 
     .FeaturedClgCon .card-Image-top {
-      height: 220px !important;
+      /* height: 220px !important; */
       object-fit: contain !important;
     }
 
@@ -3312,6 +3393,13 @@
     max-height: 480px;
   }
 
+  .galleryImgStyle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px !important;
+  }
+
   @media (min-width:320px) and (max-width:767px) {
     .examLatest {
       min-height: 630px;
@@ -3404,4 +3492,110 @@
   .react-tel-input .form-control {
     width: 100% !important;
     font-size: 1rem !important;
+  }
+
+  .top-nav .nav-link {
+    font-size: 14px !important;
+  }
+
+  a .counsellingBtn:hover {
+    color: white !important;
+  }
+
+  @media (min-width:992px) and (max-width:1024px) {
+    .top-nav .nav-link {
+      font-size: 12px !important;
+    }
+
+    .counsellingBtn {
+      font-size: 14px !important;
+    }
+  }
+
+  @media(max-width:1023px) {
+    .hideBtnTxt {
+      display: none;
+    }
+  }
+
+  .careerSec {
+    height: 500px !important;
+  }
+
+  .careerSec img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+
+  .currentOpeningBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    padding: 10px 12px !important;
+  }
+
+  .img-style {
+    background-color: rgba(39, 72, 150, 0.1) !important;
+    padding: 0px 20px !important;
+    border-radius: 20px !important;
+    filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%) !important;
+  }
+
+  .viewDetailBtn {
+    background-color: transparent !important;
+    color: #254692 !important;
+    border: 1px solid #254692 !important;
+  }
+
+  .social-clr {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .careerContact input {
+    padding: 10px 20px !important;
+  }
+
+  .careerContact input::placeholder {
+    color: rgba(143, 143, 143, 1) !important;
+  }
+
+  .fileInput {
+    display: none !important;
+  }
+
+  .fileLabel {
+    background-color: #254692 !important;
+    color: white !important;
+    padding: 12px 10px !important;
+    border-radius: 5px !important;
+  }
+
+  @media (min-width:768px) and (max-width:992px) {
+    .img-style {
+      width: 80% !important;
+    }
+
+    .careerSec {
+      height: 900px !important;
+    }
+
+    .careerSec img {
+      width: 100%;
+      height: 642px;
+      object-fit: cover;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .careerSec {
+      height: 900px !important;
+    }
+
+    .careerSec img {
+      width: 100%;
+      height: 642px;
+      object-fit: cover;
+    }
   }

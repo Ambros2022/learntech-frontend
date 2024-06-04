@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import NewsList from '../newsList';
+import ContactForm from 'src/@core/components/popup/ContactForm';
 
 const BlogCards = () => {
 
@@ -182,53 +183,7 @@ const BlogCards = () => {
                         </div>
                     </div>
                     <div className="col-lg-6 col-xl-4 col-md-5">
-                        <div className='bg-skyBlue px-lg-5 px-3 rounded'>
-                            <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Talk to our Experts</h5>
-                            <Formik
-                                initialValues={{
-                                    name: '',
-                                    email: '',
-                                    contact_number: '',
-                                    message: '',
-                                    course: '',
-                                    location: '',
-                                }}
-                                validationSchema={validationSchema}
-                                onSubmit={handleSubmit}
-                                resetForm
-                            >
-                                <Form>
-                                    <div className="mb-3">
-                                        <Field type="text" name="name" placeholder="Full Name*" className="form-control" />
-                                        <ErrorMessage name="name" component="div" className="error text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field type="text" name="contact_number" placeholder="Contact Number*" className="form-control" />
-                                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field type="email" name="email" placeholder="Email ID*" className="form-control" />
-                                        <ErrorMessage name="email" component="div" className="error text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field type="text" name="location" placeholder="Location*" className="form-control" />
-                                        <ErrorMessage name="location" component="div" className="error text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field type="text" name="course" placeholder="Interested Course*" className="form-control" />
-                                        <ErrorMessage name="course" component="div" className="error text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field as="textarea" name="message" placeholder="Type your message" className="form-control" />
-                                        <ErrorMessage name="message" component="div" className="error text-danger" />
-                                    </div>
-
-                                    <div className="d-grid pb-3">
-                                        <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                                    </div>
-                                </Form>
-                            </Formik>
-                        </div>
+                        <ContactForm heading={'Talk to our Experts'} />
                         <NewsList newsItems={newsData} />
                     </div>
                 </div>

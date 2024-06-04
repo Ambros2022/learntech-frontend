@@ -1,103 +1,66 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import MainCarousel from 'src/@core/components/main-carousel';
 import Image from 'next/image';
+import axios1 from 'src/configs/axios';
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
-// Define the Card component
-const Card = ({ imageUrl, title, applyLink, detailsLink }) => {
+
+
+interface College {
+  id: number;
+  name: string;
+  banner_image: string;
+  
+}
+
+
+function TopFeaturedColleges() {
+  const [colleges, setColleges] = useState<College[]>([]);
+
+
+  // Fetch all colleges
+  const getcolleges = useCallback(async () => {
+    try {
+      const roleparams = { page: 1, size: 10000 };
+      const response = await axios1.get('api/website/colleges/get', { params: roleparams });
+
+    
+      setColleges(response.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    getcolleges();
+  }, [getcolleges]);
+
+  // Define the Card component
+const Card = ({ id, slug, imageUrl, title, applyLink, detailsLink }) => {
   return (
     <div className="card topFeaturedClgCard mb-5">
       <Image height={300} width={500} src={imageUrl} alt={title} />
       <div className="card-body">
-        <h5 className="card-title text-black text-center">{title}</h5>
+        <h5 className="card-title text-black text-center text-truncate">{title}</h5>
         <div className="d-flex justify-content-center gap-2">
-          <a href={applyLink} className="ApplyNowBtn btn">Apply Now</a>
-          <a href={detailsLink} className="viewDetailsBtn btn">View Details</a>
+          {/* <a href={applyLink} className="ApplyNowBtn btn">Apply Now</a> */}
+          <GlobalEnquiryForm className="ApplyNowBtn btn" />
+          {/* <Link href={`/college/${id}/${slug}`} className="viewMoreBtn btn">View More</Link> */}
+          <a  href={`/college/${id}/${slug}}`} className="viewDetailsBtn btn">View Details</a>
         </div>
       </div>
     </div>
   );
-}
+};
 
-function TopFeaturedColleges() {
-  // Array of card data objects
-  const topFeaturedCollegeItems = [
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-  ];
-
-  // Map the card data objects to Card components
-  const cardComponents = topFeaturedCollegeItems.map((item, index) => (
-    <Card key={index} {...item} />
+  // Map the fetched colleges to Card components
+  const cardComponents = colleges.map((college, index) => (
+    <Card
+      key={index}
+      imageUrl={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`}
+      title={college.name}
+      applyLink="#"
+      detailsLink="#" id={college.id} slug={college.name}    />
   ));
 
   return (

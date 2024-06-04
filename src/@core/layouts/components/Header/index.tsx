@@ -11,7 +11,8 @@ import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown'
 import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown';
 import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
-
+import dynamic from 'next/dynamic'; // Dynamic import for Next.js
+const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false });
 interface Country {
   id: number;
   name: string;
@@ -21,7 +22,7 @@ interface Courses {
   id: number;
   slug: string;
 }
-
+import { createRoot } from 'react-dom/client';
 const Header = () => {
 
   const router = useRouter();
@@ -131,6 +132,32 @@ const Header = () => {
   }, [getuniversities, getexams, getnews, getCourses]);
 
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const replaceStrongWithComponent = () => {
+        const strongElements = document.getElementsByTagName('strong');
+
+        for (let i = 0; i < strongElements.length; i++) {
+          if (strongElements[i].innerText === 'Apply_Now') {
+            const container = document.createElement('div');
+            //@ts-ignore
+            strongElements[i].parentNode.replaceChild(container, strongElements[i]);
+            const root = createRoot(container);
+            root.render(<EditorEnquiryForm />);
+          }
+        }
+      };
+
+      replaceStrongWithComponent();
+
+      const observer = new MutationObserver(replaceStrongWithComponent);
+      observer.observe(document.body, { childList: true, subtree: true });
+
+      return () => observer.disconnect();
+    }
+  }, []);
+
+
 
 
 
@@ -166,9 +193,9 @@ const Header = () => {
           <button className="navbar-toggler" type="button" onClick={toggle} data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className={`${isOpen ? 'show' : ''} collapse navbar-collapse`} id="navbarSupportedContent">
-            <span className="top-nav">
-              <ul className="navbar-nav mb-2 mb-lg-0 ms-xl-5 ms-md-0">
+          <div className={`${isOpen ? 'show' : ''}collapse navbar-collapse`} id="navbarSupportedContent">
+            <span className="top-nav ms-auto">
+              <ul className="navbar-nav">
                 <li className="nav-item">
                   <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/">Home</Link>
                 </li>
@@ -260,7 +287,7 @@ const Header = () => {
                 </li>
 
                 <li className="nav-item dropdown d-lg-inline-block d-none">
-                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/home" id="navbarDropdownMenuLink" role="button"
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/" id="navbarDropdownMenuLink" role="button"
                     aria-expanded="false">
                     More
                   </Link>
@@ -317,24 +344,17 @@ const Header = () => {
                       <Link className="d-flex justify-content-between dropdown-item" href="/meds">
                         Medical Edu Studio
                       </Link>
-
                     </li>
-
-
                   </ul>
+                </li>
+                <li className="hideBtnTxt">
+                  <Image src="/images/icons/user-icon.svg" className='mx-2 mt-xl-2 mt-1 socialIcon' width={30} height={30} alt="user-icon" />
+                </li>
+                <li className="hideBtnTxt">
+                  <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn" />
                 </li>
               </ul>
             </span>
-            <div className='d-lg-flex d-none justify-content-xl-end ms-auto'>
-              {/* <Link className='mx-2  mt-1 socialIcon' href="#"> */}
-
-              <Image src="/images/icons/user-icon.svg" className='mx-2 mt-xl-2 mt-1 socialIcon' width={30} height={30} alt="user-icon" />
-              {/* </Link> */}
-
-              {/* <button className=" btn counsellingBtn p-2" type="submit">Get Counselling</button> */}
-              <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn p-2" />
-
-            </div>
           </div>
         </div>
       </nav>
@@ -350,14 +370,14 @@ const Header = () => {
               </div>
               <div className="col-md-6 signForm">
                 <div className="d-flex justify-content-center gap-4 pt-2 mb-1" role="tablist">
-                  <a href="#" className="nav-link active" id="pills-SignUp-tab" data-bs-toggle="pill" data-bs-target="#pills-SignUp" type="button" role="tab" aria-controls="pills-SignUp" aria-selected="true">Sign Up</a>
-                  <a href="#" className="nav-link" id="pills-SignIn-tab" data-bs-toggle="pill" data-bs-target="#pills-SignIn" type="button" role="tab" aria-controls="pills-SignIn" aria-selected="false">Sign In</a>
+                  <a href="#" className="nav-link" id="pills-SignUp-tab" data-bs-toggle="pill" data-bs-target="#pills-SignUp" type="button" role="tab" aria-controls="pills-SignUp" aria-selected="true">Sign Up</a>
+                  <a href="#" className="nav-link active" id="pills-SignIn-tab" data-bs-toggle="pill" data-bs-target="#pills-SignIn" type="button" role="tab" aria-controls="pills-SignIn" aria-selected="false">Sign In</a>
                 </div>
                 <div className="tab-content" id="pills-tabContent">
-                  <div className="tab-pane fade show active" id="pills-SignUp" role="tabpanel" aria-labelledby="pills-SignUp-tab">
+                  <div className="tab-pane fade" id="pills-SignUp" role="tabpanel" aria-labelledby="pills-SignUp-tab">
                     <SignupForm />
                   </div>
-                  <div className="tab-pane fade" id="pills-SignIn" role="tabpanel" aria-labelledby="pills-SignIn-tab">
+                  <div className="tab-pane fade show active" id="pills-SignIn" role="tabpanel" aria-labelledby="pills-SignIn-tab">
                     <SignInForm />
                   </div>
                 </div>

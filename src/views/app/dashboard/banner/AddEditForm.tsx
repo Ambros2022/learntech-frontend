@@ -63,18 +63,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         'All_college_page',
         'All_university_page',
         'All_school_page'
-      ];
+    ];
 
     const schema: any = yup.object().shape({
         link: yup
             .string()
             .trim()
             .required(),
-            title: yup
+        title: yup
             .string()
             .trim()
             .required(),
-            status: yup
+        status: yup
             .string()
             .trim()
             .required(),
@@ -86,7 +86,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         title: isAddMode ? '' : olddata.title,
         image: isAddMode ? '' : olddata.image,
         description: isAddMode ? '' : olddata.description,
-        status: isAddMode ? 'Draft' : olddata.status,
+        status: isAddMode ? 'Published' : olddata.status,
     }
 
     const {
@@ -131,7 +131,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -170,7 +170,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -205,7 +205,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-linkencoded">
                 <Grid container spacing={5}>
-                <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='title'
                             control={control}
@@ -247,30 +247,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={6}>
                         <Controller
-                        name='promo_banner'
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field: { value, onChange } }) => (
-                            <CustomTextField
-                     fullWidth
-                      select
-                   value={value}
-                 label='Make Promotional Banner'
-                    onChange={onChange}
-                error={Boolean(errors.promo_banner)}
-                     helperText={errors.promo_banner && 'This field is required'}
-                         >
-                            {options.map((option, value) => (
-                            <MenuItem key={value} value={option}>
-                            {option}
-                             </MenuItem>
-            ))}
-          </CustomTextField>
-        )}
-      />
-                     </Grid>
+                            name='promo_banner'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    select
+                                    value={value}
+                                    label='Make Promotional Banner'
+                                    onChange={onChange}
+                                    error={Boolean(errors.promo_banner)}
+                                    helperText={errors.promo_banner && 'This field is required'}
+                                >
+                                    {options.map((option, value) => (
+                                        <MenuItem key={value} value={option}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </CustomTextField>
+                            )}
+                        />
+                    </Grid>
 
-                  
+
 
                     <Grid item xs={12} sm={6}>
                         <Controller
@@ -296,18 +296,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={6}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
-                                <Controller
-                                    name='status'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
-                                            <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
-                                            <FormControlLabel value='Published' control={<Radio />} label='Published' />
-                                        </RadioGroup>
-                                    )}
-                                />
-                              
+                        <Controller
+                            name='status'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                    <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                    <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                </RadioGroup>
+                            )}
+                        />
+
                     </Grid>
 
                     <Grid item xs={12} sm={3}>
@@ -323,7 +323,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             rejectionMessage='Try another file for upload.'
                         />
                     </Grid>
-                
+
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}
                     </Grid>

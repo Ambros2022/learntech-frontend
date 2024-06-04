@@ -1,25 +1,144 @@
-import React from 'react'
+import axios from 'src/configs/axios';
+import Autocomplete from 'src/@core/components/mui/autocomplete';
+import React, { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import axios1 from 'axios';
+import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
+import Link from 'next/link';
 
-function BannerSection() {
-    return (
-        <>
-            <section className='bg-blue collegeBannerCon'>
-                <div className='d-flex justify-content-center h-100 w-100 container'>
-                    <div className='align-content-center w-100'>
-                        <h1 className='fw-bold text-white mb-3'>FIND TOP COLLEGES, COURSE ADMISSIONS, FEE STRUCTURES, AND PLACEMENT</h1>
-                        <div className="row">
-                            <div className="col-md-7 mb-3">
-                                <input type="search" className='form-control' placeholder='Find your college' />
-                            </div>
-                            <div className="mb-3 col-md-2 col-6 col-lg-1 col-xl-1 d-flex justify-content-start justify-content-md-center">
-                                <button className='btn bg-white text-blue srchBtn'>Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </>
-    )
+let cancelToken: any;
+
+interface SearchResult {
+  id: number;
+  name: string;
 }
 
-export default BannerSection
+function BannerSection() {
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async (value: string) => {
+    if (value.length < 2) {
+      setSearchResults([]);
+      setOpen(false); // Close the dropdown if the input is too short
+      return;
+    }
+
+    try {
+      setLoading(true);
+      if (cancelToken !== undefined) {
+        cancelToken.cancel('Operation canceled due to new request.');
+      }
+      cancelToken = axios1.CancelToken.source();
+
+      const response = await axios.get('api/website/colleges/get', {
+        cancelToken: cancelToken.token,
+        params: { searchfrom: 'name', searchtext: value },
+      });
+
+      const suggestions = response.data.data.map((item: { id: number; name: string }) => ({
+        name: item.name,
+        id: item.id,
+      }));
+
+      setSearchResults(suggestions);
+      setOpen(true);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInputChange = (event: any, value: string) => {
+    handleSearch(value);
+  };
+
+  const handleClearInput = (params: any) => {
+    setSearchResults([]);
+    setOpen(false);
+    if (params.inputProps.onChange) {
+      const event = {
+        target: {
+          value: '',
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      params.inputProps.onChange(event);
+    }
+  };
+
+  return (
+    <>
+      <section className="bg-blue collegeBannerCon">
+        <div className="d-flex justify-content-center h-100 w-100 container">
+          <div className="align-content-center w-100">
+            <h1 className="fw-bold text-white mb-3">
+              FIND TOP COLLEGES, COURSE ADMISSIONS, FEE STRUCTURES, AND PLACEMENT
+            </h1>
+            <div className="row">
+              <div className="col-7 mb-3">
+                <Autocomplete
+                  open={open}
+                  onClose={() => setOpen(false)}
+                  onInputChange={handleInputChange}
+                  options={searchResults}
+                  getOptionLabel={(option: SearchResult) => option.name}
+                  renderOption={(props, option: SearchResult) => (
+                    <li {...props}>
+                      <Link
+                        href={`/college/${option.id}/${option.name}`}
+                        style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
+                      >
+                        {option.name}
+                      </Link>
+                    </li>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder="Search"
+                      InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon />
+                          </InputAdornment>
+                        ),
+                        sx: {
+                          backgroundColor: 'white',
+                          color: 'black',
+                          '& .MuiInputBase-input::placeholder': {
+                            color: 'black',
+                          },
+                        },
+                        endAdornment: (
+                          <>
+                            {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                            {params.inputProps.value ? (
+                              <InputAdornment position="end">
+                                <IconButton onClick={() => handleClearInput(params)}>
+                                  <ClearIcon />
+                                </IconButton>
+                              </InputAdornment>
+                            ) : null}
+                            {params.InputProps.endAdornment}
+                          </>
+                        ),
+                      }}
+                    />
+                  )}
+                  
+                  
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default BannerSection;

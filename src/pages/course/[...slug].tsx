@@ -1,44 +1,49 @@
-import { ReactNode } from 'react'
-// ** Layout Import
-import FrontLayout from 'src/@core/layouts/FrontLayout'
-import InnerCoursePage from 'src/views/InnerCoursePage'
-import SubInnerCoursePage from 'src/views/SubInnerCoursePage'
-import { useRouter } from 'next/router'
+import { ReactNode, useEffect, useState } from 'react';
+import FrontLayout from 'src/@core/layouts/FrontLayout';
+import InnerCoursePage from 'src/views/InnerCoursePage';
+import SubInnerCoursePage from 'src/views/SubInnerCoursePage';
+import { useRouter } from 'next/router';
+import Spinner from 'src/@core/components/spinner';
 
-const course = () => {
-    const router = useRouter()
+const CoursePage = () => {
+  const router = useRouter();
+  const [isRouterReady, setIsRouterReady] = useState(false);
 
-    const getSlugLength = (slug) => {
-        if (slug === undefined) {
-            return 0; // or handle undefined case as per your requirement
-        }
-        if (typeof slug === 'string') {
-            return slug.length;
-        }
-        if (Array.isArray(slug)) {
-            return slug.length;
-        }
-        return 0; // for any unexpected type
-    };
+  useEffect(() => {
+    if (router.isReady) {
+      setIsRouterReady(true);
+    }
+  }, [router.isReady]);
 
-    // Calculate the length of the slug
-    const slugLength = getSlugLength(router.query.slug);
+  const getSlugLength = (slug) => {
+    if (!slug) return 0;
+    return typeof slug === 'string' ? slug.length : Array.isArray(slug) ? slug.length : 0;
+  };
 
-    // Log the length of the slug
-    console.log(slugLength);
+  const slugLength = getSlugLength(router.query.slug);
 
-    return (
-        <>
-            {slugLength <= 2 && Array.isArray(router.query.slug) ?
-                <InnerCoursePage id={router.query.slug[0]} /> :
-                <SubInnerCoursePage />
-            }
-        </>
-    )
-}
 
-course.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
 
-course.guestGuard = true
+  if (!isRouterReady) {
+    return <Spinner /> // Or a loading spinner
+  }
 
-export default course
+  return (
+    <>
+      {Array.isArray(router.query.slug) && (
+        router.query.slug.length <= 2 ? (
+          <InnerCoursePage id={router.query.slug[0]} />
+        ) : (
+          <SubInnerCoursePage id={router.query.slug[0]} />
+        )
+      )}
+
+    </>
+  );
+};
+
+CoursePage.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>;
+
+CoursePage.guestGuard = true;
+
+export default CoursePage;

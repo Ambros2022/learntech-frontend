@@ -2,192 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'
 import axios1 from 'src/configs/axios';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import Link from 'next/link';
 
 function StudyAbroadSection() {
-
-  // const usaItems = [
-
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={700}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  //   // eslint-disable-next-line react/jsx-key
-  //   <div className="card StudyAbroadCard mb-5">
-  //     <Image src="/images/icons/university.jpg" width={300} height={100}
-  //       className="card-img-top" alt="university" />
-  //     <div className="card-body">
-  //       <h5 className="card-title text-blue">The University of Melbourne</h5>
-  //       <p className="card-text"><Image width={20} height={20} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />Melbourne, Victoria</p>
-  //       <div className="d-flex justify-content-center">
-  //         <a href="#" className="btn">Apply Now</a>
-  //       </div>
-  //     </div>
-  //   </div>,
-  // ];
 
   const [activeCountry, setActiveCountry] = useState<number | null>(null);
 
@@ -271,7 +88,7 @@ function StudyAbroadSection() {
 
   const renderCards = () => {
     return cardData.map((card) => (
-      <div key={card.id} className="card featuredClgCard mb-5 h-100">
+      <div key={card.id} className="mx-xl-4 mx-lg-2 mx-md-2 mx-5  card featuredClgCard mb-5 h-100">
         <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
         <div className="card-body">
           <h5 className="card-title text-blue text-truncate" style={{ fontSize: '18px' }}>{card.name}</h5>
@@ -279,9 +96,9 @@ function StudyAbroadSection() {
             <img width={14} height={14} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
             {card.address}
           </p>
-          <div className="d-flex justify-content-center">
-            {/* <a href="#" className="btn">Apply Now</a> */}
+          <div className="d-flex justify-content-between">
             <GlobalEnquiryForm className="applyNowButton btn" />
+            <Link href="/colleges" className="btn">View More</Link>
           </div>
         </div>
       </div>
@@ -307,9 +124,9 @@ function StudyAbroadSection() {
   return (
     <section className="StudyAbroadCon bg-white" id="animation7" data-aos="fade-up">
       <div className="container pt-5 position-relative">
-        <h4 className="fw-bold text-blue text-center">Study Abroad</h4>
+        <h2 className="fw-bold text-blue text-center">Study Abroad</h2>
         <p className="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div className="d-flex justify-content-center gap-md-4 gap-2 studyAbroadNav">
+        <div className="d-flex justify-content-center flex-wrap studyAbroadNav py-3 rounded" >
           {renderButtons()}
         </div>
         <div id="studyCardContainer">

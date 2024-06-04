@@ -1,24 +1,17 @@
 import Image from 'next/image';
 import React from 'react';
 
-function FacilitiesSection() {
-  const data = [
-    { id: 1, imageSrc: '/images/icons/Paramedical.svg', title: 'Paramedical' },
-    { id: 2, imageSrc: '/images/icons/Paramedical.svg', title: 'Paramedical' },
-    { id: 3, imageSrc: '/images/icons/Paramedical.svg', title: 'Paramedical' },
-    { id: 4, imageSrc: '/images/icons/Paramedical.svg', title: 'Paramedical' },
-    { id: 5, imageSrc: '/images/icons/Paramedical.svg', title: 'Paramedical' },
-    { id: 6, imageSrc: '/images/icons/Paramedical.svg', title: 'Paramedical' },
-  ];
+function FacilitiesSection({data}) {
+
 
   function CardList() {
     return (
       <div className="row pt-3">
-        {data.map(card => (
+        {data.collegeamenities.map(card => (
           <CardComponent
             key={card.id}
-            title={card.title}
-            imageSrc={card.imageSrc}
+            title={card.clgamenities.amenities_name}
+            imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.clgamenities.amenities_logo}`}
           />
         ))}
       </div>

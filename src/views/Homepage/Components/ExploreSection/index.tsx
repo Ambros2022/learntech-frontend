@@ -27,7 +27,7 @@ function ExploreSection() {
     } catch (err) {
       console.error(err);
     }
-  }, [activeTab,datasize]);
+  }, [activeTab, datasize]);
 
   useEffect(() => {
     fetchData();
@@ -39,17 +39,30 @@ function ExploreSection() {
   };
 
   const renderData = () => {
-    return data.map((item) => (
+    return data.map((item) => {
+      let url: any;
 
-      <CardComponent
-        key={item.id}
-        title={item.name}
-        imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`}  // Adjust the path as needed
-        count={item.uniqueCollegeCount}
-      />
+      if (activeTab === 'Colleges') {
+        url = `/colleges/?stream_id=[${item.id}]`;
+      } else if (activeTab === 'Courses') {
+        url = `/course/${item.id}/${item.slug}`;
+      } else if (activeTab === 'Exams') {
+        url = `/exams/?stream_id=[${item.id}]`;
+      }
 
-    ));
-  };
+      return (
+        <CardComponent
+          key={item.id}
+          title={item.name}
+          imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`}  // Adjust the path as needed
+          count={item.uniqueCollegeCount}
+          link={url}
+        />
+      );
+    })
+
+  }
+
 
 
 
@@ -57,13 +70,13 @@ function ExploreSection() {
     setDatasize(prevSize => prevSize + 6);
   };
 
-  function CardComponent({ title, imageSrc, count }) {
+  function CardComponent({ title, imageSrc, count, link }) {
     return (
       // <Link href="/f">
       <div className="col-md-4 col-lg-2 mb-3">
         <div className="card text-center exploreCardHover">
-          <div className="row">
-            <Link href="/f">
+          <Link href={link}>
+            <div className="row">
               <div className="col-md-12 col-4 col-sm-3">
                 <img
                   width={70}
@@ -75,8 +88,8 @@ function ExploreSection() {
               </div>
               <div className="col-md-12 col-6 col-sm-7 text-md-center text-start">
                 <div className="card-body">
-                  <p className="card-text m-0 text-blue">{count} {activeTab}</p>
-                  <h6 className="card-title text-truncate">{title}</h6>
+                  <p className="card-text m-0 text-black">{count} {activeTab}</p>
+                  <h6 className="card-title text-truncate text-blue">{title}</h6>
                 </div>
               </div>
               <div className="col-2 cardArrow">
@@ -91,10 +104,10 @@ function ExploreSection() {
                   </a>
                 </span>
               </div>
-            </Link>
-          </div>
-        </div>
-      </div>
+            </div>
+          </Link>
+        </div >
+      </div >
       // </Link>
     );
   }
@@ -102,9 +115,9 @@ function ExploreSection() {
   return (
     <section className="exploreCon" id="animation6" data-aos="fade-up">
       <div className="container py-5">
-        <h4 className="fw-bold text-blue text-center">
+        <h2 className="fw-bold text-blue text-center">
           Explore Colleges, Courses and Exams That Are Curated For You
-        </h4>
+        </h2>
         <div className="d-flex exploreNav justify-content-center mb-5" role="tablist">
           <a
             className={`btn ${activeTab === 'Colleges' ? 'active' : ''}`}
@@ -136,10 +149,10 @@ function ExploreSection() {
         </div>
         {visibleCount > data.length && (
           <div className="text-center mt-4">
-            {visibleCount}
-            {data.length}
+            {/* {visibleCount} */}
+            {/* {data.length} */}
             <button className="btn viewMoreCollegeBtn" onClick={showMoreCourses}>
-              View More
+              Load More
             </button>
           </div>
         )}
