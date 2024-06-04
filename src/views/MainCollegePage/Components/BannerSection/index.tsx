@@ -8,8 +8,13 @@ import Link from 'next/link';
 
 let cancelToken: any;
 
+interface SearchResult {
+  id: number;
+  name: string;
+}
+
 function BannerSection() {
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +27,7 @@ function BannerSection() {
 
     try {
       setLoading(true);
-      if (typeof cancelToken !== typeof undefined) {
+      if (cancelToken !== undefined) {
         cancelToken.cancel('Operation canceled due to new request.');
       }
       cancelToken = axios1.CancelToken.source();
@@ -78,8 +83,8 @@ function BannerSection() {
                   onClose={() => setOpen(false)}
                   onInputChange={handleInputChange}
                   options={searchResults}
-                  getOptionLabel={option => option.name}
-                  renderOption={(props, option) => (
+                  getOptionLabel={(option: SearchResult) => option.name}
+                  renderOption={(props, option: SearchResult) => (
                     <li {...props}>
                       <Link
                         href={`/college/${option.id}/${option.name}`}
@@ -89,21 +94,22 @@ function BannerSection() {
                       </Link>
                     </li>
                   )}
-                  renderInput={params => (
+                  renderInput={(params) => (
                     <TextField
                       {...params}
                       placeholder="Search"
+                      className="form-control"
                       InputProps={{
                         ...params.InputProps,
                         sx: {
-                            backgroundColor: 'white',
-                            color: 'black',
+                          // backgroundColor: 'white',
+                          color: 'black',
                           '& .MuiInputBase-input::placeholder': {
-                            color: 'black',
+                            color: 'black', // Change this color as per your requirement
                           },
                         },
                         endAdornment: (
-                          <React.Fragment>
+                          <>
                             {loading ? <CircularProgress color="inherit" size={20} /> : null}
                             {params.InputProps.endAdornment}
                             {params.inputProps.value ? (
@@ -113,7 +119,7 @@ function BannerSection() {
                                 </IconButton>
                               </InputAdornment>
                             ) : null}
-                          </React.Fragment>
+                          </>
                         ),
                       }}
                     />

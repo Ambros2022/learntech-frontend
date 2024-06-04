@@ -28,6 +28,7 @@ interface College {
     avg_rating: number;
     college_type: string;
     course_type: string;
+    slug: string;
 
 }
 
@@ -43,7 +44,7 @@ function CollegeFilterSection() {
         value: string;
         cities?: Option[];
     };
-    
+
     type OptionGroup = {
         id: string;
         label: string;
@@ -119,9 +120,9 @@ function CollegeFilterSection() {
             console.error('Error fetching states:', error);
         }
     }, [isMountedRef]);
-    
 
-    const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[] , cityIds?: string[]) => {
+
+    const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[], cityIds?: string[]) => {
         try {
             const params: any = {
                 page: 1,
@@ -139,7 +140,7 @@ function CollegeFilterSection() {
             console.error(err);
         }
     }, [isMountedRef]);
-    
+
 
     useEffect(() => {
         fetchStatesData();
@@ -179,7 +180,7 @@ function CollegeFilterSection() {
         },
     ];
 
-  
+
 
     const [visibleCards, setVisibleCards] = useState(6);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
@@ -212,59 +213,70 @@ function CollegeFilterSection() {
         // console.log('Updated Visible Cards:', visibleCards);
     };
 
-    
-   
+
+
     // Define a debounced version of handleCheckboxChange
     const debouncedHandleCheckboxChange = debounce((groupId: string, value: string, isChecked: boolean) => {
-    const collegeFiltersSection = document.getElementById('collegeFiltersSection');
-    if (collegeFiltersSection) {
-        collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    setSelectedCheckboxes(prevSelected => {
-        const updatedSelected = { ...prevSelected };
-        if (isChecked) {
-            updatedSelected[groupId] = [...(updatedSelected[groupId] || []), value];
-        } else {
-            updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
+        const collegeFiltersSection = document.getElementById('collegeFiltersSection');
+        if (collegeFiltersSection) {
+            collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Extract selected filter values
-        const { state: selectedStateIds = [], courses: selectedCourseIds = [], streams: selectedStreamIds = [], 
-            ownership: selectedOwnership = [], courseType: selectedCourseType = [], city: selectedCityIds = [] } = updatedSelected;
+        setSelectedCheckboxes(prevSelected => {
+            const updatedSelected = { ...prevSelected };
+            if (isChecked) {
+                updatedSelected[groupId] = [...(updatedSelected[groupId] || []), value];
+            } else {
+                updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
+            }
 
-        // Filter colleges based on selected filters
-        // const filteredColleges = colleges.filter(college => {
-        //     const ownershipMatch = selectedOwnership.length === 0 || selectedOwnership.includes(college.college_type);
-        //     const courseTypeMatch = selectedCourseType.length === 0 || selectedCourseType.includes(college.course_type);
-        //     return ownershipMatch && courseTypeMatch;
-        // });
+            // Extract selected filter values
+            const { state: selectedStateIds = [], courses: selectedCourseIds = [], streams: selectedStreamIds = [],
+                ownership: selectedOwnership = [], courseType: selectedCourseType = [], city: selectedCityIds = [] } = updatedSelected;
 
-        // Perform API call with selected filter values
-        getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
-        setLoading(true);
+            // Filter colleges based on selected filters
+            // const filteredColleges = colleges.filter(college => {
+            //     const ownershipMatch = selectedOwnership.length === 0 || selectedOwnership.includes(college.college_type);
+            //     const courseTypeMatch = selectedCourseType.length === 0 || selectedCourseType.includes(college.course_type);
+            //     return ownershipMatch && courseTypeMatch;
+            // });
 
-        return updatedSelected;
-    });
-}, 300); // Debounce for 300 milliseconds
+            // Perform API call with selected filter values
+            getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
+            setLoading(true);
+
+            return updatedSelected;
+        });
+    }, 300); // Debounce for 300 milliseconds
 
     // Use the debounced function in your event handler
-        const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
-            debouncedHandleCheckboxChange(groupId, value, isChecked);
-        };
+    const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
+        debouncedHandleCheckboxChange(groupId, value, isChecked);
+
+        setCheckboxState(prevState => ({
+            ...prevState,
+            [groupId]: {
+                ...prevState[groupId],
+                [value]: isChecked
+            }
+        }));
+    };
+    // const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
+    //     debouncedHandleCheckboxChange(groupId, value, isChecked);
+    // };
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
-            
+
             // Make API call here with updated selected state ID
             const selectedStateIds = updatedSelected['state'] || [];
             const selectedCourseIds = updatedSelected['courses'] || [];
             const selectedStreamIds = updatedSelected['streams'] || [];
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds);
             setLoading(true); // Optionally set loading state
-    
+
             return updatedSelected;
         });
     };
@@ -286,7 +298,7 @@ function CollegeFilterSection() {
                                             <h6 className='fw-bold text-black my-2'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state}`}</p>
+                                            <p className="m-0 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon' /> {`${location}`}</p>
                                             <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                         </div>
                                     </div>
@@ -352,7 +364,7 @@ function CollegeFilterSection() {
             );
         }
         setLoading(true)
-           
+
 
         return (
             <div className='row'>
@@ -373,14 +385,26 @@ function CollegeFilterSection() {
         );
     }
 
+    const [selectedOptions, setSelectedOptions] = useState({});
 
-
-    const [accordionOpen, setAccordionOpen] = useState<string | null>(null);
-
-    const toggleAccordion = (groupId: string) => {
-        setAccordionOpen(prev => (prev === groupId ? null : groupId));
+    const handleSelect = (sectionId, optionValue) => {
+        setSelectedOptions((prevSelectedOptions) => {
+            const updatedOptions = { ...prevSelectedOptions };
+            updatedOptions[sectionId] = optionValue;
+            return updatedOptions;
+        });
     };
 
+    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({});
+    const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
+
+
+    const toggleAccordion = (groupId: string) => {
+        setAccordionOpen(prevState => ({
+            ...prevState,
+            [groupId]: !prevState[groupId]
+        }));
+    };
 
 
     const StateButtons: React.FC<{
@@ -388,77 +412,93 @@ function CollegeFilterSection() {
         setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
         selectedCheckboxes: Record<string, string[]>;
     }> = ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
+
+
         const handleStateButtonClick = (state: string) => {
+            window.scrollTo({ top: 650, behavior: 'smooth' });
             setSelectedCheckboxes(prevSelected => {
                 const stateSelections = prevSelected.state || [];
                 const updatedSelections = stateSelections.includes(state)
                     ? stateSelections.filter(s => s !== state)
                     : [...stateSelections, state];
-    
+
                 const updatedSelected = { ...prevSelected, state: updatedSelections };
                 // Call the API with the selected state IDs
                 getcollegedata(updatedSelected.state);
                 return updatedSelected;
             });
         };
-    
+
         return (
             <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2">
                 <div className="col-12">
                     <h6 className="text-black">Filters By Location</h6>
                     <div className="d-flex flex-wrap">
                         {options.map((option, index) => (
-                            <label key={index} className="btn text-center rounded m-1 p-2 filterItemBtn">
-                                <input
-                                    type="checkbox"
-                                    checked={selectedCheckboxes.state?.includes(option.value) || false}
-                                    onChange={() => handleStateButtonClick(option.value)}
-                                    className="me-2"
-                                />
+                            <button
+                                key={index}
+                                className={`btn text-center rounded m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                onClick={() => handleStateButtonClick(option.value)}
+                            >
                                 {option.label}
-                            </label>
+                            </button>
                         ))}
                     </div>
                 </div>
             </div>
         );
     };
-    
+
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
+        const [searchTexts, setSearchTexts] = useState<Record<string, string>>({});
+
+        const handleSearchChange = (groupId: string, searchText: string) => {
+            setSearchTexts(prev => ({ ...prev, [groupId]: searchText }));
+        };
+
+        const filteredOptions = (optionGroup: OptionGroup) => {
+            const searchText = searchTexts[optionGroup.id] || '';
+            return optionGroup.options.filter(option =>
+                option.label.toLowerCase().includes(searchText.toLowerCase())
+            );
+        };
+
         return (
             <div>
                 {options.map((optionGroup, index) => (
-                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2">
-                        <div className="col-10">
-                            <a className='text-blue' onClick={() => toggleAccordion(optionGroup.id)}>
+                    <div key={index} style={{ cursor: 'pointer' }} className="row bg-white gx-0 p-3 my-3 mx-2">
+                        <div className="col-10" onClick={() => toggleAccordion(optionGroup.id)}>
+                            <a className='text-blue'>
                                 {optionGroup.label}
                             </a>
                         </div>
                         <div className="col-2 text-center">
-                            <a className='text-blue' onClick={() => toggleAccordion(optionGroup.id)}>
-                                {accordionOpen === optionGroup.id ? '▲' : '▼'}
+                            <a className='text-blue'>
+                                {accordionOpen[optionGroup.id] ? '▲' : '▼'}
                             </a>
                         </div>
-                        <div className={`collapse ${accordionOpen === optionGroup.id ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
+                        <div className={`collapse ${accordionOpen[optionGroup.id] ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
                             <div className='my-3 options-container'>
-                                <hr></hr>
-                                <input type="search" placeholder="Search" className="icon-rtl form-control" id={`${optionGroup.id}Search`} aria-describedby={`${optionGroup.id}SearchHelp`} />
-                                {optionGroup.options.map((option, index) => (
-                                    <div key={index} className="form-check text-black searchCheckBox my-2 ">
+                                <hr />
+                                <input
+                                    type="search"
+                                    placeholder="Search"
+                                    className="icon-rtl form-control"
+                                    value={searchTexts[optionGroup.id] || ''}
+                                    onChange={(e) => handleSearchChange(optionGroup.id, e.target.value)}
+                                    id={`${optionGroup.id}Search`}
+                                    aria-describedby={`${optionGroup.id}SearchHelp`}
+                                />
+                                {filteredOptions(optionGroup).map((option, index) => (
+                                    <div key={index} className="form-check text-black searchCheckBox my-2">
                                         <input
                                             className="form-check-input"
                                             type="checkbox"
                                             value={option.value}
                                             id={`${optionGroup.id}-${index}`}
-                                            onChange={(e) =>
-                                                handleCheckboxChange(
-                                                    optionGroup.id,
-                                                    option.value,
-                                                    e.target.checked
-                                                )
-                                            }
-                                            checked={selectedCheckboxes[optionGroup.id]?.includes(option.value)}
+                                            onChange={(e) => handleCheckboxChange(optionGroup.id, option.value, e.target.checked)}
+                                            checked={checkboxState[optionGroup.id]?.[option.value]}
                                         />
                                         <label className="form-check-label" htmlFor={`${optionGroup.id}-${index}`}>
                                             {option.label}
@@ -469,9 +509,12 @@ function CollegeFilterSection() {
                         </div>
                     </div>
                 ))}
-            </div >
+            </div>
         );
     };
+
+
+
     const SelectedFilters: React.FC<{ selectedCheckboxes: Record<string, string[]> }> = ({ selectedCheckboxes }) => {
         const getLabelForValue = (groupId: string, value: string) => {
             const group = options.find(optionGroup => optionGroup.id === groupId);
@@ -509,9 +552,6 @@ function CollegeFilterSection() {
         );
     };
 
-
-   
-    
 
 
     // Calculate filtered colleges outside of handleViewMore
@@ -551,11 +591,11 @@ function CollegeFilterSection() {
                                     </button>
                                 </div>
                             )}
-                           <StateButtons
-                        options={options.find(option => option.id === 'state')?.options || []}
-                        setSelectedCheckboxes={setSelectedCheckboxes}
-                        selectedCheckboxes={selectedCheckboxes}
-/>
+                            <StateButtons
+                                options={options.find(option => option.id === 'state')?.options || []}
+                                setSelectedCheckboxes={setSelectedCheckboxes}
+                                selectedCheckboxes={selectedCheckboxes}
+                            />
 
                         </div>
                     </div>

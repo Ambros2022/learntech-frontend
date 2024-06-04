@@ -1307,7 +1307,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                         maxSize={2000000}
                                         fileNames={fileNamesbanner}
                                         label="Upload banner_image"
-                                        helpertext="Estimated Size: 640*480px"
+                                        helpertext="Estimated Size: 216*124px"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />
