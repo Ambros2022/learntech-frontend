@@ -12,7 +12,7 @@ function BannerSection() {
             <div className='text-white  mb-2 row'>
               <h6 className='col-6'>Duration : 5 years</h6>
 
-              <button  className='col-6' className='btn applyNowCourseBtn'>Apply Now</button>
+              <button  className='btn applyNowCourseBtn'>Apply Now</button>
             </div>
             <div className=''>
             
