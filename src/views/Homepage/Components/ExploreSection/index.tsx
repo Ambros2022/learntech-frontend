@@ -39,17 +39,30 @@ function ExploreSection() {
   };
 
   const renderData = () => {
-    return data.map((item) => (
+    return data.map((item) => {
+      let url: any;
 
-      <CardComponent
-        key={item.id}
-        title={item.name}
-        imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`}  // Adjust the path as needed
-        count={item.uniqueCollegeCount}
-      />
+      if (activeTab === 'Colleges') {
+        url = `/colleges/?stream_id=[${item.id}]`;
+      } else if (activeTab === 'Courses') {
+        url = `/course/${item.id}/${item.slug}`;
+      } else if (activeTab === 'Exams') {
+        url = `/exams/?stream_id=[${item.id}]`;
+      }
 
-    ));
-  };
+      return (
+        <CardComponent
+          key={item.id}
+          title={item.name}
+          imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`}  // Adjust the path as needed
+          count={item.uniqueCollegeCount}
+          link={url}
+        />
+      );
+    })
+
+  }
+
 
 
 
@@ -57,12 +70,12 @@ function ExploreSection() {
     setDatasize(prevSize => prevSize + 6);
   };
 
-  function CardComponent({ title, imageSrc, count }) {
+  function CardComponent({ title, imageSrc, count, link }) {
     return (
       // <Link href="/f">
       <div className="col-md-4 col-lg-2 mb-3">
         <div className="card text-center exploreCardHover">
-          <Link href="/f">
+          <Link href={link}>
             <div className="row">
               <div className="col-md-12 col-4 col-sm-3">
                 <img
