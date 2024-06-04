@@ -471,29 +471,39 @@
 
   .studyAbroadNav a {
     border-radius: 0 !important;
-    color: #8f8f8f !important;
+    color: black !important;
     text-decoration: none !important;
+    padding: 10px 10px !important;
+    border: 1px solid #8f8f8f !important;
+    width: 150px !important;
+    padding: 12px 30px !important;
+    text-align: center !important;
+    background-color: #8f8f8f3f;
   }
 
-  .studyAbroadNav a:hover,
-  .studyAbroadNav a:focus {
+  .studyAbroadNav a:first-child {
+    border-radius: 7px 0px 0px 7px !important;
+  }
+
+  .studyAbroadNav a:last-child {
+    border-radius: 0px 7px 7px 0px !important;
+  }
+
+  .studyAbroadNav a:hover {
     font-weight: bold !important;
-    padding-bottom: 15px !important;
-    border-bottom-style: solid !important;
-    border-bottom-width: 3.1px !important;
-    width: fit-content !important;
     color: #254692 !important;
   }
 
-  .studyAbroadNav .active,
-  .studyAbroadNav .active :focus,
-  .studyAbroadNav .active :hover {
+  .studyAbroadNav .active {
     font-weight: bold !important;
-    padding-bottom: 15px !important;
-    border-bottom-style: solid !important;
-    border-bottom-width: 3.1px !important;
-    width: fit-content !important;
-    color: #254692 !important;
+    color: white !important;
+    background-color: #254692 !important;
+  }
+
+  .studyAbroadNav .active:hover {
+    font-weight: bold !important;
+    color: white !important;
+    background-color: #254692 !important;
   }
 
   .footerCon {
@@ -969,6 +979,25 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .featuredClgCard a {
+      background-color: white;
+      font-size: 10px !important;
+      color: #254692;
+      border: 1px solid #254692 !important;
+    }
+
+    .studyAbroadNav a {
+      width: 120px !important;
+    }
+
+    .studyAbroadNav a:first-child {
+      border-radius: 0 !important;
+    }
+
+    .studyAbroadNav a:last-child {
+      border-radius: 0 !important;
+    }
+
     .footer-logo {
       width: 100% !important;
       height: 100% !important;
@@ -1186,6 +1215,10 @@
   }
 
   @media (max-width: 575px) {
+    .FeaturedClgCon .carousel-button-group {
+      top: 215px !important;
+    }
+
     .FeaturedClgCon .fi-left {
       margin-left: 8px !important;
       background-color: white;
@@ -1215,7 +1248,7 @@
     }
 
     .StudyAbroadCon .carousel-button-group {
-      top: 530px !important;
+      top: 620px !important;
     }
 
     .card-con .fi-left {
@@ -1330,6 +1363,15 @@
   /* College Filter Section */
   .bg-skyBlue {
     background-color: #f6f8fb !important;
+  }
+
+  .Expert-bg-skyBlue {
+    background-color: #f6f8fb !important;
+  }
+
+  .footerCon .bi-chevron-double-right {
+    font-size: 10px;
+    padding-right: 6px;
   }
 
   .icon-rtl {
@@ -2665,15 +2707,7 @@
   }
 
 
-  /* .ExpertCon .form-control {
-  background-color: transparent !important;
-}
-.ExpertCon input::placeholder {
-  color: white !important;
-}
-.ExpertCon .form-label {
-  color: white !important;
-} */
+
   @media (min-width: 992px) and (max-width: 1024px) {
     .newsLinkSec .fi-left {
       margin-left: -40px !important;

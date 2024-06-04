@@ -37,7 +37,7 @@ function FeaturedCollegeSection() {
   return (
     <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
       <div className="container pt-5 position-relative">
-        <h4 className="fw-bold text-blue text-center mb-5">Featured Colleges</h4>
+        <h2 className="fw-bold text-blue text-center mb-5">Featured Colleges</h2>
         <MainCarousel items={colleges.map(college => (
           <div key={college.id} className="mx-xl-4 mx-lg-2 mx-md-2 mx-5 card featuredClgCard mb-4">
 

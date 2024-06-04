@@ -50,7 +50,7 @@ const Footer = () => {
                 </div>
                 <div className="mb-3">
                   <Image className="d-inline icon-white" src="/images/icons/email-icon.svg" alt="phone-icon" width={25} height={24} />
-                  <a href="mailto:info@learntech.com" target="_blank" className="ms-2 d-inline-block">info@learntech.com</a><br></br>
+                  <a href="mailto:info@learntechww.com" target="_blank" className="ms-2 d-inline-block">info@learntechww.com</a><br></br>
                 </div >
                 <div className="mb-3">
                   <Image className="mb-3" src="/images/icons/Location White.svg" alt="phone-icon" width={25} height={24} />
@@ -61,7 +61,7 @@ const Footer = () => {
             <div className="col-md-2 col-6 text-white mb-3">
               <h5 className="fw-bold mb-3">Info</h5>
               <ul className='list-unstyled'>
-                <li className='mb-2'><Link href="/about-us"><i className="bi bi-chevron-double-right"></i> About us</Link></li>
+                <li className='mb-2'><Link href="/about-us"><small><i className="bi bi-chevron-double-right"></i></small> About us</Link></li>
                 <li className='mb-2'><Link href="/our-team"><i className="bi bi-chevron-double-right"></i> Our Team</Link></li>
                 <li className='mb-2'><Link href="/services"><i className="bi bi-chevron-double-right"></i> Services</Link></li>
                 <li className='mb-2'><Link href="/contact-us"><i className="bi bi-chevron-double-right"></i> Contact us</Link></li>

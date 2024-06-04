@@ -115,9 +115,9 @@ function ExploreSection() {
   return (
     <section className="exploreCon" id="animation6" data-aos="fade-up">
       <div className="container py-5">
-        <h4 className="fw-bold text-blue text-center">
+        <h2 className="fw-bold text-blue text-center">
           Explore Colleges, Courses and Exams That Are Curated For You
-        </h4>
+        </h2>
         <div className="d-flex exploreNav justify-content-center mb-5" role="tablist">
           <a
             className={`btn ${activeTab === 'Colleges' ? 'active' : ''}`}
@@ -152,7 +152,7 @@ function ExploreSection() {
             {/* {visibleCount} */}
             {/* {data.length} */}
             <button className="btn viewMoreCollegeBtn" onClick={showMoreCourses}>
-              View More
+              Load More
             </button>
           </div>
         )}
