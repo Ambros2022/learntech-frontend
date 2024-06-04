@@ -28,6 +28,7 @@ interface College {
     avg_rating: number;
     college_type: string;
     course_type: string;
+    slug: string;
 
 }
 
@@ -249,8 +250,19 @@ function CollegeFilterSection() {
     }, 300); // Debounce for 300 milliseconds
 
     // Use the debounced function in your event handler
+    // const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
+    //     debouncedHandleCheckboxChange(groupId, value, isChecked);
+    // };
+
     const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
         debouncedHandleCheckboxChange(groupId, value, isChecked);
+        setCheckboxState(prevState => ({
+            ...prevState,
+            [groupId]: {
+                ...prevState[groupId],
+                [value]: isChecked
+            }
+        }));
     };
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
@@ -283,10 +295,10 @@ function CollegeFilterSection() {
                                 <div className="row">
                                     <div className="col-md-7 col-xl-7">
                                         <div className="card-title">
-                                            <h6 className='fw-bold text-black my-2'>{name}</h6>
+                                            <h6 className='fw-bold text-black my-2 text-truncate'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon' /> {`${location}`}</p>
+                                            <p className="m-0 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
                                             <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                         </div>
                                     </div>
@@ -373,14 +385,26 @@ function CollegeFilterSection() {
         );
     }
 
+    const [selectedOptions, setSelectedOptions] = useState({});
 
-
-    const [accordionOpen, setAccordionOpen] = useState<string | null>(null);
-
-    const toggleAccordion = (groupId: string) => {
-        setAccordionOpen(prev => (prev === groupId ? null : groupId));
+    const handleSelect = (sectionId, optionValue) => {
+        setSelectedOptions((prevSelectedOptions) => {
+            const updatedOptions = { ...prevSelectedOptions };
+            updatedOptions[sectionId] = optionValue;
+            return updatedOptions;
+        });
     };
 
+    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({});
+    const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
+
+
+    const toggleAccordion = (groupId: string) => {
+        setAccordionOpen(prevState => ({
+            ...prevState,
+            [groupId]: !prevState[groupId]
+        }));
+    };
 
 
     const StateButtons: React.FC<{
@@ -388,7 +412,10 @@ function CollegeFilterSection() {
         setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
         selectedCheckboxes: Record<string, string[]>;
     }> = ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
+
+
         const handleStateButtonClick = (state: string) => {
+            window.scrollTo({ top: 650, behavior: 'smooth' });
             setSelectedCheckboxes(prevSelected => {
                 const stateSelections = prevSelected.state || [];
                 const updatedSelections = stateSelections.includes(state)
@@ -408,15 +435,13 @@ function CollegeFilterSection() {
                     <h6 className="text-black">Filters By Location</h6>
                     <div className="d-flex flex-wrap">
                         {options.map((option, index) => (
-                            <label key={index} className="btn text-center rounded m-1 p-2 filterItemBtn">
-                                <input
-                                    type="checkbox"
-                                    checked={selectedCheckboxes.state?.includes(option.value) || false}
-                                    onChange={() => handleStateButtonClick(option.value)}
-                                    className="me-2"
-                                />
+                            <button
+                                key={index}
+                                className={`btn text-center rounded m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                onClick={() => handleStateButtonClick(option.value)}
+                            >
                                 {option.label}
-                            </label>
+                            </button>
                         ))}
                     </div>
                 </div>
@@ -426,39 +451,54 @@ function CollegeFilterSection() {
 
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
+        const [searchTexts, setSearchTexts] = useState<Record<string, string>>({});
+
+        const handleSearchChange = (groupId: string, searchText: string) => {
+            setSearchTexts(prev => ({ ...prev, [groupId]: searchText }));
+        };
+
+        const filteredOptions = (optionGroup: OptionGroup) => {
+            const searchText = searchTexts[optionGroup.id] || '';
+            return optionGroup.options.filter(option =>
+                option.label.toLowerCase().includes(searchText.toLowerCase())
+            );
+        };
+
         return (
             <div>
                 {options.map((optionGroup, index) => (
-                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2">
-                        <div className="col-10">
-                            <a className='text-blue' onClick={() => toggleAccordion(optionGroup.id)}>
+                    <div key={index} style={{ cursor: 'pointer' }} className="row bg-white gx-0 p-3 my-3 mx-2">
+                        <div className="col-10" onClick={() => toggleAccordion(optionGroup.id)}>
+                            <a className='text-blue'>
                                 {optionGroup.label}
                             </a>
                         </div>
                         <div className="col-2 text-center">
-                            <a className='text-blue' onClick={() => toggleAccordion(optionGroup.id)}>
-                                {accordionOpen === optionGroup.id ? '▲' : '▼'}
+                            <a className='text-blue'>
+                                {accordionOpen[optionGroup.id] ? '▲' : '▼'}
                             </a>
                         </div>
-                        <div className={`collapse ${accordionOpen === optionGroup.id ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
+                        <div className={`collapse ${accordionOpen[optionGroup.id] ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
                             <div className='my-3 options-container'>
-                                <hr></hr>
-                                <input type="search" placeholder="Search" className="icon-rtl form-control" id={`${optionGroup.id}Search`} aria-describedby={`${optionGroup.id}SearchHelp`} />
-                                {optionGroup.options.map((option, index) => (
-                                    <div key={index} className="form-check text-black searchCheckBox my-2 ">
+                                <hr />
+                                <input
+                                    type="search"
+                                    placeholder="Search"
+                                    className="icon-rtl form-control"
+                                    value={searchTexts[optionGroup.id] || ''}
+                                    onChange={(e) => handleSearchChange(optionGroup.id, e.target.value)}
+                                    id={`${optionGroup.id}Search`}
+                                    aria-describedby={`${optionGroup.id}SearchHelp`}
+                                />
+                                {filteredOptions(optionGroup).map((option, index) => (
+                                    <div key={index} className="form-check text-black searchCheckBox my-2">
                                         <input
                                             className="form-check-input"
                                             type="checkbox"
                                             value={option.value}
                                             id={`${optionGroup.id}-${index}`}
-                                            onChange={(e) =>
-                                                handleCheckboxChange(
-                                                    optionGroup.id,
-                                                    option.value,
-                                                    e.target.checked
-                                                )
-                                            }
-                                            checked={selectedCheckboxes[optionGroup.id]?.includes(option.value)}
+                                            onChange={(e) => handleCheckboxChange(optionGroup.id, option.value, e.target.checked)}
+                                            checked={checkboxState[optionGroup.id]?.[option.value]}
                                         />
                                         <label className="form-check-label" htmlFor={`${optionGroup.id}-${index}`}>
                                             {option.label}
@@ -469,9 +509,12 @@ function CollegeFilterSection() {
                         </div>
                     </div>
                 ))}
-            </div >
+            </div>
         );
     };
+
+
+
     const SelectedFilters: React.FC<{ selectedCheckboxes: Record<string, string[]> }> = ({ selectedCheckboxes }) => {
         const getLabelForValue = (groupId: string, value: string) => {
             const group = options.find(optionGroup => optionGroup.id === groupId);
