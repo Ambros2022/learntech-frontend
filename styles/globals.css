@@ -2913,10 +2913,12 @@
   
 
   .options-container {
-    max-height: 300px; /* Adjust this value as needed */
+    max-height: 300px;
+    /* Adjust this value as needed */
     overflow-y: auto;
-    padding-right: 15px; /* Space for the scrollbar */
-}
+    padding-right: 15px;
+    /* Space for the scrollbar */
+  }
 
 
   .latestNewsCon .card-text {
@@ -3321,6 +3323,13 @@
   .examLatest {
     min-height: 480px;
     max-height: 480px;
+  }
+
+  .galleryImgStyle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px !important;
   }
 
   @media (min-width:320px) and (max-width:767px) {

@@ -155,6 +155,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         map: isAddMode ? '' : olddata.map,
         video_url: isAddMode ? '' : olddata.video_url,
         info: isAddMode ? '' : olddata.info,
+        course_fees: isAddMode ? '' : olddata.course_fees,
         admissions: isAddMode ? '' : olddata.admissions,
         placements: isAddMode ? '' : olddata.placements,
         rankings: isAddMode ? '' : olddata.rankings,
@@ -346,6 +347,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('avg_rating', data.avg_rating);
             formData.append('is_associated', data.is_associated);
             formData.append('info', data.info);
+            formData.append('course_fees', data.course_fees);
             formData.append('admissions', data.admissions);
             formData.append('placements', data.placements);
             formData.append('rankings', data.rankings);
@@ -413,6 +415,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('is_associated', data.is_associated);
             formData.append('avg_rating', data.avg_rating);
             formData.append('info', data.info);
+            formData.append('course_fees', data.course_fees);
             formData.append('admissions', data.admissions);
             formData.append('placements', data.placements);
             formData.append('rankings', data.rankings);
@@ -1171,6 +1174,24 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                 </Grid>
 
 
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Course & fees</Typography>
+
+                                    <Controller
+                                        name='course_fees'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("course_fees", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>Admissions</Typography>
 
