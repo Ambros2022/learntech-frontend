@@ -1,18 +1,7 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 
 const ContactCareerSec = () => {
-  const [fileName, setFileName] = useState('Choose file')
-
-  const handleFileChange = event => {
-    const file = event.target.files[0]
-    if (file) {
-      setFileName(file.name)
-    } else {
-      setFileName('Upload Resume')
-    }
-  }
-
   return (
     <>
       <section className='bg-white'>
@@ -65,7 +54,7 @@ const ContactCareerSec = () => {
             <div className='col-md-7 bg-white py-3 px-5'>
               <h2 className='text-center fw-bold text-blue'>Start Your Medical Journey</h2>
               <form action='#' className='mt-3'>
-                <div className='row mb-3 careerContact'>
+                <div className='row mb-md-3 careerContact'>
                   <div className='col-md-6'>
                     <div className='mb-3'>
                       <input type='text' className='form-control' placeholder='Full Name*' />
@@ -77,7 +66,7 @@ const ContactCareerSec = () => {
                     </div>
                   </div>
                 </div>
-                <div className='row mb-3 careerContact'>
+                <div className='row mb-md-3 careerContact'>
                   <div className='col-md-6'>
                     <div className='mb-3'>
                       <input type='tel' className='form-control' placeholder='Mobile Number' />
@@ -89,7 +78,7 @@ const ContactCareerSec = () => {
                     </div>
                   </div>
                 </div>
-                <div className='row mb-3 careerContact'>
+                <div className='row mb-md-3 careerContact'>
                   <div className='col-md-6'>
                     <div className='mb-3'>
                       <input type='text' className='form-control' placeholder='Post Applied' />
@@ -101,7 +90,7 @@ const ContactCareerSec = () => {
                     </div>
                   </div>
                 </div>
-                <div className='row mb-3 careerContact'>
+                <div className='row mb-md-3 careerContact'>
                   <div className='col-md-6'>
                     <div className='mb-3'>
                       <input type='text' className='form-control' placeholder='Current Location' />
@@ -113,15 +102,16 @@ const ContactCareerSec = () => {
                     </div>
                   </div>
                 </div>
-                <div className='row uploadRes'>
+                <div className='row mb-3'>
                   <div className='col-12'>
-                    <div className='custom-file-input'>
-                      <input type='file' id='file' className='file-input d-none' onChange={handleFileChange} />
-                      <label htmlFor='file' className='btn btn-primary'>
-                        {fileName}
-                      </label>
-                    </div>
+                    <input type='file' id='file' className='fileInput' />
+                    <label htmlFor='file' className='fileLabel'>
+                      Upload Resume
+                    </label>
                   </div>
+                </div>
+                <div className='d-grid row'>
+                  <button className='btn submitBtn'>Submit</button>
                 </div>
               </form>
             </div>

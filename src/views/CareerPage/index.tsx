@@ -3,6 +3,7 @@ import BannerSec from './Components/BannerSec'
 import AboutSec from './Components/AboutSec'
 import CurrentOpeningSec from './Components/CurrentOpeningSec'
 import ContactCareerSec from './Components/ContactCareerSec'
+import DisclaimerSec from './Components/DisclaimerSec'
 
 const CareerPage = () => {
     return (
@@ -11,6 +12,7 @@ const CareerPage = () => {
             <AboutSec />
             <CurrentOpeningSec />
             <ContactCareerSec />
+            <DisclaimerSec />
         </>
     )
 }
