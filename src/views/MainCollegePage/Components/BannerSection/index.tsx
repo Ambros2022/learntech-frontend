@@ -1,6 +1,7 @@
 import axios from 'src/configs/axios';
 import Autocomplete from 'src/@core/components/mui/autocomplete';
 import React, { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -98,20 +99,23 @@ function BannerSection() {
                     <TextField
                       {...params}
                       placeholder="Search"
-                      className="form-control"
                       InputProps={{
                         ...params.InputProps,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon />
+                          </InputAdornment>
+                        ),
                         sx: {
-                          // backgroundColor: 'white',
+                          backgroundColor: 'white',
                           color: 'black',
                           '& .MuiInputBase-input::placeholder': {
-                            color: 'black', // Change this color as per your requirement
+                            color: 'black',
                           },
                         },
                         endAdornment: (
                           <>
                             {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                            {params.InputProps.endAdornment}
                             {params.inputProps.value ? (
                               <InputAdornment position="end">
                                 <IconButton onClick={() => handleClearInput(params)}>
@@ -119,11 +123,14 @@ function BannerSection() {
                                 </IconButton>
                               </InputAdornment>
                             ) : null}
+                            {params.InputProps.endAdornment}
                           </>
                         ),
                       }}
                     />
                   )}
+                  
+                  
                 />
               </div>
             </div>

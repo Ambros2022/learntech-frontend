@@ -2614,9 +2614,9 @@
     height: 100%;
   }
 
-  .filterCardBorder .card-title {
+  /* .filterCardBorder .card-title {
     min-height: 50px !important;
-  }
+  } */
 
   .filterCardBorder .card-text {
     min-height: 50px !important;
