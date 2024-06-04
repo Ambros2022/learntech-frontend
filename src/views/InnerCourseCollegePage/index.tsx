@@ -7,7 +7,7 @@ import ExpertSection from './Components/ExpertSection'
 function InnerCourseCollegePage() {
   return (
     <>
-      <BannerSection />
+      {/* <BannerSection /> */}
       <CourseDetailSec />
       <ExpertSection />
       <TopFeaturedColleges />
