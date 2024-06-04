@@ -17,14 +17,11 @@ class CustomDocument extends Document {
         <Head>
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
-          <link
-            rel='stylesheet'
-            href='https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap'
-          />
+          <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
           <link rel='logo' sizes='180x180' href='/images/logo.png' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
           <link rel="icon" type="image/webp" href="/images/fav-icon.webp" />
-       
+
           {/* <link rel="stylesheet" href="/owl.carousel.min.css" /> */}
           {/* <link rel="stylesheet" href="/owl.theme.default.min.css" /> */}
           {/* <script src="jquery-3.7.1.min.js"></script> */}

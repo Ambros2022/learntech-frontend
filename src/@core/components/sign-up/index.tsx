@@ -7,9 +7,6 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GoogleLoginButton from '../google-login';
 
-// import TwitterLoginButton from '../twitter-login';
-
-
 interface FormValues {
   name: string;
   email: string;
@@ -20,7 +17,9 @@ interface FormValues {
 }
 
 const SignupForm: React.FC = () => {
-  const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const phoneRegExp = /^[0-9]{12}$/; // Example: 10 digits only, you may adjust it according to your needs
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -33,18 +32,16 @@ const SignupForm: React.FC = () => {
   };
 
   const handleLoginSuccess = (response) => {
-    // Handle successful login, e.g., set user state or redirect
     console.log('User Logged In:', response.profileObj);
   };
 
   const handleLoginFailure = (error) => {
-    // Handle login failure, e.g., show error message
     console.error('Login Error:', error);
   };
 
   return (
     <div className="container mt-3">
-      <h6 className="text-center"><small className='text-black'>Create new account</small></h6>
+      <h5 className="text-center text-black">Create new account</h5>
       <Formik
         initialValues={{
           name: '',
@@ -55,25 +52,15 @@ const SignupForm: React.FC = () => {
           agree: false,
         }}
         validationSchema={Yup.object({
-          name: Yup.string()
-            .required('Required'),
+          name: Yup.string().required('Required'),
           email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-          phone: Yup.string()
-            .required('Required'),
-          password: Yup.string()
-            .required('Required')
-            .min(6, 'Password must be at least 6 characters'),
-          confirmPassword: Yup.string()
-            .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
-            .required('Required'),
-          agree: Yup.boolean()
-            .oneOf([true], 'Must agree to terms and conditions')
-            .required('Required'),
+          phone: Yup.string().matches(phoneRegExp, 'Phone is not valid').required('Required'),
+          password: Yup.string().required('Required').min(6, 'Password must be at least 6 characters'),
+          confirmPassword: Yup.string().oneOf([Yup.ref('password'), undefined], 'Passwords must match').required('Required'),
+          agree: Yup.boolean().oneOf([true], 'Must agree to terms and conditions').required('Required'),
         })}
         onSubmit={(values: FormValues, { setSubmitting, resetForm }) => {
           alert("submit successfully")
-          
-          // console.log('Values:', values)
           setSubmitting(false);
           resetForm();
         }}
@@ -81,7 +68,7 @@ const SignupForm: React.FC = () => {
         {({ values, setFieldValue }) => (
           <Form>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label text-black text-black">Name</label>
+              <label htmlFor="name" className="form-label text-black">Name</label>
               <Field type="text" className="form-control" id="name" name="name" />
               <ErrorMessage name="name" component="div" className="text-danger" />
             </div>
@@ -93,7 +80,7 @@ const SignupForm: React.FC = () => {
             <div className="mb-3">
               <label htmlFor="phone" className="form-label text-black">Phone</label>
               <PhoneInput
-                country={'us'}
+                country={'in'}
                 value={values.phone}
                 onChange={(value) => setFieldValue('phone', value)}
                 inputProps={{
@@ -152,8 +139,6 @@ const SignupForm: React.FC = () => {
         <small>Sign up with social media</small>
       </div>
       <GoogleLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
-      {/* <TwitterLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} /> */}
-      {/* <LinkedInLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} /> */}
       <div className='text-black mb-3 text-center'>
         <small>Already have an account? <span className='text-blue fw-bold'>Sign In</span></small>
       </div>

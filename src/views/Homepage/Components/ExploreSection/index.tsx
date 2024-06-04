@@ -88,8 +88,8 @@ function ExploreSection() {
               </div>
               <div className="col-md-12 col-6 col-sm-7 text-md-center text-start">
                 <div className="card-body">
-                  <p className="card-text m-0 text-blue">{count} {activeTab}</p>
-                  <h6 className="card-title text-truncate">{title}</h6>
+                  <p className="card-text m-0 text-black">{count} {activeTab}</p>
+                  <h6 className="card-title text-truncate text-blue">{title}</h6>
                 </div>
               </div>
               <div className="col-2 cardArrow">

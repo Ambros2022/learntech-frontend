@@ -11,7 +11,7 @@ interface Props {
     onChanges?: any;
 }
 
-const EnquiryForm: FC<Props> = ({ page,...rest }) => {
+const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
     const router = useRouter();
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
@@ -69,20 +69,20 @@ const EnquiryForm: FC<Props> = ({ page,...rest }) => {
         >
             <Form className="container">
                 <div className='row'>
-                    <div className="col-md-3 mb-3">
+                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
                         <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
                         <ErrorMessage name="name" component="div" className="error text-danger" />
                     </div>
-                    <div className=" col-md-3 mb-3">
+                    <div className=" col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
                         <PhoneInputField name="contact_number" />
                         {/* <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" /> */}
                         <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                     </div>
-                    <div className="col-md-3 mb-3">
+                    <div className="col-lg-3  col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
                         <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
                         <ErrorMessage name="email" component="div" className="error text-danger" />
                     </div>
-                    <div className=" col-md-3 mb-3">
+                    <div className=" col-lg-3  col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
                         <Field type="text" name="course" placeholder="Enter Stream" className="form-control" />
                         <ErrorMessage name="course" component="div" className="error text-danger" />
                     </div>
@@ -92,7 +92,7 @@ const EnquiryForm: FC<Props> = ({ page,...rest }) => {
                     </div> */}
                 </div>
 
-                <div className="text-center reqBtn">
+                <div className="text-center reqBtn px-xl-4 px-lg-3 px-md-3 px-1">
                     <button type="submit" className="btn">Request for a Call Back</button>
                 </div>
 
