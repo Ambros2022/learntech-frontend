@@ -93,7 +93,7 @@ function StudyAbroadSection() {
         <div className="card-body">
           <h5 className="card-title text-blue text-truncate" style={{ fontSize: '18px' }}>{card.name}</h5>
           <p className="card-text text-truncate">
-            <img width={14} height={14} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
+            <img width={17} height={17} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
             {card.address}
           </p>
           <div className="d-flex justify-content-between">

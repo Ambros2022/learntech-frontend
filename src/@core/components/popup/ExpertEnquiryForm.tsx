@@ -68,7 +68,7 @@ const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
             resetForm
         >
             <Form className="container">
-                <div className='row'>
+                <div className='row mb-3'>
                     <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
                         <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
                         <ErrorMessage name="name" component="div" className="error text-danger" />
