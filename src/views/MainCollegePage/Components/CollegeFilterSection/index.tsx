@@ -287,12 +287,12 @@ function CollegeFilterSection() {
             <div className='col-md-12 mb-3'>
                 <div className="mx-2 filterCardBorder bg-skyBlue">
                     <div className="p-2">
-                        <div className="row">
+                        <div className="row d-flex">
                             <div className="col-md-3 col-xl-3 clgCardImg">
                                 <Image width={180} height={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
                             </div>
                             <div className="col-md-9 col-xl-9">
-                                <div className="row">
+                                <div className="row pt-3">
                                     <div className="col-md-7 col-xl-7">
                                         <div className="card-title">
                                             <h6 className='fw-bold text-black my-2 text-truncate'>{name}</h6>
@@ -315,10 +315,8 @@ function CollegeFilterSection() {
                                             </button>
                                         )}
                                     </div>
-                                    <div className="col-md-3 col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid">
-
-
-                                        <GlobalEnquiryForm className="activeBtn btn mb-3 d-flex justify-content-center" />
+                                    <div className="col-md-3 my-auto col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid">
+                                        <GlobalEnquiryForm className="activeBtn mb-3 btn d-flex justify-content-center" />
 
                                         <Link href={`/college/${id}/${slug}`} className="mb-3 viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
                                     </div>
@@ -479,7 +477,7 @@ function CollegeFilterSection() {
                                 {accordionOpen[optionGroup.id] ? '▲' : '▼'}
                             </a>
                         </div>
-                        <div className={`collapse ${accordionOpen[optionGroup.id] ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
+                        <div className={`showingCards collapse ${accordionOpen[optionGroup.id] ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
                             <div className='my-3 options-container'>
                                 <hr />
                                 <input

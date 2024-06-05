@@ -13,7 +13,7 @@ function FeaturedCollegeSection() {
       const roleparams: any = {};
       roleparams['page'] = 1;
       roleparams['size'] = 10000;
-      
+
       const response = await axios1.get('api/website/colleges/get', { params: roleparams });
 
       setColleges(response.data.data);

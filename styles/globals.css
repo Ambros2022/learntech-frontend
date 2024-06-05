@@ -276,6 +276,16 @@
     border-radius: 10px;
   }
 
+  .submtBtn {
+    background-color: white !important;
+    color: #254692 !important;
+  }
+
+  .submtBtn:hover {
+    background-color: white !important;
+    color: darkblue !important;
+  }
+
   .submitBtn {
     background-color: #254692 !important;
     color: white !important;
@@ -344,7 +354,7 @@
   }
 
   .innerCollege {
-    background-color: rgba(39, 72, 150, 1) !important;
+    /* background-color: rgba(39, 72, 150, 1) !important; */
   }
 
   .innerCollege input,
@@ -789,6 +799,18 @@
   .card-image {
     min-height: 160px !important;
   }
+
+  /* .showingCards .collapse.show {
+    height: 200px !important;
+    transition: height 50s ease-in !important;
+    transition-delay: 10s !important;
+  }
+
+  .showingCards .collapse {
+    height: 0 !important;
+    overflow: hidden !important;
+    transition: height 10s ease !important;
+  } */
 
   @media (min-width:1025px) and (max-width:1400px) {
     .card-image {

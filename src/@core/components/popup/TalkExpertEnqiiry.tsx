@@ -99,8 +99,8 @@ const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
                     </div> */}
         </div>
 
-        <div className="text-center reqBtn px-xl-4 px-lg-3 px-md-3 px-1">
-          <button type="submit" className="btn">Submit</button>
+        <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
+          <button type="submit" className="submtBtn btn">Submit</button>
         </div>
 
       </Form>
