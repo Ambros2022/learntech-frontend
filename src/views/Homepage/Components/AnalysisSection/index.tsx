@@ -1,8 +1,10 @@
 import React from 'react'
-import AnimatedCounter from '../AnimatedCounters/animatedCounter'
-import AnimatedCounter2 from '../AnimatedCounters/animatedCounter2'
-import AnimatedCounter3 from '../AnimatedCounters/animatedCounter3'
 import Image from 'next/image'
+import dynamic from 'next/dynamic';
+const AnimatedCounter = dynamic(() => import('../AnimatedCounters/animatedCounter'), { ssr: false });
+const AnimatedCounter2 = dynamic(() => import('../AnimatedCounters/animatedCounter2'), { ssr: false });
+const AnimatedCounter3 = dynamic(() => import('../AnimatedCounters/animatedCounter3'), { ssr: false });
+
 
 function AnalysisSection() {
   return (

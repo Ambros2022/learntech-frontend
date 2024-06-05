@@ -1,5 +1,7 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
-import ExpertEnquiryForm from 'src/@core/components/popup/ExpertEnquiryForm';
+const ExpertEnquiryForm = dynamic(() => import('src/@core/components/popup/ExpertEnquiryForm'), { ssr: false });
+
 function ExpertSection() {
   return (
     <section className="Expert-bg-skyBlue" id="animation15">

@@ -1,15 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'
 import axios1 from 'src/configs/axios';
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from 'next/link';
-import CollegeCard from 'src/@core/components/college-card';
+import dynamic from 'next/dynamic';
+const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
 
 function StudyAbroadSection() {
 
   const [activeCountry, setActiveCountry] = useState<number | null>(null);
-
-  // const [StudyAbroadItems] = useState(usaItems);
 
   interface Country {
     id: number;
@@ -53,21 +51,6 @@ function StudyAbroadSection() {
   };
 
   const [cardData, setCardData] = useState<any[]>([]);
-
-
-  // Function to fetch card data from the backend API
-  // const fetchCardData = useCallback(async () => {
-  //   try {
-  //     const response = await axios1.get('api/website/colleges/get');
-  //     const responseData = response.data.data;
-  //     setCardData(responseData);
-  //   } catch (error) {
-  //     console.error('Error fetching card data:', error);
-  //   }
-  // }, []);
-
-  // useEffect to fetch card data when component mounts
-
 
 
   const fetchCardData = useCallback(async () => {

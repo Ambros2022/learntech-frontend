@@ -1,15 +1,11 @@
-import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react'
-import MainCarousel from 'src/@core/components/main-carousel'
 import axios1 from 'src/configs/axios'
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from 'next/link';
-import CollegeCard from 'src/@core/components/college-card';
-
+import dynamic from 'next/dynamic';
+const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
+const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
 function FeaturedCollegeSection() {
-
   const [colleges, setColleges] = useState<any[]>([]);
-
 
   //get all banners
   const getcolleges = useCallback(async () => {
