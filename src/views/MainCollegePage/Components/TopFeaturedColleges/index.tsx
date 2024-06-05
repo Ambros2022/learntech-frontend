@@ -12,8 +12,13 @@ function FeaturedCollegeSection() {
     try {
       const roleparams: any = {};
       roleparams['page'] = 1;
+<<<<<<< HEAD
       roleparams['size'] = 10000;
 
+=======
+      roleparams['size'] = 10;
+      
+>>>>>>> origin/abhishek-work
       const response = await axios1.get('api/website/colleges/get', { params: roleparams });
 
       setColleges(response.data.data);

@@ -7,6 +7,7 @@ import axios from 'src/configs/axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import SearchIcon from '@mui/icons-material/Search';
 let cancelToken: any;
 
 function BannerSec({ data }: any) {
@@ -78,10 +79,17 @@ function BannerSec({ data }: any) {
                     <TextField
                       {...params}
                       placeholder="Search for course, degree or specialization"
-                      className="form-control"
+                      // className="form-control"
                       InputProps={{
                         ...params.InputProps,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon />
+                          </InputAdornment>
+                        ),
                         sx: {
+                          backgroundColor: 'white',
+                          color: 'black',
                           '& .MuiInputBase-input::placeholder': {
                             color: 'black',
                           },

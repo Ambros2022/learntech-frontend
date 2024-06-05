@@ -1,117 +1,49 @@
-import React from 'react';
-import MainCarousel from 'src/@core/components/main-carousel';
-import Image from 'next/image';
+import React, { useCallback, useEffect, useState } from 'react'
+import axios1 from 'src/configs/axios'
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
+const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
+function FeaturedCollegeSection() {
+  const [colleges, setColleges] = useState<any[]>([]);
 
-// Define the Card component
-const Card = ({ imageUrl, title, applyLink, detailsLink }) => {
-  return (
-    <div className="card topFeaturedClgCard mb-3">
-      <Image height={300} width={500} src={imageUrl} alt={title} />
-      <div className="card-body">
-        <h5 className="card-title text-black text-center">{title}</h5>
-        <div className="d-flex justify-content-center gap-2">
-          <a href={applyLink} className="ApplyNowBtn btn">Apply Now</a>
-          <a href={detailsLink} className="viewDetailsBtn btn">View Details</a>
-        </div>
-      </div>
-    </div>
-  );
-}
+  //get all banners
+  const getcolleges = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['page'] = 1;
+      roleparams['size'] = 10;
+      const response = await axios1.get('api/website/colleges/get', { params: roleparams });
 
-function TopFeaturedColleges() {
-  // Array of card data objects
-  const topFeaturedCollegeItems = [
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-    {
-      imageUrl: "/images/icons/filter-card.jpg",
-      title: "A.J Institute of Dental Sciences, Mangaluru",
-      applyLink: "#",
-      detailsLink: "#",
-    },
-  ];
+      setColleges(response.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
 
-  // Map the card data objects to Card components
-  const cardComponents = topFeaturedCollegeItems.map((item, index) => (
-    <Card key={index} {...item} />
-  ));
+  console.log("colleges", colleges)
+
+  useEffect(() => {
+
+    getcolleges();
+
+  }, [getcolleges]);
+
+
 
   return (
-    <section className='topFeaturedClgSec'>
-      <div className="container position-relative">
-        <h4 className="pt-5 mb-5 fw-bold text-blue text-center">Top Featured Colleges</h4>
-        <MainCarousel items={cardComponents} />
-        <div className="d-flex justify-content-center">
-          <Link className='btn viewMoreClgBtn mb-5' href="/colleges">View More</Link>
+    <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
+      <div className="container pt-5 position-relative">
+        <h2 className="fw-bold text-blue text-center mb-5">Featured Colleges</h2>
+        <MainCarousel items={colleges.map(college => (
+          <CollegeCard key={college.id} college={college} />
+        ))} />
+        <div className="d-flex justify-content-center pb-5">
+          <Link href='/colleges' className='btn viewMoreClgBtn'>Load More</Link>
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default TopFeaturedColleges;
+export default FeaturedCollegeSection
