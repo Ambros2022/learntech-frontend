@@ -285,7 +285,7 @@ function CollegeFilterSection() {
     const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
         return (
             <div className='col-md-12 mb-3'>
-                <div className="mx-2 filterCardBorder">
+                <div className="mx-2 filterCardBorder bg-skyBlue">
                     <div className="p-2">
                         <div className="row">
                             <div className="col-md-3 col-xl-3 clgCardImg">
@@ -430,7 +430,7 @@ function CollegeFilterSection() {
         };
 
         return (
-            <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2">
+            <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2 rounded">
                 <div className="col-12">
                     <h6 className="text-black">Filters By Location</h6>
                     <div className="d-flex flex-wrap">
@@ -587,7 +587,7 @@ function CollegeFilterSection() {
                             <CollegeList selectedCheckboxes={selectedCheckboxes} />
                             {filteredColleges.length > visibleCards && (
                                 <div className="text-center my-3">
-                                    <button className="btn viewMoreCardBtn"
+                                    <button className="btn viewMoreCollegeBtn"
                                         onClick={handleViewMore}
                                     >
                                         Load More

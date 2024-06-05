@@ -35,7 +35,7 @@ const LinkedInLoginButton: React.FC<LinkedInLoginButtonProps> = ({ onSuccess, on
     >
       {({ linkedInLogin }: { linkedInLogin: any }) => (
         <button onClick={linkedInLogin} className="linkedin-login-button btn">
-          Login with LinkedIn
+          <i className="bi bi-linkedin" style={{ fontSize: '1.5rem' }}></i>
         </button>
       )}
     </LinkedIn>

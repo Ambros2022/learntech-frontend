@@ -2634,30 +2634,58 @@
   }
 
   .google-login-button {
-    color: white !important;
-    border: 1px solid #dee2e6 !important;
-    padding: 5px !important;
+    background-color: #0077b5 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
     border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 1px 0 rgba(0, 0, 0, 0.24) !important;
   }
 
-  .google-login-button>div {
-    margin: 0 !important;
-    padding: 2px !important;
-    box-shadow: none !important;
+  .google-login-button:hover {
+    background-color: #005582 !important;
   }
 
-  .google-login-button div svg {
-    width: 27px !important;
-    height: 30px !important;
+  .linkedin-login-button {
+    background-color: #0077b5 !important;
+    /* LinkedIn blue */
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  .google-login-button div svg g {
-    transform: scale(1.5) !important;
+  .linkedin-login-button:hover {
+    background-color: #005582 !important;
+    /* Darker LinkedIn blue on hover */
   }
 
-  .google-login-button div span {
-    display: none !important;
+  .twitter-login-button {
+    background-color: #0077b5 !important;
+    /* LinkedIn blue */
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
+
+  .twitter-login-button:hover {
+    background-color: #005582 !important;
+    /* Darker LinkedIn blue on hover */
+  }
+
 
   .errBtn {
     color: #254692 !important;
@@ -2673,7 +2701,6 @@
 
   .filterCardBorder .card-Image-top {
     object-fit: contain !important;
-    height: 140px;
   }
 
   .filterItemBtn {
@@ -2702,7 +2729,7 @@
   }
 
   .typeBtn {
-    background-color: #f6f8fb !important;
+    background-color: #5a5a5a3a !important;
     color: #254692 !important;
   }
 
