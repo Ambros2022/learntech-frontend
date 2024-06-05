@@ -2670,12 +2670,12 @@
   }
 
   .collegeBannerCon .form-control {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    padding: 12px 10px !important;
+    background-color: white !important;
+    /* padding: 12px 10px !important; */
   }
 
   .collegeBannerCon input::placeholder {
-    color: white !important;
+    color: black !important;
   }
 
   .collegeBannerCon h1 {

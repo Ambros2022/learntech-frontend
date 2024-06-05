@@ -1,198 +1,84 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import CategoryCarousel from './CategoryCarousel'; // Adjust the import path as necessary
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import NewsList from '../newsList';
 import ExamCard from '../ExamCardList';
+import axios from 'src/configs/axios';
+import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
 
 const BrowsebyCategorySec = () => {
-    const examsData = {
-        medical: [
-            { title: 'NEET UG', date: '5th May, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            // ... other medical exams
-        ],
-        engineering: [
-            { title: 'JEE Main', date: '15th April, 2024' },
-            { title: 'BITSAT', date: '20th May, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            // ... other engineering exams
-        ],
-        dental: [
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            // ... other dental exams
-        ],
-        management: [
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            // ... other dental exams
-        ],
-        law: [
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            // ... other dental exams
-        ],
-        architecture: [
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            // ... other dental exams
-        ],
-        design: [
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'NEET MDS', date: '4th May, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            { title: 'AIIMS PG', date: '12th June, 2024' },
-            // ... other dental exams
-        ],
-        // ... other categories with respective exams
-    };
+    const [items, setItems] = useState<{ id: string; title: string }[]>([]);
+    const [examsData, setExamsData] = useState({});
+    const [newsData, setNewsData] = useState([]);
 
-    const newsData = [
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 1',
-            text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 2',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 3',
-            text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 4',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        // Add more news items as needed
-    ];
-
-    const items = [
-        { id: 'medical', title: 'Medical' },
-        { id: 'engineering', title: 'Engineering' },
-        { id: 'dental', title: 'Dental' },
-        { id: 'management', title: 'Management' },
-        { id: 'law', title: 'Law' },
-        { id: 'architecture', title: 'Architecture' },
-        { id: 'design', title: 'Design' },
-        // ... other categories
-    ];
-
-    const [activeTab, setActiveTab] = useState(items[0].id);
+    const [activeTab, setActiveTab] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const examsPerPage = 12;
 
-    function handleTabClick(id) {
+    const getCategoriesData = useCallback(async () => {
+        try {
+            const response = await axios.get('api/website/stream/get');
+            if (response.data.status === 1) {
+                const categories = response.data.data.map(category => ({
+                    id: category.id,
+                    title: category.name
+                }));
+                setItems(categories);
+                setActiveTab(categories[0]?.id || '');
+            } else {
+                console.error('Failed to fetch categories');
+            }
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }, []);
+
+    const getExamsData = useCallback(async (id) => {
+        try {
+            const response = await axios.get(`api/website/exams/get?stream_id=${id}`);
+            if (response.data.status === 1) {
+                setExamsData(prevState => ({
+                    ...prevState,
+                    [id]: response.data.data
+                }));
+            } else {
+                console.error('Failed to fetch exams');
+            }
+        } catch (error) {
+            console.error('Error fetching exams:', error);
+        }
+    }, []);
+
+
+    const getnews = useCallback(async () => {
+        try {
+          const roleparams = { page: 1, size: 10000 };
+          const response = await axios.get('/api/website/news/get', { params: roleparams });
+    
+        
+          setNewsData(response.data.data);
+        } catch (err) {
+          console.error(err);
+        }
+      }, []);
+    
+
+    useEffect(() => {
+        getCategoriesData();
+        getnews();
+    }, [getCategoriesData , getnews]);
+
+    useEffect(() => {
+        if (activeTab) {
+            getExamsData(activeTab);
+        }
+    }, [activeTab, getExamsData]);
+
+    const handleTabClick = (id) => {
         setActiveTab(id);
-        setCurrentPage(1); // Reset to the first page when changing tabs
-    }
+        setCurrentPage(1);
+    };
 
     const handleSubmit = async (values, { resetForm }) => {
         alert('Successfully Submitted');
@@ -211,17 +97,12 @@ const BrowsebyCategorySec = () => {
         message: Yup.string().required('Message is required'),
     });
 
-    const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage);
+    const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
     const totalExams = examsData[activeTab]?.length || 0;
     const totalPages = Math.ceil(totalExams / examsPerPage);
 
-    function handlePreviousPage() {
-        setCurrentPage((prev) => Math.max(prev - 1, 1));
-    }
-
-    function handleNextPage() {
-        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-    }
+    const handlePreviousPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
+    const handleNextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
 
     return (
         <section className='bg-white'>
@@ -241,9 +122,9 @@ const BrowsebyCategorySec = () => {
                                 <div className="row ">
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row">
-                                            {currentExams?.map((exam, index) => (
-                                                <ExamCard key={index} title={exam.title} date={exam.date} />
-                                            ))}
+                                        {currentExams.map((exam, index) => (
+    <ExamCard key={index} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+))}
                                         </div>
                                         <div className='d-flex justify-content-center'>
                                             <nav aria-label="Page navigation example">
@@ -270,50 +151,7 @@ const BrowsebyCategorySec = () => {
                                     <div className="col-lg-5 col-xl-4">
                                         <div className='bg-skyBlue px-lg-5 px-md-3 px-3 rounded'>
                                             <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h5>
-                                            <Formik
-                                                initialValues={{
-                                                    name: '',
-                                                    email: '',
-                                                    contact_number: '',
-                                                    message: '',
-                                                    course: '',
-                                                    location: '',
-                                                }}
-                                                validationSchema={validationSchema}
-                                                onSubmit={handleSubmit}
-                                                resetForm
-                                            >
-                                                <Form>
-                                                    <div className="mb-3">
-                                                        <Field type="text" name="name" placeholder="Full Name*" className="form-control" />
-                                                        <ErrorMessage name="name" component="div" className="error text-danger" />
-                                                    </div>
-                                                    <div className="mb-3">
-                                                        <Field type="text" name="contact_number" placeholder="Contact Number*" className="form-control" />
-                                                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                                                    </div>
-                                                    <div className="mb-3">
-                                                        <Field type="email" name="email" placeholder="Email ID*" className="form-control" />
-                                                        <ErrorMessage name="email" component="div" className="error text-danger" />
-                                                    </div>
-                                                    <div className="mb-3">
-                                                        <Field type="text" name="location" placeholder="Location*" className="form-control" />
-                                                        <ErrorMessage name="location" component="div" className="error text-danger" />
-                                                    </div>
-                                                    <div className="mb-3">
-                                                        <Field type="text" name="course" placeholder="Interested Course*" className="form-control" />
-                                                        <ErrorMessage name="course" component="div" className="error text-danger" />
-                                                    </div>
-                                                    <div className="mb-3">
-                                                        <Field as="textarea" name="message" placeholder="Type your message" className="form-control" />
-                                                        <ErrorMessage name="message" component="div" className="error text-danger" />
-                                                    </div>
-
-                                                    <div className="d-grid pb-3">
-                                                        <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                                                    </div>
-                                                </Form>
-                                            </Formik>
+                                           <SideContactUsForm/>
                                         </div>
                                         <NewsList newsItems={newsData} />
                                     </div>

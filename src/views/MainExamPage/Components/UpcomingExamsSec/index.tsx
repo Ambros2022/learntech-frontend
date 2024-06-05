@@ -1,21 +1,56 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react';
+import axios1 from 'src/configs/axios';
+
 import MainCarousel2 from 'src/@core/components/carousel2';
 
-function PopularCourses() {
+interface Item {
+    id: number;
+    title: string;
+    date: string;
+}
 
-    const items = [
-        { id: 1, title: 'CMAT', date: '4th May 2024' },
-        { id: 2, title: 'CMAT', date: '4th May 2024' },
-        { id: 3, title: 'CMAT', date: '4th May 2024' },
-        { id: 4, title: 'CMAT', date: '4th May 2024' },
-        { id: 5, title: 'CMAT', date: '4th May 2024' },
-        { id: 6, title: 'CMAT', date: '4th May 2024' },
-        { id: 7, title: 'CMAT', date: '4th May 2024' },
-        { id: 8, title: 'CMAT', date: '4th May 2024' },
-        { id: 9, title: 'CMAT', date: '4th May 2024' },
-        { id: 10, title: 'CMAT', date: '4th May 2024' },
-        { id: 20, title: 'CMAT', date: '4th May 2024' },
-    ]
+function PopularCourses() {
+    const [items, setItems] = useState<Item[]>([]);
+    const [isMountedRef, setIsMountedRef] = useState(true);
+
+    const getExamData = useCallback(async () => {
+        try {
+            const response = await axios1.get('/api/website/exams/get');
+            if (response.data.status === 1) {
+                const examData: Item[] = response.data.data.map((exam: any) => ({
+                    id: exam.id,
+                    title: exam.exam_title,
+                    date: formatDate(exam.created_at) // Format the date here
+                }));
+                if (isMountedRef) {
+                    setItems(examData);
+                }
+            } else {
+                console.error('Failed to fetch exam data');
+            }
+        } catch (error) {
+            console.error('Error fetching exam data:', error);
+        }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+        getExamData();
+
+        return () => {
+            setIsMountedRef(false); // Cleanup on unmount
+        };
+    }, [getExamData]);
+
+    // Function to format the date
+    function formatDate(dateString: string): string {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        };
+        return date.toLocaleDateString('en-US', options);
+    }
 
     // Function to create card components
     function createCards() {
@@ -29,14 +64,14 @@ function PopularCourses() {
     }
 
     // CardComponent function
-    function CardComponent({ title, date }) {
+    function CardComponent({ title, date }: { title: string; date: string }) {
         return (
             <div className='topCourseConCarousel'>
                 <div className="card text-center d-flex mx-2 border-0">
                     <div className="row flex-fill">
                         <div className="col-12 text-start px-0">
                             <div className="ms-2 card-body">
-                                <h4 className="card-title fw-bold text-blue">{title}</h4>
+                                <h4 className="card-title fw-bold text-blue text-truncate">{title}</h4>
                                 <small className="card-title flex-fill">{date}</small>
                             </div>
                         </div>
@@ -52,7 +87,7 @@ function PopularCourses() {
                 <MainCarousel2 items={createCards()} />
             </div>
         </section>
-    )
+    );
 }
 
 export default PopularCourses;
