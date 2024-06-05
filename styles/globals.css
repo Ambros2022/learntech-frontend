@@ -786,7 +786,15 @@
     font-size: 17px !important;
   }
 
+  .card-image {
+    min-height: 160px !important;
+  }
+
   @media (min-width:1025px) and (max-width:1400px) {
+    .card-image {
+      min-height: 128px !important;
+    }
+
     .top-nav .nav-link {
       font-size: 14px !important;
     }
@@ -1023,10 +1031,10 @@
       margin: 25px 0px !important;
     }
 
-    .searchSec {
+    /* .searchSec {
       width: 80% !important;
       margin: auto;
-    }
+    } */
 
     .top-nav .active,
     .top-nav .active :focus,
@@ -1108,7 +1116,7 @@
     }
 
     .searchSec {
-      margin: -20px auto 0 auto !important;
+      margin: 155px auto 0 auto !important;
     }
 
     header {
@@ -1231,7 +1239,7 @@
 
   @media (max-width: 575px) {
     .FeaturedClgCon .carousel-button-group {
-      top: 215px !important;
+      top: 260px !important;
     }
 
     .FeaturedClgCon .fi-left {
@@ -1296,6 +1304,10 @@
   }
 
   @media (min-width: 320px) and (max-width: 374px) {
+    .FeaturedClgCon .carousel-button-group {
+      top: 232px !important;
+    }
+
     .searchBtn {
       padding: 8px 20px !important;
       font-size: 10px !important;
@@ -1352,7 +1364,7 @@
 
   @media (min-width: 320px) and (max-width: 425px) {
     .bannerCon {
-      height: 750px !important;
+      height: 860px !important;
     }
 
     .carousel-item {
@@ -3619,5 +3631,41 @@
       width: 100%;
       height: 642px;
       object-fit: cover;
+    }
+  }
+
+  .card-image>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+  }
+
+  @media (min-width:992px) and (max-width:1024px) {
+    .card-image {
+      min-height: 125px !important;
+    }
+  }
+
+  @media (min-width:768px) and (max-width:1023px) {
+    .card-image {
+      min-height: 125px !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .card-image {
+      min-height: 175px !important;
+    }
+  }
+
+  @media (min-width: 375px) and (max-width: 424px) {
+    .card-image {
+      min-height: 145px !important;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 374px) {
+    .card-image {
+      min-height: 110px !important;
     }
   }

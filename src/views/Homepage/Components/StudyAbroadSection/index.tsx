@@ -3,6 +3,7 @@ import MainCarousel from 'src/@core/components/main-carousel'
 import axios1 from 'src/configs/axios';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from 'next/link';
+import CollegeCard from 'src/@core/components/college-card';
 
 function StudyAbroadSection() {
 
@@ -88,20 +89,7 @@ function StudyAbroadSection() {
 
   const renderCards = () => {
     return cardData.map((card) => (
-      <div key={card.id} className="mx-xl-4 mx-lg-2 mx-md-2 mx-5  card featuredClgCard mb-5 h-100">
-        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
-        <div className="card-body">
-          <h5 className="card-title text-blue text-truncate" style={{ fontSize: '18px' }}>{card.name}</h5>
-          <p className="card-text text-truncate">
-            <img width={17} height={17} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
-            {card.address}
-          </p>
-          <div className="d-flex justify-content-between">
-            <GlobalEnquiryForm className="applyNowButton btn" />
-            <Link href="/colleges" className="btn">View More</Link>
-          </div>
-        </div>
-      </div>
+      <CollegeCard key={card.id} college={card} />
     ));
   };
 
@@ -131,6 +119,9 @@ function StudyAbroadSection() {
         </div>
         <div id="studyCardContainer">
           <MainCarousel items={renderCards()} />
+          <div className="d-flex justify-content-center pb-5">
+            <Link href='/study-in-usa' className='btn viewMoreClgBtn'>Load More</Link>
+          </div>
         </div>
       </div>
     </section >
