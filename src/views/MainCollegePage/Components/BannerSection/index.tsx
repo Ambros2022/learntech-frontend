@@ -6,6 +6,7 @@ import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
+import Image from 'next/image';
 
 let cancelToken: any;
 
@@ -71,65 +72,77 @@ function BannerSection() {
 
   return (
     <>
-      <section className="bg-blue collegeBannerCon">
-        <div className="d-flex justify-content-center h-100 w-100 container">
-          <div className="align-content-center w-100">
-            <h1 className="fw-bold text-white mb-3">
-              FIND TOP COLLEGES, COURSE ADMISSIONS, FEE STRUCTURES, AND PLACEMENT
-            </h1>
-            <div className="row">
-              <div className="col-7 mb-3">
-                <Autocomplete
-                  open={open}
-                  onClose={() => setOpen(false)}
-                  onInputChange={handleInputChange}
-                  options={searchResults}
-                  getOptionLabel={(option: SearchResult) => option.name}
-                  renderOption={(props, option: SearchResult) => (
-                    <li {...props}>
-                      <Link
-                        href={`/college/${option.id}/${option.name}`}
-                        style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
-                      >
-                        {option.name}
-                      </Link>
-                    </li>
-                  )}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      placeholder="Search"
-                      className="form-control"
-                      InputProps={{
-                        ...params.InputProps,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <SearchIcon />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <>
-                            {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                            {params.inputProps.value ? (
-                              <InputAdornment position="end">
-                                <IconButton onClick={() => handleClearInput(params)}>
-                                  <ClearIcon />
-                                </IconButton>
+      <section className="collegeBannerCon">
+        <div className="position-relative">
+          <div>
+            <Image src='/images/icons/Banner BG.png' width={1400} height={400} alt='banner-img' className='position-relative w-100' />
+          </div>
+          <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
+            <div className="d-flex justify-content-center h-100 w-100 container">
+              <div className="align-content-center w-100">
+                <h1 className="fw-bold text-white mb-3">
+                  FIND TOP COLLEGES, COURSE ADMISSIONS, FEE STRUCTURES, AND PLACEMENT
+                </h1>
+                <div className="row">
+                  <div className="col-7 mb-3">
+                    <Autocomplete
+                      open={open}
+                      onClose={() => setOpen(false)}
+                      onInputChange={handleInputChange}
+                      options={searchResults}
+                      getOptionLabel={(option: SearchResult) => option.name}
+                      renderOption={(props, option: SearchResult) => (
+                        <li {...props}>
+                          <Link
+                            href={`/college/${option.id}/${option.name}`}
+                            style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
+                          >
+                            {option.name}
+                          </Link>
+                        </li>
+                      )}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          placeholder="Search"
+                          InputProps={{
+                            ...params.InputProps,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <SearchIcon />
                               </InputAdornment>
-                            ) : null}
-                            {params.InputProps.endAdornment}
-                          </>
-                        ),
-                      }}
+                            ),
+                            sx: {
+                              backgroundColor: 'white',
+                              color: 'black',
+                              '& .MuiInputBase-input::placeholder': {
+                                color: 'black',
+                              },
+                            },
+                            endAdornment: (
+                              <>
+                                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                {params.inputProps.value ? (
+                                  <InputAdornment position="end">
+                                    <IconButton onClick={() => handleClearInput(params)}>
+                                      <ClearIcon />
+                                    </IconButton>
+                                  </InputAdornment>
+                                ) : null}
+                                {params.InputProps.endAdornment}
+                              </>
+                            ),
+                          }}
+                        />
+                      )}
                     />
-                  )}
-
-
-                />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </section>
     </>
   );

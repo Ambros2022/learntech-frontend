@@ -193,7 +193,7 @@ const Header = () => {
           <button className="navbar-toggler" type="button" onClick={toggle} data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className={`${isOpen ? 'show' : ''}collapse navbar-collapse`} id="navbarSupportedContent">
+          <div className={`${isOpen ? 'show' : ''}collapse navbar-collapse collapseNavHeight`} id="navbarSupportedContent">
             <span className="top-nav ms-auto">
               <ul className="navbar-nav">
                 <li className="nav-item">
@@ -348,10 +348,57 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className="hideBtnTxt">
-                  <Image src="/images/icons/user-icon.svg" className='mx-2 mt-xl-2 mt-1 socialIcon' width={30} height={30} alt="user-icon" />
+                  <button className='btn userBtn' data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <Image src="/images/icons/user-icon.svg" className='socialIcon' width={30} height={30} alt="user-icon" />
+                  </button>
                 </li>
                 <li className="hideBtnTxt">
                   <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn" />
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/about-us') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/about-us">
+                    About Us
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/our-team') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/our-team">
+                    Our Team
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/services') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/services">
+                    Services
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/boards') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/boards">
+                    Boards
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/schools') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/schools">
+                    Schools
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/nri-quota') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/nri-quota">
+                    NRI Quota
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/scholarships') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/scholarships">
+                    Scholarships
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/mbbs-abroad') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/mbbs-abroad">
+                    MBBS Abroad
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/meds') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/meds">
+                    Medical Edu Studio
+                  </Link>
                 </li>
               </ul>
             </span>

@@ -9,6 +9,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import FaqSec from './Components/Faqsec'
 
 function InnerCollegePage({ id }) {
   const router = useRouter();
@@ -62,10 +63,10 @@ function InnerCollegePage({ id }) {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection  data={pagedata}/>}
-      {!loading && pagedata && <FacilitiesSection  data={pagedata}/>}
-      {!loading && pagedata && <LocationSection  data={pagedata}/>}
-  
+      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
+      {!loading && pagedata && <FacilitiesSection data={pagedata} />}
+      {!loading && pagedata && <LocationSection data={pagedata} />}
+
       <TopFeaturedColleges />
       <ExpertSection />
     </>
