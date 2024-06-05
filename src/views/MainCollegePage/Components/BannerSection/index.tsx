@@ -99,6 +99,7 @@ function BannerSection() {
                     <TextField
                       {...params}
                       placeholder="Search"
+                      className="form-control"
                       InputProps={{
                         ...params.InputProps,
                         startAdornment: (
@@ -106,13 +107,6 @@ function BannerSection() {
                             <SearchIcon />
                           </InputAdornment>
                         ),
-                        sx: {
-                          backgroundColor: 'white',
-                          color: 'black',
-                          '& .MuiInputBase-input::placeholder': {
-                            color: 'black',
-                          },
-                        },
                         endAdornment: (
                           <>
                             {loading ? <CircularProgress color="inherit" size={20} /> : null}
@@ -129,8 +123,8 @@ function BannerSection() {
                       }}
                     />
                   )}
-                  
-                  
+
+
                 />
               </div>
             </div>

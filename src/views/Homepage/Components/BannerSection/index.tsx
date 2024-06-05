@@ -12,7 +12,7 @@ import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import dynamic from 'next/dynamic';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-
+import SearchIcon from '@mui/icons-material/Search';
 
 import Autocomplete from 'src/@core/components/mui/autocomplete';
 let cancelToken: any;
@@ -186,6 +186,11 @@ function BannerSection() {
                               className="form-control"
                               InputProps={{
                                 ...params.InputProps,
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <SearchIcon />
+                                  </InputAdornment>
+                                ),
                                 sx: {
                                   '& .MuiInputBase-input::placeholder': {
                                     color: 'black',
