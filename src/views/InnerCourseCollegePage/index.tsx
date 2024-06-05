@@ -4,7 +4,7 @@ import BannerSection from '../InnerCollegePage/Components/BannerSection'
 import CourseDetailSec from './Components/CourseDetailSec'
 import ExpertSection from './Components/ExpertSection'
 
-function InnerCourseCollegePage() {
+function InnerCourseCollegePage({id}) {
   return (
     <>
       {/* <BannerSection /> */}

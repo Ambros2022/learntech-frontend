@@ -382,6 +382,7 @@ function CollegeFilterSection() {
                         imageUrl={college.banner_image}
                     />
                 ))}
+              
             </div>
         );
     }

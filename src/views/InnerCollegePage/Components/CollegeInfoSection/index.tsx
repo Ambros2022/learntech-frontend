@@ -3,7 +3,9 @@ import Link from 'next/link'
 import YoutubeVideo from 'src/@core/components/youtube-videos'
 import Image from 'next/image'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
-import FaqSec from '../Faqsec';
+import dynamic from 'next/dynamic';
+const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
+
 
 function CollegeInfoSection({ data }) {
   return (
@@ -116,7 +118,7 @@ function CollegeInfoSection({ data }) {
             <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">...</div>
 
             <div className="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
-              <FaqSec />
+              <FaqSec data={data.collegefaqs} />
             </div>
 
           </div>

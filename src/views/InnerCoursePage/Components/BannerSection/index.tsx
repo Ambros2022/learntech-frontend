@@ -4,7 +4,7 @@ import React from 'react';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 function BannerSection({ data }) {
-
+console.log(data);
   return (
     <>
       <section className="bg-blue dentalCourseCon py-5">

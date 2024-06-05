@@ -9,7 +9,6 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import FaqSec from './Components/Faqsec'
 
 function InnerCollegePage({ id }) {
   const router = useRouter();

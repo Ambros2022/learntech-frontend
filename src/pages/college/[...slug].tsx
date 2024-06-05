@@ -4,6 +4,7 @@ import FrontLayout from 'src/@core/layouts/FrontLayout'
 import InnerCollegePage from 'src/views/InnerCollegePage'
 import { useRouter } from 'next/router';
 import Spinner from 'src/@core/components/spinner';
+import InnerCourseCollegePage from 'src/views/InnerCourseCollegePage'
 
 const college = () => {
   const router = useRouter();
@@ -14,13 +15,20 @@ const college = () => {
       setIsRouterReady(true);
     }
   }, [router.isReady]);
+
+
   if (!isRouterReady) {
     return <Spinner /> // Or a loading spinner
   }
+
   return <>
 
     {Array.isArray(router.query.slug) && (
-      <InnerCollegePage id={router.query.slug[0]} />
+      router.query.slug.length <= 2 ? (
+        <InnerCollegePage id={router.query.slug[0]} />
+      ) : (
+        <InnerCourseCollegePage id={router.query.slug[0]} />
+      )
     )}
   </>
 }
