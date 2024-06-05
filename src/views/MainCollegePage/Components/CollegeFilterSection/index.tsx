@@ -373,6 +373,7 @@ function CollegeFilterSection() {
                         key={college.id}
                         id={college.id}
                         name={college.name}
+                        slug={college.slug}
                         type={college.college_type}
                         rating={college.avg_rating}
                         location={college.address}
@@ -381,6 +382,7 @@ function CollegeFilterSection() {
                         imageUrl={college.banner_image}
                     />
                 ))}
+              
             </div>
         );
     }
