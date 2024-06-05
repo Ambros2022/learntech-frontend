@@ -1,8 +1,9 @@
 // CollegeCard.js
 import React from 'react';
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
 function CollegeCard({ college }) {
     return (
@@ -18,7 +19,7 @@ function CollegeCard({ college }) {
                 </p>
                 <div className="d-flex justify-content-between">
                     <GlobalEnquiryForm className="applyNowButton btn" />
-                    <Link href="/colleges" className="btn">View More</Link>
+                    <Link href={`/college/${college.id}/${college.slug}`} className="btn">View More</Link>
                 </div>
             </div>
         </div>

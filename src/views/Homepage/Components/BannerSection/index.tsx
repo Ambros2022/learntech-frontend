@@ -11,10 +11,10 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import dynamic from 'next/dynamic';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import SearchIcon from '@mui/icons-material/Search';
+const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'), { ssr: false });
+const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
 
-import Autocomplete from 'src/@core/components/mui/autocomplete';
+// import Autocomplete from 'src/@core/components/mui/autocomplete';
 let cancelToken: any;
 
 const phoneRegExp = /^(\+\d{1,3}[- ]?)?\d{10,13}$/;
@@ -109,7 +109,7 @@ function BannerSection() {
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
-      <div id="carouselExampleIndicators" className="carousel slide">
+      {imagesLoaded && banners.length > 0 ? (<div id="carouselExampleIndicators" className="carousel slide">
         <div className="carousel-indicators">
           {banners.map((banner, index) => (
             <button
@@ -125,17 +125,15 @@ function BannerSection() {
         <div className="carousel-inner">
           {banners.map((banner, index) => (
             <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-              {imagesLoaded ? (
-                <Image
-                  fill
-                  src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                  priority={true}
-                  className="w-100"
-                  alt={`Banner ${index}`}
-                />
-              ) : (
-                <Skeleton height={500} />
-              )}
+
+              <Image
+                fill
+                src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                priority={true}
+                className="w-100"
+                alt={`Banner ${index}`}
+              />
+
             </div>
           ))}
         </div>
@@ -147,7 +145,7 @@ function BannerSection() {
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Next</span>
         </button>
-      </div>
+      </div>) : <Skeleton height={500} />}
 
       <div className="bannerFormSec">
         <div className="container-fluid">
@@ -164,8 +162,8 @@ function BannerSection() {
                           onClose={() => setOpen(false)}
                           onInputChange={handleInputChange}
                           options={searchResults}
-                          getOptionLabel={(option) => option.name}
-                          renderOption={(props, option) => (
+                          getOptionLabel={(option: any) => option.name}
+                          renderOption={(props: any, option: any) => (
                             <li {...props}>
                               {option.type === "collegedata" ? (
                                 <Link href={`/college/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
@@ -186,11 +184,6 @@ function BannerSection() {
                               className="form-control"
                               InputProps={{
                                 ...params.InputProps,
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <SearchIcon />
-                                  </InputAdornment>
-                                ),
                                 sx: {
                                   '& .MuiInputBase-input::placeholder': {
                                     color: 'black',
