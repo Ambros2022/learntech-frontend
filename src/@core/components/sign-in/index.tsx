@@ -3,11 +3,24 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GoogleLoginButton from '../google-login';
+import LinkedInLoginButton from '../linkedin-login';
+import TwitterLoginButton from '../twitter-login';
+import FacebookLoginButton from '../facebook-login';
 
 interface FormValues {
   email: string;
   password: string;
 }
+
+const handleSuccess = () => {
+  console.log('sucess');
+};
+
+const handleFailure = () => {
+  console.error('error:');
+};
+
 
 const SignInForm: React.FC = () => {
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -55,7 +68,7 @@ const SignInForm: React.FC = () => {
                   type="button"
                   onClick={togglePasswordVisibility}
                 >
-                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  <i className={showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'} style={{ color: "#254692" }}></i>
                 </button>
               </div>
               <ErrorMessage name="password" component="div" className="text-danger" />
@@ -75,6 +88,12 @@ const SignInForm: React.FC = () => {
       </div>
       <div className='text-black mb-3 text-center'>
         <small>Sign up with social media</small>
+      </div>
+      <div className="d-flex justify-content-between mb-3 flex-wrap">
+        <GoogleLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        <FacebookLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        <LinkedInLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        <TwitterLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
       </div>
       <div className='text-black mb-3 text-center'>
         <small>Already have an account? <span className='text-blue fw-bold'>Sign In</span></small>
