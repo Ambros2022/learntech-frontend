@@ -44,7 +44,7 @@ function CollegeInfoSection({ data }) {
             }
             {
               data.hostel && data.hostel != '' && data.hostel != 'null' && data.hostel != '<p>null</p>' ?
-                <button className='mb-3 btn' id="nav-hostel-tab" data-bs-toggle="tab" data-bs-target="#nav-hostel" type="button" role="tab" aria-controls="nav-hostel" aria-selected="false">Hostel</button>
+                <button className='mb-3 btn' id="nav-hostel-tab" data-bs-toggle="tab" data-bs-target="#nav-hostel" type="button" role="tab" aria-controls="nav-hostel" aria-selected="false">Infrastructure</button>
                 : ''
             }
             {
