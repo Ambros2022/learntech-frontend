@@ -12,7 +12,7 @@ function CollegeInfoSection({ data }) {
     <>
       <section className='clgInfoSec bg-white'>
         <section className="container InnerCollegeNavigationLink pt-2">
-          <p className='mb-3'><Link href="/">Home</Link> {'>'} <Link href={"/colleges"}>Colleges</Link> {'>'} Yenepoya Medical College</p>
+          <p className='mb-3'><Link href="/">Home</Link> {'>'} <Link href={"/colleges"}>Colleges</Link> {'>'} <span className='text-blue' style={{ cursor: 'pointer' }}>{data.name}</span></p>
         </section>
         <div className="container">
           <div className="pt-2 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
