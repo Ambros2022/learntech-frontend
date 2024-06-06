@@ -10,7 +10,7 @@ function BannerSection({ data }) {
           <div className="align-content-center collegeDetailCard w-100">
             <div className="row">
               <div className="col-12 mb-3 col-md-3 col-lg-3 col-xl-3 text-md-start text-center">
-                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={200} height={200} alt={data.name} />
+                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={200} height={200} alt={data.name} />
               </div>
               <div className="col-md-9 mt-3 mt-xl-5 mt-lg-4 mt-0 col-12 col-lg-9 col-xl-9 text-white text-md-start text-center location-img">
                 <h1 className='fw-bold'>{data.name}</h1>
