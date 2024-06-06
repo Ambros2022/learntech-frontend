@@ -67,7 +67,7 @@ function CollegeInfoSection({ data }) {
           <div className="tab-content" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
               <div className="row">
-                <div className="order-2 order-md-1 col-md-7 text-black  py-3 mb-5">
+                <div className="order-2 order-md-1 col-md-7 text-black pt-3">
                   <div dangerouslySetInnerHTML={{ __html: data.info }} />
                 </div>
                 <div className="col-md-5 mb-md-5 order-1 order-md-2">

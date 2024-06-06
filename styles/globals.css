@@ -581,14 +581,6 @@
     left: 20px !important;
   }
 
-  .DownloadBrchrBtn {
-    border-radius: 10px !important;
-    border: none !important;
-  }
-
-  .DownloadBrchrBtn img {
-    width: 200px !important;
-  }
 
   .footer-arrow {
     transform: rotate(90deg) !important;
@@ -841,7 +833,7 @@
   }
 
   /* @media (max-width: 1139px) {
-    .counsellingBtn {
+    .counsellingBtn {e
       font-size: 10px !important;
     }
   } */
@@ -857,6 +849,15 @@
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
+    .innerTextAddress {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 70px !important;
+    }
+
     .collapseNavHeight {
       height: 280px !important;
       overflow-y: scroll !important;
@@ -1019,6 +1020,15 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .innerTextAddress {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 70px !important;
+    }
+
     .collapseNavHeight {
       height: 280px !important;
       overflow-y: scroll !important;
@@ -1578,6 +1588,11 @@
   }
 
   @media (min-width: 768px) and (max-width: 992px) {
+
+    .freeBtn {
+      padding: 12px 0px !important;
+    }
+
     .ApplyNowBtn {
       background-color: #254692 !important;
       color: white !important;
@@ -1685,7 +1700,7 @@
   }
 
   .collegeDetailBanner {
-    height: 320px;
+    height: 460px;
   }
 
   .collegeDetailCard {
@@ -1720,6 +1735,7 @@
   .freeBtn {
     border: 1px solid white !important;
     color: white !important;
+    width: 200px !important;
   }
 
   .downloadBtn:hover {
@@ -1740,7 +1756,7 @@
     }
 
     .collegeDetailCard img {
-      width: 40% !important;
+      width: 50% !important;
       height: auto;
       object-fit: cover;
     }
@@ -1764,7 +1780,8 @@
 
     .freeBtn {
       font-size: 12px !important;
-      width: 100% !important;
+      width: 200px !important;
+      padding: 12px 0 !important;
     }
 
     .arrowIcon {
@@ -1778,7 +1795,7 @@
     }
 
     .freeBtn {
-      font-size: 10px !important;
+      font-size: 12px 0px !important;
     }
   }
 
@@ -1877,17 +1894,23 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
   }
 
+  .facilitiesSec .card:hover {
+    box-shadow: rgba(0, 0, 0, 0.589) 0px 0px 15px;
+  }
+
   .facilitiesSec .card-title {
     font-size: 12px !important;
   }
 
   .facilitiesSec .card-img-top {
-    height: 50px !important;
+    height: auto !important;
+    width: auto !important;
   }
 
+  /* 
   .facilitiesSec .card img {
     filter: invert(23%) sepia(43%) saturate(2015%) hue-rotate(200deg) brightness(93%) contrast(95%) !important;
-  }
+  } */
 
   .locatedSec {
     background-color: #254692 !important;
@@ -3655,7 +3678,30 @@
     border-radius: 5px !important;
   }
 
+  .collegeDetailCard h1 {
+    font-size: 32px !important;
+  }
+
+  .DownloadBrchrBtn {
+    border-radius: 10px !important;
+    border: none !important;
+    width: 200px !important;
+  }
+
+  .DownloadBrchrBtn>img {
+    width: 200px !important;
+  }
+
+
   @media (min-width:768px) and (max-width:992px) {
+    .collegeDetailCard h1 {
+      font-size: 20px !important;
+    }
+
+    .collegeDetailCard h6 {
+      font-size: 13px !important;
+    }
+
     .img-style {
       width: 80% !important;
     }
@@ -3681,6 +3727,22 @@
       height: 642px;
       object-fit: cover;
     }
+
+    .DownloadBrchrBtn {
+      width: 100%;
+    }
+
+    .collegeDetailCard h1 {
+      font-size: 20px !important;
+    }
+
+    .collegeDetailCard h6 {
+      font-size: 13px !important;
+    }
+
+    .collegeDetailBanner {
+      height: 560px;
+    }
   }
 
   .card-image>img {
@@ -3690,6 +3752,14 @@
   }
 
   @media (min-width:992px) and (max-width:1024px) {
+    .collegeDetailCard h1 {
+      font-size: 25px !important;
+    }
+
+    .collegeDetailCard h6 {
+      font-size: 14px !important;
+    }
+
     .card-image {
       min-height: 125px !important;
     }
