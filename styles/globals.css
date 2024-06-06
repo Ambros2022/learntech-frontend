@@ -1699,22 +1699,22 @@
     color: black;
   }
 
-  .collegeDetailBanner {
+  /* .collegeDetailBanner {
     height: 460px;
-  }
+  } */
 
   .collegeDetailCard {
     padding: 20px;
   }
 
-  .collegeDetailCard img {
-    width: 100% !important;
-    height: auto;
-    object-fit: cover;
+  .collegeDetailCard>img {
+    width: 200px !important;
+    height: 200px !important;
   }
 
   .location-img img {
     width: 20px !important;
+    height: 20px !important;
   }
 
   .collegeDetailCard p {
@@ -1736,6 +1736,7 @@
     border: 1px solid white !important;
     color: white !important;
     width: 200px !important;
+    height: 50px !important;
   }
 
   .downloadBtn:hover {
@@ -1756,9 +1757,8 @@
     }
 
     .collegeDetailCard img {
-      width: 50% !important;
-      height: auto;
-      object-fit: cover;
+      width: 200px !important;
+      height: 200px;
     }
 
     .location-img img {
@@ -1766,7 +1766,7 @@
     }
 
     .PrivateBtn {
-      font-size: 12px !important;
+      font-size: 17px !important;
     }
 
     .ratingBtn {
@@ -2690,6 +2690,23 @@
   }
 
   .google-login-button:hover {
+    background-color: #005582 !important;
+  }
+
+  .facebook-login-button {
+    background-color: #0077b5 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 1px 0 rgba(0, 0, 0, 0.24) !important;
+  }
+
+  .facebook-login-button:hover {
     background-color: #005582 !important;
   }
 
@@ -3690,6 +3707,7 @@
 
   .DownloadBrchrBtn>img {
     width: 200px !important;
+    height: 50px !important;
   }
 
 
@@ -3740,9 +3758,9 @@
       font-size: 13px !important;
     }
 
-    .collegeDetailBanner {
+    /* .collegeDetailBanner {
       height: 560px;
-    }
+    } */
   }
 
   .card-image>img {
@@ -3787,4 +3805,23 @@
     .card-image {
       min-height: 110px !important;
     }
+  }
+
+  .innerClgImg {
+    min-height: 200px !important;
+    min-width: 200px !important;
+    max-height: 200px !important;
+    max-width: 200px !important;
+  }
+
+  .innerClgImg img {
+    object-fit: contain !important;
+    /* width: 100% !important; */
+    /* height: 100% !important; */
+  }
+
+
+  .collegeDetailBanner .card {
+    background-color: transparent !important;
+    border: 0 !important;
   }
