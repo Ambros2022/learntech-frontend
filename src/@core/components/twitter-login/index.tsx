@@ -34,6 +34,7 @@ const TwitterLoginButton: React.FC<TwitterLoginButtonProps> = ({ onSuccess, onFa
             forceLogin={true}
             customHeaders={{ 'Access-Control-Allow-Origin': '*' }}
             credentials="include"
+            //@ts-ignore
             className='border-0 p-0'
         >
             <div className="twitter-login-button btn">
