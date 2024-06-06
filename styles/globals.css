@@ -170,9 +170,6 @@
     font-weight: bold !important;
   }
 
-  .top-nav {
-    font-size: 15px !important;
-  }
 
   nav a {
     color: black !important;
@@ -260,9 +257,7 @@
     outline: none !important;
   }
 
-  /* .form-control {
-  color: white !important;
-} */
+
   .searchBtn {
     padding: 10px 20px !important;
     font-size: 16px !important;
@@ -279,6 +274,16 @@
     background-color: white;
     padding: 30px;
     border-radius: 10px;
+  }
+
+  .submtBtn {
+    background-color: white !important;
+    color: #254692 !important;
+  }
+
+  .submtBtn:hover {
+    background-color: white !important;
+    color: darkblue !important;
   }
 
   .submitBtn {
@@ -349,7 +354,7 @@
   }
 
   .innerCollege {
-    background-color: rgba(39, 72, 150, 1) !important;
+    /* background-color: rgba(39, 72, 150, 1) !important; */
   }
 
   .innerCollege input,
@@ -430,10 +435,10 @@
     color: white !important;
   }
 
-  .featuredClgCard .card-text-image {
+  /* .featuredClgCard .card-text-image {
     width: auto;
     height: auto;
-  }
+  } */
 
   .StudyAbroadCard .card-text-image {
     width: auto;
@@ -469,16 +474,22 @@
     font-size: 15px !important;
   }
 
+  .hideBtnTxt .btn:first-child:active {
+    border: 0px !important;
+    color: transparent !important;
+    background-color: transparent !important;
+  }
+
   .studyAbroadNav a {
     border-radius: 0 !important;
-    color: black !important;
+    color: #254692 !important;
     text-decoration: none !important;
     padding: 10px 10px !important;
     border: 1px solid #8f8f8f !important;
     width: 150px !important;
     padding: 12px 30px !important;
     text-align: center !important;
-    background-color: #8f8f8f3f;
+    background-color: #f6f8fb;
   }
 
   .studyAbroadNav a:first-child {
@@ -570,14 +581,6 @@
     left: 20px !important;
   }
 
-  .DownloadBrchrBtn {
-    border-radius: 10px !important;
-    border: none !important;
-  }
-
-  .DownloadBrchrBtn img {
-    width: 200px !important;
-  }
 
   .footer-arrow {
     transform: rotate(90deg) !important;
@@ -613,7 +616,7 @@
     height: auto;
   }
 
-  .featuredClgCard img {
+  .featuredClgCard>img {
     width: 100%;
     height: 100%;
   }
@@ -781,7 +784,31 @@
     margin-right: 10px !important;
   }
 
-  @media (min-width:1025px) and (max-width:1321px) {
+  .top-nav .nav-link {
+    font-size: 17px !important;
+  }
+
+  .card-image {
+    min-height: 160px !important;
+  }
+
+  /* .showingCards .collapse.show {
+    height: 200px !important;
+    transition: height 50s ease-in !important;
+    transition-delay: 10s !important;
+  }
+
+  .showingCards .collapse {
+    height: 0 !important;
+    overflow: hidden !important;
+    transition: height 10s ease !important;
+  } */
+
+  @media (min-width:1025px) and (max-width:1400px) {
+    .card-image {
+      min-height: 128px !important;
+    }
+
     .top-nav .nav-link {
       font-size: 14px !important;
     }
@@ -806,7 +833,7 @@
   }
 
   /* @media (max-width: 1139px) {
-    .counsellingBtn {
+    .counsellingBtn {e
       font-size: 10px !important;
     }
   } */
@@ -822,6 +849,20 @@
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
+    .innerTextAddress {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 70px !important;
+    }
+
+    .collapseNavHeight {
+      height: 280px !important;
+      overflow-y: scroll !important;
+    }
+
     .footer-logo {
       width: 100% !important;
       height: 100% !important;
@@ -979,6 +1020,20 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .innerTextAddress {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 70px !important;
+    }
+
+    .collapseNavHeight {
+      height: 280px !important;
+      overflow-y: scroll !important;
+    }
+
     .featuredClgCard a {
       background-color: white;
       font-size: 10px !important;
@@ -1008,10 +1063,10 @@
       margin: 25px 0px !important;
     }
 
-    .searchSec {
+    /* .searchSec {
       width: 80% !important;
       margin: auto;
-    }
+    } */
 
     .top-nav .active,
     .top-nav .active :focus,
@@ -1093,7 +1148,7 @@
     }
 
     .searchSec {
-      margin: -20px auto 0 auto !important;
+      margin: 155px auto 0 auto !important;
     }
 
     header {
@@ -1216,33 +1271,33 @@
 
   @media (max-width: 575px) {
     .FeaturedClgCon .carousel-button-group {
-      top: 215px !important;
+      top: 260px !important;
     }
 
     .FeaturedClgCon .fi-left {
       margin-left: 8px !important;
-      background-color: white;
+      /* background-color: white; */
       border-radius: 25px;
       padding: 2px 8px;
     }
 
     .FeaturedClgCon .fi-right {
       margin-right: 32px !important;
-      background-color: white;
+      /* background-color: white; */
       border-radius: 25px;
       padding: 2px 8px;
     }
 
     .StudyAbroadCon .fi-left {
       margin-left: 8px !important;
-      background-color: white;
+      /* background-color: white; */
       border-radius: 25px;
       padding: 2px 8px;
     }
 
     .StudyAbroadCon .fi-right {
       margin-right: 32px !important;
-      background-color: white;
+      /* background-color: white; */
       border-radius: 25px;
       padding: 2px 8px;
     }
@@ -1281,6 +1336,10 @@
   }
 
   @media (min-width: 320px) and (max-width: 374px) {
+    .FeaturedClgCon .carousel-button-group {
+      top: 232px !important;
+    }
+
     .searchBtn {
       padding: 8px 20px !important;
       font-size: 10px !important;
@@ -1337,7 +1396,7 @@
 
   @media (min-width: 320px) and (max-width: 425px) {
     .bannerCon {
-      height: 750px !important;
+      height: 860px !important;
     }
 
     .carousel-item {
@@ -1357,6 +1416,12 @@
 
   /* Banner Section */
   .collegeBannerCon {
+    height: 300px !important;
+  }
+
+  .collegeBannerCon>.position-relative img {
+    object-fit: cover !important;
+    width: 100% !important;
     height: 300px !important;
   }
 
@@ -1523,6 +1588,11 @@
   }
 
   @media (min-width: 768px) and (max-width: 992px) {
+
+    .freeBtn {
+      padding: 12px 0px !important;
+    }
+
     .ApplyNowBtn {
       background-color: #254692 !important;
       color: white !important;
@@ -1629,22 +1699,22 @@
     color: black;
   }
 
-  .collegeDetailBanner {
-    height: 320px;
-  }
+  /* .collegeDetailBanner {
+    height: 460px;
+  } */
 
   .collegeDetailCard {
     padding: 20px;
   }
 
-  .collegeDetailCard img {
-    width: 100% !important;
-    height: auto;
-    object-fit: cover;
+  .collegeDetailCard>img {
+    width: 200px !important;
+    height: 200px !important;
   }
 
   .location-img img {
     width: 20px !important;
+    height: 20px !important;
   }
 
   .collegeDetailCard p {
@@ -1665,6 +1735,8 @@
   .freeBtn {
     border: 1px solid white !important;
     color: white !important;
+    width: 200px !important;
+    height: 50px !important;
   }
 
   .downloadBtn:hover {
@@ -1685,9 +1757,8 @@
     }
 
     .collegeDetailCard img {
-      width: 40% !important;
-      height: auto;
-      object-fit: cover;
+      width: 200px !important;
+      height: 200px;
     }
 
     .location-img img {
@@ -1695,7 +1766,7 @@
     }
 
     .PrivateBtn {
-      font-size: 12px !important;
+      font-size: 17px !important;
     }
 
     .ratingBtn {
@@ -1709,7 +1780,8 @@
 
     .freeBtn {
       font-size: 12px !important;
-      width: 100% !important;
+      width: 200px !important;
+      padding: 12px 0 !important;
     }
 
     .arrowIcon {
@@ -1723,7 +1795,7 @@
     }
 
     .freeBtn {
-      font-size: 10px !important;
+      font-size: 12px 0px !important;
     }
   }
 
@@ -1822,17 +1894,23 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
   }
 
+  .facilitiesSec .card:hover {
+    box-shadow: rgba(0, 0, 0, 0.589) 0px 0px 15px;
+  }
+
   .facilitiesSec .card-title {
     font-size: 12px !important;
   }
 
   .facilitiesSec .card-img-top {
-    height: 50px !important;
+    height: auto !important;
+    width: auto !important;
   }
 
+  /* 
   .facilitiesSec .card img {
     filter: invert(23%) sepia(43%) saturate(2015%) hue-rotate(200deg) brightness(93%) contrast(95%) !important;
-  }
+  } */
 
   .locatedSec {
     background-color: #254692 !important;
@@ -2405,7 +2483,7 @@
   .errCon h6 {
     font-size: 14px !important;
   }
-
+*/
   .faqSec .accordion-button {
     --bs-accordion-btn-active-icon: url(../public/images/icons/white-arrow.png) !important;
   }
@@ -2455,6 +2533,8 @@
     border-radius: 0 !important;
     border: 0 !important;
   }
+
+  /*
 
   .btn-close1 img {
     width: auto;
@@ -2597,30 +2677,75 @@
   }
 
   .google-login-button {
-    color: white !important;
-    border: 1px solid #dee2e6 !important;
-    padding: 5px !important;
+    background-color: #0077b5 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
     border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 1px 0 rgba(0, 0, 0, 0.24) !important;
   }
 
-  .google-login-button>div {
-    margin: 0 !important;
-    padding: 2px !important;
-    box-shadow: none !important;
+  .google-login-button:hover {
+    background-color: #005582 !important;
   }
 
-  .google-login-button div svg {
-    width: 27px !important;
-    height: 30px !important;
+  .facebook-login-button {
+    background-color: #0077b5 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 1px 0 rgba(0, 0, 0, 0.24) !important;
   }
 
-  .google-login-button div svg g {
-    transform: scale(1.5) !important;
+  .facebook-login-button:hover {
+    background-color: #005582 !important;
   }
 
-  .google-login-button div span {
-    display: none !important;
+  .linkedin-login-button {
+    background-color: #0077b5 !important;
+    /* LinkedIn blue */
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
+
+  .linkedin-login-button:hover {
+    background-color: #005582 !important;
+    /* Darker LinkedIn blue on hover */
+  }
+
+  .twitter-login-button {
+    background-color: #0077b5 !important;
+    /* LinkedIn blue */
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .twitter-login-button:hover {
+    background-color: #005582 !important;
+    /* Darker LinkedIn blue on hover */
+  }
+
 
   .errBtn {
     color: #254692 !important;
@@ -2636,7 +2761,6 @@
 
   .filterCardBorder .card-Image-top {
     object-fit: contain !important;
-    height: 140px;
   }
 
   .filterItemBtn {
@@ -2665,17 +2789,17 @@
   }
 
   .typeBtn {
-    background-color: #f6f8fb !important;
+    background-color: #5a5a5a3a !important;
     color: #254692 !important;
   }
 
   .collegeBannerCon .form-control {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    padding: 12px 10px !important;
+    background-color: white !important;
+    /* padding: 12px 10px !important; */
   }
 
   .collegeBannerCon input::placeholder {
-    color: white !important;
+    color: rgb(4, 4, 4) !important;
   }
 
   .collegeBannerCon h1 {
@@ -2978,7 +3102,7 @@
     min-height: 80px !important;
   } */
 
-  
+
 
   .options-container {
     max-height: 300px;
@@ -3277,6 +3401,7 @@
     z-index: -1px !important;
   }
 
+
   .newsCardCarousel .fi-left svg {
     stroke: #254692 !important;
     border: 1px solid rgba(39, 72, 150, 0.2);
@@ -3494,9 +3619,7 @@
     font-size: 1rem !important;
   }
 
-  .top-nav .nav-link {
-    font-size: 14px !important;
-  }
+
 
   a .counsellingBtn:hover {
     color: white !important;
@@ -3572,7 +3695,31 @@
     border-radius: 5px !important;
   }
 
+  .collegeDetailCard h1 {
+    font-size: 32px !important;
+  }
+
+  .DownloadBrchrBtn {
+    border-radius: 10px !important;
+    border: none !important;
+    width: 200px !important;
+  }
+
+  .DownloadBrchrBtn>img {
+    width: 200px !important;
+    height: 50px !important;
+  }
+
+
   @media (min-width:768px) and (max-width:992px) {
+    .collegeDetailCard h1 {
+      font-size: 20px !important;
+    }
+
+    .collegeDetailCard h6 {
+      font-size: 13px !important;
+    }
+
     .img-style {
       width: 80% !important;
     }
@@ -3598,4 +3745,83 @@
       height: 642px;
       object-fit: cover;
     }
+
+    .DownloadBrchrBtn {
+      width: 100%;
+    }
+
+    .collegeDetailCard h1 {
+      font-size: 20px !important;
+    }
+
+    .collegeDetailCard h6 {
+      font-size: 13px !important;
+    }
+
+    /* .collegeDetailBanner {
+      height: 560px;
+    } */
+  }
+
+  .card-image>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+  }
+
+  @media (min-width:992px) and (max-width:1024px) {
+    .collegeDetailCard h1 {
+      font-size: 25px !important;
+    }
+
+    .collegeDetailCard h6 {
+      font-size: 14px !important;
+    }
+
+    .card-image {
+      min-height: 125px !important;
+    }
+  }
+
+  @media (min-width:768px) and (max-width:1023px) {
+    .card-image {
+      min-height: 125px !important;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .card-image {
+      min-height: 175px !important;
+    }
+  }
+
+  @media (min-width: 375px) and (max-width: 424px) {
+    .card-image {
+      min-height: 145px !important;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 374px) {
+    .card-image {
+      min-height: 110px !important;
+    }
+  }
+
+  .innerClgImg {
+    min-height: 200px !important;
+    min-width: 200px !important;
+    max-height: 200px !important;
+    max-width: 200px !important;
+  }
+
+  .innerClgImg img {
+    object-fit: contain !important;
+    /* width: 100% !important; */
+    /* height: 100% !important; */
+  }
+
+
+  .collegeDetailBanner .card {
+    background-color: transparent !important;
+    border: 0 !important;
   }

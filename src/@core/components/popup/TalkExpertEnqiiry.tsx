@@ -1,157 +1,111 @@
-// ExpertForm.js
-import React from 'react';
-import { useFormik } from 'formik';
+import React, { FC } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'src/configs/axios'; // Import Axios
-import { toast } from 'react-hot-toast';
+import { saveAs } from 'file-saver'
+import axios from 'src/configs/axios';
+import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router';
+import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+interface Props {
+  page?: any;
+  onChanges?: any;
+}
 
-const TALKExpertForm = () => {
+const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
   const router = useRouter();
-  const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const contact_numberRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  // Formik setup with validation using Yup
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      contact_number: '',
-      course: '',
-      college: ''
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().required('Name is required').trim(),
-      email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-      contact_number: Yup.string().matches(contact_numberRegExp, 'contact_number number is not valid').required('contact_number Number is required').trim(),
-      course: Yup.string().required('Course is required').trim(),
-      college: Yup.string().required('College name is required').trim()
-    }),
-    onSubmit: async (values, { resetForm }) => {
-      try {
-        toast.loading('Processing');
-        const formData = new FormData();
-        formData.append('name', values.name);
-        formData.append('email', values.email);
-        formData.append('current_url', window.location.href);
-        formData.append('contact_number', values.contact_number);
-        formData.append('course', values.course);
-        formData.append('college', values.college);
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-        const response = await axios.post('api/website/enquiry', formData);
-
-        if (response.status === 200) {
-          toast.dismiss();
-          toast.success('Thank you. We will get back to you.');
-          resetForm();
-          router.push('/thank-you');
-        }
-      } catch (error) {
-        toast.error('Try again later!');
-        console.error('Error submitting form:', error);
-      }
-    }
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required').trim(),
+    email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
+    contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+    course: Yup.string().required('Course is required').trim(),
+    // location: Yup.string().required('Location is required').trim(),
   });
 
+  const handleSubmit = async (values, { resetForm }) => {
+
+    try {
+      toast.loading('Processing');
+      const formData = new FormData();
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('contact_number', values.contact_number);
+      formData.append('location', values.location);
+      formData.append('course_in_mind', values.course);
+      formData.append('college_name', values.college_name);
+      formData.append('current_url', window.location.href);
+      const response = await axios.post('api/website/enquiry', formData);
+
+
+      if (response.status === 200) {
+        toast.dismiss();
+        toast.success('Thank you. We will get back to you.');
+        resetForm();
+
+
+        router.push('/thank-you');
+      }
+
+    } catch (error) {
+      toast.error('try again later!');
+      console.error('Error submitting form:', error);
+    }
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit} className="container w-75 m-auto">
-      <div className="row">
-        <div className="col-md-6">
-          <div className="mb-2">
-            <label htmlFor="expertName" className="form-label">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="expertName"
-              name="name"
-              aria-describedby="expertName"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-            />
-            {formik.touched.name && formik.errors.name ? (
-              <div className='text-danger'>{formik.errors.name}</div>
-            ) : null}
+    <Formik
+      initialValues={{
+        name: '',
+        email: '',
+        contact_number: '',
+        course: '',
+        college_name: '',
+        location: '',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+      resetForm
+    >
+      <Form className="container w-75 m-auto">
+        <div className='row mb-3'>
+          <div className="col-lg-6 col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+            <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
+            <ErrorMessage name="name" component="div" className="error text-danger" />
           </div>
-        </div>
-        <div className="col-md-6">
-          <div className="mb-2">
-            <label htmlFor="expertEmail" className="form-label">Email Address</label>
-            <input
-              type="email"
-              className="form-control"
-              id="expertEmail"
-              name="email"
-              aria-describedby="expertEmail"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <div className='text-danger'>{formik.errors.email}</div>
-            ) : null}
+          <div className="col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+            <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
+            <ErrorMessage name="email" component="div" className="error text-danger" />
           </div>
-        </div>
-        <div className="col-md-6">
-          <div className="mb-2">
-            <label htmlFor="expertcontact_number" className="form-label">Phone Number</label>
-            <input
-              type="number"
-              className="form-control"
-              id="expertcontact_number"
-              name="contact_number"
-              aria-describedby="expertcontact_number"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.contact_number}
-            />
-            {formik.touched.contact_number && formik.errors.contact_number ? (
-              <div className='text-danger'>{formik.errors.contact_number}</div>
-            ) : null}
+          <div className=" col-lg-6 col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+            <PhoneInputField name="contact_number" />
+            {/* <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" /> */}
+            <ErrorMessage name="contact_number" component="div" className="error text-danger" />
           </div>
-        </div>
-        <div className="col-md-6">
-          <div className="mb-3">
-            <label htmlFor="expertCollege" className="form-label">Interested Course</label>
-            <input
-              type="text"
-              className="form-control"
-              id="expertCollege"
-              name="course"
-              aria-describedby="expertCollege"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.course}
-            />
-            {formik.touched.course && formik.errors.course ? (
-              <div className='text-danger'>{formik.errors.course}</div>
-            ) : null}
+
+          <div className=" col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+            <Field type="text" name="course" placeholder="Enter Interested Course" className="form-control" />
+            <ErrorMessage name="course" component="div" className="error text-danger" />
           </div>
-        </div>
-        <div className="col-md-6">
-          <div className="mb-3">
-            <label htmlFor="expertCollege" className="form-label">College Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="expertCollege"
-              name="college"
-              aria-describedby="expertCollege"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.college}
-            />
-            {formik.touched.college && formik.errors.college ? (
-              <div className='text-danger'>{formik.errors.college}</div>
-            ) : null}
+          <div className=" col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+            <Field type="text" name="college_name" placeholder="College Name" className="form-control" />
+            <ErrorMessage name="college_name" component="div" className="error text-danger" />
           </div>
+          {/* <div className=" col-md-3 mb-3">
+                        <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
+                        <ErrorMessage name="location" component="div" className="error text-danger" />
+                    </div> */}
         </div>
-      </div>
-      <div className='mb-2 text-center'>
-        <button type="submit" className="btn ExpertSbtBtn">Submit</button>
-      </div>
-    </form>
+
+        <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
+          <button type="submit" className="submtBtn btn">Submit</button>
+        </div>
+
+      </Form>
+    </Formik>
   );
 };
 
-export default TALKExpertForm;
+export default EnquiryForm;

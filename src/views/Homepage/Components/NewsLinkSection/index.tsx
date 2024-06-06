@@ -1,46 +1,49 @@
+import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
-import MainCarousel from 'src/@core/components/main-carousel';
+import dynamic from 'next/dynamic';
 import axios1 from 'src/configs/axios';
 
-function NewsLinkSection() {
-    const [linkSectionItems, setLinkSectionItems] = useState([]);
+const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
 
-    const fetchNews = useCallback(async () => {
-        try {
-            const roleparams = {
-                page: 1,
-                size: 10, // Adjust the size as needed
-            };
-            const response = await axios1.get('api/website/news/get', { params: roleparams });
-            const newsData = response.data.data;
-
-            // Map the fetched news data to JSX elements
-            const newsItems = newsData.map((item, index) => (
-
-                <a href={`${process.env.NEXT_PUBLIC_API_URI}news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer">
-                    <h6 key={index} className="py-2 text-truncate newsLinkClr text-white text-center" style={{ maxWidth: '200px' }}>
-                        {item.name}
-                    </h6>
-                </a>
-
-            ));
-            setLinkSectionItems(newsItems);
-        } catch (error) {
-            console.error('Error fetching news:', error);
-        }
-    }, []);
-
-    useEffect(() => {
-        fetchNews();
-    }, [fetchNews]);
-
-    return (
-        <section className="newsLinkSec py-2">
-            <div className="container text-center">
-                <MainCarousel items={linkSectionItems} />
-            </div>
-        </section>
-    );
+interface NewsItem {
+  id: number;
+  slug: string;
+  name: string;
 }
+
+const NewsLinkSection: React.FC = React.memo(() => {
+  const [linkSectionItems, setLinkSectionItems] = useState<JSX.Element[]>([]);
+
+  const fetchNews = useCallback(async () => {
+    try {
+      const roleparams = { page: 1, size: 10 };
+      const response = await axios1.get('api/website/news/get', { params: roleparams });
+      const newsData: NewsItem[] = response.data.data;
+
+      const newsItems = newsData.map((item) => (
+        <Link key={item.id} href={`news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer">
+          <h6 className="py-2 text-truncate newsLinkClr text-white text-center" style={{ maxWidth: '200px' }}>
+            {item.name}
+          </h6>
+        </Link>
+      ));
+      setLinkSectionItems(newsItems);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchNews();
+  }, [fetchNews]);
+
+  return (
+    <section className="newsLinkSec py-2">
+      <div className="container text-center">
+        <MainCarousel items={linkSectionItems} />
+      </div>
+    </section>
+  );
+});
 
 export default NewsLinkSection;

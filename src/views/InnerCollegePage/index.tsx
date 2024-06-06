@@ -62,10 +62,10 @@ function InnerCollegePage({ id }) {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection  data={pagedata}/>}
-      {!loading && pagedata && <FacilitiesSection  data={pagedata}/>}
-      {!loading && pagedata && <LocationSection  data={pagedata}/>}
-  
+      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
+      {!loading && pagedata && <FacilitiesSection data={pagedata} />}
+      {!loading && pagedata && <LocationSection data={pagedata} />}
+
       <TopFeaturedColleges />
       <ExpertSection />
     </>

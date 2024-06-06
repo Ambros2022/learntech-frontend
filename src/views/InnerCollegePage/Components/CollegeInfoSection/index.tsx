@@ -3,13 +3,16 @@ import Link from 'next/link'
 import YoutubeVideo from 'src/@core/components/youtube-videos'
 import Image from 'next/image'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import dynamic from 'next/dynamic';
+const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
+
 
 function CollegeInfoSection({ data }) {
   return (
     <>
       <section className='clgInfoSec bg-white'>
         <section className="container InnerCollegeNavigationLink pt-2">
-          <p className='mb-3'><Link href="/">Home</Link> {'>'} <Link href={"/colleges"}>Colleges</Link> {'>'} Yenepoya Medical College</p>
+          <p className='mb-3'><Link href="/">Home</Link> {'>'} <Link href={"/colleges"}>Colleges</Link> {'>'} <span className='text-blue' style={{ cursor: 'pointer' }}>{data.name}</span></p>
         </section>
         <div className="container">
           <div className="pt-2 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
@@ -41,7 +44,7 @@ function CollegeInfoSection({ data }) {
             }
             {
               data.hostel && data.hostel != '' && data.hostel != 'null' && data.hostel != '<p>null</p>' ?
-                <button className='mb-3 btn' id="nav-hostel-tab" data-bs-toggle="tab" data-bs-target="#nav-hostel" type="button" role="tab" aria-controls="nav-hostel" aria-selected="false">Hostel</button>
+                <button className='mb-3 btn' id="nav-hostel-tab" data-bs-toggle="tab" data-bs-target="#nav-hostel" type="button" role="tab" aria-controls="nav-hostel" aria-selected="false">Infrastructure</button>
                 : ''
             }
             {
@@ -64,7 +67,7 @@ function CollegeInfoSection({ data }) {
           <div className="tab-content" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
               <div className="row">
-                <div className="order-2 order-md-1 col-md-7 text-black  py-3 mb-5">
+                <div className="order-2 order-md-1 col-md-7 text-black pt-3">
                   <div dangerouslySetInnerHTML={{ __html: data.info }} />
                 </div>
                 <div className="col-md-5 mb-md-5 order-1 order-md-2">
@@ -114,7 +117,9 @@ function CollegeInfoSection({ data }) {
             </div>
             <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">...</div>
 
-            <div className="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">...</div>
+            <div className="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
+              <FaqSec data={data.collegefaqs} />
+            </div>
 
           </div>
         </div>

@@ -3,9 +3,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GoogleLoginButton from '../google-login';
+import TwitterLoginButton from '../twitter-login';
+import LinkedInLoginButton from '../linkedin-login';
+import FacebookLoginButton from '../facebook-login';
 
 interface FormValues {
   name: string;
@@ -31,13 +32,14 @@ const SignupForm: React.FC = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleLoginSuccess = (response) => {
-    console.log('User Logged In:', response.profileObj);
+  const handleSuccess = () => {
+    console.log('sucess');
   };
 
-  const handleLoginFailure = (error) => {
-    console.error('Login Error:', error);
+  const handleFailure = () => {
+    console.error('error:');
   };
+
 
   return (
     <div className="container mt-3">
@@ -101,7 +103,7 @@ const SignupForm: React.FC = () => {
                   type="button"
                   onClick={togglePasswordVisibility}
                 >
-                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  <i className={showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'} style={{ color: "#254692" }}></i>
                 </button>
               </div>
               <ErrorMessage name="password" component="div" className="text-danger" />
@@ -115,7 +117,7 @@ const SignupForm: React.FC = () => {
                   type="button"
                   onClick={toggleConfirmPasswordVisibility}
                 >
-                  <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                  <i className={showConfirmPassword ? 'bi bi-eye-slash' : 'bi bi-eye'} style={{ color: "#254692" }}></i>
                 </button>
               </div>
               <ErrorMessage name="confirmPassword" component="div" className="text-danger" />
@@ -138,7 +140,12 @@ const SignupForm: React.FC = () => {
       <div className='text-black mb-3 text-center'>
         <small>Sign up with social media</small>
       </div>
-      <GoogleLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
+      <div className="d-flex justify-content-between mb-3 flex-wrap">
+        <GoogleLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        <FacebookLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        <LinkedInLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        <TwitterLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+      </div>
       <div className='text-black mb-3 text-center'>
         <small>Already have an account? <span className='text-blue fw-bold'>Sign In</span></small>
       </div>

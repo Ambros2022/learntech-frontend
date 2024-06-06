@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'
 import axios1 from 'src/configs/axios';
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
 
 function StudyAbroadSection() {
 
   const [activeCountry, setActiveCountry] = useState<number | null>(null);
-
-  // const [StudyAbroadItems] = useState(usaItems);
 
   interface Country {
     id: number;
@@ -54,21 +53,6 @@ function StudyAbroadSection() {
   const [cardData, setCardData] = useState<any[]>([]);
 
 
-  // Function to fetch card data from the backend API
-  // const fetchCardData = useCallback(async () => {
-  //   try {
-  //     const response = await axios1.get('api/website/colleges/get');
-  //     const responseData = response.data.data;
-  //     setCardData(responseData);
-  //   } catch (error) {
-  //     console.error('Error fetching card data:', error);
-  //   }
-  // }, []);
-
-  // useEffect to fetch card data when component mounts
-
-
-
   const fetchCardData = useCallback(async () => {
     try {
       // Construct params object with country_id if activeCountry is not null
@@ -88,20 +72,7 @@ function StudyAbroadSection() {
 
   const renderCards = () => {
     return cardData.map((card) => (
-      <div key={card.id} className="mx-xl-4 mx-lg-2 mx-md-2 mx-5  card featuredClgCard mb-5 h-100">
-        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={300} height={200} className="card-img-top" alt={card.title} />
-        <div className="card-body">
-          <h5 className="card-title text-blue text-truncate" style={{ fontSize: '18px' }}>{card.name}</h5>
-          <p className="card-text text-truncate">
-            <img width={14} height={14} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
-            {card.address}
-          </p>
-          <div className="d-flex justify-content-between">
-            <GlobalEnquiryForm className="applyNowButton btn" />
-            <Link href="/colleges" className="btn">View More</Link>
-          </div>
-        </div>
-      </div>
+      <CollegeCard key={card.id} college={card} />
     ));
   };
 
@@ -131,6 +102,9 @@ function StudyAbroadSection() {
         </div>
         <div id="studyCardContainer">
           <MainCarousel items={renderCards()} />
+          <div className="d-flex justify-content-center pb-5">
+            <Link href='/study-in-usa' className='btn viewMoreClgBtn'>Load More</Link>
+          </div>
         </div>
       </div>
     </section >

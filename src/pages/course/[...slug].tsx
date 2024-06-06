@@ -15,14 +15,6 @@ const CoursePage = () => {
     }
   }, [router.isReady]);
 
-  const getSlugLength = (slug) => {
-    if (!slug) return 0;
-    return typeof slug === 'string' ? slug.length : Array.isArray(slug) ? slug.length : 0;
-  };
-
-  const slugLength = getSlugLength(router.query.slug);
-
-
 
   if (!isRouterReady) {
     return <Spinner /> // Or a loading spinner

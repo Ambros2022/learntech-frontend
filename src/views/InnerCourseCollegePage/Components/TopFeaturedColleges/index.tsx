@@ -4,7 +4,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
 const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
-function FeaturedCollegeSection() {
+function FeaturedCollegeSection({ data }) {
   const [colleges, setColleges] = useState<any[]>([]);
 
   //get all banners
@@ -13,6 +13,7 @@ function FeaturedCollegeSection() {
       const roleparams: any = {};
       roleparams['page'] = 1;
       roleparams['size'] = 10;
+      roleparams['stream_id'] = [data.generalcourse.stream_id];
       const response = await axios1.get('api/website/colleges/get', { params: roleparams });
 
       setColleges(response.data.data);
@@ -21,7 +22,7 @@ function FeaturedCollegeSection() {
     }
   }, []);
 
-  console.log("colleges", colleges)
+
 
   useEffect(() => {
 
@@ -34,12 +35,16 @@ function FeaturedCollegeSection() {
   return (
     <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
       <div className="container pt-5 position-relative">
-        <h2 className="fw-bold text-blue text-center mb-5">Featured Colleges</h2>
+        <h2 className="fw-bold text-blue text-center mb-5">Top {data.generalcourse.name} Featured Colleges</h2>
         <MainCarousel items={colleges.map(college => (
           <CollegeCard key={college.id} college={college} />
         ))} />
         <div className="d-flex justify-content-center pb-5">
-          <Link href='/colleges' className='btn viewMoreClgBtn'>Load More</Link>
+          <Link href={{
+            pathname: "/colleges",
+            // query: { stream_id: data.generalcourse.stream_id }
+          }}
+            className='btn viewMoreClgBtn'>Load More</Link>
         </div>
       </div>
     </section>
