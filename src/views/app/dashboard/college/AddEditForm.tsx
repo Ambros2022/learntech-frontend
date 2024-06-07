@@ -848,6 +848,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                                 <MenuItem value='Deemed'>Deemed</MenuItem>
                                                 <MenuItem value='Private'>Private</MenuItem>
                                                 <MenuItem value='Government'>Government</MenuItem>
+                                                <MenuItem value='Autonomous'>Autonomous</MenuItem>
 
                                             </CustomTextField>
                                         )}
