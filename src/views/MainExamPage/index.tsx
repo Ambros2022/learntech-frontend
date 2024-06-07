@@ -15,7 +15,7 @@ const MainExamPage = () => {
   
     const getPagedata = useCallback(async () => {
       try {
-        const response = await axios.get('api/website/pagefindone/get/exam');
+        const response = await axios.get('api/website/pagefindone/get/exams');
         if (isMountedRef.current) {
   
           setPagedata(response.data.data);
@@ -27,7 +27,7 @@ const MainExamPage = () => {
   
     const getTrendingCourses = useCallback(async () => {
       try {
-        const response = await axios.get('api/website/exams/get', {
+        const response = await axios.get('api/website/generalcourse/get', {
           params: {
             page: 1,
             size: 8,

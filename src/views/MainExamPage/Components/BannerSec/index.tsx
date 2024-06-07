@@ -87,7 +87,7 @@ function BannerSection() {
                             Entrance Exams in India
                         </h1>
                         <div className="row">
-                        <div className="col-7 mb-3">
+                        <div className="col-md-7 col-12 mb-3">
                             <Autocomplete
                             open={open}
                             onClose={() => setOpen(false)}
