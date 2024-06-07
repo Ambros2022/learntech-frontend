@@ -3825,3 +3825,65 @@
     background-color: transparent !important;
     border: 0 !important;
   }
+
+  .starRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .starRating .star {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ccc;
+  }
+
+  .starRating .star:hover,
+  .starRating .star.selected {
+    color: gold;
+  }
+
+
+  .starRatings .star {
+    font-size: 22px;
+    cursor: pointer;
+    color: #ccc;
+  }
+
+  .starRatings .star:hover,
+  .starRatings .star.selected {
+    color: gold;
+  }
+
+  .writeReviewBtn {
+    background-color: #274896 !important;
+    color: white !important;
+    padding: 12px 15px !important;
+  }
+
+  .rating-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #254692;
+  }
+
+  .rating-bar span {
+    flex: 1;
+  }
+
+  .progress {
+    flex: 4;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 10px;
+  }
+
+  .progress-bars {
+    background-color: #274896;
+    height: 20px;
+    line-height: 20px;
+    color: white;
+    text-align: center;
+  }
