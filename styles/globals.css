@@ -481,28 +481,21 @@
   }
 
   .studyAbroadNav a {
-    border-radius: 0 !important;
+    border-radius: 10px !important;
     color: #254692 !important;
     text-decoration: none !important;
     padding: 10px 10px !important;
-    border: 1px solid #8f8f8f !important;
+    border: 1px solid #254692 !important;
     width: 150px !important;
     padding: 12px 30px !important;
     text-align: center !important;
     background-color: #f6f8fb;
   }
 
-  .studyAbroadNav a:first-child {
-    border-radius: 7px 0px 0px 7px !important;
-  }
-
-  .studyAbroadNav a:last-child {
-    border-radius: 0px 7px 7px 0px !important;
-  }
-
   .studyAbroadNav a:hover {
     font-weight: bold !important;
-    color: #254692 !important;
+    color: white !important;
+    background-color: #254692 !important;
   }
 
   .studyAbroadNav .active {
@@ -849,14 +842,14 @@
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
-    .innerTextAddress {
+    /* .innerTextAddress {
       display: -webkit-box !important;
       -webkit-line-clamp: 3 !important;
       -webkit-box-orient: vertical !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
       min-height: 70px !important;
-    }
+    } */
 
     .collapseNavHeight {
       height: 280px !important;
@@ -1020,14 +1013,14 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
-    .innerTextAddress {
+    /* .innerTextAddress {
       display: -webkit-box !important;
       -webkit-line-clamp: 2 !important;
       -webkit-box-orient: vertical !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
       min-height: 70px !important;
-    }
+    } */
 
     .collapseNavHeight {
       height: 280px !important;
@@ -1043,14 +1036,6 @@
 
     .studyAbroadNav a {
       width: 120px !important;
-    }
-
-    .studyAbroadNav a:first-child {
-      border-radius: 0 !important;
-    }
-
-    .studyAbroadNav a:last-child {
-      border-radius: 0 !important;
     }
 
     .footer-logo {
@@ -1756,10 +1741,10 @@
       height: auto !important;
     }
 
-    .collegeDetailCard img {
+    /* .collegeDetailCard img {
       width: 200px !important;
       height: 200px;
-    }
+    } */
 
     .location-img img {
       width: 20px !important;
@@ -1802,26 +1787,24 @@
   /* College Info Section */
   .infoBtn .btn {
     border: 1px solid rgba(212, 218, 234, 1) !important;
-    border-radius: 0 !important;
+    border-radius: 10px !important;
     color: #254692 !important;
+    background-color: #f6f8fb !important;
   }
 
   .infoBtn .btn:active {
-    border: 1px solid rgba(212, 218, 234, 1) !important;
-    border-radius: 0 !important;
-    color: #254692 !important;
+    background-color: #254692 !important;
+    color: white !important;
   }
 
   .infoBtn .btn:hover {
-    border: 1px solid rgba(212, 218, 234, 1) !important;
-    border-radius: 0 !important;
-    color: #254692 !important;
+    background-color: #254692 !important;
+    color: white !important;
   }
 
   .infoBtn .btn:focus {
-    border: 1px solid rgba(212, 218, 234, 1) !important;
-    border-radius: 0 !important;
-    color: #254692 !important;
+    background-color: #254692 !important;
+    color: white !important;
   }
 
   .infoBtn .active {
@@ -1836,19 +1819,25 @@
     background-color: #254692 !important;
   }
 
+  .infoBtn .active:hover {
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #254692 !important;
+  }
+
   .applyNowImg img {
     width: 100%;
     height: 100%;
   }
 
-  .applyNowImg a.btn {
-    border: 1px solid white !important;
+  .applyNowImgbtn {
     border-radius: 5px !important;
-    background-color: transparent !important;
+    background-color: #254692 !important;
     color: white !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
+    box-shadow: rgba(255, 255, 255, 0.24) 0px 0px 15px !important;
     transform: translate(-50%, -50%) !important;
   }
 
@@ -1914,7 +1903,6 @@
 
   .locatedSec {
     background-color: #254692 !important;
-    height: 300px !important;
   }
 
   .locatedSec .location-img h6 {
@@ -2017,7 +2005,7 @@
     padding: 10px 15px !important;
     background-color: white !important;
     font-size: 14px !important;
-    font-weight: 600;
+    font-weight: bold !important;
   }
 
   .min-vh-card {
@@ -2466,15 +2454,18 @@
     border-bottom-left-radius: 0 !important;
   }
 
+  /* 
+  .errBtn {
+    color: white !important;
+    background-color: #254692 !important;
+  } */
+
   /* .faqImgSec img {
   width: auto;
   height: auto;
 }
 
-.errBtn {
-  color: #254692 !important;
-  border: 1px solid #254692 !important;
-}
+
 
   .errCon h1 {
     font-size: 30px !important;
@@ -2747,9 +2738,10 @@
   }
 
 
+
   .errBtn {
-    color: #254692 !important;
-    border: 1px solid #254692 !important;
+    color: white !important;
+    background-color: #254692 !important;
   }
 
   .ratingBtn {
@@ -2815,10 +2807,10 @@
     height: 28px !important;
   }
 
-  .thnkCon img {
+  /* .thnkCon img {
     width: auto;
     height: auto;
-  }
+  } */
 
   .reqBtnInnerClg .btn {
     background-color: white !important;
@@ -3696,7 +3688,7 @@
   }
 
   .collegeDetailCard h1 {
-    font-size: 32px !important;
+    font-size: 28px !important;
   }
 
   .DownloadBrchrBtn {
@@ -3771,7 +3763,7 @@
 
   @media (min-width:992px) and (max-width:1024px) {
     .collegeDetailCard h1 {
-      font-size: 25px !important;
+      font-size: 22px !important;
     }
 
     .collegeDetailCard h6 {
@@ -3808,10 +3800,10 @@
   }
 
   .innerClgImg {
-    min-height: 200px !important;
-    min-width: 200px !important;
-    max-height: 200px !important;
-    max-width: 200px !important;
+    min-height: 100px !important;
+    min-width: 100px !important;
+    max-height: 100px !important;
+    max-width: 100px !important;
   }
 
   .innerClgImg img {
@@ -3824,4 +3816,134 @@
   .collegeDetailBanner .card {
     background-color: transparent !important;
     border: 0 !important;
+  }
+
+  .starRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .starRating .star {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ccc;
+  }
+
+  .starRating .star:hover,
+  .starRating .star.selected {
+    color: gold;
+  }
+
+
+  .starRatings .star {
+    font-size: 22px;
+    cursor: pointer;
+    color: #ccc;
+  }
+
+  .starRatings .star:hover,
+  .starRatings .star.selected {
+    color: gold;
+  }
+
+  .writeReviewBtn {
+    background-color: #274896 !important;
+    color: white !important;
+    padding: 12px 15px !important;
+  }
+
+  .rating-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #254692;
+  }
+
+  .rating-bar span {
+    flex: 1;
+  }
+
+  .progress {
+    flex: 4;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 10px;
+  }
+
+  .progress-bars {
+    background-color: #274896;
+    height: 20px;
+    line-height: 20px;
+    color: white;
+    text-align: center;
+  }
+
+  .collegeApplyNow {
+    background-color: #ffffff !important;
+    color: #254692 !important;
+    padding: 14px !important;
+  }
+
+  .clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .expanded {
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+
+  .openAddBtn {
+    background-color: black !important;
+    color: white !important;
+    border-radius: 30px !important;
+    padding: 12px 20px !important;
+  }
+
+  .addImgClg img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .addBanner .card-body h3 {
+    min-height: 70px !important;
+  }
+
+  .iconsPosition {
+    bottom: 0px !important;
+    left: 5px !important;
+  }
+
+  .icon-yellow {
+    filter: invert(79%) sepia(89%) saturate(768%) hue-rotate(358deg) brightness(107%) contrast(103%) !important;
+  }
+
+  .bg-locationOuter {
+    background-color: rgb(152 193 234)
+  }
+
+  .card-height {
+    min-height: 100px !important;
+  }
+
+  .btn-height {
+    min-height: 85px !important;
+  }
+
+  .streamBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+  }
+
+  .TermCon>img {
+    height: 300px !important;
+    width: 100% !important;
+    object-fit: cover;
   }

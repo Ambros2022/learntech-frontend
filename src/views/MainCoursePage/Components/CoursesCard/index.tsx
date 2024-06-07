@@ -7,10 +7,10 @@ import axios from 'src/configs/axios';
 // The individual card component
 function CoursesCard({ course }) {
   return (
-    <div id={course.id} className="col-md-4 col-lg-3">
+    <div id={course.id} className="col-md-6 col-lg-4 col-xl-3">
       <div className="card mb-3 p-2 bg-crsCard">
-        <div className="row g-0">
-          <div className="col-lg-3 p-0 mb-3 mb-md-0 text-md-start text-center">
+        <div className="row g-0 card-height pt-2">
+          <div className="col-lg-3 col-md-3 col-3 col-xl-3 p-0 mb-3 mb-md-0 text-md-start text-center">
             <Image
               width={50}
               height={50}
@@ -19,22 +19,22 @@ function CoursesCard({ course }) {
               alt="Courses-Card-img"
             />
           </div>
-          <div className="col-lg-8 d-flex align-items-center">
-            <div className="card-body p-0 ps-lg-2">
-              <h5 className="fw-bold text-blue card-title text-md-center text-center text-lg-start">{course.name}</h5>
+          <div className="col-lg-9 col-9 col-xl-9 col-md-9">
+            <div className="card-body p-0 ps-lg-2 pt-2">
+              <h5 className="fw-bold text-blue card-title text-start ps-2">{course.name}</h5>
             </div>
           </div>
         </div>
         <div className="d-flex gap-2 my-0 my-md-3 mt flex-wrap coursesBtn justify-content-md-start justify-content-center min-vh-card">
           {course.general_courses.map(val => (
-            <Link key={val.id} href={`/course/${val.id}/${course.slug}/${val.slug}`} className='btn text-blue streamBtn'>
+            <Link key={val.id} href={`/course/${val.id}/${course.slug}/${val.slug}`} className='btn streamBtn'>
               {val.short_name}
             </Link>
           ))}
         </div>
         <div className="d-grid pt-1">
-          <Link href={`/course/${course.id}/${course.slug}`} className='btn viewAllBtn'>
-            View All {course.name} Courses
+          <Link href={`/course/${course.id}/${course.slug}`} className='d-flex justify-content-center text-center btn btn-height viewAllBtn'>
+            <span className='align-self-center'>View All {course.name} Courses</span>
           </Link>
         </div>
       </div>

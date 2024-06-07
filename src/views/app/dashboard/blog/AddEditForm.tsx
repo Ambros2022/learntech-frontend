@@ -257,7 +257,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Title'
+                                    label='Meta Title'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.meta_title)}
@@ -278,7 +278,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Description'
+                                    label='Meta Description'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.meta_description)}
@@ -310,9 +310,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
+                    <Grid item xs={12} sm={6}>
+                                    <Controller
+                                        name='listing_order'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                type='number'
+                                                label='Listing Order'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.listing_order)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.listing_order && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                    </Grid>
+
 
                     <Grid item xs={12} sm={12}>
-                        <Typography style={{ marginBottom: '10px' }}>overview</Typography>
+                        <Typography style={{ marginBottom: '10px' }}>Overview</Typography>
 
                         <Controller
                             name='overview'
@@ -321,7 +342,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field: { value, onChange } }) => (
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                        onChange={(value) => setValue("bottom_description", value)} />
+                                        onChange={(value) => setValue("overview", value)} />
                                     {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                     //  onChange={(value)=>  setValue("bottom_description", value)} />
                                     onChange={(value)=>console.log(value)} /> */}

@@ -29,7 +29,7 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                         <li key={item.id}>
                             <Link
                                 href={{
-                                    pathname: type === "College" ? "/colleges" : "/universities",
+                                    pathname: type === "Colleges" ? "/colleges" : "/universities",
                                     query: { state_id: item.id }
                                 }}
                                 className="dropdown-item"
