@@ -47,7 +47,7 @@ function StudyAbroadSection() {
 
   // Function to get link class
   const getLinkClass = (countryId: number) => {
-    return `mb-3 ${countryId === activeCountry ? 'active' : ''}`;
+    return `${countryId === activeCountry ? 'active' : ''}`;
   };
 
   const [cardData, setCardData] = useState<any[]>([]);
@@ -97,7 +97,7 @@ function StudyAbroadSection() {
       <div className="container pt-5 position-relative">
         <h2 className="fw-bold text-blue text-center">Study Abroad</h2>
         <p className="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div className="d-flex justify-content-center flex-wrap studyAbroadNav py-3 rounded" >
+        <div className="d-flex justify-content-center flex-wrap gap-3 studyAbroadNav py-3 rounded" >
           {renderButtons()}
         </div>
         <div id="studyCardContainer">
