@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from "react";
-import SignupForm from "src/@core/components/sign-up";
-import SignInForm from "src/@core/components/sign-in";
 import axios1 from 'src/configs/axios'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Statedropdown from 'src/@core/layouts/components/Header/state-dropdown';
@@ -13,6 +11,8 @@ import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import dynamic from 'next/dynamic'; // Dynamic import for Next.js
 const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false });
+const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false });
+const SignInForm = dynamic(() => import('src/@core/components/custom-user-auth/SignInForm'), { ssr: false });
 interface Country {
   id: number;
   name: string;
@@ -420,7 +420,7 @@ const Header = () => {
               <div className="col-md-6 signForm">
                 <div className="d-flex justify-content-center gap-4 pt-2 mb-1" role="tablist">
                   <a href="#" className="nav-link" id="pills-SignUp-tab" data-bs-toggle="pill" data-bs-target="#pills-SignUp" type="button" role="tab" aria-controls="pills-SignUp" aria-selected="true">Sign Up</a>
-                  <a href="#" className="nav-link active" id="pills-SignIn-tab" data-bs-toggle="pill" data-bs-target="#pills-SignIn" type="button" role="tab" aria-controls="pills-SignIn" aria-selected="false">Sign In</a>
+                  <a href="#" className="nav-link active" id="pills-SignIn-tab" data-bs-toggle="pill" data-bs-target="#pills-SignIn" type="button" role="tab" aria-controls="pills-SignIn" aria-selected="false">Log In</a>
                 </div>
                 <div className="tab-content" id="pills-tabContent">
                   <div className="tab-pane fade" id="pills-SignUp" role="tabpanel" aria-labelledby="pills-SignUp-tab">

@@ -7,11 +7,13 @@ import GoogleLoginButton from '../google-login';
 import TwitterLoginButton from '../twitter-login';
 import LinkedInLoginButton from '../linkedin-login';
 import FacebookLoginButton from '../facebook-login';
-
+import toast from 'react-hot-toast'
+import Link from 'next/link';
+import axios1 from 'src/configs/axios'
 interface FormValues {
   name: string;
   email: string;
-  phone: string;
+  mobile: string;
   password: string;
   confirmPassword: string;
   agree: boolean;
@@ -48,23 +50,53 @@ const SignupForm: React.FC = () => {
         initialValues={{
           name: '',
           email: '',
-          phone: '',
+          mobile: '',
           password: '',
           confirmPassword: '',
           agree: false,
         }}
         validationSchema={Yup.object({
-          name: Yup.string().required('Required'),
-          email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-          phone: Yup.string().matches(phoneRegExp, 'Phone is not valid').required('Required'),
-          password: Yup.string().required('Required').min(6, 'Password must be at least 6 characters'),
-          confirmPassword: Yup.string().oneOf([Yup.ref('password'), undefined], 'Passwords must match').required('Required'),
+          name: Yup.string().required('Required').trim(),
+          email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
+          mobile: Yup.string().matches(phoneRegExp, 'Phone is not valid').required('Required').trim(),
+          password: Yup.string().required('Required').min(6, 'Password must be at least 6 characters').trim(),
+          confirmPassword: Yup.string().oneOf([Yup.ref('password'), undefined], 'Passwords must match').required('Required').trim(),
           agree: Yup.boolean().oneOf([true], 'Must agree to terms and conditions').required('Required'),
         })}
-        onSubmit={(values: FormValues, { setSubmitting, resetForm }) => {
-          alert("submit successfully")
-          setSubmitting(false);
-          resetForm();
+        onSubmit={async (values: FormValues, { setSubmitting, resetForm }) => {
+
+
+          setSubmitting(true);
+          let url = 'api/auth/user/signup';
+          const formData = new FormData();
+          formData.append('name', values.name);
+          formData.append('email', values.email);
+          formData.append('mobile', values.mobile);
+          formData.append('password', values.password);
+          formData.append('confirmpassword', values.confirmPassword);
+          try {
+            let response = await axios1.post(url, formData)
+            console.log(response, "response")
+
+            if (response.data.status == 1) {
+
+              toast.success(response.data.message)
+              setSubmitting(false);
+              resetForm();
+            }
+            else {
+
+              toast.error(response.data.message)
+              setSubmitting(false);
+
+            }
+          } catch (err: any) {
+            console.error(err);
+            toast.error(err.message)
+            setSubmitting(false);
+
+
+          }
         }}
       >
         {({ values, setFieldValue }) => (
@@ -83,16 +115,16 @@ const SignupForm: React.FC = () => {
               <label htmlFor="phone" className="form-label text-black">Phone</label>
               <PhoneInput
                 country={'in'}
-                value={values.phone}
-                onChange={(value) => setFieldValue('phone', value)}
+                value={values.mobile}
+                onChange={(value) => setFieldValue('mobile', value)}
                 inputProps={{
-                  name: 'phone',
-                  id: 'phone',
+                  name: 'mobile',
+                  id: 'mobile',
                   className: 'form-control',
                   placeholder: '',
                 }}
               />
-              <ErrorMessage name="phone" component="div" className="text-danger" />
+              <ErrorMessage name="mobile" component="div" className="text-danger" />
             </div>
             <div className="mb-3">
               <label htmlFor="password" className="form-label text-black">Password</label>
@@ -124,7 +156,9 @@ const SignupForm: React.FC = () => {
             </div>
             <div className="mb-3 form-check">
               <Field type="checkbox" className="form-check-input" id="agree" name="agree" />
-              <label className="form-check-label text-black" htmlFor="agree">By signing up, you will agree to our <span className='text-blue fw-bold'>Terms, Data Policy</span> and <span className='text-blue fw-bold'> Cookies Policy.</span></label>
+              <label className="form-check-label text-black" htmlFor="agree">By signing up, you will agree to our
+                <Link href="/terms-and-conditions"><span className='text-blue fw-bold'> Terms, Data Policy </span></Link> and <span className='text-blue fw-bold'> Cookies Policy.</span></label>
+
               <ErrorMessage name="agree" component="div" className="text-danger" />
             </div>
             <div className="d-grid mb-3">
@@ -147,10 +181,10 @@ const SignupForm: React.FC = () => {
         <TwitterLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
       </div>
       <div className='text-black mb-3 text-center'>
-        <small>Already have an account? <span className='text-blue fw-bold'>Sign In</span></small>
+        <small>Already have an account? <span className='text-blue fw-bold'>Log In</span></small>
       </div>
 
-    </div>
+    </div >
   );
 };
 

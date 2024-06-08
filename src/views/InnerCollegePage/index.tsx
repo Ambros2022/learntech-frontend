@@ -9,7 +9,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import ReviewSec from './Components/ReviewSec'
+
 
 function InnerCollegePage({ id }) {
   const router = useRouter();
@@ -67,7 +67,7 @@ function InnerCollegePage({ id }) {
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}
 
-      <ReviewSec />
+
       <TopFeaturedColleges />
       <ExpertSection />
 
