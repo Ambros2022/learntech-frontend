@@ -244,9 +244,9 @@ const Header = () => {
 
                 <li className="nav-item dropdown">
                   <Link
-                    className={`nav-link dropdown-toggle ${isLinkActive('/country') ? 'activeDrpDwn' : ''}`}
+                    className={`nav-link dropdown-toggle ${isLinkActive('/study-in-usa') ? 'activeDrpDwn' : ''}`}
                     onClick={() => setIsOpen(!isOpen)}
-                    href="/colleges"
+                    href="/study-in-usa"
                     id="navbarDropdownMenuLink"
                     role="button"
                     aria-expanded={isOpen}
@@ -280,7 +280,9 @@ const Header = () => {
 
                               >
                                 <div className="card-news card">
-                                  <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} className="card-img-top" alt="News Banner" />
+                                  <div className="cardImgNewsheight">
+                                    <Image height={200} width={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} priority={true} className="card-img-top" alt="News Banner" />
+                                  </div>
                                   <div className="card-body">
                                     <h5 className="card-title text-truncate">{item.meta_title}</h5>
                                     <p className="card-text" >{item.meta_description}</p>
