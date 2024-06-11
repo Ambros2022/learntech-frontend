@@ -6,15 +6,15 @@ import Image from 'next/image';
 function BannerSec() {
     return (
         <>
-            <section className='collegeBannerCon bg-blue examsBannerCon'>
+            <section className='collegeBannerCon bg-blue py-5 examsBannerCon'>
                 <div className='d-flex justify-content-center w-100 h-100'>
                     <div className='align-content-center w-100 container'>
                         <div className="row">
                             <div className="col-lg-8 col-md-9 mx-md-auto innerExam">
-                                <div className="card mb-5">
+                                <div className="card mb-3">
                                     <div className="row g-0">
                                         <div className="col-md-3 text-center text-md-start">
-                                            <Image src="/images/icons/filter-card.jpg" width={200} height={200} alt="filter-card" className="img-fluid rounded" />
+                                            <Image src="/images/icons/filter-card.jpg" width={200} height={200} alt="filter-card" className="img-fluid" />
                                         </div>
                                         <div className="col-md-9 d-flex justify-content-center justify-content-md-start">
                                             <div className="align-content-center">
@@ -27,7 +27,7 @@ function BannerSec() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 d-flex justify-content-center mb-5">
+                            <div className="col-lg-4 d-flex justify-content-center mb-3">
                                 <div className="align-content-center">
                                     <div className='text-md-end text-center'>
                                         <button className='btn alertExamBtn'><i className="bi bi-bell-fill"></i> Get NEED MDS Alert</button>
@@ -53,7 +53,7 @@ function BannerSec() {
             </section>
             <div className="bg-white">
                 <section className='container py-3'>
-                    <Link className="text-black" href='/'>Home</Link> {'>'} <Link className='text-black' href='/exams'>Exams</Link> {'>'} <Link className='text-blue' href='/exams'>NEET MDS</Link>
+                    <Link className="text-black fs-5" href='/'>Home <i className='bi bi-chevron-right'></i></Link><Link className='text-black fs-5' href='/exams'> Exams <i className='bi bi-chevron-right'></i></Link><Link className='text-blue fs-5' href='/exams'>NEET MDS</Link>
                 </section>
             </div>
         </>

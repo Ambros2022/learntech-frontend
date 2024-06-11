@@ -1,6 +1,8 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image'
 import React from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
 function TopUniversity() {
 
@@ -82,18 +84,17 @@ function TopUniversity() {
   // CardComponent function
   function CardComponent({ title, imageSrc, description }) {
     return (
-      <div className="mx-2 card d-flex rounded text-center">
+      <div className="mx-lg-2 mx-xl-4 mx-md-3 mx-5 card d-flex rounded text-center">
         <div className="position-relative">
           <Image src={imageSrc} className='rounded-top m-0' width={200} height={200} alt="clg-card" />
           <div className="position-absolute topClgIcon">
             <Image src={"/images/icons/topClg.png"} className='rounded-top m-0' width={40} height={40} alt="clg-card" />
           </div>
         </div>
-        <div className='p-2'>
+        <div className='p-3'>
           <p className='m-0 text-black fw-bold'>{title}</p>
-          <small className='text-blue mb-3'>{description}</small>
-          <div className="d-grid mt-2">
-            <button className='btn topApplyBtn'>Apply Now</button>
+          <div className="mt-2 text-center">
+            <GlobalEnquiryForm className="btn ApplyNowBtn" />
           </div>
         </div>
       </div>

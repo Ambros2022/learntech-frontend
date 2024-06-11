@@ -3,19 +3,9 @@ import React from 'react';
 // NewsItem component
 const NewsItem = ({ date, title }) => (
     <div className="col-12">
-        <div className="card mb-3 cardInnerExam">
-            <div className="row g-0">
-                <div className="col-md-4 d-flex justify-content-center">
-                    <div className="align-self-center mt-3 md-0">
-                        <h3 className='fw-bold text-blue mb-0 text-center'>{date}</h3>
-                    </div>
-                </div>
-                <div className="col-md-8 d-flex">
-                    <div className="card-body align-content-center text-md-start text-center">
-                        <h5 className="btn card-title text-truncate fw-bold">{title}</h5>
-                    </div>
-                </div>
-            </div>
+        <div className="card mb-3 p-3 d-flex justify-content-center cardInnerExam">
+            <h4 className="btn card-title align-slef-center text-center mb-0 text-truncate fw-bold">{title}</h4>
+            <h6 className='fw-bold align-self-center text-blue mb-0 text-center'>{date}</h6>
         </div>
     </div>
 );

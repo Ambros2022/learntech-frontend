@@ -2408,6 +2408,7 @@
     border: 1px solid white !important;
     padding: 10px 20px !important;
     font-size: 16px !important;
+    border-radius: 10px 0px 0px 10px !important;
   }
 
   .studyInUsaCon .searchSec1 input::placeholder {
@@ -2423,6 +2424,7 @@
     font-size: 16px !important;
     color: #254692 !important;
     background-color: white !important;
+    border-radius: 0px 10px 10px 0px !important;
   }
 
   .helpMeBtn {
@@ -2538,6 +2540,12 @@
     --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
   }
 
+  .faqSec .accordion-header button:active {
+    background-color: #3d5aa0 !important;
+    color: white !important;
+    --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
+  }
+
   .faqSec .accordion-header:focus {
     outline: 0 !important;
     border: 0 !important;
@@ -2577,49 +2585,6 @@
   @media (min-width: 768px) and (max-width: 992px) {
     .studyInUsaCon h4 {
       font-size: 18px;
-    }
-  }
-
-  @media (max-width: 575px) {
-    .topClgIcon {
-      top: 13px;
-      left: 15px;
-    }
-
-    .topClgIcon img {
-      width: 150% !important;
-      height: 100% !important;
-    }
-
-    .topUniCardCon .carousel-button-group {
-      position: absolute !important;
-      top: 150px !important;
-    }
-
-    .topUniCardCon .fi-left {
-      margin-left: 20px !important;
-      background-color: white;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .topUniCardCon .fi-right {
-      margin-right: 45px !important;
-      background-color: white;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .faqImgSec img {
-      width: 330px;
-      height: 200px;
-    }
-  }
-
-  @media (min-width: 320px) and (max-width: 374px) {
-    .topUniCardCon .carousel-button-group {
-      position: absolute !important;
-      top: 125px !important;
     }
   }
 
@@ -3020,7 +2985,7 @@
   }
 
   .examsBannerCon {
-    height: 500px !important;
+    height: auto !important;
   }
 
   .examsCardCarousel .carousel-button-group {
@@ -3068,15 +3033,15 @@
   }
 
   .alertExamBtn {
-    background-color: white !important;
-    color: #254692 !important;
+    background-color: rgba(231, 61, 71, 1) !important;
+    color: white !important;
     padding: 10px 15px !important;
   }
 
   .alertExamBtn:hover {
-    color: darkblue !important;
-    padding: 10px 15px !important;
+    background-color: rgb(255, 66, 79) !important;
   }
+
 
   .bg-examsCarouselCr {
     background-color: rgba(255, 255, 255, 0.2) !important;
@@ -4017,4 +3982,45 @@
     height: 300px !important;
     width: 100% !important;
     object-fit: cover !important;
+  }
+
+  .faqSec {
+    height: auto !important;
+  }
+
+  .faqImgCon {
+    height: auto;
+  }
+
+  .faqImgSec>img {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .faqSec .accordion-body {
+    background-color: whitesmoke !important;
+  }
+
+  .boxForAccordion {
+    height: 100% !important;
+    width: 100% !important;
+    background-color: rgba(39, 72, 150, 0.2) !important;
+    color: rgba(39, 72, 150, 0.0) !important;
+  }
+
+  @media (max-width:575px) {
+    .topUniCardCon .carousel-button-group {
+      position: absolute !important;
+      top: 115px !important;
+      width: 100%;
+    }
+
+    .topUniCardCon .fi-left {
+      margin-left: 0px !important;
+    }
+
+    .topUniCardCon .fi-right {
+      margin-right: 30px !important;
+    }
+
   }

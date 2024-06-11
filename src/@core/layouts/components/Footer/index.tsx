@@ -54,7 +54,7 @@ const Footer = () => {
                 </div >
                 <div className="mb-3">
                   <Image className="mb-3" src="/images/icons/Location White.svg" alt="phone-icon" width={25} height={24} />
-                  <a href="https://www.google.com/maps/place/Jayanagara+9th+Block,+Jayanagar,+Bengaluru,+Karnataka/@12.9191172,77.5906813,16z/data=!3m1!4b1!4m6!3m5!1s0x3bae1509aa3810eb:0xc7f2ebd555ee64f3!8m2!3d12.9204609!4d77.5920295!16s%2Fg%2F113dwrrcn?entry=ttu" target="_blank" className="ms-2 mb-3 d-inline-block">9th Block, Jayanagar<br></br> Bangalore - 560041</a>
+                  <a href="https://www.google.com/maps/place/Learntech+Edu+Solutions+Pvt+Ltd+-+Study+Abroad+Counselor/@12.9187833,77.5983055,15z/data=!4m6!3m5!1s0x3bae15064e759943:0x60dcac77858f6b5e!8m2!3d12.9187833!4d77.5983055!16s%2Fg%2F11cs1gwx25?entry=ttu" target="_blank" className="ms-2 mb-3 d-inline-block">9th Block, Jayanagar<br></br> Bangalore - 560041</a>
                 </div>
               </span>
             </div>
