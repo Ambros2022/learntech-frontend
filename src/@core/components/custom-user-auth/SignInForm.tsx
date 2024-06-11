@@ -10,6 +10,7 @@ import FacebookLoginButton from '../facebook-login';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import OtpVerificationForm from './OtpVerificationForm';
 import NewPasswordForm from './NewPasswordForm';
+import router from 'next/router';
 
 interface FormValues {
   email: string;
@@ -24,7 +25,8 @@ const handleFailure = () => {
   console.error('error:');
 };
 
-const SignInForm: React.FC = () => {
+const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
+
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -89,9 +91,12 @@ const SignInForm: React.FC = () => {
               try {
                 let response = await axios1.post(url, formData);
                 if (response.data.status === 1) {
+                  localStorage.setItem("UserData", JSON.stringify(response.data.data));
                   toast.success(response.data.message);
                   setSubmitting(false);
                   resetForm();
+                  router.push('/write-review');
+                  closeModal();
                 } else {
                   toast.error(response.data.message);
                   setSubmitting(false);

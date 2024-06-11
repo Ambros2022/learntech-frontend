@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import axios1 from 'src/configs/axios'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Statedropdown from 'src/@core/layouts/components/Header/state-dropdown';
@@ -13,6 +13,8 @@ import dynamic from 'next/dynamic'; // Dynamic import for Next.js
 const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false });
 const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false });
 const SignInForm = dynamic(() => import('src/@core/components/custom-user-auth/SignInForm'), { ssr: false });
+
+const ConditionalModal = dynamic(() => import('./ConditionalModal'), { ssr: false });
 interface Country {
   id: number;
   name: string;
@@ -23,13 +25,19 @@ interface Courses {
   slug: string;
 }
 import { createRoot } from 'react-dom/client';
+
+
+
 const Header = () => {
 
   const router = useRouter();
   const [states, setStates] = useState<any[]>([]);
   const [exams, setExams] = useState<any[]>([]);
   const isMountedRef = useIsMountedRef();
+  const [showModal, setShowModal] = useState(false);
 
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
 
   const [news, setNews] = useState<any[]>([]);
@@ -179,8 +187,13 @@ const Header = () => {
                 <span className='telHover'><Image className="m-0" src="/images/icons/Phone-blue.svg" width={26} height={22} alt="phone-icon" />
                   <a href="tel:18001208969" target="_blank" className="mx-2 " style={{ color: '#274896' }}>1800 120 8969</a></span>
                 <span className="mailHover"><Image className="ms-2" src="/images/icons/email-icon.svg" width={26} height={22} alt="email-icon" />
+
                   <a href="mailto:info@learntechww.com" className="mx-2" style={{ color: '#274896' }}>info@learntechww.com</a></span>
-                <Link href='/write-review' className="ms-2 btn reviewBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Write a Review</Link>
+
+                <button onClick={openModal} className="ms-2 btn reviewBtn">
+                  Write a Review
+                </button>
+
               </div>
             </div>
           </div>
@@ -348,9 +361,11 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className="hideBtnTxt">
-                  <button className='btn userBtn' data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <Image src="/images/icons/user-icon.svg" className='socialIcon' width={30} height={30} alt="user-icon" />
+                  <button onClick={openModal} className="btn userBtn">
+                    <Image src="/images/icons/user-icon.svg" className="socialIcon" width={30} height={30} alt="user-icon" />
                   </button>
+
+
                 </li>
                 <li className="hideBtnTxt">
                   <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn" />
@@ -405,34 +420,8 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <div className="modal fadeModal" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog position-relative modal-dialog-centered modal-lg modal-md w-sm-form">
-          <div className="modal-content">
-            <h4 className="z-3 position-absolute text-white">Please Sign In to write a review</h4>
-            <div className="row gx-0">
-              <div className="col-md-6 formImgCon d-none d-md-flex justify-content-center formImage px-0 mx-0 py-5">
-                <div className="align-content-center">
-                  <Image src="/images/icons/form-img.png" width={300} height={200} alt={"form-image"} />
-                </div>
-              </div>
-              <div className="col-md-6 signForm">
-                <div className="d-flex justify-content-center gap-4 pt-2 mb-1" role="tablist">
-                  <a href="#" className="nav-link" id="pills-SignUp-tab" data-bs-toggle="pill" data-bs-target="#pills-SignUp" type="button" role="tab" aria-controls="pills-SignUp" aria-selected="true">Sign Up</a>
-                  <a href="#" className="nav-link active" id="pills-SignIn-tab" data-bs-toggle="pill" data-bs-target="#pills-SignIn" type="button" role="tab" aria-controls="pills-SignIn" aria-selected="false">Log In</a>
-                </div>
-                <div className="tab-content" id="pills-tabContent">
-                  <div className="tab-pane fade" id="pills-SignUp" role="tabpanel" aria-labelledby="pills-SignUp-tab">
-                    <SignupForm />
-                  </div>
-                  <div className="tab-pane fade show active" id="pills-SignIn" role="tabpanel" aria-labelledby="pills-SignIn-tab">
-                    <SignInForm />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div >
+
+      {showModal && <ConditionalModal showModal={showModal} closeModal={closeModal} />}
     </>
   );
 }

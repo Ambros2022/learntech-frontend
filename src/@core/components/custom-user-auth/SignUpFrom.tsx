@@ -10,6 +10,7 @@ import FacebookLoginButton from '../facebook-login';
 import toast from 'react-hot-toast'
 import Link from 'next/link';
 import axios1 from 'src/configs/axios'
+import router from 'next/router';
 interface FormValues {
   name: string;
   email: string;
@@ -19,7 +20,7 @@ interface FormValues {
   agree: boolean;
 }
 
-const SignupForm: React.FC = () => {
+const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const phoneRegExp = /^[0-9]{12}$/; // Example: 10 digits only, you may adjust it according to your needs
 
@@ -79,10 +80,12 @@ const SignupForm: React.FC = () => {
             console.log(response, "response")
 
             if (response.data.status == 1) {
-
+              localStorage.setItem("UserData", JSON.stringify(response.data.data));
               toast.success(response.data.message)
               setSubmitting(false);
               resetForm();
+              router.push('/write-review');
+              closeModal();
             }
             else {
 
