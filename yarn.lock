@@ -5848,6 +5848,13 @@
   "resolved" "https://registry.npmjs.org/jiti/-/jiti-1.21.0.tgz"
   "version" "1.21.0"
 
+"jodit-pro-react@^4.1.13":
+  "integrity" "sha512-q/9zjV5U94tW/nES2tG/GfZUx7gQkWHrmy2Ewlk0QZMc77zk0LeJfLcxeuHSe/MwagvlNzHWh7ohNPEs+L8qWA=="
+  "resolved" "https://registry.npmjs.org/jodit-pro-react/-/jodit-pro-react-4.1.13.tgz"
+  "version" "4.1.13"
+  dependencies:
+    "prop-types" "^15.8.1"
+
 "jodit-react@^4.0.30":
   "integrity" "sha512-Z33GQeeuKjydxuEd+lTmZgmRV3lWhqNB7pGXDhYynGkhfEcXSwGsedRsDc5r26MNHXkfYzr620JD7wf5hw67fA=="
   "resolved" "https://registry.npmjs.org/jodit-react/-/jodit-react-4.0.30.tgz"
