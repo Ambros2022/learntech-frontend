@@ -80,14 +80,14 @@ function BannerSection() {
 
   return (
     <>
-      <section className='collegeBannerCon bg-blue examsBannerCon'>
+      <section className='collegeBannerCon bg-blue py-5 examsBannerCon'>
         <div className='d-flex justify-content-center w-100 h-100'>
           <div className='align-content-center w-100 container'>
             <h1 className='fw-bold text-center text-white mb-3'>
               Entrance Exams in India
             </h1>
             <div className="row">
-              <div className="col-md-7 col-12 mb-3">
+              <div className="col-md-7 col-12 mb-3 mx-auto">
                 <Autocomplete
                   open={open}
                   onClose={() => setOpen(false)}
@@ -150,8 +150,8 @@ function BannerSection() {
         </div>
       </section>
       <div className="bg-white">
-        <section className='container py-3'>
-          <Link className="text-black fs-5" href='/'>Home <i className="bi bi-chevron-right"></i></Link> <Link className='text-blue fs-5' href='/exams'>Exams</Link>
+        <section className='container py-3 linkFontSize'>
+          <Link className="text-black" href='/'>Home <i className="bi bi-chevron-right"></i></Link> <Link className='text-blue' href='/exams'>Exams</Link>
         </section>
       </div>
     </>

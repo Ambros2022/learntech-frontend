@@ -3160,6 +3160,34 @@
     border-radius: 5px !important;
   }
 
+  .OverviewCarousel .carousel-button-group {
+    position: absolute !important;
+    top: -3px !important;
+    width: 100% !important;
+  }
+
+  .OverviewCarousel .fi-left {
+    margin-left: -60px !important;
+  }
+
+  .OverviewCarousel .fi-right {
+    margin-right: 20px !important;
+  }
+
+  .OverviewCarousel .fi-left svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    padding: 5px !important;
+    border-radius: 5px !important;
+  }
+
+  .OverviewCarousel .fi-right svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    padding: 5px !important;
+    border-radius: 5px !important;
+  }
+
   @media (min-width:992px) and (max-width:1024px) {
     .FeaturedClgCon .card-Image-top {
       /* height: 166px !important; */
@@ -3178,6 +3206,14 @@
     .categorySecCarousel .fi-right {
       margin-right: 35px !important;
     }
+
+    .OverviewCarousel .fi-left {
+      margin-left: -60px !important;
+    }
+
+    .OverviewCarousel .fi-right {
+      margin-right: 35px !important;
+    }
   }
 
   @media (min-width:768px) and (max-width:991px) {
@@ -3191,6 +3227,12 @@
       object-fit: contain !important;
     }
 
+    .OverviewCarousel .carousel-button-group {
+      position: absolute !important;
+      top: 1px !important;
+      width: 100% !important;
+    }
+
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
       top: 90px !important;
@@ -3202,6 +3244,14 @@
     }
 
     .categorySecCarousel .fi-right {
+      margin-right: 45px !important;
+    }
+
+    .OverviewCarousel .fi-left {
+      margin-left: -45px !important;
+    }
+
+    .OverviewCarousel .fi-right {
       margin-right: 45px !important;
     }
   }
@@ -3223,11 +3273,25 @@
       width: 100% !important;
     }
 
+    .OverviewCarousel .carousel-button-group {
+      position: absolute !important;
+      top: 2px !important;
+      width: 100% !important;
+    }
+
     .categorySecCarousel .fi-left {
       margin-left: -30px !important;
     }
 
     .categorySecCarousel .fi-right {
+      margin-right: 65px !important;
+    }
+
+    .OverviewCarousel .fi-left {
+      margin-left: -30px !important;
+    }
+
+    .OverviewCarousel .fi-right {
       margin-right: 65px !important;
     }
   }
@@ -3364,18 +3428,18 @@
   /* News Banner Section */
 
   .newsBannerSec {
-    height: 400px !important;
+    height: 300px !important;
   }
 
   .newsBannerSec img {
     width: 100%;
-    height: 400px;
+    height: 300px;
     object-fit: cover;
   }
 
   .newsBannerSec input {
     background-color: rgba(255, 255, 255, 0.2) !important;
-    padding: 20px 10px !important;
+    padding: 10px !important;
     margin: 10px 0px !important;
     color: white !important;
     font-size: 20px !important;
@@ -3402,6 +3466,13 @@
     z-index: -1px !important;
   }
 
+  .newsCardCarousel .fi-left {
+    margin-left: -20px;
+  }
+
+  .newsCardCarousel .fi-right {
+    margin-right: -20px;
+  }
 
   .newsCardCarousel .fi-left svg {
     stroke: #254692 !important;
@@ -3737,6 +3808,15 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+
+    .newsCardCarousel .fi-left {
+      margin-left: 0px;
+    }
+
+    .newsCardCarousel .fi-right {
+      margin-right: 0px;
+    }
+
     .careerSec {
       height: 900px !important;
     }
@@ -4006,6 +4086,20 @@
     width: 100% !important;
     background-color: rgba(39, 72, 150, 0.2) !important;
     color: rgba(39, 72, 150, 0.0) !important;
+  }
+
+  .linkFontSize {
+    font-size: 19px !important;
+  }
+
+  .newsImgSize img {
+    width: auto;
+    height: auto;
+  }
+
+  .newsHeightScroll {
+    min-height: 640px;
+    max-height: 640px;
   }
 
   @media (max-width:575px) {

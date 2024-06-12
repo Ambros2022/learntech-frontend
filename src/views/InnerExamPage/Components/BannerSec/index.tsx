@@ -52,8 +52,8 @@ function BannerSec() {
                 </div>
             </section>
             <div className="bg-white">
-                <section className='container py-3'>
-                    <Link className="text-black fs-5" href='/'>Home <i className='bi bi-chevron-right'></i></Link><Link className='text-black fs-5' href='/exams'> Exams <i className='bi bi-chevron-right'></i></Link><Link className='text-blue fs-5' href='/exams'>NEET MDS</Link>
+                <section className='container py-3 linkFontSize'>
+                    <Link className="text-black" href='/'>Home <i className='bi bi-chevron-right'></i></Link><Link className='text-black' href='/exams'> Exams <i className='bi bi-chevron-right'></i></Link><Link className='text-blue' href='/exams'> NEET MDS</Link>
                 </section>
             </div>
         </>

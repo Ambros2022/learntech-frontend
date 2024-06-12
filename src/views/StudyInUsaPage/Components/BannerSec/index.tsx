@@ -20,8 +20,8 @@ function BannerSec() {
           </div>
         </div>
       </section>
-      <div className='bg-white'>
-        <p className='text-black container py-3 mb-0'><Link href={'/'} className='text-black fs-5'>Home  <i className="bi bi-chevron-right"></i></Link><Link className="text-blue fs-5" href={'/study-in-usa'}> Study In USA</Link></p>
+      <div className='bg-white linkFontSize'>
+        <p className='text-black container py-3 mb-0'><Link href={'/'} className='text-black'>Home  <i className="bi bi-chevron-right"></i></Link><Link className="text-blue" href={'/study-in-usa'}> Study In USA</Link></p>
       </div>
     </>
   )

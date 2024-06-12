@@ -53,21 +53,21 @@ const BrowsebyCategorySec = () => {
 
     const getnews = useCallback(async () => {
         try {
-          const roleparams = { page: 1, size: 10000 };
-          const response = await axios.get('/api/website/news/get', { params: roleparams });
-    
-        
-          setNewsData(response.data.data);
+            const roleparams = { page: 1, size: 10000 };
+            const response = await axios.get('/api/website/news/get', { params: roleparams });
+
+
+            setNewsData(response.data.data);
         } catch (err) {
-          console.error(err);
+            console.error(err);
         }
-      }, []);
-    
+    }, []);
+
 
     useEffect(() => {
         getCategoriesData();
         getnews();
-    }, [getCategoriesData , getnews]);
+    }, [getCategoriesData, getnews]);
 
     useEffect(() => {
         if (activeTab) {
@@ -122,9 +122,9 @@ const BrowsebyCategorySec = () => {
                                 <div className="row ">
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row">
-                                        {currentExams.map((exam, index) => (
-    <ExamCard key={index} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
-))}
+                                            {currentExams.map((exam, index) => (
+                                                <ExamCard key={index} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                            ))}
                                         </div>
                                         <div className='d-flex justify-content-center'>
                                             <nav aria-label="Page navigation example">
@@ -151,7 +151,7 @@ const BrowsebyCategorySec = () => {
                                     <div className="col-lg-5 col-xl-4">
                                         <div className='bg-skyBlue px-lg-5 px-md-3 px-3 rounded'>
                                             <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h5>
-                                           <SideContactUsForm/>
+                                            <SideContactUsForm />
                                         </div>
                                         <NewsList newsItems={newsData} />
                                     </div>
