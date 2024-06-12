@@ -54,9 +54,21 @@ function CollegeFilterSection() {
     const [states, setStates] = useState<Option[]>([]);
     const [streams, setStreams] = useState<any[]>([]);
     const [courses, setCourses] = useState<any[]>([]);
+    const [promoban, setPromoban] = useState<any[]>([]);
 
     // console.log(states, "states")
 
+    const getPromobanner = useCallback(async () => {
+        try {
+            const response = await axios1.get('api/website/banner/get?promo_banner=All_college_page');
+            if (isMountedRef.current) {
+
+                setPromoban(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch trending courses:', error);
+        }
+    }, [isMountedRef]);
 
     const getstreamdata = useCallback(async () => {
         try {
@@ -147,6 +159,7 @@ function CollegeFilterSection() {
         getcollegedata();
         getstreamdata();
         getcoursesdata();
+        getPromobanner();
 
     }, []);
 
@@ -580,7 +593,8 @@ function CollegeFilterSection() {
         });
     });
 
-    const AddBanner = () => {
+    const PromoAddBanner = ({ url }) => {
+
         return (
             <>
                 <section className='bg-skyBlue addBanner rounded'>
@@ -588,12 +602,12 @@ function CollegeFilterSection() {
                         <div className="card">
                             <div className="row g-0">
                                 <div className="col-md-4 addImgClg position-relative">
-                                    <Image src="/images/icons/filter-card.jpg" width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
+                                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
                                     <div className="position-absolute iconsPosition">
-                                        <div className="d-flex flex-column">
+                                        {/* <div className="d-flex flex-column">
                                             <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-info-circle"></i></h6>
                                             <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-x-circle"></i></h6>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <h2 className='position-absolute text-white' style={{ backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px', zIndex: '3000', top: '50%', left: '50%', color: "white" }}>Ad</h2>
                                 </div>
@@ -634,7 +648,7 @@ function CollegeFilterSection() {
                                     </button>
                                 </div>
                             )}
-                            <AddBanner />
+                            {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} />}
                             <StateButtons
                                 options={options.find(option => option.id === 'state')?.options || []}
                                 setSelectedCheckboxes={setSelectedCheckboxes}

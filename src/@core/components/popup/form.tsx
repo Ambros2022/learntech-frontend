@@ -1,5 +1,5 @@
-import React, { FC} from 'react';
-import { ErrorMessage, Field, Form, Formik} from 'formik';
+import React, { FC } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { saveAs } from 'file-saver'
 import axios from 'src/configs/axios';
@@ -40,7 +40,8 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
             console.error("An error occurred while downloading the PDF:", error);
         }
     };
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const validationSchema = Yup.object().shape({
@@ -52,7 +53,8 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
     });
 
     const handleSubmit = async (values, { resetForm }) => {
-
+        // console.log(values);
+        // return
         try {
             toast.loading('Processing');
             const formData = new FormData();

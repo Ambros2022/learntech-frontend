@@ -8,7 +8,7 @@ import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-function SubInnerCoursePage({ id }) {
+function SubInnerCoursePage({ Streamid, Courseslug }) {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
@@ -19,7 +19,11 @@ function SubInnerCoursePage({ id }) {
 
   const getPagedata = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/streamfindone/get/' + id);
+      const slug = Courseslug; // replace with actual slug
+      const id = Streamid; // replace with actual id
+      
+      const response = await axios.get(`/api/website/general/stream/get/${slug}/${id}`);
+
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -28,7 +32,7 @@ function SubInnerCoursePage({ id }) {
       router.push("/404");
       console.error('Failed to fetch page data:', error);
     }
-  }, [id, isMountedRef, router]);
+  }, [Streamid, isMountedRef, router]);
 
   const getColleges = useCallback(async () => {
     try {
@@ -36,7 +40,7 @@ function SubInnerCoursePage({ id }) {
         params: {
           page: 1,
           size: 8,
-          stream_id: [id]
+          stream_id: [Streamid]
         }
       });
       if (isMountedRef.current) {
@@ -45,14 +49,14 @@ function SubInnerCoursePage({ id }) {
     } catch (error) {
       console.error('Failed to fetch trending courses:', error);
     }
-  }, [id, isMountedRef]);
+  }, [Streamid, isMountedRef]);
   const getExams = useCallback(async () => {
     try {
       const response = await axios.get('api/website/exams/get', {
         params: {
           page: 1,
           size: 8,
-          stream_id: id
+          stream_id: Streamid
         }
       });
       if (isMountedRef.current) {
@@ -61,7 +65,7 @@ function SubInnerCoursePage({ id }) {
     } catch (error) {
       console.error('Failed to fetch trending courses:', error);
     }
-  }, [id, isMountedRef]);
+  }, [Streamid, isMountedRef]);
 
   const getotherCourses = useCallback(async () => {
     try {
@@ -69,7 +73,7 @@ function SubInnerCoursePage({ id }) {
         params: {
           page: 1,
           size: 8,
-          not_stream_id: id
+          not_stream_id: Streamid
         }
       });
       if (isMountedRef.current) {
@@ -78,7 +82,7 @@ function SubInnerCoursePage({ id }) {
     } catch (error) {
       console.error('Failed to fetch trending courses:', error);
     }
-  }, [id, isMountedRef]);
+  }, [Streamid, isMountedRef]);
 
   useEffect(() => {
     getPagedata();

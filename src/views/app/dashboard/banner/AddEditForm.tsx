@@ -61,6 +61,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         'Nri_page',
         'Study_Abroad_page',
         'All_college_page',
+        'All_courses_page',
         'All_university_page',
         'All_school_page'
     ];

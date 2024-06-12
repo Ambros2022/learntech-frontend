@@ -26,7 +26,7 @@ const CoursePage = () => {
         router.query.slug.length <= 2 ? (
           <InnerCoursePage id={router.query.slug[0]} />
         ) : (
-          <SubInnerCoursePage id={router.query.slug[0]} />
+          <SubInnerCoursePage Streamid={router.query.slug[0]} Courseslug={router.query.slug[2]} />
         )
       )}
 

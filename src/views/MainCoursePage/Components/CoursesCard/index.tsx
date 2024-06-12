@@ -27,7 +27,7 @@ function CoursesCard({ course }) {
         </div>
         <div className="d-flex gap-2 my-0 my-md-3 mt flex-wrap coursesBtn justify-content-center min-vh-card">
           {course.general_courses.map(val => (
-            <Link key={val.id} href={`/course/${val.id}/${course.slug}/${val.slug}`} className='btn streamBtn'>
+            <Link key={val.id} href={`/course/${course.id}/${course.slug}/${val.slug}`} className='btn streamBtn'>
               {val.short_name}
             </Link>
           ))}
@@ -42,27 +42,28 @@ function CoursesCard({ course }) {
   );
 }
 
-const AddBanner = () => {
+const PromoAddBanner = ({ url }) => {
+
   return (
     <>
       <section className='bg-skyBlue addBanner rounded'>
         <div className="container p-5">
           <div className="card">
             <div className="row g-0">
-              <div className="col-md-5 col-lg-3 col-xl-2 addImgClg position-relative">
-                <Image src="/images/icons/filter-card.jpg" width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
+              <div className="col-md-4 addImgClg position-relative">
+                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
                 <div className="position-absolute iconsPosition">
-                  <div className="d-flex flex-column">
-                    <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-info-circle"></i></h6>
-                    <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-x-circle"></i></h6>
-                  </div>
+                  {/* <div className="d-flex flex-column">
+                                      <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-info-circle"></i></h6>
+                                      <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-x-circle"></i></h6>
+                                  </div> */}
                 </div>
                 <h2 className='position-absolute text-white' style={{ backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px', zIndex: '3000', top: '50%', left: '50%', color: "white" }}>Ad</h2>
               </div>
-              <div className="col-md-7 col-lg-9 col-xl-9">
+              <div className="col-md-8">
                 <div className="card-body" style={{ zIndex: '200' }}>
                   <h5 className="card-text">PES University</h5>
-                  <h2 className="card-title fw-bold">B.Tech 2024 - Admissions Open</h2>
+                  <h3 className="card-title fw-bold">B.Tech 2024 - Admissions Open</h3>
                   <Link href='/colleges' className='btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
                 </div>
               </div>
@@ -86,6 +87,22 @@ function CoursesContainer() {
     setDatasize(prevSize => prevSize + 8);
   };
 
+  const [promoban, setPromoban] = useState<any[]>([]);
+
+  // console.log(states, "states")
+
+  const getPromobanner = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/banner/get?promo_banner=All_courses_page');
+      if (isMountedRef.current) {
+
+        setPromoban(response.data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending courses:', error);
+    }
+  }, [isMountedRef]);
+
   const getStreamwiseCourse = useCallback(async () => {
     try {
       const response = await axios.get('api/website/stream/general/get', {
@@ -105,6 +122,7 @@ function CoursesContainer() {
 
   useEffect(() => {
     getStreamwiseCourse();
+    getPromobanner();
   }, [getStreamwiseCourse]);
 
   return (
@@ -122,9 +140,10 @@ function CoursesContainer() {
                 View More
               </button>
             </div>
-            <AddBanner />
+
           </div>
         )}
+        {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} />}
       </div>
     </section>
   );
