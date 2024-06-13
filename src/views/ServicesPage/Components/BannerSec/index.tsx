@@ -10,7 +10,7 @@ const BannerSec = () => {
             </section>
             <section className='bg-white'>
                 <div className="container py-2">
-                    <Link href='/' className='text-black'>Home </Link>{'>'} <Link className='text-blue' href='/services'>Services</Link>
+                    <Link href='/' className='text-black'>Home </Link>{'>'} Services
                 </div>
             </section>
         </>

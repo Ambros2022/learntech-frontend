@@ -18,7 +18,7 @@ const BannerSec = () => {
       </section>
       <section className="bg-white py-2">
         <div className="container">
-          <p className=''><Link className='text-black' href="/">Home</Link> {'>'} <span className='text-blue'><Link href="/terms-and-conditions" className="text-blue">Terms and Conditions</Link></span></p>
+          <p className=''><Link className='text-black' href="/">Home</Link> {'>'} <span className='text-blue'>Terms and Conditions</span></p>
         </div>
       </section>
     </>
