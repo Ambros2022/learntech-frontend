@@ -12,7 +12,7 @@ function BannerSec({ data }) {
 
     return (
         <>
-            <section className='collegeBannerCon bg-blue examsBannerCon pt-4 pb-4'>
+            <section className='collegeBannerCon bg-blue examsBannerCon'>
                 <div className='d-flex justify-content-center w-100 h-100'>
                     <div className='align-content-center w-100 container'>
                         <div className="row">

@@ -76,7 +76,7 @@ const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
                 <ErrorMessage name="name" component="div" className="error text-danger" />
             </div>
             <div className="mb-3">
-                <Field type="text" name="contact_number" placeholder="Contact Number*" className="form-control" />
+                <PhoneInputField  name="contact_number"  />
                 <ErrorMessage name="contact_number" component="div" className="error text-danger" />
             </div>
             <div className="mb-3">

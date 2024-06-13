@@ -53,10 +53,10 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
                 <div className="d-flex examSecItems mb-3" key={item.id} onClick={() => handleTabClick(item.id)}>
                     <button
                         className={`btn nav-link text-truncate ${activeTab === item.id ? 'active' : ''}`}
-                        id={`pills-${item.id}-tab`}
+                        id={`pills-${item}-tab`}
                         type="button"
                     >
-                        {item.label}
+                        {item.title}
                     </button>
                 </div>
             ))}

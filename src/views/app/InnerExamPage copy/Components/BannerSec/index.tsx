@@ -12,15 +12,15 @@ function BannerSec({ data }) {
 
     return (
         <>
-            <section className='collegeBannerCon bg-blue examsBannerCon pt-4 pb-4'>
+            <section className='collegeBannerCon bg-blue py-5 examsBannerCon'>
                 <div className='d-flex justify-content-center w-100 h-100'>
                     <div className='align-content-center w-100 container'>
                         <div className="row">
                             <div className="col-lg-8 col-md-9 mx-md-auto innerExam">
-                                <div className="card mb-5">
+                                <div className="card mb-3">
                                     <div className="row g-0">
                                         <div className="col-md-3 text-center text-md-start">
-                                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.cover_image}`} width={100} height={100} alt={data.name} />
+                                            <Image src="/images/icons/filter-card.jpg" width={200} height={200} alt="filter-card" className="img-fluid" />
                                         </div>
                                         <div className="col-md-9 d-flex justify-content-center justify-content-md-start">
                                             <div className="align-content-center">
@@ -34,7 +34,7 @@ function BannerSec({ data }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 d-flex justify-content-center mb-5">
+                            <div className="col-lg-4 d-flex justify-content-center mb-3">
                                 <div className="align-content-center">
                                     <div className='text-md-end text-center'>
                                         <GlobalEnquiryForm
@@ -52,8 +52,8 @@ function BannerSec({ data }) {
                 </div>
             </section>
             <div className="bg-white">
-                <section className='container InnerCollegeNavigationLink py-3'>
-                    <p className='mb-3 '><Link href="/">Home</Link> {'>'} <Link href={"/exams"}>Exams</Link> {'>'} <span className='text-blue' style={{ cursor: 'pointer' }}>{data.slug}</span></p>
+                <section className='container py-3 linkFontSize'>
+                    <Link className="text-black" href='/'>Home <i className='bi bi-chevron-right'></i></Link><Link className='text-black' href='/exams'> Exams <i className='bi bi-chevron-right'></i></Link><Link className='text-blue' href='/exams'> NEET MDS</Link>
                 </section>
             </div>
         </>

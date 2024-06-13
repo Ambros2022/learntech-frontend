@@ -124,7 +124,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         exam_title: isAddMode ? '' : olddata.exam_title,
         slug: isAddMode ? '' : olddata.slug,
         upcoming_date: isAddMode ? null : new Date(olddata.upcoming_date),
-        exam_dates: isAddMode ? null : new Date(olddata.exam_dates),
+        // exam_dates: isAddMode ? null : new Date(olddata.exam_dates),
         exam_short_name: isAddMode ? '' : olddata.exam_short_name,
         college_type: isAddMode ? '' : olddata.college_type,
         overview: isAddMode ? '' : olddata.overview,
@@ -139,6 +139,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         exam_centers: isAddMode ? '' : olddata.exam_centers,
         results: isAddMode ? '' : olddata.results,
         prepretion_tips: isAddMode ? '' : olddata.prepretion_tips,
+        exam_dates: isAddMode ? '' : olddata.exam_dates,
         counseling: isAddMode ? '' : olddata.counseling,
         accept_colleges: isAddMode ? '' : olddata.accept_colleges,
         status: isAddMode ? 'Published' : olddata.status,
@@ -678,7 +679,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
-                                <Grid item xs={12} sm={4}>
+                                {/* <Grid item xs={12} sm={4}>
                                     <Controller
                                         name='exam_dates'
                                         control={control}
@@ -695,12 +696,31 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                     onChange={onChange}
                                                     placeholderText='Click to select a date'
                                                     customInput={<CustomInput label='Exam Date'
-                                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
+                                                   
                                                     />}
 
 
                                                 />
                                             </DatePickerWrapper>
+                                        )}
+                                    />
+                                </Grid> */}
+
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Exam Dates</Typography>
+
+                                    <Controller
+                                        name='exam_dates'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("exam_dates", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
                                         )}
                                     />
                                 </Grid>
