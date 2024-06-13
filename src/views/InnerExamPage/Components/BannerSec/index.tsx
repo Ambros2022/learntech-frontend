@@ -19,7 +19,7 @@ function BannerSec({ data }) {
                             <div className="col-lg-8 col-md-9 mx-md-auto innerExam">
                                 <div className="card mb-5">
                                     <div className="row g-0">
-                                        <div className="col-md-3 text-center text-md-start">
+                                        <div className="col-md-3 text-center ">
                                             <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.cover_image}`} width={100} height={100} alt={data.name} />
                                         </div>
                                         <div className="col-md-9 d-flex justify-content-center justify-content-md-start">
@@ -46,7 +46,7 @@ function BannerSec({ data }) {
                                 </div>
                             </div>
                         </div>
-
+                       
                         <PopularCourses />
                     </div>
                 </div>
