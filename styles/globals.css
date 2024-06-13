@@ -1528,6 +1528,10 @@
     border-radius: 6px !important;
   }
 
+  .text-gray {
+    color: gray !important;
+  }
+
   .selectedFilterBtn {
     background-color: #254692 !important;
     color: white !important;
@@ -3188,6 +3192,22 @@
     border-radius: 5px !important;
   }
 
+
+  .boardSec {
+    height: auto;
+  }
+
+  .boardBtn {
+    background-color: rgb(255, 66, 79) !important;
+    color: white !important;
+  }
+
+  .boardSec>img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+  }
+
   @media (min-width:992px) and (max-width:1024px) {
     .FeaturedClgCon .card-Image-top {
       /* height: 166px !important; */
@@ -3257,6 +3277,10 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .boardSec h1 {
+      font-size: 20px;
+    }
+
     .FeaturedClgCon .card-Image-top {
       /* height: 262px !important; */
       object-fit: contain !important;
@@ -4100,6 +4124,45 @@
   .newsHeightScroll {
     min-height: 640px;
     max-height: 640px;
+  }
+
+  .logoBoardImg {
+    height: 100px;
+  }
+
+  .logoBoardImg>img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .cardBlogText h6 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 30px !important;
+  }
+
+  .cardBlogText p:nth-child(3) {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  @media (min-width:768px) and (max-width:992px) {
+    .logoBoardImg {
+      height: 150px;
+    }
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .logoBoardImg {
+      height: 150px;
+    }
   }
 
   @media (max-width:575px) {

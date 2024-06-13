@@ -27,8 +27,8 @@ const BannerSec = () => {
                 </div>
             </section>
             <section className='bg-white'>
-                <div className='container py-2'>
-                    <Link href='/' className='text-black'>Home</Link> {'>'} <Link href="/blogs" className='text-black'>Blog</Link> {'>'} <Link href="/blogs" className='text-blue'> How to Get BDS Direct Admission in India</Link>
+                <div className='container py-2 linkFontSize'>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/blogs" className='text-black'> Blog <i className='bi bi-chevron-right'></i></Link><Link href="/blogs" className='text-blue'> How to Get BDS Direct Admission in India</Link>
                 </div>
             </section>
         </>
