@@ -106,7 +106,7 @@ const BlogCards = () => {
         resetForm();
     };
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validationSchema = Yup.object().shape({
@@ -139,11 +139,11 @@ const BlogCards = () => {
                         <div className="row">
                             {currentCards.map((card) => (
                                 <div className="col-md-6 col-8 mx-md-0 mx-auto mb-3" key={card.id}>
-                                    <div className="card newsCardText position-relative">
-                                        <Image src={card.imgSrc} width={200} height={200} className="card-img-top" alt="news-img" />
+                                    <div className="card newsImgSize position-relative">
+                                        <Image src={card.imgSrc} width={400} height={400} className="card-img-top" alt="news-img" />
                                         <span className='share-icon'>
                                             <Image src='/images/icons/icon-share.png' width={30} height={30} style={{
-                                                top: '15px', right: '15px', backgroundColor: 'rgba(0,0,0,0.5)'
+                                                top: '20px', right: '20px', backgroundColor: 'rgba(0,0,0,0.5)'
                                             }} className='position-absolute rounded p-1' alt='share-icon' />
                                         </span>
                                         <div className="card-body">

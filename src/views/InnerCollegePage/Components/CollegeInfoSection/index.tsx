@@ -4,6 +4,7 @@ import YoutubeVideo from 'src/@core/components/youtube-videos'
 import Image from 'next/image'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import dynamic from 'next/dynamic';
+import ReviewSec from '../ReviewSec'
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 
 
@@ -44,7 +45,7 @@ function CollegeInfoSection({ data }) {
             }
             {
               data.hostel && data.hostel != '' && data.hostel != 'null' && data.hostel != '<p>null</p>' ?
-                <button className='btn' id="nav-hostel-tab" data-bs-toggle="tab" data-bs-target="#nav-hostel" type="button" role="tab" aria-controls="nav-hostel" aria-selected="false">Hostel</button>
+                <button className='btn' id="nav-hostel-tab" data-bs-toggle="tab" data-bs-target="#nav-hostel" type="button" role="tab" aria-controls="nav-hostel" aria-selected="false">Infrastructure </button>
                 : ''
             }
             {
@@ -115,7 +116,10 @@ function CollegeInfoSection({ data }) {
 
               </div>
             </div>
-            <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">...</div>
+            <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+            <ReviewSec />
+            
+            </div>
 
             <div className="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
               <FaqSec data={data.collegefaqs} />

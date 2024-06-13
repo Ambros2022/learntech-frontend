@@ -8,3 +8,4 @@ npm i react-google-login
 npm i file-saver
 npm install react-linkedin-login-oauth2
 npm install react-twitter-auth
+npm i jodit-pro-react

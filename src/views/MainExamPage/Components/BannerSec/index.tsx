@@ -6,88 +6,92 @@ import axios1 from 'axios';
 import axios from 'src/configs/axios';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-
-
+import Image from 'next/image';
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 
 let cancelToken: any;
 
 interface SearchResult {
-    id: number;
-    exam_title: string;
-  }
-  
+  id: number;
+  exam_title: string;
+}
+
 
 function BannerSection() {
-    const [open, setOpen] = useState(false);
-    const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [open, setOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
 
 
 
-    const handleSearch = async (value: string) => {
-        if (value.length < 2) {
-          setSearchResults([]);
-          setOpen(false); // Close the dropdown if the input is too short
-          return;
-        }
-    
-        try {
-          setLoading(true);
-          if (cancelToken !== undefined) {
-            cancelToken.cancel('Operation canceled due to new request.');
-          }
-          cancelToken = axios1.CancelToken.source();
-    
-          const response = await axios.get('api/website/exams/get', {
-            cancelToken: cancelToken.token,
-            params: { searchfrom: 'exam_title', searchtext: value },
-          });
-    
-          const suggestions = response.data.data.map((item: { id: number; exam_title: string }) => ({
-            exam_title: item.exam_title,
-            id: item.id,
-          }));
-    
-          setSearchResults(suggestions);
-          setOpen(true);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        } finally {
-          setLoading(false);
-        }
-      };
-    
-      const handleInputChange = (event: any, value: string) => {
-        handleSearch(value);
-      };
+  const handleSearch = async (value: string) => {
+    if (value.length < 2) {
+      setSearchResults([]);
+      setOpen(false); // Close the dropdown if the input is too short
+      return;
+    }
 
-      const handleClearInput = (params: any) => {
-        setSearchResults([]);
-        setOpen(false);
-        if (params.inputProps.onChange) {
-          const event = {
-            target: {
-              value: '',
-            },
-          } as React.ChangeEvent<HTMLInputElement>;
-          params.inputProps.onChange(event);
-        }
-      };
-    
+    try {
+      setLoading(true);
+      if (cancelToken !== undefined) {
+        cancelToken.cancel('Operation canceled due to new request.');
+      }
+      cancelToken = axios1.CancelToken.source();
+
+      const response = await axios.get('api/website/exams/get', {
+        cancelToken: cancelToken.token,
+        params: { searchfrom: 'exam_title', searchtext: value },
+      });
+
+      const suggestions = response.data.data.map((item: { id: number; exam_title: string }) => ({
+        exam_title: item.exam_title,
+        id: item.id,
+      }));
+
+      setSearchResults(suggestions);
+      setOpen(true);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInputChange = (event: any, value: string) => {
+    handleSearch(value);
+  };
+
+  const handleClearInput = (params: any) => {
+    setSearchResults([]);
+    setOpen(false);
+    if (params.inputProps.onChange) {
+      const event = {
+        target: {
+          value: '',
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      params.inputProps.onChange(event);
+    }
+  };
 
 
 
     return (
         <>
             <section className='collegeBannerCon bg-blue examsBannerCon'>
-                <div className='d-flex justify-content-center w-100 h-100'>
+            <div className="position-relative">
+          <div>
+            <Image src='/images/icons/Banner BG.png' width={1400} height={420} alt='banner-img' className='position-relative w-100' />
+          </div>
+          <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
+                <div className='d-flex justify-content-center w-100 '>
                     <div className='align-content-center w-100 container'>
-                        <h1 className='fw-bold text-center text-white mb-3'>
+                        <h1 className='fw-bold text-center text-white mb-3 mt-4'>
                             Entrance Exams in India
                         </h1>
-                        <div className="row">
-                        <div className="col-md-7 col-12 mb-3">
+                        <div className="row justify-content-center align-items-center">
+                        <div className="col-md-7 col-12 mb-3 ">
                             <Autocomplete
                             open={open}
                             onClose={() => setOpen(false)}
@@ -107,7 +111,7 @@ function BannerSection() {
                             renderInput={(params) => (
                                 <TextField
                                 {...params}
-                                placeholder="Search"
+                                placeholder="Search for Entrance Exam"
                                 className='form-control'
                                 InputProps={{
                                     ...params.InputProps,
@@ -143,19 +147,20 @@ function BannerSection() {
                         </div>
                         <PopularCourses />
                         <div className='text-md-end text-center pt-3'>
-                            <button className='btn alertExamBtn'>Get Exams Alert</button>
-
+                            {/* <button className='btn  alertExamBtn'>Get Exams Alert</button> */}
+                            <GlobalEnquiryForm 
+                                        buttonText="Get Exams Alert" 
+                                        className="btn alertExamBtn" 
+                                    />
                         </div>
                     </div>
                 </div>
+                </div>
+                </div>
             </section>
-            <div className="bg-white">
-                <section className='container py-3'>
-                    <Link className="text-black" href='/'>Home</Link> {'>'} <Link className='text-blue' href='/exams'>Exams</Link>
-                </section>
-            </div>
-        </>
-    )
+         
+    </>
+  )
 }
 
 export default BannerSection;

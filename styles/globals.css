@@ -697,12 +697,26 @@
     margin-right: -50px !important;
   }
 
-  .FeaturedClgCon .fi-left {
+  .AssociatedClg .fi-left {
     margin-left: -35px !important;
   }
 
-  .FeaturedClgCon .fi-right {
+  .AssociatedClg .fi-right {
     margin-right: -10px !important;
+  }
+
+  .AssociatedClg .carousel-button-group {
+    position: absolute !important;
+    top: 255px !important;
+    width: 100%;
+  }
+
+  .newsLinkSec .fi-left {
+    margin-left: -50px !important;
+  }
+
+  .newsLinkSec .fi-right {
+    margin-right: -50px !important;
   }
 
   .StudyAbroadCon .carousel-button-group {
@@ -1273,6 +1287,26 @@
       padding: 2px 8px;
     }
 
+    .AssociatedClg .fi-left {
+      margin-left: 8px !important;
+      /* background-color: white; */
+      border-radius: 25px;
+      padding: 2px 8px;
+    }
+
+    .AssociatedClg .fi-right {
+      margin-right: 32px !important;
+      /* background-color: white; */
+      border-radius: 25px;
+      padding: 2px 8px;
+    }
+
+    .AssociatedClg .carousel-button-group {
+      top: 280px !important;
+      width: 100%;
+    }
+
+
     .StudyAbroadCon .fi-left {
       margin-left: 8px !important;
       /* background-color: white; */
@@ -1323,6 +1357,10 @@
   @media (min-width: 320px) and (max-width: 374px) {
     .FeaturedClgCon .carousel-button-group {
       top: 232px !important;
+    }
+
+    .AssociatedClg .carousel-button-group {
+      top: 280px !important;
     }
 
     .searchBtn {
@@ -1404,11 +1442,11 @@
     height: 300px !important;
   }
 
-  .collegeBannerCon>.position-relative img {
+  /* .collegeBannerCon>.position-relative img {
     object-fit: cover !important;
     width: 100% !important;
     height: 300px !important;
-  }
+  } */
 
   /* College Filter Section */
   .bg-skyBlue {
@@ -2005,7 +2043,7 @@
     padding: 10px 15px !important;
     background-color: white !important;
     font-size: 14px !important;
-    font-weight: bold !important;
+    /* font-weight: 500 !important; */
   }
 
   .min-vh-card {
@@ -2370,6 +2408,7 @@
     border: 1px solid white !important;
     padding: 10px 20px !important;
     font-size: 16px !important;
+    border-radius: 10px 0px 0px 10px !important;
   }
 
   .studyInUsaCon .searchSec1 input::placeholder {
@@ -2385,6 +2424,7 @@
     font-size: 16px !important;
     color: #254692 !important;
     background-color: white !important;
+    border-radius: 0px 10px 10px 0px !important;
   }
 
   .helpMeBtn {
@@ -2500,6 +2540,12 @@
     --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
   }
 
+  .faqSec .accordion-header button:active {
+    background-color: #3d5aa0 !important;
+    color: white !important;
+    --bs-accordion-btn-icon: url(../public/images/icons/white-arrow.png) !important;
+  }
+
   .faqSec .accordion-header:focus {
     outline: 0 !important;
     border: 0 !important;
@@ -2539,49 +2585,6 @@
   @media (min-width: 768px) and (max-width: 992px) {
     .studyInUsaCon h4 {
       font-size: 18px;
-    }
-  }
-
-  @media (max-width: 575px) {
-    .topClgIcon {
-      top: 13px;
-      left: 15px;
-    }
-
-    .topClgIcon img {
-      width: 150% !important;
-      height: 100% !important;
-    }
-
-    .topUniCardCon .carousel-button-group {
-      position: absolute !important;
-      top: 150px !important;
-    }
-
-    .topUniCardCon .fi-left {
-      margin-left: 20px !important;
-      background-color: white;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .topUniCardCon .fi-right {
-      margin-right: 45px !important;
-      background-color: white;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .faqImgSec img {
-      width: 330px;
-      height: 200px;
-    }
-  }
-
-  @media (min-width: 320px) and (max-width: 374px) {
-    .topUniCardCon .carousel-button-group {
-      position: absolute !important;
-      top: 125px !important;
     }
   }
 
@@ -2822,6 +2825,12 @@
     height: 100%;
   }
 
+  .disclaimerCon>img {
+    height: 300px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+
 
 
   @media (min-width: 992px) and (max-width: 1024px) {
@@ -2976,7 +2985,7 @@
   }
 
   .examsBannerCon {
-    height: 500px !important;
+    height: auto !important;
   }
 
   .examsCardCarousel .carousel-button-group {
@@ -3024,15 +3033,15 @@
   }
 
   .alertExamBtn {
-    background-color: white !important;
-    color: #254692 !important;
+    background-color: rgba(231, 61, 71, 1) !important;
+    color: white !important;
     padding: 10px 15px !important;
   }
 
   .alertExamBtn:hover {
-    color: darkblue !important;
-    padding: 10px 15px !important;
+    background-color: rgb(255, 66, 79) !important;
   }
+
 
   .bg-examsCarouselCr {
     background-color: rgba(255, 255, 255, 0.2) !important;
@@ -3151,6 +3160,34 @@
     border-radius: 5px !important;
   }
 
+  .OverviewCarousel .carousel-button-group {
+    position: absolute !important;
+    top: -3px !important;
+    width: 100% !important;
+  }
+
+  .OverviewCarousel .fi-left {
+    margin-left: -60px !important;
+  }
+
+  .OverviewCarousel .fi-right {
+    margin-right: 20px !important;
+  }
+
+  .OverviewCarousel .fi-left svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    padding: 5px !important;
+    border-radius: 5px !important;
+  }
+
+  .OverviewCarousel .fi-right svg {
+    stroke: #254692 !important;
+    border: 1px solid rgba(39, 72, 150, 0.2);
+    padding: 5px !important;
+    border-radius: 5px !important;
+  }
+
   @media (min-width:992px) and (max-width:1024px) {
     .FeaturedClgCon .card-Image-top {
       /* height: 166px !important; */
@@ -3169,6 +3206,14 @@
     .categorySecCarousel .fi-right {
       margin-right: 35px !important;
     }
+
+    .OverviewCarousel .fi-left {
+      margin-left: -60px !important;
+    }
+
+    .OverviewCarousel .fi-right {
+      margin-right: 35px !important;
+    }
   }
 
   @media (min-width:768px) and (max-width:991px) {
@@ -3182,6 +3227,12 @@
       object-fit: contain !important;
     }
 
+    .OverviewCarousel .carousel-button-group {
+      position: absolute !important;
+      top: 1px !important;
+      width: 100% !important;
+    }
+
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
       top: 90px !important;
@@ -3193,6 +3244,14 @@
     }
 
     .categorySecCarousel .fi-right {
+      margin-right: 45px !important;
+    }
+
+    .OverviewCarousel .fi-left {
+      margin-left: -45px !important;
+    }
+
+    .OverviewCarousel .fi-right {
       margin-right: 45px !important;
     }
   }
@@ -3214,11 +3273,25 @@
       width: 100% !important;
     }
 
+    .OverviewCarousel .carousel-button-group {
+      position: absolute !important;
+      top: 2px !important;
+      width: 100% !important;
+    }
+
     .categorySecCarousel .fi-left {
       margin-left: -30px !important;
     }
 
     .categorySecCarousel .fi-right {
+      margin-right: 65px !important;
+    }
+
+    .OverviewCarousel .fi-left {
+      margin-left: -30px !important;
+    }
+
+    .OverviewCarousel .fi-right {
       margin-right: 65px !important;
     }
   }
@@ -3260,7 +3333,7 @@
 
   .examNewsSec .card-img-top {
     height: 125px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
   }
 
   .examNewsSec .card-text {
@@ -3287,8 +3360,8 @@
   }
 
   .examsCardRow .card-img-top {
-    height: 150px !important;
-    object-fit: cover !important;
+    height: 126px !important;
+    object-fit: contain !important;
   }
 
   .carousel-containerCategory {
@@ -3355,18 +3428,18 @@
   /* News Banner Section */
 
   .newsBannerSec {
-    height: 400px !important;
+    height: 300px !important;
   }
 
   .newsBannerSec img {
     width: 100%;
-    height: 400px;
+    height: 300px;
     object-fit: cover;
   }
 
   .newsBannerSec input {
     background-color: rgba(255, 255, 255, 0.2) !important;
-    padding: 20px 10px !important;
+    padding: 10px !important;
     margin: 10px 0px !important;
     color: white !important;
     font-size: 20px !important;
@@ -3393,6 +3466,13 @@
     z-index: -1px !important;
   }
 
+  .newsCardCarousel .fi-left {
+    margin-left: -20px;
+  }
+
+  .newsCardCarousel .fi-right {
+    margin-right: -20px;
+  }
 
   .newsCardCarousel .fi-left svg {
     stroke: #254692 !important;
@@ -3728,6 +3808,15 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+
+    .newsCardCarousel .fi-left {
+      margin-left: 0px;
+    }
+
+    .newsCardCarousel .fi-right {
+      margin-right: 0px;
+    }
+
     .careerSec {
       height: 900px !important;
     }
@@ -3927,18 +4016,17 @@
     background-color: rgb(152 193 234)
   }
 
-  .card-height {
+  /* .card-height {
     min-height: 100px !important;
   }
 
   .btn-height {
     min-height: 85px !important;
-  }
+  } */
 
   .streamBtn {
     background-color: #254692 !important;
     color: white !important;
-    padding: 12px 20px !important;
     border-radius: 10px !important;
   }
 
@@ -3946,4 +4034,87 @@
     height: 300px !important;
     width: 100% !important;
     object-fit: cover;
+  }
+
+  .cardImgNewsheight>img {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  .AdvertiseBanner>img {
+    height: 300px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .ServiceBanner>img {
+    height: 300px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .servicesImg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .teamworksec>img {
+    height: 300px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .faqSec {
+    height: auto !important;
+  }
+
+  .faqImgCon {
+    height: auto;
+  }
+
+  .faqImgSec>img {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .faqSec .accordion-body {
+    background-color: whitesmoke !important;
+  }
+
+  .boxForAccordion {
+    height: 100% !important;
+    width: 100% !important;
+    background-color: rgba(39, 72, 150, 0.2) !important;
+    color: rgba(39, 72, 150, 0.0) !important;
+  }
+
+  .linkFontSize {
+    font-size: 19px !important;
+  }
+
+  .newsImgSize img {
+    width: auto;
+    height: auto;
+  }
+
+  .newsHeightScroll {
+    min-height: 640px;
+    max-height: 640px;
+  }
+
+  @media (max-width:575px) {
+    .topUniCardCon .carousel-button-group {
+      position: absolute !important;
+      top: 115px !important;
+      width: 100%;
+    }
+
+    .topUniCardCon .fi-left {
+      margin-left: 0px !important;
+    }
+
+    .topUniCardCon .fi-right {
+      margin-right: 30px !important;
+    }
+
   }

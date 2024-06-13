@@ -6,13 +6,13 @@ const NewsItem = ({ date, title }) => (
         <div className="card mb-3 cardInnerExam">
             <div className="row g-0">
                 <div className="col-md-4 d-flex justify-content-center">
-                    <div className="align-self-center mt-3 md-0">
-                        <h3 className='fw-bold text-blue mb-0 text-center'>{date}</h3>
+                    <div className="align-self-center mt-1 md-0">
+                        <h2 className='news-font fw-bold text-blue mb-0 text-center'>{date}</h2>
                     </div>
                 </div>
                 <div className="col-md-8 d-flex">
                     <div className="card-body align-content-center text-md-start text-center">
-                        <h5 className="btn card-title text-truncate fw-bold">{title}</h5>
+                        <h5 className="btn card-title text-center text-truncate fw-bold">{title}</h5>
                     </div>
                 </div>
             </div>

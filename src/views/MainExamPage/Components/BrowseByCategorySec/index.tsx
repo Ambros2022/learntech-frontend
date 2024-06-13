@@ -7,9 +7,21 @@ import ExamCard from '../ExamCardList';
 import axios from 'src/configs/axios';
 import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
 
+
+type ExamData = {
+    [id: string]: {
+        id: string;
+        cover_image: string;
+        exam_title: string;
+        created_at: string;
+        // Add more properties as needed
+    }[];
+};
+
 const BrowsebyCategorySec = () => {
     const [items, setItems] = useState<{ id: string; title: string }[]>([]);
-    const [examsData, setExamsData] = useState({});
+    const [examsData, setExamsData] = useState<ExamData>({});
+
     const [newsData, setNewsData] = useState([]);
 
     const [activeTab, setActiveTab] = useState('');
@@ -24,8 +36,10 @@ const BrowsebyCategorySec = () => {
                     id: category.id,
                     title: category.name
                 }));
-                setItems(categories);
-                setActiveTab(categories[0]?.id || '');
+                // Add an extra tab for displaying all exams
+                const allExamsTab = { id: 'all', title: 'All Exams' };
+                setItems([...categories, allExamsTab]);
+                setActiveTab('all'); // Set active tab to 'all'
             } else {
                 console.error('Failed to fetch categories');
             }
@@ -53,21 +67,21 @@ const BrowsebyCategorySec = () => {
 
     const getnews = useCallback(async () => {
         try {
-          const roleparams = { page: 1, size: 10000 };
-          const response = await axios.get('/api/website/news/get', { params: roleparams });
-    
-        
-          setNewsData(response.data.data);
+            const roleparams = { page: 1, size: 10000 };
+            const response = await axios.get('/api/website/news/get', { params: roleparams });
+
+
+            setNewsData(response.data.data);
         } catch (err) {
-          console.error(err);
+            console.error(err);
         }
-      }, []);
-    
+    }, []);
+
 
     useEffect(() => {
         getCategoriesData();
         getnews();
-    }, [getCategoriesData , getnews]);
+    }, [getCategoriesData, getnews]);
 
     useEffect(() => {
         if (activeTab) {
@@ -85,17 +99,7 @@ const BrowsebyCategorySec = () => {
         resetForm();
     };
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    const validationSchema = Yup.object().shape({
-        name: Yup.string().required('Name is required'),
-        email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-        contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-        course: Yup.string().required('Course is required'),
-        location: Yup.string().required('Location is required'),
-        message: Yup.string().required('Message is required'),
-    });
+   
 
     const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
     const totalExams = examsData[activeTab]?.length || 0;
@@ -106,7 +110,7 @@ const BrowsebyCategorySec = () => {
 
     return (
         <section className='bg-white'>
-            <div className="container categorySecCarousel position-relative px-5 pt-2 pb-5">
+            <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
                 <h2 className='fw-bold text-blue mb-5 text-center'>Browse By Category</h2>
                 <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
                 <div className="tab-content" id="pills-tabContent">
@@ -122,9 +126,23 @@ const BrowsebyCategorySec = () => {
                                 <div className="row ">
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row">
-                                        {currentExams.map((exam, index) => (
-    <ExamCard key={index} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
-))}
+                                            {/* {currentExams.map((exam, index) => (
+                                                <ExamCard key={index} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                            ))} */}
+
+                                        {activeTab === 'all' ? (
+                                            // Map over all exams data
+                                            Object.values(examsData).map(exams => (
+                                                exams.map((exam, index) => (
+                                                    <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                                ))
+                                            ))
+                                        ) : (
+                                            // Map over current exams data based on the active tab
+                                            currentExams.map((exam, index) => (
+                                                <ExamCard key={index} id={exam.id}  cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                            ))
+                                        )}
                                         </div>
                                         <div className='d-flex justify-content-center'>
                                             <nav aria-label="Page navigation example">
@@ -151,7 +169,7 @@ const BrowsebyCategorySec = () => {
                                     <div className="col-lg-5 col-xl-4">
                                         <div className='bg-skyBlue px-lg-5 px-md-3 px-3 rounded'>
                                             <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h5>
-                                           <SideContactUsForm/>
+                                            <SideContactUsForm />
                                         </div>
                                         <NewsList newsItems={newsData} />
                                     </div>

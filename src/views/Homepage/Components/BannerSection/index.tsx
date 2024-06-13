@@ -16,7 +16,7 @@ const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete
 
 let cancelToken: any;
 
-const phoneRegExp = /^(\+\d{1,3}[- ]?)?\d{10,13}$/;
+const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const validationSchema = Yup.object().shape({

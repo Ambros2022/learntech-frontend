@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import NewsList from '../newsList';
+import Link from 'next/link';
 
 const BrowseNewsSec = () => {
     const [activeTab, setActiveTab] = useState('All');
@@ -106,6 +107,16 @@ const BrowseNewsSec = () => {
             title: 'Card title 4',
             text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
         },
+        {
+            imageSrc: '/images/icons/filter-card.jpg',
+            title: 'Card title 4',
+            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+        },
+        {
+            imageSrc: '/images/icons/filter-card.jpg',
+            title: 'Card title 4',
+            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+        },
         // Add more news items as needed
     ];
 
@@ -128,11 +139,11 @@ const BrowseNewsSec = () => {
                                     <div className="row">
                                         {currentNews.map(item => (
                                             <div key={item.id} className="col-8 mx-auto col-md-6 mx-md-0 mb-3">
-                                                <div className="card newsCardText">
-                                                    <Image src="/images/icons/newsPageImg.jpg" width={200} height={200} className="card-img-top" alt="newsImage"></Image>
+                                                <div className="card newsImgSize">
+                                                    <Image src="/images/icons/newsPageImg.jpg" width={400} height={400} className="card-img-top" alt="newsImage"></Image>
                                                     <div className="card-body">
-                                                        <h5 className="card-title text-truncate">{item.title}</h5>
-                                                        <p className="card-text">{item.description}</p>
+                                                        <h5 className="fw-bold card-title">{item.title}</h5>
+                                                        {/* <p className="card-text">{item.description}</p> */}
                                                     </div>
                                                 </div>
                                             </div>

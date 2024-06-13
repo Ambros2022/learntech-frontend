@@ -4,15 +4,17 @@ import React from 'react'
 function FaqSec() {
   return (
     <>
-      <section className='bg-white faqSec'>
+      <section className='bg-white faqSec pb-5'>
         <div className="container">
-          <h2 className='text-center text-blue fw-bold pt-5'>FAQs</h2>
-          <div className="row">
-            <div className="col-md-6 faqImgSec container d-flex justify-content-center">
-              <Image src="/images/icons/faq-img.png" className='img-fluid px-md-0 px-3 align-self-center' width={300} height={300} alt='faq-img' />
+          <h2 className='text-center text-blue fw-bold pt-5 pb-3'>FAQs</h2>
+          <div className="row faqImgCon">
+            <div className="col-md-6 faqImgSec mb-3 rounded d-flex flex-fill">
+              <div className='bg-skyBlue h-100 w-100 rounded text-center'>
+                <Image src="/images/icons/faqImage.jpg" className='rounded w-100 h-100 img-fluid px-md-0' style={{ objectFit: 'cover' }} width={500} height={500} alt='faq-img' />
+              </div>
             </div>
-            <div className="col-md-6 py-5">
-              <div className="accordion px-5" id="accordionExample">
+            <div className="col-md-6 mb-3 rounded ">
+              <div className="accordion" id="accordionExample">
                 <div className="accordion-item mb-3">
                   <h2 className="accordion-header text-white">
                     <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -21,7 +23,9 @@ function FaqSec() {
                   </h2>
                   <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div className="accordion-body">
-                      <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                      <p className='text-black'>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -33,7 +37,9 @@ function FaqSec() {
                   </h2>
                   <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div className="accordion-body">
-                      <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                      <p className='text-black'>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -45,7 +51,9 @@ function FaqSec() {
                   </h2>
                   <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div className="accordion-body">
-                      <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                      <p className='text-black'>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -57,7 +65,9 @@ function FaqSec() {
                   </h2>
                   <div id="collapseFour" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div className="accordion-body">
-                      <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                      <p className='text-black'>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -69,15 +79,20 @@ function FaqSec() {
                   </h2>
                   <div id="collapseFive" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div className="accordion-body">
-                      <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                      <p className='text-black'>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.
+                      </p>
                     </div>
                   </div>
+                </div>
+                <div className="mb-3 mb-md-0 boxForAccordion d-md-flex d-none flex-fill">
+                  <h1>.</h1>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </div >
+      </section >
     </>
   )
 }

@@ -22,7 +22,7 @@ const NewsItem = ({ imageSrc, title, text }) => (
 
 // NewsList component
 const NewsList = ({ newsItems }) => (
-    <div className='bg-skyBlue examNewsSec rounded mt-3 px-4 overflow-y-scroll' style={{ minHeight: '650px', maxHeight: '650px' }}>
+    <div className='bg-skyBlue examNewsSec rounded mt-3 px-4 overflow-y-scroll newsHeightScroll'>
         <h4 className='fw-bold text-blue text-start pt-3 mb-3'>Latest News</h4>
         <div className="row">
             {newsItems.map((item, index) => (

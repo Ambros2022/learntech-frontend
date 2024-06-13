@@ -100,7 +100,7 @@ function StudyAbroadSection() {
         <div className="d-flex justify-content-center flex-wrap gap-3 studyAbroadNav py-3 rounded" >
           {renderButtons()}
         </div>
-        <div id="studyCardContainer">
+        <div className='pt-3' id="studyCardContainer">
           <MainCarousel items={renderCards()} />
           <div className="d-flex justify-content-center pb-5">
             <Link href='/study-in-usa' className='btn viewMoreClgBtn'>Load More</Link>
