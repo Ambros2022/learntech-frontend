@@ -67,17 +67,22 @@ function PopularCourses() {
     // CardComponent function
     function CardComponent({ id, title, date }: { id: number; title: string; date: string }) {
         return (
+            
             <div className='topCourseConCarousel'>
+                 <a href={`/exam/${id}/${title}`} >
                 <div className="card text-center d-flex mx-2 border-0">
-                    <div className="row flex-fill">
-                        <div className="col-12 text-start px-0">
-                            <div className="ms-2 card-body">
-                                <h4 className="card-title fw-bold text-blue text-truncate">{title}</h4>
-                                <h6 className="card-title flex-fill">{date}</h6>
+                   
+                        <div className="row flex-fill">
+                            <div className="col-12 text-start px-0">
+                                <div className="ms-2 card-body">
+                                    <h4 className="card-title fw-bold text-blue text-truncate">{title}</h4>
+                                    <small className="card-title flex-fill text-black">{date}</small>
+                                </div>
                             </div>
                         </div>
-                    </a>
+                   
                 </div>
+                </a>
             </div>
         );
     }

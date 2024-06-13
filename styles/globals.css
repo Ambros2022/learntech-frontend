@@ -1442,11 +1442,11 @@
     height: 300px !important;
   }
 
-  .collegeBannerCon>.position-relative img {
+  /* .collegeBannerCon>.position-relative img {
     object-fit: cover !important;
     width: 100% !important;
     height: 300px !important;
-  }
+  } */
 
   /* College Filter Section */
   .bg-skyBlue {

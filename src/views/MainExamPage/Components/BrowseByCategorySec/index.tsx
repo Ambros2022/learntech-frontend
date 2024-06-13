@@ -7,9 +7,21 @@ import ExamCard from '../ExamCardList';
 import axios from 'src/configs/axios';
 import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
 
+
+type ExamData = {
+    [id: string]: {
+        id: string;
+        cover_image: string;
+        exam_title: string;
+        created_at: string;
+        // Add more properties as needed
+    }[];
+};
+
 const BrowsebyCategorySec = () => {
     const [items, setItems] = useState<{ id: string; title: string }[]>([]);
-    const [examsData, setExamsData] = useState({});
+    const [examsData, setExamsData] = useState<ExamData>({});
+
     const [newsData, setNewsData] = useState([]);
 
     const [activeTab, setActiveTab] = useState('');
@@ -24,8 +36,10 @@ const BrowsebyCategorySec = () => {
                     id: category.id,
                     title: category.name
                 }));
-                setItems(categories);
-                setActiveTab(categories[0]?.id || '');
+                // Add an extra tab for displaying all exams
+                const allExamsTab = { id: 'all', title: 'All Exams' };
+                setItems([...categories, allExamsTab]);
+                setActiveTab('all'); // Set active tab to 'all'
             } else {
                 console.error('Failed to fetch categories');
             }
@@ -96,7 +110,7 @@ const BrowsebyCategorySec = () => {
 
     return (
         <section className='bg-white'>
-            <div className="container categorySecCarousel position-relative px-5 pt-2 pb-5">
+            <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
                 <h2 className='fw-bold text-blue mb-5 text-center'>Browse By Category</h2>
                 <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
                 <div className="tab-content" id="pills-tabContent">
@@ -112,9 +126,23 @@ const BrowsebyCategorySec = () => {
                                 <div className="row ">
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row">
-                                            {currentExams.map((exam, index) => (
+                                            {/* {currentExams.map((exam, index) => (
                                                 <ExamCard key={index} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
-                                            ))}
+                                            ))} */}
+
+                                        {activeTab === 'all' ? (
+                                            // Map over all exams data
+                                            Object.values(examsData).map(exams => (
+                                                exams.map((exam, index) => (
+                                                    <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                                ))
+                                            ))
+                                        ) : (
+                                            // Map over current exams data based on the active tab
+                                            currentExams.map((exam, index) => (
+                                                <ExamCard key={index} id={exam.id}  cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                            ))
+                                        )}
                                         </div>
                                         <div className='d-flex justify-content-center'>
                                             <nav aria-label="Page navigation example">
