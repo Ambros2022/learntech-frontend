@@ -28,14 +28,9 @@ function BannerSec({ data }: any) {
       }
       cancelToken = axios1.CancelToken.source();
       const response = await axios.get('api/website/generalcourse/get', { cancelToken: cancelToken.token, params: { searchfrom: "name", searchtext: value } });
-      // const suggestions = response.data.data.flatMap((item: { data: any[]; type: any; }) => item.data.map(entry => ({
-      //   name: entry.name,
-      //   slug: entry.slug,
-      //   id: entry.id,
-      //   type: item.type,
-      // })));
 
       if (response.status == 200) {
+        console.log("d", response.data.data);
         setSearchResults(response.data.data);
       }
 
@@ -68,7 +63,7 @@ function BannerSec({ data }: any) {
                   renderOption={(props, option) => (
                     <li {...props}>
 
-                      <Link href={`/course/${option.id}/${option?.streams?.slug}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
+                      <Link href={`/course/${option.streams.id}/${option?.streams?.slug}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
                         {option.name}
                       </Link>
 
@@ -136,7 +131,7 @@ function BannerSec({ data }: any) {
           <div className="d-flex pb-5 gap-2 flex-wrap justify-content-between">
             <div className='d-flex gap-2 flex-wrap mb-2 mb-lg-0'>
               {data.map((val) => (
-                <Link href={`/course/${val.id}/${val?.streams?.slug}/${val.slug}`}
+                <Link href={`/course/${val?.streams?.id}/${val?.streams?.slug}/${val.slug}`}
                   className='btn trendCrsBtn'>{val.short_name}</Link>
               ))}
             </div>

@@ -1,7 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
 
-const ExamCard = ({ title, date, cover_image }) => {
+
+
+
+const ExamCard = ({ title, id,  date, cover_image }) => {
     // Function to format the date
     const formatDate = (inputDate) => {
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -17,6 +20,7 @@ const ExamCard = ({ title, date, cover_image }) => {
 
     return (
         <div className="col-md-4 col-12 mb-3">
+             <a href={`/exam/${id}/${title}`} >
             <div className="card examsCardRow">
                 <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${cover_image}`} width={200} height={200} className="card-img-top" alt={title} />
                 <div className="card-body text-center">
@@ -24,6 +28,7 @@ const ExamCard = ({ title, date, cover_image }) => {
                     <small className="text-blue card-text text-truncate">{formatDate(date)}</small>
                 </div>
             </div>
+            </a>
         </div>
     );
 };

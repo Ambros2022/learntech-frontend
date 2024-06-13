@@ -27,7 +27,7 @@ const college = () => {
       router.query.slug.length <= 2 ? (
         <InnerCollegePage id={router.query.slug[0]} />
       ) : (
-        <InnerCourseCollegePage id={router.query.slug[0]} />
+        <InnerCourseCollegePage Collegeid={router.query.slug[0]} Courseslug={router.query.slug[2]} />
       )
     )}
   </>

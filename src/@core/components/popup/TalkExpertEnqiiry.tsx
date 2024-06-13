@@ -14,7 +14,7 @@ interface Props {
 const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
   const router = useRouter();
 
-  const phoneRegExp = /\+? (?: [0 - 9] ?){ 6, 14 } [0 - 9]$/;
+  const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   const validationSchema = Yup.object().shape({
@@ -22,7 +22,7 @@ const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
     email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
     contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
     course: Yup.string().required('Course is required').trim(),
-    // location: Yup.string().required('Location is required').trim(),
+    location: Yup.string().required('Location is required').trim(),
   });
 
   const handleSubmit = async (values, { resetForm }) => {

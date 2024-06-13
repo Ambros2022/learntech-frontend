@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import SideContactUsFormfrom from 'src/@core/components/popup/SideContactUsForm';
 
 const ServicesSec = () => {
     const formik = useFormik({
@@ -41,7 +42,8 @@ const ServicesSec = () => {
                             <h4 className='pt-3 mb-3 fw-bold text-blue text-center'>
                                 Interested in Our Services?
                             </h4>
-                            <form onSubmit={formik.handleSubmit}>
+                            <SideContactUsFormfrom />
+                            {/* <form onSubmit={formik.handleSubmit}>
                                 <div className="mb-3 row">
                                     <div className="col-md-12">
                                         <input
@@ -136,7 +138,7 @@ const ServicesSec = () => {
                                 <div className="mb-3 text-center">
                                     <input type="submit" className='btn submitBtn' />
                                 </div>
-                            </form>
+                            </form> */}
                         </div>
                     </div>
                 </div>

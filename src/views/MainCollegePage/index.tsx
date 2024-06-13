@@ -45,11 +45,13 @@ function MainCollegePage() {
       }
     }, [isMountedRef]);
   
+
   
   
     useEffect(() => {
       getPagedata();
       getTrendingCourses();
+
   
   
     }, []);

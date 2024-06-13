@@ -22,7 +22,7 @@ interface FormValues {
 
 const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const phoneRegExp = /^[0-9]{12}$/; // Example: 10 digits only, you may adjust it according to your needs
+  const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;// Example: 10 digits only, you may adjust it according to your needs
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);

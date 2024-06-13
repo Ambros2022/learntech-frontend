@@ -1442,11 +1442,11 @@
     height: 300px !important;
   }
 
-  .collegeBannerCon>.position-relative img {
+  /* .collegeBannerCon>.position-relative img {
     object-fit: cover !important;
     width: 100% !important;
     height: 300px !important;
-  }
+  } */
 
   /* College Filter Section */
   .bg-skyBlue {
@@ -3357,7 +3357,7 @@
 
   .examNewsSec .card-img-top {
     height: 125px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
   }
 
   .examNewsSec .card-text {
@@ -3384,8 +3384,8 @@
   }
 
   .examsCardRow .card-img-top {
-    height: 150px !important;
-    object-fit: cover !important;
+    height: 126px !important;
+    object-fit: contain !important;
   }
 
   .carousel-containerCategory {

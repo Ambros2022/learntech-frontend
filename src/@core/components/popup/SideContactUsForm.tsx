@@ -14,7 +14,7 @@ interface Props {
 const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
     const router = useRouter();
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const validationSchema = Yup.object().shape({
@@ -76,7 +76,7 @@ const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
                 <ErrorMessage name="name" component="div" className="error text-danger" />
             </div>
             <div className="mb-3">
-                <Field type="text" name="contact_number" placeholder="Contact Number*" className="form-control" />
+                <PhoneInputField  name="contact_number"  />
                 <ErrorMessage name="contact_number" component="div" className="error text-danger" />
             </div>
             <div className="mb-3">

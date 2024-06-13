@@ -8,7 +8,7 @@ import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-function InnerCourseCollegePage({ id }) {
+function InnerCourseCollegePage({ Collegeid, Courseslug }) {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
@@ -19,7 +19,13 @@ function InnerCourseCollegePage({ id }) {
 
   const getPagedata = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/coursefindone/get/' + id);
+      const slug = Courseslug; // replace with actual slug
+      const id = Collegeid; // replace with actual id
+
+
+
+      const response = await axios.get(`/api/website/coursefindone/get/${slug}/${id}`);
+
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -28,7 +34,7 @@ function InnerCourseCollegePage({ id }) {
       router.push("/404");
       console.error('Failed to fetch page data:', error);
     }
-  }, [id, isMountedRef, router]);
+  }, [Collegeid, isMountedRef, router]);
 
   const getColleges = useCallback(async () => {
     try {
@@ -44,7 +50,7 @@ function InnerCourseCollegePage({ id }) {
     } catch (error) {
       console.error('Failed to fetch trending courses:', error);
     }
-  }, [id, isMountedRef]);
+  }, [Collegeid, isMountedRef]);
 
 
   useEffect(() => {
