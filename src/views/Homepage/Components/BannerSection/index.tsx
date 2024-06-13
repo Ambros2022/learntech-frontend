@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
@@ -14,7 +14,6 @@ import dynamic from 'next/dynamic';
 const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'), { ssr: false });
 const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
 
-// import Autocomplete from 'src/@core/components/mui/autocomplete';
 let cancelToken: any;
 
 const phoneRegExp = /^(\+\d{1,3}[- ]?)?\d{10,13}$/;
@@ -27,7 +26,6 @@ const validationSchema = Yup.object().shape({
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),
 });
-
 
 function BannerSection() {
   const router = useRouter();
@@ -109,43 +107,50 @@ function BannerSection() {
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
-      {imagesLoaded && banners.length > 0 ? (<div id="carouselExampleIndicators" className="carousel slide">
-        <div className="carousel-indicators">
-          {banners.map((banner, index) => (
-            <button
-              key={index}
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to={index}
-              className={index === 0 ? "active" : ""}
-              aria-label={`Slide ${index + 1}`}
-            ></button>
-          ))}
-        </div>
-        <div className="carousel-inner">
-          {banners.map((banner, index) => (
-            <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+      {imagesLoaded && banners.length > 0 ? (
+        <div id="carouselExampleIndicators" className="carousel slide">
+          <div className="carousel-indicators">
+            {banners.map((banner, index) => (
+              <button
+                key={index}
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to={index}
+                className={index === 0 ? "active" : ""}
+                aria-label={`Slide ${index + 1}`}
+              ></button>
+            ))}
+          </div>
+          <div className="carousel-inner">
+            {banners.map((banner, index) => (
+              <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                <Link href={banner.link}>
+                  <Link href={banner.link} className="stretched-link">
+                    <Image
+                      fill
+                      src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                      priority={true}
+                      className="w-100"
+                      alt={`Banner ${index}`}
+                    />
+                  </Link>
+                </Link>
+              </div>
+            ))}
+          </div>
 
-              <Image
-                fill
-                src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                priority={true}
-                className="w-100"
-                alt={`Banner ${index}`}
-              />
-
-            </div>
-          ))}
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+          </button>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
-      </div>) : <Skeleton height={500} />}
+      ) : (
+        <Skeleton height={500} />
+      )}
 
       <div className="bannerFormSec">
         <div className="container-fluid">
@@ -153,8 +158,8 @@ function BannerSection() {
             <div className="row">
               <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2">
                 <div className="searchSec align-content-center">
-                  <div className='outlineSec'>
-                    <h1 className='fw-bold text-blue mb-3'>Find Colleges, Courses & Exams that are best for you</h1>
+                  <div className="outlineSec">
+                    <h1 className="fw-bold text-blue mb-3">Find Colleges, Courses & Exams that are best for you</h1>
                     <div className="row">
                       <div className="col-12 position-relative">
                         <Autocomplete
@@ -236,7 +241,6 @@ function BannerSection() {
                     }}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
-                    resetForm
                   >
                     <Form>
                       <div className="mb-3">

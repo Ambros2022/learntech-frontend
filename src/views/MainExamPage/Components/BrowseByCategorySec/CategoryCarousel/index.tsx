@@ -56,7 +56,7 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
                         id={`pills-${item}-tab`}
                         type="button"
                     >
-                        {item.title}
+                        {item.label}
                     </button>
                 </div>
             ))}

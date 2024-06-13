@@ -19,6 +19,11 @@ const TopTrendingNews = () => {
             title: "Tech Giants Lay Off Thousands",
             description: "In a shocking move, several major tech companies have announced significant layoffs...",
             imageUrl: "/images/icons/newsPageImg.jpg"
+        },
+        {
+            title: "Tech Giants Lay Off Thousands",
+            description: "In a shocking move, several major tech companies have announced significant layoffs...",
+            imageUrl: "/images/icons/newsPageImg.jpg"
         }
         // Add more news items as needed
     ];
@@ -26,8 +31,8 @@ const TopTrendingNews = () => {
     // Function to generate news cards
     const newsCards =
         newsItems.map((news, index) => (
-            <div className="d-flex mx-5 mb-1">
-                <div key={index} className="card h-100">
+            <div className="col-8 col-md-10 mx-auto mb-1">
+                <div key={index} className="card h-100 d-flex flex-fill">
                     <Image
                         src={news.imageUrl}
                         width={400}
@@ -38,8 +43,8 @@ const TopTrendingNews = () => {
                         alt={news.title}
                     />
                     <div className="card-body">
-                        <h6 className="card-title fw-bold text-truncate">{news.title}</h6>
-                        <p className="card-text">{news.description}</p>
+                        <h6 className="card-title fw-bold">{news.title}</h6>
+                        {/* <p className="card-text">{news.description}</p> */}
                     </div>
                 </div>
             </div>

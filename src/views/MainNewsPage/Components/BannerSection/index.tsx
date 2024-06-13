@@ -8,9 +8,9 @@ const BannerSection = () => {
             <section className='newsBannerSec'>
                 <div className='position-relative'>
                     <div>
-                        <Image src='/images/icons/Banner BG.png' width={1400} height={400} alt='banner-img' className='position-relative w-100' />
+                        <Image src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
                     </div>
-                    <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
+                    <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
                         <div className="container h-100">
                             <div className="d-flex justify-content-center h-100">
                                 <div className="align-content-center h-100">
@@ -27,8 +27,8 @@ const BannerSection = () => {
                 </div>
             </section>
             <section className='bg-white'>
-                <div className='container py-2'>
-                    <Link href='/' className='text-black'>Home</Link> {'>'} <Link href="/news" className='text-blue'>News</Link>
+                <div className='container py-2 linkFontSize'>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/news" className='text-blue'> News</Link>
                 </div>
             </section>
         </>

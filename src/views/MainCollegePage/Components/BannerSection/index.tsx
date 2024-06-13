@@ -7,6 +7,9 @@ import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/ma
 import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
 let cancelToken: any;
 
@@ -84,7 +87,7 @@ function BannerSection() {
                   FIND TOP COLLEGES, COURSE ADMISSIONS, FEE STRUCTURES, AND PLACEMENT
                 </h1>
                 <div className="row">
-                  <div className="col-7 mb-3">
+                  <div className="col-md-7 mb-3">
                     <Autocomplete
                       open={open}
                       onClose={() => setOpen(false)}
@@ -136,6 +139,9 @@ function BannerSection() {
                         />
                       )}
                     />
+                  </div>
+                  <div className="col-md-5 mb-3">
+                    <GlobalEnquiryForm className="btn collegeApplyNow" />
                   </div>
                 </div>
               </div>

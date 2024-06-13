@@ -139,11 +139,11 @@ const BlogCards = () => {
                         <div className="row">
                             {currentCards.map((card) => (
                                 <div className="col-md-6 col-8 mx-md-0 mx-auto mb-3" key={card.id}>
-                                    <div className="card newsCardText position-relative">
-                                        <Image src={card.imgSrc} width={200} height={200} className="card-img-top" alt="news-img" />
+                                    <div className="card newsImgSize position-relative">
+                                        <Image src={card.imgSrc} width={400} height={400} className="card-img-top" alt="news-img" />
                                         <span className='share-icon'>
                                             <Image src='/images/icons/icon-share.png' width={30} height={30} style={{
-                                                top: '15px', right: '15px', backgroundColor: 'rgba(0,0,0,0.5)'
+                                                top: '20px', right: '20px', backgroundColor: 'rgba(0,0,0,0.5)'
                                             }} className='position-absolute rounded p-1' alt='share-icon' />
                                         </span>
                                         <div className="card-body">

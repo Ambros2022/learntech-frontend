@@ -7,7 +7,7 @@ interface ExampleProps {
 	intaialvalue?: string;
 	onChange?: any;
 }
-const DynamicJoditEditor = dynamic<any>(() => import('jodit-react'), { ssr: false });
+const DynamicJoditEditor = dynamic<any>(() => import('jodit-pro-react'), { ssr: false });
 
 const Example: React.FC<ExampleProps> = ({ placeholder, intaialvalue = '', onChange }) => {
 	const editor = useRef(null);

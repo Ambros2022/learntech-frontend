@@ -39,7 +39,7 @@ function FeaturedCollegeSection() {
           <CollegeCard key={college.id} college={college} />
         ))} />
         <div className="d-flex justify-content-center pb-5">
-          <Link href='/colleges' className='btn viewMoreClgBtn'>Load More</Link>
+          <Link href='/colleges' className='btn viewMoreClgBtn'>View More</Link>
         </div>
       </div>
     </section>

@@ -130,7 +130,7 @@ function CollegeFilterSection() {
             };
             if (stateIds && stateIds.length > 0) params['state_id'] = `[${stateIds.join(',')}]`;
             if (cityIds && cityIds.length > 0) params['city_id'] = `[${cityIds.join(',')}]`;
-            if (courseIds && courseIds.length > 0) params['course_id'] = `[${courseIds.join(',')}]`;
+            if (courseIds && courseIds.length > 0) params['general_course_id'] = `[${courseIds.join(',')}]`;
             if (streamIds && streamIds.length > 0) params['stream_id'] = `[${streamIds.join(',')}]`;
             if (ownership) params['college_type'] = ownership;
             if (courseType && courseType.length > 0) params['course_type'] = JSON.stringify(courseType);
@@ -295,7 +295,7 @@ function CollegeFilterSection() {
                                 <div className="row pt-3">
                                     <div className="col-md-7 col-xl-7">
                                         <div className="card-title">
-                                            <h6 className='fw-bold text-black my-2 text-truncate'>{name}</h6>
+                                            <h6 className='fw-bold text-black my-2'>{name}</h6>
                                         </div>
                                         <div className="card-text text-black">
                                             <p className="m-0 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
@@ -315,7 +315,7 @@ function CollegeFilterSection() {
                                             </button>
                                         )}
                                     </div>
-                                    <div className="col-md-3 my-auto col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid">
+                                    <div className="col-md-3 my-auto col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid d-md-block d-flex justify-content-center gap-3">
                                         <GlobalEnquiryForm className="activeBtn mb-3 btn d-flex justify-content-center" />
 
                                         <Link href={`/college/${id}/${slug}`} className="mb-3 viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
@@ -380,7 +380,7 @@ function CollegeFilterSection() {
                         imageUrl={college.banner_image}
                     />
                 ))}
-              
+
             </div>
         );
     }
@@ -395,7 +395,14 @@ function CollegeFilterSection() {
         });
     };
 
-    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({});
+    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
+        state: true,
+        city: true,
+        streams: true,
+        courses: true,
+        ownership: true,
+        courseType: true
+    });
     const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
 
 
@@ -573,6 +580,39 @@ function CollegeFilterSection() {
         });
     });
 
+    const AddBanner = () => {
+        return (
+            <>
+                <section className='bg-skyBlue addBanner rounded'>
+                    <div className="container p-5">
+                        <div className="card">
+                            <div className="row g-0">
+                                <div className="col-md-4 addImgClg position-relative">
+                                    <Image src="/images/icons/filter-card.jpg" width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
+                                    <div className="position-absolute iconsPosition">
+                                        <div className="d-flex flex-column">
+                                            <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-info-circle"></i></h6>
+                                            <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-x-circle"></i></h6>
+                                        </div>
+                                    </div>
+                                    <h2 className='position-absolute text-white' style={{ backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px', zIndex: '3000', top: '50%', left: '50%', color: "white" }}>Ad</h2>
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="card-body" style={{ zIndex: '200' }}>
+                                        <h5 className="card-text">PES University</h5>
+                                        <h3 className="card-title fw-bold">B.Tech 2024 - Admissions Open</h3>
+                                        <Link href='/colleges' className='btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </>
+
+        );
+    }
+
 
     return (
         <>
@@ -594,6 +634,7 @@ function CollegeFilterSection() {
                                     </button>
                                 </div>
                             )}
+                            <AddBanner />
                             <StateButtons
                                 options={options.find(option => option.id === 'state')?.options || []}
                                 setSelectedCheckboxes={setSelectedCheckboxes}
