@@ -85,17 +85,7 @@ const BrowsebyCategorySec = () => {
         resetForm();
     };
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    const validationSchema = Yup.object().shape({
-        name: Yup.string().required('Name is required'),
-        email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-        contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-        course: Yup.string().required('Course is required'),
-        location: Yup.string().required('Location is required'),
-        message: Yup.string().required('Message is required'),
-    });
+   
 
     const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
     const totalExams = examsData[activeTab]?.length || 0;

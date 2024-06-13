@@ -6,8 +6,8 @@ import axios1 from 'axios';
 import axios from 'src/configs/axios';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-
-
+import Image from 'next/image';
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 
 let cancelToken: any;
@@ -81,13 +81,18 @@ function BannerSection() {
     return (
         <>
             <section className='collegeBannerCon bg-blue examsBannerCon'>
+            <div className="position-relative">
+          <div>
+            <Image src='/images/icons/Banner BG.png' width={1400} height={400} alt='banner-img' className='position-relative w-100' />
+          </div>
+          <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
                 <div className='d-flex justify-content-center w-100 h-100'>
                     <div className='align-content-center w-100 container'>
-                        <h1 className='fw-bold text-center text-white mb-3'>
+                        <h1 className='fw-bold text-center text-white mb-3 mt-4'>
                             Entrance Exams in India
                         </h1>
-                        <div className="row">
-                        <div className="col-md-7 col-12 mb-3">
+                        <div className="row justify-content-center align-items-center">
+                        <div className="col-md-7 col-12 mb-3 ">
                             <Autocomplete
                             open={open}
                             onClose={() => setOpen(false)}
@@ -107,7 +112,7 @@ function BannerSection() {
                             renderInput={(params) => (
                                 <TextField
                                 {...params}
-                                placeholder="Search"
+                                placeholder="Search for Entrance Exam"
                                 className='form-control'
                                 InputProps={{
                                     ...params.InputProps,
@@ -143,10 +148,15 @@ function BannerSection() {
                         </div>
                         <PopularCourses />
                         <div className='text-md-end text-center pt-3'>
-                            <button className='btn alertExamBtn'>Get Exams Alert</button>
-
+                            {/* <button className='btn  alertExamBtn'>Get Exams Alert</button> */}
+                            <GlobalEnquiryForm 
+                                        buttonText="Get Exams Alert" 
+                                        className="btn alertExamBtn" 
+                                    />
                         </div>
                     </div>
+                </div>
+                </div>
                 </div>
             </section>
             <div className="bg-white">

@@ -86,6 +86,20 @@ const navigation = (): VerticalNavItemsType => {
     },
 
     {
+      title: 'User',
+      path: '/app/dashboard/user',
+      icon: 'tabler:users',
+      auth: false
+    },
+
+    {
+      title: 'Review',
+      path: '/app/dashboard/review',
+      icon: 'tabler:address-book',
+      auth: false
+    },
+
+    {
       title: 'Enquiries',
       path: '/app/dashboard/enquiry',
       icon: 'tabler:phone-outgoing',

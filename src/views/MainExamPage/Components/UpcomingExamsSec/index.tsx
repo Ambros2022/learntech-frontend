@@ -57,6 +57,7 @@ function PopularCourses() {
         return items.map(card => (
             <CardComponent
                 key={card.id}
+                id={card.id}
                 title={card.title}
                 date={card.date}
             />
@@ -64,18 +65,20 @@ function PopularCourses() {
     }
 
     // CardComponent function
-    function CardComponent({ title, date }: { title: string; date: string }) {
+    function CardComponent({ id, title, date }: { id: number; title: string; date: string }) {
         return (
             <div className='topCourseConCarousel'>
                 <div className="card text-center d-flex mx-2 border-0">
-                    <div className="row flex-fill">
-                        <div className="col-12 text-start px-0">
-                            <div className="ms-2 card-body">
-                                <h4 className="card-title fw-bold text-blue text-truncate">{title}</h4>
-                                <small className="card-title flex-fill">{date}</small>
+                    <a href={`/exam/${id}/${title}`}>
+                        <div className="row flex-fill">
+                            <div className="col-12 text-start px-0">
+                                <div className="ms-2 card-body">
+                                    <h4 className="card-title fw-bold text-blue text-truncate">{title}</h4>
+                                    <small className="card-title flex-fill text-black">{date}</small>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         );
