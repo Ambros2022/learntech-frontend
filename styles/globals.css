@@ -2644,23 +2644,23 @@
 
   .detailsFillSec select {
     background-color: rgba(39, 72, 150, 0.04) !important;
+    color: rgb(0, 0, 0) !important;
+  }
+
+  /* .detailsFillSec input {
+    background-color: rgba(39, 72, 150, 0.04) !important ;
+  } */
+
+  /* .detailsFillSec input::placeholder {
     color: rgba(143, 143, 143, 1);
-  }
-
-  .detailsFillSec input {
-    background-color: rgba(39, 72, 150, 0.04) !important;
-  }
-
-  .detailsFillSec input::placeholder {
-    color: rgba(143, 143, 143, 1);
-  }
-
+  } */
+/* 
   .detailsFillSec textarea {
     background-color: rgba(39, 72, 150, 0.04) !important;
     width: 100%;
     border: 1px solid rgba(39, 72, 150, 0.2) !important;
     border-radius: 5px;
-  }
+  } */
 
   .detailsFillSec input::placeholder {
     color: rgba(143, 143, 143, 1) !important;
