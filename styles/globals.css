@@ -2384,8 +2384,8 @@
   /* Study In Usa */
 
   .studyInUsaCon {
-    background: linear-gradient(rgba(0, 0, 0, 0.356), rgba(28, 28, 28, 0.419)),
-      url('../public/images/icons/Study-Banner-Image.jpg');
+    /* background: linear-gradient(rgba(0, 0, 0, 0.356), rgba(28, 28, 28, 0.419)),
+      url('../public/images/icons/Study-Banner-Image.jpg'); */
     height: 500px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -2411,9 +2411,9 @@
     border-radius: 10px 0px 0px 10px !important;
   }
 
-  .studyInUsaCon .searchSec1 input::placeholder {
+  /* .studyInUsaCon .searchSec1 input::placeholder {
     color: white !important;
-  }
+  } */
 
   .studyInUsaCon .searchSec1 input:focus {
     outline: none !important;
@@ -2454,11 +2454,11 @@
     font-size: 12px !important;
   }
 
-  .topUniCardCon img {
+ .topUniCardCon img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-  }
+  } 
 
   .topClgIcon {
     top: 9px !important;
