@@ -387,6 +387,25 @@
     font-size: 16px;
   }
 
+  .reqBtnWhite .btn {
+    background-color: white !important;
+    color: #254692 !important;
+  }
+
+  .reqBtnWhite .btn:hover {
+    color: darkblue !important;
+  }
+
+  .ExpertCon .form-select {
+    --bs-form-select-bg-img: url('../public/images/icons/white-arrow.png') !important;
+  }
+
+  .reqBtn {
+    background-color: #254692 !important;
+    color: white !important;
+    padding: 10px 15px !important;
+  }
+
   .reqBtn button {
     background-color: #254692 !important;
     color: white !important;
@@ -689,6 +708,14 @@
     width: 100%;
   }
 
+  .FeaturedClgCon .fi-left {
+    margin-left: -25px !important;
+  }
+
+  .FeaturedClgCon .fi-right {
+    margin-right: -10px !important;
+  }
+
   .newsLinkSec .fi-left {
     margin-left: -50px !important;
   }
@@ -721,7 +748,7 @@
 
   .StudyAbroadCon .carousel-button-group {
     position: absolute !important;
-    top: 390px !important;
+    top: 135px !important;
     width: 100%;
   }
 
@@ -1232,7 +1259,7 @@
     }
 
     .StudyAbroadCon .carousel-button-group {
-      top: 530px !important;
+      top: 135px !important;
     }
 
     #exploreCardCon .mt-3 {
@@ -1315,14 +1342,14 @@
     }
 
     .StudyAbroadCon .fi-right {
-      margin-right: 32px !important;
+      margin-right: 10px !important;
       /* background-color: white; */
       border-radius: 25px;
       padding: 2px 8px;
     }
 
     .StudyAbroadCon .carousel-button-group {
-      top: 620px !important;
+      top: 140px !important;
     }
 
     .card-con .fi-left {
@@ -1442,11 +1469,11 @@
     height: 300px !important;
   }
 
-  /* .collegeBannerCon>.position-relative img {
+  .collegeBannerCon>.position-relative img {
     object-fit: cover !important;
     width: 100% !important;
     height: 300px !important;
-  } */
+  }
 
   /* College Filter Section */
   .bg-skyBlue {
@@ -2342,7 +2369,7 @@
 
   .carouselCardsCon .card img {
     background-color: rgba(39, 72, 150, 0.1);
-    filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%);
+    /* filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%); */
   }
 
   .carouselCardsCon .carousel-button-group {
@@ -2371,7 +2398,7 @@
   }
 
   .topCarouselCardsCon .fi-right {
-    margin-right: 60px !important;
+    margin-right: 65px !important;
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
@@ -2432,10 +2459,13 @@
   }
 
   .helpMeBtn {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    color: white !important;
-    border: 1px solid white !important;
+    background-color: white !important;
+    color: #254692 !important;
     padding: 10px 20px !important;
+  }
+
+  .helpMeBtn:hover {
+    color: darkblue !important;
   }
 
   .onBrdBtn {
@@ -2806,6 +2836,20 @@
   }
 
   .ExpertCon {
+    /* background-color: white !important; */
+  }
+
+  .ExpertCon label {
+    color: white !important;
+  }
+
+  .ExpertCon input {
+    background-color: transparent !important;
+    color: white !important;
+  }
+
+  .ExpertCon option {
+    color: #254692 !important;
     background-color: white !important;
   }
 
@@ -4153,13 +4197,244 @@
     min-height: 70px !important;
   }
 
+  .boardCarosuel .carousel-button-group {
+    position: absolute !important;
+    top: 115px !important;
+    width: 100%;
+  }
+
+  .boardCarosuel .fi-left {
+    margin-left: -20px !important;
+  }
+
+  .boardCarosuel .fi-right {
+    margin-right: -20px !important;
+  }
+
+  .scholarshipSec {
+    height: 300px !important;
+  }
+
+  .scholarShipImg>img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .scholarShipBtn {
+    background-color: white !important;
+    color: #254692 !important;
+  }
+
+  .scholarShipBtn:hover {
+    color: darkblue !important;
+  }
+
+  .filterCardSec {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 15px !important;
+  }
+
+  .filterCountry.active {
+    background-color: #254692 !important;
+    color: white !important;
+    font-weight: bold;
+  }
+
+  .filterCountry {
+    background-color: white !important;
+    color: #254692 !important;
+    border: 1px solid rgba(212, 218, 234, 1) !important;
+    padding: 10px 15px !important;
+    width: 150px !important;
+  }
+
+  .countryCarouselFilter .carousel-button-group {
+    position: absolute !important;
+    top: 45px !important;
+    width: 100%;
+  }
+
+  .countryCarouselFilter .fi-left {
+    margin-left: -30px !important;
+  }
+
+  .countryCarouselFilter .fi-left svg {
+    stroke: #254692 !important;
+  }
+
+  .countryCarouselFilter .fi-right {
+    margin-right: -30px !important;
+  }
+
+  .countryCarouselFilter .fi-right svg {
+    stroke: #254692 !important;
+  }
+
+  .carousel-container2Category {
+    z-index: 1 !important;
+  }
+
+  .scholarshipBtn .applyNowButton {
+    width: 150px !important;
+    padding: 10px 12px !important;
+  }
+
+  .scholarshipBtn .viewDetailBtn {
+    width: 150px !important;
+    padding: 10px 12px !important;
+  }
+
+  .examAlertSec img {
+    width: auto;
+    height: auto;
+  }
+
+  .link_btn {
+    text-decoration: underline !important;
+    border: 1px solid rgba(39, 72, 150, 0.2) !important;
+    padding: 10px 12px !important;
+    margin-bottom: 15px !important;
+    border-radius: 10px !important;
+    color: #254692 !important;
+  }
+
+  .mbbsAbroad input::placeholder {
+    color: rgba(143, 143, 143, 1) !important;
+  }
+
+  .mbbsAbroad select {
+    background-color: white !important;
+    color: rgba(143, 143, 143, 1) !important;
+  }
+
+  .mbbsAbroad textarea::placeholder {
+    color: rgba(143, 143, 143, 1) !important;
+  }
+
+  .countryCarousel .carousel-button-group {
+    position: absolute !important;
+    top: 10px !important;
+    width: 100%;
+  }
+
+  .countryCarousel .fi-left {
+    margin-left: -20px !important;
+  }
+
+  .countryCarousel .fi-right {
+    margin-right: -20px !important;
+  }
+
+  .countryCarousel .fi-left svg {
+    stroke: #254692 !important;
+  }
+
+  .countryCarousel .fi-right svg {
+    stroke: #254692 !important;
+  }
+
+  .userSecImg {
+    width: 200px;
+    height: 200px;
+  }
+
+  .userSecImg>img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .userSec2Img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .userSec2Img>img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  @keyframes zoomInOut {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.2);
+    }
+  }
+
+  .zoom-effect {
+    display: inline-block;
+    animation: zoomInOut 2s infinite;
+  }
+
+  .text-blue {
+    color: #0073b1;
+    /* Replace with your desired color */
+  }
+
+  .fsize-1 {
+    font-size: 2rem;
+    /* Adjust the size as needed */
+  }
+  .bg-img-blue{
+    background-color: rgba(39, 72, 150, 0.1) !important;
+  }
+
   @media (min-width:768px) and (max-width:992px) {
     .logoBoardImg {
       height: 150px;
     }
+    .userSec2Img {
+      width: 180px;
+      height: 180px;
+    }
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .countryCarousel .fi-left {
+      margin-left: -10px !important;
+    }
+
+    .countryCarousel .fi-right {
+      margin-right: -10px !important;
+    }
+
+    .countryCarouselFilter .carousel-button-group {
+      position: absolute !important;
+      top: 50px !important;
+      width: 100%;
+    }
+
+    .countryCarouselFilter .fi-left {
+      margin-left: 0px !important;
+    }
+
+    .countryCarouselFilter .fi-right {
+      margin-right: 0px !important;
+    }
+
+    .countryCarouselFilter .fi-left svg {
+      border: 1px solid rgba(39, 72, 150, 0.2) !important;
+      border-radius: 5px !important;
+    }
+
+    .countryCarouselFilter .fi-right svg {
+      border: 1px solid rgba(39, 72, 150, 0.2);
+      border-radius: 5px !important;
+    }
+
+    .scholarshipSec {
+      height: 320px !important;
+    }
+
+    .scholarShipImg>img {
+      height: 320px;
+      width: 100%;
+      object-fit: cover;
+    }
+
     .logoBoardImg {
       height: 150px;
     }
@@ -4180,4 +4455,23 @@
       margin-right: 30px !important;
     }
 
+    .boardCarosuel .fi-left {
+      margin-left: 0px !important;
+    }
+
+    .boardCarosuel .fi-right {
+      margin-right: 0px !important;
+    }
+
+    .boardCarosuel .fi-left svg {
+      stroke: #254692;
+      border: 1px solid #254692;
+      border-radius: 5px;
+    }
+
+    .boardCarosuel .fi-right svg {
+      stroke: #254692;
+      border: 1px solid #254692;
+      border-radius: 5px;
+    }
   }

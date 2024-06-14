@@ -55,6 +55,9 @@ const ConditionalModal = ({ showModal, closeModal }) => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 signForm">
+                                    <div className="text-end pt-3 pe-3">
+                                        <button type="button" className="btn-close" aria-label="Close" onClick={closeModal}></button>
+                                    </div>
                                     <div className="d-flex justify-content-center gap-4 pt-2 mb-1" role="tablist">
                                         <a href="#" className="nav-link" id="pills-SignUp-tab" data-bs-toggle="pill" data-bs-target="#pills-SignUp" type="button" role="tab" aria-controls="pills-SignUp" aria-selected="true">Sign Up</a>
                                         <a href="#" className="nav-link active" id="pills-SignIn-tab" data-bs-toggle="pill" data-bs-target="#pills-SignIn" type="button" role="tab" aria-controls="pills-SignIn" aria-selected="false">Log In</a>
@@ -64,12 +67,11 @@ const ConditionalModal = ({ showModal, closeModal }) => {
                                             <SignupForm closeModal={closeModal} />
                                         </div>
                                         <div className="tab-pane fade show active" id="pills-SignIn" role="tabpanel" aria-labelledby="pills-SignIn-tab">
-                                            <SignInForm  closeModal={closeModal}/>
+                                            <SignInForm closeModal={closeModal} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" className="btn-close" aria-label="Close" onClick={closeModal}></button>
                         </div>
                     </div>
                 </div>

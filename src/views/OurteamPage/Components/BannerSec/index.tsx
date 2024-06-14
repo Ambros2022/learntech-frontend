@@ -8,9 +8,9 @@ const BannerSec = () => {
             <section className='teamworksec'>
                 <Image src='/images/icons/Banner BG.png' alt='teamwork-logo' width={1400} height={300} />
             </section >
-            <section className='linkFontSize py-2'>
+            <section className='linkFontSize bg-white py-2'>
                 <div className="container">
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/our-team" className='text-blue'>Our Team</Link>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Our Team</span>
                 </div>
             </section>
         </>

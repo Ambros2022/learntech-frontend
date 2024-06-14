@@ -39,8 +39,8 @@ function OtherCourses({ streamdata }) {
   }
 
   return (
-    <section className='bg-white'>
-      <section className='container bg-skyBlue'>
+    <section className='bg-white pb-5'>
+      <section className='container bg-skyBlue rounded'>
         <h3 className='fw-bold text-blue pt-5 ps-5'>Other Courses</h3>
         <div className="carouselCardsCon px-5 pt-2 pb-5 position-relative">
           <MainCarousel2 items={createCards()} />

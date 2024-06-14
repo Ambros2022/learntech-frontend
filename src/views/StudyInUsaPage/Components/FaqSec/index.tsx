@@ -9,7 +9,7 @@ function FaqSec() {
           <h2 className='text-center text-blue fw-bold pt-5 pb-3'>FAQs</h2>
           <div className="row faqImgCon">
             <div className="col-md-6 faqImgSec mb-3 rounded d-flex flex-fill">
-              <div className='bg-skyBlue h-100 w-100 rounded text-center'>
+              <div className='bg-skyBlue rounded text-center'>
                 <Image src="/images/icons/faqImage.jpg" className='rounded w-100 h-100 img-fluid px-md-0' style={{ objectFit: 'cover' }} width={500} height={500} alt='faq-img' />
               </div>
             </div>
