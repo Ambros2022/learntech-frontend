@@ -884,12 +884,7 @@
 
   @media (min-width: 768px) and (max-width: 991px) {
     /* .innerTextAddress {
-      display: -webkit-box !important;
-      -webkit-line-clamp: 3 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      min-height: 70px !important;
+     
     } */
 
     .collapseNavHeight {
@@ -4342,6 +4337,7 @@
     width: 100% !important;
     height: 100% !important;
   }
+
   .userSec2Img {
     width: 200px;
     height: 200px;
@@ -4350,6 +4346,50 @@
   .userSec2Img>img {
     width: 100% !important;
     height: 100% !important;
+  }
+
+  .aboutUsSec .nav-link {
+    color: black !important;
+    text-align: start !important;
+    background-color: #f6f8fb !important;
+  }
+
+  .aboutUsSec .nav-link.active {
+    background-color: #254692 !important;
+    color: white !important;
+  }
+
+  .testimonalImg {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto !important;
+  }
+
+  .testimonalImg>img {
+    width: auto;
+    height: auto;
+  }
+
+  .testimonialCarousel .carousel-button-group {
+    position: absolute !important;
+    width: 100% !important;
+    top: 100px !important;
+  }
+
+  .testimonialCarousel .fi-left {
+    margin-left: -30px !important;
+  }
+
+  .testimonialCarousel .fi-right {
+    margin-right: -30px;
+  }
+
+  .testimonialCarousel .fi-left svg {
+    stroke: #254692 !important;
+  }
+
+  .testimonialCarousel .fi-right svg {
+    stroke: #254692 !important;
   }
 
   @keyframes zoomInOut {
@@ -4378,14 +4418,76 @@
     font-size: 2rem;
     /* Adjust the size as needed */
   }
-  .bg-img-blue{
+
+  .bg-img-blue {
     background-color: rgba(39, 72, 150, 0.1) !important;
   }
 
+  .NriQuotaSec {
+    height: 300px !important;
+  }
+
+  .NriQuotaSec img {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+  }
+
+  .studentSpeakCardBody {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 5 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 70px !important;
+  }
+
+  @media (min-width:993px) and (max-width:1024px) {
+    .testimonialCarousel .carousel-button-group {
+      position: absolute !important;
+      width: 100% !important;
+      top: 125px !important;
+    }
+
+    .studentSpeakCardBody {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 5 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 70px !important;
+    }
+  }
+
   @media (min-width:768px) and (max-width:992px) {
+    .testimonialCarousel .carousel-button-group {
+      position: absolute !important;
+      width: 100% !important;
+      top: 125px !important;
+    }
+
+    .testimonialCarousel .fi-left {
+      margin-left: -30px !important;
+    }
+
+    .testimonialCarousel .fi-right {
+      margin-right: -30px;
+    }
+
+    .studentSpeakCardBody {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 5 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 70px !important;
+    }
+
+
     .logoBoardImg {
       height: 150px;
     }
+
     .userSec2Img {
       width: 180px;
       height: 180px;
@@ -4393,6 +4495,50 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .testimonialPara {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 70px !important;
+    }
+
+    .studentSpeakCardBody {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 70px !important;
+    }
+
+    .testimonialCarousel .carousel-button-group {
+      position: absolute !important;
+      width: 100% !important;
+      top: 125px !important;
+    }
+
+    .testimonialCarousel .fi-left {
+      margin-left: 0px !important;
+    }
+
+    .testimonialCarousel .fi-right {
+      margin-right: 0px;
+    }
+
+    .testimonialCarousel .fi-left svg {
+      stroke: #254692 !important;
+      border: 1px solid rgba(39, 72, 150, 0.2) !important;
+      border-radius: 5px !important;
+    }
+
+    .testimonialCarousel .fi-right svg {
+      stroke: #254692 !important;
+      border: 1px solid rgba(39, 72, 150, 0.2) !important;
+      border-radius: 5px !important;
+    }
+
     .countryCarousel .fi-left {
       margin-left: -10px !important;
     }

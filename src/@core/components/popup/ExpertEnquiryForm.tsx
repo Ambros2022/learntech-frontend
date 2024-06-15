@@ -93,8 +93,8 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
                     </div> */}
                 </div>
 
-                <div className="text-center reqBtn px-xl-4 px-lg-3 px-md-3 px-1">
-                    <button type="submit" className="btn">Request for a Call Back</button>
+                <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
+                    <button type="submit" className="btn reqBtn">Request for a Call Back</button>
                 </div>
 
             </Form>
