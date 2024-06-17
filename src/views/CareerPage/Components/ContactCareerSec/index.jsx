@@ -169,7 +169,7 @@ const ContactCareerSec = () => {
                         <ErrorMessage name='resume' component='div' className='text-danger' />
                       </div>
                     </div>
-                    <div className='d-grid row'>
+                    <div className='text-center'>
                       <button type='submit' className='btn submitBtn' disabled={isSubmitting}>
                         Submit
                       </button>
