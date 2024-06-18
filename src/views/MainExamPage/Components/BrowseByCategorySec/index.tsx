@@ -14,7 +14,8 @@ const BrowsebyCategorySec = () => {
 
     const [activeTab, setActiveTab] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const examsPerPage = 12;
+    const [totalPages, setTotalPages] = useState();
+    const examsPerPage = 10;
 
     const getCategoriesData = useCallback(async () => {
         try {
@@ -40,7 +41,7 @@ const BrowsebyCategorySec = () => {
     const getExamsData = useCallback(async (id) => {
         try {
             const roleparams: any = {};
-            roleparams['page'] = 1;
+            roleparams['page'] = totalPages;
             roleparams['size'] = 1;
             const url = id === 'all' ? 'api/website/exams/get' : `api/website/exams/get?stream_id=${id}`;
             const response = await axios.get(url, { params: roleparams });
@@ -49,6 +50,8 @@ const BrowsebyCategorySec = () => {
                     ...prevState,
                     [id]: response.data.data
                 }));
+                setTotalPages(response.data.totalPages);
+                setCurrentPage(response.data.currentPage);
             } else {
                 console.error('Failed to fetch exams');
             }
@@ -87,8 +90,9 @@ const BrowsebyCategorySec = () => {
     };
 
     const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
+  
     const totalExams = examsData[activeTab]?.length || 0;
-    const totalPages = Math.ceil(totalExams / examsPerPage);
+    // const totalPages = Math.ceil(totalExams / examsPerPage);
 
     const handlePreviousPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
     const handleNextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));

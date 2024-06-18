@@ -3437,7 +3437,7 @@
     object-fit: cover;
   }
 
-  .newsBannerSec input {
+  /* .newsBannerSec input {
     background-color: rgba(255, 255, 255, 0.2) !important;
     padding: 10px !important;
     margin: 10px 0px !important;
@@ -3448,7 +3448,7 @@
   .newsBannerSec input::placeholder {
     color: white !important;
     font-size: 20px !important;
-  }
+  } */
 
   .topnewsSec .card-text {
     display: -webkit-box !important;
@@ -4117,4 +4117,11 @@
       margin-right: 30px !important;
     }
 
+  }
+
+
+  .typographypopup{
+    font-size: 17px !important;
+    color: #254692 !important;
+    font-weight: 700 !important; 
   }

@@ -247,12 +247,7 @@ function CollegeFilterSection() {
             const { state: selectedStateIds = [], courses: selectedCourseIds = [], streams: selectedStreamIds = [],
                 ownership: selectedOwnership = [], courseType: selectedCourseType = [], city: selectedCityIds = [] } = updatedSelected;
 
-            // Filter colleges based on selected filters
-            // const filteredColleges = colleges.filter(college => {
-            //     const ownershipMatch = selectedOwnership.length === 0 || selectedOwnership.includes(college.college_type);
-            //     const courseTypeMatch = selectedCourseType.length === 0 || selectedCourseType.includes(college.course_type);
-            //     return ownershipMatch && courseTypeMatch;
-            // });
+           
 
             // Perform API call with selected filter values
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
@@ -261,11 +256,6 @@ function CollegeFilterSection() {
             return updatedSelected;
         });
     }, 300); // Debounce for 300 milliseconds
-
-    // Use the debounced function in your event handler
-    // const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
-    //     debouncedHandleCheckboxChange(groupId, value, isChecked);
-    // };
 
     const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
         debouncedHandleCheckboxChange(groupId, value, isChecked);
