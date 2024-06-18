@@ -11,7 +11,7 @@ function OverviewSection({ data, collegedata, examdata }) {
     <>
       <section className='clgInfoSec bg-white'>
         <div className="container">
-          <div className=" text-center justify-content-center justify-content-md-start d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
+          <div className=" text-center justify-content-center gap-3 justify-content-md-start d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
             <button className='active mb-3 btn' id="nav-Overview-tab" data-bs-toggle="tab" data-bs-target="#nav-Overview" type="button" role="tab" aria-controls="nav-Overview" aria-selected="true">Overview</button>
 
             <button className='mb-3 btn' id="nav-UG-tab" data-bs-toggle="tab" data-bs-target="#nav-UG" type="button" role="tab" aria-controls="nav-UG" aria-selected="false">UG</button>

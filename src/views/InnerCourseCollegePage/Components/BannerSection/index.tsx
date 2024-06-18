@@ -30,8 +30,8 @@ function BannerSection({ data }) {
         </div>
       </section>
       <section className='py-3 bg-white'>
-        <div className='container'>
-          <p><Link href={'/'} className="text-black">Home</Link> {'>'} <Link href={'/colleges'} className="text-black">Colleges</Link> {'>'} <Link href={`/college/${data.college.id}/${data.college.slug}`} className="text-black">{data.college.name}</Link> {'>'}{data.generalcourse.name}</p>
+        <div className='container linkFontSize'>
+          <p><Link href={'/'} className="text-black">Home <i className='bi bi-chevron-right'></i></Link><Link href={'/colleges'} className="text-black">Colleges <i className='bi bi-chevron-right'></i></Link> <Link href={`/college/${data.college.id}/${data.college.slug}`} className="text-black">{data.college.name} <i className='bi bi-chevron-right'></i></Link><span className='text-blue'>{data.generalcourse.name}</span></p>
         </div>
       </section>
     </>

@@ -31,11 +31,11 @@ function PopularCourses() {
   function CardComponent({ title }) {
     return (
       <div className='topCourseConCarousel'>
-        <div className="card text-center d-flex mx-2 border-0">
+        <div className="card text-center d-flex mx-2 border-1">
           <div className="row flex-fill">
             <div className="col-12 text-center text-start px-0">
               <div className="card-body d-flex">
-                <small className="card-title flex-fill">{title}</small>
+                <small className="card-title align-self-center flex-fill">{title}</small>
               </div>
             </div>
           </div>
@@ -45,9 +45,9 @@ function PopularCourses() {
   }
 
   return (
-    <section className='bg-white'>
-      <section className='container bg-skyBlue'>
-        <h3 className='fw-bold text-blue pt-5 ps-5'>Popular Degree Courses</h3>
+    <section className='bg-white pb-5'>
+      <section className='container bg-skyBlue rounded'>
+        <h2 className='fw-bold text-blue pt-5 ps-5'>Popular Degree Courses</h2>
         <div className="topCarouselCardsCon px-5 pt-2 pb-5 position-relative">
           <MainCarousel2 items={createCards()} />
         </div>
