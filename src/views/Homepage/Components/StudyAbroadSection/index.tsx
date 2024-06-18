@@ -81,7 +81,7 @@ function StudyAbroadSection() {
     return countries.map((country) => (
       <a
         key={country.id}
-        className={getLinkClass(country.id)}
+        className={`${getLinkClass(country.id)} align-self-center`}
         id={country.id.toString()}
         type="button"
         aria-selected={activeCountry === country.id}
@@ -94,13 +94,13 @@ function StudyAbroadSection() {
 
   return (
     <section className="StudyAbroadCon bg-white" id="animation7" data-aos="fade-up">
-      <div className="container pt-5 position-relative">
+      <div className="container pt-5">
         <h2 className="fw-bold text-blue text-center">Study Abroad</h2>
         <p className="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <div className="d-flex justify-content-center flex-wrap gap-3 studyAbroadNav py-3 rounded" >
           {renderButtons()}
         </div>
-        <div className='pt-3' id="studyCardContainer">
+        <div className='pt-3 position-relative' id="studyCardContainer">
           <MainCarousel items={renderCards()} />
           <div className="d-flex justify-content-center pb-5">
             <Link href='/study-in-usa' className='btn viewMoreClgBtn'>Load More</Link>

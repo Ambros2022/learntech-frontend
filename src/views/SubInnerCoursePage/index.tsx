@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import BannerSection from './Components/BannerSection';
 import OverviewSection from './Components/OverviewSection';
-import ExpertSection from './Components/ExpertSection';
+// import ExpertSection from './Components/ExpertSection';
 import PopularCourses from './Components/PopularCourses';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import ExpertSection from '../InnerCoursePage/Components/ExpertSection';
 
 function SubInnerCoursePage({ Streamid, Courseslug }) {
   const router = useRouter();
@@ -21,7 +22,7 @@ function SubInnerCoursePage({ Streamid, Courseslug }) {
     try {
       const slug = Courseslug; // replace with actual slug
       const id = Streamid; // replace with actual id
-      
+
       const response = await axios.get(`/api/website/general/stream/get/${slug}/${id}`);
 
       if (isMountedRef.current) {

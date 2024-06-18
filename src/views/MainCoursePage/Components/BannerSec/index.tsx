@@ -143,8 +143,8 @@ function BannerSec({ data }: any) {
         </div>
       </section>
       <div className='bg-white py-2'>
-        <section className=" mt-2 container CourseNavigationLink">
-          <p><Link href={"/"}>Home</Link>{'>'} <span className='text-blue'>Courses</span></p>
+        <section className=" mt-2 container CourseNavigationLink linkFontSize">
+          <p><Link href={"/"}>Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Courses</span></p>
         </section>
       </div>
     </>

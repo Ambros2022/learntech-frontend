@@ -6,14 +6,14 @@ import FrontLayout from 'src/@core/layouts/FrontLayout'
 import MainBlogPage from 'src/views/MainBlogPage'
 
 
-const news = () => {
+const blogs = () => {
     return <>
         <MainBlogPage />
     </>
 }
 
-news.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+blogs.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
 
-news.guestGuard = true
+blogs.guestGuard = true
 
-export default news
+export default blogs

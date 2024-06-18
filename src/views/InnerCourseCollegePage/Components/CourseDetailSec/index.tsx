@@ -5,7 +5,7 @@ function CourseDetailSec({ data }) {
     <>
       <section className='clgInfoSec bg-white'>
         <div className="container">
-          <div className="pt-2 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
+          <div className="pt-2 text-center justify-content-start d-flex flex-fill gap-3 flex-wrap infoBtn " id="nav-tab" role="tablist">
             <button className='active mb-3 btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-course" type="button" role="tab" aria-controls="nav-course" aria-selected="true">Course Details</button>
 
             <button className='mb-3 btn' id="nav-eligibility-tab" data-bs-toggle="tab" data-bs-target="#nav-eligibility" type="button" role="tab" aria-controls="nav-eligibility" aria-selected="false">Eligibility Criteria </button>
