@@ -34,6 +34,9 @@ interface College {
 
 function CollegeFilterSection() {
 
+    
+    const router = useRouter();
+    const { state_id } = router.query;
     const [colleges, setColleges] = useState<College[]>([]);
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
@@ -434,6 +437,19 @@ function CollegeFilterSection() {
 
                 const updatedSelected = { ...prevSelected, state: updatedSelections };
                 // Call the API with the selected state IDs
+
+                const queryParams = { ...router.query };
+                if (updatedSelections.length > 0) {
+                    queryParams.state_id = updatedSelections.join(',');
+                } else {
+                    delete queryParams.state_id;
+                }
+    
+                router.push({
+                    pathname: router.pathname,
+                    query: queryParams,
+                });
+
                 getcollegedata(updatedSelected.state);
                 return updatedSelected;
             });
@@ -459,6 +475,13 @@ function CollegeFilterSection() {
         );
     };
 
+
+    const handleCollegeSelect = (collegeId: number) => {
+        const selectedCollege = colleges.find(college => college.id === collegeId);
+        if (selectedCollege) {
+            router.push(`/filtered-college/${selectedCollege.slug}`);
+        }
+    };
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
         const [searchTexts, setSearchTexts] = useState<Record<string, string>>({});

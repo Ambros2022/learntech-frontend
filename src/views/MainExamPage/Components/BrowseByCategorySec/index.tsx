@@ -41,6 +41,7 @@ const BrowsebyCategorySec = () => {
     const getExamsData = useCallback(async (id) => {
         try {
             const roleparams: any = {};
+            
             roleparams['page'] = totalPages;
             roleparams['size'] = 1;
             const url = id === 'all' ? 'api/website/exams/get' : `api/website/exams/get?stream_id=${id}`;
