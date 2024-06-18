@@ -4442,6 +4442,26 @@
     min-height: 70px !important;
   }
 
+  .eduLoanSec {
+    height: 300px;
+  }
+
+  .eduLoanSec>img {
+    object-fit: cover !important;
+    height: 300px !important;
+    width: 100% !important;
+  }
+
+  .DetailSec select{
+    background-color: white !important;
+    color: #8f8f8f !important;
+  }
+  .DetailSec input::placeholder{
+    color: #8f8f8f !important;
+  }
+  .DetailSec textarea::placeholder{
+    color: #8f8f8f !important;
+  }
   @media (min-width:993px) and (max-width:1024px) {
     .testimonialCarousel .carousel-button-group {
       position: absolute !important;
