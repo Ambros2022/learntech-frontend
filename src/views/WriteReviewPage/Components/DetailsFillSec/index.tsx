@@ -95,7 +95,6 @@ function DetailsFillSec() {
   const [step, setStep] = useState(1);
 
   const onSubmit = async (data: any) => {
-    alert("s")
     if (step === 1) {
       setStep(2);
     } else if (step === 2) {
@@ -113,11 +112,22 @@ function DetailsFillSec() {
         formData.append('school_board_id', data.school_board_id.id);
         formData.append('grade', data.grade);
       }
+      
+      if (localStorage.getItem('UserData')) {
+        let user: any = localStorage.getItem('UserData');
+        let parsed: any = JSON.parse(user);
+        console.log(parsed?.id);
+        formData.append('user_id', JSON.parse(parsed?.id));
+      }
+
       formData.append('passing_year', data.passing_year);
       formData.append('name', data.name);
       formData.append('userrating', data.userrating);
       formData.append('content', data.content);
 
+
+      console.log(formData);
+      return
       try {
         const response = await axios1.post(url, formData);
         if (response.data.status === 1) {
