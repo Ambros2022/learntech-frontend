@@ -10,7 +10,7 @@ module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
   images: {
-    domains: ['localhost','preprod.keralastudy.com'],
+    domains: ['localhost', 'preprod.keralastudy.com'],
   },
   webpack: config => {
     config.resolve.alias = {
@@ -19,8 +19,21 @@ module.exports = {
     }
 
     return config
-  }
-  
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin", // "same-origin-allow-popups"
+          },
+        ],
+      },
+    ];
+  },
+
   // async redirects() {
   //   console.log('redirect next')
   //   let array =  [

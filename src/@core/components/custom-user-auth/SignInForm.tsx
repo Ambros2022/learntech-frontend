@@ -10,6 +10,7 @@ import FacebookLoginButton from '../facebook-login';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import OtpVerificationForm from './OtpVerificationForm';
 import NewPasswordForm from './NewPasswordForm';
+import SocialSingin from './SocialLogin';
 import router from 'next/router';
 
 interface FormValues {
@@ -145,11 +146,14 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
             <small>Log In</small>
           </div>
           <div className="d-flex justify-content-between mb-3 flex-wrap">
+            <SocialSingin />
+          </div>
+          {/* <div className="d-flex justify-content-between mb-3 flex-wrap">
             <GoogleLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
             <FacebookLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
             <LinkedInLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
             <TwitterLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
-          </div>
+          </div> */}
           {/* <div className="text-black mb-3 text-center">
             <small>Already have an account? <span className="text-blue fw-bold">Log In</span></small>
           </div> */}

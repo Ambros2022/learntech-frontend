@@ -40,6 +40,7 @@ interface PageData {
   Published_news?: number;
   Total_landingpage?: number;
   Published_landingpage?: number;
+  Users?: number;
 }
 
 // CardItem component for reusable card elements
@@ -165,6 +166,11 @@ const Home = () => {
         href="/app/dashboard/landingpage/"
         title="Landing Pages"
         value={`${pagedata.Published_landingpage}/${pagedata.Total_landingpage}`}
+      />
+      <CardItem
+        href="/app/dashboard/user/"
+        title="Users"
+        value={`${pagedata.Users}`}
       />
     </Grid>
   );

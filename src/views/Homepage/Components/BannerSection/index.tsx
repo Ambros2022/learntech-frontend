@@ -109,7 +109,7 @@ function BannerSection() {
     <section className="bannerCon bg-formClr" id="animation1">
       {imagesLoaded && banners.length > 0 ? (
         <div id="carouselExampleIndicators" className="carousel slide">
-          <div className="carousel-indicators">
+          <div className="carousel-indicators" style={{ zIndex: '40' }}>
             {banners.map((banner, index) => (
               <button
                 key={index}
@@ -121,29 +121,27 @@ function BannerSection() {
               ></button>
             ))}
           </div>
-          <div className="carousel-inner">
+          <div className="carousel-inner" >
             {banners.map((banner, index) => (
-              <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                <Link href={banner.link}>
-                  <Link href={banner.link} className="stretched-link">
-                    <Image
-                      fill
-                      src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                      priority={true}
-                      className="w-100"
-                      alt={`Banner ${index}`}
-                    />
-                  </Link>
-                </Link>
+              <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`} style={{ zIndex: '30' }}>
+                <a href={banner.link}>
+                  <Image
+                    fill
+                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                    priority={true}
+                    alt={`Banner ${index}`}
+                    className="w-100"
+                  />
+                </a>
               </div>
             ))}
           </div>
 
-          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style={{ zIndex: '40' }}>
             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
             <span className="visually-hidden">Previous</span>
           </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style={{ zIndex: '40' }}>
             <span className="carousel-control-next-icon" aria-hidden="true"></span>
             <span className="visually-hidden">Next</span>
           </button>
@@ -156,8 +154,8 @@ function BannerSection() {
         <div className="container-fluid">
           <div className="container">
             <div className="row">
-              <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2">
-                <div className="searchSec align-content-center">
+              <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2" >
+                <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
                   <div className="outlineSec">
                     <h1 className="fw-bold text-blue mb-3">Find Colleges, Courses & Exams that are best for you</h1>
                     <div className="row">
@@ -227,7 +225,7 @@ function BannerSection() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3">
+              <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '40' }}>
                 <div className="searchForm">
                   <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
                   <Formik
