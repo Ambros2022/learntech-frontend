@@ -9,3 +9,4 @@ npm i file-saver
 npm install react-linkedin-login-oauth2
 npm install react-twitter-auth
 npm i jodit-pro-react
+npm install chart.js react-chartjs-2

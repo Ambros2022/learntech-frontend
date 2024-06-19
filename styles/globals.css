@@ -4452,16 +4452,65 @@
     width: 100% !important;
   }
 
-  .DetailSec select{
+  .DetailSec select {
     background-color: white !important;
     color: #8f8f8f !important;
   }
-  .DetailSec input::placeholder{
+
+  .DetailSec input::placeholder {
     color: #8f8f8f !important;
   }
-  .DetailSec textarea::placeholder{
+
+  .DetailSec textarea::placeholder {
     color: #8f8f8f !important;
   }
+
+  .bankImg img {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .bankCarousel .carousel-button-group {
+    width: 100% !important;
+    position: absolute !important;
+    top: 30px !important;
+  }
+
+  .bankCarousel .fi-left {
+    margin-left: -20px !important;
+  }
+
+  .bankCarousel .fi-right {
+    margin-right: -20px !important;
+  }
+
+  .bankCarousel .fi-left svg {
+    stroke: #254692 !important;
+  }
+
+  .bankCarousel .fi-right svg {
+    stroke: #254692 !important;
+  }
+
+  .piechartStyle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(#c2c2c2 0% 70%,
+        #254692 50% 100%);
+  }
+
+  .tenure-button {
+    cursor: pointer !important;
+    background-color: #ffffff !important;
+    color: #254692 !important;
+  }
+
+  .tenure-button.active {
+    background-color: #254692 !important;
+    color: #ffffff !important;
+  }
+
   @media (min-width:993px) and (max-width:1024px) {
     .testimonialCarousel .carousel-button-group {
       position: absolute !important;
@@ -4515,6 +4564,12 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .bankCarousel .carousel-button-group {
+      width: 100% !important;
+      position: absolute !important;
+      top: 35px !important;
+    }
+
     .testimonialPara {
       display: -webkit-box !important;
       -webkit-line-clamp: 3 !important;

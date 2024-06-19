@@ -6,16 +6,11 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const BankSec = () => {
     const countries = [
-        { name: 'Armenia', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'Russia', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'Ukraine', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'China', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'Philippines', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'Germany', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'Kazakhstan', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'Georgia', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'Nepal', flag: '/images/icons/armenia-flag.webp' },
-        { name: 'Bangladesh', flag: '/images/icons/armenia-flag.webp' },
+        { bank: '/images/icons/rbl.png' },
+        { bank: '/images/icons/hdfc.png' },
+        { bank: '/images/icons/uco.png' },
+        { bank: '/images/icons/canara-bank.png' },
+        { bank: '/images/icons/bandhanbank.png' },
         // Add more countries as needed
     ];
 
@@ -54,7 +49,7 @@ const BankSec = () => {
     return (
         <section className='bg-white pb-5'>
             <div className="container bg-skyBlue rounded mb-3 py-3 px-4">
-                <div className='countryCarousel position-relative mb-3'>
+                <div className='bankCarousel position-relative mb-3'>
                     <Carousel
                         swipeable
                         draggable
@@ -69,13 +64,10 @@ const BankSec = () => {
                     >
                         {countries.map((country, index) => (
                             <div key={index} className="px-3">
-                                <div className="card p-3 mx-md-0 mx-3">
-                                    <div className="row d-flex justify-content-center">
-                                        <div className="col-3 align-self-center">
-                                            <Image src={country.flag} width={40} height={40} alt={`${country.name}-flag`} />
-                                        </div>
-                                        <div className="col-9 align-self-center my-auto">
-                                            <h6 className='mb-0'>{country.name}</h6>
+                                <div className="card p-3 mx-md-0 mx-3 mt-3 mb-3">
+                                    <div className="d-flex justify-content-center flex-fill">
+                                        <div className="bankImg">
+                                            <Image src={country.bank} width={200} className='img-fluid' height={200} alt='bank-logo' />
                                         </div>
                                     </div>
                                 </div>
