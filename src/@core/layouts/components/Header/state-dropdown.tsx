@@ -33,6 +33,7 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                                     query: { state_id: item.id }
                                 }}
                                 className="dropdown-item"
+                                
                             >
                                 <div className="d-flex justify-content-between">
                                     {item.name}

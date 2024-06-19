@@ -6,7 +6,7 @@ const NewsItem = ({ banner_image, id, title, text }) => (
 
     
     <div className="col-12">
-         <a href={`/news/${id}/${title}`} >
+         <a href={`/news-1/${id}/${title}`} >
         <div className="card mb-3">
             <div className="row g-0">
                 <div className="col-md-4">

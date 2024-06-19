@@ -37,6 +37,9 @@ function CollegeFilterSection() {
     
     const router = useRouter();
     const { state_id } = router.query;
+
+    console.log(state_id, "state_id")
+
     const [colleges, setColleges] = useState<College[]>([]);
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
@@ -196,7 +199,10 @@ function CollegeFilterSection() {
         },
     ];
 
+    const isStateIdAvailable = states.some(state => state.value === state_id);
+    const filteredStates = isStateIdAvailable ? states.filter(state => state.value === state_id) : states;
 
+  
 
     const [visibleCards, setVisibleCards] = useState(6);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
@@ -437,19 +443,6 @@ function CollegeFilterSection() {
 
                 const updatedSelected = { ...prevSelected, state: updatedSelections };
                 // Call the API with the selected state IDs
-
-                const queryParams = { ...router.query };
-                if (updatedSelections.length > 0) {
-                    queryParams.state_id = updatedSelections.join(',');
-                } else {
-                    delete queryParams.state_id;
-                }
-    
-                router.push({
-                    pathname: router.pathname,
-                    query: queryParams,
-                });
-
                 getcollegedata(updatedSelected.state);
                 return updatedSelected;
             });
