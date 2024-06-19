@@ -7,21 +7,9 @@ import ExamCard from '../ExamCardList';
 import axios from 'src/configs/axios';
 import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
 
-
-type ExamData = {
-    [id: string]: {
-        id: string;
-        cover_image: string;
-        exam_title: string;
-        created_at: string;
-        // Add more properties as needed
-    }[];
-};
-
 const BrowsebyCategorySec = () => {
     const [items, setItems] = useState<{ id: string; title: string }[]>([]);
-    const [examsData, setExamsData] = useState<ExamData>({});
-
+    const [examsData, setExamsData] = useState({});
     const [newsData, setNewsData] = useState([]);
 
     const [activeTab, setActiveTab] = useState('');
@@ -30,16 +18,17 @@ const BrowsebyCategorySec = () => {
 
     const getCategoriesData = useCallback(async () => {
         try {
+          
             const response = await axios.get('api/website/stream/get');
+         
             if (response.data.status === 1) {
                 const categories = response.data.data.map(category => ({
                     id: category.id,
                     title: category.name
                 }));
-                // Add an extra tab for displaying all exams
-                const allExamsTab = { id: 'all', title: 'All Exams' };
-                setItems([...categories, allExamsTab]);
-                setActiveTab('all'); // Set active tab to 'all'
+                // Add "All" category
+                setItems([{ id: 'all', title: 'All' }, ...categories]);
+                setActiveTab('all'); // Set "All" tab as active initially
             } else {
                 console.error('Failed to fetch categories');
             }
@@ -50,7 +39,11 @@ const BrowsebyCategorySec = () => {
 
     const getExamsData = useCallback(async (id) => {
         try {
-            const response = await axios.get(`api/website/exams/get?stream_id=${id}`);
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 1;
+            const url = id === 'all' ? 'api/website/exams/get' : `api/website/exams/get?stream_id=${id}`;
+            const response = await axios.get(url, { params: roleparams });
             if (response.data.status === 1) {
                 setExamsData(prevState => ({
                     ...prevState,
@@ -63,7 +56,6 @@ const BrowsebyCategorySec = () => {
             console.error('Error fetching exams:', error);
         }
     }, []);
-
 
     const getnews = useCallback(async () => {
         try {
@@ -94,13 +86,6 @@ const BrowsebyCategorySec = () => {
         setCurrentPage(1);
     };
 
-    const handleSubmit = async (values, { resetForm }) => {
-        alert('Successfully Submitted');
-        resetForm();
-    };
-
-   
-
     const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
     const totalExams = examsData[activeTab]?.length || 0;
     const totalPages = Math.ceil(totalExams / examsPerPage);
@@ -126,23 +111,13 @@ const BrowsebyCategorySec = () => {
                                 <div className="row ">
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row">
-                                            {/* {currentExams.map((exam, index) => (
-                                                <ExamCard key={index} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
-                                            ))} */}
-
-                                        {activeTab === 'all' ? (
-                                            // Map over all exams data
-                                            Object.values(examsData).map(exams => (
-                                                exams.map((exam, index) => (
+                                        {currentExams.length > 0 ? (
+                                                currentExams.map((exam, index) => (
                                                     <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
                                                 ))
-                                            ))
-                                        ) : (
-                                            // Map over current exams data based on the active tab
-                                            currentExams.map((exam, index) => (
-                                                <ExamCard key={index} id={exam.id}  cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
-                                            ))
-                                        )}
+                                            ) : (
+                                                <div className="text-center mb-5">No data</div>
+                                            )}
                                         </div>
                                         <div className='d-flex justify-content-center'>
                                             <nav aria-label="Page navigation example">

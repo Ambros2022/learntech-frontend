@@ -178,10 +178,10 @@ const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
         <small>Sign up with social media</small>
       </div>
       <div className="d-flex justify-content-between mb-3 flex-wrap">
-        <GoogleLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        {/* <GoogleLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
         <FacebookLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
         <LinkedInLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
-        <TwitterLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        <TwitterLoginButton onSuccess={handleSuccess} onFailure={handleFailure} /> */}
       </div>
       <div className='text-black mb-3 text-center'>
         <small>Already have an account? <span className='text-blue fw-bold'>Log In</span></small>

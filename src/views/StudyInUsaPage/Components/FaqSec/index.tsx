@@ -95,3 +95,4 @@ function FaqSec() {
 }
 
 export default FaqSec
+

@@ -67,9 +67,8 @@ function PopularCourses() {
     // CardComponent function
     function CardComponent({ id, title, date }: { id: number; title: string; date: string }) {
         return (
-            
             <div className='topCourseConCarousel'>
-                 <a href={`/exam/${id}/${title}`} >
+                 <a href={`/exam/${id}/${title}`} className='stretch-link'>
                 <div className="card text-center d-flex mx-2 border-0">
                    
                         <div className="row flex-fill">
