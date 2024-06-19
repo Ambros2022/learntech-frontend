@@ -1,26 +1,26 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import CategoryCarousel from './CategoryCarousel'; // Adjust the import path as necessary
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import NewsList from '../newsList';
 import ExamCard from '../ExamCardList';
 import axios from 'src/configs/axios';
 import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 const BrowsebyCategorySec = () => {
     const [items, setItems] = useState<{ id: string; title: string }[]>([]);
     const [examsData, setExamsData] = useState({});
     const [newsData, setNewsData] = useState([]);
+    const isMountedRef = useIsMountedRef();
 
     const [activeTab, setActiveTab] = useState('');
+    // const [currentExams, setCurrentExams] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const examsPerPage = 12;
+    const [totalPages, setTotalPages] = useState(1);
+    const examsPerPage = 1;
 
     const getCategoriesData = useCallback(async () => {
         try {
-          
             const response = await axios.get('api/website/stream/get');
-         
             if (response.data.status === 1) {
                 const categories = response.data.data.map(category => ({
                     id: category.id,
@@ -35,40 +35,37 @@ const BrowsebyCategorySec = () => {
         } catch (error) {
             console.error('Error fetching categories:', error);
         }
-    }, []);
+    }, [isMountedRef]);
 
-    const getExamsData = useCallback(async (id) => {
+    const getExamsData = useCallback(async (id, page = 1) => {
         try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 1;
+            const roleparams = { page, size: examsPerPage };
             const url = id === 'all' ? 'api/website/exams/get' : `api/website/exams/get?stream_id=${id}`;
             const response = await axios.get(url, { params: roleparams });
+
             if (response.data.status === 1) {
                 setExamsData(prevState => ({
                     ...prevState,
                     [id]: response.data.data
                 }));
+                setTotalPages(response.data.totalPages); // Set total pages from API response
             } else {
                 console.error('Failed to fetch exams');
             }
         } catch (error) {
             console.error('Error fetching exams:', error);
         }
-    }, []);
+    }, [examsPerPage , isMountedRef]);
 
     const getnews = useCallback(async () => {
         try {
             const roleparams = { page: 1, size: 10000 };
             const response = await axios.get('/api/website/news/get', { params: roleparams });
-
-
             setNewsData(response.data.data);
         } catch (err) {
             console.error(err);
         }
-    }, []);
-
+    }, [isMountedRef]);
 
     useEffect(() => {
         getCategoriesData();
@@ -77,21 +74,41 @@ const BrowsebyCategorySec = () => {
 
     useEffect(() => {
         if (activeTab) {
-            getExamsData(activeTab);
+            getExamsData(activeTab, currentPage);
         }
-    }, [activeTab, getExamsData]);
+    }, [activeTab, currentPage, getExamsData]);
 
     const handleTabClick = (id) => {
         setActiveTab(id);
         setCurrentPage(1);
     };
 
-    const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
-    const totalExams = examsData[activeTab]?.length || 0;
-    const totalPages = Math.ceil(totalExams / examsPerPage);
+    const handlePreviousPage = () => {
+        setCurrentPage(prevPage => {
+            const newPage = Math.max(prevPage - 1, 1);
+            getExamsData(activeTab, newPage); // Fetch new data for the previous page
+            return newPage;
+        });
+    };
+    
+    const handleNextPage = () => {
+        setCurrentPage(prevPage => {
+            const newPage = Math.min(prevPage + 1, totalPages);
+            getExamsData(activeTab, newPage); // Fetch new data for the next page
+            return newPage;
+        });
+    };
+    
+    const handlePageClick = (page) => {
+        setCurrentPage(page);
+        getExamsData(activeTab, page); // Fetch data for the clicked page
+    };
+    
+    // const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
 
-    const handlePreviousPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
-    const handleNextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
+    const currentExams = examsData[activeTab] || [];
+
+    const totalExams = examsData[activeTab]?.length || 0;
 
     return (
         <section className='bg-white'>
@@ -112,8 +129,8 @@ const BrowsebyCategorySec = () => {
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row">
                                         {currentExams.length > 0 ? (
-                                                currentExams.map((exam, index) => (
-                                                    <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                        currentExams.map((exam, index) => (
+                                        <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
                                                 ))
                                             ) : (
                                                 <div className="text-center mb-5">No data</div>
@@ -129,7 +146,7 @@ const BrowsebyCategorySec = () => {
                                                     </li>
                                                     {Array.from({ length: totalPages }, (_, index) => (
                                                         <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                                                            <button className="page-link" onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
+                                                            <button className="page-link" onClick={() => handlePageClick(index + 1)}>{index + 1}</button>
                                                         </li>
                                                     ))}
                                                     <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>

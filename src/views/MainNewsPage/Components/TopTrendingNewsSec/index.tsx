@@ -1,55 +1,67 @@
 import Image from 'next/image'
-import React from 'react'
-import Carousel3 from 'src/@core/components/carousel3';
+import React, { useEffect, useState, useCallback, useRef } from 'react'
+import axios from 'src/configs/axios';
+import Carousel3 from 'src/@core/components/carousel3'
+
+
+interface NewsItem {
+    title: string
+    description: string
+    imageUrl: string
+    id: any
+}
 
 const TopTrendingNews = () => {
-    // Array of news items
-    const newsItems = [
-        {
-            title: "JEE Mains Result Release Date Session 2024",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo...",
-            imageUrl: "/images/icons/newsPageImg.jpg"
-        },
-        {
-            title: "New Education Policy Announced",
-            description: "The government has announced a new education policy to revamp the current educational system...",
-            imageUrl: "/images/icons/newsPageImg.jpg"
-        },
-        {
-            title: "Tech Giants Lay Off Thousands",
-            description: "In a shocking move, several major tech companies have announced significant layoffs...",
-            imageUrl: "/images/icons/newsPageImg.jpg"
-        },
-        {
-            title: "Tech Giants Lay Off Thousands",
-            description: "In a shocking move, several major tech companies have announced significant layoffs...",
-            imageUrl: "/images/icons/newsPageImg.jpg"
-        }
-        // Add more news items as needed
-    ];
+   const [newsItems, setNewsItems] = useState<NewsItem[]>([])
+   
 
-    // Function to generate news cards
-    const newsCards =
-        newsItems.map((news, index) => (
-            <div className="col-8 col-md-10 mx-auto mb-1">
-                <div key={index} className="card h-100 d-flex flex-fill">
-                    <Image
-                        src={news.imageUrl}
-                        width={400}
-                        height={300}
-                        layout="responsive"
-                        quality={75}
-                        className="card-img-top"
-                        alt={news.title}
-                    />
-                    <div className="card-body">
-                        <h6 className="card-title fw-bold">{news.title}</h6>
-                        {/* <p className="card-text">{news.description}</p> */}
-                    </div>
+    const getNewsdata = useCallback(async () => {
+        try {
+            const response = await axios.get('api/website/news/get')
+          
+                const newsData = response.data.data.map(news => ({
+                    id: news.id,
+                    title: news.name,
+                    description: news.meta_description,
+                    imageUrl: `${process.env.NEXT_PUBLIC_IMG_URL}/${news.banner_image}`
+
+                    
+                }))
+                setNewsItems(newsData)
+            
+        } catch (error) {
+            console.error('Failed to fetch news data:', error)
+        }
+    }, [])
+
+    useEffect(() => {
+       
+        getNewsdata()
+       
+    }, [getNewsdata])
+
+    const newsCards = newsItems.map(news => (
+        <div key={news.id} className="col-8 col-md-10 mx-auto mb-1">
+            <div className="card h-100 d-flex flex-fill">
+                <Image
+                    src={news.imageUrl}
+                    width={400}
+                    height={300}
+                    layout="responsive"
+                    quality={75}
+                    className="card-img-top"
+                    alt={news.title}
+                />
+                <div className="card-body">
+                    <a href={`/news-1/${news.id}/${encodeURIComponent(news.title)}`}>
+                        <h6 className="card-title fw-bold text-truncate">{news.title}</h6>
+                    </a>
+                    <p className="card-text text-truncate">{news.description}</p>
                 </div>
             </div>
-        ));
-
+        </div>
+    ));
+    
     return (
         <>
             <section className='topnewsSec bg-white py-5'>

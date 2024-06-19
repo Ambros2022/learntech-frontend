@@ -10,6 +10,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
+
 function MainCollegePage() {
     const router = useRouter()
     const isMountedRef = useIsMountedRef();

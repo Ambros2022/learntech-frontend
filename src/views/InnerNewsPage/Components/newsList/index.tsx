@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 
 // NewsItem component
-const NewsItem = ({ imageSrc, text }) => (
+const NewsItem = ({ imageSrc, name }) => (
     <div className="col-12">
         <div className="card mb-3">
             <div className="row g-0">
@@ -11,7 +11,7 @@ const NewsItem = ({ imageSrc, text }) => (
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <small className="card-text">{text}</small>
+                        <small className="card-text">{name}</small>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@ const NewsList = ({ newsItems }) => (
         <h5 className='fw-bold text-center py-3 text-blue'>Other Trending News</h5>
         <div className="row">
             {newsItems.map((item, index) => (
-                <NewsItem key={index} imageSrc={item.imageSrc} text={item.text} />
+                <NewsItem key={index} imageSrc={item.imageSrc} name={item.name} />
             ))}
         </div>
     </div>

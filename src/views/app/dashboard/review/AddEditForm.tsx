@@ -71,7 +71,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let url = 'api/admin/review/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('current_url', data.current_url);
             formData.append('name', data.name);
             formData.append('content', data.content);
            
@@ -151,7 +150,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
                  
-                    <Grid item xs={12} sm={12}>
+                    {/* <Grid item xs={12} sm={12}>
                         <Controller
                             name='current_url'
                             control={control}
@@ -172,7 +171,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                  
+                   */}
                     <Grid item xs={12}>
                         {error ? <Alert severity='error'>{error}</Alert> : null}
                     </Grid>

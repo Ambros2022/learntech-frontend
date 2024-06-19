@@ -1464,11 +1464,11 @@
     height: 300px !important;
   }
 
-  .collegeBannerCon>.position-relative img {
+  /* .collegeBannerCon>.position-relative img {
     object-fit: cover !important;
     width: 100% !important;
     height: 300px !important;
-  }
+  } */
 
   /* College Filter Section */
   .bg-skyBlue {
@@ -2840,7 +2840,7 @@
 
   .ExpertCon input {
     background-color: transparent !important;
-    color: white !important;
+    color: black !important;
   }
 
   .ExpertCon option {
@@ -3500,7 +3500,7 @@
     object-fit: cover;
   }
 
-  .newsBannerSec input {
+  /* .newsBannerSec input {
     background-color: rgba(255, 255, 255, 0.2) !important;
     padding: 10px !important;
     margin: 10px 0px !important;
@@ -3511,7 +3511,7 @@
   .newsBannerSec input::placeholder {
     color: white !important;
     font-size: 20px !important;
-  }
+  } */
 
   .topnewsSec .card-text {
     display: -webkit-box !important;
@@ -4695,4 +4695,11 @@
       border: 1px solid #254692;
       border-radius: 5px;
     }
+  }
+
+
+  .typographypopup{
+    font-size: 17px !important;
+    color: #254692 !important;
+    font-weight: 700 !important; 
   }
