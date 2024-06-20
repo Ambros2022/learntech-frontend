@@ -1,19 +1,18 @@
 import { ReactNode } from 'react'
+import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 
 // ** Layout Import
-import FrontLayout from 'src/@core/layouts/FrontLayout'
-import MainNewsPage from 'src/views/MainNewsPage'
-import MedicalStudioPage from 'src/views/MedicalEduStudioPage'
+import MedicalEduStudioPage from 'src/views/MeidcalEduStudioPage'
 
 
 const meds = () => {
     return <>
-        <MedicalStudioPage />
+        <MedicalEduStudioPage />
     </>
 }
 
-meds.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+meds.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
 
 meds.guestGuard = true
 

@@ -254,7 +254,7 @@ function BannerSection() {
                         <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                       </div>
                       <div className="mb-3">
-                        <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
+                        <Field type="text" name="course" placeholder="Course in mind" className="form-control" />
                         <ErrorMessage name="course" component="div" className="error text-danger" />
                       </div>
                       <div className="mb-3">

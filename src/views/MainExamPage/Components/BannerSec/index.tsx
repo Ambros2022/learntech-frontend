@@ -79,10 +79,10 @@ function BannerSection() {
 
     return (
         <>
-            <section className='collegeBannerCon bg-blue examsBannerCon'>
+            <section className='collegeBannerCon bg-blue examBannerCon'>
             <div className="position-relative">
           <div>
-            <Image src='/images/icons/Banner BG.png' width={1200} height={420} alt='banner-img' className='position-relative w-100' />
+            <Image src='/images/icons/Banner BG.png' width={1400} height={430} alt='banner-img' className='position-relative w-100' />
           </div>
           <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
                 <div className='d-flex justify-content-center w-100 '>

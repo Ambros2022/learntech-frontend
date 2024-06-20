@@ -9,7 +9,7 @@ function ExploreSection() {
   const [activeTab, setActiveTab] = useState('Colleges');
   const [data, setData] = useState([]);
   const [visibleCount, setVisibleCount] = useState(0);
-  const [datasize, setDatasize] = useState(12);
+  const [datasize, setDatasize] = useState(18);
 
   const fetchData = useCallback(async () => {
 
