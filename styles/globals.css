@@ -4767,6 +4767,9 @@
     margin-bottom: 20px !important;
     font-size: 18px !important;
   }
+  .siteMapSec li a:hover{
+    color: #274896 !important;
+  }
   @media (min-width:993px) and (max-width:1024px) {
     .testimonialCarousel .carousel-button-group {
       position: absolute !important;
