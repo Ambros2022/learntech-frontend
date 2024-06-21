@@ -151,7 +151,7 @@ const Header = () => {
             //@ts-ignore
             strongElements[i].parentNode.replaceChild(container, strongElements[i]);
             const root = createRoot(container);
-            root.render(<EditorEnquiryForm />);
+            root.render(<EditorEnquiryForm  className="applyNowButton btn btn-sm "/>);
           }
         }
       };
