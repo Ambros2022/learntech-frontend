@@ -57,7 +57,7 @@ function OverviewSection({ data, collegedata, examdata }) {
               <div className="row imgCardConCrs mb-3">
                 <div className="col-12 mb-3 px-0">
                   <div className='dental-crs-img flex-column d-flex justify-content-center'>
-                    <Image src='/images/icons/dental-course-img.jpg' className='' width={100} height={100} alt="dental-course-img" />
+                    <Image src='/images/icons/dental-course-img.jpg' className='' width={300} height={300} alt="dental-course-img" />
                     <small className='text-center mb-3'>Are you interested in this course?</small>
                     <GlobalEnquiryForm className="mb-3 btn chkEligBtn" buttonText="Check Elgibility" />
                     {/* <button className='mb-3 btn chkEligBtn'>Check Elgibility</button> */}
@@ -69,9 +69,9 @@ function OverviewSection({ data, collegedata, examdata }) {
                     {collegedata.map((val, ind) => (
                       <Link href={`/college/${val.id}/${val.slug}`} >
                         <div key={ind} className="card p-2 mb-3 d-flex flex-row">
-                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.banner_image}`} width={90} height={60} alt={val.name}
+                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.banner_image}`} className='img-fluid' width={90} height={60} alt={val.name}
                           />
-                          <small className='align-content-center text-black mx-2'>{val.name}</small>
+                          <h6 className='align-content-center text-black mx-2'>{val.name}</h6>
                         </div>
                       </Link>
                     ))}
@@ -84,9 +84,9 @@ function OverviewSection({ data, collegedata, examdata }) {
                     {examdata.map((val, ind) => (
                       <Link href={`/exam/${val.id}/${val.slug}`} >
                         <div key={ind} className="card p-2 mb-3 d-flex flex-row">
-                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.cover_image}`} width={90} height={60} alt={val.exam_title}
+                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.cover_image}`} className='img-fluid' width={90} height={60} alt={val.exam_title}
                           />
-                          <small className='align-content-center text-black mx-2'>{val.exam_title}</small>
+                          <h6 className='align-content-center text-black mx-2'>{val.exam_title}</h6>
                         </div>
                       </Link>
                     ))}

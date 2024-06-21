@@ -47,8 +47,8 @@ const PromoAddBanner = ({ url }) => {
   return (
     <>
       <section className='bg-skyBlue addBanner rounded'>
-        <div className="container p-5">
-          <div className="card">
+        <div className="container row p-5">
+          <div className="card col-md-12 col-lg-9 col-xl-10 mx-auto p-0">
             <div className="row g-0">
               <div className="col-md-4 addImgClg position-relative">
                 <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />

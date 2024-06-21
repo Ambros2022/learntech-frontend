@@ -140,10 +140,10 @@ function BannerSection() {
                       )}
                     />
                   </div>
+                </div>
                   <div className="col-md-5 mb-3">
                     <GlobalEnquiryForm className="btn collegeApplyNow" />
                   </div>
-                </div>
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ function FaqSec() {
           <div className="row faqImgCon">
             <div className="col-md-6 faqImgSec mb-3 rounded d-flex flex-fill">
               <div className='bg-skyBlue rounded text-center'>
-                <Image src="/images/icons/faqImage.jpg" className='rounded w-100 h-100 img-fluid px-md-0' style={{ objectFit: 'cover' }} width={500} height={500} alt='faq-img' />
+                <Image src="/images/icons/FAQ-Banner.webp" className='rounded w-100 h-100 img-fluid px-md-0' style={{ objectFit: 'cover' }} width={500} height={500} alt='faq-img' />
               </div>
             </div>
             <div className="col-md-6 mb-3 rounded ">
@@ -84,9 +84,6 @@ function FaqSec() {
                       </p>
                     </div>
                   </div>
-                </div>
-                <div className="mb-3 mb-md-0 boxForAccordion d-md-flex d-none flex-fill">
-                  <h1>.</h1>
                 </div>
               </div>
             </div>
