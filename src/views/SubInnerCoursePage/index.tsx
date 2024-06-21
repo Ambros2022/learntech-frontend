@@ -7,7 +7,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import ExpertSection from '../InnerCoursePage/Components/ExpertSection';
+import ExpertSection from './Components/ExpertSection';
 
 function SubInnerCoursePage({ Streamid, Courseslug }) {
   const router = useRouter();
@@ -93,8 +93,9 @@ function SubInnerCoursePage({ Streamid, Courseslug }) {
   }, [getPagedata]);
   return (
     <>
-      <BannerSection />
-      <OverviewSection />
+      {!loading && pagedata && <BannerSection data={pagedata} />}
+      {!loading && pagedata && <OverviewSection data={pagedata} />}
+      {/* <OverviewSection /> */}
       <PopularCourses />
       <ExpertSection />
     </>

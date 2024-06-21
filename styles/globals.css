@@ -2347,8 +2347,8 @@
   }
 
   .dental-crs-img img {
-    height: 60%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
     margin: auto;
   }
 
@@ -2386,7 +2386,7 @@
 
   .topCarouselCardsCon .carousel-button-group {
     position: absolute !important;
-    top: 15px !important;
+    top: 50px !important;
     width: 100%;
   }
 

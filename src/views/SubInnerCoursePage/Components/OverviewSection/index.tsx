@@ -1,57 +1,63 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import React from 'react'
+const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
-function OverviewSection() {
+
+function OverviewSection({ data }) {
+
+  const renderContent = (content) => (
+    <div className="row">
+      <div className="order-2 order-md-1 col-md-8 text-black pt-3">
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+      </div>
+
+    </div>
+  );
+
   return (
     <>
       <section className='clgInfoSec bg-white'>
         <div className="container">
           <div className="pt-1 gap-3 text-center justify-content-center justify-content-md-start d-flex flex-fill flex-wrap infoBtn " id="nav-tab" role="tablist">
-            <button className='active mb-3 btn' id="nav-Overview-tab" data-bs-toggle="tab" data-bs-target="#nav-Overview" type="button" role="tab" aria-controls="nav-Overview" aria-selected="true">Overview</button>
-            <button className='mb-3 btn' id="nav-Syllabus-tab" data-bs-toggle="tab" data-bs-target="#nav-Syllabus" type="button" role="tab" aria-controls="nav-Syllabus" aria-selected="false">Syllabus</button>
-            <button className='mb-3 btn' id="nav-Admissions-tab" data-bs-toggle="tab" data-bs-target="#nav-Admissions" type="button" role="tab" aria-controls="nav-Admissions" aria-selected="false">Admissions</button>
-            <button className='mb-3 btn' id="nav-Career-tab" data-bs-toggle="tab" data-bs-target="#nav-Career" type="button" role="tab" aria-controls="nav-Career" aria-selected="false">Career Opportunities</button>
-            <button className='mb-3 btn' id="nav-Top-tab" data-bs-toggle="tab" data-bs-target="#nav-Top" type="button" role="tab" aria-controls="nav-Top" aria-selected="false">Top Colleges</button>
-            <button className='mb-3 btn' id="nav-FAQ-tab" data-bs-toggle="tab" data-bs-target="#nav-FAQ" type="button" role="tab" aria-controls="nav-fee" aria-selected="false">FAQ</button>
+            {data.description && data.description !== 'null' && <button className='active mb-3 btn' id="nav-Overview-tab" data-bs-toggle="tab" data-bs-target="#nav-Overview" type="button" role="tab" aria-controls="nav-Overview" aria-selected="true">Overview</button>}
+            {data.syllabus && data.syllabus !== 'null' && <button className='mb-3 btn' id="nav-Syllabus-tab" data-bs-toggle="tab" data-bs-target="#nav-Syllabus" type="button" role="tab" aria-controls="nav-Syllabus" aria-selected="false">Syllabus</button>}
+            {data.admissions && data.admissions !== 'null' && <button className='mb-3 btn' id="nav-Admissions-tab" data-bs-toggle="tab" data-bs-target="#nav-Admissions" type="button" role="tab" aria-controls="nav-Admissions" aria-selected="false">Admissions</button>}
+            {data.career_opportunities && data.career_opportunities !== 'null' && <button className='mb-3 btn' id="nav-Career-tab" data-bs-toggle="tab" data-bs-target="#nav-Career" type="button" role="tab" aria-controls="nav-Career" aria-selected="false">Career Opportunities</button>}
+            {data.top_college && data.top_college !== 'null' && <button className='mb-3 btn' id="nav-Top-tab" data-bs-toggle="tab" data-bs-target="#nav-Top" type="button" role="tab" aria-controls="nav-Top" aria-selected="false">Top Colleges</button>}
+            {data.generalcoursefaqs && data.generalcoursefaqs.length > 0 && <button className='mb-3 btn' id="nav-FAQ-tab" data-bs-toggle="tab" data-bs-target="#nav-FAQ" type="button" role="tab" aria-controls="nav-fee" aria-selected="false">FAQ</button>}
           </div>
           <div className="row">
             <div className="col-lg-9 col-md-8">
               <div className="tab-content" id="nav-tabContent">
                 <div className="tab-pane fade show active" id="nav-Overview" role="tabpanel" aria-labelledby="nav-Overview-tab">
-                  <div className="row">
-                    <div className="text-black mb-5 pe-5">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br></br><br></br>
-                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br></br><br></br>
-                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br></br><br></br>
-                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br></br><br></br>
-                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua<br></br><br></br>
-                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br></br><br></br>
-                    </div>
-
-                  </div>
+                  {renderContent(data.description)}
                 </div>
                 <div className="tab-pane fade" id="nav-Syllabus" role="tabpanel" aria-labelledby="nav-Syllabus-tab">
-                  ...
+                  {renderContent(data.syllabus)}
                 </div>
                 <div className="tab-pane fade" id="nav-Admissions" role="tabpanel" aria-labelledby="nav-Admissions-tab">
-                  ...
+                  {renderContent(data.admissions)}
                 </div>
                 <div className="tab-pane fade" id="nav-Career" role="tabpanel" aria-labelledby="nav-Career-tab">
-                  ...
+                  {renderContent(data.career_opportunities)}
                 </div>
                 <div className="tab-pane fade" id="nav-Top" role="tabpanel" aria-labelledby="nav-Top-tab">
-                  ...
+                  {renderContent(data.top_college)}
                 </div>
-                <div className="tab-pane fade" id="nav-FAQ" role="tabpanel" aria-labelledby="nav-FAQ-tab">...</div>
+                <div className="tab-pane fade" id="nav-FAQ" role="tabpanel" aria-labelledby="nav-FAQ-tab">
+                  <FaqSec data={data.generalcoursefaqs} />
+                </div>
               </div>
             </div>
             <div className="col-md-4 col-lg-3 mb-md-5 mx-auto px-0">
               <div className="row imgCardConCrs mb-3">
                 <div className="col-12 mb-3 px-0">
                   <div className='dental-crs-img flex-column d-flex justify-content-center'>
-                    <Image src='/images/icons/dental-course-img.jpg' className='' width={300} height={300} alt="dental-course-img" />
-                    <small className='text-center mb-3'>Are you interested in this course?</small>
-                    <button className='mb-3 btn chkEligBtn'>Check Elgibility</button>
+                    <Image src='/images/icons/dental-course-img.jpg' className='' width={150} height={150} alt="dental-course-img" />
+                    <h6 className='text-center mb-3'>Are you interested in this course?</h6>
+                    <GlobalEnquiryForm className="chkEligBtn mb-3 btn" buttonText={'Check Elgibility'} />
                   </div>
                 </div>
                 <div className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll bg-skyBlue" style={{ height: '460px' }}>
