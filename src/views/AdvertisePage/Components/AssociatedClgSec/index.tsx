@@ -22,7 +22,7 @@ const AssociatedClg = () => {
         }
     }, []);
 
-    console.log("colleges", colleges)
+
 
     useEffect(() => {
 

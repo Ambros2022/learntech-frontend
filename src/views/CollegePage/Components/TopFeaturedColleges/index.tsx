@@ -21,7 +21,7 @@ function FeaturedCollegeSection() {
     }
   }, []);
 
-  console.log("colleges", colleges)
+
 
   useEffect(() => {
 
