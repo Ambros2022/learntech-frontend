@@ -85,80 +85,80 @@ function BannerSection() {
             <Image src='/images/icons/Banner BG.png' width={1400} height={430} alt='banner-img' className='position-relative w-100' />
           </div>
           <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
-                <div className='d-flex justify-content-center w-100 '>
-                    <div className='align-content-center w-100 container'>
-                        <h1 className='fw-bold text-center text-white mb-3 mt-4'>
-                            Entrance Exams in India
-                        </h1>
-                        <div className="row justify-content-center align-items-center">
-                        <div className="col-md-7 col-12 mb-3 ">
-                            <Autocomplete
-                            open={open}
-                            onClose={() => setOpen(false)}
-                            onInputChange={handleInputChange}
-                            options={searchResults}
-                            getOptionLabel={(option: SearchResult) => option.exam_title}
-                            renderOption={(props, option: SearchResult) => (
-                                <li {...props}>
-                                <Link
-                                    href={`/exam/${option.id}/${option.exam_title}`}
-                                    style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
-                                >
-                                    {option.exam_title}
-                                </Link>
-                                </li>
-                            )}
-                            renderInput={(params) => (
-                                <TextField
-                                {...params}
-                                placeholder="Search for Entrance Exam"
-                                className='form-control'
-                                InputProps={{
-                                    ...params.InputProps,
-                                    startAdornment: (
-                                    <InputAdornment position="start">
-                                        <SearchIcon />
-                                    </InputAdornment>
-                                    ),
-                                
-                                    endAdornment: (
-                                    <>
-                                        {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                        {params.inputProps.value ? (
-                                        <InputAdornment position="end">
-                                            <IconButton onClick={() => handleClearInput(params)}>
-                                            <ClearIcon />
-                                            </IconButton>
-                                        </InputAdornment>
-                                        ) : null}
-                                        {params.InputProps.endAdornment}
-                                    </>
-                                    ),
-                                }}
-                                />
-                            )}
-                            
-                            
-                            />
-                            </div>
-                        </div>
-                        <div className="row text-white text-md-start text-center pt-3 mb-3">
-                            <h2>Upcoming Exams</h2>
-                        </div>
-                        <PopularCourses />
-                        <div className='text-md-end text-center pt-3'>
-                            {/* <button className='btn  alertExamBtn'>Get Exams Alert</button> */}
-                            <GlobalEnquiryForm 
-                                        buttonText="Get Exams Alert" 
-                                        className="btn alertExamBtn" 
-                                    />
-                        </div>
-                    </div>
+            <div className='d-flex justify-content-center w-100 '>
+              <div className='align-content-center w-100 container'>
+                <h1 className='fw-bold text-center text-white mb-3 mt-4'>
+                  Entrance Exams in India
+                </h1>
+                <div className="row justify-content-center align-items-center">
+                  <div className="col-md-7 col-12 mb-3 ">
+                    <Autocomplete
+                      open={open}
+                      onClose={() => setOpen(false)}
+                      onInputChange={handleInputChange}
+                      options={searchResults}
+                      getOptionLabel={(option: SearchResult) => option.exam_title}
+                      renderOption={(props, option: SearchResult) => (
+                        <li {...props}>
+                          <Link
+                            href={`/exam/${option.id}/${option.exam_title}`}
+                            style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
+                          >
+                            {option.exam_title}
+                          </Link>
+                        </li>
+                      )}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          placeholder="Search for Entrance Exam"
+                          className='form-control'
+                          InputProps={{
+                            ...params.InputProps,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <SearchIcon />
+                              </InputAdornment>
+                            ),
+
+                            endAdornment: (
+                              <>
+                                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                {params.inputProps.value ? (
+                                  <InputAdornment position="end">
+                                    <IconButton onClick={() => handleClearInput(params)}>
+                                      <ClearIcon />
+                                    </IconButton>
+                                  </InputAdornment>
+                                ) : null}
+                                {params.InputProps.endAdornment}
+                              </>
+                            ),
+                          }}
+                        />
+                      )}
+
+
+                    />
+                  </div>
                 </div>
+                <div className="row text-white text-md-start text-center pt-3 mb-3">
+                  <h2>Upcoming Exams</h2>
                 </div>
+                <PopularCourses />
+                <div className='text-md-end text-center pt-3'>
+                  {/* <button className='btn  alertExamBtn'>Get Exams Alert</button> */}
+                  <GlobalEnquiryForm
+                    buttonText="Get Exams Alert"
+                    className="btn alertExamBtn"
+                  />
                 </div>
-            </section>
-         
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </>
   )
 }

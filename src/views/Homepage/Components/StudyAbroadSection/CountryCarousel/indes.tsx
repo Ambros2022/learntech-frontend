@@ -26,10 +26,10 @@ const CountryCarosuel = ({ items }) => {
   const ButtonGroup = ({ next, previous }: any) => {
     return (
       <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
-        <span className='fi-left' onClick={previous}>
+        <span className='fi-left' onClick={previous} style={{ cursor: "pointer" }}>
           <FiChevronLeft />
         </span>
-        <span className='fi-right' onClick={next}>
+        <span className='fi-right' onClick={next} style={{ cursor: "pointer" }}>
           <FiChevronRight />
         </span>
       </div>

@@ -64,7 +64,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                   </div>
                 </div>
                 {collegedata && collegedata.length > 0 && (
-                  <div   key="e2" className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll text-center" style={{ height: '460px' }}>
+                  <div   key="e2" className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll text-center bg-skyBlue" style={{ height: '460px' }}>
                     <h5 className='fw-bold text-blue pt-3 mb-3'>Top {data.name} Colleges</h5>
                     {collegedata.map((val, ind) => (
                       <Link href={`/college/${val.id}/${val.slug}`} >
@@ -79,7 +79,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                 )}
 
                 {examdata && examdata.length > 0 && (
-                  <div  key="eee2" className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll text-center" style={{ height: '460px' }}>
+                  <div  key="eee2" className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll text-center bg-skyBlue" style={{ height: '460px' }}>
                     <h5 className='fw-bold text-blue pt-3 mb-3'>Top {data.name} Exams</h5>
                     {examdata.map((val, ind) => (
                       <Link href={`/exam/${val.id}/${val.slug}`} >
