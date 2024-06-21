@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 
-
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
 import MainNewsPage from 'src/views/MainNewsPage'

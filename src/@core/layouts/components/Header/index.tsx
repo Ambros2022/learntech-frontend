@@ -326,6 +326,12 @@ const Header = () => {
 
                     </li>
                     <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/blogs">
+                        Blogs
+                      </Link>
+
+                    </li>
+                    <li>
                       <Link className="d-flex justify-content-between dropdown-item" href="/boards">
                         Boards
                       </Link>

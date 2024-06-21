@@ -1,12 +1,56 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import NewsList from '../newsList';
 import Link from 'next/link';
+import axios from 'src/configs/axios';
+
+interface NewsItem {
+    id: number;
+    name: string;
+    banner_image: string;
+    meta_description: string;
+    category_id: string;
+}
+
+interface GroupedNewsItems {
+    [key: string]: NewsItem[];
+}
 
 const BrowseNewsSec = () => {
     const [activeTab, setActiveTab] = useState('All');
     const [currentPage, setCurrentPage] = useState(1);
     const [newsPerPage] = useState(6); // Number of news items per page
+    const [newsItems, setNewsItems] = useState<GroupedNewsItems>({});
+    const [categories, setCategories] = useState<string[]>([]);
+    
+    useEffect(() => {
+        // Fetch the news data from the API
+        const fetchNews = async () => {
+            try {
+                const response = await axios.get('api/website/news/get');
+                const data = response.data.data;
+                
+                // Group news items by category
+                const groupedNews = data.reduce((acc, newsItem) => {
+                    const category = newsItem.category_id;
+                    if (!acc[category]) acc[category] = [];
+                    acc[category].push(newsItem);
+                    return acc;
+                }, {});
+
+                // Adding 'All' category with all news items
+               
+
+                setNewsItems(groupedNews);
+                setCategories(['All', ...Object.keys(groupedNews)]);
+                groupedNews['All'] = data;
+            } catch (error) {
+                console.error('Error fetching news data:', error);
+            }
+        };
+
+        fetchNews();
+    }, []);
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
@@ -18,74 +62,7 @@ const BrowseNewsSec = () => {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    const newsItems = {
-        'All': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-        'Entrance Exams': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-        'General News': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-        'Admission Alerts': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-        'Result Announcement': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-    };
-
+  
     const newsData = [
         {
             imageSrc: '/images/icons/filter-card.jpg',
@@ -120,7 +97,9 @@ const BrowseNewsSec = () => {
         // Add more news items as needed
     ];
 
-    const currentNews = newsItems[activeTab].slice(indexOfFirstNews, indexOfLastNews);
+    const currentNews = newsItems[activeTab]?.slice(indexOfFirstNews, indexOfLastNews) || [];
+
+   
 
     return (
         <>
@@ -128,8 +107,8 @@ const BrowseNewsSec = () => {
                 <div className="container">
                     <h2 className='fw-bold text-blue text-center mb-3'>Browse News By Category</h2>
                     <div className="d-flex justify-content-center newsTabsClr gap-3 mx-5 flex-wrap flex-row">
-                        {Object.keys(newsItems).map(tabName => (
-                            <button key={tabName} className={`btn ${activeTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>{tabName}</button>
+                    {categories.map(category => (
+                            <button key={category} className={`btn ${activeTab === category ? 'active' : ''}`} onClick={() => handleTabClick(category)}>{category}</button>
                         ))}
                     </div>
                     <div className='row mb-3 mt-5'>
@@ -142,7 +121,7 @@ const BrowseNewsSec = () => {
                                                 <div className="card newsImgSize">
                                                     <Image src="/images/icons/newsPageImg.jpg" width={400} height={400} className="card-img-top" alt="newsImage"></Image>
                                                     <div className="card-body">
-                                                        <h5 className="fw-bold card-title">{item.title}</h5>
+                                                        <h5 className="fw-bold card-title">{item.name}</h5>
                                                         {/* <p className="card-text">{item.description}</p> */}
                                                     </div>
                                                 </div>
@@ -152,7 +131,7 @@ const BrowseNewsSec = () => {
                                 </div>
                             </div>
                             {/* Pagination */}
-                            <div className="d-flex justify-content-center">
+                            {/* <div className="d-flex justify-content-center">
                                 <nav aria-label="Page navigation example">
                                     <ul className="pagination  d-flex gap-3 justify-content-center">
                                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
@@ -172,7 +151,7 @@ const BrowseNewsSec = () => {
                                         </li>
                                     </ul>
                                 </nav>
-                            </div>
+                            </div> */}
 
                         </div>
                         <div className="col-lg-6 col-xl-4 col-md-5">

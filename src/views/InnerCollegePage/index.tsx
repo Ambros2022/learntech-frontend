@@ -3,7 +3,7 @@ import BannerSection from './Components/BannerSection'
 import CollegeInfoSection from './Components/CollegeInfoSection'
 import FacilitiesSection from './Components/FacilitiesSection'
 import LocationSection from './Components/LocateSection'
-import TopFeaturedColleges from '../CollegePage/Components/TopFeaturedColleges'
+import TopFeaturedColleges from './Components/TopFeaturedColleges'
 import ExpertSection from './Components/ExpertSection'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';

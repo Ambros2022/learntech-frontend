@@ -34,6 +34,12 @@ interface College {
 
 function CollegeFilterSection() {
 
+    
+    const router = useRouter();
+    const { state_id } = router.query;
+
+    console.log(state_id, "state_id")
+
     const [colleges, setColleges] = useState<College[]>([]);
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
@@ -193,7 +199,10 @@ function CollegeFilterSection() {
         },
     ];
 
+    const isStateIdAvailable = states.some(state => state.value === state_id);
+    const filteredStates = isStateIdAvailable ? states.filter(state => state.value === state_id) : states;
 
+  
 
     const [visibleCards, setVisibleCards] = useState(6);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
@@ -247,12 +256,7 @@ function CollegeFilterSection() {
             const { state: selectedStateIds = [], courses: selectedCourseIds = [], streams: selectedStreamIds = [],
                 ownership: selectedOwnership = [], courseType: selectedCourseType = [], city: selectedCityIds = [] } = updatedSelected;
 
-            // Filter colleges based on selected filters
-            // const filteredColleges = colleges.filter(college => {
-            //     const ownershipMatch = selectedOwnership.length === 0 || selectedOwnership.includes(college.college_type);
-            //     const courseTypeMatch = selectedCourseType.length === 0 || selectedCourseType.includes(college.course_type);
-            //     return ownershipMatch && courseTypeMatch;
-            // });
+           
 
             // Perform API call with selected filter values
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
@@ -261,11 +265,6 @@ function CollegeFilterSection() {
             return updatedSelected;
         });
     }, 300); // Debounce for 300 milliseconds
-
-    // Use the debounced function in your event handler
-    // const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
-    //     debouncedHandleCheckboxChange(groupId, value, isChecked);
-    // };
 
     const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
         debouncedHandleCheckboxChange(groupId, value, isChecked);
@@ -469,6 +468,13 @@ function CollegeFilterSection() {
         );
     };
 
+
+    const handleCollegeSelect = (collegeId: number) => {
+        const selectedCollege = colleges.find(college => college.id === collegeId);
+        if (selectedCollege) {
+            router.push(`/filtered-college/${selectedCollege.slug}`);
+        }
+    };
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
         const [searchTexts, setSearchTexts] = useState<Record<string, string>>({});

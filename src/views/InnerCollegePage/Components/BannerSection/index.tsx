@@ -5,7 +5,7 @@ function BannerSection({ data }) {
 
   return (
     <>
-      <section className='bg-blue collegeDetailBanner'>
+      <section className='bg-blue collegeDetailBanner py-1'>
         <div className="container">
           <div className="card mb-3 collegeDetailCard">
             <div className="row g-0">
@@ -14,10 +14,10 @@ function BannerSection({ data }) {
                   <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} />
                 </div>
               </div>
-              <div className="col-lg-7 col-xl-8 col-md-10">
+              <div className="col-lg-7 ps-3 col-xl-8 col-md-10">
                 <div className="card-body text-white">
-                  <h1 className="card-title fw-bold ">{data.name}</h1>
-                  <h6 className='mb-2 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{data.address}</h6>
+                  <h1 className="card-title fw-bold mb-3">{data.name}</h1>
+                  <h6 className='mb-3 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{data.address}</h6>
                   <h6 className='mb-3'><i className="text-warning bi bi-trophy-fill me-1"></i><strong>Approved by :&nbsp;</strong>{
                     data.collegerecognitions && data.collegerecognitions.map((element, index) => {
                       return (
@@ -32,7 +32,7 @@ function BannerSection({ data }) {
                 </div>
               </div>
               <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
-                <div className="d-flex gap-2">
+                <div className="d-flex gap-2 justify-content-end">
                   <i className="bi bi-star-fill text-warning"></i>
                   <i className="bi bi-star-fill text-warning"></i>
                   <i className="bi bi-star-fill text-warning"></i>
