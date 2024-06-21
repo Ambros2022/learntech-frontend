@@ -36,14 +36,33 @@ function CollegeFilterSection() {
 
     
     const router = useRouter();
-    const { state_id } = router.query;
-
-    console.log(state_id, "state_id")
-
+    const { state_id , city_id } = router.query;
+   
     const [colleges, setColleges] = useState<College[]>([]);
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
+    const [visibleCards, setVisibleCards] = useState(6);
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
+    
+    const [showScrollButton, setShowScrollButton] = useState(false);
+    const [states, setStates] = useState<Option[]>([]);
+    const [streams, setStreams] = useState<any[]>([]);
+    const [courses, setCourses] = useState<any[]>([]);
+    const [promoban, setPromoban] = useState<any[]>([]);
 
+    const [selectedOptions, setSelectedOptions] = useState({});
+     const [selectedStateIds, setSelectedStateIds] = useState<string[]>([]);
+     const [selectedCityIds, setSelectedCityIds] = useState<string[]>([]);
+
+    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
+        state: true,
+        city: true,
+        streams: true,
+        courses: true,
+        ownership: true,
+        courseType: true
+    });
+    const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
 
     type Option = {
         label: string;
@@ -56,11 +75,7 @@ function CollegeFilterSection() {
         label: string;
         options: Option[];
     };
-    const [showScrollButton, setShowScrollButton] = useState(false);
-    const [states, setStates] = useState<Option[]>([]);
-    const [streams, setStreams] = useState<any[]>([]);
-    const [courses, setCourses] = useState<any[]>([]);
-    const [promoban, setPromoban] = useState<any[]>([]);
+   
 
     // console.log(states, "states")
 
@@ -138,14 +153,15 @@ function CollegeFilterSection() {
             console.error('Error fetching states:', error);
         }
     }, [isMountedRef]);
-
-
+    
     const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[], cityIds?: string[]) => {
         try {
             const params: any = {
                 page: 1,
                 size: 10000
             };
+
+            
             if (stateIds && stateIds.length > 0) params['state_id'] = `[${stateIds.join(',')}]`;
             if (cityIds && cityIds.length > 0) params['city_id'] = `[${cityIds.join(',')}]`;
             if (courseIds && courseIds.length > 0) params['general_course_id'] = `[${courseIds.join(',')}]`;
@@ -170,12 +186,10 @@ function CollegeFilterSection() {
     }, []);
 
 
+
     const options: OptionGroup[] = [
         { id: 'state', label: 'States', options: states },
         { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
-        { id: 'streams', label: 'Streams', options: streams },
-        { id: 'courses', label: 'Courses', options: courses },
-
         {
             id: 'ownership',
             label: 'Ownership',
@@ -186,6 +200,10 @@ function CollegeFilterSection() {
                 { label: 'Government', value: 'Government' }
             ]
         },
+        { id: 'streams', label: 'Streams', options: streams },
+        { id: 'courses', label: 'Courses', options: courses },
+
+        
         {
             id: 'courseType',
             label: 'Course Type',
@@ -199,14 +217,7 @@ function CollegeFilterSection() {
         },
     ];
 
-    const isStateIdAvailable = states.some(state => state.value === state_id);
-    const filteredStates = isStateIdAvailable ? states.filter(state => state.value === state_id) : states;
-
-  
-
-    const [visibleCards, setVisibleCards] = useState(6);
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
-
+ 
 
     const handleViewMore = () => {
         // Check if there are any filtered colleges left to display
@@ -225,14 +236,13 @@ function CollegeFilterSection() {
             });
         });
 
-        // console.log('Filtered Colleges:', filteredColleges);
-        // console.log('Visible Cards:', visibleCards);
+      
 
         // If there are more filtered colleges to show, increment visibleCards
         if (visibleCards < filteredColleges.length) {
             setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
         }
-        // console.log('Updated Visible Cards:', visibleCards);
+        
     };
 
 
@@ -261,12 +271,13 @@ function CollegeFilterSection() {
             // Perform API call with selected filter values
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
             setLoading(true);
-
+            console.log(updatedSelected,"updatedSelected");
             return updatedSelected;
         });
     }, 300); // Debounce for 300 milliseconds
 
-    const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
+    
+    const handleCheckboxChange = (groupId, value, isChecked) => {
         debouncedHandleCheckboxChange(groupId, value, isChecked);
         setCheckboxState(prevState => ({
             ...prevState,
@@ -275,7 +286,78 @@ function CollegeFilterSection() {
                 [value]: isChecked
             }
         }));
+    
+        if (groupId === 'state') {
+            const updatedStateIds = isChecked 
+                ? [...selectedStateIds, value] 
+                : selectedStateIds.filter(id => id !== value);
+    
+            handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
+        }
+    
+        if (groupId === 'city') {
+            const updatedCityIds = isChecked 
+                ? [...selectedCityIds, value] 
+                : selectedCityIds.filter(id => id !== value);
+    
+            handleFilterChange(selectedStateIds.join(','), updatedCityIds.join(','), false);
+        }
     };
+    
+    const handleFilterChange = (stateIds, cityIds, updateStateOnly) => {
+        // Setting state and city IDs directly as comma-separated strings
+        const stateIdsArray = stateIds ? stateIds.split(',').filter(Boolean) : [];
+        const cityIdsArray = cityIds ? cityIds.split(',').filter(Boolean) : [];
+        
+        setSelectedStateIds(stateIdsArray);
+        setSelectedCityIds(cityIdsArray);
+    
+        const path = router.pathname.includes('colleges') ? '/colleges' : '/universities';
+    
+        // Construct query object based on parameters
+        const query = updateStateOnly
+            ? { state_id: stateIds }
+            : { 
+                state_id: stateIds, 
+                ...(cityIds && { city_id: cityIds }) 
+            };
+    
+        // Filter out empty query parameters
+        Object.keys(query).forEach(key => {
+            if (!query[key]) {
+                delete query[key];
+            }
+        });
+    
+        router.push({
+            pathname: path,
+            query: query
+        });
+    
+        setSelectedCheckboxes(setCheckboxState => ({
+            ...setCheckboxState,
+            state: stateIdsArray,
+            city: cityIdsArray,
+        }));
+    
+        setCheckboxState(prevState => ({
+            ...prevState,
+            state: stateIdsArray.reduce((acc, id) => ({ ...acc, [id]: true }), {}),
+            city: cityIdsArray.reduce((acc, id) => ({ ...acc, [id]: true }), {})
+        }));
+    
+        getcollegedata(stateIdsArray, cityIdsArray);
+        setLoading(true);
+    };
+    
+    
+    useEffect(() => {
+        const stateIds = state_id ? (Array.isArray(state_id) ? state_id : [state_id]) : [];
+        const cityIds = city_id ? (Array.isArray(city_id) ? city_id : [city_id]) : [];
+        handleFilterChange(stateIds.join(','), cityIds.join(','), false);
+    }, [state_id, city_id]);
+    
+    
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
         setSelectedCheckboxes(prevSelected => {
@@ -397,26 +479,8 @@ function CollegeFilterSection() {
         );
     }
 
-    const [selectedOptions, setSelectedOptions] = useState({});
 
-    const handleSelect = (sectionId, optionValue) => {
-        setSelectedOptions((prevSelectedOptions) => {
-            const updatedOptions = { ...prevSelectedOptions };
-            updatedOptions[sectionId] = optionValue;
-            return updatedOptions;
-        });
-    };
-
-    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
-        state: true,
-        city: true,
-        streams: true,
-        courses: true,
-        ownership: true,
-        courseType: true
-    });
-    const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
-
+   
 
     const toggleAccordion = (groupId: string) => {
         setAccordionOpen(prevState => ({
@@ -430,7 +494,8 @@ function CollegeFilterSection() {
         options: Option[];
         setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
         selectedCheckboxes: Record<string, string[]>;
-    }> = ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
+    }> = 
+    ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
 
 
         const handleStateButtonClick = (state: string) => {
@@ -466,14 +531,6 @@ function CollegeFilterSection() {
                 </div>
             </div>
         );
-    };
-
-
-    const handleCollegeSelect = (collegeId: number) => {
-        const selectedCollege = colleges.find(college => college.id === collegeId);
-        if (selectedCollege) {
-            router.push(`/filtered-college/${selectedCollege.slug}`);
-        }
     };
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
@@ -577,10 +634,6 @@ function CollegeFilterSection() {
             </>
         );
     };
-
-
-
-
 
 
     // Calculate filtered colleges outside of handleViewMore

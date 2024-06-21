@@ -33,6 +33,7 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                                     query: { state_id: item.id }
                                 }}
                                 className="dropdown-item"
+                             
                                 
                             >
                                 <div className="d-flex justify-content-between">
@@ -49,7 +50,7 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                                             <Link
                                                 className="dropdown-item"
                                                 href={{
-                                                    pathname: type === "College" ? "/colleges" : "/universities",
+                                                    pathname: type === "Colleges"  ? "/colleges" : "/universities",
                                                     query: { city_id: city.id }
                                                 }}
                                             >
