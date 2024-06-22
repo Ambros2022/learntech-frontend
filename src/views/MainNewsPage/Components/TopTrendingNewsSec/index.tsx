@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import axios from 'src/configs/axios';
 import Carousel3 from 'src/@core/components/carousel3'
+import Link from 'next/link';
 
 
 interface NewsItem {
@@ -53,10 +54,10 @@ const TopTrendingNews = () => {
                     alt={news.title}
                 />
                 <div className="card-body">
-                    <a href={`/news-1/${news.id}/${encodeURIComponent(news.title)}`}>
+                    <Link className='text-blue' href={`/news-1/${news.id}/${encodeURIComponent(news.title)}`}>
                         <h6 className="card-title fw-bold text-truncate">{news.title}</h6>
-                    </a>
-                    <p className="card-text text-truncate">{news.description}</p>
+                    </Link>
+                    <p className="card-text">{news.description}</p>
                 </div>
             </div>
         </div>

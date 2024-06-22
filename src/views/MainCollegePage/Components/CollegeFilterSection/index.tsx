@@ -45,10 +45,10 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                             <div className="row pt-3">
                                 <div className="col-md-7 col-xl-7">
                                     <div className="card-title">
-                                        <h6 className='fw-bold text-black my-2'>{name}</h6>
+                                        <h4 className='fw-bold text-black mb-3'>{name}</h4>
                                     </div>
                                     <div className="card-text text-black">
-                                        <p className="m-0 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
+                                        <p className="mb-3 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
                                         <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
                                     </div>
                                 </div>
@@ -543,14 +543,14 @@ function CollegeFilterSection() {
                     <div key={index} style={{ cursor: 'pointer' }} className="row bg-white gx-0 p-3 my-3 mx-2">
 
                         <div className="col-10" onClick={() => toggleAccordion(optionGroup.id)}>
-                            <a className='text-blue'>
+                            <h5 className='text-blue'>
                                 {optionGroup.label}
-                            </a>
+                            </h5>
                         </div>
                         <div className="col-2 text-center " onClick={() => toggleAccordion(optionGroup.id)}>
-                            <a className='text-blue'>
+                            <h5 className='text-blue'>
                                 {accordionOpen[optionGroup.id] ? '▲' : '▼'}
-                            </a>
+                            </h5>
 
                         </div>
                         <div className={`showingCards collapse ${accordionOpen[optionGroup.id] ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
