@@ -5055,3 +5055,11 @@
     color: #254692 !important;
     font-weight: 700 !important;
   }
+
+  .news-text{
+    color: black !important;
+  }
+
+  .news-text:hover{
+    color: blue !important;
+  }

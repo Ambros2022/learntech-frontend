@@ -26,22 +26,6 @@ const MainNewsPage = () => {
       }
     }, [isMountedRef]);
   
-    const getTrendingCourses = useCallback(async () => {
-      try {
-        const response = await axios.get('api/website/generalcourse/get', {
-          params: {
-            page: 1,
-            size: 8,
-            is_trending: 1
-          }
-        });
-        if (isMountedRef.current) {
-          setTrendingCourses(response.data.data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch trending courses:', error);
-      }
-    }, [isMountedRef]);
   
   
   
