@@ -37,12 +37,14 @@ const Footer = () => {
         <div className="container pt-3">
           <div className="row">
             <div className="col-xl-3 col-lg-4 col-md-4 col-8">
-              <Image className="footer-logo" src="/images/icons/footer-learntech-logo.png" width={200} height={200} alt="learntech-logo" />
+              <Link href='/'>
+                <Image className="footer-logo" src="/images/icons/footer-learntech-logo.png" width={200} height={200} alt="learntech-logo" />
+              </Link>
             </div>
           </div>
           <div className="row">
             <div className="col-md-4 text-white">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p className='w-75'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               <span className="footerIcon">
                 <div className="mb-3">
                   <Image className="d-inline-block" src="/images/icons/Phone Icon.svg" width={25} height={24} alt="phone-icon" />

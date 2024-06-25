@@ -1,18 +1,17 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import React from 'react'
+import Link from 'next/link';
+import React from 'react';
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
-
-function OverviewSection({ data }) {
+function OverviewSection({ data, colleges, exams }) {
 
   const renderContent = (content) => (
     <div className="row">
       <div className="order-2 order-md-1 col-md-8 text-black pt-3">
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
-
     </div>
   );
 
@@ -55,48 +54,32 @@ function OverviewSection({ data }) {
               <div className="row imgCardConCrs mb-3">
                 <div className="col-12 mb-3 px-0">
                   <div className='dental-crs-img flex-column d-flex justify-content-center'>
-                    <Image src='/images/icons/dental-course-img.jpg' className='' width={150} height={150} alt="dental-course-img" />
+                    <Image src='/images/icons/dental-course-img.jpg' className='' width={500} height={500} alt="dental-course-img" />
                     <h6 className='text-center mb-3'>Are you interested in this course?</h6>
                     <GlobalEnquiryForm className="chkEligBtn mb-3 btn" buttonText={'Check Elgibility'} />
                   </div>
                 </div>
                 <div className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll bg-skyBlue" style={{ height: '460px' }}>
                   <h5 className='fw-bold text-blue pt-3 mb-3'>Top Dental Colleges</h5>
-                  <div className="card p-2 mb-3 d-flex flex-row">
-                    <Image src='/images/icons/filter-card.jpg' width={90} height={60} alt='clg-img' />
-                    <small className='align-content-center text-black mx-2'>Kashmir University</small>
-                  </div>
-                  <div className="card p-2 mb-3 d-flex flex-row">
-                    <Image src='/images/icons/filter-card.jpg' width={90} height={60} alt='clg-img' />
-                    <small className='align-content-center text-black mx-2'>Kashmir University</small>
-                  </div>
-                  <div className="card p-2 mb-3 d-flex flex-row">
-                    <Image src='/images/icons/filter-card.jpg' width={90} height={60} alt='clg-img' />
-                    <small className='align-content-center text-black mx-2'>Kashmir University</small>
-                  </div>
-                  <div className="card p-2 mb-3 d-flex flex-row">
-                    <Image src='/images/icons/filter-card.jpg' width={90} height={60} alt='clg-img' />
-                    <small className='align-content-center text-black mx-2'>Kashmir University</small>
-                  </div>
+                  {colleges.map((college, index) => (
+                    <Link href={`/college/${college.id}/${college.slug}`}>
+                      <div key={index} className="card p-2 mb-3 d-flex flex-row">
+                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
+                        <h6 className='align-self-center mb-0 text-black ms-2 fw-bold'>{college.name}</h6>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
                 <div className="col-12 cardConBrdr p-3 overflow-y-scroll bg-skyBlue" style={{ height: '460px' }}>
                   <h5 className='fw-bold text-blue pt-3 mb-3'>Top Dental Exams</h5>
-                  <div className="card p-2 mb-3 d-flex flex-row">
-                    <Image src='/images/icons/filter-card.jpg' width={90} height={60} alt='clg-img' />
-                    <small className='align-content-center text-black mx-2'>AIPDGE</small>
-                  </div>
-                  <div className="card p-2 mb-3 d-flex flex-row">
-                    <Image src='/images/icons/filter-card.jpg' width={90} height={60} alt='clg-img' />
-                    <small className='align-content-center text-black mx-2'>NEET MDS</small>
-                  </div>
-                  <div className="card p-2 mb-3 d-flex flex-row">
-                    <Image src='/images/icons/filter-card.jpg' width={90} height={60} alt='clg-img' />
-                    <small className='align-content-center text-black mx-2'>CETPPMC</small>
-                  </div>
-                  <div className="card p-2 mb-3 d-flex flex-row">
-                    <Image src='/images/icons/filter-card.jpg' width={90} height={60} alt='clg-img' />
-                    <small className='align-content-center text-black mx-2'>MP DMAT</small>
-                  </div>
+                  {exams.map((exam, index) => (
+                    <Link href={`/exam/${exam.id}/${exam.slug}`}>
+                      <div key={index} className="card p-2 mb-3 d-flex flex-row">
+                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.cover_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
+                        <h6 className='align-self-center fw-bold text-black ms-2 mb-0'>{exam.exam_title}</h6>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
@@ -104,7 +87,7 @@ function OverviewSection({ data }) {
         </div>
       </section>
     </>
-  )
+  );
 }
 
 export default OverviewSection;
