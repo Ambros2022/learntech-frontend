@@ -96,7 +96,7 @@ const BoardsSec = () => {
                                                         <div className="row d-flex">
                                                             <div className="col-lg-4 col-xl-3 align-self-center mb-lg-0 mb-3">
                                                                 <div className="logoBoardImg">
-                                                                    <Image src='/images/icons/filter-card.jpg' width={300} height={300} alt='clg-card' className='mx-auto' />
+                                                                    <Image src='/images/icons/filter-card.jpg' width={500} height={500} alt='clg-card' className='mx-auto img-fluid' />
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-8 col-xl-9 align-self-center">

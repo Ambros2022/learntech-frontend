@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react';
 import BannerSection from './Components/BannerSection';
 import OverviewSection from './Components/OverviewSection';
-// import ExpertSection from './Components/ExpertSection';
 import PopularCourses from './Components/PopularCourses';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
@@ -12,16 +11,15 @@ import ExpertSection from './Components/ExpertSection';
 function SubInnerCoursePage({ Streamid, Courseslug }) {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
-  const [pagedata, setPagedata] = useState<any>(null);
+  const [pagedata, setPagedata] = useState(null);
   const [loading, setLoading] = useState(true);
   const [colleges, setColleges] = useState([]);
-  const [exams, setexams] = useState([]);
-  const [streams, setStreams] = useState([]);
+  const [exams, setExams] = useState([]);
 
   const getPagedata = useCallback(async () => {
     try {
-      const slug = Courseslug; // replace with actual slug
-      const id = Streamid; // replace with actual id
+      const slug = Courseslug;
+      const id = Streamid;
 
       const response = await axios.get(`/api/website/general/stream/get/${slug}/${id}`);
 
@@ -33,11 +31,11 @@ function SubInnerCoursePage({ Streamid, Courseslug }) {
       router.push("/404");
       console.error('Failed to fetch page data:', error);
     }
-  }, [Streamid, isMountedRef, router]);
+  }, [Streamid, Courseslug, isMountedRef, router]);
 
   const getColleges = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/colleges/get', {
+      const response = await axios.get('/api/website/colleges/get', {
         params: {
           page: 1,
           size: 8,
@@ -48,12 +46,13 @@ function SubInnerCoursePage({ Streamid, Courseslug }) {
         setColleges(response.data.data);
       }
     } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
+      console.error('Failed to fetch colleges:', error);
     }
   }, [Streamid, isMountedRef]);
+
   const getExams = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/exams/get', {
+      const response = await axios.get('/api/website/exams/get', {
         params: {
           page: 1,
           size: 8,
@@ -61,27 +60,10 @@ function SubInnerCoursePage({ Streamid, Courseslug }) {
         }
       });
       if (isMountedRef.current) {
-        setexams(response.data.data);
+        setExams(response.data.data);
       }
     } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [Streamid, isMountedRef]);
-
-  const getotherCourses = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/stream/get', {
-        params: {
-          page: 1,
-          size: 8,
-          not_stream_id: Streamid
-        }
-      });
-      if (isMountedRef.current) {
-        setStreams(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
+      console.error('Failed to fetch exams:', error);
     }
   }, [Streamid, isMountedRef]);
 
@@ -89,17 +71,16 @@ function SubInnerCoursePage({ Streamid, Courseslug }) {
     getPagedata();
     getColleges();
     getExams();
-    getotherCourses();
-  }, [getPagedata]);
+  }, [getPagedata, getColleges, getExams]);
+
   return (
     <>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <OverviewSection data={pagedata} />}
-      {/* <OverviewSection /> */}
+      {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />}
       <PopularCourses />
       <ExpertSection />
     </>
-  )
+  );
 }
 
 export default SubInnerCoursePage;
