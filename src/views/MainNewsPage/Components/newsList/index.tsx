@@ -2,12 +2,13 @@ import React from 'react';
 import Image from 'next/image';
 
 // NewsItem component
-const NewsItem = ({ imageSrc, title, text }) => (
+const NewsItem = ({ id, banner_image, title }) => (
     <div className="col-md-12 col-10 mx-md-0 mx-auto">
+         <a href={`/college/${id}/${title}`} >
         <div className="card mb-3">
             <div className="row g-0">
                 <div className="col-md-4 upcomingAdmission">
-                    <Image src={imageSrc} width={300} height={300} className="rounded-start img-fluid" alt="news-img" />
+                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner_image}`} width={300} height={300} className="rounded-start img-fluid" alt="news-img" />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
@@ -16,6 +17,7 @@ const NewsItem = ({ imageSrc, title, text }) => (
                 </div>
             </div>
         </div>
+        </a>
     </div>
 );
 
@@ -25,7 +27,7 @@ const NewsList = ({ newsItems }) => (
         <h4 className='fw-bold text-blue text-md-start text-center pt-3 mb-3'>Upcoming Admissions</h4>
         <div className="row">
             {newsItems.map((item, index) => (
-                <NewsItem key={index} imageSrc={item.imageSrc} title={item.title} text={item.text} />
+                <NewsItem key={index} id={item.id} banner_image={item.banner_image} title={item.name} />
             ))}
         </div>
     </div>
