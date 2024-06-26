@@ -1,8 +1,13 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import Image from 'next/image';
+import React from 'react';
+import Link from 'next/link';
 
-const ServicesSec = () => {
+interface ServicesSecProps {
+    scrollToBannerSec: () => void;
+    scrollToExamSec: () => void;
+}
+
+const ServicesSec: React.FC<ServicesSecProps> = ({ scrollToBannerSec, scrollToExamSec }) => {
     return (
         <section className='bg-skyBlue py-5 servicesCardSec'>
             <div className="container">
@@ -25,7 +30,7 @@ const ServicesSec = () => {
                                 <h5><i className='bi bi-x-circle-fill text-danger'></i> Services Offered Post Exam</h5>
                             </div>
                             <div className="text-center">
-                                <button className='btn viewMoreCollegeBtn px-4 py-2'>Buy Now</button>
+                                <button className='btn viewMoreCollegeBtn px-4 py-2' onClick={scrollToBannerSec}>Buy Now</button>
                             </div>
                         </div>
                     </div>
@@ -45,7 +50,7 @@ const ServicesSec = () => {
                                 <h5><i className='bi bi-check-circle-fill'></i> Services Offered Post Exam</h5>
                             </div>
                             <div className="text-center">
-                                <button className='btn viewMoreCollegeBtn px-4 py-2'>Buy Now</button>
+                                <button className='btn viewMoreCollegeBtn px-4 py-2' onClick={scrollToBannerSec}>Buy Now</button>
                             </div>
                         </div>
                     </div>
@@ -65,12 +70,12 @@ const ServicesSec = () => {
                                 <h5><i className='bi bi-check-circle-fill'></i> Counselling at Your Place (1)</h5>
                             </div>
                             <div className="text-center">
-                                <button className='btn viewMoreCollegeBtn px-4 py-2'>Buy Now</button>
+                                <button className='btn viewMoreCollegeBtn px-4 py-2' onClick={scrollToBannerSec}>Buy Now</button>
                             </div>
                         </div>
                     </div>
                     <div className="text-center mb-3">
-                        <Link href='https://learntechww.com/gcc-countries' className='btn viewMoreCollegeBtn py-3 px-5'>Services Offered at GCC Countries</Link>
+                        <button onClick={scrollToExamSec} className='btn viewMoreCollegeBtn py-3 px-5'>Services Offered at GCC Countries</button>
                     </div>
                 </div>
             </div>
@@ -78,4 +83,4 @@ const ServicesSec = () => {
     )
 }
 
-export default ServicesSec
+export default ServicesSec;

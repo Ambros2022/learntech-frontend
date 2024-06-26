@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const BoardsSec = () => {
     const [activeTab, setActiveTab] = useState('All Boards');
@@ -114,7 +115,7 @@ const BoardsSec = () => {
                                                             {/* <p className="card-text">{item.description}</p> */}
                                                         </div>
                                                         <div className="d-flex justify-content-center mb-3">
-                                                            <button className='btn viewMoreCollegeBtn'>View Details</button>
+                                                            <Link href={`/board/${}`} className='btn viewMoreCollegeBtn' >View Details</Link>
                                                         </div>
                                                     </div>
                                                 </div>
