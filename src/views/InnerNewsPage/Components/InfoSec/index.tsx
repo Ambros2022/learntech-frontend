@@ -16,6 +16,7 @@ const InfoSec = ({data}) => {
             const formattedNews = response.data.data.map((item) => ({
                 imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
                 name: item.name || 'No description available',
+                id: item.id,
             }))
             setNewsData(formattedNews)
             

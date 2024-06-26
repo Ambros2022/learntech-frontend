@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import NewsList from '../newsList';
 import Link from 'next/link';
 import axios from 'src/configs/axios';
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 interface NewsItem {
     id: number;
@@ -19,88 +21,112 @@ interface GroupedNewsItems {
 const BrowseNewsSec = () => {
     const [activeTab, setActiveTab] = useState('All');
     const [currentPage, setCurrentPage] = useState(1);
-    const [newsPerPage] = useState(6); // Number of news items per page
+    const [totalPages, setTotalPages] = useState(1);
+    const [collegeData, setcollegeData] = useState([]);
+
+    // const [newsPerPage] = useState(6); // Number of news items per page
     const [newsItems, setNewsItems] = useState<GroupedNewsItems>({});
-    const [categories, setCategories] = useState<string[]>([]);
-
-    useEffect(() => {
-        // Fetch the news data from the API
-        const fetchNews = async () => {
-            try {
-                const response = await axios.get('api/website/news/get');
-                const data = response.data.data;
-
-                // Group news items by category
-                const groupedNews = data.reduce((acc, newsItem) => {
-                    const category = newsItem.category_id;
-                    if (!acc[category]) acc[category] = [];
-                    acc[category].push(newsItem);
-                    return acc;
-                }, {});
-
-                // Adding 'All' category with all news items
+    const [categories, setCategories] = useState<{ id: string; title: string }[]>([]);
+    const newsPerPage = 1;
+    const isMountedRef = useIsMountedRef();
 
 
-                setNewsItems(groupedNews);
-                setCategories(['All', ...Object.keys(groupedNews)]);
-                groupedNews['All'] = data;
-            } catch (error) {
-                console.error('Error fetching news data:', error);
+    const getColleges = useCallback(async () => {
+        try {
+            const roleparams = { page: 1, size: 10000 };
+            const response = await axios.get('api/website/colleges/get', { params: roleparams });
+            setcollegeData(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+    const getCategoriesData = useCallback(async () => {
+        try {
+            const response = await axios.get('api/website/newscategory/get');
+            if (response.data.status === 1) {
+                const categories = response.data.data.map(category => ({
+                    id: category.id,
+                    title: category.name
+                }));
+                // Add "All" category
+                setCategories([{ id: 'all', title: 'All' }, ...categories]);
+                setActiveTab('all'); // Set "All" tab as active initially
+            } else {
+                console.error('Failed to fetch categories');
             }
-        };
-
-        fetchNews();
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
     }, []);
 
-    const handleTabClick = (tabName) => {
-        setActiveTab(tabName);
-        setCurrentPage(1); // Reset current page when changing tabs
+
+    const getNewsdata = useCallback(async (id, page = 1) => {
+        try {
+            const roleparams = { page, size: newsPerPage };
+            const url = id === 'all' ? '/api/website/news/get' : `/api/website/news/get?category_id=${id}`;
+            const response = await axios.get(url, { params: roleparams });
+
+            if (response.data.status === 1) {
+                setNewsItems(prevState => ({
+                    ...prevState,
+                    [id]: response.data.data
+                }));
+                setTotalPages(response.data.totalPages); // Set total pages from API response
+            } else {
+                console.error('Failed to fetch exams');
+            }
+        } catch (error) {
+            console.error('Error fetching exams:', error);
+        }
+    }, [newsPerPage, isMountedRef]);
+
+    useEffect(() => {
+        if (activeTab) {
+            getNewsdata(activeTab, currentPage);
+        }
+    }, [activeTab, currentPage, getNewsdata]);
+
+    useEffect(() => {
+
+        getCategoriesData()
+        getColleges()
+
+    }, [getCategoriesData, getColleges])
+
+    
+
+    const handleTabClick = (id) => {
+        setActiveTab(id);
+        setCurrentPage(1);
     };
 
-    const indexOfLastNews = currentPage * newsPerPage;
-    const indexOfFirstNews = indexOfLastNews - newsPerPage;
-
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+   
 
 
-    const newsData = [
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 1',
-            text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 2',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 3',
-            text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 4',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 4',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 4',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        // Add more news items as needed
-    ];
+    const handlePreviousPage = () => {
+        setCurrentPage(prevPage => {
+            const newPage = Math.max(prevPage - 1, 1);
+            getNewsdata(activeTab, newPage); // Fetch new data for the previous page
+            return newPage;
+        });
+    };
 
-    const currentNews = newsItems[activeTab]?.slice(indexOfFirstNews, indexOfLastNews) || [];
+    const handleNextPage = () => {
+        setCurrentPage(prevPage => {
+            const newPage = Math.min(prevPage + 1, totalPages);
+            getNewsdata(activeTab, newPage); // Fetch new data for the next page
+            return newPage;
+        });
+    };
+
+    const handlePageClick = (page) => {
+        setCurrentPage(page);
+        getNewsdata(activeTab, page); // Fetch data for the clicked page
+    };
 
 
-
+    const currentNews = newsItems[activeTab] || [];
     return (
         <>
             <section className='py-5 bg-white browseNews'>
@@ -108,7 +134,13 @@ const BrowseNewsSec = () => {
                     <h2 className='fw-bold text-blue text-center mb-3'>Browse News By Category</h2>
                     <div className="d-flex justify-content-center newsTabsClr gap-3 mx-5 flex-wrap flex-row">
                         {categories.map(category => (
-                            <button key={category} className={`btn ${activeTab === category ? 'active' : ''}`} onClick={() => handleTabClick(category)}>{category}</button>
+                            <button
+                                key={category.id}
+                                className={`btn ${activeTab === category.id ? 'active' : ''}`}
+                                onClick={() => handleTabClick(category.id)}
+                            >
+                                {category.title}
+                            </button>
                         ))}
                     </div>
                     <div className='row mb-3 mt-5'>
@@ -117,7 +149,7 @@ const BrowseNewsSec = () => {
                                 <div className={`tab-pane fade ${activeTab === activeTab ? 'show active' : ''}`} id={`pills-${activeTab}`} role="tabpanel" aria-labelledby={`pills-${activeTab}-tab`}>
                                     <div className="row">
                                         {currentNews.map(item => (
-                                            <div key={item.id} className="col-12 mx-5 col-lg-6 mx-lg-0 mb-3 d-flex flex-fill">
+                                            <div key={item.id} className="col-12 mx-5 col-lg-6 mx-lg-0 mb-3 d-flex ">
                                                 <div className="card">
                                                     <div className='newsPageImg'>
                                                         <Image src="/images/icons/newsPageImg.jpg" width={400} height={400} className="img-fluid" alt="newsImage"></Image>
@@ -126,7 +158,9 @@ const BrowseNewsSec = () => {
                                                         <h5 className="fw-bold card-title">{item.name}</h5>
                                                     </div>
                                                     <div className='p-3'>
-                                                        <button className='btn viewMoreCollegeBtn '>View Detail</button>
+                                                        <Link href={`/news-1/${item.id}/${item.name}`}>
+                                                            <button className='btn viewMoreCollegeBtn'>View Detail</button>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,27 +169,27 @@ const BrowseNewsSec = () => {
                                 </div>
                             </div>
                             {/* Pagination */}
-                            {/* <div className="d-flex justify-content-center">
+                            <div className="d-flex justify-content-center">
                                 <nav aria-label="Page navigation example">
-                                    <ul className="pagination  d-flex gap-3 justify-content-center">
+                                    <ul className="pagination d-flex gap-3">
                                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                            <a className="page-link" href="#" onClick={() => paginate(currentPage - 1)} aria-label="Previous">
+                                            <button className="page-link" onClick={handlePreviousPage} aria-label="Previous">
                                                 <span aria-hidden="true">{'<'}</span>
-                                            </a>
+                                            </button>
                                         </li>
-                                        {Array.from({ length: Math.ceil(newsItems[activeTab].length / newsPerPage) }, (_, i) => (
-                                            <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
-                                                <a className="page-link" href="#" onClick={() => paginate(i + 1)}>{i + 1}</a>
+                                        {Array.from({ length: totalPages }, (_, index) => (
+                                            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                                                <button className="page-link" onClick={() => handlePageClick(index + 1)}>{index + 1}</button>
                                             </li>
                                         ))}
-                                        <li className={`page-item ${currentPage === Math.ceil(newsItems[activeTab].length / newsPerPage) ? 'disabled' : ''}`}>
-                                            <a className="page-link" href="#" onClick={() => paginate(currentPage + 1)} aria-label="Next">
+                                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                                            <button className="page-link" onClick={handleNextPage} aria-label="Next">
                                                 <span aria-hidden="true">{'>'}</span>
-                                            </a>
+                                            </button>
                                         </li>
                                     </ul>
                                 </nav>
-                            </div> */}
+                            </div>
 
                         </div>
                         <div className="col-lg-4 col-xl-4 col-md-5">
@@ -164,12 +198,16 @@ const BrowseNewsSec = () => {
                                     <h4 className='text-blue fw-bold text-center mb-3'>Get Upcoming News Alerts</h4>
                                     <Image src="/images/icons/getNewsImage.png" width={200} height={200} alt='get-news-logo' className='mb-3' />
                                     <div className="d-flex justify-content-between">
-                                        <button className='btn flwBtn'>Follow Us</button>
+                                    <GlobalEnquiryForm
+                                        buttonText="Follow Us"
+                                        className='btn flwBtn'
+                                    />
+                                        {/* <button className='btn flwBtn'>Follow Us</button> */}
                                         <button className='btn askBtn'>Ask a Question</button>
                                     </div>
                                 </div>
                             </div>
-                            <NewsList newsItems={newsData} />
+                            <NewsList newsItems={collegeData} />
                         </div>
                     </div>
                 </div>
