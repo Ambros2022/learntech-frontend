@@ -1,35 +1,83 @@
-import React from 'react';
-import { useFormik } from 'formik';
+import React, { FC, useState } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { saveAs } from 'file-saver'
+import axios from 'src/configs/axios';
+import { toast } from 'react-hot-toast'
+import { useRouter } from 'next/router';
+import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+
+
 
 const ExpertSec = () => {
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            email: '',
-            phone: '',
-            comment: ''
-        },
-        validationSchema: Yup.object({
-            name: Yup.string()
-                .max(50, 'Must be 50 characters or less')
-                .required('Required'),
-            email: Yup.string()
-                .email('Invalid email address')
-                .required('Required'),
-            phone: Yup.string()
-                .matches(/^[0-9]+$/, 'Must be only digits')
-                .min(10, 'Must be at least 10 digits')
-                .max(15, 'Must be 15 digits or less')
-                .required('Required'),
-            comment: Yup.string()
-                .max(500, 'Must be 500 characters or less')
-                .required('Required')
-        }),
-        onSubmit: values => {
-            console.log(values);
+    const router = useRouter();
+
+    const [shared, setShared] = useState(false); // State to track if shared
+
+    const sharePage = () => {
+        // Using the Web Share API if available (modern browsers)
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                url: window.location.href,
+            })
+                .then(() => {
+                    setShared(true); // Update state if shared successfully
+                })
+                .catch((error) => console.error('Error sharing:', error));
+        } else {
+            // Fallback for browsers that do not support Web Share API
+            // You can implement custom share logic here for those browsers
+            console.log('Web Share API not supported');
         }
+    };
+
+    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
+    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    const validationSchema = Yup.object().shape({
+        name: Yup.string()
+            .max(50, 'Must be 50 characters or less')
+            .required('Required'),
+        email: Yup.string()
+            .email('Invalid email address')
+            .required('Required'),
+        contact_number: Yup.string()
+            .matches(/^[0-9]+$/, 'Must be only digits')
+            .min(10, 'Must be at least 10 digits')
+            .max(15, 'Must be 15 digits or less')
+            .required('Required'),
+        current_url: Yup.string()
+            .max(500, 'Must be 500 characters or less')
+            .required('Required')
     });
+
+    const handleSubmit = async (values, { resetForm }) => {
+
+        try {
+            toast.loading('Processing');
+            const formData = new FormData();
+            formData.append('name', values.name);
+            formData.append('email', values.email);
+            formData.append('contact_number', values.contact_number);
+            formData.append('current_url', values.current_url);
+            const response = await axios.post('api/website/enquiry', formData);
+
+
+            if (response.status === 200) {
+                toast.dismiss();
+                toast.success('Thank you. We will get back to you.');
+                resetForm();
+
+
+                router.push('/thank-you');
+            }
+
+        } catch (error) {
+            toast.error('try again later!');
+            console.error('Error submitting form:', error);
+        }
+    };
 
     return (
         <>
@@ -42,80 +90,50 @@ const ExpertSec = () => {
                         <button className='btn btn-success text-white'><i className="bi bi-share-fill"></i> Share</button>
                         <button className='btn btn-danger text-white'><i className="bi bi-pinterest"></i> Pin</button>
                         <button className='btn btn-secondary text-white'><i className="bi bi-envelope"></i> Email</button>
+                      
                     </div>
                     <h2 className='fw-bold text-blue pt-3'>Leave a Comment</h2>
                     <div className="row py-3">
                         <div className="col-10 me-auto">
-                            <form onSubmit={formik.handleSubmit}>
-                                <div className="row">
-                                    <div className="col-lg-4">
-                                        <div className="mb-3">
-                                            <input
-                                                type="text"
-                                                className='form-control'
-                                                name='name'
-                                                placeholder='Enter Name'
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.name}
-                                            />
-                                            {formik.touched.name && formik.errors.name ? (
-                                                <div className="text-danger">{formik.errors.name}</div>
-                                            ) : null}
+                            <Formik
+                                initialValues={{
+                                    name: '',
+                                    email: '',
+                                    contact_number: '',
+                                    current_url: ''
+                                }}
+                                validationSchema={validationSchema}
+                                onSubmit={handleSubmit}
+                                resetForm
+                            >
+                                <Form >
+                                    <div className="row">
+                                        <div className="col-lg-4 col-12 mb-3 ">
+                                            <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
+                                            <ErrorMessage name="name" component="div" className="error text-danger" />
                                         </div>
-                                    </div>
-                                    <div className="col-lg-4">
-                                        <div className="mb-3">
-                                            <input
-                                                type="email"
-                                                className='form-control'
-                                                name='email'
-                                                placeholder='Enter Email'
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.email}
-                                            />
-                                            {formik.touched.email && formik.errors.email ? (
-                                                <div className="text-danger">{formik.errors.email}</div>
-                                            ) : null}
+                                        <div className="col-lg-4 col-md-12 mb-3 ">
+                                            <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
+                                            <ErrorMessage name="email" component="div" className="error text-danger" />
                                         </div>
-                                    </div>
-                                    <div className="col-lg-4">
-                                        <div className="mb-3">
-                                            <input
-                                                type="text"
-                                                className='form-control'
-                                                name='phone'
-                                                placeholder='Enter Phone Number'
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.phone}
-                                            />
-                                            {formik.touched.phone && formik.errors.phone ? (
-                                                <div className="text-danger">{formik.errors.phone}</div>
-                                            ) : null}
+                                        <div className=" col-lg-4 col-md-12 mb-3 ">
+                                            <PhoneInputField name="contact_number" />
+                                            {/* <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" /> */}
+                                            <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                                         </div>
-                                    </div>
-                                    <div className="col-lg-12">
-                                        <div className="mb-3">
-                                            <textarea
-                                                className='form-control'
-                                                name='comment'
-                                                placeholder='Enter Comment'
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.comment}
-                                            />
-                                            {formik.touched.comment && formik.errors.comment ? (
-                                                <div className="text-danger">{formik.errors.comment}</div>
-                                            ) : null}
+
+                                        <div className="col-lg-12  col-md-12 mb-3 ">
+                                            <Field as="textarea" name="current_url" placeholder="Enter Comment" className="form-control" />
+                                            <ErrorMessage name="current_url" component="div" className="text-danger" />
                                         </div>
                                     </div>
                                     <div className='mb-3'>
                                         <input type="submit" className='btn submitBtn' value="Submit" />
                                     </div>
-                                </div>
-                            </form>
+
+                                </Form>
+                            </Formik>
+
                         </div>
                     </div>
                 </div>
