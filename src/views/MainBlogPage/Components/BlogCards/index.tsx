@@ -20,7 +20,7 @@ const BlogCards = () => {
         } catch (err) {
             console.error(err);
         }
-    }, []);
+    }, [isMountedRef]);
 
     const getBlogsData = useCallback(async (page = 1) => {
         try {
@@ -31,7 +31,7 @@ const BlogCards = () => {
         } catch (err) {
             console.error(err);
         }
-    }, []);
+    }, [isMountedRef]);
 
     useEffect(() => {
         getNewsData();

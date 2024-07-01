@@ -369,7 +369,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             required
                                             error={Boolean(errors.type_id)}
                                             {...(errors.type_id && { helperText: 'This field is required' })}
-                                            label='Select Level'
+                                            label='Select Type'
                                         />
                                     )}
                                 />

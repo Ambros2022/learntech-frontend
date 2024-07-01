@@ -132,7 +132,7 @@ const BrowseNewsSec = () => {
             <section className='py-5 bg-white browseNews'>
                 <div className="container">
                     <h2 className='fw-bold text-blue text-center mb-3'>Browse News By Category</h2>
-                    <div className="d-flex justify-content-center newsTabsClr gap-3 mx-5 flex-wrap flex-row">
+                    <div className="d-flex justify-content-center newsTabsClr gap-3 mx-0 flex-wrap flex-row">
                         {categories.map(category => (
                             <button
                                 key={category.id}

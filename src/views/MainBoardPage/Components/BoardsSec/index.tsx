@@ -15,11 +15,9 @@ const BoardsSec = () => {
                     ? await axios.get('/api/website/schoolboard/get')
                     : await axios.get(`/api/website/schoolboard/get?board_type=${activeTab}`);
 
-                // console.log('API response:', response.data); // Log the response
-
                 const data = Array.isArray(response.data.data) ? response.data.data : [];
                 setBoardItems(data);
-                // console.log('Board items:', data); // Log the board items
+
             } catch (error) {
                 console.error('Error fetching board data:', error);
                 setBoardItems([]); // Ensure boardItems is an array even if the fetch fails
@@ -79,13 +77,13 @@ const BoardsSec = () => {
                                                             <div className="row">
                                                                 <div className="col-lg-8 col-xl-9 ms-auto">
                                                                     <p className='text-black mb-2'><span className='fw-bold'>Est Year :</span> {item.established}</p>
-                                                                    <p className='text-black mb-2'><span className='fw-bold'>Location :</span> {item.location}</p>
+                                                                    {/* <p className='text-black mb-2'><span className='fw-bold'>Location :</span> {item.location}</p> */}
                                                                     <p className='text-black'><span className='fw-bold'>Approvals and Recognition :</span> {item.established}</p>
                                                                     <p className='text-black'><span className='fw-bold'>Genders Accepted :</span> {item.gender}</p>
                                                                 </div>
                                                             </div>
                                                             <div className="d-flex justify-content-center mb-3">
-                                                                <Link href={`/board/${item.id}/${item.name}`} className='btn viewMoreCollegeBtn'>View Details</Link >
+                                                                <Link href={`/board/${item.id}/${item.name}`} className='btn viewMoreCollegeBtn'>View Details</Link>
                                                             </div>
                                                         </div>
                                                     </div>

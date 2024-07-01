@@ -70,9 +70,7 @@ function InnerNewsPage({ id }) {
 
             {!loading && pagedata && <BannerSec data={pagedata}  />}
             {!loading && pagedata && <InfoSec data={pagedata}  />}
-            
-            {/* <BannerSec /> */}
-            {/* <InfoSec /> */}
+          
             <ExpertSection />
      
     </>

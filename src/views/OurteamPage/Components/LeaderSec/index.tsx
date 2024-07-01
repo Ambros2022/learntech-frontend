@@ -1,28 +1,61 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react';
+import axios from 'src/configs/axios';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
+
+interface User {
+    image: any;
+    name: string;
+    designation: string;
+    linked_in_link: any;
+}
 
 const LeaderSec = () => {
-    const users = [
-        {
-            name: 'Pooja Gupta',
-            jobTitle: 'Business Development Manager',
-            imageUrl: '/images/icons/userImage.jpg',
-            linkedinUrl: 'https://www.linkedin.com/pooja-gupta',
-        },
-        {
-            name: 'Shiju Daniel',
-            jobTitle: 'Marketing Manager',
-            imageUrl: '/images/icons/userImage.jpg',
-            linkedinUrl: 'https://www.linkedin.com/shiju-daniel',
-        },
-        {
-            name: 'Ashish Gaidhane',
-            jobTitle: 'Digital Administrator',
-            imageUrl: '/images/icons/userImage.jpg',
-            linkedinUrl: 'https://www.linkedin.com/ashish-gaidhane',
-        },
-        // Add more users as needed
-    ];
+
+
+    const [users, setUsers] = useState<User[]>([]);
+    const isMountedRef = useIsMountedRef();
+
+
+    const getBoardsData = useCallback(async () => {
+        try {
+            const response = await axios.get('api/website/ourteams/get');
+            if (isMountedRef.current) {
+                setUsers(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch trending courses:', error);
+        }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+        getBoardsData();
+    }, [getBoardsData]);
+
+
+
+    // const users = [
+    //     {
+    //         name: 'Pooja Gupta',
+    //         jobTitle: 'Business Development Manager',
+    //         imageUrl: '/images/icons/userImage.jpg',
+    //         linkedinUrl: 'https://www.linkedin.com/pooja-gupta',
+    //     },
+    //     {
+    //         name: 'Shiju Daniel',
+    //         jobTitle: 'Marketing Manager',
+    //         imageUrl: '/images/icons/userImage.jpg',
+    //         linkedinUrl: 'https://www.linkedin.com/shiju-daniel',
+    //     },
+    //     {
+    //         name: 'Ashish Gaidhane',
+    //         jobTitle: 'Digital Administrator',
+    //         imageUrl: '/images/icons/userImage.jpg',
+    //         linkedinUrl: 'https://www.linkedin.com/ashish-gaidhane',
+    //     },
+    //     // Add more users as needed
+    // ];
 
     return (
         <section className='bg-white py-5'>
@@ -45,7 +78,10 @@ const LeaderSec = () => {
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi dolores aut libero aperiam ullam vero optio cum maxime fugit magni rerum consectetur, excepturi qui iste velit repudiandae nam! Ratione qui ea perspiciatis quia quaerat mollitia exercitationem porro sit eveniet accusantium obcaecati maxime, accusamus quo voluptate corrupti similique eum. Quam quo aut, mollitia, ipsum fuga ex quidem eum nisi praesentium natus magnam neque quae maiores dolores, veniam recusandae dolorum autem sunt cupiditate ratione minus voluptatibus iure fugit delectus. Numquam fuga illum odit magnam, quaerat nesciunt vero? Laborum quidem minus, ipsum recusandae dolores alias vitae. Aut veniam impedit nostrum accusantium reprehenderit incidunt.
                             </p>
                             <div className='text-end'>
-                                <i className='text-blue bi bi-linkedin fsize-1 zoom-effect'></i>
+                                {/* <i className='text-blue bi bi-linkedin fsize-1 zoom-effect'></i> */}
+                                <a href="https://in.linkedin.com/in/mansoor-ali-73368029" target="_blank" rel="noopener noreferrer">
+                                            <i className='text-blue bi bi-linkedin fsize-1 zoom-effect'></i>
+                                        </a>
                             </div>
                         </div>
                     </div>
@@ -57,13 +93,13 @@ const LeaderSec = () => {
                         <div key={index} className="col-md-4 col-10 mx-auto mb-3">
                             <div className="card p-3">
                                 <div className='userSec2Img mx-auto'>
-                                    <Image src={user.imageUrl} width={200} height={200} alt='user-img' />
+                                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${user.image}`} width={200} height={200} alt='user-img' />
                                 </div>
                                 <div className="card-body">
                                     <h4 className='fw-bold text-black'>{user.name}</h4>
-                                    <h6 className='text-black'>{user.jobTitle}</h6>
+                                    <h6 className='text-black'>{user.designation}</h6>
                                     <div className='text-end'>
-                                        <a href={user.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                                        <a href={user.linked_in_link} target="_blank" rel="noopener noreferrer">
                                             <i className='text-blue bi bi-linkedin fsize-1 zoom-effect'></i>
                                         </a>
                                     </div>
