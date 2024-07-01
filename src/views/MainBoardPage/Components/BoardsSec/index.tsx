@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import axios from 'src/configs/axios';
+import Link from 'next/link';
 
 const BoardsSec = () => {
     const [activeTab, setActiveTab] = useState('all');
@@ -13,9 +14,9 @@ const BoardsSec = () => {
                 const response = activeTab === 'all'
                     ? await axios.get('/api/website/schoolboard/get')
                     : await axios.get(`/api/website/schoolboard/get?board_type=${activeTab}`);
-                
+
                 // console.log('API response:', response.data); // Log the response
-    
+
                 const data = Array.isArray(response.data.data) ? response.data.data : [];
                 setBoardItems(data);
                 // console.log('Board items:', data); // Log the board items
@@ -24,10 +25,10 @@ const BoardsSec = () => {
                 setBoardItems([]); // Ensure boardItems is an array even if the fetch fails
             }
         };
-    
+
         fetchBoardData();
     }, [activeTab]);
-    
+
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
         setDisplayCount(4); // Reset display count when switching tabs
@@ -84,7 +85,7 @@ const BoardsSec = () => {
                                                                 </div>
                                                             </div>
                                                             <div className="d-flex justify-content-center mb-3">
-                                                                <button className='btn viewMoreCollegeBtn'>View Details</button>
+                                                                <Link href={`/board/${item.id}/${item.name}`} className='btn viewMoreCollegeBtn'>View Details</Link >
                                                             </div>
                                                         </div>
                                                     </div>

@@ -13,34 +13,34 @@ function CollegeInfoSection({ data }) {
     <>
       <section className='clgInfoSec bg-white'>
         <section className="container InnerCollegeNavigationLink linkFontSize py-3">
-          <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={"/colleges"}> Colleges <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data.name}</span></p>
+          <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={"/boards"}> Boards <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data.name}</span></p>
         </section>
         <div className="container">
           <div className="pt-3 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3 " id="nav-tab" role="tablist">
-            <button className='active btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">Info</button>
+            <button className='active btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-Overview" type="button" role="tab" aria-controls="nav-Overview" aria-selected="true">Overview</button>
             {
               data.course_fees && data.course_fees != '' && data.course_fees != 'null' && data.course_fees != '<p>null</p>' ?
-                <button className='btn' id="nav-fees-tab" data-bs-toggle="tab" data-bs-target="#nav-fees" type="button" role="tab" aria-controls="nav-fees" aria-selected="false">Courses &amp; Fee </button>
+                <button className='btn' id="nav-time_table-tab" data-bs-toggle="tab" data-bs-target="#nav-time_table" type="button" role="tab" aria-controls="nav-time_table" aria-selected="false">Time Table </button>
                 : ''
             }
             {
               data.admissions && data.admissions != '' && data.admissions != 'null' && data.admissions != '<p>null</p>' ?
-                <button className='btn' id="nav-admission-tab" data-bs-toggle="tab" data-bs-target="#nav-admission" type="button" role="tab" aria-controls="nav-admission" aria-selected="false">Admissions</button>
+                <button className='btn' id="nav-registration_form-tab" data-bs-toggle="tab" data-bs-target="#nav-registration_form" type="button" role="tab" aria-controls="nav-registration_form" aria-selected="false">Registration Form</button>
                 : ''
             }
             {
               data.placements && data.placements != '' && data.placements != 'null' && data.placements != '<p>null</p>' ?
-                <button className='btn' id="nav-placement-tab" data-bs-toggle="tab" data-bs-target="#nav-placement" type="button" role="tab" aria-controls="nav-placement" aria-selected="false">Placement</button>
+                <button className='btn' id="nav-Syllabus-tab" data-bs-toggle="tab" data-bs-target="#nav-Syllabus" type="button" role="tab" aria-controls="nav-Syllabus" aria-selected="false">Syllabus</button>
                 : ''
             }
             {
               data.rankings && data.rankings != '' && data.rankings != 'null' && data.rankings != '<p>null</p>' ?
-                <button className='btn' id="nav-ranking-tab" data-bs-toggle="tab" data-bs-target="#nav-ranking" type="button" role="tab" aria-controls="nav-ranking" aria-selected="false">Ranking</button>
+                <button className='btn' id="nav-Results-tab" data-bs-toggle="tab" data-bs-target="#nav-Results" type="button" role="tab" aria-controls="nav-Results" aria-selected="false">Results</button>
                 : ''
             }
             {
               data.scholarship && data.scholarship != '' && data.scholarship != 'null' && data.scholarship != '<p>null</p>' ?
-                <button className='btn' id="nav-scholarship-tab" data-bs-toggle="tab" data-bs-target="#nav-scholarship" type="button" role="tab" aria-controls="nav-scholarship" aria-selected="false">Scholarship</button>
+                <button className='btn' id="nav-s Sample_Papers-tab" data-bs-toggle="tab" data-bs-target="#nav-s Sample_Papers" type="button" role="tab" aria-controls="nav-s Sample_Papers" aria-selected="false">Sample Papers</button>
                 : ''
             }
             {
@@ -55,7 +55,7 @@ function CollegeInfoSection({ data }) {
             }
 
 
-            <button className='btn' id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Review</button>
+            <button className='btn' id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reviews</button>
 
             {
               data.collegefaqs && data.collegefaqs.length > 0 ?
@@ -66,7 +66,7 @@ function CollegeInfoSection({ data }) {
           </div>
 
           <div className="tab-content pt-5" id="nav-tabContent">
-            <div className="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+            <div className="tab-pane fade show active" id="nav-Overview" role="tabpanel" aria-labelledby="nav-Overview-tab">
               <div className="row">
                 <div className="order-2 order-md-1 col-md-8 col-lg-8 col-xl-9 text-black pt-3">
                   <div dangerouslySetInnerHTML={{ __html: data.info }} />
@@ -79,28 +79,26 @@ function CollegeInfoSection({ data }) {
                     </div>}
                     {data.video_url && data.video_url !== "" && <div className="col-12 yotubeImg position-relative mb-2">
                       <YoutubeVideo videoId={data.video_url} />
-
                     </div>}
-
                   </div>
                 </div>
               </div>
             </div>
-            <div className="tab-pane fade" id="nav-fees" role="tabpanel" aria-labelledby="nav-fees-tab">
+            <div className="tab-pane fade" id="nav-time_table" role="tabpanel" aria-labelledby="nav-time_table-tab">
               <div dangerouslySetInnerHTML={{ __html: data.course_fees }} ></div>
             </div>
-            <div className="tab-pane fade" id="nav-admission" role="tabpanel" aria-labelledby="nav-admission-tab">
+            <div className="tab-pane fade" id="nav-registration_form" role="tabpanel" aria-labelledby="nav-registration_form-tab">
               <div dangerouslySetInnerHTML={{ __html: data.admissions }} >
               </div>
             </div>
 
-            <div className="tab-pane fade" id="nav-placement" role="tabpanel" aria-labelledby="nav-placement-tab">
+            <div className="tab-pane fade" id="nav-Syllabus" role="tabpanel" aria-labelledby="nav-Syllabus-tab">
               <div dangerouslySetInnerHTML={{ __html: data.placements }} ></div>
             </div>
-            <div className="tab-pane fade" id="nav-ranking" role="tabpanel" aria-labelledby="nav-ranking-tab">
+            <div className="tab-pane fade" id="nav-Results" role="tabpanel" aria-labelledby="nav-Results-tab">
               <div dangerouslySetInnerHTML={{ __html: data.rankings }} ></div>
             </div>
-            <div className="tab-pane fade" id="nav-scholarship" role="tabpanel" aria-labelledby="nav-scholarship-tab">
+            <div className="tab-pane fade" id="nav-s Sample_Papers" role="tabpanel" aria-labelledby="nav-s Sample_Papers-tab">
               <div dangerouslySetInnerHTML={{ __html: data.scholarship }} ></div>
             </div>
 
@@ -117,8 +115,8 @@ function CollegeInfoSection({ data }) {
               </div>
             </div>
             <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-            <ReviewSec />
-            
+              <ReviewSec />
+
             </div>
 
             <div className="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
