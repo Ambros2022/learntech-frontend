@@ -3,161 +3,88 @@ import TabCarousel from '../TabCarousel';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import axios from 'src/configs/axios';
+
 
 
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
 const FilterSec = () => {
 
-    // const [scholarshipsData, setScholarshipsData] = useState<any>([]);  // Use any type for now
+    const [options, setOptions] = useState([]);
+
+    const [scholarshipsData, setScholarshipsData] = useState<any>([]);  // Use any type for tabs
     const isMountedRef = useIsMountedRef();
-    
-    const [scholarshipsData, setScholarshipsData] = useState<any>([]);
-
-    useEffect(() => {
-        const getScholarshipData = async () => {
-            try {
-                const response = await axios.get('/api/website/scholarships/get');
-                if (isMountedRef.current) {
-                    setScholarshipsData(response.data.data);
-                }
-            } catch (error) {
-                console.error('Failed to fetch scholarship data:', error);
-            }
-        };
-    
-        getScholarshipData();
-    }, [isMountedRef]);
-    
-    
-    // useEffect(() => {
-    //     getScholarshipData();
-    // }, []);
-    
-    console.log(scholarshipsData, "scholarshipsData");
-    
-    
-    // const scholarshipsData = [
-    //     {
-    //         title: 'Tata Scholarship',
-    //         university: 'Cornell University',
-    //         details: [
-    //             { label: 'International Student Eligible', value: 'Yes' },
-    //             { label: 'Amount', value: 'Variable Amount' },
-    //             { label: 'Type', value: 'College Specific' },
-    //             { label: 'Level of Study', value: 'Bachelor' },
-    //             { label: 'Number of Scholarships', value: '20' }
-    //         ],
-    //         link: '/scholarships',
-    //         country: 'All'
-    //     },
-    //     {
-    //         title: 'India Scholarship',
-    //         university: 'University Name',
-    //         details: [
-    //             { label: 'Eligibility', value: 'Criteria' },
-    //             { label: 'Amount', value: 'Amount Details' },
-    //             { label: 'Type', value: 'Type of Scholarship' },
-    //             { label: 'Level of Study', value: 'Bachelor' },
-    //             { label: 'Number of Scholarships', value: '20' }
-    //         ],
-    //         link: '/scholarships',
-    //         country: 'India'
-    //     },
-    //     {
-    //         title: 'UK Scholarship',
-    //         university: 'University Name',
-    //         details: [
-    //             { label: 'Eligibility', value: 'Criteria' },
-    //             { label: 'Amount', value: 'Amount Details' },
-    //             { label: 'Type', value: 'Type of Scholarship' },
-    //             { label: 'Level of Study', value: 'Bachelor' },
-    //             { label: 'Number of Scholarships', value: '20' }
-    //         ],
-    //         link: '/scholarships',
-    //         country: 'UK'
-    //     },
-    //     // Add more scholarship objects as needed for other countries
-    // ];
-
-
-    console.log(scholarshipsData, "scholarshipsData")
-
     const [activeTab, setActiveTab] = useState('all');  // State to manage active tab
     const [currentPage, setCurrentPage] = useState(1);  // State for current page
     const perPage = 6; // Number of items per page
 
-    // Function to handle tab click
-    const handleTabClick = (tab) => {
-        setActiveTab(tab.id);
-        setCurrentPage(1); // Reset to first page when tab changes
-    };
+    // const getScholarship = useCallback(async () => {
+    //     try {
+    //         const roleparams = { page: 1, size: 10000 };
+    //         const response = await axios.get('api/website/scholarships/get', { params: roleparams });
+    //         setScholarshipsData(response.data.data);
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }, [isMountedRef]);
 
-   
+    const getScholarship = useCallback(async (countryId) => {
+        try {
+            let url = 'api/website/scholarships/get';
+            if (countryId !== 'All') {
+                url += `?country_id=${countryId}`;
+            }
+            const response = await axios.get(url);
+            setScholarshipsData(response.data.data);
+        } catch (error) {
+            console.error('Error fetching scholarships:', error);
+        }
+    }, [isMountedRef]);
+
+    // useEffect(() => {
+    //     getScholarship();
+    // }, [getScholarship]);
+
+    useEffect(() => {
+        getScholarship(activeTab);
+    }, [activeTab, getScholarship]);
+
+
+    // const handleTabClick = (all) => {
+    //     setActiveTab(all);
+    //     setCurrentPage(1); // Reset to first page when tab changes
+    // };
+
+     // Function to handle tab click
+    const handleTabClick = (tab) => {
+        setActiveTab(tab.id);  
+    };
 
     // Function to handle page change
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-    // const ScholarshipCards = ({ scholarshipsData  }) => {
-    //     // Filter scholarships based on active tab (country)
-    //     // const filteredScholarships = scholarshipsData.filter(scholarship => scholarship.country === country || country === 'All');
+    const ScholarshipCards = ({ country }) => {
+        // Filter scholarships based on active tab (country)
+        const filteredScholarships = scholarshipsData.filter(scholarship => scholarship.country === country || country === 'All');
 
-    //     // // Pagination logic
-    //     // const indexOfLastScholarship = currentPage * perPage;
-    //     // const indexOfFirstScholarship = indexOfLastScholarship - perPage;
-    //     // const currentScholarships = filteredScholarships.slice(indexOfFirstScholarship, indexOfLastScholarship);
+        // Pagination logic
+        const indexOfLastScholarship = currentPage * perPage;
+        const indexOfFirstScholarship = indexOfLastScholarship - perPage;
+        const currentScholarships = filteredScholarships.slice(indexOfFirstScholarship, indexOfLastScholarship);
 
-
-    //     if (!scholarshipsData || scholarshipsData.length === 0) {
-    //         return <div>Loading...</div>; // Placeholder for loading state
-    //     }
-    
-
-    //     return (
-    //         <div className="row d-flex flex-fill">
-    //             {scholarshipsData.map((scholarship) => (
-    //                 <div className="col-md-10 col-lg-6 col-xl-6 mb-3" key={scholarship.id}>
-    //                     <div className="card bg-skyBlue p-3">
-    //                         <h4 className='text-blue fw-bold'>{scholarship.name}</h4>
-    //                         <h6 className='text-black fw-bold'>{scholarship.slug}</h6>
-    //                         <ul className='text-black'>
-    //                             {scholarship.details.map((detail, idx) => (
-    //                                 <li key={idx}>
-    //                                     {detail.label} : {detail.value}
-    //                                 </li>
-    //                             ))}
-    //                         </ul>
-    //                         <a href={scholarship.link} className='mb-3 text-blue fw-bold btn text-start'>Read More {'>>'}</a>
-    //                         <div className="d-flex gap-3 flex-fill scholarshipBtn">
-    //                             <button className='btn applyNowButton'>Apply Now</button>
-    //                             <button className='btn viewDetailBtn'>Get Alert</button>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             ))}
-    //         </div>
-    //     );
-    // };
-
-
-    const ScholarshipCards = () => {
-        if (!scholarshipsData || scholarshipsData.length === 0) {
-            return <div>Loading...</div>; // Placeholder for loading state
-        }
-    
         return (
             <div className="row d-flex flex-fill">
-                {scholarshipsData.map((scholarship) => (
-                    <div className="col-md-10 col-lg-6 col-xl-6 mb-3" key={scholarship.id}>
+                {currentScholarships.map((scholarship, index) => (
+                    <div className="col-md-10 col-lg-6 col-xl-6 mb-3" key={index}>
                         <div className="card bg-skyBlue p-3">
                             <h4 className='text-blue fw-bold'>{scholarship.name}</h4>
-                            <h6 className='text-black fw-bold'>{scholarship.slug}</h6>
+                            <h6 className='text-black fw-bold'>{scholarship.university}</h6>
                             <ul className='text-black'>
-                            {scholarship.details && scholarship.details.map((detail, idx) => (
+                                {scholarship.details.map((detail, idx) => (
                                     <li key={idx}>
                                         {detail.label} : {detail.value}
                                     </li>
@@ -174,7 +101,6 @@ const FilterSec = () => {
             </div>
         );
     };
-    
 
     // Get total number of scholarships for the active tab
     const getTotalScholarships = (country) => {
@@ -195,6 +121,7 @@ const FilterSec = () => {
                 <div className="card mb-3 filterCardSec border-1 rounded p-3">
                     <h4 className='text-blue fw-bold mb-3'>Filter By</h4>
                     <div className="d-flex gap-3 flex-wrap">
+                        
                         {['Level of study', 'Type', 'Gender', 'Nationality', 'Deadline'].map((label) => (
                             <div className="align-self-center" key={label}>
                                 <label htmlFor={label} className='text-black fw-bold mb-2'>{label}</label>
@@ -226,11 +153,10 @@ const FilterSec = () => {
                                     aria-labelledby={country}
                                 >
                                     <h5 className='fw-bold text-black mb-3'>{getTotalScholarships(country)} Scholarships Found</h5>
-                                    {/* <ScholarshipCards country={country} /> */}
-                                    {/* <ScholarshipCards  /> */}
+                                    <ScholarshipCards country={country} />
                                 </div>
                             ))}
-                            <ScholarshipCards />
+                            
                         </div>
                         {/* Pagination */}
                         <div className="row col-md-12 blogCardspage">
