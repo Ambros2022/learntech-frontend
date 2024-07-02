@@ -116,7 +116,6 @@ function DetailsFillSec() {
       if (localStorage.getItem('UserData')) {
         let user: any = localStorage.getItem('UserData');
         let parsed: any = JSON.parse(user);
-        console.log(parsed?.id);
         formData.append('user_id', JSON.parse(parsed?.id));
       }
 
@@ -125,9 +124,6 @@ function DetailsFillSec() {
       formData.append('userrating', data.userrating);
       formData.append('content', data.content);
 
-
-      console.log(formData);
-      return
       try {
         const response = await axios1.post(url, formData);
         if (response.data.status === 1) {

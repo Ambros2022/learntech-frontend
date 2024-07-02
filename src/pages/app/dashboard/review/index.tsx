@@ -200,9 +200,9 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.reviewuser.name}
-              </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row?.reviewuser?.name}
+          </Typography>
         )
       }
     },
@@ -215,9 +215,9 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.name}
-              </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.name}
+          </Typography>
         )
       }
     },
@@ -232,46 +232,14 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.review_type}
-              </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.review_type}
+          </Typography>
         )
       }
     },
 
-    
-    // {
-    //   flex: 0.125,
-    //   minWidth: 100,
-    //   field: 'userrating',
-    //   headerName: 'rating',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params
 
-    //     return (
-    //           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //             {row.userrating}
-    //           </Typography>
-    //     )
-    //   }
-    // },
-
-    // {
-    //   flex: 0.175,
-    //   minWidth: 100,
-    //   field: 'review_type',
-    //   headerName: 'Type',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params;
-    //     return (
-    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //         {row.review_type}
-    //       </Typography>
-    //     );
-    //   }
-    // },
-    
-  
     {
       flex: 0.1,
       minWidth: 100,
@@ -281,7 +249,7 @@ const SecondPage = () => {
         const { row } = params;
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.clgreview.name}
+            {row?.clgreview?.name}
           </Typography>
         );
       }
@@ -308,7 +276,7 @@ const SecondPage = () => {
       headerName: 'Status',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
-    
+
         let button;
         switch (row.is_approved) {
           case 0:
@@ -317,13 +285,13 @@ const SecondPage = () => {
           case 1:
             button = <Button variant="contained" color="success" sx={{ width: '73px', height: '31px' }}>Approved</Button>;
             break;
-         
-          
+
+
           default:
             button = <Button variant="contained" color="primary" sx={{ width: '73px', height: '31px' }}>Unknown</Button>;
             break;
         }
-    
+
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {button}
@@ -382,23 +350,23 @@ const SecondPage = () => {
         const handleViewClick = () => {
           handleDialogOpen(row);
         };
-  
+
         return (
           <Button
-          variant="contained"
-          sx={{
-            width: '30px',
-            height: '30px',
-            backgroundColor: 'green',
-            color: 'white',
-            '&:hover': {
-              backgroundColor: 'green', // Keeps the background color green on hover
-            },
-          }}
-          onClick={handleViewClick}
-        >
-          View
-        </Button>
+            variant="contained"
+            sx={{
+              width: '30px',
+              height: '30px',
+              backgroundColor: 'green',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'green', // Keeps the background color green on hover
+              },
+            }}
+            onClick={handleViewClick}
+          >
+            View
+          </Button>
         );
       },
     },
@@ -574,213 +542,228 @@ const SecondPage = () => {
           />
         </Card>
       </Grid>
-          <Dialog
-              open={dialogOpen}
-              onClose={handleDialogClose}
-              aria-labelledby="view-dialog-title"
-              maxWidth="md"
-              fullWidth
-            >
-              <DialogTitle id="view-dialog-title" className='typographypopup'>View Details</DialogTitle>
-              <DialogContent>
-                {dialogData && (
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            User Name
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.reviewuser.name}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            Name
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.name}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ flex: 1 }}>
-            <CardContent>
-              <Typography variant="h6" component="div" className='typographypopup'>
-                Review Type
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {dialogData.review_type}
-              </Typography>
-            </CardContent>
-          </Card>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            User Rating
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.userrating}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            Content
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.content}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            Type
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.review_type}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                     
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            College
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.clgreview.name}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            School
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.sclreview.name}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            Course
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.coursereview.slug}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                    <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                           School Board
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                          {dialogData.sclbrdreview.name}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            Course Type
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.course_type}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ flex: 1 }}>
-                        <CardContent>
-                          <Typography variant="h6" component="div" className='typographypopup'>
-                            Grade
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {dialogData.grade}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Box>
-
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                    <Card sx={{ flex: 1 }}>
-                    <CardContent>
-                      <Typography variant="h6" component="div" className='typographypopup'>
-                        Likes
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {dialogData.likes}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                    <Card sx={{ flex: 1 }}>
-                    <CardContent>
-                      <Typography variant="h6" component="div" className='typographypopup'>
-                        Dislikes
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {dialogData.dislikes}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+      <Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        aria-labelledby="view-dialog-title"
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle id="view-dialog-title" className='typographypopup'>View Details</DialogTitle>
+        <DialogContent>
+          {dialogData && (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                {dialogData?.reviewuser?.name && (
                   <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        User Name
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.reviewuser.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Name
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.review_type && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Review Type
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.review_type}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                {dialogData?.userrating && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        User Rating
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.userrating}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.content && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Content
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.content}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.review_type && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Type
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.review_type}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                {dialogData?.clgreview?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        College
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.clgreview.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.sclreview?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        School
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.sclreview.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.coursereview?.slug && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Course
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.coursereview.slug}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                {dialogData?.sclbrdreview?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        School Board
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.sclbrdreview.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.course_type && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Course Type
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.course_type}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.grade && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Grade
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.grade}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+
+                <Card sx={{ flex: 1 }}>
+                  <CardContent>
+                    <Typography variant="h6" component="div" className='typographypopup'>
+                      Likes
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {dialogData.likes}
+                    </Typography>
+                  </CardContent>
+                </Card>
+
+
+                <Card sx={{ flex: 1 }}>
+                  <CardContent>
+                    <Typography variant="h6" component="div" className='typographypopup'>
+                      Dislikes
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {dialogData.dislikes}
+                    </Typography>
+                  </CardContent>
+                </Card>
+
+
+                {dialogData?.is_reported !== undefined && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Reported
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.is_reported === 1 ? 'Yes' : 'No'}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Card style={{ width: "273px" }} >
                 <CardContent>
                   <Typography variant="h6" component="div" className='typographypopup'>
-                    Reported
+                    Status
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {dialogData.is_reported === 1 ? 'Yes' : 'No'}
+                    {dialogData.is_approved === 1 ? 'Approved' : 'Pending'}
                   </Typography>
                 </CardContent>
               </Card>
-                    </Box>
+            </Box>
+          )}
 
-                    {/* <Box sx={{ display: 'flex', gap: 2 }}>
-                    <Card sx={{ flex: 1 }}>
-                    <CardContent>
-                      <Typography variant="h6" component="div" className='typographypopup'>
-                        Status
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {dialogData.is_approved === 1 ? 'Approved' : 'Pending'}
-                      </Typography>
-                    </CardContent>
-                    </Card>
-                    </Box> */}
-
-                    <Card style={{width : "273px"}} >
-                    <CardContent>
-                      <Typography variant="h6" component="div" className='typographypopup'>
-                        Status
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {dialogData.is_approved === 1 ? 'Approved' : 'Pending'}
-                      </Typography>
-                    </CardContent>
-                    </Card>
-                      
-                  </Box>
-                )}
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleDialogClose} color="primary">
-                      Close
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
 
     </Grid>
   );
