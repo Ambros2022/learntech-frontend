@@ -20,7 +20,7 @@ const BrowsebyCategorySec = () => {
 
     const getCategoriesData = useCallback(async () => {
         try {
-            const response = await axios.get('api/website/stream/get');
+            const response = await axios.get('api/website/stream/get?page=1&size=50');
             if (response.data.status === 1) {
                 const categories = response.data.data.map(category => ({
                     id: category.id,

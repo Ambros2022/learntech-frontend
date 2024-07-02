@@ -24,7 +24,7 @@ const BlogCards = () => {
 
     const getBlogsData = useCallback(async (page = 1) => {
         try {
-            const roleparams = { page, size: 1 }; // Hardcoding cardsPerPage to 1
+            const roleparams = { page, size: 8 }; // Hardcoding cardsPerPage to 1
             const response = await axios.get('api/website/blog/get', { params: roleparams });
             setCardsData(response.data.data);
             setTotalPages(response.data.totalPages); // Set total pages from API response

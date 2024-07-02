@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import BannerSec from './Components/BannerSec'
 import AchieverSec from './Components/AchieversSec'
 import ProblemSec from './Components/ProblemSec'
@@ -11,20 +11,41 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 
 const MedicalEduStudioPage = () => {
+
+    const bannerSecRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBannerSec = () => {
+        if (bannerSecRef.current) {
+            bannerSecRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    const examSecRef = useRef<HTMLDivElement>(null);
+
+
+    const scrollToExamSec = () => {
+        if (examSecRef.current) {
+            examSecRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     return (
         <>
-            <Header/>
+            <Header />
+            <div ref={bannerSecRef}>
             <BannerSec />
+            </div>
             <AchieverSec />
             <ProblemSec />
-            <HelpSec/>
-            <EducationSec/>
-            <LearningSec/>
-            <ServicesSec/>
-            <ExamSec/>
-            <Footer/>
+            <HelpSec />
+            <EducationSec scrollToExamSec={scrollToExamSec} />
+            <LearningSec />
+            <ServicesSec  scrollToBannerSec={scrollToBannerSec} scrollToExamSec={scrollToExamSec}/>
+            <ExamSec ref={examSecRef} />
+            <Footer />
         </>
     )
 }
 
-export default MedicalEduStudioPage
+export default MedicalEduStudioPage;
+
