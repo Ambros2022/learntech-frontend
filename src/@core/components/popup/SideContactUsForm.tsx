@@ -11,7 +11,7 @@ interface Props {
     onChanges?: any;
 }
 
-const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
+const SideContactUsForm: FC<Props> = ({ page,...rest }) => {
     const router = useRouter();
 
     const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;

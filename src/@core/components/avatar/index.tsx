@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
@@ -44,7 +43,6 @@ const AvatarDropdown = () => {
   const handleLogout = () => {
     localStorage.removeItem('UserData');
     setUserData(null);
-    window.location.href = '/login'; // Redirect to login page
   };
 
   return (
@@ -52,17 +50,30 @@ const AvatarDropdown = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Avatar alt={userData ? userData.name : 'User'} className="mx-2">
-        {userData ? userData.name.charAt(0) : 'U'}
-      </Avatar>
-      <Dropdown isHovered={isHovered}>
-        <Typography variant="h4" className="mb-2 p-2 text-blue">
-          Welcome, {userData ? userData.name : 'Guest'}!
-        </Typography>
-        {userData && (
-          <Button variant="outlined" className="mb-2 p-2 viewMoreCollegeBtn" color="secondary" fullWidth onClick={handleLogout}>
-            Logout
-          </Button>
+      {userData ? (
+        <Avatar alt={userData.name} className="mx-2">
+          {userData.name.charAt(0)}
+        </Avatar>
+      ) : (
+        <i className='bi bi-person-fill text-blue mx-2 fs-2'></i>
+      )}
+      <Dropdown isHovered={isHovered} className='p-3'>
+        {userData ? (
+          <>
+            <h5 className="mb-2 text-blue">
+              Welcome, {userData.name}!
+            </h5>
+            <Button variant="outlined" className="mb-2 p-2 viewMoreCollegeBtn" color="secondary" fullWidth onClick={handleLogout}>
+              Logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <h5 className="mb-2 p-2 text-blue">
+              Welcome, Guest!
+            </h5>
+            {/* Add login and signup buttons here */}
+          </>
         )}
       </Dropdown>
     </AvatarContainer>
