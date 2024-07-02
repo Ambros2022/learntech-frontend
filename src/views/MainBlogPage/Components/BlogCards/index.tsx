@@ -6,40 +6,7 @@ import ContactForm from 'src/@core/components/popup/ContactForm';
 import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
-const BlogCards = () => {
-    const [newsData, setNewsData] = useState([]);
-    const [cardsData, setCardsData] = useState<any[]>([]);
-    const [totalPages, setTotalPages] = useState(1);
-    const [currentPage, setCurrentPage] = useState(1);
-    const isMountedRef = useIsMountedRef();
-
-    const getNewsData = useCallback(async () => {
-        try {
-            const response = await axios.get('api/website/news/get');
-            setNewsData(response.data.data);
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-    const getBlogsData = useCallback(async (page = 1) => {
-        try {
-            const roleparams = { page, size: 8 }; // Hardcoding cardsPerPage to 1
-            const response = await axios.get('api/website/blog/get', { params: roleparams });
-            setCardsData(response.data.data);
-            setTotalPages(response.data.totalPages); // Set total pages from API response
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-    useEffect(() => {
-        getNewsData();
-    }, [getNewsData]);
-
-    useEffect(() => {
-        getBlogsData(currentPage);
-    }, [currentPage, getBlogsData]);
+const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData, setCurrentPage }) => {
 
     const handlePreviousPage = () => {
         setCurrentPage(prevPage => {

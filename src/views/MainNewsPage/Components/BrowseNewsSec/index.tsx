@@ -27,7 +27,7 @@ const BrowseNewsSec = () => {
     // const [newsPerPage] = useState(6); // Number of news items per page
     const [newsItems, setNewsItems] = useState<GroupedNewsItems>({});
     const [categories, setCategories] = useState<{ id: string; title: string }[]>([]);
-    const newsPerPage = 1;
+    const newsPerPage = 8;
     const isMountedRef = useIsMountedRef();
 
 
@@ -203,7 +203,11 @@ const BrowseNewsSec = () => {
                                         className='btn flwBtn'
                                     />
                                         {/* <button className='btn flwBtn'>Follow Us</button> */}
-                                        <button className='btn askBtn'>Ask a Question</button>
+                                        <GlobalEnquiryForm
+                                        buttonText="Ask a Question"
+                                        className='btn askBtn'
+                                    />
+                                        {/* <button className='btn askBtn'>Ask a Question</button> */}
                                     </div>
                                 </div>
                             </div>

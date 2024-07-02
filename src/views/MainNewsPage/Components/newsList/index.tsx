@@ -12,7 +12,7 @@ const NewsItem = ({ id, banner_image, title }) => (
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <h5 className="card-title text-truncate fw-bold">{title}</h5>
+                        <h5 className="card-title  fw-bold">{title}</h5>
                     </div>
                 </div>
             </div>
