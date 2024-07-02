@@ -4,11 +4,11 @@ import BlogList from '../blogsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
 import axios from 'src/configs/axios';
 
-const OverviewSec = ({data , createdAt}) => {
+const OverviewSec = ({ data, createdAt }) => {
 
     const [newsData, setNewsData] = useState([]);
     const [blogsData, setBlogsData] = useState([]);
-    
+
 
     const getNews = useCallback(async () => {
         setNewsData([])
@@ -22,7 +22,7 @@ const OverviewSec = ({data , createdAt}) => {
                 id: item.id,
             }))
             setNewsData(formattedNews)
-            
+
         } catch (err) {
             console.error('Failed to fetch news:', err)
         }
@@ -40,7 +40,7 @@ const OverviewSec = ({data , createdAt}) => {
                 id: item.id,
             }))
             setBlogsData(formattedNews)
-            
+
         } catch (err) {
             console.error('Failed to fetch news:', err)
         }
@@ -52,8 +52,8 @@ const OverviewSec = ({data , createdAt}) => {
     }, [getNews, getBlogs]);
 
 
-   
-   
+
+
 
     return (
         <section className='innerBlogSec bg-white py-5'>
@@ -62,12 +62,12 @@ const OverviewSec = ({data , createdAt}) => {
                 {/* <h6>Team Learntech | July 18, 2023, 13:55 IST</h6> */}
                 <h6>Team Learntech | {createdAt}</h6>
                 <div className="row mt-5">
-                    <div className="col-md-6">
+                    <div className="col-md-8">
                         <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.overview }} /></p>
                         {/* <p className='text-black'>{data.meta_description}</p> */}
-                       
+
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <div className='mb-3'>
                             <ContactForm heading={'Get More Details'} />
                         </div>
