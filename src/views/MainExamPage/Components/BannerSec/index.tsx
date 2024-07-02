@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import PopularCourses from '../UpcomingExamsSec'
 import Link from 'next/link';
-import { Autocomplete, CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
+import {  CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import axios1 from 'axios';
 import axios from 'src/configs/axios';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import Image from 'next/image';
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import Autocomplete from 'src/@core/components/mui/autocomplete';
+import dynamic from 'next/dynamic';
+
+
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
 
 let cancelToken: any;

@@ -18,12 +18,22 @@ function InnerBlogPage({ id }) {
     const [colleges, setColleges] = useState([]);
     const [exams, setexams] = useState([]);
     const [streams, setStreams] = useState([]);
+    const [createdAt, setCreatedAt] = useState('');
 
     const getPagedata = useCallback(async () => {
         try {
             const response = await axios.get('/api/website/blogfindone/get/' + id);
             if (isMountedRef.current) {
                 setPagedata(response.data.data);
+                setCreatedAt(new Date(response.data.data.created_at).toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    timeZoneName: 'short',
+                }));
                 setLoading(false);
             }
         } catch (error) {
@@ -61,14 +71,8 @@ function InnerBlogPage({ id }) {
                 <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
-            {!loading && pagedata && <BannerSec data={pagedata} />}
-            {!loading && pagedata && <OverviewSec data={pagedata} />}
-     
-
-
-
-
-            {/* <OverviewSec /> */}
+            {!loading && pagedata && <BannerSec data={pagedata}  />}
+            {!loading && pagedata && <OverviewSec data={pagedata} createdAt={createdAt} />}
             <ExpertSec />
 
         </>

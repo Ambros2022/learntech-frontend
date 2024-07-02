@@ -4,11 +4,11 @@ import BlogList from '../blogsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
 import axios from 'src/configs/axios';
 
-const OverviewSec = ({data}) => {
+const OverviewSec = ({data , createdAt}) => {
 
     const [newsData, setNewsData] = useState([]);
     const [blogsData, setBlogsData] = useState([]);
-
+    
 
     const getNews = useCallback(async () => {
         setNewsData([])
@@ -52,18 +52,19 @@ const OverviewSec = ({data}) => {
     }, [getNews, getBlogs]);
 
 
-
+   
    
 
     return (
         <section className='innerBlogSec bg-white py-5'>
             <div className="container">
                 <h1 className='fw-bold text-blue mb-3'>{data.name}</h1>
-                <h6>Team Learntech | July 18, 2023, 13:55 IST</h6>
+                {/* <h6>Team Learntech | July 18, 2023, 13:55 IST</h6> */}
+                <h6>Team Learntech | {createdAt}</h6>
                 <div className="row mt-5">
                     <div className="col-md-6">
-                        <p className='text-black'>{data.meta_title}</p>
-                        <p className='text-black'>{data.meta_description}</p>
+                        <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.overview }} /></p>
+                        {/* <p className='text-black'>{data.meta_description}</p> */}
                        
                     </div>
                     <div className="col-md-6">

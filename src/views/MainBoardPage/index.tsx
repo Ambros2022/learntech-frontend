@@ -16,13 +16,13 @@ const MainBoardPage = () => {
   
     const getPagedata = useCallback(async () => {
       try {
-        const response = await axios.get('api/website/pagefindone/get/news');
+        const response = await axios.get('api/website/pagefindone/get/boards');
         if (isMountedRef.current) {
   
           setPagedata(response.data.data);
         }
       } catch (error) {
-        console.error('Failed to fetch trending courses:', error);
+        console.error('Failed to fetch trending boards:', error);
       }
     }, [isMountedRef]);
   

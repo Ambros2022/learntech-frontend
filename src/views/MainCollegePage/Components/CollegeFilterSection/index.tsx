@@ -83,7 +83,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                 </div>
             </div>
         </div>
-    );
+    ); 
 }
 function CollegeFilterSection() {
 
