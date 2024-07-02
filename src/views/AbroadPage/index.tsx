@@ -9,6 +9,7 @@ import TopUniversity from './Components/TopUniversity'
 import FaqSec from './Components/FaqSec'
 
 function AbroadPage({ data }) {
+  console.log(data);
   return (
     <>
       <BannerSec data={data} />

@@ -2486,11 +2486,11 @@
     font-size: 12px !important;
   }
 
-  .topUniCardCon img {
+  /* .topUniCardCon img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-  }
+  } */
 
   .topClgIcon {
     top: 9px !important;

@@ -59,8 +59,8 @@ function OverviewSection({ data, colleges, exams }) {
                     <GlobalEnquiryForm className="chkEligBtn mb-3 btn" buttonText={'Check Elgibility'} />
                   </div>
                 </div>
-                <div className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll bg-skyBlue" style={{ height: '460px' }}>
-                  <h5 className='fw-bold text-blue pt-3 mb-3'>Top Dental Colleges</h5>
+                <div className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll bg-skyBlue " style={{ height: '460px' }}>
+                  <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Top {data?.streams?.name} Colleges</h5>
                   {colleges.map((college, index) => (
                     <Link href={`/college/${college.id}/${college.slug}`}>
                       <div key={index} className="card p-2 mb-3 d-flex flex-row">
@@ -70,8 +70,8 @@ function OverviewSection({ data, colleges, exams }) {
                     </Link>
                   ))}
                 </div>
-                <div className="col-12 cardConBrdr p-3 overflow-y-scroll bg-skyBlue" style={{ height: '460px' }}>
-                  <h5 className='fw-bold text-blue pt-3 mb-3'>Top Dental Exams</h5>
+                <div className="col-12 cardConBrdr p-3 overflow-y-scroll bg-skyBlue " style={{ height: '460px' }}>
+                  <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Top {data?.streams?.name} Exams</h5>
                   {exams.map((exam, index) => (
                     <Link href={`/exam/${exam.id}/${exam.slug}`}>
                       <div key={index} className="card p-2 mb-3 d-flex flex-row">

@@ -30,46 +30,27 @@ function TopUniversity({ data }) {
   }, [getcolleges]);
 
 
-
-  function createCards() {
-    return colleges.map(card => (
-      <CardComponent
-        key={card.id}
-        title={card.name}
-        imageSrc={card.banner_image}
-      />
-    ));
-  }
-
-  // CardComponent function
-  function CardComponent({ title, imageSrc }) {
-
+  function CollegeCard({ college }) {
+    // alert(JSON.stringify(college))
     return (
-      <div className="mx-lg-2 mx-xl-4 mx-md-3 mx-5 card d-flex rounded text-center">
-        <div className="position-relative">
-          <Image
-            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageSrc}`}
-            // fill={true}
-            width={150}
-            height={150}
-            alt={title}
-          />
-
-          <div className="position-absolute topClgIcon">
-
-
-          </div>
+      <div className="mx-xl-4 mx-lg-2 mx-md-2 mx-5 card featuredClgCard mb-4">
+        <div className='card-image'>
+          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`} width={200} height={200} className="card-Image-top" alt="featured-college" />
         </div>
-        <div className='p-3'>
-          <p className='m-0 text-black fw-bold'>{title}</p>
-          <div className="mt-2 text-center">
-            <GlobalEnquiryForm className="btn ApplyNowBtn" />
+        <div className="card-body">
+          <h5 className="card-title text-blue text-truncate">{college.name}</h5>
+          <p className="card-text text-truncate">
+            <Image width={17} height={17} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
+            {college.address}
+          </p>
+          <div className="d-flex justify-content-between">
+            <GlobalEnquiryForm className="applyNowButton btn" />
+            <Link href={`/${data.slug}/${college.id}/${college.slug}`} className="btn">View More</Link>
           </div>
         </div>
       </div>
     );
   }
-
   return (
     <>
       <section className='topUniSec'>
@@ -77,7 +58,10 @@ function TopUniversity({ data }) {
           <h4 className='pt-5 pb-3 fw-bold text-center text-blue'>Top 10 Universities to Study in {data?.country?.name}</h4>
         </div>
         <div className='position-relative topUniCardCon container pb-5'>
-          <MainCarousel items={createCards()} />
+
+          <MainCarousel items={colleges.map(college => (
+            <CollegeCard key={college.id} college={college} />
+          ))} />
         </div>
       </section>
     </>
