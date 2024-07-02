@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useCallback, useEffect, useState } from 'react'
 import NewsList from '../newsList';
-import axios from 'src/configs/axios'; 
+import axios from 'src/configs/axios';
 
 const InfoSec = ({ data }) => {
 
@@ -39,9 +39,16 @@ const InfoSec = ({ data }) => {
                     {/* <div className="col-md-3">
                         <Link href='/news' className='btn applyNowButton align-content-center'>Uploaded PDF DOC Preview</Link>
                     </div> */}
-                    <div className="col-md-3">
+                    {/* <div className="col-md-3">
                         <a href={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.pdf_file}`} className="btn applyNowButton align-content-center" target="_blank" rel="noopener noreferrer">Uploaded PDF DOC Preview</a>
-                    </div>
+                    </div> */}
+                    {data.pdf_file && (
+                        <div className="col-md-3">
+                            <a href={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.pdf_file}`} className="btn applyNowButton align-content-center" target="_blank" rel="noopener noreferrer">
+                                Uploaded PDF DOC Preview
+                            </a>
+                        </div>
+                    )}
 
                 </div>
                 <div className="d-flex gap-3 flex-wrap mb-3">
@@ -65,12 +72,12 @@ const InfoSec = ({ data }) => {
                 </div>
                 <div className='pt-3'>
                     <div className="row">
-                        <div className="col-md-7 text-black">
+                        <div className="col-md-8 text-black">
                             <p>
                                 <div dangerouslySetInnerHTML={{ __html: data.overview }} />
                             </p>
                         </div>
-                        <div className="col-md-5">
+                        <div className="col-md-4">
                             <NewsList newsItems={newsData} />
                         </div>
                     </div>

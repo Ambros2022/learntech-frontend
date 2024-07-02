@@ -83,7 +83,7 @@ const BannerSec = () => {
           <Image src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
           <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
             <div className="container">
-              <div className="py-5">
+              <div className="py-5">u
                 <h1 className='fw-bold text-white mb-3'>Top Scholarships in India and Abroad</h1>
                 <h6 className='text-white mb-3'>Explore the Top Scholarships based on Levels of Study, Discipline, Region and more</h6>
                 <div className="row">
@@ -108,7 +108,7 @@ const BannerSec = () => {
                       renderInput={(params) => (
                         <TextField
                           {...params}
-                          placeholder="Search for News"
+                          placeholder="Search for Scholarship"
                           className='form-control'
                           InputProps={{
                             ...params.InputProps,

@@ -11,7 +11,7 @@ const MainExamPage = () => {
     const router = useRouter()
     const isMountedRef = useIsMountedRef();
     const [pagedata, setPagedata] = useState<any>();
-    const [trendingCourses, setTrendingCourses] = useState([]);
+    
   
     const getPagedata = useCallback(async () => {
       try {
@@ -25,29 +25,12 @@ const MainExamPage = () => {
       }
     }, [isMountedRef]);
   
-    const getTrendingCourses = useCallback(async () => {
-      try {
-        const response = await axios.get('api/website/generalcourse/get', {
-          params: {
-            page: 1,
-            size: 8,
-            is_trending: 1
-          }
-        });
-        if (isMountedRef.current) {
-          setTrendingCourses(response.data.data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch trending courses:', error);
-      }
-    }, [isMountedRef]);
+   
   
   
   
     useEffect(() => {
       getPagedata();
-      getTrendingCourses();
-  
   
     }, []);
   
@@ -60,7 +43,7 @@ const MainExamPage = () => {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
             <BannerSection  />
-            <TopExamSec />
+            <TopExamSec data={pagedata} />
             <BrowsebyCategorySec />
         </>
     )

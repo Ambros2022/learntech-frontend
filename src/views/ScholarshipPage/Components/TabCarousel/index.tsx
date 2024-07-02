@@ -47,7 +47,6 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
         </div>
     );
 
-    console.log('Active Tab:', activeTab);  // Logging for debugging
 
     return (
         <Carousel

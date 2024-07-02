@@ -16,7 +16,7 @@ const BrowsebyCategorySec = () => {
     // const [currentExams, setCurrentExams] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const examsPerPage = 1;
+    const examsPerPage = 15;
 
     const getCategoriesData = useCallback(async () => {
         try {
