@@ -5,6 +5,7 @@ import Link from 'next/link';
 // NewsItem component
 const NewsItem = ({ imageSrc, id, name }) => (
     <div className="col-12">
+         <Link href={`/news/${id}/${name}`}>
         <div className="card mb-3">
             <div className="row g-0">
                 <div className="col-md-4">
@@ -12,13 +13,14 @@ const NewsItem = ({ imageSrc, id, name }) => (
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
-                    <Link href={`/news-1/${id}/${name}`}>
+                   
                         <small className="card-text news-text">{name}</small>
-                        </Link>
+                       
                     </div>
                 </div>
             </div>
         </div>
+        </Link>
     </div>
 );
 

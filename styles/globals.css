@@ -3465,7 +3465,7 @@
 
   .innerNewsCard .card-img-top {
     height: 100px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
   }
 
   .innerNewsCard .card-text {
@@ -5076,6 +5076,4 @@
     color: black !important;
   }
 
-  .news-text:hover{
-    color: blue !important;
-  }
+ 
