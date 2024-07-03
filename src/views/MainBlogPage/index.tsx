@@ -12,8 +12,25 @@ function MainBlogPage() {
     const router = useRouter()
     const isMountedRef = useIsMountedRef();
     const [pagedata, setPagedata] = useState<any>();
-    
-  
+    const [newsData, setNewsData] = useState([]);
+
+    const [cardsData, setCardsData] = useState<any[]>([]);
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
+   
+    const getBlogsData = useCallback(async (page = 1) => {
+        try {
+            const roleparams = { page, size: 8 }; // Hardcoding cardsPerPage to 1
+            const response = await axios.get('api/website/blog/get', { params: roleparams });
+            setCardsData(response.data.data);
+            setTotalPages(response.data.totalPages); // Set total pages from API response
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+
     const getPagedata = useCallback(async () => {
       try {
         const response = await axios.get('api/website/pagefindone/get/blogs');
@@ -27,13 +44,25 @@ function MainBlogPage() {
     }, [isMountedRef]);
   
    
-  
+    const getNewsData = useCallback(async () => {
+      try {
+          const response = await axios.get('api/website/news/get');
+          setNewsData(response.data.data);
+      } catch (err) {
+          console.error(err);
+      }
+  }, [isMountedRef]);
 
-  
-  
+
+  useEffect(() => {
+    getBlogsData(currentPage);
+}, [currentPage, getBlogsData]);
+
+
     useEffect(() => {
       getPagedata();
-    }, []);
+      getNewsData();
+    }, [getNewsData,getPagedata ]);
     return (
         <>
             <Head>
@@ -43,7 +72,7 @@ function MainBlogPage() {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             <BannerSec />
-            <BlogCards />
+            <BlogCards  newsData ={newsData} cardsData ={cardsData} totalPages= {totalPages} currentPage={currentPage} getBlogsData={getBlogsData}  setCurrentPage ={setCurrentPage} />
         </>
     )
 }

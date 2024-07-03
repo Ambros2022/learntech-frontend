@@ -3,29 +3,7 @@ import Image from 'next/image';
 import axios from 'src/configs/axios';
 import Link from 'next/link';
 
-const BoardsSec = () => {
-    const [activeTab, setActiveTab] = useState('all');
-    const [displayCount, setDisplayCount] = useState(4);
-    const [boardItems, setBoardItems] = useState<any[]>([]);
-
-    useEffect(() => {
-        const fetchBoardData = async () => {
-            try {
-                const response = activeTab === 'all'
-                    ? await axios.get('/api/website/schoolboard/get')
-                    : await axios.get(`/api/website/schoolboard/get?board_type=${activeTab}`);
-
-                const data = Array.isArray(response.data.data) ? response.data.data : [];
-                setBoardItems(data);
-
-            } catch (error) {
-                console.error('Error fetching board data:', error);
-                setBoardItems([]); // Ensure boardItems is an array even if the fetch fails
-            }
-        };
-
-        fetchBoardData();
-    }, [activeTab]);
+const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDisplayCount }) => {
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
@@ -56,13 +34,26 @@ const BoardsSec = () => {
                                             index < displayCount && (
                                                 <div key={item.id} className="col-8 mx-auto col-md-6 mx-md-0 mb-3">
                                                     <div className="card newsImgSize bg-skyBlue">
-                                                        <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
+                                                        {/* <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
                                                             <i className='bi bi-star-fill text-warning'></i>
                                                             <i className='bi bi-star-fill text-warning'></i>
                                                             <i className='bi bi-star-fill text-warning'></i>
                                                             <i className='bi bi-star-fill text-warning'></i>
                                                             <i className='bi bi-star-fill text-gray'></i>
-                                                        </div>
+                                                        </div> */}
+                                                        {/* {boardItems?.avg_rating && <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
+                                                            <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
+
+                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
+                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 2 ? "text-warning" : "text-white"} `}></i>
+                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 3 ? "text-warning" : "text-white"} `}></i>
+                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 4 ? "text-warning" : "text-white"} `}></i>
+                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 5 ? "text-warning" : "text-white"} `}></i>
+
+                                                               
+                                                            </div>
+                                                        </div>} */}
+
                                                         <div className="card-body">
                                                             <div className="row d-flex">
                                                                 <div className="col-lg-4 col-xl-3 align-self-center mb-lg-0 mb-3">

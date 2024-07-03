@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import BannerSec from './Components/BannerSec'
 import OverviewSec from './Components/OverviewSec'
 import ExpertSec from './Components/ExpertSec'
-
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
@@ -19,6 +18,9 @@ function InnerBlogPage({ id }) {
     const [exams, setexams] = useState([]);
     const [streams, setStreams] = useState([]);
     const [createdAt, setCreatedAt] = useState('');
+    const [newsData, setNewsData] = useState([]);
+    const [blogsData, setBlogsData] = useState([]);
+
 
     const getPagedata = useCallback(async () => {
         try {
@@ -42,27 +44,47 @@ function InnerBlogPage({ id }) {
         }
     }, [id, isMountedRef, router]);
 
-    const getColleges = useCallback(async () => {
+    const getNews = useCallback(async () => {
+        setNewsData([])
         try {
-            const response = await axios.get('api/website/news/get', {
-                params: {
-                    page: 1,
-                    size: 8,
-                }
-            });
-            if (isMountedRef.current) {
-                setColleges(response.data.data);
-            }
-        } catch (error) {
-            console.error('Failed to fetch trending courses:', error);
-        }
-    }, [id, isMountedRef]);
+            const roleparams = { page: 1, size: 10000 }
+            const response = await axios.get('/api/website/news/get', { params: roleparams })
 
+            const formattedNews = response.data.data.map((item) => ({
+                imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
+                name: item.name || 'No description available',
+                id: item.id,
+            }))
+            setNewsData(formattedNews)
+
+        } catch (err) {
+            console.error('Failed to fetch news:', err)
+        }
+    }, [id, isMountedRef])
+
+    const getBlogs = useCallback(async () => {
+        setBlogsData([])
+        try {
+            const roleparams = { page: 1, size: 10000 }
+            const response = await axios.get('/api/website/blog/get', { params: roleparams })
+
+            const formattedNews = response.data.data.map((item) => ({
+                imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
+                name: item.name || 'No description available',
+                id: item.id,
+            }))
+            setBlogsData(formattedNews)
+
+        } catch (err) {
+            console.error('Failed to fetch news:', err)
+        }
+    }, [id, isMountedRef])
 
     useEffect(() => {
         getPagedata();
-        getColleges();
-    }, [getPagedata]);
+        getNews();
+        getBlogs();
+    }, [getPagedata , getNews , getBlogs ]);
     return (
         <>
             <Head>
@@ -72,7 +94,8 @@ function InnerBlogPage({ id }) {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             {!loading && pagedata && <BannerSec data={pagedata}  />}
-            {!loading && pagedata && <OverviewSec data={pagedata} createdAt={createdAt} />}
+            {!loading && pagedata && <OverviewSec data={pagedata} createdAt={createdAt} newsData={newsData} 
+            blogsData= {blogsData}/>}
             <ExpertSec />
 
         </>

@@ -4,56 +4,7 @@ import BlogList from '../blogsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
 import axios from 'src/configs/axios';
 
-const OverviewSec = ({ data, createdAt }) => {
-
-    const [newsData, setNewsData] = useState([]);
-    const [blogsData, setBlogsData] = useState([]);
-
-
-    const getNews = useCallback(async () => {
-        setNewsData([])
-        try {
-            const roleparams = { page: 1, size: 10000 }
-            const response = await axios.get('/api/website/news/get', { params: roleparams })
-
-            const formattedNews = response.data.data.map((item) => ({
-                imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
-                name: item.name || 'No description available',
-                id: item.id,
-            }))
-            setNewsData(formattedNews)
-
-        } catch (err) {
-            console.error('Failed to fetch news:', err)
-        }
-    }, [])
-
-    const getBlogs = useCallback(async () => {
-        setBlogsData([])
-        try {
-            const roleparams = { page: 1, size: 10000 }
-            const response = await axios.get('/api/website/blog/get', { params: roleparams })
-
-            const formattedNews = response.data.data.map((item) => ({
-                imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
-                name: item.name || 'No description available',
-                id: item.id,
-            }))
-            setBlogsData(formattedNews)
-
-        } catch (err) {
-            console.error('Failed to fetch news:', err)
-        }
-    }, [])
-
-    useEffect(() => {
-        getNews();
-        getBlogs();
-    }, [getNews, getBlogs]);
-
-
-
-
+const OverviewSec = ({ data, createdAt , newsData , blogsData }) => {
 
     return (
         <section className='innerBlogSec bg-white py-5'>
@@ -63,8 +14,9 @@ const OverviewSec = ({ data, createdAt }) => {
                 <h6>Team Learntech | {createdAt}</h6>
                 <div className="row mt-5">
                     <div className="col-md-8">
-                        <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.overview }} /></p>
-                        {/* <p className='text-black'>{data.meta_description}</p> */}
+                        <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.info }} /></p>
+                        {/* <p className='text-black'>{data.meta_description}</p>
+                        <p className='text-black'>{data.meta_title}</p> */}
 
                     </div>
                     <div className="col-md-4">

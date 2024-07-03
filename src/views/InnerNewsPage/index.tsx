@@ -64,9 +64,6 @@ function InnerNewsPage({ id }) {
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
-      {/* {!loading && pagedata && <BannerSec data={pagedata} />}
-      {!loading && pagedata && <OverviewSec data={pagedata} />} */}
-
 
             {!loading && pagedata && <BannerSec data={pagedata}  />}
             {!loading && pagedata && <InfoSec data={pagedata}  />}

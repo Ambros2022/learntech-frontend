@@ -42,6 +42,7 @@ const TopTrendingNews = () => {
     }, [getNewsdata])
 
     const newsCards = newsItems.map(news => (
+        <Link className='text-blue' href={`/news-1/${news.id}/${encodeURIComponent(news.title)}`}>
         <div key={news.id} className="col-8 col-md-10 mx-auto mb-1">
             <div className="card h-100 d-flex flex-fill">
                 <Image
@@ -54,13 +55,14 @@ const TopTrendingNews = () => {
                     alt={news.title}
                 />
                 <div className="card-body">
-                    <Link className='text-blue' href={`/news-1/${news.id}/${encodeURIComponent(news.title)}`}>
+                   
                         <h6 className="card-title fw-bold text-truncate">{news.title}</h6>
-                    </Link>
+                    
                     <p className="card-text">{news.description}</p>
                 </div>
             </div>
         </div>
+        </Link>
     ));
     
     return (

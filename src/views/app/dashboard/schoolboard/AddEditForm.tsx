@@ -50,6 +50,7 @@ interface Authordata {
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
+    const [recoginationsdata, setRecoginationsdata] = useState([])
 
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
@@ -113,7 +114,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         state_id: isAddMode ? '' : olddata.state ? olddata.state : '',
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
         result_date: isAddMode ? null : new Date(olddata.result_date),
-       
+        recoginations: [],
        
     }
 
@@ -157,6 +158,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('reg_form', data.reg_form);
             formData.append('syllabus', data.syllabus);
             formData.append('results', data.results);
+            formData.append('recoginations', JSON.stringify(data.recoginations));
+
             formData.append('sample_paper', data.sample_paper);
             formData.append('logo', selectedphoto);
 
@@ -211,6 +214,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('syllabus', data.syllabus);
             formData.append('results', data.results);
             formData.append('sample_paper', data.sample_paper);
+            formData.append('recoginations', JSON.stringify(data.recoginations));
+
             if (selectedphoto == '') {
 
                 toast.error('Please Upload logo', {
@@ -297,9 +302,37 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }, [stateId]);
 
+    const getrecognition = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/recognition/get', { params: roleparams });
+            setRecoginationsdata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+
     useEffect(() => {
 
         getcountries();
+        getrecognition();
+
+    }, []);
+
+
+    useEffect(() => {
+
+       
+        if (!isAddMode && olddata.collegerecognitions) {
+            const RECOGINATION = olddata.collegerecognitions.map((item) => ({
+                id: item.clgrecognitions.id,
+                recognition_approval_name: item.clgrecognitions.recognition_approval_name,
+            }));
+            admfiledReset("recoginations", { defaultValue: RECOGINATION })
+        }
 
     }, []);
 
@@ -749,6 +782,41 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             </DatePickerWrapper>
                             )}
                         />
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="recoginations"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={recoginationsdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.recognition_approval_name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select recoginations'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.recoginations)}
+                                                            {...(errors.recoginations && { helperText: 'This field is required' })}
+                                                            placeholder='recoginations' />}
+                                                />
+                                            );
+                                        }}
+                                    />
                                 </Grid>
 
                                 <Grid item xs={12} sm={12}>
