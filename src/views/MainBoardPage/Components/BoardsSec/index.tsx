@@ -68,8 +68,16 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                             <div className="row">
                                                                 <div className="col-lg-8 col-xl-9 ms-auto">
                                                                     <p className='text-black mb-2'><span className='fw-bold'>Est Year :</span> {item.established}</p>
-                                                                    {/* <p className='text-black mb-2'><span className='fw-bold'>Location :</span> {item.location}</p> */}
-                                                                    <p className='text-black'><span className='fw-bold'>Approvals and Recognition :</span> {item.established}</p>
+                                                                    <p className='text-black mb-2'><span className='fw-bold'>Location :</span> {item.address}</p>
+                                                                    <p className='text-black'><span className='fw-bold'>Approvals and Recognition :</span>{
+                                                                        item.boardrecognitions && item.boardrecognitions.map((element, index) => {
+                                                                            return (
+                                                                                <>
+                                                                                    {index == 0 ? ' ' + element.brdrecognitions.recognition_approval_name : ', ' + element.brdrecognitions.recognition_approval_name}
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }</p>
                                                                     <p className='text-black'><span className='fw-bold'>Genders Accepted :</span> {item.gender}</p>
                                                                 </div>
                                                             </div>
