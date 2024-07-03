@@ -2698,10 +2698,11 @@
     font-size: 14px !important;
   }
 
-  .upcomingAdmission img{
+  .upcomingAdmission img {
     width: 100%;
     height: 100%;
   }
+
   /* .detailsFillSec input {
     background-color: rgba(39, 72, 150, 0.04) !important ;
   } */
@@ -3153,6 +3154,7 @@
     text-overflow: ellipsis !important;
     min-height: 70px !important;
   }
+
   .cardNewsText {
     display: -webkit-box !important;
     -webkit-line-clamp: 3 !important;
@@ -3163,12 +3165,12 @@
     max-height: 80px !important;
   }
 
-  .newsPageImg img{
+  .newsPageImg img {
     width: 100%;
     height: 100%;
   }
 
-  .innerExamImg>img{
+  .innerExamImg>img {
     width: 100%;
     height: 100%;
   }
@@ -3465,7 +3467,7 @@
 
   .innerNewsCard .card-img-top {
     height: 100px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
   }
 
   .innerNewsCard .card-text {
@@ -3539,7 +3541,7 @@
 
     .innerNewsCard .card-img-top {
       height: 200px !important;
-      object-fit: cover !important;
+      object-fit: contain !important;
     }
   }
 
@@ -5072,10 +5074,10 @@
     font-weight: 700 !important;
   }
 
-  .news-text{
+  .news-text {
     color: black !important;
   }
 
-  .news-text:hover{
+  .news-text:hover {
     color: blue !important;
   }

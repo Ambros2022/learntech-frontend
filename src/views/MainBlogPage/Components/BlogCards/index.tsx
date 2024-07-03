@@ -3,8 +3,10 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import NewsList from '../newsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
+import GlobalPopupShare from 'src/@core/components/popup/GlobalPopupShare';
 import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import router from 'next/router';
 
 const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData, setCurrentPage }) => {
 
@@ -45,7 +47,13 @@ const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData,
                                             <Image src='/images/icons/icon-share.png' width={30} height={30} style={{
                                                 top: '20px', right: '20px', backgroundColor: 'rgba(0,0,0,0.5)'
                                             }} className='position-absolute rounded p-1' alt='share-icon' />
+
+                                            <GlobalPopupShare
+                                                pathname={`${process.env.NEXT_PUBLIC_WEB_URL}/blog/${card.id}/${card.slug}`}
+                                                title={card.meta_title}
+                                                logourl={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} />
                                         </span>
+
                                         <div className="card-body">
                                             <h5 className="card-title fw-bold text-truncate">{card.name}</h5>
                                             <p className="card-text">{card.meta_title}</p>
