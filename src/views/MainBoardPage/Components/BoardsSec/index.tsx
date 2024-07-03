@@ -20,7 +20,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                 <div className="container">
                     <div className="d-flex justify-content-center newsTabsClr gap-3 mx-5 flex-wrap flex-row">
                         {['all', 'state', 'national', 'international'].map(tabName => (
-                            <button key={tabName} className={`btn ${activeTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>
+                            <button key={tabName} className={`btn bg-skyBlue ${activeTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>
                                 {tabName.charAt(0).toUpperCase() + tabName.slice(1) + ' Boards'}
                             </button>
                         ))}

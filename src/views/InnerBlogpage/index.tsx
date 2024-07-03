@@ -96,7 +96,8 @@ function InnerBlogPage({ id }) {
             {!loading && pagedata && <BannerSec data={pagedata}  />}
             {!loading && pagedata && <OverviewSec data={pagedata} createdAt={createdAt} newsData={newsData} 
             blogsData= {blogsData}/>}
-            <ExpertSec />
+      
+            {!loading && pagedata && <ExpertSec data={pagedata}  />}
 
         </>
     )

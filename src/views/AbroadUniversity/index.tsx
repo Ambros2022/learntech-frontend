@@ -16,9 +16,7 @@ function AbroadUniversityPage({ id, Countrydata }) {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [colleges, setColleges] = useState([]);
-  const [exams, setexams] = useState([]);
-  const [streams, setStreams] = useState([]);
+
 
   const getPagedata = useCallback(async () => {
     try {
@@ -33,26 +31,12 @@ function AbroadUniversityPage({ id, Countrydata }) {
     }
   }, [id, isMountedRef, router]);
 
-  const getColleges = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/colleges/get', {
-        params: {
-          page: 1,
-          size: 8,
-        }
-      });
-      if (isMountedRef.current) {
-        setColleges(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [id, isMountedRef]);
+
 
 
   useEffect(() => {
     getPagedata();
-    getColleges();
+
   }, [getPagedata]);
   return (
     <>
@@ -63,13 +47,11 @@ function AbroadUniversityPage({ id, Countrydata }) {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
+      {!loading && pagedata && <CollegeInfoSection data={pagedata} Countrydata={Countrydata} />}
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}
-
-
-      <TopFeaturedColleges />
-      <ExpertSection />
+      <TopFeaturedColleges  data={Countrydata}/>
+      
 
     </>
   )

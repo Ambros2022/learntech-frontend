@@ -6,14 +6,14 @@ import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import dynamic from 'next/dynamic';
 import ReviewSec from '../ReviewSec'
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
+const AbroadEnquiryForm = dynamic(() => import('src/@core/components/popup/AbroadEnquiryForm'), { ssr: false });
 
-
-function CollegeInfoSection({ data }) {
+function CollegeInfoSection({ data, Countrydata }) {
   return (
     <>
       <section className='clgInfoSec bg-white'>
         <section className="container InnerCollegeNavigationLink linkFontSize py-3">
-          <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={"/colleges"}> Colleges <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data.name}</span></p>
+          <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={`/${Countrydata?.slug}`}> {Countrydata?.name} <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data.name}</span></p>
         </section>
         <div className="container">
           <div className="pt-3 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3 " id="nav-tab" role="tablist">
@@ -28,11 +28,7 @@ function CollegeInfoSection({ data }) {
                 <button className='btn' id="nav-admission-tab" data-bs-toggle="tab" data-bs-target="#nav-admission" type="button" role="tab" aria-controls="nav-admission" aria-selected="false">Admissions</button>
                 : ''
             }
-            {
-              data.placements && data.placements != '' && data.placements != 'null' && data.placements != '<p>null</p>' ?
-                <button className='btn' id="nav-placement-tab" data-bs-toggle="tab" data-bs-target="#nav-placement" type="button" role="tab" aria-controls="nav-placement" aria-selected="false">Placement</button>
-                : ''
-            }
+
             {
               data.rankings && data.rankings != '' && data.rankings != 'null' && data.rankings != '<p>null</p>' ?
                 <button className='btn' id="nav-ranking-tab" data-bs-toggle="tab" data-bs-target="#nav-ranking" type="button" role="tab" aria-controls="nav-ranking" aria-selected="false">Ranking</button>
@@ -68,21 +64,11 @@ function CollegeInfoSection({ data }) {
           <div className="tab-content pt-5" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
               <div className="row">
-                <div className="order-2 order-md-1 col-md-8 col-lg-8 col-xl-9 text-black pt-3">
+                <div className="order-1 order-md-1 col-md-7 col-lg-7 col-xl-7 text-black pt-3">
                   <div dangerouslySetInnerHTML={{ __html: data.info }} />
                 </div>
-                <div className="col-md-4 col-10 mx-md-0 mx-auto col-xl-3 col-lg-4 pt-3 rounded mb-md-5 order-1 order-md-2">
-                  <div className="row gx-2">
-                    {data.banner_image && data.banner_image !== "" && <div className="col-12 applyNowImg position-relative mb-2">
-                      <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={300} height={300} className='rounded' alt='College Card' />
-                      <GlobalEnquiryForm className="applyNowImgbtn btn" />
-                    </div>}
-                    {data.video_url && data.video_url !== "" && <div className="col-12 yotubeImg position-relative mb-2">
-                      <YoutubeVideo videoId={data.video_url} />
-
-                    </div>}
-
-                  </div>
+                <div className="col-md-5 col-10 mx-md-0 mx-auto col-xl-5 col-lg-5 pt-3 rounded mb-md-5 order-2 order-md-2">
+                  <AbroadEnquiryForm />
                 </div>
               </div>
             </div>
@@ -94,9 +80,6 @@ function CollegeInfoSection({ data }) {
               </div>
             </div>
 
-            <div className="tab-pane fade" id="nav-placement" role="tabpanel" aria-labelledby="nav-placement-tab">
-              <div dangerouslySetInnerHTML={{ __html: data.placements }} ></div>
-            </div>
             <div className="tab-pane fade" id="nav-ranking" role="tabpanel" aria-labelledby="nav-ranking-tab">
               <div dangerouslySetInnerHTML={{ __html: data.rankings }} ></div>
             </div>
@@ -117,8 +100,8 @@ function CollegeInfoSection({ data }) {
               </div>
             </div>
             <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-            <ReviewSec />
-            
+              <ReviewSec />
+
             </div>
 
             <div className="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
