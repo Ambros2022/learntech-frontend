@@ -98,7 +98,7 @@ const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , set
                         {categories.map(category => (
                             <button
                                 key={category.id}
-                                className={`btn ${activeTab === category.id ? 'active' : ''}`}
+                                className={`btn bg-skyBlue ${activeTab === category.id ? 'active' : ''}`}
                                 onClick={() => handleTabClick(category.id)}
                             >
                                 {category.title}
