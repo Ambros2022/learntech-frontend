@@ -5,10 +5,11 @@ import Image from 'next/image'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import dynamic from 'next/dynamic';
 import ReviewSec from '../ReviewSec'
+import ContactForm from 'src/@core/components/popup/ContactForm';
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 
 
-function CollegeInfoSection({ data }) {
+function CollegeInfoSection({ data, exams }) {
   return (
     <>
       <section className='clgInfoSec bg-white'>
@@ -17,30 +18,34 @@ function CollegeInfoSection({ data }) {
         </section>
         <div className="container">
           <div className="pt-3 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3 " id="nav-tab" role="tablist">
-            <button className='active btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-Overview" type="button" role="tab" aria-controls="nav-Overview" aria-selected="true">Overview</button>
             {
-              data.course_fees && data.course_fees != '' && data.course_fees != 'null' && data.course_fees != '<p>null</p>' ?
-                <button className='btn' id="nav-time_table-tab" data-bs-toggle="tab" data-bs-target="#nav-time_table" type="button" role="tab" aria-controls="nav-time_table" aria-selected="false">Time Table </button>
+              data.info && data.info != '' && data.info != 'null' && data.info != '<p>null</p>' ?
+                <button className='active btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">Info</button>
                 : ''
             }
             {
-              data.admissions && data.admissions != '' && data.admissions != 'null' && data.admissions != '<p>null</p>' ?
-                <button className='btn' id="nav-registration_form-tab" data-bs-toggle="tab" data-bs-target="#nav-registration_form" type="button" role="tab" aria-controls="nav-registration_form" aria-selected="false">Registration Form</button>
+              data.time_table && data.time_table != '' && data.time_table != 'null' && data.time_table != '<p>null</p>' ?
+                <button className='btn' id="nav-time_table-tab" data-bs-toggle="tab" data-bs-target="#nav-time_table" type="button" role="tab" aria-controls="nav-time_table" aria-selected="false">Time Table</button>
                 : ''
             }
             {
-              data.placements && data.placements != '' && data.placements != 'null' && data.placements != '<p>null</p>' ?
-                <button className='btn' id="nav-Syllabus-tab" data-bs-toggle="tab" data-bs-target="#nav-Syllabus" type="button" role="tab" aria-controls="nav-Syllabus" aria-selected="false">Syllabus</button>
+              data.reg_form && data.reg_form != '' && data.reg_form != 'null' && data.reg_form != '<p>null</p>' ?
+                <button className='btn' id="nav-reg_form-tab" data-bs-toggle="tab" data-bs-target="#nav-reg_form" type="button" role="tab" aria-controls="nav-reg_form" aria-selected="false">Registration Form</button>
                 : ''
             }
             {
-              data.rankings && data.rankings != '' && data.rankings != 'null' && data.rankings != '<p>null</p>' ?
+              data.syllabus && data.syllabus != '' && data.syllabus != 'null' && data.syllabus != '<p>null</p>' ?
+                <button className='btn' id="nav-syllabus-tab" data-bs-toggle="tab" data-bs-target="#nav-syllabus" type="button" role="tab" aria-controls="nav-syllabus" aria-selected="false">Syllabus</button>
+                : ''
+            }
+            {
+              data.results && data.results != '' && data.results != 'null' && data.results != '<p>null</p>' ?
                 <button className='btn' id="nav-Results-tab" data-bs-toggle="tab" data-bs-target="#nav-Results" type="button" role="tab" aria-controls="nav-Results" aria-selected="false">Results</button>
                 : ''
             }
             {
-              data.scholarship && data.scholarship != '' && data.scholarship != 'null' && data.scholarship != '<p>null</p>' ?
-                <button className='btn' id="nav-s Sample_Papers-tab" data-bs-toggle="tab" data-bs-target="#nav-s Sample_Papers" type="button" role="tab" aria-controls="nav-s Sample_Papers" aria-selected="false">Sample Papers</button>
+              data.sample_paper && data.sample_paper != '' && data.sample_paper != 'null' && data.sample_paper != '<p>null</p>' ?
+                <button className='btn' id="nav-sample_paper-tab" data-bs-toggle="tab" data-bs-target="#nav-sample_paper" type="button" role="tab" aria-controls="nav-sample_paper" aria-selected="false">Sample Papers</button>
                 : ''
             }
             {
@@ -58,74 +63,76 @@ function CollegeInfoSection({ data }) {
             <button className='btn' id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reviews</button>
 
             {
-              data.collegefaqs && data.collegefaqs.length > 0 ?
-                <button className='btn' id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
+              data.schoolboardfaqs && data.schoolboardfaqs.length > 0 ?
+                <button className='btn' id="nav-schoolboardfaqs-tab" data-bs-toggle="tab" data-bs-target="#nav-schoolboardfaqs" type="button" role="tab" aria-controls="nav-schoolboardfaqs" aria-selected="false">FAQ</button>
                 : ''
             }
 
           </div>
-
-          <div className="tab-content pt-5" id="nav-tabContent">
-            <div className="tab-pane fade show active" id="nav-Overview" role="tabpanel" aria-labelledby="nav-Overview-tab">
-              <div className="row">
-                <div className="order-2 order-md-1 col-md-8 col-lg-8 col-xl-9 text-black pt-3">
+          <div className="row">
+            <div className="col-xl-8 col-lg-8 col-md-7 col-10 mx-auto">
+              <div className="tab-content pt-5" id="nav-tabContent">
+                <div className="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
                   <div dangerouslySetInnerHTML={{ __html: data.info }} />
                 </div>
-                <div className="col-md-4 col-10 mx-md-0 mx-auto col-xl-3 col-lg-4 pt-3 rounded mb-md-5 order-1 order-md-2">
-                  <div className="row gx-2">
-                    {data.banner_image && data.banner_image !== "" && <div className="col-12 applyNowImg position-relative mb-2">
-                      <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={300} height={300} className='rounded' alt='College Card' />
-                      <GlobalEnquiryForm className="applyNowImgbtn btn" />
-                    </div>}
-                    {data.video_url && data.video_url !== "" && <div className="col-12 yotubeImg position-relative mb-2">
-                      <YoutubeVideo videoId={data.video_url} />
-                    </div>}
+                <div className="tab-pane fade" id="nav-time_table" role="tabpanel" aria-labelledby="nav-time_table-tab">
+                  <div dangerouslySetInnerHTML={{ __html: data.time_table }} ></div>
+                </div>
+                <div className="tab-pane fade" id="nav-reg_form" role="tabpanel" aria-labelledby="nav-reg_form-tab">
+                  <div dangerouslySetInnerHTML={{ __html: data.reg_form }} >
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="tab-pane fade" id="nav-time_table" role="tabpanel" aria-labelledby="nav-time_table-tab">
-              <div dangerouslySetInnerHTML={{ __html: data.course_fees }} ></div>
-            </div>
-            <div className="tab-pane fade" id="nav-registration_form" role="tabpanel" aria-labelledby="nav-registration_form-tab">
-              <div dangerouslySetInnerHTML={{ __html: data.admissions }} >
-              </div>
-            </div>
 
-            <div className="tab-pane fade" id="nav-Syllabus" role="tabpanel" aria-labelledby="nav-Syllabus-tab">
-              <div dangerouslySetInnerHTML={{ __html: data.placements }} ></div>
-            </div>
-            <div className="tab-pane fade" id="nav-Results" role="tabpanel" aria-labelledby="nav-Results-tab">
-              <div dangerouslySetInnerHTML={{ __html: data.rankings }} ></div>
-            </div>
-            <div className="tab-pane fade" id="nav-s Sample_Papers" role="tabpanel" aria-labelledby="nav-s Sample_Papers-tab">
-              <div dangerouslySetInnerHTML={{ __html: data.scholarship }} ></div>
-            </div>
+                <div className="tab-pane fade" id="nav-syllabus" role="tabpanel" aria-labelledby="nav-syllabus-tab">
+                  <div dangerouslySetInnerHTML={{ __html: data.syllabus }} ></div>
+                </div>
+                <div className="tab-pane fade" id="nav-Results" role="tabpanel" aria-labelledby="nav-Results-tab">
+                  <div dangerouslySetInnerHTML={{ __html: data.results }} ></div>
+                </div>
+                <div className="tab-pane fade" id="nav-sample_paper" role="tabpanel" aria-labelledby="nav-sample_paper-tab">
+                  <div dangerouslySetInnerHTML={{ __html: data.sample_paper }} ></div>
+                </div>
 
-            <div className="tab-pane fade" id="nav-hostel" role="tabpanel" aria-labelledby="nav-hostel-tab">
-              <div dangerouslySetInnerHTML={{ __html: data.hostel }} ></div>
-            </div >
+                <div className="tab-pane fade" id="nav-hostel" role="tabpanel" aria-labelledby="nav-hostel-tab">
+                  <div dangerouslySetInnerHTML={{ __html: data.hostel }} ></div>
+                </div >
 
-            <div className="tab-pane fade " id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
-              <div className="row bg-skyBlue">
+                <div className="tab-pane fade " id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
+                  {/* <div className="row bg-skyBlue">
                 {data.clggallery.map((item) => <div className="col-md-4 galleryImgStyle">
                   <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.image}`} className='' width={300} height={300} alt='College Card' />
                 </div>)}
 
+              </div> */}
+                </div>
+                <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+                  <ReviewSec />
+
+                </div>
+
+                <div className="tab-pane fade" id="nav-schoolboardfaqs" role="tabpanel" aria-labelledby="nav-schoolboardfaqs-tab">
+                  <FaqSec data={data.schoolboardfaqs} />
+                </div>
+
               </div>
             </div>
-            <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-              <ReviewSec />
-
+            <div className="col-xl-4 col-lg-4 col-md-5 col-10 mx-auto py-5">
+              <ContactForm heading={'Contact US'} />
+              <div className="col-12 cardConBrdr p-3 overflow-y-scroll bg-skyBlue my-3" style={{ height: '460px' }}>
+                <h5 className='fw-bold text-blue pt-3 mb-3'>Top Dental Exams</h5>
+                {exams.map((exam, index) => (
+                  <Link href={`/exam/${exam.id}/${exam.slug}`}>
+                    <div key={index} className="card p-2 mb-3 d-flex flex-row">
+                      <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.cover_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
+                      <h6 className='align-self-center fw-bold text-black ms-2 mb-0'>{exam.exam_title}</h6>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
-
-            <div className="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
-              <FaqSec data={data.collegefaqs} />
-            </div>
-
           </div>
         </div>
-      </section >
+    </section >
     </>
   )
 }
