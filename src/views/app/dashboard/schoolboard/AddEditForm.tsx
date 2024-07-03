@@ -326,9 +326,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     useEffect(() => {
 
        
-        if (!isAddMode && olddata.collegerecognitions) {
-            const RECOGINATION = olddata.collegerecognitions.map((item) => ({
-                id: item.clgrecognitions.id,
+        if (!isAddMode && olddata.schoolboardsDetails) {
+            const RECOGINATION = olddata.schoolboardsDetails.map((item) => ({
+                id: item.school_board_id.id,
                 recognition_approval_name: item.clgrecognitions.recognition_approval_name,
             }));
             admfiledReset("recoginations", { defaultValue: RECOGINATION })

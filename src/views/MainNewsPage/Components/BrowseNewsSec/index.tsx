@@ -5,6 +5,8 @@ import Link from 'next/link';
 import axios from 'src/configs/axios';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import Spinner from 'src/@core/components/spinner'
+
 
 interface NewsItem {
     id: number;
@@ -18,48 +20,14 @@ interface GroupedNewsItems {
     [key: string]: NewsItem[];
 }
 
-const BrowseNewsSec = () => {
-    const [activeTab, setActiveTab] = useState('All');
+const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , setActiveTab}) => {
+    
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [collegeData, setcollegeData] = useState([]);
-
-    // const [newsPerPage] = useState(6); // Number of news items per page
+    const [loading, setLoading] = useState(false);
     const [newsItems, setNewsItems] = useState<GroupedNewsItems>({});
-    const [categories, setCategories] = useState<{ id: string; title: string }[]>([]);
     const newsPerPage = 8;
     const isMountedRef = useIsMountedRef();
-
-
-    const getColleges = useCallback(async () => {
-        try {
-            const roleparams = { page: 1, size: 10000 };
-            const response = await axios.get('api/website/colleges/get', { params: roleparams });
-            setcollegeData(response.data.data);
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-    const getCategoriesData = useCallback(async () => {
-        try {
-            const response = await axios.get('api/website/newscategory/get');
-            if (response.data.status === 1) {
-                const categories = response.data.data.map(category => ({
-                    id: category.id,
-                    title: category.name
-                }));
-                // Add "All" category
-                setCategories([{ id: 'all', title: 'All' }, ...categories]);
-                setActiveTab('all'); // Set "All" tab as active initially
-            } else {
-                console.error('Failed to fetch categories');
-            }
-        } catch (error) {
-            console.error('Error fetching categories:', error);
-        }
-    }, []);
-
 
     const getNewsdata = useCallback(async (id, page = 1) => {
         try {
@@ -72,10 +40,10 @@ const BrowseNewsSec = () => {
                     ...prevState,
                     [id]: response.data.data
                 }));
-                setTotalPages(response.data.totalPages); // Set total pages from API response
-            } else {
+                setTotalPages(response.data.totalPages); 
                 console.error('Failed to fetch exams');
             }
+            setLoading(false); 
         } catch (error) {
             console.error('Error fetching exams:', error);
         }
@@ -87,21 +55,15 @@ const BrowseNewsSec = () => {
         }
     }, [activeTab, currentPage, getNewsdata]);
 
-    useEffect(() => {
+   
 
-        getCategoriesData()
-        getColleges()
-
-    }, [getCategoriesData, getColleges])
-
-    
 
     const handleTabClick = (id) => {
         setActiveTab(id);
         setCurrentPage(1);
     };
 
-   
+
 
 
     const handlePreviousPage = () => {
@@ -148,23 +110,39 @@ const BrowseNewsSec = () => {
                             <div className="tab-content" id="pills-tabContent">
                                 <div className={`tab-pane fade ${activeTab === activeTab ? 'show active' : ''}`} id={`pills-${activeTab}`} role="tabpanel" aria-labelledby={`pills-${activeTab}-tab`}>
                                     <div className="row">
-                                        {currentNews.map(item => (
-                                            <div key={item.id} className="col-12 mx-5 col-lg-6 mx-lg-0 mb-3 d-flex ">
-                                                <div className="card">
-                                                    <div className='newsPageImg'>
-                                                        <Image src="/images/icons/newsPageImg.jpg" width={400} height={400} className="img-fluid" alt="newsImage"></Image>
+                                        {loading ? (
+                                           <div className='text-center'> Loading....</div>
+                                           
+                                        ) : (
+                                            currentNews.length > 0 ? (
+                                                currentNews.map(item => (
+                                                    <div key={item.id} className="col-12 mx-5 col-lg-6 mx-lg-0 mb-3 d-flex">
+                                                        <div className="card">
+                                                            <div className="newsPageImg">
+                                                                <Image
+                                                                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}
+                                                                    width={400}
+                                                                    height={400}
+                                                                    className="img-fluid"
+                                                                    alt="newsImage"
+                                                                />
+                                                            </div>
+                                                            <div className="card-body">
+                                                                <h5 className="fw-bold card-title">{item.name}</h5>
+                                                            </div>
+                                                            <div className="p-3">
+                                                                <Link href={`/news/${item.id}/${item.name}`}>
+                                                                    <button className="btn viewMoreCollegeBtn">View Detail</button>
+                                                                </Link>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className="card-body">
-                                                        <h5 className="fw-bold card-title">{item.name}</h5>
-                                                    </div>
-                                                    <div className='p-3'>
-                                                        <Link href={`/news-1/${item.id}/${item.name}`}>
-                                                            <button className='btn viewMoreCollegeBtn'>View Detail</button>
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
+                                                ))
+                                            ) : (
+                                                <div className="text-center pb-5">No news available</div>
+                                            )
+                                            
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -198,15 +176,15 @@ const BrowseNewsSec = () => {
                                     <h4 className='text-blue fw-bold text-center mb-3'>Get Upcoming News Alerts</h4>
                                     <Image src="/images/icons/getNewsImage.png" width={200} height={200} alt='get-news-logo' className='mb-3' />
                                     <div className="d-flex justify-content-between">
-                                    <GlobalEnquiryForm
-                                        buttonText="Follow Us"
-                                        className='btn flwBtn'
-                                    />
+                                        <GlobalEnquiryForm
+                                            buttonText="Follow Us"
+                                            className='btn flwBtn'
+                                        />
                                         {/* <button className='btn flwBtn'>Follow Us</button> */}
                                         <GlobalEnquiryForm
-                                        buttonText="Ask a Question"
-                                        className='btn askBtn'
-                                    />
+                                            buttonText="Ask a Question"
+                                            className='btn askBtn'
+                                        />
                                         {/* <button className='btn askBtn'>Ask a Question</button> */}
                                     </div>
                                 </div>

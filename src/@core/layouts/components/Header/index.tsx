@@ -278,7 +278,7 @@ const Header = () => {
                           {news.slice(0, 4).map((item) => (
                             <li key={item.id} className="news-item mb-1 col-md-3">
                               <Link
-                                href={`/news-1/${item.id}/${item.slug}`}
+                                href={`/news/${item.id}/${item.slug}`}
 
                               >
                                 <div className="card-news card">

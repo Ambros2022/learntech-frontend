@@ -4,7 +4,7 @@ import Image from 'next/image';
 // NewsItem component
 const NewsItem = ({ id, banner_image, title, text }) => (
     <div className="col-12">
-         <a href={`/news-1/${id}/${title}`} >
+         <a href={`/news/${id}/${title}`} >
         <div className="card mb-3">
             <div className="row g-0">
                 <div className="col-md-4">
