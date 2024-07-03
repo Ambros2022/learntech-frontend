@@ -15,7 +15,8 @@ function InnerBoardPage({ id }) {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); 
+  const [exams, setExams] = useState([]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -30,11 +31,24 @@ function InnerBoardPage({ id }) {
     }
   }, [id, isMountedRef, router]);
 
+  const getExams = useCallback(async () => {
+    try {
+      const response = await axios.get('/api/website/exams/get');
+      if (isMountedRef.current) {
+        setExams(response.data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch exams:', error);
+    }
+  }, [isMountedRef]);
+
+
 
 
   useEffect(() => {
     getPagedata();
-  }, [getPagedata]);
+    getExams();
+  }, [getPagedata, getExams]);
   return (
     <>
       <Head>
@@ -44,9 +58,9 @@ function InnerBoardPage({ id }) {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
+      {!loading && pagedata && <CollegeInfoSection data={pagedata} exams={exams}/>}
       {/* {!loading && pagedata && <FacilitiesSection data={pagedata} />} */}
-      {/* {!loading && pagedata && <LocationSection data={pagedata} />} */}
+      {!loading && pagedata && <LocationSection data={pagedata} />}
 
 
       <TopFeaturedColleges />

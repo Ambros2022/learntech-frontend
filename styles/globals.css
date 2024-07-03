@@ -4913,7 +4913,9 @@
     .medSec {
       height: 1170px !important;
     }
-
+    .resultDateBtn{
+      width: 295px !important;
+    }
     .medSec video {
       width: 100%;
       height: 600px !important;
