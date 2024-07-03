@@ -17,10 +17,10 @@ function BannerSec({ data }) {
                     <div className='align-content-center w-100 container'>
                         <div className="row">
                             <div className="col-lg-8 col-md-9 mx-md-auto innerExam">
-                                <div className="card mb-5">
+                                <div className="card mb-2">
                                     <div className="row g-0">
-                                        <div className="col-md-3 text-center ">
-                                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.cover_image}`} width={100} height={100} alt={data.name} />
+                                        <div className="col-md-3 text-center innerExamImg">
+                                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.cover_image}`} width={300} height={300} className='img-fluid' alt={data.name} />
                                         </div>
                                         <div className="col-md-9 d-flex justify-content-center justify-content-md-start">
                                             <div className="align-content-center">
@@ -34,7 +34,7 @@ function BannerSec({ data }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 d-flex justify-content-center mb-5">
+                            <div className="col-lg-4 d-flex justify-content-center mb-3">
                                 <div className="align-content-center">
                                     <div className='text-md-end text-center'>
                                         <GlobalEnquiryForm
@@ -46,14 +46,14 @@ function BannerSec({ data }) {
                                 </div>
                             </div>
                         </div>
-                       
+
                         <PopularCourses />
                     </div>
                 </div>
             </section>
             <div className="bg-white">
-                <section className='container InnerCollegeNavigationLink py-3'>
-                    <p className='mb-3 '><Link href="/">Home</Link> {'>'} <Link href={"/exams"}>Exams</Link> {'>'} <span className='text-blue' style={{ cursor: 'pointer' }}>{data.slug}</span></p>
+                <section className='container InnerCollegeNavigationLink linkFontSize py-3'>
+                    <p className='mb-3 '><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={"/exams"}> Exams <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data.slug}</span></p>
                 </section>
             </div>
         </>

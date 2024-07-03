@@ -1,196 +1,199 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import NewsList from '../newsList';
 import Link from 'next/link';
+import axios from 'src/configs/axios';
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import Spinner from 'src/@core/components/spinner'
 
-const BrowseNewsSec = () => {
-    const [activeTab, setActiveTab] = useState('All');
+
+interface NewsItem {
+    id: number;
+    name: string;
+    banner_image: string;
+    meta_description: string;
+    category_id: string;
+}
+
+interface GroupedNewsItems {
+    [key: string]: NewsItem[];
+}
+
+const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , setActiveTab}) => {
+    
     const [currentPage, setCurrentPage] = useState(1);
-    const [newsPerPage] = useState(6); // Number of news items per page
+    const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [newsItems, setNewsItems] = useState<GroupedNewsItems>({});
+    const newsPerPage = 8;
+    const isMountedRef = useIsMountedRef();
 
-    const handleTabClick = (tabName) => {
-        setActiveTab(tabName);
-        setCurrentPage(1); // Reset current page when changing tabs
+    const getNewsdata = useCallback(async (id, page = 1) => {
+        try {
+            const roleparams = { page, size: newsPerPage };
+            const url = id === 'all' ? '/api/website/news/get' : `/api/website/news/get?category_id=${id}`;
+            const response = await axios.get(url, { params: roleparams });
+
+            if (response.data.status === 1) {
+                setNewsItems(prevState => ({
+                    ...prevState,
+                    [id]: response.data.data
+                }));
+                setTotalPages(response.data.totalPages); 
+                console.error('Failed to fetch exams');
+            }
+            setLoading(false); 
+        } catch (error) {
+            console.error('Error fetching exams:', error);
+        }
+    }, [newsPerPage, isMountedRef]);
+
+    useEffect(() => {
+        if (activeTab) {
+            getNewsdata(activeTab, currentPage);
+        }
+    }, [activeTab, currentPage, getNewsdata]);
+
+   
+
+
+    const handleTabClick = (id) => {
+        setActiveTab(id);
+        setCurrentPage(1);
     };
 
-    const indexOfLastNews = currentPage * newsPerPage;
-    const indexOfFirstNews = indexOfLastNews - newsPerPage;
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    const newsItems = {
-        'All': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-        'Entrance Exams': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-        'General News': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-        'Admission Alerts': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
-        'Result Announcement': [
-            { id: 1, title: 'JEE Mains Result Release Date Session 2024', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 2, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 3, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 4, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 5, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 6, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 7, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 8, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 9, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { id: 10, title: 'New Policy Announcement', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            // Your news data here
-        ],
+
+    const handlePreviousPage = () => {
+        setCurrentPage(prevPage => {
+            const newPage = Math.max(prevPage - 1, 1);
+            getNewsdata(activeTab, newPage); // Fetch new data for the previous page
+            return newPage;
+        });
     };
 
-    const newsData = [
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 1',
-            text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 2',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 3',
-            text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 4',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 4',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            imageSrc: '/images/icons/filter-card.jpg',
-            title: 'Card title 4',
-            text: 'This is another card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        // Add more news items as needed
-    ];
+    const handleNextPage = () => {
+        setCurrentPage(prevPage => {
+            const newPage = Math.min(prevPage + 1, totalPages);
+            getNewsdata(activeTab, newPage); // Fetch new data for the next page
+            return newPage;
+        });
+    };
 
-    const currentNews = newsItems[activeTab].slice(indexOfFirstNews, indexOfLastNews);
+    const handlePageClick = (page) => {
+        setCurrentPage(page);
+        getNewsdata(activeTab, page); // Fetch data for the clicked page
+    };
 
+
+    const currentNews = newsItems[activeTab] || [];
     return (
         <>
             <section className='py-5 bg-white browseNews'>
                 <div className="container">
                     <h2 className='fw-bold text-blue text-center mb-3'>Browse News By Category</h2>
-                    <div className="d-flex justify-content-center newsTabsClr gap-3 mx-5 flex-wrap flex-row">
-                        {Object.keys(newsItems).map(tabName => (
-                            <button key={tabName} className={`btn ${activeTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>{tabName}</button>
+                    <div className="d-flex justify-content-center newsTabsClr gap-3 mx-0 flex-wrap flex-row">
+                        {categories.map(category => (
+                            <button
+                                key={category.id}
+                                className={`btn bg-skyBlue ${activeTab === category.id ? 'active' : ''}`}
+                                onClick={() => handleTabClick(category.id)}
+                            >
+                                {category.title}
+                            </button>
                         ))}
                     </div>
                     <div className='row mb-3 mt-5'>
-                        <div className="col-lg-6 col-xl-8 col-md-7">
+                        <div className="col-lg-8 col-xl-8 col-md-7">
                             <div className="tab-content" id="pills-tabContent">
                                 <div className={`tab-pane fade ${activeTab === activeTab ? 'show active' : ''}`} id={`pills-${activeTab}`} role="tabpanel" aria-labelledby={`pills-${activeTab}-tab`}>
                                     <div className="row">
-                                        {currentNews.map(item => (
-                                            <div key={item.id} className="col-8 mx-auto col-md-6 mx-md-0 mb-3">
-                                                <div className="card newsImgSize">
-                                                    <Image src="/images/icons/newsPageImg.jpg" width={400} height={400} className="card-img-top" alt="newsImage"></Image>
-                                                    <div className="card-body">
-                                                        <h5 className="fw-bold card-title">{item.title}</h5>
-                                                        {/* <p className="card-text">{item.description}</p> */}
+                                        {loading ? (
+                                           <div className='text-center'> Loading....</div>
+                                           
+                                        ) : (
+                                            currentNews.length > 0 ? (
+                                                currentNews.map(item => (
+                                                    <div key={item.id} className="col-12 mx-5 col-lg-6 mx-lg-0 mb-3 d-flex">
+                                                        <div className="card">
+                                                            <div className="newsPageImg">
+                                                                <Image
+                                                                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}
+                                                                    width={400}
+                                                                    height={400}
+                                                                    className="img-fluid"
+                                                                    alt="newsImage"
+                                                                />
+                                                            </div>
+                                                            <div className="card-body">
+                                                                <h5 className="fw-bold card-title">{item.name}</h5>
+                                                            </div>
+                                                            <div className="p-3">
+                                                                <Link href={`/news/${item.id}/${item.name}`}>
+                                                                    <button className="btn viewMoreCollegeBtn">View Detail</button>
+                                                                </Link>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        ))}
+                                                ))
+                                            ) : (
+                                                <div className="text-center pb-5">No news available</div>
+                                            )
+                                            
+                                        )}
                                     </div>
                                 </div>
                             </div>
                             {/* Pagination */}
                             <div className="d-flex justify-content-center">
                                 <nav aria-label="Page navigation example">
-                                    <ul className="pagination  d-flex gap-3 justify-content-center">
+                                    <ul className="pagination d-flex gap-3">
                                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                            <a className="page-link" href="#" onClick={() => paginate(currentPage - 1)} aria-label="Previous">
+                                            <button className="page-link" onClick={handlePreviousPage} aria-label="Previous">
                                                 <span aria-hidden="true">{'<'}</span>
-                                            </a>
+                                            </button>
                                         </li>
-                                        {Array.from({ length: Math.ceil(newsItems[activeTab].length / newsPerPage) }, (_, i) => (
-                                            <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
-                                                <a className="page-link" href="#" onClick={() => paginate(i + 1)}>{i + 1}</a>
+                                        {Array.from({ length: totalPages }, (_, index) => (
+                                            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                                                <button className="page-link" onClick={() => handlePageClick(index + 1)}>{index + 1}</button>
                                             </li>
                                         ))}
-                                        <li className={`page-item ${currentPage === Math.ceil(newsItems[activeTab].length / newsPerPage) ? 'disabled' : ''}`}>
-                                            <a className="page-link" href="#" onClick={() => paginate(currentPage + 1)} aria-label="Next">
+                                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                                            <button className="page-link" onClick={handleNextPage} aria-label="Next">
                                                 <span aria-hidden="true">{'>'}</span>
-                                            </a>
+                                            </button>
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
 
                         </div>
-                        <div className="col-lg-6 col-xl-4 col-md-5">
+                        <div className="col-lg-4 col-xl-4 col-md-5">
                             <div className='bg-skyBlue p-5 d-flex justify-content-center rounded'>
                                 <div className="align-content-center get-news">
                                     <h4 className='text-blue fw-bold text-center mb-3'>Get Upcoming News Alerts</h4>
                                     <Image src="/images/icons/getNewsImage.png" width={200} height={200} alt='get-news-logo' className='mb-3' />
                                     <div className="d-flex justify-content-between">
-                                        <button className='btn flwBtn'>Follow Us</button>
-                                        <button className='btn askBtn'>Ask a Question</button>
+                                        <GlobalEnquiryForm
+                                            buttonText="Follow Us"
+                                            className='btn flwBtn'
+                                        />
+                                        {/* <button className='btn flwBtn'>Follow Us</button> */}
+                                        <GlobalEnquiryForm
+                                            buttonText="Ask a Question"
+                                            className='btn askBtn'
+                                        />
+                                        {/* <button className='btn askBtn'>Ask a Question</button> */}
                                     </div>
                                 </div>
                             </div>
-                            <NewsList newsItems={newsData} />
+                            <NewsList newsItems={collegeData} />
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
         </>
     );
 }

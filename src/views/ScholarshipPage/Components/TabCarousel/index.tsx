@@ -1,44 +1,52 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-
-const tabs = ['All', 'India', 'UK', 'Canada', 'USA', 'Australia', 'Netherland', 'Germany'];
+import axios from 'src/configs/axios';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 const TabCarousel = ({ activeTab, onTabClick }) => {
-    const responsive = {
-        superLargeDesktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 8
-        },
-        desktop: {
-            breakpoint: { max: 1024, min: 992 },
-            items: 5
-        },
-        tablet: {
-            breakpoint: { max: 991, min: 768 },
-            items: 4
-        },
-        mobile: {
-            breakpoint: { max: 767, min: 0 },
-            items: 1
+    const [tabs, setTabs] = useState<any>([]);  // Use any type for tabs
+    const isMountedRef = useIsMountedRef();
+
+    const getCountry = useCallback(async () => {
+        try {
+            const roleparams = {
+                page: 1,
+                size: 10000
+            };
+            const response = await axios.get('api/website/country/get', { params: roleparams });
+            if (isMountedRef.current) {
+                console.log(response.data.data);
+                setTabs([{ id: 'all', name: 'All' }, ...response.data.data]);  // Include 'All' in tabs fetched
+            }
+        } catch (err) {
+            console.error(err);
         }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+        getCountry();
+    }, [getCountry]);
+
+    const responsive = {
+        superLargeDesktop: { breakpoint: { max: 3000, min: 1024 }, items: 8 },
+        desktop: { breakpoint: { max: 1024, min: 992 }, items: 5 },
+        tablet: { breakpoint: { max: 991, min: 768 }, items: 4 },
+        mobile: { breakpoint: { max: 767, min: 0 }, items: 1 }
     };
 
-    const ButtonGroup = ({ next, previous }) => {
-        return (
-            <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2" style={{ zIndex: '1 !important' }} >
-                <span className='fi-left' onClick={previous}>
-                    <FiChevronLeft />
-                </span>
-                <span className='fi-right' onClick={next}>
-                    <FiChevronRight />
-                </span>
-            </div>
-        );
-    };
+    const ButtonGroup = ({ next, previous }) => (
+        <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
+            <span className='fi-left' onClick={previous}>
+                <FiChevronLeft />
+            </span>
+            <span className='fi-right' onClick={next}>
+                <FiChevronRight />
+            </span>
+        </div>
+    );
 
-    console.log('Active Tab:', activeTab);  // Logging for debugging
 
     return (
         <Carousel
@@ -47,23 +55,23 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
             showDots={false}
             arrows={false}
             infinite
-            ssr  // SSR true for server-side rendering
+            ssr
             responsive={responsive}
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             containerClass='carousel-container2Category'
         >
-            {tabs.map((tab) => (
+            {tabs.length > 0 && tabs.map((tab) => (
                 <button
                     key={tab}
-                    className={`btn d-flex mx-auto justify-content-center filterCountry ${activeTab === tab ? 'active' : ''}`}
-                    id={tab}
+                    className={`btn d-flex mx-auto justify-content-center filterCountry ${activeTab === tab.id ? 'active' : ''}`}
+                    id={tab.id}
                     onClick={() => onTabClick(tab)}
                     role='tab'
-                    aria-controls={tab}
+                    aria-controls={tab.id}
                     aria-selected={activeTab === tab}
                 >
-                    {tab}
+                    {tab.name}
                 </button>
             ))}
         </Carousel>

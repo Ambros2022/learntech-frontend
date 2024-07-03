@@ -24,10 +24,6 @@ import Fab from '@mui/material/Fab'
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
 
-
-
-
-
 let cancelToken: any;
 
 type SortType = 'asc' | 'desc' | undefined | null
@@ -133,17 +129,34 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
 
 type DataGridRowType = {
-  id: number
-  username: string
-  email: string
-  mobile: string
-  status: any
-}
+  id: number;
+  username: string;
+  email: string;
+  content: string;
+  mobile: string;
+  status: any;
+  reviewuser: { name: string };
+  name: string;
+  review_type: string;
+  clgreview: { name: string };
+  sclreview: { name: string };
+  sclbrdreview: { name: string };
+  coursereview: { slug: string };
+  course_type: string;
+  is_approved: number;
+  userrating: number;
+  grade: string;
+  likes: any;
+  dislikes: string;
+  is_reported: any;
+};
+
 
 const SecondPage = () => {
   // ** States
 
-
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogData, setDialogData] = useState<DataGridRowType | null>(null);
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -153,12 +166,23 @@ const SecondPage = () => {
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
   const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [columnname, setColumnname] = useState<string>('updated_at')
+  const [columnname, setColumnname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
 
   params['page'] = 1;
   params['size'] = 10000;
+
+
+  const handleDialogOpen = (row: DataGridRowType) => {
+    setDialogData(row);
+    setDialogOpen(true);
+  };
+
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
 
   const handleReloadPage = useCallback(() => {
     setLoading(true);
@@ -167,66 +191,79 @@ const SecondPage = () => {
 
   let columns: GridColDef[] = [
 
-    // {
-    //   flex: 0.125,
-    //   minWidth: 100,
-    //   field: 'user.name',
-    //   headerName: 'User',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params
-
-    //     return (
-    //           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //             {row.user.name}
-    //           </Typography>
-    //     )
-    //   }
-    // },
-
     {
-      flex: 0.175,
+      flex: 0.125,
       minWidth: 100,
-      field: 'review_type',
-      headerName: 'Type',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params;
-        return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.review_type}
-          </Typography>
-        );
-      }
-    },
-    
-    {
-      flex: 0.4,
-      minWidth: 100,
-      field: 'current_url',
-      headerName: 'Url',
+      field: 'reviewuser.name',
+      headerName: 'User Name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
-
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.current_url}
+            {row?.reviewuser?.name}
           </Typography>
+        )
+      }
+    },
+    {
+      flex: 0.125,
+      minWidth: 100,
+      field: 'name',
+      headerName: 'Name',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
 
-
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.name}
+          </Typography>
         )
       }
     },
 
+
     {
-      flex: 0.175,
+      flex: 0.125,
       minWidth: 100,
-      field: 'content',
-      headerName: 'Content',
+      field: 'review_type',
+      headerName: 'Type',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.review_type}
+          </Typography>
+        )
+      }
+    },
+
+
+    {
+      flex: 0.1,
+      minWidth: 100,
+      field: 'clgreview.name',
+      headerName: 'college',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.content}
+            {row?.clgreview?.name}
+          </Typography>
+        );
+      }
+    },
+    {
+      flex: 0.2,
+      minWidth: 100,
+      field: 'course_type',
+      headerName: 'course',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.course_type}
           </Typography>
         );
       }
@@ -234,27 +271,27 @@ const SecondPage = () => {
 
     {
       flex: 0.175,
-      minWidth: 200,
+      minWidth: 100,
       field: 'is_approved',
       headerName: 'Status',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
-    
+
         let button;
         switch (row.is_approved) {
           case 0:
-            button = <Button variant="contained" color="error" sx={{ width: '100px', height: '40px' }}>Pending</Button>;
+            button = <Button variant="contained" color="error" sx={{ width: '73px', height: '31px' }}>Pending</Button>;
             break;
           case 1:
-            button = <Button variant="contained" color="success" sx={{ width: '100px', height: '40px' }}>Approved</Button>;
+            button = <Button variant="contained" color="success" sx={{ width: '73px', height: '31px' }}>Approved</Button>;
             break;
-         
-          
+
+
           default:
-            button = <Button variant="contained" color="primary" sx={{ width: '100px', height: '40px' }}>Unknown</Button>;
+            button = <Button variant="contained" color="primary" sx={{ width: '73px', height: '31px' }}>Unknown</Button>;
             break;
         }
-    
+
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {button}
@@ -274,7 +311,7 @@ const SecondPage = () => {
         const handleUpdateClick = async () => {
           try {
             // Call the API to update the status
-            const response = await axios1.post('api/admin/review/update', { id: row.id, is_approved: 1 });
+            const response = await axios1.post('api/admin/review/statusupdate', { id: row.id, is_approved: 1 });
             if (response.data.status === 1) {
               toast.success(response.data.message);
               // Update the local state to reflect the change
@@ -293,7 +330,7 @@ const SecondPage = () => {
           <Button
             variant="contained"
             color="primary"
-            sx={{ width: '140px', height: '40px' }}
+            sx={{ width: '109px', height: '31px' }}
             onClick={handleUpdateClick}
           >
             Change Status
@@ -305,6 +342,38 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 100,
+      field: 'view',
+      headerName: 'View',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
+
+        const handleViewClick = () => {
+          handleDialogOpen(row);
+        };
+
+        return (
+          <Button
+            variant="contained"
+            sx={{
+              width: '30px',
+              height: '30px',
+              backgroundColor: 'green',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'green', // Keeps the background color green on hover
+              },
+            }}
+            onClick={handleViewClick}
+          >
+            View
+          </Button>
+        );
+      },
+    },
+
+    {
+      flex: 0.175,
+      minWidth: 50,
       sortable: false,
       field: 'actions',
       headerName: 'Actions',
@@ -385,11 +454,61 @@ const SecondPage = () => {
 
 
   return (
-    <Grid container spacing={6}>
+    // <Grid container spacing={6}>
 
+    //   <Grid item xs={12}>
+    //     <Card>
+
+    //       <DataGrid
+    //         autoHeight
+    //         pagination
+    //         loading={loading}
+    //         rows={rows}
+    //         rowCount={total}
+    //         columns={columns}
+    //         // checkboxSelection/
+    //         sortingMode='server'
+    //         paginationMode='server'
+    //         pageSizeOptions={[10, 15, 25, 50]}
+    //         getRowId={(row) => row.id}
+    //         paginationModel={paginationModel}
+    //         onSortModelChange={handleSortModel}
+    //         slots={{ toolbar: ServerSideToolbar }}
+    //         onPaginationModelChange={paginationchange}
+    //         slotProps={{
+    //           baseButton: {
+    //             size: 'medium',
+    //             variant: 'tonal',
+    //           },
+    //           toolbar: {
+    //             value: searchtext,
+    //             clearSearch: () => handleSearch(''),
+    //             onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value),
+    //             // CustomToolbar: AddButtonComponent
+    //           },
+    //         }}
+    //       />
+    //     </Card>
+    //   </Grid>
+    //   <Dialog open={dialogOpen} onClose={handleDialogClose} aria-labelledby="view-dialog-title">
+    //     <DialogTitle id="view-dialog-title">View Details</DialogTitle>
+    //     <DialogContent>
+    //       <DialogContentText>
+    //         {/* Display the relevant details of the row here */}
+    //         {dialogData && JSON.stringify(dialogData, null, 2)}
+    //       </DialogContentText>
+    //     </DialogContent>
+    //     <DialogActions>
+    //       <Button onClick={handleDialogClose} color="primary">
+    //         Close
+    //       </Button>
+    //     </DialogActions>
+    //   </Dialog>
+    // </Grid>
+
+    <Grid container spacing={6}>
       <Grid item xs={12}>
         <Card>
-
           <DataGrid
             autoHeight
             pagination
@@ -397,15 +516,18 @@ const SecondPage = () => {
             rows={rows}
             rowCount={total}
             columns={columns}
-            // checkboxSelection/
-            sortingMode='server'
-            paginationMode='server'
+            sortingMode="server"
+            paginationMode="server"
             pageSizeOptions={[10, 15, 25, 50]}
             getRowId={(row) => row.id}
             paginationModel={paginationModel}
             onSortModelChange={handleSortModel}
             slots={{ toolbar: ServerSideToolbar }}
-            onPaginationModelChange={paginationchange}
+            onPaginationModelChange={(model, details) => {
+              setSize(model.pageSize);
+              setPage(model.page + 1);
+              setPaginationModel({ page: model.page, pageSize: model.pageSize });
+            }}
             slotProps={{
               baseButton: {
                 size: 'medium',
@@ -415,12 +537,233 @@ const SecondPage = () => {
                 value: searchtext,
                 clearSearch: () => handleSearch(''),
                 onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value),
-                // CustomToolbar: AddButtonComponent
               },
             }}
           />
         </Card>
       </Grid>
+      <Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        aria-labelledby="view-dialog-title"
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle id="view-dialog-title" className='typographypopup'>View Details</DialogTitle>
+        <DialogContent>
+          {dialogData && (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                {dialogData?.reviewuser?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        User Name
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.reviewuser.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Name
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.review_type && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Review Type
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.review_type}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                {dialogData?.userrating && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        User Rating
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.userrating}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.content && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Content
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.content}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.review_type && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Type
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.review_type}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                {dialogData?.clgreview?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        College
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.clgreview.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.sclreview?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        School
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.sclreview.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.coursereview?.slug && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Course
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.coursereview.slug}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                {dialogData?.sclbrdreview?.name && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        School Board
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.sclbrdreview.name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.course_type && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Course Type
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.course_type}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+                {dialogData?.grade && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Grade
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.grade}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+
+                <Card sx={{ flex: 1 }}>
+                  <CardContent>
+                    <Typography variant="h6" component="div" className='typographypopup'>
+                      Likes
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {dialogData.likes}
+                    </Typography>
+                  </CardContent>
+                </Card>
+
+
+                <Card sx={{ flex: 1 }}>
+                  <CardContent>
+                    <Typography variant="h6" component="div" className='typographypopup'>
+                      Dislikes
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {dialogData.dislikes}
+                    </Typography>
+                  </CardContent>
+                </Card>
+
+
+                {dialogData?.is_reported !== undefined && (
+                  <Card sx={{ flex: 1 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" className='typographypopup'>
+                        Reported
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dialogData.is_reported === 1 ? 'Yes' : 'No'}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
+              </Box>
+              <Card style={{ width: "273px" }} >
+                <CardContent>
+                  <Typography variant="h6" component="div" className='typographypopup'>
+                    Status
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {dialogData.is_approved === 1 ? 'Approved' : 'Pending'}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+          )}
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
 
     </Grid>
   );

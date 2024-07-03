@@ -1,60 +1,65 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import TabCarousel from '../TabCarousel';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import axios from 'src/configs/axios';
+
+
+
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
 const FilterSec = () => {
-    const scholarshipsData = [
-        {
-            title: 'Tata Scholarship',
-            university: 'Cornell University',
-            details: [
-                { label: 'International Student Eligible', value: 'Yes' },
-                { label: 'Amount', value: 'Variable Amount' },
-                { label: 'Type', value: 'College Specific' },
-                { label: 'Level of Study', value: 'Bachelor' },
-                { label: 'Number of Scholarships', value: '20' }
-            ],
-            link: '/scholarships',
-            country: 'All'
-        },
-        {
-            title: 'India Scholarship',
-            university: 'University Name',
-            details: [
-                { label: 'Eligibility', value: 'Criteria' },
-                { label: 'Amount', value: 'Amount Details' },
-                { label: 'Type', value: 'Type of Scholarship' },
-                { label: 'Level of Study', value: 'Bachelor' },
-                { label: 'Number of Scholarships', value: '20' }
-            ],
-            link: '/scholarships',
-            country: 'India'
-        },
-        {
-            title: 'UK Scholarship',
-            university: 'University Name',
-            details: [
-                { label: 'Eligibility', value: 'Criteria' },
-                { label: 'Amount', value: 'Amount Details' },
-                { label: 'Type', value: 'Type of Scholarship' },
-                { label: 'Level of Study', value: 'Bachelor' },
-                { label: 'Number of Scholarships', value: '20' }
-            ],
-            link: '/scholarships',
-            country: 'UK'
-        },
-        // Add more scholarship objects as needed for other countries
-    ];
 
-    const [activeTab, setActiveTab] = useState('All');  // State to keep track of active tab
+    const [options, setOptions] = useState([]);
+
+    const [scholarshipsData, setScholarshipsData] = useState<any>([]);  // Use any type for tabs
+    const isMountedRef = useIsMountedRef();
+    const [activeTab, setActiveTab] = useState('all');  // State to manage active tab
     const [currentPage, setCurrentPage] = useState(1);  // State for current page
     const perPage = 6; // Number of items per page
 
-    // Function to handle tab click
+    // const getScholarship = useCallback(async () => {
+    //     try {
+    //         const roleparams = { page: 1, size: 10000 };
+    //         const response = await axios.get('api/website/scholarships/get', { params: roleparams });
+    //         setScholarshipsData(response.data.data);
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }, [isMountedRef]);
+
+    const getScholarship = useCallback(async (countryId) => {
+        try {
+            let url = 'api/website/scholarships/get';
+            if (countryId !== 'All') {
+                url += `?country_id=${countryId}`;
+            }
+            const response = await axios.get(url);
+            setScholarshipsData(response.data.data);
+        } catch (error) {
+            console.error('Error fetching scholarships:', error);
+        }
+    }, [isMountedRef]);
+
+    // useEffect(() => {
+    //     getScholarship();
+    // }, [getScholarship]);
+
+    useEffect(() => {
+        getScholarship(activeTab);
+    }, [activeTab, getScholarship]);
+
+
+    // const handleTabClick = (all) => {
+    //     setActiveTab(all);
+    //     setCurrentPage(1); // Reset to first page when tab changes
+    // };
+
+     // Function to handle tab click
     const handleTabClick = (tab) => {
-        setActiveTab(tab);
-        setCurrentPage(1); // Reset to first page when tab changes
+        setActiveTab(tab.id);  
     };
 
     // Function to handle page change
@@ -76,7 +81,7 @@ const FilterSec = () => {
                 {currentScholarships.map((scholarship, index) => (
                     <div className="col-md-10 col-lg-6 col-xl-6 mb-3" key={index}>
                         <div className="card bg-skyBlue p-3">
-                            <h4 className='text-blue fw-bold'>{scholarship.title}</h4>
+                            <h4 className='text-blue fw-bold'>{scholarship.name}</h4>
                             <h6 className='text-black fw-bold'>{scholarship.university}</h6>
                             <ul className='text-black'>
                                 {scholarship.details.map((detail, idx) => (
@@ -116,6 +121,7 @@ const FilterSec = () => {
                 <div className="card mb-3 filterCardSec border-1 rounded p-3">
                     <h4 className='text-blue fw-bold mb-3'>Filter By</h4>
                     <div className="d-flex gap-3 flex-wrap">
+                        
                         {['Level of study', 'Type', 'Gender', 'Nationality', 'Deadline'].map((label) => (
                             <div className="align-self-center" key={label}>
                                 <label htmlFor={label} className='text-black fw-bold mb-2'>{label}</label>
@@ -150,6 +156,7 @@ const FilterSec = () => {
                                     <ScholarshipCards country={country} />
                                 </div>
                             ))}
+                            
                         </div>
                         {/* Pagination */}
                         <div className="row col-md-12 blogCardspage">
@@ -184,7 +191,12 @@ const FilterSec = () => {
                             <Image src="/images/icons/examAlert.png" alt='exam-alert-img' className='img-fluid' width={500} height={500} />
                             <h6 className='text-black mb-3'>Are you interested in scholarship?</h6>
                             <div className="d-flex justify-content-center gap-3 flex-wrap">
-                                <button className='btn applyNowButton'>Talk To Experts</button>
+                                {/* <button className='btn applyNowButton'>Talk To Experts</button> */}
+                                <GlobalEnquiryForm
+                                    buttonText="Talk To Experts"
+                                    className="btn applyNowButton"
+                                />
+
                                 <button className='btn viewDetailBtn'>Get More Info</button>
                             </div>
                         </div>

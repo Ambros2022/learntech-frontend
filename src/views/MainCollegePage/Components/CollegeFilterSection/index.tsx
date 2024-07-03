@@ -32,12 +32,90 @@ interface College {
 
 }
 
+const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
+    return (
+        <div className='col-md-12 mb-3'>
+            <div className="mx-2 filterCardBorder bg-skyBlue">
+                <div className="p-2">
+                    <div className="row d-flex">
+                        <div className="col-md-3 col-xl-3 clgCardImg">
+                            <Image width={180} height={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
+                        </div>
+                        <div className="col-md-9 col-xl-9">
+                            <div className="row pt-3">
+                                <div className="col-md-7 col-xl-7">
+                                    <div className="card-title">
+                                        <h4 className='fw-bold text-black mb-3'>{name}</h4>
+                                    </div>
+                                    <div className="card-text text-black">
+                                        <p className="mb-3 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
+                                        <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
+                                    </div>
+                                </div>
+                                <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
+                                    {rating && (
+                                        <button className='btn ratingBtn d-flex justify-content-center'>
+                                            <Image
+                                                src='/images/icons/star-24.png'
+                                                width={20}
+                                                height={20}
+                                                alt='star-icon'
+                                            />
+                                            <span className='align-content-center'>{rating}</span>
+                                        </button>
+                                    )}
+                                </div>
+                                <div className="col-md-3 my-auto col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid d-md-block d-flex justify-content-center gap-3">
+                                    <GlobalEnquiryForm className="activeBtn mb-3 btn d-flex justify-content-center" />
+
+                                    <Link href={`/college/${id}/${slug}`} className="mb-3 viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
+                                </div>
+                            </div>
+
+
+                            {/* <button className='btn bg-warning text-white' style={{ minWidth: '50px', minHeight: '20px' }}>{rating}</button> */}
+
+                            <div className='d-flex gap-2 btns'>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ); 
+}
 function CollegeFilterSection() {
+
+
+    const router = useRouter();
+    const { state_id, city_id } = router.query;
 
     const [colleges, setColleges] = useState<College[]>([]);
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
+    const [visibleCards, setVisibleCards] = useState(6);
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
 
+
+    const [states, setStates] = useState<Option[]>([]);
+    const [streams, setStreams] = useState<any[]>([]);
+    const [courses, setCourses] = useState<any[]>([]);
+    const [promoban, setPromoban] = useState<any[]>([]);
+
+    const [selectedOptions, setSelectedOptions] = useState({});
+    const [selectedStateIds, setSelectedStateIds] = useState<string[]>([]);
+    const [selectedCityIds, setSelectedCityIds] = useState<string[]>([]);
+
+    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
+        state: true,
+        city: true,
+        streams: true,
+        courses: true,
+        ownership: true,
+        courseType: true
+    });
+    const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
 
     type Option = {
         label: string;
@@ -50,13 +128,7 @@ function CollegeFilterSection() {
         label: string;
         options: Option[];
     };
-    const [showScrollButton, setShowScrollButton] = useState(false);
-    const [states, setStates] = useState<Option[]>([]);
-    const [streams, setStreams] = useState<any[]>([]);
-    const [courses, setCourses] = useState<any[]>([]);
-    const [promoban, setPromoban] = useState<any[]>([]);
 
-    // console.log(states, "states")
 
     const getPromobanner = useCallback(async () => {
         try {
@@ -133,13 +205,14 @@ function CollegeFilterSection() {
         }
     }, [isMountedRef]);
 
-
     const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[], cityIds?: string[]) => {
         try {
             const params: any = {
                 page: 1,
                 size: 10000
             };
+
+
             if (stateIds && stateIds.length > 0) params['state_id'] = `[${stateIds.join(',')}]`;
             if (cityIds && cityIds.length > 0) params['city_id'] = `[${cityIds.join(',')}]`;
             if (courseIds && courseIds.length > 0) params['general_course_id'] = `[${courseIds.join(',')}]`;
@@ -164,12 +237,11 @@ function CollegeFilterSection() {
     }, []);
 
 
+
+
     const options: OptionGroup[] = [
         { id: 'state', label: 'States', options: states },
         { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
-        { id: 'streams', label: 'Streams', options: streams },
-        { id: 'courses', label: 'Courses', options: courses },
-
         {
             id: 'ownership',
             label: 'Ownership',
@@ -180,6 +252,10 @@ function CollegeFilterSection() {
                 { label: 'Government', value: 'Government' }
             ]
         },
+        { id: 'streams', label: 'Streams', options: streams },
+        { id: 'courses', label: 'Courses', options: courses },
+
+
         {
             id: 'courseType',
             label: 'Course Type',
@@ -193,10 +269,6 @@ function CollegeFilterSection() {
         },
     ];
 
-
-
-    const [visibleCards, setVisibleCards] = useState(6);
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
 
 
     const handleViewMore = () => {
@@ -216,20 +288,19 @@ function CollegeFilterSection() {
             });
         });
 
-        // console.log('Filtered Colleges:', filteredColleges);
-        // console.log('Visible Cards:', visibleCards);
+
 
         // If there are more filtered colleges to show, increment visibleCards
         if (visibleCards < filteredColleges.length) {
             setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
         }
-        // console.log('Updated Visible Cards:', visibleCards);
+
     };
 
 
 
     // Define a debounced version of handleCheckboxChange
-    const debouncedHandleCheckboxChange = debounce((groupId: string, value: string, isChecked: boolean) => {
+    const debouncedHandleCheckboxChange = debounce((groupId: string, value: any, isChecked: boolean) => {
         const collegeFiltersSection = document.getElementById('collegeFiltersSection');
         if (collegeFiltersSection) {
             collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
@@ -247,27 +318,20 @@ function CollegeFilterSection() {
             const { state: selectedStateIds = [], courses: selectedCourseIds = [], streams: selectedStreamIds = [],
                 ownership: selectedOwnership = [], courseType: selectedCourseType = [], city: selectedCityIds = [] } = updatedSelected;
 
-            // Filter colleges based on selected filters
-            // const filteredColleges = colleges.filter(college => {
-            //     const ownershipMatch = selectedOwnership.length === 0 || selectedOwnership.includes(college.college_type);
-            //     const courseTypeMatch = selectedCourseType.length === 0 || selectedCourseType.includes(college.course_type);
-            //     return ownershipMatch && courseTypeMatch;
-            // });
+
 
             // Perform API call with selected filter values
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
-            setLoading(true);
 
+            console.log(updatedSelected, "updatedSelected");
             return updatedSelected;
         });
     }, 300); // Debounce for 300 milliseconds
 
-    // Use the debounced function in your event handler
-    // const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
-    //     debouncedHandleCheckboxChange(groupId, value, isChecked);
-    // };
 
-    const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
+    const handleCheckboxChange = (groupId, value, isChecked) => {
+
+        console.log("handleCheckboxChange", groupId, value, isChecked);
         debouncedHandleCheckboxChange(groupId, value, isChecked);
         setCheckboxState(prevState => ({
             ...prevState,
@@ -276,9 +340,60 @@ function CollegeFilterSection() {
                 [value]: isChecked
             }
         }));
+
+        if (groupId === 'state') {
+            const updatedStateIds = isChecked
+                ? [...selectedStateIds, value]
+                : selectedStateIds.filter(id => id !== value);
+
+            // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
+        }
+
+        // if (groupId === 'city') {
+        //     const updatedCityIds = isChecked
+        //         ? [...selectedCityIds, value]
+        //         : selectedCityIds.filter(id => id !== value);
+
+        //     handleFilterChange(selectedStateIds.join(','), updatedCityIds.join(','), false);
+        // }
     };
 
+    useEffect(() => {
+        if (state_id) {
+            debouncedHandleCheckboxChange("state", state_id, true);
+            setCheckboxState(prevState => ({
+                ...prevState,
+                ["state"]: {
+                    ...prevState["state"],
+                    //@ts-ignore
+                    [state_id]: true
+                }
+            }));
+        }
+        if (city_id) {
+            debouncedHandleCheckboxChange("city", city_id, true);
+            setCheckboxState(prevState => ({
+                ...prevState,
+                ["city"]: {
+                    ...prevState["city"],
+                    //@ts-ignore
+                    [city_id]: true
+                }
+            }));
+        }
+    }, [router, router.isReady]);
+
     const removeSelectedCheckbox = (groupId: string, value: string) => {
+        console.log("removeSelectedCheckbox", groupId, value)
+        debouncedHandleCheckboxChange(groupId, value, false);
+        setCheckboxState(prevState => ({
+            ...prevState,
+            [groupId]: {
+                ...prevState[groupId],
+                [value]: false
+            }
+        }));
+
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
@@ -288,66 +403,13 @@ function CollegeFilterSection() {
             const selectedCourseIds = updatedSelected['courses'] || [];
             const selectedStreamIds = updatedSelected['streams'] || [];
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds);
-            setLoading(true); // Optionally set loading state
+
 
             return updatedSelected;
         });
     };
 
 
-    const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
-        return (
-            <div className='col-md-12 mb-3'>
-                <div className="mx-2 filterCardBorder bg-skyBlue">
-                    <div className="p-2">
-                        <div className="row d-flex">
-                            <div className="col-md-3 col-xl-3 clgCardImg">
-                                <Image width={180} height={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
-                            </div>
-                            <div className="col-md-9 col-xl-9">
-                                <div className="row pt-3">
-                                    <div className="col-md-7 col-xl-7">
-                                        <div className="card-title">
-                                            <h6 className='fw-bold text-black my-2'>{name}</h6>
-                                        </div>
-                                        <div className="card-text text-black">
-                                            <p className="m-0 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
-                                            <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
-                                        {rating && (
-                                            <button className='btn ratingBtn d-flex justify-content-center'>
-                                                <Image
-                                                    src='/images/icons/star-24.png'
-                                                    width={20}
-                                                    height={20}
-                                                    alt='star-icon'
-                                                />
-                                                <span className='align-content-center'>{rating}</span>
-                                            </button>
-                                        )}
-                                    </div>
-                                    <div className="col-md-3 my-auto col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid d-md-block d-flex justify-content-center gap-3">
-                                        <GlobalEnquiryForm className="activeBtn mb-3 btn d-flex justify-content-center" />
-
-                                        <Link href={`/college/${id}/${slug}`} className="mb-3 viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
-                                    </div>
-                                </div>
-
-
-                                {/* <button className='btn bg-warning text-white' style={{ minWidth: '50px', minHeight: '20px' }}>{rating}</button> */}
-
-                                <div className='d-flex gap-2 btns'>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
 
 
 
@@ -374,7 +436,7 @@ function CollegeFilterSection() {
                 </div>
             );
         }
-        setLoading(true)
+
 
 
         return (
@@ -398,25 +460,7 @@ function CollegeFilterSection() {
         );
     }
 
-    const [selectedOptions, setSelectedOptions] = useState({});
 
-    const handleSelect = (sectionId, optionValue) => {
-        setSelectedOptions((prevSelectedOptions) => {
-            const updatedOptions = { ...prevSelectedOptions };
-            updatedOptions[sectionId] = optionValue;
-            return updatedOptions;
-        });
-    };
-
-    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
-        state: true,
-        city: true,
-        streams: true,
-        courses: true,
-        ownership: true,
-        courseType: true
-    });
-    const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
 
 
     const toggleAccordion = (groupId: string) => {
@@ -424,6 +468,7 @@ function CollegeFilterSection() {
             ...prevState,
             [groupId]: !prevState[groupId]
         }));
+
     };
 
 
@@ -431,48 +476,55 @@ function CollegeFilterSection() {
         options: Option[];
         setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
         selectedCheckboxes: Record<string, string[]>;
-    }> = ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
+    }> =
+        ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
 
 
-        const handleStateButtonClick = (state: string) => {
-            window.scrollTo({ top: 650, behavior: 'smooth' });
-            setSelectedCheckboxes(prevSelected => {
-                const stateSelections = prevSelected.state || [];
-                const updatedSelections = stateSelections.includes(state)
-                    ? stateSelections.filter(s => s !== state)
-                    : [...stateSelections, state];
+            const handleStateButtonClick = (state: string) => {
 
-                const updatedSelected = { ...prevSelected, state: updatedSelections };
-                // Call the API with the selected state IDs
-                getcollegedata(updatedSelected.state);
-                return updatedSelected;
-            });
-        };
+                window.scrollTo({ top: 650, behavior: 'smooth' });
+                setCheckboxState(prevState => ({
+                    ...prevState,
+                    ["state"]: {
+                        ...prevState["state"],
+                        [state]: false
+                    }
+                }));
+                setSelectedCheckboxes(prevSelected => {
+                    const stateSelections = prevSelected.state || [];
+                    const updatedSelections = stateSelections.includes(state)
+                        ? stateSelections.filter(s => s !== state)
+                        : [...stateSelections, state];
 
-        return (
-            <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2 rounded">
-                <div className="col-12">
-                    <h6 className="text-black">Filters By Location</h6>
-                    <div className="d-flex flex-wrap">
-                        {options.map((option, index) => (
-                            <button
-                                key={index}
-                                className={`btn text-center rounded m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
-                                onClick={() => handleStateButtonClick(option.value)}
-                            >
-                                {option.label}
-                            </button>
-                        ))}
+                    const updatedSelected = { ...prevSelected, state: updatedSelections };
+                    // Call the API with the selected state IDs
+                    getcollegedata(updatedSelected.state);
+                    return updatedSelected;
+                });
+            };
+
+            return (
+                <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2 rounded">
+                    <div className="col-12">
+                        <h6 className="text-black">Filters By Location</h6>
+                        <div className="d-flex flex-wrap">
+                            {options.map((option, index) => (
+                                <button
+                                    key={index}
+                                    className={`btn text-center rounded m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                    onClick={() => handleStateButtonClick(option.value)}
+                                >
+                                    {option.label}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
-    };
-
+            );
+        };
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
         const [searchTexts, setSearchTexts] = useState<Record<string, string>>({});
-
         const handleSearchChange = (groupId: string, searchText: string) => {
             setSearchTexts(prev => ({ ...prev, [groupId]: searchText }));
         };
@@ -484,19 +536,22 @@ function CollegeFilterSection() {
             );
         };
 
+
         return (
             <div>
                 {options.map((optionGroup, index) => (
                     <div key={index} style={{ cursor: 'pointer' }} className="row bg-white gx-0 p-3 my-3 mx-2">
+
                         <div className="col-10" onClick={() => toggleAccordion(optionGroup.id)}>
-                            <a className='text-blue'>
+                            <h5 className='text-blue'>
                                 {optionGroup.label}
-                            </a>
+                            </h5>
                         </div>
-                        <div className="col-2 text-center">
-                            <a className='text-blue'>
+                        <div className="col-2 text-center " onClick={() => toggleAccordion(optionGroup.id)}>
+                            <h5 className='text-blue'>
                                 {accordionOpen[optionGroup.id] ? '▲' : '▼'}
-                            </a>
+                            </h5>
+
                         </div>
                         <div className={`showingCards collapse ${accordionOpen[optionGroup.id] ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
                             <div className='my-3 options-container'>
@@ -520,6 +575,7 @@ function CollegeFilterSection() {
                                             onChange={(e) => handleCheckboxChange(optionGroup.id, option.value, e.target.checked)}
                                             checked={checkboxState[optionGroup.id]?.[option.value]}
                                         />
+
                                         <label className="form-check-label" htmlFor={`${optionGroup.id}-${index}`}>
                                             {option.label}
                                         </label>
@@ -571,10 +627,6 @@ function CollegeFilterSection() {
             </>
         );
     };
-
-
-
-
 
 
     // Calculate filtered colleges outside of handleViewMore

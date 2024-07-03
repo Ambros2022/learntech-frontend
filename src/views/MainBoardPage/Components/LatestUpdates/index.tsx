@@ -1,30 +1,22 @@
-import React from 'react';
+import Link from 'next/link';
+import React, { useCallback, useEffect, useState } from 'react';
 import MainCarousel from 'src/@core/components/main-carousel';
+import axios from 'src/configs/axios';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
-const LatestUpdateSec = () => {
-    const updates = [
-        {
-            title: 'NIFT City Intimation Slip 2024 Out; Check Direct Link Here',
-            date: 'Jan 23, 2024',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil totam, est, neque eum ullam nesciunt quaerat iste rem, optio voluptas delectus quo! Aperiam, minus dolorum sequi, tempore corporis maxime magnam architecto dicta ducimus molestiae provident ad assumenda! Voluptatibus, amet dolores pariatur repellendus labore atque officiis nihil culpa deserunt, quasi necessitatibus.'
-        },
-        {
-            title: 'Board Exam 2024 Dates Announced; Check Schedule Here',
-            date: 'Jan 25, 2024',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil totam, est, neque eum ullam nesciunt quaerat iste rem, optio voluptas delectus quo! Aperiam, minus dolorum sequi, tempore corporis maxime magnam architecto dicta ducimus molestiae provident ad assumenda! Voluptatibus, amet dolores pariatur repellendus labore atque officiis nihil culpa deserunt, quasi necessitatibus.'
-        },
-        {
-            title: 'New Education Policy 2024: Key Highlights',
-            date: 'Jan 27, 2024',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil totam, est, neque eum ullam nesciunt quaerat iste rem, optio voluptas delectus quo! Aperiam, minus dolorum sequi, tempore corporis maxime magnam architecto dicta ducimus molestiae provident ad assumenda! Voluptatibus, amet dolores pariatur repellendus labore atque officiis nihil culpa deserunt, quasi necessitatibus.'
-        },
-        {
-            title: 'New Education Policy 2024: Key Highlights',
-            date: 'Jan 27, 2024',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil totam, est, neque eum ullam nesciunt quaerat iste rem, optio voluptas delectus quo! Aperiam, minus dolorum sequi, tempore corporis maxime magnam architecto dicta ducimus molestiae provident ad assumenda! Voluptatibus, amet dolores pariatur repellendus labore atque officiis nihil culpa deserunt, quasi necessitatibus.'
-        },
-        // Add more updates as needed
-    ];
+
+
+const LatestUpdateSec = ({ updates }) => {
+
+    const formatDate = (dateString: string) => {
+        const options: Intl.DateTimeFormatOptions = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+        return new Date(dateString).toLocaleDateString('en-US', options);
+    };
+
 
     return (
         <section className='bg-white py-3'>
@@ -34,14 +26,23 @@ const LatestUpdateSec = () => {
                 </h2>
                 <div className='py-3 position-relative boardCarosuel'>
                     <MainCarousel items={updates.map((update, index) => (
-                        <div className="card mx-md-3 mx-lg-3 mx-xl-3 mx-5" key={index}>
-                            <div className="card-body cardBlogText">
-                                <h6 className='fw-bold text-blue'>{update.title}</h6>
-                                <p className='text-black mb-1'>{update.date}</p>
-                                <p className='text-black'>
-                                    {update.description}
-                                </p>
-                                <button className='btn viewMoreCollegeBtn'>Read More</button>
+                        <div className="col-12 mb-1" style={{ margin: '0px 5px' }} key={index}>
+                            <div className="newsBlosCards">
+                                <div className="mb-5 mx-lg-3 mx-0">
+                                    <div className="card h-100">
+                                        <div className="card-body newsheight  cardBlogText">
+                                            <Link href={`/news/${update.id}/${update.name}`}>
+                                                <h6 className='fw-bold text-blue'>{update.name}</h6>
+                                            </Link>
+                                            {/* <h6 className='fw-bold text-blue'>{update.name}</h6> */}
+                                            <p className='text-black mb-1'>{formatDate(update.created_at)}</p>
+                                            <p className='text-black'>
+                                                {update.meta_description}
+                                            </p>
+                                            <Link href={`/board/${update.id}/${update.name}`} className='btn viewMoreCollegeBtn'>Read More</Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))} />
@@ -49,6 +50,6 @@ const LatestUpdateSec = () => {
             </div>
         </section>
     );
-}
+};
 
 export default LatestUpdateSec;

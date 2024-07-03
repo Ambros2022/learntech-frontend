@@ -9,7 +9,7 @@ function ExploreSection() {
   const [activeTab, setActiveTab] = useState('Colleges');
   const [data, setData] = useState([]);
   const [visibleCount, setVisibleCount] = useState(0);
-  const [datasize, setDatasize] = useState(12);
+  const [datasize, setDatasize] = useState(18);
 
   const fetchData = useCallback(async () => {
 
@@ -17,11 +17,11 @@ function ExploreSection() {
     try {
       let endpoint = '';
       if (activeTab === 'Colleges') {
-        endpoint = 'api/website/explorecollege/get';
+        endpoint = 'api/website/explorecollege/get?orderby=asc&columnname=listing_order';
       } else if (activeTab === 'Courses') {
-        endpoint = 'api/website/explorecourses/get';
+        endpoint = 'api/website/explorecourses/get?orderby=asc&columnname=listing_order';
       } else if (activeTab === 'Exams') {
-        endpoint = 'api/website/exploreexam/get';
+        endpoint = 'api/website/exploreexam/get?orderby=asc&columnname=listing_order';
       }
       const roleparams = { page: 1, size: datasize };
       const response = await axios1.get(endpoint, { params: roleparams });
@@ -42,7 +42,7 @@ function ExploreSection() {
 
   const handleTabChange = useCallback((tab) => {
     setActiveTab(tab);
-    setDatasize(12);
+    setDatasize(18);
   }, []);
 
   const renderData = useCallback(() => {

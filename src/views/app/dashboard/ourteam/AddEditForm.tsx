@@ -253,7 +253,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             maxFiles={1}
                             maxSize={2000000}
                             fileNames={fileNamesphoto}
-                            label=" Upload Amenities Image"
+                            label=" Upload  Image"
                             acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                             rejectionMessage='Try another file for upload.'
                         />

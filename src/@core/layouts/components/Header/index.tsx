@@ -10,6 +10,7 @@ import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown';
 import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import dynamic from 'next/dynamic'; // Dynamic import for Next.js
+import Avatar from '@mui/material/Avatar';
 const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false });
 const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false });
 const SignInForm = dynamic(() => import('src/@core/components/custom-user-auth/SignInForm'), { ssr: false });
@@ -25,6 +26,7 @@ interface Courses {
   slug: string;
 }
 import { createRoot } from 'react-dom/client';
+import AvatarDropdown from "src/@core/components/avatar";
 
 
 
@@ -151,7 +153,7 @@ const Header = () => {
             //@ts-ignore
             strongElements[i].parentNode.replaceChild(container, strongElements[i]);
             const root = createRoot(container);
-            root.render(<EditorEnquiryForm />);
+            root.render(<EditorEnquiryForm  className="applyNowButton btn btn-sm "/>);
           }
         }
       };
@@ -200,7 +202,7 @@ const Header = () => {
         </div>
       </header >
 
-      <nav className="navbar navbar-expand-lg bg-white">
+      <nav className="navbar navbar-expand-lg bg-white" style={{zIndex:'100'}}>
         <div className="container-xl">
           <Link className="navbar-brand" href="/"><Image src="/images/icons/learntech-logo.png" width={160} height={50} alt="learntech-logo" /></Link>
           <button className="navbar-toggler" type="button" onClick={toggle} data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -326,6 +328,12 @@ const Header = () => {
 
                     </li>
                     <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/blogs">
+                        Blogs
+                      </Link>
+
+                    </li>
+                    <li>
                       <Link className="d-flex justify-content-between dropdown-item" href="/boards">
                         Boards
                       </Link>
@@ -363,11 +371,7 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className="hideBtnTxt">
-                  <button onClick={openModal} className="btn userBtn">
-                    <Image src="/images/icons/user-icon.svg" className="socialIcon" width={30} height={30} alt="user-icon" />
-                  </button>
-
-
+                  <AvatarDropdown/>
                 </li>
                 <li className="hideBtnTxt">
                   <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn" />

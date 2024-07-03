@@ -824,6 +824,8 @@
 
   .card-image {
     min-height: 160px !important;
+    max-height: 160px !important;
+    overflow: hidden !important;
   }
 
   /* .showingCards .collapse.show {
@@ -841,6 +843,7 @@
   @media (min-width:1025px) and (max-width:1400px) {
     .card-image {
       min-height: 128px !important;
+      max-height: 128px !important;
     }
 
     .top-nav .nav-link {
@@ -1071,7 +1074,7 @@
     }
 
     .studyAbroadNav a {
-      width: 120px !important;
+      width: 220px !important;
     }
 
     .footer-logo {
@@ -1228,7 +1231,7 @@
     }
 
     .studyAbroadNav a {
-      font-size: 12px !important;
+      font-size: 17px !important;
     }
 
     .arrowIcon {
@@ -1278,7 +1281,7 @@
 
   @media (min-width: 320px) and (max-width: 424px) {
     .studyAbroadNav a {
-      font-size: 10px !important;
+      font-size: 15px !important;
     }
 
     .bannerCon .carousel-control-prev {
@@ -1464,11 +1467,11 @@
     height: 300px !important;
   }
 
-  .collegeBannerCon>.position-relative img {
+  /* .collegeBannerCon>.position-relative img {
     object-fit: cover !important;
     width: 100% !important;
     height: 300px !important;
-  }
+  } */
 
   /* College Filter Section */
   .bg-skyBlue {
@@ -1491,7 +1494,7 @@
   }
 
   .searchCheckBox {
-    font-size: 20px !important;
+    font-size: 16px !important;
   }
 
   .collegeSearchFilter {
@@ -1544,6 +1547,17 @@
     padding: 10px 20px !important;
     max-height: 50px !important;
   }
+
+
+  .viewMoreBtn:hover {
+    background-color: darkblue !important;
+    color: white !important;
+    border: 1px solid #254692 !important;
+    border-radius: 6px !important;
+    padding: 10px 20px !important;
+    max-height: 50px !important;
+  }
+
 
   .filterCardBorder {
     border: 1px solid gray;
@@ -2096,8 +2110,8 @@
   }
 
   .dentalCourseCon img {
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
     padding: 5px !important;
   }
 
@@ -2344,17 +2358,17 @@
   }
 
   .dental-crs-img img {
-    height: 60%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
     margin: auto;
   }
 
   .chkEligBtn {
-    background-color: white !important;
-    color: #254692 !important;
+    background-color: #254692 !important;
+    color: white !important;
     border: 1px solid #254692 !important;
-    width: 50% !important;
     margin: auto !important;
+    font-size: 14px !important;
   }
 
   .cardConBrdr {
@@ -2383,7 +2397,7 @@
 
   .topCarouselCardsCon .carousel-button-group {
     position: absolute !important;
-    top: 15px !important;
+    top: 50px !important;
     width: 100%;
   }
 
@@ -2483,11 +2497,11 @@
     font-size: 12px !important;
   }
 
- .topUniCardCon img {
+  /* .topUniCardCon img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-  } 
+  } */
 
   .topClgIcon {
     top: 9px !important;
@@ -2535,7 +2549,7 @@
 }
 
 
-
+/*
   .errCon h1 {
     font-size: 30px !important;
   }
@@ -2676,6 +2690,19 @@
     color: rgb(0, 0, 0) !important;
   }
 
+  .errCon h1 {
+    font-size: 30px !important;
+  }
+
+  .errCon h6 {
+    font-size: 14px !important;
+  }
+
+  .upcomingAdmission img {
+    width: 100%;
+    height: 100%;
+  }
+
   /* .detailsFillSec input {
     background-color: rgba(39, 72, 150, 0.04) !important ;
   } */
@@ -2683,7 +2710,7 @@
   /* .detailsFillSec input::placeholder {
     color: rgba(143, 143, 143, 1);
   } */
-/* 
+  /* 
   .detailsFillSec textarea {
     background-color: rgba(39, 72, 150, 0.04) !important;
     width: 100%;
@@ -2840,7 +2867,7 @@
 
   .ExpertCon input {
     background-color: transparent !important;
-    color: white !important;
+    color: black !important;
   }
 
   .ExpertCon option {
@@ -3027,8 +3054,18 @@
     padding: 10px 12px !important;
   }
 
+  .examBannerCon {
+    height: 430px !important;
+  }
+
+  .examBannerCon img {
+    object-fit: cover !important;
+    height: 430px !important;
+    width: 100% !important;
+  }
+
   .examsBannerCon {
-    height: auto !important;
+    height: 430px !important;
   }
 
   .examsCardCarousel .carousel-button-group {
@@ -3116,6 +3153,26 @@
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     min-height: 70px !important;
+  }
+
+  .cardNewsText {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 80px !important;
+    max-height: 80px !important;
+  }
+
+  .newsPageImg img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .innerExamImg>img {
+    width: 100%;
+    height: 100%;
   }
 
   .FeaturedClgCon .card-Image-top {
@@ -3410,7 +3467,8 @@
 
   .innerNewsCard .card-img-top {
     height: 100px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
+    object-fit: contain !important;
   }
 
   .innerNewsCard .card-text {
@@ -3439,6 +3497,14 @@
     border-color: #254692 !important;
   }
 
+  .expertInquirySec select {
+    background-color: white !important;
+    color: #212529 !important;
+  }
+
+  .expertInquirySec input::placeholder {
+    color: #212529 !important;
+  }
 
   .topCourseConCarousel .page-link {
     color: black !important;
@@ -3476,7 +3542,7 @@
 
     .innerNewsCard .card-img-top {
       height: 200px !important;
-      object-fit: cover !important;
+      object-fit: contain !important;
     }
   }
 
@@ -3500,7 +3566,7 @@
     object-fit: cover;
   }
 
-  .newsBannerSec input {
+  /* .newsBannerSec input {
     background-color: rgba(255, 255, 255, 0.2) !important;
     padding: 10px !important;
     margin: 10px 0px !important;
@@ -3511,7 +3577,7 @@
   .newsBannerSec input::placeholder {
     color: white !important;
     font-size: 20px !important;
-  }
+  } */
 
   .topnewsSec .card-text {
     display: -webkit-box !important;
@@ -3845,6 +3911,20 @@
     height: 50px !important;
   }
 
+  .studyAbroadNav .carousel-button-group {
+    position: absolute !important;
+    width: 100% !important;
+    top: 20px !important;
+  }
+
+  .studyAbroadNav .fi-left {
+    margin-left: -50px !important;
+  }
+
+  .studyAbroadNav .fi-right {
+    margin-right: 50px !important;
+  }
+
 
   @media (min-width:768px) and (max-width:992px) {
     .collegeDetailCard h1 {
@@ -3924,30 +4004,35 @@
 
     .card-image {
       min-height: 125px !important;
+      max-height: 125px !important;
     }
   }
 
   @media (min-width:768px) and (max-width:1023px) {
     .card-image {
       min-height: 125px !important;
+      max-height: 125px !important;
     }
   }
 
   @media (min-width:320px) and (max-width:767px) {
     .card-image {
       min-height: 175px !important;
+      max-height: 175px !important;
     }
   }
 
   @media (min-width: 375px) and (max-width: 424px) {
     .card-image {
       min-height: 145px !important;
+      max-height: 145px !important;
     }
   }
 
   @media (min-width: 320px) and (max-width: 374px) {
     .card-image {
       min-height: 110px !important;
+      max-height: 110px !important;
     }
   }
 
@@ -4032,10 +4117,13 @@
     text-align: center;
   }
 
+  .checkboxesSize {}
+
   .collegeApplyNow {
-    background-color: #ffffff !important;
-    color: #254692 !important;
-    padding: 14px !important;
+    background-color: yellow !important;
+    color: #274896 !important;
+    font-weight: 500 !important;
+    padding: 12px !important;
   }
 
   .clamped {
@@ -4155,6 +4243,10 @@
     font-size: 19px !important;
   }
 
+  .linkFontSize i {
+    font-size: 14px !important;
+  }
+
   .newsImgSize img {
     width: auto;
     height: auto;
@@ -4166,12 +4258,12 @@
   }
 
   .logoBoardImg {
-    height: 100px;
+    /* height: 100px; */
   }
 
   .logoBoardImg>img {
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: auto;
   }
 
   .cardBlogText h6 {
@@ -4442,11 +4534,309 @@
     min-height: 70px !important;
   }
 
+  .eduLoanSec {
+    height: 300px;
+  }
+
+  .eduLoanSec>img {
+    object-fit: cover !important;
+    height: 300px !important;
+    width: 100% !important;
+  }
+
+  .DetailSec select {
+    background-color: white !important;
+    color: #8f8f8f !important;
+  }
+
+  .DetailSec input::placeholder {
+    color: #8f8f8f !important;
+  }
+
+  .DetailSec textarea::placeholder {
+    color: #8f8f8f !important;
+  }
+
+  .bankImg img {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .bankCarousel .carousel-button-group {
+    width: 100% !important;
+    position: absolute !important;
+    top: 30px !important;
+  }
+
+  .bankCarousel .fi-left {
+    margin-left: -20px !important;
+  }
+
+  .bankCarousel .fi-right {
+    margin-right: -20px !important;
+  }
+
+  .bankCarousel .fi-left svg {
+    stroke: #254692 !important;
+  }
+
+  .bankCarousel .fi-right svg {
+    stroke: #254692 !important;
+  }
+
+  .piechartStyle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(#c2c2c2 0% 70%,
+        #254692 50% 100%);
+  }
+
+  .tenure-button {
+    cursor: pointer !important;
+    background-color: #ffffff !important;
+    color: #254692 !important;
+  }
+
+  .tenure-button.active {
+    background-color: #254692 !important;
+    color: #ffffff !important;
+  }
+
+  .medSec {
+    height: 700px !important;
+    background-color: #254692 !important;
+  }
+
+  .medSec video {
+    width: 100%;
+    height: 700px !important;
+    object-fit: cover !important;
+  }
+
+  .medSec h5 {
+    font-size: 20px !important;
+  }
+
+  .card-hover-effect {
+    transition: transform 0.3s ease;
+  }
+
+  .card-hover-effect:hover {
+    transform: translateY(-5px);
+    /* Move 5px upward on hover */
+  }
+
+  .helpSec {
+    height: 800px !important;
+  }
+
+  .helpSec .bannerHelp {
+    height: 800px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .event-img {
+    position: relative;
+    z-index: 1;
+  }
+
+  .video-wrap {
+    text-align: center !important;
+  }
+
+  .video-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .video-btn {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    border-radius: 0;
+    color: var(--main-color);
+    position: relative;
+    top: 3px;
+    z-index: 1;
+    background-color: rgba(255, 182, 7, .9);
+    border-radius: 50%;
+    -webkit-transition: var(--transition);
+    transition: var(--transition);
+  }
+
+  .video-btn i {
+    font-size: 100px;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .event-shape-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: -1;
+  }
+
+  @-webkit-keyframes rotated {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotated {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @-webkit-keyframes moveBounce-top {
+
+    0%,
+    100% {
+      top: 0;
+    }
+
+    50% {
+      top: 100px;
+    }
+  }
+
+  @keyframes moveBounce-top {
+
+    0%,
+    100% {
+      top: 0;
+    }
+
+    50% {
+      top: 100px;
+    }
+  }
+
+
+
+  .rotated {
+    -webkit-animation-name: rotated !important;
+    animation-name: rotated !important;
+    -webkit-animation-duration: 20s !important;
+    animation-duration: 20s !important;
+    -webkit-animation-iteration-count: infinite !important;
+    animation-iteration-count: infinite !important;
+    -webkit-animation-timing-function: linear !important;
+    animation-timing-function: linear !important;
+  }
+
+  .event-shape-2 {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+    z-index: -1 !important;
+    -webkit-animation: moveBounce-top 9s linear infinite !important;
+    animation: moveBounce-top 9s linear infinite !important;
+  }
+
+  .education-shape-1 {
+    position: absolute;
+    top: 30px;
+    left: 0;
+  }
+
+  .education-shape-2 {
+    position: absolute;
+    bottom: 0;
+    right: 40px;
+  }
+
+  .medHeader h6 {
+    font-size: 14px !important;
+  }
+
+  .medHeader h6:hover {
+    color: #254692 !important;
+  }
+
+  .footerMed h6:hover {
+    color: yellow !important;
+  }
+
+  .SitemapSec {
+    height: 300px;
+  }
+
+  .SitemapSec>img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .siteMapSec li {
+    margin-bottom: 20px !important;
+    font-size: 18px !important;
+  }
+
+  .siteMapSec li a:hover {
+    color: #274896 !important;
+  }
+
   @media (min-width:993px) and (max-width:1024px) {
     .testimonialCarousel .carousel-button-group {
       position: absolute !important;
       width: 100% !important;
       top: 125px !important;
+    }
+
+    .medSec h5 {
+      font-size: 17px !important;
+    }
+
+    .medSec h4 {
+      font-size: 20px !important;
+    }
+
+
+    .servicesCardSec h5 {
+      font-size: 15px !important;
     }
 
     .studentSpeakCardBody {
@@ -4457,9 +4847,18 @@
       text-overflow: ellipsis !important;
       min-height: 70px !important;
     }
+
+
+    .medHeader h6 {
+      font-size: 14px !important;
+    }
   }
 
   @media (min-width:768px) and (max-width:992px) {
+    .medSec h5 {
+      font-size: 15px !important;
+    }
+
     .testimonialCarousel .carousel-button-group {
       position: absolute !important;
       width: 100% !important;
@@ -4483,18 +4882,67 @@
       min-height: 70px !important;
     }
 
+    .servicesCardSec h5 {
+      font-size: 15px !important;
+    }
 
     .logoBoardImg {
-      height: 150px;
+      /* height: 150px; */
     }
 
     .userSec2Img {
       width: 180px;
       height: 180px;
     }
+
+    .medSec h4 {
+      font-size: 20px !important;
+    }
+
   }
 
   @media (min-width:320px) and (max-width:767px) {
+
+    .helpSec {
+      height: 1530px !important;
+    }
+
+    .helpSec .bannerHelp {
+      height: 1530px !important;
+      width: 100% !important;
+      object-fit: cover !important;
+    }
+
+    .medSec {
+      height: 1170px !important;
+    }
+    .resultDateBtn{
+      width: 295px !important;
+    }
+    .medSec video {
+      width: 100%;
+      height: 600px !important;
+      object-fit: cover !important;
+    }
+
+    .medSec h5 {
+      font-size: 14px !important;
+    }
+
+    .bankCarousel .carousel-button-group {
+      width: 100% !important;
+      position: absolute !important;
+      top: 35px !important;
+    }
+
+    .servicesCardSec h5 {
+      font-size: 15px !important;
+    }
+
+    .EduSec h5 {
+      font-size: 15px !important;
+    }
+
     .testimonialPara {
       display: -webkit-box !important;
       -webkit-line-clamp: 3 !important;
@@ -4582,7 +5030,7 @@
     }
 
     .logoBoardImg {
-      height: 150px;
+      /* height: 150px; */
     }
   }
 
@@ -4620,4 +5068,19 @@
       border: 1px solid #254692;
       border-radius: 5px;
     }
+  }
+
+
+  .typographypopup {
+    font-size: 17px !important;
+    color: #254692 !important;
+    font-weight: 700 !important;
+  }
+
+  .news-text {
+    color: black !important;
+  }
+
+  .news-text:hover {
+    color: blue !important;
   }

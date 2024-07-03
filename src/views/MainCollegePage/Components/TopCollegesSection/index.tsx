@@ -11,8 +11,8 @@ function TopCollegesSection() {
     return (
         <>
             <section className='bg-white'>
-                <section className="container InnerCollegeNavigationLink pt-2">
-                    <p className='mb-3'><Link href="/">Home</Link> {'>'} Colleges</p>
+                <section className="container InnerCollegeNavigationLink linkFontSize pt-2">
+                    <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Colleges</span></p>
                 </section>
                 <div className='container innerClg pt-5 pb-3'>
                     <h2 className='text-center fw-bold text-blue mb-3'>List of Top Colleges in India</h2>

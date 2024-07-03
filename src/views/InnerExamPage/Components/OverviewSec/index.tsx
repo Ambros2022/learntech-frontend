@@ -73,24 +73,24 @@ function OverviewSec({ data }) {
     <section className='clgInfoSec bg-white'>
       <div className="container">
         <div className='row'>
-        <div className="pt-2 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn" id="nav-tab" role="tablist">
-          <button className='active mb-3 btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">Overview</button>
-          {data.exam_dates && data.exam_dates !== 'null' && <button className='mb-3 btn' id="nav-exams-tab" data-bs-toggle="tab" data-bs-target="#nav-exams" type="button" role="tab" aria-controls="nav-exams" aria-selected="false">Exam Dates</button>}
-          {data.eligibility_criteria && data.eligibility_criteria !== 'null' && <button className='mb-3 btn' id="nav-eligibility-tab" data-bs-toggle="tab" data-bs-target="#nav-eligibility" type="button" role="tab" aria-controls="nav-eligibility" aria-selected="false">ELIGIBILITY & REGISTRATION</button>}
-          {data.syllabus && data.syllabus !== 'null' && <button className='mb-3 btn' id="nav-syllabus-tab" data-bs-toggle="tab" data-bs-target="#nav-syllabus" type="button" role="tab" aria-controls="nav-syllabus" aria-selected="false">EXAM PATTERN & SYLLABUS</button>}
-          {data.cutoff && data.cutoff !== 'null' && <button className='mb-3 btn' id="nav-cutoff-tab" data-bs-toggle="tab" data-bs-target="#nav-cutoff" type="button" role="tab" aria-controls="nav-cutoff" aria-selected="false">CUTOFF</button>}
-          {data.admit_card && data.admit_card !== 'null' && <button className='mb-3 btn' id="nav-admitcard-tab" data-bs-toggle="tab" data-bs-target="#nav-admitcard" type="button" role="tab" aria-controls="nav-admitcard" aria-selected="false">ADMIT CARD</button>}
-          {data.exam_centers && data.exam_centers !== 'null' && <button className='mb-3 btn' id="nav-examcenters-tab" data-bs-toggle="tab" data-bs-target="#nav-examcenters" type="button" role="tab" aria-controls="nav-examcenters" aria-selected="false">EXAM CENTRES</button>}
-          {data.results && data.results !== 'null' && <button className='mb-3 btn' id="nav-results-tab" data-bs-toggle="tab" data-bs-target="#nav-results" type="button" role="tab" aria-controls="nav-results" aria-selected="false">RESULT</button>}
-          {data.prepretion_tips && data.prepretion_tips !== 'null' && <button className='mb-3 btn' id="nav-prepretiontips-tab" data-bs-toggle="tab" data-bs-target="#nav-prepretiontips" type="button" role="tab" aria-controls="nav-prepretiontips" aria-selected="false">PREPARATION TIPS</button>}
-          {data.counseling && data.counseling !== 'null' && <button className='mb-3 btn' id="nav-counseling-tab" data-bs-toggle="tab" data-bs-target="#nav-counseling" type="button" role="tab" aria-controls="nav-counseling" aria-selected="false">COUNSELLING</button>}
-          {data.accept_colleges && data.accept_colleges !== 'null' && <button className='mb-3 btn' id="nav-acceptcolleges-tab" data-bs-toggle="tab" data-bs-target="#nav-acceptcolleges" type="button" role="tab" aria-controls="nav-acceptcolleges" aria-selected="false">ACCEPTING COLLEGES</button>}
-          {data.clggallery && data.clggallery.length > 0 && <button className='mb-3 btn' id="nav-gallery-tab" data-bs-toggle="tab" data-bs-target="#nav-gallery" type="button" role="tab" aria-controls="nav-gallery" aria-selected="false">Gallery</button>}
-          {data.examfaqs && data.examfaqs.length > 0 && <button className='mb-3 btn' id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>}
+        <div className="pt-2 text-center justify-content-start d-flex flex-fill gap-3 flex-wrap infoBtn" id="nav-tab" role="tablist">
+          <button className='active  btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">Overview</button>
+          {data.exam_dates && data.exam_dates !== 'null' && <button className=' btn' id="nav-exams-tab" data-bs-toggle="tab" data-bs-target="#nav-exams" type="button" role="tab" aria-controls="nav-exams" aria-selected="false">Exam Dates</button>}
+          {data.eligibility_criteria && data.eligibility_criteria !== 'null' && <button className=' btn' id="nav-eligibility-tab" data-bs-toggle="tab" data-bs-target="#nav-eligibility" type="button" role="tab" aria-controls="nav-eligibility" aria-selected="false">ELIGIBILITY & REGISTRATION</button>}
+          {data.syllabus && data.syllabus !== 'null' && <button className=' btn' id="nav-syllabus-tab" data-bs-toggle="tab" data-bs-target="#nav-syllabus" type="button" role="tab" aria-controls="nav-syllabus" aria-selected="false">EXAM PATTERN & SYLLABUS</button>}
+          {data.cutoff && data.cutoff !== 'null' && <button className=' btn' id="nav-cutoff-tab" data-bs-toggle="tab" data-bs-target="#nav-cutoff" type="button" role="tab" aria-controls="nav-cutoff" aria-selected="false">CUTOFF</button>}
+          {data.admit_card && data.admit_card !== 'null' && <button className=' btn' id="nav-admitcard-tab" data-bs-toggle="tab" data-bs-target="#nav-admitcard" type="button" role="tab" aria-controls="nav-admitcard" aria-selected="false">ADMIT CARD</button>}
+          {data.exam_centers && data.exam_centers !== 'null' && <button className=' btn' id="nav-examcenters-tab" data-bs-toggle="tab" data-bs-target="#nav-examcenters" type="button" role="tab" aria-controls="nav-examcenters" aria-selected="false">EXAM CENTRES</button>}
+          {data.results && data.results !== 'null' && <button className=' btn' id="nav-results-tab" data-bs-toggle="tab" data-bs-target="#nav-results" type="button" role="tab" aria-controls="nav-results" aria-selected="false">RESULT</button>}
+          {data.prepretion_tips && data.prepretion_tips !== 'null' && <button className=' btn' id="nav-prepretiontips-tab" data-bs-toggle="tab" data-bs-target="#nav-prepretiontips" type="button" role="tab" aria-controls="nav-prepretiontips" aria-selected="false">PREPARATION TIPS</button>}
+          {data.counseling && data.counseling !== 'null' && <button className=' btn' id="nav-counseling-tab" data-bs-toggle="tab" data-bs-target="#nav-counseling" type="button" role="tab" aria-controls="nav-counseling" aria-selected="false">COUNSELLING</button>}
+          {data.accept_colleges && data.accept_colleges !== 'null' && <button className=' btn' id="nav-acceptcolleges-tab" data-bs-toggle="tab" data-bs-target="#nav-acceptcolleges" type="button" role="tab" aria-controls="nav-acceptcolleges" aria-selected="false">ACCEPTING COLLEGES</button>}
+          {data.clggallery && data.clggallery.length > 0 && <button className=' btn' id="nav-gallery-tab" data-bs-toggle="tab" data-bs-target="#nav-gallery" type="button" role="tab" aria-controls="nav-gallery" aria-selected="false">Gallery</button>}
+          {data.examfaqs && data.examfaqs.length > 0 && <button className=' btn' id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>}
         </div>
 
 
-    <div className="order-2 order-md-1 col-md-8 text-black pt-3">
+    <div className="col-md-8 text-black pt-3">
         <div className="tab-content" id="nav-tabContent">
           <div className="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
             {renderContent(data.overview)}
@@ -130,7 +130,7 @@ function OverviewSec({ data }) {
           </div>
         </div>
         </div>
-        <div className="col-md-4 mb-md-5 order-1 fixed-column">
+        <div className="col-md-4 mb-md-5 fixed-column">
         <div className='bg-skyBlue px-lg-5 px-3 rounded'>
           <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Upcoming Exams</h5>
           <SideContactUsForm />

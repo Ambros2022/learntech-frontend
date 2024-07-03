@@ -12,11 +12,11 @@ function CollegeInfoSection({ data }) {
   return (
     <>
       <section className='clgInfoSec bg-white'>
-        <section className="container InnerCollegeNavigationLink pt-2">
-          <p className='mb-3'><Link href="/">Home</Link> {'>'} <Link href={"/colleges"}>Colleges</Link> {'>'} <span className='text-blue' style={{ cursor: 'pointer' }}>{data.name}</span></p>
+        <section className="container InnerCollegeNavigationLink linkFontSize py-3">
+          <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={"/colleges"}> Colleges <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data.name}</span></p>
         </section>
         <div className="container">
-          <div className="pt-2 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3 " id="nav-tab" role="tablist">
+          <div className="pt-3 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3 " id="nav-tab" role="tablist">
             <button className='active btn' id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">Info</button>
             {
               data.course_fees && data.course_fees != '' && data.course_fees != 'null' && data.course_fees != '<p>null</p>' ?
@@ -65,7 +65,7 @@ function CollegeInfoSection({ data }) {
 
           </div>
 
-          <div className="tab-content" id="nav-tabContent">
+          <div className="tab-content pt-5" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
               <div className="row">
                 <div className="order-2 order-md-1 col-md-8 col-lg-8 col-xl-9 text-black pt-3">

@@ -2,31 +2,32 @@ import React from 'react';
 import Image from 'next/image';
 
 // NewsItem component
-const NewsItem = ({ imageSrc, title, text }) => (
-    <div className="col-12">
+const NewsItem = ({ id, banner_image, title }) => (
+    <div className="col-md-12 col-10 mx-md-0 mx-auto">
+         <a href={`/college/${id}/${title}`} >
         <div className="card mb-3">
             <div className="row g-0">
-                <div className="col-md-4">
-                    <Image src={imageSrc} width={200} height={200} className="card-img-top img-fluid rounded-start" alt="news-img" />
+                <div className="col-md-4 upcomingAdmission">
+                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner_image}`} width={300} height={300} className="rounded-start img-fluid" alt="news-img" />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <h5 className="card-title text-truncate fw-bold">{title}</h5>
-                        <small className="card-text">{text}</small>
+                        <h5 className="card-title  fw-bold">{title}</h5>
                     </div>
                 </div>
             </div>
         </div>
+        </a>
     </div>
 );
 
 // NewsList component
 const NewsList = ({ newsItems }) => (
     <div className='bg-skyBlue examNewsSec rounded mt-3 px-4 overflow-y-scroll newsHeightScroll'>
-        <h4 className='fw-bold text-blue text-start pt-3 mb-3'>Latest News</h4>
+        <h4 className='fw-bold text-blue text-md-start text-center pt-3 mb-3'>Upcoming Admissions</h4>
         <div className="row">
             {newsItems.map((item, index) => (
-                <NewsItem key={index} imageSrc={item.imageSrc} title={item.title} text={item.text} />
+                <NewsItem key={index} id={item.id} banner_image={item.banner_image} title={item.name} />
             ))}
         </div>
     </div>
