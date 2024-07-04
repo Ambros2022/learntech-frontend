@@ -94,14 +94,14 @@ const BrowseNewsSec = () => {
 
     }, [getCategoriesData, getColleges])
 
-    
+
 
     const handleTabClick = (id) => {
         setActiveTab(id);
         setCurrentPage(1);
     };
 
-   
+
 
 
     const handlePreviousPage = () => {
@@ -150,14 +150,14 @@ const BrowseNewsSec = () => {
                                     <div className="row">
                                         {currentNews.map(item => (
                                             <div key={item.id} className="col-12 mx-5 col-lg-6 mx-lg-0 mb-3 d-flex ">
-                                                <div className="card">
+                                                <div className="card hover-card rounded">
                                                     <div className='newsPageImg'>
                                                         <Image src="/images/icons/newsPageImg.jpg" width={400} height={400} className="img-fluid" alt="newsImage"></Image>
                                                     </div>
-                                                    <div className="card-body">
+                                                    <div className="card-body bg-skyBlue">
                                                         <h5 className="fw-bold card-title">{item.name}</h5>
                                                     </div>
-                                                    <div className='p-3'>
+                                                    <div className='p-3 bg-skyBlue'>
                                                         <Link href={`/news-1/${item.id}/${item.name}`}>
                                                             <button className='btn viewMoreCollegeBtn'>View Detail</button>
                                                         </Link>
@@ -198,15 +198,15 @@ const BrowseNewsSec = () => {
                                     <h4 className='text-blue fw-bold text-center mb-3'>Get Upcoming News Alerts</h4>
                                     <Image src="/images/icons/getNewsImage.png" width={200} height={200} alt='get-news-logo' className='mb-3' />
                                     <div className="d-flex justify-content-between">
-                                    <GlobalEnquiryForm
-                                        buttonText="Follow Us"
-                                        className='btn flwBtn'
-                                    />
+                                        <GlobalEnquiryForm
+                                            buttonText="Follow Us"
+                                            className='btn flwBtn'
+                                        />
                                         {/* <button className='btn flwBtn'>Follow Us</button> */}
                                         <GlobalEnquiryForm
-                                        buttonText="Ask a Question"
-                                        className='btn askBtn'
-                                    />
+                                            buttonText="Ask a Question"
+                                            className='btn askBtn'
+                                        />
                                         {/* <button className='btn askBtn'>Ask a Question</button> */}
                                     </div>
                                 </div>
