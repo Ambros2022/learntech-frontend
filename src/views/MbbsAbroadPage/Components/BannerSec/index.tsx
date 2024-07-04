@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry'
 
 const BannerSec = () => {
     return (
@@ -12,7 +13,7 @@ const BannerSec = () => {
                         <div className="container">
                             <div className="py-5 text-center">
                                 <h1 className='fw-bold text-white mb-3'>MBBS Abroad For Indian Students: Top Countries, Exams, Admission Process, Requirement</h1>
-                                <div className="btn scholarShipBtn">Apply Now</div>
+                                <GlobalPopupEnquiry className="btn scholarShipBtn"/>
                             </div>
                         </div>
                     </div>

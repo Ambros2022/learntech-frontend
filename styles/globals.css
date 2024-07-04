@@ -472,9 +472,9 @@
 
   #exploreCardCon .col-4 img {
     width: 60px;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     /* filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%); */
-    background-color: rgba(39, 72, 150, 0.1);
+    /* background-color: rgba(39, 72, 150, 0.1); */
   }
 
   .exploreCardHover:hover {
@@ -1262,6 +1262,13 @@
 
     #exploreCardCon .mt-3 {
       margin: 1rem 0 !important;
+    }
+
+    #exploreCardCon .col-4 img {
+      width: 60px;
+      padding: 10px 10px 10px 10px;
+      /* filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%); */
+      /* background-color: rgba(39, 72, 150, 0.1); */
     }
 
     #exploreCardCon .card-body {
@@ -2377,7 +2384,7 @@
   }
 
   .carouselCardsCon .card img {
-    background-color: rgba(39, 72, 150, 0.1);
+    /* background-color: rgba(39, 72, 150, 0.1); */
     /* filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%); */
   }
 
@@ -2385,7 +2392,72 @@
     position: absolute !important;
     top: 40px !important;
     width: 100%;
+    z-index: 1;
   }
+
+  .careerLink a {
+    color: white !important;
+  }
+
+  .careerLink a:hover {
+    color: rgb(159, 224, 250) !important;
+  }
+
+  .branchLink a {
+    color: black !important;
+  }
+
+  .branchLink a:hover {
+    color: #274896 !important;
+  }
+
+  .topCountryLinks .nav-link {
+    background-color: #f6f8fb !important;
+    border: 1px solid #274896 !important;
+    color: #274896 !important;
+  }
+
+  .topCountryLinks .nav-link img {
+    border: 1px solid #274896 !important;
+    border-radius: 50% !important;
+    padding: 2px;
+  }
+
+  .studyAbroadLink a:hover{
+    background-color: #274896 !important;
+    color: white !important;
+    font-weight: bold !important;
+  }
+  .studyAbroadLink a{
+    color: #274896 !important;
+  }
+  .clgInfoSec table{
+    width: 100% !important;
+    border: 1px solid black !important;
+  }
+  .clgInfoSec table td{
+    border: 1px solid black !important;
+  }
+  .topCountryLinks .nav-link.active img {
+    border: 1px solid white !important;
+    border-radius: 50% !important;
+  }
+
+  .topCountryLinks .nav-link:hover img {
+    border: 1px solid white !important;
+    border-radius: 50% !important;
+  }
+
+  .topCountryLinks .nav-link:hover {
+    background-color: #274896 !important;
+    color: white !important;
+  }
+
+  .topCountryLinks .nav-link.active {
+    background-color: #274896 !important;
+    color: white !important;
+  }
+
 
   .carouselCardsCon .fi-left {
     margin-left: -30px !important;
@@ -2698,10 +2770,11 @@
     font-size: 14px !important;
   }
 
-  .upcomingAdmission img{
+  .upcomingAdmission img {
     width: 100%;
     height: 100%;
   }
+
   /* .detailsFillSec input {
     background-color: rgba(39, 72, 150, 0.04) !important ;
   } */
@@ -3153,6 +3226,7 @@
     text-overflow: ellipsis !important;
     min-height: 70px !important;
   }
+
   .cardNewsText {
     display: -webkit-box !important;
     -webkit-line-clamp: 3 !important;
@@ -3163,12 +3237,12 @@
     max-height: 80px !important;
   }
 
-  .newsPageImg img{
+  .newsPageImg img {
     width: 100%;
     height: 100%;
   }
 
-  .innerExamImg>img{
+  .innerExamImg>img {
     width: 100%;
     height: 100%;
   }
@@ -3908,10 +3982,16 @@
     height: 50px !important;
   }
 
+  .bg-blur {
+    background-color: rgb(28 27 27 / 48%) !important;
+    width: 100%;
+  }
+
   .studyAbroadNav .carousel-button-group {
     position: absolute !important;
     width: 100% !important;
     top: 20px !important;
+    z-index: -1;
   }
 
   .studyAbroadNav .fi-left {
@@ -4913,9 +4993,11 @@
     .medSec {
       height: 1170px !important;
     }
-    .resultDateBtn{
+
+    .resultDateBtn {
       width: 295px !important;
     }
+
     .medSec video {
       width: 100%;
       height: 600px !important;
@@ -5074,10 +5156,10 @@
     font-weight: 700 !important;
   }
 
-  .news-text{
+  .news-text {
     color: black !important;
   }
 
-  .news-text:hover{
+  /* .news-text:hover {
     color: blue !important;
-  }
+  } */

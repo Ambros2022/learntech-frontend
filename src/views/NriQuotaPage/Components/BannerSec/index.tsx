@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry'
 
 const BannerSec = () => {
     return (
@@ -14,7 +15,8 @@ const BannerSec = () => {
                                 <h1 className='text-center fw-bold text-white mb-3'>Looking for NRI Quota Seat? in India
                                 </h1>
                                 <div className='text-center'>
-                                    <button className='btn submtBtn'>Apply Now</button>
+                                    <GlobalPopupEnquiry className='btn submtBtn'/>
+                                    {/* <button className='btn submtBtn'>Apply Now</button> */}
                                 </div>
                             </div>
                         </div>
