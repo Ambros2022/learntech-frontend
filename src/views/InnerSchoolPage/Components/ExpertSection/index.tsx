@@ -1,61 +1,17 @@
-import React from 'react'
-import 'intl-tel-input/build/css/intlTelInput.css';
-import PhoneInput from 'src/@core/components/custom-phoneInputWithFlags';
+import dynamic from 'next/dynamic';
+import React from 'react';
+const ExpertEnquiryForm = dynamic(() => import('src/@core/components/popup/ExpertEnquiryForm'), { ssr: false });
 
 function ExpertSection() {
-
-  const handlePhoneChange = (event) => {
-    console.log(event.target.value);
-  };
-
   return (
-    <>
-      <section className=" innerCollege bg-blue">
-        <div className="container py-5">
-          <h2 className="fw-bold text-white text-center">Get In Touch With Our Expert Counsellor</h2>
-          <div className="pt-3 form container">
-            <div className="row">
-              <div className="col-md-6" id="animation16">
-                <div className="mb-3 ms-md-5">
-                  <label htmlFor="expertName" className="form-label">Name</label>
-                  <input type="text" className="form-control" id="expertName" aria-describedby="expertName" />
-                </div>
-              </div>
-              <div className="col-md-6" id="animation17">
-                <div className="mb-3 me-md-5">
-                  <label htmlFor="expertPhoneNumber2" className="form-label">Phone Number</label>
-                  <PhoneInput onChange={handlePhoneChange} ariaDescribedby="expertPhoneNumber2"
-                    id="expertPhoneNumber2" />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6" id="animation18">
-                <div className="mb-3 ms-md-5">
-                  <label htmlFor="expertEmail2" className="form-label">Email</label>
-                  <input type="email" className="form-control" id="expertEmail2" aria-describedby="expertName" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="mb-3 me-md-5" id="animation19">
-                  <label htmlFor="expertCourse2" className="form-label">Select Course</label>
-                  <select className="form-select" aria-label="expertCourse2" defaultValue="">
-                    <option value="" disabled></option>
-                    <option value="bca">BCA</option>
-                    <option value="btech">Btech</option>
-                    <option value="bsc">BSC</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="text-center reqBtnInnerClg mt-3">
-              <button className="btn">Request for a Call Back</button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  )
+    <section className="Expert-bg-skyBlue" id="animation15">
+      <div className="container py-5">
+        <h3 className="fw-bold text-center text-blue pb-2">Get In Touch With Our Expert Counsellor</h3>
+        {/* <p className="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> */}
+        <ExpertEnquiryForm />
+      </div>
+    </section>
+  );
 }
 
-export default ExpertSection
+export default ExpertSection;

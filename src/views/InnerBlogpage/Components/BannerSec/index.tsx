@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const BannerSec = ({data}) => {
+const BannerSec = ({ data }) => {
     return (
         <>
             <section className='newsBannerSec'>
@@ -28,7 +28,7 @@ const BannerSec = ({data}) => {
             </section>
             <section className='bg-white'>
                 <div className='container py-2 linkFontSize'>
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/blogs" className='text-black'> Blog <i className='bi bi-chevron-right'></i></Link><Link href="/blogs" className='text-blue'>{data.slug}</Link>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/blogs" className='text-black'> Blogs <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>{data.meta_title}</span>
                 </div>
             </section>
         </>

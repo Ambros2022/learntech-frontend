@@ -1,19 +1,23 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios from 'src/configs/axios';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Full Name is required'),
-    contact: Yup.string().required('Contact Number is required'),
-    email: Yup.string().email('Invalid email address').required('Email is required'),
-    location: Yup.string().required('Location is required'),
-    country: Yup.string().required('Preferred Country is required'),
-    college: Yup.string().notRequired(), // College is optional
-    message: Yup.string().notRequired(), // Message is optional
+    name: Yup.string().required('Full Name is required').trim(),
+    contact: Yup.string().required('Contact Number is required').trim(),
+    email: Yup.string().email('Invalid email address').required('Email is required').trim(),
+    location: Yup.string().required('Location is required').trim(),
+    country: Yup.string().required('Preferred Country is required').trim(),
+    college: Yup.string().notRequired().trim(), // College is optional
+    message: Yup.string().notRequired().trim(), // Message is optional
 });
-const MedicalSec = () => {
-    const collegeOptions = ['College A', 'College B', 'College C'];
-    const countryOptions = ['Country A', 'Country B', 'Country C'];
+
+const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, meta_description?: string } }) => {
+    const router = useRouter();
 
     const initialValues = {
         name: '',
@@ -25,9 +29,30 @@ const MedicalSec = () => {
         message: '',
     };
 
-    const handleSubmit = (values) => {
-        console.log('Form data:', values);
-        // Handle form submission logic here (e.g., API call)
+    const handleSubmit = async (values, { resetForm }) => {
+        try {
+            toast.loading('Processing');
+            const formData = new FormData();
+            formData.append('name', values.name);
+            formData.append('contact_number', values.contact);
+            formData.append('email', values.email);
+            formData.append('location', values.location);
+            formData.append('country', values.country);
+            formData.append('college_name', values.college || '');
+            formData.append('message', values.message || '');
+            formData.append('current_url', window.location.href);
+            const response = await axios.post('api/website/enquiry', formData);
+
+            if (response.status === 200) {
+                toast.dismiss();
+                toast.success('Thank you. We will get back to you.');
+                resetForm();
+                router.push('/thank-you');
+            }
+        } catch (error) {
+            toast.error('Please try again later!');
+            console.error('Error submitting form:', error);
+        }
     };
 
     return (
@@ -35,13 +60,8 @@ const MedicalSec = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-7 col-lg-8 col-xl-8">
-                        <p className='text-black'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        </p>
-                        <p className="text-black">
-
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                        </p>
+                        <p className='text-black'>{data.meta_title}</p>
+                        <p className='text-black'>{data.meta_description}</p>
                     </div>
                     <div className="col-md-5 col-lg-4 col-10 mx-auto col-xl-4">
                         <Formik
@@ -49,46 +69,34 @@ const MedicalSec = () => {
                             validationSchema={validationSchema}
                             onSubmit={handleSubmit}
                         >
-                            {({ errors, touched }) => (
+                            {() => (
                                 <Form className='bg-skyBlue mbbsAbroad rounded p-3'>
                                     <h4 className='text-blue fw-bold text-center mb-3'>Start Your Medical Journey</h4>
                                     <div className="mb-3">
                                         <Field type="text" className='form-control' name='name' placeholder='Full Name*' />
-                                        {errors.name && touched.name ? <div className="text-danger">{errors.name}</div> : null}
+                                        <ErrorMessage name="name" component="div" className="text-danger" />
                                     </div>
                                     <div className="mb-3">
-                                        <Field type="text" className='form-control' name='contact' placeholder='Contact Number*' />
-                                        {errors.contact && touched.contact ? <div className="text-danger">{errors.contact}</div> : null}
+                                        <PhoneInputField name='contact' />
+                                        <ErrorMessage name="contact" component="div" className="text-danger" />
                                     </div>
                                     <div className="mb-3">
                                         <Field type="email" className='form-control' name='email' placeholder='Email ID*' />
-                                        {errors.email && touched.email ? <div className="text-danger">{errors.email}</div> : null}
+                                        <ErrorMessage name="email" component="div" className="text-danger" />
                                     </div>
                                     <div className="mb-3">
                                         <Field type="text" className='form-control' name='location' placeholder='Location*' />
-                                        {errors.location && touched.location ? <div className="text-danger">{errors.location}</div> : null}
+                                        <ErrorMessage name="location" component="div" className="text-danger" />
                                     </div>
                                     <div className="mb-3">
-                                        <Field as="select" className='form-control' name='country'>
-                                            <option value="">Preferred Country*</option>
-                                            {countryOptions.map((country, index) => (
-                                                <option key={index} value={country}>{country}</option>
-                                            ))}
-                                        </Field>
-                                        {errors.country && touched.country ? <div className="text-danger">{errors.country}</div> : null}
+                                        <Field type="text" className='form-control' name='country' placeholder='Preferred Country*' />
+                                        <ErrorMessage name="country" component="div" className="text-danger" />
                                     </div>
                                     <div className="mb-3">
-                                        <Field as="select" className='form-control' name='college'>
-                                            <option value="">Preferred College</option>
-                                            {collegeOptions.map((college, index) => (
-                                                <option key={index} value={college}>{college}</option>
-                                            ))}
-                                        </Field>
-                                        {errors.college && touched.college ? <div className="text-danger">{errors.college}</div> : null}
+                                        <Field type="text" className='form-control' name='college' placeholder='Preferred College' />
                                     </div>
                                     <div className="mb-3">
                                         <Field as="textarea" className='form-control' name='message' placeholder='Type your message' />
-                                        {errors.message && touched.message ? <div className="text-danger">{errors.message}</div> : null}
                                     </div>
                                     <div className="mb-3 text-center">
                                         <button type="submit" className='btn submitBtn'>Make me a Doctor!</button>

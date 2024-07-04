@@ -8,7 +8,7 @@ const BannerSec = () => {
             <section className='careerSec'>
                 <div className='h-100'>
                     <div className="row h-100">
-                        <div className="col-md-6 bg-white py-md-0 py-5">
+                        <div className="col-md-6 py-md-0 py-5 bg-skyBlue">
                             <div className="d-flex justify-content-center h-100">
                                 <div className="align-content-center w-75">
                                     <h1 className='fw-bold text-blue'>WE ARE HIRING</h1>
@@ -24,8 +24,8 @@ const BannerSec = () => {
                 </div>
             </section>
             <section className='bg-white'>
-                <div className="container py-3">
-                    <Link href='/' className='text-black'>Home</Link> {'>'} <Link className='text-blue' href='/career'>Career</Link>
+                <div className="container linkFontSize py-3">
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>Career</span>
                 </div>
             </section>
         </>
