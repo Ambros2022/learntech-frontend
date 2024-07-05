@@ -13,7 +13,7 @@ const BannerSec = () => {
                         <div className="container">
                             <div className="py-5 text-center">
                                 <h1 className='fw-bold text-white mb-3'>MBBS Abroad For Indian Students: Top Countries, Exams, Admission Process, Requirement</h1>
-                                <GlobalPopupEnquiry className="btn scholarShipBtn"/>
+                                <GlobalPopupEnquiry className="btn btn-apply"/>
                             </div>
                         </div>
                     </div>

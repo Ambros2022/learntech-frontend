@@ -138,6 +138,8 @@ useEffect(() => {
         meta_title: isAddMode ? '' : olddata.meta_title,
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keyword: isAddMode ? '' : olddata.meta_keyword,
+        status: isAddMode ? 'Published' : olddata.status,
+
     }
 
 
@@ -169,6 +171,7 @@ useEffect(() => {
             formData.append('name', data.name);
             formData.append('slug', data.slug);
             formData.append('info', data.info);
+            formData.append('status', data.status);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keyword', data.meta_keyword);
@@ -211,6 +214,7 @@ useEffect(() => {
             formData.append('name', data.name);
             formData.append('slug', data.slug);
             formData.append('info', data.info);
+            formData.append('status', data.status);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keyword', data.meta_keyword);
@@ -541,6 +545,22 @@ useEffect(() => {
                                     rejectionMessage='Try another file for upload.'
                                 />
                             </Grid>
+
+                            <Grid item xs={12} sm={6}>
+                                    <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
+                                    <Controller
+                                        name='status'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                                <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                                <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                            </RadioGroup>
+                                        )}
+                                    />
+
+                                </Grid>
 
 
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>

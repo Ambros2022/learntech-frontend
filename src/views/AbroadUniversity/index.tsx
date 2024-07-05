@@ -50,7 +50,7 @@ function AbroadUniversityPage({ id, Countrydata }) {
   }, [id, isMountedRef]);
 
 
-  useEffect(() => {
+  useEffect(() => {  
     getPagedata();
     getColleges();
   }, [getPagedata]);

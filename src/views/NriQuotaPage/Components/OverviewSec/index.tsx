@@ -58,7 +58,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, meta_descrip
                                 <h4 className='fw-bold text-blue text-center mb-3'>Top Trending Courses</h4>
                                 <div className='overflow-y-scroll' style={{ minHeight: '500px', maxHeight: "500px" }}>
                                     {courses.map(course => (
-                                        <div className="card p-3 mb-3" key={course.id}>
+                                        <div className="card p-3 mb-3 hover-card2" key={course.id}>
                                             <div className="row">
                                                 <div className="col-md-3 col-xl-2 mb-md-0 mb-3 text-md-start text-center">
                                                     <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${course.logo}`} alt={`${course.name}-logo`} width={50} height={50} />

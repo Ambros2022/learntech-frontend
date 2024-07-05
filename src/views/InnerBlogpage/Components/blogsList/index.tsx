@@ -4,7 +4,7 @@ import Image from 'next/image';
 // NewsItem component
 const NewsItem = ({ imageSrc, id, name }) => (
     <div className="col-12">
-        <div className="card mb-3">
+        <div className="card mb-3 bg-skyBlue hover-card">
             <div className="row g-0">
                 <div className="col-md-4">
                     <Image src={imageSrc} width={200} height={200} className="card-img-top img-fluid rounded-start" alt="news-img" />

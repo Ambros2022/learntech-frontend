@@ -405,6 +405,9 @@
     color: white !important;
     padding: 10px 15px !important;
   }
+  .reqBtn:hover {
+    box-shadow: rgba(0,0,0,0.4) 0px 0px 15px !important;
+  }
 
   .reqBtn button {
     background-color: #254692 !important;
@@ -2437,6 +2440,16 @@
   }
   .hover-card:hover{
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px !important;
+  }
+  .hover-card2:hover{
+    background-color: #d7dfee;
+  }
+  .btn-apply{
+    background-color: #E73D47 !important;
+    color: white !important;
+  }
+  .btn-apply:hover{
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important; 
   }
   .clgInfoSec table td{
     border: 1px solid black !important;
