@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useCallback, useEffect, useState } from 'react'
 import ContactForm from 'src/@core/components/popup/ContactForm'
 import axios1 from 'src/configs/axios'
@@ -58,16 +59,18 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, meta_descrip
                                 <h4 className='fw-bold text-blue text-center mb-3'>Top Trending Courses</h4>
                                 <div className='overflow-y-scroll' style={{ minHeight: '500px', maxHeight: "500px" }}>
                                     {courses.map(course => (
-                                        <div className="card p-3 mb-3 hover-card2" key={course.id}>
-                                            <div className="row">
-                                                <div className="col-md-3 col-xl-2 mb-md-0 mb-3 text-md-start text-center">
-                                                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${course.logo}`} alt={`${course.name}-logo`} width={50} height={50} />
-                                                </div>
-                                                <div className="col-md-9 col-xl-10 d-flex justify-content-md-start justify-content-center">
-                                                    <h5 className='ms-4 text-blue align-self-center fw-bold text-md-start text-center'>{course.name}</h5>
+                                        <Link href={`/course/${course.id}/${course.slug}`}>
+                                            <div className="card p-3 mb-3 hover-card2" key={course.id}>
+                                                <div className="row">
+                                                    <div className="col-md-3 col-xl-2 mb-md-0 mb-3 text-md-start text-center">
+                                                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${course.logo}`} alt={`${course.name}-logo`} width={50} height={50} />
+                                                    </div>
+                                                    <div className="col-md-9 col-xl-10 d-flex justify-content-md-start justify-content-center">
+                                                        <h5 className='ms-4 text-blue align-self-center fw-bold text-md-start text-center'>{course.name}</h5>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     ))}
                                 </div>
                             </div>

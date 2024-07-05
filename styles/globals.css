@@ -405,8 +405,9 @@
     color: white !important;
     padding: 10px 15px !important;
   }
+
   .reqBtn:hover {
-    box-shadow: rgba(0,0,0,0.4) 0px 0px 15px !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important;
   }
 
   .reqBtn button {
@@ -520,7 +521,7 @@
     background-color: #254692 !important;
   }
 
-  .studyAbroadNav .active {
+  .studyAbroadNav .active-country {
     font-weight: bold !important;
     color: white !important;
     background-color: #254692 !important;
@@ -2395,7 +2396,7 @@
     position: absolute !important;
     top: 40px !important;
     width: 100%;
-    z-index: 1;
+    z-index: -1;
   }
 
   .careerLink a {
@@ -2426,41 +2427,51 @@
     padding: 2px;
   }
 
-  .studyAbroadLink a:hover{
+  .studyAbroadLink a:hover {
     background-color: #274896 !important;
     color: white !important;
     font-weight: bold !important;
   }
-  .studyAbroadLink a{
+
+  .studyAbroadLink a {
     color: #274896 !important;
   }
-  .clgInfoSec table{
+
+  .clgInfoSec table {
     width: 100% !important;
     border: 1px solid black !important;
   }
-  .hover-card:hover{
+
+  .hover-card:hover {
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px !important;
   }
-  .hover-card2:hover{
+
+  .hover-card2:hover {
     background-color: #d7dfee;
   }
-  .btn-apply{
+
+  .btn-apply {
     background-color: #E73D47 !important;
     color: white !important;
   }
-  .btn-apply:hover{
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important; 
+
+  .btn-apply:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important;
   }
-  .clgInfoSec table td{
+
+  .clgInfoSec table td {
     border: 1px solid black !important;
   }
-  .innerNewsSec table{
+
+  .innerNewsSec table {
     width: 100% !important;
     border: 1px solid black !important;
   }
-  .innerNewsSec table td{
+
+  .innerNewsSec table td {
     border: 1px solid black !important;
   }
+
   .topCountryLinks .nav-link.active img {
     border: 1px solid white !important;
     border-radius: 50% !important;
@@ -2795,7 +2806,8 @@
 
   .upcomingAdmission img {
     width: 100%;
-    height: 100%;
+    height: -webkit-fill-available;
+    object-fit: contain !important;
   }
 
   /* .detailsFillSec input {
@@ -3188,6 +3200,7 @@
   .examCardCarousel .carousel-button-group {
     position: absolute !important;
     top: 20px !important;
+    z-index: -1 !important;
     width: 100%;
   }
 
@@ -3576,8 +3589,8 @@
   }
 
   .examsCardRow .card-img-top {
-    height: 126px !important;
-    object-fit: contain !important;
+    height: 100% !important;
+    width: 100% !important;
   }
 
   .carousel-containerCategory {
@@ -3618,12 +3631,12 @@
     max-height: 550px;
   }
 
-  @media (min-width:992px) and (max-width:1024px) {
+  /* @media (min-width:992px) and (max-width:1024px) {
     .examsCardRow .card-img-top {
       height: 100px !important;
       object-fit: cover !important;
     }
-  }
+  } */
 
   @media (min-width:320px) and (max-width:767px) {
     .innerNewsCard {
@@ -3641,12 +3654,12 @@
     }
   }
 
-  @media (min-width:374px) and (max-width:767px) {
+  /* @media (min-width:374px) and (max-width:767px) {
     .examsCardRow .card-img-top {
       height: 200px !important;
       object-fit: cover !important;
     }
-  }
+  } */
 
 
   /* News Banner Section */
@@ -5184,6 +5197,5 @@
     color: black !important;
   }
 
-  .news-text:hover {
-    color: blue !important;
-  } */
+
+  

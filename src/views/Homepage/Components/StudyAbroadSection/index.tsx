@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import MainCarousel from 'src/@core/components/main-carousel'
+import React, { useCallback, useEffect, useState } from 'react';
+import MainCarousel from 'src/@core/components/main-carousel';
 import axios1 from 'src/configs/axios';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -41,7 +41,7 @@ const StudyAbroadSection = () => {
   };
 
   const getLinkClass = (countryId: number) => {
-    return `${countryId === activeCountry ? 'active' : ''}`;
+    return `${countryId === activeCountry ? 'active-country' : ''}`;
   };
 
   const [cardData, setCardData] = useState<any[]>([]);
@@ -71,7 +71,7 @@ const StudyAbroadSection = () => {
     return countries.map((country) => (
       <a
         key={country.id}
-        className={`${getLinkClass(country.id)}d-flex mx-md-2 align-self-center btn btn-primary mb-3 text-truncate text-center justify-content-center`}
+        className={`${getLinkClass(country.id)} d-flex mx-md-2 align-self-center btn btn-primary mb-3 text-truncate text-center justify-content-center`}
         id={country.id.toString()}
         type="button"
         aria-selected={activeCountry === country.id}

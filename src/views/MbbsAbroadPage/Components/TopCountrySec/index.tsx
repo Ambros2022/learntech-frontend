@@ -10,7 +10,7 @@ const TopCountrySec = () => {
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
                             <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3130742.2674261797!2d40.29293311033469!3d39.977936755341815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40155684e773bac7%3A0xd0b4757aeb822d23!2sArmenia!5e0!3m2!1sen!2sin!4v1720076782466!5m2!1sen!2sin'
+                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6100.645896291943!2d44.51859604184559!3d40.13508948845406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abbe6e9f27fef%3A0xddc0db39386c308c!2sArmenian%20Medical%20Institute!5e0!3m2!1sen!2sin!4v1720163224650!5m2!1sen!2sin'
                                 width='100%'
                                 height='100%'
                                 className=' p-1 bg-blue rounded'
@@ -78,7 +78,7 @@ const TopCountrySec = () => {
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
                             <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022073.856508449!2d40.71697847532751!3d42.29465875614516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40440cd7e64f626b%3A0x4f907964122d4ac2!2sGeorgia!5e0!3m2!1sen!2sin!4v1720080269175!5m2!1sen!2sin'
+                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2977.711175023735!2d44.75477629999999!3d41.7267509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4044731c13a9f3b3%3A0xac94c53b52ac8277!2sTbilisi%20State%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163486732!5m2!1sen!2sin'
                                 width='100%'
                                 height='100%'
                                 className=' p-1 bg-blue rounded'
@@ -198,7 +198,7 @@ const TopCountrySec = () => {
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
                             <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16012970.944654217!2d111.93024858735006!3d11.52193447318389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x324053215f87de63%3A0x784790ef7a29da57!2sPhilippines!5e0!3m2!1sen!2sin!4v1720080315743!5m2!1sen!2sin'
+                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.346451118551!2d125.60698579999999!3d7.0857759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f96d088796b397%3A0xd09a123f2ba20380!2sDavao%20Medical%20School%20Foundation%20Inc!5e0!3m2!1sen!2sin!4v1720163546042!5m2!1sen!2sin'
                                 width='100%'
                                 height='100%'
                                 className=' p-1 bg-blue rounded'
@@ -253,7 +253,7 @@ const TopCountrySec = () => {
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
                             <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37494223.23909491!2d103.00000000000001!3d55.000000000000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x453c569a896724fb%3A0x1409fdf86611f613!2sRussia!5e0!3m2!1sen!2sin!4v1720080377060!5m2!1sen!2sin'
+                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2181.1466851934956!2d35.8995532!3d56.8605795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b68655d3066527%3A0xf22def0dcc228da8!2sTver%20State%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163585357!5m2!1sen!2sin'
                                 width='100%'
                                 height='100%'
                                 className=' p-1 bg-blue rounded'
@@ -311,7 +311,7 @@ const TopCountrySec = () => {
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
                             <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10964033.359121611!2d20.61269018854429!3d47.863495797325086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d1d9c154700e8f%3A0x1068488f64010!2sUkraine!5e0!3m2!1sen!2sin!4v1720080723327!5m2!1sen!2sin'
+                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2605.5597040751563!2d28.446470799999997!3d49.2278767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472d5c7f91a0a895%3A0x9e3cb2d36b6d7bbe!2sVinnytsia%20National%20Pirogov%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163770252!5m2!1sen!2sin'
                                 width='100%'
                                 height='100%'
                                 className=' p-1 bg-blue rounded'
@@ -355,8 +355,70 @@ const TopCountrySec = () => {
                                     </tr>
                                 </tbody>
                             </table>
-                            <h6 className='fw-bold text-black'>*Fee in INR subject to change according to USD rate</h6>
                         </div>
+                        <h4 className='text-blue mt-3 fw-bold'>Lviv National Medical University :</h4>
+                        <p className='text-black'>
+                        Lviv National Medical University was founded in 1784. It is ranked among the top 3 universities in the country and has around 22 scientific schools actively functioning. Its library is well known as it has more than 5,30,000 books along with online resources.
+                        </p>
+                        <table
+                            className='table table-bordered text-center table-responsive overflow-scroll'
+                            style={{ border: '1px solid #274896' }}
+                        >
+                            <thead>
+                                <tr>
+                                    <th className='text-blue bg-skyBlue'>Year of Study</th>
+                                    <th className='text-blue bg-skyBlue'>Tuition Fee </th>
+                                    <th className='text-blue bg-skyBlue'>Hostel Fee / Year</th>
+                                    <th className='text-blue bg-skyBlue'>Food Charges / Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td className='fw-bold'>I Year</td>
+                                    <td>7700 USD or INR 5,39,000*</td>
+                                    <td>800 USD or INR 56,000*</td>
+                                    <td>1300 USD or INR 91,000*</td>
+                                </tr>
+                                <tr>
+                                    <td className='fw-bold'>II - VI Year</td>
+                                    <td>4900 USD or INR 3,43,000*</td>
+                                    <td>800 USD or INR 56,000*</td>
+                                    <td>1300 USD or INR 91,000*</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h4 className='text-blue mt-3 fw-bold'>Vinnitsa National Medical University :</h4>
+                        <p className='text-black'>
+                        Vinnitsa National Medical University was established in 1921. It was awarded the Order of the Badge of Honour in 1984. It acquired the status of University in 1994, after which it equipped itself with modern teaching facilities. The university has been in the leading position since the past few years, according to the Ministry of Health of Ukraine.
+                        </p>
+                        <table
+                            className='table table-bordered text-center table-responsive overflow-scroll'
+                            style={{ border: '1px solid #274896' }}
+                        >
+                            <thead>
+                                <tr>
+                                    <th className='text-blue bg-skyBlue'>Year of Study</th>
+                                    <th className='text-blue bg-skyBlue'>Tuition Fee </th>
+                                    <th className='text-blue bg-skyBlue'>Hostel Fee / Year</th>
+                                    <th className='text-blue bg-skyBlue'>Food Charges / Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td className='fw-bold'>I Year</td>
+                                    <td>8000 USD or INR 5,60,000*</td>
+                                    <td>600 USD or INR 42,000*</td>
+                                    <td>1300 USD or INR 91,000*</td>
+                                </tr>
+                                <tr>
+                                    <td className='fw-bold'>II - VI Year</td>
+                                    <td>5000 USD or INR 3,50,000*</td>
+                                    <td>600 USD or INR 42,000*</td>
+                                    <td>1300 USD or INR 91,000*</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h6 className='fw-bold text-black'>*Fee in INR subject to change according to USD rate</h6>
                     </div>
                 </div>
             )
@@ -369,7 +431,7 @@ const TopCountrySec = () => {
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
                             <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2788825.1048421776!2d25.749923611495202!3d46.952611753987355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97c3628b769a1%3A0x258119acdf53accb!2sMoldova!5e0!3m2!1sen!2sin!4v1720080884844!5m2!1sen!2sin'
+                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.313994042445!2d28.817648300000002!3d47.0340691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97dc7f48e142d%3A0xccecb7104ac4ea09!2sNicolae%20Testemi%C8%9Banu%20State%20University%20of%20Medicine%20and%20Pharmacy!5e0!3m2!1sen!2sin!4v1720164144676!5m2!1sen!2sin'
                                 width='100%'
                                 height='100%'
                                 className=' p-1 bg-blue rounded'
@@ -425,7 +487,7 @@ const TopCountrySec = () => {
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
                             <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6141678.20746513!2d59.31996558009517!3d41.26824663897643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b20a5d676b1%3A0xca0a6dad7e841e20!2sUzbekistan!5e0!3m2!1sen!2sin!4v1720081051260!5m2!1sen!2sin'
+                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.766994664738!2d69.176029!3d41.357417999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8e9253333259%3A0x8a4d58aed9f6807f!2sTashkent%20Medical%20Academy!5e0!3m2!1sen!2sin!4v1720164195296!5m2!1sen!2sin'
                                 width='100%'
                                 height='100%'
                                 className=' p-1 bg-blue rounded'

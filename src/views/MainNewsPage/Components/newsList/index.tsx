@@ -5,14 +5,14 @@ import Image from 'next/image';
 const NewsItem = ({ id, banner_image, title }) => (
     <div className="col-md-12 col-10 mx-md-0 mx-auto">
          <a href={`/college/${id}/${title}`} >
-        <div className="card mb-3">
+        <div className="card mb-3 bg-skyBlue hover-card">
             <div className="row g-0">
-                <div className="col-md-4 upcomingAdmission">
-                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner_image}`} width={300} height={300} className="rounded-start img-fluid" alt="news-img" />
+                <div className="col-md-4 col-xl-3 col-lg-3 upcomingAdmission">
+                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner_image}`} width={300} height={300} className="ms-2 rounded-start img-fluid" alt="news-img" />
                 </div>
-                <div className="col-md-8">
+                <div className="col-md-8 col-lg-9 col-xl-9">
                     <div className="card-body">
-                        <h5 className="card-title  fw-bold">{title}</h5>
+                        <h6 className="card-title  fw-bold">{title}</h6>
                     </div>
                 </div>
             </div>

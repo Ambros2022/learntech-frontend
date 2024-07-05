@@ -49,7 +49,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                 <div className="tab-pane fade" id="nav-Diploma" role="tabpanel" aria-labelledby="nav-Diploma-tab">...</div>
 
                 <div className="tab-pane fade" id="nav-Top" role="tabpanel" aria-labelledby="nav-Top-tab">
-                  <div dangerouslySetInnerHTML={{ __html: data.top_college }} />
+                  <div className='pe-5' dangerouslySetInnerHTML={{ __html: data.top_college }} />
                 </div>
                 <div className="tab-pane fade" id="nav-FAQ" role="tabpanel" aria-labelledby="nav-FAQ-tab">
 
@@ -73,7 +73,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                     <h5 className='fw-bold text-blue pt-3 mb-3'>Top {data.name} Colleges</h5>
                     {collegedata.map((val, ind) => (
                       <Link href={`/college/${val.id}/${val.slug}`} >
-                        <div key={ind} className="card p-2 mb-3 d-flex flex-row">
+                        <div key={ind} className="card p-2 mb-3 d-flex flex-row bg-skyBlue hover-card">
                           <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.banner_image}`} className='img-fluid' width={90} height={60} alt={val.name}
                           />
                           <h6 className='align-content-center text-black mx-2'>{val.name}</h6>
@@ -88,7 +88,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                     <h5 className='fw-bold text-blue pt-3 mb-3'>Top {data.name} Exams</h5>
                     {examdata.map((val, ind) => (
                       <Link href={`/exam/${val.id}/${val.slug}`} >
-                        <div key={ind} className="card p-2 mb-3 d-flex flex-row">
+                        <div key={ind} className="card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
                           <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.cover_image}`} className='img-fluid' width={90} height={60} alt={val.exam_title}
                           />
                           <h6 className='align-content-center text-black mx-2'>{val.exam_title}</h6>
