@@ -15,9 +15,9 @@ const TwitterLoginComponent = () => {
   return (
     <TwitterLogin
       authCallback={authHandler}
-      consumerKey="YOUR_TWITTER_CONSUMER_KEY"
-      consumerSecret="YOUR_TWITTER_CONSUMER_SECRET"
-      callbackUrl="YOUR_CALLBACK_URL"
+      consumerKey="YWpKaU4yUWY0bGY3NDNJQVlwbmQ6MTpjaQ"
+      consumerSecret="LG9ov3DDBufNrQgi5ibhrJUH5NMW1KURNmv5Ra8NbFf60UAeuw"
+      callbackUrl="http://localhost:3000/courses/"
     />
   );
 };
