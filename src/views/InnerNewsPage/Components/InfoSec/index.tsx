@@ -2,11 +2,27 @@ import Link from 'next/link'
 import React, { useCallback, useEffect, useState } from 'react'
 import NewsList from '../newsList';
 import axios from 'src/configs/axios';
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    LinkedinShareButton,
+    LinkedinIcon,
+    TwitterShareButton,
+    EmailShareButton,
+    PinterestShareButton,
+    EmailIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
+} from 'next-share'
+import { RWebShare } from "react-web-share";
+import { useRouter } from 'next/router';
 
 const InfoSec = ({ data }) => {
 
     const [newsData, setNewsData] = useState([])
-
+    const router = useRouter();
+    // const location = "https://bangalorestudy.com/blog/special-education-at-new-horizon-group-of-schools";
+    const location = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
     const getNews = useCallback(async () => {
         setNewsData([])
         try {
@@ -52,23 +68,51 @@ const InfoSec = ({ data }) => {
 
                 </div>
                 <div className="d-flex gap-3 flex-wrap mb-3">
+                    <LinkedinShareButton url={location}>
+                        <button className='btn btn-primary'><i className="bi bi-linkedin"></i></button>
+                    </LinkedinShareButton>
+                    <TwitterShareButton
+                        url={location}
+                        title={data?.meta_title}
+                    >
+                        <button className='btn btn-dark text-white'><i className="bi bi-twitter-x"></i></button>
+                    </TwitterShareButton>
+                    <FacebookShareButton
+                        url={location}
+                        quote={data?.meta_title}
+                        hashtag={data?.meta_title}
+                    >
+                        <button className='btn btn-primary text-white'><i className="bi bi-facebook"></i> </button>
+                    </FacebookShareButton>
 
-                    <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target="_blank"> <button className='btn btn-primary'><i className="bi bi-linkedin"></i> Share</button></a>
-                    {/* <button className='btn btn-primary'><i className="bi bi-linkedin"></i> Share</button> */}
 
-                    <a href="https://www.facebook.com/learntechedu" target="_blank"><button className='btn btn-info text-white'><i className="bi bi-facebook"></i> Share</button></a>
-                    {/* <button className='btn btn-info text-white'><i className="bi bi-facebook"></i> Share</button> */}
-                    <a href="https://twitter.com/learntechww" target='_blank'> <button className='btn btn-dark text-white'><i className="bi bi-twitter-x"></i> Tweet</button></a>
-                    {/* <button className='btn btn-dark text-white'><i className="bi bi-twitter-x"></i> Tweet</button> */}
-                    <button className='btn btn-success text-white'><i className="bi bi-share-fill"></i> Share</button>
-                    <button className='btn btn-danger text-white'><i className="bi bi-pinterest"></i> Pin</button>
 
-                    <a href="mailto:info@learntechww.com" target='_blank'> <button className='btn btn-secondary text-white'><i className="bi bi-envelope"></i> Email</button></a>
-                    {/* <button className='btn btn-secondary text-white'>
-                        <a href="mailto:info@learntechww.com" className="text-white text-decoration-none">
-                            <i className="bi bi-envelope"></i> Email
-                        </a>
-                    </button> */}
+                    <PinterestShareButton
+                        url={location}
+                        media={data?.meta_title}
+                    >
+                        <button className='btn btn-danger text-white'><i className="bi bi-pinterest"></i></button>
+                    </PinterestShareButton>
+                    <WhatsappShareButton
+                        url={location}
+                        title={data?.meta_title}
+
+                    >
+                        <button className='btn btn-success text-white'> <i className="bi bi-whatsapp"></i></button>
+                    </WhatsappShareButton>
+
+                    <RWebShare
+                        data={{
+                            text: `${data?.meta_title}`,
+                            url: `${location}`,
+                            title: `${data?.meta_title}`,
+                        }}
+
+                    >
+                        <button className='btn btn-dark text-white'><i className="bi bi-share-fill"></i></button>
+                    </RWebShare>
+                    {/* <button className='btn btn-success text-white'><i className="bi bi-share-fill"></i></button> */}
+
                 </div>
                 <div className='pt-3'>
                     <div className="row">

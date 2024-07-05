@@ -98,7 +98,7 @@ const BannerSec = () => {
                       renderOption={(props, option: SearchResult) => (
                         <li {...props}>
                           <Link
-                            href={`/news-1/${option.id}/${option.name}`}
+                            href={`/news/${option.id}/${option.name}`}
                             style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
                           >
                             {option.name}

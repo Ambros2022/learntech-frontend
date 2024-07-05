@@ -2592,11 +2592,11 @@
     font-size: 12px !important;
   }
 
-  .topUniCardCon img {
+  /* .topUniCardCon img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-  }
+  } */
 
   .topClgIcon {
     top: 9px !important;
@@ -3562,7 +3562,8 @@
 
   .innerNewsCard .card-img-top {
     height: 100px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
+    object-fit: contain !important;
   }
 
   .innerNewsCard .card-text {
@@ -3636,7 +3637,7 @@
 
     .innerNewsCard .card-img-top {
       height: 200px !important;
-      object-fit: cover !important;
+      object-fit: contain !important;
     }
   }
 
@@ -5183,6 +5184,6 @@
     color: black !important;
   }
 
-  /* .news-text:hover {
+  .news-text:hover {
     color: blue !important;
   } */

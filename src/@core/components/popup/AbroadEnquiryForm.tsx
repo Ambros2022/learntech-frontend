@@ -73,7 +73,7 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
             onSubmit={handleSubmit}
             resetForm
         >
-            <Form className="bg-skyBlue px-5 pt-5 pb-3">
+            <Form className="bg-skyBlue px-3 px-md-5  pt-3  pt-md-5 pb-3">
                 <div className='row mb-3'>
                     <div className='text-center mb-3'>
                         <h3 className='fw-bold text-blue'>Book Your Tickets</h3>

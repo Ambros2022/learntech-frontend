@@ -10,7 +10,7 @@ const NewsItem = ({ imageSrc, name ,id }) => (
                     <Image src={imageSrc} width={200} height={200} className="card-img-top img-fluid rounded-start" alt="news-img" />
                 </div>
                 <div className="col-md-8">
-                    <a href={`/news-1/${id}/${name}`}>
+                    <a href={`/news/${id}/${name}`}>
                     <div className="card-body">
                         <small className="card-text text-black">{name}</small>
                     </div>

@@ -6,35 +6,25 @@ import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    LinkedinShareButton,
+    LinkedinIcon,
+    TwitterShareButton,
+    EmailShareButton,
+    PinterestShareButton,
+    EmailIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
+} from 'next-share'
+import { RWebShare } from "react-web-share";
 
 
-
-const ExpertSec = () => {
+const ExpertSec = ({ data }) => {
     const router = useRouter();
-
-    const [shared, setShared] = useState(false); // State to track if shared
-
-    const sharePage = () => {
-        // Using the Web Share API if available (modern browsers)
-        if (navigator.share) {
-            navigator.share({
-                title: document.title,
-                url: window.location.href,
-            })
-                .then(() => {
-                    setShared(true); // Update state if shared successfully
-                })
-                .catch((error) => console.error('Error sharing:', error));
-        } else {
-            // Fallback for browsers that do not support Web Share API
-            // You can implement custom share logic here for those browsers
-            console.log('Web Share API not supported');
-        }
-    };
-
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
-    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
+    // const location = "https://bangalorestudy.com/blog/special-education-at-new-horizon-group-of-schools";
+    const location = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
     const validationSchema = Yup.object().shape({
         name: Yup.string()
             .max(50, 'Must be 50 characters or less')
@@ -84,14 +74,55 @@ const ExpertSec = () => {
             <section className='bg-skyBlue py-3'>
                 <div className="container">
                     <div className="d-flex gap-3 flex-wrap mb-3">
-                        <button className='btn btn-primary'><i className="bi bi-linkedin"></i> Share</button>
-                        <button className='btn btn-info text-white'><i className="bi bi-facebook"></i> Share</button>
-                        <button className='btn btn-dark text-white'><i className="bi bi-twitter-x"></i> Tweet</button>
-                        <button className='btn btn-success text-white'><i className="bi bi-share-fill"></i> Share</button>
-                        <button className='btn btn-danger text-white'><i className="bi bi-pinterest"></i> Pin</button>
-                        <button className='btn btn-secondary text-white'><i className="bi bi-envelope"></i> Email</button>
-                      
+                        <LinkedinShareButton url={location}>
+                            <button className='btn btn-primary'><i className="bi bi-linkedin"></i></button>
+                        </LinkedinShareButton>
+                        <TwitterShareButton
+                            url={location}
+                            title={data?.meta_title}
+                        >
+                            <button className='btn btn-dark text-white'><i className="bi bi-twitter-x"></i></button>
+                        </TwitterShareButton>
+                        <FacebookShareButton
+                            url={location}
+                            quote={data?.meta_title}
+                            hashtag={data?.meta_title}
+                        >
+                            <button className='btn btn-primary text-white'><i className="bi bi-facebook"></i> </button>
+                        </FacebookShareButton>
+
+
+
+                        <PinterestShareButton
+                            url={location}
+                            media={data?.meta_title}
+                        >
+                            <button className='btn btn-danger text-white'><i className="bi bi-pinterest"></i></button>
+                        </PinterestShareButton>
+                        <WhatsappShareButton
+                            url={location}
+                            title={data?.meta_title}
+
+                        >
+                            <button className='btn btn-success text-white'> <i className="bi bi-whatsapp"></i></button>
+                        </WhatsappShareButton>
+
+                        <RWebShare
+                            data={{
+                                text: `${data?.meta_title}`,
+                                url: `${location}`,
+                                title: `${data?.meta_title}`,
+                            }}
+
+                        >
+                            <button className='btn btn-dark text-white'><i className="bi bi-share-fill"></i></button>
+                        </RWebShare>
+                        {/* <button className='btn btn-success text-white'><i className="bi bi-share-fill"></i></button> */}
+
                     </div>
+
+
+
                     <h2 className='fw-bold text-blue pt-3'>Leave a Comment</h2>
                     <div className="row py-3">
                         <div className="col-10 me-auto">
@@ -137,7 +168,7 @@ const ExpertSec = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
         </>
     );
 };

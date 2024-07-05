@@ -31,7 +31,7 @@ const LatestUpdateSec = ({ updates }) => {
                                 <div className="mb-5 mx-lg-3 mx-0">
                                     <div className="card h-100">
                                         <div className="card-body newsheight  cardBlogText">
-                                            <Link href={`/news-1/${update.id}/${update.name}`}>
+                                            <Link href={`/news/${update.id}/${update.name}`}>
                                                 <h6 className='fw-bold text-blue'>{update.name}</h6>
                                             </Link>
                                             {/* <h6 className='fw-bold text-blue'>{update.name}</h6> */}
