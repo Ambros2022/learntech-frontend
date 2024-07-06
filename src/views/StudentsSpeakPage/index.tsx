@@ -15,6 +15,27 @@ const StudentsSpeakPage = () => {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>();
   const [trendingCourses, setTrendingCourses] = useState([]);
+  const [cards, setCards] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+
+  const getScholarshipData = useCallback(async (page = 1) => {
+    try {
+      const roleparams = { page, size: 10 }; // Hardcoding cardsPerPage to 1
+      const response = await axios.get('api/website/allvideotestimonials/get', { params: roleparams });
+      if (isMountedRef.current) {
+        setCards(response.data.data);
+        setTotalPages(response.data.totalPages); // Set total pages from API response
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending courses:', error);
+    }
+  }, [isMountedRef]);
+
+  useEffect(() => {
+    getScholarshipData(currentPage);
+  }, [currentPage, getScholarshipData]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -28,14 +49,8 @@ const StudentsSpeakPage = () => {
     }
   }, [isMountedRef]);
 
-
-
-
   useEffect(() => {
     getPagedata();
-    //   getTrendingCourses();
-
-
   }, []);
 
   return (
@@ -47,7 +62,7 @@ const StudentsSpeakPage = () => {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       <BannerSec />
-      <VideoSec />
+      <VideoSec  cards={cards} totalPages={totalPages} getScholarshipData={getScholarshipData} setCurrentPage={setCurrentPage} currentPage={currentPage} />
     </>
   )
 }

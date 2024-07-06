@@ -1,36 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios from 'src/configs/axios';
 
-interface Card {
-    name: string;
-    video_url: any;
-    id: any;
-    designation: string;
-}
 
-const VideoSec = () => {
-    const [cards, setCards] = useState<Card[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const isMountedRef = useIsMountedRef();
-   
-    const getBoardsData = useCallback(async (page = 1) => {
-        try {
-            const roleparams = { page, size: 10 }; // Hardcoding cardsPerPage to 1
-            const response = await axios.get('api/website/allvideotestimonials/get', { params: roleparams });
-            if (isMountedRef.current) {
-                setCards(response.data.data);
-                setTotalPages(response.data.totalPages); // Set total pages from API response
-            }
-        } catch (error) {
-            console.error('Failed to fetch trending courses:', error);
-        }
-    }, [isMountedRef]);
-
-    useEffect(() => {
-        getBoardsData(currentPage);
-    }, [currentPage, getBoardsData]);
+const VideoSec = ({cards ,totalPages, getScholarshipData , setCurrentPage , currentPage}) => {
+    
 
     // Function to handle page change
     const handlePageChange = (pageNumber) => {
@@ -40,7 +12,7 @@ const VideoSec = () => {
     const handlePreviousPage = () => {
         setCurrentPage(prevPage => {
             const newPage = Math.max(prevPage - 1, 1);
-            getBoardsData(newPage); // Fetch new data for the previous page
+            getScholarshipData(newPage); // Fetch new data for the previous page
             return newPage;
         });
     };
@@ -48,14 +20,14 @@ const VideoSec = () => {
     const handleNextPage = () => {
         setCurrentPage(prevPage => {
             const newPage = Math.min(prevPage + 1, totalPages);
-            getBoardsData(newPage); // Fetch new data for the next page
+            getScholarshipData(newPage); // Fetch new data for the next page
             return newPage;
         });
     };
 
     const handlePageClick = (page: number) => {
         setCurrentPage(page);
-        getBoardsData(page); // Fetch data for the clicked page
+        getScholarshipData(page); // Fetch data for the clicked page
     };
 
     const currentCards = cards || [];

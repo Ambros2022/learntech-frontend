@@ -83,7 +83,7 @@ const BannerSec = () => {
           <Image src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
           <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
             <div className="container">
-              <div className="py-5">u
+              <div className="py-5">
                 <h1 className='fw-bold text-white mb-3'>Top Scholarships in India and Abroad</h1>
                 <h6 className='text-white mb-3'>Explore the Top Scholarships based on Levels of Study, Discipline, Region and more</h6>
                 <div className="row">
@@ -152,7 +152,7 @@ const BannerSec = () => {
       </section>
       <section className='bg-white'>
         <div className='container py-2 linkFontSize'>
-          <Link href='/' className='text-blue'>Home <i className='bi bi-chevron-right'></i></Link><span className='text-black'> Scholarships</span>
+          <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Scholarships</span>
         </div>
       </section>
     </>

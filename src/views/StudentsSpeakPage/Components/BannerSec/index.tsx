@@ -94,12 +94,9 @@ const BannerSec = () => {
                                                 getOptionLabel={(option: SearchResult) => option.name}
                                                 renderOption={(props, option: SearchResult) => (
                                                     <li {...props}>
-                                                        <Link
-                                                            href={`/college/${option.id}/${option.name}`}
-                                                            style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
-                                                        >
+                                                      
                                                             {option.name}
-                                                        </Link>
+                                                       
                                                     </li>
                                                 )}
                                                 renderInput={(params) => (

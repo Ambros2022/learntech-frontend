@@ -20,8 +20,8 @@ interface GroupedNewsItems {
     [key: string]: NewsItem[];
 }
 
-const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , setActiveTab}) => {
-    
+const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setActiveTab }) => {
+
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -40,10 +40,10 @@ const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , set
                     ...prevState,
                     [id]: response.data.data
                 }));
-                setTotalPages(response.data.totalPages); 
+                setTotalPages(response.data.totalPages);
                 console.error('Failed to fetch exams');
             }
-            setLoading(false); 
+            setLoading(false);
         } catch (error) {
             console.error('Error fetching exams:', error);
         }
@@ -55,7 +55,7 @@ const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , set
         }
     }, [activeTab, currentPage, getNewsdata]);
 
-   
+
 
 
     const handleTabClick = (id) => {
@@ -111,8 +111,8 @@ const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , set
                                 <div className={`tab-pane fade ${activeTab === activeTab ? 'show active' : ''}`} id={`pills-${activeTab}`} role="tabpanel" aria-labelledby={`pills-${activeTab}-tab`}>
                                     <div className="row">
                                         {loading ? (
-                                           <div className='text-center'> Loading....</div>
-                                           
+                                            <div className='text-center'> Loading....</div>
+
                                         ) : (
                                             currentNews.length > 0 ? (
                                                 currentNews.map(item => (
@@ -141,7 +141,7 @@ const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , set
                                             ) : (
                                                 <div className="text-center pb-5">No news available</div>
                                             )
-                                            
+
                                         )}
                                     </div>
                                 </div>

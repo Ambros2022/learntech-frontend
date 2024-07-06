@@ -5084,3 +5084,23 @@
   .news-text:hover {
     color: blue !important;
   }
+
+  .bi-icon{
+    font-size: 25px !important; 
+    color: #eaea09 !important;
+  }
+
+  .padding{
+    padding-left: 160px !important
+
+  }
+
+
+  .filterscholarship .select .option{
+    color: black !important;
+  }
+
+  .caret-down{
+    color: #00000078 !important
+  }
+ 
