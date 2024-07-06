@@ -218,6 +218,24 @@ const SecondPage = () => {
         )
       }
     },
+    {
+      flex: 0.3,
+      minWidth: 100,
+      field: 'status',
+      headerName: 'Status',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.status}
+          </Typography>
+
+
+        )
+      }
+    },
 
 
     {

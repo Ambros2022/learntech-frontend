@@ -1,9 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const BranchesSec = () => {
     return (
-        <section className='bg-white pb-5'>
+        <section className='bg-white branchLink pb-5'>
             <div className="container">
                 <h2 className='text-center fw-bold text-blue mb-3'>Our Branches</h2>
                 <div className="row pt-3">
@@ -20,8 +21,8 @@ const BranchesSec = () => {
                             </div>
                             <div className="row pt-3">
                                 <div className="col-lg-10 ms-auto">
-                                    <h6 className='ms-lg-2'><i className='bi bi-geo-alt-fill text-blue me-1'></i><span className='fw-bold'>Address :</span> #80 (4), E End D Main Rd, Phase 3 Tilak Nagar, Jayanagara 9th Block, Bengaluru, Karnataka 560041</h6>
-                                    <h6 className='ms-lg-2'><i className='bi bi-telephone-fill text-blue me-1'></i>+91-9036020005/16</h6>
+                                    <h6 className='ms-lg-2'><i className='bi bi-geo-alt-fill text-blue me-1'></i><span className='fw-bold'>Address :</span><Link href='https://maps.app.goo.gl/i9KuUDENfMmm4iSo9'>#80 (4), E End D Main Rd, Phase 3 Tilak Nagar, Jayanagara 9th Block, Bengaluru, Karnataka 560041</Link></h6>
+                                    <h6 className='ms-lg-2'><i className='bi bi-telephone-fill text-blue me-1'></i><Link href='tel:+919036020005'>+91-9036020005</Link>/<Link href='tel:+919036020016'>16</Link></h6>
                                 </div>
                             </div>
                         </div>
@@ -37,8 +38,8 @@ const BranchesSec = () => {
                             </div>
                             <div className="row pt-3">
                                 <div className="col-lg-10 ms-auto">
-                                    <h6 className='ms-lg-2'><i className='bi bi-geo-alt-fill text-blue me-1'></i><span className='fw-bold'>Address :</span> 6, First Floor, Al Mamzar Centre Al Qiyadah Metro Station, Dubai</h6>
-                                    <h6 className='ms-lg-2'><i className='bi bi-telephone-fill text-blue me-1'></i>+971 502436552, +971 504955123</h6>
+                                    <h6 className='ms-lg-2'><i className='bi bi-geo-alt-fill text-blue me-1'></i><span className='fw-bold'>Address :</span><Link href='https://maps.app.goo.gl/UVt8ejfzXawZeQQA6'> 6, First Floor, Al Mamzar Centre Al Qiyadah Metro Station, Dubai</Link></h6>
+                                    <h6 className='ms-lg-2'><i className='bi bi-telephone-fill text-blue me-1'></i><Link href='tel:+971502436552'>+971 502436552</Link>, <Link href='tel:+971 504955123'>+971 504955123</Link></h6>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +55,8 @@ const BranchesSec = () => {
                             </div>
                             <div className="row pt-3">
                                 <div className="col-lg-10 ms-auto">
-                                    <h6 className='ms-lg-2'><i className='bi bi-geo-alt-fill text-blue me-1'></i><span className='fw-bold'>Address :</span> Shop 240-Y, Road No: 5607, Block No: 756, Aali, Manama, Bahrain</h6>
-                                    <h6 className='ms-lg-2'><i className='bi bi-telephone-fill text-blue me-1'></i>+973 35480190, +973 38780368</h6>
+                                    <h6 className='ms-lg-2'><i className='bi bi-geo-alt-fill text-blue me-1'></i><span className='fw-bold'>Address :</span><Link href='https://maps.app.goo.gl/LwQtMH6wvTfRCzhs8'>Shop 240-Y, Road No: 5607, Block No: 756, Aali, Manama, Bahrain</Link></h6>
+                                    <h6 className='ms-lg-2'><i className='bi bi-telephone-fill text-blue me-1'></i><Link href='tel:+97335480190'>+973 35480190</Link>, <Link href='tel:+97338780368'>+973 38780368</Link></h6>
                                 </div>
                             </div>
                         </div>

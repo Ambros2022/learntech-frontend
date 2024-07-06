@@ -32,8 +32,9 @@ import ThemeComponent from 'src/@core/theme/ThemeComponent'
 import AuthGuard from 'src/@core/components/auth/AuthGuard'
 import GuestGuard from 'src/@core/components/auth/GuestGuard'
 
-
+import Script from 'next/script'
 // ** Spinner Import
+
 import Spinner from 'src/@core/components/spinner'
 
 // ** Contexts
@@ -63,7 +64,9 @@ import '../../styles/globals.css'
 //**  Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-// import 'bootstrap/dist/js/bootstrap.min.js'
+
+
+
 
 
 // ** Extend App Props with Emotion
@@ -139,7 +142,7 @@ const App = (props: ExtendedAppProps) => {
           />
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"></link>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
 
         </Head>
         <AuthProvider>
@@ -163,7 +166,7 @@ const App = (props: ExtendedAppProps) => {
           </SettingsProvider>
         </AuthProvider>
       </CacheProvider>
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <Script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></Script>
     </>
   )
 }

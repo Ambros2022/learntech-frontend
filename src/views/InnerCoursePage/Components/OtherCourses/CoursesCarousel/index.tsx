@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-const CountryCarosuel = ({ items }) => {
+const MainCarousel2 = ({ items }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1351 },
@@ -11,7 +11,7 @@ const CountryCarosuel = ({ items }) => {
     },
     desktop: {
       breakpoint: { max: 1350, min: 1024 },
-      items: 5
+      items: 6
     },
     tablet: {
       breakpoint: { max: 1023, min: 768 },
@@ -26,10 +26,10 @@ const CountryCarosuel = ({ items }) => {
   const ButtonGroup = ({ next, previous }: any) => {
     return (
       <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
-        <span className='fi-left' onClick={previous} style={{ cursor: "pointer" }}>
+        <span className='fi-left' onClick={previous}>
           <FiChevronLeft />
         </span>
-        <span className='fi-right' onClick={next} style={{ cursor: "pointer" }}>
+        <span className='fi-right' onClick={next}>
           <FiChevronRight />
         </span>
       </div>
@@ -52,10 +52,10 @@ const CountryCarosuel = ({ items }) => {
       customButtonGroup={<ButtonGroup />}
     >
       {items.map((item, index) => (
-        <div key={index} className='mx-auto d-flex justify-content-center'>{item}</div>
+        <div key={index}>{item}</div>
       ))}
     </Carousel>
   );
 };
 
-export default CountryCarosuel;
+export default MainCarousel2;

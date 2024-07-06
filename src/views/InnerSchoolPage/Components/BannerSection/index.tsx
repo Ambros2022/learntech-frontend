@@ -1,43 +1,56 @@
 import React from 'react'
 import Image from 'next/image'
-
-function BannerSection() {
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+function BannerSection({ data }) {
 
   return (
     <>
-      <section className='bg-blue collegeDetailBanner'>
-        <div className="container h-100 d-flex justify-content-center">
-          <div className="align-content-center collegeDetailCard w-100">
-            <div className="row">
-              <div className="col-12 mb-3 col-md-2 text-md-start text-center">
-                <Image src="/images/icons/filter-card.jpg" width={200} height={200} alt="College Image" />
-              </div>
-              <div className="col-md-6 col-12 text-white text-md-start text-center location-img">
-                <h6 className='fw-bold'>NEW HORIZON PUBLIC SCHOOL (NHPS)</h6>
-                <p className='mb-2'><Image width={200} height={200} src="/images/icons/Location Icon.svg" className='icon-white me-1' alt={'location-icon'} />Mangalore, Karnataka</p>
-                <p className='mb-2'><Image width={200} height={200} src="/images/icons/admission-done.svg" className='icon-white me-1' alt={'location-icon'} />Board: ICSE</p>
-                <p className='mb-3'>
-                  <Image width={200} height={200} src="/images/icons/Education.svg" className='icon-white me-1' alt={'location-icon'} />School Level: Primary, Secondary, Pre-Primary, Higher Sec
-                </p>
-              </div>
-              <div className="col-12 col-md-4 text-md-end text-center mb-3">
-                <a href="#" className='btn btn-warning text-white me-2 ratingBtn'> &#9733; 4.5</a>
-                <a href="#" className='btn PrivateBtn'>Private</a>
-              </div>
-              <div>
-                <div className="col-12 d-flex justify-content-md-end  mt-md-3 mb-md-0 mb-3 justify-content-center gap-2">
-                  <div className="d-flex justify-content-center">
-                    <a href="#" className='align-content-center btn downloadBtn'>Download Brochure</a>
-                  </div>
-                  <div className='d-flex justify-content-center w-auto'>
-                    <a href="#" className='align-content-center btn freeBtn'>Get Free Structure</a>
-                  </div>
+      <section className='bg-blue collegeDetailBanner py-1'>
+        <div className="container">
+          <div className="card mb-3 collegeDetailCard">
+            <div className="row g-0">
+              <div className="col-lg-2 col-xl-1 col-md-2">
+                <div className='innerClgImg ms-md-auto mx-auto'>
+                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} />
                 </div>
               </div>
+              <div className="col-lg-7 ps-3 col-xl-8 col-md-10">
+                <div className="card-body text-white">
+                  <h1 className="card-title fw-bold mb-3">{data.name}</h1>
+                  <h6 className='mb-3 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{`${data.citys.name}, ${data.state.name}`}</h6>
+                  <h6 className='mb-3'><i className="text-warning bi bi-trophy-fill me-1"></i><strong>Board :&nbsp;</strong>{
+                    data.schoolboard.name
+                  }</h6>
+                  <h6 className='mb-3'><i className="text-warning bi bi-award-fill me-1"></i><strong>School Level :&nbsp;</strong>{
+                    data.schoollevels[0].schlevelname.name
+                  }</h6>
+                  {/* <button className='btn btn-warning text-white me-2 ratingBtn'> &#9733; {data.avg_rating}</button> */}
+                  {/* <button className='btn PrivateBtn'>{data.college_type}</button><br /> */}
+                </div>
+              </div>
+              {data?.avg_rating && <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
+                <div className="d-flex gap-2 justify-content-end">
+
+                  <i className={`bi bi-star-fill ${data.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
+                  <i className={`bi bi-star-fill ${data.avg_rating >= 2 ? "text-warning" : "text-white"} `}></i>
+                  <i className={`bi bi-star-fill ${data.avg_rating >= 3 ? "text-warning" : "text-white"} `}></i>
+                  <i className={`bi bi-star-fill ${data.avg_rating >= 4 ? "text-warning" : "text-white"} `}></i>
+                  <i className={`bi bi-star-fill ${data.avg_rating >= 5 ? "text-warning" : "text-white"} `}></i>
+
+                  <h6 className='mb-0 text-white align-self-center'>{data.avg_rating}/5 Review</h6>
+                </div>
+              </div>}
+
+
+
+            </div>
+            <div className="d-flex justify-content-end flex-md-row flex-column gap-3 ps-md-0 ps-3">
+              <GlobalEnquiryForm pagename="Brochure" className='align-content-center btn downloadBtn' title="Download Brochure" />
+              <GlobalEnquiryForm className='align-content-center btn freeBtn' buttonText="Get Fee Structure" />
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
   )
 }

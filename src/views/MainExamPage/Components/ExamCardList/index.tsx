@@ -19,10 +19,10 @@ const ExamCard = ({ title, id,  date, cover_image }) => {
     };
 
     return (
-        <div className="col-md-4 col-12 mb-3">
+        <div className="col-md-4 col-10 mx-auto mb-3">
              <a href={`/exam/${id}/${title}`} >
             <div className="card examsCardRow">
-                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${cover_image}`} width={200} height={200} className="card-img-top" alt={title} />
+                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${cover_image}`} width={300} height={300} className="card-img-top" alt={title} />
                 <div className="card-body text-center">
                     <h5 className="fw-bold text-center card-title text-truncate">{title}</h5>
                     <small className="text-blue card-text text-truncate">{formatDate(date)}</small>

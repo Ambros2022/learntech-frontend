@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react'
 import Carousel3 from 'src/@core/components/carousel3';
 import axios from 'src/configs/axios';
@@ -6,8 +7,8 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 interface NewsItem {
     id: number;
+    name: string;
     slug: string;
-
 }
 
 function PopularCourses() {
@@ -41,37 +42,39 @@ function PopularCourses() {
         return news.map((item) => (
             <CardComponent
                 key={item.id}
-                title={item.slug}
+                title={item.name}
                 id={item.id}
-
+                slug={item.slug}
             />
         ));
     };
     // CardComponent function
-    function CardComponent({ title, id }) {
+    function CardComponent({ title, id, slug }) {
         return (
-            <div className='topCourseConCarousel'>
-                <div className="card text-center d-flex mx-2 border-0 mx-md-4">
-                    <div className="row">
-                        <div className="col-12 text-start px-0 ">
-                            <div className=" card-body  ">
-                                <div className='text-truncate'>
-                                    <div className="align-content-center">
-                                        <h6 className="card-title fw-bold text-blue">{title}</h6>
+            <Link href={`/news/${id}/${slug}`}>
+                <div className='topCourseConCarousel'>
+                    <div className="card text-center d-flex mx-2 border-0 mx-md-4" >
+                        <div className="row">
+                            <div className="col-12 text-start px-0 ">
+                                <div className=" card-body  ">
+                                    <div className='text-truncate'>
+                                        <div className="align-content-center">
+                                            <h6 className="card-title fw-bold text-blue">{title}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Link>
 
         );
     }
 
     return (
         <section className=''>
-            <div className="topCarouselCardsCon bg-examsCarouselCr examCardCarousel px-5 pt-3 pb-3 position-relative">
+            <div className="topCarouselCardsCon bg-examsCarouselCr examCardCarousel px-5 pt-3 pb-3 position-relative" style={{zIndex:'3'}}>
                 <Carousel3 items={createCards()} />
             </div>
         </section>

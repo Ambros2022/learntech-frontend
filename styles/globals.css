@@ -406,6 +406,10 @@
     padding: 10px 15px !important;
   }
 
+  .reqBtn:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important;
+  }
+
   .reqBtn button {
     background-color: #254692 !important;
     color: white !important;
@@ -472,9 +476,9 @@
 
   #exploreCardCon .col-4 img {
     width: 60px;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     /* filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%); */
-    background-color: rgba(39, 72, 150, 0.1);
+    /* background-color: rgba(39, 72, 150, 0.1); */
   }
 
   .exploreCardHover:hover {
@@ -517,7 +521,7 @@
     background-color: #254692 !important;
   }
 
-  .studyAbroadNav .active {
+  .studyAbroadNav .active-country {
     font-weight: bold !important;
     color: white !important;
     background-color: #254692 !important;
@@ -1262,6 +1266,13 @@
 
     #exploreCardCon .mt-3 {
       margin: 1rem 0 !important;
+    }
+
+    #exploreCardCon .col-4 img {
+      width: 60px;
+      padding: 10px 10px 10px 10px;
+      /* filter: invert(15%) sepia(82%) saturate(2430%) hue-rotate(217deg) brightness(97%) contrast(81%); */
+      /* background-color: rgba(39, 72, 150, 0.1); */
     }
 
     #exploreCardCon .card-body {
@@ -2377,7 +2388,7 @@
   }
 
   .carouselCardsCon .card img {
-    background-color: rgba(39, 72, 150, 0.1);
+    /* background-color: rgba(39, 72, 150, 0.1); */
     /* filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%); */
   }
 
@@ -2385,7 +2396,102 @@
     position: absolute !important;
     top: 40px !important;
     width: 100%;
+    z-index: -1;
   }
+
+  .careerLink a {
+    color: white !important;
+  }
+
+  .careerLink a:hover {
+    color: rgb(159, 224, 250) !important;
+  }
+
+  .branchLink a {
+    color: black !important;
+  }
+
+  .branchLink a:hover {
+    color: #274896 !important;
+  }
+
+  .topCountryLinks .nav-link {
+    background-color: #f6f8fb !important;
+    border: 1px solid #274896 !important;
+    color: #274896 !important;
+  }
+
+  .topCountryLinks .nav-link img {
+    border: 1px solid #274896 !important;
+    border-radius: 50% !important;
+    padding: 2px;
+  }
+
+  .studyAbroadLink a:hover {
+    background-color: #274896 !important;
+    color: white !important;
+    font-weight: bold !important;
+  }
+
+  .studyAbroadLink a {
+    color: #274896 !important;
+  }
+
+  .clgInfoSec table {
+    width: 100% !important;
+    border: 1px solid black !important;
+  }
+
+  .hover-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px !important;
+  }
+
+  .hover-card2:hover {
+    background-color: #d7dfee;
+  }
+
+  .btn-apply {
+    background-color: #E73D47 !important;
+    color: white !important;
+  }
+
+  .btn-apply:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important;
+  }
+
+  .clgInfoSec table td {
+    border: 1px solid black !important;
+  }
+
+  .innerNewsSec table {
+    width: 100% !important;
+    border: 1px solid black !important;
+  }
+
+  .innerNewsSec table td {
+    border: 1px solid black !important;
+  }
+
+  .topCountryLinks .nav-link.active img {
+    border: 1px solid white !important;
+    border-radius: 50% !important;
+  }
+
+  .topCountryLinks .nav-link:hover img {
+    border: 1px solid white !important;
+    border-radius: 50% !important;
+  }
+
+  .topCountryLinks .nav-link:hover {
+    background-color: #274896 !important;
+    color: white !important;
+  }
+
+  .topCountryLinks .nav-link.active {
+    background-color: #274896 !important;
+    color: white !important;
+  }
+
 
   .carouselCardsCon .fi-left {
     margin-left: -30px !important;
@@ -2700,7 +2806,8 @@
 
   .upcomingAdmission img {
     width: 100%;
-    height: 100%;
+    height: -webkit-fill-available;
+    object-fit: contain !important;
   }
 
   /* .detailsFillSec input {
@@ -3093,6 +3200,7 @@
   .examCardCarousel .carousel-button-group {
     position: absolute !important;
     top: 20px !important;
+    z-index: -1 !important;
     width: 100%;
   }
 
@@ -3481,8 +3589,8 @@
   }
 
   .examsCardRow .card-img-top {
-    height: 126px !important;
-    object-fit: contain !important;
+    height: 100% !important;
+    width: 100% !important;
   }
 
   .carousel-containerCategory {
@@ -3523,12 +3631,12 @@
     max-height: 550px;
   }
 
-  @media (min-width:992px) and (max-width:1024px) {
+  /* @media (min-width:992px) and (max-width:1024px) {
     .examsCardRow .card-img-top {
       height: 100px !important;
       object-fit: cover !important;
     }
-  }
+  } */
 
   @media (min-width:320px) and (max-width:767px) {
     .innerNewsCard {
@@ -3546,12 +3654,12 @@
     }
   }
 
-  @media (min-width:374px) and (max-width:767px) {
+  /* @media (min-width:374px) and (max-width:767px) {
     .examsCardRow .card-img-top {
       height: 200px !important;
       object-fit: cover !important;
     }
-  }
+  } */
 
 
   /* News Banner Section */
@@ -3911,10 +4019,16 @@
     height: 50px !important;
   }
 
+  .bg-blur {
+    background-color: rgb(28 27 27 / 48%) !important;
+    width: 100%;
+  }
+
   .studyAbroadNav .carousel-button-group {
     position: absolute !important;
     width: 100% !important;
     top: 20px !important;
+    z-index: -1;
   }
 
   .studyAbroadNav .fi-left {
@@ -4916,9 +5030,11 @@
     .medSec {
       height: 1170px !important;
     }
-    .resultDateBtn{
+
+    .resultDateBtn {
       width: 295px !important;
     }
+
     .medSec video {
       width: 100%;
       height: 600px !important;
@@ -5081,26 +5197,8 @@
     color: black !important;
   }
 
-  .news-text:hover {
+  /* .news-text:hover {
     color: blue !important;
-  }
+  } */
 
-  .bi-icon{
-    font-size: 25px !important; 
-    color: #eaea09 !important;
-  }
-
-  .padding{
-    padding-left: 160px !important
-
-  }
-
-
-  .filterscholarship .select .option{
-    color: black !important;
-  }
-
-  .caret-down{
-    color: #00000078 !important
-  }
- 
+  

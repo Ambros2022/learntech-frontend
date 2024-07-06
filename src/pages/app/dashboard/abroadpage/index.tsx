@@ -202,24 +202,24 @@ const SecondPage = () => {
       }
     },
 
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'info',
-      headerName: 'info',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
+    // {
+    //   flex: 0.175,
+    //   minWidth: 100,
+    //   field: 'info',
+    //   headerName: 'info',
+    //   renderCell: (params: GridRenderCellParams) => {
+    //     const { row } = params
 
-        return (
+    //     return (
 
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.info}
-          </Typography>
+    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+    //         {row.info}
+    //       </Typography>
 
 
-        )
-      }
-    },
+    //     )
+    //   }
+    // },
     {
       flex: 0.2,
       minWidth: 100,
@@ -250,6 +250,25 @@ const SecondPage = () => {
 
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {row.slug}
+          </Typography>
+
+
+        )
+      }
+    },
+
+    {
+      flex: 0.3,
+      minWidth: 100,
+      field: 'status',
+      headerName: 'Status',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.status}
           </Typography>
 
 

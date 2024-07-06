@@ -62,7 +62,7 @@ function OverviewSec({ data }) {
 
   const renderContent = (content) => (
     <div className="row">
-      <div className="order-2 order-md-1 col-md-8 text-black pt-3">
+      <div className="text-black pt-3">
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
      
@@ -130,7 +130,7 @@ function OverviewSec({ data }) {
           </div>
         </div>
         </div>
-        <div className="col-md-4 mb-md-5 fixed-column">
+        <div className="col-md-4 mb-md-5 fixed-column pt-5">
         <div className='bg-skyBlue px-lg-5 px-3 rounded'>
           <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Upcoming Exams</h5>
           <SideContactUsForm />

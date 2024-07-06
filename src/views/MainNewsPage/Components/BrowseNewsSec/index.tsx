@@ -98,7 +98,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                         {categories.map(category => (
                             <button
                                 key={category.id}
-                                className={`btn bg-skyBlue ${activeTab === category.id ? 'active' : ''}`}
+                                className={`btn bg-skyBlue hover-card ${activeTab === category.id ? 'active' : ''}`}
                                 onClick={() => handleTabClick(category.id)}
                             >
                                 {category.title}
@@ -117,7 +117,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                             currentNews.length > 0 ? (
                                                 currentNews.map(item => (
                                                     <div key={item.id} className="col-12 mx-5 col-lg-6 mx-lg-0 mb-3 d-flex">
-                                                        <div className="card">
+                                                        <div className="card hover-card">
                                                             <div className="newsPageImg">
                                                                 <Image
                                                                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}

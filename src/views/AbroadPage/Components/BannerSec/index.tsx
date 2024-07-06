@@ -75,7 +75,7 @@ function BannerSec({ data }) {
   return (
     <>
       <section className='studyInUsaCon' style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.356), rgba(28, 28, 28, 0.419)),url(${process.env.NEXT_PUBLIC_IMG_URL}/${data.backgroundimage})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.419)),url(${process.env.NEXT_PUBLIC_IMG_URL}/${data.backgroundimage})`,
         backgroundSize: 'cover', // Optional: To ensure the background covers the section
         backgroundPosition: 'center', // Optional: To center the background image
         width: '100%',
@@ -148,12 +148,12 @@ function BannerSec({ data }) {
               {/* </div> */}
             </div>
             {/* <button className='btn helpMeBtn'>Help me with options</button> */}
-            <GlobalEnquiryForm buttonText="Help me with options" className="helpMeBtn" />
+            <GlobalEnquiryForm buttonText="Help me with options" className="helpMeBtn rounded" />
           </div>
         </div>
       </section>
       <div className='bg-white linkFontSize'>
-        <p className='text-black container py-3 mb-0'><Link href={'/'} className='text-black'>Home  <i className="bi bi-chevron-right"></i></Link>Study In {data?.country?.name}</p>
+        <p className='text-black container py-3 mb-0'><Link href={'/'} className='text-black'>Home  <i className="bi bi-chevron-right"></i></Link> <span className='text-blue'>Study In {data?.country?.name}</span></p>
       </div>
     </>
   )

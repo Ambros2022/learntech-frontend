@@ -34,7 +34,7 @@ function AbroadUniversityPage({ id, Countrydata }) {
 
 
 
-  useEffect(() => {
+  useEffect(() => {  
     getPagedata();
 
   }, [getPagedata]);
