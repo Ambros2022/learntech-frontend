@@ -8,18 +8,15 @@ export type LoginParams = {
 
 export type ForgotPasswordParams = {
   email: string
-
 }
 export type handelVerifyemailOtpParams = {
-  email: string,
-  otp:any
-
+  email: string
+  otp: any
 }
 export type handelhandelResetPasswordParams = {
-  email: string,
-  otp:any,
+  email: string
+  otp: any
   newPassword: string
-
 }
 
 export type UserDataType = {
@@ -35,16 +32,21 @@ export type UserDataType = {
 
 export type AuthValuesType = {
   // isAuthenticated<T>(isAuthenticated: any): [any, any]
-  VerifyemailOtp:(params:handelVerifyemailOtpParams, errorCallback?: ErrCallbackType) => Promise<void>
-  ResetPassword:(params:handelhandelResetPasswordParams, errorCallback?: ErrCallbackType) => Promise<void>
+  VerifyemailOtp: (params: handelVerifyemailOtpParams, errorCallback?: ErrCallbackType) => Promise<void>
+  ResetPassword: (params: handelhandelResetPasswordParams, errorCallback?: ErrCallbackType) => Promise<void>
   loading: boolean
   logout: () => void
-  permission:any,
+  permission: any
   isAuthenticated: boolean
   user: UserDataType | null
   setLoading: (value: boolean) => void
   setUser: (value: UserDataType | null) => void
   login: (params: LoginParams, errorCallback?: ErrCallbackType) => void
   ForgotPassword: (params: ForgotPasswordParams, errorCallback?: ErrCallbackType) => Promise<void>
-
+  stateId: string | null
+  setStateId: any
+  cityId: string | null
+  setCityId: any
+  streamId: string | null
+  setStreamId: any
 }

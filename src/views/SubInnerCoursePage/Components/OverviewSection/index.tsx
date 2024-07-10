@@ -8,10 +8,10 @@ const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/Globa
 function OverviewSection({ data, colleges, exams }) {
 
   const renderContent = (content) => (
-    <div className="row">
-      <div className="order-2 order-md-1 col-md-8 text-black pt-3">
+    <div className="row p-2">
+      {/* <div className="order-2 order-md-1 col-md-8 text-black pt-3"> */}
         <div dangerouslySetInnerHTML={{ __html: content }} />
-      </div>
+      {/* </div>   */}
     </div>
   );
 
