@@ -28,7 +28,6 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
     });
 
 
-    console.log(totalPages ,"totalPages")
 
     // Function to handle input change for search text
     const handleSearchInputChange = (e) => {
@@ -46,32 +45,66 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
     };
 
     const handleSelectChange = (e) => {
-        setSearchText("")
+        setSearchText("");
         const { id, value } = e.target;
-        console.log(e.target, "e.target")
-        setFormData(prevState => ({
-            ...prevState,
-            [id]: value
-        }));
+        if (id === "deadline") {
+            setFormData(prevState => ({
+                ...prevState,
+                deadline: value
+            }));
+        } else {
+            setFormData(prevState => ({
+                ...prevState,
+                [id]: value
+            }));
+        }
     };
 
-
-    const getScholarship = useCallback(async (countryId, levelId, TypeId) => {
+    const getScholarship = useCallback(async (countryId, levelId, TypeId, CountryId) => {
         try {
             const params = {
                 level_id: levelId !== '' ? levelId : undefined,
                 type_id: TypeId !== '' ? TypeId : undefined,
+                country_id: CountryId !== '' ? CountryId : undefined,
                 gender: formData.gender,
                 searchfrom: 'name', // Specify the field to search against
                 searchtext: searchText, // Include searchtext parameter
                 page: currentPage,  // Use currentPage for pagination
                 size: perPage
             };
+            let startDate, endDate;
+            switch (formData.deadline) {
+                case "Jan - Mar":
+                    startDate = 0; // January
+                    endDate = 2;   // March
+                    break;
+                case "Apr - Jun":
+                    startDate = 3; // April
+                    endDate = 5;   // June
+                    break;
+                case "Jul - Sep":
+                    startDate = 6; // July
+                    endDate = 8;   // September
+                    break;
+                case "Oct - Dec":
+                    startDate = 9; // October
+                    endDate = 11;  // December
+                    break;
+                default:
+                    startDate = 0; // Default to January if not specified
+                    endDate = 2;
+                    break;
+            }
             let url = 'api/website/scholarships/get';
             if (countryId !== 'all') {
                 url += `?country_id=${countryId}`;
             }
-            const response = await axios.get(url, { params });
+           
+            const response = await axios.get(url, {  params: {
+                ...params,
+                startDate,
+                endDate
+            } });
             setScholarshipsData(response.data.data); // Ensure the structure of response.data fits your expected scholarship data format
             setTotalScholarships(response.data.data.length);
             // setTotalPages(response.data.data.totalPages);
@@ -81,9 +114,12 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
         }
     }, [isMountedRef, formData, searchText, perPage, currentPage]);
 
+
+    console.log(formData.deadline ,"formData.deadline")
+
     useEffect(() => {
-        getScholarship(activeTab, formData.levelOfStudy, formData.type);
-    }, [activeTab, formData.levelOfStudy, formData.type, getScholarship, searchText, currentPage]);
+        getScholarship(activeTab, formData.levelOfStudy, formData.type, formData.nationality);
+    }, [activeTab, formData.levelOfStudy, formData.type, formData.nationality, getScholarship, searchText, currentPage]);
 
 
 
@@ -231,7 +267,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                                     onChange={handleSelectChange}>
                                     <option value="">select</option>
                                     {countryData.map(option => (
-                                        <option key={option.id} value={option.name}>{option.name}</option>
+                                        <option key={option.id} value={option.id}>{option.name}</option>
                                     ))}
                                 </select>
                                 <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}>
@@ -283,7 +319,6 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     <div className="col-md-7 col-lg-8">
                         <div className="tab-content" id="pills-tabContent">
                             <h5 className='fw-bold text-black mb-3'>{totalScholarships} Scholarships Found</h5>
-
                             <ScholarshipCards />
                         </div>
                         {/* Pagination */}
