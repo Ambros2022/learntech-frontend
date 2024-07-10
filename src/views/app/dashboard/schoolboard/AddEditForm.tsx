@@ -80,17 +80,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const schema: any = yup.object().shape({
         name: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         slug: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         board_type: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         country_id: yup.object().required("This field is required"),
         state_id: yup.object().required("This field is required"),
         city_id: yup.object().required("This field is required"),
@@ -100,6 +100,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         name: isAddMode ? '' : olddata.name,
         slug: isAddMode ? '' : olddata.slug,
         gender: isAddMode ? '' : olddata.gender,
+        address: isAddMode ? '' : olddata.address,
+        map: isAddMode ? '' : olddata.map,
         board_type: isAddMode ? '' : olddata.board_type,
         avg_rating: isAddMode ? '' : olddata.avg_rating,
         listing_order: isAddMode ? '' : olddata.listing_order,
@@ -115,7 +117,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
         result_date: isAddMode ? null : new Date(olddata.result_date),
         recoginations: [],
-       
+
     }
 
     const {
@@ -132,8 +134,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
 
-   
-   
+
+
     const onSubmit = async (data: any) => {
 
         if (!isAddMode && olddata.id) {
@@ -158,12 +160,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('reg_form', data.reg_form);
             formData.append('syllabus', data.syllabus);
             formData.append('results', data.results);
+            formData.append('address', data.address);
+            formData.append('map', data.map);
             formData.append('recoginations', JSON.stringify(data.recoginations));
 
             formData.append('sample_paper', data.sample_paper);
             formData.append('logo', selectedphoto);
 
-           
+
             try {
                 let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
@@ -180,7 +184,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -213,6 +217,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('reg_form', data.reg_form);
             formData.append('syllabus', data.syllabus);
             formData.append('results', data.results);
+            formData.append('address', data.address);
+            formData.append('map', data.map);
             formData.append('sample_paper', data.sample_paper);
             formData.append('recoginations', JSON.stringify(data.recoginations));
 
@@ -232,7 +238,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -325,14 +331,16 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     useEffect(() => {
 
-       
-        if (!isAddMode && olddata.schoolboardsDetails) {
-            const RECOGINATION = olddata.schoolboardsDetails.map((item) => ({
-                id: item.school_board_id.id,
-                recognition_approval_name: item.clgrecognitions.recognition_approval_name,
+
+        if (!isAddMode && olddata.boardrecognitions) {
+            const RECOGINATION = olddata.boardrecognitions.map((item) => ({
+                id: item.brdrecognitions.id,
+                recognition_approval_name: item.brdrecognitions.recognition_approval_name,
             }));
             admfiledReset("recoginations", { defaultValue: RECOGINATION })
         }
+
+
 
     }, []);
 
@@ -498,10 +506,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
-    
+
 
     return (
-          <Card>
+        <Card>
             <TabContext value={formvalue}>
                 <TabList
                     variant='scrollable'
@@ -516,8 +524,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                 <CardContent>
                     <TabPanel sx={{ p: 0 }} value='basic-info'>
-                    <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
-                <Grid container spacing={5}>
+                        <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
+                            <Grid container spacing={5}>
 
 
                                 <Grid item xs={12} sm={4}>
@@ -663,30 +671,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 </Grid>
 
                                 <Grid item sm={4}>
-                                                <Controller
-                                                    name='gender'
-                                                    control={control}
-                                                    rules={{ required: true }}
-                                                    render={({ field: { value, onChange } }) => (
-                                                        <CustomTextField
-                                                            select
-                                                            fullWidth
+                                    <Controller
+                                        name='gender'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                select
+                                                fullWidth
 
-                                                            value={value}
-                                                            label='School Gender'
-                                                            onChange={onChange}
-                                                            error={Boolean(errors.gender)}
-                                                            placeholder=''
-                                                            aria-describedby='stepper-linear-account-email'
-                                                            {...(errors.gender && { helperText: 'This field is required' })}
-                                                        >
-                                                            <MenuItem value='male'>male</MenuItem>
-                                                            <MenuItem value='female'>female</MenuItem>
-                                                            <MenuItem value='Co-Ed'>Co-Ed</MenuItem>
-                                                            
-                                                        </CustomTextField>
+                                                value={value}
+                                                label='School Gender'
+                                                onChange={onChange}
+                                                error={Boolean(errors.gender)}
+                                                placeholder=''
+                                                aria-describedby='stepper-linear-account-email'
+                                                {...(errors.gender && { helperText: 'This field is required' })}
+                                            >
+                                                <MenuItem value='male'>male</MenuItem>
+                                                <MenuItem value='female'>female</MenuItem>
+                                                <MenuItem value='Co-Ed'>Co-Ed</MenuItem>
 
-                                                    )} />
+                                            </CustomTextField>
+
+                                        )} />
                                 </Grid>
 
                                 <Grid item sm={4}>
@@ -711,7 +719,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                 <MenuItem value='national'>national</MenuItem>
                                                 <MenuItem value='international'>international</MenuItem>
                                                 <MenuItem value='default'>default</MenuItem>
-                                                
+
                                             </CustomTextField>
 
                                         )} />
@@ -756,32 +764,32 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-                
+
                                 <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='result_date'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <DatePickerWrapper>
-                                <DatePicker
-                                    selected={value}
-                                    id='basic-input'
-                                    showYearDropdown
-                                    showMonthDropdown
-                                    dateFormat='MMMM d, yyyy'
-                                    popperPlacement={popperPlacement}
-                                    onChange={onChange}
-                                    placeholderText='Click to select a date'
-                                    customInput={<CustomInput label='Result Date' 
-                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
-                                    />}
+                                    <Controller
+                                        name='result_date'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <DatePickerWrapper>
+                                                <DatePicker
+                                                    selected={value}
+                                                    id='basic-input'
+                                                    showYearDropdown
+                                                    showMonthDropdown
+                                                    dateFormat='MMMM d, yyyy'
+                                                    popperPlacement={popperPlacement}
+                                                    onChange={onChange}
+                                                    placeholderText='Click to select a date'
+                                                    customInput={<CustomInput label='Result Date'
+                                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
+                                                    />}
 
 
-                                />
-                            </DatePickerWrapper>
-                            )}
-                        />
+                                                />
+                                            </DatePickerWrapper>
+                                        )}
+                                    />
                                 </Grid>
 
 
@@ -819,98 +827,139 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='address'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Address'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.address)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.address && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='map'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Map'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.map)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.map && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
                                 <Grid item xs={12} sm={12}>
-                                <Typography style={{ marginBottom: '10px' }}>info</Typography>
+                                    <Typography style={{ marginBottom: '10px' }}>info</Typography>
                                     <Controller
                                         name='info'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
                                             <>
-                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                onChange={(value) => setValue("info", value)} />
-                                          
-                                        </>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("info", value)} />
+
+                                            </>
                                         )}
                                     />
-                                </Grid> 
+                                </Grid>
 
                                 <Grid item xs={12} sm={12}>
-                                <Typography style={{ marginBottom: '10px' }}>Time_table</Typography>
+                                    <Typography style={{ marginBottom: '10px' }}>Time_table</Typography>
                                     <Controller
                                         name='time_table'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
                                             <>
-                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                onChange={(value) => setValue("time_table", value)} />
-                                          
-                                        </>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("time_table", value)} />
+
+                                            </>
                                         )}
                                     />
-                                </Grid> 
+                                </Grid>
 
                                 <Grid item xs={12} sm={12}>
-                                <Typography style={{ marginBottom: '10px' }}>Registration Form</Typography>
+                                    <Typography style={{ marginBottom: '10px' }}>Registration Form</Typography>
                                     <Controller
                                         name='reg_form'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
                                             <>
-                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                onChange={(value) => setValue("reg_form", value)} />
-                                          
-                                        </>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("reg_form", value)} />
+
+                                            </>
                                         )}
                                     />
-                                </Grid> 
+                                </Grid>
                                 <Grid item xs={12} sm={12}>
-                                <Typography style={{ marginBottom: '10px' }}>Syllabus</Typography>
+                                    <Typography style={{ marginBottom: '10px' }}>Syllabus</Typography>
                                     <Controller
                                         name='syllabus'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
                                             <>
-                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                onChange={(value) => setValue("syllabus", value)} />
-                                          
-                                        </>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("syllabus", value)} />
+
+                                            </>
                                         )}
                                     />
-                                </Grid> 
+                                </Grid>
                                 <Grid item xs={12} sm={12}>
-                                <Typography style={{ marginBottom: '10px' }}>Results</Typography>
+                                    <Typography style={{ marginBottom: '10px' }}>Results</Typography>
                                     <Controller
                                         name='results'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
                                             <>
-                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                onChange={(value) => setValue("results", value)} />
-                                          
-                                        </>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("results", value)} />
+
+                                            </>
                                         )}
                                     />
-                                </Grid> 
+                                </Grid>
                                 <Grid item xs={12} sm={12}>
-                                <Typography style={{ marginBottom: '10px' }}>Sample paper</Typography>
+                                    <Typography style={{ marginBottom: '10px' }}>Sample paper</Typography>
                                     <Controller
                                         name='sample_paper'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
                                             <>
-                                            <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                onChange={(value) => setValue("sample_paper", value)} />
-                                          
-                                        </>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("sample_paper", value)} />
+
+                                            </>
                                         )}
                                     />
-                                </Grid> 
+                                </Grid>
 
 
 
@@ -954,33 +1003,33 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 </Grid>
 
 
-                    <Grid item xs={12}>
-                        <DialogActions
-                            sx={{
-                                justifyContent: 'center',
-                                px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
-                                pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
-                            }}
-                        >
-
-                            <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                                Submit
-                                {loading ? (
-                                    <CircularProgress
+                                <Grid item xs={12}>
+                                    <DialogActions
                                         sx={{
-                                            color: 'common.white',
-                                            width: '20px !important',
-                                            height: '20px !important',
-                                            mr: theme => theme.spacing(2)
+                                            justifyContent: 'center',
+                                            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+                                            pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
                                         }}
-                                    />
-                                ) : null}
-                            </Button>
+                                    >
 
-                        </DialogActions>
-                    </Grid>
-                </Grid>
-                    </form >
+                                        <Button variant='contained' type='submit' sx={{ mr: 1 }} >
+                                            Submit
+                                            {loading ? (
+                                                <CircularProgress
+                                                    sx={{
+                                                        color: 'common.white',
+                                                        width: '20px !important',
+                                                        height: '20px !important',
+                                                        mr: theme => theme.spacing(2)
+                                                    }}
+                                                />
+                                            ) : null}
+                                        </Button>
+
+                                    </DialogActions>
+                                </Grid>
+                            </Grid>
+                        </form >
                     </TabPanel>
 
                     <TabPanel sx={{ p: 0 }} value='account-details'>
@@ -1037,23 +1086,23 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
                                                 <Grid item xs={12} sm={11}>
-                                                <Typography>Answers</Typography>
-                                                <Controller
-                                                name={`faqs[${index}].answers`}
-                                                control={faqcontrol}
-                                                rules={{ required: true }}
-                                                // defaultValue={val.answers}
-                                                render={({ field: { value, onChange } }) => (
-                                                <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                 onChange={(e) => {
-                                                    onChange(e);
-                                                    setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
-                                                }} />
-                                          
-                                                </>
-                                                    )}
-                                                />
+                                                    <Typography>Answers</Typography>
+                                                    <Controller
+                                                        name={`faqs[${index}].answers`}
+                                                        control={faqcontrol}
+                                                        rules={{ required: true }}
+                                                        // defaultValue={val.answers}
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <>
+                                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                                    onChange={(e) => {
+                                                                        onChange(e);
+                                                                        setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                                    }} />
+
+                                                            </>
+                                                        )}
+                                                    />
                                                 </Grid>
 
 
@@ -1065,7 +1114,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                             color="error"
                                                             onClick={() => handleRemoveFaq(index)}
                                                             style={{ margin: '17px 0 0 0px', padding: '8px' }}
-                                                            
+
                                                         >
                                                             <CloseIcon />
                                                         </Button>

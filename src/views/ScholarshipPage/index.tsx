@@ -12,7 +12,11 @@ const ScholarshipPage = () => {
     const router = useRouter()
     const isMountedRef = useIsMountedRef();
     const [pagedata, setPagedata] = useState<any>();
-    const [trendingCourses, setTrendingCourses] = useState([]);
+    const [abroadData, setAbroadData] = useState([]);
+    const [levelOptions, setLevelOptions] = useState([]);
+    const [typeOptions, setTypeOptions] = useState([]);
+
+    const [countryData, setCountryData] = useState([]);
 
     const getPagedata = useCallback(async () => {
         try {
@@ -27,10 +31,61 @@ const ScholarshipPage = () => {
     }, [isMountedRef]);
 
 
+    const getAboradPage = useCallback(async () => {
+        try {
+            const response = await axios.get('api/website/abroadpages/get');
+            if (isMountedRef.current) {
+
+                setAbroadData(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch trending courses:', error);
+        }
+    }, [isMountedRef]);
+    
+
+    const getScholarlevel = useCallback(async () => {
+        try {
+            const response = await axios.get('/api/website/allscholarlevel/get');
+            if (isMountedRef.current) {
+                setLevelOptions(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+        }
+    }, [isMountedRef]); // Dependency array ensures function reference stability
+
+    const getScholarType = useCallback(async () => {
+        try {
+            const response = await axios.get('/api/website/allscholartype/get');
+            if (isMountedRef.current) {
+                setTypeOptions(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+        }
+    }, [isMountedRef]); // Dependency array ensures function reference stability
 
 
+    const getCountry = useCallback(async () => {
+        try {
+            const response = await axios.get('api/website/country/get');
+            if (isMountedRef.current) {
+                setCountryData(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+        }
+    }, [isMountedRef]); // Dependency array ensures function reference stability
+
+
+    
     useEffect(() => {
         getPagedata();
+        getAboradPage();
+        getScholarlevel();
+        getScholarType();
+        getCountry();
     }, []);
 
     return (
@@ -42,8 +97,8 @@ const ScholarshipPage = () => {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             <BannerSec />
-            <ScholarshipAbroadSec />
-            <FilterSec />
+            <ScholarshipAbroadSec data= {pagedata}  />
+            <FilterSec abroadData ={abroadData}  levelOptions ={levelOptions} typeOptions={typeOptions} countryData={countryData}/>
         </>
     )
 }
