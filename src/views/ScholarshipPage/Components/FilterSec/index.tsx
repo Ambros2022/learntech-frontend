@@ -47,18 +47,12 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
     const handleSelectChange = (e) => {
         setSearchText("");
         const { id, value } = e.target;
-        if (id === "deadline") {
-            setFormData(prevState => ({
-                ...prevState,
-                deadline: value
-            }));
-        } else {
-            setFormData(prevState => ({
-                ...prevState,
-                [id]: value
-            }));
-        }
+        setFormData(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
     };
+    
 
     const getScholarship = useCallback(async (countryId, levelId, TypeId, CountryId) => {
         try {
@@ -72,39 +66,13 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                 page: currentPage,  // Use currentPage for pagination
                 size: perPage
             };
-            let startDate, endDate;
-            switch (formData.deadline) {
-                case "Jan - Mar":
-                    startDate = 0; // January
-                    endDate = 2;   // March
-                    break;
-                case "Apr - Jun":
-                    startDate = 3; // April
-                    endDate = 5;   // June
-                    break;
-                case "Jul - Sep":
-                    startDate = 6; // July
-                    endDate = 8;   // September
-                    break;
-                case "Oct - Dec":
-                    startDate = 9; // October
-                    endDate = 11;  // December
-                    break;
-                default:
-                    startDate = 0; // Default to January if not specified
-                    endDate = 2;
-                    break;
-            }
+          
             let url = 'api/website/scholarships/get';
             if (countryId !== 'all') {
                 url += `?country_id=${countryId}`;
             }
            
-            const response = await axios.get(url, {  params: {
-                ...params,
-                startDate,
-                endDate
-            } });
+            const response = await axios.get(url, {params});
             setScholarshipsData(response.data.data); // Ensure the structure of response.data fits your expected scholarship data format
             setTotalScholarships(response.data.data.length);
             // setTotalPages(response.data.data.totalPages);
