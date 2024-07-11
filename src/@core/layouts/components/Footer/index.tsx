@@ -44,7 +44,7 @@ const Footer = () => {
           </div>
           <div className="row">
             <div className="col-md-4 text-white">
-              <p className='w-75'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p className='w-50'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               <span className="footerIcon">
                 <div className="mb-3">
                   <Image className="d-inline-block" src="/images/icons/Phone Icon.svg" width={25} height={24} alt="phone-icon" />
@@ -88,6 +88,7 @@ const Footer = () => {
                 <li className='mb-2'><Link href="/disclaimer"><i className="bi bi-chevron-double-right"></i> Disclaimer</Link></li>
                 <li className='mb-2'><Link href="/privacy-policy"><i className="bi bi-chevron-double-right"></i> Privacy Policy</Link></li>
                 <li className='mb-2'><Link href="/terms-and-conditions"><i className="bi bi-chevron-double-right"></i> Terms & Conditions</Link></li>
+                <li className='mb-2'><Link href="/advertise-with-us"><i className="bi bi-chevron-double-right"></i> Advertise With Us</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">

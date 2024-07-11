@@ -15,7 +15,7 @@ const BannerSec = () => {
                                 <h1 className='text-center fw-bold text-white mb-3'>Looking for NRI Quota Seat? in India
                                 </h1>
                                 <div className='text-center'>
-                                    <GlobalPopupEnquiry className='btn btn-apply' />
+                                    <GlobalPopupEnquiry className='btn btn-success' />
                                     {/* <button className='btn submtBtn'>Apply Now</button> */}
                                 </div>
                             </div>

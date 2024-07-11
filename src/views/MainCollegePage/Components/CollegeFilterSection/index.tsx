@@ -34,8 +34,8 @@ interface College {
 
 const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
     return (
-        <div className='col-md-12 mb-3'>
-            <div className="mx-2 filterCardBorder bg-skyBlue">
+        <div className='col-md-12 mb-3 '>
+            <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
                 <div className="p-2">
                     <div className="row d-flex">
                         <div className="col-md-3 col-xl-3 clgCardImg">
@@ -65,7 +65,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         </button>
                                     )}
                                 </div>
-                                <div className="col-md-3 my-auto col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid d-md-block d-flex justify-content-center gap-3">
+                                <div className="col-md-3 col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid d-md-block d-flex flex-column justify-content-center gap-3">
                                     <GlobalEnquiryForm className="activeBtn mb-3 btn d-flex justify-content-center" />
 
                                     <Link href={`/college/${id}/${slug}`} className="mb-3 viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
@@ -511,7 +511,7 @@ function CollegeFilterSection() {
                             {options.map((option, index) => (
                                 <button
                                     key={index}
-                                    className={`btn text-center rounded m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                    className={`btn text-center rounded m-1 p-2 filterItemBtn  ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
                                     onClick={() => handleStateButtonClick(option.value)}
                                 >
                                     {option.label}

@@ -150,7 +150,7 @@ const BannerSec = () => {
             </section>
             <section className='bg-white'>
                 <div className='container py-2 linkFontSize'>
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link> <Link href="/blogs" className='text-blue'>Blogs</Link>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>Blogs</span>
                 </div>
             </section>
         </>

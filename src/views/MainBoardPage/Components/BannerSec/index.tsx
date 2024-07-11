@@ -141,7 +141,7 @@ const BannerSec = () => {
                                 <div className='text-center'>
                                     <GlobalEnquiryForm
                                         buttonText="Get Board Details"
-                                        className="btn boardBtn"
+                                        className="btn btn-success"
                                     />
                                     {/* <button className='btn boardBtn'>Get Board Details</button> */}
                                 </div>

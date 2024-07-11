@@ -20,7 +20,7 @@ function ExpertSection() {
           </div>
         </div>
         <div className="col-md-7 bg-blue py-3 g-0">
-          <h2 className='fw-bold text-center text-white pb-2'>Talk to our Expert</h2>
+          <h2 className='fw-bold text-center  text-white pb-2'>Talk to our Expert</h2>
           <TALKExpertForm />
         </div>
       </div>

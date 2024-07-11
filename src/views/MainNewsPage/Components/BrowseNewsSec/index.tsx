@@ -178,7 +178,7 @@ const BrowseNewsSec = ({collegeData , getColleges , categories , activeTab , set
                                     <div className="d-flex justify-content-between">
                                         <GlobalEnquiryForm
                                             buttonText="Follow Us"
-                                            className='btn flwBtn'
+                                            className='btn viewMoreCollegeBtn'
                                         />
                                         {/* <button className='btn flwBtn'>Follow Us</button> */}
                                         <GlobalEnquiryForm

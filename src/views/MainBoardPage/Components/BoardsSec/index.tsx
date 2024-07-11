@@ -20,7 +20,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                 <div className="container">
                     <div className="d-flex justify-content-center newsTabsClr gap-3 mx-5 flex-wrap flex-row">
                         {['all', 'state', 'national', 'international'].map(tabName => (
-                            <button key={tabName} className={`btn bg-skyBlue ${activeTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>
+                            <button key={tabName} className={`btn bg-skyBlue hover-card ${activeTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>
                                 {tabName.charAt(0).toUpperCase() + tabName.slice(1) + ' Boards'}
                             </button>
                         ))}
@@ -33,7 +33,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                         {boardItems.map((item, index) => (
                                             index < displayCount && (
                                                 <div key={item.id} className="col-8 mx-auto col-md-6 mx-md-0 mb-3">
-                                                    <div className="card newsImgSize bg-skyBlue">
+                                                    <div className="card hover-card newsImgSize bg-skyBlue">
                                                         {/* <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
                                                             <i className='bi bi-star-fill text-warning'></i>
                                                             <i className='bi bi-star-fill text-warning'></i>

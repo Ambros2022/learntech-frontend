@@ -79,10 +79,10 @@ const VideoSec = () => {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="p-2">
-                                            <p className="text-black fw-bold">
+                                            <h5 className="text-black fw-bold">
                                                 {card.name}
-                                            </p>
-                                            <p className="text-black studentSpeakCardBody">
+                                            </h5>
+                                            <p className="text-black overflow-y-scroll" style={{height:'90px'}}>
                                                 {card.designation}
                                             </p>
                                         </div>

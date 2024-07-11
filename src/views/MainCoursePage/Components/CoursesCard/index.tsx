@@ -8,7 +8,7 @@ import axios from 'src/configs/axios';
 function CoursesCard({ course }) {
   return (
     <div id={course.id} className="col-md-6 col-lg-4 col-xl-3 d-flex flex-fill">
-      <div className="card mb-3 p-2 bg-crsCard d-flex flex-fill">
+      <div className="card mb-3 p-2 hover-card bg-crsCard d-flex flex-fill">
         <div className="row g-0 pt-2">
           <div className="col-lg-3 col-md-3 col-3 col-xl-3 p-0 mb-3 mb-md-0 text-md-start text-center">
             <Image
