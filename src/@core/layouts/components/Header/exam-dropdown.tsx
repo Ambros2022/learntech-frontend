@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
+import { useAuth } from 'src/hooks/useAuth';
 
 const DropdownMenu = React.memo(({ states }: any) => {
     const [visibleStates, setVisibleStates] = useState(10); // Initially show 10 states
@@ -16,7 +17,7 @@ const DropdownMenu = React.memo(({ states }: any) => {
         setVisibleStates(10); // Reset to initial number of visible states
         setIsExpanded(false); // Set to collapsed
     }, []);
-
+    const { setStreamId } = useAuth();
     return (
         <>
 
@@ -30,9 +31,10 @@ const DropdownMenu = React.memo(({ states }: any) => {
                             <Link
                                 href={{
                                     pathname: "/exams",
-                                    query: { stream_id: item.id }
+                                    // query: { stream_id: item.id }
                                 }}
                                 className="dropdown-item"
+                                onClick={() => setStreamId(item.id)}
                             >
                                 <div className="d-flex justify-content-between">
                                     {item.name}

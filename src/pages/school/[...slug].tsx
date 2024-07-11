@@ -8,7 +8,7 @@ import InnerSchoolPage from 'src/views/InnerSchoolPage'
 
 const school = () => {
     return <>
-        <InnerSchoolPage />
+        {/* <InnerSchoolPage /> */}
     </>
 }
 

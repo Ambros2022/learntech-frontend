@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import axios1 from 'src/configs/axios'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import { useAuth } from 'src/hooks/useAuth';
 
 
 interface City {
@@ -83,14 +84,15 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                 </div>
             </div>
         </div>
-    ); 
+    );
 }
 function CollegeFilterSection() {
 
 
     const router = useRouter();
-    const { state_id, city_id } = router.query;
-
+    const { city_id } = router.query;
+    // let state_id = 92;
+    // console.log(state_id, "state_id");
     const [colleges, setColleges] = useState<College[]>([]);
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
@@ -116,6 +118,9 @@ function CollegeFilterSection() {
         courseType: true
     });
     const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
+
+    const { stateId, setStateId, cityId, setCityId } = useAuth();
+
 
     type Option = {
         label: string;
@@ -301,6 +306,8 @@ function CollegeFilterSection() {
 
     // Define a debounced version of handleCheckboxChange
     const debouncedHandleCheckboxChange = debounce((groupId: string, value: any, isChecked: boolean) => {
+
+        console.log("debounce", groupId, value, isChecked);
         const collegeFiltersSection = document.getElementById('collegeFiltersSection');
         if (collegeFiltersSection) {
             collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
@@ -359,27 +366,32 @@ function CollegeFilterSection() {
     };
 
     useEffect(() => {
-        if (state_id) {
-            debouncedHandleCheckboxChange("state", state_id, true);
+        if (stateId) {
+            let text = stateId.toString();
+            debouncedHandleCheckboxChange("state", text, true);
             setCheckboxState(prevState => ({
                 ...prevState,
                 ["state"]: {
                     ...prevState["state"],
                     //@ts-ignore
-                    [state_id]: true
+                    [text]: true
                 }
             }));
+            setStateId(null)
         }
-        if (city_id) {
-            debouncedHandleCheckboxChange("city", city_id, true);
+        console.log("checkboxState", checkboxState);
+        if (cityId) {
+            let text = cityId.toString();
+            debouncedHandleCheckboxChange("city", text, true);
             setCheckboxState(prevState => ({
                 ...prevState,
                 ["city"]: {
                     ...prevState["city"],
                     //@ts-ignore
-                    [city_id]: true
+                    [text]: true
                 }
             }));
+            setCityId(null)
         }
     }, [router, router.isReady]);
 

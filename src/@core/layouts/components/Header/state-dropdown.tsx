@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
+import { useAuth } from 'src/hooks/useAuth';
 
 const DropdownMenu = React.memo(({ states, type }: any) => {
     const [visibleStates, setVisibleStates] = useState(10); // Initially show 10 states
@@ -16,7 +17,7 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
         setVisibleStates(10); // Reset to initial number of visible states
         setIsExpanded(false); // Set to collapsed
     }, []);
-
+    const { setStateId,setCityId } = useAuth();
     return (
         <>
 
@@ -30,11 +31,11 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                             <Link
                                 href={{
                                     pathname: type === "Colleges" ? "/colleges" : "/universities",
-                                    query: { state_id: item.id }
+                                    // query: { state_id: item.id }
                                 }}
                                 className="dropdown-item"
-                             
-                                
+                                onClick={() => setStateId(item.id)}
+
                             >
                                 <div className="d-flex justify-content-between">
                                     {item.name}
@@ -50,9 +51,10 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                                             <Link
                                                 className="dropdown-item"
                                                 href={{
-                                                    pathname: type === "Colleges"  ? "/colleges" : "/universities",
-                                                    query: { city_id: city.id }
+                                                    pathname: type === "Colleges" ? "/colleges" : "/universities",
+                                                    // query: { city_id: city.id }
                                                 }}
+                                                onClick={() => setCityId(city.id)}
                                             >
                                                 {city.name}
                                             </Link>

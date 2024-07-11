@@ -14,8 +14,10 @@ import authConfig from 'src/configs/auth'
 import Cookies from 'js-cookie';
 
 // ** Types
-import { AuthValuesType, LoginParams, ErrCallbackType, ForgotPasswordParams, handelVerifyemailOtpParams, 
-  handelhandelResetPasswordParams, UserDataType } from './types'
+import {
+  AuthValuesType, LoginParams, ErrCallbackType, ForgotPasswordParams, handelVerifyemailOtpParams,
+  handelhandelResetPasswordParams, UserDataType
+} from './types'
 
 // ** Defaults
 const defaultProvider: AuthValuesType = {
@@ -29,7 +31,13 @@ const defaultProvider: AuthValuesType = {
   ForgotPassword: () => Promise.resolve(),
   VerifyemailOtp: () => Promise.resolve(),
   ResetPassword: () => Promise.resolve(),
-  logout: () => Promise.resolve()
+  logout: () => Promise.resolve(),
+  stateId: null,
+  setStateId: () => Promise.resolve(),
+  cityId: null,
+  setCityId: () => Promise.resolve(),
+  streamId: null,
+  setStreamId: () => Promise.resolve(),
 }
 
 const AuthContext = createContext(defaultProvider)
@@ -45,7 +53,9 @@ const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<any>(defaultProvider.user)
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading)
   const [isAuthenticated, setisAuthenticated] = useState<boolean>(defaultProvider.isAuthenticated)
-
+  const [stateId, setStateId] = useState(null);
+  const [cityId, setCityId] = useState(null);
+  const [streamId, setStreamId] = useState(null);
   const [permission, setPermission] = useState<any>(null);
   const setAuthToken = (token: string) => {
     Cookies.set(authConfig.storageTokenKeyName, token, { expires: 1 });
@@ -127,7 +137,7 @@ const AuthProvider = ({ children }: Props) => {
       if (response && response.status == 200) {
         const data = response.data.data;
         const accessToken = response.data.data.accessToken;
-        
+
 
         setAuthToken(response.data.data.accessToken);
 
@@ -291,7 +301,13 @@ const AuthProvider = ({ children }: Props) => {
     ForgotPassword: handelforgotpassword,
     VerifyemailOtp: handelVerifyemailOtp,
     ResetPassword: handelResetPassword,
-    logout: handleLogout
+    logout: handleLogout,
+    stateId,
+    setStateId,
+    cityId,
+    setCityId,
+    streamId,
+    setStreamId,
   }
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
