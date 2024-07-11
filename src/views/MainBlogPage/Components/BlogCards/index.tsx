@@ -41,7 +41,7 @@ const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData,
                         <div className="row">
                             {currentCards.map((card) => (
                                 <div className="col-md-6 col-8 mx-md-0 mx-auto mb-3" key={card.id}>
-                                    <div className="card newsImgSize position-relative">
+                                    <div className="card bg-skyBlue hover-card newsImgSize position-relative">
                                         <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={400} height={400} className="card-img-top" alt="news-img" />
                                         <span className='share-icon'>
                                             <Image src='/images/icons/icon-share.png' width={30} height={30} style={{

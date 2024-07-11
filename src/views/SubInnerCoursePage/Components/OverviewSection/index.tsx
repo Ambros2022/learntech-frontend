@@ -8,10 +8,10 @@ const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/Globa
 function OverviewSection({ data, colleges, exams }) {
 
   const renderContent = (content) => (
-    <div className="row p-2">
+    <div className="row pe-4">
       {/* <div className="order-2 order-md-1 col-md-8 text-black pt-3"> */}
         <div dangerouslySetInnerHTML={{ __html: content }} />
-      {/* </div>   */}
+      {/* </div> */}
     </div>
   );
 
@@ -63,7 +63,7 @@ function OverviewSection({ data, colleges, exams }) {
                   <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Top {data?.streams?.name} Colleges</h5>
                   {colleges.map((college, index) => (
                     <Link href={`/college/${college.id}/${college.slug}`}>
-                      <div key={index} className="card p-2 mb-3 d-flex flex-row">
+                      <div key={index} className="card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
                         <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
                         <h6 className='align-self-center mb-0 text-black ms-2 fw-bold'>{college.name}</h6>
                       </div>
@@ -74,7 +74,7 @@ function OverviewSection({ data, colleges, exams }) {
                   <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Top {data?.streams?.name} Exams</h5>
                   {exams.map((exam, index) => (
                     <Link href={`/exam/${exam.id}/${exam.slug}`}>
-                      <div key={index} className="card p-2 mb-3 d-flex flex-row">
+                      <div key={index} className="card p-2 mb-3 bg-skyBlue hover-card d-flex flex-row">
                         <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.cover_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
                         <h6 className='align-self-center fw-bold text-black ms-2 mb-0'>{exam.exam_title}</h6>
                       </div>

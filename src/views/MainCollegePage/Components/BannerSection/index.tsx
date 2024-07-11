@@ -86,7 +86,7 @@ function BannerSection() {
                 <h1 className="fw-bold text-white mb-3">
                   FIND TOP COLLEGES, COURSE ADMISSIONS, FEE STRUCTURES, AND PLACEMENT
                 </h1>
-                <div className="row">
+                <div className="row d-flex ">
                   <div className="col-md-7 mb-3">
                     <Autocomplete
                       open={open}
@@ -140,10 +140,10 @@ function BannerSection() {
                       )}
                     />
                   </div>
-                </div>
-                  <div className="col-md-5 mb-3">
-                    <GlobalEnquiryForm className="btn btn-apply" />
+                  <div className="col-md-5 d-flex mb-3">
+                    <GlobalEnquiryForm className="btn p-md-3 align-self-center btn-success" />
                   </div>
+                </div>
               </div>
             </div>
           </div>

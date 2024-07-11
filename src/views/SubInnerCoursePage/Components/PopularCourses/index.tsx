@@ -68,7 +68,7 @@ function PopularCourses() {
     <section className='bg-white pb-5'>
       <section className='container bg-skyBlue rounded'>
         <h2 className='fw-bold text-blue pt-5 ps-5'>Popular Degree Courses</h2>
-        <div className="topCarouselCardsCon px-5 pt-2 pb-5 position-relative">
+        <div className="topCarouselCardsCon px-5 pt-2 pb-5 position-relative" style={{zIndex:'2'}}>
           <CoursesCraousel items={createCards()} />
         </div>
       </section>
