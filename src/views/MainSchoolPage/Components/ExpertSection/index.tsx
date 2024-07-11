@@ -9,7 +9,7 @@ function ExpertSection() {
   return (
     <section className='collegeExpertSection'>
       <div className="row">
-        <div className="col-md-5 d-flex innerCollege g-0">
+        <div className="col-md-5 d-flex innerCollege g-0 bg-blue">
           <div className='container d-flex  justify-content-center'>
             <div className='px-5 text-white text-spacing align-content-center'>
               <h2 className='fw-bold mb-3'>Did you choose a School?</h2>

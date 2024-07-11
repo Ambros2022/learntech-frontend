@@ -2,8 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 
 function TopCollegesSection({data}) {
-    const metaTitle = data?.meta_title || 'Default Meta Title';
-    const metaDescription = data?.meta_description || 'Default Meta Title';
+ 
     return (
         <>
             <section className='bg-white'>
@@ -12,8 +11,8 @@ function TopCollegesSection({data}) {
                 </section>
                 <div className='container innerClg pt-5 pb-3'>
                     <h2 className='text-center fw-bold text-blue mb-3'>List of Top Schools in India</h2>
-                    <p className='text-black'>{metaTitle}</p>
-                    <p className='text-black'>{metaDescription}</p>
+                    <p className='text-black'>{data?.meta_title || 'Default Title'}</p>
+                    <p className='text-black'>{data?.meta_description || 'Default Title'}</p>
                 </div>
             </section>
         </>
