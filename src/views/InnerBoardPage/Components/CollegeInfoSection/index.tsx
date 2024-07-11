@@ -119,12 +119,18 @@ function CollegeInfoSection({ data, exams }) {
             <div className="col-xl-4 col-lg-4 col-md-5 col-10 mx-auto py-5">
               <ContactForm heading={'Contact US'} />
               <div className="col-12 cardConBrdr p-3 overflow-y-scroll bg-skyBlue my-3" style={{ height: '460px' }}>
-                <h5 className='fw-bold text-blue pt-3 mb-3'>Top Dental Exams</h5>
+                <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Upcoming Exams</h5>
                 {exams.map((exam, index) => (
                   <Link href={`/exam/${exam.id}/${exam.slug}`}>
-                    <div key={index} className="card p-2 mb-3 d-flex flex-row">
-                      <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.cover_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
-                      <h6 className='align-self-center fw-bold text-black ms-2 mb-0'>{exam.exam_title}</h6>
+                    <div key={index} className="card bg-skyBlue hover-card p-2 d-flex mb-3">
+                      <div className="row">
+                        <div className="col-xl-5 col-lg-5 col-md-5 mx-auto">
+                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.cover_image}`} width={500} height={500} className='align-self-center innerBoardImg' alt='clg-img' />
+                        </div>
+                        <div className="col-xl-7 col-lg-7 col-md-7 d-flex justify-content-md-start justify-content-center">
+                          <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title}</h6>
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 ))}
@@ -132,7 +138,7 @@ function CollegeInfoSection({ data, exams }) {
             </div>
           </div>
         </div>
-    </section >
+      </section >
     </>
   )
 }

@@ -3,7 +3,7 @@ import React from 'react';
 const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, currentPage }) => {
 
 
-    console.log(cards , "cards")
+  console.log(cards, "cards")
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     getScholarshipData(pageNumber);
@@ -29,7 +29,7 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
     <section className='bg-skyBlue py-5'>
       <div className="container">
         <div className="row">
-          {cards.map((card) => (
+          {currentCards.map((card) => (
             <div key={card.id} className="col-md-6 col-10 mx-auto">
               <div className="card p-3 mb-4">
                 <div className="row">
@@ -44,8 +44,12 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
                   </div>
                   <div className="col-md-6">
                     <div className="p-2">
-                      <p className="text-black fw-bold">{card.name}</p>
-                      <p className="text-black studentSpeakCardBody">{card.designation}</p>
+                      <h5 className="text-black fw-bold">
+                        {card.name}
+                      </h5>
+                      <p className="text-black overflow-y-scroll" style={{ height: '90px' }}>
+                        {card.designation}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -53,6 +57,7 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
             </div>
           ))}
         </div>
+        {/* Pagination */}
         <div className="row col-md-12 blogCardspage">
           <div className='d-flex justify-content-center'>
             <nav aria-label="Page navigation example">
@@ -64,7 +69,7 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
                 </li>
                 {Array.from({ length: totalPages }, (_, index) => (
                   <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                    <button className="page-link" onClick={() => handlePageChange(index + 1)}>{index + 1}</button>
+                    <button className="page-link" onClick={() => handlePageClick(index + 1)}>{index + 1}</button>
                   </li>
                 ))}
                 <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>

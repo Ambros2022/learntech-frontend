@@ -86,8 +86,8 @@ function BannerSec({ data }) {
           <div className='text-white align-content-center text-center'>
             <h1 className='fw-bold'>Study in {data?.country?.name}</h1>
             <div className="searchSec1 text-center mb-4">
-              <p className='mb-0'>Explore Top Universities and Colleges in {data?.country?.name}.</p>
-              <p>Get Updates on Tuition, Courses Offered, Duration and more.</p>
+              <h3 className='mb-0'>Explore Top Universities and Colleges in {data?.country?.name}.</h3>
+              <h3 className='mb-3'>Get Updates on Tuition, Courses Offered, Duration and more.</h3>
               {/* <div className="d-flex"> */}
               {/* <input type="search" placeholder="Find your dream college" className="form-control" id="exampleInputSearchClg" aria-describedby="exampleInputSearchClg" /> */}
               <Autocomplete

@@ -53,7 +53,7 @@ function PopularCourses() {
         return (
             <Link href={`/news/${id}/${slug}`}>
                 <div className='topCourseConCarousel'>
-                    <div className="card text-center d-flex mx-2 border-0 mx-md-4" >
+                    <div className="card hover-card text-center d-flex mx-2 border-0 mx-md-4" >
                         <div className="row">
                             <div className="col-12 text-start px-0 ">
                                 <div className=" card-body  ">

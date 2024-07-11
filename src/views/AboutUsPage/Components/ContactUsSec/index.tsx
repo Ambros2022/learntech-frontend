@@ -60,7 +60,7 @@ const ContactUsSec = () => {
                 <div className="col-md-6 position-relative">
                     <div className="bg-blue py-5 h-100 w-100 px-5 d-flex flex-column">
                         <div className="align-content-center h-100 w-100">
-                            <h4 className="text-white fw-bold text-center mb-3">Contact Us</h4>
+                            <h4 className="text-white fw-bold text-center mb-4">Contact Us</h4>
                             <Formik
                                 initialValues={{
                                     fullName: '',
@@ -74,7 +74,7 @@ const ContactUsSec = () => {
                             >
                                 <Form>
                                     <div className="row px-md-5">
-                                        <div className="col-md-12 col-lg-6 col-xl-6 mb-lg-3 mb-3">
+                                        <div className="col-md-12 mb-3">
                                             <Field
                                                 type="text"
                                                 name="fullName"
@@ -83,11 +83,11 @@ const ContactUsSec = () => {
                                             />
                                             <ErrorMessage name="fullName" component="div" className="text-danger" />
                                         </div>
-                                        <div className="col-md-12 col-lg-6 col-xl-6 mb-lg-0 mb-3">
+                                        <div className="col-md-12 mb-3">
                                             <PhoneInputField name="mobileNumber" />
                                             <ErrorMessage name="mobileNumber" component="div" className="text-danger" />
                                         </div>
-                                        <div className="col-md-12 col-lg-6 col-xl-6 mb-lg-0 mb-3">
+                                        <div className="col-md-12 mb-3">
                                             <Field
                                                 type="email"
                                                 name="email"
@@ -96,7 +96,7 @@ const ContactUsSec = () => {
                                             />
                                             <ErrorMessage name="email" component="div" className="text-danger" />
                                         </div>
-                                        <div className="col-md-12 col-lg-6 col-xl-6 mb-lg-3 mb-3">
+                                        <div className="col-md-12 mb-3">
                                             <Field
                                                 type="text"
                                                 name="courseInMind"
@@ -115,7 +115,7 @@ const ContactUsSec = () => {
                                             <ErrorMessage name="message" component="div" className="text-danger" />
                                         </div> */}
                                         <div className="text-center">
-                                            <button type="submit" className="btn submtBtn">Submit</button>
+                                            <button type="submit" className="btn btn-success">Submit</button>
                                         </div>
                                     </div>
                                 </Form>
