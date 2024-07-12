@@ -17,8 +17,15 @@ function DetailsFillSec() {
   const [boards, setBoards] = useState([]);
   const [course, setCourse] = useState([]);
   const [schema, setSchema] = useState<any>();
+  const [collegeid, setCollegeid] = useState<any>();
+  const [coursetype, setCoursetype] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const [showStep2, setShowStep2] = useState<boolean>(false); // New state for step 2 visibility
+
+  const [userData, setUserData] = useState<{ name: string; email: string } | null>(null);
+
+
+
 
   const getcolleges = useCallback(async () => {
     try {
@@ -52,32 +59,40 @@ function DetailsFillSec() {
 
   const getCourses = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10000 };
-      const response = await axios1.get('api/website/generalcourse/get', { params: roleparams });
+      const roleparams = { page: 1, size: 10000, college_id: collegeid, course_type: coursetype };
+
+      const response = await axios1.get('api/website/allcourses/get', { params: roleparams });
       setCourse(response.data.data);
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [collegeid, coursetype]);
 
   useEffect(() => {
     getcolleges();
-    getCourses();
     getschools();
     getboards();
-  }, [getcolleges, getCourses, getschools, getboards]);
+  }, [getcolleges, getschools, getboards]);
+
+  useEffect(() => {
+    if (collegeid && coursetype) {
+      getCourses();
+    }
+
+
+  }, [getCourses, collegeid, coursetype]);
 
   const collegeSchema = Yup.object().shape({
-    review_type: Yup.string().required('review_type is required'),
-    passing_year: Yup.string().required('passing_year is required'),
+    review_type: Yup.string().required('This field is required'),
+    passing_year: Yup.string().required('This field is required'),
     college_id: Yup.object().required("This field is required"),
     course_type: Yup.string().required("This field is required"),
-    course_id: Yup.object().required("This field is required"),
+    // course_id: Yup.object().required("This field is required"),
   });
 
   const schoolSchema = Yup.object().shape({
-    review_type: Yup.string().required('review_type is required'),
-    passing_year: Yup.string().required('passing_year is required'),
+    review_type: Yup.string().required('This field is required'),
+    passing_year: Yup.string().required('This field is required'),
     school_id: Yup.object().required("This field is required"),
     grade: Yup.string().required("This field is required"),
     school_board_id: Yup.object().required("This field is required"),
@@ -90,6 +105,8 @@ function DetailsFillSec() {
   });
 
   const onSubmit = async (data: any) => {
+    // console.log(data);
+    // return
     if (!showStep2) {
       setShowStep2(true);
     } else {
@@ -124,7 +141,7 @@ function DetailsFillSec() {
         if (response.data.status === 1) {
           toast.success(response.data.message);
           setLoading(false);
-          router.push("/thank-you");
+          router.push("/");
           reset();
         } else {
           setLoading(false);
@@ -138,6 +155,9 @@ function DetailsFillSec() {
     }
   };
 
+
+
+
   const defaultValues = {
     review_type: 'college',
     college_id: '',
@@ -147,22 +167,37 @@ function DetailsFillSec() {
     course_type: '',
     course_id: '',
     passing_year: '',
-    name: '',
+    name: 'ss', // Initialize the name field
     userrating: 0,
     content: '',
   };
-
+  
   const {
     control,
     handleSubmit,
     watch,
     reset,
+    resetField: admfiledReset,
     formState: { errors },
   } = useForm<any>({
     defaultValues,
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
+  
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('UserData');
+    if (storedUserData) {
+      const parsedUserData = JSON.parse(storedUserData);
+      setUserData(parsedUserData);
+  
+      // Update the form's default values with the parsed user data
+      reset({
+        ...defaultValues,
+        name: parsedUserData?.name ?? '',
+      });
+    }
+  }, [reset]);
 
   const reviewType = watch('review_type');
 
@@ -220,7 +255,20 @@ function DetailsFillSec() {
                       options={colleges}
                       loading={!colleges.length}
                       value={field.value}
-                      onChange={(event, newValue) => field.onChange(newValue)}
+                      onChange={(event, newValue) => {
+                        if (newValue) {
+
+                          setCollegeid(newValue.id);
+                          admfiledReset("course_id", { defaultValue: "New" })
+                          field.onChange(newValue);
+                        }
+                        else {
+                          setCollegeid(null);
+                          admfiledReset("course_id", { defaultValue: "New" })
+                        }
+                      }}
+                      // onChange={(event, newValue) => field.onChange(newValue)}
+
                       getOptionLabel={(option: any) => option.name || ''}
                       renderInput={(params: any) => (
                         <CustomTextField
@@ -243,21 +291,36 @@ function DetailsFillSec() {
                     <CustomTextField
                       fullWidth
                       select
-                      value={value}
+                      value={value || ''}  // Ensure value is not undefined
                       label='Select Degree'
-                      onChange={onChange}
+                      onChange={(event) => {
+                        const newValue = event.target.value;
+                        console.log(newValue, "event");
+                        if (newValue) {
+                          setCoursetype(newValue);
+                          admfiledReset("course_id", { defaultValue: "New" });
+                          onChange(newValue);  // Pass newValue to onChange
+                        } else {
+                          setCoursetype(null);
+                          admfiledReset("course_id", { defaultValue: "New" });
+                          onChange(null);  // Pass null to onChange
+                        }
+                      }}
                       placeholder=''
                       error={Boolean(errors.course_type)}
                       {...(errors.course_type && { helperText: String(errors.course_type.message) })}
                     >
                       <MenuItem value='UG'>UG</MenuItem>
-                      <MenuItem value='Diploma'>Diploma</MenuItem>
                       <MenuItem value='PG'>PG</MenuItem>
+                      <MenuItem value='Diploma'>Diploma</MenuItem>
+                      <MenuItem value='Doctorate'>Doctorate</MenuItem>
                     </CustomTextField>
                   )}
                 />
+
               </Grid>
-              <Grid item xs={12} sm={6}>
+
+              {course && course.length > 0 && <Grid item xs={12} sm={6}>
                 <Controller
                   name='course_id'
                   control={control}
@@ -269,7 +332,7 @@ function DetailsFillSec() {
                       loading={!course.length}
                       value={field.value}
                       onChange={(event, newValue) => field.onChange(newValue)}
-                      getOptionLabel={(option: any) => option.name || ''}
+                      getOptionLabel={(option: any) => option?.generalcourse?.name || ''}
                       renderInput={(params: any) => (
                         <CustomTextField
                           {...params}
@@ -281,7 +344,7 @@ function DetailsFillSec() {
                     />
                   )}
                 />
-              </Grid>
+              </Grid>}
             </>
           )}
 
@@ -452,24 +515,20 @@ function DetailsFillSec() {
               </Grid>
             </Grid>
             <Grid container spacing={5} className='pt-4'>
-              <Grid item xs={12} sm={6}>
-                <Button variant="contained" color="primary" type="submit" fullWidth>
+              <Grid item xs={12} sm={12} className='text-center'>
+                <Button variant="contained" color="primary" type="submit" >
                   Submit
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <Button variant="contained" color="secondary" fullWidth onClick={() => setShowStep2(false)}>
-                  Back
-                </Button>
-              </Grid>
+
             </Grid>
           </>
         )}
 
         {!showStep2 && (
           <Grid container spacing={5} className='pt-4'>
-            <Grid item xs={12} sm={6}>
-              <Button variant="contained" color="primary" type="submit" fullWidth>
+            <Grid item xs={12} sm={12} className='text-center'>
+              <Button variant="contained" color="primary" type="submit" >
                 Next
               </Button>
             </Grid>
