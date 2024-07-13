@@ -6,6 +6,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import NewsLetterSec from '../MainNewsPage/Components/NewsLetterSec';
 
 const MainExamPage = () => {
     const router = useRouter()

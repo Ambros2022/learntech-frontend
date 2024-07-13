@@ -15,6 +15,7 @@ function BannerSection({ data }) {
             <div className='text-white  mb-2 row'>
               <h4 className='col-6 mb-3'>Duration : {data.duration}</h4>
               <div className="d-flex">
+                <GlobalEnquiryForm className='btn btn-success'/>
               </div>
             </div>
             <div className=''>
@@ -25,7 +26,7 @@ function BannerSection({ data }) {
       </section>
       <section className='py-3 bg-white'>
         <div className='container linkFontSize'>
-          <p><Link href={'/'} className="text-black">Home <i className='bi bi-chevron-right'></i></Link><Link href={'/courses'} className="text-black"> Courses  <i className='bi bi-chevron-right'></i></Link> <Link href={'courses/innerCourse'} className="text-black">Dental  <i className='bi bi-chevron-right'></i></Link><span className="text-blue"> {data.slug}</span></p>
+          <p><Link href={'/'} className="text-black">Home <i className='bi bi-chevron-right'></i></Link><Link href={'/courses'} className="text-black"> Courses  <i className='bi bi-chevron-right'></i></Link> <Link href={'courses/innerCourse'} className="text-black">{data.streams.name}  <i className='bi bi-chevron-right'></i></Link><span className="text-blue"> {data.slug}</span></p>
         </div>
       </section>
     </>

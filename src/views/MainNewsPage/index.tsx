@@ -7,6 +7,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import NewsLetterSec from './Components/NewsLetterSec';
 
 const MainNewsPage = () => {
   const router = useRouter()
@@ -123,6 +124,7 @@ const MainNewsPage = () => {
       <BannerSection />
       <TopTrendingNews newsItems={newsItems} loading={loading} />
       <BrowseNewsSec collegeData={collegeData} getColleges={getColleges} categories={categories} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <NewsLetterSec />
     </>
   )
 }

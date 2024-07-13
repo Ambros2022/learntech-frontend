@@ -82,7 +82,7 @@ const BannerSection = () => {
             <div className="container h-100">
               <div className="d-flex justify-content-center h-100">
                 <div className="align-content-center h-100">
-                  <h1 className='fw-bold text-white'>Latest Education News</h1>
+                  <h1 className='fw-bold text-white mb-4'>Latest Education News</h1>
                   <div className="row">
                     {/* <div className="col-md-12 mb-3 mx-auto">
                                             <input type="search" className='form-control' placeholder='Search' />

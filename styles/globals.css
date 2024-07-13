@@ -603,7 +603,7 @@
   }
 
   .arrowIcon {
-    background-color: white !important;
+    background-color: rgb(234, 240, 252) !important;
     border-radius: 50% !important;
     padding: 9px !important;
     border: none !important;
@@ -1535,6 +1535,7 @@
     padding: 10px 20px !important;
     max-height: 50px !important;
   }
+
   .activeBtn:hover {
     background-color: darkblue !important;
     color: white !important;
@@ -2083,10 +2084,12 @@
     background-color: rgba(255, 255, 255, 0.1) !important;
     color: white !important;
   }
-  .btn-elg:hover{
-    box-shadow: rgba(0,0,0,0.5) 0px 0px 15px !important;
-  } 
-  .trendCrsBtn:hover{
+
+  .btn-elg:hover {
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px !important;
+  }
+
+  .trendCrsBtn:hover {
     background-color: rgba(255, 255, 255, 0.377) !important;
     color: white !important;
   }
@@ -2101,11 +2104,13 @@
     font-size: 14px !important;
     font-weight: 500;
   }
-  .coursesBtn .btn:hover{
+
+  .coursesBtn .btn:hover {
     background-color: white !important;
     border: 1px solid #274896 !important;
     color: #274896 !important;
   }
+
   .viewAllBtn {
     color: #254692 !important;
     border: 1px solid #254692 !important;
@@ -2114,7 +2119,8 @@
     font-size: 14px !important;
     /* font-weight: 500 !important; */
   }
-  .viewAllBtn:hover{
+
+  .viewAllBtn:hover {
     background-color: #274896 !important;
     color: white !important;
   }
@@ -2136,6 +2142,7 @@
     color: white !important;
     border: 1px solid white !important;
   }
+
   .innerApplyBtn:hover {
     color: white !important;
     border: 1px solid white !important;
@@ -2143,7 +2150,7 @@
   }
 
   .dentalCourseCon h1 {
-    font-size: 30px !important;
+    font-size: 25px !important;
     font-weight: bold !important;
   }
 
@@ -2819,9 +2826,19 @@
     border: 1px solid rgba(39, 72, 150, 0.2) !important;
   }
 
+  .innerNewsSec h1{
+    font-size: 30px !important;
+  }
+  .expertInquirySec select, option{
+    background-color: #F8F7FA !important;
+  }
   .detailsFillSec select {
     background-color: rgba(39, 72, 150, 0.04) !important;
     color: rgb(0, 0, 0) !important;
+  }
+
+  .hover-blue:hover{
+    color: #274896 !important;
   }
 
   .errCon h1 {
@@ -2834,7 +2851,7 @@
 
   .upcomingAdmission img {
     width: 100%;
-    height: -webkit-fill-available;
+    height: -webkit-fill-available !important;
     object-fit: contain !important;
   }
 
@@ -2852,6 +2869,12 @@
     border: 1px solid rgba(39, 72, 150, 0.2) !important;
     border-radius: 5px;
   } */
+
+  .border-circle{
+    border:2px solid #274896 !important;
+    border-radius: 50% !important;
+    padding: 20px !important;
+  }
 
   .detailsFillSec input::placeholder {
     color: rgba(143, 143, 143, 1) !important;
@@ -3190,17 +3213,17 @@
   }
 
   .examBannerCon {
-    height: 430px !important;
+    height: 500px !important;
   }
 
   .examBannerCon img {
     object-fit: cover !important;
-    height: 430px !important;
+    height: 500px !important;
     width: 100% !important;
   }
 
   .examsBannerCon {
-    height: 430px !important;
+    height: 500px !important;
   }
 
   .examsCardCarousel .carousel-button-group {
@@ -3264,14 +3287,7 @@
     border-radius: 10px !important;
   }
 
-  .examSecItems>.nav-link.active {
-    font-weight: bold !important;
-    color: white !important;
-    background-color: #254692 !important;
-    padding: 10px 12px !important;
-    border-radius: 5px !important;
-  }
-  .examSecItems>.nav-link:hover {
+  .examSecItems .nav-link.active {
     font-weight: bold !important;
     color: white !important;
     background-color: #254692 !important;
@@ -3279,13 +3295,21 @@
     border-radius: 5px !important;
   }
 
-  .examSecItems>.nav-link {
+  .examSecItems .nav-link:hover {
+    font-weight: bold !important;
+    color: white !important;
+    background-color: #254692 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
+  }
+
+  .examSecItems .nav-link {
     color: rgba(125, 145, 192, 1) !important;
     border: 1px solid rgba(212, 218, 234, 1) !important;
     padding: 10px 12px !important;
     border-radius: 5px !important;
-    margin: 0px 20px !important;
-    width: 100% !important;
+    /* margin: 0px 20px !important; */
+    /* width: auto !important; */
   }
 
 
@@ -3543,7 +3567,7 @@
     }
 
     .categorySecCarousel .fi-left {
-      margin-left: -30px !important;
+      margin-left: 60px !important;
     }
 
     .categorySecCarousel .fi-right {
@@ -3662,8 +3686,8 @@
   }
 
   .innerNewsCard {
-    min-height: 550px;
-    max-height: 550px;
+    min-height: 1500px;
+    max-height: 1500px;
   }
 
   /* @media (min-width:992px) and (max-width:1024px) {
@@ -3675,8 +3699,8 @@
 
   @media (min-width:320px) and (max-width:767px) {
     .innerNewsCard {
-      min-height: 1440px;
-      max-height: 1440px;
+      min-height: 1500px;
+      max-height: 1500px;
     }
 
     .examNewsSec {
@@ -3827,7 +3851,7 @@
     border-radius: 5px !important;
   }
 
-  .innerBoardImg{
+  .innerBoardImg {
     width: 100% !important;
     height: 100% !important;
   }
@@ -3851,7 +3875,8 @@
     color: #254692 !important;
     border: 1px solid #254692 !important;
   }
-  .askBtn:hover{
+
+  .askBtn:hover {
     background-color: transparent !important;
     color: #254692 !important;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important;
@@ -4024,7 +4049,8 @@
     color: #254692 !important;
     border: 1px solid #254692 !important;
   }
-  .viewDetailBtn:hover{
+
+  .viewDetailBtn:hover {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important;
   }
 
@@ -4405,6 +4431,7 @@
   .linkFontSize {
     font-size: 19px !important;
   }
+
   .linkFontSize a:hover {
     font-size: 19px !important;
     color: #274896 !important;
@@ -5254,18 +5281,17 @@
     color: blue !important;
   } */
 
-  .bi-icon{
-    font-size: 25px !important; 
+  .bi-icon {
+    font-size: 25px !important;
     color: #eaea09 !important;
   }
 
-  .padding{
+  .padding {
     padding-left: 160px !important
-
   }
 
 
-  
-  .caret-down{
+
+  .caret-down {
     color: #00000078 !important
   }

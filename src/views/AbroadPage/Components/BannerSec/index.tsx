@@ -79,7 +79,7 @@ function BannerSec({ data }) {
         backgroundSize: 'cover', // Optional: To ensure the background covers the section
         backgroundPosition: 'center', // Optional: To center the background image
         width: '100%',
-        height: '400px' // Adjust height as needed
+        height: '500px' // Adjust height as needed
       }}>
 
         <div className="container h-100 d-flex justify-content-center">

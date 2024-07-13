@@ -27,7 +27,7 @@ const BrowsebyCategorySec = () => {
                     title: category.name
                 }));
                 // Add "All" category
-                setItems([{ id: 'all', title: 'All' }, ...categories]);
+                setItems([{ id: 'all', title: 'All Exams' }, ...categories]);
                 setActiveTab('all'); // Set "All" tab as active initially
             } else {
                 console.error('Failed to fetch categories');
@@ -55,7 +55,7 @@ const BrowsebyCategorySec = () => {
         } catch (error) {
             console.error('Error fetching exams:', error);
         }
-    }, [examsPerPage , isMountedRef]);
+    }, [examsPerPage, isMountedRef]);
 
     const getnews = useCallback(async () => {
         try {
@@ -90,7 +90,7 @@ const BrowsebyCategorySec = () => {
             return newPage;
         });
     };
-    
+
     const handleNextPage = () => {
         setCurrentPage(prevPage => {
             const newPage = Math.min(prevPage + 1, totalPages);
@@ -98,12 +98,12 @@ const BrowsebyCategorySec = () => {
             return newPage;
         });
     };
-    
+
     const handlePageClick = (page) => {
         setCurrentPage(page);
         getExamsData(activeTab, page); // Fetch data for the clicked page
     };
-    
+
     // const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
 
     const currentExams = examsData[activeTab] || [];
@@ -114,7 +114,9 @@ const BrowsebyCategorySec = () => {
         <section className='bg-white'>
             <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
                 <h2 className='fw-bold text-blue mb-5 text-center'>Browse By Category</h2>
-                <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
+                {/* <div className='examSecItems'> */}
+                    <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
+                {/* </div> */}
                 <div className="tab-content" id="pills-tabContent">
                     {items.map((item) => (
                         <div
@@ -128,9 +130,9 @@ const BrowsebyCategorySec = () => {
                                 <div className="row ">
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row">
-                                        {currentExams.length > 0 ? (
-                                        currentExams.map((exam, index) => (
-                                        <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                            {currentExams.length > 0 ? (
+                                                currentExams.map((exam, index) => (
+                                                    <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
                                                 ))
                                             ) : (
                                                 <div className="text-center mb-5">No data</div>
