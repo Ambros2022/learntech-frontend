@@ -1,4 +1,4 @@
-    import React, { FC } from 'react';
+import React, { FC } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { saveAs } from 'file-saver';
@@ -10,10 +10,9 @@ import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 interface Props {
     page?: any;
     onChanges?: any;
-    placeholder?: any;
 }
 
-const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
+const NewsLetterEnquiry: FC<Props> = ({ page, ...rest }) => {
     const router = useRouter();
 
     const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
@@ -23,8 +22,6 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
         contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-        course: Yup.string().required('Course is required').trim(),
-        location: Yup.string().required('Location is required').trim(),
     });
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -57,8 +54,6 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
                 name: '',
                 email: '',
                 contact_number: '',
-                course: '',
-                location: '',
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -77,27 +72,13 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
                         <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
                         <ErrorMessage name="email" component="div" className="error text-danger" />
                     </div>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
-                        <Field as="select" name="course" className="form-control">
-                            <option value="">Select {placeholder}</option>
-                            <option value={`${placeholder}1`}> {placeholder} 1</option>
-                            <option value={`${placeholder}2`}> {placeholder} 2</option>
-                            <option value={`${placeholder}3`}> {placeholder} 3</option>
-                        </Field>
-                        <ErrorMessage name="course" component="div" className="error text-danger" />
+                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 text-md-start text-center px-lg-3 px-md-5 px-5">
+                        <button type="submit" className="btn reqBtn">Submit</button>
                     </div>
-                    {/* <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
-                        <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                        <ErrorMessage name="location" component="div" className="error text-danger" />
-                    </div> */}
-                </div>
-
-                <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
-                    <button type="submit" className="btn reqBtn">Request for a Call Back</button>
                 </div>
             </Form>
         </Formik>
     );
 };
 
-export default EnquiryForm;
+export default NewsLetterEnquiry;

@@ -74,7 +74,7 @@ function PopularCourses() {
 
     return (
         <section className=''>
-            <div className="topCarouselCardsCon bg-examsCarouselCr examCardCarousel px-5 pt-3 pb-3 position-relative" style={{zIndex:'3'}}>
+            <div className="topCarouselCardsCon bg-examsCarouselCr examCardCarousel px-5 pt-3 mt-md-5 mt-3 pb-3 position-relative" style={{zIndex:'3'}}>
                 <Carousel3 items={createCards()} />
             </div>
         </section>

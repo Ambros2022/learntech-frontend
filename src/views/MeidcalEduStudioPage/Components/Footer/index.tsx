@@ -1,8 +1,33 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Footer = () => {
+    const [showButton, setShowButton] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const halfwayPoint = window.innerHeight / 2;
+            if (window.scrollY > halfwayPoint) {
+                setShowButton(true);
+            } else {
+                setShowButton(false);
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Smooth scrolling
+        });
+    }
     return (
         <>
             <section className='bg-skyBlue pt-5'>
@@ -82,6 +107,11 @@ const Footer = () => {
                 <h4 className='text-center text-white mb-3 mt-5'>Copyright @ 2024</h4>
                 <h6 className='text-center text-white'>Learntech Edu Solutions Pvt Ltd.</h6>
             </section>
+            <div className="mt-md-3 col-md-4 text-md-end">
+                <a href="tel:18001208969" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a>
+                <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={30} height={30} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
+                <a href="https://wa.me/+919036020076" target='_blank' className="whatsappIcon" ><Image width={30} height={30} className="footer-arrow" src="/images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
+            </div>
         </>
     )
 }

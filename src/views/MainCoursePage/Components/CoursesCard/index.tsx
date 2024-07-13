@@ -123,7 +123,7 @@ function CoursesContainer() {
   useEffect(() => {
     getStreamwiseCourse();
     getPromobanner();
-  }, [getStreamwiseCourse]);
+  }, [getPromobanner, getStreamwiseCourse]);
 
   return (
     <section className="bg-white pt-5 pb-5">

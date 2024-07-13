@@ -75,20 +75,20 @@ const ExpertSec = ({ data }) => {
                 <div className="container">
                     <div className="d-flex gap-3 flex-wrap mb-3">
                         <LinkedinShareButton url={location}>
-                            <button className='btn btn-primary'><i className="bi bi-linkedin"></i></button>
+                            <button className='btn  btn-primary'><i className="bi me-2 bi-linkedin"></i>Share</button>
                         </LinkedinShareButton>
                         <TwitterShareButton
                             url={location}
                             title={data?.meta_title}
                         >
-                            <button className='btn btn-dark text-white'><i className="bi bi-twitter-x"></i></button>
+                            <button className='btn btn-dark me-2 text-white'><i className="bi me-2 bi-twitter-x"></i>Tweet</button>
                         </TwitterShareButton>
                         <FacebookShareButton
                             url={location}
                             quote={data?.meta_title}
                             hashtag={data?.meta_title}
                         >
-                            <button className='btn btn-primary text-white'><i className="bi bi-facebook"></i> </button>
+                            <button className='btn btn-primary text-white'><i className="bi me-2 bi-facebook"></i>Share</button>
                         </FacebookShareButton>
 
 
@@ -97,14 +97,14 @@ const ExpertSec = ({ data }) => {
                             url={location}
                             media={data?.meta_title}
                         >
-                            <button className='btn btn-danger text-white'><i className="bi bi-pinterest"></i></button>
+                            <button className='btn btn-danger text-white'><i className="bi me-2 bi-pinterest"></i>Pin</button>
                         </PinterestShareButton>
                         <WhatsappShareButton
                             url={location}
                             title={data?.meta_title}
 
                         >
-                            <button className='btn btn-success text-white'> <i className="bi bi-whatsapp"></i></button>
+                            <button className='btn btn-success text-white'> <i className="bi me-2 bi-whatsapp"></i>Share</button>
                         </WhatsappShareButton>
 
                         <RWebShare
@@ -115,7 +115,7 @@ const ExpertSec = ({ data }) => {
                             }}
 
                         >
-                            <button className='btn btn-dark text-white'><i className="bi bi-share-fill"></i></button>
+                            <button className='btn btn-dark text-white'><i className="bi me-2 bi-share-fill"></i>Share</button>
                         </RWebShare>
                         {/* <button className='btn btn-success text-white'><i className="bi bi-share-fill"></i></button> */}
 
@@ -158,7 +158,7 @@ const ExpertSec = ({ data }) => {
                                             <ErrorMessage name="current_url" component="div" className="text-danger" />
                                         </div>
                                     </div>
-                                    <div className='mb-3'>
+                                    <div className='mb-3 text-center'>
                                         <input type="submit" className='btn submitBtn' value="Submit" />
                                     </div>
 

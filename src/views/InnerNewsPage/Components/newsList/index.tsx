@@ -5,35 +5,35 @@ import Link from 'next/link';
 // NewsItem component
 const NewsItem = ({ imageSrc, id, name }) => (
     <div className="col-12">
-         <Link href={`/news/${id}/${name}`}>
-        <div className="card bg-skyBlue hover-card mb-3">
-            <div className="row g-0">
-                <div className="col-md-4">
-                    <Image src={imageSrc} width={200} height={200} className="ms-md-2 card-img-top img-fluid rounded-start" alt="news-img" />
-                </div>
-                <div className="col-md-8">
-                    <div className="card-body">
-                   
-                        <small className="card-text news-text">{name}</small>
-                       
+        <Link href={`/news/${id}/${name}`}>
+            <div className="card bg-skyBlue hover-card mb-3">
+                <div className="row g-0">
+                    <div className="col-lg-4">
+                        <Image src={imageSrc} width={600} height={600} style={{ width: '100%', height: '-webkit-fill-available', objectFit:'contain'}} className="img-fluid rounded-start" alt="news-img" />
+                    </div>
+                    <div className="col-lg-8">
+                        <div className="card-body d-flex">
+                            <h6 className="align-content-center card-text news-text">{name}</h6>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </Link>
     </div>
 );
 
 // NewsList component
 const NewsList = ({ newsItems }) => (
-    <div className='mb-5 bg-skyBlue innerNewsCard px-4 overflow-y-scroll rounded'>
-        <h5 className='fw-bold text-center py-3 text-blue'>Other Trending News</h5>
-        <div className="row">
-            {newsItems.map((item, index) => (
-                <NewsItem key={index} imageSrc={item.imageSrc} name={item.name} id={item.id} />
-            ))}
+    <>
+        <h4 className='fw-bold text-center py-3 text-blue'>Other Trending News</h4>
+        <div className='mb-5 pt-3 bg-skyBlue innerNewsCard px-4 overflow-y-scroll rounded'>
+            <div className="row">
+                {newsItems.map((item, index) => (
+                    <NewsItem key={index} imageSrc={item.imageSrc} name={item.name} id={item.id} />
+                ))}
+            </div>
         </div>
-    </div>
+    </>
 );
 
 export default NewsList;

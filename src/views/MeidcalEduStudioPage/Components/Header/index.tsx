@@ -8,7 +8,9 @@ const Header = () => {
             <section className='bg-white py-3 medHeader'>
                 <nav className="navbar navbar-expand-lg">
                     <div className="container">
-                        <Image src='/images/icons/medicalEduLogo.png' width={200} height={200} alt='medical-logo' className="img-fluid navbar-brand"></Image>
+                        <Link href='/meds'>
+                            <Image src='/images/icons/medicalEdulogo.png' width={200} height={200} alt='medical-logo' className="img-fluid navbar-brand"></Image>
+                        </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
@@ -36,7 +38,9 @@ const Header = () => {
                                 </li>
                             </ul>
                             <form className="d-flex" role="search">
-                                <Image src='/images/icons/learntech-logo.png' width={200} height={200} alt='learntech-logo' className="img-fluid"></Image>
+                                <Link href='/'>
+                                    <Image src='/images/icons/learntech-logo.png' width={200} height={200} alt='learntech-logo' className="img-fluid"></Image>
+                                </Link>
                             </form>
                         </div>
                     </div>
