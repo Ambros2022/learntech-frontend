@@ -311,7 +311,7 @@ const SecondPage = () => {
         const handleUpdateClick = async () => {
           try {
             // Call the API to update the status
-            const response = await axios1.post('api/admin/review/statusupdate', { id: row.id, is_approved: 1 });
+            const response = await axios1.post('/api/website/review/statusupdate', { id: row.id, is_approved: 1 });
             if (response.data.status === 1) {
               toast.success(response.data.message);
               // Update the local state to reflect the change

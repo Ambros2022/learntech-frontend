@@ -1535,6 +1535,7 @@
     padding: 10px 20px !important;
     max-height: 50px !important;
   }
+
   .activeBtn:hover {
     background-color: darkblue !important;
     color: white !important;
@@ -2083,10 +2084,12 @@
     background-color: rgba(255, 255, 255, 0.1) !important;
     color: white !important;
   }
-  .btn-elg:hover{
-    box-shadow: rgba(0,0,0,0.5) 0px 0px 15px !important;
-  } 
-  .trendCrsBtn:hover{
+
+  .btn-elg:hover {
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px !important;
+  }
+
+  .trendCrsBtn:hover {
     background-color: rgba(255, 255, 255, 0.377) !important;
     color: white !important;
   }
@@ -2101,11 +2104,13 @@
     font-size: 14px !important;
     font-weight: 500;
   }
-  .coursesBtn .btn:hover{
+
+  .coursesBtn .btn:hover {
     background-color: white !important;
     border: 1px solid #274896 !important;
     color: #274896 !important;
   }
+
   .viewAllBtn {
     color: #254692 !important;
     border: 1px solid #254692 !important;
@@ -2114,7 +2119,8 @@
     font-size: 14px !important;
     /* font-weight: 500 !important; */
   }
-  .viewAllBtn:hover{
+
+  .viewAllBtn:hover {
     background-color: #274896 !important;
     color: white !important;
   }
@@ -2136,6 +2142,7 @@
     color: white !important;
     border: 1px solid white !important;
   }
+
   .innerApplyBtn:hover {
     color: white !important;
     border: 1px solid white !important;
@@ -3271,6 +3278,7 @@
     padding: 10px 12px !important;
     border-radius: 5px !important;
   }
+
   .examSecItems>.nav-link:hover {
     font-weight: bold !important;
     color: white !important;
@@ -3827,7 +3835,7 @@
     border-radius: 5px !important;
   }
 
-  .innerBoardImg{
+  .innerBoardImg {
     width: 100% !important;
     height: 100% !important;
   }
@@ -3851,7 +3859,8 @@
     color: #254692 !important;
     border: 1px solid #254692 !important;
   }
-  .askBtn:hover{
+
+  .askBtn:hover {
     background-color: transparent !important;
     color: #254692 !important;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important;
@@ -4024,7 +4033,8 @@
     color: #254692 !important;
     border: 1px solid #254692 !important;
   }
-  .viewDetailBtn:hover{
+
+  .viewDetailBtn:hover {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px !important;
   }
 
@@ -4405,6 +4415,7 @@
   .linkFontSize {
     font-size: 19px !important;
   }
+
   .linkFontSize a:hover {
     font-size: 19px !important;
     color: #274896 !important;
@@ -5198,9 +5209,7 @@
       object-fit: cover;
     }
 
-    .logoBoardImg {
-      /* height: 150px; */
-    }
+
   }
 
   @media (max-width:575px) {
@@ -5254,18 +5263,21 @@
     color: blue !important;
   } */
 
-  .bi-icon{
-    font-size: 25px !important; 
+  .bi-icon {
+    font-size: 25px !important;
     color: #eaea09 !important;
   }
 
-  .padding{
+  .padding {
     padding-left: 160px !important
-
   }
 
 
-  
-  .caret-down{
+  .caret-down {
     color: #00000078 !important
+  }
+
+
+  .click-like:hover .bi-hand-thumbs-up-fill {
+    display: inline-block !important;
   }

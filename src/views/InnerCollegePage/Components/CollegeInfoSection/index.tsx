@@ -8,7 +8,7 @@ import ReviewSec from '../ReviewSec'
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 
 
-function CollegeInfoSection({ data }) {
+function CollegeInfoSection({ data  }) {
   return (
     <>
       <section className='clgInfoSec bg-white'>
@@ -117,7 +117,7 @@ function CollegeInfoSection({ data }) {
               </div>
             </div>
             <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-            <ReviewSec />
+            <ReviewSec data= {data} />
             
             </div>
 
