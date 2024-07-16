@@ -82,9 +82,7 @@ const BannerSec = ({ handleSearchQuery }) => {
                                                                 <ClearIcon />
                                                             </IconButton>
                                                         )}
-                                                        <InputAdornment position="end">
-                                                            <MicIcon />
-                                                        </InputAdornment>
+                                                       
                                                     </>
                                                     ),
                                                 }}
