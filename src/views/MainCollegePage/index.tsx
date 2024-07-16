@@ -12,66 +12,78 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 
 function MainCollegePage() {
-    const router = useRouter()
-    const isMountedRef = useIsMountedRef();
-    const [pagedata, setPagedata] = useState<any>();
-    const [trendingCourses, setTrendingCourses] = useState([]);
-  
-    const getPagedata = useCallback(async () => {
-      try {
-        const response = await axios.get('api/website/pagefindone/get/colleges');
-        if (isMountedRef.current) {
-  
-          setPagedata(response.data.data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch trending courses:', error);
-      }
-    }, [isMountedRef]);
-  
-    const getTrendingCourses = useCallback(async () => {
-      try {
-        const response = await axios.get('api/website/generalcourse/get', {
-          params: {
-            page: 1,
-            size: 8,
-            is_trending: 1
-          }
-        });
-        if (isMountedRef.current) {
-          setTrendingCourses(response.data.data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch trending courses:', error);
-      }
-    }, [isMountedRef]);
-  
+  const router = useRouter()
+  const isMountedRef = useIsMountedRef();
+  const [pagedata, setPagedata] = useState<any>();
+  const [collegePagedata, setCollegePagedata] = useState<any>();
+  const [trendingCourses, setTrendingCourses] = useState([]);
 
-  
-  
-    useEffect(() => {
-      getPagedata();
-      getTrendingCourses();
+  const getPagedata = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/pagefindone/get/colleges');
+      if (isMountedRef.current) {
 
-  
-  
-    }, []);
-    return (
-        <>
-            <Head>
-                <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-                <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
-                <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
-                <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-            </Head>
-            <BannerSection />
-            <TopCollegesSection />
-            <CollegeFilterSection />
-            <BestCollegeSec />
-            <ExpertSection />
-            <TopFeaturedColleges />
-        </>
-    )
+        setPagedata(response.data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending courses:', error);
+    }
+  }, [isMountedRef]);
+
+  const getCollegePagedata = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/colleges/get');
+      if (isMountedRef.current) {
+
+        setCollegePagedata(response.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending courses:', error);
+    }
+  }, [isMountedRef]);
+
+  const getTrendingCourses = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/generalcourse/get', {
+        params: {
+          page: 1,
+          size: 8,
+          is_trending: 1
+        }
+      });
+      if (isMountedRef.current) {
+        setTrendingCourses(response.data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending courses:', error);
+    }
+  }, [isMountedRef]);
+
+  console.log(collegePagedata);
+
+
+
+  useEffect(() => {
+    getPagedata();
+    getTrendingCourses();
+    getCollegePagedata();
+  }, [getPagedata, getTrendingCourses, getCollegePagedata]);
+  return (
+    <>
+      <Head>
+        <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
+        <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
+        <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
+        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+      </Head>
+      <BannerSection />
+      <TopCollegesSection />
+      <CollegeFilterSection data={collegePagedata} />
+      <BestCollegeSec />
+      <ExpertSection />
+      <TopFeaturedColleges />
+    </>
+  )
 }
 
 export default MainCollegePage;

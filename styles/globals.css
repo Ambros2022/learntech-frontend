@@ -1505,7 +1505,7 @@
   }
 
   .searchCheckBox {
-    font-size: 16px !important;
+    font-size: 15px !important;
   }
 
   .collegeSearchFilter {
@@ -1815,7 +1815,7 @@
   }
 
   .freeBtn {
-    border: 1px solid white !important;
+    background-color: rgb(5, 153, 5) !important;
     color: white !important;
     width: 200px !important;
     height: 50px !important;
@@ -1827,9 +1827,10 @@
   }
 
   .freeBtn:hover {
-    border: 1px solid white !important;
+    background-color: rgb(5, 153, 5) !important;
     color: white !important;
-    box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 15px;
+    border: 1px solid white !important;
+    /* box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 15px; */
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
@@ -1924,7 +1925,7 @@
 
   .applyNowImg img {
     width: 100%;
-    height: 100%;
+    height: 250px;
   }
 
   .applyNowImgbtn {
@@ -2497,6 +2498,14 @@
     border: 1px solid black !important;
   }
 
+  table td {
+    padding: 10px !important;
+  }
+
+  table td .applyNowButton {
+    margin: 15px 0px 0px 0px !important;
+  }
+
   .innerNewsSec table {
     width: 100% !important;
     border: 1px solid black !important;
@@ -3065,6 +3074,11 @@
 
 
   @media (min-width: 992px) and (max-width: 1024px) {
+    .clgCardImg img {
+      width: 100%;
+      height: auto !important;
+    }
+
     .newsLinkSec .fi-left {
       margin-left: -40px !important;
     }
@@ -3192,7 +3206,7 @@
     }
 
     .clgCardImg .card-Image-top {
-      height: 200px !important;
+      height: 120px !important;
       object-fit: cover !important;
     }
 
@@ -3337,7 +3351,8 @@
 
   .newsPageImg img {
     width: 100%;
-    height: 100%;
+    height: 200px;
+    overflow: hidden;
   }
 
   .innerExamImg>img {
@@ -3480,6 +3495,14 @@
       object-fit: contain !important;
     }
 
+
+    .newsPageImg img {
+      width: 100%;
+      height: 150px;
+      overflow: hidden;
+    }
+
+
     .StudyAbroadCard .card-img-top {
       height: 166px !important;
       object-fit: contain !important;
@@ -3503,6 +3526,13 @@
   }
 
   @media (min-width:768px) and (max-width:991px) {
+
+    .newsPageImg img {
+      width: 100%;
+      height: 150px;
+      overflow: hidden;
+    }
+
     .FeaturedClgCon .card-Image-top {
       /* height: 166px !important; */
       object-fit: contain !important;
@@ -3543,6 +3573,12 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .newsPageImg img {
+      width: 100%;
+      height: 150px;
+      overflow: hidden;
+    }
+
     .boardSec h1 {
       font-size: 20px;
     }
