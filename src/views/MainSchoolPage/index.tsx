@@ -1,6 +1,5 @@
-
 import BannerSection from './Components/BannerSection';
-import ExpertSection from './Components/ExpertSection';
+import ExpertSection from '../MainCollegePage/Components/ExpertSection';
 import TopFeaturedColleges from './Components/TopFeaturedColleges';
 import TopCollegesSection from './Components/TopCollegesSection';
 import CollegeFilterSection from './Components/CollegeFilterSection';
@@ -14,6 +13,7 @@ const MainSchoolPage = () => {
     const router = useRouter()
     const isMountedRef = useIsMountedRef();
     const [pagedata, setPagedata] = useState<any>();
+    const [blogdata, setBlogdata] = useState<any>();
    
     const getPagedata = useCallback(async () => {
         try {
@@ -28,10 +28,24 @@ const MainSchoolPage = () => {
     }, [isMountedRef]);
 
 
+    const getBlogsData = useCallback(async () => {
+        try {
+            const response = await axios.get('api/website/blog/get');
+            if (isMountedRef.current) {
+
+                setBlogdata(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch trending courses:', error);
+        }
+    }, [isMountedRef]);
+
+
     useEffect(() => {
         getPagedata();
+        getBlogsData();
         
-    }, [getPagedata]);
+    }, [getPagedata , getBlogsData]);
 
     return (
         <>
@@ -41,15 +55,11 @@ const MainSchoolPage = () => {
                 <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
-            {/* <BannerSection />
-      <TopTrendingNews newsItems={newsItems} loading={loading} />
-      <BrowseNewsSec collegeData={collegeData} getColleges={getColleges} categories={categories} activeTab={activeTab} setActiveTab={setActiveTab} /> */}
             <BannerSection />
             <TopCollegesSection data={pagedata} />
             <CollegeFilterSection />
-            {/* <BestCollegeSec /> */}
             <ExpertSection />
-            <TopFeaturedColleges />
+            <TopFeaturedColleges blogdata={blogdata} />
         </>
     )
 }

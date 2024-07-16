@@ -2826,18 +2826,21 @@
     border: 1px solid rgba(39, 72, 150, 0.2) !important;
   }
 
-  .innerNewsSec h1{
+  .innerNewsSec h1 {
     font-size: 30px !important;
   }
-  .expertInquirySec select, option{
+
+  .expertInquirySec select,
+  option {
     background-color: #F8F7FA !important;
   }
+
   .detailsFillSec select {
     background-color: rgba(39, 72, 150, 0.04) !important;
     color: rgb(0, 0, 0) !important;
   }
 
-  .hover-blue:hover{
+  .hover-blue:hover {
     color: #274896 !important;
   }
 
@@ -2870,8 +2873,8 @@
     border-radius: 5px;
   } */
 
-  .border-circle{
-    border:2px solid #274896 !important;
+  .border-circle {
+    border: 2px solid #274896 !important;
     border-radius: 50% !important;
     padding: 20px !important;
   }
@@ -5225,9 +5228,7 @@
       object-fit: cover;
     }
 
-    .logoBoardImg {
-      /* height: 150px; */
-    }
+
   }
 
   @media (max-width:575px) {
@@ -5294,4 +5295,9 @@
 
   .caret-down {
     color: #00000078 !important
+  }
+
+
+  .click-like:hover .bi-hand-thumbs-up-fill {
+    display: inline-block !important;
   }

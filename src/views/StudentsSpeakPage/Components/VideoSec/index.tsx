@@ -3,7 +3,6 @@ import React from 'react';
 const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, currentPage }) => {
 
 
-    console.log(cards , "cards")
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     getScholarshipData(pageNumber);
@@ -74,6 +73,7 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
                 </li>
               </ul>
             </nav>
+
           </div>
         </div>
       </div>

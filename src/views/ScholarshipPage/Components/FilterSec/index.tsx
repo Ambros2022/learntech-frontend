@@ -83,7 +83,6 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
     }, [isMountedRef, formData, searchText, perPage, currentPage]);
 
 
-    console.log(formData.deadline ,"formData.deadline")
 
     useEffect(() => {
         getScholarship(activeTab, formData.levelOfStudy, formData.type, formData.nationality);
@@ -93,7 +92,6 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
 
     const renderScholarshipDetails = (scholarship) => (
         <ul className='text-black'>
-
             <li>International Student Eligible: {scholarship.is_eligible === 1 ? 'Yes' : 'No'}</li>
             <li>Amount : {scholarship.amount}</li>
             <li>Type: {scholarship.scholartypes ? scholarship.scholartypes.name : 'Not specified'}</li>
