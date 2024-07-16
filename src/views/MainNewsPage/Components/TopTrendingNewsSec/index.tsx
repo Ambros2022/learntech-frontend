@@ -12,7 +12,7 @@ const TopTrendingNews = ({ newsItems, loading }) => {
     const newsCards = newsItems.map(news => (
         <Link className='text-blue' href={`/news/${news.id}/${encodeURIComponent(news.title)}`}>
             <div key={news.id} className="col-8 col-md-10 mx-auto mb-1">
-                <div className="card h-100 d-flex flex-fill  hover-card   ">
+                <div className="card h-100 topNewsImg d-flex flex-fill  hover-card   ">
                     <Image
                         src={news.imageUrl}
                         width={400}

@@ -25,7 +25,7 @@ const MainNewsPage = () => {
     general_news: 'General News',
     admission_alert_news: 'Admission Alert News',
     results_announcement: 'Result Announcement',
-
+    board_news: 'Board News',
   };
 
 

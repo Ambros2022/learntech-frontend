@@ -702,22 +702,50 @@
     position: relative !important;
   }
 
+
+
   .newsLinkSec .carousel-button-group {
     margin: -50px 0px 0px 0px !important;
+  }
+
+  .carouselInnerCourse .carousel-button-group {
+    position: absolute !important;
+    top: 0px !important;
+    width: 100%;
+    z-index: -1 !important;
+  }
+
+  .carouselInnerCourse .fi-left {
+    margin-left: -30px !important;
+    /* z-index: 1 !important; */
+  }
+
+  .carouselInnerCourse .fi-right {
+    margin-right: -30px !important;
+    /* z-index: 1 !important; */
   }
 
   .FeaturedClgCon .carousel-button-group {
     position: absolute !important;
     top: 260px !important;
     width: 100%;
+
   }
 
   .FeaturedClgCon .fi-left {
     margin-left: -25px !important;
+    cursor: pointer !important;
+  }
+
+  .text-truncate1 {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 
   .FeaturedClgCon .fi-right {
     margin-right: -10px !important;
+    cursor: pointer !important;
   }
 
   .newsLinkSec .fi-left {
@@ -887,12 +915,25 @@
     .searchForm h5 {
       font-size: 19px !important;
     }
+    .carouselInnerCourse .carousel-button-group {
+      position: absolute !important;
+      top: 5px !important;
+      width: 100%;
+      z-index: -1 !important;
+    }
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
     /* .innerTextAddress {
      
     } */
+
+    .carouselInnerCourse .carousel-button-group {
+      position: absolute !important;
+      top: 5px !important;
+      width: 100%;
+      z-index: -1 !important;
+    }
 
     .collapseNavHeight {
       height: 280px !important;
@@ -1056,6 +1097,18 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .carouselInnerCourse .carousel-button-group {
+      top: 8px !important;
+    }
+
+    .carouselInnerCourse .fi-left {
+      margin-left: 20px !important;
+    }
+
+    .carouselInnerCourse .fi-right {
+      margin-right: 20px !important;
+    }
+
     /* .innerTextAddress {
       display: -webkit-box !important;
       -webkit-line-clamp: 2 !important;
@@ -3065,6 +3118,10 @@
     height: 100%;
   }
 
+  .topNewsImg>img{
+    width: 100% !important;
+    height: 120px !important;
+  }
   .disclaimerCon>img {
     height: 300px !important;
     width: 100% !important;
@@ -3829,8 +3886,7 @@
   .newsTabsClr button {
     border: 1px solid rgba(212, 218, 234, 1) !important;
     font-size: 15px !important;
-    max-width: 200px !important;
-    min-width: 200px !important;
+    width: auto !important;
     padding: 15px 12px !important;
     color: #254692 !important;
   }
