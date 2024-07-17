@@ -30,17 +30,7 @@ function MainCollegePage() {
     }
   }, [isMountedRef]);
 
-  const getCollegePagedata = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/colleges/get');
-      if (isMountedRef.current) {
 
-        setCollegePagedata(response.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
 
   const getTrendingCourses = useCallback(async () => {
     try {
@@ -59,15 +49,13 @@ function MainCollegePage() {
     }
   }, [isMountedRef]);
 
-  console.log(collegePagedata);
 
 
 
   useEffect(() => {
     getPagedata();
     getTrendingCourses();
-    getCollegePagedata();
-  }, [getPagedata, getTrendingCourses, getCollegePagedata]);
+  }, [getPagedata, getTrendingCourses, ]);
   return (
     <>
       <Head>
@@ -78,7 +66,7 @@ function MainCollegePage() {
       </Head>
       <BannerSection />
       <TopCollegesSection />
-      <CollegeFilterSection data={collegePagedata} />
+      <CollegeFilterSection />
       <BestCollegeSec />
       <ExpertSection />
       <TopFeaturedColleges />

@@ -87,7 +87,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
         </div>
     );
 }
-function CollegeFilterSection({ data }) {
+function CollegeFilterSection() {
 
 
     const router = useRouter();
@@ -95,6 +95,7 @@ function CollegeFilterSection({ data }) {
     // let state_id = 92;
     // console.log(state_id, "state_id");
     const [colleges, setColleges] = useState<College[]>([]);
+    const [total, setTotal] = useState<string>("0");
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
     const [visibleCards, setVisibleCards] = useState(6);
@@ -227,6 +228,7 @@ function CollegeFilterSection({ data }) {
             if (courseType && courseType.length > 0) params['course_type'] = JSON.stringify(courseType);
             const response = await axios1.get('api/website/colleges/get', { params });
             setColleges(response.data.data);
+            setTotal(response.data.totalItems);
         } catch (err) {
             console.error(err);
         }
@@ -697,7 +699,7 @@ function CollegeFilterSection({ data }) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-xl-3 col-md-4 mb-3 mb-lg-0 bg-skyBlue">
-                            <h5 className='text-blue fw-bold text-md-start text-center px-3 pt-3'>Found {data.totalItems} Colleges</h5>
+                            <h5 className='text-blue fw-bold text-md-start text-center px-3 pt-3'>Found {total} Colleges</h5>
                             <MultiSelectOptions options={options} />
                         </div>
                         <div className="col-lg-9 col-xl-9 col-md-8">
