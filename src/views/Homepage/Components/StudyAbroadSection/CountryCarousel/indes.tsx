@@ -6,16 +6,16 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 const CountryCarosuel = ({ items }) => {
   const responsive = {
     superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      breakpoint: { max: 4000, min: 1351 },
+      items: 7
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 1350, min: 1024 },
       items: 5
     },
     tablet: {
       breakpoint: { max: 1023, min: 768 },
-      items: 3
+      items: 4
     },
     mobile: {
       breakpoint: { max: 767, min: 0 },

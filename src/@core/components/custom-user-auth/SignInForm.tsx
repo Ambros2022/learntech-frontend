@@ -150,7 +150,7 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
           </div>
           <div className="d-flex justify-content-between mb-3 flex-wrap">
             <GoogleLogin />
-            <FacebookLogin onLogin={undefined} />
+            {/* <FacebookLogin onLogin={undefined} /> */}
             <TwitterLogin />
             <LinkdinLogin />
           </div>

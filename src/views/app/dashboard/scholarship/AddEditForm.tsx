@@ -68,11 +68,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     };
 
-    const options = [
+    const optionseligible = [
         'male',
         'female',
         'others',
     ];
+
+    const options = [
+        { label: 'Yes', value: '1' },
+        { label: 'No', value: '0' },
+      ];
+      
 
     const schema: any = yup.object().shape({
         name: yup
@@ -346,7 +352,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='type_id'
@@ -400,7 +405,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-
 
                     <Grid item xs={12} sm={4}>
                         <Controller
@@ -457,7 +461,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.gender)}
                                     helperText={errors.gender && 'This field is required'}
                                 >
-                                    {options.map((option, value) => (
+                                    {optionseligible.map((option, value) => (
                                         <MenuItem key={value} value={option}>
                                             {option}
                                         </MenuItem>
@@ -516,7 +520,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
-                                    type='number'
+                                    select
                                     value={value}
                                     label='Is_eligible'
                                     onChange={onChange}
@@ -524,7 +528,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.is_eligible)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.is_eligible && { helperText: 'This field is required' })}
-                                />
+                                    >
+                                    {options.map((option) => (
+                                      <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                      </MenuItem>
+                                    ))}
+                                  </CustomTextField>
+                                
                             )}
                         />
                     </Grid>
@@ -614,10 +625,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         onChange={onChange}
                                         placeholderText='Click to select a date'
                                         customInput={<CustomInput label='Last date'
-                                        // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
+                                      
                                         />}
-
-
                                     />
                                 </DatePickerWrapper>
                             )}
@@ -635,10 +644,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field: { value, onChange } }) => (
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                        onChange={(value) => setValue("top_description", value)} />
-                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                        onChange={(value) => setValue("overview", value)} />
                                 </>
                             )}
                         />

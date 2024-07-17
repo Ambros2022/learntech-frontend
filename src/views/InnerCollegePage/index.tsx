@@ -17,7 +17,7 @@ function InnerCollegePage({ id }) {
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [colleges, setColleges] = useState([]);
-  const [exams, setexams] = useState([]);
+  const [reviews, setreviews] = useState([]);
   const [streams, setStreams] = useState([]);
 
   const getPagedata = useCallback(async () => {
@@ -50,10 +50,13 @@ function InnerCollegePage({ id }) {
   }, [id, isMountedRef]);
 
 
+
+
   useEffect(() => {
     getPagedata();
     getColleges();
-  }, [getPagedata]);
+   
+  }, [getPagedata ]);
   return (
     <>
       <Head>
@@ -63,7 +66,7 @@ function InnerCollegePage({ id }) {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
+      {!loading && pagedata && <CollegeInfoSection data={pagedata}  />}
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}
 

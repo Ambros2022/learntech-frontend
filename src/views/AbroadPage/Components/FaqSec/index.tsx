@@ -10,7 +10,7 @@ function FaqSec({ data }) {
           <div className="row faqImgCon">
             <div className="col-md-6 faqImgSec mb-3 rounded d-flex flex-fill">
               <div className='bg-skyBlue h-100 w-100 rounded text-center' style={{ position: "relative" }}>
-                <Image src="/images/icons/faqImage.jpg" fill={true} alt='faq-img' />
+                <Image src="/images/icons/FAQ-Banner.webp" fill={true} alt='faq-img' />
               </div>
             </div>
             <div className="col-md-6 mb-3 rounded ">

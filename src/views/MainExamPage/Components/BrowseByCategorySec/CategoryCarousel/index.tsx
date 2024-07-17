@@ -6,12 +6,12 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
     const responsive = {
         superLargeDesktop: {
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
+            breakpoint: { max: 4000, min: 1023 },
+            items: 9
         },
         desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 5
+            breakpoint: { max: 1024, min: 1024 },
+            items: 8
         },
         tablet: {
             breakpoint: { max: 1023, min: 768 },
@@ -47,14 +47,17 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
             responsive={responsive}
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
-            containerClass='carousel-containerCategory'
+            containerClass='carousel-containerCategory mx-auto'
         >
             {items.map((item) => (
-                <div className="d-flex examSecItems mb-3" key={item.id} onClick={() => handleTabClick(item.id)}>
+                <div className="examSecItems d-flex justify-content-center text-center mx-2 mb-3">
                     <button
-                        className={`btn nav-link text-truncate ${activeTab === item.id ? 'active' : ''}`}
+                        className={`text-truncate categoryTextHide btn nav-link ${activeTab === item.id ? 'active' : ''}`}
                         id={`pills-${item}-tab`}
                         type="button"
+                        onClick={() => handleTabClick(item.id)}
+                        key={item.id}
+                        style={{ zIndex: '20'}}
                     >
                         {item.title}
                     </button>

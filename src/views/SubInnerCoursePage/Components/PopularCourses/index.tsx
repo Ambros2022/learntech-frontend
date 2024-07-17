@@ -49,7 +49,7 @@ function PopularCourses() {
     return (
       <Link href={`/course/${id}/${slug}`}>
         <div className='topCourseConCarousel'>
-          <div className="card text-center d-flex mx-2 border-1">
+          <div className="card text-center hover-card d-flex mx-2 border-1">
             <div className="row flex-fill">
               <div className="col-12 text-center text-start px-0">
                 <div className="card-body d-flex flex-column">
@@ -68,7 +68,7 @@ function PopularCourses() {
     <section className='bg-white pb-5'>
       <section className='container bg-skyBlue rounded'>
         <h2 className='fw-bold text-blue pt-5 ps-5'>Popular Degree Courses</h2>
-        <div className="topCarouselCardsCon px-5 pt-2 pb-5 position-relative">
+        <div className="topCarouselCardsCon px-5 pt-2 pb-5 position-relative" style={{zIndex:'2'}}>
           <CoursesCraousel items={createCards()} />
         </div>
       </section>

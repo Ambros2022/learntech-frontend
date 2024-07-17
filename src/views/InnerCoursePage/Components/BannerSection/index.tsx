@@ -34,8 +34,8 @@ function BannerSection({ data }) {
       </section>
       <section className='py-3 bg-white'>
         <div className='container linkFontSize'>
-          <p><Link href={'/'} className="text-black">Home <i className='bi bi-chevron-right'></i></Link><Link href={'/courses'} className="text-black"> Courses <i className='bi bi-chevron-right'></i></Link><span className='text-blue'>
-           {data.name}
+          <p><Link href={'/'} className="text-black">Home <i className='bi bi-chevron-right'></i></Link><Link href={'/courses'} className="text-black"> Courses <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>
+            {data.name}
           </span>
           </p>
         </div>

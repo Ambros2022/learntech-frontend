@@ -8,7 +8,7 @@ const BannerSec = ({ data }) => {
             <section className='newsBannerSec'>
                 <div className='position-relative'>
                     <div>
-                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={1200} height={400} alt='banner-img' className='position-relative ' />
+                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={1400} height={400} alt='banner-img' className='position-relative ' />
                     </div>
                     {/* <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
                         <div className="container h-100">
@@ -28,7 +28,7 @@ const BannerSec = ({ data }) => {
             </section>
             <section className='bg-white'>
                 <div className='container py-2 linkFontSize'>
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/news" className='text-black'> News <i className='bi bi-chevron-right'></i></Link><Link href="/news" className='text-blue'>{data.meta_title}</Link>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/news" className='text-black'> News <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>{data.meta_title}</span>
                 </div>
             </section>
         </>

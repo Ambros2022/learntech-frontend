@@ -16,61 +16,61 @@ let cancelToken: any;
 interface SearchResult {
     id: number;
     name: string;
-  }
+}
 
 const BannerSec = () => {
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-  
+
     const handleSearch = async (value: string) => {
-      if (value.length < 2) {
-        setSearchResults([]);
-        setOpen(false); // Close the dropdown if the input is too short
-        return;
-      }
-  
-      try {
-        setLoading(true);
-        if (cancelToken !== undefined) {
-          cancelToken.cancel('Operation canceled due to new request.');
+        if (value.length < 2) {
+            setSearchResults([]);
+            setOpen(false); // Close the dropdown if the input is too short
+            return;
         }
-        cancelToken = axios1.CancelToken.source();
-  
-        const response = await axios.get('api/website/blog/get', {
-          cancelToken: cancelToken.token,
-          params: { searchfrom: 'name', searchtext: value },
-        });
-  
-        const suggestions = response.data.data.map((item: { id: number; name: string }) => ({
-          name: item.name,
-          id: item.id,
-        }));
-  
-        setSearchResults(suggestions);
-        setOpen(true);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
+
+        try {
+            setLoading(true);
+            if (cancelToken !== undefined) {
+                cancelToken.cancel('Operation canceled due to new request.');
+            }
+            cancelToken = axios1.CancelToken.source();
+
+            const response = await axios.get('api/website/blog/get', {
+                cancelToken: cancelToken.token,
+                params: { searchfrom: 'name', searchtext: value },
+            });
+
+            const suggestions = response.data.data.map((item: { id: number; name: string }) => ({
+                name: item.name,
+                id: item.id,
+            }));
+
+            setSearchResults(suggestions);
+            setOpen(true);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
+        }
     };
-  
+
     const handleInputChange = (event: any, value: string) => {
-      handleSearch(value);
+        handleSearch(value);
     };
-  
+
     const handleClearInput = (params: any) => {
-      setSearchResults([]);
-      setOpen(false);
-      if (params.inputProps.onChange) {
-        const event = {
-          target: {
-            value: '',
-          },
-        } as React.ChangeEvent<HTMLInputElement>;
-        params.inputProps.onChange(event);
-      }
+        setSearchResults([]);
+        setOpen(false);
+        if (params.inputProps.onChange) {
+            const event = {
+                target: {
+                    value: '',
+                },
+            } as React.ChangeEvent<HTMLInputElement>;
+            params.inputProps.onChange(event);
+        }
     };
     return (
         <>
@@ -83,7 +83,7 @@ const BannerSec = () => {
                         <div className="container h-100">
                             <div className="d-flex justify-content-center h-100">
                                 <div className="align-content-center h-100">
-                                    <h1 className='fw-bold text-white'>Educational Blogs</h1>
+                                    <h1 className='fw-bold text-white mb-4'>Educational Blogs</h1>
                                     <div className="row">
                                         {/* <div className="col-md-12 mb-3 mx-auto">
                                             <input type="search" className='form-control' placeholder='Search' />
@@ -150,7 +150,7 @@ const BannerSec = () => {
             </section>
             <section className='bg-white'>
                 <div className='container py-2 linkFontSize'>
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link> <Link href="/blogs" className='text-blue'>Blogs</Link>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>Blog</span>
                 </div>
             </section>
         </>

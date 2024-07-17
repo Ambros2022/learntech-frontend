@@ -1,7 +1,12 @@
-import Image from 'next/image'
-import React from 'react'
-import { Formik, Form, Field } from 'formik';
+import Image from 'next/image';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import Link from 'next/link';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import axios from 'src/configs/axios';
+import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required('Full Name is required'),
@@ -14,9 +19,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const CareerSec = () => {
-
-    const collegeOptions = ['College A', 'College B', 'College C'];
-    const countryOptions = ['Country A', 'Country B', 'Country C'];
+    const router = useRouter();
 
 
     const initialValues = {
@@ -29,13 +32,35 @@ const CareerSec = () => {
         message: '',
     };
 
-    const handleSubmit = (values) => {
-        console.log('Form data:', values);
-        // Handle form submission logic here (e.g., API call)
+    const handleSubmit = async (values, { resetForm }) => {
+        try {
+            toast.loading('Processing');
+            const formData = new FormData();
+            formData.append('name', values.name);
+            formData.append('email', values.email);
+            formData.append('contact_number', values.contact);
+            formData.append('location', values.location);
+            formData.append('country', values.country);
+            formData.append('college_name', values.college);
+            formData.append('message', values.message || '');
+            formData.append('current_url', window.location.href);
+
+            const response = await axios.post('api/website/enquiry', formData);
+
+            if (response.status === 200) {
+                toast.dismiss();
+                toast.success('Thank you. We will get back to you.');
+                resetForm();
+                router.push('/thank-you');
+            }
+        } catch (error) {
+            toast.error('Please try again later!');
+            console.error('Error submitting form:', error);
+        }
     };
 
     return (
-        <section className='bg-white py-5'>
+        <section className='bg-white py-5 careerLink'>
             <div className="container">
                 <div className="row">
                     <div className="col-xl-8 col-md-7 mb-md-0 mb-3">
@@ -47,8 +72,8 @@ const CareerSec = () => {
                                     <Image src='/images/icons/phoneAbout1.png' width={30} height={30} alt='phone1' />
                                 </div>
                                 <div>
-                                    <h6 className='ms-3 text-white'>1800-120-8696 (Tollfree)</h6>
-                                    <h6 className='ms-3 text-white'>(Monday to Saturday | (9am to 6pm)</h6>
+                                    <h6 className='ms-3 text-white'><Link href='tel:18001208696'>1800-120-8696</Link> (Tollfree)</h6>
+                                    <h6 className='ms-3 text-white'>(Monday to Saturday | (9am to 6pm))</h6>
                                 </div>
                             </div>
                             <div className="d-flex mb-3">
@@ -56,7 +81,7 @@ const CareerSec = () => {
                                     <Image src='/images/icons/phoneAbout2.png' width={30} height={30} alt='phone2' />
                                 </div>
                                 <div className='align-self-center'>
-                                    <h6 className='ms-3 text-white my-auto'>080-22454991, 26631169</h6>
+                                    <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link>, <Link href='tel:26631169'>26631169</Link></h6>
                                 </div>
                             </div>
                             <div className="d-flex mb-3">
@@ -64,7 +89,7 @@ const CareerSec = () => {
                                     <Image src='/images/icons/phoneAbout3.png' width={30} height={30} alt='phone3' />
                                 </div>
                                 <div className='align-self-center'>
-                                    <h6 className='ms-3 text-white my-auto'>080-22454991</h6>
+                                    <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link></h6>
                                 </div>
                             </div>
                             <div className="d-flex mb-3">
@@ -72,7 +97,7 @@ const CareerSec = () => {
                                     <Image src='/images/icons/email-icon.svg' className='icon-white' width={30} height={30} alt='email' />
                                 </div>
                                 <div className='align-self-center'>
-                                    <h6 className='ms-3 text-white my-auto'>info@learntechww.com</h6>
+                                    <h6 className='ms-3 text-white my-auto'><Link href="mailto:info@learntechww.com">info@learntechww.com</Link></h6>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +117,8 @@ const CareerSec = () => {
                                             {errors.name && touched.name ? <div className="text-danger">{errors.name}</div> : null}
                                         </div>
                                         <div className="mb-3">
-                                            <Field type="text" className='form-control' name='contact' placeholder='Contact Number*' />
+                                            <PhoneInputField name='contact'/>
+                                            {/* <Field type="text" className='form-control' name='contact' placeholder='Contact Number*' /> */}
                                             {errors.contact && touched.contact ? <div className="text-danger">{errors.contact}</div> : null}
                                         </div>
                                         <div className="mb-3">
@@ -104,20 +130,12 @@ const CareerSec = () => {
                                             {errors.location && touched.location ? <div className="text-danger">{errors.location}</div> : null}
                                         </div>
                                         <div className="mb-3">
-                                            <Field as="select" className='form-control' name='country'>
-                                                <option value="">Preferred Country*</option>
-                                                {countryOptions.map((country, index) => (
-                                                    <option key={index} value={country}>{country}</option>
-                                                ))}
+                                            <Field type="text" className='form-control' name='country' placeholder='Preferred Country*'>
                                             </Field>
                                             {errors.country && touched.country ? <div className="text-danger">{errors.country}</div> : null}
                                         </div>
                                         <div className="mb-3">
-                                            <Field as="select" className='form-control' name='college'>
-                                                <option value="">Preferred College</option>
-                                                {collegeOptions.map((college, index) => (
-                                                    <option key={index} value={college}>{college}</option>
-                                                ))}
+                                            <Field type="text" className='form-control' name='college' placeholder='Preferred College'>
                                             </Field>
                                             {errors.college && touched.college ? <div className="text-danger">{errors.college}</div> : null}
                                         </div>
@@ -136,7 +154,7 @@ const CareerSec = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default CareerSec
+export default CareerSec;

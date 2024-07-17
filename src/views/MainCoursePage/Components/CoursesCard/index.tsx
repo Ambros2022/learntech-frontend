@@ -7,10 +7,10 @@ import axios from 'src/configs/axios';
 // The individual card component
 function CoursesCard({ course }) {
   return (
-    <div id={course.id} className="col-md-6 col-lg-4 col-xl-3 d-flex flex-fill">
-      <div className="card mb-3 p-2 bg-crsCard d-flex flex-fill">
+    <div id={course.id} className="col">
+      <div className="card h-100 d-flex flex-column p-2 hover-card bg-crsCard">
         <div className="row g-0 pt-2">
-          <div className="col-lg-3 col-md-3 col-3 col-xl-3 p-0 mb-3 mb-md-0 text-md-start text-center">
+          <div className="col-3 p-0 mb-3 text-center text-md-start">
             <Image
               width={50}
               height={50}
@@ -19,23 +19,25 @@ function CoursesCard({ course }) {
               alt="Courses-Card-img"
             />
           </div>
-          <div className="col-lg-9 col-9 col-xl-9 col-md-9">
-            <div className="card-body p-0 ps-lg-2 pt-2">
-              <h5 className="fw-bold text-blue card-title text-start ps-2">{course.name}</h5>
+          <div className="col-9">
+            <div className="card-body p-0 ps-2 pt-2">
+              <h5 className="fw-bold text-blue card-title text-start">{course.name}</h5>
             </div>
           </div>
         </div>
-        <div className="d-flex gap-2 my-0 my-md-3 mt flex-wrap coursesBtn justify-content-center min-vh-card">
-          {course.general_courses.map(val => (
-            <Link key={val.id} href={`/course/${course.id}/${course.slug}/${val.slug}`} className='btn streamBtn'>
-              {val.short_name}
+        <div className="card-body d-flex flex-column p-0">
+          <div className="flex-grow-1 d-flex flex-wrap gap-2 justify-content-center align-items-start my-3">
+            {course.general_courses.map(val => (
+              <Link key={val.id} href={`/course/${course.id}/${course.slug}/${val.slug}`} className='btn streamBtn'>
+                {val.short_name}
+              </Link>
+            ))}
+          </div>
+          <div className="mt-auto">
+            <Link href={`/course/${course.id}/${course.slug}`} className='d-flex justify-content-center text-center btn viewAllBtn w-100'>
+              <span className='align-self-center'>View All {course.name} Courses</span>
             </Link>
-          ))}
-        </div>
-        <div className="d-grid pt-1 mt-auto">
-          <Link href={`/course/${course.id}/${course.slug}`} className='d-flex justify-content-center text-center btn viewAllBtn'>
-            <span className='align-self-center'>View All {course.name} Courses</span>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -123,12 +125,12 @@ function CoursesContainer() {
   useEffect(() => {
     getStreamwiseCourse();
     getPromobanner();
-  }, [getStreamwiseCourse]);
+  }, [getPromobanner, getStreamwiseCourse]);
 
   return (
     <section className="bg-white pt-5 pb-5">
       <div className="container">
-        <div className="row">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 mb-5">
           {streamcourses.map((course, index) => (
             <CoursesCard key={index} course={course} />
           ))}

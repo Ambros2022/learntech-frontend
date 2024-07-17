@@ -13,7 +13,7 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
         try {
             const roleparams = {
                 page: 1,
-                size: 10000
+                size: 50
             };
             const response = await axios.get('api/website/country/get', { params: roleparams });
             if (isMountedRef.current) {
@@ -70,6 +70,7 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
                     role='tab'
                     aria-controls={tab.id}
                     aria-selected={activeTab === tab}
+                    style={{zIndex:'10'}}
                 >
                     {tab.name}
                 </button>

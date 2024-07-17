@@ -8,7 +8,7 @@ import ReviewSec from '../ReviewSec'
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 
 
-function CollegeInfoSection({ data }) {
+function CollegeInfoSection({ data  }) {
   return (
     <>
       <section className='clgInfoSec bg-white'>
@@ -74,7 +74,7 @@ function CollegeInfoSection({ data }) {
                 <div className="col-md-4 col-10 mx-md-0 mx-auto col-xl-3 col-lg-4 pt-3 rounded mb-md-5 order-1 order-md-2">
                   <div className="row gx-2">
                     {data.banner_image && data.banner_image !== "" && <div className="col-12 applyNowImg position-relative mb-2">
-                      <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={300} height={300} className='rounded' alt='College Card' />
+                      <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={500} height={500} className='rounded' alt='College Card' />
                       <GlobalEnquiryForm className="applyNowImgbtn btn" />
                     </div>}
                     {data.video_url && data.video_url !== "" && <div className="col-12 yotubeImg position-relative mb-2">
@@ -117,7 +117,7 @@ function CollegeInfoSection({ data }) {
               </div>
             </div>
             <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-            <ReviewSec />
+            <ReviewSec data= {data} />
             
             </div>
 

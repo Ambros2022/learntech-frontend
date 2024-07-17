@@ -13,8 +13,8 @@ const OverviewSec = ({ data, createdAt , newsData , blogsData }) => {
                 {/* <h6>Team Learntech | July 18, 2023, 13:55 IST</h6> */}
                 <h6>Team Learntech | {createdAt}</h6>
                 <div className="row mt-5">
-                    <div className="col-md-8">
-                        <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.info }} /></p>
+                    <div className="col-md-8 overflow-x-scroll">
+                        <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.overview }} /></p>
                         {/* <p className='text-black'>{data.meta_description}</p>
                         <p className='text-black'>{data.meta_title}</p> */}
 

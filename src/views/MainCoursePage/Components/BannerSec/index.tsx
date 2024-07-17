@@ -136,7 +136,7 @@ function BannerSec({ data }: any) {
               ))}
             </div>
             <div className='align-content-end'>
-              <GlobalEnquiryForm buttonText="Check Eligibility" className="btn bg-warning text-white" />
+              <GlobalEnquiryForm buttonText="Check Eligibility" className="btn btn-elg bg-warning text-white" />
               {/* <button className='btn bg-warning text-white'>Check Eligibility</button> */}
             </div>
           </div>

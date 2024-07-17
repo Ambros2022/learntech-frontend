@@ -37,11 +37,11 @@ const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData,
         <section className='bg-white py-5 blogCardspage'>
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-6 col-xl-8 col-md-7">
+                    <div className="col-lg-7 col-xl-8 col-md-7">
                         <div className="row">
                             {currentCards.map((card) => (
-                                <div className="col-md-6 col-8 mx-md-0 mx-auto mb-3" key={card.id}>
-                                    <div className="card newsImgSize position-relative">
+                                <div className="col-md-12 col-lg-6 col-8 px-md-4 mx-md-0 mx-auto mb-5" key={card.id}>
+                                    <div className="card bg-skyBlue hover-card newsImgSize position-relative">
                                         <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={400} height={400} className="card-img-top" alt="news-img" />
                                         <span className='share-icon'>
                                             <Image src='/images/icons/icon-share.png' width={30} height={30} style={{
@@ -87,7 +87,7 @@ const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData,
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-6 col-xl-4 col-md-5">
+                    <div className="col-lg-5 col-xl-4 col-md-5">
                         <ContactForm heading={'Talk to our Experts'} />
                         <NewsList newsItems={newsData} />
                     </div>

@@ -12,7 +12,7 @@ const StudySec = ({ data }) => {
     <>
       <section className='bg-white studySec'>
         <div className='container pt-3 pb-5'>
-          <h4 className='fw-bold text-blue mb-3'>Study In {data?.country?.name}</h4>
+          <h2 className='fw-bold text-blue mb-3'>Study In {data?.country?.name}</h2>
           <div className="row pt-3 pb-2">
             <div className="col-md-6 col-lg-7 col-xl-7 text-black order-2 order-md-1">
               <div dangerouslySetInnerHTML={{ __html: data?.info }} />

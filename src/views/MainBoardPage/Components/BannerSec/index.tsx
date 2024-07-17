@@ -81,7 +81,7 @@ const BannerSec = () => {
                     <div className="container h-100">
                         <div className="d-flex justify-content-center h-100">
                             <div className="align-content-center h-100">
-                                <h1 className='fw-bold text-white'>Searching for Boards in India
+                                <h1 className='fw-bold text-white mb-4'>Searching for Boards in India
                                 </h1>
                                 <div className="row">
                                     <div className="col-md-12 mb-3 mx-auto">
@@ -141,7 +141,7 @@ const BannerSec = () => {
                                 <div className='text-center'>
                                     <GlobalEnquiryForm
                                         buttonText="Get Board Details"
-                                        className="btn boardBtn"
+                                        className="btn btn-success"
                                     />
                                     {/* <button className='btn boardBtn'>Get Board Details</button> */}
                                 </div>
