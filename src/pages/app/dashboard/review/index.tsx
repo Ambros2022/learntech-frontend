@@ -1,6 +1,7 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
 // ** MUI Imports
+import CardHeader from '@mui/material/CardHeader'
 
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -23,6 +24,9 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
+import CustomTextField from 'src/@core/components/mui/text-field'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
 
 let cancelToken: any;
 
@@ -154,7 +158,8 @@ type DataGridRowType = {
 
 const SecondPage = () => {
   // ** States
-
+  const [colleges, setColleges] = useState([])
+  const [college_id, setCollege_id] = useState('')
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogData, setDialogData] = useState<DataGridRowType | null>(null);
   const [reloadpage, setReloadpage] = useState("0");
@@ -169,6 +174,8 @@ const SecondPage = () => {
   const [columnname, setColumnname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
+  const isMountedRef = useIsMountedRef();
+
 
   params['page'] = 1;
   params['size'] = 10000;
@@ -195,7 +202,7 @@ const SecondPage = () => {
       flex: 0.125,
       minWidth: 100,
       field: 'reviewuser.name',
-      headerName: 'User Name',
+      headerName: 'Name',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
@@ -206,21 +213,21 @@ const SecondPage = () => {
         )
       }
     },
-    {
-      flex: 0.125,
-      minWidth: 100,
-      field: 'name',
-      headerName: 'Name',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
+    // {
+    //   flex: 0.125,
+    //   minWidth: 100,
+    //   field: 'name',
+    //   headerName: 'Name',
+    //   renderCell: (params: GridRenderCellParams) => {
+    //     const { row } = params
 
-        return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.name}
-          </Typography>
-        )
-      }
-    },
+    //     return (
+    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+    //         {row.name}
+    //       </Typography>
+    //     )
+    //   }
+    // },
 
 
     {
@@ -234,6 +241,21 @@ const SecondPage = () => {
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {row.review_type}
+          </Typography>
+        )
+      }
+    },
+    {
+      flex: 0.125,
+      minWidth: 100,
+      field: 'userrating',
+      headerName: 'Rating',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.userrating}
           </Typography>
         )
       }
@@ -388,7 +410,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string , ) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -405,6 +427,7 @@ const SecondPage = () => {
             size,
             searchtext,
             searchfrom,
+            
 
           },
         })
@@ -443,7 +466,7 @@ const SecondPage = () => {
       setOrderby(newModel[0].sort)
       setColumnname(newModel[0].field)
     } else {
-      setOrderby('asc')
+      setOrderby('desc')
       setColumnname('name')
     }
   }
@@ -451,6 +474,28 @@ const SecondPage = () => {
   const handleSearch = (value: string) => {
     setSearchtext(value)
   }
+
+
+  //get all countries
+  const getcolleges = useCallback(async () => {
+    try {
+        const roleparams: any = {};
+        roleparams['page'] = 1;
+        roleparams['size'] = 10000;
+        const response = await axios1.get('api/admin/college/get', { params: roleparams });
+
+        setColleges(response.data.data);
+
+    } catch (err) {
+        console.error(err);
+    }
+}, [isMountedRef]);
+
+useEffect(() => {
+
+  getcolleges();
+
+}, [getcolleges]);
 
 
   return (
@@ -509,6 +554,54 @@ const SecondPage = () => {
     <Grid container spacing={6}>
       <Grid item xs={12}>
         <Card>
+
+        <CardHeader title="Search Filters" />
+        <CardContent>
+                  <Grid container spacing={6}>
+                    <Grid item sm={4} xs={12}>
+                      <CustomTextField
+                        select
+                        fullWidth
+                        defaultValue="Select College"
+                        value={college_id}
+                        onChange={(e: any) => {
+                          // setCountry_id(e.target.value);
+                          // console.log(setschoolId, "setschoolId");
+                          
+                        }}
+                        SelectProps={{
+                          displayEmpty: true,
+                        }}
+                      >
+                        <MenuItem value=''>Select Country</MenuItem>
+                        {colleges && colleges.map((val: any) => (
+                          <MenuItem value={val.id}>{val.name}</MenuItem>
+                        ))}
+                        {colleges.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                      </CustomTextField>
+                    </Grid>
+                    <Grid item sm={4} xs={12}>
+                      <Button sx={{ mt: 0 }} variant="contained" color='error'
+                        onClick={(e: any) => {
+                          // setClassId('');
+                          // setCountry_id('');
+                          // setStatus('');
+                        }}
+                        startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+
+
+                <Divider sx={{ m: '0 !important' }} />
+
+
+
+
+
+
+
+
           <DataGrid
             autoHeight
             pagination

@@ -25,7 +25,8 @@ const ReviewSec = ({ data }) => {
     const [userId, setUserId] = useState<string>(''); // Assuming user_id is a string
     const [likedReviews, setLikedReviews] = useState<number[]>([]);
     const [dislikedReviews, setDisLikedReviews] = useState<number[]>([]);
-
+    const [visibleCards, setVisibleCards] = useState(3);
+    const [showAllComments, setShowAllComments] = useState(false);
 
     //reviewrating
     useEffect(() => {
@@ -58,6 +59,7 @@ const ReviewSec = ({ data }) => {
                 if (response.data && response.data.data && response.data.data.length > 0) {
                     const firstReview = response.data.data[0]; // Assuming you want the user_id from the first review
                     setUserId(firstReview.user_id);
+
                 } else {
                     console.error('Empty or invalid response data');
                 }
@@ -76,7 +78,7 @@ const ReviewSec = ({ data }) => {
                 const response = await axios.get('api/website/findonereview/get', {
                     params: {
                         college_id: data.id,
-                        page: 1,
+                        page: 2,
                         size: 8,
                     }
                 });
@@ -88,23 +90,6 @@ const ReviewSec = ({ data }) => {
         getFindReviewData();
     }, [data.id]);
 
-    // const handleLikeClick = async (reviewId: number) => {
-    //     try {
-    //         const response = await axios.post('/api/website/review/likesupdate', {
-    //             id: reviewId,
-    //             likes: 'like',
-    //         });
-    //         const updatedCardData = cardData.map(review => {
-    //             if (review.id === reviewId) {
-    //                 return { ...review, likes: response.data.likes };
-    //             }
-    //             return review;
-    //         });
-    //         setCardData(updatedCardData);
-    //     } catch (error) {
-    //         console.error('Failed to update likes:', error);
-    //     }
-    // };
 
     const handleLikeClick = async (reviewId: number) => {
         try {
@@ -124,7 +109,7 @@ const ReviewSec = ({ data }) => {
                     ? prevLikedReviews.filter(id => id !== reviewId)
                     : [...prevLikedReviews, reviewId]
             );
-            
+
         } catch (error) {
             console.error('Failed to update likes:', error);
         }
@@ -221,6 +206,16 @@ const ReviewSec = ({ data }) => {
         setShowReplyForm(false);
     };
 
+    const handleLoadMore = () => {
+        setVisibleCards(visibleCards + 3); 
+    };
+
+    // Function to handle "View All" button click
+    const handleViewAllClick = () => {
+        setShowAllComments(!showAllComments);
+    };
+
+
     return (
         <>
             <section className='bg-white py-5'>
@@ -242,7 +237,7 @@ const ReviewSec = ({ data }) => {
                                     <div className="progress">
                                         <div
                                             className="progress-bars"
-                                            style={{ width: `${(rating.count / totalReviews) * 40}%` }}
+                                            style={{ width: `${(rating.count / totalReviews) * 75}%` }}
                                         >
                                             {rating.count}
                                         </div>
@@ -258,8 +253,8 @@ const ReviewSec = ({ data }) => {
                         </div>
                     </div>
 
-                    <div className="row col-md-12 col-10  mx-md-0 mx-auto py-5">
-                        {cardData.map((review) => (
+                    <div className="row col-md-12 col-10  mx-md-0 mx-auto pt-5">
+                        {cardData.slice(0, visibleCards).map((review) => (
                             <div key={review.id} className="card p-3 mb-5 bg-skyBlue">
                                 <div className="row">
                                     <div className="col-md-2 text-center">
@@ -315,9 +310,11 @@ const ReviewSec = ({ data }) => {
 
 
                                     {/* <button className='btn text-blue' onClick={() => handleDisLikeClick(review.id)}><i className="bi bi-hand-thumbs-down"></i> {review.dislikes}</button> */}
-                                    <button className='btn text-blue'><i className="bi bi-flag"></i> Report</button>
+                                    <button className='btn text-blue' style={{ cursor: 'default' }}><i className="bi bi-flag"></i> Report</button>
                                     <button className='btn text-blue' onClick={() => toggleReplyForm(review.id)}><i className="bi bi-reply"></i> Reply</button>
+
                                 </div>
+
                                 {showReplyForm && selectedReviewId === review.id && (
                                     <div className="d-flex align-items-start">
                                         <form onSubmit={handleReplySubmit} className="d-flex align-items-center col-md-8 col-12">
@@ -331,10 +328,45 @@ const ReviewSec = ({ data }) => {
                                             <button type="submit" className="btn btn-primary ms-2">Submit</button>
                                         </form>
                                     </div>
+
                                 )}
+
+                                {/* Display Review Replies */}
+                                {review.reviewreply && review.reviewreply.length > 0 && (
+                                    <div className="review-replies">
+                                        {/* Show limited replies initially */}
+                                        <h6 className='fw-bold text-black '>Replies:</h6>
+                                        {review.reviewreply.slice(0, showAllComments ? undefined : 2).map(reply => (
+                                            <div className="reply" key={reply.id}>
+                                               
+                                                <p>{reply.content}</p>
+                                            </div>
+                                        ))}
+                                        {/* "View All Replies" Button */}
+                                        {review.reviewreply.length > 2 && (
+                                            <div className="text-start mt-2">
+                                                <button className="btn viewMoreCollegeBtn" onClick={handleViewAllClick}>
+                                                    {showAllComments ? 'Show Less ' : `View All (${review.reviewreply.length})`}
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
 
                             </div>
                         ))}
+
+
+
+
+                    </div>
+                    <div className="text-center">
+                        {cardData.length>visibleCards?( // Show load more button only if there are more reviews to load
+                            <button className="btn viewMoreCollegeBtn" onClick={handleLoadMore}>
+                                Load More
+                            </button>
+                        ):''}
                     </div>
 
                 </div>
