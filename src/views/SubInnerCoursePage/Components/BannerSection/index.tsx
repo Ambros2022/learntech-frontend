@@ -5,6 +5,7 @@ const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/Globa
 
 
 function BannerSection({ data }) {
+
   return (
     <>
       <section className="bg-blue dentalCourseCon py-5">
@@ -26,7 +27,13 @@ function BannerSection({ data }) {
       </section>
       <section className='py-3 bg-white'>
         <div className='container linkFontSize'>
-          <p><Link href={'/'} className="text-black">Home <i className='bi bi-chevron-right'></i></Link><Link href={'/courses'} className="text-black"> Courses  <i className='bi bi-chevron-right'></i></Link> <Link href={'courses/innerCourse'} className="text-black">{data.streams.name}  <i className='bi bi-chevron-right'></i></Link><span className="text-blue"> {data.slug}</span></p>
+          <p><Link href={'/'} className="text-black">Home <i className='bi bi-chevron-right'></i></Link>
+
+          <Link href={'/courses'} className="text-black"> Courses  <i className='bi bi-chevron-right'></i></Link>
+
+          <Link href={`/course/${data?.streams?.id}/${data?.streams?.slug}`} className="text-black">{data.streams.name}  <i className='bi bi-chevron-right'></i></Link>
+
+          <span className="text-blue"> {data.slug}</span></p>
         </div>
       </section>
     </>
