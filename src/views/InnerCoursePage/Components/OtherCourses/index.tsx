@@ -22,7 +22,7 @@ function OtherCourses({ streamdata }) {
   function CardComponent({ title, imageSrc }) {
     return (
       <div className='courseConCarousel'>
-        <div className="card text-center d-flex mx-2">
+        <div className="card hover-card text-center d-flex mx-2">
           <div className="row flex-fill">
             <div className="col-12">
               <Image width={50} height={50} src={imageSrc} className="p-2 img-fluid mx-auto mt-3" alt={`${title}-logo`} />

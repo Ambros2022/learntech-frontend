@@ -1531,11 +1531,11 @@
     height: 300px !important;
   }
 
-  /* .collegeBannerCon>.position-relative img {
+  .collegeBannerCon>.position-relative img {
     object-fit: cover !important;
     width: 100% !important;
     height: 300px !important;
-  } */
+  }
 
   /* College Filter Section */
   .bg-skyBlue {
@@ -2550,6 +2550,12 @@
   .clgInfoSec table td {
     border: 1px solid black !important;
   }
+  .tab-pane{
+    overflow-x: scroll !important;
+  }
+  table{
+    overflow-x: scroll !important;
+  }
 
   table td {
     padding: 10px !important;
@@ -3482,10 +3488,12 @@
 
   .categorySecCarousel .fi-left {
     margin-left: -60px !important;
+    z-index: 40 !important;
   }
 
   .categorySecCarousel .fi-right {
     margin-right: 20px !important;
+    z-index: 40 !important;
   }
 
   .categorySecCarousel .fi-left svg {
@@ -3662,12 +3670,17 @@
       width: 100% !important;
     }
 
+    .categoryTextHide{
+      text-overflow: ellipsis !important;
+      width: 60% !important;
+    }
+
     .categorySecCarousel .fi-left {
-      margin-left: 60px !important;
+      margin-left: 30px !important;
     }
 
     .categorySecCarousel .fi-right {
-      margin-right: 65px !important;
+      margin-right: 30px !important;
     }
 
     .OverviewCarousel .fi-left {
@@ -4627,11 +4640,12 @@
   .countryCarouselFilter .carousel-button-group {
     position: absolute !important;
     top: 45px !important;
-    width: 100%;
+    width: 100% !important;
   }
 
   .countryCarouselFilter .fi-left {
     margin-left: -30px !important;
+    z-index: 40 !important;
   }
 
   .countryCarouselFilter .fi-left svg {
@@ -4640,6 +4654,7 @@
 
   .countryCarouselFilter .fi-right {
     margin-right: -30px !important;
+    z-index: 40 !important;
   }
 
   .countryCarouselFilter .fi-right svg {

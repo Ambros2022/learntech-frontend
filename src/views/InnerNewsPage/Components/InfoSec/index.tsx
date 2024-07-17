@@ -116,7 +116,7 @@ const InfoSec = ({ data }) => {
                 </div>
                 <div className='pt-3'>
                     <div className="row">
-                        <div className="col-md-8 text-black">
+                        <div className="col-md-8 text-black overflow-x-scroll">
                             <p>
                                 <div dangerouslySetInnerHTML={{ __html: data.overview }} />
                             </p>
