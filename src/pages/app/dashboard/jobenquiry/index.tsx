@@ -354,22 +354,22 @@ const SecondPage = () => {
 
 
  
-  const AddButtonToolbar = () => {
+  // const AddButtonToolbar = () => {
 
-    return (
-      <>
-        <Link href={'./jobenquiry/add'}>
-          <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
-            <Icon icon='tabler:plus' />
-            Add
-          </Fab>
-        </Link>
+  //   return (
+  //     <>
+  //       <Link href={'./jobenquiry/add'}>
+  //         <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
+  //           <Icon icon='tabler:plus' />
+  //           Add
+  //         </Fab>
+  //       </Link>
 
-      </>
-    );
-  };
+  //     </>
+  //   );
+  // };
 
-  const AddButtonComponent = <AddButtonToolbar />;
+  // const AddButtonComponent = <AddButtonToolbar />;
 
   return (
     <Grid container spacing={6}>
@@ -402,7 +402,7 @@ const SecondPage = () => {
                 value: searchtext,
                 clearSearch: () => handleSearch(''),
                 onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value),
-                CustomToolbar: AddButtonComponent
+                // CustomToolbar: AddButtonComponent
               },
             }}
           />

@@ -254,12 +254,12 @@ const navigation = (): VerticalNavItemsType => {
           auth: false
         },
 
-        {
-          title: 'Job Location',
-          path: '/app/dashboard/joblocation ',
-          // icon: 'tabler:notes',
-          auth: false
-        },
+        // {
+        //   title: 'Job Location',
+        //   path: '/app/dashboard/joblocation ',
+        //   // icon: 'tabler:notes',
+        //   auth: false
+        // },
 
         {
           title: 'Job Enquiry',

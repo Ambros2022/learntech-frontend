@@ -5302,4 +5302,21 @@
     display: inline-block !important;
   }
 
+  .color-joenquiry .form-control {
+    color: black !important;
+  }
+
+  .careerContact select {
+    padding: 10px 20px !important;
+  }
+
+  .careerContact select option {
+    color: black !important;
+  }
+
+
+  .Jobenquiryphoneinput input{
+    padding: 22px 44px !important;
+
+  }
   

@@ -20,7 +20,7 @@ const SideContactUsForm: FC<Props> = ({ page,...rest }) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+        contact: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
         location: Yup.string().required('Location is required').trim(),
         course: Yup.string().required('Course is required').trim(),
         message: Yup.string().trim(),
@@ -33,9 +33,10 @@ const SideContactUsForm: FC<Props> = ({ page,...rest }) => {
             const formData = new FormData();
             formData.append('name', values.name);
             formData.append('email', values.email);
-            formData.append('contact_number', values.contact_number);
+            formData.append('contact_number', values.contact);
             formData.append('location', values.location);
             formData.append('course_in_mind', values.course);
+            formData.append('college_name', values.college);
             formData.append('current_url', window.location.href);
             formData.append('message', values.message);
             const response = await axios.post('api/website/enquiry', formData);
@@ -61,7 +62,7 @@ const SideContactUsForm: FC<Props> = ({ page,...rest }) => {
         initialValues={{
             name: '',
             email: '',
-            contact_number: '',
+            contact: '',
             message: '',
             course: '',
             location: '',
@@ -76,8 +77,8 @@ const SideContactUsForm: FC<Props> = ({ page,...rest }) => {
                 <ErrorMessage name="name" component="div" className="error text-danger" />
             </div>
             <div className="mb-3">
-                <PhoneInputField  name="contact_number"  />
-                <ErrorMessage name="contact_number" component="div" className="error text-danger" />
+                <PhoneInputField  name="contact"  />
+                <ErrorMessage name="contact" component="div" className="error text-danger" />
             </div>
             <div className="mb-3">
                 <Field type="email" name="email" placeholder="Email ID*" className="form-control" />
