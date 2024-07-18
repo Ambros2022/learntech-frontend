@@ -9,6 +9,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Script from 'next/script'
 
 
 function InnerCollegePage({ id }) {
@@ -49,14 +50,21 @@ function InnerCollegePage({ id }) {
     }
   }, [id, isMountedRef]);
 
-
+  const formattedData = pagedata && pagedata.collegefaqs && pagedata.collegefaqs.map((item) => ({
+    "@type": "Question",
+    "name": item.questions,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answers,
+    },
+  }));
 
 
   useEffect(() => {
     getPagedata();
     getColleges();
-   
-  }, [getPagedata ]);
+
+  }, [getPagedata]);
   return (
     <>
       <Head>
@@ -64,9 +72,34 @@ function InnerCollegePage({ id }) {
         <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": formattedData,
+            }
+          )}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(
+            {
+              "@context": "https://schema.org/",
+              "@type": "CollegeOrUniversity",
+              "name": `${pagedata?.meta_title}`,
+              "logo": `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
+              "url": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": `${pagedata?.address}`
+              }
+
+            }
+          )}
+        </script>
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection data={pagedata}  />}
+      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}
 

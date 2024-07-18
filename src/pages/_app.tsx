@@ -143,6 +143,46 @@ const App = (props: ExtendedAppProps) => {
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+          <script type="application/ld+json">
+            {JSON.stringify(
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "Learntech",
+                "legalName": "Learntech Edu Solution Pvt.",
+                "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
+                "logo": `${process.env.NEXT_PUBLIC_WEB_URL}/images/icons/learntech-logo.png`,
+                "foundingDate": "2009",
+                "founders": [
+                  {
+                    "@type": "Person",
+                    "name": "Mansoor Ali"
+                  }
+                ],
+                "address": [
+                  {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Bangalore",
+                    "addressRegion": "IND",
+                    "postalCode": "560069",
+                    "streetAddress": "#3/75, 'D' Main, East End,Jayanagar 9th Block, Bangalore, India"
+                  }
+                ],
+                "contactPoint": {
+                  "@type": "ContactPoint",
+                  "contactType": "customer support",
+                  "telephone": "[+91-9036020016]",
+                  "email": "info@bangalorestudy.com"
+                },
+                "sameAs": [
+                  "https://www.facebook.com/bangalorestudy/",
+                  "https://twitter.com/BangaloreStudy2",
+                  "https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w",
+                  "https://www.instagram.com/bangalorestudy/",
+                ]
+              }
+            )}
+          </script>
 
         </Head>
         <AuthProvider>
