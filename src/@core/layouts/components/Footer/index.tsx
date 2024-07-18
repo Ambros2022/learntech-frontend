@@ -44,7 +44,10 @@ const Footer = () => {
           </div>
           <div className="row">
             <div className="col-md-4 text-white">
-              <p className='w-50'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p className='' style={{fontWeight:'300', fontSize:'14px'}}>Dream. Apply. Achieve.
+                Our Expert Admission Guidance
+                is the Bridge that Connects You
+                to a Brighter Future.</p>
               <span className="footerIcon">
                 <div className="mb-3">
                   <Image className="d-inline-block" src="/images/icons/Phone Icon.svg" width={25} height={24} alt="phone-icon" />
