@@ -2550,9 +2550,7 @@
   .clgInfoSec table td {
     border: 1px solid black !important;
   }
-  .tab-pane{
-    overflow-x: scroll !important;
-  }
+  
   table{
     overflow-x: scroll !important;
   }
