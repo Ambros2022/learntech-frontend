@@ -50,13 +50,14 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
             containerClass='carousel-containerCategory mx-auto'
         >
             {items.map((item) => (
-                <div className="examSecItems d-flex justify-content-center text-center mx-2 mb-3" >
+                <div className="examSecItems d-flex justify-content-center text-center mx-2 mb-3">
                     <button
-                        className={`text-truncate btn nav-link ${activeTab === item.id ? 'active' : ''}`}
+                        className={`text-truncate categoryTextHide btn nav-link ${activeTab === item.id ? 'active' : ''}`}
                         id={`pills-${item}-tab`}
                         type="button"
                         onClick={() => handleTabClick(item.id)}
                         key={item.id}
+                        style={{ zIndex: '20'}}
                     >
                         {item.title}
                     </button>

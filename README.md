@@ -12,3 +12,4 @@ npm i jodit-pro-react
 npm install chart.js react-chartjs-2
 npm i next-share
 npm i react-web-share
+npm i sharp

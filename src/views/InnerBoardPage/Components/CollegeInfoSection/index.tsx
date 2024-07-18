@@ -119,7 +119,7 @@ function CollegeInfoSection({ data, exams }) {
             <div className="col-xl-4 col-lg-4 col-md-5 col-10 mx-auto py-5">
               <ContactForm heading={'Contact US'} />
               <div className="col-12 cardConBrdr p-3 overflow-y-scroll bg-skyBlue my-3" style={{ height: '460px' }}>
-                <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Upcoming Exams</h5>
+                <h4 className='fw-bold text-blue pt-3 mb-3 text-center'>Upcoming Exams</h4>
                 {exams.map((exam, index) => (
                   <Link href={`/exam/${exam.id}/${exam.slug}`}>
                     <div key={index} className="card bg-skyBlue hover-card p-2 d-flex mb-3">

@@ -6,7 +6,7 @@ const BestSec = ({ data = {} }: { data?: { meta_title?: string, meta_description
         <>
             <section className='bg-white pt-2 pb-5'>
                 <div className="container">
-                    <h2 className='text-center fw-bold text-blue'>Best Education Boards in India</h2>
+                    <h2 className='text-md-start text-center fw-bold text-blue'>Best Education Boards in India</h2>
                     <div className="row py-2">
                         <div className="col-lg-8 col-md-7">
                             <p className='text-black'>

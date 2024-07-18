@@ -73,7 +73,7 @@ const ExpertSec = ({ data }) => {
         <>
             <section className='bg-skyBlue py-3'>
                 <div className="container">
-                    <div className="d-flex gap-3 flex-wrap mb-3">
+                    <div className="d-flex justify-content-md-start justify-content-center gap-3 flex-wrap mb-3">
                         <LinkedinShareButton url={location}>
                             <button className='btn  btn-primary'><i className="bi me-2 bi-linkedin"></i>Share</button>
                         </LinkedinShareButton>
@@ -123,9 +123,9 @@ const ExpertSec = ({ data }) => {
 
 
 
-                    <h2 className='fw-bold text-blue pt-3'>Leave a Comment</h2>
+                    <h2 className='fw-bold text-md-start text-center text-blue pt-3'>Leave a Comment</h2>
                     <div className="row py-3">
-                        <div className="col-10 me-auto">
+                        <div className="col-10 me-md-auto mx-auto">
                             <Formik
                                 initialValues={{
                                     name: '',

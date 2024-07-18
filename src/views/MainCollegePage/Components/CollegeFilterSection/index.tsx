@@ -35,41 +35,42 @@ interface College {
 
 const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
     return (
-        <div className='col-md-12 mb-3 '>
+        <div className='col-md-10 col-lg-12 col-10 mx-auto mb-3 '>
             <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
                 <div className="p-2">
                     <div className="row d-flex">
-                        <div className="col-md-3 col-xl-3 clgCardImg">
-                            <Image width={180} height={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
+                        <div className="align-content-start col-md-12 col-lg-4 col-xl-3 clgCardImg">
+                            <Image width={500} height={500} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid rounded card-Image-top me-auto" alt="College Logo" style={{ objectFit: 'cover' }} />
                         </div>
-                        <div className="col-md-9 col-xl-9">
+                        <div className="col-md-12 col-lg-8 col-xl-9">
                             <div className="row pt-3">
-                                <div className="col-md-7 col-xl-7">
+                                <div className="col-md-12 col-lg-12 col-xl-6">
                                     <div className="card-title">
-                                        <h4 className='fw-bold text-black mb-3'>{name}</h4>
+                                        <h5 className='fw-bold text-black mb-3'>{name}</h5>
                                     </div>
                                     <div className="card-text text-black">
                                         <p className="mb-3 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
-                                        <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
+                                        <p className="mb-3"><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></p>
                                     </div>
                                 </div>
-                                <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
+                                <div className="col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
                                     {rating && (
-                                        <button className='btn ratingBtn d-flex justify-content-center'>
-                                            <Image
-                                                src='/images/icons/star-24.png'
-                                                width={20}
-                                                height={20}
-                                                alt='star-icon'
-                                            />
-                                            <span className='align-content-center'>{rating}</span>
-                                        </button>
+                                        <div className="d-flex gap-2 justify-content-start justify-content-md-start">
+
+                                            <i className={`bi bi-star-fill ${rating >= 1 ? "text-warning" : "text-gray"} `}></i>
+                                            <i className={`bi bi-star-fill ${rating >= 2 ? "text-warning" : "text-gray"} `}></i>
+                                            <i className={`bi bi-star-fill ${rating >= 3 ? "text-warning" : "text-gray"} `}></i>
+                                            <i className={`bi bi-star-fill ${rating >= 4 ? "text-warning" : "text-gray"} `}></i>
+                                            <i className={`bi bi-star-fill ${rating >= 5 ? "text-warning" : "text-gray"} `}></i>
+
+                                            {/* <h6 className='mb-0 text-white align-self-center'>{rating}/5 Review</h6> */}
+                                        </div>
                                     )}
                                 </div>
-                                <div className="col-md-3 col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid d-md-block d-flex flex-column justify-content-center gap-3">
-                                    <GlobalEnquiryForm className="activeBtn mb-3 btn d-flex justify-content-center" />
+                                <div className="mt-md-3 mt-lg-0 col-md-10 col-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column gap-3 mb-3">
+                                    <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
 
-                                    <Link href={`/college/${id}/${slug}`} className="mb-3 viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
+                                    <Link href={`/college/${id}/${slug}`} className=" viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
                                 </div>
                             </div>
 
@@ -94,6 +95,7 @@ function CollegeFilterSection() {
     // let state_id = 92;
     // console.log(state_id, "state_id");
     const [colleges, setColleges] = useState<College[]>([]);
+    const [total, setTotal] = useState<string>("0");
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
     const [visibleCards, setVisibleCards] = useState(6);
@@ -176,7 +178,7 @@ function CollegeFilterSection() {
             const response = await axios1.get('api/website/generalcourse/get');
             if (response.data.status === 1) {
                 const courseData = response.data.data.map((course: any) => ({
-                    label: course.name,
+                    label: course.short_name,
                     value: course.id.toString()
                 }));
                 setCourses(courseData);
@@ -226,6 +228,7 @@ function CollegeFilterSection() {
             if (courseType && courseType.length > 0) params['course_type'] = JSON.stringify(courseType);
             const response = await axios1.get('api/website/colleges/get', { params });
             setColleges(response.data.data);
+            setTotal(response.data.totalItems);
         } catch (err) {
             console.error(err);
         }
@@ -269,7 +272,7 @@ function CollegeFilterSection() {
                 { label: 'PG', value: 'PG' },
                 { label: 'Diploma', value: 'Diploma' },
                 { label: 'Doctorate', value: 'Doctorate' },
-                { label: 'Default', value: 'Default' },
+                // { label: 'Default', value: 'Default' },
             ],
         },
     ];
@@ -471,8 +474,6 @@ function CollegeFilterSection() {
             </div>
         );
     }
-
-
 
 
     const toggleAccordion = (groupId: string) => {
@@ -697,10 +698,11 @@ function CollegeFilterSection() {
             <div className='bg-white py-3'>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 mb-3 mb-lg-0 bg-skyBlue">
+                        <div className="col-lg-3 col-xl-3 col-md-4 mb-3 mb-lg-0 bg-skyBlue">
+                            <h5 className='text-blue fw-bold text-md-start text-center px-3 pt-3'>Found {total} Colleges</h5>
                             <MultiSelectOptions options={options} />
                         </div>
-                        <div className="col-lg-9">
+                        <div className="col-lg-9 col-xl-9 col-md-8">
                             <SelectedFilters selectedCheckboxes={selectedCheckboxes} />
                             <CollegeList selectedCheckboxes={selectedCheckboxes} />
                             {filteredColleges.length > visibleCards && (

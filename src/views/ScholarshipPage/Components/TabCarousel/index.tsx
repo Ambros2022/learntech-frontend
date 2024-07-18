@@ -70,6 +70,7 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
                     role='tab'
                     aria-controls={tab.id}
                     aria-selected={activeTab === tab}
+                    style={{zIndex:'10'}}
                 >
                     {tab.name}
                 </button>

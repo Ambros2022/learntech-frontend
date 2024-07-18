@@ -702,22 +702,50 @@
     position: relative !important;
   }
 
+
+
   .newsLinkSec .carousel-button-group {
     margin: -50px 0px 0px 0px !important;
+  }
+
+  .carouselInnerCourse .carousel-button-group {
+    position: absolute !important;
+    top: 0px !important;
+    width: 100%;
+    z-index: -1 !important;
+  }
+
+  .carouselInnerCourse .fi-left {
+    margin-left: -30px !important;
+    /* z-index: 1 !important; */
+  }
+
+  .carouselInnerCourse .fi-right {
+    margin-right: -30px !important;
+    /* z-index: 1 !important; */
   }
 
   .FeaturedClgCon .carousel-button-group {
     position: absolute !important;
     top: 260px !important;
     width: 100%;
+
   }
 
   .FeaturedClgCon .fi-left {
     margin-left: -25px !important;
+    cursor: pointer !important;
+  }
+
+  .text-truncate1 {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 
   .FeaturedClgCon .fi-right {
     margin-right: -10px !important;
+    cursor: pointer !important;
   }
 
   .newsLinkSec .fi-left {
@@ -887,12 +915,25 @@
     .searchForm h5 {
       font-size: 19px !important;
     }
+    .carouselInnerCourse .carousel-button-group {
+      position: absolute !important;
+      top: 5px !important;
+      width: 100%;
+      z-index: -1 !important;
+    }
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
     /* .innerTextAddress {
      
     } */
+
+    .carouselInnerCourse .carousel-button-group {
+      position: absolute !important;
+      top: 5px !important;
+      width: 100%;
+      z-index: -1 !important;
+    }
 
     .collapseNavHeight {
       height: 280px !important;
@@ -1056,6 +1097,18 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .carouselInnerCourse .carousel-button-group {
+      top: 8px !important;
+    }
+
+    .carouselInnerCourse .fi-left {
+      margin-left: 20px !important;
+    }
+
+    .carouselInnerCourse .fi-right {
+      margin-right: 20px !important;
+    }
+
     /* .innerTextAddress {
       display: -webkit-box !important;
       -webkit-line-clamp: 2 !important;
@@ -1478,11 +1531,11 @@
     height: 300px !important;
   }
 
-  /* .collegeBannerCon>.position-relative img {
+  .collegeBannerCon>.position-relative img {
     object-fit: cover !important;
     width: 100% !important;
     height: 300px !important;
-  } */
+  }
 
   /* College Filter Section */
   .bg-skyBlue {
@@ -1505,7 +1558,7 @@
   }
 
   .searchCheckBox {
-    font-size: 16px !important;
+    font-size: 15px !important;
   }
 
   .collegeSearchFilter {
@@ -1815,7 +1868,7 @@
   }
 
   .freeBtn {
-    border: 1px solid white !important;
+    background-color: rgb(5, 153, 5) !important;
     color: white !important;
     width: 200px !important;
     height: 50px !important;
@@ -1827,9 +1880,10 @@
   }
 
   .freeBtn:hover {
-    border: 1px solid white !important;
+    background-color: rgb(5, 153, 5) !important;
     color: white !important;
-    box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 15px;
+    border: 1px solid white !important;
+    /* box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 15px; */
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
@@ -1924,7 +1978,7 @@
 
   .applyNowImg img {
     width: 100%;
-    height: 100%;
+    height: 250px;
   }
 
   .applyNowImgbtn {
@@ -2496,6 +2550,20 @@
   .clgInfoSec table td {
     border: 1px solid black !important;
   }
+  .tab-pane{
+    overflow-x: scroll !important;
+  }
+  table{
+    overflow-x: scroll !important;
+  }
+
+  table td {
+    padding: 10px !important;
+  }
+
+  table td .applyNowButton {
+    margin: 15px 0px 0px 0px !important;
+  }
 
   .innerNewsSec table {
     width: 100% !important;
@@ -3056,6 +3124,10 @@
     height: 100%;
   }
 
+  .topNewsImg>img{
+    width: 100% !important;
+    height: 120px !important;
+  }
   .disclaimerCon>img {
     height: 300px !important;
     width: 100% !important;
@@ -3065,6 +3137,11 @@
 
 
   @media (min-width: 992px) and (max-width: 1024px) {
+    .clgCardImg img {
+      width: 100%;
+      height: auto !important;
+    }
+
     .newsLinkSec .fi-left {
       margin-left: -40px !important;
     }
@@ -3192,7 +3269,7 @@
     }
 
     .clgCardImg .card-Image-top {
-      height: 200px !important;
+      height: 120px !important;
       object-fit: cover !important;
     }
 
@@ -3337,7 +3414,8 @@
 
   .newsPageImg img {
     width: 100%;
-    height: 100%;
+    height: 200px;
+    overflow: hidden;
   }
 
   .innerExamImg>img {
@@ -3410,10 +3488,12 @@
 
   .categorySecCarousel .fi-left {
     margin-left: -60px !important;
+    z-index: 40 !important;
   }
 
   .categorySecCarousel .fi-right {
     margin-right: 20px !important;
+    z-index: 40 !important;
   }
 
   .categorySecCarousel .fi-left svg {
@@ -3480,6 +3560,14 @@
       object-fit: contain !important;
     }
 
+
+    .newsPageImg img {
+      width: 100%;
+      height: 150px;
+      overflow: hidden;
+    }
+
+
     .StudyAbroadCard .card-img-top {
       height: 166px !important;
       object-fit: contain !important;
@@ -3503,6 +3591,13 @@
   }
 
   @media (min-width:768px) and (max-width:991px) {
+
+    .newsPageImg img {
+      width: 100%;
+      height: 150px;
+      overflow: hidden;
+    }
+
     .FeaturedClgCon .card-Image-top {
       /* height: 166px !important; */
       object-fit: contain !important;
@@ -3543,6 +3638,12 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .newsPageImg img {
+      width: 100%;
+      height: 150px;
+      overflow: hidden;
+    }
+
     .boardSec h1 {
       font-size: 20px;
     }
@@ -3569,12 +3670,17 @@
       width: 100% !important;
     }
 
+    .categoryTextHide{
+      text-overflow: ellipsis !important;
+      width: 60% !important;
+    }
+
     .categorySecCarousel .fi-left {
-      margin-left: 60px !important;
+      margin-left: 30px !important;
     }
 
     .categorySecCarousel .fi-right {
-      margin-right: 65px !important;
+      margin-right: 30px !important;
     }
 
     .OverviewCarousel .fi-left {
@@ -3793,8 +3899,7 @@
   .newsTabsClr button {
     border: 1px solid rgba(212, 218, 234, 1) !important;
     font-size: 15px !important;
-    max-width: 200px !important;
-    min-width: 200px !important;
+    width: auto !important;
     padding: 15px 12px !important;
     color: #254692 !important;
   }
@@ -4535,11 +4640,12 @@
   .countryCarouselFilter .carousel-button-group {
     position: absolute !important;
     top: 45px !important;
-    width: 100%;
+    width: 100% !important;
   }
 
   .countryCarouselFilter .fi-left {
     margin-left: -30px !important;
+    z-index: 40 !important;
   }
 
   .countryCarouselFilter .fi-left svg {
@@ -4548,6 +4654,7 @@
 
   .countryCarouselFilter .fi-right {
     margin-right: -30px !important;
+    z-index: 40 !important;
   }
 
   .countryCarouselFilter .fi-right svg {
@@ -4723,12 +4830,12 @@
   }
 
   .studentSpeakCardBody {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 5 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    min-height: 70px !important;
+    /* display: -webkit-box !important; */
+    /* -webkit-line-clamp: 5 !important; */
+    /* -webkit-box-orient: vertical !important; */
+    /* overflow: hidden !important; */
+    /* text-overflow: ellipsis !important; */
+    height: 90px !important;
   }
 
   .eduLoanSec {

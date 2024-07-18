@@ -141,7 +141,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                             {renderScholarshipDetails(scholarship)}
                             <Link href={`/scholarship/${scholarship.id}/${scholarship.name}`}
                                 className='mb-3 text-blue fw-bold btn text-start'>Read More {'>>'}</Link>
-                            <div className="d-flex gap-3 flex-fill scholarshipBtn">
+                            <div className="d-flex gap-3 flex-fill scholarshipBtn flex-md-row flex-column">
 
                                 <GlobalEnquiryForm
                                     buttonText="Apply Now"
@@ -267,7 +267,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     </div>
 
                 </div>
-                <div className='position-relative countryCarouselFilter mb-5 pt-5'>
+                <div className='position-relative countryCarouselFilter mb-5 pt-5' style={{zIndex:'2'}}>
                     <TabCarousel activeTab={activeTab} onTabClick={handleTabClick} />
                 </div>
                 <div className="row">

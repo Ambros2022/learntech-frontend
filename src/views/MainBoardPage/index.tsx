@@ -16,17 +16,17 @@ const MainBoardPage = () => {
   const [displayCount, setDisplayCount] = useState(4);
   const [boardItems, setBoardItems] = useState<any[]>([]);
   const [updates, setUpdates] = useState<any[]>([]);
-   
-    const getBoardsData = useCallback(async () => {
-        try {
-            const response = await axios.get('api/website/news/get');
-            if (isMountedRef.current) {
-                setUpdates(response.data.data);
-            }
-        } catch (error) {
-            console.error('Failed to fetch trending schoolboard:', error);
-        }
-    }, [isMountedRef]);
+
+  const getBoardsData = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/news/get?category_id=8');
+      if (isMountedRef.current) {
+        setUpdates(response.data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending schoolboard:', error);
+    }
+  }, [isMountedRef]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -41,22 +41,22 @@ const MainBoardPage = () => {
   }, [isMountedRef]);
 
   useEffect(() => {
-      const fetchBoardData = async () => {
-          try {
-              const response = activeTab === 'all'
-                  ? await axios.get('/api/website/schoolboard/get')
-                  : await axios.get(`/api/website/schoolboard/get?board_type=${activeTab}`);
+    const fetchBoardData = async () => {
+      try {
+        const response = activeTab === 'all'
+          ? await axios.get('/api/website/schoolboard/get')
+          : await axios.get(`/api/website/schoolboard/get?board_type=${activeTab}`);
 
-              const data = Array.isArray(response.data.data) ? response.data.data : [];
-              setBoardItems(data);
+        const data = Array.isArray(response.data.data) ? response.data.data : [];
+        setBoardItems(data);
 
-          } catch (error) {
-              console.error('Error fetching board data:', error);
-              setBoardItems([]); // Ensure boardItems is an array even if the fetch fails
-          }
-      };
+      } catch (error) {
+        console.error('Error fetching board data:', error);
+        setBoardItems([]); // Ensure boardItems is an array even if the fetch fails
+      }
+    };
 
-      fetchBoardData();
+    fetchBoardData();
   }, [activeTab]);
 
 
@@ -76,7 +76,7 @@ const MainBoardPage = () => {
       </Head>
       <BannerSec />
       <BestSec data={pagedata} />
-        <BoardsSec  boardItems={boardItems}  activeTab={activeTab} displayCount={displayCount} setActiveTab={setActiveTab}  setDisplayCount={setDisplayCount} />
+      <BoardsSec boardItems={boardItems} activeTab={activeTab} displayCount={displayCount} setActiveTab={setActiveTab} setDisplayCount={setDisplayCount} />
       <LatestUpdateSec updates={updates} />
     </>
   )

@@ -3,6 +3,16 @@ import Image from 'next/image'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 function BannerSection({ data }) {
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   return (
     <>
       <section className='bg-blue collegeDetailBanner py-1'>
@@ -19,14 +29,14 @@ function BannerSection({ data }) {
                   <h1 className="card-title fw-bold mb-3">{data.name}</h1>
                   <h6 className='mb-3 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{data.address}</h6>
                   <h6 className='mb-3'>
-                    <strong><i className="text-warning bi bi-trophy-fill me-1"></i> Approvals and Recognition :&nbsp;</strong>
-                    { data.boardrecognitions.length > 0 && data.boardrecognitions[0].brdrecognitions.recognition_approval_name}
+                    <><i className="text-warning bi bi-trophy-fill me-1"></i> Approvals and Recognition :&nbsp;</>
+                    {data.boardrecognitions.length > 0 && data.boardrecognitions[0].brdrecognitions.recognition_approval_name}
                   </h6>
-                  <div className='d-flex justify-content-md-start justify-content-center gap-md-5 gap-3 flex-wrap'>
-                    <h6 className='mb-3'><strong>Est Year :&nbsp;</strong>{
+                  <div className='d-flex justify-content-md-start justify-content-center mt-4 gap-md-5 gap-3 flex-wrap'>
+                    <h6 className='mb-3'>Est Year :&nbsp;{
                       data.established
                     }</h6>
-                    <h6 className='mb-3'><strong>Gender Accepted :&nbsp;</strong>{
+                    <h6 className='mb-3'><>Gender Accepted :&nbsp;</>{
                       data.gender
                     }</h6>
                   </div>
@@ -48,7 +58,7 @@ function BannerSection({ data }) {
               </div>}
             </div>
             <div className="d-flex justify-content-md-end justify-content-center flex-md-row flex-column gap-3 ps-md-3 ps-0">
-              <button className='btn btn-danger resultDateBtn'>{data.result_date}</button>
+              <button className='btn btn-danger resultDateBtn'><>Result Date : {formatDate(data.result_date)}</></button>
               <GlobalEnquiryForm className='align-content-center btn freeBtn' buttonText="Enquire Now" />
             </div>
           </div>

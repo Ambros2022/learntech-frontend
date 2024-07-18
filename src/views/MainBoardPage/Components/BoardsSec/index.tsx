@@ -29,10 +29,10 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                         <div className="col-12">
                             <div className="tab-content" id="pills-tabContent">
                                 <div className={`tab-pane fade show active`} id={`pills-${activeTab}`} role="tabpanel" aria-labelledby={`pills-${activeTab}-tab`}>
-                                    <div className="row">
+                                    <div className="row ">
                                         {boardItems.map((item, index) => (
                                             index < displayCount && (
-                                                <div key={item.id} className="col-8 mx-auto col-md-6 mx-md-0 mb-3">
+                                                <div key={item.id} className="d-flex col-8 mx-auto col-md-6 mx-md-0 mb-3">
                                                     <div className="card hover-card newsImgSize bg-skyBlue">
                                                         {/* <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
                                                             <i className='bi bi-star-fill text-warning'></i>
@@ -81,7 +81,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                                     <p className='text-black'><span className='fw-bold'>Genders Accepted :</span> {item.gender}</p>
                                                                 </div>
                                                             </div>
-                                                            <div className="d-flex justify-content-center mb-3">
+                                                            <div className="d-flex justify-content-end">
                                                                 <Link href={`/board/${item.id}/${item.name}`} className='btn viewMoreCollegeBtn'>View Details</Link>
                                                             </div>
                                                         </div>

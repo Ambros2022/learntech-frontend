@@ -32,7 +32,7 @@ function BannerSection({ data }) {
                 </div>
               </div>
               {data?.avg_rating && <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
-                <div className="d-flex gap-2 justify-content-end">
+                <div className="d-flex gap-2 justify-content-md-end justify-content-center">
 
                   <i className={`bi bi-star-fill ${data.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
                   <i className={`bi bi-star-fill ${data.avg_rating >= 2 ? "text-warning" : "text-white"} `}></i>
