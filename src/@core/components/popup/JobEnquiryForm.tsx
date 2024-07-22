@@ -15,8 +15,6 @@ interface Props {
     data: any[];
 }
 
-
-
 const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     const router = useRouter();
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);

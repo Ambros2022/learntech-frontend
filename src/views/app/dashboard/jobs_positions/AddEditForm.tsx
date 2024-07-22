@@ -33,12 +33,22 @@ interface Authordata {
     isAddMode: boolean;
 }
 
+interface JobPositionLocation {
+    jobposition: {
+        id: string;
+        name: string;
+    };
+    
+}
+
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
     const { user } = useAuth();
     const [loading, setLoading] = useState<boolean>(false)
     const [superadmin, setSuperadmin] = useState<boolean>(true)
     const [error, setError] = useState("")
+    const [jobsdata, setJobsdata] = useState([])
+
     const [schools, setSchools] = useState([])
     const isMountedRef = useIsMountedRef();
     const params: any = {}
@@ -62,6 +72,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
+       
     })
 
     const defaultValues = {
@@ -70,7 +81,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         exp_required: isAddMode ? '' : olddata.exp_required,
         total_positions: isAddMode ? '' : olddata.total_positions,
         status: isAddMode ? 'Published' : olddata.status,
+        joblocations: [],
     }
+
+    const getjobs = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/alljoblocation/get', { params: roleparams });
+            setJobsdata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+
+    useEffect(() => {
+        getjobs();
+
+    }, [getjobs]);
+
 
     const {
         control,
@@ -128,13 +159,22 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/jobsposition/add';
-            let formData: any = {};
-            formData.name = data.name;
-            formData.job_description = data.job_description;
-            formData.exp_required = data.exp_required;
-            formData.total_positions = data.total_positions;
-            formData.status = data.status;
+            const url = 'api/admin/jobsposition/add';
+
+            const formData = new FormData();
+            formData.append('name', data.name);
+            formData.append('job_description', data.job_description);
+            formData.append('exp_required', data.exp_required);
+            formData.append('total_positions', data.total_positions);
+            formData.append('status', data.status);
+            // let url = 'api/admin/jobsposition/add';
+            // let formData: any = {};
+            // formData.name = data.name;
+            // formData.job_description = data.job_description;
+            // formData.exp_required = data.exp_required;
+            // formData.total_positions = data.total_positions;
+            // formData.status = data.status;
+            formData.append('joblocations', JSON.stringify(data.joblocations));
             try {
                 let response = await axios1.post(url, formData)
                 // console.log(response, "response")
@@ -169,10 +209,58 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
+
+
+
+    useEffect(() => {
+
+        if (!isAddMode && olddata.jobpositionlocation) {
+            const locations = olddata.jobpositionlocation.map((item) => ({
+                id: item.jobpositionslocation.id,
+                name: item.jobpositionslocation.name,
+            }));
+            admfiledReset("joblocations", { defaultValue: locations })
+        }
+    }, []);
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
+
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name="joblocations"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => {
+                                // console.log(value); // Log value here
+
+                                return (
+                                    <CustomAutocomplete
+                                        multiple
+                                        fullWidth
+                                        value={value || []}
+                                        options={jobsdata}
+                                        onChange={(event, newValue) => {
+                                            onChange(newValue);
+                                        }}
+                                        filterSelectedOptions
+                                        id='autocomplete-multiple-outlined'
+                                        getOptionLabel={(option: any) => option.name}
+                                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                                        renderInput={params =>
+                                            <CustomTextField {...params}
+                                            label='Select locations'
+                                               
+                                                variant="outlined"
+                                                error={Boolean(errors.joblocations)}
+                                                {...(errors.joblocations && { helperText: 'This field is required' })}
+                                                placeholder='joblocations' />}
+                                    />
+                                );
+                            }}
+                        />
+                    </Grid>
                     <Grid item xs={12} sm={6}>
                         <Controller
                             name='name'

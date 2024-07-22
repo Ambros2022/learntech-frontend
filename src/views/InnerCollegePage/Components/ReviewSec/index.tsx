@@ -25,12 +25,12 @@ const ReviewSec = ({ data }) => {
     const [userId, setUserId] = useState<string>(''); // Assuming user_id is a string
     const [likedReviews, setLikedReviews] = useState<number[]>([]);
     const [dislikedReviews, setDisLikedReviews] = useState<number[]>([]);
-    const [visibleCards, setVisibleCards] = useState(3);
+    const [visibleCards, setVisibleCards] = useState(2);
     const [showAllComments, setShowAllComments] = useState(false);
 
     //reviewrating
     useEffect(() => {
-        const getReviewData = async () => {
+        const getReviewRatingData = async () => {
             try {
                 const response = await axios.get('/api/website/reviewrating/get', {
                     params: {
@@ -48,7 +48,7 @@ const ReviewSec = ({ data }) => {
                 console.error('Failed to fetch page data:', error);
             }
         };
-        getReviewData();
+        getReviewRatingData();
     }, [data.id]);
 
     //allreview
@@ -77,12 +77,12 @@ const ReviewSec = ({ data }) => {
             try {
                 const response = await axios.get('api/website/findonereview/get', {
                     params: {
+                        size: 1000,
                         college_id: data.id,
-                        page: 2,
-                        size: 8,
                     }
                 });
                 setCardData(response.data.data);
+
             } catch (error) {
                 console.error('Failed to fetch page data:', error);
             }
@@ -91,52 +91,7 @@ const ReviewSec = ({ data }) => {
     }, [data.id]);
 
 
-    const handleLikeClick = async (reviewId: number) => {
-        try {
-            const response = await axios.post('/api/website/review/likesupdate', {
-                id: reviewId,
-                likes: 'like',
-            });
-            const updatedCardData = cardData.map(review => {
-                if (review.id === reviewId) {
-                    return { ...review, likes: response.data.likes };
-                }
-                return review;
-            });
-            setCardData(updatedCardData);
-            setLikedReviews(prevLikedReviews =>
-                prevLikedReviews.includes(reviewId)
-                    ? prevLikedReviews.filter(id => id !== reviewId)
-                    : [...prevLikedReviews, reviewId]
-            );
 
-        } catch (error) {
-            console.error('Failed to update likes:', error);
-        }
-    };
-
-    const handleDisLikeClick = async (reviewId: number) => {
-        try {
-            const response = await axios.post('/api/website/review/likesupdate', {
-                id: reviewId,
-                dislikes: 'dislike',
-            });
-            const updatedCardData = cardData.map(review => {
-                if (review.id === reviewId) {
-                    return { ...review, dislikes: response.data.dislikes };
-                }
-                return review;
-            });
-            setCardData(updatedCardData);
-            setDisLikedReviews(prevLikedReviews =>
-                prevLikedReviews.includes(reviewId)
-                    ? prevLikedReviews.filter(id => id !== reviewId)
-                    : [...prevLikedReviews, reviewId]
-            );
-        } catch (error) {
-            console.error('Failed to update dislikes:', error);
-        }
-    };
 
     const handleClick = (value) => {
         setRating(value);
@@ -200,14 +155,19 @@ const ReviewSec = ({ data }) => {
             setCardData(updatedCardData);
             setShowReplyForm(false);
             setReplyContent('');
+            setLoading(true);
         } catch (error) {
             console.error('Failed to add reply:', error);
         }
         setShowReplyForm(false);
+        setLoading(true);
     };
 
+
+
+
     const handleLoadMore = () => {
-        setVisibleCards(visibleCards + 3); 
+        setVisibleCards(visibleCards + 3);
     };
 
     // Function to handle "View All" button click
@@ -215,6 +175,68 @@ const ReviewSec = ({ data }) => {
         setShowAllComments(!showAllComments);
     };
 
+
+    const handleLikeDislikeClick = async (reviewId, action) => {
+        try {
+            let likeValue = 0;
+            let dislikeValue = 0;
+
+            // Check if user has already liked/disliked this review
+            if (action === 'like' && likedReviews.includes(reviewId)) {
+               
+                return; // Exit function early
+            } else if (action === 'dislike' && dislikedReviews.includes(reviewId)) {
+               
+                return; // Exit function early
+            }
+
+            // Set likeValue or dislikeValue based on action
+            if (action === 'like') {
+                likeValue = 1;
+            } else if (action === 'dislike') {
+                dislikeValue = 0;
+            }
+
+            // Make API call to update likes/dislikes
+            const response = await axios.post('api/website/review/likesupdate', {
+                id: reviewId,
+                like: likeValue,
+                dislike: dislikeValue,
+            });
+
+            const updatedReview = response.data.updatedReview;
+
+            // Update likedReviews or dislikedReviews state
+            if (action === 'like') {
+                const updatedLikedReviews = [...likedReviews, reviewId];
+                setLikedReviews(updatedLikedReviews);
+            } else if (action === 'dislike') {
+                const updatedDislikedReviews = [...dislikedReviews, reviewId];
+                setDisLikedReviews(updatedDislikedReviews);
+            }
+
+            // Update review data in cardData state to reflect new likes/dislikes count
+            const updatedCardData = cardData.map(review => {
+                if (review.id === reviewId) {
+                    return { ...review, likes: updatedReview.likes, dislikes: updatedReview.dislikes };
+                }
+                return review;
+            });
+
+            setCardData(updatedCardData);
+
+        } catch (error) {
+            console.error('Failed to update like/dislike:', error);
+        }
+    };
+
+    const handleLikeClick = (reviewId) => {
+        handleLikeDislikeClick(reviewId, 'like');
+    };
+
+    const handleDislikeClick = (reviewId) => {
+        handleLikeDislikeClick(reviewId, 'dislike');
+    };
 
     return (
         <>
@@ -237,7 +259,7 @@ const ReviewSec = ({ data }) => {
                                     <div className="progress">
                                         <div
                                             className="progress-bars"
-                                            style={{ width: `${(rating.count / totalReviews) * 75}%` }}
+                                            style={{ width: rating.count ? `${(rating.count / totalReviews) * 100}%` : '10%' }}
                                         >
                                             {rating.count}
                                         </div>
@@ -302,11 +324,10 @@ const ReviewSec = ({ data }) => {
                                         <i className={`bi ${likedReviews.includes(review.id) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i> {review.likes}
                                     </button>
 
-
-
-                                    <button className='btn text-blue click-like' onClick={() => handleDisLikeClick(review.id)}>
+                                    <button className='btn text-blue click-like' onClick={() => handleDislikeClick(review.id)}>
                                         <i className={`bi ${dislikedReviews.includes(review.id) ? 'bi-hand-thumbs-down-fill' : 'bi-hand-thumbs-down'}`}></i> {review.dislikes}
                                     </button>
+
 
 
                                     {/* <button className='btn text-blue' onClick={() => handleDisLikeClick(review.id)}><i className="bi bi-hand-thumbs-down"></i> {review.dislikes}</button> */}
@@ -335,10 +356,10 @@ const ReviewSec = ({ data }) => {
                                 {review.reviewreply && review.reviewreply.length > 0 && (
                                     <div className="review-replies">
                                         {/* Show limited replies initially */}
-                                        <h6 className='fw-bold text-black '>Replies:</h6>
+                                        <h6 className='fw-bold text-black pt-2 '>Replies:</h6>
                                         {review.reviewreply.slice(0, showAllComments ? undefined : 2).map(reply => (
                                             <div className="reply" key={reply.id}>
-                                               
+
                                                 <p>{reply.content}</p>
                                             </div>
                                         ))}
@@ -362,11 +383,11 @@ const ReviewSec = ({ data }) => {
 
                     </div>
                     <div className="text-center">
-                        {cardData.length>visibleCards?( // Show load more button only if there are more reviews to load
+                        {cardData.length > visibleCards ? ( // Show load more button only if there are more reviews to load
                             <button className="btn viewMoreCollegeBtn" onClick={handleLoadMore}>
                                 Load More
                             </button>
-                        ):''}
+                        ) : ''}
                     </div>
 
                 </div>

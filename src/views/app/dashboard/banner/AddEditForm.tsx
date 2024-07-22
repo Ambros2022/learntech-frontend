@@ -63,7 +63,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         'All_college_page',
         'All_courses_page',
         'All_university_page',
-        'All_school_page'
+        'All_school_page',
+        'Services_Page',
+        'All_about_page',
+        'All_our_teams',
     ];
 
     const schema: any = yup.object().shape({
