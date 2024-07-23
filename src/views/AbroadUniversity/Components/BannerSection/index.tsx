@@ -7,14 +7,14 @@ function BannerSection({ data }) {
     <>
       <section className='bg-blue collegeDetailBanner py-1'>
         <div className="container">
-          <div className="card mb-3 collegeDetailCard">
+          <div className="card mb-3 w-100 collegeDetailCard">
             <div className="row g-0">
-              <div className="col-lg-2 col-xl-1 col-md-2">
-                <div className='innerClgImg ms-md-auto mx-auto'>
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} />
+              <div className="col-lg-2 col-xl-2 col-md-2 pt-3">
+                <div className='innerClgImg m-auto d-flex justify-content-center bg-white p-3 rounded'>
+                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={200} height={200} alt={data.name} className='align-self-center img-fluid' />
                 </div>
               </div>
-              <div className="col-lg-7 ps-3 col-xl-8 col-md-10">
+              <div className="col-lg-7 ps-md-3 col-xl-7 col-md-10">
                 <div className="card-body text-white">
                   <h1 className="card-title fw-bold mb-3">{data.name}</h1>
                   <h6 className='mb-3 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{data.address}</h6>

@@ -196,8 +196,8 @@ function OverviewSection({ data, collegedata, examdata }) {
               <div className="row imgCardConCrs mb-3">
                 <div className="col-12 mb-3 px-0">
                   <div className='dental-crs-img flex-column d-flex justify-content-center'>
-                    <Image src='/images/icons/dental-course-img.jpg' className='' width={300} height={300} alt="dental-course-img" />
-                    <small className='text-center mb-3'>Are you interested in this course?</small>
+                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`} className='img-fluid' width={600} height={600} alt={`${data.name}-course-img`} />
+                    <h6 className='text-center mb-3'>Are you interested in this course?</h6>
                     <GlobalEnquiryForm className="mb-3 btn chkEligBtn" buttonText="Check Elgibility" />
                     {/* <button className='mb-3 btn chkEligBtn'>Check Elgibility</button> */}
                   </div>

@@ -30,11 +30,11 @@ const BannerSec = () => {
                 {banners?.map((banner, index) => (
                         <a href={banner.link}>
                             <Image
-                                fill
                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                                 priority={true}
                                 alt={`Banner ${index}`}
-                                className="w-100"
+                                height={300}
+                                width={1400}
                             />
                         </a>
                 ))}

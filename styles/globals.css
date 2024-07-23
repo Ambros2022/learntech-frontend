@@ -4517,8 +4517,10 @@
     width: 100% !important;
     object-fit: cover !important;
   }
-
-  .ServiceBanner>img {
+  .ServiceBanner{
+    height: 300px !important;
+  }
+  .ServiceBanner img {
     height: 300px !important;
     width: 100% !important;
     object-fit: cover !important;
@@ -4529,7 +4531,10 @@
     height: 100%;
   }
 
-  .teamworksec>img {
+  .teamworksec{
+    height: 300px !important;
+  }
+  .teamworksec img {
     height: 300px !important;
     width: 100% !important;
     object-fit: cover !important;
