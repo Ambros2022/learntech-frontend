@@ -535,7 +535,7 @@
 
   .footerCon {
     background-color: rgba(21, 41, 88, 1);
-    font-size: 16px !important;
+    font-size: 14px !important;
     font-weight: 200 !important;
   }
 
@@ -915,6 +915,7 @@
     .searchForm h5 {
       font-size: 19px !important;
     }
+
     .carouselInnerCourse .carousel-button-group {
       position: absolute !important;
       top: 5px !important;
@@ -1155,7 +1156,7 @@
       color: #254692 !important;
       font-weight: bold !important;
       border-bottom: 0 !important;
-      padding-bottom: 0 !important;
+      /* padding-bottom: 0 !important; */
     }
 
     .Analysis-Section img {
@@ -2550,10 +2551,8 @@
   .clgInfoSec table td {
     border: 1px solid black !important;
   }
-  .tab-pane{
-    overflow-x: scroll !important;
-  }
-  table{
+
+  table {
     overflow-x: scroll !important;
   }
 
@@ -3124,10 +3123,11 @@
     height: 100%;
   }
 
-  .topNewsImg>img{
+  .topNewsImg>img {
     width: 100% !important;
     height: 120px !important;
   }
+
   .disclaimerCon>img {
     height: 300px !important;
     width: 100% !important;
@@ -3670,7 +3670,7 @@
       width: 100% !important;
     }
 
-    .categoryTextHide{
+    .categoryTextHide {
       text-overflow: ellipsis !important;
       width: 60% !important;
     }
@@ -3794,10 +3794,10 @@
     box-shadow: none !important;
   }
 
-  .innerNewsCard {
+  /* .innerNewsCard {
     min-height: 1500px;
     max-height: 1500px;
-  }
+  } */
 
   /* @media (min-width:992px) and (max-width:1024px) {
     .examsCardRow .card-img-top {
@@ -3807,10 +3807,10 @@
   } */
 
   @media (min-width:320px) and (max-width:767px) {
-    .innerNewsCard {
+    /* .innerNewsCard {
       min-height: 1500px;
       max-height: 1500px;
-    }
+    } */
 
     .examNewsSec {
       min-height: 1125px !important;
@@ -3841,6 +3841,17 @@
     height: 300px;
     object-fit: cover;
   }
+
+  .blogBannerSec {
+    height: 400px !important;
+  }
+
+  .blogBannerSec img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
 
   /* .newsBannerSec input {
     background-color: rgba(255, 255, 255, 0.2) !important;
@@ -4001,10 +4012,11 @@
     border: none !important;
   }
 
+  /* 
   .examLatest {
     min-height: 480px;
     max-height: 480px;
-  }
+  } */
 
   .galleryImgStyle img {
     width: 100%;
@@ -4014,10 +4026,10 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
-    .examLatest {
+    /* .examLatest {
       min-height: 630px;
       max-height: 630px;
-    }
+    } */
 
     .innerExam h3 {
       font-size: 20px !important;
@@ -4290,6 +4302,11 @@
     object-fit: contain !important;
   }
 
+  .topCollegeImg>img {
+    width: 100% !important;
+    height: 80px !important;
+  }
+
   @media (min-width:992px) and (max-width:1024px) {
     .collegeDetailCard h1 {
       font-size: 22px !important;
@@ -4317,6 +4334,12 @@
       min-height: 175px !important;
       max-height: 175px !important;
     }
+
+    .topCollegeImg>img {
+      width: 100% !important;
+      height: 150px !important;
+    }
+
   }
 
   @media (min-width: 375px) and (max-width: 424px) {
@@ -4334,10 +4357,10 @@
   }
 
   .innerClgImg {
-    min-height: 100px !important;
-    min-width: 100px !important;
-    max-height: 100px !important;
-    max-width: 100px !important;
+    min-height: 130px !important;
+    min-width: 130px !important;
+    max-height: 130px !important;
+    max-width: 130px !important;
   }
 
   .innerClgImg img {
@@ -4537,12 +4560,13 @@
   }
 
   .linkFontSize {
-    font-size: 19px !important;
+    font-size: 17px !important;
   }
 
   .linkFontSize a:hover {
-    font-size: 19px !important;
-    color: #274896 !important;
+    font-size: 17px !important;
+    color: rgb(39, 72, 150) !important;
+    font-weight: bold !important;
   }
 
   .linkFontSize i {

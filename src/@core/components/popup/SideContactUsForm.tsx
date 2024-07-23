@@ -11,7 +11,7 @@ interface Props {
     onChanges?: any;
 }
 
-const SideContactUsForm: FC<Props> = ({ page,...rest }) => {
+const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
     const router = useRouter();
 
     const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
@@ -59,50 +59,50 @@ const SideContactUsForm: FC<Props> = ({ page,...rest }) => {
 
     return (
         <Formik
-        initialValues={{
-            name: '',
-            email: '',
-            contact: '',
-            message: '',
-            course: '',
-            location: '',
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-        resetForm
-    >
-        <Form>
-            <div className="mb-3">
-                <Field type="text" name="name" placeholder="Full Name*" className="form-control" />
-                <ErrorMessage name="name" component="div" className="error text-danger" />
-            </div>
-            <div className="mb-3">
-                <PhoneInputField  name="contact"  />
-                <ErrorMessage name="contact" component="div" className="error text-danger" />
-            </div>
-            <div className="mb-3">
-                <Field type="email" name="email" placeholder="Email ID*" className="form-control" />
-                <ErrorMessage name="email" component="div" className="error text-danger" />
-            </div>
-            <div className="mb-3">
-                <Field type="text" name="location" placeholder="Location*" className="form-control" />
-                <ErrorMessage name="location" component="div" className="error text-danger" />
-            </div>
-            <div className="mb-3">
-                <Field type="text" name="course" placeholder="Interested Course*" className="form-control" />
-                <ErrorMessage name="course" component="div" className="error text-danger" />
-            </div>
-            <div className="mb-3">
-                <Field as="textarea" name="message" placeholder="Type your message" className="form-control" />
-                <ErrorMessage name="message" component="div" className="error text-danger" />
-            </div>
-    
-            <div className="d-grid pb-3">
-                <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-            </div>
-        </Form>
-    </Formik>
-    
+            initialValues={{
+                name: '',
+                email: '',
+                contact_number: '',
+                message: '',
+                course: '',
+                location: '',
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+            resetForm
+        >
+            <Form>
+                <div className="mb-3">
+                    <Field type="text" name="name" placeholder="Full Name*" className="form-control" />
+                    <ErrorMessage name="name" component="div" className="error text-danger" />
+                </div>
+                <div className="mb-3">
+                    <Field type="email" name="email" placeholder="Email ID*" className="form-control" />
+                    <ErrorMessage name="email" component="div" className="error text-danger" />
+                </div>
+                <div className="mb-3">
+                    <PhoneInputField name="contact_number" />
+                    <ErrorMessage name="contact_number" component="div" className="error text-danger" />
+                </div>
+                <div className="mb-3">
+                    <Field type="text" name="course" placeholder="Interested Course*" className="form-control" />
+                    <ErrorMessage name="course" component="div" className="error text-danger" />
+                </div>
+                <div className="mb-3">
+                    <Field type="text" name="location" placeholder="Location*" className="form-control" />
+                    <ErrorMessage name="location" component="div" className="error text-danger" />
+                </div>
+                <div className="mb-3">
+                    <Field as="textarea" name="message" placeholder="Type your message" className="form-control" />
+                    <ErrorMessage name="message" component="div" className="error text-danger" />
+                </div>
+
+                <div className="d-grid pb-3">
+                    <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
+                </div>
+            </Form>
+        </Formik>
+
     );
 };
 

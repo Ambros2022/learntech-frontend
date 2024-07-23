@@ -171,14 +171,14 @@ const App = (props: ExtendedAppProps) => {
                 "contactPoint": {
                   "@type": "ContactPoint",
                   "contactType": "customer support",
-                  "telephone": "[+91-9036020016]",
-                  "email": "info@bangalorestudy.com"
+                  "telephone": "[1800 120 8969]",
+                  "email": "info@learntechww.com"
                 },
                 "sameAs": [
-                  "https://www.facebook.com/bangalorestudy/",
-                  "https://twitter.com/BangaloreStudy2",
+                  "https://www.facebook.com/learntechedu/",
+                  "https://twitter.com/leartechww",
                   "https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w",
-                  "https://www.instagram.com/bangalorestudy/",
+                  "https://www.instagram.com/learntechedus/",
                 ]
               }
             )}

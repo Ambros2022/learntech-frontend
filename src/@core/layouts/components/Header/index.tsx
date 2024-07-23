@@ -180,7 +180,7 @@ const Header = () => {
             <div className="col-md-3 d-flex align-items-center socialIcon">
               <a href="https://www.facebook.com/learntechedu" target="_blank"><Image className="mx-2" width={26} height={22} src='/images/icons/Facebook.svg' alt="facebook-img" /></a>
               <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target='_blank'><Image className="me-2" width={26} height={22} alt='linked-in-img' src='/images/icons/linked-in.svg' /></a>
-              <a href="https://twitter.com/learntechww" target='_blank'><Image className="me-2" src='/images/icons/twitter.svg' width={26} height={22} alt="twitter-img" /></a>
+              <a href="https://twitter.com/learntechww" target='_blank'><Image className="me-2" src='/images/icons/twitter-x.png' width={26} height={22} alt="twitter-img" /></a>
               <a href="https://www.instagram.com/learntechedus" target='_blank'><Image className="me-2" src='/images/icons/instagram.svg' width={26} height={22} alt='instagram-img' /></a>
               <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target='_blank'><Image className="me-2" src='/images/icons/youtube.svg' width={26} height={22} alt="youtube-img" /></a>
             </div>

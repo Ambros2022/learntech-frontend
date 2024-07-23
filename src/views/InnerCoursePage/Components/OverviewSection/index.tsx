@@ -85,7 +85,7 @@ function OverviewSection({ data, collegedata, examdata }) {
             {data.streamfaqs && data.streamfaqs.length > 0 && <button className='mb-3 btn' id="nav-FAQ-tab" data-bs-toggle="tab" data-bs-target="#nav-FAQ" type="button" role="tab" aria-controls="nav-fee" aria-selected="false">FAQ</button>}
           </div>
           <div className="row">
-            <div className="col-lg-9">
+            <div className="col-lg-9 col-md-8">
               <div className="tab-content" id="nav-tabContent">
                 <div className="tab-pane fade show active" id="nav-Overview" role="tabpanel" aria-labelledby="nav-Overview-tab">
                   <div className="row">
@@ -192,7 +192,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                 </div>
               </div>
             </div>
-            <div className="col-md-8 col-lg-3 mb-md-5 mx-auto px-0">
+            <div className="col-md-4 col-lg-3 mb-md-5 mx-auto px-0">
               <div className="row imgCardConCrs mb-3">
                 <div className="col-12 mb-3 px-0">
                   <div className='dental-crs-img flex-column d-flex justify-content-center'>
@@ -203,33 +203,43 @@ function OverviewSection({ data, collegedata, examdata }) {
                   </div>
                 </div>
                 {collegedata && collegedata.length > 0 && (
-                  <div key="e2" className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll text-center bg-skyBlue" style={{ height: '460px' }}>
-                    <h5 className='fw-bold text-blue pt-3 mb-3'>Top {data.name} Colleges</h5>
-                    {collegedata.map((val, ind) => (
-                      <Link href={`/college/${val.id}/${val.slug}`} >
-                        <div key={ind} className="card p-2 mb-3 d-flex flex-row bg-skyBlue hover-card">
-                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.banner_image}`} className='img-fluid' width={90} height={60} alt={val.name}
-                          />
-                          <h6 className='align-content-center text-black mx-2'>{val.name}</h6>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
+                  <>
+                    <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Colleges</h5>
+                    <div key="e2" className="col-12 cardConBrdr p-3 mb-3 text-center  overflow-y-auto bg-skyBlue" style={{ maxHeight: 'calc(6 * 150px)' }}>
+                      {collegedata.map((val, ind) => (
+                        <Link href={`/college/${val.id}/${val.slug}`} >
+                          <div key={ind} className="card p-3 mb-3 d-flex flex-row bg-skyBlue hover-card">
+                            <div className="row d-flex">
+                              <div className="align-content-center col-md-5 col-xl-5 mb-md-0 mb-3 col-lg-5 topCollegeImg">
+                                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.banner_image}`} className='img-fluid rounded' width={500} height={500} alt={val.name}
+                                />
+                              </div>
+                              <div className="align-content-center col-md-7 col-xl-7 col-lg-7">
+                                <h6 className='align-content-center text-black fw-bold'>{val.name}</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
                 )}
 
                 {examdata && examdata.length > 0 && (
-                  <div key="eee2" className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll text-center bg-skyBlue" style={{ height: '460px' }}>
-                    <h5 className='fw-bold text-blue pt-3 mb-3'>Top {data.name} Exams</h5>
-                    {examdata.map((val, ind) => (
-                      <Link href={`/exam/${val.id}/${val.slug}`} >
-                        <div key={ind} className="card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
-                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.cover_image}`} className='img-fluid' width={90} height={60} alt={val.exam_title}
-                          />
-                          <h6 className='align-content-center text-black mx-2'>{val.exam_title}</h6>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
+                  <>
+                    <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Exams</h5>
+                    <div key="eee2" className="col-12 cardConBrdr p-3 mb-3  overflow-y-auto text-center bg-skyBlue" style={{ maxHeight: 'calc(6 * 150px)' }}>
+                      {examdata.map((val, ind) => (
+                        <Link href={`/exam/${val.id}/${val.slug}`} >
+                          <div key={ind} className="card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
+                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.cover_image}`} className='img-fluid' width={90} height={60} alt={val.exam_title}
+                            />
+                            <h6 className='align-content-center text-black mx-2 fw-bold'>{val.exam_title}</h6>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
                 )}
 
               </div>

@@ -111,7 +111,7 @@ function ExploreSection() {
         {visibleCount > data.length && (
           <div className="text-center mt-4">
             <button className="btn viewMoreCollegeBtn" onClick={showMoreCourses}>
-              Load More
+              View More
             </button>
           </div>
         )}
