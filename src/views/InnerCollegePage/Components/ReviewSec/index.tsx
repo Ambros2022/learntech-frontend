@@ -130,6 +130,7 @@ const ReviewSec = ({ data }) => {
     };
 
     const toggleReplyForm = (reviewId: number) => {
+        console.log(reviewId)
         setShowReplyForm(!showReplyForm);
         setSelectedReviewId(reviewId);
     };
@@ -145,14 +146,23 @@ const ReviewSec = ({ data }) => {
 
             });
 
+            // console.log(response.data.data.content)
+            // console.log(response.data.data)
+            // setCardData(response)
+            console.log(cardData)
             const updatedCardData = cardData.map(review => {
+                console.log(review.id)
                 if (review.id === selectedReviewId) {
-                    return { ...review, replies: [...review.replies, response.data] };
+                    // console.log(review.reviewreply)
+                    const updatedReplies = review.reviewreply ? [...review.reviewreply, response.data.data] : [response.data.data];
+                    // console.log(updatedReplies)
+                    return { ...review, reviewreply: updatedReplies };
                 }
                 return review;
             });
-
+            // console.log(cardData)
             setCardData(updatedCardData);
+
             setShowReplyForm(false);
             setReplyContent('');
             setLoading(true);
@@ -160,7 +170,6 @@ const ReviewSec = ({ data }) => {
             console.error('Failed to add reply:', error);
         }
         setShowReplyForm(false);
-        setLoading(true);
     };
 
 
@@ -183,21 +192,19 @@ const ReviewSec = ({ data }) => {
 
             // Check if user has already liked/disliked this review
             if (action === 'like' && likedReviews.includes(reviewId)) {
-               
+
                 return; // Exit function early
             } else if (action === 'dislike' && dislikedReviews.includes(reviewId)) {
-               
+
                 return; // Exit function early
             }
 
-            // Set likeValue or dislikeValue based on action
             if (action === 'like') {
                 likeValue = 1;
             } else if (action === 'dislike') {
                 dislikeValue = 0;
             }
 
-            // Make API call to update likes/dislikes
             const response = await axios.post('api/website/review/likesupdate', {
                 id: reviewId,
                 like: likeValue,
@@ -206,13 +213,14 @@ const ReviewSec = ({ data }) => {
 
             const updatedReview = response.data.updatedReview;
 
-            // Update likedReviews or dislikedReviews state
             if (action === 'like') {
                 const updatedLikedReviews = [...likedReviews, reviewId];
                 setLikedReviews(updatedLikedReviews);
+
             } else if (action === 'dislike') {
                 const updatedDislikedReviews = [...dislikedReviews, reviewId];
                 setDisLikedReviews(updatedDislikedReviews);
+
             }
 
             // Update review data in cardData state to reflect new likes/dislikes count
@@ -230,10 +238,12 @@ const ReviewSec = ({ data }) => {
         }
     };
 
+    // Function to handle like button click
     const handleLikeClick = (reviewId) => {
         handleLikeDislikeClick(reviewId, 'like');
     };
 
+    // Function to handle dislike button click
     const handleDislikeClick = (reviewId) => {
         handleLikeDislikeClick(reviewId, 'dislike');
     };
@@ -320,15 +330,13 @@ const ReviewSec = ({ data }) => {
                                 </div>
                                 <div className="d-flex flex-wrap">
                                     {/* <button className='btn text-blue click-like' onClick={() => handleLikeClick(review.id)}><i className="bi bi-hand-thumbs-up"></i> {review.likes}</button> */}
-                                    <button className='btn text-blue click-like' onClick={() => handleLikeClick(review.id)}>
+                                    <button className='btn text-blue' onClick={() => handleLikeClick(review.id)}>
                                         <i className={`bi ${likedReviews.includes(review.id) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i> {review.likes}
                                     </button>
 
-                                    <button className='btn text-blue click-like' onClick={() => handleDislikeClick(review.id)}>
+                                    <button className='btn text-blue ' onClick={() => handleDislikeClick(review.id)}>
                                         <i className={`bi ${dislikedReviews.includes(review.id) ? 'bi-hand-thumbs-down-fill' : 'bi-hand-thumbs-down'}`}></i> {review.dislikes}
                                     </button>
-
-
 
                                     {/* <button className='btn text-blue' onClick={() => handleDisLikeClick(review.id)}><i className="bi bi-hand-thumbs-down"></i> {review.dislikes}</button> */}
                                     <button className='btn text-blue' style={{ cursor: 'default' }}><i className="bi bi-flag"></i> Report</button>
@@ -356,7 +364,7 @@ const ReviewSec = ({ data }) => {
                                 {review.reviewreply && review.reviewreply.length > 0 && (
                                     <div className="review-replies">
                                         {/* Show limited replies initially */}
-                                        <h6 className='fw-bold text-black pt-2 '>Replies:</h6>
+                                        <h6 className='fw-bold text-black '>Replies:</h6>
                                         {review.reviewreply.slice(0, showAllComments ? undefined : 2).map(reply => (
                                             <div className="reply" key={reply.id}>
 
