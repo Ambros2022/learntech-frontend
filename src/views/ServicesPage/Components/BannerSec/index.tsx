@@ -10,7 +10,7 @@ const BannerSec = () => {
     const getbanner = useCallback(async () => {
         try {
             const roleparams: any = { page: 1, size: 10000 };
-            const response = await axios1.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
+            const response = await axios1.get('api/website/banner/get?promo_banner=All_about_page', { params: roleparams });
             setBanners(response.data.data);
         } catch (err) {
             console.error(err);

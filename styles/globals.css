@@ -4625,13 +4625,23 @@
   }
 
   .scholarshipSec {
-    height: 300px !important;
+    height: 300px;
   }
 
   .scholarShipImg>img {
     height: 300px;
     width: 100%;
     object-fit: cover;
+  }
+
+  .aboutUsPageSec {
+    height: 500px;
+    background-color: #E8E8E8;
+  }
+
+  .aboutUsPageSec img {
+    height: 500px;
+    object-fit: contain;
   }
 
   .scholarShipBtn {
@@ -5350,13 +5360,26 @@
     }
 
     .scholarshipSec {
-      height: 320px !important;
+      height: 320px ;
     }
 
     .scholarShipImg>img {
       height: 320px;
       width: 100%;
       object-fit: cover;
+    }
+
+    .aboutUsPageSec {
+      height: 200px;
+    }
+
+    .aboutUsPageSec h1{
+      font-size: 15px;
+    }
+
+    .aboutUsPageSec img {
+      height: 200px;
+      object-fit: contain;
     }
 
 
@@ -5432,22 +5455,3 @@
   .click-like:hover .bi-hand-thumbs-up-fill {
     display: inline-block !important;
   }
-
-  .color-joenquiry .form-control {
-    color: black !important;
-  }
-
-  .careerContact select {
-    padding: 10px 20px !important;
-  }
-
-  .careerContact select option {
-    color: black !important;
-  }
-
-
-  .Jobenquiryphoneinput input{
-    padding: 22px 44px !important;
-
-  }
-  
