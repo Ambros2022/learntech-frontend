@@ -42,6 +42,14 @@ function InnerBoardPage({ id }) {
     }
   }, [isMountedRef]);
 
+  const formattedData = pagedata && pagedata.schoolboardfaqs && pagedata.schoolboardfaqs.map((item) => ({
+    "@type": "Question",
+    "name": item.questions,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answers,
+    },
+  }));
 
 
 
@@ -56,6 +64,31 @@ function InnerBoardPage({ id }) {
         <meta name="description" content={pagedata?.meta_description || "Are you searching for which board is best for your child"} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": formattedData,
+            }
+          )}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(
+            {
+              "@context": "https://schema.org/",
+              "@type": "CollegeOrUniversity",
+              "name": `${pagedata?.meta_title}`,
+              "logo": `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
+              "url": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": `${pagedata?.address}`
+              }
+
+            }
+          )}
+        </script>
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <CollegeInfoSection data={pagedata} exams={exams}/>}
