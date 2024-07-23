@@ -25,7 +25,7 @@ const NewsItem = ({ id, banner_image, title }) => (
 const NewsList = ({ newsItems }) => (
     <>
         <h4 className='fw-bold text-blue mt-3 text-center pt-3 mb-4'>Upcoming Admissions</h4>
-        <div className='bg-skyBlue pt-3 examNewsSec rounded mt-3 px-4 overflow-y-scroll newsHeightScroll'>
+        <div className='bg-skyBlue pt-3 examNewsSec rounded mt-3 px-4 overflow-y-auto'  style={{ maxHeight: 'calc(6 * 102px)' }}>
             <div className="row">
                 {newsItems.map((item, index) => (
                     <NewsItem key={index} id={item.id} banner_image={item.banner_image} title={item.name} />

@@ -29,7 +29,7 @@ function OtherCourses({ streamdata }) {
             </div>
             <div className="col-12 text-center text-start px-0">
               <div className="card-body d-flex text-center justify-content-center">
-                <h6 className="card-title flex-fill">{title}</h6>
+                <h6 className="card-title flex-fill text-truncate">{title}</h6>
               </div>
             </div>
           </div>

@@ -131,7 +131,7 @@ const Footer = () => {
               <p className="d-inline-block">Follow us on</p>
               <a href="https://www.facebook.com/learntechedu" target='_blank'><Image width={27} height={27} className='icon-white mx-2' src="/images/icons/Facebook.svg" alt="facebook-icon" /></a>
               <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/linked-in.svg" alt="linkedIn-icon" /></a>
-              <a href="https://twitter.com/learntechww" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/twitter.svg" alt="twitter-icon" /></a>
+              <a href="https://twitter.com/learntechww" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/twitter-x.png" alt="twitter-icon" /></a>
               <a href="https://www.instagram.com/learntechedus" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/instagram.svg" alt="instagram-icon" /></a>
               <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/youtube.svg" alt="youtube-icon" /></a>
             </div>

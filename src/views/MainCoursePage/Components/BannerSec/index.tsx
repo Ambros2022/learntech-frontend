@@ -50,7 +50,7 @@ function BannerSec({ data }: any) {
     <>
       <section className='bg-blue courseSec'>
         <div className="container">
-          <h1 className='text-white fw-bold pt-5 mb-3'>Choose By Interest</h1>
+          <h1 className='text-white fw-bold pt-5 mb-3'>Choose Your Preferred Course, Degree or Specialisation</h1>
           <div>
             <div className="row">
               <div className="col-md-7 mb-3">
@@ -62,12 +62,9 @@ function BannerSec({ data }: any) {
                   getOptionLabel={(option) => option.name}
                   renderOption={(props, option) => (
                     <li {...props}>
-
                       <Link href={`/course/${option.streams.id}/${option?.streams?.slug}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
                         {option.name}
                       </Link>
-
-
                     </li>
                   )}
                   renderInput={(params) => (
@@ -117,10 +114,7 @@ function BannerSec({ data }: any) {
                     />
                   )}
                 />
-
                 {/* <input type="search" className='form-control' placeholder='Search for course, degree or specialization' /> */}
-
-
               </div>
               {/* <div className="mb-3 col-md-2 col-6 col-lg-1 col-xl-1 d-flex justify-content-start justify-content-md-center">
                 <button className='btn bg-white text-blue srchBtn'>Search</button>

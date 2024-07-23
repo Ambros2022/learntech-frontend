@@ -31,9 +31,9 @@ function BannerSection({ data }) {
 
           <Link href={'/courses'} className="text-black"> Courses  <i className='bi bi-chevron-right'></i></Link>
 
-          <Link href={`/course/${data?.streams?.id}/${data?.streams?.slug}`} className="text-black">{data.streams.name}  <i className='bi bi-chevron-right'></i></Link>
+          <Link href={`/course/${data?.streams?.id}/${data?.streams?.slug}`} className="text-black"> {data.streams.name}  <i className='bi bi-chevron-right'></i></Link>
 
-          <span className="text-blue"> {data.slug}</span></p>
+          <span className="text-blue"> {data.short_name}</span></p>
         </div>
       </section>
     </>
