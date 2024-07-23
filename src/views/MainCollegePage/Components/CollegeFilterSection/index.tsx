@@ -257,13 +257,11 @@ function CollegeFilterSection() {
                 { label: 'Public', value: 'Public' },
                 { label: 'Deemed', value: 'Deemed' },
                 { label: 'Private', value: 'Private' },
-                { label: 'Government', value: 'Government' }
+                { label: 'Government', value: 'Government' },
+                { label: 'Autonomous', value: 'Autonomous' },
             ]
         },
         { id: 'streams', label: 'Streams', options: streams },
-        { id: 'courses', label: 'Courses', options: courses },
-
-
         {
             id: 'courseType',
             label: 'Course Type',
@@ -275,6 +273,7 @@ function CollegeFilterSection() {
                 // { label: 'Default', value: 'Default' },
             ],
         },
+        { id: 'courses', label: 'Courses', options: courses },
     ];
 
 

@@ -45,9 +45,6 @@ import QuillEditor from 'src/@core/components/html-editor/index';
 import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
 
 
-
-
-
 interface Authordata {
     olddata?: any;
     isAddMode: boolean;
@@ -76,6 +73,16 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const handleFileChangephoto = (files: any[]) => {
         setSelectedphoto(files[0]);
         setFileNamesphoto(
+            files.map((file) => ({
+                name: file.name,
+                preview: URL.createObjectURL(file),
+            }))
+        );
+
+    };
+    const handleFileChangebanner = (files: any[]) => {
+        setSelectedbanner(files[0]);
+        setFileNamesbanner(
             files.map((file) => ({
                 name: file.name,
                 preview: URL.createObjectURL(file),
@@ -166,6 +173,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_keyword', data.meta_keyword);
             formData.append('listing_order', data.listing_order);
             formData.append('logo', selectedphoto);
+            formData.append('banner', selectedbanner);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -210,6 +218,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_keyword', data.meta_keyword);
             formData.append('listing_order', data.listing_order);
             formData.append('logo', selectedphoto);
+            formData.append('banner', selectedbanner);
 
 
             try {
@@ -569,6 +578,21 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         maxSize={2000000}
                                         fileNames={fileNamesphoto}
                                         label=" Upload Logo"
+                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                        rejectionMessage='Try another file for upload.'
+                                    />
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={3}>
+                                    <FileUpload
+                                        isAddMode={isAddMode}
+                                        olddata={!isAddMode && olddata.banner ? olddata.banner : ""}
+                                        onFileChange={handleFileChangebanner}
+                                        maxFiles={1}
+                                        maxSize={2000000}
+                                        fileNames={fileNamesbanner}
+                                        label=" Upload banner"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />

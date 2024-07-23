@@ -44,7 +44,10 @@ const Footer = () => {
           </div>
           <div className="row">
             <div className="col-md-4 text-white">
-              <p className='w-50'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p className='' style={{fontWeight:'300', fontSize:'14px'}}>Dream. Apply. Achieve.
+                Our Expert Admission Guidance
+                is the Bridge that Connects You
+                to a Brighter Future.</p>
               <span className="footerIcon">
                 <div className="mb-3">
                   <Image className="d-inline-block" src="/images/icons/Phone Icon.svg" width={25} height={24} alt="phone-icon" />
@@ -128,7 +131,7 @@ const Footer = () => {
               <p className="d-inline-block">Follow us on</p>
               <a href="https://www.facebook.com/learntechedu" target='_blank'><Image width={27} height={27} className='icon-white mx-2' src="/images/icons/Facebook.svg" alt="facebook-icon" /></a>
               <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/linked-in.svg" alt="linkedIn-icon" /></a>
-              <a href="https://twitter.com/learntechww" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/twitter.svg" alt="twitter-icon" /></a>
+              <a href="https://twitter.com/learntechww" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/twitter-x.png" alt="twitter-icon" /></a>
               <a href="https://www.instagram.com/learntechedus" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/instagram.svg" alt="instagram-icon" /></a>
               <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target='_blank'><Image width={27} height={27} className='icon-white me-2' src="/images/icons/youtube.svg" alt="youtube-icon" /></a>
             </div>

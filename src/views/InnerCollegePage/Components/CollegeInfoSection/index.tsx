@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import YoutubeVideo from 'src/@core/components/youtube-videos'
 import Image from 'next/image'
@@ -9,6 +9,11 @@ const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { s
 
 
 function CollegeInfoSection({ data  }) {
+  const [activeTab, setActiveTab] = useState(); // Default to 'info' tab
+
+  const handleTabClick = (tabId) => {
+      setActiveTab(tabId);
+  };
   return (
     <>
       <section className='clgInfoSec bg-white'>
@@ -55,7 +60,9 @@ function CollegeInfoSection({ data  }) {
             }
 
 
-            <button className='btn' id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Review</button>
+            <button className={`btn ${activeTab === 'review' ? 'active' : ''}`} onClick={() => handleTabClick('review')} id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Review</button>
+            {/* <button className={`btn ${activeTab === 'review' ? 'active' : ''}`} onClick={() => handleTabClick('review')}>Review</button> */}
+
 
             {
               data.collegefaqs && data.collegefaqs.length > 0 ?
@@ -116,10 +123,9 @@ function CollegeInfoSection({ data  }) {
 
               </div>
             </div>
-            <div className="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-            <ReviewSec data= {data} />
-            
-            </div>
+            <div className={`tab-pane fade ${activeTab === 'review' ? 'show active' : ''}`} id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+                            {activeTab === 'review' && <ReviewSec data={data} />}
+                        </div>
 
             <div className="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
               <FaqSec data={data.collegefaqs} />

@@ -62,12 +62,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [streamId, setStreamId] = useState<any>(isAddMode ? "" : olddata?.stream?.id || '');
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
+    const [fileNamesbanner, setFileNamesbanner] = useState<any>([]);
+    const [selectedbanner, setSelectedbanner] = useState('');
 
 
 
     const handleFileChangephoto = (files: any[]) => {
         setSelectedphoto(files[0]);
         setFileNamesphoto(
+            files.map((file) => ({
+                name: file.name,
+                preview: URL.createObjectURL(file),
+            }))
+        );
+
+    };
+
+    const handleFileChangebanner = (files: any[]) => {
+        setSelectedbanner(files[0]);
+        setFileNamesbanner(
             files.map((file) => ({
                 name: file.name,
                 preview: URL.createObjectURL(file),
@@ -200,6 +213,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
             formData.append('logo', selectedphoto);
+            formData.append('banner', selectedbanner);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -253,6 +267,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
             formData.append('logo', selectedphoto);
+            formData.append('banner', selectedbanner);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -768,6 +783,36 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
+                              
+
+                                <Grid item xs={12} sm={3}>
+                                    <FileUpload
+                                        isAddMode={isAddMode}
+                                        olddata={!isAddMode && olddata.logo ? olddata.logo : ""}
+                                        onFileChange={handleFileChangephoto}
+                                        maxFiles={1}
+                                        maxSize={2000000}
+                                        fileNames={fileNamesphoto}
+                                        label=" Upload Logo"
+                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                        rejectionMessage='Try another file for upload.'
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={3}>
+                                    <FileUpload
+                                        isAddMode={isAddMode}
+                                        olddata={!isAddMode && olddata.banner ? olddata.banner : ""}
+                                        onFileChange={handleFileChangebanner}
+                                        maxFiles={1}
+                                        maxSize={2000000}
+                                        fileNames={fileNamesbanner}
+                                        label=" Upload banner"
+                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                        rejectionMessage='Try another file for upload.'
+                                    />
+                                </Grid>
+
                                 <Grid item xs={12} sm={6}>
                                     <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                                     <Controller
@@ -782,20 +827,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
 
-                                </Grid>
-
-                                <Grid item xs={12} sm={3}>
-                                    <FileUpload
-                                        isAddMode={isAddMode}
-                                        olddata={!isAddMode && olddata.logo ? olddata.logo : ""}
-                                        onFileChange={handleFileChangephoto}
-                                        maxFiles={1}
-                                        maxSize={2000000}
-                                        fileNames={fileNamesphoto}
-                                        label=" Upload Logo"
-                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                                        rejectionMessage='Try another file for upload.'
-                                    />
                                 </Grid>
 
 

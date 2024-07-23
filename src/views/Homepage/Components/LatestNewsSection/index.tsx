@@ -78,25 +78,28 @@ function LatestNewsSection() {
                 <div className="card-con pt-5">
                     <NewsCarousel items={combinedItems.map((item) => (
                         <div className="col-12 mb-1" style={{ margin: '0px 5px' }} key={item.id}>
-                            <div className="newsBlosCards">
-                                <div className="mb-5 mx-lg-3 mx-0">
-                                    <div className="card h-100 hover-card">
-                                        <div className="card-body newsheight ">
-                                            <h5 className="card-title  fw-bold text-blue text-truncate">{item.name}</h5>
-                                            <h6 className="card-subtitle py-2 mb-2 text-body-secondary">
-                                                {item.created_at ? format(new Date(item.created_at), 'dd-MMM-yyyy') : 'No Date Available'}
-                                            </h6>
+                            <Link
+                                href={`/${activeTab}/${item.id}/${item.slug}`}>
+                                <div className="newsBlosCards">
+                                    <div className="mb-5 mx-lg-3 mx-0">
+                                        <div className="card h-100 hover-card">
+                                            <div className="card-body newsheight ">
+                                                <h5 className="card-title  fw-bold text-blue text-truncate">{item.name}</h5>
+                                                <h6 className="card-subtitle py-2 mb-2 text-body-secondary">
+                                                    {item.created_at ? format(new Date(item.created_at), 'dd-MMM-yyyy') : 'No Date Available'}
+                                                </h6>
 
-                                            <p className="card-text ">{item.meta_description}</p>
-                                            <Link
-                                                href={`/${activeTab}/${item.id}/${item.slug}`}
-                                                // href={item.link}
+                                                <p className="card-text ">{item.meta_description}</p>
+                                                <Link
+                                                    href={`/${activeTab}/${item.id}/${item.slug}`}
+                                                    // href={item.link}
 
-                                                className="btn readBtn card-link">Read More</Link>
+                                                    className="btn viewDetailBtn">Read More</Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     ))} />
                 </div>

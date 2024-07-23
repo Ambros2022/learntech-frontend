@@ -148,7 +148,7 @@ function BannerSec({ data }) {
               {/* </div> */}
             </div>
             {/* <button className='btn helpMeBtn'>Help me with options</button> */}
-            <GlobalEnquiryForm buttonText="Help me with options" className="helpMeBtn rounded" />
+            <GlobalEnquiryForm buttonText="Help me with options" className="btn viewMoreCollegeBtn rounded" />
           </div>
         </div>
       </section>

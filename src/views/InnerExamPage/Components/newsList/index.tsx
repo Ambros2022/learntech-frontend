@@ -14,14 +14,16 @@ const NewsItem = ({ date, title }) => (
 
 // NewsList component
 const NewsList = ({ newsItems }) => (
-    <div className='bg-skyBlue blogSec examLatest mt-3 px-4 overflow-y-scroll rounded'>
+    <>
         <h4 className='fw-bold text-blue text-start pt-3 text-center mb-3'>Upcoming Exams</h4>
-        <div className="row">
-            {newsItems.map((item, index) => (
-                <NewsItem key={index} date={item.date} title={item.title} />
-            ))}
+        <div className='bg-skyBlue blogSec examLatest mt-3 px-4 py-3 overflow-y-auto rounded' style={{ maxHeight: 'calc(6 * 150px)' }}>
+            <div className="row">
+                {newsItems.map((item, index) => (
+                    <NewsItem key={index} date={item.date} title={item.title} />
+                ))}
+            </div>
         </div>
-    </div>
+    </>
 );
 
 export default NewsList;

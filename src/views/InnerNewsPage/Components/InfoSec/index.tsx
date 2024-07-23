@@ -60,7 +60,7 @@ const InfoSec = ({ data }) => {
                     </div> */}
                     {data.pdf_file && (
                         <div className="col-md-3">
-                            <a href={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.pdf_file}`} className="btn applyNowButton align-content-center" target="_blank" rel="noopener noreferrer">
+                            <a href={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.pdf_file}`} className="btn applyNowButton align-content-center"  rel="noopener noreferrer">
                                 Uploaded PDF DOC Preview
                             </a>
                         </div>
@@ -116,7 +116,7 @@ const InfoSec = ({ data }) => {
                 </div>
                 <div className='pt-3'>
                     <div className="row">
-                        <div className="col-md-8 text-black overflow-x-scroll">
+                        <div className="col-md-8 text-black">
                             <p>
                                 <div dangerouslySetInnerHTML={{ __html: data.overview }} />
                             </p>

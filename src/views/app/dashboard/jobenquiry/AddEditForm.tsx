@@ -30,6 +30,8 @@ import { useAuth } from 'src/hooks/useAuth'
 
 import { Alert, FormControlLabel, FormLabel, RadioGroup, useTheme } from '@mui/material'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import FileUpload from 'src/@core/components/dropzone/FileUpload';
+
 
 
 interface Authordata {
@@ -59,21 +61,21 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const schema: any = yup.object().shape({
         name: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         email: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         resume: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         current_location: yup
-        .string()
-        .trim()
-        .required(),
+            .string()
+            .trim()
+            .required(),
         job_location_id: yup.object().required("This field is required"),
         jobs_position_id: yup.object().required("This field is required"),
 
@@ -83,10 +85,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         name: isAddMode ? '' : olddata.name,
         email: isAddMode ? '' : olddata.email,
         phone: isAddMode ? '' : olddata.phone,
-        d_o_b: isAddMode ? null : new Date(olddata.d_o_b),
+        d_o_b: isAddMode ? '' : olddata.d_o_b,
+        // d_o_b: isAddMode ? null : new Date(olddata.d_o_b),
         current_location: isAddMode ? '' : olddata.current_location,
         total_exp: isAddMode ? '' : olddata.total_exp,
-        resume: isAddMode ? '' : olddata.resume,
+
         status: isAddMode ? '' : olddata.status,
         job_location_id: isAddMode ? '' : olddata.alljoblocations,
         jobs_position_id: isAddMode ? '' : olddata.jobspositions,
@@ -144,109 +147,114 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     }, [getlocation]);
 
-    const onSubmit = async (data: any) => {
-       
-        if (!isAddMode && olddata.id) {
-            let updateid = olddata.id;
-            setLoading(true)
-            let url = 'api/admin/jobsenquires/update';
-            let formData: any = {};
-            formData.id = updateid;
-            formData.name = data.name;
-            formData.email = data.email;
-            formData.phone = data.phone;
-            formData.d_o_b = data.d_o_b;
-            formData.current_location = data.current_location;
-            formData.total_exp = data.total_exp;
-            formData.resume = data.resume;
-            formData.status = data.status;
-            formData.job_location_id = data.job_location_id.id;
-            formData.jobs_position_id = data.jobs_position_id.id;
+    // const onSubmit = async (data: any) => {
 
-            try {
-                let response = await axios1.post(url, formData)
-                if (response.data.status == 1) {
-                    toast.success(response.data.message)
-                    setLoading(false)
-                    setError('')
-                    reset();
-                    router.back();
-                }
-                else {
-                    setLoading(false)
-                    toast.error(response.data.message)
-                    setError(response.data.message)
-                }
+    //     if (!isAddMode && olddata.id) {
+    //         let updateid = olddata.id;
+    //         setLoading(true)
+    //         let url = 'api/admin/jobsenquires/update';
+    //         let formData: any = {};
+    //         formData.id = updateid;
+    //         formData.name = data.name;
+    //         formData.email = data.email;
+    //         formData.phone = data.phone;
+    //         formData.d_o_b = data.d_o_b;
+    //         formData.current_location = data.current_location;
+    //         formData.total_exp = data.total_exp;
+    //         formData.resume = data.resume;
+    //         formData.status = data.status;
+    //         formData.job_location_id = data.job_location_id.id;
+    //         formData.jobs_position_id = data.jobs_position_id.id;
 
-            } catch (err: any) {
-                console.error(err);
-                setLoading(false)
-                if (err.errors && err.errors.length > 0) {
-                    const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
-                    toast.error(errorMessage || "Please try again");
-                } else {
-                    setError(err.message || "Please try again");
-                    toast.error(err.message || "Please try again");
-                }
+    //         try {
+    //             let response = await axios1.post(url, formData)
+    //             if (response.data.status == 1) {
+    //                 toast.success(response.data.message)
+    //                 setLoading(false)
+    //                 setError('')
+    //                 reset();
+    //                 router.back();
+    //             }
+    //             else {
+    //                 setLoading(false)
+    //                 toast.error(response.data.message)
+    //                 setError(response.data.message)
+    //             }
 
-            }
-        } else {
-            setLoading(true)
-            let url = 'api/admin/jobsenquires/add';
-            let formData: any = {};
-            formData.job_location_id = data.job_location_id.id;
-            formData.jobs_position_id = data.jobs_position_id.id;
-            formData.name = data.name;
-            formData.email = data.email;
-            formData.phone = data.phone;
-            formData.d_o_b = data.d_o_b;
-            formData.current_location = data.current_location;
-            formData.total_exp = data.total_exp;
-            formData.resume = data.resume;
-            formData.status = data.status;
-          
-            try {
-                let response = await axios1.post(url, formData)
-                // console.log(response, "response")
+    //         } catch (err: any) {
+    //             console.error(err);
+    //             setLoading(false)
+    //             if (err.errors && err.errors.length > 0) {
+    //                 const errorMessage = err.errors[0].msg;
+    //                 setError(errorMessage || "Please try again");
+    //                 toast.error(errorMessage || "Please try again");
+    //             } else {
+    //                 setError(err.message || "Please try again");
+    //                 toast.error(err.message || "Please try again");
+    //             }
 
-                if (response.data.status == 1) {
-                    // console.log("response.data", response.data)
-                    toast.success(response.data.message)
-                    setLoading(false)
-                    setError('')
-                    reset();
-                    router.push('./');
+    //         }
+    //     } else {
+    //         setLoading(true)
+    //         let url = 'api/admin/jobsenquires/add';
+    //         let formData: any = {};
+    //         formData.job_location_id = data.job_location_id.id;
+    //         formData.jobs_position_id = data.jobs_position_id.id;
+    //         formData.name = data.name;
+    //         formData.email = data.email;
+    //         formData.phone = data.phone;
+    //         formData.d_o_b = data.d_o_b;
+    //         formData.current_location = data.current_location;
+    //         formData.total_exp = data.total_exp;
+    //         formData.resume = data.resume;
+    //         formData.status = data.status;
+
+    //         try {
+    //             let response = await axios1.post(url, formData)
+    //             // console.log(response, "response")
+
+    //             if (response.data.status == 1) {
+    //                 // console.log("response.data", response.data)
+    //                 toast.success(response.data.message)
+    //                 setLoading(false)
+    //                 setError('')
+    //                 reset();
+    //                 router.push('./');
 
 
-                }
-                else {
-                    setLoading(false)
-                    toast.error(response.data.message)
-                    setError(response.data.message)
-                }
-            } catch (err: any) {
-                setLoading(false)
-                if (err.errors && err.errors.length > 0) {
-                    const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
-                    toast.error(errorMessage || "Please try again");
-                } else {
-                    setError(err.message || "Please try again");
-                    toast.error(err.message || "Please try again");
-                }
+    //             }
+    //             else {
+    //                 setLoading(false)
+    //                 toast.error(response.data.message)
+    //                 setError(response.data.message)
+    //             }
+    //         } catch (err: any) {
+    //             setLoading(false)
+    //             if (err.errors && err.errors.length > 0) {
+    //                 const errorMessage = err.errors[0].msg;
+    //                 setError(errorMessage || "Please try again");
+    //                 toast.error(errorMessage || "Please try again");
+    //             } else {
+    //                 setError(err.message || "Please try again");
+    //                 toast.error(err.message || "Please try again");
+    //             }
 
-            }
-        }
+    //         }
+    //     }
+    // }
+
+
+    const handleFilechange = () => {
+
+        return("")
     }
-
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
+            <form  encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
 
-                <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='job_location_id'
                             control={control}
@@ -254,7 +262,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
-                                
+
                                     options={joblocations}
                                     loading={!joblocations.length}
                                     value={field.value}
@@ -275,7 +283,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                  
+
                     <Grid item xs={12} sm={4}>
                         <Controller
                             name='jobs_position_id'
@@ -284,7 +292,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
-                                
+
                                     options={jobposition}
                                     loading={!jobposition.length}
                                     value={field.value}
@@ -402,25 +410,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='resume'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Resume'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.resume)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.resume && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                   
 
                     <Grid item xs={12} sm={4}>
                         <Controller
@@ -428,42 +418,50 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                <DatePickerWrapper>
-                                <DatePicker
-                                    selected={value}
-                                    id='basic-input'
-                                    showYearDropdown
-                                    showMonthDropdown
-                                    dateFormat='MMMM d, yyyy'
-                                    popperPlacement={popperPlacement}
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Date of birth'
                                     onChange={onChange}
-                                    placeholderText='Click to select a date'
-                                    customInput={<CustomInput label='Date of birth' 
-                                    // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
-                                    />}
-
-
+                                    placeholder=''
+                                    error={Boolean(errors.d_o_b)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.d_o_b && { helperText: 'This field is required' })}
                                 />
-                            </DatePickerWrapper>
                             )}
                         />
                     </Grid>
 
+
                     <Grid item xs={12} sm={4}>
-                        <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
-                                <Controller
-                                    name='status'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
-                                            <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
-                                            <FormControlLabel value='Published' control={<Radio />} label='Published' />
-                                        </RadioGroup>
-                                    )}
-                                />
-                              
+                        <FileUpload
+                            isAddMode={isAddMode}
+                            olddata={!isAddMode && olddata.resume ? olddata.resume : ""}
+                           onFileChange={handleFilechange}
+                            maxFiles={1}
+                            maxSize={2000000}
+                            fileNames={""}
+                            label="View Resume"
+                           
+                        />
                     </Grid>
+                    
+
+                    {/* <Grid item xs={12} sm={4}>
+                        <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
+                        <Controller
+                            name='status'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                    <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                    <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                </RadioGroup>
+                            )}
+                        />
+
+                    </Grid> */}
 
 
 
@@ -471,7 +469,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         {error ? <Alert severity='error'>{error}</Alert> : null}
                     </Grid>
 
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <DialogActions
                             sx={{
                                 justifyContent: 'center',
@@ -481,7 +479,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         >
 
                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                               
+
                                 Submit
                                 {loading ? (
                                     <CircularProgress
@@ -494,9 +492,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 ) : null}
                             </Button>
-                         
+
                         </DialogActions>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </form >
         </>

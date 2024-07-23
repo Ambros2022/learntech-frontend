@@ -68,7 +68,7 @@ const Edituserlayout = () => {
               p: theme => theme.spacing(2, 5, 4, 5)
             }}
           >
-            <h5>Edit Job Enquiry</h5>
+            <h5>View Job Enquiry</h5>
             <Link href={`../`} >
               <Button variant='contained'>View All jobenquiry</Button>
             </Link>

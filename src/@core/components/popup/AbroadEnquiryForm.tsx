@@ -67,7 +67,7 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
                 course: '',
                 college_name: '',
                 description: '',
-               
+
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -84,24 +84,25 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
                         <ErrorMessage name="name" component="div" className="error text-danger" />
                     </div>
                     <div className="mb-3">
-                        <PhoneInputField name="contact_number" />
-                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                    </div>
-                    <div className="mb-3">
                         <Field type="email" name="email" placeholder="Email ID" className="form-control" />
                         <ErrorMessage name="email" component="div" className="error text-danger" />
                     </div>
+                    <div className="mb-3">
+                        <PhoneInputField name="contact_number" />
+                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
+                    </div>
+
                     <div className="mb-3">
                         <Field type="text" name="location" placeholder="Location" className="form-control" />
                         <ErrorMessage name="location" component="div" className="error text-danger" />
                     </div>
                     <div className="mb-3">
-                        <Field type="text" name="course" placeholder="Preferred Course" className="form-control" />
-                        <ErrorMessage name="course" component="div" className="error text-danger" />
-                    </div>
-                    <div className="mb-3">
                         <Field type="text" name="college_name" placeholder="Preferred College" className="form-control" />
                         <ErrorMessage name="college_name" component="div" className="error text-danger" />
+                    </div>
+                    <div className="mb-3">
+                        <Field type="text" name="course" placeholder="Preferred Course" className="form-control" />
+                        <ErrorMessage name="course" component="div" className="error text-danger" />
                     </div>
                     <div className="mb-3">
                         <Field as="textarea" name="description" placeholder="Type your message" className="form-control" />

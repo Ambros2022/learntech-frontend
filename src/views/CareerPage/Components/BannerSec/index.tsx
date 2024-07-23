@@ -3,6 +3,12 @@ import Link from 'next/link'
 import React from 'react'
 
 const BannerSec = () => {
+    const handleScrollToCurrentOpening = () => {
+        const currentOpeningSection = document.getElementById('currentOpeningSection');
+        if (currentOpeningSection) {
+            currentOpeningSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
     return (
         <>
             <section className='careerSec'>
@@ -13,7 +19,8 @@ const BannerSec = () => {
                                 <div className="align-content-center w-75">
                                     <h1 className='fw-bold text-blue'>WE ARE HIRING</h1>
                                     <h6 className='text-black mb-3'>Come join one of the Best Educational Service Provider Firms as rated by ISO 9001:2008 Certified.</h6>
-                                    <a className='btn currentOpeningBtn'>Current Openings</a>
+                                    {/* <a className='btn currentOpeningBtn'>Current Openings</a> */}
+                                    <button onClick={handleScrollToCurrentOpening} className='btn currentOpeningBtn'>Current Openings</button>
                                 </div>
                             </div>
                         </div>
