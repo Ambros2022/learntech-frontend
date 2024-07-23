@@ -54,7 +54,8 @@ function OverviewSection({ data, colleges, exams }) {
               <div className="row imgCardConCrs mb-3">
                 <div className="col-12 mb-3 px-0">
                   <div className='dental-crs-img flex-column d-flex justify-content-center'>
-                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`} className='' width={300} height={300} alt={`${data.name}-course-img`} />
+                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`} className='img-fluid' width={600} height={600} alt={`${data.name}-course-img`} />
+                    {/* <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`} className='img-fluid' width={600} height={600} alt={`${data.name}-course-img`} /> */}
                     {/* <Image src='/images/icons/dental-course-img.jpg' className='' width={500} height={500} alt="dental-course-img" /> */}
                     <h6 className='text-center mb-3'>Are you interested in this course?</h6>
                     <GlobalEnquiryForm className="chkEligBtn mb-3 btn" buttonText={'Check Elgibility'} />
