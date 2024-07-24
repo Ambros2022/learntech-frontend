@@ -8,13 +8,25 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import ExpertSection from './Components/ExpertSection';
 
-function SubInnerCoursePage({ Streamid, Courseslug }) {
+interface Pagedata {
+  meta_title?: string;
+  meta_description?: string;
+  meta_keyword?: string;
+  generalcoursefaqs?: { questions: string; answers: string }[];
+}
+
+interface SubInnerCoursePageProps {
+  Streamid: string;
+  Courseslug: string;
+}
+
+const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Courseslug }) => {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
-  const [pagedata, setPagedata] = useState(null);
+  const [pagedata, setPagedata] = useState<Pagedata | null>(null);
   const [loading, setLoading] = useState(true);
-  const [colleges, setColleges] = useState([]);
-  const [exams, setExams] = useState([]);
+  const [colleges, setColleges] = useState<any[]>([]);
+  const [exams, setExams] = useState<any[]>([]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -67,6 +79,15 @@ function SubInnerCoursePage({ Streamid, Courseslug }) {
     }
   }, [Streamid, isMountedRef]);
 
+  const formattedData = pagedata?.generalcoursefaqs?.map((item) => ({
+    "@type": "Question",
+    "name": item.questions,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answers,
+    },
+  })) || [];
+
   useEffect(() => {
     getPagedata();
     getColleges();
@@ -75,6 +96,19 @@ function SubInnerCoursePage({ Streamid, Courseslug }) {
 
   return (
     <>
+      <Head>
+        <title>{pagedata?.meta_title || "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
+        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
+        <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
+        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": formattedData,
+          }
+        )}} />
+      </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />}
       <PopularCourses />

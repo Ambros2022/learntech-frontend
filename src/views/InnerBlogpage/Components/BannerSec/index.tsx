@@ -5,10 +5,10 @@ import React from 'react'
 const BannerSec = ({ data }) => {
     return (
         <>
-            <section className='newsBannerSec'>
+            <section className='newsBannerSec blogBannerSec'>
                 <div className='position-relative'>
                     <div>
-                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={900} height={400} alt='banner-img' className='position-relative' />
+                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={900} height={500} alt='banner-img' className='position-relative' />
                     </div>
                     {/* <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
                         <div className="container h-100">
@@ -27,7 +27,7 @@ const BannerSec = ({ data }) => {
                 </div>
             </section>
             <section className='bg-white'>
-                <div className='container py-2 linkFontSize'>
+                <div className='container py-3 linkFontSize'>
                     <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/blogs" className='text-black'> Blogs <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>{data.meta_title}</span>
                 </div>
             </section>

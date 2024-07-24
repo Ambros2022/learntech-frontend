@@ -54,33 +54,45 @@ function OverviewSection({ data, colleges, exams }) {
               <div className="row imgCardConCrs mb-3">
                 <div className="col-12 mb-3 px-0">
                   <div className='dental-crs-img flex-column d-flex justify-content-center'>
-                    <Image src='/images/icons/dental-course-img.jpg' className='' width={500} height={500} alt="dental-course-img" />
+                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`} className='img-fluid' width={600} height={600} alt={`${data.name}-course-img`} />
+                    {/* <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`} className='img-fluid' width={600} height={600} alt={`${data.name}-course-img`} /> */}
+                    {/* <Image src='/images/icons/dental-course-img.jpg' className='' width={500} height={500} alt="dental-course-img" /> */}
                     <h6 className='text-center mb-3'>Are you interested in this course?</h6>
                     <GlobalEnquiryForm className="chkEligBtn mb-3 btn" buttonText={'Check Elgibility'} />
                   </div>
                 </div>
-                <div className="col-12 cardConBrdr p-3 mb-3 overflow-y-scroll bg-skyBlue " style={{ height: '460px' }}>
-                  <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Top {data?.streams?.name} Colleges</h5>
-                  {colleges.map((college, index) => (
-                    <Link href={`/college/${college.id}/${college.slug}`}>
-                      <div key={index} className="card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
-                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
-                        <h6 className='align-self-center mb-0 text-black ms-2 fw-bold'>{college.name}</h6>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-                <div className="col-12 cardConBrdr p-3 overflow-y-scroll bg-skyBlue " style={{ height: '460px' }}>
-                  <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Top {data?.streams?.name} Exams</h5>
-                  {exams.map((exam, index) => (
-                    <Link href={`/exam/${exam.id}/${exam.slug}`}>
-                      <div key={index} className="card p-2 mb-3 bg-skyBlue hover-card d-flex flex-row">
-                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.cover_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
-                        <h6 className='align-self-center fw-bold text-black ms-2 mb-0'>{exam.exam_title}</h6>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                {colleges && colleges.length > 0 && (
+                  <>
+                    <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Top {data?.streams?.name} Colleges</h5>
+                    <div className="col-12 cardConBrdr p-3 mb-3 bg-skyBlue  overflow-y-auto" style={{ maxHeight: 'calc(6 * 150px)' }}>
+                      {colleges.map((college, index) => (
+                        <Link href={`/college/${college.id}/${college.slug}`}>
+                          <div key={index} className="mx-1 row card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
+                            <div className="col-md-5 align-content-center topCollegeImg mb-md-0 mb-3">
+                              <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`} width={300} height={300} className='img-fluid rounded' alt='clg-img' />
+                            </div>
+                            <div className="col-md-7 align-content-center">
+                              <h6 className='align-self-center mb-0 text-black ms-2 fw-bold'>{college.name}</h6>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </>)}
+                {exams && exams.length > 0 && (
+                  <>
+                    <h5 className='fw-bold text-blue pt-3 mb-3 text-center'>Top {data?.streams?.name} Exams</h5>
+                    <div className="col-12 cardConBrdr p-3 bg-skyBlue  overflow-y-auto" style={{ maxHeight: 'calc(6 * 150px)' }}>
+                      {exams?.map((exam, index) => (
+                        <Link href={`/exam/${exam?.id}/${exam.slug}`}>
+                          <div key={index} className="card p-2 mb-3 bg-skyBlue hover-card d-flex flex-row">
+                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.cover_image}`} width={90} height={60} className='img-fluid align-self-center' alt='clg-img' />
+                            <h6 className='align-self-center fw-bold text-black ms-2 mb-0'>{exam.exam_title}</h6>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </>)}
               </div>
             </div>
           </div>

@@ -16,6 +16,7 @@ import LinkdinLogin from './LinkedInLogin';
 import TwitterLogin from './TwitterLogin';
 import router from 'next/router';
 
+
 interface FormValues {
   email: string;
   password: string;
@@ -149,6 +150,7 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
             <small>Log In</small>
           </div>
           <div className="d-flex justify-content-between mb-3 flex-wrap">
+
             <GoogleLogin />
             {/* <FacebookLogin onLogin={undefined} /> */}
             <TwitterLogin />

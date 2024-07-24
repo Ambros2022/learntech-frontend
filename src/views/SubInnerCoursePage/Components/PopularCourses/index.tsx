@@ -48,18 +48,20 @@ function PopularCourses() {
   function CardComponent({ name, id, slug, logo }: CourseItem) {
     return (
       <Link href={`/course/${id}/${slug}`}>
-        <div className='topCourseConCarousel'>
-          <div className="card text-center hover-card d-flex mx-2 border-1">
-            <div className="row flex-fill">
-              <div className="col-12 text-center text-start px-0">
-                <div className="card-body d-flex flex-column">
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} width={50} height={50} alt={`${name} logo`} className="mx-auto img-fluid" />
-                  <h6 className="card-title align-self-center flex-fill mt-3">{name}</h6>
-                </div>
+          <div className='courseConCarousel'>
+        <div className="card hover-card text-center d-flex mx-2">
+          <div className="row flex-fill">
+            <div className="col-12">
+              <Image width={50} height={50} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${name}-logo`} />
+            </div>
+            <div className="col-12 text-center text-start px-0">
+              <div className="card-body d-flex text-center justify-content-center">
+                <h6 className="card-title flex-fill text-truncate">{name}</h6>
               </div>
             </div>
           </div>
-        </div >
+        </div>
+      </div>
       </Link>
     );
   }
