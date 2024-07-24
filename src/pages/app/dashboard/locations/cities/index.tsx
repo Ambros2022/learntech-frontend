@@ -179,6 +179,8 @@ type DataGridRowType = {
 
 const SecondPage = () => {
   // ** States
+  const [states, setStates] = useState([]);
+  const [state_id, setState_id] = useState('')
   const [reloadpage, setReloadpage] = useState("0");
   const [city_id, setcity_id] = useState('')
   const [loading, setLoading] = useState(true);
@@ -197,6 +199,30 @@ const SecondPage = () => {
 
   params['page'] = 1;
   params['size'] = 10000;
+
+
+
+    //get all states
+    const getstates = useCallback(async () => {
+      try {
+        const roleparams: any = {};
+        roleparams['size'] = 10000;
+        const response = await axios1.get('api/admin/state/get/', { params: roleparams });
+  
+        setStates(response.data.data);
+  
+      } catch (err) {
+        console.error(err);
+      }
+    }, [isMountedRef]);
+  
+  
+    useEffect(() => {
+  
+      getstates();
+      // getcourses();
+  
+    }, [getstates]);
 
   const handleReloadPage = useCallback(() => {
     setLoading(true);
@@ -252,7 +278,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, city_id: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, fieldname: string, state_id: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -269,7 +295,7 @@ const SecondPage = () => {
             size,
             page,
             fieldname,
-            city_id,
+            state_id,
 
           },
         })
@@ -305,8 +331,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, fieldname, city_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, fieldname, city_id])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, fieldname, state_id)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, fieldname, state_id])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -345,6 +371,41 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
+        <CardHeader title="Search Filters" />
+          <CardContent>
+            <Grid container spacing={6}>
+              <Grid item sm={4} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select States"
+                  value={state_id}
+                  onChange={(e: any) => {
+                    setState_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select State</MenuItem>
+                  {states && states.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {states.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
+
+              <Grid item sm={4} xs={12}>
+                <Button sx={{ mt: 0 }} variant="contained" color='error'
+                  onClick={(e: any) => {
+                    setState_id('');
+                  }}
+                  startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+              </Grid>
+            </Grid>
+          </CardContent>
 
           <DataGrid
             autoHeight

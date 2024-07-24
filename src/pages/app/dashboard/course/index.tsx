@@ -13,7 +13,9 @@ import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
 import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import { Button, CardContent, CardHeader, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
 
 
 // ** Icon Imports
@@ -23,6 +25,7 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
+import CustomTextField from 'src/@core/components/mui/text-field'
 
 
 
@@ -142,8 +145,13 @@ type DataGridRowType = {
 
 const SecondPage = () => {
   // ** States
-
-
+  const [colleges, setColleges] = useState([]);
+  const [college_id, setCollege_id] = useState('')
+  const [generalCourses, setGeneralCourses] = useState([]);
+  const [course_type, setCourse_type] = useState('');
+  const [status, setStatus] = useState('');
+  const [general_course_id, setGeneral_course_id] = useState('')
+  
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -156,6 +164,7 @@ const SecondPage = () => {
   const [columnname, setColumnname] = useState<string>('slug')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
+  const isMountedRef = useIsMountedRef();
 
   params['page'] = 1;
   params['size'] = 10000;
@@ -176,9 +185,9 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.college.name}
-              </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.college.name}
+          </Typography>
         )
       }
     },
@@ -197,9 +206,9 @@ const SecondPage = () => {
         );
       }
     },
-    
 
-   
+
+
     {
       flex: 0.175,
       minWidth: 100,
@@ -255,7 +264,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string, college_id: string, general_course_id: string, status: string , course_type: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -272,6 +281,10 @@ const SecondPage = () => {
             size,
             searchtext,
             searchfrom,
+            college_id,
+            general_course_id,
+            status,
+            course_type,
 
           },
         })
@@ -302,8 +315,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname, college_id,  general_course_id , status, course_type)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, college_id, general_course_id, status , course_type])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -338,11 +351,152 @@ const SecondPage = () => {
 
   const AddButtonComponent = <AddButtonToolbar />;
 
+  //get all courses
+  const getcourses = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/generalcourse/get', { params: roleparams });
+
+      setGeneralCourses(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+
+
+   //get all colleges
+   const getcolleges = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/college/get', { params: roleparams });
+
+      setColleges(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+
+
+  useEffect(() => {
+    getcourses();
+    getcolleges();
+  }, [getcourses]);
+
+
   return (
     <Grid container spacing={6}>
 
       <Grid item xs={12}>
         <Card>
+          <CardHeader title="Search Filters" />
+          <CardContent>
+            <Grid container spacing={6}>
+            <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select College"
+                  value={college_id}
+                  onChange={(e: any) => {
+                    setCollege_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select College</MenuItem>
+                  {colleges && colleges.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {colleges.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Course"
+                  value={general_course_id}
+                  onChange={(e: any) => {
+                    setGeneral_course_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select Courses</MenuItem>
+                  {generalCourses && generalCourses.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {generalCourses.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
+
+
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Course Type"
+                  value={course_type}
+                  onChange={(e: any) => {
+                    setCourse_type(e.target.value);
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select Course Type</MenuItem>
+                  <MenuItem value="UG">UG</MenuItem>
+                  <MenuItem value="PG">PG</MenuItem>
+                  <MenuItem value="Diploma">Diploma</MenuItem>
+                  <MenuItem value="Doctorate">Doctorate</MenuItem>
+                  <MenuItem value="Default">Default</MenuItem>
+                </CustomTextField>
+              </Grid>
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Status"
+                  value={status}
+                  onChange={(e: any) => {
+                    setStatus(e.target.value);
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select status</MenuItem>
+                  <MenuItem value="Draft">Draft</MenuItem>
+                  <MenuItem value="Published">Published</MenuItem>
+                </CustomTextField>
+              </Grid>
+              <Grid item sm={3} xs={12}>
+                <Button sx={{ mt: 0 }} variant="contained" color='error'
+                  onClick={(e: any) => {
+                    setGeneral_course_id('');
+                    setCourse_type('');
+                    setStatus('');
+                    setCollege_id('');
+                    // setCountry_id('');
+                    // setStatus('');
+                  }}
+                  startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+              </Grid>
+            </Grid>
+          </CardContent>
 
           <DataGrid
             autoHeight

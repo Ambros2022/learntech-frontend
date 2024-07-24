@@ -13,7 +13,7 @@ import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
 import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import { Button, CardContent, CardHeader, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
 
 
 // ** Icon Imports
@@ -23,6 +23,9 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
+import CustomTextField from 'src/@core/components/mui/text-field'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+
 
 
 
@@ -143,7 +146,10 @@ type DataGridRowType = {
 const SecondPage = () => {
   // ** States
 
-
+  const [countries, setCountries] = useState([]);
+  const [country_id, setCountry_id] = useState('')
+  const [type, setType] = useState('');
+  const [status, setStatus] = useState('');
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -156,6 +162,7 @@ const SecondPage = () => {
   const [columnname, setColumnname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
+  const isMountedRef = useIsMountedRef();
 
   params['page'] = 1;
   params['size'] = 10000;
@@ -180,14 +187,14 @@ const SecondPage = () => {
         return (
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(params)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.name}
-            </Typography>
+            {renderClient(params)}
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+                {row.name}
+              </Typography>
 
+            </Box>
           </Box>
-        </Box>
 
 
         )
@@ -202,16 +209,16 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-          
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.type}
-              </Typography>
 
-            
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.type}
+          </Typography>
+
+
         )
       }
     },
-    
+
 
 
     {
@@ -225,16 +232,16 @@ const SecondPage = () => {
         return (
 
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.country.name}
-          </Typography>
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.state.name}
+            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+              {row.country.name}
+            </Typography>
+            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+              {row.state.name}
 
 
-          </Typography>
+            </Typography>
 
-        </Box>
+          </Box>
 
 
 
@@ -278,7 +285,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string, country_id: string, type: string, status: string,) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -295,6 +302,9 @@ const SecondPage = () => {
             size,
             searchtext,
             searchfrom,
+            country_id,
+            type,
+            status,
 
           },
         })
@@ -325,8 +335,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname, country_id, type, status)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, country_id, type, status])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -361,11 +371,112 @@ const SecondPage = () => {
 
   const AddButtonComponent = <AddButtonToolbar />;
 
+
+  //get all countries
+  const getcountry = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/countries/get', { params: roleparams });
+
+      setCountries(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+
+  useEffect(() => {
+
+    getcountry();
+    // getcourses();
+
+  }, [getcountry]);
+
+
   return (
     <Grid container spacing={6}>
 
       <Grid item xs={12}>
         <Card>
+          <CardHeader title="Search Filters" />
+          <CardContent>
+            <Grid container spacing={6}>
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Country"
+                  value={country_id}
+                  onChange={(e: any) => {
+                    setCountry_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select Country</MenuItem>
+                  {countries && countries.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {countries.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
+
+
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Type"
+                  value={type}
+                  onChange={(e: any) => {
+                    setType(e.target.value);
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select Type</MenuItem>
+                  <MenuItem value="college">College</MenuItem>
+                  <MenuItem value="university">University</MenuItem>
+                  <MenuItem value="board">Board</MenuItem>
+                </CustomTextField>
+              </Grid>
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Status"
+                  value={status}
+                  onChange={(e: any) => {
+                    setStatus(e.target.value);
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select status</MenuItem>
+                  <MenuItem value="Draft">Draft</MenuItem>
+                  <MenuItem value="Published">Published</MenuItem>
+                </CustomTextField>
+              </Grid>
+
+              <Grid item sm={3} xs={12}>
+                <Button sx={{ mt: 0 }} variant="contained" color='error'
+                  onClick={(e: any) => {
+                    setCountry_id('');
+                    setType('');
+                    setStatus('');
+                    
+                  }}
+                  startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+              </Grid>
+            </Grid>
+          </CardContent>
 
           <DataGrid
             autoHeight

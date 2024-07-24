@@ -212,7 +212,7 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('desc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
+  const [searchfrom, setSearchfrom] = useState<any>('name,email')
   const [columnname, setColumnname] = useState<string>('updated_at')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
