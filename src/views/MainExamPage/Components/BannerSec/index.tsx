@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PopularCourses from '../UpcomingExamsSec'
 import Link from 'next/link';
-import {  CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
+import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import axios1 from 'axios';
 import axios from 'src/configs/axios';
 import SearchIcon from '@mui/icons-material/Search';
@@ -81,10 +81,10 @@ function BannerSection() {
 
 
 
-    return (
-        <>
-            <section className='collegeBannerCon bg-blue examBannerCon'>
-            <div className="position-relative">
+  return (
+    <>
+      <section className='collegeBannerCon bg-blue examBannerCon'>
+        <div className="position-relative">
           <div>
             <Image src='/images/icons/Banner BG.png' width={1400} height={430} alt='banner-img' className='position-relative w-100' />
           </div>
@@ -92,7 +92,7 @@ function BannerSection() {
             <div className='d-flex justify-content-center w-100 '>
               <div className='align-content-center w-100 container'>
                 <h1 className='fw-bold text-center text-white mb-3 mt-4'>
-                  Entrance Exams in India
+                  Academic Entrance Exams in India
                 </h1>
                 <div className="row justify-content-center align-items-center">
                   <div className="col-md-7 col-12 mb-3 ">

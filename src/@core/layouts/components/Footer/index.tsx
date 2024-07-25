@@ -44,9 +44,10 @@ const Footer = () => {
           </div>
           <div className="row">
             <div className="col-md-4 text-white">
-              <p className='' style={{fontWeight:'300', fontSize:'14px'}}>Dream. Apply. Achieve.
-                Our Expert Admission Guidance
-                is the Bridge that Connects You
+              <p className='d-flex justify-content-start text-center'>
+                Dream. Apply. Achieve.<br></br>
+                Our Expert Admission Guidance<br></br>
+                is the Bridge that Connects You<br></br>
                 to a Brighter Future.</p>
               <span className="footerIcon">
                 <div className="mb-3">

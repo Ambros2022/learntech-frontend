@@ -4,9 +4,9 @@ import 'react-multi-carousel/lib/styles.css';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const responsive = {
-  superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 8 },
-  desktop: { breakpoint: { max: 1024, min: 768 }, items: 6 },
-  tablet: { breakpoint: { max: 768, min: 464 }, items: 4 },
+  superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 4 },
+  desktop: { breakpoint: { max: 1024, min: 768 }, items: 3 },
+  tablet: { breakpoint: { max: 768, min: 464 }, items: 2 },
   mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
 };
 
@@ -42,7 +42,7 @@ const CustomCarousel = ({ items, setActiveTab }) => {
       responsive={responsive}
       renderButtonGroupOutside
       customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
-      className="pt-2 text-center mx-md-0 mx-5 infoBtn justify-content-between d-flex"
+      className="pt-2 text-center infoBtn infoBtn2 justify-content-between d-flex"
     >
       {items.map((item, index) => (
         <button
@@ -52,8 +52,8 @@ const CustomCarousel = ({ items, setActiveTab }) => {
           style={{
             whiteSpace: 'nowrap',
             overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            maxWidth: '80%'
+            // textOverflow: 'ellipsis',
+            width: '250px',
           }}
         >
           {item.label}

@@ -60,7 +60,7 @@ function AssociatedClg() {
       const roleparams: any = {};
       roleparams['page'] = 1;
       roleparams['size'] = 10;
-      const response = await axios1.get('api/website/colleges/get', { params: roleparams });
+      const response = await axios1.get('api/website/colleges/get?is_associated=1', { params: roleparams });
 
       setColleges(response.data.data);
     } catch (err) {

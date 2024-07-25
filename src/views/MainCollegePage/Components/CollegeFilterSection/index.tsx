@@ -552,7 +552,7 @@ function CollegeFilterSection() {
         return (
             <div>
                 {options.map((optionGroup, index) => (
-                    <div key={index} style={{ cursor: 'pointer' }} className="row bg-white gx-0 p-3 my-3 mx-2">
+                    <div key={index} style={{ cursor: 'pointer' }} className="row rounded bg-white gx-0 p-3 my-3 mx-2">
 
                         <div className="col-10" onClick={() => toggleAccordion(optionGroup.id)}>
                             <h5 className='text-blue'>
@@ -657,7 +657,7 @@ function CollegeFilterSection() {
         });
     });
 
-    const PromoAddBanner = ({ url }) => {
+    const PromoAddBanner = ({ url, title, description }) => {
 
         return (
             <>
@@ -677,8 +677,8 @@ function CollegeFilterSection() {
                                 </div>
                                 <div className="col-md-8">
                                     <div className="card-body" style={{ zIndex: '200' }}>
-                                        <h5 className="card-text">PES University</h5>
-                                        <h3 className="card-title fw-bold">B.Tech 2024 - Admissions Open</h3>
+                                        <h5 className="card-text">{description}</h5>
+                                        <h3 className="card-title fw-bold">{title}</h3>
                                         <Link href='/colleges' className='btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
                                     </div>
                                 </div>
@@ -697,7 +697,7 @@ function CollegeFilterSection() {
             <div className='bg-white py-3'>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 col-xl-3 col-md-4 mb-3 mb-lg-0 bg-skyBlue">
+                        <div className="col-lg-3 col-xl-3 col-md-4 mb-3 mb-lg-0 bg-skyDarkBlue rounded">
                             <h5 className='text-blue fw-bold text-md-start text-center px-3 pt-3'>Found {total} Colleges</h5>
                             <MultiSelectOptions options={options} />
                         </div>
@@ -713,7 +713,7 @@ function CollegeFilterSection() {
                                     </button>
                                 </div>
                             )}
-                            {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} />}
+                            {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} description={promoban[0].description} title={promoban[0].title}/>}
                             <StateButtons
                                 options={options.find(option => option.id === 'state')?.options || []}
                                 setSelectedCheckboxes={setSelectedCheckboxes}

@@ -162,7 +162,7 @@ const BrowsebyCategorySec = () => {
                                     </div>
                                     <div className="col-lg-5 col-xl-4">
                                         <div className='bg-skyBlue px-lg-5 px-md-3 px-3 rounded'>
-                                            <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h5>
+                                            <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
                                             <SideContactUsForm />
                                         </div>
                                         <NewsList newsItems={newsData} />

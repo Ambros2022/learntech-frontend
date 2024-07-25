@@ -191,7 +191,6 @@ const Header = () => {
                 <span className="mailHover"><Image className="ms-2" src="/images/icons/email-icon.svg" width={26} height={22} alt="email-icon" />
 
                   <a href="mailto:info@learntechww.com" className="mx-2" style={{ color: '#274896' }}>info@learntechww.com</a></span>
-
                 <button onClick={openModal} className="ms-2 btn reviewBtn">
                   Write a Review
                 </button>

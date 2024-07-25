@@ -5334,6 +5334,11 @@ functions-have-names@^1.2.3:
   resolved "https://registry.npmjs.org/functions-have-names/-/functions-have-names-1.2.3.tgz"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
+gapi-script@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/gapi-script/-/gapi-script-1.2.0.tgz"
+  integrity sha512-NKTVKiIwFdkO1j1EzcrWu/Pz7gsl1GmBmgh+qhuV2Ytls04W/Eg5aiBL91SCiBM9lU0PMu7p1hTVxhh1rPT5Lw==
+
 get-caller-file@^2.0.5:
   version "2.0.5"
   resolved "https://registry.npmjs.org/get-caller-file/-/get-caller-file-2.0.5.tgz"
@@ -7148,6 +7153,18 @@ react-fast-compare@^3.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.2.tgz"
   integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
 
+react-google-button@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.npmjs.org/react-google-button/-/react-google-button-0.8.0.tgz"
+  integrity sha512-0u6mbDcTUmWzgXsld8FJpbrXP+zDsNQVYPIt225aBqwgJ/CdrDiep1PZOpnyntyjsejWG0TtQr6uZB4eIaXlJQ==
+  dependencies:
+    prop-types "^15.8.1"
+
+react-google-login-component@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.npmjs.org/react-google-login-component/-/react-google-login-component-0.9.3.tgz"
+  integrity sha512-ZzJhLxv9fmGVWbshqi3dOiZsc06tlYm0/Sux+loZleuBxGztnjSuhN9oORF5DOulbZ4UthPg2qJcIVbZ229RSg==
+
 react-google-login@^5.2.2:
   version "5.2.2"
   resolved "https://registry.npmjs.org/react-google-login/-/react-google-login-5.2.2.tgz"
@@ -7155,6 +7172,11 @@ react-google-login@^5.2.2:
   dependencies:
     "@types/react" "*"
     prop-types "^15.6.0"
+
+react-google-one-tap-login@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/react-google-one-tap-login/-/react-google-one-tap-login-0.1.1.tgz"
+  integrity sha512-RCbOfR3Z7VcRae4AzrLoBfY/aqqdN24pkQeNz9CJ0W65C9SY3vAwF0Yp8mwpeFwsugaZ5b1HZsfhUYWtb3IMrw==
 
 react-hook-form@7.43.9:
   version "7.43.9"
@@ -7439,6 +7461,11 @@ react@16.14.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
+
+reactjs-social-login@^2.6.3:
+  version "2.6.3"
+  resolved "https://registry.npmjs.org/reactjs-social-login/-/reactjs-social-login-2.6.3.tgz"
+  integrity sha512-i/pcyJPtlVpHoPRr/j5/KjaP/GNxAInnnHDk0PD2Zo0B3cMdvr0ZiGC/GMjOKAAgKCujyniDf/OiZ7c6MrOLQg==
 
 read-cache@^1.0.0:
   version "1.0.0"
