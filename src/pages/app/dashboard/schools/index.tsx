@@ -13,7 +13,7 @@ import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
 import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import { Button, CardContent, CardHeader, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
 
 
 // ** Icon Imports
@@ -23,6 +23,8 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
+import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import CustomTextField from 'src/@core/components/mui/text-field'
 
 
 
@@ -143,7 +145,9 @@ type DataGridRowType = {
 const SecondPage = () => {
   // ** States
 
-
+  const [schoolboards, setSchoolboards] = useState([]);
+  const [school_board_id, setSchool_board_id] = useState('')
+  const [status, setStatus] = useState('');
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -156,9 +160,33 @@ const SecondPage = () => {
   const [columnname, setColumnname] = useState<string>('id')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
+  const isMountedRef = useIsMountedRef();
+
 
   params['page'] = 1;
   params['size'] = 10000;
+
+
+  //get all schoolboards
+  const getschoolbaards = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/schoolboard/get', { params: roleparams });
+
+      setSchoolboards(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+
+
+  useEffect(() => {
+    getschoolbaards();
+  }, [getschoolbaards]);
+
 
   const handleReloadPage = useCallback(() => {
     setLoading(true);
@@ -308,7 +336,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string , school_board_id: string, status: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -325,6 +353,8 @@ const SecondPage = () => {
             size,
             searchtext,
             searchfrom,
+            school_board_id,
+            status,
 
           },
         })
@@ -355,8 +385,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname, school_board_id, status)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname , school_board_id, status])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -396,6 +426,64 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
+        <CardHeader title="Search Filters" />
+          <CardContent>
+            <Grid container spacing={6}>
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select School Board"
+                  value={school_board_id}
+                  onChange={(e: any) => {
+                    setSchool_board_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select School Board</MenuItem>
+                  {schoolboards && schoolboards.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {schoolboards.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
+
+
+             
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Status"
+                  value={status}
+                  onChange={(e: any) => {
+                    setStatus(e.target.value);
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select status</MenuItem>
+                  <MenuItem value="Draft">Draft</MenuItem>
+                  <MenuItem value="Published">Published</MenuItem>
+                </CustomTextField>
+              </Grid>
+
+              <Grid item sm={3} xs={12}>
+                <Button sx={{ mt: 0 }} variant="contained" color='error'
+                  onClick={(e: any) => {
+                    setSchool_board_id('');
+                    setStatus('');
+                   
+                  }}
+                  startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+              </Grid>
+            </Grid>
+          </CardContent>
 
           <DataGrid
             autoHeight

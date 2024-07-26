@@ -7,7 +7,11 @@ import BankSec from './Components/BankSec'
 import FaqSec from '../StudyInUsaPage/Components/FaqSec'
 import LoanCalculator from './Components/LoanCalculator'
 
+
+
+
 const EducationLoanPage = () => {
+
     return (
         <>
             <BannerSec />

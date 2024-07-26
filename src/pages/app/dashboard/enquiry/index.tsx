@@ -166,7 +166,6 @@ const SecondPage = () => {
   }, []);
 
   let columns: GridColDef[] = [
-
     {
       flex: 0.125,
       minWidth: 100,
@@ -197,9 +196,7 @@ const SecondPage = () => {
         );
       }
     },
-    
-
-   
+  
     {
       flex: 0.4,
       minWidth: 100,

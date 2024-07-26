@@ -479,7 +479,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field: { value, onChange } }) => (
                                 <CustomTextField
                                     fullWidth
-                                    type='number'
                                     value={value}
                                     label='Amount'
                                     onChange={onChange}

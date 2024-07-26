@@ -55,6 +55,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
+    const [fileNamesbanner, setFileNamesbanner] = useState<any>([]);
+    const [selectedbannner, setSelectedbanner] = useState('');
     const [fileNameslogo, setFileNameslogo] = useState<any>([]);
     const [selectedlogo, setSelectedlogo] = useState('');
     const [streamsdata, setStreamsdata] = useState([])
@@ -81,6 +83,16 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const handleFileChangephoto = (files: any[]) => {
         setSelectedphoto(files[0]);
         setFileNamesphoto(
+            files.map((file) => ({
+                name: file.name,
+                preview: URL.createObjectURL(file),
+            }))
+        );
+
+    };
+    const handleFileChangebanner = (files: any[]) => {
+        setSelectedbanner(files[0]);
+        setFileNamesbanner(
             files.map((file) => ({
                 name: file.name,
                 preview: URL.createObjectURL(file),
@@ -172,7 +184,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         } catch (err) {
             console.error(err);
         }
-    }, []);
+    }, [isMountedRef]);
 
 
     useEffect(() => {
@@ -211,7 +223,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('accept_colleges', data.accept_colleges);
             formData.append('promo_banner_status', data.promo_banner_status);
             formData.append('cover_image', selectedphoto);
-            formData.append('promo_banner', selectedlogo);
+            formData.append('logo', selectedlogo);
+            formData.append('promo_banner', selectedbannner);
             formData.append('status', data.status);
 
 
@@ -290,7 +303,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             //     return false;
 
             // }
-            formData.append('promo_banner', selectedlogo);
+            formData.append('logo', selectedlogo);
+            formData.append('promo_banner', selectedbannner);
 
 
             setLoading(false)
@@ -969,11 +983,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     <FileUpload
                                         isAddMode={isAddMode}
                                         olddata={!isAddMode && olddata.promo_banner ? olddata.promo_banner : ""}
+                                        onFileChange={handleFileChangebanner}
+                                        maxFiles={1}
+                                        maxSize={2000000}
+                                        fileNames={fileNamesbanner}
+                                        label=" Upload promo_banner"
+                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                        rejectionMessage='Try another file for upload.'
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={3}>
+                                    <FileUpload
+                                        isAddMode={isAddMode}
+                                        olddata={!isAddMode && olddata.logo ? olddata.logo : ""}
                                         onFileChange={handleFileChangelogo}
                                         maxFiles={1}
                                         maxSize={2000000}
                                         fileNames={fileNameslogo}
-                                        label=" Upload promo_banner"
+                                        label=" Upload Logo"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />

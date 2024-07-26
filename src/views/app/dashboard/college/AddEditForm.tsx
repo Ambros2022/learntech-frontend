@@ -837,7 +837,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                                 fullWidth
                                                 select
                                                 value={value}
-                                                label='Select college_type'
+                                                label='Select College Type'
                                                 onChange={onChange}
                                                 placeholder=''
                                                 error={Boolean(errors.college_type)}

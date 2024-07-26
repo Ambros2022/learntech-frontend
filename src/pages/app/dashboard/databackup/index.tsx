@@ -57,30 +57,30 @@ const RowOptions = ({ path, onReloadPage }: { path: any  | string; onReloadPage:
   const handledownloadfile = async () => {
     try {
       const response = await axios1.get('api/admin/backup/download/' + path, { responseType: 'blob' });
-
+  
       // Create a Blob object from the response data
-      const blob = new Blob([response.data], { type: response.headers['content-type'] });
-
+      const blob = new Blob([response.data], { type: 'application/sql' }); // Adjust the type as per your API response
+  
       // Create a temporary URL for the blob
       const url = window.URL.createObjectURL(blob);
-
+  
       // Create a temporary anchor element
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'filename'; // Specify the filename you want to download
+      a.download = 'backup.sql'; // Specify the filename for the SQL file
       document.body.appendChild(a);
-
+  
       // Programmatically trigger a click event on the anchor element
       a.click();
-
+  
       // Cleanup: remove the temporary anchor element and URL object
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
       
-      toast.success('File downloaded successfully');
+      toast.success('SQL file downloaded successfully');
     } catch (error) {
       console.error(error);
-      toast.error('An error occurred. Please try again.');
+      toast.error('An error occurred while downloading the SQL file. Please try again.');
     }
   };
   

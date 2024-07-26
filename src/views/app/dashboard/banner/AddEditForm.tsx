@@ -67,6 +67,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         'Services_Page',
         'All_about_page',
         'All_our_teams',
+        'Home_news_page',
+        'Advertise_page',
     ];
 
     const schema: any = yup.object().shape({
@@ -265,7 +267,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     helperText={errors.promo_banner && 'This field is required'}
                                 >
                                     {options.map((option, value) => (
-                                        <MenuItem key={value} value={option}>
+                                          <MenuItem key={value} value={option}>
                                             {option}
                                         </MenuItem>
                                     ))}
