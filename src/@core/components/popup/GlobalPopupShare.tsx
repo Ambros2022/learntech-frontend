@@ -103,8 +103,8 @@ const GlobalPopupShare: FC<Props> = ({ className, title, pathname, logourl, ...r
             </a> */}
             <a onClick={() => setModalShow(true)} style={{ cursor: "pointer" }}>
                 <span className='share-icon'>
-                    <Image src='/images/icons/icon-share.png' width={30} height={30} style={{
-                        top: '20px', right: '20px', backgroundColor: 'rgba(0,0,0,0.5)'
+                    <Image src='/images/icons/icon-share.png' width={50} height={50} style={{
+                        bottom: '20px', right: '20px', backgroundColor: 'rgba(0,0,0,0.5)'
                     }} className='position-absolute rounded p-1' alt='share-icon' />
                 </span>
             </a>

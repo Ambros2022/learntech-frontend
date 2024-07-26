@@ -96,7 +96,7 @@ const BannerSec = ({ handleSearchQuery }) => {
                 </div>
             </section>
 
-            <section className='bg-white'>
+            <section className='bg-skyBlue'>
                 <div className='container py-2 linkFontSize'>
                     <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Students' Speak</span>
                 </div>

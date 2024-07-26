@@ -24,7 +24,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
     const [totalPages, setTotalPages] = useState(1)
     const [loading, setLoading] = useState(false)
     const [newsItems, setNewsItems] = useState<GroupedNewsItems>({})
-    const newsPerPage = 5
+    const newsPerPage = 4
     const isMountedRef = useIsMountedRef()
 
     const getNewsdata = useCallback(
@@ -82,7 +82,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
         getNewsdata(activeTab, page) // Fetch data for the clicked page
     }
 
-    
+
 
     const currentNews = newsItems[activeTab] || []
     return (
@@ -116,7 +116,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                         ) : currentNews.length > 0 ? (
                                             currentNews.map(item => (
                                                 <div key={item.id} className='col-10 mx-auto col-lg-6 px-4 mx-lg-0 mb-5 d-flex'>
-                                                    <div className='card hover-card d-flex flex-fill'>
+                                                    <div className='card hover-card d-flex flex-fill bg-skyBlue'>
                                                         <div className='newsPageImg'>
                                                             <Image
                                                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}
@@ -130,70 +130,70 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                                             <div className='card-body'>
                                                                 <h5 className='fw-bold card-title'>{item.name}</h5>
                                                             </div>
+                                                        </Link>
+                                                        <div className='p-3'>
+                                                            <Link href={`/news/${item.id}/${item.name}`}>
+                                                                <button className='btn viewMoreCollegeBtn'>View Detail</button>
                                                             </Link>
-                                                            <div className='p-3'>
-                                                                <Link href={`/news/${item.id}/${item.name}`}>
-                                                                    <button className='btn viewMoreCollegeBtn'>View Detail</button>
-                                                                </Link>
-                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                    ))
-                                    ) : (
-                                    <div className='text-center pb-5'>No news available</div>
+                                            ))
+                                        ) : (
+                                            <div className='text-center pb-5'>No news available</div>
                                         )}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {/* Pagination */}
-                        <div className='d-flex justify-content-center'>
-                            <nav aria-label='Page navigation example'>
-                                <ul className='pagination d-flex gap-3'>
-                                    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                        <button className='page-link' onClick={handlePreviousPage} aria-label='Previous'>
-                                            <span aria-hidden='true'>{'<'}</span>
-                                        </button>
-                                    </li>
-                                    {Array.from({ length: totalPages }, (_, index) => (
-                                        <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                                            <button className='page-link' onClick={() => handlePageClick(index + 1)}>
-                                                {index + 1}
+                            {/* Pagination */}
+                            <div className='d-flex justify-content-center'>
+                                <nav aria-label='Page navigation example'>
+                                    <ul className='pagination d-flex gap-3'>
+                                        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                            <button className='page-link' onClick={handlePreviousPage} aria-label='Previous'>
+                                                <span aria-hidden='true'>{'<'}</span>
                                             </button>
                                         </li>
-                                    ))}
-                                    <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                                        <button className='page-link' onClick={handleNextPage} aria-label='Next'>
-                                            <span aria-hidden='true'>{'>'}</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
+                                        {Array.from({ length: totalPages }, (_, index) => (
+                                            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                                                <button className='page-link' onClick={() => handlePageClick(index + 1)}>
+                                                    {index + 1}
+                                                </button>
+                                            </li>
+                                        ))}
+                                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                                            <button className='page-link' onClick={handleNextPage} aria-label='Next'>
+                                                <span aria-hidden='true'>{'>'}</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                    </div>
-                    <div className='col-lg-4 col-xl-4  col-md-5'>
-                        <div className='bg-skyBlue p-5 d-flex justify-content-center rounded'>
-                            <div className='align-content-center get-news'>
-                                <h5 className='text-blue fw-bold text-center mb-3'><i className='bi bi-megaphone-fill me-2'></i>Get Upcoming News Alerts</h5>
-                                {/* <Image
+                        <div className='col-lg-4 col-xl-4  col-md-5'>
+                            <div className='bg-skyBlue p-5 d-flex justify-content-center rounded'>
+                                <div className='align-content-center get-news'>
+                                    <h5 className='text-blue fw-bold text-center mb-3'><i className='bi bi-megaphone-fill me-2'></i>Get Upcoming News Alerts</h5>
+                                    {/* <Image
                     src='/images/icons/getNewsImage.png'
                     width={200}
                     height={200}
                     alt='get-news-logo'
                     className='mb-3'
                   /> */}
-                                <div className='d-flex gap-3 justify-content-between'>
-                                    <GlobalEnquiryForm buttonText='Follow Us' className='btn viewMoreCollegeBtn' />
-                                    {/* <button className='btn flwBtn'>Follow Us</button> */}
-                                    <GlobalEnquiryForm buttonText='Ask a Question' className='btn askBtn' />
-                                    {/* <button className='btn askBtn'>Ask a Question</button> */}
+                                    <div className='d-flex gap-3 justify-content-between'>
+                                        <GlobalEnquiryForm buttonText='Follow Us' className='btn viewMoreCollegeBtn' />
+                                        {/* <button className='btn flwBtn'>Follow Us</button> */}
+                                        <GlobalEnquiryForm buttonText='Ask a Question' className='btn askBtn' />
+                                        {/* <button className='btn askBtn'>Ask a Question</button> */}
+                                    </div>
                                 </div>
                             </div>
+                            <NewsList newsItems={collegeData} />
                         </div>
-                        <NewsList newsItems={collegeData} />
                     </div>
                 </div>
-            </div>
-        </section >
+            </section >
         </>
     )
 }

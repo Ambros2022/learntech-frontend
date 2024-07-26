@@ -83,6 +83,7 @@ const Footer = () => {
                 <li className='mb-2'><Link href="/study-in-usa"><i className="bi bi-chevron-double-right"></i> Study Abroad</Link></li>
                 <li className='mb-2'><Link href="/scholarships"><i className="bi bi-chevron-double-right"></i> Scholarships</Link></li>
                 <li className='mb-2'><Link href="/students-speak"><i className="bi bi-chevron-double-right"></i> Student’s Speak</Link></li>
+                <li className='mb-2'><Link href="/education-loan"><i className="bi bi-chevron-double-right"></i> Education Loan</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">

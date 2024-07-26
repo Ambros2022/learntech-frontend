@@ -13,16 +13,17 @@ function MainBlogPage() {
     const isMountedRef = useIsMountedRef();
     const [pagedata, setPagedata] = useState<any>();
     const [newsData, setNewsData] = useState([]);
-
+    const [loading, setLoading] = useState(false);
     const [cardsData, setCardsData] = useState<any[]>([]);
     const [totalPages, setTotalPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
+    const [collegeData, setcollegeData] = useState([]);
 
    
     const getBlogsData = useCallback(async (page = 1) => {
         try {
             const roleparams = { page, size: 8 }; // Hardcoding cardsPerPage to 1
-            const response = await axios.get('api/website/blog/get', { params: roleparams });
+            const response = await axios.get('api/website/blog/get?orderby=desc', { params: roleparams });
             setCardsData(response.data.data);
             setTotalPages(response.data.totalPages); // Set total pages from API response
         } catch (err) {
@@ -53,6 +54,17 @@ function MainBlogPage() {
       }
   }, [isMountedRef]);
 
+  const getColleges = useCallback(async () => {
+    try {
+      const roleparams = { page: 1, size: 10000 };
+      const response = await axios.get('api/website/colleges/get', { params: roleparams });
+      setcollegeData(response.data.data);
+    } catch (err) {
+      console.error(err);
+      setLoading(false); // Set loading to false in case of error
+    }
+  }, [isMountedRef]);
+
 
   useEffect(() => {
     getBlogsData(currentPage);
@@ -61,8 +73,8 @@ function MainBlogPage() {
 
     useEffect(() => {
       getPagedata();
-      getNewsData();
-    }, [getNewsData,getPagedata ]);
+      getColleges();
+    }, [getColleges,getPagedata ]);
     return (
         <>
             <Head>
@@ -72,7 +84,7 @@ function MainBlogPage() {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             <BannerSec />
-            <BlogCards  newsData ={newsData} cardsData ={cardsData} totalPages= {totalPages} currentPage={currentPage} getBlogsData={getBlogsData}  setCurrentPage ={setCurrentPage} />
+            <BlogCards  collegeData ={collegeData} cardsData ={cardsData} totalPages= {totalPages} currentPage={currentPage} getBlogsData={getBlogsData}  setCurrentPage ={setCurrentPage} />
         </>
     )
 }

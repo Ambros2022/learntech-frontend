@@ -84,7 +84,7 @@ const BannerSec = () => {
                                 <h1 className='fw-bold text-white mb-4'>Searching for Boards in India
                                 </h1>
                                 <div className="row">
-                                    <div className="col-md-12 mb-3 mx-auto">
+                                    <div className="col-md-8 mb-3 mx-auto">
                                         <Autocomplete
                                             open={open}
                                             onClose={() => setOpen(false)}
@@ -104,7 +104,7 @@ const BannerSec = () => {
                                             renderInput={(params) => (
                                                 <TextField
                                                     {...params}
-                                                    placeholder="Search"
+                                                    placeholder="Search National And State Boards in India"
                                                     InputProps={{
                                                         ...params.InputProps,
                                                         startAdornment: (
@@ -137,12 +137,15 @@ const BannerSec = () => {
                                             )}
                                         />
                                     </div>
+                                    <div className="col-md-4">
+                                        <GlobalEnquiryForm
+                                            buttonText="Get Board Details"
+                                            className="btn py-xl-3 py-lg-3 py-md-1 btn-success"
+                                        />
+                                    </div>
                                 </div>
-                                <div className='text-center'>
-                                    <GlobalEnquiryForm
-                                        buttonText="Get Board Details"
-                                        className="btn btn-success"
-                                    />
+                                <div className='text-end'>
+
                                     {/* <button className='btn boardBtn'>Get Board Details</button> */}
                                 </div>
                             </div>

@@ -3980,9 +3980,9 @@
       max-height: 1500px;
     } */
 
-    .examNewsSec {
+    /* .examNewsSec {
       min-height: 1125px !important;
-    }
+    } */
 
     .innerNewsCard .card-img-top {
       height: 200px !important;
@@ -4849,7 +4849,7 @@
 
   .countryCarouselFilter .carousel-button-group {
     position: absolute !important;
-    top: 45px !important;
+    top: 15px !important;
     width: 100% !important;
   }
 
@@ -4902,6 +4902,8 @@
   .mbbsAbroad input::placeholder {
     color: rgba(143, 143, 143, 1) !important;
   }
+
+
 
   .mbbsAbroad select {
     background-color: white !important;
@@ -5417,6 +5419,13 @@
 
   @media (min-width:320px) and (max-width:767px) {
 
+    .mbbsAbroad h6{
+      font-size: 12px !important;
+    }
+    .mbbsAbroad h4{
+      font-size: 20px !important;
+    }
+
     .helpSec {
       height: 1530px !important;
     }
@@ -5513,7 +5522,7 @@
 
     .countryCarouselFilter .carousel-button-group {
       position: absolute !important;
-      top: 50px !important;
+      top: 20px !important;
       width: 100%;
     }
 

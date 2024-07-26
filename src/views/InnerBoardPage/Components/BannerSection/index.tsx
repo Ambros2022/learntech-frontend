@@ -26,19 +26,19 @@ function BannerSection({ data }) {
               </div>
               <div className="col-lg-7 ps-md-3 ps-0 col-xl-8 col-md-10">
                 <div className="card-body text-white">
-                  <h1 className="card-title fw-bold mb-3">{data.name}</h1>
-                  <h6 className='mb-3 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{data.address}</h6>
+                  <h1 className="card-title fw-bold mb-3">{data.name}: Check Exam Details & Results</h1>
+                  <h6 className='mb-3 location-img'><i className='bi bi-geo-alt-fill me-1 fs-5 text-danger'></i>{data.address}</h6>
                   <h6 className='mb-3'>
                     <><i className="text-warning bi bi-trophy-fill me-1"></i> Approvals and Recognition :&nbsp;</>
                     {data.boardrecognitions.length > 0 && data.boardrecognitions[0].brdrecognitions.recognition_approval_name}
                   </h6>
                   <div className='d-flex justify-content-md-start justify-content-center mt-4 gap-md-5 gap-3 flex-wrap'>
-                    <h6 className='mb-3'>Est Year :&nbsp;{
+                    <h6 className='mb-3 fw-bold'>Est Year :&nbsp;<span className='fw-normal'>{
                       data.established
-                    }</h6>
-                    <h6 className='mb-3'><>Gender Accepted :&nbsp;</>{
+                    }</span></h6>
+                    <h6 className='mb-3 fw-bold'><>Gender Accepted :&nbsp;</><span className='fw-normal'>{
                       data.gender
-                    }</h6>
+                    }</span></h6>
                   </div>
                   {/* {data.avg_rating && data.avg_rating !== "null" && "" && <button className='btn btn-warning text-white me-2 ratingBtn'> &#9733; {data.avg_rating}</button>}
                   <button className='btn PrivateBtn'>{data.college_type}</button><br /> */}
@@ -58,7 +58,7 @@ function BannerSection({ data }) {
               </div>}
             </div>
             <div className="d-flex justify-content-md-end justify-content-center flex-md-row flex-column gap-3 ps-md-3 ps-0">
-              <button className='btn btn-danger resultDateBtn'><>Result Date : {formatDate(data.result_date)}</></button>
+              <button className='btn btn-danger resultDateBtn'><><i className="me-2 bi bi-alarm-fill"></i>Result Date : {formatDate(data.result_date)}</></button>
               <GlobalEnquiryForm className='align-content-center btn freeBtn' buttonText="Enquire Now" />
             </div>
           </div>

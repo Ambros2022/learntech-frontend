@@ -1,19 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import NewsList from '../newsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
 import GlobalPopupShare from 'src/@core/components/popup/GlobalPopupShare';
-import axios from 'src/configs/axios';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import router from 'next/router';
 
-const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData, setCurrentPage }) => {
+const BlogCards = ({ collegeData, cardsData, totalPages, currentPage, getBlogsData, setCurrentPage }) => {
 
     const handlePreviousPage = () => {
         setCurrentPage(prevPage => {
             const newPage = Math.max(prevPage - 1, 1);
-            getBlogsData(newPage); // Fetch new data for the previous page
+            getBlogsData(newPage);
             return newPage;
         });
     };
@@ -21,14 +18,14 @@ const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData,
     const handleNextPage = () => {
         setCurrentPage(prevPage => {
             const newPage = Math.min(prevPage + 1, totalPages);
-            getBlogsData(newPage); // Fetch new data for the next page
+            getBlogsData(newPage);
             return newPage;
         });
     };
 
-    const handlePageClick = (page: number) => {
+    const handlePageClick = (page) => {
         setCurrentPage(page);
-        getBlogsData(page); // Fetch data for the clicked page
+        getBlogsData(page);
     };
 
     const currentCards = cardsData || [];
@@ -40,31 +37,31 @@ const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData,
                     <div className="col-lg-7 col-xl-8 col-md-7">
                         <div className="row">
                             {currentCards.map((card) => (
-                                <div className="col-md-12 col-lg-6 col-8 px-md-4 mx-md-0 mx-auto mb-5" key={card.id}>
-                                    <div className="card bg-skyBlue hover-card newsImgSize position-relative">
+                                <div className="col-md-6 col-lg-6 mb-5 d-flex" key={card.id}>
+                                    <div className="card bg-skyBlue hover-card newsImgSize position-relative w-100">
                                         <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={400} height={400} className="card-img-top" alt="news-img" />
                                         <span className='share-icon'>
-                                            <Image src='/images/icons/icon-share.png' width={30} height={30} style={{
+                                            {/* <Image src='/images/icons/icon-share.png' width={50} height={50} style={{
                                                 top: '20px', right: '20px', backgroundColor: 'rgba(0,0,0,0.5)'
-                                            }} className='position-absolute rounded p-1' alt='share-icon' />
-
+                                            }} className='position-absolute rounded p-1' alt='share-icon' /> */}
                                             <GlobalPopupShare
                                                 pathname={`${process.env.NEXT_PUBLIC_WEB_URL}/blog/${card.id}/${card.slug}`}
                                                 title={card.meta_title}
                                                 logourl={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} />
                                         </span>
-
-                                        <div className="card-body">
+                                        <div className="card-body d-flex flex-column">
                                             <h5 className="card-title fw-bold text-truncate">{card.name}</h5>
-                                            <p className="card-text">{card.meta_title}</p>
-                                            <Link href={`/blog/${card.id}/${card.name}`} className="btn viewMoreBtn">View More</Link>
+                                            <p className="card-text flex-grow-1">{card.meta_title}</p>
+                                            <div className="text-start">
+                                                <Link href={`/blog/${card.id}/${card.name}`} className="btn viewMoreBtn mt-auto">View More</Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <div className="row col-md-12">
-                            <div className='d-flex justify-content-center'>
+                        <div className="row">
+                            <div className='col-12 d-flex justify-content-center'>
                                 <nav aria-label="Page navigation example">
                                     <ul className="pagination d-flex gap-3">
                                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
@@ -89,7 +86,7 @@ const BlogCards = ({ newsData, cardsData, totalPages, currentPage, getBlogsData,
                     </div>
                     <div className="col-lg-5 col-xl-4 col-md-5">
                         <ContactForm heading={'Talk to our Experts'} />
-                        <NewsList newsItems={newsData} />
+                        <NewsList newsItems={collegeData} />
                     </div>
                 </div>
             </div>

@@ -72,6 +72,7 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, meta_descript
                             {() => (
                                 <Form className='bg-skyBlue mbbsAbroad rounded p-3'>
                                     <h4 className='text-blue fw-bold text-center mb-3'>Start Your Medical Journey</h4>
+                                    <h6 className='text-black fw-bold text-center mb-3'>Fill this & help us book a flight for your Successful Medical Career</h6>
                                     <div className="mb-3">
                                         <Field type="text" className='form-control' name='name' placeholder='Full Name*' />
                                         <ErrorMessage name="name" component="div" className="text-danger" />

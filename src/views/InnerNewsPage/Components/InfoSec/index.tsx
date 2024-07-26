@@ -60,7 +60,7 @@ const InfoSec = ({ data }) => {
                     </div> */}
                     {data.pdf_file && (
                         <div className="col-md-3">
-                            <a href={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.pdf_file}`} className="btn applyNowButton align-content-center"  rel="noopener noreferrer">
+                            <a href={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.pdf_file}`} className="btn applyNowButton align-content-center" rel="noopener noreferrer">
                                 Uploaded PDF DOC Preview
                             </a>
                         </div>
@@ -69,38 +69,34 @@ const InfoSec = ({ data }) => {
                 </div>
                 <div className="d-flex gap-3 flex-wrap mb-3">
                     <LinkedinShareButton url={location}>
-                        <button className='btn btn-primary'><i className="bi bi-linkedin"></i></button>
+                        <button className='btn btn-primary'><i className="bi bi-linkedin me-2"></i>Share</button>
                     </LinkedinShareButton>
-                    <TwitterShareButton
-                        url={location}
-                        title={data?.meta_title}
-                    >
-                        <button className='btn btn-dark text-white'><i className="bi bi-twitter-x"></i></button>
-                    </TwitterShareButton>
                     <FacebookShareButton
                         url={location}
                         quote={data?.meta_title}
                         hashtag={data?.meta_title}
                     >
-                        <button className='btn btn-primary text-white'><i className="bi bi-facebook"></i> </button>
+                        <button className='btn btn-primary text-white'><i className="bi bi-facebook me-2"></i>Share</button>
                     </FacebookShareButton>
-
-
-
-                    <PinterestShareButton
+                    <TwitterShareButton
                         url={location}
-                        media={data?.meta_title}
+                        title={data?.meta_title}
                     >
-                        <button className='btn btn-danger text-white'><i className="bi bi-pinterest"></i></button>
-                    </PinterestShareButton>
+                        <button className='btn btn-dark text-white'><i className="bi bi-twitter-x me-2"></i>Tweet</button>
+                    </TwitterShareButton>
                     <WhatsappShareButton
                         url={location}
                         title={data?.meta_title}
 
                     >
-                        <button className='btn btn-success text-white'> <i className="bi bi-whatsapp"></i></button>
+                        <button className='btn btn-success text-white'> <i className="bi bi-whatsapp me-2"></i>Share</button>
                     </WhatsappShareButton>
-
+                    <PinterestShareButton
+                        url={location}
+                        media={data?.meta_title}
+                    >
+                        <button className='btn btn-danger text-white'><i className="bi bi-pinterest me-2"></i>Share</button>
+                    </PinterestShareButton>
                     <RWebShare
                         data={{
                             text: `${data?.meta_title}`,
@@ -109,7 +105,7 @@ const InfoSec = ({ data }) => {
                         }}
 
                     >
-                        <button className='btn btn-dark text-white'><i className="bi bi-share-fill"></i></button>
+                        <button className='btn btn-dark text-white'><i className="bi bi-share-fill me-2"></i>Share</button>
                     </RWebShare>
                     {/* <button className='btn btn-success text-white'><i className="bi bi-share-fill"></i></button> */}
 

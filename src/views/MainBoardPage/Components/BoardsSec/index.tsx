@@ -32,7 +32,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                     <div className="row ">
                                         {boardItems.map((item, index) => (
                                             index < displayCount && (
-                                                <div key={item.id} className="d-flex col-8 mx-auto col-md-6 mx-md-0 mb-3">
+                                                <div key={item.id} className="d-flex col-10 mx-auto col-md-6 mx-md-0 mb-3">
                                                     <div className="card hover-card newsImgSize bg-skyBlue">
                                                         {/* <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
                                                             <i className='bi bi-star-fill text-warning'></i>
@@ -41,7 +41,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                             <i className='bi bi-star-fill text-warning'></i>
                                                             <i className='bi bi-star-fill text-gray'></i>
                                                         </div> */}
-                                                        {/* {boardItems?.avg_rating && <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
+                                                        {boardItems?.avg_rating && <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
                                                             <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
 
                                                                 <i className={`bi bi-star-fill ${boardItems.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
@@ -52,21 +52,21 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
 
                                                                
                                                             </div>
-                                                        </div>} */}
+                                                        </div>}
 
                                                         <div className="card-body">
                                                             <div className="row d-flex">
                                                                 <div className="col-lg-4 col-xl-3 align-self-center mb-lg-0 mb-3">
                                                                     <div className="logoBoardImg">
-                                                                        <Image src='/images/icons/filter-card.jpg' width={500} height={500} alt='clg-card' className='mx-auto img-fluid' />
+                                                                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`} width={500} height={500} alt='clg-card' className='mx-auto img-fluid' />
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-lg-8 col-xl-9 align-self-center">
-                                                                    <h5 className="fw-bold card-title">{item.name}</h5>
+                                                                    <h5 className="fw-bold card-title text-blue">{item.name}</h5>
                                                                 </div>
                                                             </div>
                                                             <div className="row">
-                                                                <div className="col-lg-8 col-xl-9 ms-auto">
+                                                                <div className="col-12 mt-3">
                                                                     <p className='text-black mb-2'><span className='fw-bold'>Est Year :</span> {item.established}</p>
                                                                     <p className='text-black mb-2'><span className='fw-bold'>Location :</span> {item.address}</p>
                                                                     <p className='text-black'><span className='fw-bold'>Approvals and Recognition :</span>{
