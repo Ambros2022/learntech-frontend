@@ -93,6 +93,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         general_course_id: isAddMode ? '' : olddata.generalcourse ? olddata.generalcourse : '',
         course_type: isAddMode ? '' : olddata.course_type,
         slug: isAddMode ? '' : olddata.slug,
+        course_short_name: isAddMode ? '' : olddata.course_short_name,
         meta_title: isAddMode ? '' : olddata.meta_title,
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
@@ -165,6 +166,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('id', updateid);
             formData.append('course_type', data.course_type);
             formData.append('slug', data.slug);
+            formData.append('course_short_name', data.course_short_name);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
@@ -210,6 +212,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const formData = new FormData();
             formData.append('course_type', data.course_type);
             formData.append('slug', data.slug);
+            formData.append('course_short_name', data.course_short_name);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
@@ -369,6 +372,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.slug)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.slug && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='course_short_name'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Courses Short Name'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.course_short_name)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.course_short_name && { helperText: 'This field is required' })}
                                 />
                             )}
                         />

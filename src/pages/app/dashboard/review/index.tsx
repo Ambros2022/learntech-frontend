@@ -628,8 +628,6 @@ const SecondPage = () => {
                   onClick={(e: any) => {
                     setCollege_id('');
                     setCourse_id('');
-                    // setCountry_id('');
-                    // setStatus('');
                   }}
                   startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
               </Grid>

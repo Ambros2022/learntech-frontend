@@ -222,7 +222,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Title'
+                                    multiline
+                                    rows={3}
+                                    label='Meta Title'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.meta_title)}
@@ -266,7 +268,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     value={value}
                                     multiline
                                     rows={3}
-                                    label='Meta Title'
+                                    label='Meta keyword'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.meta_keyword)}
