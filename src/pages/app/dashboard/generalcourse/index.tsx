@@ -13,9 +13,7 @@ import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
 import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
-
-
+import { Button, CardContent, CardHeader, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
 // ** Icon Imports
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
@@ -23,6 +21,8 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
+import CustomTextField from 'src/@core/components/mui/text-field'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 
 
@@ -142,8 +142,8 @@ type DataGridRowType = {
 
 const SecondPage = () => {
   // ** States
-
-
+  const [streams, setStreams] = useState([]);
+  const [stream_id, setStream_id] = useState('')
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -156,6 +156,7 @@ const SecondPage = () => {
   const [columnname, setColumnname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
+  const isMountedRef = useIsMountedRef();
 
   params['page'] = 1;
   params['size'] = 10000;
@@ -255,7 +256,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string , stream_id: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -272,6 +273,7 @@ const SecondPage = () => {
             size,
             searchtext,
             searchfrom,
+            stream_id,
 
           },
         })
@@ -302,8 +304,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname , stream_id)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, stream_id])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -338,11 +340,70 @@ const SecondPage = () => {
 
   const AddButtonComponent = <AddButtonToolbar />;
 
+   //get all streams
+   const getstreams = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/stream/get', { params: roleparams });
+
+      setStreams(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+
+  useEffect(() => {
+
+    getstreams();
+
+  }, [getstreams]);
+
   return (
     <Grid container spacing={6}>
 
       <Grid item xs={12}>
         <Card>
+        <CardHeader title="Search Filters" />
+          <CardContent>
+            <Grid container spacing={6}>
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Stream"
+                  value={stream_id}
+                  onChange={(e: any) => {
+                    setStream_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select Stream</MenuItem>
+                  {streams && streams.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {streams.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
+
+
+              <Grid item sm={3} xs={12}>
+                <Button sx={{ mt: 0 }} variant="contained" color='error'
+                  onClick={(e: any) => {
+                    setStream_id('');
+                    
+                 
+                  }}
+                  startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+              </Grid>
+            </Grid>
+          </CardContent>
 
           <DataGrid
             autoHeight

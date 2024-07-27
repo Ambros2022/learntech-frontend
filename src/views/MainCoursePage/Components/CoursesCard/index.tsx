@@ -44,7 +44,7 @@ function CoursesCard({ course }) {
   );
 }
 
-const PromoAddBanner = ({ url }) => {
+const PromoAddBanner = ({ url, title, description }) => {
 
   return (
     <>
@@ -64,8 +64,8 @@ const PromoAddBanner = ({ url }) => {
               </div>
               <div className="col-md-8">
                 <div className="card-body" style={{ zIndex: '200' }}>
-                  <h5 className="card-text">PES University</h5>
-                  <h3 className="card-title fw-bold">B.Tech 2024 - Admissions Open</h3>
+                  <h5 className="card-text">{description}</h5>
+                  <h3 className="card-title fw-bold">{title}</h3>
                   <Link href='/colleges' className='btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
                 </div>
               </div>
@@ -145,7 +145,7 @@ function CoursesContainer() {
 
           </div>
         )}
-        {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} />}
+        {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} description={promoban[0].description} title={promoban[0].title} />}
       </div>
     </section>
   );

@@ -76,6 +76,13 @@ const BannerSec = () => {
       params.inputProps.onChange(event);
     }
   };
+
+  const buttonText = (
+    <>
+        Get <i className='bi bi-currency-rupee'></i>1 Lakh Scholarship
+    </>
+);
+
   return (
     <>
       <section className='scholarshipSec'>
@@ -140,8 +147,8 @@ const BannerSec = () => {
                 </div>
                 <div className="text-md-end mt-md-3 mt-0">
                 <GlobalEnquiryForm
-                    buttonText="Get 1 Lakh Scholarship"
-                    className="btn scholarShipBtn"
+                    buttonText={buttonText}
+                    className="btn btn-warning"
                   />
                   {/* <div className="btn scholarShipBtn">Get 1 Lakh Scholarship</div> */}
                 </div>

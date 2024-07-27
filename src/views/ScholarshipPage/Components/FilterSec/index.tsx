@@ -52,7 +52,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
             [id]: value
         }));
     };
-    
+
 
     const getScholarship = useCallback(async (countryId, levelId, TypeId, CountryId) => {
         try {
@@ -66,13 +66,13 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                 page: currentPage,  // Use currentPage for pagination
                 size: perPage
             };
-          
+
             let url = 'api/website/scholarships/get';
             if (countryId !== 'all') {
                 url += `?country_id=${countryId}`;
             }
-           
-            const response = await axios.get(url, {params});
+
+            const response = await axios.get(url, { params });
             setScholarshipsData(response.data.data); // Ensure the structure of response.data fits your expected scholarship data format
             setTotalScholarships(response.data.data.length);
             // setTotalPages(response.data.data.totalPages);
@@ -92,11 +92,11 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
 
     const renderScholarshipDetails = (scholarship) => (
         <ul className='text-black'>
-            <li>International Student Eligible: {scholarship.is_eligible === 1 ? 'Yes' : 'No'}</li>
-            <li>Amount : {scholarship.amount}</li>
-            <li>Type: {scholarship.scholartypes ? scholarship.scholartypes.name : 'Not specified'}</li>
-            <li>Level Of Study: {scholarship.scholarlevels ? scholarship.scholarlevels.name : 'Not specified'}</li>
-            <li>Total Scholarships: {scholarship.total_scholarships}</li>
+            <li>International Student Eligible : <span className='fw-bold'>{scholarship.is_eligible === 1 ? 'Yes' : 'No'}</span></li>
+            <li>Amount : <span className='fw-bold'>{scholarship.amount}</span></li>
+            <li>Type : <span className='fw-bold'>{scholarship.scholartypes ? scholarship.scholartypes.name : 'Not specified'}</span></li>
+            <li>Level Of Study : <span className='fw-bold'>{scholarship.scholarlevels ? scholarship.scholarlevels.name : 'Not specified'}</span></li>
+            <li>Number Of Scholarships : <span className='fw-bold'>{scholarship.total_scholarships}</span></li>
         </ul>
     );
 
@@ -267,18 +267,27 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     </div>
 
                 </div>
-                <div className='position-relative countryCarouselFilter mb-5 pt-5' style={{zIndex:'2'}}>
-                    <TabCarousel activeTab={activeTab} onTabClick={handleTabClick} />
+
+                <div>
+                    <h4 className='fw-bold text-blue mt-4 pt-5'>Select Countries</h4>
+                    <div className='position-relative countryCarouselFilter mb-5 pt-3' style={{ zIndex: '2' }}>
+                        <TabCarousel activeTab={activeTab} onTabClick={handleTabClick} />
+                    </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
-                        <input
-                            type="search"
-                            className='form-control'
-                            placeholder='Search Scholarships'
-                            value={searchText}
-                            onChange={handleSearchInputChange}  // Handle input change for search
-                        />
+                    <div className="ms-auto col-md-5 col-lg-4">
+                        <div className="input-group">
+                            <input
+                                type="search"
+                                className="form-control"
+                                placeholder="Search Scholarships"
+                                value={searchText}
+                                onChange={handleSearchInputChange}
+                            />
+                            <span className="input-group-text">
+                                <i className="bi bi-search"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="row pt-4">
@@ -315,9 +324,9 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     </div>
                     <div className="col-md-5 col-lg-4 pt-5 col-10 mx-auto">
                         <div className='border p-3 text-center rounded examAlertSec bg-skyBlue mb-3'>
-                            <h4 className='text-blue fw-bold'>Get Upcoming News Alerts</h4>
-                            <Image src="/images/icons/examAlert.png" alt='exam-alert-img' className='img-fluid' width={500} height={500} />
-                            <h6 className='text-black mb-3'>Are you interested in scholarship?</h6>
+                            <h4 className='text-blue fw-bold'>Are you interested in scholarship?</h4>
+                            <Image src="/images/icons/Scholarships.png" alt='exam-alert-img' className='img-fluid' width={300} height={300} />
+                            {/* <h6 className='text-black mb-3'>Are you interested in scholarship?</h6> */}
                             <div className="d-flex justify-content-center gap-3 flex-wrap">
                                 <GlobalEnquiryForm
                                     buttonText="Talk To Experts"
@@ -333,11 +342,11 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                             </div>
                         </div>
                         <div className='border p-3 rounded bg-skyBlue'>
-                            <h4 className='text-blue fw-bold'>Most Popular Links</h4>
+                            <h4 className='text-blue fw-bold text-center mb-3'>Most Popular Links</h4>
                             {abroadData.map((link, index) => (
                                 <div className='d-grid' key={index}>
                                     <Link href={`/${link.slug}`}
-                                        className='link_btn'>{link.name}</Link>
+                                        className='link_btn text-center'>{link.name}</Link>
 
                                 </div>
                             ))}

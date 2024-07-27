@@ -30,7 +30,7 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
     }, [getCountry]);
 
     const responsive = {
-        superLargeDesktop: { breakpoint: { max: 3000, min: 1024 }, items: 8 },
+        superLargeDesktop: { breakpoint: { max: 3000, min: 1024 }, items: 7 },
         desktop: { breakpoint: { max: 1024, min: 992 }, items: 5 },
         tablet: { breakpoint: { max: 991, min: 768 }, items: 4 },
         mobile: { breakpoint: { max: 767, min: 0 }, items: 1 }
@@ -59,7 +59,7 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
             responsive={responsive}
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
-            containerClass='carousel-container2Category'
+            containerClass='carousel-container2Category pb-1'
         >
             {tabs.length > 0 && tabs.map((tab) => (
                 <button

@@ -63,6 +63,7 @@ import '../../styles/globals.css'
 
 //**  Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 
@@ -190,16 +191,18 @@ const App = (props: ExtendedAppProps) => {
             <SettingsConsumer>
               {({ settings }) => {
                 return (
-                  <ThemeComponent settings={settings}>
-                    {/* <Redirection > */}
-                    <Guard authGuard={authGuard} guestGuard={guestGuard}>
-                      {getLayout(<Component {...pageProps} />)}
-                    </Guard>
-                    {/* </Redirection> */}
-                    <ReactHotToast>
-                      <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
-                    </ReactHotToast>
-                  </ThemeComponent>
+                  <GoogleOAuthProvider clientId="605863392131-ftqj61h4djtrt0d0aa0dtjuo5lcbt7km.apps.googleusercontent.com">
+                    <ThemeComponent settings={settings}>
+                      {/* <Redirection > */}
+                      <Guard authGuard={authGuard} guestGuard={guestGuard}>
+                        {getLayout(<Component {...pageProps} />)}
+                      </Guard>
+                      {/* </Redirection> */}
+                      <ReactHotToast>
+                        <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
+                      </ReactHotToast>
+                    </ThemeComponent>
+                  </GoogleOAuthProvider >
                 )
               }}
             </SettingsConsumer>

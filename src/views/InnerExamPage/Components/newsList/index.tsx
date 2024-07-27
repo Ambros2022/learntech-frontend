@@ -1,14 +1,18 @@
 import React from 'react';
+import NewsCarosuel from '../NewsCarosuel';
+import Link from 'next/link';
 
 // NewsItem component
-const NewsItem = ({ date, title }) => (
+const NewsItem = ({ date, title, slug, id }) => (
     <div className="col-12">
+        <Link href={`/exam/${id}/${slug}`}>
         <div className="card mb-3 bg-skyBlue hover-card cardInnerExam">
-            <div className="card-body text-center d-flex flex-md-row gap-md-0 gap-3 flex-wrap justify-content-xl-start justify-content-lg-center justify-content-center justify-content-md-center">
-                <h5 className='fw-bold text-blue mb-0 text-center border-circle align-content-center'>{date}</h5>
-                <h3 className="btn card-title text-center fw-bold mb-0  align-content-center">{title}</h3>
+            <div className="card-body text-center d-flex flex-lg-row flex-md-column flex-row gap-3 justify-content-xl-start justify-content-lg-center justify-content-center justify-content-md-center">
+                <h6 className='fw-bold text-blue mb-0 text-center border-circle align-content-center'>{date}</h6>
+                <h5 className="card-title text-center fw-bold mb-0  align-content-center">{title} Exam</h5>
             </div>
         </div>
+        </Link>
     </div>
 );
 
@@ -16,12 +20,13 @@ const NewsItem = ({ date, title }) => (
 const NewsList = ({ newsItems }) => (
     <>
         <h4 className='fw-bold text-blue text-start pt-3 text-center mb-3'>Upcoming Exams</h4>
-        <div className='bg-skyBlue blogSec examLatest mt-3 px-4 py-3 overflow-y-auto rounded' style={{ maxHeight: 'calc(6 * 150px)' }}>
-            <div className="row">
+        <div className='bg-skyBlue blogSec examLatest mt-3 px-4 py-3 position-relative rounded' style={{ zIndex: '2' }}>
+            <div className="row overflow-y-auto" style={{ maxHeight: 'calc(4 * 102px)' }}>
                 {newsItems.map((item, index) => (
-                    <NewsItem key={index} date={item.date} title={item.title} />
+                    <NewsItem key={index} date={item.date} title={item.title} id={item.id} slug={item.slug}/>
                 ))}
             </div>
+            {/* <NewsCarosuel items={newsItems} /> */}
         </div>
     </>
 );

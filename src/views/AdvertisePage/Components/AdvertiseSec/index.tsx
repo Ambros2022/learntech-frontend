@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import SideContactUsFormfrom from 'src/@core/components/popup/SideContactUsForm';
+import ContactUsForm from 'src/@core/components/popup/ContactUsForm';
 
 const AdvertiseSec = ({ data }) => {
 
@@ -22,7 +22,7 @@ const AdvertiseSec = ({ data }) => {
                             <div className="row">
                                 <div className="col-md-12 col-lg-12 col-10 mx-md-0 mx-auto bg-skyBlue p-3 rounded mb-3">
                                 <h4 className='text-center fw-bold text-blue pt-2'>Connect With Us</h4>
-                                    <SideContactUsFormfrom />
+                                <ContactUsForm/>
                                     {/* <form onSubmit={formik.handleSubmit} className='bg-skyBlue rounded border p-3 mb-3'>
                                         <h4 className='text-center fw-bold text-blue pt-2'>Connect With Us</h4>
                                         <div className="mb-3">

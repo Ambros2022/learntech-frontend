@@ -1,20 +1,24 @@
-    import React, { FC } from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { saveAs } from 'file-saver';
 import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import axios1 from 'src/configs/axios';
 
 interface Props {
     page?: any;
     onChanges?: any;
-    placeholder?: any;
+    placeholder?: string;
 }
 
-const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
+const EnquiryForm: FC<Props> = ({ placeholder = 'Course', ...rest }) => {
     const router = useRouter();
+    const isMountedRef = useIsMountedRef();
+    const [streams, setStreams] = useState<any[]>([]);
+    const [courses, setCourses] = useState<any[]>([]);
 
     const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -22,14 +26,15 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+        contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone Number is required'),
         course: Yup.string().required('Course is required').trim(),
-        location: Yup.string().required('Location is required').trim(),
+        // location: Yup.string().required('Location is required').trim(),
     });
 
-    const handleSubmit = async (values, { resetForm }) => {
+    const handleSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
         try {
             toast.loading('Processing');
+            console.log('Form values:', values); // Logging form values for debugging
             const formData = new FormData();
             formData.append('name', values.name);
             formData.append('email', values.email);
@@ -37,19 +42,66 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
             formData.append('location', values.location);
             formData.append('course_in_mind', values.course);
             formData.append('current_url', window.location.href);
-            const response = await axios.post('api/website/enquiry', formData);
+            const response = await axios.post('/api/website/enquiry', formData);
 
             if (response.status === 200) {
                 toast.dismiss();
                 toast.success('Thank you. We will get back to you.');
                 resetForm();
                 router.push('/thank-you');
+            } else {
+                console.error('Failed to submit form:', response);
+                toast.error('Failed to submit form. Please try again.');
             }
         } catch (error) {
-            toast.error('try again later!');
+            toast.dismiss();
+            toast.error('Error submitting form. Please try again later!');
             console.error('Error submitting form:', error);
         }
     };
+
+    const getStreamData = useCallback(async (size = 10000) => {
+        try {
+            const response = await axios1.get(`/api/website/stream/get?size=${size}`);
+            if (response.data.status === 1) {
+                const streamData = response.data.data.map((stream: any) => ({
+                    label: stream.name,
+                    value: stream.name
+                }));
+                if (isMountedRef.current) {
+                    setStreams(streamData);
+                }
+            } else {
+                console.error('Failed to fetch streams');
+            }
+        } catch (error) {
+            console.error('Error fetching streams:', error);
+        }
+    }, [isMountedRef]);
+
+    // const getCoursesData = useCallback(async () => {
+    //     try {
+    //         const response = await axios1.get('/api/website/courses/get');
+    //         if (response.data.status === 1) {
+    //             const courseData = response.data.data.map((course: any) => ({
+    //                 label: course.name,
+    //                 value: course.name()
+    //             }));
+    //             if (isMountedRef.current) {
+    //                 setCourses(courseData);
+    //             }
+    //         } else {
+    //             console.error('Failed to fetch courses');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching courses:', error);
+    //     }
+    // }, [isMountedRef]);
+
+    useEffect(() => {
+        getStreamData();
+        // getCoursesData();
+    }, [getStreamData]);
 
     return (
         <Formik
@@ -58,44 +110,45 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
                 email: '',
                 contact_number: '',
                 course: '',
-                location: '',
+                // location: '',
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-            <Form className="container expertInquirySec">
-                <div className='row mb-3'>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
-                        <Field type="text" name="name" placeholder="Enter Name" className="form-control text-black" />
-                        <ErrorMessage name="name" component="div" className="error text-danger" />
+            {({ setFieldValue }) => (
+                <Form className="container expertInquirySec">
+                    <div className='row mb-3'>
+                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                            <Field type="text" name="name" placeholder="Enter Name" className="form-control text-black" />
+                            <ErrorMessage name="name" component="div" className="error text-danger" />
+                        </div>
+                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                            <PhoneInputField name="contact_number" />
+                            <ErrorMessage name="contact_number" component="div" className="error text-danger" />
+                        </div>
+                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                            <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
+                            <ErrorMessage name="email" component="div" className="error text-danger" />
+                        </div>
+                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                            <Field as="select" name="course" className="form-control">
+                                <option value="">Select {placeholder}</option>
+                                {streams.map((item) => (
+                                    <option key={item.value} value={item.value}>{item.label}</option>
+                                ))}
+                            </Field>
+                            <ErrorMessage name="course" component="div" className="error text-danger" />
+                        </div>
+                        {/* <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                            <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
+                            <ErrorMessage name="location" component="div" className="error text-danger" />
+                        </div> */}
                     </div>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
-                        <PhoneInputField name="contact_number" />
-                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
+                    <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
+                        <button type="submit" className="btn reqBtn">Request for a Call Back</button>
                     </div>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
-                        <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                        <ErrorMessage name="email" component="div" className="error text-danger" />
-                    </div>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
-                        <Field as="select" name="course" className="form-control">
-                            <option value="">Select {placeholder}</option>
-                            <option value={`${placeholder}1`}> {placeholder} 1</option>
-                            <option value={`${placeholder}2`}> {placeholder} 2</option>
-                            <option value={`${placeholder}3`}> {placeholder} 3</option>
-                        </Field>
-                        <ErrorMessage name="course" component="div" className="error text-danger" />
-                    </div>
-                    {/* <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
-                        <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                        <ErrorMessage name="location" component="div" className="error text-danger" />
-                    </div> */}
-                </div>
-
-                <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
-                    <button type="submit" className="btn reqBtn">Request for a Call Back</button>
-                </div>
-            </Form>
+                </Form>
+            )}
         </Formik>
     );
 };

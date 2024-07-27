@@ -31,8 +31,9 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, meta_descrip
         try {
             const roleparams: any = {};
             roleparams['page'] = 1;
-            roleparams['size'] = 10;
+            roleparams['size'] = 100;
             const response = await axios1.get('api/website/stream/get?orderBy=asc&columnname=listing_order', { params: roleparams });
+            // const response = await axios1.get('api/website/streams/get?orderBy=asc&columnname=listing_order', { params: roleparams });
             setCourses(response.data.data);
         } catch (err) {
             console.error(err);
@@ -55,9 +56,9 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, meta_descrip
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-5 col-10 mx-auto">
                             <ContactForm heading={'Get More Details'} />
+                            <h4 className='pt-3 fw-bold text-blue text-center mb-3'>Top Trending Courses</h4>
                             <div className='p-3 border mt-3 rounded bg-skyBlue'>
-                                <h4 className='fw-bold text-blue text-center mb-3'>Top Trending Courses</h4>
-                                <div className='overflow-y-scroll' style={{ minHeight: '500px', maxHeight: "500px" }}>
+                                <div className='overflow-y-auto' style={{ maxHeight: 'calc(7 * 100px)' }}>
                                     {courses.map(course => (
                                         <Link href={`/course/${course.id}/${course.slug}`}>
                                             <div className="card p-3 mb-3 hover-card2" key={course.id}>

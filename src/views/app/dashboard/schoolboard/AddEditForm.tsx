@@ -412,7 +412,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/schoolboard/updatefaq';
+            let url = 'api/admin/schoolboard/updatefaqs';
             const formData = new FormData();
             formData.append('id', updateid);
             formData.append('faqs', JSON.stringify(data.faqs));
@@ -681,7 +681,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                 fullWidth
 
                                                 value={value}
-                                                label='School Gender'
+                                                label='Select Gender'
                                                 onChange={onChange}
                                                 error={Boolean(errors.gender)}
                                                 placeholder=''

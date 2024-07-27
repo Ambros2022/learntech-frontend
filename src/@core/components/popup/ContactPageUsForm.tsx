@@ -79,13 +79,13 @@ const contact_numberPageUsForm: FC<Props> = ({ page, ...rest }) => {
                         {errors.name && touched.name ? <div className="text-danger">{errors.name}</div> : null}
                     </div>
                     <div className="mb-3">
+                        <Field type="email" className='form-control' name='email' placeholder='Email ID*' />
+                        {errors.email && touched.email ? <div className="text-danger">{errors.email}</div> : null}
+                    </div>
+                    <div className="mb-3">
                         <PhoneInputField name='contact_number' />
                         {/* <Field type="text" className='form-control' name='contact_number' placeholder='contact_number Number*' /> */}
                         {errors.contact_number && touched.contact_number ? <div className="text-danger">{errors.contact_number}</div> : null}
-                    </div>
-                    <div className="mb-3">
-                        <Field type="email" className='form-control' name='email' placeholder='Email ID*' />
-                        {errors.email && touched.email ? <div className="text-danger">{errors.email}</div> : null}
                     </div>
                     <div className="mb-3">
                         <Field type="text" className='form-control' name='location' placeholder='Location*' />

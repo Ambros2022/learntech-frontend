@@ -32,18 +32,18 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
             <div key={card.id} className="col-md-6 col-10 mx-auto">
               <div className="card p-3 mb-4">
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-6 embedly-responsive">
                     <iframe
                       width="100"
                       height="100"
                       src={card.video_url}
                       allowFullScreen
-                      className='w-100 h-100'
+                      className='w-100 embedly-embed h-100'
                     ></iframe>
                   </div>
                   <div className="col-md-6">
                     <div className="p-2">
-                      <p className="text-black fw-bold">{card.name}</p>
+                      <h5 className="text-black fw-bold">{card.name}</h5>
                       <p className="text-black studentSpeakCardBody overflow-y-scroll">{card.designation}</p>
                     </div>
                   </div>

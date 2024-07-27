@@ -45,7 +45,7 @@ interface PageData {
 
 // CardItem component for reusable card elements
 const CardItem = ({ href, title, value }: { href: string; title: string; value: ReactNode }) => (
-  <Grid item xs={12} sm={4} md={2}>
+  <Grid item xs={12} sm={4} md={2} >
     <Card>
       <Link href={href}>
         <CardHeader title={title} />
@@ -63,6 +63,7 @@ const Home = () => {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<PageData | null>(null);
+  const [enquirydata, setEnquirydata] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
 
   const getPagedata = useCallback(async () => {
@@ -78,8 +79,26 @@ const Home = () => {
     }
   }, [isMountedRef]);
 
+
+  const getEnquirydata = useCallback(async () => {
+    try {
+      const response = await axios.get('api/admin/findenquiry/get');
+      if (isMountedRef.current) {
+        const { totalDataCount } = response.data;
+        // Set the totalDataCount to your state
+        setEnquirydata(totalDataCount);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('Failed to fetch enquiry data:', error);
+      setLoading(false); // Update loading state in case of an error
+    }
+  }, [isMountedRef]);
+
+
   useEffect(() => {
     getPagedata();
+    getEnquirydata();
   }, [getPagedata]);
 
   if (loading) {
@@ -90,8 +109,20 @@ const Home = () => {
     return <Typography variant="body1" color="textSecondary">Failed to load data</Typography>;
   }
 
+  console.log(enquirydata, "enquirydata"
+  )
   return (
+    <>
+
+    {/* <Card>
+      <CardHeader title="Welcome Learntech Admin!"/> */}
     <Grid container spacing={3}>
+      <CardItem
+        href="/app/dashboard/enquiry/" // Adjust the href as needed
+        title="Today Enquiry" // Adjust the title if necessary
+        value={`${enquirydata}/${enquirydata}`} // Display the totalDataCount twice
+      />
+
       <CardItem
         href="/app/dashboard/college/"
         title="Colleges"
@@ -173,6 +204,8 @@ const Home = () => {
         value={`${pagedata.Users}`}
       />
     </Grid>
+    {/* </Card> */}
+    </>
   );
 }
 

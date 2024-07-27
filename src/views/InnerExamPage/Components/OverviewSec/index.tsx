@@ -14,11 +14,11 @@ import CustomCarousel from '../CustomCarousel';
 
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 
-
-
 type ExamData = {
   exam_title: string;
   created_at: string;
+  id: number;
+  slug: string;
 };
 
 function OverviewSec({ data }) {
@@ -39,7 +39,7 @@ function OverviewSec({ data }) {
     { id: 'counseling', label: 'COUNSELLING', content: data.counseling },
     { id: 'acceptcolleges', label: 'ACCEPTING COLLEGES', content: data.accept_colleges },
     { id: 'gallery', label: 'Gallery', content: data.clggallery },
-    { id: 'faq', label: 'FAQ', content: data.examfaqs },
+    { id: 'faq', label: 'FAQ', content: <FaqSec data={data.examfaqs} /> },
   ].filter(item => item.content && item.content !== 'null');
 
   const [activeTab, setActiveTab] = useState(items[0].id);
@@ -117,16 +117,28 @@ function OverviewSec({ data }) {
   const newsData = examData.map(data => ({
     date: formatDate(new Date(data.created_at)),
     title: data.exam_title,
+    slug: data.slug,
+    id: data.id,
   }));
 
-  const renderContent = (content) => (
-    <div className="row">
-      <div className="text-black pt-3">
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+  const renderContent = (content) => {
+    if (typeof content === 'string') {
+      return (
+        <div className="row">
+          <div className="text-black pt-3">
+            <div dangerouslySetInnerHTML={{ __html: content }} />
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="row">
+        <div className="text-black pt-3">
+          {content}
+        </div>
       </div>
-    </div>
-  );
-
+    );
+  };
 
   return (
     <section className='clgInfoSec bg-white'>
@@ -134,7 +146,6 @@ function OverviewSec({ data }) {
         <div className='carouselInnerCourse position-relative' style={{ zIndex: '2' }}>
           <CustomCarousel items={items} setActiveTab={setActiveTab} />
           <div className="row">
-
             <div className="col-md-8 text-black pt-3">
               <div className="tab-content" id="nav-tabContent">
                 {items.map((item, index) => (

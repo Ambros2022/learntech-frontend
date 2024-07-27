@@ -52,7 +52,7 @@ const CoursesCraousel = ({ items }) => {
             customButtonGroup={<ButtonGroup />}
         >
             {items.map((item, index) => (
-                <div key={index}>{item}</div>
+                <div className='py-3' key={index}>{item}</div>
             ))}
         </Carousel>
     );

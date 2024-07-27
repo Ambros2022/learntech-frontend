@@ -278,9 +278,9 @@ const ReviewSec = ({ data }) => {
                             ))}
                         </div>
 
-                        <div className="col-md-6 col-10 mx-auto col-lg-3 mt-3 mt-md-5 mt-lg-0 mx-md-auto border p-3 rounded text-center">
-                            <h4 className='text-blue fw-bold text-center'>Write a helpful review!</h4>
-                            <p className='text-black text-center'>It's not about being good or bad; what matters is being honest and genuine.</p>
+                        <div className="col-md-6 col-10 mx-auto col-lg-3 mt-3 mt-md-5 mt-lg-0 mx-md-auto border p-3 text-center">
+                            <h4 className='text-blue fw-bold text-center mb-4'>Write a helpful review!</h4>
+                            <p className='text-black text-center mb-5'>It's not about being good or bad; what matters is being honest and genuine.</p>
                             <Link href={`/write-review`} className='btn writeReviewBtn'>Write a Review</Link>
                         </div>
                     </div>

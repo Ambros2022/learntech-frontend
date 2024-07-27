@@ -1,26 +1,22 @@
 // LinkedInLogin.js
-import React from 'react';
-import { useLinkedIn } from 'react-linkedin-login-oauth2';
+import React from 'react'
+import { useLinkedIn } from 'react-linkedin-login-oauth2'
 
 const LinkedInLogin = () => {
   const { linkedInLogin } = useLinkedIn({
-    clientId: 'YOUR_LINKEDIN_CLIENT_ID',
-    redirectUri: 'YOUR_REDIRECT_URI',
-    onSuccess: (code) => {
+    clientId: 'YIDyEUMR9PDHbl9T7Fkiysaqv',
+    redirectUri: 'localhost:3000',
+    onSuccess: code => {
       // Handle success, e.g., exchange code for access token
-      console.log(code);
+      console.log(code)
     },
-    onError: (error) => {
+    onError: error => {
       // Handle error
-      console.error(error);
-    },
-  });
+      console.error(error)
+    }
+  })
 
-  return (
-    <button onClick={linkedInLogin}>
-      Login with LinkedIn
-    </button>
-  );
-};
+  return <button onClick={linkedInLogin}>Login with LinkedIn</button>
+}
 
-export default LinkedInLogin;
+export default LinkedInLogin

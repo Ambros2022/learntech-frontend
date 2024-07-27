@@ -44,9 +44,10 @@ const Footer = () => {
           </div>
           <div className="row">
             <div className="col-md-4 text-white">
-              <p className='' style={{fontWeight:'300', fontSize:'14px'}}>Dream. Apply. Achieve.
-                Our Expert Admission Guidance
-                is the Bridge that Connects You
+              <p className='d-flex justify-content-start text-center'>
+                Dream. Apply. Achieve.<br></br>
+                Our Expert Admission Guidance<br></br>
+                is the Bridge that Connects You<br></br>
                 to a Brighter Future.</p>
               <span className="footerIcon">
                 <div className="mb-3">
@@ -82,6 +83,7 @@ const Footer = () => {
                 <li className='mb-2'><Link href="/study-in-usa"><i className="bi bi-chevron-double-right"></i> Study Abroad</Link></li>
                 <li className='mb-2'><Link href="/scholarships"><i className="bi bi-chevron-double-right"></i> Scholarships</Link></li>
                 <li className='mb-2'><Link href="/students-speak"><i className="bi bi-chevron-double-right"></i> Student’s Speak</Link></li>
+                <li className='mb-2'><Link href="/education-loan"><i className="bi bi-chevron-double-right"></i> Education Loan</Link></li>
               </ul>
             </div>
             <div className="col-md-2 col-6 text-white mb-3">

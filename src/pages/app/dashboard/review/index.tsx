@@ -158,8 +158,10 @@ type DataGridRowType = {
 
 const SecondPage = () => {
   // ** States
-  const [colleges, setColleges] = useState([])
+  const [colleges, setColleges] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [college_id, setCollege_id] = useState('')
+  const [course_id, setCourse_id] = useState('')
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogData, setDialogData] = useState<DataGridRowType | null>(null);
   const [reloadpage, setReloadpage] = useState("0");
@@ -167,7 +169,7 @@ const SecondPage = () => {
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
   const [page, setPage] = useState<number>(1)
-  const [orderby, setOrderby] = useState<SortType>('desc')
+  const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
   const [searchfrom, setSearchfrom] = useState<any>('name')
@@ -410,7 +412,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string , ) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string, college_id: string , course_id: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -427,7 +429,9 @@ const SecondPage = () => {
             size,
             searchtext,
             searchfrom,
-            
+            college_id,
+            course_id,
+
 
           },
         })
@@ -458,8 +462,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname, college_id, course_id)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, college_id, course_id])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -476,26 +480,43 @@ const SecondPage = () => {
   }
 
 
-  //get all countries
+  //get all colleges
   const getcolleges = useCallback(async () => {
     try {
-        const roleparams: any = {};
-        roleparams['page'] = 1;
-        roleparams['size'] = 10000;
-        const response = await axios1.get('api/admin/college/get', { params: roleparams });
+      const roleparams: any = {};
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/college/get', { params: roleparams });
 
-        setColleges(response.data.data);
+      setColleges(response.data.data);
 
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
-}, [isMountedRef]);
+  }, [isMountedRef]);
 
-useEffect(() => {
 
-  getcolleges();
+  //get all courses
+  const getcourses = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/generalcourse/get', { params: roleparams });
 
-}, [getcolleges]);
+      setCourses(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+  useEffect(() => {
+
+    getcolleges();
+    getcourses();
+
+  }, [getcolleges , getcourses]);
 
 
   return (
@@ -555,52 +576,66 @@ useEffect(() => {
       <Grid item xs={12}>
         <Card>
 
-        <CardHeader title="Search Filters" />
-        <CardContent>
-                  <Grid container spacing={6}>
-                    <Grid item sm={4} xs={12}>
-                      <CustomTextField
-                        select
-                        fullWidth
-                        defaultValue="Select College"
-                        value={college_id}
-                        onChange={(e: any) => {
-                          // setCountry_id(e.target.value);
-                          // console.log(setschoolId, "setschoolId");
-                          
-                        }}
-                        SelectProps={{
-                          displayEmpty: true,
-                        }}
-                      >
-                        <MenuItem value=''>Select Country</MenuItem>
-                        {colleges && colleges.map((val: any) => (
-                          <MenuItem value={val.id}>{val.name}</MenuItem>
-                        ))}
-                        {colleges.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
-                      </CustomTextField>
-                    </Grid>
-                    <Grid item sm={4} xs={12}>
-                      <Button sx={{ mt: 0 }} variant="contained" color='error'
-                        onClick={(e: any) => {
-                          // setClassId('');
-                          // setCountry_id('');
-                          // setStatus('');
-                        }}
-                        startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
-                    </Grid>
-                  </Grid>
-                </CardContent>
+          <CardHeader title="Search Filters" />
+          <CardContent>
+            <Grid container spacing={6}>
+              <Grid item sm={4} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select College"
+                  value={college_id}
+                  onChange={(e: any) => {
+                    setCollege_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select College</MenuItem>
+                  {colleges && colleges.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {colleges.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
 
 
-                <Divider sx={{ m: '0 !important' }} />
+              <Grid item sm={4} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Courses"
+                  value={course_id}
+                  onChange={(e: any) => {
+                    setCourse_id(e.target.value);
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select Course</MenuItem>
+                  {courses && courses.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {courses.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
+              <Grid item sm={4} xs={12}>
+                <Button sx={{ mt: 0 }} variant="contained" color='error'
+                  onClick={(e: any) => {
+                    setCollege_id('');
+                    setCourse_id('');
+                  }}
+                  startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+              </Grid>
+            </Grid>
+          </CardContent>
 
 
-
-
-
-
-
+          <Divider sx={{ m: '0 !important' }} />
 
           <DataGrid
             autoHeight

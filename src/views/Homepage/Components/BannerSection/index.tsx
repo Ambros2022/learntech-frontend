@@ -157,7 +157,7 @@ function BannerSection() {
               <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2" >
                 <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
                   <div className="outlineSec">
-                    <h1 className="fw-bold text-blue mb-3">Find Colleges, Courses & Exams that are best for you</h1>
+                    <h1 className="fw-bold text-blue mb-3"> Find your Perfect Educational Fit</h1>
                     <div className="row">
                       <div className="col-12 position-relative">
                         <Autocomplete
@@ -183,7 +183,7 @@ function BannerSection() {
                             <TextField
                               {...params}
                               size="small"
-                              placeholder="Search"
+                              placeholder="Search for colleges, universities, exams & courses"
                               className="form-control"
                               InputProps={{
                                 ...params.InputProps,

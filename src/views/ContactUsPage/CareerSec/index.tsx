@@ -20,13 +20,13 @@ const CareerSec = () => {
         <section className='bg-white py-5 careerLink'>
             <div className="container">
                 <div className="row">
-                    <div className="col-xl-8 col-md-7 mb-md-0 mb-3">
-                        <div className='bg-blue p-5 h-100 rounded'>
+                    <div className="col-xl-6 col-md-6 mb-md-0 mb-3">
+                        <div className='bg-blue p-md-5 p-3 h-100 rounded'>
                             <h2 className="fw-bold text-white">Contact Career Representative</h2>
                             <h6 className='text-white mb-5'>Please fill out the form to enable our career representatives to contact you at the earliest.</h6>
                             <div className="d-flex mb-3">
                                 <div className='align-self-center'>
-                                    <Image src='/images/icons/phoneAbout1.png' width={30} height={30} alt='phone1' />
+                                    <Image src='/images/icons/phoneAbout1N.png' width={30} height={30} alt='phone1' />
                                 </div>
                                 <div>
                                     <h6 className='ms-3 text-white'><Link href='tel:18001208696'>1800-120-8696</Link> (Tollfree)</h6>
@@ -35,7 +35,7 @@ const CareerSec = () => {
                             </div>
                             <div className="d-flex mb-3">
                                 <div className=''>
-                                    <Image src='/images/icons/phoneAbout2.png' width={30} height={30} alt='phone2' />
+                                    <Image src='/images/icons/phoneAbout2N.png' width={30} height={30} alt='phone2' />
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link>, <Link href='tel:26631169'>26631169</Link></h6>
@@ -43,7 +43,7 @@ const CareerSec = () => {
                             </div>
                             <div className="d-flex mb-3">
                                 <div className=''>
-                                    <Image src='/images/icons/phoneAbout3.png' width={30} height={30} alt='phone3' />
+                                    <Image src='/images/icons/phoneAbout3N.png' width={30} height={30} alt='phone3' />
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link></h6>
@@ -51,7 +51,7 @@ const CareerSec = () => {
                             </div>
                             <div className="d-flex mb-3">
                                 <div className=''>
-                                    <Image src='/images/icons/email-icon.svg' className='icon-white' width={30} height={30} alt='email' />
+                                    <Image src='/images/icons/phoneAbout4N.png' width={30} height={30} alt='email' />
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href="mailto:info@learntechww.com">info@learntechww.com</Link></h6>
@@ -59,7 +59,7 @@ const CareerSec = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-4 col-md-5 col-10 mx-auto">
+                    <div className="col-xl-6 col-md-6">
                         <div className="bg-skyBlue rounded">
                             <ContactPageUsForm/>
                         </div>

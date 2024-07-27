@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import EducationLoanPage from 'src/@core/components/popup/EducationloanForm'
 
 const DetailSec = () => {
     const validationSchema = Yup.object({
@@ -19,11 +20,11 @@ const DetailSec = () => {
             <section className='bg-white DetailSec'>
                 <div className="row g-0">
                     <div className="col-md-6">
-                        <Image src='/images/icons/ContactImgForm.jfif' width={500} height={500} alt='contact-form' style={{ objectFit: 'cover' }} className='w-100 h-100' />
+                        <Image src='/images/icons/contactImgForm.jfif' width={500} height={500} alt='contact-form' style={{ objectFit: 'cover' }} className='w-100 h-100' />
                     </div>
                     <div className="col-md-6 bg-skyBlue px-5 py-5">
                         <h2 className='fw-bold text-center text-blue mb-3'>ENTER YOUR DETAILS</h2>
-                        <Formik
+                        {/* <Formik
                             initialValues={{
                                 fullName: '',
                                 email: '',
@@ -90,7 +91,8 @@ const DetailSec = () => {
                                     </div>
                                 </Form>
                             )}
-                        </Formik>
+                        </Formik> */}
+                        <EducationLoanPage/>
                     </div>
                 </div>
             </section>

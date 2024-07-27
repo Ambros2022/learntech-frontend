@@ -115,7 +115,7 @@ const BrowsebyCategorySec = () => {
             <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
                 <h2 className='fw-bold text-blue mb-5 text-center '>Browse By Category</h2>
                 {/* <div className='examSecItems'> */}
-                    <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
+                <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
                 {/* </div> */}
                 <div className="tab-content" id="pills-tabContent">
                     {items.map((item) => (
@@ -162,7 +162,7 @@ const BrowsebyCategorySec = () => {
                                     </div>
                                     <div className="col-lg-5 col-xl-4">
                                         <div className='bg-skyBlue px-lg-5 px-md-3 px-3 rounded'>
-                                            <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h5>
+                                            <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
                                             <SideContactUsForm />
                                         </div>
                                         <NewsList newsItems={newsData} />

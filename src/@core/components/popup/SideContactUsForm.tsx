@@ -20,7 +20,7 @@ const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        contact: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+        contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
         location: Yup.string().required('Location is required').trim(),
         course: Yup.string().required('Course is required').trim(),
         message: Yup.string().trim(),
@@ -33,7 +33,7 @@ const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
             const formData = new FormData();
             formData.append('name', values.name);
             formData.append('email', values.email);
-            formData.append('contact_number', values.contact);
+            formData.append('contact_number', values.contact_number);
             formData.append('location', values.location);
             formData.append('course_in_mind', values.course);
             formData.append('college_name', values.college);

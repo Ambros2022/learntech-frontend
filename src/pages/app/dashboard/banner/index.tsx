@@ -13,7 +13,7 @@ import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
 import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import { Button, CardContent, CardHeader, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
 
 
 // ** Icon Imports
@@ -23,6 +23,7 @@ import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
+import CustomTextField from 'src/@core/components/mui/text-field'
 
 
 
@@ -142,8 +143,7 @@ type DataGridRowType = {
 
 const SecondPage = () => {
   // ** States
-
-
+  const [status, setStatus] = useState('');
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -237,7 +237,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string , status: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -254,6 +254,7 @@ const SecondPage = () => {
             size,
             searchtext,
             searchfrom,
+            status,
 
           },
         })
@@ -284,8 +285,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname , status)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, status])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -325,6 +326,38 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
+        <CardHeader title="Search Filters" />
+          <CardContent>
+            <Grid container spacing={6}>
+              <Grid item sm={3} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select Status"
+                  value={status}
+                  onChange={(e: any) => {
+                    setStatus(e.target.value);
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select status</MenuItem>
+                  <MenuItem value="Draft">Draft</MenuItem>
+                  <MenuItem value="Published">Published</MenuItem>
+                </CustomTextField>
+              </Grid>
+
+              <Grid item sm={3} xs={12}>
+                <Button sx={{ mt: 0 }} variant="contained" color='error'
+                  onClick={(e: any) => {
+                    setStatus('');
+                    
+                  }}
+                  startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+              </Grid>
+            </Grid>
+          </CardContent>
 
           <DataGrid
             autoHeight

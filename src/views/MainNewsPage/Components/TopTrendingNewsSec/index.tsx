@@ -37,7 +37,7 @@ const TopTrendingNews = ({ newsItems, loading }) => {
         <>
             <section className='topnewsSec bg-white py-5'>
                 <div className="container">
-                    <h2 className='text-blue fw-bold text-center mb-5'>Top Trending News</h2>
+                    <h2 className='text-blue fw-bold text-center mb-5'>Trending News</h2>
                     {loading ? (
 
                         <div className='text-center'> Loading....</div>
