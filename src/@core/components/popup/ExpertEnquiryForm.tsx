@@ -14,7 +14,7 @@ interface Props {
     placeholder?: string;
 }
 
-const EnquiryForm: FC<Props> = ({ placeholder = 'Course', ...rest }) => {
+const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
     const router = useRouter();
     const isMountedRef = useIsMountedRef();
     const [streams, setStreams] = useState<any[]>([]);
@@ -27,7 +27,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Course', ...rest }) => {
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
         contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone Number is required'),
-        course: Yup.string().required('Course is required').trim(),
+        course: Yup.string().required('Stream is required').trim(),
         // location: Yup.string().required('Location is required').trim(),
     });
 
