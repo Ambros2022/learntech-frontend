@@ -18,6 +18,7 @@ const ContactUsSec = () => {
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
         mobileNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
         courseInMind: Yup.string().required('Course In Mind is required').trim(),
+        location: Yup.string().required('Location is required').trim(),
         message: Yup.string().trim(),
     });
 
@@ -31,6 +32,7 @@ const ContactUsSec = () => {
             formData.append('course_in_mind', values.courseInMind);
             formData.append('current_url', window.location.href);
             formData.append('message', values.message || '');
+            formData.append('location', values.location || '');
             const response = await axios.post('api/website/enquiry', formData);
 
             if (response.status === 200) {
@@ -67,7 +69,8 @@ const ContactUsSec = () => {
                                     email: '',
                                     mobileNumber: '',
                                     courseInMind: '',
-                                    // message: ''
+                                    location:'',
+                                    message: '',
                                 }}
                                 validationSchema={validationSchema}
                                 onSubmit={handleSubmit}
@@ -84,10 +87,6 @@ const ContactUsSec = () => {
                                             <ErrorMessage name="fullName" component="div" className="text-danger" />
                                         </div>
                                         <div className="col-md-12 mb-3">
-                                            <PhoneInputField name="mobileNumber" />
-                                            <ErrorMessage name="mobileNumber" component="div" className="text-danger" />
-                                        </div>
-                                        <div className="col-md-12 mb-3">
                                             <Field
                                                 type="email"
                                                 name="email"
@@ -95,6 +94,10 @@ const ContactUsSec = () => {
                                                 placeholder="Email Id"
                                             />
                                             <ErrorMessage name="email" component="div" className="text-danger" />
+                                        </div>
+                                        <div className="col-md-12 mb-3">
+                                            <PhoneInputField name="mobileNumber" />
+                                            <ErrorMessage name="mobileNumber" component="div" className="text-danger" />
                                         </div>
                                         <div className="col-md-12 mb-3">
                                             <Field
@@ -105,7 +108,16 @@ const ContactUsSec = () => {
                                             />
                                             <ErrorMessage name="courseInMind" component="div" className="text-danger" />
                                         </div>
-                                        {/* <div className="col-md-12 mb-3">
+                                        <div className="col-md-12 mb-3">
+                                            <Field
+                                                type="text"
+                                                name="location"
+                                                className="form-control"
+                                                placeholder="Location"
+                                            />
+                                            <ErrorMessage name="location" component="div" className="text-danger" />
+                                        </div>
+                                         <div className="col-md-12 mb-3">
                                             <Field
                                                 as="textarea"
                                                 name="message"
@@ -113,7 +125,7 @@ const ContactUsSec = () => {
                                                 placeholder="Type your message"
                                             />
                                             <ErrorMessage name="message" component="div" className="text-danger" />
-                                        </div> */}
+                                        </div> 
                                         <div className="text-center">
                                             <button type="submit" className="btn btn-success">Submit</button>
                                         </div>

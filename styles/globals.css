@@ -866,10 +866,23 @@
 
   .card-con .fi-left {
     margin-left: -30px !important;
+    border:1px solid white;
+    border-radius: 5px;
+
+  }
+  .card-con .fi-left svg {
+    stroke: white;
+  
+  }
+  .card-con .fi-right svg {
+    stroke: white;
+   
   }
 
   .card-con .fi-right {
     margin-right: -25px !important;
+    border:1px solid white;
+    border-radius: 5px;
   }
 
   .arrowIcon.show {
@@ -4680,10 +4693,14 @@
     width: 100% !important;
   }
 
-  .AdvertiseBanner>img {
-    height: 300px !important;
-    width: 100% !important;
-    object-fit: cover !important;
+  .AdvertiseBanner{
+    height: 300px;
+  }
+
+  .AdvertiseBanner img {
+    height: 300px;
+    width: 100% ;
+    object-fit: contain;
   }
 
   .ServiceBanner {
@@ -4702,13 +4719,13 @@
   }
 
   .teamworksec {
-    height: 300px !important;
+    height: 400px;
   }
 
   .teamworksec img {
-    height: 300px !important;
-    width: 100% !important;
-    object-fit: cover !important;
+    height: 400px;
+    width: 100%;
+    object-fit: contain !important;
   }
 
   .faqSec {
@@ -4811,12 +4828,12 @@
   }
 
   .aboutUsPageSec {
-    height: 500px;
+    height: 400px;
     background-color: #E8E8E8;
   }
 
   .aboutUsPageSec img {
-    height: 500px;
+    height: 400px;
     object-fit: contain;
   }
 
@@ -5316,6 +5333,11 @@
     color: yellow !important;
   }
 
+  .pieChartDesign canvas{
+    height: 230px !important;
+    width: 230px !important;
+  }
+
   .SitemapSec {
     height: 300px;
   }
@@ -5419,6 +5441,23 @@
 
   @media (min-width:320px) and (max-width:767px) {
 
+    
+  .AdvertiseBanner{
+    height: 120px;
+  }
+
+  .AdvertiseBanner img{
+    height: 120px;
+    width: 100%;
+  }
+
+
+    .teamworksec{
+      height: 180px;
+    }
+    .teamworksec img{
+      height: 180px;
+    }
     .mbbsAbroad h6{
       font-size: 12px !important;
     }

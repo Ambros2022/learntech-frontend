@@ -11,7 +11,7 @@ interface Props {
     onChanges?: any;
 }
 
-const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
+const ContactUsForm: FC<Props> = ({ page, ...rest }) => {
     const router = useRouter();
 
     const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
@@ -22,7 +22,6 @@ const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
         contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
         location: Yup.string().required('Location is required').trim(),
-        course: Yup.string().required('Course is required').trim(),
         message: Yup.string().trim(),
     });
 
@@ -64,7 +63,7 @@ const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
                 email: '',
                 contact_number: '',
                 message: '',
-                course: '',
+                // course: '',
                 location: '',
             }}
             validationSchema={validationSchema}
@@ -84,10 +83,10 @@ const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
                     <PhoneInputField name="contact_number" />
                     <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <Field type="text" name="course" placeholder="Interested Course*" className="form-control" />
                     <ErrorMessage name="course" component="div" className="error text-danger" />
-                </div>
+                </div> */}
                 <div className="mb-3">
                     <Field type="text" name="location" placeholder="Location*" className="form-control" />
                     <ErrorMessage name="location" component="div" className="error text-danger" />
@@ -106,4 +105,4 @@ const SideContactUsForm: FC<Props> = ({ page, ...rest }) => {
     );
 };
 
-export default SideContactUsForm;
+export default ContactUsForm;

@@ -74,12 +74,12 @@ const EnquiryFormMed = ({ heading }: { heading: string }) => {
                         <ErrorMessage name="name" component="div" className="error text-danger" />
                     </div>
                     <div className="mb-3">
-                        <PhoneInputField name="contact_number" />
-                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                    </div>
-                    <div className="mb-3">
                         <Field type="email" name="email" placeholder="Email ID*" className="form-control" />
                         <ErrorMessage name="email" component="div" className="error text-danger" />
+                    </div>
+                    <div className="mb-3">
+                        <PhoneInputField name="contact_number" />
+                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                     </div>
                     <div className="mb-3">
                         <Field type="text" name="location" placeholder="Location*" className="form-control" />

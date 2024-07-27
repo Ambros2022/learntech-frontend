@@ -20,7 +20,7 @@ const DetailSec = () => {
             <section className='bg-white DetailSec'>
                 <div className="row g-0">
                     <div className="col-md-6">
-                        <Image src='/images/icons/ContactImgForm.jfif' width={500} height={500} alt='contact-form' style={{ objectFit: 'cover' }} className='w-100 h-100' />
+                        <Image src='/images/icons/contactImgForm.jfif' width={500} height={500} alt='contact-form' style={{ objectFit: 'cover' }} className='w-100 h-100' />
                     </div>
                     <div className="col-md-6 bg-skyBlue px-5 py-5">
                         <h2 className='fw-bold text-center text-blue mb-3'>ENTER YOUR DETAILS</h2>

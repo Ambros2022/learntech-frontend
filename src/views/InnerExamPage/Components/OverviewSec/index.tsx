@@ -17,8 +17,8 @@ const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { s
 type ExamData = {
   exam_title: string;
   created_at: string;
-  id:number;
-  slug:string;
+  id: number;
+  slug: string;
 };
 
 function OverviewSec({ data }) {
@@ -39,7 +39,7 @@ function OverviewSec({ data }) {
     { id: 'counseling', label: 'COUNSELLING', content: data.counseling },
     { id: 'acceptcolleges', label: 'ACCEPTING COLLEGES', content: data.accept_colleges },
     { id: 'gallery', label: 'Gallery', content: data.clggallery },
-    { id: 'faq', label: 'FAQ', content: <FaqSec data={data.examfaqs}/> },
+    { id: 'faq', label: 'FAQ', content: <FaqSec data={data.examfaqs} /> },
   ].filter(item => item.content && item.content !== 'null');
 
   const [activeTab, setActiveTab] = useState(items[0].id);
@@ -117,8 +117,8 @@ function OverviewSec({ data }) {
   const newsData = examData.map(data => ({
     date: formatDate(new Date(data.created_at)),
     title: data.exam_title,
-    slug:data.slug,
-    id:data.id,
+    slug: data.slug,
+    id: data.id,
   }));
 
   const renderContent = (content) => {

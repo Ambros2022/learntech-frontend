@@ -56,6 +56,8 @@ const BankSec = () => {
                         showDots={false}
                         arrows={false}
                         infinite
+                        autoPlaySpeed={2000}
+                        autoPlay={true}
                         ssr  // SSR true for server-side rendering
                         responsive={responsive}
                         renderButtonGroupOutside

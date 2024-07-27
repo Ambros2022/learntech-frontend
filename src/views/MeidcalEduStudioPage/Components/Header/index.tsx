@@ -8,7 +8,7 @@ const Header = () => {
             <section className='bg-white py-3 medHeader'>
                 <nav className="navbar navbar-expand-lg">
                     <div className="container">
-                        <Link href='/meds'>
+                        <Link href='/'>
                             <Image src='/images/icons/medicalEdulogo.png' width={200} height={200} alt='medical-logo' className="img-fluid navbar-brand"></Image>
                         </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

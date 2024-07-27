@@ -58,7 +58,7 @@ const LeaderSec = () => {
     // ];
 
     return (
-        <section className='bg-white py-5'>
+        <section className='bg-white py-md-5 py-3'>
             <div className="container">
                 <h2 className='text-blue fw-bold'>Meet Our Leaders</h2>
                 <p className="text-black">
@@ -86,7 +86,7 @@ const LeaderSec = () => {
                         </div>
                     </div>
                 </div>
-                <h2 className='fw-bold text-blue pt-3 mb-3'>Management Team
+                <h2 className='fw-bold text-md-start text-center text-blue pt-3 mb-3'>Management Team
                 </h2>
                 <div className="row">
                     {users.map((user, index) => (

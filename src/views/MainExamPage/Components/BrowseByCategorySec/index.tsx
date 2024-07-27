@@ -115,7 +115,7 @@ const BrowsebyCategorySec = () => {
             <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
                 <h2 className='fw-bold text-blue mb-5 text-center '>Browse By Category</h2>
                 {/* <div className='examSecItems'> */}
-                    <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
+                <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
                 {/* </div> */}
                 <div className="tab-content" id="pills-tabContent">
                     {items.map((item) => (

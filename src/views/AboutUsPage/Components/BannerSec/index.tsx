@@ -28,25 +28,23 @@ const BannerSec = () => {
     }, [getbanner]);
     return (
         <>
-            <section className='scholarshipSec aboutUsPageSec'>
-                <div className='position-relative h-100 scholarShipImg'>
-                    {banners.map((banner, index) => (
-                            <a href={banner.link}>
-                                <Image
-                                    width={1400} height={500}
-                                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                                    priority={true}
-                                    alt={`Banner-img`}
-                                    className="w-100"
-                                />
-                            </a>
-                    ))}
-                    <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
-                        <div className="container d-flex justify-content-center h-100 w-100">
-                            <div className="align-content-center">
-                                <div className="py-5 text-center">
-                                    <h1 className='fw-bold text-white mb-3 rounded p-3' style={{backgroundColor:"rgb(37,70,146)"}}>About Learntech Edu Solutions</h1>
-                                </div>
+            <section className='scholarshipSec aboutUsPageSec position-relative'>
+                {banners.map((banner, index) => (
+                    <a href={banner.link}>
+                        <Image
+                            width={1400} height={500}
+                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                            priority={true}
+                            alt={`Banner-img`}
+                            className="w-100"
+                        />
+                    </a>
+                ))}
+                <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
+                    <div className="container d-flex justify-content-center h-100 w-100">
+                        <div className="align-content-center">
+                            <div className="py-5 text-center">
+                                <h1 className='fw-bold text-white mb-3 rounded p-3' style={{ backgroundColor: "rgb(37,70,146)" }}>About Learntech Edu Solutions</h1>
                             </div>
                         </div>
                     </div>

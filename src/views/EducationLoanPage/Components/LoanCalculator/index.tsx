@@ -76,14 +76,12 @@ const LoanCalculator: React.FC = () => {
         }
     };
 
-    // Handle changes in interest rate input
     const handleInterestRateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const rawValue = event.target.value.replace(/[^\d.]/g, ''); // Allow only digits and decimal point
-        const value = rawValue === '' ? NaN : parseFloat(rawValue);
+        const value = parseFloat(event.target.value);
         if (!isNaN(value)) {
             setInterestRate(value);
         } else {
-            setInterestRate(0); // Handle empty input by setting interestRate to 0 or another default value
+            setInterestRate(0); // Handle invalid input
         }
     };
 
@@ -153,7 +151,8 @@ const LoanCalculator: React.FC = () => {
                             <div className='d-flex'>
                                 <div className='input-group'>
                                     <input
-                                        type="text"
+                                        type="number"
+                                        step="0.01" // Allows for decimal values
                                         className='form-control'
                                         value={isNaN(interestRate) ? '' : `${interestRate}`}
                                         onChange={handleInterestRateChange}
@@ -165,7 +164,7 @@ const LoanCalculator: React.FC = () => {
                                 ariaLabel="Interest Rate Slider"
                                 defaultValue={10}
                                 getAriaValueText={(value) => `${value}`}
-                                step={1}
+                                step={0.1} // Allows for decimal steps
                                 marks={percentage}
                                 min={5}
                                 max={20}
@@ -230,7 +229,7 @@ const LoanCalculator: React.FC = () => {
                             <h4 className='fw-bold text-blue'>Payable Amount</h4>
                             <h6 className='text-black'>{isNaN(payableAmount) ? '' : formatNumber(payableAmount)}</h6>
                         </div>
-                        <div className="d-flex mb-3 justify-content-center">
+                        <div className="d-flex mb-3 justify-content-center pieChartDesign">
                             <PieChart loanAmount={loanAmount} totalInterest={totalInterest} />
                         </div>
                     </div>

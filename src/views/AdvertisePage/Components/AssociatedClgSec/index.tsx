@@ -79,17 +79,20 @@ function AssociatedClg() {
 
 
   return (
-    <section className="FeaturedClgCon bg-skyBlue" id="animation5" data-aos="fade-up">
-      <div className="container pt-5 position-relative">
-        <h2 className="fw-bold text-blue text-center mb-5">Our Associated Colleges and Universities</h2>
-        <MainCarousel items={colleges.map(college => (
-          <CollegeCard key={college.id} college={college} />
-        ))} />
-        <div className="d-flex justify-content-center pb-5">
-          <Link href='/colleges' className='btn viewMoreClgBtn'>Load More</Link>
+    <>
+    {colleges && colleges.length>0 ? (
+      <section className="FeaturedClgCon bg-skyBlue" id="animation5" data-aos="fade-up">
+        <div className="container pt-5 position-relative">
+          <h2 className="fw-bold text-blue text-center mb-5">Our Associated Colleges and Universities</h2>
+          <MainCarousel items={colleges.map(college => (
+            <CollegeCard key={college.id} college={college} />
+          ))} />
+          <div className="d-flex justify-content-center pb-5">
+            <Link href='/colleges' className='btn viewMoreClgBtn'>View More</Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>):''}
+    </>
   )
 }
 

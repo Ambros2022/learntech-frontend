@@ -5,7 +5,7 @@ const StepSection = () => {
         <section className='bg-white py-5'>
             <div className="container bg-skyBlue rounded p-3">
                 <h2 className='fw-bold text-center text-blue pt-2 mb-4'>Steps to Continue with Your Application</h2>
-                <div className='d-flex justify-content-center gap-3 flex-wrap'>
+                <div className='d-flex justify-content-center gap-5 flex-wrap'>
                     <div className='bg-blue rounded' style={{ width: '200px', height: '200px' }}>
 
                     </div>
