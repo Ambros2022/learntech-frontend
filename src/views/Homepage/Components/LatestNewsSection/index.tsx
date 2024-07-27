@@ -74,7 +74,7 @@ function LatestNewsSection() {
     const combinedItems = activeTab === 'news' ? newsItems : blogItems;
 
     return (
-        <section className="latestNewsCon" style={{ backgroundImage: banners[0] ? `url(${process.env.NEXT_PUBLIC_IMG_URL}/${banners[0].image})` : 'none', backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
+        <section className="latestNewsCon" style={{ backgroundImage: banners[0] ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${process.env.NEXT_PUBLIC_IMG_URL}/${banners[0].image})` : 'none', backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
             <div className="container pt-5">
                 <h3 className="fw-bold text-center">Latest News & Blogs</h3>
                 <div className="nav-pills justify-content-center pt-3 gap-2 d-flex" role="tablist">
