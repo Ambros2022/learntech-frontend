@@ -122,14 +122,14 @@ function BannerSec({ data }: any) {
             </div>
           </div>
           <h2 className='text-white fw-bold pt-3 mb-3'>Trending Courses</h2>
-          <div className="d-flex pb-5 gap-2 flex-wrap justify-content-between">
+          <div className="d-flex pb-5 gap-2 flex-wrap flex-md-row flex-column justify-content-between">
             <div className='d-flex gap-2 flex-wrap mb-2 mb-lg-0'>
               {data.map((val) => (
                 <Link href={`/course/${val?.streams?.id}/${val?.streams?.slug}/${val.slug}`}
                   className='btn trendCrsBtn'>{val.short_name}</Link>
               ))}
             </div>
-            <div className='align-content-end'>
+            <div className='align-content-center'>
               <GlobalEnquiryForm buttonText="Check Eligibility" className="btn btn-elg bg-warning text-white" />
               {/* <button className='btn bg-warning text-white'>Check Eligibility</button> */}
             </div>

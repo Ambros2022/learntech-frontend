@@ -71,25 +71,25 @@ const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
     >
       <Form className="container w-75 m-auto">
         <div className='row mb-3'>
-          <div className="col-lg-6 col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+          <div className="col-lg-6 col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5">
             <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
             <ErrorMessage name="name" component="div" className="error text-danger" />
           </div>
-          <div className="col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+          <div className="col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5">
             <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
             <ErrorMessage name="email" component="div" className="error text-danger" />
           </div>
-          <div className=" col-lg-6 col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+          <div className=" col-lg-6 col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5">
             <PhoneInputField name="contact_number" />
             {/* <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" /> */}
             <ErrorMessage name="contact_number" component="div" className="error text-danger" />
           </div>
 
-          <div className=" col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+          <div className=" col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5">
             <Field type="text" name="course" placeholder="Enter Interested Course" className="form-control" />
             <ErrorMessage name="course" component="div" className="error text-danger" />
           </div>
-          <div className=" col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+          <div className=" col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5">
             <Field type="text" name="college_name" placeholder="College Name" className="form-control" />
             <ErrorMessage name="college_name" component="div" className="error text-danger" />
           </div>

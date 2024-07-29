@@ -49,16 +49,16 @@ const BannerSec = ({ handleSearchQuery }) => {
                     </div>
                     <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
                         <div className="container h-100">
-                            <div className="d-flex justify-content-center h-100">
+                            <div className="card d-flex justify-content-center w-100 h-100 bg-transparent border-0">
                                 <div className="align-content-center h-100">
                                     <h1 className='fw-bold text-white text-center'>Success Stories of Learntech Edu Solutions Pvt. Ltd.</h1>
                                     <div className="row">
-                                        <div className=" col-12 text-center mb-3 ">
+                                        <div className="col-12 w-100 text-center mb-3">
                                             <TextField
                                                 placeholder="Search"
                                                 value={searchText}
                                                 onChange={handleInputChange}
-                                                
+
                                                 InputProps={{
                                                     startAdornment: (
                                                         <InputAdornment position="start">
@@ -73,17 +73,17 @@ const BannerSec = ({ handleSearchQuery }) => {
                                                             color: 'black',
                                                         },
                                                     },
-                                                    
+
                                                     endAdornment: (
                                                         <>
-                                                        {loading && <CircularProgress color="inherit" size={20} />}
-                                                        {searchText && !loading && (
-                                                            <IconButton onClick={handleClearInput} edge="end">
-                                                                <ClearIcon />
-                                                            </IconButton>
-                                                        )}
-                                                       
-                                                    </>
+                                                            {loading && <CircularProgress color="inherit" size={20} />}
+                                                            {searchText && !loading && (
+                                                                <IconButton onClick={handleClearInput} edge="end">
+                                                                    <ClearIcon />
+                                                                </IconButton>
+                                                            )}
+
+                                                        </>
                                                     ),
                                                 }}
                                             />

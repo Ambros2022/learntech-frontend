@@ -26,7 +26,7 @@ const NewsLinkSection: React.FC = React.memo(() => {
       const newsData: NewsItem[] = response.data.data;
 
       const newsItems = newsData.map((item) => (
-        <Link key={item.id} href={`news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer">
+        <Link key={item.id} href={`/news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer">
           <h6 className="py-2 mx-auto text-truncate newsLink2Clr text-blue text-center" style={{ maxWidth: '200px' }}>
             {item.name}
           </h6>

@@ -29,7 +29,7 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
       <div className="container">
         <div className="row">
           {cards.map((card) => (
-            <div key={card.id} className="col-md-6 col-10 mx-auto">
+            <div key={card.id} className="col-md-6">
               <div className="card p-3 mb-4">
                 <div className="row">
                   <div className="col-md-6 embedly-responsive">

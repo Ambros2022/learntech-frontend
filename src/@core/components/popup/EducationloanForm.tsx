@@ -68,7 +68,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
         name: '',
         contact_number: '',
         email: '',
-        location: '',
+        city: '',
         course: '',
         college: '',
         message: '',
@@ -81,7 +81,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
             formData.append('name', values.name);
             formData.append('email', values.email);
             formData.append('contact_number', values.contact_number);
-            formData.append('location', values.location);
+            formData.append('location', values.city);
             formData.append('course_in_mind', values.course);
             formData.append('college_name', values.college);
             formData.append('description', values.message || '');

@@ -16,7 +16,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
 
     return (
         <>
-            <section className='py-5 bg-white browseNews'>
+            <section className='py-md-5 py-3 bg-white browseNews'>
                 <div className="container">
                     <div className="d-flex justify-content-center newsTabsClr gap-3 mx-5 flex-wrap flex-row">
                         {['all', 'state', 'national', 'international'].map(tabName => (
@@ -32,7 +32,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                     <div className="row ">
                                         {boardItems.map((item, index) => (
                                             index < displayCount && (
-                                                <div key={item.id} className="d-flex col-10 mx-auto col-md-6 mx-md-0 mb-3">
+                                                <div key={item.id} className="d-flex mx-auto col-md-6 mx-md-0 mb-3">
                                                     <div className="card hover-card newsImgSize bg-skyBlue">
                                                         {/* <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
                                                             <i className='bi bi-star-fill text-warning'></i>
@@ -57,7 +57,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                         <div className="card-body">
                                                             <div className="row d-flex">
                                                                 <div className="col-lg-4 col-xl-3 align-self-center mb-lg-0 mb-3">
-                                                                    <div className="logoBoardImg">
+                                                                    <div className="logoBoardImg text-center">
                                                                         <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`} width={500} height={500} alt='clg-card' className='mx-auto img-fluid' />
                                                                     </div>
                                                                 </div>
@@ -81,7 +81,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                                     <p className='text-black'><span className='fw-bold'>Genders Accepted :</span> {item.gender}</p>
                                                                 </div>
                                                             </div>
-                                                            <div className="d-flex justify-content-end">
+                                                            <div className="d-flex justify-md-content-end">
                                                                 <Link href={`/board/${item.id}/${item.name}`} className='btn viewMoreCollegeBtn'>View Details</Link>
                                                             </div>
                                                         </div>

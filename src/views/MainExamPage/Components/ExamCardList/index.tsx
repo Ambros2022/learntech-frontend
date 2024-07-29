@@ -19,7 +19,7 @@ const ExamCard = ({ title, id,  date, cover_image }) => {
     };
 
     return (
-        <div className="col-md-4 col-10 mx-auto mb-3">
+        <div className="col-md-4 mb-3">
              <a href={`/exam/${id}/${title}`} >
             <div className="card hover-card examsCardRow">
                 <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${cover_image}`} width={300} height={300} className="card-img-top" alt={title} />

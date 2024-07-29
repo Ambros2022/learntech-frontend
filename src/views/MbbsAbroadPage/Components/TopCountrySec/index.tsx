@@ -543,7 +543,7 @@ const TopCountrySec = () => {
         <section className='topCountryLinks bg-white pb-5'>
             <div className='container bg-skyBlue rounded mb-3 py-3 px-4'>
                 <h2 className='text-blue fw-bold mb-3'>Top 10 Countries to Study MBBS Abroad</h2>
-                <ul className='nav nav-pills d-flex gap-2 flex-wrap' id='pills-tab' role='tablist'>
+                <ul className='nav nav-pills d-flex gap-2 flex-wrap flex-md-row flex-column' id='pills-tab' role='tablist'>
                     {countries.map((country, index) => (
                         <li className='nav-item rounded' key={index}>
                             <button

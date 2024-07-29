@@ -129,7 +129,7 @@ const BrowsebyCategorySec = () => {
                             <div className='topCourseConCarousel pt-5'>
                                 <div className="row ">
                                     <div className="col-lg-7 col-xl-8">
-                                        <div className="row">
+                                        <div className="row px-md-0 px-3">
                                             {currentExams.length > 0 ? (
                                                 currentExams.map((exam, index) => (
                                                     <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />

@@ -25,7 +25,9 @@ import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import type { FC } from 'react';
 import { useAuth } from 'src/hooks/useAuth'
-import { Alert, FormControlLabel, FormLabel, RadioGroup } from '@mui/material'
+import { Alert, FormControlLabel, FormLabel, RadioGroup, Typography } from '@mui/material'
+import QuillEditor from 'src/@core/components/html-editor/index';
+
 
 
 interface Authordata {
@@ -38,7 +40,7 @@ interface JobPositionLocation {
         id: string;
         name: string;
     };
-    
+
 }
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
@@ -72,7 +74,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-       
+
     })
 
     const defaultValues = {
@@ -107,6 +109,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         control,
         handleSubmit,
         reset,
+        setValue,
         resetField: admfiledReset,
         formState: { errors }
     } = useForm<any>({
@@ -250,8 +253,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         isOptionEqualToValue={(option, value) => option.id === value.id}
                                         renderInput={params =>
                                             <CustomTextField {...params}
-                                            label='Select locations'
-                                               
+                                                label='Select locations'
+
                                                 variant="outlined"
                                                 error={Boolean(errors.joblocations)}
                                                 {...(errors.joblocations && { helperText: 'This field is required' })}
@@ -281,7 +284,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
+                    {/* <Grid item xs={12} sm={6}>
                         <Controller
                             name='job_description'
                             control={control}
@@ -299,7 +302,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             )}
                         />
-                    </Grid>
+                    </Grid> */}
+
+
+                    
 
                     <Grid item xs={12} sm={6}>
                         <Controller
@@ -336,6 +342,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.total_positions && { helperText: 'This field is required' })}
                                 />
+                            )}
+                        />
+                    </Grid>
+
+
+                    <Grid item xs={12} sm={12}>
+                        <Typography style={{ marginBottom: '10px' }}>Description</Typography>
+
+                        <Controller
+                            name='job_description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value } }) => (
+                                <>
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("job_description", value)} />
+                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                </>
                             )}
                         />
                     </Grid>
