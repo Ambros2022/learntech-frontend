@@ -228,20 +228,21 @@ const SecondPage = () => {
       flex: 0.175,
       minWidth: 200,
       field: 'job_description',
-      headerName: 'description',
+      headerName: 'Description',
       renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
+        const { row } = params;
+    
         return (
-       
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.job_description}
-              </Typography>
-
-        
-        )
+          <Typography
+            noWrap
+            variant='body2'
+            sx={{ color: 'text.primary', fontWeight: 600 }}
+            dangerouslySetInnerHTML={{ __html: row.job_description }}
+          />
+        );
       }
     },
+    
     {
       flex: 0.175,
       minWidth: 200,

@@ -17,7 +17,7 @@ function BannerSection({ data }) {
               <div className="col-lg-7 ps-xl-5 col-xl-8 col-md-10">
                 <div className="card-body text-white">
                   <h1 className="card-title fw-bold mb-3">{data.name}</h1>
-                  <h6 className='mb-3 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{data.address}</h6>
+                  <h6 className='mb-3 location-img'><i className='bi bi-geo-alt-fill text-danger me-1'></i>{data.address}</h6>
                   <h6 className='mb-3'><i className="text-warning bi bi-trophy-fill me-1"></i><strong>Approved by :&nbsp;</strong>{
                     data.collegerecognitions && data.collegerecognitions.map((element, index) => {
                       return (

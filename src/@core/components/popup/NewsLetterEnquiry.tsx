@@ -60,19 +60,19 @@ const NewsLetterEnquiry: FC<Props> = ({ page, ...rest }) => {
         >
             <Form className="container expertInquirySec">
                 <div className='row mb-3'>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                         <Field type="text" name="name" placeholder="Enter Name" className="form-control text-black" />
                         <ErrorMessage name="name" component="div" className="error text-danger" />
                     </div>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                         <PhoneInputField name="contact_number" />
                         <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                     </div>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                         <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
                         <ErrorMessage name="email" component="div" className="error text-danger" />
                     </div>
-                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 text-md-start text-center px-lg-3 px-md-5 px-5">
+                    <div className="col-lg-3 col-md-6 mb-3 px-xl-4 text-md-start text-center px-lg-3 px-md-5">
                         <button type="submit" className="btn reqBtn">Submit</button>
                     </div>
                 </div>

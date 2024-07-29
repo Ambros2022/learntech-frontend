@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios1 from 'src/configs/axios';
+import { height } from '@mui/system';
 
 interface Props {
     page?: any;
@@ -118,19 +119,19 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
             {({ setFieldValue }) => (
                 <Form className="container expertInquirySec">
                     <div className='row mb-3'>
-                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                             <Field type="text" name="name" placeholder="Enter Name" className="form-control text-black" />
                             <ErrorMessage name="name" component="div" className="error text-danger" />
                         </div>
-                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                             <PhoneInputField name="contact_number" />
                             <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                         </div>
-                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                             <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
                             <ErrorMessage name="email" component="div" className="error text-danger" />
                         </div>
-                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                             <Field as="select" name="course" className="form-control">
                                 <option value="">Select {placeholder}</option>
                                 {streams.map((item) => (
@@ -139,7 +140,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
                             </Field>
                             <ErrorMessage name="course" component="div" className="error text-danger" />
                         </div>
-                        {/* <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5 px-5">
+                        {/* <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                             <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
                             <ErrorMessage name="location" component="div" className="error text-danger" />
                         </div> */}

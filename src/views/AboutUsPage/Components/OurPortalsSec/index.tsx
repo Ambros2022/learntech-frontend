@@ -16,7 +16,7 @@ const OurPortalSec = () => {
                         </div>
                         <div className='bg-skyBlue rounded hover-card'>
                             <Link href='https://www.keralastudy.com/'>
-                                <Image src='/images/icons/Logo_kerala_study.png' width={200} height={200} alt='kerala_study-logo' className='img-fluid' />
+                                <Image src='/images/icons/Logo_Kerala_Study.png' width={200} height={200} alt='kerala_study-logo' className='img-fluid' />
                             </Link>
                         </div>
 

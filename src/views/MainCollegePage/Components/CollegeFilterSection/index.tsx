@@ -35,7 +35,7 @@ interface College {
 
 const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
     return (
-        <div className='col-md-10 col-lg-12 col-10 mx-auto mb-3 '>
+        <div className='col-md-10 col-lg-12 mx-auto mb-3 '>
             <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
                 <div className="p-2">
                     <div className="row d-flex">
@@ -50,7 +50,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                     </div>
                                     <div className="card-text text-black">
                                         <p className="mb-3 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
-                                        <p className="mb-3"><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></p>
+                                        <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p>
                                     </div>
                                 </div>
                                 <div className="col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
@@ -67,7 +67,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         </div>
                                     )}
                                 </div>
-                                <div className="mt-md-3 mt-lg-0 col-md-10 col-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column gap-3 mb-3">
+                                <div className="mt-md-3 mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column gap-3 mb-3">
                                     <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
 
                                     <Link href={`/college/${id}/${slug}`} className=" viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
@@ -713,7 +713,7 @@ function CollegeFilterSection() {
                                     </button>
                                 </div>
                             )}
-                            {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} description={promoban[0].description} title={promoban[0].title}/>}
+                            {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} description={promoban[0].description} title={promoban[0].title} />}
                             <StateButtons
                                 options={options.find(option => option.id === 'state')?.options || []}
                                 setSelectedCheckboxes={setSelectedCheckboxes}

@@ -133,7 +133,7 @@
   }
 
   .latestNewsCon .nav-pills button {
-    background-color: rgb(208, 208, 208) !important;
+    background-color: white !important;
     color: #254692 !important;
   }
 
@@ -866,22 +866,24 @@
 
   .card-con .fi-left {
     margin-left: -30px !important;
-    border:1px solid white;
+    border: 1px solid white;
     border-radius: 5px;
 
   }
+
   .card-con .fi-left svg {
     stroke: white;
-  
+
   }
+
   .card-con .fi-right svg {
     stroke: white;
-   
+
   }
 
   .card-con .fi-right {
     margin-right: -25px !important;
-    border:1px solid white;
+    border: 1px solid white;
     border-radius: 5px;
   }
 
@@ -1560,14 +1562,14 @@
 
     .card-con .fi-left {
       margin-left: 0px !important;
-      border: 1px solid #254692;
+      border: 1px solid white;
       border-radius: 5px;
       padding: 1px 10px;
     }
 
     .card-con .fi-right {
       margin-right: 0px !important;
-      border: 1px solid #254692;
+      border: 1px solid white;
       border-radius: 5px;
       padding: 0px 10px;
     }
@@ -2063,8 +2065,7 @@
     }
 
     .freeBtn {
-      font-size: 12px !important;
-      width: 200px !important;
+      width: 260px !important;
       padding: 12px 0 !important;
     }
 
@@ -2336,10 +2337,11 @@
     background-color: white !important;
   }
 
-  .newsLink2Clr:hover{
+  .newsLink2Clr:hover {
     color: darkblue !important;
     font-weight: bold !important;
   }
+
   .CourseNavigationLink a {
     text-decoration: none;
     color: black;
@@ -2703,6 +2705,7 @@
   .clgInfoSec table td {
     border: 1px solid black !important;
   }
+
 
   table {
     overflow-x: scroll !important;
@@ -4422,7 +4425,7 @@
     }
 
     .collegeDetailCard h6 {
-      font-size: 13px !important;
+      font-size: 18px !important;
     }
 
     .img-style {
@@ -4469,7 +4472,7 @@
     }
 
     .collegeDetailCard h6 {
-      font-size: 13px !important;
+      font-size: 17px !important;
     }
 
     /* .collegeDetailBanner {
@@ -4544,7 +4547,19 @@
     max-width: 130px !important;
   }
 
+  .logoBoardImg {
+    min-height: 130px !important;
+    min-width: 130px !important;
+    max-height: 130px !important;
+    max-width: 130px !important;
+  }
+
   .innerClgImg img {
+    object-fit: contain !important;
+    /* width: 100% !important; */
+    /* height: 100% !important; */
+  }
+  .logoBoardImg img {
     object-fit: contain !important;
     /* width: 100% !important; */
     /* height: 100% !important; */
@@ -4651,9 +4666,9 @@
     height: 100% !important;
   }
 
-  .addBanner .card-body h3 {
+  /* .addBanner .card-body h3 {
     min-height: 70px !important;
-  }
+  } */
 
   .iconsPosition {
     bottom: 0px !important;
@@ -4693,13 +4708,13 @@
     width: 100% !important;
   }
 
-  .AdvertiseBanner{
+  .AdvertiseBanner {
     height: 300px;
   }
 
   .AdvertiseBanner img {
     height: 300px;
-    width: 100% ;
+    width: 100%;
     object-fit: contain;
   }
 
@@ -5333,7 +5348,7 @@
     color: yellow !important;
   }
 
-  .pieChartDesign canvas{
+  .pieChartDesign canvas {
     height: 230px !important;
     width: 230px !important;
   }
@@ -5355,6 +5370,94 @@
 
   .siteMapSec li a:hover {
     color: #274896 !important;
+  }
+
+  .innerClgCarousel .react-multi-carousel-list {
+    width: 200px;
+    z-index: 20 !important;
+  }
+
+  .innerClgCarousel .carousel-button-group {
+    width: 100% !important;
+    position: absolute !important;
+    top: 2px !important;
+    z-index: 0 !important;
+  }
+
+  .innerClgCarousel .fi-left {
+    z-index: 20 !important;
+    margin-left: 0 !important;
+  }
+
+  .innerClgCarousel .fi-right {
+    margin-right: 30px !important;
+    z-index: 20 !important;
+  }
+
+  .innerNewsCarousel .react-multi-carousel-list {
+    width: 200px;
+    z-index: 20 !important;
+  }
+
+  .innerNewsCarousel .carousel-button-group {
+    width: 100% !important;
+    position: absolute !important;
+    top: 5px !important;
+    z-index: 0 !important;
+  }
+
+  .innerNewsCarousel .fi-left {
+    z-index: 20 !important;
+    margin-left: 0 !important;
+  }
+
+  .innerNewsCarousel .fi-right {
+    margin-right: 0px !important;
+    z-index: 20 !important;
+  }
+
+  .innerCourseCarosuel .react-multi-carousel-list {
+    width: 200px;
+    z-index: 20 !important;
+  }
+
+  .innerCourseCarosuel .carousel-button-group {
+    width: 100% !important;
+    position: absolute !important;
+    top: 2px !important;
+    z-index: 0 !important;
+  }
+
+  .innerCourseCarosuel .fi-left {
+    z-index: 20 !important;
+    margin-left: 0 !important;
+  }
+
+  .innerCourseCarosuel .fi-right {
+    margin-right: 30px !important;
+    z-index: 20 !important;
+  }
+
+  .innerClgCarousel .react-multi-carousel-list {
+    width: 200px;
+    z-index: 20 !important;
+  }
+
+  .innerClgCarousel .carousel-button-group {
+    width: 100% !important;
+    position: absolute !important;
+    top: 2px !important;
+    z-index: 0 !important;
+  }
+
+  .innerClgCarousel .fi-left {
+    z-index: 20 !important;
+    margin-left: 0 !important;
+  }
+
+  .innerClgCarousel .fi-right {
+    margin-right: 30px !important;
+    z-index: 20 !important;
   }
 
   @media (min-width:993px) and (max-width:1024px) {
@@ -5441,27 +5544,46 @@
 
   @media (min-width:320px) and (max-width:767px) {
 
-    
-  .AdvertiseBanner{
-    height: 120px;
-  }
+    .table {
+      overflow-x: scroll !important;
+    }
 
-  .AdvertiseBanner img{
-    height: 120px;
-    width: 100%;
-  }
+    .innerClgImg {
+      min-height: 100px !important;
+      min-width: 100px !important;
+      max-height: 100px !important;
+      max-width: 100px !important;
+    }
+    .logoBoardImg {
+      min-height: 100px !important;
+      min-width: 100px !important;
+      max-height: 100px !important;
+      max-width: 100px !important;
+    }
+
+    .AdvertiseBanner {
+      height: 120px;
+    }
+
+    .AdvertiseBanner img {
+      height: 120px;
+      width: 100%;
+    }
 
 
-    .teamworksec{
+    .teamworksec {
       height: 180px;
     }
-    .teamworksec img{
+
+    .teamworksec img {
       height: 180px;
     }
-    .mbbsAbroad h6{
+
+    .mbbsAbroad h6 {
       font-size: 12px !important;
     }
-    .mbbsAbroad h4{
+
+    .mbbsAbroad h4 {
       font-size: 20px !important;
     }
 
@@ -5480,7 +5602,7 @@
     }
 
     .resultDateBtn {
-      width: 295px !important;
+      width: 260px !important;
     }
 
     .medSec video {

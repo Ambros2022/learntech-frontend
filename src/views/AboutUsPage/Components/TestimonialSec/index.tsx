@@ -13,7 +13,7 @@ const testimonials = [
         testimonial: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
-        name: 'Ashish Gaidhane',
+        name: 'Pooja Gaidhane',
         location: 'Maharashtra',
         institution: 'MVJ College of Engineering, Bangalore',
         image: '/images/icons/userImage.jpg',

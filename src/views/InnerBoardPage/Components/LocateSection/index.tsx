@@ -15,7 +15,7 @@ function LocationSection({ data }) {
             <div className="col-md-6 mb-md-0 mb-3 d-flex justify-content-start locatedSec py-5 rounded px-md-5">
               <div className="w-100 card mb-3 bg-lightCard p-3">
                 <div className="row g-0">
-                  <div className="col-lg-4 mx-auto text-center locationClgImg">
+                  <div className="col-lg-4 mx-auto text-center locationClgImg bg-white rounded p-2">
                     <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='rounded clgImg mb-3' width={100} height={100} alt="College Image" />
                   </div>
                   <div className="col-lg-12 d-flex">

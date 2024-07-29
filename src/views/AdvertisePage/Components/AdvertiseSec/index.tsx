@@ -20,7 +20,7 @@ const AdvertiseSec = ({ data }) => {
                         </div>
                         <div className="col-xl-3 col-lg-4 col-md-5">
                             <div className="row">
-                                <div className="col-md-12 col-lg-12 col-10 mx-md-0 mx-auto bg-skyBlue p-3 rounded mb-3">
+                                <div className="col-md-12 col-lg-12 bg-skyBlue p-3 rounded mb-3">
                                 <h4 className='text-center fw-bold text-blue pt-2'>Connect With Us</h4>
                                 <ContactUsForm/>
                                     {/* <form onSubmit={formik.handleSubmit} className='bg-skyBlue rounded border p-3 mb-3'>
@@ -85,7 +85,7 @@ const AdvertiseSec = ({ data }) => {
                                         </div>
                                     </form> */}
                                 </div>
-                                <div className="col-md-12 col-lg-12 mb-3 mx-md-0 mx-auto col-10">
+                                <div className="col-md-12 col-lg-12 mb-3 mx-md-0">
                                     <div className='bg-skyBlue p-3 rounded border text-center'>
                                         <Image src="/images/icons/advertisement.png" width={200} height={200} alt={'advertisement-logo'} />
                                     </div>

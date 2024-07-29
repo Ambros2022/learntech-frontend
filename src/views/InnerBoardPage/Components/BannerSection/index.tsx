@@ -16,8 +16,8 @@ function BannerSection({ data }) {
   return (
     <>
       <section className='bg-blue collegeDetailBanner py-1'>
-        <div className="container">
-          <div className="card mb-3 collegeDetailCard text-md-start text-center">
+        <div className="container ">
+          <div className="card w-100 mb-3 collegeDetailCard text-md-start text-center">
             <div className="row">
               <div className="col-lg-2 col-xl-1 col-md-2 gx-0">
                 <div className='innerClgImg ms-md-auto mx-auto mt-md-3 mt-4'>

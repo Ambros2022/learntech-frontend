@@ -63,7 +63,7 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, meta_descript
                         <p className='text-black'>{data.meta_title}</p>
                         <p className='text-black'>{data.meta_description}</p>
                     </div>
-                    <div className="col-md-5 col-lg-4 col-10 mx-auto col-xl-4">
+                    <div className="col-md-5 col-lg-4 col-xl-4">
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
