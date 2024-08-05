@@ -50,6 +50,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
         contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
         course: Yup.string().required('Course is required').trim(),
         location: Yup.string().required('Location is required').trim(),
+        message: Yup.string().required('Message is required'),
     });
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -64,8 +65,8 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
             formData.append('location', values.location);
             formData.append('course_in_mind', values.course);
             formData.append('current_url', window.location.href);
+            formData.append('description', values.message);
             const response = await axios.post('api/website/enquiry', formData);
-
 
             if (response.status === 200) {
                 toast.dismiss();
@@ -96,6 +97,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
                 contact_number: '',
                 course: '',
                 location: '',
+                message: '',
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -123,7 +125,10 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
                     <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
                     <ErrorMessage name="location" component="div" className="error text-danger" />
                 </div>
-
+                <div className="mb-3">
+                    <Field as="textarea" name="message" placeholder="Enter Message" className="form-control" />
+                    <ErrorMessage name="message" component="div" className="error text-danger" />
+                </div>
                 <div className="d-grid">
                     <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">
                         {page && page == "Brochure" ? "Download Brochure" : "Submit"}

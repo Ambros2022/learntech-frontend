@@ -5,12 +5,12 @@ import React from 'react'
 const BannerSec = ({ data }) => {
     return (
         <>
-            <section className='newsBannerSec blogBannerSec'>
-                <div className='position-relative'>
+            <section className='newsBannerSec blogBannerSec' style={{ backgroundImage: data.banner_image ?`url(${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image})` : 'none', backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
+                {/* <div className='position-relative w-auto h-auto'>
                     <div>
-                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={900} height={500} alt='banner-img' className='position-relative' />
-                    </div>
-                    {/* <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
+                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={900} height={500} alt='banner-img' className='position-relative' /> */}
+                {/* </div> */}
+                {/* <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
                         <div className="container h-100">
                             <div className="d-flex justify-content-center h-100">
                                 <div className="align-content-center h-100">
@@ -24,7 +24,7 @@ const BannerSec = ({ data }) => {
                             </div>
                         </div>
                     </div> */}
-                </div>
+                {/* </div> */}
             </section>
             <section className='bg-white'>
                 <div className='container py-3 linkFontSize'>

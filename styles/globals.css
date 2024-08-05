@@ -4027,15 +4027,8 @@
   }
 
   .blogBannerSec {
-    height: 400px !important;
+    height: 500px !important;
   }
-
-  .blogBannerSec img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-  }
-
 
   /* .newsBannerSec input {
     background-color: rgba(255, 255, 255, 0.2) !important;
@@ -4210,10 +4203,14 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+
     /* .examLatest {
       min-height: 630px;
       max-height: 630px;
     } */
+    .blogBannerSec {
+      height: 200px !important;
+    }
 
     .innerExam h3 {
       font-size: 20px !important;
@@ -4559,6 +4556,7 @@
     /* width: 100% !important; */
     /* height: 100% !important; */
   }
+
   .logoBoardImg img {
     object-fit: contain !important;
     /* width: 100% !important; */
@@ -4781,9 +4779,10 @@
     font-size: 14px !important;
   }
 
-  .newsImgSize img {
-    width: auto;
-    height: auto;
+  .newsImgSize>img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
   }
 
   .newsHeightScroll {
@@ -5461,6 +5460,10 @@
   }
 
   @media (min-width:993px) and (max-width:1024px) {
+    .newsImgSize>img {
+      height: 120px;
+    }
+
     .testimonialCarousel .carousel-button-group {
       position: absolute !important;
       width: 100% !important;
@@ -5496,6 +5499,10 @@
   }
 
   @media (min-width:768px) and (max-width:992px) {
+    .newsImgSize>img {
+      height: 120px;
+    }
+
     .medSec h5 {
       font-size: 15px !important;
     }
@@ -5543,6 +5550,9 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+    .newsImgSize>img {
+      height: 150px;
+    }
 
     .table {
       overflow-x: scroll !important;
@@ -5554,6 +5564,7 @@
       max-height: 100px !important;
       max-width: 100px !important;
     }
+
     .logoBoardImg {
       min-height: 100px !important;
       min-width: 100px !important;
@@ -5800,4 +5811,14 @@
 
   .click-like:hover .bi-hand-thumbs-up-fill {
     display: inline-block !important;
+  }
+
+  .innerClgImg2 img {
+    height: 300px;
+    width: 100%;
+  }
+
+  .clgVideo {
+    width: 100%;
+    height: 300px;
   }
