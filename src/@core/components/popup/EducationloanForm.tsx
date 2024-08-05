@@ -38,7 +38,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
             const roleparams: any = {}
 
             roleparams['size'] = 10000;
-            const response = await axios1.get('api/website/generalcourse/get', { params: roleparams });
+            const response = await axios1.get('api/website/stream/get', { params: roleparams });
             setCourses(response.data.data);
         } catch (err) {
             console.error(err);
@@ -70,21 +70,21 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
         email: '',
         city: '',
         course: '',
-        college: '',
-        message: '',
+        bank: '',
+        notes: '',
     };
 
     const handleSubmit = async (values, { resetForm }) => {
         try {
             toast.loading('Processing');
             const formData = new FormData();
-            formData.append('name', values.name);
+            formData.append('name', values.fullName);
             formData.append('email', values.email);
             formData.append('contact_number', values.contact_number);
             formData.append('location', values.city);
             formData.append('course_in_mind', values.course);
-            formData.append('college_name', values.college);
-            formData.append('description', values.message || '');
+            formData.append('bank_name', values.bank);
+            formData.append('description', values.notes);
             formData.append('current_url', window.location.href);
 
             const response = await axios.post('api/website/enquiry', formData);
@@ -137,7 +137,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
                                     <option value="" disabled>Select a Course</option>
                                     {courses.map((course: any) => (
                                         <option key={course.id} value={course.name}>
-                                            {course.short_name}
+                                            {course.name}
                                         </option>
                                     ))}
                                 </Field>
@@ -220,7 +220,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
                             <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) ' }}>
                                     <i className="bi bi-caret-down-fill caret-down"></i>
                                 </div>
-                                <ErrorMessage name="bank" component="div" className="text-danger" />
+                                <ErrorMessage name="bank_name" component="div" className="text-danger" />
                             </div>
                           
                         </div>
