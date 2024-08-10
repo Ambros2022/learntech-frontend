@@ -43,8 +43,8 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                             <Image width={500} height={500} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid rounded card-Image-top me-auto" alt="College Logo" style={{ objectFit: 'cover' }} />
                         </div>
                         <div className="col-md-12 col-lg-8 col-xl-9">
-                            <div className="row pt-3">
-                                <div className="col-md-12 col-lg-12 col-xl-6">
+                            <div className="row">
+                                <div className="p-2 col-md-12 col-lg-12 col-xl-6">
                                     <div className="card-title">
                                         <h5 className='fw-bold text-black mb-3'>{name}</h5>
                                     </div>
@@ -53,7 +53,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p>
                                     </div>
                                 </div>
-                                <div className="col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
+                                <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
                                     {rating && (
                                         <div className="d-flex gap-2 justify-content-start justify-content-md-start">
 
@@ -67,7 +67,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         </div>
                                     )}
                                 </div>
-                                <div className="mt-md-3 mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column gap-3 mb-3">
+                                <div className="mt-md-3 pt-2 mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column gap-3 mb-3">
                                     <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
 
                                     <Link href={`/college/${id}/${slug}`} className=" viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
@@ -154,7 +154,7 @@ function CollegeFilterSection() {
             const roleparams: any = {};
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
-            const response = await axios1.get('/api/website/stream/get');
+            const response = await axios1.get(`/api/website/stream/get?size=${roleparams['size']}`);
             if (response.data.status === 1) {
                 const streamData = response.data.data.map((stream: any) => ({
                     label: stream.name,
@@ -381,7 +381,6 @@ function CollegeFilterSection() {
             }));
             setStateId(null)
         }
-        console.log("checkboxState", checkboxState);
         if (cityId) {
             let text = cityId.toString();
             debouncedHandleCheckboxChange("city", text, true);

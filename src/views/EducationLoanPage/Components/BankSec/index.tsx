@@ -47,7 +47,7 @@ const BankSec = () => {
     };
 
     return (
-        <section className='bg-white pb-md-5 pb-3'>
+        <section className='bg-white pb-md-2 pb-3'>
             <div className="container bg-skyBlue rounded mb-3 py-3 px-4">
                 <div className='bankCarousel position-relative mb-3'>
                     <Carousel

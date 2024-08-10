@@ -19,7 +19,7 @@ const ServicesSec = () => {
                         </div>
                         <div className="col-md-4 col-xl-5 col-lg-4 border rounded px-xl-5 px-lg-4 col-10 mx-md-0 mx-auto">
                             <h4 className='pt-3 mb-3 fw-bold text-blue text-center'>
-                                Talk to Our Expert
+                                Talk to Our Experts
                             </h4>
                             <SideContactUsFormfrom />
                         </div>

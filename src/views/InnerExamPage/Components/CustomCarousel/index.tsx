@@ -47,13 +47,13 @@ const CustomCarousel = ({ items, setActiveTab }) => {
       {items.map((item, index) => (
         <button
           key={index}
-          className={`btn mx-2 nav-item ${activeIndex === index ? 'active' : ''}`}
+          className={`btn py-3 mx-2 nav-item ${activeIndex === index ? 'active' : ''}`}
           onClick={() => handleTabClick(index, item.id)}
           style={{
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             // textOverflow: 'ellipsis',
-            width: '250px',
+            width: '230px',
           }}
         >
           {item.label}

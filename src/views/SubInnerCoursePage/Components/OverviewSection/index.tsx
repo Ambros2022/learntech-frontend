@@ -167,8 +167,8 @@ function OverviewSection({ data, colleges, exams }) {
                                 alt={val.name}
                               />
                             </div>
-                            <div className="align-content-center col-md-7 col-xl-7 col-lg-7">
-                              <h6 className='align-content-center text-black fw-bold'>{val.name}</h6>
+                            <div className="align-content-center justify-content-md-start justify-content-center col-md-7 col-xl-7 col-lg-7">
+                              <h6 className='align-content-center text-md-start text-center text-black fw-bold'>{val.name}</h6>
                             </div>
                           </div>
                         </div>
@@ -189,13 +189,13 @@ function OverviewSection({ data, colleges, exams }) {
                       <Link key={val.id} href={`/exam/${val.id}/${val.slug}`}>
                         <div className="card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
                           <Image
-                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.cover_image}`}
+                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.logo}`}
                             className='img-fluid'
                             width={90}
                             height={60}
                             alt={val.exam_title}
                           />
-                          <h6 className='align-content-center text-black mx-2 fw-bold'>{val.exam_title}</h6>
+                          <h4 className='align-content-center text-md-start text-center text-black mx-2 fw-bold'>{val.exam_title}</h4>
                         </div>
                       </Link>
                     ))}

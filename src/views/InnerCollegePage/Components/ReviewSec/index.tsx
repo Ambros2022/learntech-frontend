@@ -297,7 +297,7 @@ const ReviewSec = ({ data }) => {
                                             <h4 className='fw-bold text-blue'>{review.name}</h4>
                                         </div>
                                         <div className='align-self-center'>
-                                            <h6 className='text-blue'><span><i className="bi bi-patch-check-fill text-warning"></i></span> Verified</h6>
+                                            <h6 className='text-blue'><span><i className="bi bi-patch-check-fill text-success"></i></span> Verified</h6>
                                         </div>
                                     </div>
                                 </div>

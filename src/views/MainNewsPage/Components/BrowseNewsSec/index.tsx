@@ -11,6 +11,7 @@ import 'react-multi-carousel/lib/styles.css'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 interface NewsItem {
+    slug: any
     id: number
     name: string
     banner_image: string
@@ -186,7 +187,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                                                 alt='newsImage'
                                                             />
                                                         </div>
-                                                        <Link className='text-black hover-blue' href={`/news/${item.id}/${item.name}`}>
+                                                        <Link className='text-black hover-blue' href={`/news/${item.id}/${item.slug}`}>
                                                             <div className='card-body'>
                                                                 <h5 className='fw-bold card-title'>{item.name}</h5>
                                                             </div>
@@ -236,7 +237,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                     <h5 className='text-blue fw-bold text-center mb-3'><i className='bi bi-megaphone-fill me-2'></i>Get Upcoming News Alerts</h5>
                                     <div className='d-flex gap-3 flex-lg-row flex-column justify-content-between'>
                                         <GlobalEnquiryForm buttonText='Follow Us' className='btn viewMoreCollegeBtn' />
-                                        <GlobalEnquiryForm buttonText='Ask a Question' className='btn viewMoreCollegeBtn' />
+                                        <GlobalEnquiryForm buttonText='Ask a Question' className='btn btn-success' />
                                     </div>
                                 </div>
                             </div>

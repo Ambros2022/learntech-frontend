@@ -39,7 +39,7 @@ const ContactCareerSec = ({locations , data}) => {
                 <div className='social-clr'>
                   <Image
                     src='/images/icons/Phone-blue.svg'
-                    className='icon-white'
+                    className='clr-red'
                     width={30}
                     height={30}
                     alt='email-icon'
@@ -52,7 +52,7 @@ const ContactCareerSec = ({locations , data}) => {
               </div>
               <div className='d-flex'>
                 <div className='social-clr'>
-                  <Image src='/images/icons/whatsapp-2.svg' width={30} height={30} alt='email-icon' />
+                  <Image src='/images/icons/whatsapp-green.svg' width={30} height={30} alt='email-icon' />
                 </div>
                 <div className='align-content-center ms-2'>
                   <p className='text-white m-0'>+91 9036020016</p>

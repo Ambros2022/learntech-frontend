@@ -48,7 +48,7 @@ function InnerBlogPage({ id }) {
         setNewsData([])
         try {
             const roleparams = { page: 1, size: 10000 }
-            const response = await axios.get('/api/website/news/get', { params: roleparams })
+            const response = await axios.get('/api/website/news/get?orderby=desc', { params: roleparams })
 
             const formattedNews = response.data.data.map((item) => ({
                 imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
@@ -66,7 +66,7 @@ function InnerBlogPage({ id }) {
         setBlogsData([])
         try {
             const roleparams = { page: 1, size: 10000 }
-            const response = await axios.get('/api/website/blog/get', { params: roleparams })
+            const response = await axios.get('/api/website/blog/get?orderby=desc', { params: roleparams })
 
             const formattedNews = response.data.data.map((item) => ({
                 imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,

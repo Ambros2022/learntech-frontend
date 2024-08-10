@@ -20,8 +20,8 @@ function BannerSection({ data }) {
           <div className="card w-100 mb-3 collegeDetailCard text-md-start text-center">
             <div className="row">
               <div className="col-lg-2 col-xl-1 col-md-2 gx-0">
-                <div className='innerClgImg ms-md-auto mx-auto mt-md-3 mt-4'>
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={100} height={100} alt={data.name} />
+                <div className='innerClgImg mx-auto'>
+                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='img-fluid mt-md-3 bg-white rounded' width={100} height={100} alt={data.name} />
                 </div>
               </div>
               <div className="col-lg-7 ps-md-3 ps-0 col-xl-8 col-md-10">

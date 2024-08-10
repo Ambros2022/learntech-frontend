@@ -17,7 +17,7 @@ function BannerSection({ data }) {
               <div className="col-lg-7 ps-md-3 col-xl-7 col-md-10">
                 <div className="card-body text-white">
                   <h1 className="card-title fw-bold mb-3">{data.name}</h1>
-                  <h6 className='mb-3 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{data.address}</h6>
+                  <h6 className='mb-3 location-img'><i className='bi bi-geo-alt-fill me-2 fs-5 text-danger'></i>{data.address}</h6>
                   <h6 className='mb-3 location-img'>
                     <i className="bi bi-bank me-1"></i>  Estd {data?.established}
                   </h6>

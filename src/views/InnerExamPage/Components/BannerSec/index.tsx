@@ -21,7 +21,7 @@ function BannerSec({ data }) {
                                 <div className="card mb-2">
                                     <div className="row g-0">
                                         <div className="col-md-3 text-center innerExamImg">
-                                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={300} height={300} className='bg-white p-2 rounded img-fluid' alt={data.name} />
+                                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={300} height={300} className='bg-white p-1 rounded img-fluid' alt={data.name} />
                                         </div>
                                         <div className="col-md-9 d-flex justify-content-center justify-content-md-start">
                                             <div className="align-content-center">
