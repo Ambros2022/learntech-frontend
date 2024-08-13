@@ -13,7 +13,9 @@ type CourseItem = {
   streams: {
     slug: string;
   };
+  streamsSlug?: string; // Optional to avoid type issues
 };
+
 
 function PopularCourses() {
   const [items, setItems] = useState<CourseItem[]>([]);
@@ -39,19 +41,27 @@ function PopularCourses() {
   function createCards() {
     return items.map((card) => (
       <CardComponent
+        key={card.id}
         id={card.id}
         short_name={card.short_name}
         slug={card.slug}
         logo={card.logo}
-        streamsSlug={card.streams.slug}
+        streamsSlug={card.streams.slug} // Pass streamsSlug separately
       />
     ));
   }
 
-  // CardComponent function
-  function CardComponent({ short_name, id, slug, logo, streamsSlug }: CourseItem) {
+  type CardProps = {
+    id: number;
+    short_name: string;
+    slug: string;
+    logo: string;
+    streamsSlug: string;
+  };
+
+  function CardComponent({ short_name, id, slug, logo, streamsSlug }: CardProps) {
     return (
-      <Link href={`/course/${streamsSlug}.slug/${id}/${slug}`}>
+      <Link href={`/course/${id}/${streamsSlug}/${slug}`}>
         <div className='courseConCarousel'>
           <div className="card hover-card text-center d-flex mx-2">
             <div className="row flex-fill">
@@ -69,7 +79,6 @@ function PopularCourses() {
       </Link>
     );
   }
-
   return (
     <section className='bg-white pb-5'>
       <section className='container bg-skyBlue rounded'>

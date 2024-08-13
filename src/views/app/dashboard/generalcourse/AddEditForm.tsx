@@ -649,46 +649,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-
-                                <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>syllabus</Typography>
-                                    <Controller
-                                        name='syllabus'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("syllabus", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                    onChange={(value)=>console.log(value)} /> */}
-                                            </>
-                                        )}
-                                    />
-                                </Grid>
-
-
-
-                                <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>top_college</Typography>
-
-                                    <Controller
-                                        name='top_college'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("top_college", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                        //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                        onChange={(value)=>console.log(value)} /> */}
-                                            </>
-                                        )}
-                                    />
-                                </Grid>
-
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>description</Typography>
 
@@ -703,6 +663,23 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                 {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                         //  onChange={(value)=>  setValue("bottom_description", value)} />
                                         onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>syllabus</Typography>
+                                    <Controller
+                                        name='syllabus'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("syllabus", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                    onChange={(value)=>console.log(value)} /> */}
                                             </>
                                         )}
                                     />
@@ -726,6 +703,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
+
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>career_opportunities</Typography>
 
@@ -744,6 +722,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
+
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>top_college</Typography>
+
+                                    <Controller
+                                        name='top_college'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("top_college", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                        //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                        onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+
+
+
+
+
 
                                 <Grid item xs={12} sm={6} style={{ marginTop: 14 }}>
                                     <Controller
@@ -783,7 +785,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
-                              
+
 
                                 <Grid item xs={12} sm={3}>
                                     <FileUpload

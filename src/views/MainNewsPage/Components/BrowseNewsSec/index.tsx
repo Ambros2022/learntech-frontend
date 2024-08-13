@@ -193,7 +193,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                                             </div>
                                                         </Link>
                                                         <div className='p-3'>
-                                                            <Link href={`/news/${item.id}/${item.name}`}>
+                                                            <Link href={`/news/${item.id}/${item.slug}`}>
                                                                 <button className='btn viewMoreCollegeBtn'>View Detail</button>
                                                             </Link>
                                                         </div>
