@@ -77,8 +77,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const options = [
         { label: 'Yes', value: '1' },
         { label: 'No', value: '0' },
-      ];
-      
+    ];
+
 
     const schema: any = yup.object().shape({
         name: yup
@@ -97,19 +97,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-        gender: yup
-            .string()
-            .trim()
-            .required(),
+        gender: yup.array().of(yup.string()).min(1, "Select at least one gender").required("This field is required"),
         level_id: yup.object().required("This field is required"),
         type_id: yup.object().required("This field is required"),
         country_id: yup.object().required("This field is required"),
     })
 
+    
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
         slug: isAddMode ? '' : olddata.slug,
-        gender: isAddMode ? '' : olddata.gender,
+        gender: isAddMode ? [] : olddata.gender ? olddata.gender.split(',') : [],
         amount: isAddMode ? '' : olddata.amount,
         // last_date: isAddMode ? '' : olddata.last_date,
         total_scholarships: isAddMode ? '' : olddata.total_scholarships,
@@ -152,7 +150,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('name', data.name);
             formData.append('slug', data.slug);
-            formData.append('gender', data.gender);
+            formData.append('gender', data.gender.join(','));
             formData.append('amount', data.amount);
             formData.append('last_date', data.last_date);
             formData.append('total_scholarships', data.total_scholarships);
@@ -202,7 +200,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('name', data.name);
             formData.append('slug', data.slug);
-            formData.append('gender', data.gender);
+            formData.append('gender', data.gender.join(','));
             formData.append('amount', data.amount);
             formData.append('last_date', data.last_date);
             formData.append('total_scholarships', data.total_scholarships);
@@ -451,22 +449,24 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='gender'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    multiple
                                     fullWidth
-                                    select
-                                    value={value}
-                                    label='Select Gender'
-                                    onChange={onChange}
-                                    error={Boolean(errors.gender)}
-                                    helperText={errors.gender && 'This field is required'}
-                                >
-                                    {optionseligible.map((option, value) => (
-                                        <MenuItem key={value} value={option}>
-                                            {option}
-                                        </MenuItem>
-                                    ))}
-                                </CustomTextField>
+                                    options={optionseligible}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue);
+                                    }}
+                                    renderInput={(params) => (
+                                        <CustomTextField
+                                            {...params}
+                                            label='Select Gender'
+                                            error={Boolean(errors.gender)}
+                                            helperText={errors.gender ? (errors.gender.message as string) : ''}
+                                        />
+                                    )}
+                                />
                             )}
                         />
                     </Grid>
@@ -527,14 +527,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.is_eligible)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.is_eligible && { helperText: 'This field is required' })}
-                                    >
+                                >
                                     {options.map((option) => (
-                                      <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                      </MenuItem>
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
                                     ))}
-                                  </CustomTextField>
-                                
+                                </CustomTextField>
+
                             )}
                         />
                     </Grid>
@@ -624,7 +624,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         onChange={onChange}
                                         placeholderText='Click to select a date'
                                         customInput={<CustomInput label='Last date'
-                                      
+
                                         />}
                                     />
                                 </DatePickerWrapper>
