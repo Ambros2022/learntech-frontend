@@ -26,7 +26,7 @@ const CareerSec = () => {
                             <h6 className='text-white mb-5'>Please fill out the form to enable our career representatives to contact you at the earliest.</h6>
                             <div className="d-flex mb-3">
                                 <div className='align-self-center'>
-                                    <Image src='/images/icons/phoneAbout1N.png' width={30} height={30} alt='phone1' />
+                                    <Image src='/images/icons/phoneAbout1R.png' width={30} height={30} alt='phone1' className='img-fluid' />
                                 </div>
                                 <div>
                                     <h6 className='ms-3 text-white'><Link href='tel:18001208696'>1800-120-8696</Link> (Tollfree)</h6>
@@ -35,7 +35,7 @@ const CareerSec = () => {
                             </div>
                             <div className="d-flex mb-3">
                                 <div className=''>
-                                    <Image src='/images/icons/phoneAbout2N.png' width={30} height={30} alt='phone2' />
+                                    <Image src='/images/icons/phoneAbout2R.png' className='img-fluid' width={30} height={30} alt='phone2' />
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link>, <Link href='tel:26631169'>26631169</Link></h6>
@@ -43,7 +43,7 @@ const CareerSec = () => {
                             </div>
                             <div className="d-flex mb-3">
                                 <div className=''>
-                                    <Image src='/images/icons/phoneAbout3N.png' width={30} height={30} alt='phone3' />
+                                    <Image src='/images/icons/fax-icon.svg' className='img-fluid' width={30} height={30} alt='phone3' />
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link></h6>
@@ -51,7 +51,7 @@ const CareerSec = () => {
                             </div>
                             <div className="d-flex mb-3">
                                 <div className=''>
-                                    <Image src='/images/icons/phoneAbout4N.png' width={30} height={30} alt='email' />
+                                    <Image src='/images/icons/email-icon.svg' width={30} height={30} alt='email' className='img-fluid icon-white'/>
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href="mailto:info@learntechww.com">info@learntechww.com</Link></h6>

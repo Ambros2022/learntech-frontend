@@ -9,7 +9,7 @@ const FaqSec = ({ data }) => {
                         <div className="accordion" id="accordionExample">
                             {data.map((item, index) => (
                                 <div className="accordion-item mb-3" key={index}>
-                                    <h2 className="accordion-header text-white">
+                                    <h4 className="accordion-header text-white">
                                         <button
                                             className="accordion-button"
                                             type="button"
@@ -20,7 +20,7 @@ const FaqSec = ({ data }) => {
                                         >
                                             {index + 1}. {item.questions}
                                         </button>
-                                    </h2>
+                                    </h4>
                                     <div
                                         id={`col${index}`}
                                         className="accordion-collapse collapse"

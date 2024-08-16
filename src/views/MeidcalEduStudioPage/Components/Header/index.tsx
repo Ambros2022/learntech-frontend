@@ -22,18 +22,18 @@ const Header = () => {
                                 <div className='d-flex flex-xl-row gap-xl-3 flex-lg-column flex-column'>
                                     <li className="nav-item d-flex">
                                         <Link className='d-flex' href='tel:+91 90058 00200'>
-                                            <Image src='/images/icons/whatsapp.png' width={50} height={50} alt='medical-logo' className="me-1 img-fluid navbar-brand"></Image><h6 className='m-0 text-black align-self-center'>+91 90058 00200</h6>
+                                            <Image src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 img-fluid navbar-brand my-auto"></Image><h6 className='m-0 text-black align-self-center'>+91 90058 00200</h6>
                                         </Link>
                                     </li>
                                     <li className="nav-item d-flex">
                                         <Link className='d-flex' href='tel:+91 90057 00300'>
-                                            <Image src='/images/icons/whatsapp.png' width={50} height={50} alt='medical-logo' className="me-1 img-fluid navbar-brand"></Image><h6 className='m-0 text-black align-self-center'>+91 90057 00300</h6>
+                                            <Image src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 img-fluid navbar-brand my-auto"></Image><h6 className='m-0 text-black align-self-center'>+91 90057 00300</h6>
                                         </Link>
                                     </li>
                                 </div>
                                 <li className="nav-item d-flex">
                                     <Link className='d-flex' href='mailto:meds@learntechww.com'>
-                                        <Image src='/images/icons/gmail.png' width={50} height={50} alt='medical-logo' className="me-1 align-self-center img-fluid navbar-brand"></Image><h6 className='m-0 text-black align-self-center'>meds@learntechww.com</h6>
+                                        <Image src='/images/icons/gmail.png' width={40} height={40} alt='medical-logo' className="me-1 align-self-center img-fluid navbar-brand my-auto"></Image><h6 className='m-0 text-black align-self-center'>meds@learntechww.com</h6>
                                     </Link>
                                 </li>
                             </ul>

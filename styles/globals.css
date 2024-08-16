@@ -149,6 +149,10 @@
     /* Adjust the blur intensity as needed */
   }
 
+  .clr-red {
+    filter: invert(21%) sepia(99%) saturate(6299%) hue-rotate(2deg) brightness(117%) contrast(129%);
+  }
+
   .modal-open .page-content {
     pointer-events: none;
     /* Ensure that the blurred background cannot be interacted with */
@@ -545,7 +549,7 @@
     border-radius: 25px !important;
     border: 1px solid white !important;
     color: white !important;
-    padding: 15px 40px !important;
+    padding: 10px 20px !important;
   }
 
   .btn-success2:hover {
@@ -725,10 +729,15 @@
   .newsLinkSec2 .carousel-button-group {
     margin: -50px 0px 0px 0px !important;
   }
-
+.newsLinkSec2 .fi-left  svg{
+  stroke: white !important; 
+}
+.newsLinkSec2 .fi-right svg{
+  stroke: white !important; 
+}
   .carouselInnerCourse .carousel-button-group {
     position: absolute !important;
-    top: 0px !important;
+    top: 10px !important;
     width: 100%;
     z-index: -1 !important;
   }
@@ -995,7 +1004,7 @@
 
     .carouselInnerCourse .carousel-button-group {
       position: absolute !important;
-      top: 5px !important;
+      top: 15px !important;
       width: 100%;
       z-index: -1 !important;
     }
@@ -1029,7 +1038,7 @@
 
     .carouselInnerCourse .carousel-button-group {
       position: absolute !important;
-      top: 5px !important;
+      top: 15px !important;
       width: 100%;
       z-index: -1 !important;
     }
@@ -1218,7 +1227,7 @@
 
   @media (min-width: 320px) and (max-width: 767px) {
     .carouselInnerCourse .carousel-button-group {
-      top: 8px !important;
+      top: 15px !important;
     }
 
     .carouselInnerCourse .fi-left {
@@ -1708,7 +1717,7 @@
   }
 
   .searchCheckBox {
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
 
   .collegeSearchFilter {
@@ -2338,7 +2347,7 @@
   }
 
   .newsLink2Clr:hover {
-    color: darkblue !important;
+    color: whitesmoke !important;
     font-weight: bold !important;
   }
 
@@ -3193,9 +3202,7 @@
     min-width: 90px !important;
   }
 
-  .filterCardBorder .card-Image-top {
-    object-fit: contain !important;
-  }
+  .filterCardBorder .card-Image-top {}
 
   .filterItemBtn {
     background-color: #254692 !important;
@@ -3294,7 +3301,7 @@
   @media (min-width: 992px) and (max-width: 1024px) {
     .clgCardImg img {
       width: 100%;
-      height: auto !important;
+      height: 100%;
     }
 
     .newsLinkSec .fi-left {
@@ -3333,11 +3340,11 @@
     }
 
     .activeBtn {
-      font-size: 11px !important;
+      font-size: 15px !important;
     }
 
     .viewMoreBtn {
-      font-size: 11px !important;
+      font-size: 15px !important;
     }
   }
 
@@ -3387,11 +3394,11 @@
     }
 
     .activeBtn {
-      font-size: 11px !important;
+      font-size: 15px !important;
     }
 
     .viewMoreBtn {
-      font-size: 11px !important;
+      font-size: 15px !important;
     }
   }
 
@@ -3605,7 +3612,6 @@
 
   .FeaturedClgCon .card-Image-top {
     /* height: 235px !important; */
-    object-fit: contain !important;
   }
 
   .StudyAbroadCard .card-img-top {
@@ -3737,7 +3743,6 @@
   @media (min-width:992px) and (max-width:1024px) {
     .FeaturedClgCon .card-Image-top {
       /* height: 166px !important; */
-      object-fit: contain !important;
     }
 
 
@@ -3780,7 +3785,6 @@
 
     .FeaturedClgCon .card-Image-top {
       /* height: 166px !important; */
-      object-fit: contain !important;
     }
 
     .StudyAbroadCard .card-img-top {
@@ -3834,7 +3838,6 @@
 
     .FeaturedClgCon .card-Image-top {
       /* height: 262px !important; */
-      object-fit: contain !important;
     }
 
     .StudyAbroadCard .card-img-top {
@@ -3879,7 +3882,6 @@
   @media (min-width:424px) and (max-width:767px) {
     .FeaturedClgCon .card-Image-top {
       /* height: 300px !important; */
-      object-fit: contain !important;
     }
 
     .StudyAbroadCard .card-img-top {
@@ -3901,7 +3903,6 @@
 
     .FeaturedClgCon .card-Image-top {
       /* height: 220px !important; */
-      object-fit: contain !important;
     }
 
     .StudyAbroadCard .card-img-top {
@@ -4086,14 +4087,14 @@
 
   .newsTabsClr button {
     border: 1px solid rgba(212, 218, 234, 1) !important;
-    font-size: 15px !important;
+    font-size: 18px !important;
     width: auto !important;
     padding: 15px 12px !important;
     color: #254692 !important;
   }
 
   .newsTabsClr button.active {
-    font-size: 14px !important;
+    font-size: 18px !important;
     background-color: #254692 !important;
     font-weight: bold !important;
     color: white !important;
@@ -4362,7 +4363,12 @@
   }
 
   .careerContact input {
-    padding: 10px 20px !important;
+    padding-left: 10px 20px !important;
+  }
+
+
+  .Jobenquiryphoneinput input {
+    padding-left: 50px !important;
   }
 
   .careerContact input::placeholder {
@@ -4479,8 +4485,8 @@
 
   .card-image>img {
     width: 100%;
-    height: 100%;
-    object-fit: contain !important;
+    height: 200px;
+    overflow: hidden;
   }
 
   .topCollegeImg>img {
@@ -4870,10 +4876,30 @@
     font-weight: bold;
   }
 
+  .abroadBtn:hover {
+    color: darkblue !important;
+    border: 1px darkblue solid !important;
+  }
+
+  .medHeader h6 {
+    font-size: 25px !important;
+  }
+
+  .innerCourseClgH1>h1 {
+    font-size: 20px !important;
+  }
+
   .filterCountry {
     background-color: white !important;
     color: #254692 !important;
     border: 1px solid rgba(212, 218, 234, 1) !important;
+    padding: 10px 15px !important;
+    width: 150px !important;
+  }
+
+  .filterCountry:hover {
+    background-color: #254692 !important;
+    color: white !important;
     padding: 10px 15px !important;
     width: 150px !important;
   }
@@ -4991,6 +5017,16 @@
     color: black !important;
     text-align: start !important;
     background-color: #f6f8fb !important;
+    border: 1px solid #254692;
+  }
+  .aboutUsSec .nav-link:hover{
+    color: white !important;
+    text-align: start !important;
+    background-color: #254692 !important;
+  }
+
+  .clr-black{
+    filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(284deg) brightness(107%) contrast(107%);
   }
 
   .aboutUsSec .nav-link.active {

@@ -721,46 +721,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 </Grid> */}
 
                                 <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>Exam Dates</Typography>
-
-                                    <Controller
-                                        name='exam_dates'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("exam_dates", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                            </>
-                                        )}
-                                    />
-                                </Grid>
-
-
-
-                                <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>Accept_colleges</Typography>
-
-                                    <Controller
-                                        name='accept_colleges'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("accept_colleges", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                            </>
-                                        )}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>Overview</Typography>
 
                                     <Controller
@@ -780,16 +740,16 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 </Grid>
 
                                 <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>Counseling</Typography>
+                                    <Typography style={{ marginBottom: '10px' }}>Exam Dates</Typography>
 
                                     <Controller
-                                        name='counseling'
+                                        name='exam_dates'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("counseling", value)} />
+                                                    onChange={(value) => setValue("exam_dates", value)} />
                                                 {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                 //  onChange={(value)=>  setValue("bottom_description", value)} />
                                 onChange={(value)=>console.log(value)} /> */}
@@ -797,84 +757,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-
-                                <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>Prepretion_tips</Typography>
-
-                                    <Controller
-                                        name='prepretion_tips'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("prepretion_tips", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                            </>
-                                        )}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>Results</Typography>
-
-                                    <Controller
-                                        name='results'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("results", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                            </>
-                                        )}
-                                    />
-                                </Grid>
-
-
-                                <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>Exam_center</Typography>
-
-                                    <Controller
-                                        name='exam_centers'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("exam_centers", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                            </>
-                                        )}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>Admit_card</Typography>
-
-                                    <Controller
-                                        name='admit_card'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <>
-                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(value) => setValue("admit_card", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
-                                            </>
-                                        )}
-                                    />
-                                </Grid>
-
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>Eligibility_criteria</Typography>
 
@@ -893,7 +775,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>Syllabus</Typography>
 
@@ -912,7 +793,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>Cutoff</Typography>
 
@@ -931,6 +811,116 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Admit_card</Typography>
+
+                                    <Controller
+                                        name='admit_card'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("admit_card", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Exam_center</Typography>
+
+                                    <Controller
+                                        name='exam_centers'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("exam_centers", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Results</Typography>
+
+                                    <Controller
+                                        name='results'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("results", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Prepretion_tips</Typography>
+
+                                    <Controller
+                                        name='prepretion_tips'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("prepretion_tips", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Counseling</Typography>
+
+                                    <Controller
+                                        name='counseling'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("counseling", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Accept_colleges</Typography>
+
+                                    <Controller
+                                        name='accept_colleges'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("accept_colleges", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                //  onChange={(value)=>  setValue("bottom_description", value)} />
+                                onChange={(value)=>console.log(value)} /> */}
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                      
+
 
 
 

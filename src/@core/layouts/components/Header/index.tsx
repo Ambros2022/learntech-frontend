@@ -106,6 +106,7 @@ const Header = () => {
       const roleparams: any = {}
       roleparams['page'] = 1;
       roleparams['size'] = 10000;
+      roleparams['country_id'] = 204;
       const response = await axios1.get('api/website/states/get', { params: roleparams });
       setStates(response.data.data);
 

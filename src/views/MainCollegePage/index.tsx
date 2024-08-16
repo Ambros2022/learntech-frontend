@@ -20,7 +20,7 @@ function MainCollegePage() {
 
   const getPagedata = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/pagefindone/get/colleges');
+      const response = await axios.get('api/website/colleges/get/');
       if (isMountedRef.current) {
 
         setPagedata(response.data.data);

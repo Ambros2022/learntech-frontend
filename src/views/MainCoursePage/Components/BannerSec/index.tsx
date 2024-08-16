@@ -27,8 +27,8 @@ function BannerSec({ data }: any) {
         cancelToken.cancel("Operation canceled due to new request.");
       }
       cancelToken = axios1.CancelToken.source();
-      const response = await axios.get('api/website/generalcourse/get', { cancelToken: cancelToken.token, params: { searchfrom: "name", searchtext: value } });
-
+      const response = await axios.get('api/website/stream/general/get', { cancelToken: cancelToken.token, params: { searchfrom: "name", searchtext: value } });
+      console.log(response,'..')
       if (response.status == 200) {
         console.log("d", response.data.data);
         setSearchResults(response.data.data);
@@ -62,7 +62,7 @@ function BannerSec({ data }: any) {
                   getOptionLabel={(option) => option.name}
                   renderOption={(props, option) => (
                     <li {...props}>
-                      <Link href={`/course/${option.streams.id}/${option?.streams?.slug}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
+                      <Link href={`/course/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
                         {option.name}
                       </Link>
                     </li>

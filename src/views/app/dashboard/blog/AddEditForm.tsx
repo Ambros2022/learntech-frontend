@@ -26,7 +26,8 @@ import type { FC } from 'react';
 import { Alert, FormControlLabel, FormLabel, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import QuillEditor from 'src/@core/components/html-editor/index';
-
+import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
+import useIsMountedRef from 'src/hooks/useIsMountedRef'
 
 
 
@@ -41,6 +42,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
+    const [category, setCategory] = useState([]);
+    const isMountedRef = useIsMountedRef();
 
     const handleFileChangephoto = (files: any[]) => {
         setSelectedphoto(files[0]);
@@ -79,6 +82,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
         slug: isAddMode ? '' : olddata.slug,
+        category_id: isAddMode ? '' : olddata.blogcategories ? olddata.blogcategories : '',
         meta_title: isAddMode ? '' : olddata.meta_title,
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
@@ -108,6 +112,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('id', updateid);
             formData.append('name', data.name);
             formData.append('slug', data.slug);
+            formData.append('category_id', data.category_id.id);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
@@ -150,6 +155,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const formData = new FormData();
             formData.append('name', data.name);
             formData.append('slug', data.slug);
+            formData.append('category_id', data.category_id.id);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
@@ -201,7 +207,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
+    //get all Catogry
+    const getcategory = useCallback(async () => {
 
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/website/blogcategories/get', { params: roleparams });
+
+            setCategory(response.data.data);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
+    useEffect(() => {
+
+        getcategory();
+
+    }, [getcategory]);
 
     return (
         <>
@@ -246,7 +272,35 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='category_id'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    fullWidth
 
+                                    options={category}
+                                    loading={!category.length}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue);
+                                    }}
+                                    getOptionLabel={(option: any) => option.name || ''}
+                                    renderInput={(params: any) => (
+                                        <CustomTextField
+                                            {...params}
+                                            required
+                                            error={Boolean(errors.category_id)}
+                                            {...(errors.category_id && { helperText: 'This field is required' })}
+                                            label='Select Category'
+                                        />
+                                    )}
+                                />
+                            )}
+                        />
+                    </Grid>
 
                     <Grid item xs={12} sm={6}>
                         <Controller
@@ -280,6 +334,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     value={value}
                                     label='Meta Description'
                                     onChange={onChange}
+                                    multiline
+                                    rows={3}
                                     placeholder=''
                                     error={Boolean(errors.meta_description)}
                                     aria-describedby='validation-basic-first-name'
@@ -301,6 +357,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     value={value}
                                     label='keywords'
                                     onChange={onChange}
+                                    multiline
+                                    rows={3}
                                     placeholder=''
                                     error={Boolean(errors.meta_keywords)}
                                     aria-describedby='validation-basic-first-name'
@@ -311,24 +369,24 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                                    <Controller
-                                        name='listing_order'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
-                                            <CustomTextField
-                                                fullWidth
-                                                value={value}
-                                                type='number'
-                                                label='Listing Order'
-                                                onChange={onChange}
-                                                placeholder=''
-                                                error={Boolean(errors.listing_order)}
-                                                aria-describedby='validation-basic-first-name'
-                                                {...(errors.listing_order && { helperText: 'This field is required' })}
-                                            />
-                                        )}
-                                    />
+                        <Controller
+                            name='listing_order'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    type='number'
+                                    label='Listing Order'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.listing_order)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.listing_order && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
                     </Grid>
 
 

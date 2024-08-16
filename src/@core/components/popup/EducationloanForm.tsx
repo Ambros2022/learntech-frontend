@@ -118,20 +118,20 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
             {({ isSubmitting }) => (
                 <Form>
                     <div className="row">
-                        <div className="col-lg-6 mb-3">
+                        <div className="col-12 mb-3">
                             <Field type="text" name="fullName" className='form-control' placeholder='Your Full Name' />
                             <ErrorMessage name="fullName" component="div" className="text-danger" />
                         </div>
-                        <div className="col-lg-6 mb-3">
+                        <div className="col-12 mb-3">
                             <Field type="email" name="email" className='form-control' placeholder='Your Email Id' />
                             <ErrorMessage name="email" component="div" className="text-danger" />
                         </div>
-                        <div className="col-lg-6 mb-3">
+                        <div className="col-12 mb-3">
                             {/* <Field type="text" name="contact_number" className='form-control' placeholder='Your Mobile Number' /> */}
                             <PhoneInputField name="contact_number" />
                             <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                         </div>
-                        <div className="col-lg-6 mb-3">
+                        <div className="col-12 mb-3">
                             <div style={{ position: 'relative' }}>
                                 <Field as="select" name="course" className='form-control'>
                                     <option value="" disabled>Select a Course</option>
@@ -147,7 +147,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
                                 <ErrorMessage name="course" component="div" className="text-danger" />
                             </div>
                         </div>
-                        <div className="col-lg-6 mb-3">
+                        <div className="col-12 mb-3">
                         <div style={{ position: 'relative' }}>
                             <Field as="select" name="city" className='form-control'>
                                 <option value="" disabled>Select your City</option>
@@ -164,7 +164,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
                             <ErrorMessage name="city" component="div" className="text-danger" />
                         </div>
                         </div>
-                        <div className="col-lg-6 mb-3">
+                        <div className="col-12 mb-3">
                         <div style={{ position: 'relative' }}>
                             <Field as="select" name="bank" className='form-control'>
                                 <option value="" disabled>Select a Bank</option>

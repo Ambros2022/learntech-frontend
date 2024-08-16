@@ -140,7 +140,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                             <h6 className='text-black fw-bold'>{scholarship.university}</h6>
                             {renderScholarshipDetails(scholarship)}
                             <Link href={`/scholarship/${scholarship.id}/${scholarship.name}`}
-                                className='mb-3 text-blue fw-bold btn text-start'>Read More {'>>'}</Link>
+                                className='mb-3 text-blue fw-bold text-start'>Read More {'>>'}</Link>
                             <div className="d-flex gap-3 flex-fill scholarshipBtn flex-md-row flex-column">
 
                                 <GlobalEnquiryForm
@@ -214,9 +214,9 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
 
 
                                     <option value="">select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="LGBT">LGBT</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">others</option>
                                 </select>
                                 <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}>
                                     <i className="bi bi-caret-down-fill caret-down"></i> {/* Replace with your desired icon */}
@@ -275,7 +275,10 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="ms-auto col-md-5 col-lg-4">
+                    <div className="col-lg-8 col-md-7 order-2 order-md-1">
+                        <h5 className='fw-bold text-black mb-3'>{totalScholarships} Scholarships Found</h5>
+                    </div>
+                    <div className="col-md-5 col-lg-4 order-1 order-md-2 mb-md-0 mb-5">
                         <div className="input-group">
                             <input
                                 type="search"
@@ -291,9 +294,8 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     </div>
                 </div>
                 <div className="row pt-4">
-                    <div className="col-md-7 col-lg-8">
+                    <div className="col-md-7 col-lg-8 pt-lg-3 pt-2">
                         <div className="tab-content" id="pills-tabContent">
-                            <h5 className='fw-bold text-black mb-3'>{totalScholarships} Scholarships Found</h5>
                             <ScholarshipCards />
                         </div>
                         {/* Pagination */}
@@ -322,7 +324,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-5 col-lg-4 pt-5">
+                    <div className="col-md-5 col-lg-4 pt-lg-3 pt-2">
                         <div className='border p-3 text-center rounded examAlertSec bg-skyBlue mb-3'>
                             <h4 className='text-blue fw-bold'>Are you interested in scholarship?</h4>
                             <Image src="/images/icons/Scholarships.png" alt='exam-alert-img' className='img-fluid' width={300} height={300} />
@@ -346,7 +348,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                             {abroadData.map((link, index) => (
                                 <div className='d-grid' key={index}>
                                     <Link href={`/${link.slug}`}
-                                        className='link_btn text-center'>{link.name}</Link>
+                                        className='text-blue border mb-3 btn abroadBtn text-center' style={{fontSize:'17px'}}>{link.name}</Link>
 
                                 </div>
                             ))}

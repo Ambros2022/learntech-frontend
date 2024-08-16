@@ -51,7 +51,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [types, setTypes] = useState([]);
     const [countries, setCountries] = useState([]);
     const isMountedRef = useIsMountedRef();
-
+    const [gendersdata, setgendersdata] = useState([])
     const theme = useTheme()
     const { direction } = theme
 
@@ -77,8 +77,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const options = [
         { label: 'Yes', value: '1' },
         { label: 'No', value: '0' },
-      ];
-      
+    ];
+
 
     const schema: any = yup.object().shape({
         name: yup
@@ -97,10 +97,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-        gender: yup
-            .string()
-            .trim()
-            .required(),
+        // gender: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
         level_id: yup.object().required("This field is required"),
         type_id: yup.object().required("This field is required"),
         country_id: yup.object().required("This field is required"),
@@ -123,6 +123,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         level_id: isAddMode ? '' : olddata.scholarlevels ? olddata.scholarlevels : '',
         type_id: isAddMode ? '' : olddata.scholartypes ? olddata.scholartypes : '',
         country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
+        genders: [],
 
     }
 
@@ -131,7 +132,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         handleSubmit,
         reset,
         setValue,
-
+        resetField: admfiledReset,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -139,125 +140,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
-    const onSubmit = async (data: any) => {
-
-        if (!isAddMode && olddata.id) {
-            let updateid = olddata.id;
-            setLoading(true)
-            let link = 'api/admin/scholarship/update';
-            const formData = new FormData();
-            formData.append('id', updateid);
-            formData.append('level_id', data.level_id.id);
-            formData.append('type_id', data.type_id.id);
-            formData.append('country_id', data.country_id.id);
-            formData.append('name', data.name);
-            formData.append('slug', data.slug);
-            formData.append('gender', data.gender);
-            formData.append('amount', data.amount);
-            formData.append('last_date', data.last_date);
-            formData.append('total_scholarships', data.total_scholarships);
-            formData.append('is_eligible', data.is_eligible);
-            formData.append('meta_title', data.meta_title);
-            formData.append('meta_description', data.meta_description);
-            formData.append('meta_keywords', data.meta_keywords);
-            formData.append('overview', data.overview);
-            formData.append('status', data.status);
-            formData.append('logo', selectedphoto);
-
-            try {
-                let response = await axios1.post(link, formData)
-                if (response.data.status == 1) {
-                    toast.success(response.data.message)
-                    setLoading(false)
-                    setError('')
-                    reset();
-                    router.back();
-                }
-                else {
-                    setLoading(false)
-                    toast.error(response.data.message)
-                    setError(response.data.message)
-                }
-
-            } catch (err: any) {
-
-                setLoading(false)
-                if (err.errors && err.errors.length > 0) {
-                    const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
-                    toast.error(errorMessage || "Please try again");
-                } else {
-                    setError(err.message || "Please try again");
-                    toast.error(err.message || "Please try again");
-                }
-
-            }
-        } else {
-            setLoading(true)
-            let link = 'api/admin/scholarship/add';
-
-            const formData = new FormData();
-            formData.append('level_id', data.level_id.id);
-            formData.append('type_id', data.type_id.id);
-            formData.append('country_id', data.country_id.id);
-            formData.append('name', data.name);
-            formData.append('slug', data.slug);
-            formData.append('gender', data.gender);
-            formData.append('amount', data.amount);
-            formData.append('last_date', data.last_date);
-            formData.append('total_scholarships', data.total_scholarships);
-            formData.append('is_eligible', data.is_eligible);
-            formData.append('meta_title', data.meta_title);
-            formData.append('meta_description', data.meta_description);
-            formData.append('meta_keywords', data.meta_keywords);
-            formData.append('overview', data.overview);
-            formData.append('status', data.status);
-            if (selectedphoto == '') {
-
-                toast.error('Please Upload Image', {
-                    duration: 2000
-                })
-                setLoading(false);
-                return false;
-
-            }
-
-            formData.append('logo', selectedphoto);
-
-            try {
-                let response = await axios1.post(link, formData)
-                console.log(response, "response")
-
-                if (response.data.status == 1) {
-
-                    toast.success(response.data.message)
-                    setLoading(false)
-                    setError('')
-                    reset();
-                    router.push('./');
-
-
-                }
-                else {
-                    setLoading(false)
-                    toast.error(response.data.message)
-                    setError(response.data.message)
-                }
-            } catch (err: any) {
-                console.error(err);
-                setLoading(false)
-                if (err.errors && err.errors.length > 0) {
-                    const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
-                    toast.error(errorMessage || "Please try again");
-                } else {
-                    setError(err.message || "Please try again");
-                    toast.error(err.message || "Please try again");
-                }
-
-            }
-        }
-    }
 
     //get all levels
     const getlevels = useCallback(async () => {
@@ -308,16 +190,161 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }, [isMountedRef]);
 
+    const getgenders = useCallback(async () => {
+
+        try {
+        
+            const response = await axios1.get('api/website/genders/get');
+            setgendersdata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
 
     useEffect(() => {
 
         getlevels();
         gettypes();
         getcountry();
+        getgenders();
 
     }, [getlevels]);
 
+    useEffect(() => {
 
+        if (!isAddMode && olddata.schgenders) {
+            const STREAM = olddata.schgenders.map((item) => ({
+                id: item.genders.id,
+                name: item.genders.name,
+            }));
+            admfiledReset("genders", { defaultValue: STREAM })
+        }
+
+
+    }, []);
+
+
+    const onSubmit = async (data: any) => {
+
+        if (!isAddMode && olddata.id) {
+            let updateid = olddata.id;
+            setLoading(true)
+            let link = 'api/admin/scholarship/update';
+            const formData = new FormData();
+            formData.append('id', updateid);
+            formData.append('level_id', data.level_id.id);
+            formData.append('type_id', data.type_id.id);
+            formData.append('country_id', data.country_id.id);
+            formData.append('name', data.name);
+            formData.append('slug', data.slug);
+            formData.append('gender', data.gender);
+            formData.append('amount', data.amount);
+            formData.append('last_date', data.last_date);
+            formData.append('total_scholarships', data.total_scholarships);
+            formData.append('is_eligible', data.is_eligible);
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keywords', data.meta_keywords);
+            formData.append('overview', data.overview);
+            formData.append('status', data.status);
+            formData.append('logo', selectedphoto);
+            formData.append('genders', JSON.stringify(data.genders));
+
+            try {
+                let response = await axios1.post(link, formData)
+                if (response.data.status == 1) {
+                    toast.success(response.data.message)
+                    setLoading(false)
+                    setError('')
+                    reset();
+                    router.back();
+                }
+                else {
+                    setLoading(false)
+                    toast.error(response.data.message)
+                    setError(response.data.message)
+                }
+
+            } catch (err: any) {
+
+                setLoading(false)
+                if (err.errors && err.errors.length > 0) {
+                    const errorMessage = err.errors[0].msg;
+                    setError(errorMessage || "Please try again");
+                    toast.error(errorMessage || "Please try again");
+                } else {
+                    setError(err.message || "Please try again");
+                    toast.error(err.message || "Please try again");
+                }
+
+            }
+        } else {
+            setLoading(true)
+            let link = 'api/admin/scholarship/add';
+
+            const formData = new FormData();
+            formData.append('level_id', data.level_id.id);
+            formData.append('type_id', data.type_id.id);
+            formData.append('country_id', data.country_id.id);
+            formData.append('name', data.name);
+            formData.append('slug', data.slug);
+            formData.append('gender', data.gender);
+            formData.append('amount', data.amount);
+            formData.append('last_date', data.last_date);
+            formData.append('total_scholarships', data.total_scholarships);
+            formData.append('is_eligible', data.is_eligible);
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keywords', data.meta_keywords);
+            formData.append('overview', data.overview);
+            formData.append('status', data.status);
+            formData.append('genders', JSON.stringify(data.genders));
+            if (selectedphoto == '') {
+
+                toast.error('Please Upload Image', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
+
+            formData.append('logo', selectedphoto);
+
+            try {
+                let response = await axios1.post(link, formData)
+                console.log(response, "response")
+
+                if (response.data.status == 1) {
+
+                    toast.success(response.data.message)
+                    setLoading(false)
+                    setError('')
+                    reset();
+                    router.push('./');
+
+
+                }
+                else {
+                    setLoading(false)
+                    toast.error(response.data.message)
+                    setError(response.data.message)
+                }
+            } catch (err: any) {
+                console.error(err);
+                setLoading(false)
+                if (err.errors && err.errors.length > 0) {
+                    const errorMessage = err.errors[0].msg;
+                    setError(errorMessage || "Please try again");
+                    toast.error(errorMessage || "Please try again");
+                } else {
+                    setError(err.message || "Please try again");
+                    toast.error(err.message || "Please try again");
+                }
+
+            }
+        }
+    }
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-linkencoded">
@@ -448,26 +475,35 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={4}>
                         <Controller
-                            name='gender'
+                            name="genders"
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    select
-                                    value={value}
-                                    label='Select Gender'
-                                    onChange={onChange}
-                                    error={Boolean(errors.gender)}
-                                    helperText={errors.gender && 'This field is required'}
-                                >
-                                    {optionseligible.map((option, value) => (
-                                        <MenuItem key={value} value={option}>
-                                            {option}
-                                        </MenuItem>
-                                    ))}
-                                </CustomTextField>
-                            )}
+                            render={({ field: { value, onChange } }) => {
+                                // console.log(value); // Log value here
+
+                                return (
+                                    <CustomAutocomplete
+                                        multiple
+                                        fullWidth
+                                        value={value || []}
+                                        options={gendersdata}
+                                        onChange={(event, newValue) => {
+                                            onChange(newValue);
+                                        }}
+                                        filterSelectedOptions
+                                        id='autocomplete-multiple-outlined'
+                                        getOptionLabel={(option: any) => option.name}
+                                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                                        renderInput={params =>
+                                            <CustomTextField {...params}
+                                                label='Select genders'
+                                                variant="outlined"
+                                                error={Boolean(errors.genders)}
+                                                {...(errors.genders && { helperText: 'This field is required' })}
+                                                placeholder='genders' />}
+                                    />
+                                );
+                            }}
                         />
                     </Grid>
 
@@ -527,14 +563,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.is_eligible)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.is_eligible && { helperText: 'This field is required' })}
-                                    >
+                                >
                                     {options.map((option) => (
-                                      <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                      </MenuItem>
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
                                     ))}
-                                  </CustomTextField>
-                                
+                                </CustomTextField>
+
                             )}
                         />
                     </Grid>
@@ -624,7 +660,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         onChange={onChange}
                                         placeholderText='Click to select a date'
                                         customInput={<CustomInput label='Last date'
-                                      
+
                                         />}
                                     />
                                 </DatePickerWrapper>

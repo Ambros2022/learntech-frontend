@@ -11,7 +11,7 @@ const HelpSec = () => {
                     <div className="row">
                         <div className="col-lg-6 col-sm-6 mb-5">
                             <div className="card card-hover-effect p-3 border-white bg-transparent ">
-                                <Image src='/images/icons/Expert.svg' className='mx-auto' alt='help-banner' width={150} height={150} />
+                                <Image src='/images/icons/expert.svg' className='mx-auto' alt='help-banner' width={150} height={150} />
                                 <h5 className='text-white fw-bold text-center'>Team of Experts:</h5>
                                 <h6 className='text-white mb-0mb-0 text-center'>We have a dedicated team of experts who are determined to help you walk down the path.</h6>
                             </div>

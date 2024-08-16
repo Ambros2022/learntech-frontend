@@ -46,7 +46,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     const [selectedphoto, setSelectedphoto] = useState('');
     const [fileNameslogo, setFileNameslogo] = useState<any>([]);
     const [selectedlogo, setSelectedlogo] = useState('');
-
+    
     const [amenitiesdata, setAmenitiesdata] = useState([])
     const [streamsdata, setStreamsdata] = useState([])
     const [recoginationsdata, setRecoginationsdata] = useState([])

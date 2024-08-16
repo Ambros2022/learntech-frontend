@@ -7,17 +7,22 @@ import CoursesCraousel from './CoursesCraousel';
 // Define a type for the course items
 type CourseItem = {
   id: number;
-  name: string;
+  short_name: string;
   slug: string;
   logo: string;
+  streams: {
+    slug: string;
+  };
+  streamsSlug?: string; // Optional to avoid type issues
 };
+
 
 function PopularCourses() {
   const [items, setItems] = useState<CourseItem[]>([]);
 
   const fetchCourses = useCallback(async () => {
     try {
-      const response = await axios1.get('/api/website/stream/get');
+      const response = await axios1.get('/api/website/generalcourse/get');
       if (response.data.status === 1) {
         setItems(response.data.data);
       } else {
@@ -36,41 +41,49 @@ function PopularCourses() {
   function createCards() {
     return items.map((card) => (
       <CardComponent
+        key={card.id}
         id={card.id}
-        name={card.name}
+        short_name={card.short_name}
         slug={card.slug}
         logo={card.logo}
+        streamsSlug={card.streams.slug} // Pass streamsSlug separately
       />
     ));
   }
 
-  // CardComponent function
-  function CardComponent({ name, id, slug, logo }: CourseItem) {
+  type CardProps = {
+    id: number;
+    short_name: string;
+    slug: string;
+    logo: string;
+    streamsSlug: string;
+  };
+
+  function CardComponent({ short_name, id, slug, logo, streamsSlug }: CardProps) {
     return (
-      <Link href={`/course/${id}/${slug}`}>
-          <div className='courseConCarousel'>
-        <div className="card hover-card text-center d-flex mx-2">
-          <div className="row flex-fill">
-            <div className="col-12">
-              <Image width={50} height={50} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${name}-logo`} />
-            </div>
-            <div className="col-12 text-center text-start px-0">
-              <div className="card-body d-flex text-center justify-content-center">
-                <h6 className="card-title flex-fill text-truncate">{name}</h6>
+      <Link href={`/course/${id}/${streamsSlug}/${slug}`}>
+        <div className='courseConCarousel'>
+          <div className="card hover-card text-center d-flex mx-2">
+            <div className="row flex-fill">
+              <div className="col-12">
+                <Image width={50} height={50} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${name}-logo`} />
+              </div>
+              <div className="col-12 text-center text-start px-0">
+                <div className="card-body d-flex text-center justify-content-center">
+                  <h6 className="card-title flex-fill text-truncate">{short_name}</h6>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </Link>
     );
   }
-
   return (
     <section className='bg-white pb-5'>
       <section className='container bg-skyBlue rounded'>
         <h2 className='fw-bold text-blue pt-5 ps-5'>Popular Degree Courses</h2>
-        <div className="topCarouselCardsCon px-5 pt-2 pb-5 position-relative" style={{zIndex:'2'}}>
+        <div className="topCarouselCardsCon px-5 pt-2 pb-5 position-relative" style={{ zIndex: '2' }}>
           <CoursesCraousel items={createCards()} />
         </div>
       </section>

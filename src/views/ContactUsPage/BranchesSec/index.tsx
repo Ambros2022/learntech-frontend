@@ -53,7 +53,7 @@ const BranchesSec = () => {
                             >
                                 <div className="row">
                                     <div className="col-md-12 mx-auto col-xl-2 col-lg-2 text-center ">
-                                        <Image src='/images/icons/Locationicon.svg' width={70} height={70} alt="location-icon" className='p-3 rounded bg-img-blue mx-auto' />
+                                        <Image src='/images/icons/Locationicon.svg' width={70} height={70} alt="location-icon" className='p-3 rounded clr-red mx-auto' />
                                     </div>
                                     <div className="col-md-12 text-md-center text-lg-start mt-md-2 col-xl-10 col-lg-10">
                                         <h5 className='text-blue fw-bold ms-lg-2'>{branch.name}</h5>

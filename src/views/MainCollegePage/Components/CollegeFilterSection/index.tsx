@@ -43,8 +43,8 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                             <Image width={500} height={500} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid rounded card-Image-top me-auto" alt="College Logo" style={{ objectFit: 'cover' }} />
                         </div>
                         <div className="col-md-12 col-lg-8 col-xl-9">
-                            <div className="row pt-3">
-                                <div className="col-md-12 col-lg-12 col-xl-6">
+                            <div className="row">
+                                <div className="p-2 col-md-12 col-lg-12 col-xl-6">
                                     <div className="card-title">
                                         <h5 className='fw-bold text-black mb-3'>{name}</h5>
                                     </div>
@@ -53,7 +53,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p>
                                     </div>
                                 </div>
-                                <div className="col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
+                                <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
                                     {rating && (
                                         <div className="d-flex gap-2 justify-content-start justify-content-md-start">
 
@@ -67,7 +67,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         </div>
                                     )}
                                 </div>
-                                <div className="mt-md-3 mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column gap-3 mb-3">
+                                <div className="mt-md-3 pt-2 mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column gap-3 mb-3">
                                     <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
 
                                     <Link href={`/college/${id}/${slug}`} className=" viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
@@ -103,6 +103,7 @@ function CollegeFilterSection() {
 
 
     const [states, setStates] = useState<Option[]>([]);
+    const [citys, setCitys] = useState<any[]>([]);
     const [streams, setStreams] = useState<any[]>([]);
     const [courses, setCourses] = useState<any[]>([]);
     const [promoban, setPromoban] = useState<any[]>([]);
@@ -154,7 +155,7 @@ function CollegeFilterSection() {
             const roleparams: any = {};
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
-            const response = await axios1.get('/api/website/stream/get');
+            const response = await axios1.get(`/api/website/stream/get?size=${roleparams['size']}`);
             if (response.data.status === 1) {
                 const streamData = response.data.data.map((stream: any) => ({
                     label: stream.name,
@@ -193,16 +194,23 @@ function CollegeFilterSection() {
 
     const fetchStatesData = useCallback(async () => {
         try {
-            const response = await axios1.get('api/website/states/get');
+            const response = await axios1.get('api/website/states/get?page=1&size=50&country_id=204');
             if (response.data.status === 1) {
+                const arrcity: any = [];
                 const statesData = response.data.data.map((state: any) => ({
                     label: state.name,
                     value: state.id.toString(),
-                    cities: state.city.map((city: any) => ({
-                        label: city.name,
-                        value: city.id.toString()
-                    }))
+                    cities: state.city.map((city: any) => {
+                        const cityObj = {
+                            label: city.name,
+                            value: city.id.toString(),
+                        };
+                        arrcity.push(cityObj);
+                        return cityObj;
+                    })
                 }));
+
+                setCitys(arrcity);
                 setStates(statesData);
             } else {
                 console.error('Failed to fetch states');
@@ -249,7 +257,8 @@ function CollegeFilterSection() {
 
     const options: OptionGroup[] = [
         { id: 'state', label: 'States', options: states },
-        { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
+        { id: 'city', label: 'Cities', options: citys },
+        // { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
         {
             id: 'ownership',
             label: 'Ownership',
@@ -332,7 +341,20 @@ function CollegeFilterSection() {
             // Perform API call with selected filter values
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
 
-            console.log(updatedSelected, "updatedSelected");
+            // console.log(updatedSelected, "updatedSelected");
+            console.log(selectedStateIds, "selectedStateIds");
+            if (groupId == "state" && selectedStateIds.length > 0) {
+                const citiesArr = states
+                    .filter(state => selectedStateIds.includes(state.value))
+                    .flatMap(state => state.cities);
+
+                console.log(citiesArr);
+                setCitys(citiesArr);
+            }
+            if (groupId === "state" && selectedStateIds.length === 0 && states.length > 0) {
+                const arrcity = states.flatMap((state: any) => state.cities);
+                setCitys(arrcity);
+            }
             return updatedSelected;
         });
     }, 300); // Debounce for 300 milliseconds
@@ -350,13 +372,13 @@ function CollegeFilterSection() {
             }
         }));
 
-        if (groupId === 'state') {
-            const updatedStateIds = isChecked
-                ? [...selectedStateIds, value]
-                : selectedStateIds.filter(id => id !== value);
+        // if (groupId === 'state') {
+        //     const updatedStateIds = isChecked
+        //         ? [...selectedStateIds, value]
+        //         : selectedStateIds.filter(id => id !== value);
 
-            // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
-        }
+        //     // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
+        // }
 
         // if (groupId === 'city') {
         //     const updatedCityIds = isChecked
@@ -381,7 +403,6 @@ function CollegeFilterSection() {
             }));
             setStateId(null)
         }
-        console.log("checkboxState", checkboxState);
         if (cityId) {
             let text = cityId.toString();
             debouncedHandleCheckboxChange("city", text, true);
@@ -494,25 +515,36 @@ function CollegeFilterSection() {
 
             const handleStateButtonClick = (state: string) => {
 
+                console.log("handleStateButtonClick",state);
+
+                debouncedHandleCheckboxChange("state", state, true);
                 window.scrollTo({ top: 650, behavior: 'smooth' });
+
+                // setCheckboxState(prevState => ({
+                //     ...prevState,
+                //     [groupId]: {
+                //         ...prevState[groupId],
+                //         [value]: isChecked
+                //     }
+                // }));
                 setCheckboxState(prevState => ({
                     ...prevState,
                     ["state"]: {
                         ...prevState["state"],
-                        [state]: false
+                        [state]: true
                     }
                 }));
-                setSelectedCheckboxes(prevSelected => {
-                    const stateSelections = prevSelected.state || [];
-                    const updatedSelections = stateSelections.includes(state)
-                        ? stateSelections.filter(s => s !== state)
-                        : [...stateSelections, state];
+                // setSelectedCheckboxes(prevSelected => {
+                //     const stateSelections = prevSelected.state || [];
+                //     const updatedSelections = stateSelections.includes(state)
+                //         ? stateSelections.filter(s => s !== state)
+                //         : [...stateSelections, state];
 
-                    const updatedSelected = { ...prevSelected, state: updatedSelections };
-                    // Call the API with the selected state IDs
-                    getcollegedata(updatedSelected.state);
-                    return updatedSelected;
-                });
+                //     const updatedSelected = { ...prevSelected, state: updatedSelections };
+                //     // Call the API with the selected state IDs
+                //     getcollegedata(updatedSelected.state);
+                //     return updatedSelected;
+                // });
             };
 
             return (
