@@ -79,11 +79,33 @@ const navigation = (): VerticalNavItemsType => {
       ]
     },
     {
-      title: 'Blog',
-      path: '/app/dashboard/blog',
-      icon: 'tabler:file-pencil',
-      auth: false
+      title: 'Blogs',
+      icon: 'tabler:news',
+      auth: false,
+      children: [
+        {
+          title: 'Blogs Categories',
+          path: '/app/dashboard/blogscategories',
+          auth: false
+        },
+        {
+          title: 'Blog',
+          path: '/app/dashboard/blog',
+          auth: false
+        },
+        {
+          title: 'Blog Comments',
+          path: '/app/dashboard/blogcomments',
+          auth: false
+        }
+      ]
     },
+    // {
+    //   title: 'Blog',
+    //   path: '/app/dashboard/blog',
+    //   icon: 'tabler:file-pencil',
+    //   auth: false
+    // },
 
     {
       title: 'User',
@@ -220,7 +242,6 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
 
-
     {
       title: 'Testimonial',
       path: '/app/dashboard/testimonial',
@@ -234,7 +255,7 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'tabler:users',
       auth: false
     },
-    
+
     {
       title: 'Job',
       icon: 'tabler:weight',

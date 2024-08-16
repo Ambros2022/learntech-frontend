@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/blog/delete/' + id)
+      await axios1.post('api/admin/blogscategories/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -90,7 +90,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./blog/edit/` + id} >
+        <Link href={`./blogscategories/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -168,88 +168,27 @@ const SecondPage = () => {
   let columns: GridColDef[] = [
 
     {
-      flex: 0.175,
+      flex: 0.4,
       minWidth: 200,
       field: 'name',
       headerName: 'name',
       renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
+        const { row } = params;
         return (
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {renderClient(params)}
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.name}
-              </Typography>
-
-            </Box>
-          </Box>
-        )
-      }
-    },
-    {
-      flex: 0.3,
-      minWidth: 200,
-      field: 'slug',
-      headerName: 'Slug',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.slug}
+            {row.name}
           </Typography>
-
-
-        )
+        );
       }
     },
+    
+
+   
+
 
     {
       flex: 0.175,
       minWidth: 200,
-      field: 'blogcategories.name',
-      headerName: 'Category',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.blogcategories?.name}
-          </Typography>
-
-
-        )
-      }
-    },
-
-    {
-      flex: 0.175,
-      minWidth: 200,
-      field: 'status',
-      headerName: 'status',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
-        return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.status}
-          </Typography>
-
-
-        )
-      }
-    },
-
-
-
-    {
-      flex: 0.175,
-      minWidth: 100,
       sortable: false,
       field: 'actions',
       headerName: 'Actions',
@@ -272,7 +211,7 @@ const SecondPage = () => {
       cancelToken = axios.CancelToken.source();
 
       await axios1
-        .get('api/admin/blog/get', {
+        .get('api/admin/blogscategories/get', {
           cancelToken: cancelToken.token,
           params: {
             columnname,
@@ -334,7 +273,7 @@ const SecondPage = () => {
 
     return (
       <>
-        <Link href={'./blog/add'}>
+        <Link href={'./blogscategories/add'}>
           <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
             <Icon icon='tabler:plus' />
             Add
