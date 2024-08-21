@@ -214,9 +214,9 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
 
 
                                     <option value="">select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="LGBT">LGBT</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">others</option>
                                 </select>
                                 <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}>
                                     <i className="bi bi-caret-down-fill caret-down"></i> {/* Replace with your desired icon */}

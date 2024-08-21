@@ -103,6 +103,7 @@ function CollegeFilterSection() {
 
 
     const [states, setStates] = useState<Option[]>([]);
+    const [citys, setCitys] = useState<any[]>([]);
     const [streams, setStreams] = useState<any[]>([]);
     const [courses, setCourses] = useState<any[]>([]);
     const [promoban, setPromoban] = useState<any[]>([]);
@@ -193,16 +194,23 @@ function CollegeFilterSection() {
 
     const fetchStatesData = useCallback(async () => {
         try {
-            const response = await axios1.get('api/website/states/get');
+            const response = await axios1.get('api/website/states/get?page=1&size=50&country_id=204');
             if (response.data.status === 1) {
+                const arrcity: any = [];
                 const statesData = response.data.data.map((state: any) => ({
                     label: state.name,
                     value: state.id.toString(),
-                    cities: state.city.map((city: any) => ({
-                        label: city.name,
-                        value: city.id.toString()
-                    }))
+                    cities: state.city.map((city: any) => {
+                        const cityObj = {
+                            label: city.name,
+                            value: city.id.toString(),
+                        };
+                        arrcity.push(cityObj);
+                        return cityObj;
+                    })
                 }));
+
+                setCitys(arrcity);
                 setStates(statesData);
             } else {
                 console.error('Failed to fetch states');
@@ -249,7 +257,8 @@ function CollegeFilterSection() {
 
     const options: OptionGroup[] = [
         { id: 'state', label: 'States', options: states },
-        { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
+        { id: 'city', label: 'Cities', options: citys },
+        // { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
         {
             id: 'ownership',
             label: 'Ownership',
@@ -332,7 +341,20 @@ function CollegeFilterSection() {
             // Perform API call with selected filter values
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
 
-            console.log(updatedSelected, "updatedSelected");
+            // console.log(updatedSelected, "updatedSelected");
+            console.log(selectedStateIds, "selectedStateIds");
+            if (groupId == "state" && selectedStateIds.length > 0) {
+                const citiesArr = states
+                    .filter(state => selectedStateIds.includes(state.value))
+                    .flatMap(state => state.cities);
+
+                console.log(citiesArr);
+                setCitys(citiesArr);
+            }
+            if (groupId === "state" && selectedStateIds.length === 0 && states.length > 0) {
+                const arrcity = states.flatMap((state: any) => state.cities);
+                setCitys(arrcity);
+            }
             return updatedSelected;
         });
     }, 300); // Debounce for 300 milliseconds
@@ -350,13 +372,13 @@ function CollegeFilterSection() {
             }
         }));
 
-        if (groupId === 'state') {
-            const updatedStateIds = isChecked
-                ? [...selectedStateIds, value]
-                : selectedStateIds.filter(id => id !== value);
+        // if (groupId === 'state') {
+        //     const updatedStateIds = isChecked
+        //         ? [...selectedStateIds, value]
+        //         : selectedStateIds.filter(id => id !== value);
 
-            // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
-        }
+        //     // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
+        // }
 
         // if (groupId === 'city') {
         //     const updatedCityIds = isChecked
@@ -493,25 +515,36 @@ function CollegeFilterSection() {
 
             const handleStateButtonClick = (state: string) => {
 
+                console.log("handleStateButtonClick",state);
+
+                debouncedHandleCheckboxChange("state", state, true);
                 window.scrollTo({ top: 650, behavior: 'smooth' });
+
+                // setCheckboxState(prevState => ({
+                //     ...prevState,
+                //     [groupId]: {
+                //         ...prevState[groupId],
+                //         [value]: isChecked
+                //     }
+                // }));
                 setCheckboxState(prevState => ({
                     ...prevState,
                     ["state"]: {
                         ...prevState["state"],
-                        [state]: false
+                        [state]: true
                     }
                 }));
-                setSelectedCheckboxes(prevSelected => {
-                    const stateSelections = prevSelected.state || [];
-                    const updatedSelections = stateSelections.includes(state)
-                        ? stateSelections.filter(s => s !== state)
-                        : [...stateSelections, state];
+                // setSelectedCheckboxes(prevSelected => {
+                //     const stateSelections = prevSelected.state || [];
+                //     const updatedSelections = stateSelections.includes(state)
+                //         ? stateSelections.filter(s => s !== state)
+                //         : [...stateSelections, state];
 
-                    const updatedSelected = { ...prevSelected, state: updatedSelections };
-                    // Call the API with the selected state IDs
-                    getcollegedata(updatedSelected.state);
-                    return updatedSelected;
-                });
+                //     const updatedSelected = { ...prevSelected, state: updatedSelections };
+                //     // Call the API with the selected state IDs
+                //     getcollegedata(updatedSelected.state);
+                //     return updatedSelected;
+                // });
             };
 
             return (
