@@ -19,13 +19,13 @@ function BannerSec({ data }) {
                         <div className="row">
                             <div className="col-lg-8 col-md-9 mx-md-auto innerExam">
                                 <div className="card mb-2">
-                                    <div className="row g-0">
-                                        <div className="col-md-3 text-center innerExamImg">
-                                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={300} height={300} className='bg-white p-1 rounded img-fluid' alt={data.name} />
+                                    <div className="row g-0 d-flex flex-row">
+                                        <div className="col-md-3 text-center innerClgImg mx-md-0 mx-auto align-content-center">
+                                            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={100} height={100} className='bg-white p-2 rounded img-fluid' alt={data.name} />
                                         </div>
-                                        <div className="col-md-9 d-flex justify-content-center justify-content-md-start">
+                                        <div className="col-md-9 d-flex justify-content-center justify-content-md-start align-content-center">
                                             <div className="align-content-center">
-                                                <div className="card-body">
+                                                <div className="p-lg-3">
                                                     <h3 className="fw-bold text-white card-title">
                                                         {data.exam_title} Exam : {examDate}
                                                     </h3>
@@ -35,7 +35,7 @@ function BannerSec({ data }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 d-flex justify-content-center mb-3">
+                            <div className="col-lg-4 col-md-3 d-flex justify-content-center mb-3">
                                 <div className="align-content-center">
                                     <div className='text-md-end text-center'>
                                         <GlobalEnquiryForm

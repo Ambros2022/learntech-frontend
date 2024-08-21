@@ -6,12 +6,16 @@ import Link from 'next/link';
 const NewsItem = ({ date, title, slug, id }) => (
     <div className="col-12">
         <Link href={`/exam/${id}/${slug}`}>
-        <div className="card mb-3 bg-skyBlue hover-card cardInnerExam">
-            <div className="card-body text-center d-flex flex-lg-row flex-md-column flex-row gap-3 justify-content-xl-start justify-content-lg-center justify-content-center justify-content-md-center">
-                <h6 className='fw-bold text-blue mb-0 text-center border-circle align-content-center'>{date}</h6>
-                <h5 className="card-title text-center fw-bold mb-0  align-content-center">{title} Exam</h5>
+            <div className="card mb-3 bg-skyBlue hover-card cardInnerExam">
+                <div className="row p-3 d-flex flex-row">
+                    <div className="col-6 align-content-center">
+                        <p className='fw-bold text-blue mb-0 text-center border-circle align-content-center'>{date}</p>
+                    </div>
+                    <div className="col-6 align-content-center">
+                        <h5 className="card-title text-center fw-bold mb-0  align-content-center">{title} Exam</h5>
+                    </div>
+                </div>
             </div>
-        </div>
         </Link>
     </div>
 );
@@ -23,7 +27,7 @@ const NewsList = ({ newsItems }) => (
         <div className='bg-skyBlue blogSec examLatest mt-3 px-4 py-3 position-relative rounded' style={{ zIndex: '2' }}>
             <div className="row overflow-y-auto" style={{ maxHeight: 'calc(4 * 102px)' }}>
                 {newsItems.map((item, index) => (
-                    <NewsItem key={index} date={item.date} title={item.title} id={item.id} slug={item.slug}/>
+                    <NewsItem key={index} date={item.date} title={item.title} id={item.id} slug={item.slug} />
                 ))}
             </div>
             {/* <NewsCarosuel items={newsItems} /> */}

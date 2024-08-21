@@ -61,9 +61,17 @@ function CollegeInfoSection({ data }) {
     { id: 'ranking', label: 'Ranking', content: data.rankings },
     { id: 'scholarship', label: 'Scholarship', content: data.scholarship },
     { id: 'hostel', label: 'Infrastructure', content: data.hostel },
-    { id: 'gallery', label: 'Gallery', content: data.clggallery },
+    {
+      id: 'gallery',
+      label: 'Gallery',
+      content: data.clggallery && data.clggallery.length > 0 ? data.clggallery : ''
+    },
     { id: 'review', label: 'Review', content: <ReviewSec data={data} /> },
-    { id: 'faq', label: 'FAQ', content: <FaqSec data={data.collegefaqs} /> }
+    {
+      id: 'faq',
+      label: 'FAQ',
+      content: data.collegefaqs && data.collegefaqs.length > 0 ? <FaqSec data={data.collegefaqs} /> : null
+    },
   ];
 
   const ButtonGroup = ({ next, previous }) => (

@@ -3,14 +3,14 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import GoogleLoginButton from '../google-login';
-import TwitterLoginButton from '../twitter-login';
-import LinkedInLoginButton from '../linkedin-login';
-import FacebookLoginButton from '../facebook-login';
 import toast from 'react-hot-toast'
 import Link from 'next/link';
 import axios1 from 'src/configs/axios'
 import router from 'next/router';
+import GoogleLoginButton from './GoogleLoginButton';
+import LinkedinLoginButton from './LinkedinLoginButton';
+import TwitterLoginButton from './TwitterLoginButton';
+import FacebookLoginButton from './FacebookLoginButton';
 interface FormValues {
   name: string;
   email: string;
@@ -186,7 +186,12 @@ const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
       <div className='text-black mb-3 text-center'>
         <small>Already have an account? <span className='text-blue fw-bold'>Log In</span></small>
       </div>
-
+      <div className="d-flex justify-content-around mb-3 flex-wrap">
+        <GoogleLoginButton/>
+        <LinkedinLoginButton />
+        <TwitterLoginButton/>
+        <FacebookLoginButton/>
+      </div>
     </div >
   );
 };

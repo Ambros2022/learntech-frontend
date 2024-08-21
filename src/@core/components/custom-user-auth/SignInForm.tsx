@@ -7,12 +7,10 @@ import router from 'next/router';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import OtpVerificationForm from './OtpVerificationForm';
 import NewPasswordForm from './NewPasswordForm';
-import { gapi } from 'gapi-script'
 import GoogleLoginButton from './GoogleLoginButton';
-import { GoogleLogin } from '@react-oauth/google';
-import LinkedInPage from './Linkedin';
-import LinkedInLogin from './LinkedInLogin';
-// import SocialGoogle from './GoogleLogin';
+import LinkedinLoginButton from './LinkedinLoginButton';
+import TwitterLoginButton from './TwitterLoginButton';
+import FacebookLoginButton from './FacebookLoginButton';
 
 
 
@@ -146,25 +144,13 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               <p className="fake-legend"><span>OR</span></p>
             </div>
             <div className="text-black mb-3 text-center">
-              <small>Log In</small>
+              <small>Log in with social media</small>
             </div>
-            <div className="d-flex justify-content-between mb-3 flex-wrap">
-
-
-              <GoogleLogin
-                onSuccess={credentialResponse => {
-                  console.log(credentialResponse);
-                }}
-                onError={() => {
-                  console.log('Login Failed');
-                }}
-              />
-              {/* <LinkedInPage/> */}
-              <LinkedInLogin />
-              {/* <SocialGoogle />  */}
-              {/* <FacebookLogin /> */}
-              {/* <TwitterLogin /> */}
-              {/* <LinkdinLogin /> */}
+            <div className="d-flex justify-content-around mb-3 flex-wrap">
+              <GoogleLoginButton/>
+              <LinkedinLoginButton/>
+              <TwitterLoginButton/>
+              <FacebookLoginButton/>
             </div>
           </>
         )}

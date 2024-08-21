@@ -3,7 +3,7 @@ import { signIn, useSession } from 'next-auth/react';
 import axios1 from 'src/configs/axios';
 import { useRouter } from 'next/router';
 
-const GoogleLoginButton = () => {
+const TwitterLoginButton = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const handleSocialLogin = async () => {
@@ -16,7 +16,7 @@ const GoogleLoginButton = () => {
         name: session.user.name,
         email: session.user.email,
         provider_id: '112982883499715183981', // Customize this field
-        provider_name: 'google',
+        provider_name: 'twitter',
       };
 
       try {
@@ -38,7 +38,7 @@ const GoogleLoginButton = () => {
     event.preventDefault();
 
     try {
-      const result = await signIn('google', { redirect: false });
+      const result = await signIn('twitter', { redirect: false });
       if (result?.error) {
         console.error('Sign-In Error:', result.error);
         alert('Sign-In Error: ' + result.error);
@@ -58,10 +58,10 @@ const GoogleLoginButton = () => {
   return (
     <div>
       <button className='btn' onClick={handleSignIn}>
-        <i className='bi bi-google fs-1 text-danger'></i>
+        <i className='bi bi-twitter-x fs-1 text-dark'></i>
       </button>
     </div>
   );
 };
 
-export default GoogleLoginButton;
+export default TwitterLoginButton;

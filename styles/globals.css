@@ -662,6 +662,11 @@
     filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
   }
 
+
+  .featuredClgCard .card-text i{
+    color: red !important;
+  }
+
   .featuredClgCard a {
     background-color: white;
     font-size: 12px !important;
@@ -3823,7 +3828,7 @@
 
   @media (min-width:320px) and (max-width:767px) {
     .examsBannerCon {
-      height: 400px !important;
+      height: 300px !important;
     }
 
     .newsPageImg img {
@@ -4886,7 +4891,7 @@
   }
 
   .innerCourseClgH1>h1 {
-    font-size: 20px !important;
+    /* font-size: 20px !important; */
   }
 
   .filterCountry {

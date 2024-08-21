@@ -35,7 +35,7 @@ function InnerCoursePage({ id }) {
       const response = await axios.get('api/website/colleges/get', {
         params: {
           page: 1,
-          size: 8,
+          size: 1000,
           stream_id: [id]
         }
       });
@@ -51,7 +51,7 @@ function InnerCoursePage({ id }) {
       const response = await axios.get('api/website/exams/get', {
         params: {
           page: 1,
-          size: 8,
+          size: 1000,
           stream_id: id
         }
       });
@@ -68,7 +68,7 @@ function InnerCoursePage({ id }) {
       const response = await axios.get('api/website/stream/get', {
         params: {
           page: 1,
-          size: 8,
+          size: 1000,
           not_stream_id: id
         }
       });

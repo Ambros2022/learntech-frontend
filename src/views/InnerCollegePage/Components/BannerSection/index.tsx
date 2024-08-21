@@ -11,7 +11,7 @@ function BannerSection({ data }) {
             <div className="row g-0">
               <div className="col-lg-2 col-xl-1 text-center col-md-2">
                 <div className='innerClgImg mx-auto'>
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} className='img-fluid mt-md-3 bg-white rounded'/>
+                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} className='img-fluid mt-md-3 p-2 bg-white rounded'/>
                 </div>
               </div>
               <div className="col-lg-7 ps-xl-5 col-xl-8 col-md-10">

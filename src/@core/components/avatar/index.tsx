@@ -3,6 +3,8 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const AvatarContainer = styled('div')({
   position: 'relative',
@@ -31,6 +33,7 @@ const Dropdown = styled(Box, {
 const AvatarDropdown = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [userData, setUserData] = useState<{ name: string; email: string } | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('UserData');
@@ -40,9 +43,11 @@ const AvatarDropdown = () => {
     }
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () =>{
     localStorage.removeItem('UserData');
     setUserData(null);
+    await signOut({ redirect: false });
+    router.push('/write-review');
   };
 
   return (

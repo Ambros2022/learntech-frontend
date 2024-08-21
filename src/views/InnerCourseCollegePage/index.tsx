@@ -41,7 +41,7 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
       const response = await axios.get('api/website/colleges/get', {
         params: {
           page: 1,
-          size: 8,
+          size: 1000,
         }
       });
       if (isMountedRef.current) {

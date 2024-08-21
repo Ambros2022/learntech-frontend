@@ -95,7 +95,7 @@ function BannerSection() {
                   Academic Entrance Exams in India
                 </h1>
                 <div className="row justify-content-center align-items-center">
-                  <div className="col-md-7 col-12 mb-3 ">
+                  <div className="col-md-5 col-12 mb-3 ">
                     <Autocomplete
                       open={open}
                       onClose={() => setOpen(false)}

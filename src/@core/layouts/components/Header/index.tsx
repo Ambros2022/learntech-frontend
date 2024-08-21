@@ -122,6 +122,8 @@ const Header = () => {
       const roleparams: any = {}
       roleparams['page'] = 1;
       roleparams['size'] = 10000;
+      roleparams['orderby']='asc';
+      roleparams['colmnname']='listing_order';
       const response = await axios1.get('api/website/stream_exams/get', { params: roleparams });
       setExams(response.data.data);
 
@@ -244,16 +246,15 @@ const Header = () => {
                 </li>
 
                 <li className="nav-item dropdown">
-                  <Link
-                    className={`nav-link dropdown-toggle ${isLinkActive('/study-in-usa') ? 'activeDrpDwn' : ''}`}
+                  <a
+                    className={`nav-link dropdown-toggle`}
                     onClick={() => setIsOpen(!isOpen)}
-                    href="/study-in-usa"
                     id="navbarDropdownMenuLink"
                     role="button"
                     aria-expanded={isOpen}
                   >
                     Study Abroad
-                  </Link>
+                  </a>
                   <Abroaddropdown states={countries} type="Colleges" />
 
                 </li>

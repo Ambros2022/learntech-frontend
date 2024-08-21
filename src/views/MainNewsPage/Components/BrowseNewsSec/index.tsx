@@ -28,7 +28,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
     const [totalPages, setTotalPages] = useState(1)
     const [loading, setLoading] = useState(false)
     const [newsItems, setNewsItems] = useState<GroupedNewsItems>({})
-    const newsPerPage = 4
+    const newsPerPage = 8
     const isMountedRef = useIsMountedRef()
     const [isMobile, setIsMobile] = useState(false)
 
@@ -176,8 +176,8 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                             <div className='text-center'> Loading....</div>
                                         ) : currentNews.length > 0 ? (
                                             currentNews.map(item => (
-                                                <div key={item.id} className=' mx-auto col-lg-6 px-4 mx-lg-0 mb-5 d-flex'>
-                                                    <div className='card hover-card d-flex flex-fill bg-skyBlue'>
+                                                <div key={item.id} className='col-lg-6 px-4 mx-lg-0 mb-5 d-flex'>
+                                                    <div className='card h-100 w-100 d-flex flex-column bg-skyBlue'>
                                                         <div className='newsPageImg'>
                                                             <Image
                                                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}
@@ -187,18 +187,19 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                                                 alt='newsImage'
                                                             />
                                                         </div>
-                                                        <Link className='text-black hover-blue' href={`/news/${item.id}/${item.slug}`}>
-                                                            <div className='card-body'>
+                                                        <Link className='text-black hover-blue flex-grow-1' href={`/news/${item.id}/${item.slug}`}>
+                                                            <div className='card-body d-flex flex-column'>
                                                                 <h5 className='fw-bold card-title'>{item.name}</h5>
                                                             </div>
                                                         </Link>
-                                                        <div className='p-3'>
+                                                        <div className='p-3 mt-auto'>
                                                             <Link href={`/news/${item.id}/${item.slug}`}>
                                                                 <button className='btn viewMoreCollegeBtn'>View Detail</button>
                                                             </Link>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             ))
                                         ) : (
                                             <div className='text-center pb-5'>No news available</div>
