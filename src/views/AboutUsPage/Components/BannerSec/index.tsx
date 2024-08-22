@@ -32,7 +32,7 @@ const BannerSec = () => {
                 {banners.map((banner, index) => (
                     <a href={banner.link}>
                         <Image
-                            width={1400} height={500}
+                            width={1400} height={300}
                             src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                             priority={true}
                             alt={`Banner-img`}

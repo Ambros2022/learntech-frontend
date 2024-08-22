@@ -13,7 +13,7 @@ const ContactCareerSec = ({locations , data}) => {
     <>
       <section className='bg-white'>
         <div className='container'>
-        <h2 className='fw-bold text-blue pb-3'>JOB VACANCY APPLICATION FORM</h2>
+        <h2 className='fw-bold text-center text-blue pb-3'>JOB VACANCY APPLICATION FORM</h2>
           <div className='row py-5'>
             <div className='col-md-5 bg-blue rounded py-3'>
               <h2 className='fw-bold text-white'>Contact Career Representative</h2>

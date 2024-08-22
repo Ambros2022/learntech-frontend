@@ -46,6 +46,7 @@ function InnerCoursePage({ id }) {
       console.error('Failed to fetch trending courses:', error);
     }
   }, [id, isMountedRef]);
+  
   const getExams = useCallback(async () => {
     try {
       const response = await axios.get('api/website/exams/get', {

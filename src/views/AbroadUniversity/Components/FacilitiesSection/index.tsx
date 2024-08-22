@@ -30,12 +30,17 @@ function FacilitiesSection({ data }) {
   }
 
   return (
-    <section className='bg-white facilitiesSec py-5'>
-      <div className="container bg-skyBlue px-4 py-5">
-        <h2 className='pt-3 text-blue fw-bold'>Facilities & Infrastructure</h2>
-        <CardList />
-      </div>
-    </section>
+    <>
+      {
+        (data && data.length>0)?(
+        <section className='bg-white facilitiesSec py-5'>
+          <div className="container bg-skyBlue px-4 py-5">
+            <h2 className='pt-3 text-blue fw-bold'>Facilities & Infrastructure</h2>
+            <CardList />
+          </div>
+        </section>):''
+      }
+    </>
   );
 }
 

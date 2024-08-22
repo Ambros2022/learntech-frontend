@@ -49,7 +49,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         <h5 className='fw-bold text-black mb-3'>{name}</h5>
                                     </div>
                                     <div className="card-text text-black">
-                                        <p className="mb-3 text-truncate"><Image src='/images/icons/Locationicon.svg' width={20} height={20} alt='location-icon ' /> {`${location}`}</p>
+                                        <p className="mb-3 text-truncate"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i>{`${location}`}</p>
                                         <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         </div>
                                     )}
                                 </div>
-                                <div className="mt-md-3 pt-2 mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column gap-3 mb-3">
+                                <div className="mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column justify-content-xl-around gap-xl-0 gap-3">
                                     <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
 
                                     <Link href={`/college/${id}/${slug}`} className=" viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
@@ -555,7 +555,7 @@ function CollegeFilterSection() {
                             {options.map((option, index) => (
                                 <button
                                     key={index}
-                                    className={`btn text-center rounded m-1 p-2 filterItemBtn  ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                    className={`btn text-center m-1 p-2 filterItemBtn  ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
                                     onClick={() => handleStateButtonClick(option.value)}
                                 >
                                     {option.label}

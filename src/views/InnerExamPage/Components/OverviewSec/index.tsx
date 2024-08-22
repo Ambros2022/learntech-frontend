@@ -167,7 +167,7 @@ function OverviewSec({ data }) {
             </div>
 
             <div className="col-md-4 mb-md-5 fixed-column pt-5">
-              <div className='bg-skyBlue px-lg-5 px-3 rounded'>
+              <div className='bg-skyBlue px-lg-5 px-3  mb-5 rounded'>
                 <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
                 <SideContactUsForm />
               </div>

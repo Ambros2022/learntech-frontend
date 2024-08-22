@@ -54,22 +54,25 @@ function CollegeInfoSection({ data, Countrydata }) {
     { id: 'Ranking', label: 'Ranking', content: data.rankings },
     { id: 'Scholarship', label: 'Scholarship', content: data.scholarship },
     { id: 'Hostel', label: 'Infrastructure', content: data.hostel },
-    { id: 'Gallery', label: 'Gallery', content: data.clggallery },
-    { id: 'Review', label: 'Review', content: <ReviewSec /> },
+    { id: 'Gallery', label: 'Gallery', content: data.clggallery && data.clggallery.length > 0 ? data.clggallery : '' },
+    { id: 'Review', label: 'Review', content: <ReviewSec data={data} /> },
     { id: 'Faq', label: 'FAQ', content: <FaqSec data={data.collegefaqs} /> }
   ];
 
-  const renderTabs = () => tabs.map((tab) => (
-    tab.content ? (
-      <button
-        key={tab.id}
-        className={`btn mb-3 ${activeTab === tab.id ? 'active' : ''}`}
-        onClick={() => handleTabClick(tab.id)}
-      >
-        {tab.label}
-      </button>
-    ) : null
-  ));
+  const renderTabs = () => tabs.map((tab, index) => {
+    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>') {
+      return (
+        <button
+          key={index}
+          className={`btn ${activeTab === tab.id ? 'active' : ''}`}
+          onClick={() => handleTabClick(tab.id)}
+        >
+          {tab.label}
+        </button>
+      );
+    }
+    return null;
+  });
 
   const renderTabContent = () => tabs.map((tab) => (
     tab.content ? (
@@ -134,7 +137,7 @@ function CollegeInfoSection({ data, Countrydata }) {
             </div>
           )}
 
-          <div className="tab-content pt-5" id="nav-tabContent">
+          <div className="tab-content py-md-5 py-3" id="nav-tabContent">
             {renderTabContent()}
           </div>
         </div>

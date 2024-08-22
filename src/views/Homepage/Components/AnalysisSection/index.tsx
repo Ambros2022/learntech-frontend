@@ -18,7 +18,7 @@ function AnalysisSection() {
               </div>
               <div className="col-md-8 col-8 text-start mt-2 mt-md-0">
                 <h4 className="fw-bold"><AnimatedCounter /></h4>
-                <h6>Application Filled</h6>
+                <h6>Number Admission Success</h6>
               </div>
             </div>
           </div>
@@ -29,7 +29,7 @@ function AnalysisSection() {
               </div>
               <div className="col-md-8 col-8 text-start mt-2 mt-md-0">
                 <h4 className="fw-bold"><AnimatedCounter2 /></h4>
-                <h6>Admission Done</h6>
+                <h6>Number Partner Colleges/Universities</h6>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@ function AnalysisSection() {
               </div>
               <div className="col-md-8 col-8 text-start mt-2 mt-md-0">
                 <h4 className="fw-bold"><AnimatedCounter3 /></h4>
-                <h6>Expert Counsellors</h6>
+                <h6>Number Faster Admission Process</h6>
               </div>
             </div>
           </div>

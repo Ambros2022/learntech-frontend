@@ -76,9 +76,10 @@ function OverviewSection({ data, colleges, exams }) {
       >
         {Array.isArray(tab.content) ? (
           tab.content.map((item, index) => (
-            <div key={index} className="col-md-6 mx-auto mb-3">
+            <div key={index} className="col-md-6 mb-3">
               <div className="card bg-skyBlue hover-card p-3">
                 <h5 className='fw-bold text-blue text-center mb-3'>{item.name}</h5>
+                <h5 className='fw-bold text-blue text-center mb-3'>{item.short_name}</h5>
                 <h5 className='text-blue text-center mb-3'>
                   <span className='fw-bold'>Duration:</span> <span className='text-black'>{item.duration}</span>
                 </h5>
@@ -134,7 +135,7 @@ function OverviewSection({ data, colleges, exams }) {
           </div>
           <div className="col-md-4 col-lg-3 mb-md-5 mx-auto px-0">
             <div className="row imgCardConCrs mb-3">
-              <div className="col-12 mb-3 px-0">
+              <div className="col-12 mb-5 px-0">
                 <div className='dental-crs-img flex-column d-flex justify-content-center'>
                   <Image
                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`}
@@ -149,9 +150,9 @@ function OverviewSection({ data, colleges, exams }) {
               </div>
               {colleges && colleges.length > 0 && (
                 <>
-                  <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data?.streams?.name} Colleges</h5>
+                  <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data?.streams?.name} Colleges</h4>
                   <div
-                    className="col-12 cardConBrdr p-3 mb-3 text-center overflow-y-auto bg-skyBlue"
+                    className="col-12 cardConBrdr p-3 mb-5 text-center overflow-y-auto bg-skyBlue"
                     style={{ maxHeight: 'calc(6 * 150px)' }}
                   >
                     {colleges.map((val, ind) => (
@@ -180,9 +181,9 @@ function OverviewSection({ data, colleges, exams }) {
 
               {exams && exams.length > 0 && (
                 <>
-                  <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data?.streams?.name} Exams</h5>
+                  <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data?.streams?.name} Exams</h4>
                   <div
-                    className="col-12 cardConBrdr p-3 mb-3 overflow-y-auto text-center bg-skyBlue"
+                    className="col-12 cardConBrdr p-3 mb-5 overflow-y-auto text-center bg-skyBlue"
                     style={{ maxHeight: 'calc(6 * 150px)' }}
                   >
                     {exams.map((val, ind) => (
@@ -195,7 +196,7 @@ function OverviewSection({ data, colleges, exams }) {
                             height={60}
                             alt={val.exam_title}
                           />
-                          <h4 className='align-content-center text-md-start text-center text-black mx-2 fw-bold'>{val.exam_title}</h4>
+                          <h6 className='align-content-center text-md-start text-center text-black mx-2 fw-bold'>{val.exam_title}</h6>
                         </div>
                       </Link>
                     ))}

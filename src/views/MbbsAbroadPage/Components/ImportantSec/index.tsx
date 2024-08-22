@@ -39,7 +39,7 @@ const ImportantSec = () => {
                 <h2 className='fw-bold text-blue mb-3'>Important Tags</h2>
                 <div className="d-flex gap-3 flex-wrap studyAbroadLink">
                     {tags.map((tag, index) => (
-                        <Link key={index} href={`/${tag.slug}`} className='btn p-3 rounded text-black bg-skyBlue'>
+                        <Link key={index} href={`/${tag.slug}`} style={{borderRadius:'50px'}} className='btn p-3 text-black bg-skyBlue'>
                             {tag.name}
                         </Link>
                     ))}

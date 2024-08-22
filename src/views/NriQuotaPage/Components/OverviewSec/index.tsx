@@ -56,7 +56,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, meta_descrip
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-5">
                             <ContactForm heading={'Get More Details'} />
-                            <h4 className='pt-3 fw-bold text-blue text-center mb-3'>Top Trending Courses</h4>
+                            <h4 className='pt-5 fw-bold text-blue text-center mb-3'>Top Trending Courses</h4>
                             <div className='p-3 border mt-3 rounded bg-skyBlue'>
                                 <div className='overflow-y-auto' style={{ maxHeight: 'calc(7 * 100px)' }}>
                                     {courses.map(course => (
@@ -75,7 +75,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, meta_descrip
                                     ))}
                                 </div>
                             </div>
-                            <div className='row g-2 p-3 bg-skyBlue mt-3 rounded'>
+                            <div className='row g-2 p-3 bg-skyBlue mt-5 rounded'>
                                 <div className="col-md-12">
                                     {banners.map((banner, index) => (
                                         <a href={banner.link}>

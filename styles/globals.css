@@ -511,12 +511,10 @@
     border-radius: 10px !important;
     color: #254692 !important;
     text-decoration: none !important;
-    padding: 10px 10px !important;
     border: 1px solid #254692 !important;
-    width: 150px !important;
-    padding: 12px 30px !important;
     text-align: center !important;
     background-color: #f6f8fb;
+    margin: 0 auto !important;
   }
 
   .studyAbroadNav a:hover {
@@ -663,7 +661,7 @@
   }
 
 
-  .featuredClgCard .card-text i{
+  .featuredClgCard .card-text i {
     color: red !important;
   }
 
@@ -734,15 +732,18 @@
   .newsLinkSec2 .carousel-button-group {
     margin: -50px 0px 0px 0px !important;
   }
-.newsLinkSec2 .fi-left  svg{
-  stroke: white !important; 
-}
-.newsLinkSec2 .fi-right svg{
-  stroke: white !important; 
-}
+
+  .newsLinkSec2 .fi-left svg {
+    stroke: white !important;
+  }
+
+  .newsLinkSec2 .fi-right svg {
+    stroke: white !important;
+  }
+
   .carouselInnerCourse .carousel-button-group {
     position: absolute !important;
-    top: 10px !important;
+    top: 5px !important;
     width: 100%;
     z-index: -1 !important;
   }
@@ -999,6 +1000,10 @@
   } */
 
   @media (max-width: 1024px) {
+    .footerCon {
+      font-size: 12px !important;
+    }
+
     .top-nav {
       font-size: 12px !important;
     }
@@ -1009,7 +1014,7 @@
 
     .carouselInnerCourse .carousel-button-group {
       position: absolute !important;
-      top: 15px !important;
+      top: 10px !important;
       width: 100%;
       z-index: -1 !important;
     }
@@ -1043,7 +1048,7 @@
 
     .carouselInnerCourse .carousel-button-group {
       position: absolute !important;
-      top: 15px !important;
+      top: 10px !important;
       width: 100%;
       z-index: -1 !important;
     }
@@ -1231,10 +1236,15 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
-    .carouselInnerCourse .carousel-button-group {
-      top: 15px !important;
+    .studyAbroadNav .carousel-button-group{
+      position: absolute !important;
     }
-
+    .carouselInnerCourse .carousel-button-group {
+      top: 10px !important;
+    }
+    .carouselInnerCourse .react-multi-carousel-list{
+      margin: 0px 20px !important;
+    }
     .carouselInnerCourse .fi-left {
       margin-left: -10px !important;
     }
@@ -3207,11 +3217,11 @@
     min-width: 90px !important;
   }
 
-  .filterCardBorder .card-Image-top {}
 
   .filterItemBtn {
     background-color: #254692 !important;
     color: white !important;
+    border-radius: 20px !important;
     text-align: center !important;
   }
 
@@ -3495,7 +3505,7 @@
   }
 
   .examsBannerCon {
-    height: 300px !important;
+    height: 200px !important;
   }
 
   .examsCardCarousel .carousel-button-group {
@@ -4033,7 +4043,10 @@
   }
 
   .blogBannerSec {
-    height: 500px !important;
+    height: 300px !important;
+    background-image: url('/images/icons/Banner BG.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
   }
 
   /* .newsBannerSec input {
@@ -4329,13 +4342,7 @@
   }
 
   .careerSec {
-    height: 500px !important;
-  }
-
-  .careerSec img {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
+    height: 300px !important;
   }
 
   .currentOpeningBtn {
@@ -4441,14 +4448,9 @@
     }
 
     .careerSec {
-      height: 900px !important;
+      height: 300px !important;
     }
 
-    .careerSec img {
-      width: 100%;
-      height: 642px;
-      object-fit: cover;
-    }
   }
 
   @media (min-width:320px) and (max-width:767px) {
@@ -4462,13 +4464,7 @@
     }
 
     .careerSec {
-      height: 900px !important;
-    }
-
-    .careerSec img {
-      width: 100%;
-      height: 642px;
-      object-fit: cover;
+      height: 300px !important;
     }
 
     .DownloadBrchrBtn {
@@ -4724,7 +4720,7 @@
   .AdvertiseBanner img {
     height: 300px;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .ServiceBanner {
@@ -4743,13 +4739,13 @@
   }
 
   .teamworksec {
-    height: 400px;
+    height: 300px;
   }
 
   .teamworksec img {
-    height: 400px;
+    height: 300px;
     width: 100%;
-    object-fit: contain !important;
+    object-fit: cover !important;
   }
 
   .faqSec {
@@ -4853,13 +4849,13 @@
   }
 
   .aboutUsPageSec {
-    height: 400px;
+    height: 300px;
     background-color: #E8E8E8;
   }
 
   .aboutUsPageSec img {
-    height: 400px;
-    object-fit: contain;
+    height: 300px !important;
+    object-fit: cover !important;
   }
 
   .scholarShipBtn {
@@ -5024,13 +5020,14 @@
     background-color: #f6f8fb !important;
     border: 1px solid #254692;
   }
-  .aboutUsSec .nav-link:hover{
+
+  .aboutUsSec .nav-link:hover {
     color: white !important;
     text-align: start !important;
     background-color: #254692 !important;
   }
 
-  .clr-black{
+  .clr-black {
     filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(284deg) brightness(107%) contrast(107%);
   }
 
@@ -5614,21 +5611,22 @@
     }
 
     .AdvertiseBanner {
-      height: 120px;
+      height: 200px;
     }
 
     .AdvertiseBanner img {
-      height: 120px;
+      height: 200px;
       width: 100%;
+      object-fit: cover;
     }
 
 
     .teamworksec {
-      height: 180px;
+      height: 200px;
     }
 
     .teamworksec img {
-      height: 180px;
+      height: 200px;
     }
 
     .mbbsAbroad h6 {
@@ -5768,7 +5766,7 @@
     }
 
     .aboutUsPageSec {
-      height: 200px;
+      height: 300px;
     }
 
     .aboutUsPageSec h1 {
@@ -5776,8 +5774,8 @@
     }
 
     .aboutUsPageSec img {
-      height: 200px;
-      object-fit: contain;
+      height: 300px;
+      object-fit: cover;
     }
 
 
@@ -5863,3 +5861,37 @@
     width: 100%;
     height: 300px;
   }
+
+  .faqImageWrapper {
+    max-width: 100%;
+    max-height: 350px; /* Set a fixed height */
+    overflow: hidden; /* Ensure the image doesn't overflow the container */
+  }
+  
+  .faqImage {
+    object-fit: cover; /* Maintain aspect ratio and fill the container */
+    width: 100%;
+    height: 100%;
+  }
+
+  .arrow-right {
+    font-size: 1.25rem; /* Adjust as needed */
+}
+
+.arrow-down {
+    display: none;
+    font-size: 1.25rem; /* Adjust as needed */
+}
+
+@media (max-width: 767px) { /* Adjust the breakpoint as needed */
+    .arrow-right {
+        display: none;
+    }
+    .arrow-down {
+        display: inline;
+    }
+}
+
+.faxicon img svg{
+  stroke: white !important;
+}

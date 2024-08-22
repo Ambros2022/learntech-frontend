@@ -25,7 +25,7 @@ const NewsItem = ({ imageSrc, id, name }) => (
 const NewsList = ({ blogItems, heading }) => (
     <>
         <h4 className='fw-bold text-center py-3 text-blue'>{heading}</h4>
-        <div className='mb-5 bg-skyBlue pt-3 innerNewsCard px-4 overflow-y-auto rounded' style={{ maxHeight: 'calc(7 * 115px)' }}>
+        <div className='mb-5 bg-skyBlue pt-3 innerNewsCard px-4 overflow-y-auto rounded' style={{ maxHeight: 'calc(20 * 115px)' }}>
             <div className="row">
                 {blogItems.map((item, index) => (
                     <NewsItem key={index} id={item.id} imageSrc={item.imageSrc} name={item.name} />

@@ -54,49 +54,49 @@ function OverviewSection({ data, collegedata, examdata }) {
     { id: 'Diploma', label: 'Diploma', content: data.general_courses.filter(course => course.course_type === 'Diploma') },
     { id: 'Top', label: 'Top Colleges', content: data.top_college },
     { id: 'FAQ', label: 'FAQ', content: <FaqSec data={data.streamfaqs} /> }
-  ];
+  ].filter(tab => tab.content && (Array.isArray(tab.content) ? tab.content.length > 0 : true));
+
 
   const renderTabs = () => tabs.map((tab) => (
-    tab.content ? (
-      <button
-        key={tab.id}
-        className={`btn ${activeTab === tab.id ? 'active' : ''}`}
-        onClick={() => handleTabClick(tab.id)}
-      >
-        {tab.label}
-      </button>
-    ) : null
+    <button
+      key={tab.id}
+      className={`btn ${activeTab === tab.id ? 'active' : ''}`}
+      onClick={() => handleTabClick(tab.id)}
+    >
+      {tab.label}
+    </button>
   ));
 
+
   const renderTabContent = () => tabs.map((tab) => (
-    tab.content ? (
-      <div
-        key={tab.id}
-        className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
-      >
-        {tab.id === 'FAQ' ? (
-          <FaqSec data={data.streamfaqs} />
-        ) : Array.isArray(tab.content) ? (
-          tab.content.map((item, index) => (
-            <div key={index} className="col-md-6 mx-auto mb-3">
-              <div className="card bg-skyBlue hover-card p-3">
-                <h5 className='fw-bold text-blue text-center mb-3'>{item.name}</h5>
-                <h5 className='text-blue text-center mb-3'>
-                  <span className='fw-bold'>Duration:</span> <span className='text-black'>{item.duration}</span>
-                </h5>
-                <div className='justify-content-center d-flex gap-3 flex-wrap'>
-                  <GlobalEnquiryForm buttonText={'Apply Now'} className={'btn viewMoreCollegeBtn'} />
-                  <Link className='btn viewDetailBtn' href={`/course/${item.id}/${data.slug}/${item.slug}`}>View Detail</Link>
-                </div>
+    <div
+      key={tab.id}
+      className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
+    >
+      {tab.id === 'FAQ' ? (
+        <FaqSec data={data.streamfaqs} />
+      ) : Array.isArray(tab.content) ? (
+        tab.content.map((item, index) => (
+          <div key={index} className="col-md-6 mb-3">
+            <div className="card bg-skyBlue hover-card p-3">
+              <h5 className='fw-bold text-blue text-center mb-3'>{item.name}</h5>
+              <h5 className='fw-bold text-blue text-center mb-3'>{item.short_name}</h5>
+              <h5 className='text-blue text-center mb-3'>
+                <span className='fw-bold'>Duration:</span> <span className='text-black'>{item.duration}</span>
+              </h5>
+              <div className='justify-content-center d-flex gap-3 flex-wrap'>
+                <GlobalEnquiryForm buttonText={'Apply Now'} className={'btn viewMoreCollegeBtn'} />
+                <Link className='btn viewDetailBtn' href={`/course/${data.id}/${data.slug}/${item.slug}`}>View Detail</Link>
               </div>
             </div>
-          ))
-        ) : (
-          <div dangerouslySetInnerHTML={{ __html: tab.content }} />
-        )}
-      </div>
-    ) : null
+          </div>
+        ))
+      ) : (
+        <div dangerouslySetInnerHTML={{ __html: tab.content }} />
+      )}
+    </div>
   ));
+
   return (
     <section className='clgInfoSec innerCourseCarosuel bg-white'>
       <div className="container position-relative">
@@ -131,7 +131,7 @@ function OverviewSection({ data, collegedata, examdata }) {
           </div>
           <div className="col-md-4 col-lg-3 mb-md-5 mx-auto px-0">
             <div className="row imgCardConCrs mb-3">
-              <div className="col-12 mb-3 px-0">
+              <div className="col-12 mb-5 px-0">
                 <div className='dental-crs-img flex-column d-flex justify-content-center'>
                   <Image
                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`}
@@ -142,14 +142,13 @@ function OverviewSection({ data, collegedata, examdata }) {
                   />
                   <h6 className='text-center mb-3'>Are you interested in this course?</h6>
                   <GlobalEnquiryForm className="mb-3 btn chkEligBtn" buttonText="Check Eligibility" />
-                  {/* <button className='mb-3 btn chkEligBtn'>Check Eligibility</button> */}
                 </div>
               </div>
               {collegedata && collegedata.length > 0 && (
                 <>
-                  <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Colleges</h5>
+                  <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Colleges</h4>
                   <div
-                    className="col-12 cardConBrdr p-3 mb-3 text-center overflow-y-auto bg-skyBlue"
+                    className="col-12 cardConBrdr p-3 mb-5 text-center overflow-y-auto bg-skyBlue"
                     style={{ maxHeight: 'calc(6 * 150px)' }}
                   >
                     {collegedata.map((val, ind) => (
@@ -178,7 +177,7 @@ function OverviewSection({ data, collegedata, examdata }) {
 
               {examdata && examdata.length > 0 && (
                 <>
-                  <h5 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Exams</h5>
+                  <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Exams</h4>
                   <div
                     className="col-12 cardConBrdr p-3 mb-3 overflow-y-auto text-center bg-skyBlue"
                     style={{ maxHeight: 'calc(6 * 150px)' }}
@@ -193,7 +192,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                             height={60}
                             alt={val.exam_title}
                           />
-                          <h4 className='align-content-center text-black text-md-start text-center mx-2 fw-bold'>{val.exam_title}</h4>
+                          <h6 className='align-content-center text-black text-md-start text-center mx-2 fw-bold'>{val.exam_title} Exam</h6>
                         </div>
                       </Link>
                     ))}

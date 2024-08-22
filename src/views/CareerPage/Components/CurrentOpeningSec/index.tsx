@@ -8,7 +8,7 @@ const CurrentOpeningSec = ({ jobData }) => {
     return (
         <section className='bg-white py-5' id="currentOpeningSection">
             <div className="container">
-                <h2 className='fw-bold text-blue pb-3'>Current Openings</h2>
+                <h2 className='fw-bold text-center text-blue pb-3'>Current Openings</h2>
                 <div className="row">
                     {jobData.map((job, index) => (
                         <div className="col-md-6" key={index}>

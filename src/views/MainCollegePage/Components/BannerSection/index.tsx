@@ -107,7 +107,7 @@ function BannerSection() {
                       renderInput={(params) => (
                         <TextField
                           {...params}
-                          placeholder="Search"
+                          placeholder="Find Your College"
                           InputProps={{
                             ...params.InputProps,
                             startAdornment: (

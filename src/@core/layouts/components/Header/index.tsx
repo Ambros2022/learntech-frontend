@@ -123,8 +123,6 @@ const Header = () => {
       const roleparams: any = {}
       roleparams['page'] = 1;
       roleparams['size'] = 10000;
-      roleparams['orderby']='asc';
-      roleparams['colmnname']='listing_order';
       const response = await axios1.get('api/website/stream_exams/get', { params: roleparams });
       setExams(response.data.data);
 

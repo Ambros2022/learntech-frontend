@@ -29,7 +29,7 @@ function BannerSection({ data }) {
                   <h1 className="card-title fw-bold mb-3">{data.name}: Check Exam Details & Results</h1>
                   <h6 className='mb-3 location-img'><i className='bi bi-geo-alt-fill me-1 fs-5 text-danger'></i>{data.address}</h6>
                   <h6 className='mb-3'>
-                    <><i className="text-warning bi bi-trophy-fill me-1"></i> Approvals and Recognition :&nbsp;</>
+                    <><i className="text-warning bi bi-trophy-fill me-1"></i> <span className='fw-bold'>Approvals and Recognition : </span>&nbsp;</>
                     {data.boardrecognitions.length > 0 && data.boardrecognitions[0].brdrecognitions.recognition_approval_name}
                   </h6>
                   <div className='d-flex justify-content-md-start justify-content-center mt-4 gap-md-5 gap-3 flex-wrap'>

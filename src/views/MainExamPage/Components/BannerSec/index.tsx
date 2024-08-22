@@ -150,7 +150,7 @@ function BannerSection() {
                   <h2>Upcoming Exams</h2>
                 </div>
                 <PopularCourses />
-                <div className='text-md-end text-center pt-3'>
+                <div className='text-md-end text-center pt-5'>
                   {/* <button className='btn  alertExamBtn'>Get Exams Alert</button> */}
                   <GlobalEnquiryForm
                     buttonText="Get Exams Alert"
