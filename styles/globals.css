@@ -568,7 +568,7 @@
 
   .footerCon a {
     text-decoration: none !important;
-    color: #274896 !important;
+    color: white !important;
   }
 
   .download-img {
@@ -586,7 +586,7 @@
   }
 
   .footerCon a:hover {
-    color: darkblue !important;
+    color: #0077b5 !important;
   }
 
   footer {
