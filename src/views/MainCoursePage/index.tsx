@@ -30,7 +30,7 @@ function MainCoursePage() {
       const response = await axios.get('api/website/generalcourse/get', {
         params: {
           page: 1,
-          size: 8,
+          size: 1000,
           is_trending: 1
         }
       });

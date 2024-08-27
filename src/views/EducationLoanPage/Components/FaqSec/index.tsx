@@ -4,13 +4,19 @@ import React from 'react'
 function FaqSec({ data }) {
   return (
     <>
-      <section className='bg-white faqSec pb-md-5 pb-3'>
+      <section className='bg-white faqSec pb-3'>
         <div className="container">
-          <h2 className='text-center text-blue fw-bold pt-5 pb-3'>FAQs</h2>
+          <h2 className='text-center text-blue fw-bold pb-3'>FAQs</h2>
           <div className="row faqImgCon">
-            <div className="col-md-6 faqImgSec mb-3 rounded d-flex flex-fill">
-              <div className='bg-skyBlue h-100 w-100 rounded text-center' style={{ position: "relative" }}>
-                <Image src="/images/icons/FAQ-Banner.webp" fill={true} alt='faq-img' />
+            <div className="col-md-6 faqImgSec mb-3 rounded">
+              <div className='faqImageWrapper h-100 w-100 rounded text-center'>
+                <Image
+                  src="/images/icons/FAQ-Banner.webp"
+                  width={500}
+                  height={500}
+                  className='faqImage img-fluid'
+                  alt='faq-img'
+                />
               </div>
             </div>
             <div className="col-md-6 mb-3 rounded ">

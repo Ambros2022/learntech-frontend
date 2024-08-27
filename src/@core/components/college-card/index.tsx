@@ -13,9 +13,11 @@ function CollegeCard({ college }) {
             </div>
             <div className="card-body">
                 <h5 className="card-title text-blue text-truncate">{college.name}</h5>
-                <p className="card-text text-truncate">
-                    <Image width={17} height={17} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
-                    {college.address}
+                <p className="text-truncate">
+                    <i className='bi bi-geo-alt-fill text-danger me-1'></i>
+                    <span className='card-text'>
+                        {college.address}
+                    </span>
                 </p>
                 <div className="d-flex justify-content-between">
                     <GlobalEnquiryForm className="applyNowButton btn" />

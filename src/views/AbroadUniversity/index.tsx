@@ -51,8 +51,6 @@ function AbroadUniversityPage({ id, Countrydata }) {
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}
       <TopFeaturedColleges  data={Countrydata}/>
-      
-
     </>
   )
 }

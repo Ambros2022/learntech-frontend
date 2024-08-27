@@ -1,47 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import axios from 'src/configs/axios';
 
-const testimonials = [
-    {
-        name: 'Ashish Gaidhane',
-        location: 'Maharashtra',
-        institution: 'MVJ College of Engineering, Bangalore',
-        image: '/images/icons/userImage.jpg',
-        testimonial: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    },
-    {
-        name: 'Pooja Gaidhane',
-        location: 'Maharashtra',
-        institution: 'MVJ College of Engineering, Bangalore',
-        image: '/images/icons/userImage.jpg',
-        testimonial: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    },
-    {
-        name: 'Ashish Gaidhane',
-        location: 'Maharashtra',
-        institution: 'MVJ College of Engineering, Bangalore',
-        image: '/images/icons/userImage.jpg',
-        testimonial: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    },
-    {
-        name: 'Ashish Gaidhane',
-        location: 'Maharashtra',
-        institution: 'MVJ College of Engineering, Bangalore',
-        image: '/images/icons/userImage.jpg',
-        testimonial: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    },
-    {
-        name: 'Ashish Gaidhane',
-        location: 'Maharashtra',
-        institution: 'MVJ College of Engineering, Bangalore',
-        image: '/images/icons/userImage.jpg',
-        testimonial: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    },
-    // Repeat the testimonials as needed
-];
+// Define the interface for a testimonial
+interface Testimonial {
+    name: string;
+    location: string;
+    institution: string;
+    image: string;
+    designation: string;
+    type: string; // Assuming type is also part of the data
+}
 
 const responsive = {
     superLargeDesktop: {
@@ -62,7 +34,7 @@ const responsive = {
     }
 };
 
-const ButtonGroup = ({ next, previous }) => {
+const ButtonGroup = ({ next, previous }: { next?: () => void; previous?: () => void }) => {
     return (
         <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
             <span className='fi-left' onClick={previous}>
@@ -76,6 +48,29 @@ const ButtonGroup = ({ next, previous }) => {
 };
 
 const TestimonialSec = () => {
+    const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+    const fetchTestimonials = useCallback(async () => {
+        try {
+            const response = await axios.get<{ status: number; data: Testimonial[] }>('api/website/allvideotestimonials/get', {
+                params: { type: 'About_us_page' }
+            });
+            if (response.data?.status === 1) {
+                // Filter only the testimonials with type "About_us_page"
+                const filteredTestimonials = response.data.data.filter(
+                    (item) => item.type === 'About_us_page'
+                );
+                setTestimonials(filteredTestimonials);
+            }
+        } catch (error) {
+            console.error('Failed to fetch testimonials:', error);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchTestimonials();
+    }, [fetchTestimonials]);
+
     return (
         <section className='py-5 bg-white'>
             <div className="container">
@@ -89,29 +84,31 @@ const TestimonialSec = () => {
                         infinite
                         autoPlay
                         autoPlaySpeed={2000}
-                        ssr  // SSR true for server-side rendering
+                        ssr
                         responsive={responsive}
                         renderButtonGroupOutside
                         customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
                     >
                         {testimonials.map((testimonial, index) => (
                             <div className="card p-3 bg-skyBlue border-0 mb-3 mx-md-2 mx-3" key={index}>
-                                <div className="row">
-                                    <div className="col-md-3 col-lg-2 col-xl-2">
+                                <div className="row d-flex">
+                                    <div className="col-md-3 col-lg-2 col-xl-2 align-content-center">
                                         <div className='testimonalImg'>
-                                            <Image src={testimonial.image} className='mx-auto' width={50} height={50} alt='testimonial-img' />
+                                            <Image src={'/images/icons/userImage.jpg'} className='mx-auto' width={50} height={50} alt='testimonial-img' />
                                         </div>
                                     </div>
-                                    <div className="col-md-9 col-lg-10 col-xl-10">
-                                        <h5 className='text-blue'>{testimonial.name} ({testimonial.location})</h5>
-                                        <p className='text-black'>{testimonial.institution}</p>
+                                    <div className="col-md-9 col-lg-10 col-xl-10 align-content-center">
+                                        <h5 className='text-blue'>{testimonial.name} 
+                                            {/* ({testimonial.location}) */}
+                                            </h5>
+                                        {/* <p className='text-black'>{testimonial.institution}</p> */}
                                     </div>
                                 </div>
                                 <hr />
                                 <div className="d-flex">
                                     <i className='bi bi-quote fs-1 text-blue align-self-start me-2'></i>
                                     <p className='text-black mt-3 testimonialPara'>
-                                        {testimonial.testimonial}
+                                        {testimonial.designation}
                                     </p>
                                     <i className='bi bi-quote align-self-end fs-1 text-blue ms-2'></i>
                                 </div>
@@ -122,6 +119,6 @@ const TestimonialSec = () => {
             </div>
         </section>
     );
-}
+};
 
 export default TestimonialSec;

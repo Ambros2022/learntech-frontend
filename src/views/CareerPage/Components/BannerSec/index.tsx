@@ -11,24 +11,14 @@ const BannerSec = () => {
     };
     return (
         <>
-            <section className='careerSec'>
-                <div className='h-100'>
-                    <div className="row h-100">
-                        <div className="col-md-6 py-md-0 py-5 bg-skyBlue">
-                            <div className="d-flex justify-content-center h-100">
-                                <div className="align-content-center w-75">
-                                    <h1 className='fw-bold text-blue'>WE ARE HIRING</h1>
-                                    <h6 className='text-black mb-3'>Come join one of the Best Educational Service Provider Firms as rated by ISO 9001:2008 Certified.</h6>
-                                    {/* <a className='btn currentOpeningBtn'>Current Openings</a> */}
-                                    <button onClick={handleScrollToCurrentOpening} className='btn currentOpeningBtn'>Current Openings</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-6 gx-0">
-                            <Image src='/images/icons/career-img.jpg' width={600} height={500} alt='career-img' />
-                        </div>
+            <section className='careerSec' style={{ backgroundImage: 'url(/images/icons/Career_02.webp)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'top center' }}>
+                <div className="container d-flex justify-content-center align-content-center text-center h-100 flex-column">
+                    <h1 className='fw-bold text-white'>WE ARE HIRING</h1>
+                    <h6 className='text-white mb-3'>Come join one of the Best Educational Service Provider Firms as rated by ISO 9001:2008 Certified.</h6>
+                    <div>
+                        <button onClick={handleScrollToCurrentOpening} className='btn currentOpeningBtn'>Current Openings</button>
                     </div>
-                </div>
+                </div >
             </section>
             <section className='bg-white'>
                 <div className="container linkFontSize py-3">

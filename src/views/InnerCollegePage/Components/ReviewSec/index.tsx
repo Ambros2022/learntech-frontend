@@ -250,7 +250,7 @@ const ReviewSec = ({ data }) => {
 
     return (
         <>
-            <section className='bg-white py-5'>
+            <section className='bg-white py-3'>
                 <div className="container">
                     <h2 className='fw-bold text-blue mb-3'>{data.name} Overall Rating</h2>
                     <div className="row py-5 bg-skyBlue rounded">

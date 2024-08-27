@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import Link from 'next/link'
+import React, { useState } from 'react';
+import Link from 'next/link';
 import Autocomplete from 'src/@core/components/mui/autocomplete';
-import { useRouter } from 'next/router';
 import axios1 from 'axios';
 import axios from 'src/configs/axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
@@ -10,11 +9,19 @@ import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import SearchIcon from '@mui/icons-material/Search';
 let cancelToken: any;
 
+type SearchResult = {
+  id: number;
+  name: string;
+  slug: string;
+  type: 'course' | 'general_course';
+  parentCourseId?: number; // Use this to store the parent course ID
+  parentCourseSlug?: string; // Use this to store the parent course slug
+};
+
 function BannerSec({ data }: any) {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-
 
   const handleSearch = async (value) => {
     if (value.length < 2) {
@@ -27,11 +34,47 @@ function BannerSec({ data }: any) {
         cancelToken.cancel("Operation canceled due to new request.");
       }
       cancelToken = axios1.CancelToken.source();
-      const response = await axios.get('api/website/stream/general/get', { cancelToken: cancelToken.token, params: { searchfrom: "name", searchtext: value } });
-      console.log(response,'..')
-      if (response.status == 200) {
-        console.log("d", response.data.data);
-        setSearchResults(response.data.data);
+      const response = await axios.get('api/website/search/course', {
+        cancelToken: cancelToken.token,
+        params: {
+          searchfrom: "name,general_courses.short_name,general_courses.name",
+          searchtext: value
+        }
+      });
+
+      if (response.status === 200) {
+        const results: SearchResult[] = [];
+
+        response.data.data.forEach((course) => {
+          // Add matched course by name
+          if (course.name.toLowerCase().includes(value.toLowerCase())) {
+            results.push({
+              id: course.id,
+              name: course.name,
+              slug: course.slug,
+              type: 'course'
+            });
+          }
+
+          // Add matched general courses
+          course.general_courses.forEach((generalCourse) => {
+            if (
+              generalCourse.name.toLowerCase().includes(value.toLowerCase()) ||
+              generalCourse.short_name.toLowerCase().includes(value.toLowerCase())
+            ) {
+              results.push({
+                id: generalCourse.id,
+                name: `${generalCourse.short_name} - ${course.name}`,
+                slug: generalCourse.slug,
+                type: 'general_course',
+                parentCourseId: course.id,
+                parentCourseSlug: course.slug
+              });
+            }
+          });
+        });
+
+        setSearchResults(results);
       }
 
       setOpen(true);
@@ -59,11 +102,11 @@ function BannerSec({ data }: any) {
                   onClose={() => setOpen(false)}
                   onInputChange={handleInputChange}
                   options={searchResults}
-                  getOptionLabel={(option) => option.name}
+                  getOptionLabel={(option) => `${option.name} ${option.type === 'general_course' ? `(General Course under ${option.parentCourseSlug})` : ''}`}
                   renderOption={(props, option) => (
                     <li {...props}>
-                      <Link href={`/course/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
-                        {option.name}
+                      <Link href={`/course/${option.type === 'general_course' ? `${option.parentCourseId}/${option.parentCourseSlug}/${option.slug}` : `${option.id}/${option.slug}`}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
+                        {option.name} {option.type === 'general_course' ? `(General Course under ${option.parentCourseSlug})` : ''}
                       </Link>
                     </li>
                   )}
@@ -71,7 +114,6 @@ function BannerSec({ data }: any) {
                     <TextField
                       {...params}
                       placeholder="Search for course, degree or specialization"
-                      // className="form-control"
                       InputProps={{
                         ...params.InputProps,
                         startAdornment: (
@@ -114,11 +156,7 @@ function BannerSec({ data }: any) {
                     />
                   )}
                 />
-                {/* <input type="search" className='form-control' placeholder='Search for course, degree or specialization' /> */}
               </div>
-              {/* <div className="mb-3 col-md-2 col-6 col-lg-1 col-xl-1 d-flex justify-content-start justify-content-md-center">
-                <button className='btn bg-white text-blue srchBtn'>Search</button>
-              </div> */}
             </div>
           </div>
           <h2 className='text-white fw-bold pt-3 mb-3'>Trending Courses</h2>
@@ -131,7 +169,6 @@ function BannerSec({ data }: any) {
             </div>
             <div className='align-content-center'>
               <GlobalEnquiryForm buttonText="Check Eligibility" className="btn btn-elg bg-warning text-white" />
-              {/* <button className='btn bg-warning text-white'>Check Eligibility</button> */}
             </div>
           </div>
         </div>
@@ -142,7 +179,7 @@ function BannerSec({ data }: any) {
         </section>
       </div>
     </>
-  )
+  );
 }
 
-export default BannerSec
+export default BannerSec;

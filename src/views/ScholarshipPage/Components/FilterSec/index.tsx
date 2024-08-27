@@ -5,6 +5,12 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
+import axios1 from 'axios';
+import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
+import Autocomplete from 'src/@core/components/mui/autocomplete';
+
 
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
@@ -27,7 +33,17 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
         deadline: ''
     });
 
+    let cancelToken: any;
 
+    interface SearchResult {
+        id: number;
+        name: string;
+    }
+
+
+    const [open, setOpen] = useState(false);
+    const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+    const [loading, setLoading] = useState(false);
 
     // Function to handle input change for search text
     const handleSearchInputChange = (e) => {
@@ -100,6 +116,56 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
         </ul>
     );
 
+    const handleSearch = async (value: string) => {
+        if (value.length < 2) {
+            setSearchResults([]);
+            setOpen(false); // Close the dropdown if the input is too short
+            return;
+        }
+
+        try {
+            setLoading(true);
+            if (cancelToken !== undefined) {
+                cancelToken.cancel('Operation canceled due to new request.');
+            }
+            cancelToken = axios1.CancelToken.source();
+
+            const response = await axios.get('api/website/scholarships/get', {
+                cancelToken: cancelToken.token,
+                params: { searchfrom: 'name', searchtext: value },
+            });
+
+            const suggestions = response.data.data.map((item: { id: number; name: string }) => ({
+                name: item.name,
+                id: item.id,
+            }));
+
+            setSearchResults(suggestions);
+            setOpen(true);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleInputChange = (event: any, value: string) => {
+        handleSearch(value);
+    };
+
+    const handleClearInput = (params: any) => {
+        setSearchResults([]);
+        setOpen(false);
+        if (params.inputProps.onChange) {
+            const event = {
+                target: {
+                    value: '',
+                },
+            } as React.ChangeEvent<HTMLInputElement>;
+            params.inputProps.onChange(event);
+        }
+    };
+
     // Function to handle tab click
     const handleTabClick = (tab) => {
         setActiveTab(tab.id);
@@ -169,94 +235,145 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     <div className="d-flex gap-3 flex-wrap">
                         <div className="align-self-center flex-grow-1">
                             <label htmlFor="levelOfStudy" className='text-black fw-bold mb-2'>Level of study</label>
-                            <div style={{ position: 'relative' }}>
-                                <select className='form-control text-black w-100'
+                            <div className="position-relative w-100">
+                                <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
                                     id="levelOfStudy"
                                     value={formData.levelOfStudy}
                                     onChange={handleSelectChange}
-                                    style={{ paddingRight: '2.5rem' }}>
-                                    <option value="">select</option>
+                                    style={{
+                                        appearance: 'none', // Hide the default arrow
+                                        WebkitAppearance: 'none',
+                                        MozAppearance: 'none',
+                                        background: 'transparent', // Ensure background is transparent for icon positioning
+                                        paddingRight: '2.5rem', // Add space for the icon
+                                    }}>
+                                    <option value="">Select</option>
                                     {levelOptions.map(option => (
                                         <option key={option.id} value={option.id}>{option.name}</option>
                                     ))}
                                 </select>
-                                <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) ' }}>
-                                    <i className="bi bi-caret-down-fill caret-down"></i> {/* Replace with your desired icon */}
-                                </div>
+                                <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                    style={{
+                                        right: '1rem', // Adjust based on padding
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                    }}></i>
                             </div>
                         </div>
 
                         <div className="align-self-center flex-grow-1">
                             <label htmlFor="type" className='text-black fw-bold mb-2'>Type</label>
-                            <div style={{ position: 'relative' }}>
-                                <select className='form-control text-black w-100'
+                            <div className="position-relative w-100">
+                                <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
                                     id="type"
                                     value={formData.type}
-                                    onChange={handleSelectChange}>
-                                    <option value="">select</option>
+                                    onChange={handleSelectChange}
+                                    style={{
+                                        appearance: 'none', // Hide the default arrow
+                                        WebkitAppearance: 'none',
+                                        MozAppearance: 'none',
+                                        background: 'transparent', // Ensure background is transparent for icon positioning
+                                        paddingRight: '2.5rem', // Add space for the icon
+                                    }}>
+                                    <option value="">Select</option>
                                     {typeOptions.map(option => (
                                         <option key={option.id} value={option.id}>{option.name}</option>
                                     ))}
                                 </select>
-                                <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}>
-                                    <i className="bi bi-caret-down-fill caret-down"></i> {/* Replace with your desired icon */}
-                                </div>
+                                <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                    style={{
+                                        right: '1rem', // Adjust based on padding
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                    }}></i>
                             </div>
                         </div>
                         <div className="align-self-center flex-grow-1">
                             <label htmlFor="gender" className='text-black fw-bold mb-2'>Gender</label>
-                            <div style={{ position: 'relative' }}>
-                                <select className='form-control text-black w-100'
+                            <div className="position-relative w-100">
+                                <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
                                     id="gender"
                                     value={formData.gender}
                                     onChange={handleSelectChange}
-                                    style={{ paddingRight: '2.5rem' }}>
-
-
+                                    style={{
+                                        appearance: 'none', // Hide the default arrow
+                                        WebkitAppearance: 'none',
+                                        MozAppearance: 'none',
+                                        background: 'transparent', // Ensure background is transparent for icon positioning
+                                        paddingRight: '2.5rem', // Add space for the icon
+                                    }}>
                                     <option value="">select</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
                                     <option value="3">others</option>
                                 </select>
-                                <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}>
-                                    <i className="bi bi-caret-down-fill caret-down"></i> {/* Replace with your desired icon */}
-                                </div>
+                                <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                    style={{
+                                        right: '1rem', // Adjust based on padding
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                    }}></i>
                             </div>
                         </div>
 
                         <div className="align-self-center flex-grow-1">
                             <label htmlFor="nationality" className='text-black fw-bold mb-2'>Nationality</label>
-                            <div style={{ position: 'relative' }}>
-                                <select className='form-control text-black w-100'
+                            <div className="position-relative w-100">
+                                <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
                                     id="nationality"
                                     value={formData.nationality}
-                                    onChange={handleSelectChange}>
-                                    <option value="">select</option>
+                                    onChange={handleSelectChange}
+                                    style={{
+                                        appearance: 'none', // Hide the default arrow
+                                        WebkitAppearance: 'none',
+                                        MozAppearance: 'none',
+                                        background: 'transparent', // Ensure background is transparent for icon positioning
+                                        paddingRight: '2.5rem', // Add space for the icon
+                                    }}>
+                                    <option value="">Select</option>
                                     {countryData.map(option => (
                                         <option key={option.id} value={option.id}>{option.name}</option>
                                     ))}
                                 </select>
-                                <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}>
-                                    <i className="bi bi-caret-down-fill caret-down"></i> {/* Replace with your desired icon */}
-                                </div>
+                                <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                    style={{
+                                        right: '1rem', // Adjust based on padding
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                    }}></i>
                             </div>
                         </div>
                         <div className="align-self-center flex-grow-1">
                             <label htmlFor="deadline" className='text-black fw-bold mb-2'>Deadline</label>
-                            <div style={{ position: 'relative' }}>
-                                <select className='form-control text-black w-100'
+                            <div className="position-relative w-100">
+                                <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
                                     id="deadline"
                                     value={formData.deadline}
-                                    onChange={handleSelectChange}>
+                                    onChange={handleSelectChange}
+                                    style={{
+                                        appearance: 'none', // Hide the default arrow
+                                        WebkitAppearance: 'none',
+                                        MozAppearance: 'none',
+                                        background: 'transparent', // Ensure background is transparent for icon positioning
+                                        paddingRight: '2.5rem', // Add space for the icon
+                                    }}>
                                     <option value="">select</option>
                                     <option value="Jan - Mar">Jan - Mar</option>
                                     <option value="Apr - Jun">Apr - Jun</option>
                                     <option value="Jul - Sep">Jul - Sep</option>
                                     <option value="Oct - Dec">Oct - Dec</option>
                                 </select>
-                                <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}>
-                                    <i className="bi bi-caret-down-fill caret-down"></i> {/* Replace with your desired icon */}
-                                </div>
+                                <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                    style={{
+                                        right: '1rem', // Adjust based on padding
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                    }}></i>
                             </div>
                         </div>
 
@@ -279,18 +396,52 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                         <h5 className='fw-bold text-black mb-3'>{totalScholarships} Scholarships Found</h5>
                     </div>
                     <div className="col-md-5 col-lg-4 order-1 order-md-2 mb-md-0 mb-5">
-                        <div className="input-group">
-                            <input
-                                type="search"
-                                className="form-control"
-                                placeholder="Search Scholarships"
-                                value={searchText}
-                                onChange={handleSearchInputChange}
-                            />
-                            <span className="input-group-text">
-                                <i className="bi bi-search"></i>
-                            </span>
-                        </div>
+                        <Autocomplete
+                            open={open}
+                            onClose={() => setOpen(false)}
+                            onInputChange={handleInputChange}
+                            options={searchResults}
+                            getOptionLabel={(option: SearchResult) => option.name}
+                            renderOption={(props, option: SearchResult) => (
+                                <li {...props}>
+                                    <Link
+                                        href={`/scholarship/${option.id}/${option.name}`}
+                                        style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
+                                    >
+                                        {option.name}
+                                    </Link>
+                                </li>
+                            )}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    placeholder="Search for Scholarship"
+                                    className='form-control'
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <SearchIcon />
+                                            </InputAdornment>
+                                        ),
+
+                                        endAdornment: (
+                                            <>
+                                                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                                {params.inputProps.value ? (
+                                                    <InputAdornment position="end">
+                                                        <IconButton onClick={() => handleClearInput(params)}>
+                                                            <ClearIcon />
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                ) : null}
+                                                {params.InputProps.endAdornment}
+                                            </>
+                                        ),
+                                    }}
+                                />
+                            )}
+                        />
                     </div>
                 </div>
                 <div className="row pt-4">
@@ -325,7 +476,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                         </div>
                     </div>
                     <div className="col-md-5 col-lg-4 pt-lg-3 pt-2">
-                        <div className='border p-3 text-center rounded examAlertSec bg-skyBlue mb-3'>
+                        <div className='border p-3 text-center rounded examAlertSec bg-skyBlue mb-5'>
                             <h4 className='text-blue fw-bold'>Are you interested in scholarship?</h4>
                             <Image src="/images/icons/Scholarships.png" alt='exam-alert-img' className='img-fluid' width={300} height={300} />
                             {/* <h6 className='text-black mb-3'>Are you interested in scholarship?</h6> */}
@@ -348,7 +499,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                             {abroadData.map((link, index) => (
                                 <div className='d-grid' key={index}>
                                     <Link href={`/${link.slug}`}
-                                        className='text-blue border mb-3 btn abroadBtn text-center' style={{fontSize:'17px'}}>{link.name}</Link>
+                                        className='text-blue border mb-3 btn abroadBtn text-center' style={{ fontSize: '17px' }}>{link.name}</Link>
 
                                 </div>
                             ))}

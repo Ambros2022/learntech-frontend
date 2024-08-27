@@ -9,13 +9,13 @@ function BannerSection({ data }) {
         <div className="container">
           <div className="card mb-3 w-100 collegeDetailCard">
             <div className="row g-0">
-              <div className="col-lg-2 col-xl-2 col-md-2 pt-3">
+              <div className="col-lg-2 col-xl-2 col-md-3 pt-3">
                 <div className='innerClgImg m-auto d-flex justify-content-center bg-white p-3 rounded'>
                   <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={200} height={200} alt={data.name} className='align-self-center img-fluid' />
                 </div>
               </div>
-              <div className="col-lg-7 ps-md-3 col-xl-7 col-md-10">
-                <div className="card-body text-white">
+              <div className="col-lg-7 col-xl-7 col-md-9">
+                <div className="py-3 ps-md-2 text-white">
                   <h1 className="card-title fw-bold mb-3">{data.name}</h1>
                   <h6 className='mb-3 location-img'><i className='bi bi-geo-alt-fill me-2 fs-5 text-danger'></i>{data.address}</h6>
                   <h6 className='mb-3 location-img'>

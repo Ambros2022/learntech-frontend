@@ -2,29 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const BannerSec = ({ data }) => {
+const BannerSec = ({ data, createdAt}) => {
     return (
         <>
-            <section className='newsBannerSec blogBannerSec' style={{ backgroundImage: data.banner_image ?`url(${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image})` : 'none', backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
-                {/* <div className='position-relative w-auto h-auto'>
-                    <div>
-                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={900} height={500} alt='banner-img' className='position-relative' /> */}
-                {/* </div> */}
-                {/* <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
-                        <div className="container h-100">
-                            <div className="d-flex justify-content-center h-100">
-                                <div className="align-content-center h-100">
-                                    <h1 className='fw-bold text-white'>Latest Education News</h1>
-                                    <div className="row">
-                                        <div className="col-md-12 mb-3 mx-auto">
-                                            <input type="search" className='form-control' placeholder='Search' />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
-                {/* </div> */}
+            <section className='newsBannerSec blogBannerSec'>
+                <div className="container d-flex h-100 w-100 justify-content-center flex-column align-content-center text-center">
+                    <h1 className='fw-bold text-white mb-3'>{data.name}</h1>
+                    <h6 className='text-white'>Team Learntech | {createdAt}</h6>
+                </div>
             </section>
             <section className='bg-white'>
                 <div className='container py-3 linkFontSize'>

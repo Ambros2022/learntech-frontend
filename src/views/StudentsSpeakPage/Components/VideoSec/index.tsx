@@ -2,6 +2,8 @@ import React from 'react';
 
 const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, currentPage }) => {
 
+  // Filter cards to only include those with type "Testimonial_page"
+  const filteredCards = cards.filter(card => card.type === 'Testimonial_page');
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -28,23 +30,23 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
     <section className='bg-skyBlue py-5'>
       <div className="container">
         <div className="row">
-          {cards.map((card) => (
-            <div key={card.id} className="col-md-6">
-              <div className="card p-3 mb-4">
-                <div className="row">
-                  <div className="col-md-6 embedly-responsive">
+          {filteredCards.map((card) => (
+            <div key={card.id} className="col-md-6 d-flex mb-4">
+              <div className="card p-3 d-flex flex-column flex-fill">
+                <div className="row flex-fill">
+                  <div className="col-md-6 embedly-responsive d-flex align-items-center">
                     <iframe
-                      width="100"
-                      height="100"
+                      width="100%"
+                      height="auto"
                       src={card.video_url}
                       allowFullScreen
-                      className='w-100 embedly-embed h-100'
+                      className='embedly-embed'
                     ></iframe>
                   </div>
-                  <div className="col-md-6">
-                    <div className="p-2">
+                  <div className="col-md-6 d-flex flex-column justify-content-between">
+                    <div className="p-2 flex-fill">
                       <h5 className="text-black fw-bold">{card.name}</h5>
-                      <p className="text-black studentSpeakCardBody overflow-y-scroll">{card.designation}</p>
+                      <p className="text-black studentSpeakCardBody overflow-y-auto">{card.designation}</p>
                     </div>
                   </div>
                 </div>
@@ -73,7 +75,6 @@ const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, curre
                 </li>
               </ul>
             </nav>
-
           </div>
         </div>
       </div>

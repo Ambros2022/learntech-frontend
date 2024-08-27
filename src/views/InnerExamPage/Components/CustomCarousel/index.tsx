@@ -4,9 +4,9 @@ import 'react-multi-carousel/lib/styles.css';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const responsive = {
-  superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 4 },
-  desktop: { breakpoint: { max: 1024, min: 768 }, items: 3 },
-  tablet: { breakpoint: { max: 768, min: 464 }, items: 2 },
+  superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 6 },
+  desktop: { breakpoint: { max: 1024, min: 768 }, items: 5 },
+  tablet: { breakpoint: { max: 768, min: 464 }, items: 4 },
   mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
 };
 
@@ -14,10 +14,10 @@ const ButtonGroup = ({ next, previous }) => {
   return (
     <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
       <span className='fi-left' onClick={previous}>
-        <FiChevronLeft />
+        <i className='bi bi-arrow-left-short text-blue'></i>
       </span>
       <span className='fi-right' onClick={next}>
-        <FiChevronRight />
+        <i className='bi bi-arrow-right-short text-blue'></i>
       </span>
     </div>
   );
@@ -47,13 +47,14 @@ const CustomCarousel = ({ items, setActiveTab }) => {
       {items.map((item, index) => (
         <button
           key={index}
-          className={`btn py-3 mx-2 nav-item ${activeIndex === index ? 'active' : ''}`}
+          className={`btn py-2 mx-2 nav-item ${activeIndex === index ? 'active' : ''}`}
           onClick={() => handleTabClick(index, item.id)}
           style={{
             whiteSpace: 'nowrap',
             overflow: 'hidden',
-            // textOverflow: 'ellipsis',
-            width: '230px',
+            fontSize: '13px',
+            textOverflow: 'ellipsis',
+            width: '150px',
           }}
         >
           {item.label}

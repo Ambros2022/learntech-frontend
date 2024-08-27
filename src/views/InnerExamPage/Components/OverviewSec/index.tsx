@@ -27,8 +27,8 @@ function OverviewSec({ data }) {
   const [promoban, setPromoban] = useState<any[]>([]);
 
   const items = [
-    { id: 'info', label: 'Overview', content: data.overview },
-    { id: 'exams', label: 'Exam Dates', content: data.exam_dates },
+    { id: 'info', label: 'OVERVIEW', content: data.overview },
+    { id: 'exams', label: 'EXAM DATES', content: data.exam_dates },
     { id: 'eligibility', label: 'ELIGIBILITY & REGISTRATION', content: data.eligibility_criteria },
     { id: 'syllabus', label: 'EXAM PATTERN & SYLLABUS', content: data.syllabus },
     { id: 'cutoff', label: 'CUTOFF', content: data.cutoff },
@@ -38,8 +38,12 @@ function OverviewSec({ data }) {
     { id: 'prepretiontips', label: 'PREPARATION TIPS', content: data.prepretion_tips },
     { id: 'counseling', label: 'COUNSELLING', content: data.counseling },
     { id: 'acceptcolleges', label: 'ACCEPTING COLLEGES', content: data.accept_colleges },
-    { id: 'gallery', label: 'Gallery', content: data.clggallery },
-    { id: 'faq', label: 'FAQ', content: <FaqSec data={data.examfaqs} /> },
+    { id: 'gallery', label: 'GALLERY', content: data.clggallery },
+    {
+      id: 'faq',
+      label: 'FAQ',
+      content: data.examfaqs && data.examfaqs.length > 0 ? <FaqSec data={data.examfaqs} /> : null
+    },
   ].filter(item => item.content && item.content !== 'null');
 
   const [activeTab, setActiveTab] = useState(items[0].id);
@@ -163,7 +167,7 @@ function OverviewSec({ data }) {
             </div>
 
             <div className="col-md-4 mb-md-5 fixed-column pt-5">
-              <div className='bg-skyBlue px-lg-5 px-3 rounded'>
+              <div className='bg-skyBlue px-lg-5 px-3  mb-5 rounded'>
                 <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
                 <SideContactUsForm />
               </div>

@@ -11,6 +11,7 @@ type CourseItem = {
   slug: string;
   logo: string;
   streams: {
+    id: any;
     slug: string;
   };
   streamsSlug?: string; // Optional to avoid type issues
@@ -42,7 +43,7 @@ function PopularCourses() {
     return items.map((card) => (
       <CardComponent
         key={card.id}
-        id={card.id}
+        id={card.streams.id}
         short_name={card.short_name}
         slug={card.slug}
         logo={card.logo}
@@ -52,7 +53,7 @@ function PopularCourses() {
   }
 
   type CardProps = {
-    id: number;
+    id: any;
     short_name: string;
     slug: string;
     logo: string;
@@ -66,7 +67,7 @@ function PopularCourses() {
           <div className="card hover-card text-center d-flex mx-2">
             <div className="row flex-fill">
               <div className="col-12">
-                <Image width={50} height={50} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${name}-logo`} />
+                <Image width={100} height={100} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${name}-logo`} />
               </div>
               <div className="col-12 text-center text-start px-0">
                 <div className="card-body d-flex text-center justify-content-center">
@@ -83,7 +84,7 @@ function PopularCourses() {
     <section className='bg-white pb-5'>
       <section className='container bg-skyBlue rounded'>
         <h2 className='fw-bold text-blue pt-5 ps-5'>Popular Degree Courses</h2>
-        <div className="topCarouselCardsCon px-5 pt-2 pb-5 position-relative" style={{ zIndex: '2' }}>
+        <div className="topCarouselCardsCon subInnerCourseCon px-5 pt-2 pb-5 position-relative" style={{ zIndex: '2' }}>
           <CoursesCraousel items={createCards()} />
         </div>
       </section>

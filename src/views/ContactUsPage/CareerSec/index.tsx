@@ -35,15 +35,15 @@ const CareerSec = () => {
                             </div>
                             <div className="d-flex mb-3">
                                 <div className=''>
-                                    <Image src='/images/icons/phoneAbout2R.png' className='img-fluid' width={30} height={30} alt='phone2' />
+                                    <Image src='/images/icons/phoneAbout2.png' className='img-fluid' width={30} height={30} alt='phone2' />
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link>, <Link href='tel:26631169'>26631169</Link></h6>
                                 </div>
                             </div>
                             <div className="d-flex mb-3">
-                                <div className=''>
-                                    <Image src='/images/icons/fax-icon.svg' className='img-fluid' width={30} height={30} alt='phone3' />
+                                <div className='faxicon'>
+                                    <Image src='/images/icons/fax2.svg' className='img-fluid' width={30} height={30} alt='phone3' />
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link></h6>

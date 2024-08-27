@@ -9,10 +9,9 @@ const OverviewSec = ({ data, createdAt , newsData , blogsData }) => {
     return (
         <section className='innerBlogSec bg-white py-5'>
             <div className="container">
-                <h1 className='fw-bold text-blue mb-3'>{data.name}</h1>
-                {/* <h6>Team Learntech | July 18, 2023, 13:55 IST</h6> */}
-                <h6>Team Learntech | {createdAt}</h6>
-                <div className="row mt-5">
+                {/* <h1 className='fw-bold text-blue mb-3'>{data.name}</h1>
+                <h6>Team Learntech | {createdAt}</h6> */}
+                <div className="row">
                     <div className="col-md-8">
                         <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.overview }} /></p>
                         {/* <p className='text-black'>{data.meta_description}</p>

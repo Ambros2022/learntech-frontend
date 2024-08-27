@@ -95,7 +95,7 @@ function BannerSection() {
                   Academic Entrance Exams in India
                 </h1>
                 <div className="row justify-content-center align-items-center">
-                  <div className="col-md-7 col-12 mb-3 ">
+                  <div className="col-md-5 col-12 mb-3 ">
                     <Autocomplete
                       open={open}
                       onClose={() => setOpen(false)}
@@ -150,7 +150,7 @@ function BannerSection() {
                   <h2>Upcoming Exams</h2>
                 </div>
                 <PopularCourses />
-                <div className='text-md-end text-center pt-3'>
+                <div className='text-md-end text-center pt-5'>
                   {/* <button className='btn  alertExamBtn'>Get Exams Alert</button> */}
                   <GlobalEnquiryForm
                     buttonText="Get Exams Alert"

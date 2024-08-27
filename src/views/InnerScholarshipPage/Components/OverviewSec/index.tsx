@@ -20,7 +20,7 @@ const OverviewSec = ({ data  , scholarship}) => {
 
                     </div>
                     <div className="col-md-4">
-                        <div className='mb-3'>
+                        <div className='mb-5'>
                             <ContactForm heading={'CONTACT US'} />
                         </div>
                         {/* <ScholarshipList ScholarshipItem={newsItems}  /> */}

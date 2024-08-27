@@ -245,16 +245,15 @@ const Header = () => {
                 </li>
 
                 <li className="nav-item dropdown">
-                  <Link
-                    className={`nav-link dropdown-toggle ${isLinkActive('/study-in-usa') ? 'activeDrpDwn' : ''}`}
+                  <a
+                    className={`nav-link dropdown-toggle`}
                     onClick={() => setIsOpen(!isOpen)}
-                    href="/study-in-usa"
                     id="navbarDropdownMenuLink"
                     role="button"
                     aria-expanded={isOpen}
                   >
                     Study Abroad
-                  </Link>
+                  </a>
                   <Abroaddropdown states={countries} type="Colleges" />
 
                 </li>

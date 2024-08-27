@@ -34,8 +34,8 @@ const ServicesSec = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6 col-xl-7 col-lg-7 col-10 mx-auto">
-                            <div className='d-flex justify-content-start servicesImg'>
-                                <Image src='/images/icons/expertTeamHD.png' className='align-self-start img-fluid' width={800} height={800} alt='services-img' />
+                            <div className='d-flex justify-content-center servicesImg'>
+                                <Image src='/images/icons/ServicePage.webp' className='align-self-center img-fluid' width={600} height={600} alt='services-img' />
                             </div>
                         </div>
                         <div className="col-md-6 col-xl-5 col-10 mx-auto h-100 col-lg-5 border rounded px-xl-5 px-lg-4 col-10 mx-md-0 me-auto">
