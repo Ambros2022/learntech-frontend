@@ -71,7 +71,7 @@ const StudyAbroadSection = () => {
     return countries.map((country) => (
       <a
         key={country.id}
-        className={`${getLinkClass(country.id)} d-flex mx-md-2 align-self-center btn btn-primary mb-3 text-truncate text-center justify-content-center`}
+        className={`${getLinkClass(country.id)}  d-flex mx-md-2 align-self-center btn btn-primary mb-3 text-truncate text-center justify-content-center`}
         id={country.id.toString()}
         type="button"
         aria-selected={activeCountry === country.id}
@@ -106,7 +106,7 @@ const StudyAbroadSection = () => {
       <div className="container pt-5">
         <h2 className="fw-bold text-blue text-center">Study Abroad</h2>
         <p className="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div className="studyAbroadNav position-relative py-3 px-5 rounded" style={{zIndex:'2'}}>
+        <div className="studyAbroadNav position-relative py-4 px-5 rounded" style={{zIndex:'2'}}>
           <CountryCarosuel items={renderButtons()}/>
         </div>
         <div className='pt-3 position-relative ' id="studyCardContainer">

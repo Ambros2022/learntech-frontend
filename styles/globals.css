@@ -509,12 +509,14 @@
 
   .studyAbroadNav a {
     border-radius: 10px !important;
+    width: 150px;
     color: #254692 !important;
     text-decoration: none !important;
     border: 1px solid #254692 !important;
     text-align: center !important;
     background-color: #f6f8fb;
     margin: 0 auto !important;
+    padding: 12px 30px !important;
   }
 
   .studyAbroadNav a:hover {
@@ -566,7 +568,7 @@
 
   .footerCon a {
     text-decoration: none !important;
-    color: white !important;
+    color: #274896 !important;
   }
 
   .download-img {
@@ -584,7 +586,7 @@
   }
 
   .footerCon a:hover {
-    color: skyblue !important;
+    color: darkblue !important;
   }
 
   footer {
@@ -2796,6 +2798,21 @@
   .topCarouselCardsCon .fi-right {
     margin-right: 65px !important;
   }
+  .subInnerCourseCon .carousel-button-group {
+    position: absolute !important;
+    top: 70px !important;
+    width: 100%;
+    z-index: -1;
+  }
+
+
+  .subInnerCourseCon .fi-left {
+    margin-left: -30px !important;
+  }
+
+  .subInnerCourseCon .fi-right {
+    margin-right: 65px !important;
+  }
 
   @media (min-width: 320px) and (max-width: 767px) {
     .imgCardConCrs {
@@ -4411,8 +4428,14 @@
   .DownloadBrchrBtn>img {
     width: 200px !important;
     height: 50px !important;
+    box-shadow: rgb(0, 0, 0, 0.5) 0 0 13px !important;
+    border-radius: 10px !important;
   }
 
+  .boxShadow{
+    box-shadow: rgba(0,0,0,0.5) 0 0 13px !important;
+    border-radius: 13px !important;
+  }
   .bg-blur {
     background-color: rgb(28 27 27 / 48%) !important;
     width: 100%;

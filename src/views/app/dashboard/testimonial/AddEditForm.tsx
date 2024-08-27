@@ -23,10 +23,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import type { FC } from 'react';
-import { Alert } from '@mui/material'
+import { Alert, FormHelperText } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
-
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import CustomSelectField from 'src/@core/components/mui/select-feild'
 
 
 interface Authordata {
@@ -52,6 +56,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
+        type: yup
+            .string()
+            .required('Testimonial type is required'),
     })
 
     const defaultValues = {
@@ -60,6 +67,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         designation: isAddMode ? '' : olddata.designation,
         video_url: isAddMode ? '' : olddata.video_url,
         full_url: isAddMode ? '' : olddata.full_url,
+        type: isAddMode ? '' : olddata.type,
     }
 
     const {
@@ -86,6 +94,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('designation', data.designation);
             formData.append('video_url', data.video_url);
             formData.append('full_url', data.full_url);
+            formData.append('type', data.type);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -103,7 +112,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -124,14 +133,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('designation', data.designation);
             formData.append('video_url', data.video_url);
             formData.append('full_url', data.full_url);
-         
+            formData.append('type', data.type);
+
 
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -162,7 +172,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
-    
+
 
     return (
         <>
@@ -263,6 +273,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 />
                             )}
                         />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='type'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomSelectField
+                                    label="Type"
+                                    value={value}
+                                    onChange={onChange}
+                                    labelId="testimonial-type-label"
+                                    error={Boolean(errors.type)}
+                                >
+                                    <MenuItem value="Testimonial_page">Testimonial Page</MenuItem>
+                                    <MenuItem value="About_us_page">About Us Page</MenuItem>
+                                </CustomSelectField>
+                            )} 
+                        />
+                        {errors.type && (
+                            <FormHelperText>
+                                {errors.type.message as React.ReactNode}
+                            </FormHelperText>
+                        )}
                     </Grid>
 
                     <Grid item xs={12}>
