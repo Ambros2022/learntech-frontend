@@ -509,14 +509,15 @@
 
   .studyAbroadNav a {
     border-radius: 10px !important;
-    width: 150px;
+    width: 130px;
     color: #254692 !important;
     text-decoration: none !important;
     border: 1px solid #254692 !important;
     text-align: center !important;
     background-color: #f6f8fb;
     margin: 0 auto !important;
-    padding: 12px 30px !important;
+    padding: 5px !important;
+    font-size: 15px !important;
   }
 
   .studyAbroadNav a:hover {
@@ -568,7 +569,7 @@
 
   .footerCon a {
     text-decoration: none !important;
-    color: #274896 !important;
+    color: white !important;
   }
 
   .download-img {
@@ -586,7 +587,7 @@
   }
 
   .footerCon a:hover {
-    color: darkblue !important;
+    color: #0077b5 !important;
   }
 
   footer {
