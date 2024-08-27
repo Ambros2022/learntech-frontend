@@ -11,7 +11,7 @@ const CountryCarosuel = ({ items }) => {
     },
     desktop: {
       breakpoint: { max: 1350, min: 1024 },
-      items: 5
+      items: 6
     },
     tablet: {
       breakpoint: { max: 1023, min: 768 },
@@ -52,7 +52,7 @@ const CountryCarosuel = ({ items }) => {
       customButtonGroup={<ButtonGroup />}
     >
       {items.map((item, index) => (
-        <div key={index} className='mx-auto d-flex justify-content-center'>{item}</div>
+        <div key={index} className='mx-auto d-flex justify-content-center mb-3'>{item}</div>
       ))}
     </Carousel>
   );
