@@ -77,10 +77,9 @@ function OverviewSection({ data, collegedata, examdata }) {
         <FaqSec data={data.streamfaqs} />
       ) : Array.isArray(tab.content) ? (
         tab.content.map((item, index) => (
-          <div key={index} className="col-md-6 mb-3">
+          <div key={index} className="col-12 mb-3">
             <div className="card bg-skyBlue hover-card p-3">
-              <h5 className='fw-bold text-blue text-center mb-3'>{item.name}</h5>
-              <h5 className='fw-bold text-blue text-center mb-3'>{item.short_name}</h5>
+              <h5 className='fw-bold text-blue text-center mb-3'>{item.short_name} {`(${item.name})`}</h5>
               <h5 className='text-blue text-center mb-3'>
                 <span className='fw-bold'>Duration:</span> <span className='text-black'>{item.duration}</span>
               </h5>
@@ -182,20 +181,20 @@ function OverviewSection({ data, collegedata, examdata }) {
                     className="col-12 cardConBrdr p-3 mb-3 overflow-y-auto text-center bg-skyBlue"
                     style={{ maxHeight: 'calc(6 * 150px)' }}
                   >
-                    {examdata.map((val, ind) => (
-                      <Link key={val.id} href={`/exam/${val.id}/${val.slug}`}>
-                        <div className="card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
-                          <Image
-                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.logo}`}
-                            className='img-fluid'
-                            width={90}
-                            height={60}
-                            alt={val.exam_title}
-                          />
-                          <h6 className='align-content-center text-black text-md-start text-center mx-2 fw-bold'>{val.exam_title} Exam</h6>
+                    {examdata.map((exam, index) => (
+                  <Link href={`/exam/${exam.id}/${exam.slug}`} key={index}>
+                    <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
+                      <div className="row">
+                        <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
+                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={200} height={200} className='align-self-center innerBoardImg' alt='clg-img' />
                         </div>
-                      </Link>
-                    ))}
+                        <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
+                          <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title} Exam</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
                   </div>
                 </>
               )}

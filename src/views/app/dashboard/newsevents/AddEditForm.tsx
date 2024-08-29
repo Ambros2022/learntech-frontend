@@ -95,7 +95,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .required(),
 
         category_id: yup.object().required("This field is required"),
-
+        pdf_name: yup.string()
+            .trim()
+            .required(),
 
     })
 
@@ -104,6 +106,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         category_id: isAddMode ? '' : olddata.newscategories,
         meta_title: isAddMode ? '' : olddata.meta_title,
         name: isAddMode ? '' : olddata.name,
+        pdf_name: isAddMode ? '' : olddata.pdf_name,
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
         overview: isAddMode ? '' : olddata.overview,
@@ -132,6 +135,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('id', updateid);
             formData.append('slug', data.slug);
             formData.append('name', data.name);
+            formData.append('pdf_name', data.pdf_name);
             formData.append('category_id', data.category_id.id);
             formData.append('status', data.status);
             formData.append('meta_title', data.meta_title);
@@ -175,6 +179,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const formData = new FormData();
             formData.append('slug', data.slug);
             formData.append('name', data.name);
+            formData.append('pdf_name', data.pdf_name);
             formData.append('category_id', data.category_id.id);
             formData.append('status', data.status);
             formData.append('meta_title', data.meta_title);
@@ -451,7 +456,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             rejectionMessage='Try another file for upload.'
                         />
                     </Grid>
-
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='pdf_name'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Pdf Name'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.pdf_name)}
+                                    aria-describedby='validation-basic-pdf-name'
+                                    {...(errors.pdf_name && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
                     <Grid item xs={12} sm={4}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                         <Controller

@@ -61,7 +61,7 @@ const InfoSec = ({ data }) => {
                     {data.pdf_file && (
                         <div className="col-md-3">
                             <a href={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.pdf_file}`} className="btn applyNowButton align-content-center" rel="noopener noreferrer">
-                                Uploaded PDF DOC Preview
+                                {data.pdf_name}
                             </a>
                         </div>
                     )}

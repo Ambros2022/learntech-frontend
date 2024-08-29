@@ -158,7 +158,7 @@ const CollegeInfoSection = ({ data, exams }) => {
       </section>
       <section className="bg-white">
         <div className="container">
-          <div className="row ">
+          <div className="row">
             <div className="col-xl-8 col-lg-8 col-md-7 col-12 mx-auto">
               <div className="tab-content pt-5" id="nav-tabContent">
                 {renderTabContent()}
@@ -172,8 +172,8 @@ const CollegeInfoSection = ({ data, exams }) => {
                   <Link href={`/exam/${exam.id}/${exam.slug}`} key={index}>
                     <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
                       <div className="row">
-                        <div className="col-xl-5 col-lg-5 col-md-5 mx-auto">
-                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={500} height={500} className='align-self-center innerBoardImg' alt='clg-img' />
+                        <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
+                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={200} height={200} className='align-self-center innerBoardImg' alt='clg-img' />
                         </div>
                         <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
                           <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title} Exam</h6>

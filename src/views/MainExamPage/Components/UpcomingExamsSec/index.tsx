@@ -20,7 +20,7 @@ function PopularCourses() {
                 const examData: Item[] = response.data.data.map((exam: any) => ({
                     id: exam.id,
                     title: exam.exam_title,
-                    date: formatDate(exam.created_at) // Format the date here
+                    date: formatDate(exam.upcoming_date) // Format the date here
                 }));
                 if (isMountedRef) {
                     setItems(examData);

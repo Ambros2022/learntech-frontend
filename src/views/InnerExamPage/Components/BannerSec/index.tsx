@@ -8,8 +8,8 @@ import NewsLinkSection from '../NewsLinkSection';
 
 
 function BannerSec({ data }) {
-    // Ensure created_at is a valid date
-    const examDate = data.created_at ? format(new Date(data.created_at), 'd MMM yyyy') : 'Date not available';
+    // Ensure upcoming_date is a valid date
+    const examDate = data.upcoming_date ? format(new Date(data.upcoming_date), 'd MMM yyyy') : 'Date not available';
 
     return (
         <>

@@ -71,7 +71,7 @@ const StudyAbroadSection = () => {
     return countries.map((country) => (
       <a
         key={country.id}
-        className={`${getLinkClass(country.id)}  d-flex mx-md-2 align-self-center btn btn-primary mb-3 text-truncate text-center justify-content-center`}
+        className={`${getLinkClass(country.id)} d-flex mx-md-2 align-self-center btn btn-primary mb-3 text-truncate text-center justify-content-center`}
         id={country.id.toString()}
         type="button"
         aria-selected={activeCountry === country.id}

@@ -64,7 +64,7 @@ function BannerSec({ data }: any) {
             ) {
               results.push({
                 id: generalCourse.id,
-                name: `${generalCourse.short_name} - ${course.name}`,
+                name: generalCourse.short_name,
                 slug: generalCourse.slug,
                 type: 'general_course',
                 parentCourseId: course.id,
@@ -102,11 +102,11 @@ function BannerSec({ data }: any) {
                   onClose={() => setOpen(false)}
                   onInputChange={handleInputChange}
                   options={searchResults}
-                  getOptionLabel={(option) => `${option.name} ${option.type === 'general_course' ? `(General Course under ${option.parentCourseSlug})` : ''}`}
+                  getOptionLabel={(option) => option.name}
                   renderOption={(props, option) => (
                     <li {...props}>
                       <Link href={`/course/${option.type === 'general_course' ? `${option.parentCourseId}/${option.parentCourseSlug}/${option.slug}` : `${option.id}/${option.slug}`}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
-                        {option.name} {option.type === 'general_course' ? `(General Course under ${option.parentCourseSlug})` : ''}
+                        {option.name}
                       </Link>
                     </li>
                   )}
