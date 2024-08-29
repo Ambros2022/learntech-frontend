@@ -983,6 +983,10 @@
   }
 
   @media (min-width: 1024px) and (max-width: 1199px) {
+    .examNewsText {
+      font-size: 10px !important;
+    }
+
     .featuredClgCard a {
       font-size: 12px !important;
     }
@@ -1239,15 +1243,18 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
-    .studyAbroadNav .carousel-button-group{
+    .studyAbroadNav .carousel-button-group {
       position: absolute !important;
     }
+
     .carouselInnerCourse .carousel-button-group {
       top: 10px !important;
     }
-    .carouselInnerCourse .react-multi-carousel-list{
+
+    .carouselInnerCourse .react-multi-carousel-list {
       margin: 0px 20px !important;
     }
+
     .carouselInnerCourse .fi-left {
       margin-left: -10px !important;
     }
@@ -2799,6 +2806,7 @@
   .topCarouselCardsCon .fi-right {
     margin-right: 65px !important;
   }
+
   .subInnerCourseCon .carousel-button-group {
     position: absolute !important;
     top: 70px !important;
@@ -4186,7 +4194,7 @@
 
   .innerBoardImg {
     width: 100% !important;
-    height: 100% !important;
+    height: 100px !important;
   }
 
   .blogCardspage .page-link:focus {
@@ -4241,6 +4249,7 @@
 
   @media (min-width:320px) and (max-width:767px) {
 
+
     /* .examLatest {
       min-height: 630px;
       max-height: 630px;
@@ -4261,6 +4270,12 @@
     .examNewsSec .card-img-top {
       height: 200px !important;
       object-fit: cover !important;
+    }
+
+    .innerBoardImg {
+      width: 50% !important;
+      height: 100px !important;
+      margin: auto !important;
     }
   }
 
@@ -4433,10 +4448,11 @@
     border-radius: 10px !important;
   }
 
-  .boxShadow{
-    box-shadow: rgba(0,0,0,0.5) 0 0 13px !important;
+  .boxShadow {
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 13px !important;
     border-radius: 13px !important;
   }
+
   .bg-blur {
     background-color: rgb(28 27 27 / 48%) !important;
     width: 100%;
@@ -4919,14 +4935,14 @@
     color: #254692 !important;
     border: 1px solid rgba(212, 218, 234, 1) !important;
     padding: 10px 15px !important;
-    width: 150px !important;
+    width: 120px !important;
+    font-size: 12px !important;
   }
 
   .filterCountry:hover {
     background-color: #254692 !important;
     color: white !important;
     padding: 10px 15px !important;
-    width: 150px !important;
   }
 
   .countryCarouselFilter .carousel-button-group {
@@ -5888,34 +5904,42 @@
 
   .faqImageWrapper {
     max-width: 100%;
-    max-height: 350px; /* Set a fixed height */
-    overflow: hidden; /* Ensure the image doesn't overflow the container */
+    max-height: 350px;
+    /* Set a fixed height */
+    overflow: hidden;
+    /* Ensure the image doesn't overflow the container */
   }
-  
+
   .faqImage {
-    object-fit: cover; /* Maintain aspect ratio and fill the container */
+    object-fit: cover;
+    /* Maintain aspect ratio and fill the container */
     width: 100%;
     height: 100%;
   }
 
   .arrow-right {
-    font-size: 1.25rem; /* Adjust as needed */
-}
+    font-size: 1.25rem;
+    /* Adjust as needed */
+  }
 
-.arrow-down {
+  .arrow-down {
     display: none;
-    font-size: 1.25rem; /* Adjust as needed */
-}
+    font-size: 1.25rem;
+    /* Adjust as needed */
+  }
 
-@media (max-width: 767px) { /* Adjust the breakpoint as needed */
+  @media (max-width: 767px) {
+
+    /* Adjust the breakpoint as needed */
     .arrow-right {
-        display: none;
+      display: none;
     }
-    .arrow-down {
-        display: inline;
-    }
-}
 
-.faxicon img svg{
-  stroke: white !important;
-}
+    .arrow-down {
+      display: inline;
+    }
+  }
+
+  .faxicon img svg {
+    stroke: white !important;
+  }

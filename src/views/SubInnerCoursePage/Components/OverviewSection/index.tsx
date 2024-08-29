@@ -138,7 +138,7 @@ function OverviewSection({ data, colleges, exams }) {
               <div className="col-12 mb-5 px-0">
                 <div className='dental-crs-img flex-column d-flex justify-content-center'>
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner}`}
+                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.streams.banner}`}
                     className='img-fluid'
                     width={600}
                     height={600}
@@ -186,17 +186,17 @@ function OverviewSection({ data, colleges, exams }) {
                     className="col-12 cardConBrdr p-3 mb-5 overflow-y-auto text-center bg-skyBlue"
                     style={{ maxHeight: 'calc(6 * 150px)' }}
                   >
-                    {exams.map((val, ind) => (
-                      <Link key={val.id} href={`/exam/${val.id}/${val.slug}`}>
-                        <div className="card bg-skyBlue hover-card p-2 mb-3 d-flex flex-row">
-                          <Image
-                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${val.logo}`}
-                            className='img-fluid'
-                            width={90}
-                            height={60}
-                            alt={val.exam_title}
-                          />
-                          <h6 className='align-content-center text-md-start text-center text-black mx-2 fw-bold'>{val.exam_title}</h6>
+                    {exams.map((exam, index) => (
+                      <Link href={`/exam/${exam.id}/${exam.slug}`} key={index}>
+                        <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
+                          <div className="row">
+                            <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
+                              <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={200} height={200} className='align-self-center innerBoardImg' alt='clg-img' />
+                            </div>
+                            <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
+                              <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title} Exam</h6>
+                            </div>
+                          </div>
                         </div>
                       </Link>
                     ))}

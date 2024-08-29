@@ -13,6 +13,7 @@ type CourseItem = {
   streams: {
     id: any;
     slug: string;
+    logo:string;
   };
   streamsSlug?: string; // Optional to avoid type issues
 };
@@ -46,7 +47,7 @@ function PopularCourses() {
         id={card.streams.id}
         short_name={card.short_name}
         slug={card.slug}
-        logo={card.logo}
+        logo={card.streams.logo}
         streamsSlug={card.streams.slug} // Pass streamsSlug separately
       />
     ));
@@ -67,7 +68,7 @@ function PopularCourses() {
           <div className="card hover-card text-center d-flex mx-2">
             <div className="row flex-fill">
               <div className="col-12">
-                <Image width={100} height={100} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${name}-logo`} />
+                <Image width={70} height={70} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${name}-logo`} />
               </div>
               <div className="col-12 text-center text-start px-0">
                 <div className="card-body d-flex text-center justify-content-center">

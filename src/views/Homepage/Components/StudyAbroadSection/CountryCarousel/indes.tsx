@@ -6,11 +6,11 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 const CountryCarosuel = ({ items }) => {
   const responsive = {
     superLargeDesktop: {
-      breakpoint: { max: 4000, min: 1351 },
+      breakpoint: { max: 4000, min: 1025 },
       items: 7
     },
     desktop: {
-      breakpoint: { max: 1350, min: 1024 },
+      breakpoint: { max: 1025, min: 1024 },
       items: 6
     },
     tablet: {
@@ -27,10 +27,10 @@ const CountryCarosuel = ({ items }) => {
     return (
       <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
         <span className='fi-left' onClick={previous} style={{ cursor: "pointer" }}>
-          <FiChevronLeft />
+          <i className='bi bi-arrow-left-short text-blue'></i>
         </span>
         <span className='fi-right' onClick={next} style={{ cursor: "pointer" }}>
-          <FiChevronRight />
+          <i className='bi bi-arrow-right-short text-blue'></i>
         </span>
       </div>
     );

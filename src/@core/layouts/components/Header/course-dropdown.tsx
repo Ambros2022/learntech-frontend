@@ -31,7 +31,7 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                                 href={`/course/${item.id}/${item.slug}`}
                                 className="dropdown-item"
                             >
-                                <div className="d-flex justify-content-between">
+                                <div className="d-flex justify-content-between text-truncate">
                                     {item.name}
                                 </div>
                             </Link>

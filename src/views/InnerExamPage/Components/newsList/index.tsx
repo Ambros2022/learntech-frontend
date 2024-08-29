@@ -8,11 +8,11 @@ const NewsItem = ({ date, title, slug, id }) => (
         <Link href={`/exam/${id}/${slug}`}>
             <div className="card mb-3 bg-skyBlue hover-card cardInnerExam">
                 <div className="row p-3 d-flex flex-row">
-                    <div className="col-6 align-content-center">
-                        <p className='fw-bold text-blue mb-0 text-center border-circle align-content-center'>{date}</p>
+                    <div className="col-lg-6 col-md-12 col-6 align-content-center mb-lg-0 mb-md-3 mb-0">
+                        <p className='fw-bold text-blue mb-0 text-center examNewsText border-circle align-content-center'>{date}</p>
                     </div>
-                    <div className="col-6 align-content-center">
-                        <h5 className="card-title text-center fw-bold mb-0  align-content-center">{title} Exam</h5>
+                    <div className="col-lg-6 col-md-12 col-6 align-content-center">
+                        <h5 className="card-title text-center fw-bold mb-0 align-content-center">{title} Exam</h5>
                     </div>
                 </div>
             </div>

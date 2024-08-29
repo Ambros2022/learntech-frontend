@@ -11,6 +11,10 @@ import NewsList from '../newsList';
 import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import CustomCarousel from '../CustomCarousel';
+import Carousel from 'react-multi-carousel';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import 'react-multi-carousel/lib/styles.css';
+
 
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 
@@ -25,6 +29,38 @@ function OverviewSec({ data }) {
   const [examData, setExamData] = useState<ExamData[]>([]);
   const isMountedRef = useIsMountedRef();
   const [promoban, setPromoban] = useState<any[]>([]);
+
+
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 1024 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 1024, min: 768 },
+      items: 4
+    },
+    tablet: {
+      breakpoint: { max: 767, min: 425 },
+      items: 1
+    },
+    mobile: {
+      breakpoint: { max: 424, min: 0 },
+      items: 1
+    }
+  };
+
+  const ButtonGroup = ({ next, previous }) => (
+    <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
+      <span className='fi-left' onClick={previous}>
+        <FiChevronLeft />
+      </span>
+      <span className='fi-right' onClick={next}>
+        <FiChevronRight />
+      </span>
+    </div>
+  );
+
 
   const items = [
     { id: 'info', label: 'OVERVIEW', content: data.overview },
@@ -44,9 +80,26 @@ function OverviewSec({ data }) {
       label: 'FAQ',
       content: data.examfaqs && data.examfaqs.length > 0 ? <FaqSec data={data.examfaqs} /> : null
     },
-  ].filter(item => item.content && item.content !== 'null');
+  ].filter(item => item.content && item.content !== 'null'); ''
+
+  const isMobileView = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 320 && window.innerWidth <= 767;
+    }
+    return false;
+  };
 
   const [activeTab, setActiveTab] = useState(items[0].id);
+  const [isMobile, setIsMobile] = useState(isMobileView());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(isMobileView());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const getPromobanner = useCallback(async () => {
     try {
@@ -144,11 +197,55 @@ function OverviewSec({ data }) {
     );
   };
 
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+  };
+
+  const renderTabs = () => items.map((tab, index) => {
+    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>') {
+      return (
+        <button
+          key={index}
+          className={`btn ${activeTab === tab.id ? 'active' : ''}`}
+          onClick={() => handleTabClick(tab.id)}
+          style={{fontSize:'12px'}}
+        >
+          {tab.label}
+        </button>
+      );
+    }
+    return null;
+  });
+
   return (
     <section className='clgInfoSec bg-white'>
       <div className="container">
-        <div className='carouselInnerCourse position-relative' style={{ zIndex: '2' }}>
-          <CustomCarousel items={items} setActiveTab={setActiveTab} />
+        {/* <div className='carouselInnerCourse position-relative' style={{ zIndex: '2' }}> */}
+        {/* <CustomCarousel items={items} setActiveTab={setActiveTab} /> */}
+        <div className="container position-relative innerClgCarousel">
+          {isMobile ? (
+            <Carousel
+              swipeable
+              draggable
+              showDots={false}
+              arrows={false}
+              infinite
+              autoPlay
+              autoPlaySpeed={2000}
+              ssr // SSR true for server-side rendering
+              renderButtonGroupOutside
+              customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
+              responsive={responsive}
+              className="infoBtn gap-3 mx-auto text-center"
+            >
+              {renderTabs()}
+            </Carousel>
+          ) : (
+            <div className="text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3" id="nav-tab" role="tablist">
+              {renderTabs()}
+            </div>
+          )}
+
           <div className="row">
             <div className="col-md-8 text-black pt-3">
               <div className="tab-content" id="nav-tabContent">
@@ -175,6 +272,7 @@ function OverviewSec({ data }) {
             </div>
           </div>
         </div>
+        {/* </div> */}
         {promoban.map((ele, index) => (
           <PromoAddBanner key={index} url={ele.banner_url} />
         ))}

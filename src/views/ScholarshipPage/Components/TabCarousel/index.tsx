@@ -30,9 +30,9 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
     }, [getCountry]);
 
     const responsive = {
-        superLargeDesktop: { breakpoint: { max: 3000, min: 1024 }, items: 5},
-        desktop: { breakpoint: { max: 1024, min: 992 }, items: 5 },
-        tablet: { breakpoint: { max: 991, min: 768 }, items: 4 },
+        superLargeDesktop: { breakpoint: { max: 3000, min: 1024 }, items: 7},
+        desktop: { breakpoint: { max: 1024, min: 992 }, items: 6 },
+        tablet: { breakpoint: { max: 991, min: 768 }, items: 5 },
         mobile: { breakpoint: { max: 767, min: 0 }, items: 1 }
     };
 
