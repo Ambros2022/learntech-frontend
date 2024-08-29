@@ -36,7 +36,7 @@ const DropdownMenu = React.memo(({ states }: any) => {
                                 className="dropdown-item"
                                 onClick={() => setStreamId(item.id)}
                             >
-                                <div className="d-flex justify-content-between">
+                                <div className="d-flex justify-content-between text-truncate">
                                     {item.name}
                                     {item.exam.length > 0 && (
                                         <Image className="ms-auto" src="/images/icons/right arrow.svg" width={20} height={25} alt="arrow-img" />

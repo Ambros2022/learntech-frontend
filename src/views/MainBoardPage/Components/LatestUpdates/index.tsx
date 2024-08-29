@@ -31,7 +31,7 @@ const LatestUpdateSec = ({ updates }) => {
                                 <div className="mb-5 mx-lg-3 mx-0">
                                     <div className="card bg-skyBlue  hover-card h-100">
                                         <div className="card-body newsheight  cardBlogText">
-                                            <Link href={`/news/${update.id}/${update.name}`}>
+                                            <Link href={`/news/${update.id}/${update.slug}`}>
                                                 <h6 className='fw-bold text-blue'>{update.name}</h6>
                                             </Link>
                                             {/* <h6 className='fw-bold text-blue'>{update.name}</h6> */}
@@ -39,7 +39,7 @@ const LatestUpdateSec = ({ updates }) => {
                                             <p className='text-black'>
                                                 {update.meta_description}
                                             </p>
-                                            <Link href={`/board/${update.id}/${update.name}`} className='btn viewMoreCollegeBtn'>Read More</Link>
+                                            <Link href={`/news/${update.id}/${update.slug}`} className='btn viewMoreCollegeBtn'>Read More</Link>
                                         </div>
                                     </div>
                                 </div>

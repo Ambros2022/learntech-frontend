@@ -21,7 +21,7 @@ function LocationSection({ data }) {
                   <div className="col-lg-12 d-flex bg-blue">
                     <div className="card-body align-content-start text-white p-0 mt-2 text-lg-start text-center text-md-center ">
                       <h5 className="card-title fw-bold mb-3 pt-3">{data.name}</h5>
-                      <h6 className="card-text mb-0 mt-2 innerTextAddress"><Image width={25} height={20} src="/images/icons/Location Icon.svg" className='icon-white' alt={'location-icon'} /><span className="mt-2">{data.address}</span></h6>
+                      <h6 className="card-text mb-0 mt-2 innerTextAddress"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i><span className="mt-2">{data.address}</span></h6>
                     </div>
                   </div>
                 </div>
