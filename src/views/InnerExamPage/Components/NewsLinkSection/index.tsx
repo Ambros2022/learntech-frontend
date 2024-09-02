@@ -27,7 +27,7 @@ const NewsLinkSection: React.FC = React.memo(() => {
 
       const newsItems = newsData.map((item) => (
         <Link key={item.id} href={`/news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer">
-          <h6 className="py-2 mx-auto text-truncate newsLink2Clr text-white text-center" style={{ maxWidth: '200px' }}>
+          <h6 className="py-2 mx-auto newsLink2Clr text-white text-center" style={{ maxWidth: '200px' }}>
             {item.name}
           </h6>
         </Link>
@@ -43,7 +43,7 @@ const NewsLinkSection: React.FC = React.memo(() => {
   }, [fetchNews]);
 
   return (
-    <section className="newsLinkSec2 bg-blue py-3">
+    <section className="newsLinkSec2 bg-blue py-3 position-relative">
       <div className="container text-center">
         <MainCarousel items={linkSectionItems} />
       </div>

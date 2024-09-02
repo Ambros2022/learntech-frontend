@@ -208,7 +208,7 @@ function OverviewSec({ data }) {
           key={index}
           className={`btn ${activeTab === tab.id ? 'active' : ''}`}
           onClick={() => handleTabClick(tab.id)}
-          style={{fontSize:'12px'}}
+          style={{ fontSize: '12px' }}
         >
           {tab.label}
         </button>
@@ -220,10 +220,10 @@ function OverviewSec({ data }) {
   return (
     <section className='clgInfoSec bg-white'>
       <div className="container">
-        {/* <div className='carouselInnerCourse position-relative' style={{ zIndex: '2' }}> */}
-        {/* <CustomCarousel items={items} setActiveTab={setActiveTab} /> */}
-        <div className="container position-relative innerClgCarousel">
-          {isMobile ? (
+        <div className='carouselInnerCourse position-relative' style={{ zIndex: '2' }}>
+          <CustomCarousel items={items} setActiveTab={setActiveTab} />
+          {/* <div className="container position-relative innerClgCarousel"> */}
+            {/* {isMobile ? (
             <Carousel
               swipeable
               draggable
@@ -240,43 +240,43 @@ function OverviewSec({ data }) {
             >
               {renderTabs()}
             </Carousel>
-          ) : (
-            <div className="text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3" id="nav-tab" role="tablist">
+          ) : ( */}
+            {/* <div className="text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3" id="nav-tab" role="tablist">
               {renderTabs()}
-            </div>
-          )}
+            </div> */}
+            {/* )} */}
 
-          <div className="row">
-            <div className="col-md-8 text-black pt-3">
-              <div className="tab-content" id="nav-tabContent">
-                {items.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`tab-pane fade ${activeTab === item.id ? 'show active' : ''}`}
-                    id={`nav-${item.id}`}
-                    role="tabpanel"
-                    aria-labelledby={`nav-${item.id}-tab`}
-                  >
-                    {renderContent(item.content)}
-                  </div>
-                ))}
+            <div className="row">
+              <div className="col-md-8 text-black pt-3">
+                <div className="tab-content" id="nav-tabContent">
+                  {items.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`tab-pane fade ${activeTab === item.id ? 'show active' : ''}`}
+                      id={`nav-${item.id}`}
+                      role="tabpanel"
+                      aria-labelledby={`nav-${item.id}-tab`}
+                    >
+                      {renderContent(item.content)}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="col-md-4 mb-md-5 fixed-column pt-5">
-              <div className='bg-skyBlue px-lg-5 px-3  mb-5 rounded'>
-                <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
-                <SideContactUsForm />
+              <div className="col-md-4 mb-md-5 fixed-column pt-5">
+                <div className='bg-skyBlue px-lg-5 px-3  mb-5 rounded'>
+                  <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
+                  <SideContactUsForm />
+                </div>
+                <NewsList newsItems={newsData} />
               </div>
-              <NewsList newsItems={newsData} />
             </div>
           </div>
+          {/* </div> */}
+          {promoban.map((ele, index) => (
+            <PromoAddBanner key={index} url={ele.banner_url} />
+          ))}
         </div>
-        {/* </div> */}
-        {promoban.map((ele, index) => (
-          <PromoAddBanner key={index} url={ele.banner_url} />
-        ))}
-      </div>
     </section>
   );
 }

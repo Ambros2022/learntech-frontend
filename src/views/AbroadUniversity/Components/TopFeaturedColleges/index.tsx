@@ -44,9 +44,9 @@ function FeaturedCollegeSection({data}) {
         </div>
         <div className="card-body">
           <h5 className="card-title text-blue text-truncate">{college.name}</h5>
-          <p className="card-text text-truncate">
-            <Image width={17} height={17} className="me-2 card-text-image" src="/images/icons/Location 2.svg" alt="location-icon" />
-            {college.address}
+          <p className="text-truncate">
+            <i className='bi bi-geo-alt-fill text-danger fs-5 me-1'></i>
+            <span className='card-text'>{college.address}</span>
           </p>
           <div className="d-flex justify-content-between">
             <GlobalEnquiryForm className="applyNowButton btn" />
@@ -59,7 +59,7 @@ function FeaturedCollegeSection({data}) {
   return (
     <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
       <div className="container pt-5 position-relative">
-        <h2 className="fw-bold text-blue text-center mb-5">Top 10 Universities to Study in {data?.country?.name}</h2>
+        <h2 className="fw-bold text-blue text-center mb-5">Top Universities to Study in {data?.country?.name}</h2>
         <MainCarousel items={colleges.map(college => (
           <CollegeCard key={college.id} college={college} />
         ))} />

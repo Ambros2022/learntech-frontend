@@ -33,13 +33,13 @@ const Header = () => {
                                 </div>
                                 <li className="nav-item d-flex">
                                     <Link className='d-flex' href='mailto:meds@learntechww.com'>
-                                        <Image src='/images/icons/gmail.png' width={40} height={40} alt='medical-logo' className="me-1 align-self-center img-fluid navbar-brand my-auto"></Image><h6 className='m-0 text-black align-self-center'>meds@learntechww.com</h6>
+                                        <Image src='/images/icons/gmail.png' width={25} height={25} alt='medical-logo' className="me-1 align-self-center img-fluid navbar-brand my-auto"></Image><h6 className='m-0 text-black align-self-center'>meds@learntechww.com</h6>
                                     </Link>
                                 </li>
                             </ul>
                             <form className="d-flex" role="search">
                                 <Link href='/'>
-                                    <Image src='/images/icons/learntech-logo.png' width={200} height={200} alt='learntech-logo' className="img-fluid"></Image>
+                                    <Image src='/images/icons/learntech-logo.png' width={250} height={250} alt='learntech-logo' className="marginLogo img-fluid"></Image>
                                 </Link>
                             </form>
                         </div>

@@ -52,17 +52,17 @@ const Footer = () => {
                 to a Brighter Future.</p>
               <span className="footerIcon">
                 <div className="mb-3">
-                  <a href="tel:18001208969" target="_blank" className="ms-2 d-inline-block"><i className='bi bi-telephone-fill fs-5 me-2'></i>1800 120 8969</a><br></br>
+                  <a href="tel:18001208969" target="_blank" className="d-inline-block"><i className='bi bi-telephone-fill fs-5 me-2'></i>1800 120 8969</a><br></br>
                 </div>
                 <div className="mb-3">
-                  <a href="mailto:info@learntechww.com" target="_blank" className="ms-2 d-inline-block"><i className='bi bi-envelope-fill fs-5 me-2'></i>info@learntechww.com</a><br></br>
+                  <a href="mailto:info@learntechww.com" target="_blank" className="d-inline-block"><i className='bi bi-envelope-fill fs-5 me-2'></i>info@learntechww.com</a><br></br>
                 </div >
                 <div className="mb-3">
-                  <a href="https://www.google.com/maps/place/Learntech+Edu+Solutions+Pvt+Ltd+-+Study+Abroad+Counselor/@12.9187833,77.5983055,15z/data=!4m6!3m5!1s0x3bae15064e759943:0x60dcac77858f6b5e!8m2!3d12.9187833!4d77.5983055!16s%2Fg%2F11cs1gwx25?entry=ttu" target="_blank" className="ms-2 mb-3 d-inline-block"><i className='bi bi-geo-alt-fill fs-5 me-2'></i>9th Block, Jayanagar<br></br> Bangalore - 560041</a>
+                  <a href="https://www.google.com/maps/place/Learntech+Edu+Solutions+Pvt+Ltd+-+Study+Abroad+Counselor/@12.9187833,77.5983055,15z/data=!4m6!3m5!1s0x3bae15064e759943:0x60dcac77858f6b5e!8m2!3d12.9187833!4d77.5983055!16s%2Fg%2F11cs1gwx25?entry=ttu" target="_blank" className="mb-3 d-inline-block"><i className='bi bi-geo-alt-fill fs-5 me-2'></i>9th Block, Jayanagar<br></br> Bangalore - 560041</a>
                 </div>
               </span>
             </div>
-            <div className="text-white mb-3">
+            <div className="text-white">
               <h5 className="fw-bold mb-3">Info</h5>
               <ul className='list-unstyled'>
                 <li className='mb-2'><Link href="/about-us"><small><i className="bi bi-chevron-double-right"></i></small> About us</Link></li>
@@ -73,7 +73,7 @@ const Footer = () => {
                 <li className='mb-2'><Link href="/sitemap"><i className="bi bi-chevron-double-right"></i> Site Map</Link></li>
               </ul>
             </div>
-            <div className="text-white mb-3">
+            <div className="text-white">
               <h5 className="fw-bold mb-3">Quick Links</h5>
               <ul className='list-unstyled'>
                 <li className='mb-2'><Link href="/blogs"><i className="bi bi-chevron-double-right"></i> Blogs</Link></li>
@@ -84,7 +84,7 @@ const Footer = () => {
                 <li className='mb-2'><Link href="/education-loan"><i className="bi bi-chevron-double-right"></i> Education Loan</Link></li>
               </ul>
             </div>
-            <div className="text-white mb-3">
+            <div className="text-white">
               <h5 className="fw-bold mb-3">Legal</h5>
               <ul className='list-unstyled'>
                 <li className='mb-2'><Link href="/"><i className="bi bi-chevron-double-right"></i> Feed</Link></li>
@@ -94,7 +94,7 @@ const Footer = () => {
                 <li className='mb-2'><Link href="/advertise-with-us"><i className="bi bi-chevron-double-right"></i> Advertise With Us</Link></li>
               </ul>
             </div>
-            <div className="text-white mb-3">
+            <div className="text-white">
               <h5 className="fw-bold mb-3">Download Our App</h5>
               <a href="https://apps.apple.com/in/app/learntech/id1623567055" target='_blank'><Image className="mb-3 img-fluid boxShadow" width={150} height={70} alt="app-store-img" src="/images/icons/app-store.png" /></a><br></br>
               <a href="https://play.google.com/store/apps/details?id=com.ilearntech.app" target='_blank'><Image className="img-fluid boxShadow" width={150} height={70} alt="google-play-img" src="/images/icons/google-play.png" /></a>
@@ -102,10 +102,10 @@ const Footer = () => {
           </div>
         </div>
         <div className="row container-fluid">
-          <div className="mt-md-3 text-md-start">
+          <div className="text-md-start">
             <a href="tel:18001208969" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a>
           </div>
-          <div className="mb-md-3 text-md-center">
+          <div className="text-md-center">
 
             {/* <a href="#" className="DownloadBrchrBtn" >
               <Image src="/images/icons/Download Brochure.svg" width={150} height={70} alt="download-brochure-icon" />
@@ -114,7 +114,7 @@ const Footer = () => {
 
             <GlobalEnquiryForm pagename="Brochure" title="Get Brochure" />
           </div>
-          <div className="mt-md-3 text-md-end">
+          <div className="text-md-end">
             <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={30} height={30} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
             <a href="https://wa.me/+919036020076" target='_blank' className="whatsappIcon" ><Image width={30} height={30} className="footer-arrow" src="/images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
           </div>

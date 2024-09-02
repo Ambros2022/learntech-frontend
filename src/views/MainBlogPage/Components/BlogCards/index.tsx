@@ -53,7 +53,7 @@ const BlogCards = ({ collegeData, cardsData, totalPages, currentPage, getBlogsDa
                                             <h5 className="card-title fw-bold text-truncate">{card.name}</h5>
                                             <p className="card-text flex-grow-1">{card.meta_title}</p>
                                             <div className="text-start">
-                                                <Link href={`/blog/${card.id}/${card.name}`} className="btn viewMoreBtn mt-auto">View More</Link>
+                                                <Link href={`/blog/${card.id}/${card.slug}`} className="btn viewMoreBtn mt-auto">View More</Link>
                                             </div>
                                         </div>
                                     </div>

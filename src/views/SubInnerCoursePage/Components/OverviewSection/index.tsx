@@ -194,7 +194,7 @@ function OverviewSection({ data, colleges, exams }) {
                               <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={200} height={200} className='align-self-center innerBoardImg' alt='clg-img' />
                             </div>
                             <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
-                              <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title} Exam</h6>
+                              <h5 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title}</h5>
                             </div>
                           </div>
                         </div>
