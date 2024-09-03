@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import axios from 'src/configs/axios';
+import test from 'node:test';
 
 // Define the interface for a testimonial
 interface Testimonial {
@@ -72,52 +73,59 @@ const TestimonialSec = () => {
     }, [fetchTestimonials]);
 
     return (
-        <section className='py-5 bg-white'>
-            <div className="container">
-                <h2 className='text-blue fw-bold text-center mb-5'>Testimonials</h2>
-                <div className='testimonialCarousel position-relative'>
-                    <Carousel
-                        swipeable
-                        draggable
-                        showDots={false}
-                        arrows={false}
-                        infinite
-                        autoPlay
-                        autoPlaySpeed={2000}
-                        ssr
-                        responsive={responsive}
-                        renderButtonGroupOutside
-                        customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
-                    >
-                        {testimonials.map((testimonial, index) => (
-                            <div className="card p-3 bg-skyBlue border-0 mb-3 mx-md-2 mx-3" key={index}>
-                                <div className="row d-flex">
-                                    <div className="col-md-3 col-lg-2 col-xl-2 align-content-center">
-                                        <div className='testimonalImg'>
-                                            <Image src={'/images/icons/userImage.jpg'} className='mx-auto' width={50} height={50} alt='testimonial-img' />
+        <>
+            {
+                testimonials && testimonials.length > 0 ? (
+                    <section className='py-5 bg-white'>
+                        <div className="container">
+                            <h2 className='text-blue fw-bold text-center mb-5'>Testimonials</h2>
+                            <div className='testimonialCarousel position-relative'>
+                                <Carousel
+                                    swipeable
+                                    draggable
+                                    showDots={false}
+                                    arrows={false}
+                                    infinite
+                                    autoPlay
+                                    autoPlaySpeed={2000}
+                                    ssr
+                                    responsive={responsive}
+                                    renderButtonGroupOutside
+                                    customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
+                                >
+                                    {testimonials.map((testimonial, index) => (
+                                        <div className="card p-3 bg-skyBlue border-0 mb-3 mx-md-2 mx-3" key={index}>
+                                            <div className="row d-flex">
+                                                <div className="col-md-3 col-lg-2 col-xl-2 align-content-center">
+                                                    <div className='testimonalImg'>
+                                                        <Image src={'/images/icons/userImage.jpg'} className='mx-auto' width={50} height={50} alt='testimonial-img' />
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-9 col-lg-10 col-xl-10 align-content-center">
+                                                    <h5 className='text-blue'>{testimonial.name}
+                                                        {/* ({testimonial.location}) */}
+                                                    </h5>
+                                                    {/* <p className='text-black'>{testimonial.institution}</p> */}
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div className="d-flex">
+                                                <i className='bi bi-quote fs-1 text-blue align-self-start me-2'></i>
+                                                <p className='text-black mt-3 testimonialPara'>
+                                                    {testimonial.designation}
+                                                </p>
+                                                <i className='bi bi-quote align-self-end fs-1 text-blue ms-2'></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-md-9 col-lg-10 col-xl-10 align-content-center">
-                                        <h5 className='text-blue'>{testimonial.name} 
-                                            {/* ({testimonial.location}) */}
-                                            </h5>
-                                        {/* <p className='text-black'>{testimonial.institution}</p> */}
-                                    </div>
-                                </div>
-                                <hr />
-                                <div className="d-flex">
-                                    <i className='bi bi-quote fs-1 text-blue align-self-start me-2'></i>
-                                    <p className='text-black mt-3 testimonialPara'>
-                                        {testimonial.designation}
-                                    </p>
-                                    <i className='bi bi-quote align-self-end fs-1 text-blue ms-2'></i>
-                                </div>
+                                    ))}
+                                </Carousel>
                             </div>
-                        ))}
-                    </Carousel>
-                </div>
-            </div>
-        </section>
+                        </div>
+                    </section>
+                ):''
+        }
+
+        </>
     );
 };
 

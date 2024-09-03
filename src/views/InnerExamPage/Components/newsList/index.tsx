@@ -12,7 +12,7 @@ const NewsItem = ({ date, title, slug, id }) => (
                         <p className='fw-bold text-blue mb-0 text-center examNewsText border-circle align-content-center'>{date}</p>
                     </div>
                     <div className="col-lg-6 col-md-12 col-6 align-content-center">
-                        <h6 className="card-title text-center fw-bold mb-0 align-content-center">{title}</h6>
+                        <h5 className="card-title text-center fw-bold mb-0 align-content-center">{title}</h5>
                     </div>
                 </div>
             </div>

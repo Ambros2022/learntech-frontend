@@ -7,11 +7,11 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 1023 },
-            items: 4
+            items: 6
         },
         desktop: {
             breakpoint: { max: 1024, min: 1024 },
-            items: 3
+            items: 5
         },
         tablet: {
             breakpoint: { max: 1023, min: 768 },
@@ -57,7 +57,7 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
                         type="button"
                         onClick={() => handleTabClick(item.id)}
                         key={item.id}
-                        style={{ zIndex: '20'}}
+                        style={{ zIndex: '20', fontSize:'14px'}}
                     >
                         {item.title}
                     </button>

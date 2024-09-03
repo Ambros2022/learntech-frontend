@@ -4,9 +4,9 @@ import 'react-multi-carousel/lib/styles.css';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const responsive = {
-  superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 5},
-  desktop: { breakpoint: { max: 1024, min: 768 }, items: 4 },
-  tablet: { breakpoint: { max: 768, min: 464 }, items: 3 },
+  superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 7},
+  desktop: { breakpoint: { max: 1024, min: 768 }, items: 5 },
+  tablet: { breakpoint: { max: 768, min: 464 }, items: 4 },
   mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
 };
 
@@ -47,12 +47,12 @@ const CustomCarousel = ({ items, setActiveTab }) => {
       {items.map((item, index) => (
         <button
           key={index}
-          className={`btn py-2 mx-2 nav-item ${activeIndex === index ? 'active' : ''}`}
+          className={`btn text-truncate py-2 mx-2 nav-item ${activeIndex === index ? 'active' : ''}`}
           onClick={() => handleTabClick(index, item.id)}
           style={{
             whiteSpace: 'nowrap',
             fontSize: '13px',
-            width: '200px',
+            width: '150px',
           }}
         >
           {item.label}

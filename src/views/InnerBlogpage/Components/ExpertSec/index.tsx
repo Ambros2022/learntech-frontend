@@ -71,7 +71,7 @@ const ExpertSec = ({ data }) => {
 
     return (
         <>
-            <section className='bg-skyBlue py-3'>
+            <section className='bg-white py-3'>
                 <div className="container">
                     <div className="d-flex justify-content-md-start justify-content-center gap-3 flex-wrap mb-3">
                         <LinkedinShareButton url={location}>

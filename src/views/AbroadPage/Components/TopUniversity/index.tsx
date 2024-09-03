@@ -55,17 +55,21 @@ function TopUniversity({ data }) {
   }
   return (
     <>
-      <section className='topUniSec'>
-        <div className="container">
-          <h2 className='pt-5 pb-3 fw-bold text-center text-blue'>Top Universities to Study in {data?.country?.name}</h2>
-        </div>
-        <div className='position-relative topUniCardCon container pb-5'>
+      {
+        colleges && colleges.length>0? (
+          <section className='topUniSec'>
+            <div className="container">
+              <h2 className='pt-5 pb-3 fw-bold text-center text-blue'>Top Universities to Study in {data?.country?.name}</h2>
+            </div>
+            <div className='position-relative topUniCardCon container pb-5'>
 
-          <MainCarousel items={colleges.map(college => (
-            <CollegeCard key={college.id} college={college} />
-          ))} />
-        </div>
-      </section>
+              <MainCarousel items={colleges.map(college => (
+                <CollegeCard key={college.id} college={college} />
+              ))} />
+            </div>
+          </section>
+        ):'' 
+      }
     </>
   )
 }
