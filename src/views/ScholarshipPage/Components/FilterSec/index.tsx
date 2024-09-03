@@ -205,7 +205,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                             <h4 className='text-blue fw-bold'>{scholarship.name}</h4>
                             <h6 className='text-black fw-bold'>{scholarship.university}</h6>
                             {renderScholarshipDetails(scholarship)}
-                            <Link href={`/scholarship/${scholarship.id}/${scholarship.name}`}
+                            <Link href={`/scholarship/${scholarship.id}/${scholarship.slug}`}
                                 className='mb-3 text-blue fw-bold text-start'>Read More {'>>'}</Link>
                             <div className="d-flex gap-3 flex-fill scholarshipBtn flex-md-row flex-column">
 
@@ -213,7 +213,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                                     buttonText="Apply Now"
                                     className="btn applyNowButton"
                                 />
-                                <Link href={`/scholarship/${scholarship.id}/${scholarship.name}`}>
+                                <Link href={`/scholarship/${scholarship.id}/${scholarship.slug}`}>
                                     <button className='btn viewDetailBtn'>Get Alert</button>
                                 </Link>
 
@@ -494,13 +494,12 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
 
                             </div>
                         </div>
+                        <h4 className='text-blue fw-bold text-center mb-3'>Most Popular Links</h4>
                         <div className='border p-3 rounded bg-skyBlue'>
-                            <h4 className='text-blue fw-bold text-center mb-3'>Most Popular Links</h4>
                             {abroadData.map((link, index) => (
                                 <div className='d-grid' key={index}>
                                     <Link href={`/${link.slug}`}
-                                        className='text-blue border mb-3 btn abroadBtn text-center' style={{ fontSize: '17px' }}>{link.name}</Link>
-
+                                        className='text-blue border mb-3 btn abroadBtn text-center'><h5 className='mb-0'>{link.name}</h5></Link>
                                 </div>
                             ))}
                         </div>

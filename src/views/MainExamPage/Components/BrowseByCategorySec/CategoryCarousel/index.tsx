@@ -7,11 +7,11 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 1023 },
-            items: 9
+            items: 4
         },
         desktop: {
             breakpoint: { max: 1024, min: 1024 },
-            items: 8
+            items: 3
         },
         tablet: {
             breakpoint: { max: 1023, min: 768 },

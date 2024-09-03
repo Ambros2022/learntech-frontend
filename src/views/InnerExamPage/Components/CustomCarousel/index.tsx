@@ -51,7 +51,7 @@ const CustomCarousel = ({ items, setActiveTab }) => {
           onClick={() => handleTabClick(index, item.id)}
           style={{
             whiteSpace: 'nowrap',
-            fontSize: '12px',
+            fontSize: '13px',
             width: '200px',
           }}
         >

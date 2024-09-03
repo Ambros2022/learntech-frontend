@@ -28,7 +28,7 @@ function BannerSection({ data }) {
                   <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='p-2 bg-white rounded' width={100} height={100} alt={data.name} />
                 </div>
               </div>
-              <div className="align-content-center col-lg-10 ps-md-0 ps-0 col-xl-10 col-md-9">
+              <div className="align-content-center col-lg-10 ps-md-0 ps-0 col-xl-10 col-md-9 marginLeftSize">
                 <div className="py-md-3 py-2 text-white">
                   <h1 className="card-title fw-bold mb-3">{data.name} : Eligibility, Deadline, Amount</h1>
 

@@ -123,7 +123,7 @@ const ExpertSec = ({ data }) => {
 
 
 
-                    <h2 className='fw-bold text-md-start text-center text-blue pt-3'>Leave a Comment</h2>
+                 {/*  <h2 className='fw-bold text-md-start text-center text-blue pt-3'>Leave a Comment</h2>
                     <div className="row py-3">
                         <div className="col-10 me-md-auto mx-auto">
                             <Formik
@@ -150,7 +150,7 @@ const ExpertSec = ({ data }) => {
                                         <div className=" col-lg-4 col-md-12 mb-3 ">
                                             <PhoneInputField name="contact_number" />
                                             {/* <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" /> */}
-                                            <ErrorMessage name="contact_number" component="div" className="error text-danger" />
+                                            {/* <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                                         </div>
 
                                         <div className="col-lg-12  col-md-12 mb-3 ">
@@ -166,7 +166,7 @@ const ExpertSec = ({ data }) => {
                             </Formik>
 
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section >
         </>

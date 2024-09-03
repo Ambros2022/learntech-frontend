@@ -711,7 +711,7 @@ function CollegeFilterSection() {
                                     <div className="card-body" style={{ zIndex: '200' }}>
                                         <h5 className="card-text">{description}</h5>
                                         <h3 className="card-title fw-bold">{title}</h3>
-                                        <Link href='/colleges' className='btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
+                                        <Link href='/colleges' className='mt-3 btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
                                     </div>
                                 </div>
                             </div>

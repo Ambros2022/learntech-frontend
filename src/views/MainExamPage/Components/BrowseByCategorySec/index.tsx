@@ -16,7 +16,7 @@ const BrowsebyCategorySec = () => {
     // const [currentExams, setCurrentExams] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const examsPerPage = 15;
+    const examsPerPage = 9;
 
     const getCategoriesData = useCallback(async () => {
         try {
@@ -115,7 +115,11 @@ const BrowsebyCategorySec = () => {
             <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
                 <h2 className='fw-bold text-blue mb-5 text-center '>Browse By Category</h2>
                 {/* <div className='examSecItems'> */}
-                <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
+                <div className="row">
+                    <div className="col-lg-7 col-xl-8">
+                        <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
+                    </div>
+                </div>
                 {/* </div> */}
                 <div className="tab-content" id="pills-tabContent">
                     {items.map((item) => (
@@ -132,7 +136,7 @@ const BrowsebyCategorySec = () => {
                                         <div className="row px-md-0 px-3">
                                             {currentExams.length > 0 ? (
                                                 currentExams.map((exam, index) => (
-                                                    <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} date={exam.created_at} />
+                                                    <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} slug={exam.slug} date={exam.created_at} />
                                                 ))
                                             ) : (
                                                 <div className="text-center mb-5">No data</div>
@@ -163,7 +167,9 @@ const BrowsebyCategorySec = () => {
                                     <div className="col-lg-5 col-xl-4">
                                         <div className='bg-skyBlue px-lg-5 px-md-3 px-3 mb-5 rounded'>
                                             <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
-                                            <SideContactUsForm />
+                                            <div className='examsForm'>
+                                                <SideContactUsForm />
+                                            </div>
                                         </div>
                                         <NewsList newsItems={newsData} />
                                     </div>

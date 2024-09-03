@@ -57,7 +57,7 @@ function TopUniversity({ data }) {
     <>
       <section className='topUniSec'>
         <div className="container">
-          <h2 className='pt-5 pb-3 fw-bold text-center text-blue'>Top 10 Universities to Study in {data?.country?.name}</h2>
+          <h2 className='pt-5 pb-3 fw-bold text-center text-blue'>Top Universities to Study in {data?.country?.name}</h2>
         </div>
         <div className='position-relative topUniCardCon container pb-5'>
 

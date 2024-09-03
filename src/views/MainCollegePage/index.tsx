@@ -67,7 +67,7 @@ function MainCollegePage() {
       <BannerSection />
       <TopCollegesSection />
       <CollegeFilterSection />
-      <BestCollegeSec />
+      {/* <BestCollegeSec /> */}
       <ExpertSection />
       <TopFeaturedColleges />
     </>

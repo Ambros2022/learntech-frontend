@@ -41,18 +41,6 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                             <i className='bi bi-star-fill text-warning'></i>
                                                             <i className='bi bi-star-fill text-gray'></i>
                                                         </div> */}
-                                                        {boardItems?.avg_rating && <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
-                                                            <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
-
-                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
-                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 2 ? "text-warning" : "text-white"} `}></i>
-                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 3 ? "text-warning" : "text-white"} `}></i>
-                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 4 ? "text-warning" : "text-white"} `}></i>
-                                                                <i className={`bi bi-star-fill ${boardItems.avg_rating >= 5 ? "text-warning" : "text-white"} `}></i>
-
-                                                               
-                                                            </div>
-                                                        </div>}
 
                                                         <div className="card-body">
                                                             <div className="row d-flex">
@@ -61,9 +49,21 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                                         <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`} width={100} height={100} alt='clg-card' className='mx-auto img-fluid' />
                                                                     </div>
                                                                 </div>
-                                                                <div className="col-lg-8 col-xl-9 align-content-center">
+                                                                <div className="col-lg-8 col-xl-6 align-content-center">
                                                                     <h5 className="fw-bold card-title text-blue">{item.name}</h5>
                                                                 </div>
+                                                                {item?.avg_rating && <div className="col-xl-3 align-content-center">
+                                                                    <div className="d-flex justify-content-xl-end gap-2 fs-5 me-2 pt-1">
+
+                                                                        <i className={`bi bi-star-fill ${item.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
+                                                                        <i className={`bi bi-star-fill ${item.avg_rating >= 2 ? "text-warning" : "text-white"} `}></i>
+                                                                        <i className={`bi bi-star-fill ${item.avg_rating >= 3 ? "text-warning" : "text-white"} `}></i>
+                                                                        <i className={`bi bi-star-fill ${item.avg_rating >= 4 ? "text-warning" : "text-white"} `}></i>
+                                                                        <i className={`bi bi-star-fill ${item.avg_rating >= 5 ? "text-warning" : "text-white"} `}></i>
+
+
+                                                                    </div>
+                                                                </div>}
                                                             </div>
                                                             <div className="row">
                                                                 <div className="col-12 mt-3">
