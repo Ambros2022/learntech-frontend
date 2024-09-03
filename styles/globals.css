@@ -735,7 +735,16 @@
   .newsLinkSec2 .carousel-button-group {
     position: absolute !important;
     width: 100% !important;
-    top: 20% !important;
+    top: 30% !important;
+    z-index: -1 !important;
+  }
+
+  .newsLinkSec2 .fi-left {
+    z-index: 20 !important;
+  }
+
+  .newsLinkSec2 .fi-right {
+    z-index: 20 !important;
   }
 
   .newsLinkSec2 .fi-left svg {
@@ -2390,7 +2399,7 @@
   }
 
   .newsLink2Clr:hover {
-    color: whitesmoke !important;
+    color: darkblue !important;
     font-weight: bold !important;
   }
 
@@ -3431,11 +3440,11 @@
     }
 
     .newsLinkSec2 .fi-left {
-      margin-left: -35px !important;
+      margin-left: -40px !important;
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 40px !important;
+      margin-right: 35px !important;
     }
 
     .errCon h1 {
@@ -3538,6 +3547,12 @@
 
     .ratingBtn {
       font-size: 15px !important;
+    }
+
+    .newsLinkSec2 .carousel-button-group {
+      position: absolute !important;
+      width: 100% !important;
+      top: 40% !important;
     }
   }
 
@@ -4404,7 +4419,7 @@
   }
 
   .careerSec {
-    height: 350px !important;
+    height: 400px !important;
   }
 
   .currentOpeningBtn {
@@ -4783,21 +4798,21 @@
   }
 
   .AdvertiseBanner {
-    height: 300px;
+    height: 400px;
   }
 
   .AdvertiseBanner img {
-    height: 300px;
+    height: 400px;
     width: 100%;
     object-fit: cover;
   }
 
   .ServiceBanner {
-    height: 350px !important;
+    height: 400px !important;
   }
 
   .ServiceBanner img {
-    height: 350px !important;
+    height: 400px !important;
     width: 100% !important;
     object-fit: cover !important;
   }
@@ -4808,11 +4823,11 @@
   }
 
   .teamworksec {
-    height: 350px;
+    height: 400px;
   }
 
   .teamworksec img {
-    height: 350px;
+    height: 400px;
     width: 100%;
     object-fit: cover !important;
   }
@@ -4918,12 +4933,12 @@
   }
 
   .aboutUsPageSec {
-    height: 300px;
+    height: 400px;
     background-color: #E8E8E8;
   }
 
   .aboutUsPageSec img {
-    height: 300px !important;
+    height: 400px !important;
     object-fit: cover !important;
   }
 
@@ -5992,12 +6007,27 @@
   .faxicon img svg {
     stroke: white !important;
   }
+
   /* .mainText{
     font-size: 12px !important;
   } */
-  .examsForm form{
+  .examsForm form {
     padding: 5px 0px !important;
   }
-  .examsForm input{
+
+  .examsForm input {
     height: 30px !important;
+  }
+
+  .newsLink2Container {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .cardHeight {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    height: 70px !important;
   }

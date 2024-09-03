@@ -6,9 +6,9 @@ import Image from 'next/image'
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
 // const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
-function FeaturedCollegeSection({data}) {
+function FeaturedCollegeSection({ data }) {
   const [colleges, setColleges] = useState<any[]>([]);
-  
+
 
   //get all banners
   const getcolleges = useCallback(async () => {
@@ -57,17 +57,22 @@ function FeaturedCollegeSection({data}) {
     );
   }
   return (
-    <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
-      <div className="container pt-5 position-relative">
-        <h2 className="fw-bold text-blue text-center mb-5">Top Universities to Study in {data?.country?.name}</h2>
-        <MainCarousel items={colleges.map(college => (
-          <CollegeCard key={college.id} college={college} />
-        ))} />
-        {/* <div className="d-flex justify-content-center pb-5">
+    <>
+      {colleges && colleges.length > 0 ? (
+        <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
+          <div className="container pt-5 position-relative">
+            <h2 className="fw-bold text-blue text-center mb-5">Top Universities to Study in {data?.country?.name}</h2>
+            <MainCarousel items={colleges.map(college => (
+              <CollegeCard key={college.id} college={college} />
+            ))} />
+            {/* <div className="d-flex justify-content-center pb-5">
           <Link href='/colleges' className='btn viewMoreClgBtn'>View More</Link>
-        </div> */}
-      </div>
-    </section>
+          </div> */}
+          </div>
+        </section>
+      ) : ''}
+
+    </>
   )
 }
 

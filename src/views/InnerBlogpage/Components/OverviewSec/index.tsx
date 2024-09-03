@@ -7,7 +7,7 @@ import axios from 'src/configs/axios';
 const OverviewSec = ({ data, createdAt , newsData , blogsData }) => {
 
     return (
-        <section className='innerBlogSec bg-white py-5'>
+        <section className='innerBlogSec bg-white pt-3'>
             <div className="container">
                 {/* <h1 className='fw-bold text-blue mb-3'>{data.name}</h1>
                 <h6>Team Learntech | {createdAt}</h6> */}

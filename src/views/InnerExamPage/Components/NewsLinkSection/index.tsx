@@ -27,9 +27,11 @@ const NewsLinkSection: React.FC = React.memo(() => {
 
       const newsItems = newsData.map((item) => (
         <Link key={item.id} href={`/news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer">
-          <h6 className="py-2 mx-auto newsLink2Clr text-white text-center" style={{ maxWidth: '200px' }}>
-            {item.name}
-          </h6>
+          <div className="card mx-2 cardHeight">
+            <h6 className="py-2 mx-auto newsLink2Clr bg-white text-blue rounded text-center" style={{ maxWidth: '200px', zIndex:'40'}}>
+              {item.name}
+            </h6>
+          </div>
         </Link>
       ));
       setLinkSectionItems(newsItems);
@@ -43,8 +45,8 @@ const NewsLinkSection: React.FC = React.memo(() => {
   }, [fetchNews]);
 
   return (
-    <section className="newsLinkSec2 bg-blue py-3 position-relative">
-      <div className="container text-center">
+    <section className="newsLinkSec2 bg-blue py-3 position-relative" style={{ zIndex: '2' }}>
+      <div className="container text-center py-3 newsLink2Container rounded">
         <MainCarousel items={linkSectionItems} />
       </div>
     </section>
