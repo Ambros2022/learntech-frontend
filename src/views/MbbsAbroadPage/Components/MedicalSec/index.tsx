@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
     message: Yup.string().notRequired().trim(), // Message is optional
 });
 
-const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, meta_description?: string } }) => {
+const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) => {
     const router = useRouter();
 
     const initialValues = {
@@ -60,8 +60,12 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, meta_descript
             <div className="container">
                 <div className="row">
                     <div className="col-md-7 col-lg-8 col-xl-8">
-                        <p className='text-black'>{data.meta_title}</p>
-                        <p className='text-black'>{data.meta_description}</p>
+                        {/* <p className='text-black'>{data.meta_title}</p> */}
+                        {data.top_description && (
+                            <p className='text-black'>
+                                <div dangerouslySetInnerHTML={{ __html: data.top_description }} />
+                            </p>
+                        )}
                     </div>
                     <div className="col-md-5 col-lg-4 col-xl-4">
                         <Formik
