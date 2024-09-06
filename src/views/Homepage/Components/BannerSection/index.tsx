@@ -157,7 +157,7 @@ function BannerSection() {
               <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2" >
                 <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
                   <div className="outlineSec">
-                    <h1 className="fw-bold text-blue mb-3"> Find your Perfect Educational Fit</h1>
+                    <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
                     <div className="row">
                       <div className="col-12 position-relative">
                         <Autocomplete
@@ -227,7 +227,7 @@ function BannerSection() {
               </div>
               <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '40' }}>
                 <div className="searchForm">
-                  <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
+                  <h5 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h5>
                   <Formik
                     initialValues={{
                       name: '',

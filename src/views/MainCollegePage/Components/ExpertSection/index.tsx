@@ -12,7 +12,8 @@ function ExpertSection() {
         <div className="col-md-5 d-flex innerCollege bg-blue g-0">
           <div className='container d-flex justify-content-center'>
             <div className='px-2 px-md-0 ps-lg-3 text-white text-spacing align-content-center'>
-              <h2 className='fw-bold mb-3'>Did you choose a college?</h2>
+              <h2 className='fw-bold mb-3'>Did you Choose a College?
+              </h2>
               <p>Did you find your desired college?</p>
               <p>Need more assistance?</p>
               <p>Get customized counseling from our experts now!</p>

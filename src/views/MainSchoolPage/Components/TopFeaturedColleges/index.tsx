@@ -2,6 +2,7 @@ import React from 'react';
 import MainCarousel from 'src/@core/components/main-carousel';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
 
@@ -41,6 +42,9 @@ function TopFeaturedColleges({blogdata}) {
       <div className="container position-relative">
         <h4 className="pt-5 mb-5 fw-bold text-blue text-center">Related Blogs</h4>
         <MainCarousel items={cardComponents} />
+        <div className="text-center mb-5">
+          <Link href={"/blogs"} className='btn viewMoreClgBtn'>View More</Link>
+        </div>
       </div>
     </section>
   );

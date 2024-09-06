@@ -50,13 +50,14 @@ const ContactUsSec = () => {
     return (
         <section>
             <div className="row g-0">
-                <div className="col-md-6 h-100">
+                <div className="col-md-6">
                     <Image
                         src="/images/icons/contactImgForm.jfif"
                         width={1000}
                         height={1000}
                         alt="contact-us-img"
                         className="w-100 h-100"
+                        style={{objectFit:'cover'}}
                     />
                 </div>
                 <div className="col-md-6 position-relative">

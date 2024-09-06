@@ -6,8 +6,11 @@ function ExpertSection() {
   return (
     <section className="Expert-bg-skyBlue" id="animation15">
       <div className="container py-5">
-        <h3 className="fw-bold text-center text-blue">Get In Touch With Our Expert Counsellor</h3>
-        <p className="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <h3 className="fw-bold text-center text-blue">Connect with Our Elite Academic Advisors
+        </h3>
+        <p className="text-black">
+          Unlock personalized strategies tailored to your educational goals. Let our experts guide you through every step of your academic journey, ensuring you make informed and impactful decisions.
+        </p>
         <ExpertEnquiryForm placeholder={'Stream'} />
       </div>
     </section>

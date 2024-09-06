@@ -92,7 +92,7 @@ function BannerSection() {
             <div className='d-flex justify-content-center w-100 '>
               <div className='align-content-center w-100 container'>
                 <h1 className='fw-bold text-center text-white mb-3 mt-4'>
-                  Academic Entrance Exams in India
+                  Entrance Exams in India and Abroad
                 </h1>
                 <div className="row justify-content-center align-items-center">
                   <div className="col-md-5 col-12 mb-3 ">
@@ -147,7 +147,7 @@ function BannerSection() {
                   </div>
                 </div>
                 <div className="row text-white text-md-start text-center pt-3 mb-3">
-                  <h2>Upcoming Exams</h2>
+                  <h4>Upcoming Entrance Exams</h4>
                 </div>
                 <PopularCourses />
                 <div className='text-md-end text-center pt-5'>

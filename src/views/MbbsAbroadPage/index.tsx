@@ -13,24 +13,24 @@ const MbbsAbroadPage = () => {
     const data = {
         abroadpagefaqs: [
             {
-                questions: "What is the MBBS eligibility criteria?",
-                answers: "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.</p>"
+                questions: "Can I practice medicine in India after completing my MBBS from abroad?",
+                answers: "<p>Yes, Indian students who complete their MBBS from abroad can practice medicine in India. However, they must clear the Foreign Medical Graduates Examination (FMGE), which is mandatory for all foreign-educated medical graduates. Once they pass this exam, they can register with the National Medical Commission (NMC) and start practicing.</p>"
             },
             {
-                questions: "What is the MBBS course duration and fee?",
-                answers: "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.</p>"
+                questions: "Are there any scholarships available for Indian students pursuing MBBS abroad?",
+                answers: "<p>Yes, there are various scholarships available for Indian students who wish to study MBBS abroad. These scholarships can be provided by the respective universities, the governments of the host countries, or international organizations.</p>"
             },
             {
-                questions: "Name some of the best private colleges in Bangalore?",
-                answers: "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.</p>"
+                questions: "What are the career prospects after completing an MBBS abroad?",
+                answers: "<p>After completing an MBBS abroad, students can pursue various career paths, such as practicing medicine in India (after clearing FMGE), continuing their education with postgraduate studies, or working in the host country if they meet the local licensing requirements. Many countries offer opportunities for further specialization and research in the medical field.</p>"
             },
             {
-                questions: "How to get MBBS admission in Bangalore?",
-                answers: "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.</p>"
+                questions: "What are the language requirements for studying MBBS abroad?",
+                answers: "<p>The language of instruction for MBBS in most countries like Russia, Ukraine, and the Philippines is English. However, some countries may require students to learn the local language, especially if they will be interacting with patients during clinical training. Universities often provide language courses to help international students.</p>"
             },
             {
-                questions: "Which are the top MBBS colleges in Bangalore?",
-                answers: "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et dolores dolorem aut ut, consequatur repellendus fuga modi numquam repellat officia quasi! Assumenda eveniet deleniti nostrum molestias recusandae laudantium dolorum autem.</p>"
+                questions: "How does the quality of education in foreign medical colleges compare to Indian colleges?",
+                answers: "<p>The quality of education in foreign medical colleges can be on par with, or even exceed, that of Indian colleges, especially in countries like Russia, Ukraine, and the Philippines, which have well-established medical programs recognized by international bodies. The curriculum is often updated with the latest medical practices, and students gain exposure to diverse medical cases, enhancing their learning experience.</p>"
             }
         ]
     };

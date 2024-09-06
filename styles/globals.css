@@ -437,6 +437,19 @@
   .exploreCon {
     background-color: rgba(39, 72, 150, 0.04) !important;
   }
+  .exploreCon h2{
+    font-size: 29px;
+  }
+  .ServiceTabs button{
+    border:1px solid #274896 !important;
+    color:  #274896 !important;
+    padding: 10px 15px !important;
+  }
+  .ServiceTabs .active{
+    background-color: #274896 !important;
+    color: white !important;
+    padding: 10px 15px !important;
+  }
 
   .exploreNav a {
     border: 1px solid rgba(39, 72, 150, 0.2) !important;
@@ -2769,6 +2782,7 @@
 
 
   table {
+    width: 100% !important;
     overflow-x: scroll !important;
   }
 
@@ -3270,7 +3284,13 @@
     min-width: 90px !important;
   }
 
-
+  .filterItemBtn2{
+    background-color: #274896 !important;
+    border: 2px solid white !important;
+    color: white !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+  }
   .filterItemBtn {
     background-color: #dfe9ff !important;
     border: 2px solid #274896 !important;

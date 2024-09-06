@@ -656,7 +656,7 @@ function CollegeFilterSection() {
                         <div className='my-2'>
                             {Object.entries(selectedCheckboxes).map(([groupId, values]) => (
                                 values.map(value => (
-                                    <div key={value} className="btn d-inline-flex align-items-center filterItemBtn rounded m-1 p-2">
+                                    <div key={value} className="btn d-inline-flex align-items-center filterItemBtn2 rounded m-1 p-2">
                                         <span className="me-2">{getLabelForValue(groupId, value)}</span>
                                         <button
                                             className="btn"

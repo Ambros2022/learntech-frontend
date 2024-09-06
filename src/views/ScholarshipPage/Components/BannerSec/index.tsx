@@ -91,8 +91,7 @@ const BannerSec = () => {
           <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
             <div className="container">
               <div className="py-5">
-                <h1 className='fw-bold text-white mb-3'>Top Scholarships in India and Abroad</h1>
-                <h6 className='text-white mb-3'>Explore the Top Scholarships based on Levels of Study, Discipline, Region and more</h6>
+                <h1 className='fw-bold text-white mb-3'>Explore Scholarships to Support Your Studies</h1>
                 <div className="row">
                   <div className="col-md-8 col-xl-6 col-lg-6 col-10 mb-3 me-auto">
                    

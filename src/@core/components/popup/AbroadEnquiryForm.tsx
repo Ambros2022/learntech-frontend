@@ -76,8 +76,10 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
             <Form className="bg-skyBlue px-3 px-md-5  pt-3  pt-md-5 pb-3">
                 <div className='row mb-3'>
                     <div className='text-center mb-3'>
-                        <h3 className='fw-bold text-blue'>Book Your Tickets</h3>
-                        <small>Your career needs a RIGHT PILOT. Let us pilot your career to success</small>
+                        <h3 className='fw-bold text-blue'>Unlock Study Abroad Opportunities!
+                        </h3>
+                        <small>From choosing the right university to securing your admission, our experts are here to support your journey to international academic success.
+                        </small>
                     </div>
                     <div className="mb-3">
                         <Field type="text" name="name" placeholder="Full Name" className="form-control" />

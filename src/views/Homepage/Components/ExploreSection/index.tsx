@@ -77,7 +77,7 @@ function ExploreSection() {
     <section className="exploreCon" id="animation6" data-aos="fade-up">
       <div className="container py-5">
         <h2 className="fw-bold text-blue text-center mb-3">
-          Explore Colleges, Courses and Exams That Are Curated For You
+          Discover Colleges, Courses and Exams that Matches with Your Aspirations
         </h2>
         <div className="d-flex exploreNav justify-content-center mb-5" role="tablist">
           <a

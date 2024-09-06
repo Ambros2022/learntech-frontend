@@ -20,16 +20,84 @@ const Overview = () => {
                         <div className="col-md-8 col-xl-10 col-lg-9">
                             <div className="tab-content mt-md-0 mt-3 text-black" id="v-pills-tabContent">
                                 <div className="tab-pane fade show active" id="v-pills-who-we-are" role="tabpanel" aria-labelledby="v-pills-who-we-are-tab">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quidem, inventore recusandae unde error esse cum doloribus architecto ut rem asperiores maiores cumque provident velit eligendi hic dolorem, repudiandae neque voluptatem accusantium nulla necessitatibus voluptatum. Libero deserunt similique et obcaecati quae fugiat labore. Quidem temporibus quam placeat vel ea? Dolorum molestias dicta voluptate adipisci exercitationem harum amet similique, cum ipsa laborum quibusdam. Similique ad perferendis quae minus reiciendis eveniet, neque suscipit sequi cum nesciunt veniam ea delectus? Quos excepturi soluta voluptas animi vero nulla, asperiores necessitatibus nesciunt quaerat architecto, officiis temporibus enim dolores ipsum consequuntur facere ex officia.
+                                    <p className="text-black">
+                                        Learntech Edu Solutions stands as a leading educational service provider, firmly established in the Education sector since 1994. As India’s first ISO Certified Educational Consultancy, our organization is a testament to quality and trust. Our headquarters are strategically located in Bangalore, serving as the operational hub that coordinates our vast network of branches within India, including regions such as Kerala and Haryana. Internationally, we have expanded our footprint with offices in the UAE, Bahrain, and Qatar, ensuring a broad reach that caters to a global student base and educational institutions.</p>
+
+                                    <p className="text-black">
+                                        Our primary focus at Learntech Edu Solutions is to offer precise and impactful admission guidance, facilitated by seasoned experts with deep-rooted experience in the Education industry. We specialize in guiding students through their academic journeys in various fields, including Medicine, Dentistry, Engineering, Computer Science, Nursing, Pharmacy, Law, Management and more. Our team’s extensive knowledge of the Education sector, combined with a robust network of industry contacts, has enabled us to assist over 5,00,000 students in achieving their academic ambitions.</p>
+
+                                    <p className="text-black">
+                                        Our services are not confined by geographic boundaries; we provide comprehensive support for admission to esteemed institutions both in India and abroad. Furthermore, our services extend beyond Indian nationals, offering tailored guidance to NRIs and international students who aspire to pursue higher education in India. By bridging the gap between students and their academic dreams, Learntech Edu Solutions plays a pivotal role in shaping the future of countless aspirants across the globe.</p>
+
+                                    <h5 className='text-black fw-bold'>Empowering Colleges and Universities for Greater Success:</h5>
+
+                                    <p className="text-black">
+                                        Beyond assisting students, Learntech Edu Solutions offers valuable services to colleges and universities, aiming to enhance their brand visibility and attract more admissions. We specialize in strategic brand promotions on various social media platforms, ensuring educational institutions gain the recognition they deserve. Our digital marketing expertise includes website development and optimization, crafting impactful online presences that resonate with potential students and stakeholders. Additionally, Learntech provides comprehensive lead generation services, helping colleges effectively reach out to prospective students and increase enrollment numbers.</p>
+
+                                    <p className="text-black">
+                                        Through tailored marketing strategies and leveraging our extensive network, Learntech empowers educational institutions to strengthen their brand, expand their reach, and secure a competitive edge in the ever-evolving education sector. Our commitment is to foster mutually beneficial relationships, driving growth and success for both students and academic institutions alike.</p>
                                 </div>
                                 <div className="tab-pane fade" id="v-pills-our-mission" role="tabpanel" aria-labelledby="v-pills-our-mission-tab">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quidem, inventore recusandae unde error esse cum doloribus architecto ut rem asperiores maiores cumque provident velit eligendi hic dolorem, repudiandae neque voluptatem accusantium nulla necessitatibus voluptatum. Libero deserunt similique et obcaecati quae fugiat labore. Quidem temporibus quam placeat vel ea? Dolorum molestias dicta voluptate adipisci exercitationem harum amet similique, cum ipsa laborum quibusdam. Similique ad perferendis quae minus reiciendis eveniet, neque suscipit sequi cum nesciunt veniam ea delectus? Quos excepturi soluta voluptas animi vero nulla, asperiores necessitatibus nesciunt quaerat architecto, officiis temporibus enim dolores ipsum consequuntur facere ex officia.                                </div>
+                                    <p className="text-black">
+                                        Our mission is to empower students by providing accurate, personalized, and comprehensive admission guidance, ensuring each individual finds the right academic path that aligns with their aspirations and potential. We strive to remove the barriers and complexities in the admission process, offering support from start to finish. Our dedicated team of experienced counsellors partners with students, guiding them through every step, from selecting the right course and college to navigating applications and securing admissions. Additionally, we collaborate with colleges and universities to enhance their visibility and reputation through strategic brand promotions, digital marketing, and lead generation, helping them connect with talented students globally. Our goal is to bridge the gap between students' academic dreams and the opportunities available, creating a nurturing environment for learning and growth.
+                                    </p>     </div>
                                 <div className="tab-pane fade" id="v-pills-our-vision" role="tabpanel" aria-labelledby="v-pills-our-vision-tab">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quidem, inventore recusandae unde error esse cum doloribus architecto ut rem asperiores maiores cumque provident velit eligendi hic dolorem, repudiandae neque voluptatem accusantium nulla necessitatibus voluptatum. Libero deserunt similique et obcaecati quae fugiat labore. Quidem temporibus quam placeat vel ea? Dolorum molestias dicta voluptate adipisci exercitationem harum amet similique, cum ipsa laborum quibusdam. Similique ad perferendis quae minus reiciendis eveniet, neque suscipit sequi cum nesciunt veniam ea delectus? Quos excepturi soluta voluptas animi vero nulla, asperiores necessitatibus nesciunt quaerat architecto, officiis temporibus enim dolores ipsum consequuntur facere ex officia.                                </div>
+                                    <p className="text-black">
+                                        Learntech Edu Solutions has a vision to become the global leader in providing educational services and be recognized for their unwavering commitment to helping students achieve their academic and career goals. We aim to create a future where every student, regardless of their background, has access to the best educational opportunities tailored to their individual interests and strengths. By building strong, collaborative relationships with colleges and universities, we envision becoming the preferred partner for institutions seeking to expand their reach, enhance their brand, and attract qualified students. Our goal is to set a new standard in educational services, where our expertise, innovation, and dedication help shape the educational sector, making quality education accessible and attainable for all.</p>                              </div>
                                 <div className="tab-pane fade" id="v-pills-what-do-we-offer" role="tabpanel" aria-labelledby="v-pills-what-do-we-offer-tab">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quidem, inventore recusandae unde error esse cum doloribus architecto ut rem asperiores maiores cumque provident velit eligendi hic dolorem, repudiandae neque voluptatem accusantium nulla necessitatibus voluptatum. Libero deserunt similique et obcaecati quae fugiat labore. Quidem temporibus quam placeat vel ea? Dolorum molestias dicta voluptate adipisci exercitationem harum amet similique, cum ipsa laborum quibusdam. Similique ad perferendis quae minus reiciendis eveniet, neque suscipit sequi cum nesciunt veniam ea delectus? Quos excepturi soluta voluptas animi vero nulla, asperiores necessitatibus nesciunt quaerat architecto, officiis temporibus enim dolores ipsum consequuntur facere ex officia.                                </div>
+                                    <p className="text-black">
+                                        As an educational service provider, we offer numerous services for students and the institutes we work with. We strive to find the best feasible fit for our students while also taking into consideration their personal objectives and career goals.
+                                    </p>
+                                    <h5 className='fw-bold text-black'>For Students:
+                                    </h5>
+                                    <table className='table table-responsvie table-bordered'>
+                                        <div className="tbody">
+                                            <tr>
+                                                <td>
+                                                    Career Counselling
+                                                </td>
+                                                <td>
+                                                    Mentoring for Entrance Exams
+                                                </td>
+                                                <td>
+                                                    Assistance for Educational Loans and Scholarships
+                                                </td>
+                                                <td>
+                                                    Seat Reservation Facilities
+                                                </td>
+                                                <td>
+                                                    Facilitate Direct Meetings with Colleges and Universities
+                                                </td>
+                                                <td>
+                                                    NRI Admission Assistance
+                                                </td>
+                                                <td>
+                                                    Assistance to Pay Fees via EMI
+                                                </td>
+                                            </tr>
+                                        </div>
+                                    </table>
+                                    <h5 className='fw-bold text-black'>For Colleges and Universities:
+                                    </h5>
+                                    <table className='table table-responsvie table-bordered'>
+                                        <div className="tbody">
+                                            <tr>
+                                                <td>
+                                                Branding and Visibility                                                </td>
+                                                <td>
+                                                Lead Generation for Admissions                                                </td>
+                                                <td>
+                                                Collaborative Promotional Events                                                </td>
+                                                <td>
+                                                Social Media Management                                                 </td>
+                                                <td>
+                                                Digital Marketing                                                </td>
+                                            </tr>
+                                        </div>
+                                    </table>
+                                </div>
                                 <div className="tab-pane fade" id="v-pills-why-choose-us" role="tabpanel" aria-labelledby="v-pills-why-choose-us-tab">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quidem, inventore recusandae unde error esse cum doloribus architecto ut rem asperiores maiores cumque provident velit eligendi hic dolorem, repudiandae neque voluptatem accusantium nulla necessitatibus voluptatum. Libero deserunt similique et obcaecati quae fugiat labore. Quidem temporibus quam placeat vel ea? Dolorum molestias dicta voluptate adipisci exercitationem harum amet similique, cum ipsa laborum quibusdam. Similique ad perferendis quae minus reiciendis eveniet, neque suscipit sequi cum nesciunt veniam ea delectus? Quos excepturi soluta voluptas animi vero nulla, asperiores necessitatibus nesciunt quaerat architecto, officiis temporibus enim dolores ipsum consequuntur facere ex officia.                                </div>
+                                Providing admissions guidance is about more than just helping students enroll into their preferred college to study a course of their interest. It is about helping candidates lay the foundational stones for the life they desire to lead in the future. The appropriate education in a student’s career can enable them to improve their standards of living and make life-altering contributions to society. It also makes them sufficiently qualified to build a sustainable future for themselves and others. We, at Learntech, understand and value the importance of the right education in a candidate's life. This is why our seasoned experts work tirelessly to ensure that students achieve their ambitions efficiently and reliably. The determination of our counsellors to help students build their dream careers motivates them to overcome unprecedented challenges.                             </div>
                             </div>
                         </div>
                     </div>
