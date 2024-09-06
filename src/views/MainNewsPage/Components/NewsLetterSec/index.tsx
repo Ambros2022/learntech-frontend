@@ -11,7 +11,7 @@ const NewsLetterSec = () => {
                     <h2 className='fw-bold text-blue text-md-start text-center mb-3'>Subscribe to our Newsletter
                     </h2>
                     <p className="text-black  text-md-start text-center mb-5">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, dolorem voluptate officiis harum temporibus quasi vitae quos tempore sequi illo. Facilis facere quae, molestias, eius sapiente exercitationem natus doloremque provident aliquam quos quo obcaecati odit iusto dignissimos optio mollitia, ipsa consequuntur velit. Dolorem explicabo sed quos libero neque error obcaecati sit voluptates enim aspernatur vero, eaque laudantium velit, maiores deleniti amet vitae vel necessitatibus omnis dolorum incidunt quia. Nam iusto ut tempora optio quisquam eaque provident perferendis cupiditate ipsum molestias. Est a laudantium vero quidem eum quas nihil eius repellat reprehenderit sunt. Fuga necessitatibus vero consequatur sapiente laudantium voluptates animi.
+                        Subscribe to our website to stay informed about the latest developments in college admissions, education, and career guidance. Get valuable advice and tips from experienced professionals to help you navigate the college application process with confidence. Discover and explore various scholarship options to help fund your education and achieve your goals. Gain a competitive advantage in the college admissions process. Receive tailored information and guidance based on your interests and needs, ensuring you stay on track and focused throughout your academic journey and much more.
                     </p>
                     <NewsLetterEnquiry />
                 </div>

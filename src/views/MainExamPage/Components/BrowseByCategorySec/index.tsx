@@ -113,7 +113,8 @@ const BrowsebyCategorySec = () => {
     return (
         <section className='bg-white'>
             <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
-                <h2 className='fw-bold text-blue mb-5 text-center '>Browse By Category</h2>
+                <h2 className='fw-bold text-blue mb-5 text-center '>List of Entrance Exams in India
+                </h2>
                 {/* <div className='examSecItems'> */}
                 <div className="row">
                     <div className="col-lg-7 col-xl-8">

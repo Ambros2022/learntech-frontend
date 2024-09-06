@@ -1,7 +1,32 @@
-import React from 'react'
-import ContactForm from 'src/@core/components/popup/ContactForm'
+import React, { useState } from 'react';
+import ContactForm from 'src/@core/components/popup/ContactForm';
 
-const ScholarshipAbroadSec = ({data}) => {
+const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string } }) => {
+  const [isExpanded, setIsExpanded] = useState(false); // State for handling read more
+  const maxLength = 4000; // Adjust this value to control when "Read More" appears
+
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const renderDescription = () => {
+    if (!data.top_description) return null;
+
+    if (data.top_description.length <= maxLength || isExpanded) {
+      return <div dangerouslySetInnerHTML={{ __html: data.top_description }} />;
+    }
+
+    const truncatedText = data.top_description.slice(0, maxLength) + '...';
+    return (
+      <>
+        <div dangerouslySetInnerHTML={{ __html: truncatedText }} />
+        <div className='text-center'>
+          <button onClick={toggleReadMore} className="btn viewMoreClgBtn">Read More</button>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       <section className='bg-white'>
@@ -9,21 +34,21 @@ const ScholarshipAbroadSec = ({data}) => {
           <h2 className='fw-bold text-blue'>Scholarships in India and Abroad</h2>
           <div className="row pt-2">
             <div className="col-md-8">
-              <p className='text-black'>
-              {data?.meta_title || 'Default Title'}
-              </p>
-              <p className='text-black'>
-              {data?.meta_description || 'Default Title'}
-              </p>
+              {renderDescription()}
+              {isExpanded && (
+                <div className='text-center'>
+                  <button onClick={toggleReadMore} className="btn viewMoreClgBtn">Read Less</button>
+                </div>
+              )}
             </div>
             <div className="col-md-4">
-              <ContactForm heading={'Contact Us'}/>
+              <ContactForm heading={'Contact Us'} />
             </div>
           </div>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default ScholarshipAbroadSec
+export default ScholarshipAbroadSec;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
@@ -12,12 +12,14 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Email is required').trim(),
     location: Yup.string().required('Location is required').trim(),
     country: Yup.string().required('Preferred Country is required').trim(),
-    college: Yup.string().notRequired().trim(), // College is optional
-    message: Yup.string().notRequired().trim(), // Message is optional
+    college: Yup.string().notRequired().trim(),
+    message: Yup.string().notRequired().trim(),
 });
 
 const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) => {
     const router = useRouter();
+    const [isExpanded, setIsExpanded] = useState(false);
+    const maxLength = 9000;
 
     const initialValues = {
         name: '',
@@ -55,16 +57,38 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
         }
     };
 
+    const toggleReadMore = () => {
+        setIsExpanded(!isExpanded);
+    };
+
+    const renderDescription = () => {
+        if (!data.top_description) return null;
+
+        if (data.top_description.length <= maxLength || isExpanded) {
+            return <div dangerouslySetInnerHTML={{ __html: data.top_description }} />;
+        }
+
+        const truncatedText = data.top_description.slice(0, maxLength) + '...';
+        return (
+            <>
+                <div dangerouslySetInnerHTML={{ __html: truncatedText }} />
+                <div className='text-center'>
+                    <button onClick={toggleReadMore} className="btn viewMoreClgBtn">Read More</button>
+                </div>
+            </>
+        );
+    };
+
     return (
         <section className='py-5 bg-white'>
             <div className="container">
                 <div className="row">
                     <div className="col-md-7 col-lg-8 col-xl-8">
-                        {/* <p className='text-black'>{data.meta_title}</p> */}
-                        {data.top_description && (
-                            <p className='text-black'>
-                                <div dangerouslySetInnerHTML={{ __html: data.top_description }} />
-                            </p>
+                        {renderDescription()}
+                        {isExpanded && (
+                            <div className='text-center'>
+                                <button onClick={toggleReadMore} className="btn viewMoreClgBtn">Read Less</button>
+                            </div>
                         )}
                     </div>
                     <div className="col-md-5 col-lg-4 col-xl-4">

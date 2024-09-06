@@ -12,7 +12,8 @@ const BannerSec = () => {
                         <div className="container">
                             <div className="py-5 text-start">
                                 <h1 className='fw-bold text-white mb-3'>Contact Us</h1>
-                                <h4 className='text-white'>Our team is ready to help you with any inquiries you may have. Please fill out the form below, and a member of our team will contact you shortly!</h4>
+                                <h4 className='text-white'>For students seeking admissions guidance or institutions looking to boost their branding, our expert team is ready to provide personalized support. Fill out the form below, and we'll get in touch with you shortly to address your specific needs and offer tailored solutions.
+                                </h4>
                             </div>
                         </div>
                     </div>

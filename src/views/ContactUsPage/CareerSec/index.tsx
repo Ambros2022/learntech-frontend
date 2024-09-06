@@ -22,8 +22,9 @@ const CareerSec = () => {
                 <div className="row">
                     <div className="col-xl-6 col-md-6 mb-md-0 mb-3">
                         <div className='bg-blue p-md-5 p-3 h-100 rounded'>
-                            <h2 className="fw-bold text-white">Contact Career Representative</h2>
-                            <h6 className='text-white mb-5'>Please fill out the form to enable our career representatives to contact you at the earliest.</h6>
+                            <h3 className="fw-bold text-white">Connect with Our Expert Advisors</h3>
+                            <h6 className='text-white mb-5'>Fill and submit the form to initiate a conversation with our expert advisors, who will promptly reach out to provide insightful guidance and tailored support for your inquiries.
+                            </h6>
                             <div className="d-flex mb-3">
                                 <div className='align-self-center'>
                                     <Image src='/images/icons/phoneAbout1R.png' width={30} height={30} alt='phone1' className='img-fluid' />
@@ -51,7 +52,7 @@ const CareerSec = () => {
                             </div>
                             <div className="d-flex mb-3">
                                 <div className=''>
-                                    <Image src='/images/icons/email-icon.svg' width={30} height={30} alt='email' className='img-fluid icon-white'/>
+                                    <Image src='/images/icons/email-icon.svg' width={30} height={30} alt='email' className='img-fluid icon-white' />
                                 </div>
                                 <div className='align-self-center'>
                                     <h6 className='ms-3 text-white my-auto'><Link href="mailto:info@learntechww.com">info@learntechww.com</Link></h6>
@@ -61,7 +62,7 @@ const CareerSec = () => {
                     </div>
                     <div className="col-xl-6 col-md-6">
                         <div className="bg-skyBlue rounded">
-                            <ContactPageUsForm/>
+                            <ContactPageUsForm />
                         </div>
                     </div>
                 </div>

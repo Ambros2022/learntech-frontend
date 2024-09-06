@@ -93,7 +93,7 @@ function BannerSec({ data }: any) {
     <>
       <section className='bg-blue courseSec'>
         <div className="container">
-          <h1 className='text-white fw-bold pt-5 mb-3'>Choose Your Preferred Course, Degree or Specialisation</h1>
+          <h1 className='text-white fw-bold pt-5 mb-3'>Best Courses to Study in India and Abroad</h1>
           <div>
             <div className="row">
               <div className="col-md-7 mb-3">

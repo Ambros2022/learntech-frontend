@@ -12,7 +12,8 @@ const BannerSec = () => {
                     <div className="">
                         <div className="position-absolute h-100 w-100 d-flex justify-content-center" style={{ top: '1px' }}>
                             <div className="align-content-center">
-                                <h1 className='text-center fw-bold text-white mb-3'>Looking for NRI Quota Seat? in India
+                                <h1 className='text-center fw-bold text-white mb-3'>Know All About NRI Quota Seats in India
+                                    in India
                                 </h1>
                                 <div className='text-center'>
                                     <GlobalPopupEnquiry className='btn btn-success' />

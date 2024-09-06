@@ -84,7 +84,7 @@ function BannerSection() {
             <div className="d-flex justify-content-center h-100 w-100 container">
               <div className="align-content-center w-100">
                 <h1 className="fw-bold text-white mb-3">
-                  FIND TOP COLLEGES, COURSE ADMISSIONS, FEE STRUCTURES, AND PLACEMENT
+                  Know all About Top Colleges, Placements, Admissions and Fee Structures
                 </h1>
                 <div className="row d-flex ">
                   <div className="col-md-7 mb-3">
