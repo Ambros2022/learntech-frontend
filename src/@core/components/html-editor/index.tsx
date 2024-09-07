@@ -1,34 +1,55 @@
 'use client';
-import React, { useState, useRef, useMemo, ChangeEvent, useEffect } from 'react';
-// import JoditEditor from 'jodit-react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
+
 interface ExampleProps {
 	placeholder?: string;
 	intaialvalue?: string;
-	onChange?: any;
+	onChange?: (content: string) => void;
 }
+
 const DynamicJoditEditor = dynamic<any>(() => import('jodit-pro-react'), { ssr: false });
 
 const Example: React.FC<ExampleProps> = ({ placeholder, intaialvalue = '', onChange }) => {
 	const editor = useRef(null);
 	const [values, setValues] = useState(intaialvalue);
-	function onChanges(content) {
-		setValues(content)
-		onChange(content);
-	}
+
+	// Editor configuration with Poppins font
+	const config = useMemo(
+		() => ({
+			controls: {
+				font: {
+					list: { 'Poppins,Arial,sans-serif': 'Poppins' }
+				}
+			},
+			placeholder: placeholder || 'Start typing...'
+		}),
+		[placeholder]
+	);
+
+	const handleChange = useCallback(
+		(content: string) => {
+			setValues(content);
+			if (onChange) {
+				onChange(content);
+			}
+		},
+		[onChange]
+	);
+
 	useEffect(() => {
-		onChanges(values);
-	}, [values]);
+		setValues(intaialvalue);
+	}, [intaialvalue]);
+
 	return (
 		<DynamicJoditEditor
 			ref={editor}
 			value={values}
-			onChange={onChanges}
-		// config={config}
-		// tabIndex={1} // tabIndex of textarea
-		// onBlur={handleBlur} // preferred to use only this option to update the content for performance reasons
-		// onChange={handleChange}
+			config={config}
+			onChange={handleChange}
+			tabIndex={1} // tabIndex for focus control
 		/>
 	);
-}
+};
+
 export default Example;
