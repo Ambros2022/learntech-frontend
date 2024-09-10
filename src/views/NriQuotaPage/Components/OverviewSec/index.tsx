@@ -65,7 +65,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
 
     return (
         <>
-            <section className='bg-white pt-2 pb-5'>
+            <section className='bg-white pt-2 pb-5' style={{fontFamily:'Poppins !important'}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-8 col-lg-8 col-md-7 col-10 mx-auto">
