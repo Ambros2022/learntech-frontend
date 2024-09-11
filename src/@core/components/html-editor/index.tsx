@@ -18,10 +18,11 @@ const Example: React.FC<ExampleProps> = ({ placeholder, intaialvalue = '', onCha
     () => ({
       controls: {
         font: {
-          list: { 'Poppins,Arial,sans-serif': 'Poppins' }
+          list: { 'Poppins': 'Poppins' }
         }
       },
-      placeholder: placeholder || 'Start typing...'
+      placeholder: placeholder || 'Start typing...',
+      editorCssClass: 'custom-jodit-css' // Custom class for styling
     }),
     [placeholder]
   );
@@ -44,13 +45,20 @@ const Example: React.FC<ExampleProps> = ({ placeholder, intaialvalue = '', onCha
   }, [intaialvalue]);
 
   return (
-    <DynamicJoditEditor
-      ref={editor}
-      value={values}
-      config={config}
-      onChange={handleChange}
-      tabIndex={1} // tabIndex for focus control
-    />
+    <>
+      <style jsx global>{`
+        .custom-jodit-css .jodit-wysiwyg {
+          font-family: 'Poppins', sans-serif !important;
+        }
+      `}</style>
+      <DynamicJoditEditor
+        ref={editor}
+        value={values}
+        config={config}
+        onChange={handleChange}
+        tabIndex={1} // tabIndex for focus control
+      />
+    </>
   );
 };
 
