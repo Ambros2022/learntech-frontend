@@ -39,13 +39,13 @@ const OrganizationSection = () => {
         <>
             <section className='bg-white py-3'>
                 <div className="container">
-                    <h2 className='text-center fw-bold text-blue mb-3'>Edstellar Approach to Organizational Management Training</h2>
+                    <h2 className='text-center fw-bold text-blue mb-3'>Learntech Approach to Organizational stream Training</h2>
                     <p className='text-black'>
-                        Edstellar is a leading management training company that takes a holistic approach to delivering training solutions. Starting from expert consultation, training customization, training delivery and post-training support, our clients get ongoing assistance at every stage of their learning journey.
+                    Learntech is a leading stream training company that takes a holistic approach to delivering training solutions. Starting from expert consultation, training customization, training delivery and post-training support, our clients get ongoing assistance at every stage of their learning journey.
 
                         Our commitment to client success extends beyond the training sessions. We provide guidance to ensure that your team continues to excel and apply their newly acquired skills effectively in their roles.
 
-                        The training methods include corporate live interactive sessions, and hands-on exercises designed for professionals. Edstellar’s Management training for teams offer significant flexibility in terms of scheduling and delivery options, catering to the diverse needs of organizations.
+                        The training methods include corporate live interactive sessions, and hands-on exercises designed for professionals. Learntech stream training for teams offer significant flexibility in terms of scheduling and delivery options, catering to the diverse needs of organizations.
                     </p>
                     <div className="d-flex py-md-5 py-3 flex-wrap justify-content-center gap-3">
                         {
