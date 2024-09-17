@@ -10,7 +10,7 @@ const OrganizationSection = () => {
         },
         {
             "title": "2. Plan",
-            "icon": "bi-gear-fill",
+            "icon": "bi-send-fill",
             "description": "Crafting a comprehensive strategy, we lay down a clear roadmap for the training solution."
         },
         {
