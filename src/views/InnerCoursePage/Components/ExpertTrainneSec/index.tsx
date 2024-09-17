@@ -35,7 +35,7 @@ const ExperTraineeSec = () => {
                     <button className='btn mb-4 text-blue trainingBtn'>
                         <small>{trainer.trainingType}</small>
                     </button>
-                    <GlobalEnquiryForm className="applyNowButton btn" />
+                    <GlobalEnquiryForm buttonText={'View Profile'} className="applyNowButton btn" />
                 </div>
             </div>
         );
