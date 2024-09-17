@@ -437,15 +437,18 @@
   .exploreCon {
     background-color: rgba(39, 72, 150, 0.04) !important;
   }
-  .exploreCon h2{
+
+  .exploreCon h2 {
     font-size: 29px;
   }
-  .ServiceTabs button{
-    border:1px solid #274896 !important;
-    color:  #274896 !important;
+
+  .ServiceTabs button {
+    border: 1px solid #274896 !important;
+    color: #274896 !important;
     padding: 10px 15px !important;
   }
-  .ServiceTabs .active{
+
+  .ServiceTabs .active {
     background-color: #274896 !important;
     color: white !important;
     padding: 10px 15px !important;
@@ -3278,13 +3281,14 @@
     min-width: 90px !important;
   }
 
-  .filterItemBtn2{
+  .filterItemBtn2 {
     background-color: #274896 !important;
     border: 2px solid white !important;
     color: white !important;
     border-radius: 20px !important;
     text-align: center !important;
   }
+
   .filterItemBtn {
     background-color: #dfe9ff !important;
     border: 2px solid #274896 !important;
@@ -6044,4 +6048,29 @@
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     height: 70px !important;
+  }
+
+  .organizationalCard {
+    position: relative !important;
+    border-right: 1px solid #274896 !important;
+    border-left: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    width: 170px !important;
+  }
+
+  .right-arrow-orgazinational {
+    position: absolute !important;
+    top: 17% !important;
+    right: -7% !important;
+    background-color: white !important;
+    border-radius: 50% !important;
+    border: 1px solid #274896 !important;
+    padding: 5px !important;
+  }
+
+  .trainingBtn{
+    background-color: #f6f8fb !important;
+    border-radius: 20px !important;
+    padding: 5px 10px !important;
   }

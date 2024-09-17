@@ -7,6 +7,8 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import OrganizationSection from './Components/OrganizationalSec';
+import ExperTraineeSec from './Components/ExpertTrainneSec';
 
 function InnerCoursePage({ id }) {
   const router = useRouter();
@@ -121,6 +123,8 @@ function InnerCoursePage({ id }) {
 
 
       <OtherCourses streamdata={streams} />
+      <OrganizationSection/>
+      <ExperTraineeSec/>
       <ExpertSection />
     </>
   );
