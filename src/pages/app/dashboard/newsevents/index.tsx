@@ -164,24 +164,24 @@ const SecondPage = () => {
   params['size'] = 10000;
 
 
-    //get all categories
-    const getcategory = useCallback(async () => {
-      try {
-        const roleparams: any = {};
-        roleparams['size'] = 10000;
-        const response = await axios1.get('api/admin/newscategories/get', { params: roleparams });
-  
-        setNewscategories(response.data.data);
-  
-      } catch (err) {
-        console.error(err);
-      }
-    }, [isMountedRef]);
-  
-  
-    useEffect(() => {
-      getcategory();
-    }, [getcategory]);
+  //get all categories
+  const getcategory = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/newscategories/get', { params: roleparams });
+
+      setNewscategories(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+
+  useEffect(() => {
+    getcategory();
+  }, [getcategory]);
 
   const handleReloadPage = useCallback(() => {
     setLoading(true);
@@ -200,8 +200,8 @@ const SecondPage = () => {
 
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-          {row.name}
-        </Typography>
+            {row.name}
+          </Typography>
         )
       }
     },
@@ -214,17 +214,27 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {row.slug}
           </Typography>
-
-
         )
       }
     },
     {
-      flex: 0.175,
+      flex: 0.1,
+      minWidth: 100,
+      field: 'country.name',
+      headerName: 'Country',
+      renderCell: (params: GridRenderCellParams) => {
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {params.row.country && params.row.country ? params.row.country.name : ""}
+          </Typography>
+        );
+      }
+    },
+    {
+      flex: 0.1,
       minWidth: 100,
       field: 'status',
       headerName: 'status',
@@ -244,7 +254,7 @@ const SecondPage = () => {
 
 
     {
-      flex: 0.175,
+      flex: 0.2,
       minWidth: 100,
       sortable: false,
       field: 'actions',
@@ -260,9 +270,9 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string , category_id: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string, category_id: string) => {
       setLoading(true);
-      
+
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
       }
@@ -310,7 +320,7 @@ const SecondPage = () => {
 
   useEffect(() => {
     fetchTableData(orderby, searchtext, searchfrom, size, page, columnname, category_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname , category_id])
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, category_id])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -350,7 +360,7 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
-        <CardHeader title="Search Filters" />
+          <CardHeader title="Search Filters" />
           <CardContent>
             <Grid container spacing={6}>
               <Grid item sm={4} xs={12}>
@@ -377,8 +387,8 @@ const SecondPage = () => {
               </Grid>
 
 
-         
-             
+
+
 
               <Grid item sm={3} xs={12}>
                 <Button sx={{ mt: 0 }} variant="contained" color='error'

@@ -280,7 +280,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>top Description</Typography>
+                        <Typography style={{ marginBottom: '10px' }}>top Description</Typography>
 
                         <Controller
                             name='top_description'
@@ -288,12 +288,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
                                 <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("top_description", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("top_description", value)} />
+                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                 //  onChange={(value)=>  setValue("bottom_description", value)} />
                                 onChange={(value)=>console.log(value)} /> */}
-                            </>
+                                </>
                             )}
                         />
                     </Grid>
@@ -318,7 +318,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

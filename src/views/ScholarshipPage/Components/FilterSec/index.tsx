@@ -5,7 +5,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
-import axios1 from 'axios';
+    import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';

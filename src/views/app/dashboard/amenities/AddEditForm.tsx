@@ -106,7 +106,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -142,7 +142,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -232,7 +232,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

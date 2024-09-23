@@ -267,7 +267,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     helperText={errors.promo_banner && 'This field is required'}
                                 >
                                     {options.map((option, value) => (
-                                          <MenuItem key={value} value={option}>
+                                        <MenuItem key={value} value={option}>
                                             {option}
                                         </MenuItem>
                                     ))}
@@ -331,7 +331,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

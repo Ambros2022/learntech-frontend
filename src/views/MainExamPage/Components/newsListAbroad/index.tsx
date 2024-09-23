@@ -25,10 +25,10 @@ const NewsItem = ({ banner_image, id, title, text, slug}) => (
 );
 
 // NewsList component
-const NewsList = ({ newsItems }) => (
+const NewsListAbroad = ({ newsItems }) => (
 
     <>
-        <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Latest News Of India</h4>
+        <h4 className='fw-bold text-blue text-center pt-5 mb-3'>Latest News Of Abroad</h4>
         <div className='bg-skyBlue examNewsSec mt-3 px-4 py-3 overflow-y-auto' style={{ maxHeight: 'calc(3 * 160px)' }}>
             <div className="row " >
                 {newsItems.map((item, index) => (
@@ -39,4 +39,4 @@ const NewsList = ({ newsItems }) => (
     </>
 );
 
-export default NewsList;
+export default NewsListAbroad;

@@ -47,7 +47,7 @@ const AvatarDropdown = () => {
     localStorage.removeItem('UserData');
     setUserData(null);
     await signOut({ redirect: false });
-    router.push('/write-review');
+    router.push('/');
   };
 
   return (

@@ -25,7 +25,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, CardContent, MenuItem, Tab, Typography, useTheme } from '@mui/material'
+import { Alert, CardContent, FormLabel, FormControlLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete';
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
@@ -83,6 +83,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
+        established: yup
+            .string()
+            .trim()
+            .required(),
         slug: yup
             .string()
             .trim()
@@ -91,9 +95,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-        country_id: yup.object().required("This field is required"),
-        state_id: yup.object().required("This field is required"),
-        city_id: yup.object().required("This field is required"),
+        // country_id: yup.object().required("This field is required"),
+        // state_id: yup.object().required("This field is required"),
+        // city_id: yup.object().required("This field is required"),
 
     })
     const defaultValues = {
@@ -117,7 +121,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
         result_date: isAddMode ? null : new Date(olddata.result_date),
         recoginations: [],
-
+        status: isAddMode ? 'Published' : olddata.status,
+        meta_title: isAddMode ? '' : olddata.meta_title,
+        meta_description: isAddMode ? '' : olddata.meta_description,
+        meta_keyword: isAddMode ? '' : olddata.meta_keyword,
     }
 
     const {
@@ -163,9 +170,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('address', data.address);
             formData.append('map', data.map);
             formData.append('recoginations', JSON.stringify(data.recoginations));
-
+            formData.append('status', data.status);
             formData.append('sample_paper', data.sample_paper);
             formData.append('logo', selectedphoto);
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keyword', data.meta_keyword);
 
 
             try {
@@ -221,6 +231,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('map', data.map);
             formData.append('sample_paper', data.sample_paper);
             formData.append('recoginations', JSON.stringify(data.recoginations));
+            formData.append('status', data.status);
+            formData.append('meta_title', data.meta_title);
+            formData.append('meta_description', data.meta_description);
+            formData.append('meta_keyword', data.meta_keyword);
+
 
             if (selectedphoto == '') {
 
@@ -670,6 +685,68 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='meta_title'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Meta Title'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.meta_title)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_title && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='meta_description'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Meta Description'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                multiline
+                                                rows={3}
+                                                error={Boolean(errors.meta_description)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_description && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='meta_keyword'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Meta keywords'
+                                                multiline
+                                                rows={3}
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.meta_keyword)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_keyword && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
                                 <Grid item sm={4}>
                                     <Controller
                                         name='gender'
@@ -998,8 +1075,24 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
+                                <Grid item xs={12} sm={4}>
+                                    <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
+                                    <Controller
+                                        name='status'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <RadioGroup row aria-label='controlled' name='controlled' value={value} onChange={onChange}>
+                                                <FormControlLabel value='Draft' control={<Radio />} label='Draft' />
+                                                <FormControlLabel value='Published' control={<Radio />} label='Published' />
+                                            </RadioGroup>
+                                        )}
+                                    />
+
+                                </Grid>
+
                                 <Grid item xs={12}>
-                                    {error ? <Alert severity='error'>{error}</Alert> : null}
+                                    {error && <Alert severity='error'>{error}</Alert>}
                                 </Grid>
 
 

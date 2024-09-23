@@ -179,7 +179,7 @@ const Home = () => {
         value={pagedata.schoolboards}
       />
       <CardItem
-        href="/app/dashboard/scholarships/"
+        href="/app/dashboard/scholarship/"
         title="Scholarships"
         value={`${pagedata.Published_scholarships}/${pagedata.scholarships}`}
       />

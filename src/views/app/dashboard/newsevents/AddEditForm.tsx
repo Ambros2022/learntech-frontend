@@ -41,7 +41,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
-
+    const [countryData, setCountryData] = useState([])
     const [fileNamespdf, setFileNamespdf] = useState<any>([]);
     const [selectedpdf, setSelectedpdf] = useState('');
     const [category, setCategory] = useState([]);
@@ -93,7 +93,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-
+        country_id: yup.object().required("This field is required"),
         category_id: yup.object().required("This field is required"),
         pdf_name: yup.string()
             .trim()
@@ -111,6 +111,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
         overview: isAddMode ? '' : olddata.overview,
         status: isAddMode ? 'Published' : olddata.status,
+        country_id: (isAddMode || !olddata) ? '' : olddata.country,
     }
 
     const {
@@ -124,7 +125,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         mode: 'onChange',
         resolver: yupResolver(schema)
     })
-
+    console.log(olddata)
     const onSubmit = async (data: any) => {
 
         if (!isAddMode && olddata.id) {
@@ -142,6 +143,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
             formData.append('overview', data.overview);
+            formData.append('country_id', data.country_id.id);
             formData.append('pdf_file', selectedpdf);
             formData.append('banner_image', selectedphoto);
             try {
@@ -181,6 +183,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('name', data.name);
             formData.append('pdf_name', data.pdf_name);
             formData.append('category_id', data.category_id.id);
+            formData.append('country_id', data.country_id.id);
             formData.append('status', data.status);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
@@ -243,6 +246,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
+    const getCountry = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/countries/get', { params: roleparams });
+            setCountryData(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
     //get all Catogry
     const getcategory = useCallback(async () => {
 
@@ -262,8 +277,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     useEffect(() => {
 
         getcategory();
-
-    }, [getcategory]);
+        getCountry();
+    }, [getcategory, getCountry]);
 
 
 
@@ -295,6 +310,34 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             error={Boolean(errors.category_id)}
                                             {...(errors.category_id && { helperText: 'This field is required' })}
                                             label='Select Category'
+                                        />
+                                    )}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='country_id'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <CustomAutocomplete
+                                    fullWidth
+                                    loading={!countryData.length}
+                                    options={countryData}
+                                    value={field.value}
+                                    onChange={(event, newValue) => {
+                                        field.onChange(newValue);
+                                    }}
+                                    getOptionLabel={(option: any) => option.name || ''}
+                                    renderInput={(params: any) => (
+                                        <CustomTextField
+                                            {...params}
+
+                                            error={Boolean(errors.country_id)}
+                                            {...(errors.country_id && { helperText: 'This field is required' })}
+                                            label='Select Country'
                                         />
                                     )}
                                 />
@@ -492,7 +535,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

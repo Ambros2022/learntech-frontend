@@ -140,7 +140,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -161,14 +161,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('sub_stream_slug', data.sub_stream_slug);
             formData.append('sub_stream_description', data.sub_stream_description);
             formData.append('stream_id', data.stream_id.id);
-         
+
 
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -199,7 +199,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
-    
+
 
     return (
         <>
@@ -207,7 +207,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 <Grid container spacing={5}>
 
 
-                <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={6}>
                         <Controller
                             name='stream_id'
                             control={control}
@@ -215,7 +215,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             render={({ field }) => (
                                 <CustomAutocomplete
                                     fullWidth
-                                
+
                                     options={stream}
                                     loading={!stream.length}
                                     value={field.value}
@@ -304,7 +304,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

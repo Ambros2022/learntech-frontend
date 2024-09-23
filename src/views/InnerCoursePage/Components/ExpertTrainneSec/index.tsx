@@ -18,7 +18,7 @@ const ExperTraineeSec = () => {
     // Define the TrainerCard inside the same component to keep it in a single file
     const TrainerCard = ({ trainer }: { trainer: { name: string; location: string; since: string; trainingType: string } }) => {
         return (
-            <div className="card py-3 hover-card">
+            <div className="card py-3 hover-card" style={{border:'1px solid #274896'}}>
                 <div className="row d-flex">
                     <div className="col-4 text-center align-content-center">
                         <i className='bi bi-person fs-1 text-blue'></i>
@@ -28,7 +28,7 @@ const ExperTraineeSec = () => {
                         <h6 className='fw-light'>{trainer.location}</h6>
                     </div>
                 </div>
-                <hr />
+                <hr className='text-blue'/>
                 <div className='px-3'>
                     <h6 className='fw-light'>Trainer Since</h6>
                     <h6 className='fw-light'>{trainer.since}</h6>
