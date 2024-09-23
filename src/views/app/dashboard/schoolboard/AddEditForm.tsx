@@ -95,6 +95,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
+        meta_title: yup
+            .string()
+            .trim()
+            .required(),
+        meta_description: yup
+            .string()
+            .trim()
+            .required(),
+        meta_keyword: yup
+            .string()
+            .trim()
+            .required(),
         // country_id: yup.object().required("This field is required"),
         // state_id: yup.object().required("This field is required"),
         // city_id: yup.object().required("This field is required"),
@@ -151,9 +163,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let url = 'api/admin/schoolboard/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('country_id', data.country_id.id);
-            formData.append('state_id', data.state_id.id);
-            formData.append('city_id', data.city_id.id);
+            if (data.country_id !== null && data.country_id !== undefined && data.country_id !== '') {
+                formData.append('country_id', data.country_id.id);
+            }
+            if (data.state_id !== null && data.state_id !== undefined && data.state_id !== '') {
+                formData.append('state_id', data.state_id.id);
+            }
+            if (data.city_id !== null && data.city_id !== undefined && data.city_id !== '') {
+                formData.append('city_id', data.city_id.id);
+            }
             formData.append('name', data.name);
             formData.append('slug', data.slug);
             formData.append('gender', data.gender);
@@ -211,9 +229,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let url = 'api/admin/schoolboard/add';
 
             const formData = new FormData();
-            formData.append('country_id', data.country_id.id);
-            formData.append('state_id', data.state_id.id);
-            formData.append('city_id', data.city_id.id);
+            if (data.country_id !== null && data.country_id !== undefined && data.country_id !== '') {
+                formData.append('country_id', data.country_id.id);
+            }
+            if (data.state_id !== null && data.state_id !== undefined && data.state_id !== '') {
+                formData.append('state_id', data.state_id.id);
+            }
+            if (data.city_id !== null && data.city_id !== undefined && data.city_id !== '') {
+                formData.append('city_id', data.city_id.id);
+            }
             formData.append('name', data.name);
             formData.append('slug', data.slug);
             formData.append('gender', data.gender);
@@ -1091,9 +1115,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                                 </Grid>
 
-                                <Grid item xs={12}>
+                                {/* <Grid item xs={12}>
                                     {error && <Alert severity='error'>{error}</Alert>}
-                                </Grid>
+                                </Grid> */}
 
 
                                 <Grid item xs={12}>
