@@ -40,9 +40,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
-   
+
     const schema: any = yup.object().shape({
-        
+
 
     })
 
@@ -73,7 +73,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('id', updateid);
             formData.append('name', data.name);
             formData.append('content', data.content);
-           
+
             try {
                 let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
@@ -90,7 +90,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -102,12 +102,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             }
-        } 
+        }
     }
 
     return (
         <>
-             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
+            <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
                     <Grid item xs={12} sm={12}>
@@ -129,7 +129,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                  
+
                     <Grid item xs={12} sm={12}>
                         <Controller
                             name='content'
@@ -149,7 +149,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                 
+
                     {/* <Grid item xs={12} sm={12}>
                         <Controller
                             name='current_url'
@@ -173,7 +173,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
                    */}
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

@@ -47,7 +47,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const isMountedRef = useIsMountedRef();
 
     const schema: any = yup.object().shape({
-        
+
 
     })
 
@@ -108,7 +108,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     //             }
 
     //         } catch (err: any) {
-         
+
     //             setLoading(false)
     //             if (err.errors && err.errors.length > 0) {
     //                 const errorMessage = err.errors[0].msg;
@@ -125,7 +125,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     return (
         <>
-            <form  encType="application/x-www-form-urlencoded">
+            <form encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
                     <Grid item xs={12} sm={6}>
@@ -176,7 +176,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                   type='number'
+                                    type='number'
                                     label='Contact Number'
                                     onChange={onChange}
                                     placeholder=''
@@ -196,7 +196,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    
+
                                     label='Location'
                                     onChange={onChange}
                                     placeholder=''
@@ -216,7 +216,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    
+
                                     label='Course_in_mind'
                                     onChange={onChange}
                                     placeholder=''
@@ -236,7 +236,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    
+
                                     label='College_name'
                                     onChange={onChange}
                                     placeholder=''
@@ -256,7 +256,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                   
+
                                     label='School_name'
                                     onChange={onChange}
                                     placeholder=''
@@ -311,7 +311,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     {/* <Grid item xs={12}>

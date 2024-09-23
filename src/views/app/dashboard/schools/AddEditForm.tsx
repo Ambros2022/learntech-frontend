@@ -51,7 +51,7 @@ interface Authordata {
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     // ** States
-    const { setValue } = useForm();
+    // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
@@ -238,7 +238,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         control,
         handleSubmit,
         resetField: admfiledReset,
-        // setValue,
+        setValue,
         reset,
         formState: { errors }
     } = useForm<any>({
@@ -987,19 +987,20 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4}>
-                                    {/* <Controller
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>info</Typography>
+                                    <Controller
                                         name='info'
                                         control={control}
                                         rules={{ required: true }}
                                         render={({ field: { value, onChange } }) => (
-                                            <JoditEditor // Replace CustomTextField with Example
-                                                placeholder='Enter text here...' // Example-specific prop
-                                                value={value} // Example-specific prop (if needed)
-                                                onChange={onChange} // Example-specific prop (if needed)
-                                            />
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("info", value)} />
+
+                                            </>
                                         )}
-                                    /> */}
+                                    />
                                 </Grid>
 
 

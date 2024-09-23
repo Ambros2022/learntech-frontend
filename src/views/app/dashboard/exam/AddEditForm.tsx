@@ -28,7 +28,7 @@ import { FaTrash } from 'react-icons/fa';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
+import { Alert, CardContent, FormControlLabel, FormHelperText, FormLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import TabContext from '@mui/lab/TabContext'
@@ -37,6 +37,7 @@ import TabList from '@mui/lab/TabList'
 import { Config } from 'src/configs/mainconfig'
 import QuillEditor from 'src/@core/components/html-editor/index';
 import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
+import CustomSelectField from 'src/@core/components/mui/select-feild'
 
 
 
@@ -60,6 +61,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [fileNameslogo, setFileNameslogo] = useState<any>([]);
     const [selectedlogo, setSelectedlogo] = useState('');
     const [streamsdata, setStreamsdata] = useState([])
+    const [countryData, setCountryData] = useState([])
     const isMountedRef = useIsMountedRef();
     const theme = useTheme()
     const { direction } = theme
@@ -127,10 +129,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .trim()
             .required(),
         stream_id: yup.object().required("This field is required"),
-
+        country_id: yup.object().required("This field is required"),
+        // level_of_study: yup
+        //     .string()
+        //     .required('Level of Study is required'),
+        // types_of_exams: yup
+        //     .string()
+        //     .required('Type of exam is required'),
 
 
     })
+    console.log(olddata)
 
     const defaultValues = {
         exam_title: isAddMode ? '' : olddata.exam_title,
@@ -140,6 +149,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         exam_short_name: isAddMode ? '' : olddata.exam_short_name,
         college_type: isAddMode ? '' : olddata.college_type,
         overview: isAddMode ? '' : olddata.overview,
+        level_of_study: isAddMode ? '' : olddata.level_of_study,
+        types_of_exams: isAddMode ? '' : olddata.types_of_exams,
+        country_id: (isAddMode || !olddata) ? '' : olddata.country,
         // exam_dates: isAddMode ? '' : olddata.exam_dates,
         meta_title: isAddMode ? '' : olddata.meta_title,
         meta_description: isAddMode ? '' : olddata.meta_description,
@@ -186,13 +198,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }, [isMountedRef]);
 
+    const getCountry = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/countries/get', { params: roleparams });
+            setCountryData(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
+
 
     useEffect(() => {
 
 
         getstreams();
+        getCountry();
 
-    }, [getstreams]);
+    }, [getstreams, getCountry]);
 
     const onSubmit = async (data: any) => {
 
@@ -203,11 +229,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const formData = new FormData();
             formData.append('id', updateid);
             formData.append('stream_id', data.stream_id.id);
+            formData.append('country_id', data.country_id.id);
             formData.append('exam_title', data.exam_title);
             formData.append('slug', data.slug);
             formData.append('upcoming_date', data.upcoming_date);
             formData.append('exam_short_name', data.exam_short_name);
             formData.append('meta_title', data.meta_title);
+            formData.append('level_of_study', data.level_of_study);
+            formData.append('types_of_exams', data.types_of_exams);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
             formData.append('overview', data.overview);
@@ -263,6 +292,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
             const formData = new FormData();
             formData.append('stream_id', data.stream_id.id);
+            formData.append('country_id', data.country_id.id);
             formData.append('exam_title', data.exam_title);
             formData.append('slug', data.slug);
             formData.append('upcoming_date', data.upcoming_date);
@@ -270,6 +300,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
+            formData.append('level_of_study', data.level_of_study);
+            formData.append('types_of_exams', data.types_of_exams);
             formData.append('overview', data.overview);
             formData.append('exam_dates', data.exam_dates);
             formData.append('eligibility_criteria', data.eligibility_criteria);
@@ -371,7 +403,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
-        // resolver: yupResolver(schema)
+        resolver: yupResolver(schema)
     })
     const { fields, append, remove } = useFieldArray({
         control: faqcontrol,
@@ -524,7 +556,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         render={({ field }) => (
                                             <CustomAutocomplete
                                                 fullWidth
-
                                                 options={streamsdata}
                                                 loading={!streamsdata.length}
                                                 value={field.value}
@@ -664,6 +695,86 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             />
                                         )}
                                     />
+                                </Grid>
+
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='country_id'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <CustomAutocomplete
+                                                fullWidth
+                                                loading={!countryData.length}
+                                                options={countryData}
+                                                value={field.value}
+                                                onChange={(event, newValue) => {
+                                                    field.onChange(newValue);
+                                                }}
+                                                getOptionLabel={(option: any) => option.name || ''}
+                                                renderInput={(params: any) => (
+                                                    <CustomTextField
+                                                        {...params}
+
+                                                        error={Boolean(errors.country_id)}
+                                                        {...(errors.country_id && { helperText: 'This field is required' })}
+                                                        label='Select Country'
+                                                    />
+                                                )}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='level_of_study'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomSelectField
+                                                label="Select Level of study"
+                                                value={value}
+                                                onChange={onChange}
+                                                labelId="level-of-study-label"
+                                                error={Boolean(errors.level_of_study)}
+                                            >
+                                                <MenuItem value="UG">UG</MenuItem>
+                                                <MenuItem value="PG">PG</MenuItem>
+                                                <MenuItem value="professional">Professional</MenuItem>
+                                            </CustomSelectField>
+                                        )}
+                                    />
+                                    {errors.level_of_study && (
+                                        <FormHelperText>
+                                            {errors.level_of_study.message as React.ReactNode}
+                                        </FormHelperText>
+                                    )}
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='types_of_exams'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomSelectField
+                                                label="Select Type of exam"
+                                                value={value}
+                                                onChange={onChange}
+                                                labelId="type-of-exam-label"
+                                                error={Boolean(errors.types_of_exams)}
+                                            >
+                                                <MenuItem value="Language_Proficiency">Language Proficiency</MenuItem>
+                                                <MenuItem value="Aptitiude_Test">Aptitude Test</MenuItem>
+                                                <MenuItem value="Streams">Streams</MenuItem>
+                                            </CustomSelectField>
+                                        )}
+                                    />
+                                    {errors.types_of_exams && (
+                                        <FormHelperText>
+                                            {errors.types_of_exams.message as React.ReactNode}
+                                        </FormHelperText>
+                                    )}
                                 </Grid>
 
                                 <Grid item xs={12} sm={4}>
@@ -919,7 +1030,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-                      
+
 
 
 
@@ -998,7 +1109,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    {error ? <Alert severity='error'>{error}</Alert> : null}
+                                {error && <Alert severity='error'>{error}</Alert>}
                                 </Grid>
 
                                 <Grid item xs={12}>

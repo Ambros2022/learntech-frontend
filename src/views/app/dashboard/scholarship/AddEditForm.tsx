@@ -193,7 +193,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const getgenders = useCallback(async () => {
 
         try {
-        
+
             const response = await axios1.get('api/website/genders/get');
             setgendersdata(response.data.data);
         } catch (err) {
@@ -716,7 +716,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

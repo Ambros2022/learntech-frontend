@@ -146,6 +146,8 @@ const SecondPage = () => {
   // ** States
   const [streams, setStreams] = useState([]);
   const [stream_id, setStream_id] = useState('')
+  const [country_id, setCountry_id] = useState('')
+  const [countries, setCountries] = useState([])
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -184,14 +186,14 @@ const SecondPage = () => {
         return (
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(params)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.exam_title}
-            </Typography>
+            {renderClient(params)}
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+                {row.exam_title}
+              </Typography>
 
+            </Box>
           </Box>
-        </Box>
 
 
         )
@@ -206,16 +208,28 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-          
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.slug}
-              </Typography>
 
-            
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.slug}
+          </Typography>
+
+
         )
       }
     },
-    
+    {
+      flex: 0.175,
+      minWidth: 200,
+      field: 'country.name',
+      headerName: 'Country',
+      renderCell: (params: GridRenderCellParams) => {
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {params.row.country && params.row.country ? params.row.country.name : ""}
+          </Typography>
+        );
+      }
+    },
     {
       flex: 0.175,
       minWidth: 200,
@@ -249,7 +263,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string , stream_id: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string, stream_id: string, country_id: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -267,7 +281,7 @@ const SecondPage = () => {
             searchtext,
             searchfrom,
             stream_id,
-
+            country_id,
           },
         })
 
@@ -297,8 +311,8 @@ const SecondPage = () => {
   }
 
   useEffect(() => {
-    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname , stream_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, stream_id])
+    fetchTableData(orderby, searchtext, searchfrom, size, page, columnname, stream_id, country_id)
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, stream_id, country_id])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -333,10 +347,23 @@ const SecondPage = () => {
 
   const AddButtonComponent = <AddButtonToolbar />;
 
+  const getcountries = useCallback(async () => {
 
+    try {
+      const roleparams: any = {};
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/countries/get', { params: roleparams });
 
-   //get all streams
-   const getstreams = useCallback(async () => {
+      setCountries(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+  //get all streams
+  const getstreams = useCallback(async () => {
     try {
       const roleparams: any = {};
       roleparams['size'] = 10000;
@@ -353,9 +380,9 @@ const SecondPage = () => {
   useEffect(() => {
 
     getstreams();
-  
+    getcountries();
 
-  }, [getstreams]);
+  }, [getstreams, getcountries]);
 
 
   return (
@@ -363,9 +390,31 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
-        <CardHeader title="Search Filters" />
+          <CardHeader title="Search Filters" />
           <CardContent>
             <Grid container spacing={6}>
+              <Grid item sm={4} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select School"
+                  value={country_id}
+                  onChange={(e: any) => {
+                    setCountry_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select Country</MenuItem>
+                  {countries && countries.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {countries.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
               <Grid item sm={3} xs={12}>
                 <CustomTextField
                   select
@@ -394,8 +443,8 @@ const SecondPage = () => {
                 <Button sx={{ mt: 0 }} variant="contained" color='error'
                   onClick={(e: any) => {
                     setStream_id('');
-                    
-                 
+
+
                   }}
                   startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
               </Grid>

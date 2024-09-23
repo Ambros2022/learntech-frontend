@@ -92,7 +92,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('linked_in_link', data.linked_in_link);
             formData.append('image', selectedphoto);
 
-           
+
 
             try {
                 let response = await axios1.post(url, formData)
@@ -110,7 +110,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 }
 
             } catch (err: any) {
-         
+
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
@@ -141,14 +141,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
 
             formData.append('image', selectedphoto);
-         
+
 
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
 
                 if (response.data.status == 1) {
-             
+
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
@@ -179,14 +179,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }
 
 
-    
+
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
-                   
+
                     <Grid item xs={12} sm={6}>
                         <Controller
                             name='name'
@@ -259,10 +259,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                  
+
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

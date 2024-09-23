@@ -73,7 +73,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const onSubmit = async (data: any) => {
-       
+
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
@@ -231,7 +231,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

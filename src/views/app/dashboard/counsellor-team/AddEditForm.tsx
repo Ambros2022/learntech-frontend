@@ -15,20 +15,19 @@ import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
+import CustomInput from 'src/@core/components/pickersCoustomInput/index'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-
-
 import type { FC } from 'react';
-import { Alert } from '@mui/material'
+import { Alert, useTheme } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
-
+import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 
 interface Authordata {
@@ -40,12 +39,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
     const [stream, setStream] = useState([]);
     const isMountedRef = useIsMountedRef();
+    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
+    const [selectedphoto, setSelectedphoto] = useState('');
+    const theme = useTheme()
+    const { direction } = theme
 
-
+    const popperPlacement: ReactDatePickerProps['popperPlacement'] = direction === 'ltr' ? 'bottom-start' : 'bottom-end'
 
     const handleFileChangephoto = (files: any[]) => {
         setSelectedphoto(files[0]);
@@ -67,6 +68,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
+        location: isAddMode ? '' : olddata.location,
+        description: isAddMode ? '' : olddata.description,
+        experience: isAddMode ? null : new Date(olddata.experience),
     }
 
     const {
@@ -80,21 +84,20 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
-
-
-
-
-
-
     const onSubmit = async (data: any) => {
 
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/blogscategories/update';
+            let url = 'api/admin/counsellorteam/update';
             const formData = new FormData();
             formData.append('id', updateid);
+            formData.append('title', data.title);
             formData.append('name', data.name);
+            formData.append('location', data.location);
+            formData.append('description', data.description);
+            formData.append('image', selectedphoto);
+            formData.append('experience', data.experience);
 
 
             try {
@@ -127,10 +130,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/blogscategories/add';
-
+            let url = 'api/admin/counsellorteam/add';
             const formData = new FormData();
+            formData.append('title', data.title);
             formData.append('name', data.name);
+            formData.append('location', data.location);
+            formData.append('description', data.description);
+            formData.append('experience', data.experience);
+            if (selectedphoto == '') {
+
+                toast.error('Please Upload Image', {
+                    duration: 2000
+                })
+                setLoading(false);
+                return false;
+
+            }
+
+            formData.append('image', selectedphoto);
+
 
             try {
                 let response = await axios1.post(url, formData)
@@ -175,6 +193,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
+
                     <Grid item xs={12} sm={6}>
                         <Controller
                             name='name'
@@ -184,7 +203,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label=' Name'
+                                    label='Name'
                                     onChange={onChange}
                                     placeholder=''
                                     error={Boolean(errors.name)}
@@ -192,6 +211,103 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     {...(errors.name && { helperText: 'This field is required' })}
                                 />
                             )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='location'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Location'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.location)}
+                                    aria-describedby='validation-basic-location'
+                                    {...(errors.location && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='experience'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <DatePickerWrapper>
+                                    <DatePicker
+                                        selected={value}
+                                        id='basic-input'
+                                        showYearDropdown
+                                        showMonthDropdown
+                                        dateFormat='MMMM d, yyyy'
+                                        popperPlacement={popperPlacement}
+                                        onChange={onChange}
+                                        placeholderText='Click to select a date'
+                                        customInput={<CustomInput label='Experience'
+                                        // error={Boolean(errors.upcoming_date)} {...(errors.upcoming_date && { helperText: 'This field is required' })} 
+                                        />}
+
+
+                                    />
+                                </DatePickerWrapper>
+                            )}
+                        />
+                    </Grid>
+                    {/* <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='experience'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Experience'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.experience)}
+                                    aria-describedby='validation-basic-experience'
+                                    {...(errors.experience && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid> */}
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='description'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Description'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.description)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.description && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={3}>
+                        <FileUpload
+                            isAddMode={isAddMode}
+                            olddata={!isAddMode && olddata.image ? olddata.image : ""}
+                            onFileChange={handleFileChangephoto}
+                            maxFiles={1}
+                            maxSize={2000000}
+                            fileNames={fileNamesphoto}
+                            label=" Upload  Image"
+                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                            rejectionMessage='Try another file for upload.'
                         />
                     </Grid>
 

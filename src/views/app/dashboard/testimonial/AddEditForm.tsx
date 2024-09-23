@@ -290,7 +290,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     <MenuItem value="Testimonial_page">Testimonial Page</MenuItem>
                                     <MenuItem value="About_us_page">About Us Page</MenuItem>
                                 </CustomSelectField>
-                            )} 
+                            )}
                         />
                         {errors.type && (
                             <FormHelperText>
@@ -300,7 +300,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>

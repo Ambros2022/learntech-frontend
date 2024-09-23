@@ -246,11 +246,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const handleFilechange = () => {
 
-        return("")
+        return ("")
     }
     return (
         <>
-            <form  encType="application/x-www-form-urlencoded">
+            <form encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
 
@@ -410,7 +410,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                   
+
 
                     <Grid item xs={12} sm={4}>
                         <Controller
@@ -437,15 +437,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         <FileUpload
                             isAddMode={isAddMode}
                             olddata={!isAddMode && olddata.resume ? olddata.resume : ""}
-                           onFileChange={handleFilechange}
+                            onFileChange={handleFilechange}
                             maxFiles={1}
                             maxSize={2000000}
                             fileNames={""}
                             label="View Resume"
-                           
+
                         />
                     </Grid>
-                    
+
 
                     {/* <Grid item xs={12} sm={4}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
@@ -466,7 +466,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     {/* <Grid item xs={12}>

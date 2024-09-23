@@ -32,7 +32,7 @@ const OrganizationSection = () => {
             "title": "6. Evaluate",
             "icon": "bi bi-trophy-fill",
             "description": "After training, we assess the tangible impact of our training interventions based on a combination of feedback, analytics, and business"
-        }
+        },
     ]
 
     return (
@@ -41,12 +41,13 @@ const OrganizationSection = () => {
                 <div className="container">
                     <h2 className='text-center fw-bold text-blue mb-3'>Learntech Approach to Organizational stream Training</h2>
                     <p className='text-black'>
-                    Learntech is a leading stream training company that takes a holistic approach to delivering training solutions. Starting from expert consultation, training customization, training delivery and post-training support, our clients get ongoing assistance at every stage of their learning journey.
+                        Learntech is a leading stream training company that takes a holistic approach to delivering training solutions. Starting from expert consultation, training customization, training delivery and post-training support, our clients get ongoing assistance at every stage of their learning journey.</p>
 
-                        Our commitment to client success extends beyond the training sessions. We provide guidance to ensure that your team continues to excel and apply their newly acquired skills effectively in their roles.
+                    <p className="text-black">
+                        Our commitment to client success extends beyond the training sessions. We provide guidance to ensure that your team continues to excel and apply their newly acquired skills effectively in their roles.</p>
 
-                        The training methods include corporate live interactive sessions, and hands-on exercises designed for professionals. Learntech stream training for teams offer significant flexibility in terms of scheduling and delivery options, catering to the diverse needs of organizations.
-                    </p>
+                    <p className="text-black">
+                        The training methods include corporate live interactive sessions, and hands-on exercises designed for professionals. Learntech stream training for teams offer significant flexibility in terms of scheduling and delivery options, catering to the diverse needs of organizations.</p>
                     <div className="d-flex py-md-5 py-3 flex-wrap justify-content-center gap-3">
                         {
                             cardData.map((data, index) => (
@@ -64,7 +65,7 @@ const OrganizationSection = () => {
                         }
                     </div>
                 </div>
-            </section>
+            </section >
         </>
     )
 }

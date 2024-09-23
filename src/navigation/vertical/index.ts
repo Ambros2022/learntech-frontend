@@ -255,6 +255,18 @@ const navigation = (): VerticalNavItemsType => {
       icon: 'tabler:users',
       auth: false
     },
+    {
+      title: 'Organization Pages',
+      path: '/app/dashboard/organization-pages',
+      icon: 'tabler:affiliate',
+      auth: false
+    },
+    {
+      title: 'Counsellor Team',
+      path: '/app/dashboard/counsellor-team',
+      icon: 'tabler:users',
+      auth: false
+    },
 
     {
       title: 'Job',

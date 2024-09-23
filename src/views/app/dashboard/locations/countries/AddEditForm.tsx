@@ -75,7 +75,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
 
     const onSubmit = async (data: any) => {
-       
+
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
@@ -176,7 +176,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {error ? <Alert severity='error'>{error}</Alert> : null}
+                        {error && <Alert severity='error'>{error}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -189,7 +189,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         >
 
                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                               
+
                                 Submit
                                 {loading ? (
                                     <CircularProgress
@@ -202,7 +202,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 ) : null}
                             </Button>
-                         
+
                         </DialogActions>
                     </Grid>
                 </Grid>
