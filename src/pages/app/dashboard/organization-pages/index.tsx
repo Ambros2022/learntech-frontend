@@ -67,7 +67,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
 
   const DeleteRow = async () => {
     try {
-      await axios1.post('api/admin/ourteams/delete/' + id)
+      await axios1.post('api/admin/organizationpage/delete/' + id)
         .then(response => {
           if (response.data.status == 1) {
             toast.success(response.data.message)
@@ -90,7 +90,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   return (
     <>
       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./ourteam/edit/` + id} >
+        <Link href={`./organization-pages/edit/` + id} >
           <Icon icon='tabler:edit' fontSize={20} />
         </Link>
       </MenuItem>
@@ -152,8 +152,8 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [columnname, setColumnname] = useState<string>('name')
+  const [searchfrom, setSearchfrom] = useState<any>('title')
+  const [columnname, setColumnname] = useState<string>('title')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
 
@@ -170,13 +170,13 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 100,
-      field: 'name',
-      headerName: 'Member name',
+      field: 'title',
+      headerName: 'title',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.name}
+            {row.title}
           </Typography>
         );
       }
@@ -185,15 +185,15 @@ const SecondPage = () => {
     {
       flex: 0.175,
       minWidth: 100,
-      field: 'designation',
-      headerName: 'designation',
+      field: 'categories',
+      headerName: 'categories',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params
 
         return (
 
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.designation}
+            {row.categories}
           </Typography>
 
 
@@ -201,45 +201,45 @@ const SecondPage = () => {
       }
     },
 
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'image',
-      headerName: 'image',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params;
+    // {
+    //   flex: 0.175,
+    //   minWidth: 100,
+    //   field: 'image',
+    //   headerName: 'image',
+    //   renderCell: (params: GridRenderCellParams) => {
+    //     const { row } = params;
     
-        return (
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              src={row.image} // replace 'imageSrc' with the field name containing the image URL in your data
-              alt={row.image} // replace 'designation' with the appropriate field name for alt text
-              style={{ width: 100, height: 40, marginRight: 10 }} // adjust width, height, and margin as needed
-            />
-            {/* <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.image}
-            </Typography> */}
-          </div>
-        );
-      }
-    },
+    //     return (
+    //       <div style={{ display: 'flex', alignItems: 'center' }}>
+    //         <img
+    //           src={row.image} // replace 'imageSrc' with the field name containing the image URL in your data
+    //           alt={row.image} // replace 'designation' with the appropriate field name for alt text
+    //           style={{ width: 100, height: 40, marginRight: 10 }} // adjust width, height, and margin as needed
+    //         />
+    //         {/* <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+    //           {row.image}
+    //         </Typography> */}
+    //       </div>
+    //     );
+    //   }
+    // },
     
 
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'linked_in_link',
-      headerName: 'Linkdin',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
+    // {
+    //   flex: 0.3,
+    //   minWidth: 200,
+    //   field: 'content',
+    //   headerName: 'content',
+    //   renderCell: (params: GridRenderCellParams) => {
+    //     const { row } = params
 
-        return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.linked_in_link}
-              </Typography>
-        )
-      }
-    },
+    //     return (
+    //           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+    //             {row.content}
+    //           </Typography>
+    //     )
+    //   }
+    // },
    
 
     {
@@ -267,7 +267,7 @@ const SecondPage = () => {
       cancelToken = axios.CancelToken.source();
 
       await axios1
-        .get('api/admin/ourteams/get', {
+        .get('api/admin/organizationpage/get', {
           cancelToken: cancelToken.token,
           params: {
             columnname,
@@ -315,7 +315,7 @@ const SecondPage = () => {
       setColumnname(newModel[0].field)
     } else {
       setOrderby('asc')
-      setColumnname('name')
+      setColumnname('title')
     }
   }
 

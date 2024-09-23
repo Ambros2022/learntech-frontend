@@ -1,11 +1,11 @@
 // ** React Imports
-import {  useState,  useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditForm from 'src/views/app/dashboard/ourteam/AddEditForm'
+import AddEditForm from 'src/views/app/dashboard/organization-pages/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
@@ -27,7 +27,7 @@ const Edituserlayout = () => {
   const getolddata = useCallback(async () => {
     try {
 
-      const response = await axios1.get('api/admin/ourteams/get/' + id);
+      const response = await axios1.get('api/admin/organizationpage/get/' + id);
       if (isMountedRef.current) {
         setolddata(response.data.data);
         setFormloading(false);
@@ -48,33 +48,33 @@ const Edituserlayout = () => {
 
   return (
     <>
-     
-        <Card>
-          <Box
-            sx={{
-              gap: 2,
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              p: theme => theme.spacing(2, 5, 4, 5)
-            }}
-          >
-            <h5>Edit Team Member</h5>
-    
 
-            <Link href={`../`} >
-              <Button variant='contained'>View All member</Button>
-            </Link>
-          </Box>
-          <CardContent>
+      <Card>
+        <Box
+          sx={{
+            gap: 2,
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            p: theme => theme.spacing(2, 5, 4, 5)
+          }}
+        >
+          <h5>Edit Organization Page Details</h5>
 
-            {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
 
-          </CardContent>
-        </Card>
+          <Link href={`../`} >
+            <Button variant='contained'>View All organization pages</Button>
+          </Link>
+        </Box>
+        <CardContent>
 
-      
+          {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
+
+        </CardContent>
+      </Card>
+
+
     </>
   )
 }

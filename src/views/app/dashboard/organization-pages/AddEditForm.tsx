@@ -81,30 +81,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
     const schema: any = yup.object().shape({
-        name: yup
+        title: yup
             .string()
             .trim()
             .required(),
-        slug: yup
+            categories: yup
             .string()
             .trim()
             .required(),
-        info: yup
+        content: yup
             .string()
             .trim()
             .required(),
-        meta_title: yup
-            .string()
-            .trim()
-            .required(),
-        meta_description: yup
-            .string()
-            .trim()
-            .required(),
-        meta_keyword: yup
-            .string()
-            .trim()
-            .required(),
+        // meta_title: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
+        // meta_description: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
+        // meta_keyword: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
     })
 
 
@@ -116,7 +116,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         // meta_title: isAddMode ? '' : olddata.meta_title,
         // meta_description: isAddMode ? '' : olddata.meta_description,
         // meta_keyword: isAddMode ? '' : olddata.meta_keyword,
-        // status: isAddMode ? 'Published' : olddata.status,
+        status: isAddMode ? 'Published' : olddata.status,
 
     }
 
@@ -142,7 +142,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/abroadpage/update';
+            let url = 'api/admin/organizationpage/update';
             const formData = new FormData();
             formData.append('id', updateid);
             formData.append('categories', data.categories);
@@ -184,12 +184,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/abroadpage/add';
+            let url = 'api/admin/organizationpage/add';
 
             const formData = new FormData();
             formData.append('categories', data.categories);
-            formData.append('name', data.name);
-            formData.append('slug', data.slug);
+            formData.append('title', data.title);
+            // formData.append('slug', data.slug);
             formData.append('content', data.content);
             // formData.append('status', data.status);
             // formData.append('meta_title', data.meta_title);
@@ -345,7 +345,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}`, '& .MuiTab-root': { py: 3.5 } }}
                 >
                     <Tab value='basic-info' label='Basic Info' />
-                    <Tab value='account-details' label='FAQS' />
+                    <Tab value='account-details' label='Steps' />
                     {/* <Tab value='social-links' label='Gallery Images' /> */}
                 </TabList>
 
@@ -443,7 +443,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid> */}
 
-                                <Grid item xs={12} sm={6}>
+                                {/* <Grid item xs={12} sm={6}>
                                     <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                                     <Controller
                                         name='status'
@@ -457,7 +457,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
 
-                                </Grid>
+                                </Grid> */}
 
 
                                 <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -481,7 +481,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     </TabPanel>
 
                     <TabPanel sx={{ p: 0 }} value='account-details'>
-                        {isAddMode ? <> <h6>Please add Abroad Details First.</h6> </> : <>
+                        {isAddMode ? <> <h6>Please add Organization Page Details First.</h6> </> : <>
                             <form onSubmit={faqhandleSubmit(faqonSubmit)} encType="application/x-www-form-urlencoded">
                                 <Grid container spacing={5}>
                                     {fields.map((val, index) => (
