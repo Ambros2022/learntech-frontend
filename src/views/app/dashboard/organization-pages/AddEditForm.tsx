@@ -85,7 +85,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-            categories: yup
+        categories: yup
             .string()
             .trim()
             .required(),
@@ -135,7 +135,32 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
-
+    const stepsSchema: any = yup.object().shape({
+        title: yup
+            .string()
+            .trim()
+        //     .required(),
+        // categories: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
+        // content: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
+        // meta_title: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
+        // meta_description: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
+        // meta_keyword: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
+    })
 
     const onSubmit = async (data: any) => {
 
@@ -241,67 +266,36 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         }
     }
 
-
-
-    const faqdefaultValues = {
-        faqs: isAddMode ? [{
-            questions: '',
-            answers: '',
-
-        }] : olddata.abroadpagefaqs && olddata.abroadpagefaqs.length > 0 ? olddata.abroadpagefaqs : [{
-            questions: '',
-            answers: '',
-        }] || [{
-            questions: '',
-            answers: '',
-        }],
-
-
+    const stepsDefaultValues = {
+        title: isAddMode ? '' : olddata.title,
+        description: isAddMode ? '' : olddata.description,
+        // slug: isAddMode ? '' : olddata.slug,
+        icon: isAddMode ? '' : olddata.icon,
+        order_by: isAddMode ? '' : olddata.order_by,
+        // meta_title: isAddMode ? '' : olddata.meta_title,
+        // meta_description: isAddMode ? '' : olddata.meta_description,
+        // meta_keyword: isAddMode ? '' : olddata.meta_keyword,
+        // order_by: isAddMode ? 'Published' : olddata.order_by,
 
     }
 
+    const onStepsSubmit = async (data: any) => {
 
-
-    const {
-        control: faqcontrol,
-        handleSubmit: faqhandleSubmit,
-        formState: { errors: faqerrors }
-    } = useForm<any>({
-        defaultValues: faqdefaultValues,
-        mode: 'onChange',
-        // resolver: yupResolver(schema)
-    })
-    const { fields, append, remove } = useFieldArray({
-        control: faqcontrol,
-        name: 'faqs',
-    });
-
-    const handleAddFaq = () => {
-
-        append({
-            questions: '',
-            answers: '',
-
-
-        });
-
-    };
-
-    const handleRemoveFaq = (index: number | number[] | undefined) => {
-        remove(index);
-    };
-
-    const faqonSubmit = async (data: any) => {
-        console.log(data.faqs);
-        // return
-
-        if (!isAddMode && olddata.id) {
+        if (!isAddMode && olddata.id && olddata.description) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/abroadpage/updatefaq';
+            let url = 'api/admin/organizationpagesteps/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('faqs', JSON.stringify(data.faqs));
+            formData.append('title', data.title);
+            formData.append('description', data.description);
+            formData.append('icon', data.icon);
+            formData.append('order_by', data.order_by);
+            // formData.append('status', data.status);
+            // formData.append('meta_title', data.meta_title);
+            // formData.append('meta_description', data.meta_description);
+            // formData.append('meta_keyword', data.meta_keyword);
+            // formData.append('backgroundimage', selectedphoto);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -309,26 +303,100 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     toast.success(response.data.message)
                     setLoading(false)
                     setError('')
-                    reset();
+                    stepsReset();
                     router.back();
                 }
                 else {
-
                     setLoading(false)
                     toast.error(response.data.message)
                     setError(response.data.message)
                 }
-                // history.push('/app/products');
+
+            } catch (err: any) {
+
+                setLoading(false)
+                if (err.errors && err.errors.length > 0) {
+                    const errorMessage = err.errors[0].msg;
+                    setError(errorMessage || "Please try again");
+                    toast.error(errorMessage || "Please try again");
+                } else {
+                    setError(err.message || "Please try again");
+                    toast.error(err.message || "Please try again");
+                }
+
+            }
+        } else {
+            setLoading(true)
+            let url = 'api/admin/organizationpagesteps/add';
+
+            const formData = new FormData();
+            // formData.append('categories', data.categories);
+            formData.append('title', data.title);
+            formData.append('order_by', data.order_by);
+            formData.append('description', data.description);
+            formData.append('icon', data.icon);
+            // formData.append('meta_title', data.meta_title);
+            // formData.append('meta_description', data.meta_description);
+            // formData.append('meta_keyword', data.meta_keyword);
+            // if (selectedphoto == '') {
+
+            //     toast.error('Please Upload Icon', {
+            //         duration: 2000
+            //     })
+            //     setLoading(false);
+            //     return false;
+
+            // }
+            // formData.append('backgroundimage', selectedphoto);
+
+            try {
+                let response = await axios1.post(url, formData)
+                console.log(response, "response")
+
+                if (response.data.status == 1) {
+
+                    toast.success(response.data.message)
+                    setLoading(false)
+                    setError('')
+                    stepsReset();
+                    router.push('./');
+
+
+                }
+                else {
+                    setLoading(false)
+                    toast.error(response.data.message)
+                    setError(response.data.message)
+                }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
-                toast.error(err.message || "please try again")
+                if (err.errors && err.errors.length > 0) {
+                    const errorMessage = err.errors[0].msg;
+                    setError(errorMessage || "Please try again");
+                    toast.error(errorMessage || "Please try again");
+                } else {
+                    setError(err.message || "Please try again");
+                    toast.error(err.message || "Please try again");
+                }
 
             }
-
         }
     }
+
+    const {
+        control: stepsControl,
+        handleSubmit: handleStepsSubmit,
+        resetField: stepsResetField,
+        reset: stepsReset,
+        setValue: stepsSetValue,
+        formState: { errors: stepsErrors }
+    } = useForm<any>({
+        defaultValues: stepsDefaultValues,
+        mode: 'onChange',
+        resolver: yupResolver(stepsSchema)
+    })
+
 
 
     const handleTabsChange = (event: SyntheticEvent, newValue: string) => {
@@ -345,7 +413,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}`, '& .MuiTab-root': { py: 3.5 } }}
                 >
                     <Tab value='basic-info' label='Basic Info' />
-                    <Tab value='account-details' label='Steps' />
+                    <Tab value='steps-details' label='Steps' />
                     {/* <Tab value='social-links' label='Gallery Images' /> */}
                 </TabList>
 
@@ -400,14 +468,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-
-
-
-
-
-                       
-
-
 
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>Content</Typography>
@@ -480,141 +540,138 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         </form >
                     </TabPanel>
 
-                    <TabPanel sx={{ p: 0 }} value='account-details'>
+                    <TabPanel sx={{ p: 0 }} value='steps-details'>
                         {isAddMode ? <> <h6>Please add Organization Page Details First.</h6> </> : <>
-                            <form onSubmit={faqhandleSubmit(faqonSubmit)} encType="application/x-www-form-urlencoded">
+                            <form onSubmit={handleStepsSubmit(onStepsSubmit)} encType="application/x-www-form-urlencoded">
                                 <Grid container spacing={5}>
-                                    {fields.map((val, index) => (
-                                        <Grid item xs={12} key={val.id}>
-                                            <Grid container spacing={2} alignItems="center">
-                                                <Grid item xs={12} sm={11}>
-                                                    <Controller
-                                                        //@ts-ignore
-                                                        name={`faqs[${index}].questions`}
-                                                        control={faqcontrol}
-                                                        rules={{ required: true }}
-                                                        //@ts-ignore
-                                                        defaultValue={val.questions}
-                                                        render={({ field: { value, onChange } }) => (
-                                                            <CustomTextField
-                                                                fullWidth
-                                                                value={value}
-                                                                label='Questions'
-                                                                onChange={(e) => {
-                                                                    onChange(e);
-                                                                    setValue(`faqs[${index}].questions`, e.target.value);
-                                                                }}
-                                                                placeholder=''
-                                                            />
-                                                        )}
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={12} sm={11}>
-                                                    <Typography>Answers</Typography>
-                                                    <Controller
-                                                        //@ts-ignore
-                                                        name={`faqs[${index}].answers`}
-                                                        control={faqcontrol}
-                                                        rules={{ required: true }}
-                                                        //@ts-ignore
-                                                        defaultValue={val.answers}
-                                                        render={({ field: { value, onChange } }) => (
-                                                            <>
-                                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                                    onChange={(e) => {
-                                                                        onChange(e);
-                                                                        setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
-                                                                    }} />
 
-                                                            </>
-                                                        )}
-                                                    />
-                                                </Grid>
+                                    {/* <Grid item xs={12} sm={6}>
+                                        <Controller
+                                            name='categories'
+                                            control={control}
+                                            rules={{ required: true }}
+                                            render={({ field: { value, onChange } }) => (
+                                                <CustomSelectField
+                                                    label="Select Categories"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    labelId="categories-label"
+                                                    error={Boolean(errors.categories)}
+                                                >
+                                                    <MenuItem value="Streams">Streams</MenuItem>
+                                                    <MenuItem value="Courses">Courses</MenuItem>
+                                                    <MenuItem value="Exams">Exams</MenuItem>
+                                                    <MenuItem value="Study_Abroad">Study Abroad</MenuItem>
+                                                </CustomSelectField>
+                                            )}
+                                        />
+                                        {errors.type && (
+                                            <FormHelperText>
+                                                {errors.type.message as React.ReactNode}
+                                            </FormHelperText>
+                                        )}
+                                    </Grid> */}
+
+                                    <Grid item xs={12} sm={6}>
+                                        <Controller
+                                            name='title'
+                                            control={stepsControl}
+                                            rules={{ required: true }}
+                                            render={({ field: { value, onChange } }) => (
+                                                <CustomTextField
+                                                    fullWidth
+                                                    value={value}
+                                                    label='Title'
+                                                    onChange={onChange}
+                                                    placeholder=''
+                                                    error={Boolean(stepsErrors.title)}
+                                                    aria-describedby='validation-basic-title'
+                                                    {...(stepsErrors.title && { helperText: 'This field is required' })}
+                                                />
+                                            )}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <Controller
+                                            name='description'
+                                            control={stepsControl}
+                                            rules={{ required: true }}
+                                            render={({ field: { value, onChange } }) => (
+                                                <CustomTextField
+                                                    fullWidth
+                                                    value={value}
+                                                    label='Description'
+                                                    onChange={onChange}
+                                                    placeholder=''
+                                                    error={Boolean(stepsErrors.description)}
+                                                    aria-describedby='validation-basic-description'
+                                                    {...(stepsErrors.description && { helperText: 'This field is required' })}
+                                                />
+                                            )}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <Controller
+                                            name='icon'
+                                            control={stepsControl}
+                                            rules={{ required: true }}
+                                            render={({ field: { value, onChange } }) => (
+                                                <CustomTextField
+                                                    fullWidth
+                                                    value={value}
+                                                    label='Icon'
+                                                    onChange={onChange}
+                                                    placeholder=''
+                                                    error={Boolean(stepsErrors.icon)}
+                                                    aria-describedby='validation-basic-icon'
+                                                    {...(stepsErrors.icon && { helperText: 'This field is required' })}
+                                                />
+                                            )}
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={6}>
+                                        <Controller
+                                            name='listing_order'
+                                            control={stepsControl}
+                                            rules={{ required: true }}
+                                            render={({ field: { value, onChange } }) => (
+                                                <CustomTextField
+                                                    fullWidth
+                                                    value={value}
+                                                    type='number'
+                                                    label='Listing Order'
+                                                    onChange={onChange}
+                                                    placeholder=''
+                                                    error={Boolean(stepsErrors.listing_order)}
+                                                    aria-describedby='validation-basic-listing-order'
+                                                    {...(stepsErrors.listing_order && { helperText: 'This field is required' })}
+                                                />
+                                            )}
+                                        />
+                                    </Grid>
+
+                                  
 
 
+                                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
-                                                <Grid item xs={1}>
-                                                    {index !== 0 && (
-                                                        <Button
-                                                            variant="contained"
-                                                            color="error"
-                                                            onClick={() => handleRemoveFaq(index)}
-                                                            style={{ margin: '17px 0 0 0px', padding: '8px' }}
-                                                        >
-                                                            <CloseIcon />
-                                                        </Button>
-                                                    )}
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    ))}
-                                    {fields.length === 0 && (
-                                        <Grid item xs={12}>
-
-                                            <Grid container spacing={2} alignItems="center">
-                                                <Grid item xs={12} sm={5}>
-                                                    <CustomTextField
-                                                        fullWidth
-                                                        label='Questions'
-                                                        placeholder=''
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={12} sm={5}>
-                                                    <CustomTextField
-                                                        fullWidth
-                                                        label='Answers'
-                                                        placeholder=''
-                                                    />
-                                                </Grid>
-
-                                            </Grid>
-                                        </Grid>
-                                    )}
-                                    <Grid item xs={3}>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={handleAddFaq}
-                                            style={{ margin: '18px 0', fontSize: '12px' }}
-                                        >
-                                            Add More
+                                        <Button type='submit' variant='contained'>
+                                            Submit
+                                            {loading ? (
+                                                <CircularProgress
+                                                    sx={{
+                                                        color: 'common.white',
+                                                        width: '20px !important',
+                                                        height: '20px !important',
+                                                        mr: theme => theme.spacing(2)
+                                                    }}
+                                                />
+                                            ) : null}
                                         </Button>
                                     </Grid>
-
-                                    <Grid item xs={12}>
-                                        <DialogActions
-                                            sx={{
-                                                justifyContent: 'center',
-                                                px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
-                                                pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
-                                            }}
-                                        >
-
-                                            <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                                                {/* <Button variant='contained' type='submit' sx={{ mr: 1 }} onClick={() => setShow(false)}> */}
-                                                Update
-                                                {loading ? (
-                                                    <CircularProgress
-                                                        sx={{
-                                                            color: 'common.white',
-                                                            width: '20px !important',
-                                                            height: '20px !important',
-                                                            mr: theme => theme.spacing(2)
-                                                        }}
-                                                    />
-                                                ) : null}
-                                            </Button>
-                                            {/* <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
-                                Discard
-                            </Button> */}
-                                        </DialogActions>
-                                    </Grid>
-
                                 </Grid>
                             </form >
-
-
-
                         </>}
 
                     </TabPanel>
