@@ -43,6 +43,7 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import QuillEditor from 'src/@core/components/html-editor/index';
 import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
+import StepsFormContainer from '../stepsFormContainer'
 
 
 
@@ -542,136 +543,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <TabPanel sx={{ p: 0 }} value='steps-details'>
                         {isAddMode ? <> <h6>Please add Organization Page Details First.</h6> </> : <>
-                            <form onSubmit={handleStepsSubmit(onStepsSubmit)} encType="application/x-www-form-urlencoded">
-                                <Grid container spacing={5}>
-
-                                    {/* <Grid item xs={12} sm={6}>
-                                        <Controller
-                                            name='categories'
-                                            control={control}
-                                            rules={{ required: true }}
-                                            render={({ field: { value, onChange } }) => (
-                                                <CustomSelectField
-                                                    label="Select Categories"
-                                                    value={value}
-                                                    onChange={onChange}
-                                                    labelId="categories-label"
-                                                    error={Boolean(errors.categories)}
-                                                >
-                                                    <MenuItem value="Streams">Streams</MenuItem>
-                                                    <MenuItem value="Courses">Courses</MenuItem>
-                                                    <MenuItem value="Exams">Exams</MenuItem>
-                                                    <MenuItem value="Study_Abroad">Study Abroad</MenuItem>
-                                                </CustomSelectField>
-                                            )}
-                                        />
-                                        {errors.type && (
-                                            <FormHelperText>
-                                                {errors.type.message as React.ReactNode}
-                                            </FormHelperText>
-                                        )}
-                                    </Grid> */}
-
-                                    <Grid item xs={12} sm={6}>
-                                        <Controller
-                                            name='title'
-                                            control={stepsControl}
-                                            rules={{ required: true }}
-                                            render={({ field: { value, onChange } }) => (
-                                                <CustomTextField
-                                                    fullWidth
-                                                    value={value}
-                                                    label='Title'
-                                                    onChange={onChange}
-                                                    placeholder=''
-                                                    error={Boolean(stepsErrors.title)}
-                                                    aria-describedby='validation-basic-title'
-                                                    {...(stepsErrors.title && { helperText: 'This field is required' })}
-                                                />
-                                            )}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        <Controller
-                                            name='description'
-                                            control={stepsControl}
-                                            rules={{ required: true }}
-                                            render={({ field: { value, onChange } }) => (
-                                                <CustomTextField
-                                                    fullWidth
-                                                    value={value}
-                                                    label='Description'
-                                                    onChange={onChange}
-                                                    placeholder=''
-                                                    error={Boolean(stepsErrors.description)}
-                                                    aria-describedby='validation-basic-description'
-                                                    {...(stepsErrors.description && { helperText: 'This field is required' })}
-                                                />
-                                            )}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        <Controller
-                                            name='icon'
-                                            control={stepsControl}
-                                            rules={{ required: true }}
-                                            render={({ field: { value, onChange } }) => (
-                                                <CustomTextField
-                                                    fullWidth
-                                                    value={value}
-                                                    label='Icon'
-                                                    onChange={onChange}
-                                                    placeholder=''
-                                                    error={Boolean(stepsErrors.icon)}
-                                                    aria-describedby='validation-basic-icon'
-                                                    {...(stepsErrors.icon && { helperText: 'This field is required' })}
-                                                />
-                                            )}
-                                        />
-                                    </Grid>
-
-                                    <Grid item xs={12} sm={6}>
-                                        <Controller
-                                            name='listing_order'
-                                            control={stepsControl}
-                                            rules={{ required: true }}
-                                            render={({ field: { value, onChange } }) => (
-                                                <CustomTextField
-                                                    fullWidth
-                                                    value={value}
-                                                    type='number'
-                                                    label='Listing Order'
-                                                    onChange={onChange}
-                                                    placeholder=''
-                                                    error={Boolean(stepsErrors.listing_order)}
-                                                    aria-describedby='validation-basic-listing-order'
-                                                    {...(stepsErrors.listing_order && { helperText: 'This field is required' })}
-                                                />
-                                            )}
-                                        />
-                                    </Grid>
-
-                                  
-
-
-                                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-
-                                        <Button type='submit' variant='contained'>
-                                            Submit
-                                            {loading ? (
-                                                <CircularProgress
-                                                    sx={{
-                                                        color: 'common.white',
-                                                        width: '20px !important',
-                                                        height: '20px !important',
-                                                        mr: theme => theme.spacing(2)
-                                                    }}
-                                                />
-                                            ) : null}
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </form >
+                            <StepsFormContainer
+                                isAddMode={isAddMode}
+                                olddata={olddata}
+                            />
                         </>}
 
                     </TabPanel>

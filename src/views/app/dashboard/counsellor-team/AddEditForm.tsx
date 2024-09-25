@@ -92,7 +92,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let url = 'api/admin/counsellorteam/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('title', data.title);
             formData.append('name', data.name);
             formData.append('location', data.location);
             formData.append('description', data.description);
@@ -132,7 +131,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             setLoading(true)
             let url = 'api/admin/counsellorteam/add';
             const formData = new FormData();
-            formData.append('title', data.title);
             formData.append('name', data.name);
             formData.append('location', data.location);
             formData.append('description', data.description);
@@ -311,9 +309,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
                     </Grid>
 
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         {error && <Alert severity='error'>{error}</Alert>}
-                    </Grid>
+                    </Grid> */}
 
                     <Grid item xs={12}>
                         <DialogActions

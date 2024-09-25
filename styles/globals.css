@@ -1008,6 +1008,10 @@
     }
   }
 
+  .examNewsText {
+    font-size: 13px !important;
+  }
+
   @media (min-width: 1024px) and (max-width: 1199px) {
     .examNewsText {
       font-size: 10px !important;
@@ -6069,8 +6073,12 @@
     padding: 5px !important;
   }
 
-  .trainingBtn{
+  .trainingBtn {
     background-color: #f6f8fb !important;
     border-radius: 20px !important;
     padding: 5px 10px !important;
+  }
+
+  .counsellorText h5 {
+    font-size: 15px !important;
   }

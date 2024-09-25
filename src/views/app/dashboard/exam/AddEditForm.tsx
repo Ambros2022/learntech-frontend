@@ -1108,9 +1108,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     />
                                 </Grid>
 
-                                <Grid item xs={12}>
+                                {/* <Grid item xs={12}>
                                 {error && <Alert severity='error'>{error}</Alert>}
-                                </Grid>
+                                </Grid> */}
 
                                 <Grid item xs={12}>
                                     <DialogActions

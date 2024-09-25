@@ -115,6 +115,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
         slug: isAddMode ? '' : olddata.slug,
+        short_name: isAddMode ? '' : olddata.short_name,
         gender: isAddMode ? '' : olddata.gender,
         address: isAddMode ? '' : olddata.address,
         map: isAddMode ? '' : olddata.map,
@@ -174,6 +175,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
             formData.append('name', data.name);
             formData.append('slug', data.slug);
+            formData.append('short_name', data.short_name);
             formData.append('gender', data.gender);
             formData.append('board_type', data.board_type);
             formData.append('avg_rating', data.avg_rating);
@@ -240,6 +242,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
             formData.append('name', data.name);
             formData.append('slug', data.slug);
+            formData.append('short_name', data.short_name);
             formData.append('gender', data.gender);
             formData.append('board_type', data.board_type);
             formData.append('avg_rating', data.avg_rating);
@@ -704,6 +707,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                 error={Boolean(errors.slug)}
                                                 aria-describedby='validation-basic-first-name'
                                                 {...(errors.slug && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='short_name'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Short Name'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.short_name)}
+                                                aria-describedby='validation-basic-short-name'
+                                                {...(errors.short_name && { helperText: 'This field is required' })}
                                             />
                                         )}
                                     />

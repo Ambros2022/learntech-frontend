@@ -74,7 +74,7 @@ const CollegeInfoSection = ({ data, exams }) => {
       { id: 'sample_paper', label: 'Sample Papers', content: data.sample_paper },
       { id: 'hostel', label: 'Infrastructure', content: data.hostel },
       { id: 'gallery', label: 'Gallery', content: data.clggallery },
-      { id: 'review', label: 'Reviews', content: <ReviewSec data={data}/> },
+      { id: 'review', label: 'Reviews', content: <ReviewSec data={data} /> },
       { id: 'schoolboardfaqs', label: 'FAQ', content: <FaqSec data={data.schoolboardfaqs} /> }
     ];
 
@@ -102,7 +102,7 @@ const CollegeInfoSection = ({ data, exams }) => {
       { id: 'hostel', content: data.hostel },
       { id: 'gallery', content: data.clggallery },
       { id: 'review', content: <ReviewSec data={data} /> },
-      { id: 'schoolboardfaqs', content: data.schoolboardfaqs && data.schoolboardfaqs !== '' ? (<FaqSec data={data.schoolboardfaqs} />) :''}
+      { id: 'schoolboardfaqs', content: data.schoolboardfaqs && data.schoolboardfaqs !== '' ? (<FaqSec data={data.schoolboardfaqs} />) : '' }
     ];
 
     return tabs
@@ -128,7 +128,7 @@ const CollegeInfoSection = ({ data, exams }) => {
           <p className='mb-3'>
             <Link href="/">Home <i className='bi bi-chevron-right'></i></Link>
             <Link href={"/boards"}> Boards <i className='bi bi-chevron-right'></i></Link>
-            <span className='text-blue' style={{ cursor: 'pointer' }}> {data.name}</span>
+            <span className='text-blue' style={{ cursor: 'pointer' }}> {data.short_name}</span>
           </p>
         </section>
         <div className="container bg-white position-relative innerClgCarousel">
@@ -156,34 +156,45 @@ const CollegeInfoSection = ({ data, exams }) => {
           )}
         </div>
       </section>
+
       <section className="bg-white">
         <div className="container">
           <div className="row">
-            <div className="col-xl-8 col-lg-8 col-md-7 col-12 mx-auto">
-              <div className="tab-content pt-5" id="nav-tabContent">
-                {renderTabContent()}
-              </div>
-            </div>
-            <div className="col-xl-4 col-lg-4 col-md-5 col-12 mx-auto py-5">
-              <ContactForm heading={'Contact US'} />
-              <h4 className='fw-bold text-blue pt-3 mb-3 text-center mt-5'>Upcoming Exams</h4>
-              <div className="col-12 cardConBrdr p-3 overflow-y-auto bg-skyBlue my-3" style={{ maxHeight: 'calc(7 * 90px)' }}>
-                {exams.map((exam, index) => (
-                  <Link href={`/exam/${exam.id}/${exam.slug}`} key={index}>
-                    <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
-                      <div className="row">
-                        <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
-                          <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={200} height={200} className='align-self-center innerBoardImg' alt='clg-img' />
+            {activeTab === 'info' ? (
+              <>
+                <div className="col-xl-8 col-lg-8 col-md-7 col-12 mx-auto">
+                  <div className="tab-content pt-5" id="nav-tabContent">
+                    {renderTabContent()}
+                  </div>
+                </div>
+                <div className="col-xl-4 col-lg-4 col-md-5 col-12 mx-auto py-5">
+                  <ContactForm heading={'Contact US'} />
+                  <h4 className='fw-bold text-blue pt-3 mb-3 text-center mt-5'>Upcoming Exams</h4>
+                  <div className="col-12 cardConBrdr p-3 overflow-y-auto bg-skyBlue my-3" style={{ maxHeight: 'calc(7 * 90px)' }}>
+                    {exams.map((exam, index) => (
+                      <Link href={`/exam/${exam.id}/${exam.slug}`} key={index}>
+                        <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
+                          <div className="row">
+                            <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
+                              <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={200} height={200} className='align-self-center innerBoardImg' alt='clg-img' />
+                            </div>
+                            <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
+                              <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title} Exam</h6>
+                            </div>
+                          </div>
                         </div>
-                        <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
-                          <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title} Exam</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="col-12">
+                <div className="tab-content pt-5" id="nav-tabContent">
+                  {renderTabContent()}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>

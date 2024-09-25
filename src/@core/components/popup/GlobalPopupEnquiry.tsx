@@ -100,7 +100,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                             //     <img src={require("src/assets/img/left_bt.svg")} alt="Download Brochure" />
                             // </a>
                             <a onClick={() => setModalShow(true)} className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
-                                <Image src="/images/icons/Download Brochure.svg" className='mb-3' width={150} height={70} alt="download-brochure-icon" />
+                                <Image src="/images/icons/Download Brochure.svg" className='mb-md-3 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" />
 
                             </a>
                             :

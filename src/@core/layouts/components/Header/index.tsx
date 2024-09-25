@@ -368,6 +368,11 @@ const Header = () => {
                         Medical Edu Studio
                       </Link>
                     </li>
+                    <li>
+                      <Link className="d-flex justify-content-between dropdown-item" href="/education-loan">
+                        Education Loan
+                      </Link>
+                    </li>
                   </ul>
                 </li>
                 <li className="hideBtnTxt">
@@ -419,6 +424,11 @@ const Header = () => {
                 <li className="nav-item dropdown d-lg-none d-md-inline-block">
                   <Link className={`nav-link ${isLinkActive('/meds') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/meds">
                     Medical Edu Studio
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/education-loan') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/education-loan">
+                    Education Loan
                   </Link>
                 </li>
               </ul>
