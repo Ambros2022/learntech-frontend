@@ -245,8 +245,8 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         });
     };
 
-    const ScholarshipCards = ({ data}) => {
-        console.log("W",data);
+    const ScholarshipCards = ({ data }) => {
+        console.log("W", data);
         const startIndex = (currentPage - 1) * perPage;
         const paginatedScholarships = data.slice(startIndex, startIndex + perPage);
         return (
@@ -334,6 +334,8 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                             </nav>
                                         </div>
                                         <div className="mb-3 rounded p-3">
+                                            <h2 className='fw-bold text-blue mb-5 text-center '>Entrance Exams for Study Abroad
+                                            </h2>
                                             <h4 className='text-blue fw-bold mb-3'>Filter By</h4>
 
                                             <div className="d-flex gap-3 flex-wrap">
@@ -552,7 +554,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                                 </div>
                                             </div>
                                         ) : (
-                                            <ScholarshipCards data={scholarshipsData}/>
+                                            <ScholarshipCards data={scholarshipsData} />
                                         )}                                        {/* Pagination */}
                                         <div className="row col-md-12 blogCardspage">
                                             <div className='d-flex justify-content-center'>

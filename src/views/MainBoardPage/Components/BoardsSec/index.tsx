@@ -82,7 +82,7 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                                 </div>
                                                             </div>
                                                             <div className="d-flex justify-md-content-end">
-                                                                <Link href={`/board/${item.id}/${item.name}`} className='btn viewMoreCollegeBtn'>View Details</Link>
+                                                                <Link href={`/board/${item.id}/${item.slug}`} className='btn viewMoreCollegeBtn'>View Details</Link>
                                                             </div>
                                                         </div>
                                                     </div>

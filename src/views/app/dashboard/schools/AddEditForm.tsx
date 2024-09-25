@@ -1002,6 +1002,36 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Admissions Process</Typography>
+                                    <Controller
+                                        name='admissions_process'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("admissions_process", value)} />
+
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>Extracurriculars</Typography>
+                                    <Controller
+                                        name='extracurriculars'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("extracurriculars", value)} />
+
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
 
 
                                 {/* <Grid item xs={12} sm={12}>
