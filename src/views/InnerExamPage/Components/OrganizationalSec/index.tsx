@@ -11,7 +11,7 @@ const OrganizationSection = ({data}) => {
         try {
             const roleparams: any = {};
             roleparams['size'] = 1000;
-            roleparams['categories'] = 'Streams';
+            roleparams['categories'] = 'Exams';
             const response = await axios.get('api/website/organizationpage/get', { params: roleparams });
             if (isMountedRef.current && response.data.status === 1) {
                 setOrganizationPage(response.data.data[0]);
@@ -30,8 +30,8 @@ const OrganizationSection = ({data}) => {
             {organizationPage && organizationPage !== '' ? (
                 <section className='bg-white pt-5'>
                     <div className="container">
-                        <h2 className='text-center fw-bold text-blue mb-3'>Learntech’s Approach for {data.name} Courses</h2>
-                        {/* <h2 className='text-center fw-bold text-blue mb-3'>Learntech’s Approach for{organizationPage.title}</h2> */}
+                        {/* <h2 className='text-center fw-bold text-blue mb-3'>Learntech’s Approach for {data.name} Courses</h2> */}
+                        <h2 className='text-center fw-bold text-blue mb-3'>{organizationPage.title}</h2>
                         <p className='text-black' dangerouslySetInnerHTML={{ __html: organizationPage.content }}></p>
                         <div className="d-flex mt-5 pt-md-5 pt-3 flex-wrap justify-content-center gap-3">
                             {organizationPage.organizatiopagesteps.map((data) => (

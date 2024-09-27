@@ -95,10 +95,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .required(),
         country_id: yup.object().required("This field is required"),
         category_id: yup.object().required("This field is required"),
-        pdf_name: yup.string()
-            .trim()
-            .required(),
-
     })
 
     const defaultValues = {

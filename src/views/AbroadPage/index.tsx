@@ -7,6 +7,8 @@ import BannerSec from './Components/BannerSec'
 import StudySec from './Components/StudySec'
 import TopUniversity from './Components/TopUniversity'
 import FaqSec from './Components/FaqSec'
+import OrganizationSection from './Components/OrganizationalSec';
+import ExperTraineeSec from './Components/ExpertTrainneSec';
 
 function AbroadPage({ data }) {
   console.log(data);
@@ -14,6 +16,8 @@ function AbroadPage({ data }) {
     <>
       <BannerSec data={data} />
       <StudySec data={data} />
+      <OrganizationSection data={data}/>
+      <ExperTraineeSec/>
       <TopUniversity data={data} />
       {data && data?.abroadpagefaqs.length > 0 && <FaqSec data={data} />}
     </>

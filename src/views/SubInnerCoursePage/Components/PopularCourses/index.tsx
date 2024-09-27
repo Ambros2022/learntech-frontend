@@ -13,7 +13,7 @@ type CourseItem = {
   streams: {
     id: any;
     slug: string;
-    logo:string;
+    logo: string;
   };
   streamsSlug?: string; // Optional to avoid type issues
 };
@@ -61,6 +61,7 @@ function PopularCourses() {
     streamsSlug: string;
   };
 
+
   function CardComponent({ short_name, id, slug, logo, streamsSlug }: CardProps) {
     return (
       <Link href={`/course/${id}/${streamsSlug}/${slug}`}>
@@ -82,7 +83,7 @@ function PopularCourses() {
     );
   }
   return (
-    <section className='bg-white pb-5'>
+    <section className='bg-white pb-5 pt-5'>
       <section className='container bg-skyBlue rounded'>
         <h2 className='fw-bold text-blue pt-5 ps-5'>Popular Degree Courses</h2>
         <div className="topCarouselCardsCon subInnerCourseCon px-5 pt-2 pb-5 position-relative" style={{ zIndex: '2' }}>
