@@ -3773,7 +3773,7 @@
 
   .categorySecCarousel .carousel-button-group {
     position: absolute !important;
-    top: 93px !important;
+    top: 122px !important;
     width: 67% !important;
   }
 
@@ -3848,7 +3848,7 @@
   @media (min-width:992px) and (max-width:1024px) {
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
-      top: 93px !important;
+      top: 122px !important;
       width: 60% !important;
     }
 
@@ -3907,7 +3907,7 @@
 
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
-      top: 90px !important;
+      top: 122px !important;
       width: 100% !important;
     }
 
@@ -3954,7 +3954,7 @@
 
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
-      top: 90px !important;
+      top: 122px !important;
       width: 100% !important;
     }
 
@@ -4004,7 +4004,7 @@
 
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
-      top: 83px !important;
+      top: 140px !important;
       width: 100% !important;
     }
 
@@ -6060,12 +6060,17 @@
     border-left: 0 !important;
     border-top: 0 !important;
     border-bottom: 0 !important;
-    width: 170px !important;
+    width: 200px !important;
+  }
+
+  .organizationImg>img{
+    height: 80px;
+    width: auto;
   }
 
   .right-arrow-orgazinational {
     position: absolute !important;
-    top: 17% !important;
+    top: 0% !important;
     right: -7% !important;
     background-color: white !important;
     border-radius: 50% !important;
@@ -6079,6 +6084,8 @@
     padding: 5px 10px !important;
   }
 
-  .counsellorText h5 {
-    font-size: 15px !important;
+  @media (min-width:320px) and (max-width:1400px) {
+    .organizationalCard {
+      width: 170px !important;
+    }
   }

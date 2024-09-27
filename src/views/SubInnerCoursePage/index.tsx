@@ -7,6 +7,8 @@ import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import ExpertSection from './Components/ExpertSection';
+import OrganizationSection from './Components/OrganizationalSec';
+import ExperTraineeSec from './Components/ExpertTrainneSec';
 
 interface Pagedata {
   meta_title?: string;
@@ -111,6 +113,8 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />}
+      <OrganizationSection data={pagedata}/>
+      <ExperTraineeSec/>
       <PopularCourses />
       <ExpertSection />
     </>

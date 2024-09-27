@@ -8,6 +8,8 @@ import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import UpcomingExamsSec from './Components/UpcomingExamsSec';
+import OrganizationSection from './Components/OrganizationalSec';
+import ExperTraineeSec from './Components/ExpertTrainneSec';
 
 function InnerExamPage({ id }) {
   const router = useRouter();
@@ -82,6 +84,8 @@ function InnerExamPage({ id }) {
       </Head>
       {!loading && pagedata && <BannerSec data={pagedata} />}
       {!loading && pagedata && <OverviewSec data={pagedata} />}
+      <OrganizationSection data={pagedata}/>
+      <ExperTraineeSec/>
       {/* {!loading && pagedata && <UpcomingExamsSec data={news} />} */}
 
       {/* <OverviewSec /> */}
