@@ -71,7 +71,7 @@ const CollegeInfoSection = ({ data, exams }) => {
       { id: 'reg_form', label: 'Registration Form', content: data.reg_form },
       { id: 'syllabus', label: 'Syllabus', content: data.syllabus },
       { id: 'results', label: 'Results', content: data.results },
-      { id: 'sample_paper', label: 'Sample Papers', content: data.sample_paper },
+      { id: 'sample_paper', label: 'Sample Papers', content: data.sample_paper && data.sample_paper>0?data.sample_paper:'' },
       { id: 'hostel', label: 'Infrastructure', content: data.hostel },
       { id: 'gallery', label: 'Gallery', content: data.clggallery },
       { id: 'review', label: 'Reviews', content: <ReviewSec data={data} /> },
