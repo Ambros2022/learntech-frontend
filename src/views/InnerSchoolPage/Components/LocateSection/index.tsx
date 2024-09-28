@@ -8,20 +8,20 @@ import dynamic from 'next/dynamic'
 function LocationSection({ data }) {
   return (
     <>
-      <section className='locationSec bg-white pb-5'>
+      <section className='locationSec bg-white pb-5 pt-5'>
         <div className="container">
-          <h2 className='pt-0 text-center mb-4 text-blue fw-bold'>Locate The College</h2>
+          <h2 className='pt-0 text-center mb-4 text-blue fw-bold'>Locate The School</h2>
           <div className="row px-3">
             <div className="col-md-6 mb-md-0 mb-3 d-flex justify-content-start locatedSec py-5 rounded px-md-5">
               <div className="w-100 card mb-3 bg-lightCard p-3">
-                <div className="row g-0">
-                  <div className="col-lg-4 mx-auto text-center locationClgImg mb-3">
-                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} className='rounded clgImg mb-3' width={100} height={100} alt="College Image" />
+                <div className="row rounded g-0 bg-white">
+                  <div className="col-lg-4 mx-auto text-center locationClgImg">
+                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} className='rounded p-3 clgImg mb-3' width={100} height={100} alt="College Image" />
                   </div>
-                  <div className="col-lg-12 d-flex">
-                    <div className="card-body align-content-start text-white p-0 mt-2 text-center text-md-center ">
-                      <h3 className="card-title fw-bold mb-3">{data.name}</h3>
-                      <h6 className="card-text mb-0 mt-2 innerTextAddress"><Image width={25} height={20} src="/images/icons/Location Icon.svg" className='icon-white' alt={'location-icon'} /><span className="mt-2">{data.address}</span></h6>
+                  <div className="col-lg-12 d-flex bg-blue">
+                    <div className="card-body align-content-start text-white p-0 mt-2 text-lg-start text-center text-md-center ">
+                      <h5 className="card-title fw-bold mb-3 pt-3">{data.name}</h5>
+                      <h6 className="card-text mb-0 mt-2 innerTextAddress"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i><span className="mt-2">{data.address}</span></h6>
                     </div>
                   </div>
                 </div>
@@ -30,11 +30,11 @@ function LocationSection({ data }) {
             <div className="col-md-6">
               <div className='p-2 bg-blue rounded h-100 w-100'>
                 <iframe
-                  src={data.map}
                   width="100%"
                   height="100%"
                   loading="lazy"
                   allowFullScreen
+                  src={data.map}
                   className='rounded'
                 ></iframe>
               </div>

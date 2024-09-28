@@ -110,17 +110,17 @@ const StudyAbroadSection = () => {
           Studying abroad offers transformative advantages that can redefine your academic and professional trajectory. Immersing yourself in a new cultural and academic environment sharpens critical thinking and problem-solving skills by challenging you to adapt and thrive in unfamiliar settings. This experience cultivates a global mindset, essential for understanding diverse perspectives and approaches, which is increasingly valued in a globalized job market.
         </p>
 
-        {showMore && (
+        {/* {showMore && ( */}
           <p className="text-black">
             Beyond cultural enrichment, studying at prestigious international universities grants access to cutting-edge research, state-of-the-art facilities, and innovative teaching methodologies that provide a distinct edge in your field. These institutions are often at the forefront of technological advancements and global discourse, offering tools and insights to empower you as a future leader. Explore your options and find the universities that will enable you to shape the future with a truly global perspective.
           </p>
-        )}
+        {/* )} */}
 
-        <div className='text-center'>
+        {/* <div className='text-center'>
           <button onClick={() => setShowMore(!showMore)} className="btn viewMoreCollegeBtn mb-3">
             {showMore ? 'Read Less' : 'Read More'}
           </button>
-        </div>
+        </div> */}
 
         <div className="studyAbroadNav position-relative py-4 px-5 rounded" style={{ zIndex: '2' }}>
           <CountryCarosuel items={renderButtons()} />

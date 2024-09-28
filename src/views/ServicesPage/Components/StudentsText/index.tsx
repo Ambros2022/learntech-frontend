@@ -30,8 +30,8 @@ const StudentsText = ({ data }) => {
                             <p className="text-black">
                                 Learntech offers tailored guidance to help students make informed educational choices based on their interests and goals. Our experienced advisors provide in-depth consultations to assist students in selecting the most suitable courses and colleges. By choosing Learntech, students benefit from expert advice that maximizes their chances of finding the right fit for their academic journey.
                             </p>
-                            {isReadMore && (
-                                <>
+                            {/* {isReadMore && ( */}
+                                {/* <> */}
                                     <h5 className="text-black fw-bold pt-3">
                                         Reserved Seating Advantage:
                                     </h5>
@@ -68,10 +68,10 @@ const StudentsText = ({ data }) => {
                                     <p className="text-black">
                                         To accommodate the financial demands of higher education, Learntech offers guidance on paying tuition fees in convenient EMI plans. Our experts help students explore flexible payment options, alleviating the financial burden and making it easier to manage educational expenses over time.
                                     </p>
-                                </>)}
-                            <button className="btn btn-link p-0" onClick={toggleReadMore}>
+                                {/* </>)} */}
+                            {/* <button className="btn btn-link p-0" onClick={toggleReadMore}>
                                 {isReadMore ? 'Read Less' : 'Read More'}
-                            </button>
+                            </button> */}
 
                         </div>
                         <div className={`tab-pane fade ${activeTab === 'colleges' ? 'show active' : ''}`} role="tabpanel">
@@ -82,8 +82,8 @@ const StudentsText = ({ data }) => {
                                 In a highly competitive educational sector, establishing a strong global presence is essential. Learntech offers advanced branding and visibility services designed to expand your institution's reach worldwide. By featuring your institution’s profile on our websites, we provide extensive exposure and enhance your institution’s brand. Our strategic initiatives and targeted campaigns elevate recognition and strengthen the institute’s global brand value.
 
                             </p>
-                            {isReadMore && (
-                                <>
+                            {/* {isReadMore && (
+                                <> */}
                                     <h5 className="text-black fw-bold pt-3">
                                         Strategic Promotional Activities:
                                     </h5>
@@ -109,10 +109,10 @@ const StudentsText = ({ data }) => {
                                     <p className="text-black">
                                     Learntech’s extensive network supports your institution in attracting students from diverse cultural and traditional backgrounds. Our global admissions services help you create a vibrant, multicultural environment by facilitating the integration of international students, enhancing the sense of unity and diversity within your institution.
                                     </p>
-                                </>)}
+                                {/* </>)}
                             <button className="btn btn-link p-0" onClick={toggleReadMore}>
                                 {isReadMore ? 'Read Less' : 'Read More'}
-                            </button>
+                            </button> */}
 
                         </div>
                     </div>

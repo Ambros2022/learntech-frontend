@@ -18,13 +18,13 @@ function TopCollegesSection() {
                     </h2>
                     <p className='text-black'>Selecting the right college is more than just a step towards your future; it's a transformative experience that shapes your entire life. The best colleges in India offer more than academic excellence; they provide a vibrant ecosystem where passion meets purpose, and potential transforms into reality. These institutions are not just places of learning; they are incubators of innovation, creativity, and leadership.
                     </p>
+                    <h5 className='fw-bold text-black mb-4'>Why Colleges are a Pillar of Your Academic and Personal Growth:
+                    </h5>
+                    <h6 className='fw-bold text-black'>
+                        <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Catalysts for Innovation: </h6>
+                    <p className='text-black'>The top colleges in India are at the forefront of groundbreaking research and technological advancements. They offer students unique opportunities to work on cutting-edge projects, collaborate with renowned faculty, and contribute to innovations that can change the world. These top NIRF ranked colleges in India are well-recognized for their commitment to driving forward-thinking initiatives and research that meet global standards.</p>
                     {showMore && (
                         <>
-                            <h5 className='fw-bold text-black mb-4'>Why Colleges are a Pillar of Your Academic and Personal Growth:
-                            </h5>
-                            <h6 className='fw-bold text-black'>
-                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Catalysts for Innovation: </h6>
-                            <p className='text-black'>The top colleges in India are at the forefront of groundbreaking research and technological advancements. They offer students unique opportunities to work on cutting-edge projects, collaborate with renowned faculty, and contribute to innovations that can change the world. These top NIRF ranked colleges in India are well-recognized for their commitment to driving forward-thinking initiatives and research that meet global standards.</p>
                             <h6 className='fw-bold text-black'>
                                 <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Tailored Educational Experiences: </h6>
                             <p className='text-black'>From the best government colleges in India to the best private colleges in India, a variety of institutions provide a wide range of courses designed to meet the latest industry standards. Whether it’s pioneering medical research, designing the next big tech breakthrough, or mastering the art of business management, these colleges ensure students receive the specialized education needed to excel. The best autonomous colleges in pan India focus on offering programs that are not only academically rigorous but also flexible to meet individual student needs.</p>
@@ -135,7 +135,7 @@ function TopCollegesSection() {
                         </>
                     )}
                     <div className='text-center'>
-                        <button onClick={handleToggleReadMore} className='btn viewMoreCollegeBtn'>
+                        <button onClick={handleToggleReadMore} className='btn mb-5 viewMoreCollegeBtn'>
                             {showMore ? 'Read Less' : 'Read More'}
                         </button>
                     </div>

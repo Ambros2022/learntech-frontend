@@ -7,29 +7,38 @@ function BannerSection({ data }) {
     <>
       <section className='bg-blue collegeDetailBanner py-1'>
         <div className="container">
-          <div className="card mb-3 collegeDetailCard">
+          <div className="card w-100 mb-3 collegeDetailCard">
             <div className="row g-0">
-              <div className="col-lg-2 col-xl-1 col-md-2">
-                <div className='innerClgImg ms-md-auto mx-auto'>
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} />
+              <div className="col-lg-2 col-xl-1 text-center col-md-2">
+                <div className='innerClgImg mx-auto'>
+                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} className='img-fluid mt-md-3 p-2 bg-white rounded' />
                 </div>
               </div>
-              <div className="col-lg-7 ps-3 col-xl-8 col-md-10">
+              <div className="col-lg-7 ps-xl-5 col-xl-8 col-md-10">
                 <div className="card-body text-white">
                   <h1 className="card-title fw-bold mb-3">{data.name}</h1>
-                  <h6 className='mb-3 location-img'><Image width={20} height={20} src="/images/icons/Location Icon.svg" className='icon-yellow me-1' alt={'location-icon'} />{data.address}</h6>
-                  <h6 className='mb-3'><i className="text-warning bi bi-trophy-fill me-1"></i><strong>Board :&nbsp;</strong>{
-                    data.schoolboard.name
-                  }</h6>
-                  <h6 className='mb-3'><i className="text-warning bi bi-award-fill me-1"></i><strong>School Level :&nbsp;</strong>{
-                    data.schoollevels[0].schlevelname.name
-                  }</h6>
+                  <h6 className='mb-3 location-img'><i className='bi bi-geo-alt-fill text-danger me-1'></i>{data.address}</h6>
+                  <h6 className='mb-3 location-img'><i className='bi bi-mortarboard-fill text-warning me-2'></i><strong>Board :</strong>{data.short_name}</h6>
+                  <h6 className='mb-3 location-img'>
+                    <i className='bi bi-award-fill text-primary me-2'></i>
+                    <strong>School Level : </strong>
+                    {data.schoollevels.map((value) => value.schlevelname.name).join(', ')}
+                  </h6>
+                  {/* <h6 className='mb-3'><i className="text-warning bi bi-trophy-fill me-1"></i><strong>Approved by :&nbsp;</strong>{
+                    data.collegerecognitions && data.collegerecognitions.map((element, index) => {
+                      return (
+                        <>
+                          {index == 0 ? ' ' + element.clgrecognitions.recognition_approval_name : ', ' + element.clgrecognitions.recognition_approval_name}
+                        </>
+                      )
+                    })
+                  }</h6> */}
                   {/* <button className='btn btn-warning text-white me-2 ratingBtn'> &#9733; {data.avg_rating}</button> */}
                   {/* <button className='btn PrivateBtn'>{data.college_type}</button><br /> */}
                 </div>
               </div>
               {data?.avg_rating && <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
-                <div className="d-flex gap-2 justify-content-end">
+                <div className="d-flex gap-2 justify-content-md-end justify-content-start">
 
                   <i className={`bi bi-star-fill ${data.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
                   <i className={`bi bi-star-fill ${data.avg_rating >= 2 ? "text-warning" : "text-white"} `}></i>

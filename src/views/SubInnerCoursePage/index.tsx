@@ -113,9 +113,9 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />}
+      <PopularCourses />
       <OrganizationSection data={pagedata}/>
       <ExperTraineeSec/>
-      <PopularCourses />
       <ExpertSection />
     </>
   );

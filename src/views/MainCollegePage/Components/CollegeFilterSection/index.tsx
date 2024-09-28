@@ -55,7 +55,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                 </div>
                                 <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
                                     {rating && (
-                                        <div className="d-flex gap-2 justify-content-start justify-content-md-start">
+                                        <div className="d-flex  mb-md-3 mb-lg-0 gap-2 justify-content-start justify-content-md-start">
 
                                             <i className={`bi bi-star-fill ${rating >= 1 ? "text-warning" : "text-gray"} `}></i>
                                             <i className={`bi bi-star-fill ${rating >= 2 ? "text-warning" : "text-gray"} `}></i>
@@ -224,7 +224,8 @@ function CollegeFilterSection() {
         try {
             const params: any = {
                 page: 1,
-                size: 10000
+                size: 10000,
+                type:'college'
             };
 
 

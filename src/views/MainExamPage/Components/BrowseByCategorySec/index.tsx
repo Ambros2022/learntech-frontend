@@ -12,6 +12,7 @@ import Image from 'next/image';
 
 const BrowsebyCategorySec = ({ countryData, streams }) => {
     const [scholarshipsData, setScholarshipsData] = useState<any>([]);  // Use any type for tabs
+    const [scholarshipData, setScholarshipData] = useState<any>([]);  // Use any type for tabs
     const [totalScholarships, setTotalScholarships] = useState(0);
     const [items, setItems] = useState<{ id: string; title: string }[]>([]);
     const [examsData, setExamsData] = useState({});
@@ -56,6 +57,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
     const [totalScholarshipPages, setTotalScholarshipPages] = useState(1);
     const scholarshipsPerPage = 9;
 
+
     const handleClearAll = () => {
         setFormData({
             level_of_study: '',
@@ -74,6 +76,8 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
             [id]: value
         }));
     };
+
+
     const getScholarship = useCallback(async (country_id, level_of_study, types_of_exam, stream_id) => {
         setIsLoading(true);
         try {
@@ -101,6 +105,27 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
             setIsLoading(false);
         }
     }, [isMountedRef, formData, searchText, scholarshipsPerPage, currentScholarshipPage]);
+
+
+    const getScholarships = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const params = {
+                size: 1000,
+                page: 1,
+                isIndia: 'false'
+            };
+
+            let url = 'api/website/exams/get';
+
+            const response = await axios.get(url, { params });
+            setScholarshipData(response.data.data);
+        } catch (error) {
+            console.error('Error fetching scholarships:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [isMountedRef]);
 
 
 
@@ -220,8 +245,10 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
     useEffect(() => {
         getCategoriesData();
         getnews();
+        getScholarships();
         getabroadnews();
-    }, [getCategoriesData, getabroadnews, getnews]);
+    }, [getCategoriesData, getabroadnews, getnews, getScholarships]);
+
 
     useEffect(() => {
         if (activeTab) {
@@ -288,16 +315,24 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
     const ScholarshipCards = ({ data }) => {
         const startIndex = (currentPage - 1) * perPage;
         const paginatedScholarships = data.slice(startIndex, startIndex + perPage);
+
+        if (paginatedScholarships.length === 0) {
+            return (
+                <div className="col-12 text-center">
+                    <p className="fw-bold text-muted">No scholarships found matching your criteria. Please try adjusting your filters.</p>
+                </div>
+            );
+        }
+
         return (
             <div className="row d-flex flex-fill px-md-0 px-3">
                 {paginatedScholarships.map((scholarship, index) => (
-                    <div className="col-md-4 mb-3">
-                        <a href={`/exam/${scholarship.id}/${scholarship.slug}`} >
+                    <div className="col-md-4 mb-3" key={scholarship.id}>
+                        <a href={`/exam/${scholarship.id}/${scholarship.slug}`}>
                             <div className="card hover-card examsCardRow">
                                 <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${scholarship.cover_image}`} width={300} height={300} className="card-img-top" alt={scholarship.exam_title} />
                                 <div className="card-body text-center">
                                     <h5 className="fw-bold text-center card-title text-truncate">{scholarship.exam_title}</h5>
-                                    {/* <small className="text-blue card-text text-truncate">{formatDate(date)}</small> */}
                                 </div>
                             </div>
                         </a>
@@ -306,6 +341,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
             </div>
         );
     };
+
 
     const handlePageClick = (page) => {
         setCurrentPage(page);
@@ -329,8 +365,12 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         <section className='bg-white'>
             <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
                 <div className='w-100 text-center'>
-                    <h2 className='fw-bold text-white mb-5 text-center bg-blue mx-auto p-3' style={{ display: 'inline-block', }}>List of Entrance Exams in India
+                    {/* <h2 className='fw-bold text-white mb-5 text-center bg-blue mx-auto p-3' style={{ display: 'inline-block', }}>List of Entrance Exams in India
+                    </h2> */}
+                    <h2 className='fw-bold text-black mb-5 text-center p-3 heading-with-styled-lines'>
+                        List of Entrance Exams in India
                     </h2>
+
                 </div>
                 {/* <div className='examSecItems'> */}
                 <div className="row">
@@ -349,7 +389,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                             aria-labelledby={`pills-${item.id}-tab`}
                         >
                             <div className='topCourseConCarousel pt-5'>
-                                <div className="row ">
+                                <div className="row">
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row px-md-0 px-3">
                                             {currentExams.length > 0 ? (
@@ -382,10 +422,10 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                             </nav>
                                         </div>
                                         <div className="mb-3 rounded p-3 mt-5">
-                                            {scholarshipsData && scholarshipsData.length > 0 ? (
+                                            {scholarshipData && scholarshipData.length > 0 ? (
                                                 <>
                                                     <div className='w-100 text-center'>
-                                                        <h2 className='fw-bold text-white bg-blue mb-5 p-3 text-center mt-5' style={{ display: 'inline-block' }}>Entrance Exams for Study Abroad
+                                                        <h2 className='fw-bold text-black mb-5 p-3 heading-with-styled-lines text-center mt-3'>Entrance Exams for Study Abroad
                                                         </h2>
                                                     </div>
                                                     <h4 className='text-blue fw-bold mb-3'>Filter By</h4>
@@ -512,43 +552,47 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                                 </>
                                             ) : ''}
                                         </div>
-                                        {
-                                            scholarshipsData && scholarshipsData.length > 0 ? (
-                                                <>
-                                                    {isLoading ? (
-                                                        <div className="text-center">
-                                                            <div className="spinner-border text-primary" role="status">
-                                                                <span className="visually-hidden">Loading...</span>
-                                                            </div>
-                                                        </div>
-                                                    ) : (
-                                                        <ScholarshipCards data={scholarshipsData} />
-                                                    )}                                        {/* Pagination */}
-                                                    <div className="row col-md-12 blogCardspage">
-                                                        <div className='d-flex justify-content-center'>
-                                                            <nav aria-label="Scholarships Page navigation">
-                                                                <ul className="pagination d-flex gap-3">
-                                                                    <li className={`page-item ${currentScholarshipPage === 1 ? 'disabled' : ''}`}>
-                                                                        <button className="page-link" onClick={handleScholarshipPreviousPage} aria-label="Previous">
-                                                                            <span aria-hidden="true">{'<'}</span>
-                                                                        </button>
-                                                                    </li>
-                                                                    {Array.from({ length: totalScholarshipPages }, (_, index) => (
-                                                                        <li key={index} className={`page-item ${currentScholarshipPage === index + 1 ? 'active' : ''}`}>
-                                                                            <button className="page-link" onClick={() => handleScholarshipPageClick(index + 1)}>{index + 1}</button>
-                                                                        </li>
-                                                                    ))}
-                                                                    <li className={`page-item ${currentScholarshipPage === totalScholarshipPages ? 'disabled' : ''}`}>
-                                                                        <button className="page-link" onClick={handleScholarshipNextPage} aria-label="Next">
-                                                                            <span aria-hidden="true">{'>'}</span>
-                                                                        </button>
-                                                                    </li>
-                                                                </ul>
-                                                            </nav>
+                                        {scholarshipData && scholarshipData.length > 0 ? (
+                                            <>
+                                                {isLoading ? (
+                                                    <div className="text-center">
+                                                        <div className="spinner-border text-primary" role="status">
+                                                            <span className="visually-hidden">Loading...</span>
                                                         </div>
                                                     </div>
-                                                </>
-                                            ) : ''}
+                                                ) : (
+                                                    <>
+                                                        <ScholarshipCards data={scholarshipsData} />
+                                                        {/* Pagination */}
+                                                        {scholarshipsData.length > 0 && (
+                                                            <div className="row col-md-12 blogCardspage">
+                                                                <div className='d-flex justify-content-center'>
+                                                                    <nav aria-label="Scholarships Page navigation">
+                                                                        <ul className="pagination d-flex gap-3">
+                                                                            <li className={`page-item ${currentScholarshipPage === 1 ? 'disabled' : ''}`}>
+                                                                                <button className="page-link" onClick={handleScholarshipPreviousPage} aria-label="Previous">
+                                                                                    <span aria-hidden="true">{'<'}</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            {Array.from({ length: totalScholarshipPages }, (_, index) => (
+                                                                                <li key={index} className={`page-item ${currentScholarshipPage === index + 1 ? 'active' : ''}`}>
+                                                                                    <button className="page-link" onClick={() => handleScholarshipPageClick(index + 1)}>{index + 1}</button>
+                                                                                </li>
+                                                                            ))}
+                                                                            <li className={`page-item ${currentScholarshipPage === totalScholarshipPages ? 'disabled' : ''}`}>
+                                                                                <button className="page-link" onClick={handleScholarshipNextPage} aria-label="Next">
+                                                                                    <span aria-hidden="true">{'>'}</span>
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </nav>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </>
+                                        ) : ''}
                                     </div>
                                     <div className="col-lg-5 col-xl-4">
                                         <div className='bg-skyBlue px-lg-5 px-md-3 px-3 mb-5 rounded'>

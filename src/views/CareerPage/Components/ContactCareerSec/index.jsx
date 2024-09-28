@@ -61,7 +61,7 @@ const ContactCareerSec = ({locations , data}) => {
             </div>
             <div className='col-md-7 bg-white py-3 px-5'>
               {/* <h2 className='text-center fw-bold text-blue'>Start Your Medical Journey</h2> */}
-              <h2 className='text-center fw-bold text-blue'>ENTER YOUR DETAILS</h2>
+              <h2 className='text-center fw-bold text-blue' id='contactForm'>ENTER YOUR DETAILS</h2>
               <JObEnquiryForm locations={locations} data ={data}/>
             </div>
           </div>

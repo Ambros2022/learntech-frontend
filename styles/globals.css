@@ -6063,7 +6063,7 @@
     width: 200px !important;
   }
 
-  .organizationImg>img{
+  .organizationImg>img {
     height: 80px;
     width: auto;
   }
@@ -6089,3 +6089,44 @@
       width: 170px !important;
     }
   }
+
+  .blogCard {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 60px !important;
+  }
+  .heading-with-lines {
+    position: relative;
+    display: inline-block;
+}
+
+.heading-with-styled-lines {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 20px; /* Adjust for space below */
+}
+
+.heading-with-styled-lines::before,
+.heading-with-styled-lines::after {
+  content: '';
+  position: absolute;
+  background-color: black;
+  height: 2px;
+}
+
+.heading-with-styled-lines::before {
+  width: 80px; /* Wider top line */
+  top: 100%; /* Below the text */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.heading-with-styled-lines::after {
+  width: 40px; /* Smaller bottom line */
+  top: calc(100% + 8px); /* Slightly more space below */
+  left: 50%;
+  transform: translateX(-50%);
+}
