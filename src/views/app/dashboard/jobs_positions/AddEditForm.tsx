@@ -83,7 +83,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         exp_required: isAddMode ? '' : olddata.exp_required,
         total_positions: isAddMode ? '' : olddata.total_positions,
         status: isAddMode ? 'Published' : olddata.status,
-        joblocations: [],
+        joblocations: isAddMode ? [] : olddata.jobpositionlocation?.map((item: any) => ({
+            id: item.jobpositionslocation.id,
+            name: item.jobpositionslocation.name,
+        })) || [],
     }
 
     const getjobs = useCallback(async () => {
@@ -130,6 +133,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.job_description = data.job_description;
             formData.exp_required = data.exp_required;
             formData.total_positions = data.total_positions;
+            formData.joblocations = JSON.stringify(data.joblocations);
             formData.status = data.status;
 
             try {
@@ -177,7 +181,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             // formData.exp_required = data.exp_required;
             // formData.total_positions = data.total_positions;
             // formData.status = data.status;
-            formData.append('joblocations', JSON.stringify(data.joblocations));
+            formData.append('joblocations', data.joblocations);
             try {
                 let response = await axios1.post(url, formData)
                 // console.log(response, "response")
@@ -216,15 +220,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
     useEffect(() => {
-
         if (!isAddMode && olddata.jobpositionlocation) {
-            const locations = olddata.jobpositionlocation.map((item) => ({
+            const locations = olddata.jobpositionlocation.map((item: any) => ({
                 id: item.jobpositionslocation.id,
                 name: item.jobpositionslocation.name,
             }));
-            admfiledReset("joblocations", { defaultValue: locations })
+            setValue("joblocations", locations);
         }
-    }, []);
+    }, [isAddMode, olddata, setValue]);
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">

@@ -9,7 +9,8 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import SchoolBanner from './Components/SchoolBanner'
+import Script from 'next/script'
+import SchoolBannerSec from './Components/SchoolBannerSec'
 
 
 function InnerSchoolPage({ id }) {
@@ -18,12 +19,12 @@ function InnerSchoolPage({ id }) {
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [colleges, setColleges] = useState([]);
-  const [exams, setexams] = useState([]);
+  const [reviews, setreviews] = useState([]);
   const [streams, setStreams] = useState([]);
 
   const getPagedata = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/schoolfindone/get/11');
+      const response = await axios.get('api/website/schoolfindone/get/' + id);
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -36,7 +37,7 @@ function InnerSchoolPage({ id }) {
 
   const getColleges = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/colleges/get', {
+      const response = await axios.get('api/website/schools/get', {
         params: {
           page: 1,
           size: 8,
@@ -50,24 +51,60 @@ function InnerSchoolPage({ id }) {
     }
   }, [id, isMountedRef]);
 
+  const formattedData = pagedata && pagedata.collegefaqs && pagedata.collegefaqs.map((item) => ({
+    "@type": "Question",
+    "name": item.questions,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answers,
+    },
+  }));
+
 
   useEffect(() => {
     getPagedata();
     getColleges();
+
   }, [getPagedata]);
   return (
     <>
       <Head>
         <title>{pagedata?.meta_title || "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top School? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
+        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": formattedData,
+            }
+          )}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(
+            {
+              "@context": "https://schema.org/",
+              "@type": "Schools",
+              "name": `${pagedata?.meta_title}`,
+              "logo": `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
+              "url": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": `${pagedata?.address}`
+              }
+
+            }
+          )}
+        </script>
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {/* {!loading && pagedata && <CollegeInfoSection data={pagedata} />} */}
+      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
+      {!loading && pagedata && <SchoolBannerSec data={pagedata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}
-      {!loading && pagedata && <SchoolBanner data={pagedata} />}
+
 
       <TopFeaturedColleges />
       <ExpertSection />
@@ -76,4 +113,4 @@ function InnerSchoolPage({ id }) {
   )
 }
 
-export default InnerSchoolPage
+export default InnerSchoolPage;

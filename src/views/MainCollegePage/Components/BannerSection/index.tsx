@@ -39,7 +39,7 @@ function BannerSection() {
 
       const response = await axios.get('api/website/colleges/get', {
         cancelToken: cancelToken.token,
-        params: { searchfrom: 'name', searchtext: value },
+        params: { searchfrom: 'name', searchtext: value, type:'college' },
       });
 
       const suggestions = response.data.data.map((item: { id: number; name: string }) => ({

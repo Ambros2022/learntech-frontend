@@ -124,9 +124,7 @@ const ExperTraineeSec = () => {
                             <>
                                 <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${selectedTraineer.image}`} className='img-fluid mb-3 rounded' width={200} height={200} alt={`${selectedTraineer.name}-img`} />
                                 <h2 className='fw-bold text-blue'>{selectedTraineer.name}</h2>
-                                <p className='text-black'><strong className='text-blue'>Location:</strong> {selectedTraineer.location}</p>
-                                <p className='text-black'><strong className='text-blue'>Experience Since:</strong> {format(new Date(selectedTraineer.experience), 'dd-MMM-yyyy')}</p>
-                                <p className='text-black'><strong className='text-blue'>Description:</strong> {selectedTraineer.description}</p>
+                                <div className='text-black' dangerouslySetInnerHTML={{__html : selectedTraineer.info}}/>
                                 <Button onClick={() => setModalOpen(false)} variant="contained" color="primary">Close</Button>
                             </>
                         ) : (

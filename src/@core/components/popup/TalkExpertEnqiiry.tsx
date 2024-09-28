@@ -9,9 +9,10 @@ import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 interface Props {
   page?: any;
   onChanges?: any;
+  type?: any;
 }
 
-const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
+const EnquiryForm: FC<Props> = ({ page, type, ...rest }) => {
   const router = useRouter();
 
   const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
@@ -90,7 +91,7 @@ const EnquiryForm: FC<Props> = ({ page, ...rest }) => {
             <ErrorMessage name="course" component="div" className="error text-danger" />
           </div>
           <div className=" col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5">
-            <Field type="text" name="college_name" placeholder="College Name" className="form-control" />
+            <Field type="text" name="college_name" placeholder={type? type:"College Name"} className="form-control" />
             <ErrorMessage name="college_name" component="div" className="error text-danger" />
           </div>
           {/* <div className=" col-md-3 mb-3">

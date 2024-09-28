@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import * as Yup from 'yup';
+import { debounce } from 'lodash'; // Import debounce function from lodash library
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import emailjs from 'emailjs-com';
 import { Modal } from 'react-bootstrap';
@@ -7,11 +8,126 @@ import { toast } from 'react-hot-toast'
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import axios1 from 'src/configs/axios'
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+import { useAuth } from 'src/hooks/useAuth';
 
+
+interface City {
+    id: number;
+    name: string;
+}
+
+interface College {
+    id: number;
+    name: string;
+    state: number;
+    address: string;
+    banner_image: string;
+    established: string;
+    avg_rating: number;
+    school_type: string;
+    course_type: string;
+    slug: string;
+
+}
+
+const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
+    return (
+        <div className='col-md-10 col-lg-12 mx-auto mb-3 '>
+            <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
+                <div className="p-2">
+                    <div className="row d-flex">
+                        <div className="align-content-start col-md-12 col-lg-4 col-xl-3 clgCardImg">
+                            <Image width={500} height={500} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid rounded card-Image-top me-auto" alt="College Logo" style={{ objectFit: 'cover' }} />
+                        </div>
+                        <div className="col-md-12 col-lg-8 col-xl-9">
+                            <div className="row">
+                                <div className="p-2 col-md-12 col-lg-12 col-xl-6">
+                                    <div className="card-title">
+                                        <h5 className='fw-bold text-black mb-3'>{name}</h5>
+                                    </div>
+                                    <div className="card-text text-black">
+                                        <p className="mb-3 text-truncate"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i>{`${location}`}</p>
+                                        <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p>
+                                    </div>
+                                </div>
+                                <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
+                                    {rating && (
+                                        <div className="d-flex mb-md-3 mb-lg-0 gap-2 justify-content-start justify-content-md-start">
+
+                                            <i className={`bi bi-star-fill ${rating >= 1 ? "text-warning" : "text-gray"} `}></i>
+                                            <i className={`bi bi-star-fill ${rating >= 2 ? "text-warning" : "text-gray"} `}></i>
+                                            <i className={`bi bi-star-fill ${rating >= 3 ? "text-warning" : "text-gray"} `}></i>
+                                            <i className={`bi bi-star-fill ${rating >= 4 ? "text-warning" : "text-gray"} `}></i>
+                                            <i className={`bi bi-star-fill ${rating >= 5 ? "text-warning" : "text-gray"} `}></i>
+
+                                            {/* <h6 className='mb-0 text-white align-self-center'>{rating}/5 Review</h6> */}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column justify-content-xl-around gap-xl-0 gap-3">
+                                    <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
+                                    <Link href={`/school/${id}/${slug}`} className=" viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
+                                </div>
+                            </div>
+
+
+                            {/* <button className='btn bg-warning text-white' style={{ minWidth: '50px', minHeight: '20px' }}>{rating}</button> */}
+
+                            <div className='d-flex gap-2 btns'>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
 function CollegeFilterSection() {
+
+
+    const router = useRouter();
+    const { city_id } = router.query;
+    // let state_id = 92;
+    // console.log(state_id, "state_id");
+    const [colleges, setColleges] = useState<College[]>([]);
+    const [total, setTotal] = useState<string>("0");
+    const isMountedRef = useIsMountedRef();
+    const [loading, setLoading] = useState<boolean>(false)
+    const [visibleCards, setVisibleCards] = useState(6);
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
+
+
+    const [states, setStates] = useState<Option[]>([]);
+    const [citys, setCitys] = useState<any[]>([]);
+    const [streams, setStreams] = useState<any[]>([]);
+    const [courses, setCourses] = useState<any[]>([]);
+    const [promoban, setPromoban] = useState<any[]>([]);
+
+    const [selectedOptions, setSelectedOptions] = useState({});
+    const [selectedStateIds, setSelectedStateIds] = useState<string[]>([]);
+    const [selectedCityIds, setSelectedCityIds] = useState<string[]>([]);
+
+    const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
+        state: true,
+        city: true,
+        streams: true,
+        courses: true,
+        ownership: true,
+        courseType: true
+    });
+    const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
+
+    const { stateId, setStateId, cityId, setCityId } = useAuth();
+
+
     type Option = {
         label: string;
         value: string;
+        cities?: Option[];
     };
 
     type OptionGroup = {
@@ -20,218 +136,155 @@ function CollegeFilterSection() {
         options: Option[];
     };
 
-    const [showScrollButton, setShowScrollButton] = useState(false);
+
+    const getPromobanner = useCallback(async () => {
+        try {
+            const response = await axios1.get('api/website/banner/get?promo_banner=All_college_page');
+            if (isMountedRef.current) {
+
+                setPromoban(response.data.data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch trending courses:', error);
+        }
+    }, [isMountedRef]);
+
+    const getstreamdata = useCallback(async () => {
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get(`/api/website/schoolboard/get?size=${roleparams['size']}`);
+            if (response.data.status === 1) {
+                const streamData = response.data.data.map((stream: any) => ({
+                    label: stream.short_name,
+                    value: stream.id.toString()
+                }));
+                console.log(streamData)
+                setStreams(streamData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, [isMountedRef]);
 
 
-    // const [showModal, setShowModal] = useState(false);
-    // const handleShowModal = () => setShowModal(true);
-    // const handleCloseModal = () => setShowModal(false);
-
-    // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-    // const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-    // const validationSchema = Yup.object().shape({
-    //     name: Yup.string().required('Name is required'),
-    //     email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-    //     phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-    //     course: Yup.string().required('Course is required'),
-    //     location: Yup.string().required('Location is required'),
-    // });
-
-    // const handleSubmit = async (values, { resetForm }) => {
-    //     try {
-    //         toast.loading('Processing'); // Display loading toast while processing
-    //         setShowModal(false); // Assuming setShowModal is a state setter for hiding modal
-    //         await emailjs.send("service_lrx8r36", "template_fsa8zp6", values, "8xItMn8QYmHOyfncY");
-    //         toast.dismiss();
-    //         toast.success('Message sent successfully!'); // Display success toast if email is sent successfully
-    //         resetForm(); // Reset the form
-    //         // Close the modal here if needed
-    //     } catch (error) {
-    //         toast.error('Failed!'); // Display error toast if sending email fails
-    //         console.error('Error sending email:', error);
-    //         alert("Error sending email. Please try again later."); // Fall back to alert if toast is not available
-    //     }
-    // };
+    const getcoursesdata = useCallback(async () => {
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/website/generalcourse/get');
+            if (response.data.status === 1) {
+                const courseData = response.data.data.map((course: any) => ({
+                    label: course.short_name,
+                    value: course.id.toString()
+                }));
+                setCourses(courseData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, [isMountedRef]);
 
 
-    const colleges = [
-        {
-            id: 1,
-            name: 'New Horizon Public School (NHPS)',
-            slug: 'New Horizon Public School (NHPS)',
-            type: 'Private',
-            rating: 4.5,
-            location: 'Bangalore',
-            state: 'karnataka',
-            ownership: 'private',
-            streams: ['management', 'education'],
-            courses: ['bsc', 'mba'],
-            courseType: 'bachelors',
-            established: 1992,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 2,
-            name: 'New Horizon Public School (NHPS)',
-            slug: 'New Horizon Public School (NHPS)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Vidyaniketan',
-            state: 'Bangalore',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 3,
-            name: 'New Horizon Public School (NHPS)',
-            slug: 'New Horizon Public School (NHPS)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'karnataka',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 4,
-            name: 'New Horizon Public School (NHPS)',
-            slug: 'New Horizon Public School (NHPS)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Manipal',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 5,
-            name: "New Horizon Public School (NHPS)",
-            slug: "New Horizon Public School (NHPS)",
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 6,
-            name: 'New Horizon Public School (NHPS)',
-            slug: 'New Horizon Public School (NHPS)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
-        {
-            id: 7,
-            name: 'New Horizon Public School (NHPS)',
-            slug: 'New Horizon Public School (NHPS)',
-            type: 'Public',
-            rating: 4.0,
-            location: 'Bangalore',
-            state: 'India',
-            ownership: 'public',
-            streams: ['science', 'arts'],
-            courses: ['b_tech', 'ba'],
-            courseType: 'masters',
-            established: 1985,
-            imageUrl: '/images/icons/filter-card.jpg'
-        },
+    const fetchStatesData = useCallback(async () => {
+        try {
+            const response = await axios1.get('api/website/states/get?page=1&size=50&country_id=204');
+            if (response.data.status === 1) {
+                const arrcity: any = [];
+                const statesData = response.data.data.map((state: any) => ({
+                    label: state.name,
+                    value: state.id.toString(),
+                    cities: state.city.map((city: any) => {
+                        const cityObj = {
+                            label: city.name,
+                            value: city.id.toString(),
+                        };
+                        arrcity.push(cityObj);
+                        return cityObj;
+                    })
+                }));
 
-        // Add more college objects as needed
-    ];
+                setCitys(arrcity);
+                setStates(statesData);
+            } else {
+                console.error('Failed to fetch states');
+            }
+        } catch (error) {
+            console.error('Error fetching states:', error);
+        }
+    }, [isMountedRef]);
+
+    const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[], cityIds?: string[]) => {
+        try {
+            const params: any = {
+                page: 1,
+                size: 10000,
+                orderby:'desc'
+            };
 
 
-    // const stateOptions: Option[] = Array.from(new Set(colleges.map(college => college.state))).map(state => ({ label: state, value: state }));
-    // const locationOptions: Option[] = Array.from(new Set(colleges.map(college => college.location))).map(location => ({ label: location, value: location }));
-    // const ownershipOptions: Option[] = Array.from(new Set(colleges.map(college => college.ownership))).map(ownership => ({ label: ownership, value: ownership }));
+            if (stateIds && stateIds.length > 0) params['state_id'] = `[${stateIds.join(',')}]`;
+            if (cityIds && cityIds.length > 0) params['city_id'] = `[${cityIds.join(',')}]`;
+            // if (courseIds && courseIds.length > 0) params['general_course_id'] = `[${courseIds.join(',')}]`;
+            if (streamIds && streamIds.length > 0) params['school_board_id'] = `[${streamIds.join(',')}]`;
+            if (ownership) params['school_type'] = ownership;
+            // if (courseType && courseType.length > 0) params['course_type'] = JSON.stringify(courseType);
+            const response = await axios1.get('api/website/schools/get', { params });
+            setColleges(response.data.data);
+            setTotal(response.data.totalItems);
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
 
-    // const options: OptionGroup[] = [
-    //     {
-    //         id: 'state',
-    //         label: 'States',
-    //         options: options
-    //     },
-    //     {
-    //         id: 'location',
-    //         label: 'City',
-    //         options: locationOptions
-    //     },
-    //     {
-    //         id: 'ownership',
-    //         label: 'Ownership',
-    //         options: ownershipOptions
-    //     },
-    //     // Add other filter options...
-    // ];
+
+    useEffect(() => {
+        fetchStatesData();
+        getcollegedata();
+        getstreamdata();
+        getcoursesdata();
+        getPromobanner();
+    }, []);
+
+
+
 
     const options: OptionGroup[] = [
-        {
-            id: 'board',
-            label: 'Boards',
-            options: [
-                { label: 'ICSE', value: 'icse' },
-                { label: 'CBSE', value: 'cbse' },
-                { label: 'HBSE', value: 'hbse' },
-                { label: 'CAIE', value: 'caie' }
-            ]
-        },
-        {
-            id: 'state',
-            label: 'States',
-            options: [
-                { label: 'Maharashtra', value: 'maharashtra' },
-                { label: 'Tamil Nadu', value: 'tamil_nadu' },
-                { label: 'Uttar Pradesh', value: 'uttar_pradesh' },
-                { label: 'Karnataka', value: 'karnataka' }
-            ]
-        },
-        {
-            id: 'location',
-            label: 'City',
-            options: [
-                { label: 'Pune', value: 'pune' },
-                { label: 'Mumbai', value: 'mumbai' },
-                { label: 'Delhi', value: 'delhi' },
-                { label: 'Hyderabad', value: 'hyderabad' }
-            ]
-        },
+        { id: 'streams', label: 'Boards', options: streams },
+        { id: 'state', label: 'States', options: states },
+        { id: 'city', label: 'Cities', options: citys },
+        // { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
         {
             id: 'ownership',
-            label: 'School Types',
+            label: 'Ownership',
             options: [
-                { label: 'Private (2334)', value: 'private' },
-                { label: 'Public (3265)', value: 'public' }
+                { label: 'Public', value: 'Public' },
+                { label: 'Deemed', value: 'Deemed' },
+                { label: 'Private', value: 'Private' },
+                { label: 'Government', value: 'Government' },
+                // { label: 'Autonomous', value: 'Autonomous' },
             ]
         },
+        // {
+        //     id: 'courseType',
+        //     label: 'Course Type',
+        //     options: [
+        //         { label: 'UG', value: 'UG' },
+        //         { label: 'PG', value: 'PG' },
+        //         { label: 'Diploma', value: 'Diploma' },
+        //         { label: 'Doctorate', value: 'Doctorate' },
+        //         // { label: 'Default', value: 'Default' },
+        //     ],
+        // },
+        // { id: 'courses', label: 'Courses', options: courses },
     ];
 
-    const [visibleCards, setVisibleCards] = useState(6);
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
 
 
     const handleViewMore = () => {
@@ -251,22 +304,21 @@ function CollegeFilterSection() {
             });
         });
 
-        console.log('Filtered Colleges:', filteredColleges);
-        console.log('Visible Cards:', visibleCards);
+
 
         // If there are more filtered colleges to show, increment visibleCards
         if (visibleCards < filteredColleges.length) {
             setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
         }
 
-        console.log('Updated Visible Cards:', visibleCards);
     };
 
 
 
+    // Define a debounced version of handleCheckboxChange
+    const debouncedHandleCheckboxChange = debounce((groupId: string, value: any, isChecked: boolean) => {
 
-    const handleCheckboxChange = (groupId: string, value: string, isChecked: boolean) => {
-
+        console.log("debounce", groupId, value, isChecked);
         const collegeFiltersSection = document.getElementById('collegeFiltersSection');
         if (collegeFiltersSection) {
             collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
@@ -279,89 +331,135 @@ function CollegeFilterSection() {
             } else {
                 updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
             }
+
+            // Extract selected filter values
+            const { state: selectedStateIds = [], courses: selectedCourseIds = [], streams: selectedStreamIds = [],
+                ownership: selectedOwnership = [], courseType: selectedCourseType = [], city: selectedCityIds = [] } = updatedSelected;
+
+
+
+            // Perform API call with selected filter values
+            getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
+
+            // console.log(updatedSelected, "updatedSelected");
+            console.log(selectedStateIds, "selectedStateIds");
+            if (groupId == "state" && selectedStateIds.length > 0) {
+                const citiesArr = states
+                    .filter(state => selectedStateIds.includes(state.value))
+                    .flatMap(state => state.cities);
+
+                console.log(citiesArr);
+                setCitys(citiesArr);
+            }
+            if (groupId === "state" && selectedStateIds.length === 0 && states.length > 0) {
+                const arrcity = states.flatMap((state: any) => state.cities);
+                setCitys(arrcity);
+            }
             return updatedSelected;
         });
+    }, 300); // Debounce for 300 milliseconds
 
+
+    const handleCheckboxChange = (groupId, value, isChecked) => {
+
+        console.log("handleCheckboxChange", groupId, value, isChecked);
+        debouncedHandleCheckboxChange(groupId, value, isChecked);
+        setCheckboxState(prevState => ({
+            ...prevState,
+            [groupId]: {
+                ...prevState[groupId],
+                [value]: isChecked
+            }
+        }));
+
+        // if (groupId === 'state') {
+        //     const updatedStateIds = isChecked
+        //         ? [...selectedStateIds, value]
+        //         : selectedStateIds.filter(id => id !== value);
+
+        //     // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
+        // }
+
+        // if (groupId === 'city') {
+        //     const updatedCityIds = isChecked
+        //         ? [...selectedCityIds, value]
+        //         : selectedCityIds.filter(id => id !== value);
+
+        //     handleFilterChange(selectedStateIds.join(','), updatedCityIds.join(','), false);
+        // }
     };
 
+    useEffect(() => {
+        if (stateId) {
+            let text = stateId.toString();
+            debouncedHandleCheckboxChange("state", text, true);
+            setCheckboxState(prevState => ({
+                ...prevState,
+                ["state"]: {
+                    ...prevState["state"],
+                    //@ts-ignore
+                    [text]: true
+                }
+            }));
+            setStateId(null)
+        }
+        if (cityId) {
+            let text = cityId.toString();
+            debouncedHandleCheckboxChange("city", text, true);
+            setCheckboxState(prevState => ({
+                ...prevState,
+                ["city"]: {
+                    ...prevState["city"],
+                    //@ts-ignore
+                    [text]: true
+                }
+            }));
+            setCityId(null)
+        }
+    }, [router, router.isReady]);
+
     const removeSelectedCheckbox = (groupId: string, value: string) => {
+        console.log("removeSelectedCheckbox", groupId, value)
+        debouncedHandleCheckboxChange(groupId, value, false);
+        setCheckboxState(prevState => ({
+            ...prevState,
+            [groupId]: {
+                ...prevState[groupId],
+                [value]: false
+            }
+        }));
 
         setSelectedCheckboxes(prevSelected => {
             const updatedSelected = { ...prevSelected };
             updatedSelected[groupId] = (updatedSelected[groupId] || []).filter(item => item !== value);
+
+            // Make API call here with updated selected state ID
+            const selectedStateIds = updatedSelected['state'] || [];
+            const selectedCourseIds = updatedSelected['courses'] || [];
+            const selectedStreamIds = updatedSelected['streams'] || [];
+            getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds);
+
+
             return updatedSelected;
         });
     };
 
 
-    const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
-
-        return (
-            <div className='col-md-12 mb-3'>
-                <div className="mx-2 filterCardBorder">
-                    <div className="p-2">
-                        <div className="row">
-                            <div className="col-md-3 col-xl-3 clgCardImg">
-                                <Image width={180} height={200} src={imageUrl} className="img-fluid card-Image-top" alt="College Logo" style={{ objectFit: 'cover' }} />
-                            </div>
-                            <div className="col-md-9 col-xl-9">
-                                <div className="row">
-                                    <div className="col-md-7 col-xl-7">
-                                        <div className="card-title">
-                                            <h6 className='fw-bold text-black my-2'>{name}</h6>
-                                        </div>
-                                        <div className="card-text text-black">
-                                            <p className="m-0"><Image src='/images/icons/Location Icon.svg' width={20} height={20} alt='location-icon' /> {`${location}, ${state}`}</p>
-                                            <p className="mb-3 "><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}  <button className='ms-2 btn typeBtn'>{type}</button></p>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-2 col-xl-2 col-lg-2 text-end mb-md-0 mb-3">
-                                        <button className='btn ratingBtn d-flex justify-content-center'><Image src='/images/icons/star-24.png' width={20} height={20} alt='star-icon' /><span className='align-content-center'>{rating}</span></button>
-                                    </div>
-                                    <div className="col-md-3 col-xl-3 col-lg-3 text-xl-end text-end d-xl-grid">
-                                        <a className="activeBtn btn mb-3 d-flex justify-content-center"
-                                        // onClick={handleShowModal}
-                                        ><span className='align-content-center'>Apply Now</span></a>
-                                        <Link href={`/school/${id}/${slug}`} className="mb-3 viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
-                                    </div>
-                                </div>
-
-
-                                {/* <button className='btn bg-warning text-white' style={{ minWidth: '50px', minHeight: '20px' }}>{rating}</button> */}
-
-                                <div className='d-flex gap-2 btns'>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
 
 
 
     function CollegeList({ selectedCheckboxes }: { selectedCheckboxes: Record<string, string[]> }) {
         const filteredColleges = colleges.filter(college => {
-            return Object.keys(selectedCheckboxes).every(groupId => {
-                const selectedValues = selectedCheckboxes[groupId];
-                if (!selectedValues || selectedValues.length === 0) {
-                    return true;
-                }
-
-                if (Array.isArray(college[groupId])) {
-                    return selectedValues.some(value => college[groupId].includes(value));
-                }
-
-                return selectedValues.includes(college[groupId]);
-            });
+            if (!selectedCheckboxes.stateId || selectedCheckboxes.stateId.length === 0) {
+                return true; // Return true if no state is selected
+            }
+            return selectedCheckboxes.stateId.includes(college.state.toString().toLowerCase().replace(' ', '_')); // Convert to string and filter based on selected state(s)
         });
 
         if (filteredColleges.length === 0) {
             return (
                 <div className="text-center my-5">
-                    <p>No schools found for the selected filters.</p>
+                    <p>No School found for the selected filters.</p>
                 </div>
             );
         }
@@ -369,10 +467,11 @@ function CollegeFilterSection() {
         if (filteredColleges.length > 0 && filteredColleges.slice(0, visibleCards).length === 0) {
             return (
                 <div className="text-center my-5">
-                    <p>No more Schools to display.</p>
+                    <p>No more schools to display.</p>
                 </div>
             );
         }
+
 
 
         return (
@@ -381,99 +480,147 @@ function CollegeFilterSection() {
                     <CollegeCard
                         key={college.id}
                         id={college.id}
-                        slug={college.name}
                         name={college.name}
-                        type={college.type}
-                        rating={college.rating}
-                        location={college.location}
+                        slug={college.slug}
+                        type={college.school_type}
+                        rating={college.avg_rating}
+                        location={college.address}
                         state={college.state}
                         established={college.established}
-                        imageUrl={college.imageUrl}
+                        imageUrl={college.banner_image}
                     />
                 ))}
+
             </div>
         );
     }
 
-    // useEffect(() => {
-    //     const collegeFilterSection = document.getElementById('collegeFilterSection');
-    //     if (collegeFilterSection) {
-    //         collegeFilterSection.scrollIntoView({ behavior: 'smooth' });
-    //     }
-    // }, [visibleCards, selectedCheckboxes]);
-
-    const [accordionOpen, setAccordionOpen] = useState<string | null>(null);
 
     const toggleAccordion = (groupId: string) => {
-        setAccordionOpen(groupId === accordionOpen ? null : groupId);
+        setAccordionOpen(prevState => ({
+            ...prevState,
+            [groupId]: !prevState[groupId]
+        }));
+
     };
 
 
+    const StateButtons: React.FC<{
+        options: Option[];
+        setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
+        selectedCheckboxes: Record<string, string[]>;
+    }> =
+        ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
 
-    // const StateButtons: React.FC<{ options: Option[]; setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>> }> = ({ options, setSelectedCheckboxes }) => {
-    //     const handleStateButtonClick = (state: string) => {
-    //         setSelectedCheckboxes({ state: [state] });
-    //         const collegeFiltersSection = document.getElementById('collegeFiltersSection');
-    //         if (collegeFiltersSection) {
-    //             collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
-    //         }
-    //     };
 
-    //     return (
-    //         <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2">
-    //             <div className="col-12">
-    //                 <h6 className="text-black">Filters By Location</h6>
-    //                 <div className="btn-group d-flex flex-wrap">
-    //                     {options.map((option, index) => (
-    //                         <button key={index} className="btn text-center rounded m-1 p-2 filterItemBtn" onClick={() => handleStateButtonClick(option.value)}>
-    //                             {option.label}
-    //                         </button>
-    //                     ))}
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     );
-    // };
+            const handleStateButtonClick = (state: string) => {
+
+                console.log("handleStateButtonClick",state);
+
+                debouncedHandleCheckboxChange("state", state, true);
+                window.scrollTo({ top: 650, behavior: 'smooth' });
+
+                // setCheckboxState(prevState => ({
+                //     ...prevState,
+                //     [groupId]: {
+                //         ...prevState[groupId],
+                //         [value]: isChecked
+                //     }
+                // }));
+                setCheckboxState(prevState => ({
+                    ...prevState,
+                    ["state"]: {
+                        ...prevState["state"],
+                        [state]: true
+                    }
+                }));
+                // setSelectedCheckboxes(prevSelected => {
+                //     const stateSelections = prevSelected.state || [];
+                //     const updatedSelections = stateSelections.includes(state)
+                //         ? stateSelections.filter(s => s !== state)
+                //         : [...stateSelections, state];
+
+                //     const updatedSelected = { ...prevSelected, state: updatedSelections };
+                //     // Call the API with the selected state IDs
+                //     getcollegedata(updatedSelected.state);
+                //     return updatedSelected;
+                // });
+            };
+
+            return (
+                <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2 rounded">
+                    <div className="col-12">
+                        <h6 className="text-black">Filters By Location</h6>
+                        <div className="d-flex flex-wrap">
+                            {options.map((option, index) => (
+                                <button
+                                    key={index}
+                                    className={`btn text-center m-1 p-2 filterItemBtn  ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                    onClick={() => handleStateButtonClick(option.value)}
+                                >
+                                    {option.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
+        const [searchTexts, setSearchTexts] = useState<Record<string, string>>({});
+        const handleSearchChange = (groupId: string, searchText: string) => {
+            setSearchTexts(prev => ({ ...prev, [groupId]: searchText }));
+        };
+
+        const filteredOptions = (optionGroup: OptionGroup) => {
+            const searchText = searchTexts[optionGroup.id] || '';
+            return optionGroup.options.filter(option =>
+                // option.label.toLowerCase().includes(searchText.toLowerCase())
+                option.label
+            );
+        };
+
+
         return (
             <div>
                 {options.map((optionGroup, index) => (
-                    <div key={index} className="row bg-white gx-0 p-3 my-3 mx-2">
-                        <div className="col-10">
-                            <a className='text-blue'
-                            >{optionGroup.label}</a>
+                    <div key={index} style={{ cursor: 'pointer' }} className="row rounded bg-white gx-0 p-3 my-3 mx-2">
+
+                        <div className="col-10" onClick={() => toggleAccordion(optionGroup.id)}>
+                            <h5 className='text-blue'>
+                                {optionGroup.label}
+                            </h5>
                         </div>
-                        <div className="col-2 text-center">
-                            <a
-                                className='text-blue'
-                                onClick={() => toggleAccordion(optionGroup.id)}
-                                aria-expanded={accordionOpen === optionGroup.id}
-                                aria-controls={`${optionGroup.id}Collapse`}
-                            >
-                                &#11205;
-                            </a>
+                        <div className="col-2 text-center " onClick={() => toggleAccordion(optionGroup.id)}>
+                            <h5 className='text-blue'>
+                                {accordionOpen[optionGroup.id] ? '▲' : '▼'}
+                            </h5>
+
                         </div>
-                        <div className={`collapse ${accordionOpen === optionGroup.id ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
-                            <div className='my-3'>
-                                <hr></hr>
-                                <input type="search" placeholder="Search" className="icon-rtl form-control" id={`${optionGroup.id}Search`} aria-describedby={`${optionGroup.id}SearchHelp`} />
-                                {optionGroup.options.map((option, index) => (
+                        <div className={`showingCards collapse ${accordionOpen[optionGroup.id] ? 'show' : ''}`} id={`${optionGroup.id}Collapse`}>
+                            <div className='my-3 options-container'>
+                                <hr />
+                                <input
+                                    type="search"
+                                    placeholder="Search"
+                                    className="icon-rtl form-control"
+                                    value={searchTexts[optionGroup.id] || ''}
+                                    onChange={(e) => handleSearchChange(optionGroup.id, e.target.value)}
+                                    id={`${optionGroup.id}Search`}
+                                    aria-describedby={`${optionGroup.id}SearchHelp`}
+                                />
+                                {filteredOptions(optionGroup).map((option, index) => (
                                     <div key={index} className="form-check text-black searchCheckBox my-2">
                                         <input
                                             className="form-check-input"
                                             type="checkbox"
                                             value={option.value}
                                             id={`${optionGroup.id}-${index}`}
-                                            onChange={(e) =>
-                                                handleCheckboxChange(
-                                                    optionGroup.id,
-                                                    option.value,
-                                                    e.target.checked
-                                                )
-                                            }
-                                            checked={selectedCheckboxes[optionGroup.id]?.includes(option.value)}
+                                            onChange={(e) => handleCheckboxChange(optionGroup.id, option.value, e.target.checked)}
+                                            checked={checkboxState[optionGroup.id]?.[option.value]}
                                         />
+
                                         <label className="form-check-label" htmlFor={`${optionGroup.id}-${index}`}>
                                             {option.label}
                                         </label>
@@ -482,11 +629,12 @@ function CollegeFilterSection() {
                             </div>
                         </div>
                     </div>
-                ))
-                }
-            </div >
+                ))}
+            </div>
         );
     };
+
+
 
     const SelectedFilters: React.FC<{ selectedCheckboxes: Record<string, string[]> }> = ({ selectedCheckboxes }) => {
         const getLabelForValue = (groupId: string, value: string) => {
@@ -495,27 +643,36 @@ function CollegeFilterSection() {
             return option ? option.label : value;
         };
 
+        // Check if there are any selected filters
+        const hasSelectedFilters = Object.keys(selectedCheckboxes).some(groupId => selectedCheckboxes[groupId].length > 0);
+
+        // Render the filter card only if there are selected filters
         return (
-            <div id="collegeFiltersSection" className="row bg-skyBlue gx-0 px-3 py-2 mb-3 mx-2">
-                <div className="col-12">
-                    <h6 className='text-black'>Selected Filters</h6>
-                </div>
-                <div className='my-2'>
-                    {Object.entries(selectedCheckboxes).map(([groupId, values]) => (
-                        values.map(value => (
-                            <div key={value} className="btn d-inline-flex align-items-center filterItemBtn rounded m-1 p-2">
-                                <span className="me-2">{getLabelForValue(groupId, value)}</span>
-                                <button
-                                    className="btn"
-                                    onClick={() => removeSelectedCheckbox(groupId, value)}
-                                ><Image src="/images/icons/close-icon-white.png" width={18} height={18} alt='close-white' /></button>
-                            </div>
-                        ))
-                    ))}
-                </div>
-            </div>
+            <>
+                {hasSelectedFilters && (
+                    <div id="collegeFiltersSection" className="row bg-skyBlue gx-0 px-3 py-2 mb-3 mx-2">
+                        <div className="col-12">
+                            <h6 className='text-black'>Selected Filters</h6>
+                        </div>
+                        <div className='my-2'>
+                            {Object.entries(selectedCheckboxes).map(([groupId, values]) => (
+                                values.map(value => (
+                                    <div key={value} className="btn d-inline-flex align-items-center filterItemBtn2 rounded m-1 p-2">
+                                        <span className="me-2">{getLabelForValue(groupId, value)}</span>
+                                        <button
+                                            className="btn"
+                                            onClick={() => removeSelectedCheckbox(groupId, value)}
+                                        ><Image src="/images/icons/close-icon-white.png" width={18} height={18} alt='close-white' /></button>
+                                    </div>
+                                ))
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </>
         );
     };
+
 
     // Calculate filtered colleges outside of handleViewMore
     const filteredColleges = colleges.filter(college => {
@@ -533,81 +690,75 @@ function CollegeFilterSection() {
         });
     });
 
+    const PromoAddBanner = ({ url, title, description }) => {
+
+        return (
+            <>
+                <section className='bg-skyBlue addBanner rounded'>
+                    <div className="container p-5">
+                        <div className="card">
+                            <div className="row g-0">
+                                <div className="col-md-4 addImgClg position-relative">
+                                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
+                                    <div className="position-absolute iconsPosition">
+                                        {/* <div className="d-flex flex-column">
+                                            <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-info-circle"></i></h6>
+                                            <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-x-circle"></i></h6>
+                                        </div> */}
+                                    </div>
+                                    <h2 className='position-absolute text-white' style={{ backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px', zIndex: '3000', top: '50%', left: '50%', color: "white" }}>Ad</h2>
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="card-body" style={{ zIndex: '200' }}>
+                                        <h5 className="card-text">{description}</h5>
+                                        <h3 className="card-title fw-bold">{title}</h3>
+                                        <Link href='/colleges' className='mt-3 btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </>
+
+        );
+    }
+
 
     return (
         <>
             <div className='bg-white py-3'>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 mb-3 mb-lg-0 bg-skyBlue">
+                        <div className="col-lg-3 col-xl-3 col-md-4 mb-3 mb-lg-0 bg-skyDarkBlue rounded">
+                            <h5 className='text-blue fw-bold text-md-start text-center px-3 pt-3'>Found {total} Schools</h5>
                             <MultiSelectOptions options={options} />
                         </div>
-                        <div className="col-lg-9">
+                        <div className="col-lg-9 col-xl-9 col-md-8">
                             <SelectedFilters selectedCheckboxes={selectedCheckboxes} />
                             <CollegeList selectedCheckboxes={selectedCheckboxes} />
                             {filteredColleges.length > visibleCards && (
                                 <div className="text-center my-3">
-                                    <button className="btn viewMoreCardBtn"
+                                    <button className="btn viewMoreCollegeBtn"
                                         onClick={handleViewMore}
                                     >
                                         Load More
                                     </button>
                                 </div>
                             )}
-                            {/* <StateButtons options={options.find(option => option.id === 'state')?.options || []} setSelectedCheckboxes={setSelectedCheckboxes} /> */}
+                            {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} description={promoban[0].description} title={promoban[0].title} />}
+                            {/* <StateButtons
+                                options={options.find(option => option.id === 'state')?.options || []}
+                                setSelectedCheckboxes={setSelectedCheckboxes}
+                                selectedCheckboxes={selectedCheckboxes}
+                            /> */}
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Modal
 
-            <Modal className="modal fade px-3" id="exampleModal" show={showModal} onHide={handleCloseModal}>
-                <div className="modal-content">
-                    <div className="searchForm">
-                        <h5 className="pb-3 fw-bold text-center text-blue">Let’s build a better future for you</h5>
-                        <Formik
-                            initialValues={{
-                                name: '',
-                                email: '',
-                                phoneNumber: '',
-                                course: '',
-                                location: '',
-                            }}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                            resetForm
-                        >
-                            <Form>
-                                <div className="mb-3">
-                                    <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
-                                    <ErrorMessage name="name" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                                    <ErrorMessage name="email" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" />
-                                    <ErrorMessage name="phoneNumber" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
-                                    <ErrorMessage name="course" component="div" className="error text-danger" />
-                                </div>
-                                <div className="mb-3">
-                                    <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                                    <ErrorMessage name="location" component="div" className="error text-danger" />
-                                </div>
-
-                                <div className="d-grid">
-                                    <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                                </div>
-                            </Form>
-                        </Formik>
-                    </div>
-                </div>
-            </Modal> */}
         </>
 
     );

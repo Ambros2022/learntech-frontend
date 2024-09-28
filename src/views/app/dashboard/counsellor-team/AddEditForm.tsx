@@ -23,11 +23,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import type { FC } from 'react';
-import { Alert, useTheme } from '@mui/material'
+import { Alert, Typography, useTheme } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import QuillEditor from 'src/@core/components/html-editor/index';
 
 
 interface Authordata {
@@ -70,6 +71,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         name: isAddMode ? '' : olddata.name,
         location: isAddMode ? '' : olddata.location,
         description: isAddMode ? '' : olddata.description,
+        info: isAddMode ? '' : olddata.info,
         experience: isAddMode ? null : new Date(olddata.experience),
     }
 
@@ -77,6 +79,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         control,
         handleSubmit,
         reset,
+        setValue,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -94,6 +97,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('id', updateid);
             formData.append('name', data.name);
             formData.append('location', data.location);
+            formData.append('info', data.info);
             formData.append('description', data.description);
             formData.append('image', selectedphoto);
             formData.append('experience', data.experience);
@@ -133,6 +137,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const formData = new FormData();
             formData.append('name', data.name);
             formData.append('location', data.location);
+            formData.append('info', data.info);
             formData.append('description', data.description);
             formData.append('experience', data.experience);
             if (selectedphoto == '') {
@@ -291,6 +296,21 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.description && { helperText: 'This field is required' })}
                                 />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Typography style={{ marginBottom: '10px' }}>Info</Typography>
+
+                        <Controller
+                            name='info'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <>
+                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                        onChange={(value) => setValue("info", value)} />
+                                </>
                             )}
                         />
                     </Grid>

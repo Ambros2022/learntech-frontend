@@ -230,6 +230,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         status: isAddMode ? 'Published' : olddata.status,
         home_view_status: isAddMode ? 'default' : olddata.home_view_status,
         listing_order: isAddMode ? '' : olddata.listing_order,
+        avg_rating: isAddMode ? '' : olddata.avg_rating,
         amenities: [],
         levels: [],
     }
@@ -288,6 +289,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_keyword', data.meta_keyword);
             formData.append('address', data.address);
             formData.append('map', data.map);
+            formData.append('avg_rating', data.avg_rating);
             formData.append('video_url', data.video_url);
             formData.append('info', data.info);
             formData.append('admissions_process', data.admissions_process);
@@ -346,6 +348,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_keyword', data.meta_keyword);
             formData.append('address', data.address);
             formData.append('map', data.map);
+            formData.append('avg_rating', data.avg_rating);
             formData.append('video_url', data.video_url);
             formData.append('info', data.info);
             formData.append('admissions_process', data.admissions_process);
@@ -987,6 +990,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='avg_rating'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                type='number'
+                                                value={value}
+                                                label='Average Rating'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.avg_rating)}
+                                                aria-describedby='validation-basic-avg-rating'
+                                                {...(errors.avg_rating && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>info</Typography>
                                     <Controller

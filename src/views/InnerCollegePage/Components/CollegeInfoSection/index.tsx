@@ -64,7 +64,21 @@ function CollegeInfoSection({ data }) {
     {
       id: 'gallery',
       label: 'Gallery',
-      content: data.clggallery && data.clggallery.length > 0 ? data.clggallery : ''
+      content: data.clggallery && data.clggallery.length > 0 ? (
+        <div className="row">
+          {data.clggallery.map((galleryItem, index) => (
+            <div key={index} className="col-6 col-md-4 mb-4">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_IMG_URL}/${galleryItem.image}`}
+                alt={`Gallery Image ${index + 1}`}
+                width={500}
+                height={300}
+                className='img-fluid rounded'
+              />
+            </div>
+          ))}
+        </div>
+      ) : ''
     },
     { id: 'review', label: 'Review', content: <ReviewSec data={data} /> },
     {
