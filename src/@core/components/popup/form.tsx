@@ -1,18 +1,21 @@
 import React, { FC } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver';
 import axios from 'src/configs/axios';
-import { toast } from 'react-hot-toast'
+import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+
 interface Props {
     page?: any;
     onChanges?: any;
+    placeholder?: string;  // Add the placeholder prop to define its type
 }
 
-const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
+const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, ...rest }) => {
     const router = useRouter();
+
     const downloadPDF = async (): Promise<void> => {
         try {
             const oReq = new XMLHttpRequest();
@@ -23,7 +26,6 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
 
             oReq.onload = function () {
                 if (oReq.status === 200) {
-                    // Once the file is downloaded, save it using FileSaver
                     const file = new Blob([oReq.response], { type: 'application/pdf' });
                     saveAs(file, "Learntechww Brochure 2024.pdf");
                 } else {
@@ -42,20 +44,19 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
     };
 
     const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
-    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+    // Adjust validation schema to check for placeholder prop
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
         contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
-        course: Yup.string().required('Course is required').trim(),
+        course: Yup.string().required(`${placeholder || 'Course'} is required`).trim(),  // Use placeholder if available
         location: Yup.string().required('Location is required').trim(),
         message: Yup.string().required('Message is required'),
     });
 
     const handleSubmit = async (values, { resetForm }) => {
-        // console.log(values);
-        // return
         try {
             toast.loading('Processing');
             const formData = new FormData();
@@ -75,14 +76,11 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
                 onChanges();
 
                 if (page && page == "Brochure") {
-                    alert("z");
                     downloadPDF();
                 }
 
-
                 router.push('/thank-you');
             }
-
         } catch (error) {
             toast.error('try again later!');
             console.error('Error submitting form:', error);
@@ -101,7 +99,6 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
-            resetForm
         >
             <Form>
                 <div className="mb-3">
@@ -114,11 +111,10 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
                 </div>
                 <div className="mb-3">
                     <PhoneInputField name="contact_number" />
-                    {/* <Field type="text" name="phoneNumber" placeholder="Enter Phone Number" className="form-control" /> */}
                     <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                 </div>
                 <div className="mb-3">
-                    <Field type="text" name="course" placeholder="Enter Course" className="form-control" />
+                    <Field type="text" name="course" placeholder={placeholder? (`Enter ${placeholder}`):("Enter Course")} className="form-control" />
                     <ErrorMessage name="course" component="div" className="error text-danger" />
                 </div>
                 <div className="mb-3">
@@ -132,8 +128,6 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
                 <div className="d-grid">
                     <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">
                         {page && page == "Brochure" ? "Download Brochure" : "Submit"}
-
-
                     </button>
                 </div>
             </Form>

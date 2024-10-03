@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic'
 
 
 
-
 function LocationSection({ data }) {
+  console.log(data.map)
   return (
     <>
       <section className='locationSec bg-white pb-5 pt-5'>
@@ -20,7 +20,7 @@ function LocationSection({ data }) {
                   </div>
                   <div className="col-lg-12 d-flex bg-blue">
                     <div className="card-body align-content-start text-white p-0 mt-2 text-lg-start text-center text-md-center ">
-                      <h5 className="card-title fw-bold mb-3 pt-3">{data.name}</h5>
+                      <h3 className="card-title fw-bold mb-3 pt-3">{data.name}</h3>
                       <h6 className="card-text mb-0 mt-2 innerTextAddress"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i><span className="mt-2">{data.address}</span></h6>
                     </div>
                   </div>
@@ -29,14 +29,20 @@ function LocationSection({ data }) {
             </div>
             <div className="col-md-6">
               <div className='p-2 bg-blue rounded h-100 w-100'>
-                <iframe
-                  width="100%"
-                  height="100%"
-                  loading="lazy"
-                  allowFullScreen
-                  src={data.map}
-                  className='rounded'
-                ></iframe>
+                {data.map ? (
+                  <iframe
+                    src={data.map}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    allowFullScreen
+                    className='rounded'
+                  ></iframe>
+                ) : (
+                  ""
+                )}
+
               </div>
             </div>
           </div>

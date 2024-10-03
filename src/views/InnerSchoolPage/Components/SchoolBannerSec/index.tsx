@@ -1,4 +1,6 @@
 import React from 'react';
+import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry';
+
 
 const SchoolBannerSec = ({ data }) => {
     return (
@@ -15,6 +17,9 @@ const SchoolBannerSec = ({ data }) => {
             >
                 <h4 className='align-self-center text-center fw-bold p-3 text-white rounded'>Interested In this School ? Admission Now !</h4>
                 <h2 className='align-self-center text-center mx-md-0 mx-5 text-white fw-bold p-3 bg-blue rounded'>{data.name}</h2>
+                <div className='text-center mt-3            '>
+                    <GlobalPopupEnquiry className='viewMoreCollegeBtn btn' />
+                </div>
             </section>
         </>
     );
