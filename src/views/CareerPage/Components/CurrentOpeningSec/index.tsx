@@ -63,7 +63,7 @@ const CurrentOpeningSec: React.FC<CurrentOpeningSecProps> = ({ jobData }) => {
                                                     </span>
                                                 </>
                                             ) : ''}
-                                            <p className="card-text text-truncate mt-2">
+                                            <p className="card-text text-truncate mt-3">
                                                 <Image src="/images/icons/calendor-filled.png" width={20} height={20} alt='logo-location' /> {job.exp_required}
                                             </p>
                                             <div className="row">

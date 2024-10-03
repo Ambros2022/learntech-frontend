@@ -17,6 +17,7 @@ interface Props {
 
 const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     const router = useRouter();
+    const [resumeFileName, setResumeFileName] = useState('');
 
 
     const initialValues = {
@@ -175,20 +176,27 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                                 <ErrorMessage name='total_exp' component='div' className='text-danger' />
                             </div>
                         </div>
-                        <div className='col-md-6'>
-                            <div className='mb-3'>
+                        <div className='col-md-12'>
+                            <div className='mb-3 jobFile'>
                                 <input
                                     type='file'
                                     name='resume'
                                     accept='.pdf,.docx'
-                                    className='form-control'
+                                    className='form-control jobFileInput'
                                     onChange={(event) => {
                                         const file = event.currentTarget.files ? event.currentTarget.files[0] : null;
                                         console.log('Selected file:', file);
                                         setFieldValue('resume', file);
+                                        setResumeFileName(file ? file.name : ''); // Update state with file name
                                     }}
                                 />
                                 <ErrorMessage name='resume' component='div' className='text-danger' />
+                                {/* Conditional rendering of file name or placeholder */}
+                                {resumeFileName ? (
+                                    <div className='file-name'>{resumeFileName}</div>
+                                ) : (
+                                    <div className='placeholder-text'>Please Upload a valid .Pdf Or .Docx File</div>
+                                )}
                             </div>
                         </div>
 

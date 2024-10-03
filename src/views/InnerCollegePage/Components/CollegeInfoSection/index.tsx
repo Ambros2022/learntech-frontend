@@ -67,7 +67,7 @@ function CollegeInfoSection({ data }) {
       content: data.clggallery && data.clggallery.length > 0 ? (
         <div className="row">
           {data.clggallery.map((galleryItem, index) => (
-            <div key={index} className="col-6 col-md-4 mb-4">
+            <div key={index} className="col-6 col-md-4 p-4">
               <Image
                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${galleryItem.image}`}
                 alt={`Gallery Image ${index + 1}`}

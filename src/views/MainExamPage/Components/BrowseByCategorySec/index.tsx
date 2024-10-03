@@ -319,7 +319,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         if (paginatedScholarships.length === 0) {
             return (
                 <div className="col-12 text-center">
-                    <p className="fw-bold text-muted">No scholarships found matching your criteria. Please try adjusting your filters.</p>
+                    <p className="fw-bold text-muted">No exams found. Try adjusting the filter settings.</p>
                 </div>
             );
         }

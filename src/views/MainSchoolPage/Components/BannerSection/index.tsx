@@ -140,7 +140,7 @@ function BannerSection() {
                     />
                   </div>
                   <div className="col-md-5 d-flex mb-3">
-                    <GlobalEnquiryForm className="btn align-self-center btn-success2" />
+                    <GlobalEnquiryForm className="btn align-self-center btn-success2" placeholder={'Grade'}/>
                   </div>
                 </div>
               </div>

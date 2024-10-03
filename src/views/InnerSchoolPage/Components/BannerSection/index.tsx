@@ -18,10 +18,10 @@ function BannerSection({ data }) {
                 <div className="card-body text-white">
                   <h1 className="card-title fw-bold mb-3">{data.name}</h1>
                   <h6 className='mb-3 location-img'><i className='bi bi-geo-alt-fill text-danger me-1'></i>{data.address}</h6>
-                  <h6 className='mb-3 location-img'><i className='bi bi-mortarboard-fill text-warning me-2'></i><strong>Board :</strong>{data.short_name}</h6>
-                  <h6 className='mb-3 location-img'>
+                  <h6 className='mb-3 location-img'><i className='bi bi-mortarboard-fill text-warning me-2'></i><strong>Board : </strong>{data.schoolboard.short_name}</h6>
+                  <h6 className='mb-3 location-img d-flex'>
                     <i className='bi bi-award-fill text-primary me-2'></i>
-                    <strong>School Level : </strong>
+                    <strong className='flex-shrink-0'>School Level : </strong>
                     {data.schoollevels.map((value) => value.schlevelname.name).join(', ')}
                   </h6>
                   {/* <h6 className='mb-3'><i className="text-warning bi bi-trophy-fill me-1"></i><strong>Approved by :&nbsp;</strong>{
@@ -37,7 +37,7 @@ function BannerSection({ data }) {
                   {/* <button className='btn PrivateBtn'>{data.college_type}</button><br /> */}
                 </div>
               </div>
-              {data?.avg_rating && <div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
+              {data?.avg_rating && data?.avg_rating !==0 ? (<div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
                 <div className="d-flex gap-2 justify-content-md-end justify-content-start">
 
                   <i className={`bi bi-star-fill ${data.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
@@ -48,7 +48,7 @@ function BannerSection({ data }) {
 
                   <h6 className='mb-0 text-white align-self-center'>{data.avg_rating}/5 Review</h6>
                 </div>
-              </div>}
+              </div>):''}
 
 
 

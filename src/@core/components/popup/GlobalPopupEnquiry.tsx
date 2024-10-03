@@ -11,12 +11,12 @@ interface Props {
     title?: any;
     pagename?: any;
     buttonText?: any;
-
+    placeholder?: any;
 }
 
 
 
-const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, ...rest }) => {
+const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, placeholder='', ...rest }) => {
     const [modalShow, setModalShow] = React.useState(false);
     function onChanges() {
 
@@ -29,7 +29,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                 <div className="modal-content">
                     <div className="searchForm">
                         <h5 className="pb-3 fw-bold text-center text-blue">{props.title}</h5>
-                        <EnquiryForm onChanges={onChanges} page={props.pagename} />
+                        <EnquiryForm onChanges={onChanges} page={props.pagename} placeholder={placeholder} />
                     </div>
                 </div>
             </Modal>

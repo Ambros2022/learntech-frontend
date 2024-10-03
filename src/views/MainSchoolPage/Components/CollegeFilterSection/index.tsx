@@ -54,7 +54,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                     </div>
                                 </div>
                                 <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
-                                    {rating && (
+                                    {rating && rating.length!==0 ? (
                                         <div className="d-flex mb-md-3 mb-lg-0 gap-2 justify-content-start justify-content-md-start">
 
                                             <i className={`bi bi-star-fill ${rating >= 1 ? "text-warning" : "text-gray"} `}></i>
@@ -65,7 +65,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
 
                                             {/* <h6 className='mb-0 text-white align-self-center'>{rating}/5 Review</h6> */}
                                         </div>
-                                    )}
+                                    ):''}
                                 </div>
                                 <div className="mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column justify-content-xl-around gap-xl-0 gap-3">
                                     <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
@@ -262,7 +262,7 @@ function CollegeFilterSection() {
         // { id: 'city', label: 'Cities', options: states.flatMap(state => state.cities) },
         {
             id: 'ownership',
-            label: 'Ownership',
+            label: 'School Types',
             options: [
                 { label: 'Public', value: 'Public' },
                 { label: 'Deemed', value: 'Deemed' },

@@ -6098,35 +6098,84 @@
     text-overflow: ellipsis !important;
     min-height: 60px !important;
   }
+
   .heading-with-lines {
     position: relative;
     display: inline-block;
-}
+  }
 
-.heading-with-styled-lines {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 20px; /* Adjust for space below */
-}
+  .heading-with-styled-lines {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 20px;
+    /* Adjust for space below */
+  }
 
-.heading-with-styled-lines::before,
-.heading-with-styled-lines::after {
-  content: '';
-  position: absolute;
-  background-color: black;
-  height: 2px;
-}
+  .heading-with-styled-lines::before,
+  .heading-with-styled-lines::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+    height: 2px;
+  }
 
-.heading-with-styled-lines::before {
-  width: 80px; /* Wider top line */
-  top: 100%; /* Below the text */
-  left: 50%;
-  transform: translateX(-50%);
-}
+  .heading-with-styled-lines::before {
+    width: 80px;
+    /* Wider top line */
+    top: 100%;
+    /* Below the text */
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-.heading-with-styled-lines::after {
-  width: 40px; /* Smaller bottom line */
-  top: calc(100% + 8px); /* Slightly more space below */
-  left: 50%;
-  transform: translateX(-50%);
-}
+  .heading-with-styled-lines::after {
+    width: 40px;
+    /* Smaller bottom line */
+    top: calc(100% + 8px);
+    /* Slightly more space below */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .jobFile {
+    position: relative !important;
+    overflow: hidden;
+  }
+
+  .jobFileInput {
+    color: transparent !important;
+  }
+
+  .placeholder-text {
+    position: absolute !important;
+    color: black !important;
+    left: 300px !important;
+    top: 50% !important;
+    transform: translate(-50%,-50%);
+    white-space: nowrap ;             
+    overflow: hidden;                
+    text-overflow: ellipsis;        
+  }
+
+  .file-name {
+    position: absolute !important;
+    color: black !important;
+    left: 200px !important;
+    top: 50% !important;
+    transform: translate(-50%,-50%);
+    white-space: nowrap;           
+    overflow: hidden;             
+    text-overflow: ellipsis;       
+  }
+
+  
+
+  @media (min-width:320px) and (max-width:767px) {
+    .placeholder-text {
+      display: none !important;
+    }
+  
+    .file-name {
+      display: none !important;
+    }
+  }

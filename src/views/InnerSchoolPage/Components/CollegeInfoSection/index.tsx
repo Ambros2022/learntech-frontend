@@ -63,7 +63,7 @@ function CollegeInfoSection({ data }) {
       content: data.schgallery && data.schgallery.length > 0 ? (
         <div className="row">
           {data.schgallery.map((galleryItem, index) => (
-            <div key={index} className="col-6 col-md-4 mb-4">
+            <div key={index} className="col-6 col-md-4 p-4">
               <Image
                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${galleryItem.image}`}
                 alt={`Gallery Image ${index + 1}`}
@@ -75,7 +75,7 @@ function CollegeInfoSection({ data }) {
           ))}
         </div>
       ) : ''
-    },    
+    },
     {
       id: 'faq',
       label: 'FAQ',
@@ -110,6 +110,8 @@ function CollegeInfoSection({ data }) {
     return null;
   });
 
+  const embedUrl = data.video_url.replace("watch?v=", "embed/");
+
   const renderTabContent = () => tabs.map((tab, index) => {
     if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>') {
       return (
@@ -143,8 +145,19 @@ function CollegeInfoSection({ data }) {
                   </div>
                 </div>
                 <div className='clgVideo rounded'>
-                  <iframe width="100%" height="100%" className="rounded" src={data.video_url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                  {embedUrl ? (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      className="rounded"
+                      src={embedUrl}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
+                  ) : ''}
                 </div>
+
               </div>
 
             </div>

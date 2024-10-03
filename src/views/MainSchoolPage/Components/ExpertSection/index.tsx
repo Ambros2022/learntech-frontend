@@ -1,5 +1,5 @@
 import React from 'react';
-import TALKExpertForm from 'src/@core/components/popup/TalkExpertEnqiiry';
+import TALKExpertForm from 'src/@core/components/popup/TalkExpertEnqiirySchool';
 
 function ExpertSection() {
   const handlePhoneChange = (event) => {
