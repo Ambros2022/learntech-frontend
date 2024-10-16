@@ -72,6 +72,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         location: isAddMode ? '' : olddata.location,
         description: isAddMode ? '' : olddata.description,
         info: isAddMode ? '' : olddata.info,
+        listing_order: isAddMode ? '' : olddata.listing_order,
         experience: isAddMode ? null : new Date(olddata.experience),
     }
 
@@ -98,6 +99,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('name', data.name);
             formData.append('location', data.location);
             formData.append('info', data.info);
+            formData.append('listing_order', data.listing_order);
             formData.append('description', data.description);
             formData.append('image', selectedphoto);
             formData.append('experience', data.experience);
@@ -138,6 +140,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('name', data.name);
             formData.append('location', data.location);
             formData.append('info', data.info);
+            formData.append('listing_order', data.listing_order);
             formData.append('description', data.description);
             formData.append('experience', data.experience);
             if (selectedphoto == '') {
@@ -295,6 +298,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.description)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.description && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='listing_order'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Listing Order'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.listing_order)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.listing_order && { helperText: 'This field is required' })}
                                 />
                             )}
                         />

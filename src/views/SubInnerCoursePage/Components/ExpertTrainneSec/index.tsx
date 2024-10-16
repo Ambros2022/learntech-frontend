@@ -18,7 +18,7 @@ const ExperTraineeSec = () => {
 
     const getTraineer = useCallback(async () => {
         try {
-            const response = await axios.get('api/website/counsellorteams/get');
+            const response = await axios.get('api/website/counsellorteams/get?orderby=asc&columnname=listing_order');
             if (isMountedRef.current && response.data.status === 1) {
                 setTraineer(response.data.data); // Adjusted to handle array of trainees
             }
@@ -75,7 +75,7 @@ const ExperTraineeSec = () => {
                                 The instructor-led training is conducted by certified trainers with extensive expertise in the field. Participants will benefit from the instructor's vast knowledge, gaining valuable insights and practical skills essential for success in Access practices.
                             </p>
                             <div className='py-3'>
-                                <div className="row d-flex flex-wrap">
+                                <div className="row d-flex flex-wrap g-2">
                                     {traineer.map((trainee: any, index: number) => (
                                         <div className="col-md-4 col-lg-4 col-xl-3" key={index}>
                                             <TrainerCard trainee={trainee} />
@@ -100,15 +100,17 @@ const ExperTraineeSec = () => {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: 600,
+                            width: { xs: '90%', sm: 400, md: 900 }, // Responsive width
+                            maxHeight: '90vh', // Set max height to 80% of viewport height
                             bgcolor: 'background.paper',
                             boxShadow: 24,
-                            p: 4,
+                            p: { xs: 2, md: 4 }, // Responsive padding
                             borderRadius: '10px',
                             outline: 'none', // Remove focus outline on click
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
+                            overflowY: 'auto', // Enable vertical scrolling if content overflows
                         }}
                     >
                         {/* Close Icon at the top right corner */}
@@ -122,10 +124,18 @@ const ExperTraineeSec = () => {
                         {/* Modal Content */}
                         {selectedTraineer ? (
                             <>
-                                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${selectedTraineer.image}`} className='img-fluid mb-3 rounded' width={200} height={200} alt={`${selectedTraineer.name}-img`} />
+                                <Image
+                                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${selectedTraineer.image}`}
+                                    className='img-fluid mb-3 rounded'
+                                    width={200}
+                                    height={200}
+                                    alt={`${selectedTraineer.name}-img`}
+                                />
                                 <h2 className='fw-bold text-blue'>{selectedTraineer.name}</h2>
                                 <div className='text-black' dangerouslySetInnerHTML={{ __html: selectedTraineer.info }} />
-                                <Button onClick={() => setModalOpen(false)} variant="contained" color="primary">Close</Button>
+                                <Button onClick={() => setModalOpen(false)} variant="contained" color="primary">
+                                    Close
+                                </Button>
                             </>
                         ) : (
                             <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
