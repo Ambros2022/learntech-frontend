@@ -304,10 +304,10 @@ const SecondPage = () => {
         let button;
         switch (row.is_approved) {
           case 0:
-            button = <Button variant="contained" color="error" sx={{ width: '73px', height: '31px' }}>Pending</Button>;
+            button = <Button variant="contained" color="error" sx={{ width: '83px', height: '31px' }}>Pending</Button>;
             break;
           case 1:
-            button = <Button variant="contained" color="success" sx={{ width: '73px', height: '31px' }}>Approved</Button>;
+            button = <Button variant="contained" color="success" sx={{ width: '83px', height: '31px' }}>Approved</Button>;
             break;
 
 
@@ -354,7 +354,7 @@ const SecondPage = () => {
           <Button
             variant="contained"
             color="primary"
-            sx={{ width: '109px', height: '31px' }}
+            sx={{ width: '140px', height: '31px' }}
             onClick={handleUpdateClick}
           >
             Change Status
@@ -379,7 +379,7 @@ const SecondPage = () => {
           <Button
             variant="contained"
             sx={{
-              width: '30px',
+              width: '40px',
               height: '30px',
               backgroundColor: 'green',
               color: 'white',

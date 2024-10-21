@@ -24,20 +24,10 @@ function BannerSection({ data }) {
                     <strong className='flex-shrink-0'>School Level : </strong>
                     {data.schoollevels.map((value) => value.schlevelname.name).join(', ')}
                   </h6>
-                  {/* <h6 className='mb-3'><i className="text-warning bi bi-trophy-fill me-1"></i><strong>Approved by :&nbsp;</strong>{
-                    data.collegerecognitions && data.collegerecognitions.map((element, index) => {
-                      return (
-                        <>
-                          {index == 0 ? ' ' + element.clgrecognitions.recognition_approval_name : ', ' + element.clgrecognitions.recognition_approval_name}
-                        </>
-                      )
-                    })
-                  }</h6> */}
-                  {/* <button className='btn btn-warning text-white me-2 ratingBtn'> &#9733; {data.avg_rating}</button> */}
-                  {/* <button className='btn PrivateBtn'>{data.college_type}</button><br /> */}
+
                 </div>
               </div>
-              {data?.avg_rating && data?.avg_rating !==0 ? (<div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
+              {data?.avg_rating && data?.avg_rating !== 0 ? (<div className="col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-3">
                 <div className="d-flex gap-2 justify-content-md-end justify-content-start">
 
                   <i className={`bi bi-star-fill ${data.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
@@ -48,14 +38,12 @@ function BannerSection({ data }) {
 
                   <h6 className='mb-0 text-white align-self-center'>{data.avg_rating}/5 Review</h6>
                 </div>
-              </div>):''}
-
-
+              </div>) : ''}
 
             </div>
             <div className="d-flex justify-content-end flex-md-row flex-column gap-3 ps-md-0 ps-3">
-              <GlobalEnquiryForm pagename="Brochure" className='align-content-center btn downloadBtn' title="Download Brochure" />
-              <GlobalEnquiryForm className='align-content-center btn freeBtn' buttonText="Get Fee Structure" />
+              <GlobalEnquiryForm pagename="Brochure" className='align-content-center btn downloadBtn' title="Download Brochure" placeholder="Class" />
+              <GlobalEnquiryForm className='align-content-center btn freeBtn' buttonText="Get Fee Structure" placeholder="Class" />
             </div>
           </div>
         </div>

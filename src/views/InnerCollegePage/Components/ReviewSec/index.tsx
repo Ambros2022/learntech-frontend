@@ -289,10 +289,10 @@ const ReviewSec = ({ data }) => {
                         {cardData.slice(0, visibleCards).map((review) => (
                             <div key={review.id} className="card p-3 mb-5 bg-skyBlue">
                                 <div className="row">
-                                    <div className="col-md-2 text-center">
+                                    <div className="col-md-1 text-center">
                                         <i className="fs-1 bi bi-person-circle"></i>
                                     </div>
-                                    <div className="col-md-10 d-flex justify-content-md-between justify-content-center flex-md-row flex-column">
+                                    <div className="col-md-11 d-flex justify-content-md-between justify-content-center flex-md-row flex-column">
                                         <div className='align-self-center'>
                                             <h4 className='fw-bold text-blue'>{review.name}</h4>
                                         </div>
@@ -300,9 +300,10 @@ const ReviewSec = ({ data }) => {
                                             <h6 className='text-blue'><span><i className="bi bi-patch-check-fill text-success"></i></span> Verified</h6>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className="ms-auto col-md-10">
+                                    <div className="col-md-1 text-center">
+                                    
+                                    </div>
+                                    <div className="col-md-11">
                                         <h6>{review.userrating} Reviewed <span className={'starRatings ms-1 me-1 mt-3'}>
                                             {[1, 2, 3, 4, 5].map((value) => (
                                                 <span
@@ -315,7 +316,10 @@ const ReviewSec = ({ data }) => {
                                         </span> on {format(new Date(review.created_at), 'MMM dd, yyyy hh:mm a')}
                                         </h6>
                                     </div>
-                                    <div className="ms-auto col-md-10">
+                                    <div className="col-md-1 text-center">
+                                    
+                                    </div>
+                                    <div className="col-md-11">
                                         <ul>
                                             <li>Batch {review.passing_year}</li>
                                             <li>B.Tech (Bachelor of Technology)</li>

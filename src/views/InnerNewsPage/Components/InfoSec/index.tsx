@@ -7,9 +7,7 @@ const InfoSec = ({ data }) => {
     const [newsData, setNewsData] = useState([]);
     const [showModal, setShowModal] = useState(false); // State to control modal visibility
     const [loading, setLoading] = useState(true); // State to manage loading status
-    const router = useRouter();
-
-    const location = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
+    console.log(data);
 
     const getNews = useCallback(async () => {
         setNewsData([]);
@@ -77,7 +75,7 @@ const InfoSec = ({ data }) => {
             {/* Modal for PDF preview */}
             {showModal && (
                 <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                    <div className="modal-dialog modal-lg">
+                    <div className="modal-dialog modal-xl">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title text-blue">{data.pdf_name}</h5>

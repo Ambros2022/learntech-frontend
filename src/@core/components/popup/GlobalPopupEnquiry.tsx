@@ -33,60 +33,12 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                     </div>
                 </div>
             </Modal>
-            // <Modal
-            //     {...props}
-            //     // size="lg"
-            //     aria-labelledby="contained-modal-title-vcenter"
-            //     centered
-            //     id="enquiryformpopup"
-            // >
-            //     <Modal.Header closeButton className='close'>
-            //         {/* <Modal.Title id="contained-modal-title-vcenter">
-
-            //         </Modal.Title> */}
-            //     </Modal.Header>
-            //     <Modal.Body>
-            //         <h4> {props.title == "Download Brochure" ? "ff" : ""}{props.title == "Submit" ? "Please fill in your details to receive your detailed rank prediction." : props.title}</h4>
-
-            //         <div id="header-form" className="">
-            //             <EnquiryForm onChanges={onChanges} page={props.pagename} />
-            //         </div>
-            //     </Modal.Body>
-            //     {/* <Modal.Footer>
-            //         <Button onClick={props.onHide}>Close</Button>
-            //     </Modal.Footer> */}
-            // </Modal>
+ 
         );
     }
 
     return (
         <>
-
-            {/* {pagename && pagename == 'CourseList' ?
-                <a onClick={() => setModalShow(true)} className="talk-to-expert btn">
-                    <img src={CallNow} className="fcall" />
-                    Talk to our Experts
-                </a>
-                :
-                <>
-                    {
-                        pagename == 'Brochure' ?
-                            <a onClick={() => setModalShow(true)} className={className ? className : 'active_bt'}>
-                                <img src={require("src/assets/img/left_bt.svg")} alt="Download Brochure" />
-                            </a>
-                            :
-
-
-
-
-                            <a onClick={() => setModalShow(true)} className={className ? className : 'active_bt'} style={{ cursor: 'pointer' }}>
-                                {title ? title : 'Apply Now'}
-                            </a>
-
-                    }
-               
-            } */}
-
 
             {pagename && pagename == 'CourseList' ?
                 <a onClick={() => setModalShow(true)} className={className ? className : 'active btn'} style={{ cursor: 'pointer' }}>
@@ -96,9 +48,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                 <>
                     {
                         pagename == 'Brochure' ?
-                            // <a onClick={() => setModalShow(true)} className={className ? className : 'active_bt'}>
-                            //     <img src={require("src/assets/img/left_bt.svg")} alt="Download Brochure" />
-                            // </a>
+                    
                             <a onClick={() => setModalShow(true)} className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
                                 <Image src="/images/icons/Download Brochure.svg" className='mb-md-3 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" />
 

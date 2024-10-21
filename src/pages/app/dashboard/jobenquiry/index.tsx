@@ -98,7 +98,7 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
     try {
       await axios1.post('api/admin/jobsenquires/delete/' + id)
         .then(response => {
-      
+
           if (response.data.status == 1) {
             toast.success(response.data.message)
             // router.reload();
@@ -189,6 +189,8 @@ const SecondPage = () => {
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const isMountedRef = useIsMountedRef();
   const ability = useContext(AbilityContext)
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogData, setDialogData] = useState<any>(null);
   const params: any = {}
 
   params['page'] = 1;
@@ -199,6 +201,17 @@ const SecondPage = () => {
     setLoading(true);
     setReloadpage('1');
   }, []);
+
+
+
+  const handleDialogOpen = (row: DataGridRowType) => {
+    setDialogData(row);
+    setDialogOpen(true);
+  };
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
 
   let columns: GridColDef[] = [
 
@@ -237,8 +250,8 @@ const SecondPage = () => {
       }
     },
 
-    
-   
+
+
 
     {
       flex: 0.175,
@@ -257,7 +270,7 @@ const SecondPage = () => {
 
     {
       flex: 0.175,
-      minWidth: 200,
+      minWidth: 100,
       field: 'jobspositions.name',
       headerName: 'Job Position',
       renderCell: (params: GridRenderCellParams) => {
@@ -269,8 +282,40 @@ const SecondPage = () => {
         );
       }
     },
-  
-  
+
+    {
+      flex: 0.175,
+      minWidth: 100,
+      field: 'jobspositions.resume',
+      headerName: 'Resume',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
+
+        const handleViewClick = () => {
+          handleDialogOpen(row);
+        };
+
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: 'green',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: 'green', // Keeps the background color green on hover
+                },
+              }}
+              onClick={handleViewClick}
+            >
+              View Resume
+            </Button>
+          </Typography>
+        );
+      }
+    },
+
+
 
 
 
@@ -290,7 +335,7 @@ const SecondPage = () => {
   const fetchTableData = useCallback(
     async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string) => {
       setLoading(true);
-     
+
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
       }
@@ -319,9 +364,9 @@ const SecondPage = () => {
         .catch((error) => {
           // Handle error if needed
           setLoading(false);
-         
+
         });
-   
+
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationModel, reloadpage]
@@ -353,23 +398,7 @@ const SecondPage = () => {
   }
 
 
- 
-  // const AddButtonToolbar = () => {
 
-  //   return (
-  //     <>
-  //       <Link href={'./jobenquiry/add'}>
-  //         <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
-  //           <Icon icon='tabler:plus' />
-  //           Add
-  //         </Fab>
-  //       </Link>
-
-  //     </>
-  //   );
-  // };
-
-  // const AddButtonComponent = <AddButtonToolbar />;
 
   return (
     <Grid container spacing={6}>
@@ -408,6 +437,32 @@ const SecondPage = () => {
           />
         </Card>
       </Grid>
+
+      <Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        aria-labelledby="view-dialog-title"
+        maxWidth="xl"
+        fullWidth
+      >
+        <DialogTitle id="view-dialog-title" className='typographypopup'>View Details</DialogTitle>
+        <DialogContent>
+          {dialogData && (
+                <iframe
+                src={`${process.env.NEXT_PUBLIC_IMG_URL}/${dialogData.resume}`}
+                title={dialogData.resume}
+                style={{ width: '100%', height: '500px', display: loading ? 'none' : 'block' }}
+
+            />
+          )}
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
 
     </Grid>
   );
