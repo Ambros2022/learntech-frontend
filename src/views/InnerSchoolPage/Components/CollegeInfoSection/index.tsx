@@ -141,7 +141,7 @@ function CollegeInfoSection({ data }) {
                       transform: 'translate(-50%, -50%)'
                     }}
                   >
-                    <GlobalPopupEnquiry className='viewMoreCollegeBtn btn' />
+                    <GlobalPopupEnquiry className='viewMoreCollegeBtn btn' placeholder="Class" />
                   </div>
                 </div>
                 <div className='clgVideo rounded'>

@@ -34,7 +34,7 @@ const CurrentOpeningSec: React.FC<CurrentOpeningSecProps> = ({ jobData }) => {
         setSelectedJob(null); // Clear selected job
     };
 
-    const handleClick=()=>{
+    const handleClick = () => {
         const direction = document.getElementById('contactForm')
         direction?.scrollIntoView();
         handleClose();
@@ -83,12 +83,12 @@ const CurrentOpeningSec: React.FC<CurrentOpeningSecProps> = ({ jobData }) => {
             </div>
 
             {/* Modal for Job Description */}
-            <Modal show={showModal} onHide={handleClose}>
+            <Modal show={showModal} onHide={handleClose}   size="xl" >
                 <Modal.Header closeButton>
-                    <Modal.Title className='text-blue'>{selectedJob?.name}</Modal.Title>
+                    <Modal.Title className='text-blue' >{selectedJob?.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className='text-black' dangerouslySetInnerHTML={{ __html: selectedJob?.job_description || ''}}></div>
+                    <div className='text-black' dangerouslySetInnerHTML={{ __html: selectedJob?.job_description || '' }}></div>
                     <button className="btn viewMoreClgBtn" onClick={handleClick}>Apply Now</button>
                 </Modal.Body>
                 <Modal.Footer>

@@ -21,7 +21,7 @@ const CareerPage = () => {
 
     const getPagedata = useCallback(async () => {
         try {
-            const response = await axios.get('api/website/pagefindone/get/careers');
+            const response = await axios.get('api/website/pagefindone/get/career');
             if (isMountedRef.current) {
 
                 setPagedata(response.data.data);
@@ -74,10 +74,10 @@ const CareerPage = () => {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             <BannerSec />
-            <AboutSec />
+            <AboutSec data={pagedata}/>
             <CurrentOpeningSec  jobData= {jobData}  />
             <ContactCareerSec locations={locations}  data= {jobData} />
-            <DisclaimerSec />
+            <DisclaimerSec  data={pagedata} />
         </>
     )
 }

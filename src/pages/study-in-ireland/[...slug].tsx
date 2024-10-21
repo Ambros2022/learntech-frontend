@@ -28,7 +28,7 @@ const college = () => {
         setError(null);
 
         try {
-            const response = await axios.get(`api/website/abroadpagefindone/get/study-in-uk`);
+            const response = await axios.get(`api/website/abroadpagefindone/get/study-in-ireland`);
             if (isMountedRef.current) {
                 setPageData(response.data.data);
                 setLoading(false);
