@@ -44,7 +44,7 @@ const NewsCarousel = ({ items }) => {
             arrows={false}
             infinite
             autoPlay
-            autoPlaySpeed={2000}
+            autoPlaySpeed={1500}
             ssr  // SSR true for server-side rendering
             responsive={responsive}
             renderButtonGroupOutside

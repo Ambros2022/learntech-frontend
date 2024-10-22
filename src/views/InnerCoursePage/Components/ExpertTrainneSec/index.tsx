@@ -10,7 +10,7 @@ import { Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 import Fade from '@mui/material/Fade'; // Import Fade transition
 
-const ExperTraineeSec = () => {
+const ExperTraineeSec = ({ data }) => {
     const [traineer, setTraineer] = useState<any>();
     const [selectedTraineer, setSelectedTraineer] = useState<any>(null); // State for selected trainee details
     const [modalOpen, setModalOpen] = useState(false); // State for modal control
@@ -69,10 +69,12 @@ const ExperTraineeSec = () => {
                     <section className='bg-light py-md-5 py-3'>
                         <div className="container">
                             <h2 className='text-center fw-bold text-blue'>
-                                We have Expert Trainers to Meet Your CyberArk Training Needs
+                                We have Educational Experts to Provide Guidance for {data?.name} Courses
                             </h2>
                             <p className="text-black">
-                                The instructor-led training is conducted by certified trainers with extensive expertise in the field. Participants will benefit from the instructor's vast knowledge, gaining valuable insights and practical skills essential for success in Access practices.
+
+                                The counselors at Learntech Edu Solutions Pvt. Ltd. spark inspiration, helping students navigate their academic paths with clarity and confidence. They are experts in creating strategies based on student’s preferences and interests to provide guidance for smooth admission process to colleges/ universities in India or abroad.
+
                             </p>
                             <div className='py-3'>
                                 <div className="row d-flex flex-wrap g-2">

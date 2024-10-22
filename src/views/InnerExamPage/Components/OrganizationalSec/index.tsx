@@ -31,7 +31,7 @@ const OrganizationSection = ({data}) => {
                 <section className='bg-white pt-5'>
                     <div className="container">
                         {/* <h2 className='text-center fw-bold text-blue mb-3'>Learntech’s Approach for {data.name} Courses</h2> */}
-                        <h2 className='text-center fw-bold text-blue mb-3'>{organizationPage.title}</h2>
+                        <h2 className='text-center fw-bold text-blue mb-3'>{organizationPage.title} {data?.exam_short_name} Exam</h2>
                         <p className='text-black' dangerouslySetInnerHTML={{ __html: organizationPage.content }}></p>
                         <div className="d-flex mt-5 pt-md-5 pt-3 flex-wrap justify-content-center gap-3">
                             {organizationPage.organizatiopagesteps.map((data) => (

@@ -141,7 +141,7 @@ function InnerCoursePage({ id }) {
 
       <OtherCourses streamdata={streams} />
       <OrganizationSection data={pagedata}/>
-      <ExperTraineeSec/>
+      <ExperTraineeSec data={pagedata}/>
       <ExpertSection />
     </>
   );

@@ -77,7 +77,7 @@ const MainBoardPage = () => {
       <BannerSec />
       <BestSec data={pagedata} />
       <BoardsSec boardItems={boardItems} activeTab={activeTab} displayCount={displayCount} setActiveTab={setActiveTab} setDisplayCount={setDisplayCount} />
-      <LatestUpdateSec updates={updates} />
+      {updates && updates.length > 0 && <LatestUpdateSec updates={updates} />}
     </>
   )
 }

@@ -17,7 +17,7 @@ function AbroadPage({ data }) {
       <BannerSec data={data} />
       <StudySec data={data} />
       <OrganizationSection data={data}/>
-      <ExperTraineeSec/>
+      <ExperTraineeSec data={data}/>
       <TopUniversity data={data} />
       {data && data?.abroadpagefaqs.length > 0 && <FaqSec data={data} />}
     </>

@@ -96,10 +96,10 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
       </MenuItem>
 
 
-      <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
+      {/* <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
         <Icon icon='tabler:trash' fontSize={20} />
 
-      </MenuItem>
+      </MenuItem> */}
 
       <Grid>
 
