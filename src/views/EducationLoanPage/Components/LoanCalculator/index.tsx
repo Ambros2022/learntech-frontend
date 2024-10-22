@@ -114,9 +114,9 @@ const LoanCalculator: React.FC = () => {
     };
 
     return (
-        <section className='bg-white py-5'>
+        <section className='bg-white py-3'>
             <div className="container">
-                <h2 className='fw-bold text-center text-blue'>CALCULATE YOUR EDUCATION LOAN EMI</h2>
+                <h2 className='fw-bold text-center text-blue'>EMI Calculator for Education Loans</h2>
                 <div className="row p-3 bg-skyBlue rounded mt-3">
                     <div className="col-lg-8 mt-3">
                         <div className='d-flex gap-3 flex-wrap'>
@@ -233,7 +233,7 @@ const LoanCalculator: React.FC = () => {
                             <PieChart loanAmount={loanAmount} totalInterest={totalInterest} />
                         </div>
                     </div>
-                    <h5 className='text-center mt-3'><i className='bi bi-question-circle'></i> Not sure about interest and fees rates, use our advanced EMI Calculator</h5>
+                    <h5 className='text-center mt-3'><i className='bi bi-question-circle'></i> Get a detailed breakdown of your total repayment using our comprehensive education loan repayment calculator.</h5>
                 </div>
             </div>
         </section >

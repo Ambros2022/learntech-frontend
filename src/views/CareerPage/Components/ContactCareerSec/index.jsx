@@ -27,8 +27,8 @@ const ContactCareerSec = ({ locations, data }) => {
               </div>
               <div className='align-content-center ms-2'>
                 <p className='text-white m-0'>
-                  <Link href='mailto:pooja@learntechww.com' className='text-white text-decoration-none'>
-                    pooja@learntechww.com
+                  <Link href='mailto:hr@learntechww.com' className='text-white text-decoration-none'>
+                    hr@learntechww.com
                   </Link>
                 </p>
                 <p className='text-white m-0'>
@@ -50,8 +50,8 @@ const ContactCareerSec = ({ locations, data }) => {
               </div>
               <div className='align-content-center ms-2'>
                 <p className='text-white m-0'>
-                  <Link href='tel:+919036020016' className='text-white text-decoration-none'>
-                    +91 9036020016
+                  <Link href='tel:+919606833296' className='text-white text-decoration-none'>
+                    +91 9606833296
                   </Link>
                 </p>
                 <p className='text-white m-0'>
@@ -67,8 +67,8 @@ const ContactCareerSec = ({ locations, data }) => {
               </div>
               <div className='align-content-center ms-2'>
                 <p className='text-white m-0'>
-                  <Link href='https://wa.me/+919036020016' className='text-white text-decoration-none'>
-                    +91 9036020016
+                  <Link href='https://wa.me/+919606833296' className='text-white text-decoration-none'>
+                    +91 9606833296
                   </Link>
                 </p>
                 <p className='text-white m-0'>

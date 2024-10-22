@@ -16,122 +16,284 @@ function TopUniversitiesSection() {
                 <div className='container innerClg pt-5 pb-3'>
                     <h2 className='text-center fw-bold text-blue mb-3'>Best Universities in India
                     </h2>
-                    <p className='text-black'>Selecting the right university is more than just a step towards your future; it's a transformative experience that shapes your entire life. The best Universities in India offer more than academic excellence; they provide a vibrant ecosystem where passion meets purpose, and potential transforms into reality. These institutions are not just places of learning; they are incubators of innovation, creativity, and leadership.
+                    <p className='text-black'>It is of utmost importance for every academic enthusiast to find the right university. Choosing the right university provides a strong foundation to build upon and move forward, thus embarking on an intellectual journey that is best suited for you. The best universities in India are designed to not only meet the academic requirements of students but also to address their co-curricular needs. The most prestigious universities in India take a comprehensive approach to offer their students with the necessary skills that are both subject-specific and life-oriented.
                     </p>
-                    <h5 className='fw-bold text-black mb-4'>Why Universities are a Pillar of Your Academic and Personal Growth:
-                    </h5>
+                    <h4 className='fw-bold text-black mb-4'>What can Top-Ranked Universities in India do for Your Academic and Non-Academic Pursuits?
+                    </h4>
+                    <h5 className='fw-bold text-black mb-3'>Academic Pursuits: </h5>
+
                     <h6 className='fw-bold text-black'>
-                        <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Catalysts for Innovation: </h6>
-                    <p className='text-black'>The top Universities in India are at the forefront of groundbreaking research and technological advancements. They offer students unique opportunities to work on cutting-edge projects, collaborate with renowned faculty, and contribute to innovations that can change the world. These top NIRF ranked Universities in India are well-recognized for their commitment to driving forward-thinking initiatives and research that meet global standards.</p>
+                        <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Expert Faculty:</h6>
+
+                    <p className='text-black'>One of the primary reasons for the best universities in India to achieve academic excellence is the presence of expert faculty members. Through these experts, universities provide students with the opportunity to gain advanced knowledge, thereby enriching their academic aspirations.</p>
+                    <h6 className='fw-bold text-black'>
+                        <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Quality Education:</h6>
+
+                    <p className='text-black'>The curriculum offered by UGC-approved universities in India is designed by experts across various disciplines. The subject-specific curriculum takes a holistic approach to ensure that students are equipped with adequate knowledge and the most effective skills that are related to their preferred discipline.
+                    </p>
                     {showMore && (
                         <>
                             <h6 className='fw-bold text-black'>
-                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Tailored Educational Experiences: </h6>
-                            <p className='text-black'>From the best government Universities in India to the best private Universities in India, a variety of institutions provide a wide range of courses designed to meet the latest industry standards. Whether it’s pioneering medical research, designing the next big tech breakthrough, or mastering the art of business management, these Universities ensure students receive the specialized education needed to excel. The best autonomous Universities in pan India focus on offering programs that are not only academically rigorous but also flexible to meet individual student needs.</p>
-                            <h6 className='fw-bold text-black'>
-                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Global Exposure and Cultural Enrichment: </h6>
-                            <p className='text-black'>Top ranked Universities in India attract students from diverse backgrounds, creating a rich tapestry of cultures and perspectives. This diversity fosters a global outlook, enhances critical thinking, and builds strong interpersonal skills, preparing students for success on the world stage. This aspect is particularly emphasized in UGC approved ranking Universities in India, which maintain high standards for inclusivity and global engagement.
-                            </p>
-                            <h6 className='fw-bold text-black'>
-                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Networking and Career Opportunities: </h6>
-                            <p className='text-black'>The best educational institutes in India have a strong reputation for maintaining robust connections with leading industries and organizations. They provide pathways through internships, workshops, and placements, allowing students to gain real-world experience, build professional networks, and secure successful careers. This networking is critical for those studying in both top NIRF ranked Universities and best private Universities in India, where industry connections significantly enhance employability.
-                            </p>
-                            <h6 className='fw-bold text-black'>
-                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Holistic Personal Development: </h6>
-                            <p className='text-black'>From top Universities in India to best government Universities in India, the emphasis is on nurturing personal growth. Leadership programs, extracurricular activities, and a variety of clubs allow students to explore their interests, discover new talents, and build confidence. These institutions ensure students graduate as well-rounded individuals ready to become the leaders of tomorrow.
-                            </p>
-                            <h5 className='fw-bold text-black mb-4'>A Wide Array of Top Universities in India to Shape Your Future:
-                            </h5>
-                            <p className='text-black'>India's educational landscape offers an extensive variety of specialized Universities that cater to diverse academic and professional aspirations. Whether you aim to pursue a career in healthcare, engineering, or the arts, there's a university that aligns with your interests and career goals. From top-ranked medical Universities providing cutting-edge facilities and research opportunities to prestigious engineering institutions that foster innovation and critical thinking, students have access to institutions that can significantly enhance their knowledge and skills. The best Universities in India are categorized based on the courses they offer, ensuring that students can find a perfect fit for their academic journey. Below is a list of top Universities in India, offering specialized streams of education:
-                            </p>
-                            <table className='table text-black table-bordered table-responsive'>
-                                <tbody className=''>
-                                    <tr>
-                                        <td>
-                                            Medical Universities
-                                        </td>
-                                        <td>
-                                            Dental Universities
-                                        </td>
-                                        <td>
-                                            Ayurveda, Unani, Siddha & Homeopathy (AYUSH) Universities
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Naturopathy & Yogic Science Universities
+                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Research Opportunities:</h6>
 
-                                        </td>
-                                        <td>
-                                            Veterinary Universities                                </td>
-                                        <td>
-                                            Nursing Universities                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Allied Health Sciences Universities                                </td>
-                                        <td>
-                                            Physiotherapy Universities                                </td>
-                                        <td>
-                                            Pharmacy Universities                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Designing Universities
-
-                                        </td>
-                                        <td>
-                                            Architecture Universities                                </td>
-                                        <td>
-                                            Law Universities                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Science Universities                                </td>
-                                        <td>
-                                            Management Universities                                </td>
-                                        <td>
-                                            Computer Universities                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Commerce Universities                                </td>
-                                        <td>
-                                            Arts & Humanities Universities                                </td>
-                                        <td>
-                                            Media & Communication Universities                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Aviation Universities                                </td>
-                                        <td>
-                                            Education Universities                                </td>
-                                        <td>
-                                            Agriculture Universities                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Audiology Universities                                </td>
-                                        <td>
-                                            Vocational Study Universities                                </td>
-                                        <td>
-                                            Earth Science Universities                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Life Sciences Universities                                </td>
-                                        <td>
-                                            Social Work Universities
-
-                                        </td>
-                                        <td>
-                                            Occupational Therapy Universities                                </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p className='text-black'>
-                                By choosing a university that aligns with your passion and career goals, you can embark on a fulfilling educational journey that not only enhances your knowledge but also shapes your future. The best Universities in India provide the right environment to nurture your talents and prepare you for the challenges of tomorrow.
+                            <p className='text-black'>Many top universities in India feature research facilities that are curated to apply the theoretical aspects of a discipline to practical applications. Thus, providing opportunities for students to primarily focus on making advancements in the real world while retaining the foundational principles of the same.
                             </p>
+
+                            <h5 className='fw-bold text-black mb-3'>Non-Academic Pursuits: </h5>
+
+                            <h6 className='fw-bold text-black'>
+                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Extra Curricular Activities:</h6>
+
+                            <p className='text-black'>The best public universities and the best private universities in India offer various extra-curricular activities, such as sports, cultural events and innovative clubs to help students embrace and bring out their innate talents.
+                            </p>
+                            <h6 className='fw-bold text-black'>
+                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Networking and Career Opportunities:</h6>
+
+                            <p className='text-black'>All the good universities in India offer students significant opportunities to connect with prominent industry professionals, peers, and alumni groups through various events such as networking sessions, guest lectures, workshops, seminars, industry visits and more. These opportunities can help students land internships and secure rewarding job prospects.
+                            </p>
+                            <h6 className='fw-bold text-black'>
+                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Community Engagement:</h6>
+
+                            <p className='text-black'>From the best government universities to the top private universities in India, students are encouraged to participate in community service and volunteer work. By doing so, these top-ranked universities of India enables them to contribute to the overall growth of society.
+
+                            </p>
+
+
+
+                            <h4 className='fw-bold text-black mb-4'>Types of Universities:
+                            </h4>
+
+                            <p className='text-black'>All Indian universities in world rankings are categorised into three types. Namely,  Public universities, Private universities and Deemed universities. These categories are primarily differentiated based on their funding and administrative system. Let us dive into the specifics of each category to help you make a transformative decision that can benefit you now and in the future.
+                            </p>
+
+                            <h5 className='fw-bold text-black mb-3'>Public Universities:</h5>
+
+
+                            <p className='text-black'>Public universities, also known as government universities, are higher educational institutions that are established and funded by the respective government authorities. The overall functions of public universities are regulated by the same. Under this category, there are two primary classifications: Central universities and State universities.
+
+                            </p>
+
+                            <h6 className='fw-bold text-black'>
+                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Central Universities:</h6>
+
+                            <p className='text-black'>This category consists of the best government universities in India that are established and governed under the direct regulations of the central government. The rules and policies set forth by the central government will be applicable uniformly to all the central universities. Moreover, the admissions for certain courses in these universities are usually based on national-level entrance exams.
+
+
+                            </p>
+                            <h6 className='fw-bold text-black'>
+                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>State Universities:</h6>
+
+                            <p className='text-black'>This category consists of a list of the top universities in India that are funded by their respective state governments. These universities are under the direct governance of the concerned state authority. The admission process for these universities will vary from one state university to another and are based on both the national-level and state-level entrance exams. However, in some situations, these universities may also to receive grants from the central government as well.
+
+
+                            </p>
+                            <h6 className='fw-bold text-black'>
+                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Private Universities:</h6>
+
+                            <p className='text-black'>Some of the most prestigious universities in India fall under this category. Private universities are educational entities that are established by private bodies, trusts, or organisations and are primarily funded by the same authoritative bodies, as well as through tuition fees. They may also receive grants and contributions from external sources such as private corporations, alumni organisations, philanthropists, and foundations. Moreover, these universities have their own governing bodies and are given the flexibility to establish policies regarding admissions, curriculum, and faculty selections, provided they align with the regulations of the government authorities.
+
+
+                            </p>
+                            <h6 className='fw-bold text-black'>
+                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Deemed Universities:</h6>
+
+                            <p className='text-black'>Deemed universities in India are institutions that are granted the ‘university status’ by the University Grants Commission (UGC), Department of Higher Education, and Ministry of Education based on certain factors such as academic excellence, research facilities, and their overall contribution to higher education. These universities are offered a higher level of autonomy and independence in making decisions regarding courses, fees, admissions and curriculum. Deemed universities in India are authorised to receive government funding and can also generate revenue through tuition fees, donations and collaborations.
+
+                            </p>
+
+
+
+
+
+
+                            <h4 className='fw-bold text-black mb-4'>Category Wise Highlights:
+                            </h4>
+                            <div className="table-responsive">
+                                <table className='table text-black table-bordered table-responsive text-center   align-middle  '>
+
+                                    <thead className="thead-dark">
+                                        <tr>
+                                            <th className='fw-bold text-black align-middle ' scope="col" rowSpan={2} colSpan={2}>
+                                                Categories
+                                            </th>
+                                            <th className='fw-bold text-black' scope="col" colSpan={3}>
+                                                Types of Universities
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th className='fw-bold text-black' scope="col" >
+                                                Public
+                                            </th>
+                                            <th className='fw-bold text-black' scope="col" >
+                                                Private
+                                            </th>
+                                            <th className='fw-bold text-black' scope="col" >
+                                                Deemed
+                                            </th>
+                                        </tr>
+
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td className='fw-bold text-black' colSpan={2} >
+                                                Ownership
+                                            </td>
+                                            <td  >
+                                                Central/ State Government
+
+                                            </td>
+                                            <td  >
+                                                Private entities, trusts, organisations, educational societies.
+
+                                            </td>
+                                            <td  >
+                                                Can be owned by government or private bodies
+
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td className='fw-bold text-black' colSpan={2}>
+                                                Funding
+                                            </td>
+                                            <td  >
+                                                By Central/ State Government
+
+
+                                            </td>
+                                            <td  >
+
+                                                Through tuition fees, private entities, trusts, etc
+
+
+                                            </td>
+                                            <td  >
+                                                By a combination of tuition fees, donations and government grants
+
+
+
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td className='fw-bold text-black' colSpan={2}>
+                                                Establishment
+                                            </td>
+                                            <td  >
+                                                Established under a government act
+
+
+                                            </td>
+                                            <td  >
+
+                                                Established by private entities
+
+
+
+                                            </td>
+                                            <td  >
+                                                Granted ‘University Status’ by UGC, Ministry of Education
+
+
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td className='fw-bold text-black' colSpan={2}>
+                                                Autonomy
+                                            </td>
+                                            <td  >
+                                                Limited autonomy
+
+
+
+                                            </td>
+                                            <td  >
+
+                                                Comparatively higher autonomy than public universities
+
+
+                                            </td>
+                                            <td  >
+                                                Greater autonomy than public and private universities
+
+
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td className='fw-bold text-black' colSpan={2}>
+                                                Tuition Fees
+                                            </td>
+                                            <td  >
+                                                Lower Fees compared to private universities
+
+
+
+                                            </td>
+                                            <td  >
+
+                                                Higher than public universities
+
+
+
+                                            </td>
+                                            <td  >
+                                                Will vary.
+                                                May be similar to private universities/ similar to government universities
+
+
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td className='fw-bold text-black' colSpan={2}>
+                                                Programs Offered
+
+                                            </td>
+                                            <td  >
+                                                Wide range of courses across various disciplines
+
+
+
+                                            </td>
+                                            <td  >
+
+                                                Will vary.
+                                                May offer courses with specialisations in certain fields
+
+
+
+
+                                            </td>
+                                            <td  >
+                                                Will Vary.
+                                                Mostly focus on courses under specific areas of study and professional education
+
+
+                                            </td>
+
+
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
                         </>
                     )}
                     <div className='text-center'>

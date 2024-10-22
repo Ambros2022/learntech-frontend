@@ -8,6 +8,7 @@ import ExpertSec from './Components/ExpertSec'
 import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const MbbsAbroadPage = () => {
     const data = {
@@ -41,7 +42,7 @@ const MbbsAbroadPage = () => {
 
     const getPagedata = useCallback(async () => {
         try {
-            const response = await axios.get('api/website/pagefindone/get/mbbs-abroad');
+            const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
             if (isMountedRef.current) {
 
                 setPagedata(response.data.data);
@@ -61,14 +62,16 @@ const MbbsAbroadPage = () => {
     }, []);
     return (
         <>
-            <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-            <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
-            <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
-            <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+            <Head>
+                <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
+                <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
+                <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
+                <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+            </Head>
             <BannerSec />
             <MedicalSec data={pagedata} />
             <TopCountrySec />
-            <FaqSec data={data}/>
+            <FaqSec data={data} />
             <ImportantSec />
             <ExpertSec />
         </>

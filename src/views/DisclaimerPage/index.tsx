@@ -13,22 +13,22 @@ const DisclaimerPage = () => {
 
     const getPagedata = useCallback(async () => {
         try {
-            const response = await axios.get('api/website/pagefindone/get/disclaimer');
-            if (isMountedRef.current) {
-
-                setPagedata(response.data.data);
-            }
+          const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
+          if (isMountedRef.current) {
+    
+            setPagedata(response.data.data);
+          }
         } catch (error) {
-            console.error('Failed to fetch trending courses:', error);
+          console.error('Failed to fetch trending courses:', error);
         }
-    }, [isMountedRef]);
-
-
-
-    useEffect(() => {
+      }, [isMountedRef]);
+    
+    
+    
+      useEffect(() => {
         getPagedata();
-
-    }, []);
+    
+      }, []);
     return (
         <>
             <Head>

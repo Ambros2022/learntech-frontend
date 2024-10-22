@@ -11,7 +11,7 @@ import OrganizationSection from './Components/OrganizationalSec';
 import ExperTraineeSec from './Components/ExpertTrainneSec';
 
 function AbroadPage({ data }) {
-  console.log(data);
+
   return (
     <>
       <BannerSec data={data} />
