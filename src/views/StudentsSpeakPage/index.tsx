@@ -36,21 +36,24 @@ const StudentsSpeakPage = () => {
     setSearchQuery(query);
     setCurrentPage(1); // Reset to first page when searching
   };
+  
+  const getPagedata = useCallback(async () => {
+    try {
+      const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
+      if (isMountedRef.current) {
+
+        setPagedata(response.data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending courses:', error);
+    }
+  }, [isMountedRef]);
 
   useEffect(() => {
     getPagedata();
   }, []);
 
-  const getPagedata = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/pagefindone/get/studentspeak');
-      if (isMountedRef.current) {
-        setPagedata(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending ourteams:', error);
-    }
-  }, [isMountedRef]);
+
 
   return (
     <>

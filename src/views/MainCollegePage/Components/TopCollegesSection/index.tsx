@@ -44,91 +44,93 @@ function TopCollegesSection() {
                             </h5>
                             <p className='text-black'>India's educational landscape offers an extensive variety of specialized colleges that cater to diverse academic and professional aspirations. Whether you aim to pursue a career in healthcare, engineering, or the arts, there's a college that aligns with your interests and career goals. From top-ranked medical colleges providing cutting-edge facilities and research opportunities to prestigious engineering institutions that foster innovation and critical thinking, students have access to institutions that can significantly enhance their knowledge and skills. The best colleges in India are categorized based on the courses they offer, ensuring that students can find a perfect fit for their academic journey. Below is a list of top colleges in India, offering specialized streams of education:
                             </p>
-                            <table className='table text-black table-bordered table-responsive'>
-                                <tbody className=''>
-                                    <tr>
-                                        <td>
-                                            Medical Colleges
-                                        </td>
-                                        <td>
-                                            Dental Colleges
-                                        </td>
-                                        <td>
-                                            Ayurveda, Unani, Siddha & Homeopathy (AYUSH) Colleges
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Naturopathy & Yogic Science Colleges
+                            <div className="table-responsive">
+                                <table className='table text-black table-bordered table-responsive'>
+                                    <tbody className=''>
+                                        <tr>
+                                            <td>
+                                                Medical Colleges
+                                            </td>
+                                            <td>
+                                                Dental Colleges
+                                            </td>
+                                            <td>
+                                                Ayurveda, Unani, Siddha & Homeopathy (AYUSH) Colleges
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Naturopathy & Yogic Science Colleges
 
-                                        </td>
-                                        <td>
-                                            Veterinary Colleges                                </td>
-                                        <td>
-                                            Nursing Colleges                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Allied Health Sciences Colleges                                </td>
-                                        <td>
-                                            Physiotherapy Colleges                                </td>
-                                        <td>
-                                            Pharmacy Colleges                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Designing Colleges
+                                            </td>
+                                            <td>
+                                                Veterinary Colleges                                </td>
+                                            <td>
+                                                Nursing Colleges                                </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Allied Health Sciences Colleges                                </td>
+                                            <td>
+                                                Physiotherapy Colleges                                </td>
+                                            <td>
+                                                Pharmacy Colleges                                </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Designing Colleges
 
-                                        </td>
-                                        <td>
-                                            Architecture Colleges                                </td>
-                                        <td>
-                                            Law Colleges                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Science Colleges                                </td>
-                                        <td>
-                                            Management Colleges                                </td>
-                                        <td>
-                                            Computer Colleges                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Commerce Colleges                                </td>
-                                        <td>
-                                            Arts & Humanities Colleges                                </td>
-                                        <td>
-                                            Media & Communication Colleges                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Aviation Colleges                                </td>
-                                        <td>
-                                            Education Colleges                                </td>
-                                        <td>
-                                            Agriculture Colleges                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Audiology Colleges                                </td>
-                                        <td>
-                                            Vocational Study Colleges                                </td>
-                                        <td>
-                                            Earth Science Colleges                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Life Sciences Colleges                                </td>
-                                        <td>
-                                            Social Work Colleges
+                                            </td>
+                                            <td>
+                                                Architecture Colleges                                </td>
+                                            <td>
+                                                Law Colleges                                </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Science Colleges                                </td>
+                                            <td>
+                                                Management Colleges                                </td>
+                                            <td>
+                                                Computer Colleges                                </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Commerce Colleges                                </td>
+                                            <td>
+                                                Arts & Humanities Colleges                                </td>
+                                            <td>
+                                                Media & Communication Colleges                                </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Aviation Colleges                                </td>
+                                            <td>
+                                                Education Colleges                                </td>
+                                            <td>
+                                                Agriculture Colleges                                </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Audiology Colleges                                </td>
+                                            <td>
+                                                Vocational Study Colleges                                </td>
+                                            <td>
+                                                Earth Science Colleges                                </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Life Sciences Colleges                                </td>
+                                            <td>
+                                                Social Work Colleges
 
-                                        </td>
-                                        <td>
-                                            Occupational Therapy Colleges                                </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            </td>
+                                            <td>
+                                                Occupational Therapy Colleges                                </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <p className='text-black'>
                                 By choosing a college that aligns with your passion and career goals, you can embark on a fulfilling educational journey that not only enhances your knowledge but also shapes your future. The best colleges in India provide the right environment to nurture your talents and prepare you for the challenges of tomorrow.
                             </p>
