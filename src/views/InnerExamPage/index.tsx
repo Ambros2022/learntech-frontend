@@ -85,7 +85,7 @@ function InnerExamPage({ id }) {
       {!loading && pagedata && <BannerSec data={pagedata} />}
       {!loading && pagedata && <OverviewSec data={pagedata} />}
       <OrganizationSection data={pagedata}/>
-      <ExperTraineeSec/>
+      <ExperTraineeSec data={pagedata}/>
       {/* {!loading && pagedata && <UpcomingExamsSec data={news} />} */}
 
       {/* <OverviewSec /> */}

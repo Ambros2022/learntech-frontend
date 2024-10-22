@@ -914,7 +914,15 @@
     stroke: white;
 
   }
+  .card-board .fi-left svg {
+    stroke: rgb(1, 1, 1) !important;
 
+  }
+
+  .card-board .fi-right svg {
+    stroke: rgb(0, 0, 0) !important;
+
+  }
   .card-con .fi-right svg {
     stroke: white;
 
