@@ -42,10 +42,58 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
-    const [stream, setStream] = useState([]);
-    const isMountedRef = useIsMountedRef();
+    const [collegedata, setCollegedata] = useState([])
+    const [streamdata, setStreamdata] = useState([])
+    const [coursedata, setCoursedata] = useState([])
+
+    const getcolleges = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('/api/admin/college/get', { params: roleparams });
+            setCollegedata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+    const getstreams = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('/api/admin/stream/get', { params: roleparams });
+            setStreamdata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+    const getcourses = useCallback(async () => {
+
+        try {
+            const roleparams: any = {}
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('/api/admin/generalcourse/get', { params: roleparams });
+            setCoursedata(response.data.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+
+
+    useEffect(() => {
+
+
+        getcolleges();
+        getstreams();
+        getcourses();
+
+
+    }, []);
+
 
     const schema: any = yup.object().shape({
         title: yup
@@ -68,11 +116,16 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         video_url: isAddMode ? '' : olddata.video_url,
         full_url: isAddMode ? '' : olddata.full_url,
         type: isAddMode ? '' : olddata.type,
+        colleges: [],
+        streams: [],
+        courses: [],
+
     }
 
     const {
         control,
         handleSubmit,
+        resetField: admfiledReset,
         reset,
         formState: { errors }
     } = useForm<any>({
@@ -80,6 +133,33 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         mode: 'onChange',
         resolver: yupResolver(schema)
     })
+
+    useEffect(() => {
+
+        if (!isAddMode && olddata.collegeTestimonials) {
+            const colleges = olddata.collegeTestimonials.map((item) => ({
+                id: item.collegeDetails.id,
+                name: item.collegeDetails.name,
+            }));
+            admfiledReset("colleges", { defaultValue: colleges })
+        }
+        if (!isAddMode && olddata.streamTestimonials) {
+            const colleges = olddata.streamTestimonials.map((item) => ({
+                id: item.streamDetails.id,
+                name: item.streamDetails.name,
+            }));
+            admfiledReset("streams", { defaultValue: colleges })
+        }
+        if (!isAddMode && olddata.courseTestimonials) {
+            const colleges = olddata.courseTestimonials.map((item) => ({
+                id: item.courseDetails.id,
+                name: item.courseDetails.name,
+            }));
+            admfiledReset("courses", { defaultValue: colleges })
+        }
+
+
+    }, []);
 
     const onSubmit = async (data: any) => {
 
@@ -95,6 +175,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('video_url', data.video_url);
             formData.append('full_url', data.full_url);
             formData.append('type', data.type);
+            formData.append('colleges', JSON.stringify(data.colleges));
+            formData.append('streams', JSON.stringify(data.streams));
+            formData.append('courses', JSON.stringify(data.courses));
 
             try {
                 let response = await axios1.post(url, formData)
@@ -134,6 +217,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('video_url', data.video_url);
             formData.append('full_url', data.full_url);
             formData.append('type', data.type);
+            formData.append('colleges', JSON.stringify(data.colleges));
+            formData.append('streams', JSON.stringify(data.streams));
+            formData.append('courses', JSON.stringify(data.courses));
 
 
             try {
@@ -297,6 +383,106 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 {errors.type.message as React.ReactNode}
                             </FormHelperText>
                         )}
+                    </Grid>
+
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name="colleges"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => {
+                                // console.log(value); // Log value here
+
+                                return (
+                                    <CustomAutocomplete
+                                        multiple
+                                        fullWidth
+                                        value={value || []}
+                                        options={collegedata}
+                                        onChange={(event, newValue) => {
+                                            onChange(newValue);
+                                        }}
+                                        filterSelectedOptions
+                                        id='autocomplete-multiple-outlined'
+                                        getOptionLabel={(option: any) => option.name}
+                                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                                        renderInput={params =>
+                                            <CustomTextField {...params}
+                                                label='Select colleges'
+                                                variant="outlined"
+                                                error={Boolean(errors.colleges)}
+                                                {...(errors.colleges && { helperText: 'This field is required' })}
+                                                placeholder='colleges' />}
+                                    />
+                                );
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name="streams"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => {
+                                // console.log(value); // Log value here
+
+                                return (
+                                    <CustomAutocomplete
+                                        multiple
+                                        fullWidth
+                                        value={value || []}
+                                        options={streamdata}
+                                        onChange={(event, newValue) => {
+                                            onChange(newValue);
+                                        }}
+                                        filterSelectedOptions
+                                        id='autocomplete-multiple-outlined'
+                                        getOptionLabel={(option: any) => option.name}
+                                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                                        renderInput={params =>
+                                            <CustomTextField {...params}
+                                                label='Select Streams'
+                                                variant="outlined"
+                                                error={Boolean(errors.streams)}
+                                                {...(errors.streams && { helperText: 'This field is required' })}
+                                                placeholder='streams' />}
+                                    />
+                                );
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name="courses"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => {
+                                // console.log(value); // Log value here
+
+                                return (
+                                    <CustomAutocomplete
+                                        multiple
+                                        fullWidth
+                                        value={value || []}
+                                        options={coursedata}
+                                        onChange={(event, newValue) => {
+                                            onChange(newValue);
+                                        }}
+                                        filterSelectedOptions
+                                        id='autocomplete-multiple-outlined'
+                                        getOptionLabel={(option: any) => option.name}
+                                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                                        renderInput={params =>
+                                            <CustomTextField {...params}
+                                                label='Select Courses'
+                                                variant="outlined"
+                                                error={Boolean(errors.courses)}
+                                                {...(errors.courses && { helperText: 'This field is required' })}
+                                                placeholder='courses' />}
+                                    />
+                                );
+                            }}
+                        />
                     </Grid>
 
                     <Grid item xs={12}>
