@@ -43,8 +43,8 @@ const AboutUsPage = () => {
       </Head>
       <BannerSec />
       <Overview />
-      <JourneySec />
       <TestimonialSec />
+      <JourneySec />
       <OurPortalSec />
       <ContactUsSec />
     </>

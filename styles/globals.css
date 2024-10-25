@@ -6,6 +6,10 @@
     font-family: 'Poppins' !important;
   }
 
+  p {
+    font-size: 16px !important;
+  }
+
   #__next {
     height: 100%;
   }
@@ -914,6 +918,7 @@
     stroke: white;
 
   }
+
   .card-board .fi-left svg {
     stroke: rgb(1, 1, 1) !important;
 
@@ -923,6 +928,7 @@
     stroke: rgb(0, 0, 0) !important;
 
   }
+
   .card-con .fi-right svg {
     stroke: white;
 
@@ -6159,10 +6165,10 @@
     color: black !important;
     left: 300px !important;
     top: 50% !important;
-    transform: translate(-50%,-50%);
-    white-space: nowrap ;             
-    overflow: hidden;                
-    text-overflow: ellipsis;        
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .file-name {
@@ -6170,19 +6176,19 @@
     color: black !important;
     left: 200px !important;
     top: 50% !important;
-    transform: translate(-50%,-50%);
-    white-space: nowrap;           
-    overflow: hidden;             
-    text-overflow: ellipsis;       
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  
+
 
   @media (min-width:320px) and (max-width:767px) {
     .placeholder-text {
       display: none !important;
     }
-  
+
     .file-name {
       display: none !important;
     }

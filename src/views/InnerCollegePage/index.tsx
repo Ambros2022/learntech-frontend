@@ -5,6 +5,7 @@ import FacilitiesSection from './Components/FacilitiesSection'
 import LocationSection from './Components/LocateSection'
 import TopFeaturedColleges from './Components/TopFeaturedColleges'
 import ExpertSection from './Components/ExpertSection'
+import Testimonial from './Components/TestimonialSec'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
@@ -20,6 +21,7 @@ function InnerCollegePage({ id }) {
   const [colleges, setColleges] = useState([]);
   const [reviews, setreviews] = useState([]);
   const [streams, setStreams] = useState([]);
+  const [testdata, setTestdata] = useState<any>(null);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -27,6 +29,19 @@ function InnerCollegePage({ id }) {
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
+      }
+    } catch (error) {
+      router.push("/404");
+      console.error('Failed to fetch page data:', error);
+    }
+  }, [id, isMountedRef, router]);
+
+  const gettestimonials = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/testimonial/filter/get?page=1&size=15&college_id=' + id);
+      if (isMountedRef.current) {
+        setTestdata(response.data.data);
+
       }
     } catch (error) {
       router.push("/404");
@@ -60,9 +75,12 @@ function InnerCollegePage({ id }) {
   }));
 
 
+
+
   useEffect(() => {
     getPagedata();
     getColleges();
+    gettestimonials();
 
   }, [getPagedata]);
   return (
@@ -101,7 +119,11 @@ function InnerCollegePage({ id }) {
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
+
+      {testdata && testdata.length > 0 && <Testimonial  testimonials={testdata}/>}
+      
       {!loading && pagedata && <LocationSection data={pagedata} />}
+
 
 
       <TopFeaturedColleges />

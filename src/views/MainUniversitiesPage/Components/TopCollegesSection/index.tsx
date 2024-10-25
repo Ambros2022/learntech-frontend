@@ -87,15 +87,15 @@ function TopUniversitiesSection() {
 
 
                             </p>
-                            <h6 className='fw-bold text-black'>
-                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Private Universities:</h6>
+                            <h5 className='fw-bold text-black mb-3'>Private Universities:</h5>
+             
 
                             <p className='text-black'>Some of the most prestigious universities in India fall under this category. Private universities are educational entities that are established by private bodies, trusts, or organisations and are primarily funded by the same authoritative bodies, as well as through tuition fees. They may also receive grants and contributions from external sources such as private corporations, alumni organisations, philanthropists, and foundations. Moreover, these universities have their own governing bodies and are given the flexibility to establish policies regarding admissions, curriculum, and faculty selections, provided they align with the regulations of the government authorities.
 
 
                             </p>
-                            <h6 className='fw-bold text-black'>
-                                <i className='bi bi-circle-fill me-2' style={{ fontSize: '10px' }}></i>Deemed Universities:</h6>
+                            <h5 className='fw-bold text-black mb-3'>Deemed Universities:</h5>
+                        
 
                             <p className='text-black'>Deemed universities in India are institutions that are granted the ‘university status’ by the University Grants Commission (UGC), Department of Higher Education, and Ministry of Education based on certain factors such as academic excellence, research facilities, and their overall contribution to higher education. These universities are offered a higher level of autonomy and independence in making decisions regarding courses, fees, admissions and curriculum. Deemed universities in India are authorised to receive government funding and can also generate revenue through tuition fees, donations and collaborations.
 
