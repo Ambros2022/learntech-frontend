@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import ExpertSection from './Components/ExpertSection';
 import OrganizationSection from './Components/OrganizationalSec';
 import ExperTraineeSec from './Components/ExpertTrainneSec';
+import Testimonial from './Components/TestimonialSec'
 
 interface Pagedata {
   meta_title?: string;
@@ -30,6 +31,7 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
   const [colleges, setColleges] = useState<any[]>([]);
   const [exams, setExams] = useState<any[]>([]);
 
+  
   const getPagedata = useCallback(async () => {
     try {
       const slug = Courseslug;
@@ -94,6 +96,7 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
     getPagedata();
     getColleges();
     getExams();
+
   }, [getPagedata, getColleges, getExams]);
 
   return (
@@ -114,6 +117,7 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />}
       <PopularCourses />
+      {!loading && pagedata && <Testimonial data={pagedata} />}
       <OrganizationSection data={pagedata}/>
       <ExperTraineeSec data={pagedata}/>
       <ExpertSection />

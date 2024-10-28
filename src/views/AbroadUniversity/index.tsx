@@ -9,14 +9,28 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
+import Testimonial from './Components/TestimonialSec'
 
 function AbroadUniversityPage({ id, Countrydata }) {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [testdata, setTestdata] = useState<any>(null);
 
+
+  const gettestimonials = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/testimonial/filter/get?page=1&size=15&college_id=' + id);
+      if (isMountedRef.current) {
+        setTestdata(response.data.data);
+
+      }
+    } catch (error) {
+      router.push("/404");
+      console.error('Failed to fetch page data:', error);
+    }
+  }, [id, isMountedRef, router]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -36,7 +50,7 @@ function AbroadUniversityPage({ id, Countrydata }) {
 
   useEffect(() => {  
     getPagedata();
-
+    gettestimonials();
   }, [getPagedata]);
   return (
     <>
@@ -49,6 +63,7 @@ function AbroadUniversityPage({ id, Countrydata }) {
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <CollegeInfoSection data={pagedata} Countrydata={Countrydata} />}
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
+      {testdata && testdata.length > 0 && <Testimonial testimonials={testdata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}
       <TopFeaturedColleges  data={Countrydata}/>
     </>

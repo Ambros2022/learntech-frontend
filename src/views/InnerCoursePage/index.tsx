@@ -9,6 +9,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import OrganizationSection from './Components/OrganizationalSec';
 import ExperTraineeSec from './Components/ExpertTrainneSec';
+import Testimonial from './Components/TestimonialSec'
 
 function InnerCoursePage({ id }) {
   const router = useRouter();
@@ -19,6 +20,21 @@ function InnerCoursePage({ id }) {
   const [exams, setexams] = useState([]);
   const [streams, setStreams] = useState([]);
   const [organizationData, setOrganizationData] = useState([]);
+  const [testdata, setTestdata] = useState<any>(null);
+
+
+  const gettestimonials = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/testimonial/filter/get?page=1&size=15&stream_id=' + id);
+      if (isMountedRef.current) {
+        setTestdata(response.data.data);
+
+      }
+    } catch (error) {
+      router.push("/404");
+      console.error('Failed to fetch page data:', error);
+    }
+  }, [id, isMountedRef, router]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -115,6 +131,7 @@ function InnerCoursePage({ id }) {
     getColleges();
     getExams();
     getotherCourses();
+    gettestimonials();
   }, [getPagedata]);
 
   return (
@@ -140,6 +157,7 @@ function InnerCoursePage({ id }) {
 
 
       <OtherCourses streamdata={streams} />
+      {testdata && testdata.length > 0 && <Testimonial testimonials={testdata} />}
       <OrganizationSection data={pagedata}/>
       <ExperTraineeSec data={pagedata}/>
       <ExpertSection />

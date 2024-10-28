@@ -10,7 +10,7 @@ import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script'
-
+import Testimonial from './Components/TestimonialSec'
 
 function InnerUniversityPage({ id }) {
   const router = useRouter();
@@ -20,6 +20,22 @@ function InnerUniversityPage({ id }) {
   const [colleges, setColleges] = useState([]);
   const [reviews, setreviews] = useState([]);
   const [streams, setStreams] = useState([]);
+  const [testdata, setTestdata] = useState<any>(null);
+
+
+  const gettestimonials = useCallback(async () => {
+    try {
+      const response = await axios.get('api/website/testimonial/filter/get?page=1&size=15&college_id=' + id);
+      if (isMountedRef.current) {
+        setTestdata(response.data.data);
+
+      }
+    } catch (error) {
+      router.push("/404");
+      console.error('Failed to fetch page data:', error);
+    }
+  }, [id, isMountedRef, router]);
+
 
   const getPagedata = useCallback(async () => {
     try {
@@ -64,7 +80,7 @@ function InnerUniversityPage({ id }) {
   useEffect(() => {
     getPagedata();
     getColleges();
-
+    gettestimonials();
   }, [getPagedata]);
   return (
     <>
@@ -102,6 +118,7 @@ function InnerUniversityPage({ id }) {
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
+      {testdata && testdata.length > 0 && <Testimonial testimonials={testdata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}
 
 

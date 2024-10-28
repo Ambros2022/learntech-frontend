@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const Overview = () => {
     return (
@@ -50,54 +51,109 @@ const Overview = () => {
                                     </p>
                                     <h5 className='fw-bold text-black'>For Students:
                                     </h5>
-                                    <table className='table table-responsvie table-bordered'>
-                                        <div className="tbody">
+
+                                    <table className="table table-responsive table-bordered">
+                                        <tbody className="text-center">
                                             <tr>
-                                                <td>
-                                                    Career Counselling
+                                                <td className="d-block d-md-table-cell">
+                                                    <div className="col">
+                                                        <Image src="/images/aboutus/Career_Counselling.png" width={50} height={50} alt="Career Counselling" />
+                                                        <h6 className="text-black fw-bold pt-3">Career Counselling</h6>
+                                                    </div>
                                                 </td>
-                                                <td>
-                                                    Mentoring for Entrance Exams
+                                                <td className="d-block d-md-table-cell">
+                                                    <div className="col">
+                                                        <Image src="/images/aboutus/Mentoring_for_Entrance_Exams.png" width={50} height={50} alt="Mentoring for Entrance Exams" />
+                                                        <h6 className="text-black fw-bold pt-3">Mentoring for Entrance Exams</h6>
+                                                    </div>
                                                 </td>
-                                                <td>
-                                                    Assistance for Educational Loans and Scholarships
+                                                <td className="d-block d-md-table-cell">
+                                                    <div className="col">
+                                                        <Image src="/images/aboutus/Assistance.png" width={50} height={50} alt="Assistance for Educational Loans and Scholarships" />
+                                                        <h6 className="text-black fw-bold pt-3">Assistance for Educational Loans and Scholarships</h6>
+                                                    </div>
+
                                                 </td>
-                                                <td>
-                                                    Seat Reservation Facilities
+                                                <td className="d-block d-md-table-cell">
+
+                                                    <div className="col">
+                                                        <Image src="/images/aboutus/Seat_Reservation_Facilities.png" width={50} height={50} alt="Seat Reservation Facilities" />
+                                                        <h6 className="text-black fw-bold pt-3">Seat Reservation Facilities</h6>
+                                                    </div>
+
                                                 </td>
-                                                <td>
-                                                    Facilitate Direct Meetings with Colleges and Universities
+                                                <td className="d-block d-md-table-cell">
+                                                    <div className="col">
+                                                        <Image src="/images/aboutus/facilitate.png" width={50} height={50} alt="Facilitate Direct Meetings with Colleges and Universities" />
+                                                        <h6 className="text-black fw-bold pt-3">Facilitate Direct Meetings with Colleges and Universities</h6>
+                                                    </div>
+
                                                 </td>
-                                                <td>
-                                                    NRI Admission Assistance
+                                                <td className="d-block d-md-table-cell">
+                                                    <div className="col">
+                                                        <Image src="/images/aboutus/nri.png" width={50} height={50} alt="  NRI Admission Assistance" />
+                                                        <h6 className="text-black fw-bold pt-3">  NRI Admission Assistance</h6>
+                                                    </div>
+
                                                 </td>
-                                                <td>
-                                                    Assistance to Pay Fees via EMI
+                                                <td className="d-block d-md-table-cell">
+                                                    <div className="col">
+                                                        <Image src="/images/aboutus/assistance_to_Pay.png" width={50} height={50} alt="Assistance to Pay Fees via EMI" />
+                                                        <h6 className="text-black fw-bold pt-3">    Assistance to Pay Fees via EMI</h6>
+                                                    </div>
+
                                                 </td>
                                             </tr>
-                                        </div>
+                                        </tbody>
                                     </table>
+
+
+
                                     <h5 className='fw-bold text-black'>For Colleges and Universities:
                                     </h5>
-                                    <table className='table table-responsvie table-bordered'>
-                                        <div className="tbody">
-                                            <tr>
-                                                <td>
-                                                Branding and Visibility                                                </td>
-                                                <td>
-                                                Lead Generation for Admissions                                                </td>
-                                                <td>
-                                                Collaborative Promotional Events                                                </td>
-                                                <td>
-                                                Social Media Management                                                 </td>
-                                                <td>
-                                                Digital Marketing                                                </td>
-                                            </tr>
-                                        </div>
-                                    </table>
+                                    <div className="table-responsive">
+                                        <table className="table table-responsive table-bordered">
+                                            <tbody className="text-center">
+                                                <tr>
+                                                    <td className="d-block d-md-table-cell">
+                                                        <div>
+                                                            <Image src="/images/aboutus/Branding.png" width={50} height={50} alt="Branding and Visibility" />
+                                                            <h6 className="text-black fw-bold pt-3">Branding and Visibility</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td className="d-block d-md-table-cell">
+                                                        <div>
+                                                            <Image src="/images/aboutus/Lead_Generation.png" width={50} height={50} alt="Lead Generation for Admissions" />
+                                                            <h6 className="text-black fw-bold pt-3">Lead Generation for Admissions</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td className="d-block d-md-table-cell">
+                                                        <div>
+                                                            <Image src="/images/aboutus/Collaborative.png" width={50} height={50} alt="Collaborative Promotional Events" />
+                                                            <h6 className="text-black fw-bold pt-3">Collaborative Promotional Events</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td className="d-block d-md-table-cell">
+                                                        <div>
+                                                            <Image src="/images/aboutus/Social_Media.png" width={50} height={50} alt="Social Media Management" />
+                                                            <h6 className="text-black fw-bold pt-3">Social Media Management</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td className="d-block d-md-table-cell">
+                                                        <div>
+                                                            <Image src="/images/aboutus/Digital_Marketing.png" width={50} height={50} alt="Digital Marketing" />
+                                                            <h6 className="text-black fw-bold pt-3">Digital Marketing</h6>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                       
+                                    </div>
                                 </div>
                                 <div className="tab-pane fade" id="v-pills-why-choose-us" role="tabpanel" aria-labelledby="v-pills-why-choose-us-tab">
-                                Providing admissions guidance is about more than just helping students enroll into their preferred college to study a course of their interest. It is about helping candidates lay the foundational stones for the life they desire to lead in the future. The appropriate education in a student’s career can enable them to improve their standards of living and make life-altering contributions to society. It also makes them sufficiently qualified to build a sustainable future for themselves and others. We, at Learntech, understand and value the importance of the right education in a candidate's life. This is why our seasoned experts work tirelessly to ensure that students achieve their ambitions efficiently and reliably. The determination of our counsellors to help students build their dream careers motivates them to overcome unprecedented challenges.                             </div>
+                                    Providing admissions guidance is about more than just helping students enroll into their preferred college to study a course of their interest. It is about helping candidates lay the foundational stones for the life they desire to lead in the future. The appropriate education in a student’s career can enable them to improve their standards of living and make life-altering contributions to society. It also makes them sufficiently qualified to build a sustainable future for themselves and others. We, at Learntech, understand and value the importance of the right education in a candidate's life. This is why our seasoned experts work tirelessly to ensure that students achieve their ambitions efficiently and reliably. The determination of our counsellors to help students build their dream careers motivates them to overcome unprecedented challenges.                             </div>
                             </div>
                         </div>
                     </div>

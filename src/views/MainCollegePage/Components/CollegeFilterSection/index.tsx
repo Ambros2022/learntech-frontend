@@ -54,7 +54,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                     </div>
                                 </div>
                                 <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
-                                    {rating && rating.length!==0 ? (
+                                    {rating && rating.length !== 0 ? (
                                         <div className="d-flex  mb-md-3 mb-lg-0 gap-2 justify-content-start justify-content-md-start">
 
                                             <i className={`bi bi-star-fill ${rating >= 1 ? "text-warning" : "text-gray"} `}></i>
@@ -65,7 +65,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
 
                                             {/* <h6 className='mb-0 text-white align-self-center'>{rating}/5 Review</h6> */}
                                         </div>
-                                    ):''}
+                                    ) : ''}
                                 </div>
                                 <div className="mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column justify-content-xl-around gap-xl-0 gap-3">
                                     <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
@@ -91,9 +91,7 @@ function CollegeFilterSection() {
 
 
     const router = useRouter();
-    const { city_id } = router.query;
-    // let state_id = 92;
-    // console.log(state_id, "state_id");
+
     const [colleges, setColleges] = useState<College[]>([]);
     const [total, setTotal] = useState<string>("0");
     const isMountedRef = useIsMountedRef();
@@ -122,7 +120,7 @@ function CollegeFilterSection() {
     });
     const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
 
-    const { stateId, setStateId, cityId, setCityId } = useAuth();
+    const { stateId, setStateId, cityId, setCityId, streamId, setStreamId } = useAuth();
 
 
     type Option = {
@@ -225,7 +223,7 @@ function CollegeFilterSection() {
             const params: any = {
                 page: 1,
                 size: 10000,
-                type:'college'
+                type: 'college'
             };
 
 
@@ -342,14 +340,11 @@ function CollegeFilterSection() {
             // Perform API call with selected filter values
             getcollegedata(selectedStateIds, selectedCourseIds, selectedStreamIds, selectedOwnership, selectedCourseType, selectedCityIds);
 
-            // console.log(updatedSelected, "updatedSelected");
-            console.log(selectedStateIds, "selectedStateIds");
             if (groupId == "state" && selectedStateIds.length > 0) {
                 const citiesArr = states
                     .filter(state => selectedStateIds.includes(state.value))
                     .flatMap(state => state.cities);
 
-                console.log(citiesArr);
                 setCitys(citiesArr);
             }
             if (groupId === "state" && selectedStateIds.length === 0 && states.length > 0) {
@@ -373,21 +368,7 @@ function CollegeFilterSection() {
             }
         }));
 
-        // if (groupId === 'state') {
-        //     const updatedStateIds = isChecked
-        //         ? [...selectedStateIds, value]
-        //         : selectedStateIds.filter(id => id !== value);
-
-        //     // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
-        // }
-
-        // if (groupId === 'city') {
-        //     const updatedCityIds = isChecked
-        //         ? [...selectedCityIds, value]
-        //         : selectedCityIds.filter(id => id !== value);
-
-        //     handleFilterChange(selectedStateIds.join(','), updatedCityIds.join(','), false);
-        // }
+        
     };
 
     useEffect(() => {
@@ -404,6 +385,20 @@ function CollegeFilterSection() {
             }));
             setStateId(null)
         }
+        if (streamId) {
+            let text = streamId.toString();
+            debouncedHandleCheckboxChange("streams", text, true);
+            setCheckboxState(prevState => ({
+                ...prevState,
+                ["streams"]: {
+                    ...prevState["streams"],
+                    //@ts-ignore
+                    [text]: true
+                }
+            }));
+            setStreamId(null)
+        }
+        
         if (cityId) {
             let text = cityId.toString();
             debouncedHandleCheckboxChange("city", text, true);
@@ -516,7 +511,7 @@ function CollegeFilterSection() {
 
             const handleStateButtonClick = (state: string) => {
 
-                console.log("handleStateButtonClick",state);
+                console.log("handleStateButtonClick", state);
 
                 debouncedHandleCheckboxChange("state", state, true);
                 window.scrollTo({ top: 650, behavior: 'smooth' });
