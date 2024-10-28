@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import { useAuth } from 'src/hooks/useAuth';
 
 interface CardComponentProps {
     title: any;
@@ -7,13 +8,16 @@ interface CardComponentProps {
     count: number;
     link: string;
     activeTab: string;
+    Itemid: string;
 }
 
-const CardComponent: React.FC<CardComponentProps> = React.memo(({ title, imageSrc, count, link, activeTab }) => {
+const CardComponent: React.FC<CardComponentProps> = React.memo(({ title, imageSrc, count, link, activeTab,Itemid }) => {
+    const { setStreamId } = useAuth();
+
     return (
         <div className="col-md-4 col-lg-2 mb-3">
             <div className="card text-center exploreCardHover">
-                <Link href={link}>
+                <Link href={link}   onClick={() => activeTab !== 'Courses' ? setStreamId(Itemid) : ""}>
                     <div className="row">
                         <div className="col-md-12 col-4 col-sm-3">
                             <img

@@ -11,6 +11,7 @@ function ExploreSection() {
   const [visibleCount, setVisibleCount] = useState(0);
   const [datasize, setDatasize] = useState(18);
 
+
   const fetchData = useCallback(async () => {
 
 
@@ -49,11 +50,11 @@ function ExploreSection() {
     return data.map((item: any) => {
       let url = '';
       if (activeTab === 'Colleges') {
-        url = `/colleges/?stream_id=[${item.id}]`;
+        url = `/colleges/`;
       } else if (activeTab === 'Courses') {
         url = `/course/${item.id}/${item.slug}`;
       } else if (activeTab === 'Exams') {
-        url = `/exams/?stream_id=[${item.id}]`;
+        url = `/exams/`;
       }
 
       return (
@@ -64,6 +65,8 @@ function ExploreSection() {
           count={item.uniqueCollegeCount}
           link={url}
           activeTab={activeTab}
+          Itemid={item.id}
+    
         />
       );
     });

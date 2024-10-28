@@ -155,7 +155,7 @@ const Header = () => {
             //@ts-ignore
             strongElements[i].parentNode.replaceChild(container, strongElements[i]);
             const root = createRoot(container);
-            root.render(<EditorEnquiryForm  className="applyNowButton btn btn-sm "/>);
+            root.render(<EditorEnquiryForm className="applyNowButton btn btn-sm " />);
           }
         }
       };
@@ -203,7 +203,7 @@ const Header = () => {
         </div>
       </header >
 
-      <nav className="navbar navbar-expand-lg bg-white" style={{zIndex:'100'}}>
+      <nav className="navbar navbar-expand-lg bg-white" style={{ zIndex: '100' }}>
         <div className="container-xl">
           <Link className="navbar-brand" href="/"><Image src="/images/icons/learntech-logo.png" width={160} height={50} alt="learntech-logo" /></Link>
           <button className="navbar-toggler" type="button" onClick={toggle} data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -376,7 +376,7 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className="hideBtnTxt">
-                  <AvatarDropdown/>
+                  <AvatarDropdown />
                 </li>
                 <li className="hideBtnTxt">
                   <GlobalEnquiryForm buttonText="Get Counselling" className="btn counsellingBtn" />
@@ -394,6 +394,11 @@ const Header = () => {
                 <li className="nav-item dropdown d-lg-none d-md-inline-block">
                   <Link className={`nav-link ${isLinkActive('/services') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/services">
                     Services
+                  </Link>
+                </li>
+                <li className="nav-item dropdown d-lg-none d-md-inline-block">
+                  <Link className={`nav-link ${isLinkActive('/blogs') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/blogs">
+                    Blogs
                   </Link>
                 </li>
                 <li className="nav-item dropdown d-lg-none d-md-inline-block">

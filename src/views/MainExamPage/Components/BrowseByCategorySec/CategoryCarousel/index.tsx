@@ -57,7 +57,7 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
                         type="button"
                         onClick={() => handleTabClick(item.id)}
                         key={item.id}
-                        style={{ zIndex: '20', fontSize:'14px'}}
+                        style={{ zIndex: '20', fontSize: '14px' }}
                     >
                         {item.title}
                     </button>

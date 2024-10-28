@@ -9,8 +9,11 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios1 from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuth } from 'src/hooks/useAuth';
+import { useRouter } from 'next/router';
 
 const BrowsebyCategorySec = ({ countryData, streams }) => {
+    const {streamId, setStreamId } = useAuth();
     const [scholarshipsData, setScholarshipsData] = useState<any>([]);  // Use any type for tabs
     const [scholarshipData, setScholarshipData] = useState<any>([]);  // Use any type for tabs
     const [totalScholarships, setTotalScholarships] = useState(0);
@@ -29,14 +32,15 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
     });
     const perPage = 9; // Number of items per page
 
-    let cancelToken: any;
+    const router = useRouter();
+
 
     interface SearchResult {
         id: number;
         name: string;
     }
 
-    const [activeTab, setActiveTab] = useState('');
+    const [activeTab, setActiveTab] = useState('all');
     // const [currentExams, setCurrentExams] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -134,55 +138,6 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
     }, [formData, getScholarship, currentScholarshipPage]);
 
 
-    const handleSearch = async (value: string) => {
-        if (value.length < 2) {
-            setSearchResults([]);
-            setOpen(false); // Close the dropdown if the input is too short
-            return;
-        }
-
-        try {
-            setLoading(true);
-            if (cancelToken !== undefined) {
-                cancelToken.cancel('Operation canceled due to new request.');
-            }
-            cancelToken = axios1.CancelToken.source();
-
-            const response = await axios.get('api/website/scholarships/get', {
-                cancelToken: cancelToken.token,
-                params: { searchfrom: 'name', searchtext: value },
-            });
-
-            const suggestions = response.data.data.map((item: { id: number; name: string }) => ({
-                name: item.name,
-                id: item.id,
-            }));
-
-            setSearchResults(suggestions);
-            setOpen(true);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleInputChange = (event: any, value: string) => {
-        handleSearch(value);
-    };
-
-    const handleClearInput = (params: any) => {
-        setSearchResults([]);
-        setOpen(false);
-        if (params.inputProps.onChange) {
-            const event = {
-                target: {
-                    value: '',
-                },
-            } as React.ChangeEvent<HTMLInputElement>;
-            params.inputProps.onChange(event);
-        }
-    };
     const getCategoriesData = useCallback(async () => {
         try {
             const response = await axios.get('api/website/stream/get?page=1&size=50');
@@ -193,7 +148,6 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                 }));
                 // Add "All" category
                 setItems([{ id: 'all', title: 'All Exams' }, ...categories]);
-                setActiveTab('all'); // Set "All" tab as active initially
             } else {
                 console.error('Failed to fetch categories');
             }
@@ -248,7 +202,16 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         getScholarships();
         getabroadnews();
     }, [getCategoriesData, getabroadnews, getnews, getScholarships]);
+    useEffect(() => {
+   
+        if (streamId) {
+       
+            setActiveTab(streamId)
+            setStreamId(null)
+        }
+        
 
+    }, [router, router.isReady]);
 
     useEffect(() => {
         if (activeTab) {
@@ -261,21 +224,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         setCurrentPage(1);
     };
 
-    const handlePreviousPage = () => {
-        setCurrentPage(prevPage => {
-            const newPage = Math.max(prevPage - 1, 1);
-            getExamsData(activeTab, newPage); // Fetch new data for the previous page
-            return newPage;
-        });
-    };
 
-    const handleNextPage = () => {
-        setCurrentPage(prevPage => {
-            const newPage = Math.min(prevPage + 1, totalPages);
-            getExamsData(activeTab, newPage); // Fetch new data for the next page
-            return newPage;
-        });
-    };
 
     const handleExamPreviousPage = () => {
         setCurrentExamPage(prevPage => {
@@ -343,10 +292,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
     };
 
 
-    const handlePageClick = (page) => {
-        setCurrentPage(page);
-        getExamsData(activeTab, page); // Fetch data for the clicked page
-    };
+
 
     useEffect(() => {
         if (activeTab) {
@@ -359,7 +305,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
 
     const currentExams = examsData[activeTab] || [];
 
-    const totalExams = examsData[activeTab]?.length || 0;
+
 
     return (
         <section className='bg-white'>
