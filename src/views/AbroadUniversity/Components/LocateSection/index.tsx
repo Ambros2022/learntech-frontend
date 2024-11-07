@@ -31,7 +31,7 @@ function LocationSection({ data }) {
               <div className='p-2 bg-blue rounded h-100 w-100'>
                 <iframe
                   width="100%"
-                  height="100%"
+                  height="400px"
                   loading="lazy"
                   allowFullScreen
                   src={data.map}

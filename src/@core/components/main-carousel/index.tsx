@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const MainCarousel = ({ items }) => {
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 767);
+  };
+
+  useEffect(() => {
+    handleResize(); // Check on initial load
+    window.addEventListener('resize', handleResize); // Check on resize
+    return () => window.removeEventListener('resize', handleResize); // Cleanup
+  }, []);
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -43,7 +55,7 @@ const MainCarousel = ({ items }) => {
       showDots={false}
       arrows={false}
       infinite
-      autoPlay
+      autoPlay={!isMobile}
       autoPlaySpeed={2000}
       ssr  // SSR true for server-side rendering
       responsive={responsive}

@@ -25,32 +25,34 @@ function FaqSec({ data }) {
             </div>
           </div>
           <div className="col-md-6 mb-3 rounded ">
+            
             <div className="accordion" id="accordionExample">
-              {data.abroadpagefaqs.map((item, index) => (
-                <div className="accordion-item mb-3" key={index}>
-                  <h2 className="accordion-header">
-                    <button
-                      className={`accordion-button ${activeIndex === index ? 'active' : ''}`}
-                      type="button"
-                      onClick={() => handleAccordionClick(index)}
-                      aria-expanded={activeIndex === index ? "true" : "false"}
+                {data.abroadpagefaqs.map((item, index) => (
+                  <div className="accordion-item mb-3" key={index}>
+                    <h2 className="accordion-header text-white">
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#col${index}`}
+                        aria-expanded="true"
+                        aria-controls={`col${index}`}
+                      >
+                        {index + 1}. {item.questions}
+                      </button>
+                    </h2>
+                    <div
+                      id={`col${index}`}
+                      className="accordion-collapse collapse"
+                      data-bs-parent="#accordionExample"
                     >
-                      {index + 1}. {item.questions}
-                      <span className={`arrow ${activeIndex === index ? 'rotate' : ''}`}></span>
-                    </button>
-                  </h2>
-                  <div
-                    id={`col${index}`}
-                    className={`accordion-collapse collapse ${activeIndex === index ? "show" : ""}`}
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div className="accordion-body">
-                      <div dangerouslySetInnerHTML={{ __html: item.answers }} />
+                      <div className="accordion-body">
+                        <div dangerouslySetInnerHTML={{ __html: item.answers }} />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
           </div>
         </div>
       </div>

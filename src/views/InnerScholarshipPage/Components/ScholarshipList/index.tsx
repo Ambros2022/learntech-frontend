@@ -21,7 +21,7 @@ const NewsItem = ({ id,slug, title, text }) => (
 // NewsList component
 const NewsList = ({ newsItems }) => (
     <>
-        <h4 className='fw-bold text-blue text-center pt-3 mb-3'> Similar Scholarship</h4>
+        <h2 className='fw-bold text-blue text-center pt-3 mb-3'> Similar Scholarship</h2>
         <div className='bg-skyBlue examNewsSec blogSec pt-3 mt-3 px-4 overflow-y-auto rounded' style={{ maxHeight: 'calc(7 * 115px)' }}>
             <div className="row">
                 {newsItems.map((item, index) => (

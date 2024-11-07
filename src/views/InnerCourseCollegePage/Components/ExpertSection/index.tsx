@@ -3,7 +3,7 @@ import TALKExpertForm from 'src/@core/components/popup/TalkExpertEnqiiry';
 
 function ExpertSection() {
   return (
-    <section className='collegeExpertSection bg-blue py-5'>
+    <section className='collegeExpertSection bg-blue py-3 py-md-5'>
       <div className="row">
         <div className="col-md-5 d-flex innerCollege bg-blue g-0">
           <div className='container d-flex justify-content-center'>

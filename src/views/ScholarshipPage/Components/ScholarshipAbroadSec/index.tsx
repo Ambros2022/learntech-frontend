@@ -41,7 +41,7 @@ const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string
                 </div>
               )}
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 pt-4 pt-md-0">
               <ContactForm heading={'Contact Us'} />
             </div>
           </div>

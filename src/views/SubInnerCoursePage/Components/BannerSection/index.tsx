@@ -14,9 +14,9 @@ function BannerSection({ data }) {
             <h1 className=' fw-bold text-white mb-3'>{data.short_name} ({data.name}): Course, Duration, Eligibility, Fees, Admissions, Opportunities
             </h1>
             <div className='text-white  mb-2 row'>
-              <h4 className='col-6 mb-3'>Duration : {data.duration}</h4>
+              <h4 className='col-12 mb-3'>Duration : {data.duration}</h4>
               <div className="d-flex">
-                <GlobalEnquiryForm className='btn btn-success'/>
+                <GlobalEnquiryForm className='btn btn-success font-18'/>
               </div>
             </div>
             <div className=''>

@@ -65,7 +65,7 @@ function MainCollegePage() {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       <BannerSection />
-      <TopCollegesSection />
+      <TopCollegesSection data={pagedata} />
       <CollegeFilterSection />
       {/* <BestCollegeSec /> */}
       <ExpertSection />

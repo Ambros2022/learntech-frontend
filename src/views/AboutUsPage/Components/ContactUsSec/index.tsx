@@ -61,9 +61,9 @@ const ContactUsSec = () => {
                     />
                 </div>
                 <div className="col-md-6 position-relative">
-                    <div className="bg-blue py-5 h-100 w-100 px-5 d-flex flex-column">
+                    <div className="bg-blue py-4 py-md-5  h-100 w-100 px-5 d-flex flex-column">
                         <div className="align-content-center h-100 w-100">
-                            <h4 className="text-white fw-bold text-center mb-4">Contact Us</h4>
+                            <h2 className="text-white fw-bold text-center mb-4">Contact Us</h2>
                             <Formik
                                 initialValues={{
                                     fullName: '',
@@ -128,7 +128,7 @@ const ContactUsSec = () => {
                                             <ErrorMessage name="message" component="div" className="text-danger" />
                                         </div> 
                                         <div className="text-center">
-                                            <button type="submit" className="btn btn-success">Submit</button>
+                                            <button type="submit" className="btn btn-success btn-lg">Submit</button>
                                         </div>
                                     </div>
                                 </Form>

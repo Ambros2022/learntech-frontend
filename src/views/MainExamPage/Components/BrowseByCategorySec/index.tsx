@@ -320,7 +320,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                 </div>
                 {/* <div className='examSecItems'> */}
                 <div className="row">
-                    <div className="col-lg-7 col-xl-8">
+                    <div className="col-lg-7 col-xl-8 exam-car px-5 ">
                         <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
                     </div>
                 </div>
@@ -542,7 +542,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                     </div>
                                     <div className="col-lg-5 col-xl-4">
                                         <div className='bg-skyBlue px-lg-5 px-md-3 px-3 mb-5 rounded'>
-                                            <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
+                                            <h2 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h2>
                                             <div className='examsForm'>
                                                 <SideContactUsForm />
                                             </div>

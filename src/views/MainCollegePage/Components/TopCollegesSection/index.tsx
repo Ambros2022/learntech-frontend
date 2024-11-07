@@ -1,11 +1,41 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-function TopCollegesSection() {
-    const [showMore, setShowMore] = useState(false);
+function TopCollegesSection({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) {
+    // const [showMore, setShowMore] = useState(false);
 
-    const handleToggleReadMore = () => {
-        setShowMore(!showMore);
+    // const handleToggleReadMore = () => {
+    //     setShowMore(!showMore);
+    // };
+    const [isExpanded, setIsExpanded] = useState(false);
+    const maxLength = 1800; // Adjust this value to change when the "Read More" button appears
+
+    const toggleReadMore = () => {
+        setIsExpanded(!isExpanded);
+    };
+
+
+    const renderDescription = () => {
+        if (!data.top_description) return null;
+
+        if (data.top_description.length <= maxLength || isExpanded) {
+            return <div dangerouslySetInnerHTML={{ __html: data.top_description }} />;
+        }
+
+        const truncatedText = data.top_description.slice(0, maxLength) + '...';
+        return (
+            <>
+                <div dangerouslySetInnerHTML={{ __html: truncatedText }} />
+                <div className='text-center'>
+                    <button
+                        onClick={toggleReadMore}
+                        className="btn viewMoreClgBtn"
+                    >
+                        Read More
+                    </button>
+                </div>
+            </>
+        );
     };
     return (
         <>
@@ -13,10 +43,21 @@ function TopCollegesSection() {
                 <section className="container InnerCollegeNavigationLink linkFontSize pt-2">
                     <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Colleges</span></p>
                 </section>
-                <div className='container innerClg pt-5 pb-3'>
+                <div className='container innerClg pt-3 pt-md-5 pb-3'>
                     <h2 className='text-center fw-bold text-blue mb-3'>Best Colleges in India
                     </h2>
-                    <p className='text-black'>Selecting the right college is more than just a step towards your future; it's a transformative experience that shapes your entire life. The best colleges in India offer more than academic excellence; they provide a vibrant ecosystem where passion meets purpose, and potential transforms into reality. These institutions are not just places of learning; they are incubators of innovation, creativity, and leadership.
+                    {renderDescription()}
+                    {isExpanded && (
+                        <div className='text-center'>
+                            <button
+                                onClick={toggleReadMore}
+                                className="btn viewMoreClgBtn"
+                            >
+                                Read Less
+                            </button>
+                        </div>
+                    )}
+                    {/* <p className='text-black'>Selecting the right college is more than just a step towards your future; it's a transformative experience that shapes your entire life. The best colleges in India offer more than academic excellence; they provide a vibrant ecosystem where passion meets purpose, and potential transforms into reality. These institutions are not just places of learning; they are incubators of innovation, creativity, and leadership.
                     </p>
                     <h5 className='fw-bold text-black mb-4'>Why Colleges are a Pillar of Your Academic and Personal Growth:
                     </h5>
@@ -137,10 +178,10 @@ function TopCollegesSection() {
                         </>
                     )}
                     <div className='text-center'>
-                        <button onClick={handleToggleReadMore} className='btn mb-5 viewMoreCollegeBtn'>
+                        <button onClick={handleToggleReadMore} className='btn  viewMoreCollegeBtn'>
                             {showMore ? 'Read Less' : 'Read More'}
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </>

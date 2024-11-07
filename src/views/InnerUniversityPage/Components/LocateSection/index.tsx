@@ -10,7 +10,7 @@ function LocationSection({ data }) {
     <>
       <section className='locationSec bg-white pb-5'>
         <div className="container">
-          <h2 className='pt-0 text-center mb-4 text-blue fw-bold'>Locate The University</h2>
+          <h2 className='pt-0 text-center mb-4 text-blue fw-bold'>Locate the University</h2>
           <div className="row px-3">
             <div className="col-md-6 mb-md-0 mb-3 d-flex justify-content-start locatedSec py-5 rounded px-md-5">
               <div className="w-100 card mb-3 bg-lightCard p-3">
@@ -31,7 +31,7 @@ function LocationSection({ data }) {
               <div className='p-2 bg-blue rounded h-100 w-100'>
                 <iframe
                   width="100%"
-                  height="100%"
+                  height="400px"
                   loading="lazy"
                   allowFullScreen
                   src={data.map}

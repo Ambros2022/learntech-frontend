@@ -230,7 +230,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
         <section className='bg-white py-5'>
             <div className="container">
                 <div className="card mb-3 filterCardSec filterscholarship border-1 rounded p-3">
-                    <h4 className='text-blue fw-bold mb-3'>Filter By</h4>
+                    <h2 className='text-blue fw-bold mb-3'>Filter By</h2>
 
                     <div className="d-flex gap-3 flex-wrap">
                         <div className="align-self-center flex-grow-1">
@@ -386,7 +386,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                 </div>
 
                 <div>
-                    <h4 className='fw-bold text-blue mt-4 pt-5'>Select Countries</h4>
+                    <h2 className='fw-bold text-blue mt-4 pt-5'>Select Countries</h2>
                     <div className='position-relative countryCarouselFilter mb-5 pt-3' style={{ zIndex: '2' }}>
                         <TabCarousel activeTab={activeTab} onTabClick={handleTabClick} />
                     </div>
@@ -477,7 +477,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     </div>
                     <div className="col-md-5 col-lg-4 pt-lg-3 pt-2">
                         <div className='border p-3 text-center rounded examAlertSec bg-skyBlue mb-5'>
-                            <h4 className='text-blue fw-bold'>Are you interested in scholarship?</h4>
+                            <h2 className='text-blue fw-bold'>Are you interested in scholarship?</h2>
                             <Image src="/images/icons/Scholarships.png" alt='exam-alert-img' className='img-fluid' width={300} height={300} />
                             {/* <h6 className='text-black mb-3'>Are you interested in scholarship?</h6> */}
                             <div className="d-flex justify-content-center gap-3 flex-wrap">
@@ -494,7 +494,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
 
                             </div>
                         </div>
-                        <h4 className='text-blue fw-bold text-center mb-3'>Most Popular Links</h4>
+                        <h2 className='text-blue fw-bold text-center mb-3'>Most Popular Links</h2>
                         <div className='border p-3 rounded bg-skyBlue'>
                             {abroadData.map((link, index) => (
                                 <div className='d-grid' key={index}>

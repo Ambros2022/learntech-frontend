@@ -76,7 +76,7 @@ function LatestNewsSection() {
     return (
         <section className="latestNewsCon" style={{ backgroundImage: banners[0] ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${process.env.NEXT_PUBLIC_IMG_URL}/${banners[0].image})` : 'none', backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
             <div className="container pt-5">
-                <h3 className="fw-bold text-white text-center">Latest News & Blogs</h3>
+                <h2 className="fw-bold text-white text-center">Latest News & Blogs</h2>
                 <div className="nav-pills justify-content-center pt-3 gap-2 d-flex" role="tablist">
                     <button
                         className={`btn px-4 newsBtn ${activeTab === 'news' ? 'active' : ''}`}

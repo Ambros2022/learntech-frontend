@@ -120,7 +120,7 @@ const LoanCalculator: React.FC = () => {
                 <div className="row p-3 bg-skyBlue rounded mt-3">
                     <div className="col-lg-8 mt-3">
                         <div className='d-flex gap-3 flex-wrap'>
-                            <h4 className='fw-bold text-blue align-self-center'>Loan Amount</h4>
+                            <h3 className='fw-bold text-blue align-self-center'>Loan Amount</h3>
                             <div className='d-flex'>
                                 <div className='input-group'>
                                     <input
@@ -147,7 +147,7 @@ const LoanCalculator: React.FC = () => {
                             />
                         </div>
                         <div className='d-flex gap-3 flex-wrap mt-5'>
-                            <h4 className='fw-bold text-blue align-self-center'>Interest Rate</h4>
+                            <h3 className='fw-bold text-blue align-self-center'>Interest Rate</h3>
                             <div className='d-flex'>
                                 <div className='input-group'>
                                     <input
@@ -175,7 +175,7 @@ const LoanCalculator: React.FC = () => {
                             />
                         </div>
                         <div className='d-flex gap-3 flex-wrap mt-5'>
-                            <h4 className='fw-bold text-blue align-self-center'>Loan Tenure</h4>
+                            <h3 className='fw-bold text-blue align-self-center'>Loan Tenure</h3>
                             <div className='d-flex align-items-center'>
                                 <div className='input-group'>
                                     <input
@@ -218,22 +218,22 @@ const LoanCalculator: React.FC = () => {
                     </div>
                     <div className="col-lg-4 mt-3 text-center">
                         <div className="p-3">
-                            <h4 className='fw-bold text-blue'>EMI Amount</h4>
+                            <h3 className='fw-bold text-blue'>EMI Amount</h3>
                             <h6 className='text-black'>{isNaN(emi) ? '' : formatNumber(emi)} Per Month</h6>
                         </div>
                         <div className="p-3 mt-3">
-                            <h4 className='fw-bold text-blue'>Total Interest</h4>
+                            <h3 className='fw-bold text-blue'>Total Interest</h3>
                             <h6 className='text-black'>{isNaN(totalInterest) ? '' : formatNumber(totalInterest)}</h6>
                         </div>
                         <div className="p-3 mt-3">
-                            <h4 className='fw-bold text-blue'>Payable Amount</h4>
+                            <h3 className='fw-bold text-blue'>Payable Amount</h3>
                             <h6 className='text-black'>{isNaN(payableAmount) ? '' : formatNumber(payableAmount)}</h6>
                         </div>
                         <div className="d-flex mb-3 justify-content-center pieChartDesign">
                             <PieChart loanAmount={loanAmount} totalInterest={totalInterest} />
                         </div>
                     </div>
-                    <h5 className='text-center mt-3'><i className='bi bi-question-circle'></i> Get a detailed breakdown of your total repayment using our comprehensive education loan repayment calculator.</h5>
+                    <h6 className='text-center mt-3'><i className='bi bi-question-circle'></i> Get a detailed breakdown of your total repayment using our comprehensive education loan repayment calculator.</h6>
                 </div>
             </div>
         </section >

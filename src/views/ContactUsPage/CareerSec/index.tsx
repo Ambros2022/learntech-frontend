@@ -21,10 +21,10 @@ const CareerSec = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-xl-6 col-md-6 mb-md-0 mb-3">
-                        <div className='bg-blue p-md-5 p-3 h-100 rounded'>
-                            <h3 className="fw-bold text-white">Connect with Our Expert Advisors</h3>
-                            <h6 className='text-white mb-5'>Fill and submit the form to initiate a conversation with our expert advisors, who will promptly reach out to provide insightful guidance and tailored support for your inquiries.
-                            </h6>
+                        <div className='bg-blue p-md-4 p-3 h-100 rounded'>
+                            <h2 className="fw-bold text-white">Connect with Our Expert Advisors</h2>
+                            <p className='text-white mb-5'>Fill and submit the form to initiate a conversation with our expert advisors, who will promptly reach out to provide insightful guidance and tailored support for your inquiries.
+                            </p>
                             <div className="d-flex mb-3">
                                 <div className='align-self-center'>
                                     <Image src='/images/icons/phoneAbout1R.png' width={30} height={30} alt='phone1' className='img-fluid' />

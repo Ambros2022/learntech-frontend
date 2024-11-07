@@ -9,12 +9,12 @@ const BannerSec = () => {
             <section className='scholarshipSec'>
                 <div className='position-relative scholarShipImg'>
                     <Image src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
-                    <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
-                        <div className="container">
-                            <div className="py-5 text-center">
-                                <h1 className='fw-bold text-white mb-3'>MBBS Abroad For Indian Students: Top Countries, Exams, Admission Process, Requirement</h1>
-                                <GlobalPopupEnquiry className="btn btn-success"/>
-                            </div>
+                    <div className='position-absolute h-100 w-100 d-flex justify-content-center' style={{ top: '0px' }}>
+                        <div className="align-content-center text-center">
+
+                            <h1 className='fw-bold text-white mb-3'> MBBS Abroad For Indian Students. </h1>
+                            <GlobalPopupEnquiry className="btn btn-success" />
+
                         </div>
                     </div>
                 </div>

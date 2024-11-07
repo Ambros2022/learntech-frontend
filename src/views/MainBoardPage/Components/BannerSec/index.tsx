@@ -81,9 +81,9 @@ const BannerSec = () => {
                     <div className="container h-100">
                         <div className="d-flex justify-content-center h-100">
                             <div className="align-content-center h-100">
-                                <h1 className='fw-bold text-white mb-4'>Searching for Boards in India
+                                <h1 className='fw-bold text-white mb-4'>Education Boards in India
                                 </h1>
-                                <div className="row d-flex">
+                                <div className="row d-flex g-3">
                                     <div className="col-md-8 mb-md-0 mb-3 mx-auto">
                                         <Autocomplete
                                             open={open}
@@ -137,17 +137,14 @@ const BannerSec = () => {
                                             )}
                                         />
                                     </div>
-                                    <div className="col-md-4 d-flex">
+                                    <div className="col-md-4 d-flex justify-content-center">
                                         <GlobalEnquiryForm
                                             buttonText="Get Board Details"
                                             className="btn my-auto align-self-center btn-success2"
                                         />
                                     </div>
                                 </div>
-                                <div className='text-end'>
 
-                                    {/* <button className='btn boardBtn'>Get Board Details</button> */}
-                                </div>
                             </div>
                         </div>
                     </div>

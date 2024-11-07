@@ -120,6 +120,41 @@ function CollegeFilterSection() {
         ownership: true,
         courseType: true
     });
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setAccordionOpen({
+                    state: false,
+                    city: false,
+                    streams: false,
+                    courses: false,
+                    ownership: false,
+                    courseType: false
+                });
+            } else {
+                setAccordionOpen({
+                    state: true,
+                    city: true,
+                    streams: true,
+                    courses: true,
+                    ownership: true,
+                    courseType: true
+                });
+            }
+        };
+
+        // Run on initial load
+        handleResize();
+
+        // Add event listener to handle resize
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup on unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
     const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
 
     const { stateId, setStateId, cityId, setCityId } = useAuth();

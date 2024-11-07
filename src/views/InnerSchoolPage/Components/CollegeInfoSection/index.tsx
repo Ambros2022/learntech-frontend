@@ -45,11 +45,11 @@ function CollegeInfoSection({ data }) {
     },
     tablet: {
       breakpoint: { max: 767, min: 425 },
-      items: 1
+      items: 2
     },
     mobile: {
       breakpoint: { max: 424, min: 0 },
-      items: 1
+      items: 2
     }
   };
 
@@ -63,7 +63,7 @@ function CollegeInfoSection({ data }) {
       content: data.schgallery && data.schgallery.length > 0 ? (
         <div className="row">
           {data.schgallery.map((galleryItem, index) => (
-            <div key={index} className="col-6 col-md-4 p-4">
+            <div key={index} className="col-12 col-md-4 p-2 p-md-4">
               <Image
                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${galleryItem.image}`}
                 alt={`Gallery Image ${index + 1}`}
@@ -193,13 +193,13 @@ function CollegeInfoSection({ data }) {
             showDots={false}
             arrows={false}
             infinite
-            autoPlay
+            autoPlay={false}
             autoPlaySpeed={2000}
             ssr // SSR true for server-side rendering
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             responsive={responsive}
-            className="infoBtn gap-3 mx-auto text-center"
+            className="infoBtn gap-3  text-center"
           >
             {renderTabs()}
           </Carousel>

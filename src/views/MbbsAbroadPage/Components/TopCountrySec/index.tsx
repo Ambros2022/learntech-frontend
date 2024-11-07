@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import CategoryCarousel from '../CategoryCarousel'; 
 
 const TopCountrySec = () => {
     const countries = [
@@ -30,7 +31,7 @@ const TopCountrySec = () => {
                                 monuments. The numerous internship opportunities available in the country helps them gain useful
                                 experiences.
                             </p>
-                            <h4 className='text-blue mt-3 fw-bold'>Armenian Medical Institute:</h4>
+                            <h3 className='text-blue mt-3 fw-bold'>Armenian Medical Institute:</h3>
                             <p className='text-black'>
                                 Established in 1990, Armenian Medical Institute is one of the largest universities in Armenia. It ranks
                                 2nd in the entire country and provides a range of facilities. In fact, the University has the 3rd
@@ -91,7 +92,7 @@ const TopCountrySec = () => {
                             <p className='text-black'>
                                 Georgia is known for its mixed European and Asian culture. The country has a beautiful atmosphere and a low crime rate. The top colleges of Georgia charge lower fees when compared to the Indian colleges. The cost of living is also surprisingly low for Indian students.
                             </p>
-                            <h4 className='text-blue mt-3 fw-bold'>Tbilisi State Medical University :</h4>
+                            <h3 className='text-blue mt-3 fw-bold'>Tbilisi State Medical University :</h3>
                             <p className='text-black'>
                                 Tbilisi State Medical University was established in 1918. More than 10,000 students study undergraduate and postgraduate programs provided by the institution. It is ranked at the 8th position among the higher educational institutions in Georgia. Since its establishment, the university has produced around 40,000 doctors.
                             </p>
@@ -124,7 +125,7 @@ const TopCountrySec = () => {
                             </table>
                         </div>
                     </div>
-                    <h4 className='text-blue mt-3 fw-bold'>Caucasus International University :</h4>
+                    <h3 className='text-blue mt-3 fw-bold'>Caucasus International University :</h3>
                     <p className='text-black'>
                         Caucasus International University, established in 1995 attracts many foreign students to the country. Around 4000-5000 students study at the university. Even though it was founded just a few decades ago, it has managed to become one of the top medical institutions in the country.
                     </p>
@@ -155,7 +156,7 @@ const TopCountrySec = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <h4 className='text-blue mt-3 fw-bold'>Georgian American University :</h4>
+                    <h3 className='text-blue mt-3 fw-bold'>Georgian American University :</h3>
                     <p className='text-black'>
                         The Georgian American University, founded in 2005, highly emphasizes on providing quality education. The university ranks among the top 30 universities in the country. It follows the international standards of education. It also has student exchange programs with different leading institutions around the world.
                     </p>
@@ -211,7 +212,7 @@ const TopCountrySec = () => {
                             <p className='text-black'>
                                 The Philippines is another popular destination for higher education among Indian students. The total educational cost for studying in the Philippines is less when compared to India. Moreover, the American teaching format and the American accent used in the colleges and institutes of the country makes it the best place to pursue higher studies for Indians.
                             </p>
-                            <h4 className='text-blue mt-3 fw-bold'>Davao Medical School Foundation :</h4>
+                            <h3 className='text-blue mt-3 fw-bold'>Davao Medical School Foundation :</h3>
                             <p className='text-black'>
                                 Davao Medical School Foundation was established in 1976. The university provides education on primary health care, integral health sciences, and community health care. The University is ranked in the 6th position among the top institutions in the Philippines. It is also affiliated with 7 hospitals to provide maximum practical experience to the students.
                             </p>
@@ -266,7 +267,7 @@ const TopCountrySec = () => {
                             <p className='text-black'>
                                 Russia is a country that continues to create a global impact in modern times. The colleges and universities in Russia are equipped with the latest technologies and facilities. The professors are highly qualified and use advanced teaching methods which enables the students to learn easily and also helps to develop practical experiences. The students who study in Russia develop a sense of self-dependency, responsibility, and determination.
                             </p>
-                            <h4 className='text-blue mt-3 fw-bold'>Tver State Medical University :</h4>
+                            <h3 className='text-blue mt-3 fw-bold'>Tver State Medical University :</h3>
                             <p className='text-black'>
                                 Tver State Medical University is a centre that forms partnerships and collaborates with many other international organizations to bring the best educational experience for students. The history of Tver State Medical University dates back to the year 1902, during which it was established. Since then, it has made a lot of achievements in the fields of education and research.
                             </p>
@@ -324,7 +325,7 @@ const TopCountrySec = () => {
                             <p className='text-black'>
                                 Ukraine has constantly gained popularity among international students for its world-class education facilities in higher education. The cost of living for Indian students is less in Ukraine. The educational environment in the country is also very good as they provide 1 teacher for every 14 students. As a result, each and every student gets equal attention and proper guidance from the professors.
                             </p>
-                            <h4 className='text-blue mt-3 fw-bold'>Bogomolets Kyiv National Medical University :</h4>
+                            <h3 className='text-blue mt-3 fw-bold'>Bogomolets Kyiv National Medical University :</h3>
                             <p className='text-black'>
                                 Bogomolets Kyiv National Medical University was established in 1841. More than 10,000 students receive training at this institution in the medical science field. It is known to be the best medical university in Ukraine.
                             </p>
@@ -356,7 +357,7 @@ const TopCountrySec = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <h4 className='text-blue mt-3 fw-bold'>Lviv National Medical University :</h4>
+                        <h3 className='text-blue mt-3 fw-bold'>Lviv National Medical University :</h3>
                         <p className='text-black'>
                         Lviv National Medical University was founded in 1784. It is ranked among the top 3 universities in the country and has around 22 scientific schools actively functioning. Its library is well known as it has more than 5,30,000 books along with online resources.
                         </p>
@@ -387,7 +388,7 @@ const TopCountrySec = () => {
                                 </tr>
                             </tbody>
                         </table>
-                        <h4 className='text-blue mt-3 fw-bold'>Vinnitsa National Medical University :</h4>
+                        <h3 className='text-blue mt-3 fw-bold'>Vinnitsa National Medical University :</h3>
                         <p className='text-black'>
                         Vinnitsa National Medical University was established in 1921. It was awarded the Order of the Badge of Honour in 1984. It acquired the status of University in 1994, after which it equipped itself with modern teaching facilities. The university has been in the leading position since the past few years, according to the Ministry of Health of Ukraine.
                         </p>
@@ -444,7 +445,7 @@ const TopCountrySec = () => {
                             <p className='text-black'>
                                 Moldova provides the perfect environment for students to study and complete their education in a stress-free manner. Studying and doing an internship in Moldova will provide the students with a unique and unforgettable experience that will be useful in their careers.
                             </p>
-                            <h4 className='text-blue mt-3 fw-bold'>Nicolae Testemitanu State University of Medicine and Pharmacy :</h4>
+                            <h3 className='text-blue mt-3 fw-bold'>Nicolae Testemitanu State University of Medicine and Pharmacy :</h3>
                             <p className='text-black'>
                                 Nicolae Testemitanu State University of Medicine and Pharmacy was established in 1945 and imparts education to more than 6000 students. The university ranks among the top 6000 universities globally. It has a Medical Scientific Library that plays a crucial role in the training and research process of the students. It also has International alliances with many top educational institutions in the world.
                             </p>
@@ -500,7 +501,7 @@ const TopCountrySec = () => {
                             <p className='text-black'>
                                 Uzbekistan is a country located in Central Asia. It has developed into a country with a mix of Soviet-style architecture and ancient Islamic architecture. It is slowly turning into a popular choice for students who want to undertake higher studies in foreign countries. Every year, students from India, Bangladesh, Bhutan, Nepal, Pakistan, and many other countries move to Uzbekistan to pursue their higher studies.
                             </p>
-                            <h4 className='text-blue mt-3 fw-bold'>Tashkent Medical Academy :</h4>
+                            <h3 className='text-blue mt-3 fw-bold'>Tashkent Medical Academy :</h3>
                             <p className='text-black'>
                                 Tashkent Medical Academy was established in 1919. It ensures to train the students as professionals so that they can contribute to the overall development of the healthcare system. The academy has seven specialized scientific councils along with the main research unit called the Central Research Laboratory (CRL).
                             </p>
@@ -540,14 +541,19 @@ const TopCountrySec = () => {
     }
 
     return (
-        <section className='topCountryLinks bg-white pb-5'>
+        <section className='topCountryLinks bg-white pb-3'>
             <div className='container bg-skyBlue rounded mb-3 py-3 px-4'>
                 <h2 className='text-blue text-center py-3 fw-bold mb-3'>Top 7 Countries to Study MBBS Abroad</h2>
-                <ul className='nav nav-pills d-flex gap-3 flex-wrap flex-md-row flex-column' id='pills-tab' role='tablist'>
+                <div className="row ">
+                    <div className="col-12 mbbs px-2">
+                        <CategoryCarousel items={countries} handleTabClick={handleTabClick} activeTab={activeTab} />
+                    </div>
+                </div>
+                {/* <ul className='nav nav-pills d-flex gap-3 flex-wrap flex-md-row flex-column' id='pills-tab' role='tablist'>
                     {countries.map((country, index) => (
                         <li className='nav-item rounded' key={index}>
                             <button
-                                className={`nav-link ${country.name === activeTab ? 'active' : ''}`}
+                                className={` d-flex nav-link ${country.name === activeTab ? 'active' : ''}`}
                                 id={`pills-${country.name}-tab`}
                                 data-bs-toggle='pill'
                                 data-bs-target={`#pills-${country.name}`}
@@ -562,7 +568,7 @@ const TopCountrySec = () => {
                             </button>
                         </li>
                     ))}
-                </ul>
+                </ul> */}
                 <div className='tab-content' id='pills-tabContent'>
                     {countries.map((country, index) => (
                         <div

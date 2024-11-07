@@ -28,11 +28,11 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 767, min: 425 },
-    items: 1
+    items: 2
   },
   mobile: {
     breakpoint: { max: 424, min: 0 },
-    items: 1
+    items: 2
   }
 };
 
@@ -71,7 +71,7 @@ const CollegeInfoSection = ({ data, exams }) => {
       { id: 'reg_form', label: 'Registration Form', content: data.reg_form },
       { id: 'syllabus', label: 'Syllabus', content: data.syllabus },
       { id: 'results', label: 'Results', content: data.results },
-      { id: 'sample_paper', label: 'Sample Papers', content: data.sample_paper && data.sample_paper>0?data.sample_paper:'' },
+      { id: 'sample_paper', label: 'Sample Papers', content: data.sample_paper && data.sample_paper > 0 ? data.sample_paper : '' },
       { id: 'hostel', label: 'Infrastructure', content: data.hostel },
       { id: 'gallery', label: 'Gallery', content: data.clggallery },
       { id: 'review', label: 'Reviews', content: <ReviewSec data={data} /> },
@@ -139,13 +139,14 @@ const CollegeInfoSection = ({ data, exams }) => {
               showDots={false}
               arrows={false}
               infinite
-              autoPlay
+              autoPlay={false}
               autoPlaySpeed={2000}
               ssr
               renderButtonGroupOutside
               customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
               responsive={responsive}
-              className="infoBtn gap-3 mx-auto text-center"
+              className="infoBtn gap-3  text-center"
+
             >
               {renderTabs()}
             </Carousel>
@@ -163,13 +164,13 @@ const CollegeInfoSection = ({ data, exams }) => {
             {activeTab === 'info' ? (
               <>
                 <div className="col-xl-8 col-lg-8 col-md-7 col-12 mx-auto">
-                  <div className="tab-content pt-5" id="nav-tabContent">
+                  <div className="tab-content pt-3" id="nav-tabContent">
                     {renderTabContent()}
                   </div>
                 </div>
                 <div className="col-xl-4 col-lg-4 col-md-5 col-12 mx-auto py-5">
-                  <ContactForm heading={'Contact US'} />
-                  <h4 className='fw-bold text-blue pt-3 mb-3 text-center mt-5'>Upcoming Exams</h4>
+                  <ContactForm heading={'Contact Us'} />
+                  <h2 className='fw-bold text-blue pt-3 mb-3 text-center mt-5'>Upcoming Exams</h2>
                   <div className="col-12 cardConBrdr p-3 overflow-y-auto bg-skyBlue my-3" style={{ maxHeight: 'calc(7 * 90px)' }}>
                     {exams.map((exam, index) => (
                       <Link href={`/exam/${exam.id}/${exam.slug}`} key={index}>

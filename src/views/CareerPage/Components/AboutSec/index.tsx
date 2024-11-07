@@ -4,8 +4,8 @@ const AboutSec = ({data}) => {
 
     return (
         <section className='bg-white '>
-            <div className="container  py-5 rounded">
-                <div className="container px-5">
+            <div className="container  py-3 rounded">
+                <div className="container px-0 px-md-5">
                     <h2 className='text-center text-blue fw-bold mb-3'>About Learntech Edu Solutions Pvt. Ltd.</h2>
                     <div dangerouslySetInnerHTML={{ __html: data?.top_description }} />
                 </div>

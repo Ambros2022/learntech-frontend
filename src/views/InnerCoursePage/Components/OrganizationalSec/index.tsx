@@ -28,7 +28,7 @@ const OrganizationSection = ({data}) => {
     return (
         <>
             {organizationPage && organizationPage !== '' ? (
-                <section className='bg-white pt-5'>
+                <section className='bg-white pt-3'>
                     <div className="container">
                         <h2 className='text-center fw-bold text-blue mb-3'>{organizationPage?.title} {data?.name} Courses</h2>
                         {/* <h2 className='text-center fw-bold text-blue mb-3'>Learntech’s Approach for{organizationPage.title}</h2> */}

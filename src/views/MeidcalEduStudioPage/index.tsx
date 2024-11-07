@@ -63,9 +63,9 @@ const MedicalEduStudioPage = () => {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             <Header />
-            <div ref={bannerSecRef}>
-                <BannerSec />
-            </div>
+            {/* <div ref={bannerSecRef}> */}
+            <BannerSec refview={bannerSecRef} />
+            {/* </div> */}
             <AchieverSec />
             <ProblemSec />
             <HelpSec />

@@ -80,7 +80,7 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
     };
 
     return (
-        <section className='py-5 bg-white'>
+        <section className='py-3 bg-white'>
             <div className="container">
                 <div className="row">
                     <div className="col-md-7 col-lg-8 col-xl-8">
@@ -91,7 +91,7 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
                             </div>
                         )}
                     </div>
-                    <div className="col-md-5 col-lg-4 col-xl-4">
+                    <div className="col-md-5 col-lg-4 col-xl-4 pt-3 pt-md-0">
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
@@ -99,8 +99,8 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
                         >
                             {() => (
                                 <Form className='bg-skyBlue mbbsAbroad rounded p-3'>
-                                    <h4 className='text-blue fw-bold text-center mb-3'>Start Your Medical Journey</h4>
-                                    <h6 className='text-black fw-bold text-center mb-3'>Fill this & help us book a flight for your Successful Medical Career</h6>
+                                    <h2 className='text-blue fw-bold text-center mb-3'>Start Your Medical Journey</h2>
+                                    <p className='text-black fw-bold text-center mb-3'>Fill this & help us book a flight for your Successful Medical Career</p>
                                     <div className="mb-3">
                                         <Field type="text" className='form-control' name='name' placeholder='Full Name*' />
                                         <ErrorMessage name="name" component="div" className="text-danger" />

@@ -35,7 +35,7 @@ interface College {
 
 const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
     return (
-        <div className='col-md-10 col-lg-12 mx-auto mb-3 '>
+        <div className='col-md-10 col-lg-12 mx-auto mb-3 filtercollge-card'>
             <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
                 <div className="p-2">
                     <div className="row d-flex">
@@ -50,7 +50,14 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                     </div>
                                     <div className="card-text text-black">
                                         <p className="mb-3 text-truncate"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i>{`${location}`}</p>
-                                        <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p>
+                                        <p className="mb-3">
+                                            <div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-row'>
+                                                <span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />
+                                                    Est. Year {established}</span><span className='me-auto align-self-center'>
+                                                    <button className='ms-2 mt-md-0 mt-0 mt-md-3 btn typeBtn'>{type}</button>
+                                                </span>
+                                            </div>
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
@@ -118,6 +125,41 @@ function CollegeFilterSection() {
         ownership: true,
         courseType: true
     });
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setAccordionOpen({
+                    state: false,
+                    city: false,
+                    streams: false,
+                    courses: false,
+                    ownership: false,
+                    courseType: false
+                });
+            } else {
+                setAccordionOpen({
+                    state: true,
+                    city: true,
+                    streams: true,
+                    courses: true,
+                    ownership: true,
+                    courseType: true
+                });
+            }
+        };
+
+        // Run on initial load
+        handleResize();
+
+        // Add event listener to handle resize
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup on unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
     const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
 
     const { stateId, setStateId, cityId, setCityId, streamId, setStreamId } = useAuth();
@@ -368,7 +410,7 @@ function CollegeFilterSection() {
             }
         }));
 
-        
+
     };
 
     useEffect(() => {
@@ -398,7 +440,7 @@ function CollegeFilterSection() {
             }));
             setStreamId(null)
         }
-        
+
         if (cityId) {
             let text = cityId.toString();
             debouncedHandleCheckboxChange("city", text, true);
@@ -516,13 +558,7 @@ function CollegeFilterSection() {
                 debouncedHandleCheckboxChange("state", state, true);
                 window.scrollTo({ top: 650, behavior: 'smooth' });
 
-                // setCheckboxState(prevState => ({
-                //     ...prevState,
-                //     [groupId]: {
-                //         ...prevState[groupId],
-                //         [value]: isChecked
-                //     }
-                // }));
+
                 setCheckboxState(prevState => ({
                     ...prevState,
                     ["state"]: {
@@ -530,17 +566,7 @@ function CollegeFilterSection() {
                         [state]: true
                     }
                 }));
-                // setSelectedCheckboxes(prevSelected => {
-                //     const stateSelections = prevSelected.state || [];
-                //     const updatedSelections = stateSelections.includes(state)
-                //         ? stateSelections.filter(s => s !== state)
-                //         : [...stateSelections, state];
 
-                //     const updatedSelected = { ...prevSelected, state: updatedSelections };
-                //     // Call the API with the selected state IDs
-                //     getcollegedata(updatedSelected.state);
-                //     return updatedSelected;
-                // });
             };
 
             return (

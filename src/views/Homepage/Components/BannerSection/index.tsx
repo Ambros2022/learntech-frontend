@@ -227,7 +227,7 @@ function BannerSection() {
               </div>
               <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '40' }}>
                 <div className="searchForm">
-                  <h5 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h5>
+                  <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
                   <Formik
                     initialValues={{
                       name: '',

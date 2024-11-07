@@ -78,7 +78,7 @@ function ExploreSection() {
 
   return (
     <section className="exploreCon" id="animation6" data-aos="fade-up">
-      <div className="container py-5">
+      <div className="container  py-4 py-md-5">
         <h2 className="fw-bold text-blue text-center mb-3">
           Discover Colleges, Courses and Exams that Matches with Your Aspirations
         </h2>

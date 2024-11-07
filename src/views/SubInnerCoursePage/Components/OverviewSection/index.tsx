@@ -12,8 +12,8 @@ const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/Globa
 const responsive = {
   superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 5 },
   desktop: { breakpoint: { max: 1024, min: 768 }, items: 4 },
-  tablet: { breakpoint: { max: 767, min: 425 }, items: 1 },
-  mobile: { breakpoint: { max: 424, min: 0 }, items: 1 }
+  tablet: { breakpoint: { max: 767, min: 425 }, items: 2 },
+  mobile: { breakpoint: { max: 424, min: 0 }, items: 2 }
 };
 
 const ButtonGroup = ({ next, previous }) => (
@@ -111,13 +111,15 @@ function OverviewSection({ data, colleges, exams }) {
             showDots={false}
             arrows={false}
             infinite
-            autoPlay
+            autoPlay={false}
             autoPlaySpeed={2000}
             ssr
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             responsive={responsive}
-            className="infoBtn gap-3 mx-auto text-center"
+            // className="infoBtn gap-3 mx-auto text-center"
+            className="infoBtn gap-3  text-center"
+
           >
             {renderTabs()}
           </Carousel>

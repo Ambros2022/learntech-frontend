@@ -51,7 +51,7 @@ const ExperTraineeSec = ({ data }) => {
                 </div>
                 <hr className='text-blue' />
                 <div className='px-3'>
-                    <h6 className='fw-light'>Trainer Since</h6>
+                    <h6 className='fw-light'>Counsellor Since</h6>
                     <h6 className='fw-light'>{format(new Date(trainee.experience), 'dd-MMM-yyyy')}</h6>
                     <button className='btn mb-4 text-blue trainingBtn'>
                         <small>{trainee.description}</small>
@@ -68,7 +68,7 @@ const ExperTraineeSec = ({ data }) => {
                 traineer && traineer.length !== 0 ? (
                     <section className='bg-light py-md-5 py-3'>
                         <div className="container">
-                            <h2 className='text-center fw-bold text-blue'>
+                            <h2 className='text-center fw-bold text-blue pb-3'>
                                 We have Educational Experts to Provide Guidance for  {data?.exam_short_name} Exam
                             </h2>
                             <p className="text-black">

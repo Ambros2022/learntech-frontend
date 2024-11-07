@@ -10,9 +10,9 @@ const Overview = () => {
                         <div className="col-md-4 col-xl-2 col-lg-3 d-flex flex-column aboutUsSec">
                             <div className="d-flex align-items-start">
                                 <div className="nav flex-column gap-3 nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <button className="nav-link active" id="v-pills-who-we-are-tab" data-bs-toggle="pill" data-bs-target="#v-pills-who-we-are" type="button" role="tab" aria-controls="v-pills-who-we-are" aria-selected="true">WHO WE ARE</button>
-                                    <button className="nav-link" id="v-pills-our-mission-tab" data-bs-toggle="pill" data-bs-target="#v-pills-our-mission" type="button" role="tab" aria-controls="v-pills-our-mission" aria-selected="false">OUR MISSION</button>
-                                    <button className="nav-link" id="v-pills-our-vision-tab" data-bs-toggle="pill" data-bs-target="#v-pills-our-vision" type="button" role="tab" aria-controls="v-pills-our-vision" aria-selected="false">OUR VISION</button>
+                                    <button className="nav-link active" id="v-pills-who-we-are-tab" data-bs-toggle="pill" data-bs-target="#v-pills-who-we-are" type="button" role="tab" aria-controls="v-pills-who-we-are" aria-selected="true">Who We Are</button>
+                                    <button className="nav-link" id="v-pills-our-mission-tab" data-bs-toggle="pill" data-bs-target="#v-pills-our-mission" type="button" role="tab" aria-controls="v-pills-our-mission" aria-selected="false">Our Mission</button>
+                                    <button className="nav-link" id="v-pills-our-vision-tab" data-bs-toggle="pill" data-bs-target="#v-pills-our-vision" type="button" role="tab" aria-controls="v-pills-our-vision" aria-selected="false">Our Vision</button>
                                     <button className="nav-link" id="v-pills-what-do-we-offer-tab" data-bs-toggle="pill" data-bs-target="#v-pills-what-do-we-offer" type="button" role="tab" aria-controls="v-pills-what-do-we-offer" aria-selected="false">What Do We Offer?</button>
                                     <button className="nav-link" id="v-pills-why-choose-us-tab" data-bs-toggle="pill" data-bs-target="#v-pills-why-choose-us" type="button" role="tab" aria-controls="v-pills-why-choose-us" aria-selected="false">Why Choose Us?</button>
                                 </div>
@@ -49,8 +49,8 @@ const Overview = () => {
                                     <p className="text-black">
                                         As an educational service provider, we offer numerous services for students and the institutes we work with. We strive to find the best feasible fit for our students while also taking into consideration their personal objectives and career goals.
                                     </p>
-                                    <h5 className='fw-bold text-black'>For Students:
-                                    </h5>
+                                    <h2 className='fw-bold text-black'>For Students:
+                                    </h2>
 
                                     <table className="table table-responsive table-bordered">
                                         <tbody className="text-center">
@@ -109,8 +109,8 @@ const Overview = () => {
 
 
 
-                                    <h5 className='fw-bold text-black'>For Colleges and Universities:
-                                    </h5>
+                                    <h2 className='fw-bold text-black'>For Colleges and Universities:
+                                    </h2>
                                     <div className="table-responsive">
                                         <table className="table table-responsive table-bordered">
                                             <tbody className="text-center">
@@ -149,7 +149,7 @@ const Overview = () => {
                                                 </tr>
                                             </tbody>
                                         </table>
-                                       
+
                                     </div>
                                 </div>
                                 <div className="tab-pane fade" id="v-pills-why-choose-us" role="tabpanel" aria-labelledby="v-pills-why-choose-us-tab">

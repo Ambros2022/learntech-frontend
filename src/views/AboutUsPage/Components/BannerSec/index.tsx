@@ -28,7 +28,7 @@ const BannerSec = () => {
     }, [getbanner]);
     return (
         <>
-            <section className='scholarshipSec aboutUsPageSec position-relative'>
+            <section className=' aboutUsPageSec position-relative d-flex justify-content-center ' >
                 {banners.map((banner, index) => (
                     <a href={banner.link}>
                         <Image
@@ -36,11 +36,11 @@ const BannerSec = () => {
                             src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                             priority={true}
                             alt={`Banner-img`}
-                            className="w-100"
+                            className="banner-image-about"
                         />
                     </a>
                 ))}
-                <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
+                <div className='position-absolute w-100 h-100 d-flex justify-content-center AdvertiseBanner' style={{ top: '0px' }}>
                     <div className="container d-flex justify-content-center h-100 w-100">
                         <div className="align-content-center">
                             <div className="py-5 text-center">

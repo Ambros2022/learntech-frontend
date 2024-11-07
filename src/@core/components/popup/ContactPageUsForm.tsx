@@ -73,8 +73,8 @@ const contact_numberPageUsForm: FC<Props> = ({ page, ...rest }) => {
         >
             {({ errors, touched }) => (
                 <Form className='bg-skyBlue mbbsAbroad rounded p-3'>
-                    <h4 className='text-blue fw-bold text-center mb-3'>Contact for Personalized Support!
-                    </h4>
+                    <h2 className='text-blue fw-bold text-center mb-3'>Contact for Personalized Support!
+                    </h2>
                     <div className="mb-3">
                         <Field type="text" className='form-control' name='name' placeholder='Full Name*' />
                         {errors.name && touched.name ? <div className="text-danger">{errors.name}</div> : null}

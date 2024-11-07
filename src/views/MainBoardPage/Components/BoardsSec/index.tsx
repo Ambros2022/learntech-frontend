@@ -18,13 +18,19 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
         <>
             <section className='py-md-5 py-3 bg-white browseNews'>
                 <div className="container">
-                    <div className="d-flex justify-content-center newsTabsClr gap-3 mx-5 flex-wrap flex-row">
+                    <div className="d-flex justify-content-center newsTabsClr gap-3  flex-wrap">
                         {['all', 'state', 'national', 'international'].map(tabName => (
-                            <button key={tabName} className={`btn bg-skyBlue hover-card ${activeTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>
+                            <button
+                                key={tabName}
+                                className={`btn bg-skyBlue hover-card ${activeTab === tabName ? 'active' : ''} tab-button`}
+                                onClick={() => handleTabClick(tabName)}
+                            >
                                 {tabName.charAt(0).toUpperCase() + tabName.slice(1) + ' Boards'}
                             </button>
                         ))}
                     </div>
+
+
                     <div className='row mb-3 mt-5'>
                         <div className="col-12">
                             <div className="tab-content" id="pills-tabContent">

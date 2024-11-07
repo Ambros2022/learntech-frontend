@@ -34,7 +34,7 @@ const ImportantSec = () => {
     }, [getTagsdata]);
 
     return (
-        <section className='bg-white py-5'>
+        <section className='bg-white py-3'>
             <div className="container">
                 <h2 className='fw-bold text-blue mb-3'>Important Tags</h2>
                 <div className="d-flex gap-3 flex-wrap studyAbroadLink">
