@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
+    const isMobileView = () => {
+        if (typeof window !== 'undefined') {
+            return window.innerWidth >= 320 && window.innerWidth <= 767;
+        }
+        return false;
+    };
+    const [isMobile, setIsMobile] = useState(isMobileView());
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 1023 },
-            items: 6
+            items: 7
         },
         desktop: {
             breakpoint: { max: 1024, min: 1024 },
@@ -37,30 +44,37 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
     };
 
     return (
-        <Carousel
+           <Carousel
             swipeable
             draggable
             showDots={false}
             arrows={false}
             infinite
             ssr  // SSR true for server-side rendering
+            autoPlay={isMobile ? true : false}
+            autoPlaySpeed={2000}
             responsive={responsive}
             renderButtonGroupOutside
-            customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
+            customButtonGroup={isMobile ? <ButtonGroup next={undefined} previous={undefined} /> : null}
             containerClass='carousel-containerCategory mx-auto'
         >
-            {items.map((item) => (
+            {items.map((country) => (
                 <div className="examSecItems d-flex justify-content-center text-center mx-2 mb-3">
                     <button
-                        className={`text-truncate categoryTextHide btn nav-link ${activeTab === item.id ? 'active' : ''}`}
-                        id={`pills-${item}-tab`}
-                        type="button"
-                        onClick={() => handleTabClick(item.id)}
-                        key={item.id}
-                        style={{ zIndex: '20', fontSize: '14px' }}
+                        className={`nav-link ${country.name === activeTab ? 'active' : ''}`}
+                        id={`pills-${country.name}-tab`}
+                        data-bs-toggle='pill'
+                        data-bs-target={`#pills-${country.name}`}
+                        type='button'
+                        role='tab'
+                        aria-controls={`pills-${country.name}`}
+                        aria-selected={country.name === activeTab ? 'true' : 'false'}
+                        onClick={() => handleTabClick(country.name)}
                     >
-                        {item.title}
+                        <img src={country.flag} width={30} height={30} alt={`${country.name}-flag`} className='me-2 rounded' />
+                        {country.name}
                     </button>
+
                 </div>
             ))}
         </Carousel>

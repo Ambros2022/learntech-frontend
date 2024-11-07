@@ -14,8 +14,8 @@ const isMobileView = () => typeof window !== 'undefined' && window.innerWidth >=
 const responsive = {
   superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 5 },
   desktop: { breakpoint: { max: 1024, min: 768 }, items: 4 },
-  tablet: { breakpoint: { max: 767, min: 425 }, items: 1 },
-  mobile: { breakpoint: { max: 424, min: 0 }, items: 1 }
+  tablet: { breakpoint: { max: 767, min: 425 }, items: 2 },
+  mobile: { breakpoint: { max: 424, min: 0 }, items: 2 }
 };
 
 const ButtonGroup = ({ next, previous }) => (
@@ -97,7 +97,7 @@ function OverviewSection({ data, collegedata, examdata }) {
   ));
 
   return (
-    <section className='clgInfoSec innerCourseCarosuel bg-white'>
+    <section className='clgInfoSec innerClgCarousel bg-white'>
       <div className="container position-relative">
         {isMobile ? (
           <Carousel
@@ -106,13 +106,14 @@ function OverviewSection({ data, collegedata, examdata }) {
             showDots={false}
             arrows={false}
             infinite
-            autoPlay
+            autoPlay={false}
             autoPlaySpeed={2000}
             ssr
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             responsive={responsive}
-            className="infoBtn gap-3 mx-auto text-center"
+            // className="infoBtn gap-3 mx-auto text-center"
+               className="infoBtn gap-3  text-center"
           >
             {renderTabs()}
           </Carousel>
@@ -124,7 +125,7 @@ function OverviewSection({ data, collegedata, examdata }) {
 
         <div className="row">
           <div className="col-md-8 col-lg-9 pe-md-5">
-            <div className="tab-content pt-5" id="nav-tabContent">
+            <div className="tab-content pt-3" id="nav-tabContent">
               {renderTabContent()}
             </div>
           </div>
@@ -140,7 +141,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                     alt={`${data.name}-course-img`}
                   />
                   <h6 className='text-center mb-3'>Are you interested in this course?</h6>
-                  <GlobalEnquiryForm className="mb-3 btn chkEligBtn" buttonText="Check Eligibility" />
+                  <GlobalEnquiryForm className="mb-3  chkEligBtn" buttonText="Check Eligibility" />
                 </div>
               </div>
               {collegedata && collegedata.length > 0 && (

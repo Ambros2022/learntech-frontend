@@ -13,7 +13,7 @@ function BannerSection({ data }) {
             <div className="row px-5 px-md-0 d-flex">
               <div className="align-content-center col-md-2 p-2 col-lg-1 col-6 mx-md-0 mb-md-0 mb-3 mx-auto bg-white rounded d-flex justify-content-center">
                 <div className="align-content-center">
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={200} height={200} alt={data.name} />
+                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={100} height={100} alt={data.name} />
                 </div>
               </div>
               <div className="align-content-center my-auto gap-2 col-md-10 col-lg-11 col-12 flex-column d-flex">
@@ -24,7 +24,7 @@ function BannerSection({ data }) {
                 </div>
                 <div className="align-content-center row ps-lg-3 ps-md-2 text-md-start text-center">
                   <div className="col-12">
-                    <GlobalEnquiryForm className="btn innerApplyBtn" />
+                    <GlobalEnquiryForm className="btn btn-success" />
                   </div>
                 </div>
               </div>

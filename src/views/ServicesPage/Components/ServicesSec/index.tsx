@@ -39,9 +39,9 @@ const ServicesSec = () => {
                             </div>
                         </div>
                         <div className="col-md-6 col-xl-5 col-10 mx-auto h-100 col-lg-5 border rounded px-xl-5 px-lg-4 col-10 mx-md-0 me-auto">
-                            <h4 className='pt-3 mb-3 fw-bold text-blue text-center'>
+                            <h2 className='pt-3 mb-3 fw-bold text-blue text-center'>
                                 Interested in Our Services?
-                            </h4>
+                            </h2>
                             <SideContactUsFormfrom />
                             {/* <form onSubmit={formik.handleSubmit}>
                                 <div className="mb-3 row">

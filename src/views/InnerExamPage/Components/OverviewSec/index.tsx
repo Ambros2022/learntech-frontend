@@ -50,16 +50,6 @@ function OverviewSec({ data }) {
     }
   };
 
-  const ButtonGroup = ({ next, previous }) => (
-    <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
-      <span className='fi-left' onClick={previous}>
-        <FiChevronLeft />
-      </span>
-      <span className='fi-right' onClick={next}>
-        <FiChevronRight />
-      </span>
-    </div>
-  );
 
 
   const items = [
@@ -222,29 +212,7 @@ function OverviewSec({ data }) {
       <div className="container">
         <div className='carouselInnerCourse position-relative' style={{ zIndex: '2' }}>
           <CustomCarousel items={items} setActiveTab={setActiveTab} />
-          {/* <div className="container position-relative innerClgCarousel"> */}
-            {/* {isMobile ? (
-            <Carousel
-              swipeable
-              draggable
-              showDots={false}
-              arrows={false}
-              infinite
-              autoPlay
-              autoPlaySpeed={2000}
-              ssr // SSR true for server-side rendering
-              renderButtonGroupOutside
-              customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
-              responsive={responsive}
-              className="infoBtn gap-3 mx-auto text-center"
-            >
-              {renderTabs()}
-            </Carousel>
-          ) : ( */}
-            {/* <div className="text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3" id="nav-tab" role="tablist">
-              {renderTabs()}
-            </div> */}
-            {/* )} */}
+        
 
             <div className="row">
               <div className="col-md-8 text-black pt-3">
@@ -265,7 +233,7 @@ function OverviewSec({ data }) {
 
               <div className="col-md-4 mb-md-5 fixed-column pt-5">
                 <div className='bg-skyBlue px-lg-5 px-3  mb-5 rounded'>
-                  <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h4>
+                  <h2 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h2>
                   <SideContactUsForm />
                 </div>
                 <NewsList newsItems={newsData} />

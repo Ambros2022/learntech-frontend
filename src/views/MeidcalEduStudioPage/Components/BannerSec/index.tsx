@@ -1,7 +1,8 @@
 import React from 'react';
 import EnquiryFormMed from 'src/@core/components/popup/EnquiryFormMed';
 
-const BannerSec = () => {
+const BannerSec = (refview) => {
+    console.log("refview",refview);
     return (
         <section className='medSec position-relative'>
             <video src="/videos/bannerMeds.webm" muted autoPlay loop></video>
@@ -26,8 +27,8 @@ const BannerSec = () => {
                             </h5>
                         </div>
                         <div className="col-lg-4 col-md-5 col-10 mx-auto align-self-center bg-skyBlue rounded p-3">
-                            <h4 className='fw-bold text-blue text-center mb-3'></h4>
-                            <EnquiryFormMed heading='Grab Your Opportunity !'/>
+                            <h4 className='fw-bold text-blue text-center mb-3' ref={refview?.refview}></h4>
+                            <EnquiryFormMed heading='Grab Your Opportunity !' />
                         </div>
                     </div>
                 </div>

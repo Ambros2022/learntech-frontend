@@ -53,7 +53,7 @@ const BestSec = ({ data = {} }: { data?: { meta_title?: string, top_description?
                                 </div>
                             )}
                         </div>
-                        <div className="col-lg-4 col-md-5 mx-auto">
+                        <div className="col-lg-4 pt-4 pt-md-0 col-md-5 mx-auto">
                             <ContactForm heading={'Contact Us'} />
                         </div>
                     </div>

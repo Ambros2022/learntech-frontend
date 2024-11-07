@@ -7,7 +7,7 @@ const ContactForm = ({ heading }) => {
 
     return (
         <div className='bg-skyBlue px-lg-5 px-3 rounded'>
-            <h4 className='fw-bold text-blue text-center pt-3 mb-3'>{heading}</h4>
+            <h2 className='fw-bold text-blue text-center pt-3 mb-3'>{heading}</h2>
             <SideContactUsForm />
         </div>
     )

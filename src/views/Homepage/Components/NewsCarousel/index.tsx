@@ -43,7 +43,7 @@ const NewsCarousel = ({ items }) => {
             showDots={false}
             arrows={false}
             infinite
-            autoPlay
+            autoPlay={false}
             autoPlaySpeed={1500}
             ssr  // SSR true for server-side rendering
             responsive={responsive}

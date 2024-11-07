@@ -9,7 +9,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
     const [imagesLoaded, setImagesLoaded] = useState(false);
     const [banners, setBanners] = useState<any[]>([]);
     const [isExpanded, setIsExpanded] = useState(false); // State to handle the read more functionality
-    const maxLength = 27000; // Adjust this value to control when "Read More" appears
+    const maxLength = 35600; // Adjust this value to control when "Read More" appears
 
     const toggleReadMore = () => {
         setIsExpanded(!isExpanded);
@@ -76,9 +76,9 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
                                 </div>
                             )}
                         </div>
-                        <div className="col-xl-4 col-lg-4 col-md-5">
+                        <div className="col-xl-4 col-lg-4 pt-4  pt-md-0 col-md-5 nri-h2">
                             <ContactForm heading={'Expert Guidance for Securing NRI Quota Seats'} />
-                            <h4 className='pt-5 fw-bold text-blue text-center mb-3'>Top Trending Courses</h4>
+                            <h2 className='pt-5 fw-bold text-blue text-center mb-3 '>Top Trending Courses</h2>
                             <div className='p-3 border mt-3 rounded bg-skyBlue'>
                                 <div className='overflow-y-auto' style={{ maxHeight: 'calc(7 * 100px)' }}>
                                     {courses.map(course => (

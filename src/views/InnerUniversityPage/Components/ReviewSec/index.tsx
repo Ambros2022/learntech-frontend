@@ -297,7 +297,7 @@ const ReviewSec = ({ data }) => {
                                             <h4 className='fw-bold text-blue'>{review.name}</h4>
                                         </div>
                                         <div className='align-self-center'>
-                                            <h6 className='text-blue'><span><i className="bi bi-patch-check-fill text-success"></i></span> Verified</h6>
+                                            <h6 className='text-blue pb-3 pb-md-0'><span><i className="bi bi-patch-check-fill text-success"></i></span> Verified</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -328,7 +328,7 @@ const ReviewSec = ({ data }) => {
                                         {review.content}
                                     </p>
                                 </div>
-                                <div className="d-flex flex-wrap">
+                                <div className="d-flex ">
                                     {/* <button className='btn text-blue click-like' onClick={() => handleLikeClick(review.id)}><i className="bi bi-hand-thumbs-up"></i> {review.likes}</button> */}
                                     <button className='btn text-blue' onClick={() => handleLikeClick(review.id)}>
                                         <i className={`bi ${likedReviews.includes(review.id) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i> {review.likes}

@@ -46,7 +46,7 @@ const InfoSec = ({ data }) => {
     return (
         <section className='bg-white'>
             <div className="container innerNewsSec">
-                <div className="row py-5">
+                <div className="row pt-3 pb-0">
                     <div className="col-md-9 mb-3">
                         <h1 className='text-blue fw-bold'>{data.meta_title}</h1>
                     </div>
@@ -58,7 +58,7 @@ const InfoSec = ({ data }) => {
                         </div>
                     )}
                 </div>
-                <div className='pt-3'>
+                <div className='pt-0'>
                     <div className="row">
                         <div className="col-md-8 text-black">
                             <p>

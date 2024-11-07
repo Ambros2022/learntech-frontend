@@ -4,7 +4,7 @@ import axios1 from 'src/configs/axios';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import CountryCarosuel from './CountryCarousel/indes';
-
+import { Spinner } from 'react-bootstrap';
 const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
 
 const StudyAbroadSection = () => {
@@ -104,33 +104,41 @@ const StudyAbroadSection = () => {
 
   return (
     <section className="StudyAbroadCon bg-white" id="animation7" data-aos="fade-up">
-      <div className="container pt-5">
+      <div className="container pt-4 pt-md-5">
         <h2 className="fw-bold text-blue text-center">Study Abroad</h2>
         <p className="text-black mt-3">
           Studying abroad offers transformative advantages that can redefine your academic and professional trajectory. Immersing yourself in a new cultural and academic environment sharpens critical thinking and problem-solving skills by challenging you to adapt and thrive in unfamiliar settings. This experience cultivates a global mindset, essential for understanding diverse perspectives and approaches, which is increasingly valued in a globalized job market.
         </p>
 
-        {/* {showMore && ( */}
-          <p className="text-black">
-            Beyond cultural enrichment, studying at prestigious international universities grants access to cutting-edge research, state-of-the-art facilities, and innovative teaching methodologies that provide a distinct edge in your field. These institutions are often at the forefront of technological advancements and global discourse, offering tools and insights to empower you as a future leader. Explore your options and find the universities that will enable you to shape the future with a truly global perspective.
-          </p>
-        {/* )} */}
+        <p className="text-black">
+          Beyond cultural enrichment, studying at prestigious international universities grants access to cutting-edge research, state-of-the-art facilities, and innovative teaching methodologies that provide a distinct edge in your field. These institutions are often at the forefront of technological advancements and global discourse, offering tools and insights to empower you as a future leader. Explore your options and find the universities that will enable you to shape the future with a truly global perspective.
+        </p>
 
-        {/* <div className='text-center'>
-          <button onClick={() => setShowMore(!showMore)} className="btn viewMoreCollegeBtn mb-3">
-            {showMore ? 'Read Less' : 'Read More'}
-          </button>
-        </div> */}
 
         <div className="studyAbroadNav position-relative py-4 px-5 rounded" style={{ zIndex: '2' }}>
           <CountryCarosuel items={renderButtons()} />
         </div>
-        <div className='pt-3 position-relative ' id="studyCardContainer">
-          <MainCarousel items={renderCards()} />
-          <div className="d-flex justify-content-center pb-5">
-            <Link href='/study-in-usa' className='btn viewMoreClgBtn'>Load More</Link>
+        {cardData.length > 0 ? (
+          <div className='pt-3 position-relative' id="studyCardContainer">
+            <MainCarousel items={renderCards()} />
+            <div className="d-flex justify-content-center pb-5">
+              <Link href='/study-in-usa' className='btn viewMoreClgBtn'>Load More</Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="text-center">
+            {cardData.length === 0 ? (
+              <div className="text-center">
+                <p>No items available</p>
+              </div>
+            ) : (
+              <div className="text-center">
+                <Spinner animation="border" />
+                <p>Loading...</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

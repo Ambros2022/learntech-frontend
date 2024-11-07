@@ -45,11 +45,11 @@ function CollegeInfoSection({ data }) {
     },
     tablet: {
       breakpoint: { max: 767, min: 425 },
-      items: 1
+      items: 2
     },
     mobile: {
       breakpoint: { max: 424, min: 0 },
-      items: 1
+      items: 2
     }
   };
 
@@ -190,7 +190,8 @@ function CollegeInfoSection({ data }) {
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             responsive={responsive}
-            className="infoBtn gap-3 mx-auto text-center"
+            className="infoBtn gap-3  text-center"
+            // className="infoBtn gap-3 mx-auto text-center"
           >
             {renderTabs()}
           </Carousel>

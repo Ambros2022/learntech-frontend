@@ -73,7 +73,7 @@ const LeaderSec = () => {
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-9 col-xl-9 text-md-start text-center">
-                            <h4 className='text-blue fw-bold pt-md-0 pt-2'>MANSOOR ALI</h4>
+                            <h3 className='text-blue fw-bold pt-md-0 pt-2'>MANSOOR ALI</h3>
                             <p className="text-black">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi dolores aut libero aperiam ullam vero optio cum maxime fugit magni rerum consectetur, excepturi qui iste velit repudiandae nam! Ratione qui ea perspiciatis quia quaerat mollitia exercitationem porro sit eveniet accusantium obcaecati maxime, accusamus quo voluptate corrupti similique eum. Quam quo aut, mollitia, ipsum fuga ex quidem eum nisi praesentium natus magnam neque quae maiores dolores, veniam recusandae dolorum autem sunt cupiditate ratione minus voluptatibus iure fugit delectus. Numquam fuga illum odit magnam, quaerat nesciunt vero? Laborum quidem minus, ipsum recusandae dolores alias vitae. Aut veniam impedit nostrum accusantium reprehenderit incidunt.
                             </p>
@@ -96,8 +96,8 @@ const LeaderSec = () => {
                                     <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${user.image}`} width={400} height={400} className='img-fluid rounded' alt='user-img' />
                                 </div>
                                 <div className="card-body">
-                                    <h4 className='fw-bold text-black'>{user.name}</h4>
-                                    <h6 className='text-black'>{user.designation}</h6>
+                                    <h3 className='fw-bold text-black'>{user.name}</h3>
+                                    <h4 className='text-black'>{user.designation}</h4>
                                     <div className='text-end'>
                                         <a href={user.linked_in_link} target="_blank" rel="noopener noreferrer">
                                             <i className='text-blue bi bi-linkedin fsize-1 zoom-effect'></i>

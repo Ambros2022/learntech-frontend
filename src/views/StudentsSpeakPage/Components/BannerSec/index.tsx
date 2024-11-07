@@ -52,7 +52,7 @@ const BannerSec = ({ handleSearchQuery }) => {
                             <div className="card d-flex justify-content-center w-100 h-100 bg-transparent border-0">
                                 <div className="align-content-center h-100">
                                     <h1 className='fw-bold text-white text-center'>Success Stories of Learntech Edu Solutions Pvt. Ltd.</h1>
-                                    <div className="row">
+                                    <div className="row ">
                                         <div className="col-12 w-100 text-center mb-3">
                                             <TextField
                                                 placeholder="Search"
@@ -67,7 +67,7 @@ const BannerSec = ({ handleSearchQuery }) => {
                                                     ),
                                                     sx: {
                                                         backgroundColor: 'white',
-                                                        width: '400px',
+                                                        width: '300px',
                                                         color: 'black',
                                                         '& .MuiInputBase-input::placeholder': {
                                                             color: 'black',

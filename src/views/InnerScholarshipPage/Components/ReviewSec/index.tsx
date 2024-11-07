@@ -74,7 +74,7 @@ const ReviewSec = () => {
                                         <h4 className='fw-bold text-blue'>Ashish Gaidhane</h4>
                                     </div>
                                     <div className='align-self-center'>
-                                        <h6 className='text-blue'><span><i className="bi bi-patch-check-fill text-warning"></i></span> Verified</h6>
+                                        <h6 className='text-blue pb-3 pb-md-0'><span><i className="bi bi-patch-check-fill text-warning"></i></span> Verified</h6>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@ const ReviewSec = () => {
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam explicabo similique sit iure dignissimos cum architecto asperiores dolorem quo saepe.
                                 </p>
                             </div>
-                            <div className="d-flex flex-wrap">
+                            <div className="d-flex ">
                                 <button className='btn text-blue'><i className="bi bi-hand-thumbs-up"></i> 03</button>
                                 <button className='btn text-blue'><i className="bi bi-hand-thumbs-down"></i> 03</button>
                                 <button className='btn text-blue'><i className="bi bi-flag"></i> Report</button>

@@ -34,7 +34,7 @@ function BannerSec({ data }: any) {
         cancelToken.cancel("Operation canceled due to new request.");
       }
       cancelToken = axios1.CancelToken.source();
-      const response = await axios.get('api/website/search/course', {
+      const response = await axios.get('/api/website/courses/get', {
         cancelToken: cancelToken.token,
         params: {
           searchfrom: "name,general_courses.short_name,general_courses.name",

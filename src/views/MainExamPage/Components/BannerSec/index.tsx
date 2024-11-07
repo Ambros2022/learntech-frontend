@@ -147,7 +147,7 @@ function BannerSection() {
                   </div>
                 </div>
                 <div className="row text-white text-md-start text-center pt-3 mb-3">
-                  <h4>Upcoming Entrance Exams</h4>
+                  <h2>Upcoming Entrance Exams</h2>
                 </div>
                 <PopularCourses />
                 <div className='text-md-end text-center pt-5'>

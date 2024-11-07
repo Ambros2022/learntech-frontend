@@ -10,7 +10,7 @@ import { Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 import Fade from '@mui/material/Fade'; // Import Fade transition
 
-const ExperTraineeSec = ({data}) => {
+const ExperTraineeSec = ({ data }) => {
     const [traineer, setTraineer] = useState<any>();
     const [selectedTraineer, setSelectedTraineer] = useState<any>(null); // State for selected trainee details
     const [modalOpen, setModalOpen] = useState(false); // State for modal control
@@ -51,7 +51,7 @@ const ExperTraineeSec = ({data}) => {
                 </div>
                 <hr className='text-blue' />
                 <div className='px-3'>
-                    <h6 className='fw-light'>Trainer Since</h6>
+                    <h6 className='fw-light'>Counsellor Since</h6>
                     <h6 className='fw-light'>{format(new Date(trainee.experience), 'dd-MMM-yyyy')}</h6>
                     <button className='btn mb-4 text-blue trainingBtn'>
                         <small>{trainee.description}</small>
@@ -68,11 +68,11 @@ const ExperTraineeSec = ({data}) => {
                 traineer && traineer.length !== 0 ? (
                     <section className='bg-light py-md-5 py-3'>
                         <div className="container">
-                            <h2 className='text-center fw-bold text-blue'>
-                            We have Educational Experts to Provide Guidance for Study in {data?.country?.name}
+                            <h2 className='text-center fw-bold text-blue pb-3'>
+                                We have Educational Experts to Provide Guidance for Study in {data?.country?.name}
                             </h2>
                             <p className="text-black">
-                            The counselors at Learntech Edu Solutions Pvt. Ltd. spark inspiration, helping students navigate their academic paths with clarity and confidence. They are experts in creating strategies based on student’s preferences and interests to provide guidance for smooth admission process to colleges/ universities in India or abroad.
+                                The counselors at Learntech Edu Solutions Pvt. Ltd. spark inspiration, helping students navigate their academic paths with clarity and confidence. They are experts in creating strategies based on student’s preferences and interests to provide guidance for smooth admission process to colleges/ universities in India or abroad.
                             </p>
                             <div className='py-3'>
                                 <div className="row d-flex flex-wrap g-2">

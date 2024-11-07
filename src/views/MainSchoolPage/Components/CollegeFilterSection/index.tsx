@@ -35,7 +35,7 @@ interface College {
 
 const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
     return (
-        <div className='col-md-10 col-lg-12 mx-auto mb-3 '>
+        <div className='col-md-10 col-lg-12 mx-auto mb-3 filtercollge-card '>
             <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
                 <div className="p-2">
                     <div className="row d-flex">
@@ -50,11 +50,20 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                     </div>
                                     <div className="card-text text-black">
                                         <p className="mb-3 text-truncate"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i>{`${location}`}</p>
-                                        <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p>
+                                        {/* <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p> */}
+
+                                        <p className="mb-3">
+                                            <div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-row'>
+                                                <span className='align-self-center me-auto'> <Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' /> 
+                                                    Est. Year  {established} </span><span className='me-auto align-self-center'>
+                                                    <button className='ms-2 mt-md-0 mt-0 mt-md-3 btn typeBtn'>{type}</button>
+                                                </span>
+                                            </div>
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
-                                    {rating && rating.length!==0 ? (
+                                    {rating && rating.length !== 0 ? (
                                         <div className="d-flex mb-md-3 mb-lg-0 gap-2 justify-content-start justify-content-md-start">
 
                                             <i className={`bi bi-star-fill ${rating >= 1 ? "text-warning" : "text-gray"} `}></i>
@@ -65,10 +74,10 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
 
                                             {/* <h6 className='mb-0 text-white align-self-center'>{rating}/5 Review</h6> */}
                                         </div>
-                                    ):''}
+                                    ) : ''}
                                 </div>
                                 <div className="mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column justify-content-xl-around gap-xl-0 gap-3">
-                                    <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" placeholder="Class"/>
+                                    <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" placeholder="Class" />
                                     <Link href={`/school/${id}/${slug}`} className=" viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
                                 </div>
                             </div>
@@ -119,6 +128,40 @@ function CollegeFilterSection() {
         ownership: true,
         courseType: true
     });
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setAccordionOpen({
+                    state: false,
+                    city: false,
+                    streams: false,
+                    courses: false,
+                    ownership: false,
+                    courseType: false
+                });
+            } else {
+                setAccordionOpen({
+                    state: true,
+                    city: true,
+                    streams: true,
+                    courses: true,
+                    ownership: true,
+                    courseType: true
+                });
+            }
+        };
+
+        // Run on initial load
+        handleResize();
+
+        // Add event listener to handle resize
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup on unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const [checkboxState, setCheckboxState] = useState<{ [groupId: string]: { [value: string]: boolean } }>({});
 
     const { stateId, setStateId, cityId, setCityId } = useAuth();
@@ -225,7 +268,7 @@ function CollegeFilterSection() {
             const params: any = {
                 page: 1,
                 size: 10000,
-                orderby:'desc'
+                orderby: 'desc'
             };
 
 
@@ -515,7 +558,7 @@ function CollegeFilterSection() {
 
             const handleStateButtonClick = (state: string) => {
 
-                console.log("handleStateButtonClick",state);
+                console.log("handleStateButtonClick", state);
 
                 debouncedHandleCheckboxChange("state", state, true);
                 window.scrollTo({ top: 650, behavior: 'smooth' });

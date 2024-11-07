@@ -45,11 +45,11 @@ function CollegeInfoSection({ data }) {
     },
     tablet: {
       breakpoint: { max: 767, min: 425 },
-      items: 1
+      items: 3
     },
     mobile: {
       breakpoint: { max: 424, min: 0 },
-      items: 1
+      items: 2
     }
   };
 
@@ -184,13 +184,14 @@ function CollegeInfoSection({ data }) {
             showDots={false}
             arrows={false}
             infinite
-            autoPlay
+            autoPlay={false}
             autoPlaySpeed={2000}
             ssr // SSR true for server-side rendering
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             responsive={responsive}
-            className="infoBtn gap-3 mx-auto text-center"
+            className="infoBtn gap-3  text-center"
+            // className="infoBtn gap-3 mx-auto text-center"
           >
             {renderTabs()}
           </Carousel>

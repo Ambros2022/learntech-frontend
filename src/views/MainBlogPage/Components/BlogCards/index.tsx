@@ -50,7 +50,7 @@ const BlogCards = ({ collegeData, cardsData, totalPages, currentPage, getBlogsDa
                                                 logourl={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} />
                                         </span>
                                         <div className="card-body d-flex flex-column">
-                                            <h5 className="card-title fw-bold text-truncate">{card.name}</h5>
+                                            <h2 className="card-title fw-bold text-truncate">{card.name}</h2>
                                             <p className="card-text flex-grow-1">{card.meta_title}</p>
                                             <div className="text-start">
                                                 <Link href={`/blog/${card.id}/${card.slug}`} className="btn viewMoreBtn mt-auto">View More</Link>
@@ -85,7 +85,7 @@ const BlogCards = ({ collegeData, cardsData, totalPages, currentPage, getBlogsDa
                         </div>
                     </div>
                     <div className="col-lg-5 col-xl-4 col-md-5">
-                        <ContactForm heading={'Talk to our Experts'} />
+                        <ContactForm heading={'Talk to Our Experts'} />
                         <NewsList newsItems={collegeData} />
                     </div>
                 </div>

@@ -1,11 +1,40 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-function TopUniversitiesSection() {
-    const [showMore, setShowMore] = useState(false);
+function TopUniversitiesSection({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) {
+    // const [showMore, setShowMore] = useState(false);
 
-    const handleToggleReadMore = () => {
-        setShowMore(!showMore);
+    // const handleToggleReadMore = () => {
+    //     setShowMore(!showMore);
+    // };
+    const [isExpanded, setIsExpanded] = useState(false);
+    const maxLength = 2000; // Adjust this value to change when the "Read More" button appears
+
+    const toggleReadMore = () => {
+        setIsExpanded(!isExpanded);
+    };
+
+    const renderDescription = () => {
+        if (!data.top_description) return null;
+
+        if (data.top_description.length <= maxLength || isExpanded) {
+            return <div dangerouslySetInnerHTML={{ __html: data.top_description }} />;
+        }
+
+        const truncatedText = data.top_description.slice(0, maxLength) + '...';
+        return (
+            <>
+                <div dangerouslySetInnerHTML={{ __html: truncatedText }} />
+                <div className='text-center'>
+                    <button
+                        onClick={toggleReadMore}
+                        className="btn viewMoreClgBtn"
+                    >
+                        Read More
+                    </button>
+                </div>
+            </>
+        );
     };
     return (
         <>
@@ -13,10 +42,21 @@ function TopUniversitiesSection() {
                 <section className="container InnerCollegeNavigationLink linkFontSize pt-2">
                     <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Universities</span></p>
                 </section>
-                <div className='container innerClg pt-5 pb-3'>
+                <div className='container innerClg pt-3 pt-md-5 pb-3'>
                     <h2 className='text-center fw-bold text-blue mb-3'>Best Universities in India
                     </h2>
-                    <p className='text-black'>It is of utmost importance for every academic enthusiast to find the right university. Choosing the right university provides a strong foundation to build upon and move forward, thus embarking on an intellectual journey that is best suited for you. The best universities in India are designed to not only meet the academic requirements of students but also to address their co-curricular needs. The most prestigious universities in India take a comprehensive approach to offer their students with the necessary skills that are both subject-specific and life-oriented.
+                    {renderDescription()}
+                    {isExpanded && (
+                        <div className='text-center'>
+                            <button
+                                onClick={toggleReadMore}
+                                className="btn viewMoreClgBtn"
+                            >
+                                Read Less
+                            </button>
+                        </div>
+                    )}
+                    {/* <p className='text-black'>It is of utmost importance for every academic enthusiast to find the right university. Choosing the right university provides a strong foundation to build upon and move forward, thus embarking on an intellectual journey that is best suited for you. The best universities in India are designed to not only meet the academic requirements of students but also to address their co-curricular needs. The most prestigious universities in India take a comprehensive approach to offer their students with the necessary skills that are both subject-specific and life-oriented.
                     </p>
                     <h4 className='fw-bold text-black mb-4'>What can Top-Ranked Universities in India do for Your Academic and Non-Academic Pursuits?
                     </h4>
@@ -297,10 +337,10 @@ function TopUniversitiesSection() {
                         </>
                     )}
                     <div className='text-center'>
-                        <button onClick={handleToggleReadMore} className='btn mb-5 viewMoreCollegeBtn'>
+                        <button onClick={handleToggleReadMore} className='btn  viewMoreCollegeBtn'>
                             {showMore ? 'Read Less' : 'Read More'}
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </>

@@ -72,7 +72,7 @@ function PopularCourses() {
                 <div className="card text-center hover-card bg-skyBlue d-flex mx-2 border-0">
                    
                         <div className="row flex-fill">
-                            <div className="col-12 text-start px-0">
+                            <div className="col-12 text-center text-md-start px-0">
                                 <div className="ms-2 card-body">
                                     <h4 className="card-title fw-bold text-blue text-truncate">{title}</h4>
                                     <h6 className="card-title  mainText flex-fill text-truncate text-black">{date}</h6>

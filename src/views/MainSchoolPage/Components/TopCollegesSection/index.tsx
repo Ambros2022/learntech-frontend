@@ -36,7 +36,7 @@ const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string
                     <p className='mb-3'><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Schools</span></p>
                 </section>
                 <div className="container py-3">
-                    <h2 className='fw-bold text-blue text-center'>List of Best Schools in India</h2>
+                    <h2 className='fw-bold text-blue text-center pb-3'>List of Best Schools in India</h2>
                     <div>
                         {renderDescription()}
                         {isExpanded && (

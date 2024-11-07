@@ -235,7 +235,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                         <div className='col-lg-4 col-xl-4 col-md-5'>
                             <div className='bg-skyBlue p-5 d-flex justify-content-center rounded'>
                                 <div className='align-content-center get-news'>
-                                    <h5 className='text-blue fw-bold text-center mb-3'><i className='bi bi-megaphone-fill me-2'></i>Get Upcoming News Alerts</h5>
+                                    <h2 className='text-blue fw-bold text-center mb-3'><i className='bi bi-megaphone-fill me-2'></i>Get Upcoming News Alerts</h2>
                                     <div className='d-flex gap-3 flex-lg-row flex-column justify-content-between'>
                                         <GlobalEnquiryForm buttonText='Follow Us' className='btn viewMoreCollegeBtn' />
                                         <GlobalEnquiryForm buttonText='Ask a Question' className='btn btn-success' />
