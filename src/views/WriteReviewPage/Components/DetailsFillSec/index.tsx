@@ -216,7 +216,7 @@ function DetailsFillSec() {
 
   return (
     <div className='container detailsFillSec'>
-      <h5 className='text-center text-black pt-5 mb-4'>Please fill the below details to write a review</h5>
+      <h5 className='text-center text-black pt-5 mb-4'>Please fill in the below details to write a review</h5>
       <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6}>
@@ -235,8 +235,10 @@ function DetailsFillSec() {
                   error={Boolean(errors.review_type)}
                   {...(errors.review_type && { helperText: String(errors.review_type.message) })}
                 >
-                  <MenuItem value='college'>College</MenuItem>
+                  <MenuItem value='college'>College/University</MenuItem>
+                
                   <MenuItem value='school'>School</MenuItem>
+     
                 </CustomTextField>
               )}
             />
@@ -442,9 +444,9 @@ function DetailsFillSec() {
                   error={Boolean(errors.passing_year)}
                   {...(errors.passing_year && { helperText: String(errors.passing_year.message) })}
                 >
-                  {Array.from({ length: 50 }, (_, i) => (
-                    <MenuItem key={i} value={2000 + i}>
-                      {2000 + i}
+                  {Array.from({ length: 31 }, (_, i) => (
+                    <MenuItem key={i} value={2020 + i}>
+                      {2020 + i}
                     </MenuItem>
                   ))}
                 </CustomTextField>

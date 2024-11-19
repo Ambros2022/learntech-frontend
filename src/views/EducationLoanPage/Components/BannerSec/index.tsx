@@ -16,7 +16,7 @@ const BannerSec = () => {
                         {/* <h3 className='fw-bold text-white text-center align-self-center mb-3'>The Simplest Way to
                         </h3> */}
                         {/* <h6 className='text-blue p-2 rounded fw-bold align-self-center mb-3' style={{display:'inline-block', backgroundColor:'white'}}>APPLY FOR EDUCATION LOAN</h6> */}
-                        <div className='align-self-center'>
+                        <div className='align-self-center pt-3'>
                             <GlobalPopupEnquiry className='btn btn-success2'/>
                             {/* <button >APPLY NOW</button> */}
                         </div>

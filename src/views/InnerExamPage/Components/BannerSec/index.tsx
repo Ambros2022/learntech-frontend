@@ -51,7 +51,8 @@ function BannerSec({ data }) {
                     </div>
                 </div>
             </section>
-            <NewsLinkSection />
+            <div>  <NewsLinkSection /></div>
+
             <div className="bg-white">
                 <section className='container InnerCollegeNavigationLink linkFontSize py-3'>
                     <p className='mb-3 '><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={"/exams"}> Exams <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data.exam_title}</span></p>

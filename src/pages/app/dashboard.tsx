@@ -13,6 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Link from 'next/link';
+import { BsFileBarGraphFill, BsCardHeading, BsBuilding, BsBank, BsBank2, BsBookHalf, BsBorderWidth, BsAirplaneEnginesFill, BsFillPassFill, BsBlockquoteLeft, BsFillPersonLinesFill, BsFillPostageFill, BsFillPipFill, BsFillJournalBookmarkFill } from "react-icons/bs";
 
 // Define types for pagedata
 interface PageData {
@@ -43,13 +44,20 @@ interface PageData {
   Users?: number;
 }
 
+
 // CardItem component for reusable card elements
-const CardItem = ({ href, title, value }: { href: string; title: string; value: ReactNode }) => (
+const CardItem = ({ href, title, value, icon }: { href: string; title: string; value: ReactNode, icon?: any }) => (
   <Grid item xs={12} sm={4} md={2} >
     <Card>
+
       <Link href={href}>
-        <CardHeader title={title} />
-        <CardContent>
+        {/* <CardHeader /> */}
+        <div className='d-flex justify-content-evenly align-content-center  g-3 pt-2'>
+          <h3 style={{ color: 'black' }}>{icon}</h3>
+          <div className='d-flex justify-content-center align-content-center'><p className='pt-2 '>{title}</p></div>
+        </div>
+        {/* <CardHeader/> */}
+        <CardContent className=' p-2 pt-1 d-flex justify-content-center'>
           <Typography variant="body1" color="textSecondary">
             {value}
           </Typography>
@@ -109,102 +117,128 @@ const Home = () => {
     return <Typography variant="body1" color="textSecondary">Failed to load data</Typography>;
   }
 
-  console.log(enquirydata, "enquirydata"
-  )
+
   return (
     <>
 
-    {/* <Card>
+      {/* <Card>
       <CardHeader title="Welcome Learntech Admin!"/> */}
-    <Grid container spacing={3}>
-      <CardItem
-        href="/app/dashboard/enquiry/" // Adjust the href as needed
-        title="Today Enquiry" // Adjust the title if necessary
-        value={`${enquirydata}/${enquirydata}`} // Display the totalDataCount twice
-      />
+      <Grid container spacing={3}>
+        <CardItem
+          icon={<BsFileBarGraphFill />}
 
-      <CardItem
-        href="/app/dashboard/college/"
-        title="Colleges"
-        value={`${pagedata.Published_colleges}/${pagedata.Total_colleges}`}
-      />
-      <CardItem
-        href="/app/dashboard/college/"
-        title="Universities"
-        value={`${pagedata.Published_universities}/${pagedata.Total_universitys}`}
-      />
-      <CardItem
-        href="/app/dashboard/schools/"
-        title="Schools"
-        value={`${pagedata.Published_school}/${pagedata.school}`}
-      />
-      <CardItem
-        href="/app/dashboard/stream/"
-        title="Streams"
-        value={pagedata.stream}
-      />
-      <CardItem
-        href="/app/dashboard/generalcourse/"
-        title="General Courses"
-        value={pagedata.generalcourse}
-      />
-      <CardItem
-        href="/app/dashboard/course/"
-        title="College Courses"
-        value={`${pagedata.Published_courses}/${pagedata.courses}`}
-      />
-      <CardItem
-        href="/app/dashboard/abroadpage/"
-        title="Abroad Pages"
-        value={pagedata.abroadpages}
-      />
-      <CardItem
-        href="/app/dashboard/exam/"
-        title="Exams"
-        value={`${pagedata.Published_exam}/${pagedata.exam}`}
-      />
-      <CardItem
-        href="/app/dashboard/enquiry/"
-        title="Enquires"
-        value={pagedata.enquiry}
-      />
-      <CardItem
-        href="/app/dashboard/blog/"
-        title="Blogs"
-        value={`${pagedata.Published_blog}/${pagedata.blog}`}
-      />
-      <CardItem
-        href="/app/dashboard/schoolboard/"
-        title="Boards"
-        value={pagedata.schoolboards}
-      />
-      <CardItem
-        href="/app/dashboard/scholarship/"
-        title="Scholarships"
-        value={`${pagedata.Published_scholarships}/${pagedata.scholarships}`}
-      />
-      <CardItem
-        href="/app/dashboard/jobs_positions/"
-        title="Jobs Positions"
-        value={pagedata.jobs_positions}
-      />
-      <CardItem
-        href="/app/dashboard/newsevents/"
-        title="News"
-        value={`${pagedata.Published_news}/${pagedata.Total_news}`}
-      />
-      <CardItem
-        href="/app/dashboard/landingpage/"
-        title="Landing Pages"
-        value={`${pagedata.Published_landingpage}/${pagedata.Total_landingpage}`}
-      />
-      <CardItem
-        href="/app/dashboard/user/"
-        title="Users"
-        value={`${pagedata.Users}`}
-      />
-    </Grid>
-    {/* </Card> */}
+          href="/app/dashboard/enquiry/" // Adjust the href as needed
+          title="Today Enquiry" // Adjust the title if necessary
+          value={`${enquirydata}/${enquirydata}`} // Display the totalDataCount twice
+        />
+
+        <CardItem
+          icon={<BsBuilding />}
+          href="/app/dashboard/college/"
+          title="Colleges"
+          value={`${pagedata.Published_colleges}/${pagedata.Total_colleges}`}
+        />
+        <CardItem
+          icon={<BsBank />}
+
+          href="/app/dashboard/college/"
+          title="Universities"
+          value={`${pagedata.Published_universities}/${pagedata.Total_universitys}`}
+        />
+        <CardItem
+          icon={<BsBank2 />}
+
+          href="/app/dashboard/schools/"
+          title="Schools"
+          value={`${pagedata.Published_school}/${pagedata.school}`}
+        />
+        <CardItem
+          icon={<BsCardHeading />}
+
+          href="/app/dashboard/stream/"
+          title="Streams"
+          value={pagedata.stream}
+        />
+        <CardItem
+          icon={<BsBorderWidth />}
+          href="/app/dashboard/generalcourse/"
+          title="General Courses"
+          value={pagedata.generalcourse}
+        />
+        <CardItem
+
+          icon={<BsBookHalf />}
+
+          href="/app/dashboard/course/"
+          title="College Courses"
+          value={`${pagedata.Published_courses}/${pagedata.courses}`}
+        />
+        <CardItem
+          icon={<BsAirplaneEnginesFill />}
+
+          href="/app/dashboard/abroadpage/"
+          title="Abroad Pages"
+          value={pagedata.abroadpages}
+        />
+        <CardItem
+          icon={<BsFillPassFill />}
+          href="/app/dashboard/exam/"
+          title="Exams"
+          value={`${pagedata.Published_exam}/${pagedata.exam}`}
+        />
+        <CardItem
+          icon={<BsFileBarGraphFill />}
+
+          href="/app/dashboard/enquiry/"
+          title="Enquires"
+          value={pagedata.enquiry}
+        />
+        <CardItem
+          icon={<BsBlockquoteLeft />}
+          href="/app/dashboard/blog/"
+          title="Blogs"
+          value={`${pagedata.Published_blog}/${pagedata.blog}`}
+        />
+        <CardItem
+          icon={<BsBank2 />}
+
+          href="/app/dashboard/schoolboard/"
+          title="Boards"
+          value={pagedata.schoolboards}
+        />
+        <CardItem
+          icon={<BsFillJournalBookmarkFill />}
+
+          href="/app/dashboard/scholarship/"
+          title="Scholarships"
+          value={`${pagedata.Published_scholarships}/${pagedata.scholarships}`}
+        />
+        <CardItem
+          icon={<BsFillPersonLinesFill />}
+          href="/app/dashboard/jobs_positions/"
+          title="Jobs Positions"
+          value={pagedata.jobs_positions}
+        />
+        <CardItem
+          icon={<BsFillPipFill />}
+          href="/app/dashboard/newsevents/"
+          title="News"
+          value={`${pagedata.Published_news}/${pagedata.Total_news}`}
+        />
+        <CardItem
+          icon={<BsFillPostageFill />}
+          href="/app/dashboard/landingpage/"
+          title="Landing Pages"
+          value={`${pagedata.Published_landingpage}/${pagedata.Total_landingpage}`}
+        />
+        <CardItem
+          icon={<BsFillPersonLinesFill />}
+          href="/app/dashboard/user/"
+          title="Users"
+          value={`${pagedata.Users}`}
+        />
+      </Grid>
+      {/* </Card> */}
     </>
   );
 }

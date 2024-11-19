@@ -65,12 +65,12 @@ function BannerSection({ data }) {
               </div>
               <div className="col-lg-7 ps-xl-5 col-xl-8 col-md-10">
                 <div className="card-body text-white">
-                  <h1 className="card-title fw-bold mb-3">{data.name}</h1>
+                  <h1 className="card-title fw-bold mb-3 ">{data.name}</h1>
                   <h6 className='mb-3 d-flex '><i className='bi bi-geo-alt-fill text-danger me-1'></i> <span>{data.address}</span></h6>
-                  <h6 className='mb-3 location-img'><i className='bi bi-mortarboard-fill text-warning me-2'></i><strong>Board : </strong>{data.schoolboard.short_name}</h6>
+                  <h6 className='mb-3 location-img'><i className='bi bi-mortarboard-fill text-warning me-2'></i><strong>Board: </strong>{data.schoolboard.short_name}</h6>
                   <h6 className='mb-3 location-img d-flex'>
                     <i className='bi bi-award-fill text-primary me-2'></i>
-                    <strong className='flex-shrink-0'>School Level : </strong>
+                    <strong className='flex-shrink-0'>School Level:</strong>&nbsp;
                     {data.schoollevels.map((value) => value.schlevelname.name).join(', ')}
                   </h6>
                 </div>
@@ -91,9 +91,9 @@ function BannerSection({ data }) {
 
 
             </div>
-            <div className="d-flex justify-content-end flex-md-row flex-column gap-1 gap-md-3 ps-md-0 ps-0">
-              <GlobalEnquiryForm pagename="Brochure" className='align-content-center btn downloadBtn' title="Download Brochure" />
-              <GlobalEnquiryForm className='align-content-center btn freeBtn' buttonText="Get Fee Structure" />
+            <div className="d-flex justify-content-center justify-content-md-end flex-md-row flex-wrap gap-1 gap-md-3 ps-md-0 ps-0">
+              <GlobalEnquiryForm pagename="Brochure" className='align-content-center btn downloadBtn' placeholder="Class" title="Download Brochure" />
+              <GlobalEnquiryForm className='align-content-center btn freeBtn' placeholder="Class" buttonText="Get Fee Structure" />
             </div>
 
           </div>

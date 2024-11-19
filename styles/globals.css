@@ -820,7 +820,7 @@
 
   .FeaturedClgCon .carousel-button-group {
     position: absolute !important;
-    top: 260px !important;
+    top: 220px !important;
     width: 100%;
 
   }
@@ -1294,6 +1294,10 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .browseNews .getalert {
+      font-size: 21px !important;
+    }
+
     .studyAbroadNav .carousel-button-group {
       position: absolute !important;
     }
@@ -1509,7 +1513,7 @@
     }
 
     .footerCon .address {
-      font-size: 15px !important;
+      font-size: 16px !important;
     }
 
     .footerIcon img {
@@ -1524,9 +1528,9 @@
     .phone-icon {
       background-color: rgb(248, 67, 101) !important;
       border-radius: 50% !important;
-      padding: 9px !important;
+      padding: 10px !important;
       border: none !important;
-      width: 46px !important;
+      width: 53px !important;
       box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
       bottom: 12px !important;
       left: 12px !important;
@@ -1615,7 +1619,7 @@
 
   @media (max-width: 575px) {
     .FeaturedClgCon .carousel-button-group {
-      top: 260px !important;
+      top: 220px !important;
     }
 
     .FeaturedClgCon .fi-left {
@@ -1701,7 +1705,7 @@
 
   @media (min-width: 320px) and (max-width: 374px) {
     .FeaturedClgCon .carousel-button-group {
-      top: 232px !important;
+      top: 220px !important;
     }
 
     .AssociatedClg .carousel-button-group {
@@ -2186,6 +2190,12 @@
     .arrowIcon {
       bottom: 85px !important;
     }
+
+    .infoBtn .btn {
+      width: 90% !important;
+    }
+
+
   }
 
   @media (min-width: 320px) and (max-width: 374px) {
@@ -2477,11 +2487,12 @@
     font-weight: bold !important;
   }
 
-  /* .dentalCourseCon img {
-    width: 100%;
-    height: 100%;
-    padding: 5px !important;
-  } */
+  .collegeCourseCon h1 {
+    font-size: 22px !important;
+    font-weight: bold !important;
+  }
+
+
 
   @media (min-width: 992px) and (max-width: 1024px) {
     .searchSec h1 {
@@ -2498,19 +2509,37 @@
       font-size: 21px !important;
       font-weight: bold !important;
     }
+
+    .collegeCourseCon h1 span {
+      font-size: 21px !important;
+      font-weight: bold !important;
+    }
   }
 
 
 
-.font-18{
-  font-size: 18px !important;
+  .font-18 {
+    font-size: 18px !important;
 
-}
+  }
+
+  .stdud15 {
+    font-size: 15px !important;
+  }
 
   @media (min-width: 320px) and (max-width: 767px) {
     .dentalCourseCon h1 {
       font-size: 22px !important;
       font-weight: bold !important;
+    }
+
+    .collegeCourseCon h1 span {
+      font-size: 21px !important;
+      font-weight: bold !important;
+    }
+
+    .h2job {
+      font-size: 20px !important;
     }
 
     .innerApplyBtn {
@@ -2533,9 +2562,7 @@
       font-size: 12px !important;
     }
 
-    .h2job {
-      font-size: 19px !important;
-    }
+
 
     .srchBtn {
       font-size: 12px !important;
@@ -2813,9 +2840,19 @@
   }
 
   .clgInfoSec .tab-content {
-    width: 100% !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    width: 100%;
+    overflow-x: hidden;
+    /* Hide scrollbar by default */
+  }
+
+  /* Enable horizontal scrolling only for mobile devices */
+  @media (max-width: 768px) {
+    .clgInfoSec .tab-content {
+      overflow-x: auto !important;
+      /* Show scrollbar for mobile */
+      -webkit-overflow-scrolling: touch !important;
+      /* Smooth scrolling for iOS */
+    }
   }
 
   /* 
@@ -2940,7 +2977,7 @@
       margin: auto !important;
     }
 
-  
+
   }
 
   /* Study In Usa */
@@ -3195,11 +3232,12 @@
   /* Write Review Page */
 
   .writeReviewSec {
-    background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
-      url('../public/images/icons/werite-review-img.jpeg');
-    height: 500px;
+    /* background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
+      url('../public/images/icons/werite-review-img.jpeg'); */
+    height: 300px;
     background-size: cover;
     background-repeat: no-repeat;
+    background: #214f93;
   }
 
   .guidanceCon {
@@ -3569,6 +3607,13 @@
 
 
   @media (min-width: 320px) and (max-width: 767px) {
+
+    .disclaimerCon>img {
+      height: 130px !important;
+      width: 100% !important;
+      object-fit: cover !important;
+    }
+
     .filtercollge-card .text-truncate {
       overflow: visible !important;
       white-space: wrap;
@@ -3647,6 +3692,7 @@
       position: absolute !important;
       width: 100% !important;
       top: 40% !important;
+      z-index: 20 !important;
     }
   }
 
@@ -4004,7 +4050,7 @@
 
     .latestNewsCon .card-text {
 
-      min-height: 136px !important;
+      min-height: 88px !important;
     }
 
     .examsBannerCon {
@@ -4020,6 +4066,13 @@
     /* .boardSec h1 {
       font-size: 20px;
     } */
+    .adv17 h5 {
+      font-size: 17px !important;
+    }
+
+    .carrer20 {
+      font-size: 20px !important;
+    }
 
     .FeaturedClgCon .card-Image-top {
       /* height: 262px !important; */
@@ -4045,7 +4098,7 @@
 
     .mbbs .carousel-button-group {
       position: absolute !important;
-      top: 2103px !important;
+      top: 2143px !important;
       width: 100% !important;
       left: 0px;
     }
@@ -4201,14 +4254,7 @@
   } */
 
   @media (min-width:320px) and (max-width:767px) {
-    /* .innerNewsCard {
-      min-height: 1500px;
-      max-height: 1500px;
-    } */
 
-    /* .examNewsSec {
-      min-height: 1125px !important;
-    } */
 
     .innerNewsCard .card-img-top {
       height: 200px !important;
@@ -4303,6 +4349,7 @@
     width: auto !important;
     padding: 15px 12px !important;
     color: #254692 !important;
+
   }
 
   .newsTabsClr button.active {
@@ -4429,7 +4476,8 @@
     .blogBannerSec {
       height: 300px !important;
     }
-    .blogBannerSec h1{
+
+    .blogBannerSec h1 {
       font-size: 23px !important;
     }
 
@@ -5326,12 +5374,28 @@
   }
 
   .studentSpeakCardBody {
-    /* display: -webkit-box !important; */
-    /* -webkit-line-clamp: 5 !important; */
-    /* -webkit-box-orient: vertical !important; */
-    /* overflow: hidden !important; */
-    /* text-overflow: ellipsis !important; */
+
     height: 90px !important;
+    scrollbar-width: thin;
+    /* For Firefox */
+    scrollbar-color: #ccc transparent;
+    /* For Firefox */
+  }
+
+  /* For Chrome, Edge, and Safari */
+  .studentSpeakCardBody::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .studentSpeakCardBody::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    /* Scrollbar thumb color */
+    border-radius: 10px;
+  }
+
+  .studentSpeakCardBody::-webkit-scrollbar-track {
+    background: transparent;
+    /* Track color */
   }
 
   .eduLoanSec {
@@ -5617,7 +5681,7 @@
 
   .siteMapSec li {
     margin-bottom: 20px !important;
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
 
   .siteMapSec li a:hover {
@@ -5736,14 +5800,7 @@
       font-size: 15px !important;
     }
 
-    .studentSpeakCardBody {
-      display: -webkit-box !important;
-      -webkit-line-clamp: 5 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      min-height: 70px !important;
-    }
+
 
 
     .medHeader h6 {
@@ -5783,11 +5840,6 @@
     }
 
     .studentSpeakCardBody {
-      display: -webkit-box !important;
-      -webkit-line-clamp: 5 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
       min-height: 70px !important;
     }
 
@@ -5936,11 +5988,6 @@
     }
 
     .studentSpeakCardBody {
-      display: -webkit-box !important;
-      -webkit-line-clamp: 3 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
       min-height: 70px !important;
     }
 
@@ -6300,15 +6347,29 @@
 
 
   @media (min-width:320px) and (max-width:767px) {
-    /* .placeholder-text {
-      display: none !important;
-    } */
+    .f20 {
+      font-size: 20px !important;
 
-    /* .jobform .placeholder-text {
-      display: block !important;
-    } */
+    }
+
+    .placeholder-text {
+      position: absolute !important;
+      color: black !important;
+      left: 235px !important;
+      top: 45% !important;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 12px !important;
+    }
+
+    .tablecustom-border .d-md-table-cell {
+      border: 1px solid;
+    }
+
     .contactuspage p {
-      font-size: 17px !important;
+      font-size: 16px !important;
     }
 
     .journey-video {
@@ -6344,4 +6405,40 @@
       margin-bottom: 10px;
       /* Adds spacing between rows */
     }
+
+    .newsTabsClr button {
+      font-size: 13px !important;
+      padding: 11px 5px !important;
+      margin: 4px !important;
+    }
+  }
+
+  .team h4 {
+    font-size: 18px !important;
+  }
+
+  .innerBlogSec h2 {
+    font-size: 21px !important;
+  }
+
+  .responsive-card {
+    background: url('/images/icons/Card.webp') no-repeat center;
+    background-size: cover;
+    /* Default for larger screens */
+    height: auto;
+    /* Allow content height to adjust dynamically */
+    min-height: 200px;
+    /* Ensure a minimum height */
+  }
+
+
+
+  @media (max-width: 768px) {
+    .responsive-card {
+      background-size: contain;
+      background-position: bottom;
+      min-height: 309px;
+    }
+
+
   }

@@ -31,7 +31,7 @@ function LatestNewsSection() {
     const fetchData = useCallback(async (tab: 'news' | 'blogs') => {
         setLoading(true);
         try {
-            const roleParams = { page: 1, size: 8, type: tab };
+            const roleParams = { page: 1, size: 8, type: tab, orderby: 'desc', columnname: 'created_at' };
             const response = await axios1.get('api/website/newsandblogs/get', { params: roleParams });
 
             if (response.data && response.data.status === 1) {
@@ -95,7 +95,7 @@ function LatestNewsSection() {
                     <NewsCarousel items={combinedItems.map((item) => (
                         <div className="col-12 mb-1" style={{ margin: '0px 5px' }} key={item.id}>
                             <Link href={`/${activeTab}/${item.id}/${item.slug}`}>
-                                <div className="newsBlosCards">
+                                {/* <div className="newsBlosCards">
                                     <div className="mb-5 mx-lg-3 mx-0">
                                         <div className="card h-100 hover-card" style={{ background: 'url(/images/icons/Card.webp)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                                             <div className="card-body newsheight">
@@ -114,7 +114,28 @@ function LatestNewsSection() {
                                             </div>
                                         </div>
                                     </div>
+                                </div> */}
+                                <div className="newsBlosCards">
+                                    <div className="mb-5 mx-lg-3 mx-0">
+                                        <div className="card h-100 hover-card responsive-card">
+                                            <div className="card-body newsheight">
+                                                <h5 className="card-title fw-bold text-blue text-truncate">{item.name}</h5>
+                                                <h6 className="card-subtitle py-2 mb-2 text-body-secondary">
+                                                    {item.created_at ? format(new Date(item.created_at), 'dd-MMM-yyyy') : 'No Date Available'}
+                                                </h6>
+                                                <div className="row mb-3">
+                                                    <div className="col-xl-8">
+                                                        <p className="card-text">{item.meta_description}</p>
+                                                    </div>
+                                                </div>
+                                                <Link href={`/${activeTab}/${item.id}/${item.slug}`} className="btn viewDetailBtn">
+                                                    Read More
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </Link>
                         </div>
                     ))} />

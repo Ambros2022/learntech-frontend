@@ -80,24 +80,6 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
         }
     }, [isMountedRef]);
 
-    // const getCoursesData = useCallback(async () => {
-    //     try {
-    //         const response = await axios1.get('/api/website/courses/get');
-    //         if (response.data.status === 1) {
-    //             const courseData = response.data.data.map((course: any) => ({
-    //                 label: course.name,
-    //                 value: course.name()
-    //             }));
-    //             if (isMountedRef.current) {
-    //                 setCourses(courseData);
-    //             }
-    //         } else {
-    //             console.error('Failed to fetch courses');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error fetching courses:', error);
-    //     }
-    // }, [isMountedRef]);
 
     useEffect(() => {
         getStreamData();
@@ -132,7 +114,12 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
                             <ErrorMessage name="email" component="div" className="error text-danger" />
                         </div>
                         <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-                            <Field as="select" name="course" className="form-control">
+                            <Field
+                                as="select"
+                                name="course"
+                                className="form-control"
+                                style={{ appearance: 'auto', WebkitAppearance: 'auto' }} /* Ensures default arrow */
+                            >
                                 <option value="">Select {placeholder}</option>
                                 {streams.map((item) => (
                                     <option key={item.value} value={item.value}>{item.label}</option>
@@ -140,10 +127,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
                             </Field>
                             <ErrorMessage name="course" component="div" className="error text-danger" />
                         </div>
-                        {/* <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-                            <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                            <ErrorMessage name="location" component="div" className="error text-danger" />
-                        </div> */}
+
                     </div>
                     <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
                         <button type="submit" className="btn reqBtn">Request for a Call Back</button>

@@ -18,17 +18,20 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
         <>
             <section className='py-md-5 py-3 bg-white browseNews'>
                 <div className="container">
-                    <div className="d-flex justify-content-center newsTabsClr gap-3  flex-wrap">
-                        {['all', 'state', 'national', 'international'].map(tabName => (
-                            <button
-                                key={tabName}
-                                className={`btn bg-skyBlue hover-card ${activeTab === tabName ? 'active' : ''} tab-button`}
-                                onClick={() => handleTabClick(tabName)}
-                            >
-                                {tabName.charAt(0).toUpperCase() + tabName.slice(1) + ' Boards'}
-                            </button>
+                    <div className="row justify-content-center newsTabsClr gap-0 gap-md-3">
+                        {['all', 'state', 'national', 'international'].map((tabName) => (
+                            <div key={tabName} className="col-6 col-md-auto p-0 d-flex justify-content-center"> {/* col-6 for two per row on mobile, col-md-auto for auto width on larger screens */}
+                                <button
+                                    className={`btn bg-skyBlue hover-card ${activeTab === tabName ? 'active' : ''} tab-button`}
+                                    onClick={() => handleTabClick(tabName)}
+                                >
+                                    {tabName.charAt(0).toUpperCase() + tabName.slice(1) + ' Boards'}
+                                </button>
+                            </div>
                         ))}
                     </div>
+
+
 
 
                     <div className='row mb-3 mt-5'>
@@ -40,13 +43,6 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                             index < displayCount && (
                                                 <div key={item.id} className="d-flex mx-auto col-md-6 mx-md-0 mb-3">
                                                     <div className="card hover-card newsImgSize w-100 bg-skyBlue">
-                                                        {/* <div className="d-flex justify-content-end gap-2 fs-5 me-2 pt-1">
-                                                            <i className='bi bi-star-fill text-warning'></i>
-                                                            <i className='bi bi-star-fill text-warning'></i>
-                                                            <i className='bi bi-star-fill text-warning'></i>
-                                                            <i className='bi bi-star-fill text-warning'></i>
-                                                            <i className='bi bi-star-fill text-gray'></i>
-                                                        </div> */}
 
                                                         <div className="card-body">
                                                             <div className="row d-flex">

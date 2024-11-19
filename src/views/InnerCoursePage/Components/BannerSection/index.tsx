@@ -22,7 +22,7 @@ function BannerSection({ data }) {
                     <h1 className='text-white text-md-start text-center'>{data.name} Courses: Eligibility, Syllabus, Colleges, Admission</h1>
                   </div>
                 </div>
-                <div className="align-content-center row ps-lg-3 ps-md-2 text-md-start text-center">
+                <div className="align-content-center row ps-lg-3 ps-md-2 text-md-start text-center py-2 py-md-0">
                   <div className="col-12">
                     <GlobalEnquiryForm className="btn btn-success" />
                   </div>

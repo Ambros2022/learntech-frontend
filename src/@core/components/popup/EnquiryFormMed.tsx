@@ -54,7 +54,7 @@ const EnquiryFormMed = ({ heading }: { heading: string }) => {
 
     return (
         <div className='bg-skyBlue px-3 rounded'>
-            <h3 className='fw-bold text-blue text-center pt-0 mb-3'>{heading}</h3>
+            <h3 className='fw-bold text-blue text-center pt-0 mb-3 f20'>{heading}</h3>
             <Formik
                 initialValues={{
                     name: '',

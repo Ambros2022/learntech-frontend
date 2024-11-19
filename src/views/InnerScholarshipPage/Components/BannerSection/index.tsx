@@ -67,17 +67,17 @@ function BannerSection({ data }) {
               </div>
               <div className="col-lg-7 ps-xl-5 col-xl-8 col-md-10">
                 <div className="py-md-3 py-2 text-white">
-                  <h1 className="card-title fw-bold mb-3">{data.name} : Eligibility, Deadline, Amount</h1>
+                  <h1 className="card-title fw-bold mb-3">{data.name}: Eligibility, Deadline, Amount</h1>
 
                   <div className="d-flex flex-column flex-md-row align-items-md-center gap-md-5">
                     <div className="mb-3  d-flex align-items-center">
                       <i className="bi bi-alarm-fill text-warning bi-icon me-2"></i>
-                      <span className="fw-bold text-start" style={{ fontSize: '16px' }}>Last Date of Application : <span className='fw-normal text-white'>{formatDate(data.last_date)}</span></span>
+                      <span className="fw-bold text-start" style={{ fontSize: '16px' }}>Last Date of Application: <span className='fw-normal text-white'>{formatDate(data.last_date)}</span></span>
                       <span className="ms-2 text-start"></span>
                     </div>
 
                     <div className="mb-3  d-flex align-items-center">
-                      <i className="bi bi-currency-rupee bi-icon text-danger me-1"></i>
+                      <i className="bi bi-currency-rupee bi-icon text-danger me-2"></i>
                       <span className="fw-bold" style={{ fontSize: '16px' }} >INR</span>
                       <span className="ms-2">{data.amount}</span>
                     </div>

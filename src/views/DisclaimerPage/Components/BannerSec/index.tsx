@@ -8,9 +8,9 @@ const BannerSec = () => {
             <section className='bg-skyBlue disclaimerCon w-100 position-relative'>
                 <Image src='/images/icons/Banner BG.png' alt='banner-img' width={1400} height={300} />
                 <div className="h-100 position-absolute w-100" style={{ top: '0px' }}>
-                    <div className="container h-100">
+                    <div className="container h-100 px-0">
                         <div className="d-flex h-100 justify-content-center">
-                            <h1 className='align-self-center text-white px-md-0 px-5 fw-bold'>Learntech Edu Solutions Pvt. Ltd.</h1>
+                            <h1 className='align-self-center text-white px-md-0  fw-bold'>Learntech Edu Solutions Pvt. Ltd.</h1>
                         </div>
                     </div>
                 </div>

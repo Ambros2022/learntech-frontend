@@ -84,7 +84,7 @@ const BannerSec = () => {
                                 <h1 className='fw-bold text-white mb-4'>Education Boards in India
                                 </h1>
                                 <div className="row d-flex g-3">
-                                    <div className="col-md-8 mb-md-0 mb-3 mx-auto">
+                                    <div className="col-md-7 mb-md-0 mb-3 mx-auto">
                                         <Autocomplete
                                             open={open}
                                             onClose={() => setOpen(false)}
@@ -137,7 +137,7 @@ const BannerSec = () => {
                                             )}
                                         />
                                     </div>
-                                    <div className="col-md-4 d-flex justify-content-center">
+                                    <div className="col-md-5 d-flex justify-content-center">
                                         <GlobalEnquiryForm
                                             buttonText="Get Board Details"
                                             className="btn my-auto align-self-center btn-success2"

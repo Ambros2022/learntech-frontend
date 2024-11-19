@@ -34,7 +34,7 @@ const LinkSec = () => {
 
     return (
         <>
-            <section className='bg-white siteMapSec py-5'>
+            <section className='bg-white siteMapSec py-2'>
                 <div className="container">
                     <div className='py-2'>
                         <h2 className='fw-bold text-blue mb-3'>Information</h2>

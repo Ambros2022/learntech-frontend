@@ -49,10 +49,10 @@ const Overview = () => {
                                     <p className="text-black">
                                         As an educational service provider, we offer numerous services for students and the institutes we work with. We strive to find the best feasible fit for our students while also taking into consideration their personal objectives and career goals.
                                     </p>
-                                    <h2 className='fw-bold text-black'>For Students:
+                                    <h2 className='fw-bold text-black f20'>For Students:
                                     </h2>
 
-                                    <table className="table table-responsive table-bordered">
+                                    <table className="table table-responsive table-bordered tablecustom-border">
                                         <tbody className="text-center">
                                             <tr>
                                                 <td className="d-block d-md-table-cell">
@@ -109,10 +109,10 @@ const Overview = () => {
 
 
 
-                                    <h2 className='fw-bold text-black'>For Colleges and Universities:
+                                    <h2 className='fw-bold text-black f20'>For Colleges and Universities:
                                     </h2>
                                     <div className="table-responsive">
-                                        <table className="table table-responsive table-bordered">
+                                        <table className="table table-responsive table-bordered tablecustom-border">
                                             <tbody className="text-center">
                                                 <tr>
                                                     <td className="d-block d-md-table-cell">

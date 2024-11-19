@@ -141,6 +141,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     value={value}
                                     label='content'
                                     onChange={onChange}
+                                    multiline
+                                    rows={3}
                                     placeholder=''
                                     error={Boolean(errors.content)}
                                     aria-describedby='validation-basic-first-name'

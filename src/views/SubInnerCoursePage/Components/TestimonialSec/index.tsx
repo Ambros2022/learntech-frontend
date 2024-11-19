@@ -75,9 +75,9 @@ console.log(data)
     return (
         <>
             {testimonials && testimonials.length > 0 ? (
-                <section className='bg-white pb-5'>
+                <section className='bg-white pb-3'>
                     <div className="container">
-                        <h2 className='text-blue fw-bold text-center mb-5'>Testimonials</h2>
+                        <h2 className='text-blue fw-bold text-center mb-3'>Testimonials</h2>
                         <div className='testimonialCarousel position-relative'>
                             <Carousel
                                 swipeable

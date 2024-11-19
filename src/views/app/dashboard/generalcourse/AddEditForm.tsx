@@ -140,7 +140,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .trim()
             .required(),
         stream_id: yup.object().required("This field is required"),
-        sub_streams_id: yup.object().required("This field is required"),
+        // sub_streams_id: yup.object().required("This field is required"),
     })
 
 

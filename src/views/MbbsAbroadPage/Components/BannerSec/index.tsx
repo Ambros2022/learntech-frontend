@@ -12,7 +12,7 @@ const BannerSec = () => {
                     <div className='position-absolute h-100 w-100 d-flex justify-content-center' style={{ top: '0px' }}>
                         <div className="align-content-center text-center">
 
-                            <h1 className='fw-bold text-white mb-3'> MBBS Abroad For Indian Students. </h1>
+                            <h1 className='fw-bold text-white mb-3'> MBBS Abroad For Indian Students </h1>
                             <GlobalPopupEnquiry className="btn btn-success" />
 
                         </div>

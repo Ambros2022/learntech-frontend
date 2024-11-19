@@ -1,15 +1,8 @@
-// ** React Imports
-import { ReactNode } from 'react'
+import React, { useCallback, useEffect, useState,ReactNode } from 'react';
+import axios from 'src/configs/axios';
 
-// ** Next Import
-import Link from 'next/link'
-
-// ** MUI Components
-import Button from '@mui/material/Button'
-import { styled } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-import Box, { BoxProps } from '@mui/material/Box'
-
+import { useRouter } from 'next/router';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
 
@@ -17,6 +10,28 @@ import FrontLayout from 'src/@core/layouts/FrontLayout'
 import Error404Page from 'src/views/Error404Page'
 
 const Error404 = () => {
+  const router = useRouter()
+  const isMountedRef = useIsMountedRef();
+  const [pagedata, setPagedata] = useState<any>();
+
+  const getPagedata = useCallback(async () => {
+    try {
+      const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
+      if (isMountedRef.current) {
+
+        setPagedata(response.data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending courses:', error);
+    }
+  }, [isMountedRef]);
+
+
+
+  useEffect(() => {
+    getPagedata();
+
+  }, []);
   return (
     <Error404Page />
   )

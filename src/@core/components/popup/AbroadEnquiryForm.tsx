@@ -78,8 +78,8 @@ const EnquiryForm: FC<Props> = ({ page, placeholder = 'Stream', ...rest }) => {
                     <div className='text-center mb-3'>
                         <h3 className='fw-bold text-blue'>Unlock Study Abroad Opportunities!
                         </h3>
-                        <small>From choosing the right university to securing your admission, our experts are here to support your journey to international academic success.
-                        </small>
+                        <p className='stdud15'>From choosing the right university to securing your admission, our experts are here to support your journey to international academic success.
+                        </p>
                     </div>
                     <div className="mb-3">
                         <Field type="text" name="name" placeholder="Full Name" className="form-control" />
