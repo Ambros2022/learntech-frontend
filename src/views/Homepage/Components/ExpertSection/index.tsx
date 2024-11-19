@@ -6,7 +6,7 @@ function ExpertSection() {
   return (
     <section className="Expert-bg-skyBlue" id="animation15">
       <div className="container py-3 py-md-5 ">
-        <h2 className="fw-bold text-center text-blue">Connect with Our Elite Academic Advisors
+        <h2 className="fw-bold text-center text-blue mb-2">Connect with Our Elite Academic Advisors
         </h2>
         <p className="text-black">
           Unlock personalized strategies tailored to your educational goals. Let our experts guide you through every step of your academic journey, ensuring you make informed and impactful decisions.

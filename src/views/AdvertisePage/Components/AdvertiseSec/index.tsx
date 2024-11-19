@@ -49,7 +49,7 @@ const AdvertiseSec = ({ data }) => {
                                         Digital marketing for educational institutions can be done through a plethora of activities. Some of them are:
                                     </p>
 
-                                    <div className='row text-center'>
+                                    <div className='row text-center adv17'>
                                         <div className="col-6">
                                             <Image src="/images/avertise/Social_Media_Marketing_3.png" width={100} height={100} alt={'Social Media Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Social Media Marketing</h5>
@@ -98,7 +98,7 @@ const AdvertiseSec = ({ data }) => {
                                     </p>
 
 
-                                    <div className='row text-center'>
+                                    <div className='row text-center adv17'>
                                         <div className="col-6">
                                             <Image src="/images/avertise/Expos_and_Educational_Fairs_3.png" width={100} height={100} alt={'Expos and Educational Fairs'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Expos and Educational Fairs</h5>
@@ -178,8 +178,8 @@ const AdvertiseSec = ({ data }) => {
                             <div className="text-black text-center">
                                 <p className="text-black text-center pt-3" style={{ fontSize: "18px" }}>Efficient education services marketing is necessary for any institute to thrive. By advertising with us, not only will your institute gain global recognition, but also succeed in nurturing a group of potential individuals, thereby moulding the pioneers of tomorrow.</p>
 
-                                <h4 className=' fw-bold pt-3'>So WHY THE WAIT!!!</h4>
-                                <h5 className=' fw-bold pt-3 pb-3'>Partner with Us!
+                                <h4 className=' fw-bold pt-3 text-blue'>So Why the Wait!!!</h4>
+                                <h5 className=' fw-bold pt-3 pb-3'>Partner With Us!
                                 </h5>
                             </div>
                         </div>
@@ -201,8 +201,8 @@ const AdvertiseSec = ({ data }) => {
                             <div className="text-black text-center">
                                 <p className="text-black text-center pt-3" style={{ fontSize: "18px" }}>Efficient education services marketing is necessary for any institute to thrive. By advertising with us, not only will your institute gain global recognition, but also succeed in nurturing a group of potential individuals, thereby moulding the pioneers of tomorrow.</p>
 
-                                <h4 className=' fw-bold pt-3'>So WHY THE WAIT!!!</h4>
-                                <h5 className=' fw-bold pt-3 pb-3'>Partner with Us!
+                                <h4 className=' fw-bold pt-3 text-blue'>So Why the Wait!!!</h4>
+                                <h5 className=' fw-bold pt-3 pb-3'>Partner With Us!
                                 </h5>
                             </div>
                         </div>

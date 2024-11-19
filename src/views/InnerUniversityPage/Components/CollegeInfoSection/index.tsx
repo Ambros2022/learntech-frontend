@@ -184,7 +184,7 @@ function CollegeInfoSection({ data }) {
             showDots={false}
             arrows={false}
             infinite
-            autoPlay
+            autoPlay={false}
             autoPlaySpeed={2000}
             ssr // SSR true for server-side rendering
             renderButtonGroupOutside

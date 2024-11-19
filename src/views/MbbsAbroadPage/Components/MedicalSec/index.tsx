@@ -100,7 +100,7 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
                             {() => (
                                 <Form className='bg-skyBlue mbbsAbroad rounded p-3'>
                                     <h2 className='text-blue fw-bold text-center mb-3'>Start Your Medical Journey</h2>
-                                    <p className='text-black fw-bold text-center mb-3'>Fill this & help us book a flight for your Successful Medical Career</p>
+                                    <p className='text-black fw-bold text-center mb-3'>Fill This & Help Us Book a Flight for Your Successful Medical Career</p>
                                     <div className="mb-3">
                                         <Field type="text" className='form-control' name='name' placeholder='Full Name*' />
                                         <ErrorMessage name="name" component="div" className="text-danger" />

@@ -11,12 +11,12 @@ const StepSection = () => {
 
                         <div className='rounded col-12 col-md-8 custom-edu-loan' >
                             <Image src='/images/icons/Filling_up_of_Application_Form.jpg' className='rounded img-fluid' width={500} height={500} alt='filling-up-of-application-form' />
-                            <p className='fw-bold text-black my-3 text-center'>Fill out the Student Loan Application Form</p>
+                            <p className='fw-bold text-black my-3 mb-0 mb-md-3 text-center'>Fill out the Student Loan Application Form</p>
                         </div>
                         <div className='col-12 col-md-2'>
                             <span className='align-self-center d-flex justify-content-center'>
-                                <i className='bi fw-bold fs-5 bi-arrow-right arrow-right text-black'></i>
-                                <i className='bi fw-bold fs-5 bi-arrow-down arrow-down text-black'></i>
+                                <i className='bi fw-bold fs-5 bi-arrow-right-square-fill arrow-right text-blue'></i>
+                                <i className='bi fw-bold fs-5 bi-arrow-down-square-fill arrow-down text-blue'></i>
                             </span>
                         </div>
                     </div>
@@ -24,12 +24,12 @@ const StepSection = () => {
 
                         <div className='rounded col-12 col-md-8 custom-edu-loan' >
                             <Image src='/images/icons/Document_Verification_Interview.jpg' className='rounded img-fluid' width={500} height={500} alt='document-verification-interview' />
-                            <p className='fw-bold text-black my-3 text-center'>Submit the Required Documents   </p>
+                            <p className='fw-bold text-black my-3 mb-0 mb-md-3 text-center'>Submit the Required Documents   </p>
                         </div>
                         <div className='col-12 col-md-2'>
                             <span className='align-self-center d-flex justify-content-center'>
-                                <i className='bi fw-bold fs-5 bi-arrow-right arrow-right text-black'></i>
-                                <i className='bi fw-bold fs-5 bi-arrow-down arrow-down text-black'></i>
+                                <i className='bi fw-bold fs-5 bi-arrow-right-square-fill arrow-right text-blue'></i>
+                                <i className='bi fw-bold fs-5 bi-arrow-down-square-fill arrow-down text-blue'></i>
                             </span>
                         </div>
                     </div>
@@ -37,12 +37,12 @@ const StepSection = () => {
 
                         <div className='rounded col-12 col-md-8 custom-edu-loan' >
                             <Image src='/images/icons/Loan_Approval.jpg' className='rounded img-fluid' width={500} height={500} alt='loan-approval' />
-                            <p className='fw-bold text-black my-3 text-center'>Application Review by the Bank</p>
+                            <p className='fw-bold text-black my-3 mb-0 mb-md-3 text-center'>Application Review by the Bank</p>
                         </div>
                         <div className='col-12 col-md-2'>
                             <span className='align-self-center d-flex justify-content-center'>
-                                <i className='bi fw-bold fs-5 bi-arrow-right arrow-right text-black'></i>
-                                <i className='bi fw-bold fs-5 bi-arrow-down arrow-down text-black'></i>
+                                <i className='bi fw-bold fs-5 bi-arrow-right-square-fill arrow-right text-blue'></i>
+                                <i className='bi fw-bold fs-5 bi-arrow-down-square-fill arrow-down text-blue'></i>
                             </span>
                         </div>
                     </div>
@@ -50,7 +50,7 @@ const StepSection = () => {
 
                         <div className='rounded col-12 col-md-8 custom-edu-loan' >
                             <Image src='/images/icons/Loan_Disbursal.jpg' className='rounded img-fluid' width={500} height={500} alt='loan-disbursal' />
-                            <p className='fw-bold text-black my-3 text-center'>Pay the Loan to your Educational Institute</p>
+                            <p className='fw-bold text-black my-3 mb-0 mb-md-3 text-center'>Pay the Loan to your Educational Institute</p>
                         </div>
                         <div className='col-12 col-md-2'>
                             {/* <span className='align-self-center d-flex justify-content-center'>

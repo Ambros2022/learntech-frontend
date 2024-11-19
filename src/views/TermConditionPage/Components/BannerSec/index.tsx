@@ -11,7 +11,7 @@ const BannerSec = () => {
           <div className="container h-100">
             <div className="d-flex justify-content-center h-100">
               <div className="align-content-center text-center h-100">
-                <h1 className='text-white px-md-0 px-5 fw-bold'>Terms and Conditions</h1>
+                <h1 className='text-white px-md-0 px-0 fw-bold'>Terms and Conditions</h1>
                 <h6 className='text-white'>Stay up-to-date with Top Colleges, Universities, Exam updates.</h6>
               </div>
             </div>

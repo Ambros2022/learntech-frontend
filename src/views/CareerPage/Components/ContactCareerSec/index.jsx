@@ -10,7 +10,7 @@ const ContactCareerSec = ({ locations, data }) => {
         <h2 className='fw-bold text-center text-blue pb-3 d-none d-md-block'>Job Vacancy Application Form</h2>
         <div className='row py-3'>
           <div className='col-md-5 bg-blue rounded py-3'>
-            <h2 className='fw-bold text-white h2job'>Contact Career Representative</h2>
+            <h2 className='fw-bold text-white h2job '>Contact Career Representative</h2>
             <p className='text-white'>
               Please fill out the form to enable our career representatives to contact you at the earliest.
             </p>
@@ -79,9 +79,9 @@ const ContactCareerSec = ({ locations, data }) => {
               </div>
             </div>
           </div>
-          <div className='col-md-7 bg-white py-3 px-5' id='contactForm'>
+          <div className='col-md-7 bg-white py-3 px-3 px-md-5 carrer' id='contactForm'>
             <h2 className='text-center fw-bold text-blue d-none d-md-block' >Enter Your Details</h2>
-            <h2 className='fw-bold text-center text-blue pb-3 jobform d-block d-md-none' >Job Vacancy Application Form</h2>
+            <h2 className='carrer20 fw-bold text-center text-blue pb-3 jobform d-block d-md-none pt-3' >Job Vacancy Application Form</h2>
             <JObEnquiryForm locations={locations} data={data} />
           </div>
         </div>

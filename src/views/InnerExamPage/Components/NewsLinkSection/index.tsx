@@ -45,7 +45,7 @@ const NewsLinkSection: React.FC = React.memo(() => {
   }, [fetchNews]);
 
   return (
-    <section className="newsLinkSec2 bg-blue py-3 position-relative" style={{ zIndex: '2' }}>
+    <section className="newsLinkSec2 bg-blue py-3 position-relative "  style={{ zIndex: '2' }}>
       <div className="container text-center py-3 newsLink2Container rounded">
         <MainCarousel items={linkSectionItems} />
       </div>

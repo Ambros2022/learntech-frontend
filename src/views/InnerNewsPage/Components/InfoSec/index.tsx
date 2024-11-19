@@ -51,7 +51,7 @@ const InfoSec = ({ data }) => {
                         <h1 className='text-blue fw-bold'>{data.meta_title}</h1>
                     </div>
                     {data.pdf_file && (
-                        <div className="col-md-3">
+                        <div className="col-md-3 pb-3 pb-md-0">
                             <button className="btn applyNowButton align-content-center" onClick={handleOpenModal}>
                                 {data?.pdf_name ? data?.pdf_name  : "View PDF"}
                             </button>

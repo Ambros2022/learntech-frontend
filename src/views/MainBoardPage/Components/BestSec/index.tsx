@@ -3,7 +3,7 @@ import ContactForm from 'src/@core/components/popup/ContactForm';
 
 const BestSec = ({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) => {
     const [isExpanded, setIsExpanded] = useState(false);
-    const maxLength = 5700; // Adjust this value to change when the "Read More" button appears
+    const maxLength = 8000; // Adjust this value to change when the "Read More" button appears
 
     const toggleReadMore = () => {
         setIsExpanded(!isExpanded);

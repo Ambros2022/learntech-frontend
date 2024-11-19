@@ -62,7 +62,7 @@ const Footer = () => {
                 </div>
               </span>
             </div>
-            <div className="text-white">
+            <div className="text-white pb-3 pb-md-0">
               <h5 className="fw-bold mb-3">Info</h5>
               <ul className='list-unstyled'>
                 <li className='mb-2'><Link href="/about-us"><small><i className="bi bi-chevron-double-right"></i></small> About us</Link></li>
@@ -73,7 +73,7 @@ const Footer = () => {
                 <li className='mb-2'><Link href="/sitemap"><i className="bi bi-chevron-double-right"></i> Site Map</Link></li>
               </ul>
             </div>
-            <div className="text-white">
+            <div className="text-white pb-3 pb-md-0 ">
               <h5 className="fw-bold mb-3">Quick Links</h5>
               <ul className='list-unstyled'>
                 <li className='mb-2'><Link href="/blogs"><i className="bi bi-chevron-double-right"></i> Blogs</Link></li>
@@ -84,7 +84,7 @@ const Footer = () => {
                 <li className='mb-2'><Link href="/education-loan"><i className="bi bi-chevron-double-right"></i> Education Loan</Link></li>
               </ul>
             </div>
-            <div className="text-white">
+            <div className="text-white pb-3 pb-md-0">
               <h5 className="fw-bold mb-3">Legal</h5>
               <ul className='list-unstyled'>
                 <li className='mb-2'><Link href="/"><i className="bi bi-chevron-double-right"></i> Feed</Link></li>
@@ -96,11 +96,11 @@ const Footer = () => {
             </div>
             <div className="text-white">
               <h5 className="fw-bold mb-3 mb-md-3">Download Our App</h5>
-              <div className='d-flex  flex-row flex-md-column justify-content-around'>
-                <a href="https://apps.apple.com/in/app/learntech/id1623567055" target='_blank'><Image className="mb-1 mb-md-3 img-fluid boxShadow" width={150} height={100} alt="app-store-img" src="/images/icons/app-store.png" /></a>
+              <div className='d-flex px-2 px-md-0  flex-row flex-md-column justify-content-around'>
+                <a href="https://apps.apple.com/in/app/learntech/id1623567055" target='_blank'><Image className="mb-1 mb-md-3  boxShadow" width={150} height={50} alt="app-store-img" src="/images/icons/app-store.png" /></a>
 
 
-                <a href="https://play.google.com/store/apps/details?id=com.ilearntech.app" target='_blank'><Image className="img-fluid boxShadow" width={150} height={100} alt="google-play-img" src="/images/icons/google-play.png" /></a>
+                <a href="https://play.google.com/store/apps/details?id=com.ilearntech.app" target='_blank'><Image className=" boxShadow" width={150} height={50} alt="google-play-img" src="/images/icons/google-play.png" /></a>
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ const Footer = () => {
               <Image src="/images/icons/Phone-blue.svg" width={35} height={35} alt="phone-icon" className="red-filter" />
               </a>
           </div>
-          <div className="text-center">
+          <div className="text-center pb-3">
             <GlobalEnquiryForm pagename="Brochure" title="Get Brochure" />
           </div>
           <div className="text-md-end">

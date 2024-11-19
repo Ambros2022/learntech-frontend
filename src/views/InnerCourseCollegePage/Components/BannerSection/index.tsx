@@ -7,7 +7,7 @@ function BannerSection({ data }) {
   console.log(data);
   return (
     <>
-      <section className="bg-blue dentalCourseCon py-5">
+      <section className="bg-blue collegeCourseCon py-5">
         <div className="container h-100 flex-column column-gap-0 d-flex justify-content-center">
           <div className="align-items-center">
             <div className="row px-5 px-md-0">
@@ -15,7 +15,7 @@ function BannerSection({ data }) {
               <div className="col-md-12 col-12">
                 <div className="row">
                   <div className="col-12">
-                    <h1 className='text-white text-center'>{data.generalcourse.name} Course : Duration, Eligibility, Fee Structure <br /
+                    <h1 className='text-white text-center'>{data.generalcourse.name} Course:  Duration, Eligibility, Fee Structure <br /
                     ><br /><span>{data.college.name}</span></h1>
                   </div>
                 </div>

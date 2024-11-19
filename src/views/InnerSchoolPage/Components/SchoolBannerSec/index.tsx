@@ -17,8 +17,8 @@ const SchoolBannerSec = ({ data }) => {
             >
                 <h4 className='align-self-center text-center fw-bold p-3 text-white rounded'>Interested in Studying at This School?</h4>
                 <h2 className='align-self-center text-center mx-md-0 mx-5 text-white fw-bold p-3 bg-blue rounded'>{data.name}</h2>
-                <div className='text-center mt-3            '>
-                    <GlobalPopupEnquiry className='viewMoreCollegeBtn btn' placeholder="Class" />
+                <div className='text-center mt-3'>
+                    <GlobalPopupEnquiry className='viewMoreCollegeBtn btn btn-success2' placeholder="Class" />
                 </div>
             </section>
         </>

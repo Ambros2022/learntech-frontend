@@ -4,7 +4,7 @@ import React from 'react'
 function FaqSec({ data }) {
   return (
     <>
-      <section className='bg-white faqSec pb-5'>
+      <section className='bg-white faqSec pb-2'>
         <div className="container">
           <h2 className='text-center text-blue fw-bold pt-5 pb-3'>FAQs</h2>
           <div className="row faqImgCon">

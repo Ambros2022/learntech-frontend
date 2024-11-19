@@ -78,7 +78,7 @@ const TestimonialSec = () => {
                 testimonials && testimonials.length > 0 ? (
                     <section className='py-5 bg-white'>
                         <div className="container">
-                            <h2 className='text-blue fw-bold text-center mb-5'>Testimonials</h2>
+                            <h2 className='text-blue fw-bold text-center mb-3'>Testimonials</h2>
                             <div className='testimonialCarousel position-relative'>
                                 <Carousel
                                     swipeable

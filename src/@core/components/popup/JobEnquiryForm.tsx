@@ -195,7 +195,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                                 {resumeFileName ? (
                                     <div className='file-name'>{resumeFileName}</div>
                                 ) : (
-                                    <div className='placeholder-text'>Please Upload a valid .Pdf Or .Docx File</div>
+                                    <div className='placeholder-text'>Please Upload a valid .Pdf or .Docx File</div>
                                 )}
                             </div>
                         </div>

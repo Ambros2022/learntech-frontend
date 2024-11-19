@@ -46,10 +46,10 @@ function OverviewSection({ data, colleges, exams }) {
 
   const tabs = [
     { id: 'Overview', label: 'Overview', content: data.description },
-    { id: 'Syllabus', label: 'Syllabus', content: data.syllabus },
-    { id: 'Admissions', label: 'Admissions', content: data.admissions },
-    { id: 'Career', label: 'Career Opportunities', content: data.career_opportunities },
     { id: 'Top', label: 'Top Colleges', content: data.top_college },
+    { id: 'Admissions', label: 'Admissions', content: data.admissions },
+    { id: 'Syllabus', label: 'Syllabus', content: data.syllabus },
+    { id: 'Career', label: 'Career Opportunities', content: data.career_opportunities },
     { id: 'FAQ', label: 'FAQ', content: <FaqSec data={data.generalcoursefaqs} /> }
   ];
 
@@ -131,7 +131,7 @@ function OverviewSection({ data, colleges, exams }) {
 
         <div className="row">
           <div className="col-md-8 col-lg-9 pe-md-5">
-            <div className="tab-content pt-5" id="nav-tabContent">
+            <div className="tab-content pt-2" id="nav-tabContent">
               {renderTabContent()}
             </div>
           </div>

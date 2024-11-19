@@ -80,15 +80,16 @@ function BannerSection({ data }) {
                   <h1 className="card-title fw-bold mb-3 pt-3 pt-md-0">{data.name}</h1>
                   <h6 className='mb-3 d-flex '><i className='bi bi-geo-alt-fill text-danger me-1'></i> <span>{data.address}</span></h6>
                   <h6 className='mb-3 d-flex'>
-                    <><i className="text-warning bi bi-trophy-fill me-1 "></i> <span ><span className='fw-bold'>Approvals and Recognition  </span>&nbsp;:
-                      {data.boardrecognitions.length > 0 && data.boardrecognitions[0].brdrecognitions.recognition_approval_name}
+                    <><i className="text-warning bi bi-trophy-fill me-1 ">
+                      </i> <span ><span className='fw-bold'>Approvals and Recognition</span>:&nbsp;
+                       {data.boardrecognitions.length > 0 && data.boardrecognitions[0].brdrecognitions.recognition_approval_name}
                     </span>&nbsp;</>
                   </h6>
                   <div className='d-flex justify-content-md-start  mt-4 gap-md-5 gap-3 flex-wrap'>
-                    <h6 className='mb-3 fw-bold'>Est Year :&nbsp;<span className='fw-normal'>{
+                    <h6 className='mb-3 fw-bold'>Est Year:&nbsp;<span className='fw-normal'>{
                       data.established
                     }</span></h6>
-                    <h6 className='mb-3 fw-bold'><>Gender Accepted :&nbsp;</><span className='fw-normal'>{
+                    <h6 className='mb-3 fw-bold'><>Gender Accepted:&nbsp;</><span className='fw-normal'>{
                       data.gender
                     }</span></h6>
                   </div>
@@ -111,7 +112,8 @@ function BannerSection({ data }) {
 
 
             </div>
-            <div className="d-flex justify-content-md-end justify-content-center flex-md-row flex-column gap-3 ps-md-3 ps-0 ">
+            <div className="d-flex flex-wrap justify-content-md-end justify-content-center flex-md-row  gap-3 ps-md-3 ps-0 ">
+
               <button className='btn btn-danger resultDateBtn'><><i className="me-2 bi bi-alarm-fill"></i>Result Date : {formatDate(data.result_date)}</></button>
               <GlobalEnquiryForm className='align-content-center btn freeBtn' buttonText="Enquire Now" />
             </div>
