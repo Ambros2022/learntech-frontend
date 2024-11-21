@@ -8,8 +8,10 @@ const BannerSec = () => {
         <section className='SitemapSec position-relative'>
             <Image src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img'/>
             <div className="d-flex h-100 w-100 justify-content-center position-absolute" style={{top:'0'}}>
-                <div className="container h-100 d-flex justify-content-center">
-                    <h1 className="text-white text-bold text-center align-self-center">Sitemap</h1>
+                <div className="container h-100 row justify-content-center text-center align-content-center">
+                    <h1 className="col-12 text-white text-bold text-center align-self-center">Sitemap</h1>
+                    <p className='col-12 text-white pt-2'>Navigate Your Way to a Realm of Information
+                    </p>
                 </div>
             </div>
         </section>

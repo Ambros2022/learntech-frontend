@@ -108,8 +108,15 @@ const Footer = () => {
                 <h6 className='text-center text-white'>Learntech Edu Solutions Pvt Ltd.</h6>
             </section>
             <div className="mt-md-3 col-md-4 text-md-end">
-                <a href="tel:18001208969" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a>
+                {/* <a href="tel:18001208969" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a> */}
+
+
+                <a href="tel:18001208969" className="phone-icon">
+
+                    <Image src="/images/icons/Phone-blue.svg" width={35} height={35} alt="phone-icon" className="red-filter" />
+                </a>
                 <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={30} height={30} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
+
                 <a href="https://wa.me/+919036020076" target='_blank' className="whatsappIcon" ><Image width={35} height={35} className="footer-arrow" src="/images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
             </div>
         </>

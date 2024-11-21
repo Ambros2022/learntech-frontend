@@ -44,7 +44,7 @@ function FeaturedCollegeSection({ data }) {
             pathname: "/colleges",
             // query: { stream_id: data.generalcourse.stream_id }
           }}
-            className='btn viewMoreClgBtn'>Load More</Link>
+            className='btn viewMoreClgBtn'>View More</Link>
         </div>
       </div>
     </section>

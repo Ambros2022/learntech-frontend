@@ -146,9 +146,11 @@ function CollegeInfoSection({ data }) {
                     <GlobalPopupEnquiry className='viewMoreCollegeBtn btn' />
                   </div>
                 </div>
-                <div className='clgVideo rounded'>
+
+               {data?.video_url && <div className='clgVideo rounded'>
                   <iframe width="100%" height="100%" className="rounded" src={data.video_url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-                </div>
+                </div>}
+
               </div>
 
             </div>

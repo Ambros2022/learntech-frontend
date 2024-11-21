@@ -6,7 +6,7 @@ function GuidanceSec() {
       <section className='guidanceSec bg-skyBlue'>
         <div className="container py-5">
           <div className='p-3 rounded guidanceCon'>
-            <h4 className='text-blue fw-bold'>Guidelines:e</h4>
+            <h4 className='text-blue fw-bold'>Guidelines:</h4>
             <h6 className='text-black fw-bold'>Your review may be rejected if:</h6>
             <ul className='text-black'>
               <li><small>It is vague and short</small></li>

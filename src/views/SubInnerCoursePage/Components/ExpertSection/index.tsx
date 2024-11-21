@@ -5,7 +5,7 @@ const ExpertEnquiryForm = dynamic(() => import('src/@core/components/popup/Exper
 function ExpertSection() {
   return (
     <section className="Expert-bg-skyBlue" id="animation15">
-      <div className="container py-3 py-md-5">
+      <div className="container py-5 py-md-5">
         <h3 className="fw-bold text-center text-blue mb-3">Get In Touch With Our Expert Counsellor</h3>
         <ExpertEnquiryForm placeholder={'Stream'} />
       </div>
