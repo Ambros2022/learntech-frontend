@@ -115,7 +115,7 @@ function DetailsFillSec() {
       const formData = new FormData();
 
       formData.append('review_type', data.review_type);
-      if (data.review_type === 'college') {
+      if (data.review_type === 'college' || data.review_type === 'university') {
         formData.append('college_id', data.college_id.id);
         formData.append('course_type', data.course_type);
         formData.append('course_id', data.course_id.id);
@@ -171,7 +171,7 @@ function DetailsFillSec() {
     userrating: 0,
     content: '',
   };
-  
+
   const {
     control,
     handleSubmit,
@@ -184,13 +184,13 @@ function DetailsFillSec() {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
-  
+
   useEffect(() => {
     const storedUserData = localStorage.getItem('UserData');
     if (storedUserData) {
       const parsedUserData = JSON.parse(storedUserData);
       setUserData(parsedUserData);
-  
+
       // Update the form's default values with the parsed user data
       reset({
         ...defaultValues,
@@ -205,7 +205,7 @@ function DetailsFillSec() {
     if (showStep2) {
       setSchema(validationSchema3);
     } else {
-      if (reviewType == "college") {
+      if (reviewType == "college" || reviewType == "university") {
         setSchema(collegeSchema);
       }
       else {
@@ -235,16 +235,17 @@ function DetailsFillSec() {
                   error={Boolean(errors.review_type)}
                   {...(errors.review_type && { helperText: String(errors.review_type.message) })}
                 >
-                  <MenuItem value='college'>College/University</MenuItem>
-                
+                  <MenuItem value='college'>College </MenuItem>
+                  <MenuItem value='university'>University</MenuItem>
+
                   <MenuItem value='school'>School</MenuItem>
-     
+
                 </CustomTextField>
               )}
             />
           </Grid>
 
-          {reviewType === 'college' && (
+          {(reviewType === 'university' || reviewType === 'college') && (
             <>
               <Grid item xs={12} sm={6}>
                 <Controller
@@ -277,7 +278,7 @@ function DetailsFillSec() {
                           {...params}
                           error={Boolean(errors.college_id)}
                           {...(errors.college_id && { helperText: 'Please Select College' })}
-                          label='Select College/University'
+                          label={reviewType}
                         />
                       )}
                     />
@@ -418,9 +419,23 @@ function DetailsFillSec() {
                       error={Boolean(errors.grade)}
                       {...(errors.grade && { helperText: String(errors.grade.message) })}
                     >
-                      <MenuItem value='10'>10th</MenuItem>
-                      <MenuItem value='11'>11th</MenuItem>
-                      <MenuItem value='12'>12th</MenuItem>
+                      <MenuItem value='Nursery'>Nursery</MenuItem>
+                      <MenuItem value='LKG'>LKG</MenuItem>
+                      <MenuItem value='UKG'>UKG</MenuItem>
+                      <MenuItem value='Grade 1'>Grade 1</MenuItem>
+                      <MenuItem value='Grade 2'>Grade 2</MenuItem>
+                      <MenuItem value='Grade 3'>Grade 3</MenuItem>
+                      <MenuItem value='Grade 4'>Grade 4</MenuItem>
+                      <MenuItem value='Grade 5'>Grade 5</MenuItem>
+                      <MenuItem value='Grade 6'>Grade 6</MenuItem>
+                      <MenuItem value='Grade 7'>Grade 7</MenuItem>
+                      <MenuItem value='Grade 8'>Grade 8</MenuItem>
+                      <MenuItem value='Grade 9'>Grade 9</MenuItem>
+                      <MenuItem value='Grade 10'>Grade 10</MenuItem>
+                      <MenuItem value='Grade 11'>Grade 11</MenuItem>
+                      <MenuItem value='Grade 12'>Grade 12</MenuItem>
+
+
                     </CustomTextField>
                   )}
                 />
@@ -444,9 +459,9 @@ function DetailsFillSec() {
                   error={Boolean(errors.passing_year)}
                   {...(errors.passing_year && { helperText: String(errors.passing_year.message) })}
                 >
-                  {Array.from({ length: 31 }, (_, i) => (
-                    <MenuItem key={i} value={2020 + i}>
-                      {2020 + i}
+                  {Array.from({ length: 25 }, (_, i) => (
+                    <MenuItem key={i} value={2000 + i}>
+                      {2000 + i}
                     </MenuItem>
                   ))}
                 </CustomTextField>

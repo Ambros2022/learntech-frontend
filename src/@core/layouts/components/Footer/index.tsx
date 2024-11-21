@@ -107,17 +107,17 @@ const Footer = () => {
         </div>
         <div className="row container-fluid">
           <div className="text-md-start">
-        
+
             <a href="tel:18001208969" className="phone-icon">
- 
+
               <Image src="/images/icons/Phone-blue.svg" width={35} height={35} alt="phone-icon" className="red-filter" />
-              </a>
+            </a>
           </div>
           <div className="text-center pb-3">
             <GlobalEnquiryForm pagename="Brochure" title="Get Brochure" />
           </div>
           <div className="text-md-end">
-            
+
             <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={30} height={30} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
             <a href="https://wa.me/+919036020076" target='_blank' className="whatsappIcon" ><Image width={35} height={35} className="footer-arrow" src="/images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
           </div>

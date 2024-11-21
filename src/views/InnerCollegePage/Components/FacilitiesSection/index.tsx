@@ -32,7 +32,7 @@ function FacilitiesSection({ data }) {
   return (
     <section className='bg-white facilitiesSec py-3'>
       <div className="container bg-skyBlue px-4 py-3">
-        <h2 className='pt-3 text-blue fw-bold'>Facilities & Infrastructure</h2>
+        <h2 className='pt-3 text-blue fw-bold text-center'>Facilities & Infrastructure</h2>
         <CardList />
       </div>
     </section>

@@ -8,7 +8,7 @@ function LocationSection({ data }) {
   console.log(data.map)
   return (
     <>
-      <section className='locationSec bg-white pb-5 pt-5'>
+      <section className='locationSec bg-white pb-0 pb-md-5 pt-5'>
         <div className="container">
           <h2 className='pt-0 text-center mb-4 text-blue fw-bold'>Locate the School</h2>
           <div className="row px-3">

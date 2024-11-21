@@ -177,7 +177,7 @@ function CollegeInfoSection({ data }) {
   });
 
   return (
-    <section className='clgInfoSec bg-white'>
+    <section className=' bg-white'>
       <section className="container InnerCollegeNavigationLink linkFontSize py-3">
         <p className='mb-0'>
           <Link href="/">Home <i className='bi bi-chevron-right'></i></Link>

@@ -64,7 +64,7 @@ function BannerSection({ data }) {
 
 
             </div>
-            <div className="d-flex justify-content-end flex-md-row flex-column gap-1 gap-md-3 ps-md-0 ps-0">
+            <div className="d-flex justify-content-end flex-md-row flex-column gap-1 gap-md-3 ps-md-0 ps-0 align-items-center">
               <GlobalEnquiryForm pagename="Brochure" className='align-content-center btn downloadBtn' title="Download Brochure" />
               <GlobalEnquiryForm className='align-content-center btn freeBtn' buttonText="Get Fee Structure" />
             </div>

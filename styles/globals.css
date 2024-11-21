@@ -2200,6 +2200,7 @@
     .infoBtn .btn {
       width: 90% !important;
     }
+
     .innerNewsCarousel .btn {
       width: 90% !important;
     }
@@ -2207,10 +2208,7 @@
 
   }
 
-  @media (min-width: 425px) and (max-width: 767px) {
-
-
-  }
+  @media (min-width: 425px) and (max-width: 767px) {}
 
   @media (min-width: 320px) and (max-width: 374px) {
     .downloadBtn {
@@ -6227,6 +6225,8 @@
     background-color: rgba(255, 255, 255, 0.2) !important;
   }
 
+
+
   .cardHeight {
     display: -webkit-box !important;
     -webkit-line-clamp: 3 !important;
@@ -6359,11 +6359,18 @@
     font-size: 22px !important;
   }
 
+  .scholarh2 {
+    font-size: 22px !important;
+  }
 
   @media (min-width:320px) and (max-width:767px) {
     .f20 {
       font-size: 20px !important;
 
+    }
+
+    .newsLink2Container .carousel-button-group {
+      padding: 0px 20px !important;
     }
 
     .placeholder-text {
@@ -6483,6 +6490,7 @@
     display: none;
     /* Hides native arrow on IE/Edge */
   }
+
   .browseNews .getalert {
     font-size: 24px !important;
   }

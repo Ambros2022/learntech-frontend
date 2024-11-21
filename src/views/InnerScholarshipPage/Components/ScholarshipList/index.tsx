@@ -9,7 +9,7 @@ const NewsItem = ({ id,slug, title, text }) => (
                 <div className="row g-0">
                     <div className="col-md-12">
                         <div className="card-body text-center">
-                            <h5 className="card-title  fw-bold">{title}</h5>
+                            <h5 className="card-title  fw-bold mb-0">{title}</h5>
                         </div>
                     </div>
                 </div>
