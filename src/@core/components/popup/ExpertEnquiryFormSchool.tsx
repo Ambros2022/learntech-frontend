@@ -96,8 +96,8 @@ const EnquiryForm: FC<Props> = ({ ...rest }) => {
                             <ErrorMessage name="email" component="div" className="error text-danger" />
                         </div>
                         <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-                            <Field as="select" name="course"      className="form-control"
-                                style={{ appearance: 'auto', WebkitAppearance: 'auto' }}>
+                            <Field as="select" name="course"      className="form-control custom-select-bold-arrow"
+                                >
                                 <option value="">Select Grade</option>
                                 {grades.map((item) => (
                                     <option key={item.value} value={item.value}>{item.label}</option>

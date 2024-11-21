@@ -39,24 +39,31 @@ const ExperTraineeSec = ({ data }) => {
 
     const TrainerCard = ({ trainee }: { trainee: { name: string; location: string; experience: string; description: string, image: string } }) => {
         return (
-            <div className="card py-3 hover-card" style={{ border: '1px solid #274896' }}>
+            <div className="card py-3 hover-card h-100" style={{ border: '1px solid #274896' }}>
                 <div className="row d-flex px-3">
                     <div className="col-4 mb-lg-0 mb-md-3 mb-0 text-center align-content-center">
-                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${trainee.image}`} width={200} height={200} alt={`${trainee.name}-img`} className='img-fluid' style={{ borderRadius: '50%' }} />
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${trainee.image}`}
+                            width={200}
+                            height={200}
+                            alt={`${trainee.name}-img`}
+                            className="img-fluid"
+                            style={{ borderRadius: '50%' }}
+                        />
                     </div>
                     <div className="col-8 align-content-center counsellorText">
-                        <h5 className='text-blue'>{trainee.name}</h5>
-                        <h6 className='fw-light'>{trainee.location}</h6>
+                        <h5 className="text-blue">{trainee.name}</h5>
+                        <h6 className="fw-light">{trainee.location}</h6>
                     </div>
                 </div>
-                <hr className='text-blue' />
-                <div className='px-3'>
-                    <h6 className='fw-light'>Counsellor Since</h6>
-                    <h6 className='fw-light'>{format(new Date(trainee.experience), 'dd-MMM-yyyy')}</h6>
-                    <button className='btn mb-4 text-blue trainingBtn'>
+                <hr className="text-blue" />
+                <div className="px-3">
+                    <h6 className="fw-light">Counsellor Since</h6>
+                    <h6 className="fw-light">{format(new Date(trainee.experience), 'dd-MMM-yyyy')}</h6>
+                    <button className="btn mb-4 text-blue trainingBtn">
                         <small>{trainee.description}</small>
                     </button><br />
-                    <button className='btn viewMoreCollegeBtn' onClick={() => handleViewProfile(trainee)}>View Profile</button>
+                    <button className="btn viewMoreCollegeBtn" onClick={() => handleViewProfile(trainee)}>View Profile</button>
                 </div>
             </div>
         );
@@ -75,9 +82,9 @@ const ExperTraineeSec = ({ data }) => {
                                 The counselors at Learntech Edu Solutions Pvt. Ltd. spark inspiration, helping students navigate their academic paths with clarity and confidence. They are experts in creating strategies based on student’s preferences and interests to provide guidance for smooth admission process to colleges/ universities in India or abroad.
                             </p>
                             <div className='py-3'>
-                                <div className="row d-flex flex-wrap g-2">
+                                <div className="row d-flex flex-wrap g-2 align-items-stretch">
                                     {traineer.map((trainee: any, index: number) => (
-                                        <div className="col-md-4 col-lg-4 col-xl-3" key={index}>
+                                        <div className="col-12 col-md-4 col-lg-4 col-xl-3 " key={index}>
                                             <TrainerCard trainee={trainee} />
                                         </div>
                                     ))}

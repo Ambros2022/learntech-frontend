@@ -456,7 +456,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     <Controller
                                         name='sub_streams_id'
                                         control={control}
-                                        rules={{ required: true }}
+                                        // rules={{ required: true }}
                                         render={({ field }) => (
                                             <CustomAutocomplete
                                                 fullWidth

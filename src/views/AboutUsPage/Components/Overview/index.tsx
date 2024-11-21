@@ -109,7 +109,7 @@ const Overview = () => {
 
 
 
-                                    <h2 className='fw-bold text-black f20'>For Colleges and Universities:
+                                    <h2 className='fw-bold text-black f20 pt-3'>For Colleges and Universities:
                                     </h2>
                                     <div className="table-responsive">
                                         <table className="table table-responsive table-bordered tablecustom-border">

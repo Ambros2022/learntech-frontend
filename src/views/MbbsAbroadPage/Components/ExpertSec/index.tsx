@@ -10,7 +10,7 @@ const ExpertSec = () => {
                     <p className='text-blue rounded p-2 mb-3' style={{ display: 'inline-block', backgroundColor: 'white' }}>
                         Connect with our experts to avail admission assistance for MBBS Abroad
                     </p><br />
-                    <GlobalPopupEnquiry className='btn reqBtn' buttonText='Request a Call Back' />
+                    <GlobalPopupEnquiry className='btn reqBtn btn-success2' buttonText='Request a Call Back' />
                 </div>
             </section>
         </>
