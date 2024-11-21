@@ -87,9 +87,9 @@ function AssociatedClg() {
           <MainCarousel items={colleges.map(college => (
             <CollegeCard key={college.id} college={college} />
           ))} />
-          <div className="d-flex justify-content-center pb-5">
+          {/* <div className="d-flex justify-content-center pb-5">
             <Link href='/colleges' className='btn viewMoreClgBtn'>View More</Link>
-          </div>
+          </div> */}
         </div>
       </section>):''}
     </>

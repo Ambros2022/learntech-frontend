@@ -4,7 +4,7 @@ import ContactForm from 'src/@core/components/popup/ContactForm';
 
 const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string } }) => {
     const [isExpanded, setIsExpanded] = useState(false); // State for handling read more
-    const maxLength = 3700; // Adjust this value to control when "Read More" appears
+    const maxLength = 5400; // Adjust this value to control when "Read More" appears
 
     const toggleReadMore = () => {
         setIsExpanded(!isExpanded);
@@ -21,7 +21,7 @@ const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string
         return (
             <>
                 <div dangerouslySetInnerHTML={{ __html: truncatedText }} />
-                <div className='text-center mb-5'>
+                <div className='text-center mb-2 mt-2'>
                     <button onClick={toggleReadMore} className="btn viewMoreClgBtn">Read More</button>
                 </div>
             </>

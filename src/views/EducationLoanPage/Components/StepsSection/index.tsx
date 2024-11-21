@@ -16,7 +16,8 @@ const StepSection = () => {
                         <div className='col-12 col-md-2'>
                             <span className='align-self-center d-flex justify-content-center'>
                                 <i className='bi fw-bold fs-5 bi-arrow-right-square-fill arrow-right text-blue'></i>
-                                <i className='bi fw-bold fs-5 bi-arrow-down-square-fill arrow-down text-blue'></i>
+                                <i className="bi fw-bold bi-arrow-down-square-fill arrow-down text-blue" style={{ fontSize: '1.5rem' }}></i>
+
                             </span>
                         </div>
                     </div>
@@ -29,7 +30,7 @@ const StepSection = () => {
                         <div className='col-12 col-md-2'>
                             <span className='align-self-center d-flex justify-content-center'>
                                 <i className='bi fw-bold fs-5 bi-arrow-right-square-fill arrow-right text-blue'></i>
-                                <i className='bi fw-bold fs-5 bi-arrow-down-square-fill arrow-down text-blue'></i>
+                                <i className="bi fw-bold bi-arrow-down-square-fill arrow-down text-blue" style={{ fontSize: '1.5rem' }}></i>
                             </span>
                         </div>
                     </div>
@@ -42,7 +43,7 @@ const StepSection = () => {
                         <div className='col-12 col-md-2'>
                             <span className='align-self-center d-flex justify-content-center'>
                                 <i className='bi fw-bold fs-5 bi-arrow-right-square-fill arrow-right text-blue'></i>
-                                <i className='bi fw-bold fs-5 bi-arrow-down-square-fill arrow-down text-blue'></i>
+                                <i className="bi fw-bold bi-arrow-down-square-fill arrow-down text-blue" style={{ fontSize: '1.5rem' }}></i>
                             </span>
                         </div>
                     </div>

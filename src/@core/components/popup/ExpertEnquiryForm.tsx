@@ -117,8 +117,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
                             <Field
                                 as="select"
                                 name="course"
-                                className="form-control"
-                                style={{ appearance: 'auto', WebkitAppearance: 'auto' }} /* Ensures default arrow */
+                                className="form-control custom-select-bold-arrow"
                             >
                                 <option value="">Select {placeholder}</option>
                                 {streams.map((item) => (
@@ -139,3 +138,5 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
 };
 
 export default EnquiryForm;
+
+

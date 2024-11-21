@@ -52,7 +52,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                         <p className="mb-3 text-truncate"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i>{`${location}`}</p>
                                         <p className="mb-3">
                                             <div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-row'>
-                                                <span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />
+                                                <span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} className='me-1' alt='calendor Icon' />
                                                     Est. Year {established}</span><span className='me-auto align-self-center'>
                                                     <button className='ms-2 mt-md-0 mt-0 mt-md-3 btn typeBtn'>{type}</button>
                                                 </span>
