@@ -387,7 +387,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
 
                 <div>
                     <h2 className='fw-bold text-blue mt-4 pt-5'>Select Countries</h2>
-                    <div className='position-relative countryCarouselFilter mb-5 pt-3' style={{ zIndex: '2' }}>
+                    <div className='position-relative countryCarouselFilter mb-5 pt-3 innerschCarousel' style={{ zIndex: '2' }}>
                         <TabCarousel activeTab={activeTab} onTabClick={handleTabClick} />
                     </div>
                 </div>

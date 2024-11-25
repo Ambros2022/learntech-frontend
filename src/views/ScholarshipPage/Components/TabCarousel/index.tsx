@@ -59,7 +59,7 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
             responsive={responsive}
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
-            containerClass='carousel-container2Category pb-1'
+            containerClass='carousel-container2Category pb-1 scholarcrousel'
         >
             {tabs.length > 0 && tabs.map((tab) => (
                 <button

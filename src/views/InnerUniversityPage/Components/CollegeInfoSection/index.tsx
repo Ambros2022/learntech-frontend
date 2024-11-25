@@ -89,7 +89,7 @@ function CollegeInfoSection({ data }) {
   ];
 
   const ButtonGroup = ({ next, previous }) => (
-    <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
+    <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2 small-tab">
       <span className='fi-left' onClick={previous}>
         <FiChevronLeft />
       </span>
@@ -196,9 +196,10 @@ function CollegeInfoSection({ data }) {
             {renderTabs()}
           </Carousel>
         ) : (
-          <div className="pt-3 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3" id="nav-tab" role="tablist">
-            {renderTabs()}
-          </div>
+          <div className={`pt-3 text-center ${isMobile ? '' : 'justify-content-start d-flex flex-fill'} flex-wrap infoBtn`} id="nav-tab" role="tablist">
+          {renderTabs()}
+        </div>
+        
         )}
 
         <div className="tab-content pt-5" id="nav-tabContent">

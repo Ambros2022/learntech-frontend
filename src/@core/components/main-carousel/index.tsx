@@ -3,8 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-const MainCarousel = ({ items }) => {
-
+const MainCarousel = ({ items, autoPlayOnMobile = false }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   const handleResize = () => {
@@ -16,6 +15,7 @@ const MainCarousel = ({ items }) => {
     window.addEventListener('resize', handleResize); // Check on resize
     return () => window.removeEventListener('resize', handleResize); // Cleanup
   }, []);
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -35,7 +35,7 @@ const MainCarousel = ({ items }) => {
     }
   };
 
-  const ButtonGroup = ({ next, previous }: any) => {
+  const ButtonGroup = ({ next, previous }: any ) => {
     return (
       <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
         <span className='fi-left' onClick={previous} >
@@ -55,7 +55,7 @@ const MainCarousel = ({ items }) => {
       showDots={false}
       arrows={false}
       infinite
-      autoPlay={!isMobile}
+      autoPlay={autoPlayOnMobile || !isMobile} // Conditional auto-play
       autoPlaySpeed={2000}
       ssr  // SSR true for server-side rendering
       responsive={responsive}
