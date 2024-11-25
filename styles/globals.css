@@ -2843,28 +2843,26 @@
   .studyAbroadLink a {
     color: #274896 !important;
   }
-
+/* 
   .clgInfoSec table {
-    width: 100% !important;
+    width: 90% !important;
     border: 1px solid black !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
-  }
+  } */
 
-  .clgInfoSec .tab-content {
+  /* .clgInfoSec .tab-content {
     width: 100%;
     overflow-x: hidden;
-    /* Hide scrollbar by default */
-  }
+  } */
 
   /* Enable horizontal scrolling only for mobile devices */
   @media (max-width: 768px) {
-    .clgInfoSec .tab-content {
-      overflow-x: auto !important;
-      /* Show scrollbar for mobile */
+    /* .clgInfoSec .tab-content {
+
       -webkit-overflow-scrolling: touch !important;
-      /* Smooth scrolling for iOS */
-    }
+
+    } */
   }
 
   /* 
@@ -4110,7 +4108,7 @@
 
     .mbbs .carousel-button-group {
       position: absolute !important;
-      top: 2131px !important;
+      top: 1235px  !important;
       width: 100% !important;
       left: 0px;
     }
@@ -4153,7 +4151,7 @@
 
     .mbbs .carousel-button-group {
       position: absolute !important;
-      top: 2041px !important;
+      top: 1203px !important;
       width: 100% !important;
       left: 0px;
     }
@@ -5876,6 +5874,16 @@
 
   @media (min-width:320px) and (max-width:767px) {
 
+    .scholarcrousel .btn {
+      width: 80% !important;
+  }
+
+    .innerschCarousel .react-multi-carousel-list {
+      width: 300px !important;
+      margin-left: 20px !important;
+      padding-right: 15px !important;
+      z-index: 20 !important;
+    }
     .innerClgCarousel .react-multi-carousel-list {
       width: 300px !important;
       margin-left: 30px !important;
@@ -6368,6 +6376,10 @@
       font-size: 20px !important;
 
     }
+    .scholarcrousel{
+      padding-left: 15px !important;
+      z-index: 20 !important;
+    }
 
     .newsLink2Container .carousel-button-group {
       padding: 0px 20px !important;
@@ -6494,3 +6506,18 @@
   .browseNews .getalert {
     font-size: 24px !important;
   }
+
+  @media (max-width: 424px) {
+    .infoBtn {
+      display: inline-flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start; /* Align items to the start */
+      gap: 8px; /* Add minimal spacing between items */
+    }
+  
+    .infoBtn > * {
+      flex: 0 0 auto; /* Prevent items from stretching */
+      white-space: nowrap; /* Ensure text doesn’t wrap */
+    }
+  }
+  

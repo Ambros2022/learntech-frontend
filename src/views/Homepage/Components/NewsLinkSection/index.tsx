@@ -40,7 +40,7 @@ const NewsLinkSection: React.FC = React.memo(() => {
   return (
     <section className="newsLinkSec py-2">
       <div className="container text-center">
-        <MainCarousel items={linkSectionItems} />
+        <MainCarousel items={linkSectionItems} autoPlayOnMobile={true} />
       </div>
     </section>
   );

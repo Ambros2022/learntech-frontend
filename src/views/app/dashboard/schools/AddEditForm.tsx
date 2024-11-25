@@ -300,7 +300,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('home_view_status', data.home_view_status);
             formData.append('listing_order', data.listing_order);
             formData.append('amenities', JSON.stringify(data.amenities));
-            formData.append('levles', JSON.stringify(data.levles));
+            formData.append('levels', JSON.stringify(data.levels));
             formData.append('icon', selectedphoto);
             formData.append('banner_image', selectedbanner);
 
