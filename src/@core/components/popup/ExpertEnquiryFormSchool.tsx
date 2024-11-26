@@ -40,7 +40,7 @@ const EnquiryForm: FC<Props> = ({ ...rest }) => {
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
         contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone Number is required'),
-        course: Yup.string().required('Stream is required').trim(),
+        course: Yup.string().required('Grade is required').trim(),
     });
 
     const handleSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
