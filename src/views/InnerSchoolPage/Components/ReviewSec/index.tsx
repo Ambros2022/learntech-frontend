@@ -78,7 +78,7 @@ const ReviewSec = ({ data }) => {
                 const response = await axios.get('api/website/findonereview/get', {
                     params: {
                         size: 1000,
-                        college_id: data.id,
+                        school_id: data.id,
                     }
                 });
                 setCardData(response.data.data);

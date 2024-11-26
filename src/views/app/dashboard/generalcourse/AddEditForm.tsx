@@ -193,8 +193,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let url = 'api/admin/generalcourse/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('stream_id', data.stream_id.id);
-            formData.append('sub_streams_id', data.sub_streams_id.id);
+            formData.append('stream_id', data?.stream_id?.id);
+            if (data?.sub_streams_id?.id) {
+                formData.append('sub_streams_id', data?.sub_streams_id?.id);
+            }
+
             formData.append('name', data.name);
             formData.append('slug', data.slug);
             formData.append('course_type', data.course_type);
@@ -247,8 +250,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let url = 'api/admin/generalcourse/add';
 
             const formData = new FormData();
-            formData.append('stream_id', data.stream_id.id);
-            formData.append('sub_streams_id', data.sub_streams_id.id);
+            formData.append('stream_id', data?.stream_id?.id);
+            formData.append('sub_streams_id', data?.sub_streams_id?.id);
             formData.append('name', data.name);
             formData.append('slug', data.slug);
             formData.append('course_type', data.course_type);

@@ -6520,4 +6520,18 @@
       white-space: nowrap; /* Ensure text doesn’t wrap */
     }
   }
+
+  @media (min-width: 768px) {
+    .infoBtn {
+      display: flex; /* Maintain flex layout */
+      flex-wrap: wrap; /* Allow wrapping on larger screens */
+      justify-content: center; /* Center the items */
+      gap: 16px; /* Add more space between tabs */
+      padding: 10px 0; /* Add padding around the tabs */
+    }
+  
+    .infoBtn > * {
+      flex: 0 0 auto; /* Ensure tabs take space based on content */
+    }
+  }
   

@@ -268,7 +268,8 @@ function CollegeFilterSection() {
             const params: any = {
                 page: 1,
                 size: 10000,
-                orderby: 'desc'
+                orderby: 'desc',
+                columnname:'listing_order'
             };
 
 
