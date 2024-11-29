@@ -23,19 +23,18 @@ function DetailsFillSec() {
   const [showStep2, setShowStep2] = useState<boolean>(false); // New state for step 2 visibility
 
   const [userData, setUserData] = useState<{ name: string; email: string } | null>(null);
-
-
+  const [datatype, setDatatype] = useState<any>('college');
 
 
   const getcolleges = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10000 };
+      const roleparams = { page: 1, size: 10000, type: datatype };
       const response = await axios1.get('api/website/colleges/get', { params: roleparams });
       setColleges(response.data.data);
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [datatype]);
 
   const getschools = useCallback(async () => {
     try {
@@ -230,7 +229,11 @@ function DetailsFillSec() {
                   select
                   value={value}
                   label='Select review_type'
-                  onChange={onChange}
+                  onChange={(event) => {
+                    const newValue = event.target.value;
+                    setDatatype(newValue);
+                    onChange(newValue);
+                  }}
                   placeholder=''
                   error={Boolean(errors.review_type)}
                   {...(errors.review_type && { helperText: String(errors.review_type.message) })}

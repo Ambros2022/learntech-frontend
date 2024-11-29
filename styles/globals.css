@@ -714,6 +714,11 @@
     color: white;
   }
 
+  .newsLinkSec li {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
 
   .StudyAbroadCard .card-text img {
     filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
@@ -2201,6 +2206,10 @@
       width: 90% !important;
     }
 
+    .font13-m .btn {
+      font-size: 13px !important;
+    }
+
     .innerNewsCarousel .btn {
       width: 90% !important;
     }
@@ -2843,7 +2852,8 @@
   .studyAbroadLink a {
     color: #274896 !important;
   }
-/* 
+
+  /* 
   .clgInfoSec table {
     width: 90% !important;
     border: 1px solid black !important;
@@ -3902,7 +3912,7 @@
   .categorySecCarousel .carousel-button-group {
     position: absolute !important;
     top: 122px !important;
-    width: 67% !important;
+    width: 62% !important;
   }
 
   .categorySecCarousel .fi-left {
@@ -4108,7 +4118,7 @@
 
     .mbbs .carousel-button-group {
       position: absolute !important;
-      top: 1235px  !important;
+      top: 2135px !important;
       width: 100% !important;
       left: 0px;
     }
@@ -4151,7 +4161,7 @@
 
     .mbbs .carousel-button-group {
       position: absolute !important;
-      top: 1203px !important;
+      top: 2040px !important;
       width: 100% !important;
       left: 0px;
     }
@@ -5876,7 +5886,7 @@
 
     .scholarcrousel .btn {
       width: 80% !important;
-  }
+    }
 
     .innerschCarousel .react-multi-carousel-list {
       width: 300px !important;
@@ -5884,6 +5894,7 @@
       padding-right: 15px !important;
       z-index: 20 !important;
     }
+
     .innerClgCarousel .react-multi-carousel-list {
       width: 300px !important;
       margin-left: 30px !important;
@@ -6000,11 +6011,12 @@
 
     .testimonialPara {
       display: -webkit-box !important;
-      -webkit-line-clamp: 3 !important;
+      -webkit-line-clamp: 8 !important;
       -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
+      overflow-y: auto !important;
       text-overflow: ellipsis !important;
-      min-height: 70px !important;
+      max-height: 100px !important;
+      /* Set a max-height to trigger scrolling */
     }
 
     .studentSpeakCardBody {
@@ -6376,7 +6388,8 @@
       font-size: 20px !important;
 
     }
-    .scholarcrousel{
+
+    .scholarcrousel {
       padding-left: 15px !important;
       z-index: 20 !important;
     }
@@ -6511,27 +6524,46 @@
     .infoBtn {
       display: inline-flex;
       flex-wrap: nowrap;
-      justify-content: flex-start; /* Align items to the start */
-      gap: 8px; /* Add minimal spacing between items */
+      justify-content: flex-start;
+      /* Align items to the start */
+      gap: 8px;
+      /* Add minimal spacing between items */
     }
-  
-    .infoBtn > * {
-      flex: 0 0 auto; /* Prevent items from stretching */
-      white-space: nowrap; /* Ensure text doesn’t wrap */
+
+    .infoBtn>* {
+      flex: 0 0 auto;
+      /* Prevent items from stretching */
+      white-space: nowrap;
+      /* Ensure text doesn’t wrap */
     }
   }
 
   @media (min-width: 768px) {
     .infoBtn {
-      display: flex; /* Maintain flex layout */
-      flex-wrap: wrap; /* Allow wrapping on larger screens */
-      justify-content: center; /* Center the items */
-      gap: 16px; /* Add more space between tabs */
-      padding: 10px 0; /* Add padding around the tabs */
+      display: flex;
+      /* Maintain flex layout */
+      flex-wrap: wrap;
+      /* Allow wrapping on larger screens */
+      justify-content: center;
+      /* Center the items */
+      gap: 16px;
+      /* Add more space between tabs */
+      padding: 10px 0;
+      /* Add padding around the tabs */
     }
-  
-    .infoBtn > * {
-      flex: 0 0 auto; /* Ensure tabs take space based on content */
+
+    .infoBtn>* {
+      flex: 0 0 auto;
+      /* Ensure tabs take space based on content */
     }
   }
-  
+
+  .testimonialPara {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow-y: auto !important;
+    text-overflow: ellipsis !important;
+
+    /* Set a max-height to trigger scrolling */
+  }

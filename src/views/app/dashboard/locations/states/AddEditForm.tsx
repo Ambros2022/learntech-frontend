@@ -24,12 +24,13 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import type { FC } from 'react';
 
 
-import { Alert } from '@mui/material'
+import { Alert, Checkbox, FormControlLabel } from '@mui/material'
 
 
 interface FormInputs {
     name: string
     country_id: any
+    is_top: any
 }
 
 interface Authordata {
@@ -57,6 +58,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const defaultValues = {
         name: isAddMode || !olddata ? '' : olddata.name,
         country_id: (isAddMode || !olddata) ? '' : olddata.country,
+        is_top: isAddMode ? false : olddata.is_top ? olddata.is_top : false,
 
     }
 
@@ -82,6 +84,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.id = updateid;
             formData.name = data.name;
             formData.country_id = data.country_id.id;
+            formData.is_top = data?.is_top;
 
             try {
                 let response = await axios1.post(url, formData)
@@ -117,6 +120,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let formData: any = {};
             formData.name = data.name;
             formData.country_id = data.country_id.id;
+            formData.is_top = data?.is_top;
             try {
                 let response = await axios1.post(url, formData)
                 console.log(response, "response")
@@ -223,6 +227,27 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.name)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.name && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4 } style={{ marginTop: 14 }}> 
+
+                        <Controller
+
+                            name='is_top'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <FormControlLabel
+                                    label='is_top'
+                                    control={
+                                        <Checkbox
+                                            checked={value}
+                                            onChange={(e) => onChange(e.target.checked ? 1 : 0)}
+                                            name='is_top'
+                                        />
+                                    }
                                 />
                             )}
                         />

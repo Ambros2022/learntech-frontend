@@ -21,15 +21,15 @@ const ScholarshipPage = () => {
 
     const getPagedata = useCallback(async () => {
         try {
-          const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
-          if (isMountedRef.current) {
-    
-            setPagedata(response.data.data);
-          }
+            const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
+            if (isMountedRef.current) {
+
+                setPagedata(response.data.data);
+            }
         } catch (error) {
-          console.error('Failed to fetch trending courses:', error);
+            console.error('Failed to fetch trending courses:', error);
         }
-      }, [isMountedRef]);
+    }, [isMountedRef]);
 
 
     const getAboradPage = useCallback(async () => {
@@ -43,7 +43,7 @@ const ScholarshipPage = () => {
             console.error('Failed to fetch trending courses:', error);
         }
     }, [isMountedRef]);
-    
+
 
     const getScholarlevel = useCallback(async () => {
         try {
@@ -80,7 +80,7 @@ const ScholarshipPage = () => {
     }, [isMountedRef]); // Dependency array ensures function reference stability
 
 
-    
+
     useEffect(() => {
         getPagedata();
         getAboradPage();
@@ -98,8 +98,8 @@ const ScholarshipPage = () => {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             <BannerSec />
-            <ScholarshipAbroadSec data= {pagedata}  />
-            <FilterSec abroadData ={abroadData}  levelOptions ={levelOptions} typeOptions={typeOptions} countryData={countryData}/>
+            <ScholarshipAbroadSec data={pagedata} />
+            <FilterSec abroadData={abroadData} levelOptions={levelOptions} typeOptions={typeOptions} countryData={countryData} />
         </>
     )
 }

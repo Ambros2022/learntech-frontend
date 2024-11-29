@@ -54,7 +54,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
 
                                         <p className="mb-3">
                                             <div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-row'>
-                                                <span className='align-self-center me-auto'> <Image src='/images/icons/calendor-filled.png' width={20} height={20} className='me-1' alt='calendor Icon' /> 
+                                                <span className='align-self-center me-auto'> <Image src='/images/icons/calendor-filled.png' width={20} height={20} className='me-1' alt='calendor Icon' />
                                                     Est. Year  {established} </span><span className='me-auto align-self-center'>
                                                     <button className='ms-2 mt-md-0 mt-0 mt-md-3 btn typeBtn'>{type}</button>
                                                 </span>
@@ -168,6 +168,7 @@ function CollegeFilterSection() {
 
 
     type Option = {
+        is_top: string;
         label: string;
         value: string;
         cities?: Option[];
@@ -250,7 +251,8 @@ function CollegeFilterSection() {
                         };
                         arrcity.push(cityObj);
                         return cityObj;
-                    })
+                    }),
+                    is_top: state.is_top.toString(),
                 }));
 
                 setCitys(arrcity);
@@ -268,8 +270,8 @@ function CollegeFilterSection() {
             const params: any = {
                 page: 1,
                 size: 10000,
-                orderby: 'desc',
-                columnname:'listing_order'
+                orderby: 'asc',
+                columnname: 'listing_order'
             };
 
 
@@ -597,13 +599,15 @@ function CollegeFilterSection() {
                         <h6 className="text-black">Filters By Location</h6>
                         <div className="d-flex flex-wrap">
                             {options.map((option, index) => (
-                                <button
-                                    key={index}
-                                    className={`btn text-center m-1 p-2 filterItemBtn  ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
-                                    onClick={() => handleStateButtonClick(option.value)}
-                                >
-                                    {option.label}
-                                </button>
+                                option.is_top === "1" && (
+                                    <button
+                                        key={index}
+                                        className={`btn text-center m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                        onClick={() => handleStateButtonClick(option.value)}
+                                    >
+                                        {option.label}
+                                    </button>
+                                )
                             ))}
                         </div>
                     </div>

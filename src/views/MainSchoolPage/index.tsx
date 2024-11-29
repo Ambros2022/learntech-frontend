@@ -20,7 +20,7 @@ function MainSchoolPage() {
 
   const getPagedata = useCallback(async () => {
     try {
-      const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
+      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
       if (isMountedRef.current) {
 
         setPagedata(response.data.data);
@@ -65,7 +65,7 @@ function MainSchoolPage() {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       <BannerSection />
-      <TopCollegesSection data= {pagedata}/>
+      <TopCollegesSection data={pagedata} />
       <CollegeFilterSection />
       {/* <BestCollegeSec /> */}
       <ExpertSection />

@@ -161,6 +161,7 @@ function CollegeFilterSection() {
 
 
     type Option = {
+        is_top: string;
         label: string;
         value: string;
         cities?: Option[];
@@ -242,7 +243,8 @@ function CollegeFilterSection() {
                         };
                         arrcity.push(cityObj);
                         return cityObj;
-                    })
+                    }),
+                    is_top: state.is_top.toString(),
                 }));
 
                 setCitys(arrcity);
@@ -589,13 +591,15 @@ function CollegeFilterSection() {
                         <h6 className="text-black">Filters By Location</h6>
                         <div className="d-flex flex-wrap">
                             {options.map((option, index) => (
-                                <button
-                                    key={index}
-                                    className={`btn text-center m-1 p-2 filterItemBtn  ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
-                                    onClick={() => handleStateButtonClick(option.value)}
-                                >
-                                    {option.label}
-                                </button>
+                                option.is_top === "1" && (
+                                    <button
+                                        key={index}
+                                        className={`btn text-center m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                        onClick={() => handleStateButtonClick(option.value)}
+                                    >
+                                        {option.label}
+                                    </button>
+                                )
                             ))}
                         </div>
                     </div>

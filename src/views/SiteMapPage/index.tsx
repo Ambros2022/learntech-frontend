@@ -12,20 +12,20 @@ const SiteMapPage = () => {
   const [pagedata, setPagedata] = useState<any>();
 
   const getPagedata = useCallback(async () => {
-      try {
-        const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
-        if (isMountedRef.current) {
-  
-          setPagedata(response.data.data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch trending courses:', error);
+    try {
+      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
+      if (isMountedRef.current) {
+
+        setPagedata(response.data.data);
       }
-    }, [isMountedRef]);
+    } catch (error) {
+      console.error('Failed to fetch trending courses:', error);
+    }
+  }, [isMountedRef]);
 
 
   useEffect(() => {
-      getPagedata();
+    getPagedata();
 
   }, []);
   return (
