@@ -79,16 +79,16 @@ const TestimonialSec = ({ testimonials }: { testimonials: Testimonial[] }) => {
                                                     <iframe
                                                         width="100%"
                                                         height="auto"
-                                                        src={card?.streamTestimonials?.video_url}
+                                                        src={card?.collegeTestimonials?.video_url}
                                                         allowFullScreen
                                                         className="embedly-embed"
                                                     ></iframe>
                                                 </div>
                                                 <div className="col-md-6 d-flex flex-column justify-content-between">
                                                     <div className="p-2 flex-fill">
-                                                        <h5 className="text-black fw-bold pt-2">{card?.streamTestimonials?.name}</h5>
+                                                        <h5 className="text-black fw-bold pt-2">{card?.collegeTestimonials?.name}</h5>
                                                         <p className="text-black studentSpeakCardBody overflow-y-auto">
-                                                            {card?.streamTestimonials?.designation}
+                                                            {card?.collegeTestimonials?.designation}
                                                         </p>
                                                     </div>
                                                 </div>
