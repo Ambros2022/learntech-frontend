@@ -36,10 +36,10 @@ const StudentsSpeakPage = () => {
     setSearchQuery(query);
     setCurrentPage(1); // Reset to first page when searching
   };
-  
+
   const getPagedata = useCallback(async () => {
     try {
-      const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
+      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
       if (isMountedRef.current) {
 
         setPagedata(response.data.data);

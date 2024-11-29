@@ -21,16 +21,16 @@ const CareerPage = () => {
 
     const getPagedata = useCallback(async () => {
         try {
-          const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
-          if (isMountedRef.current) {
-    
-            setPagedata(response.data.data);
-          }
+            const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
+            if (isMountedRef.current) {
+
+                setPagedata(response.data.data);
+            }
         } catch (error) {
-          console.error('Failed to fetch trending courses:', error);
+            console.error('Failed to fetch trending courses:', error);
         }
-      }, [isMountedRef]);
-    
+    }, [isMountedRef]);
+
 
 
 
@@ -62,8 +62,8 @@ const CareerPage = () => {
         getPagedata();
         getJobs();
         getJobsLocation();
-       
-      
+
+
     }, []);
 
     return (
@@ -75,10 +75,10 @@ const CareerPage = () => {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             <BannerSec />
-            <AboutSec data={pagedata}/>
-            <CurrentOpeningSec  jobData= {jobData}  />
-            <ContactCareerSec locations={locations}  data= {jobData} />
-            <DisclaimerSec  data={pagedata} />
+            <AboutSec data={pagedata} />
+            <CurrentOpeningSec jobData={jobData} />
+            <ContactCareerSec locations={locations} data={jobData} />
+            <DisclaimerSec data={pagedata} />
         </>
     )
 }

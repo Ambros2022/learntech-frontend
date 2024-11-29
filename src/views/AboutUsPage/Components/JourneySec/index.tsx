@@ -3,7 +3,7 @@ import React from 'react'
 const JourneySec = () => {
     return (
         <>
-            <section className='bg-white pt-0 pt-md-5'>
+            <section className='bg-white pt-0 pt-md-0'>
                 <div className="container">
                     <h2 className='fw-bold text-blue text-center mb-3'>
                         The Journey of Learntech Edu Solutions

@@ -30,7 +30,7 @@ const MainBoardPage = () => {
 
   const getPagedata = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/pagefindone/get/boards');
+      const response = await axios.get('api/website/pagefindone/getboards');
       if (isMountedRef.current) {
 
         setPagedata(response.data.data);

@@ -5,7 +5,7 @@ import React from 'react'
 const OurPortalSec = () => {
     return (
         <>
-            <section className='bg-white py-5 pt-md-5'>
+            <section className='bg-white py-5 pt-md-2'>
                 <div className="container">
                     <h2 className='fw-bold text-blue text-center'>Our Portals</h2>
                     <div className="d-flex gap-5 mt-4 flex-wrap justify-content-center">

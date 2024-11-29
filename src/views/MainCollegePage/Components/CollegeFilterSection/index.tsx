@@ -166,6 +166,7 @@ function CollegeFilterSection() {
 
 
     type Option = {
+        is_top: string;
         label: string;
         value: string;
         cities?: Option[];
@@ -175,6 +176,7 @@ function CollegeFilterSection() {
         id: string;
         label: string;
         options: Option[];
+        isTop?: any;
     };
 
 
@@ -244,10 +246,12 @@ function CollegeFilterSection() {
                         const cityObj = {
                             label: city.name,
                             value: city.id.toString(),
+
                         };
                         arrcity.push(cityObj);
                         return cityObj;
-                    })
+                    }),
+                    is_top: state.is_top.toString(),
                 }));
 
                 setCitys(arrcity);
@@ -547,9 +551,11 @@ function CollegeFilterSection() {
         options: Option[];
         setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
         selectedCheckboxes: Record<string, string[]>;
+
     }> =
         ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
 
+  
 
             const handleStateButtonClick = (state: string) => {
 
@@ -573,17 +579,21 @@ function CollegeFilterSection() {
                 <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2 rounded">
                     <div className="col-12">
                         <h6 className="text-black">Filters By Location</h6>
+                        
                         <div className="d-flex flex-wrap">
                             {options.map((option, index) => (
-                                <button
-                                    key={index}
-                                    className={`btn text-center m-1 p-2 filterItemBtn  ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
-                                    onClick={() => handleStateButtonClick(option.value)}
-                                >
-                                    {option.label}
-                                </button>
+                                option.is_top === "1" && (
+                                    <button
+                                        key={index}
+                                        className={`btn text-center m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
+                                        onClick={() => handleStateButtonClick(option.value)}
+                                    >
+                                        {option.label}
+                                    </button>
+                                )
                             ))}
                         </div>
+
                     </div>
                 </div>
             );
@@ -722,10 +732,6 @@ function CollegeFilterSection() {
                                 <div className="col-md-4 addImgClg position-relative">
                                     <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
                                     <div className="position-absolute iconsPosition">
-                                        {/* <div className="d-flex flex-column">
-                                            <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-info-circle"></i></h6>
-                                            <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-x-circle"></i></h6>
-                                        </div> */}
                                     </div>
                                     <h2 className='position-absolute text-white' style={{ backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px', zIndex: '3000', top: '50%', left: '50%', color: "white" }}>Ad</h2>
                                 </div>

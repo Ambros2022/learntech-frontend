@@ -168,7 +168,7 @@ const SecondPage = () => {
   let columns: GridColDef[] = [
 
     {
-      flex: 0.175,
+      flex: 0.190,
       minWidth: 200,
       field: 'name',
       headerName: 'name',
@@ -190,7 +190,7 @@ const SecondPage = () => {
     },
 
     {
-      flex: 0.175,
+      flex: 0.100,
       minWidth: 100,
       field: 'slug',
       headerName: 'Slug',
@@ -208,45 +208,10 @@ const SecondPage = () => {
       }
     },
 
-    // {
-    //   flex: 0.175,
-    //   minWidth: 100,
-    //   field: 'citys.name',
-    //   headerName: 'City',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params
 
-    //     return (
-
-    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //         {row.citys.name}
-    //       </Typography>
-
-
-    //     )
-    //   }
-    // },
-    // {
-    //   flex: 0.175,
-    //   minWidth: 100,
-    //   field: 'state.name',
-    //   headerName: 'Area',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params
-
-    //     return (
-
-    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //         {row.state.name}
-    //       </Typography>
-
-
-    //     )
-    //   }
-    // },
     {
-      flex: 0.175,
-      minWidth: 100,
+      flex: 0.080,
+      minWidth: 50,
       field: 'gender',
       headerName: 'Gender',
       renderCell: (params: GridRenderCellParams) => {
@@ -262,7 +227,44 @@ const SecondPage = () => {
         )
       }
     },
-  
+    {
+      flex: 0.1,
+      minWidth: 120,
+      field: 'listing_order',
+      headerName: 'listing_order',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.listing_order}
+          </Typography>
+
+
+        )
+      }
+    },
+    
+    {
+      flex: 0.1,
+      minWidth: 50,
+      field: 'status',
+      headerName: 'Status',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.status}
+          </Typography>
+
+
+        )
+      }
+    },
+
 
 
     {

@@ -144,20 +144,20 @@ function CollegeInfoSection({ data }) {
                     <GlobalPopupEnquiry className='viewMoreCollegeBtn btn-success2' placeholder="Class" />
                   </div>
                 </div>
-                <div className='clgVideo rounded'>
-                  {embedUrl ? (
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      className="rounded"
-                      src={embedUrl}
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                    ></iframe>
-                  ) : ''}
-                </div>
+                {embedUrl ? (<div className='clgVideo rounded'>
 
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    className="rounded"
+                    src={embedUrl}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+
+                </div>
+                ) : ''}
               </div>
 
             </div>
@@ -199,7 +199,7 @@ function CollegeInfoSection({ data }) {
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             responsive={responsive}
-            className="infoBtn gap-3  text-center"
+            className="infoBtn gap-3  text-center font13-m"
           >
             {renderTabs()}
           </Carousel>

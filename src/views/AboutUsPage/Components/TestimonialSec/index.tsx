@@ -8,6 +8,7 @@ import test from 'node:test';
 
 // Define the interface for a testimonial
 interface Testimonial {
+    collegeTestimonials?: any;
     name: string;
     location: string;
     institution: string;
@@ -35,18 +36,25 @@ const responsive = {
     }
 };
 
-const ButtonGroup = ({ next, previous }: { next?: () => void; previous?: () => void }) => {
-    return (
-        <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
-            <span className='fi-left' onClick={previous}>
-                <FiChevronLeft />
-            </span>
-            <span className='fi-right' onClick={next}>
-                <FiChevronRight />
-            </span>
-        </div>
-    );
-};
+const ButtonGroup = ({
+    next,
+    previous,
+    showButtons,
+}: {
+    next?: () => void;
+    previous?: () => void;
+    showButtons: boolean;
+}) => (
+    <div className={`carousel-button-group d-flex justify-content-between ${showButtons ? '' : 'd-none'}`}>
+        <span className="carousel-btn fi-left" onClick={previous}>
+            <FiChevronLeft size={30} />
+        </span>
+        <span className="carousel-btn fi-right" onClick={next}>
+            <FiChevronRight size={30} />
+        </span>
+    </div>
+);
+
 
 const TestimonialSec = () => {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -72,6 +80,18 @@ const TestimonialSec = () => {
         fetchTestimonials();
     }, [fetchTestimonials]);
 
+    const [isDesktop, setIsDesktop] = useState(true);
+
+    useEffect(() => {
+        const updateIsDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+        updateIsDesktop();
+        window.addEventListener('resize', updateIsDesktop);
+        return () => window.removeEventListener('resize', updateIsDesktop);
+    }, []);
+
+    const autoPlay = testimonials.length > 0 && (!isDesktop || testimonials.length > 2);
+    const showButtons = isDesktop && testimonials.length > 2;
+
     return (
         <>
             {
@@ -86,12 +106,12 @@ const TestimonialSec = () => {
                                     showDots={false}
                                     arrows={false}
                                     infinite
-                                    autoPlay
+                                    autoPlay={autoPlay}
                                     autoPlaySpeed={2000}
                                     ssr
                                     responsive={responsive}
                                     renderButtonGroupOutside
-                                    customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
+                                    customButtonGroup={<ButtonGroup showButtons={showButtons} />}
                                 >
                                     {testimonials.map((testimonial, index) => (
                                         <div className="card p-3 bg-skyBlue border-0 mb-3 mx-md-2 mx-3" key={index}>
@@ -105,13 +125,25 @@ const TestimonialSec = () => {
                                                     <h5 className='text-blue'>{testimonial.name}
                                                         {/* ({testimonial.location}) */}
                                                     </h5>
-                                                    {/* <p className='text-black'>{testimonial.institution}</p> */}
+                                                    <p className='text-black'>
+
+
+                                                        {
+                                                            testimonial?.collegeTestimonials && testimonial.collegeTestimonials.map((element, index) => {
+                                                                return (
+                                                                    <>
+                                                                        {index == 0 ? ' ' + element?.collegeDetails?.name : ', ' + element?.collegeDetails?.name}
+                                                                    </>
+                                                                )
+                                                            })
+                                                        }
+                                                    </p>
                                                 </div>
                                             </div>
                                             <hr />
                                             <div className="d-flex">
                                                 <i className='bi bi-quote fs-1 text-blue align-self-start me-2'></i>
-                                                <p className='text-black mt-3 testimonialPara'>
+                                                <p className='text-black mt-3 testimonialPara  '>
                                                     {testimonial.designation}
                                                 </p>
                                                 <i className='bi bi-quote align-self-end fs-1 text-blue ms-2'></i>
@@ -122,8 +154,8 @@ const TestimonialSec = () => {
                             </div>
                         </div>
                     </section>
-                ):''
-        }
+                ) : ''
+            }
 
         </>
     );

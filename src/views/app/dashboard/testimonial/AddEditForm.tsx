@@ -315,6 +315,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     label='Designation'
                                     onChange={onChange}
                                     placeholder=''
+                                    multiline={true}
+                                    rows={10}
                                     error={Boolean(errors.designation)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.designation && { helperText: 'This field is required' })}

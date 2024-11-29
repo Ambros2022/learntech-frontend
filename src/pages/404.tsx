@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState,ReactNode } from 'react';
+import React, { useCallback, useEffect, useState, ReactNode } from 'react';
 import axios from 'src/configs/axios';
 
 import { useRouter } from 'next/router';
@@ -16,7 +16,7 @@ const Error404 = () => {
 
   const getPagedata = useCallback(async () => {
     try {
-      const response = await axios.get(`api/website/pagefindone/get/${router.asPath}`);
+      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
       if (isMountedRef.current) {
 
         setPagedata(response.data.data);
