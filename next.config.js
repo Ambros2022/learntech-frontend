@@ -10,7 +10,7 @@ module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
   images: {
-    domains: ['localhost', 'preprod.keralastudy.com'],
+    domains: ['localhost', 'preprod.keralastudy.com','3.6.46.89'],
   },
   webpack: config => {
     config.resolve.alias = {

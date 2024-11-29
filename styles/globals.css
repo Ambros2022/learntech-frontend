@@ -6,6 +6,10 @@
     font-family: 'Poppins' !important;
   }
 
+  p {
+    font-size: 16px !important;
+  }
+
   #__next {
     height: 100%;
   }
@@ -438,6 +442,22 @@
     background-color: rgba(39, 72, 150, 0.04) !important;
   }
 
+  /* .exploreCon h2 {
+    font-size: 29px;
+  } */
+
+  .ServiceTabs button {
+    border: 1px solid #274896 !important;
+    color: #274896 !important;
+    padding: 10px 15px !important;
+  }
+
+  .ServiceTabs .active {
+    background-color: #274896 !important;
+    color: white !important;
+    padding: 10px 15px !important;
+  }
+
   .exploreNav a {
     border: 1px solid rgba(39, 72, 150, 0.2) !important;
     border-radius: 0 !important;
@@ -509,14 +529,15 @@
 
   .studyAbroadNav a {
     border-radius: 10px !important;
+    width: 130px;
     color: #254692 !important;
     text-decoration: none !important;
-    padding: 10px 10px !important;
     border: 1px solid #254692 !important;
-    width: 150px !important;
-    padding: 12px 30px !important;
     text-align: center !important;
     background-color: #f6f8fb;
+    margin: 0 auto !important;
+    padding: 5px !important;
+    font-size: 15px !important;
   }
 
   .studyAbroadNav a:hover {
@@ -561,7 +582,7 @@
   }
 
   .footer-logo {
-    width: 100% !important;
+    width: 95% !important;
     height: 100% !important;
     margin-left: -20px !important;
   }
@@ -586,7 +607,7 @@
   }
 
   .footerCon a:hover {
-    color: skyblue !important;
+    color: #0077b5 !important;
   }
 
   footer {
@@ -601,12 +622,16 @@
     filter: invert(100%) sepia(100%) saturate(38%) hue-rotate(254deg) brightness(110%) contrast(110%) !important;
   }
 
+  .red-filter {
+    filter: brightness(0) invert(1);
+  }
+
   .phone-icon {
-    background-color: rgb(255, 253, 232) !important;
+    background-color: rgb(248, 67, 101) !important;
     border-radius: 50% !important;
-    padding: 16px 18px !important;
+    padding: 14px 12px !important;
     border: none !important;
-    width: 64px !important;
+    width: 67px !important;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
     position: fixed !important;
     z-index: 100 !important;
@@ -662,6 +687,11 @@
     filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
   }
 
+
+  .featuredClgCard .card-text i {
+    color: red !important;
+  }
+
   .featuredClgCard a {
     background-color: white;
     font-size: 12px !important;
@@ -684,6 +714,11 @@
     color: white;
   }
 
+  .newsLinkSec li {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
 
   .StudyAbroadCard .card-text img {
     filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
@@ -697,12 +732,6 @@
   .StudyAbroadCard .card-text {
     filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
   }
-
-  /* .StudyAbroadCard a {
-    background-color: white;
-    color: #254692;
-    border: 1px solid #254692 !important;
-  } */
 
   .StudyAbroadCard {
     margin-right: 10px !important;
@@ -727,17 +756,31 @@
   }
 
   .newsLinkSec2 .carousel-button-group {
-    margin: -50px 0px 0px 0px !important;
+    position: absolute !important;
+    width: 95% !important;
+    top: 30% !important;
+    z-index: -1 !important;
   }
-.newsLinkSec2 .fi-left  svg{
-  stroke: white !important; 
-}
-.newsLinkSec2 .fi-right svg{
-  stroke: white !important; 
-}
+
+  .newsLinkSec2 .fi-left {
+    z-index: 20 !important;
+  }
+
+  .newsLinkSec2 .fi-right {
+    z-index: 20 !important;
+  }
+
+  .newsLinkSec2 .fi-left svg {
+    stroke: white !important;
+  }
+
+  .newsLinkSec2 .fi-right svg {
+    stroke: white !important;
+  }
+
   .carouselInnerCourse .carousel-button-group {
     position: absolute !important;
-    top: 10px !important;
+    top: 5px !important;
     width: 100%;
     z-index: -1 !important;
   }
@@ -782,7 +825,7 @@
 
   .FeaturedClgCon .carousel-button-group {
     position: absolute !important;
-    top: 260px !important;
+    top: 220px !important;
     width: 100%;
 
   }
@@ -846,7 +889,7 @@
   }
 
   .newsLinkSec2 .fi-right {
-    margin-right: -50px !important;
+    margin-right: 100px !important;
   }
 
   .StudyAbroadCon .carousel-button-group {
@@ -882,6 +925,16 @@
 
   .card-con .fi-left svg {
     stroke: white;
+
+  }
+
+  .card-board .fi-left svg {
+    stroke: rgb(1, 1, 1) !important;
+
+  }
+
+  .card-board .fi-right svg {
+    stroke: rgb(0, 0, 0) !important;
 
   }
 
@@ -946,17 +999,15 @@
     overflow: hidden !important;
   }
 
-  /* .showingCards .collapse.show {
-    height: 200px !important;
-    transition: height 50s ease-in !important;
-    transition-delay: 10s !important;
+  .searchForm h2 {
+    font-size: 20px !important;
   }
 
-  .showingCards .collapse {
-    height: 0 !important;
-    overflow: hidden !important;
-    transition: height 10s ease !important;
-  } */
+  @media (min-width:1025px) and (max-width:1500px) {
+    .marginLeftSize {
+      margin-left: -40px !important;
+    }
+  }
 
   @media (min-width:1025px) and (max-width:1400px) {
     .card-image {
@@ -969,13 +1020,27 @@
     }
 
     .featuredClgCard a {
-      font-size: 11px !important;
+      font-size: 15px !important;
+    }
+
+    .newsLinkSec2 .carousel-button-group {
+
+      width: 98% !important;
+
     }
   }
 
+  .examNewsText {
+    font-size: 13px !important;
+  }
+
   @media (min-width: 1024px) and (max-width: 1199px) {
+    .examNewsText {
+      font-size: 10px !important;
+    }
+
     .featuredClgCard a {
-      font-size: 12px !important;
+      font-size: 15px !important;
     }
 
     .bannerCon .carousel-control-prev {
@@ -984,6 +1049,10 @@
 
     .bannerCon .carousel-control-next {
       right: -50px;
+    }
+
+    .cardInnerExam h6 {
+      font-size: 15px !important;
     }
   }
 
@@ -994,17 +1063,27 @@
   } */
 
   @media (max-width: 1024px) {
+    .footerCon {
+      font-size: 16px !important;
+    }
+
     .top-nav {
       font-size: 12px !important;
     }
 
-    .searchForm h5 {
+    .searchForm h2 {
       font-size: 19px !important;
+    }
+
+
+    .searchForm {
+      padding: 20px 30px;
+
     }
 
     .carouselInnerCourse .carousel-button-group {
       position: absolute !important;
-      top: 15px !important;
+      top: 10px !important;
       width: 100%;
       z-index: -1 !important;
     }
@@ -1038,7 +1117,7 @@
 
     .carouselInnerCourse .carousel-button-group {
       position: absolute !important;
-      top: 15px !important;
+      top: 10px !important;
       width: 100%;
       z-index: -1 !important;
     }
@@ -1070,7 +1149,7 @@
     }
 
     .footer-logo {
-      width: 100% !important;
+      width: 95% !important;
       height: 100% !important;
       margin-left: -14px !important;
     }
@@ -1116,7 +1195,7 @@
     }
 
     .footerCon {
-      font-size: 12px !important;
+      font-size: 16px !important;
     }
 
     .footerIcon img {
@@ -1128,12 +1207,12 @@
       font-size: 15px !important;
     }
 
-    .searchForm h5 {
-      font-size: 19px !important;
+    .searchForm h2 {
+      font-size: 21px !important;
     }
 
     .phone-icon {
-      background-color: white !important;
+      background-color: rgb(248, 67, 101) !important;
       border-radius: 50% !important;
       padding: 11px 13px !important;
       border: none !important;
@@ -1194,7 +1273,7 @@
     }
 
     .featuredClgCard a {
-      font-size: 12px !important;
+      font-size: 15px !important;
     }
 
     .bannerCon .carousel-control-prev {
@@ -1226,8 +1305,20 @@
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
+    .browseNews .getalert {
+      font-size: 21px !important;
+    }
+
+    .studyAbroadNav .carousel-button-group {
+      position: absolute !important;
+    }
+
     .carouselInnerCourse .carousel-button-group {
-      top: 15px !important;
+      top: 10px !important;
+    }
+
+    .carouselInnerCourse .react-multi-carousel-list {
+      margin: 0px 20px !important;
     }
 
     .carouselInnerCourse .fi-left {
@@ -1244,6 +1335,11 @@
       width: 100%;
     }
 
+    .mbbs-tab .carousel-button-group {
+      position: absolute !important;
+      top: 70px !important;
+      width: 100%;
+    }
 
     .examLatest .fi-left {
       margin-left: -30px !important;
@@ -1258,6 +1354,13 @@
       z-index: 50 !important;
     }
 
+    .examNewsText {
+      font-size: 10px !important;
+    }
+
+    .cardInnerExam h6 {
+      font-size: 15px !important;
+    }
 
     /* .innerTextAddress {
       display: -webkit-box !important;
@@ -1275,7 +1378,7 @@
 
     .featuredClgCard a {
       background-color: white;
-      font-size: 10px !important;
+      font-size: 15px !important;
       color: #254692;
       border: 1px solid #254692 !important;
     }
@@ -1322,7 +1425,7 @@
     }
 
     .searchSec h1 {
-      font-size: 0.8rem !important;
+      font-size: 0.9rem !important;
       cursor: pointer;
     }
 
@@ -1398,8 +1501,12 @@
       box-shadow: #00000073 0px 0px 15px !important;
       position: fixed !important;
       z-index: 100 !important;
+      bottom: 12px !important;
+      right: 12px !important;
       transform: rotate(270deg) !important;
     }
+
+
 
     .banner {
       background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/icons/Banner Image.jpg') !important;
@@ -1413,7 +1520,11 @@
     }
 
     .footerCon {
-      font-size: 12px !important;
+      font-size: 16px !important;
+    }
+
+    .footerCon .address {
+      font-size: 16px !important;
     }
 
     .footerIcon img {
@@ -1426,12 +1537,14 @@
     }
 
     .phone-icon {
-      background-color: white !important;
+      background-color: rgb(248, 67, 101) !important;
       border-radius: 50% !important;
-      padding: 9px !important;
+      padding: 10px !important;
       border: none !important;
-      width: 46px !important;
+      width: 53px !important;
       box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
+      bottom: 12px !important;
+      left: 12px !important;
     }
 
     .newsBlosCards {
@@ -1452,7 +1565,7 @@
       padding: 7px !important;
       border: none !important;
       width: 45px !important;
-      right: 22px !important;
+      right: 12px !important;
       box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
     }
 
@@ -1501,6 +1614,9 @@
   @media (min-width: 320px) and (max-width: 424px) {
     .studyAbroadNav a {
       font-size: 15px !important;
+      margin: 0px 3px !important;
+
+
     }
 
     .bannerCon .carousel-control-prev {
@@ -1514,7 +1630,7 @@
 
   @media (max-width: 575px) {
     .FeaturedClgCon .carousel-button-group {
-      top: 260px !important;
+      top: 220px !important;
     }
 
     .FeaturedClgCon .fi-left {
@@ -1600,7 +1716,7 @@
 
   @media (min-width: 320px) and (max-width: 374px) {
     .FeaturedClgCon .carousel-button-group {
-      top: 232px !important;
+      top: 220px !important;
     }
 
     .AssociatedClg .carousel-button-group {
@@ -1998,7 +2114,11 @@
   } */
 
   .collegeDetailCard {
-    padding: 20px;
+    padding: 20px 0px;
+  }
+
+  .collegeDetailCard .card-body {
+    padding: 8px 0px !important;
   }
 
   .collegeDetailCard>img {
@@ -2079,9 +2199,25 @@
     }
 
     .arrowIcon {
-      bottom: 119px !important;
+      bottom: 85px !important;
     }
+
+    .infoBtn .btn {
+      width: 90% !important;
+    }
+
+    .font13-m .btn {
+      font-size: 13px !important;
+    }
+
+    .innerNewsCarousel .btn {
+      width: 90% !important;
+    }
+
+
   }
+
+  @media (min-width: 425px) and (max-width: 767px) {}
 
   @media (min-width: 320px) and (max-width: 374px) {
     .downloadBtn {
@@ -2347,7 +2483,7 @@
   }
 
   .newsLink2Clr:hover {
-    color: whitesmoke !important;
+    color: darkblue !important;
     font-weight: bold !important;
   }
 
@@ -2372,11 +2508,12 @@
     font-weight: bold !important;
   }
 
-  .dentalCourseCon img {
-    width: 100%;
-    height: 100%;
-    padding: 5px !important;
+  .collegeCourseCon h1 {
+    font-size: 22px !important;
+    font-weight: bold !important;
   }
+
+
 
   @media (min-width: 992px) and (max-width: 1024px) {
     .searchSec h1 {
@@ -2385,22 +2522,45 @@
     }
 
     .dentalCourseCon h1 {
-      font-size: 27px !important;
+      font-size: 22px !important;
+      font-weight: bold !important;
+    }
+
+    .dentalCourseCon h1 span {
+      font-size: 21px !important;
+      font-weight: bold !important;
+    }
+
+    .collegeCourseCon h1 span {
+      font-size: 21px !important;
       font-weight: bold !important;
     }
   }
 
-  @media (min-width: 768px) and (max-width: 992px) {
-    .dentalCourseCon h1 {
-      font-size: 20px !important;
-      font-weight: bold !important;
-    }
+
+
+  .font-18 {
+    font-size: 18px !important;
+
+  }
+
+  .stdud15 {
+    font-size: 15px !important;
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
     .dentalCourseCon h1 {
-      font-size: 15px !important;
+      font-size: 22px !important;
       font-weight: bold !important;
+    }
+
+    .collegeCourseCon h1 span {
+      font-size: 21px !important;
+      font-weight: bold !important;
+    }
+
+    .h2job {
+      font-size: 20px !important;
     }
 
     .innerApplyBtn {
@@ -2422,6 +2582,8 @@
     .checkBtn {
       font-size: 12px !important;
     }
+
+
 
     .srchBtn {
       font-size: 12px !important;
@@ -2631,7 +2793,9 @@
     color: white !important;
     border: 1px solid #254692 !important;
     margin: auto !important;
-    font-size: 14px !important;
+    font-size: 18px !important;
+    border-radius: 8px;
+    padding: 10px 10px;
   }
 
   .cardConBrdr {
@@ -2646,7 +2810,7 @@
 
   .carouselCardsCon .carousel-button-group {
     position: absolute !important;
-    top: 40px !important;
+    top: 70px !important;
     width: 100%;
     z-index: -1;
   }
@@ -2689,10 +2853,38 @@
     color: #274896 !important;
   }
 
+  /* 
+  .clgInfoSec table {
+    width: 90% !important;
+    border: 1px solid black !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  } */
+
+  /* .clgInfoSec .tab-content {
+    width: 100%;
+    overflow-x: hidden;
+  } */
+
+  /* Enable horizontal scrolling only for mobile devices */
+  @media (max-width: 768px) {
+    /* .clgInfoSec .tab-content {
+
+      -webkit-overflow-scrolling: touch !important;
+
+    } */
+  }
+
+  /* 
+
   .clgInfoSec table {
     width: 100% !important;
     border: 1px solid black !important;
-  }
+    border-collapse: collapse;
+    min-width: 600px;
+
+  }  */
+
 
   .hover-card:hover {
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px !important;
@@ -2717,6 +2909,7 @@
 
 
   table {
+    width: 100% !important;
     overflow-x: scroll !important;
   }
 
@@ -2782,15 +2975,29 @@
     margin-right: 65px !important;
   }
 
+  .subInnerCourseCon .carousel-button-group {
+    position: absolute !important;
+    top: 70px !important;
+    width: 100%;
+    z-index: -1;
+  }
+
+
+  .subInnerCourseCon .fi-left {
+    margin-left: -30px !important;
+  }
+
+  .subInnerCourseCon .fi-right {
+    margin-right: 65px !important;
+  }
+
   @media (min-width: 320px) and (max-width: 767px) {
     .imgCardConCrs {
       width: 90% !important;
       margin: auto !important;
     }
 
-    .chkEligBtn {
-      font-size: 12px !important;
-    }
+
   }
 
   /* Study In Usa */
@@ -3045,11 +3252,12 @@
   /* Write Review Page */
 
   .writeReviewSec {
-    background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
-      url('../public/images/icons/werite-review-img.jpeg');
-    height: 500px;
+    /* background: linear-gradient(rgba(0, 0, 0, 0.444), rgba(6, 6, 6, 0.41)),
+      url('../public/images/icons/werite-review-img.jpeg'); */
+    height: 300px;
     background-size: cover;
     background-repeat: no-repeat;
+    background: #214f93;
   }
 
   .guidanceCon {
@@ -3202,11 +3410,27 @@
     min-width: 90px !important;
   }
 
-  .filterCardBorder .card-Image-top {}
+  .filterItemBtn2 {
+    background-color: #274896 !important;
+    border: 2px solid white !important;
+    color: white !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+  }
 
   .filterItemBtn {
-    background-color: #254692 !important;
+    background-color: #dfe9ff !important;
+    border: 2px solid #274896 !important;
+    color: #274896 !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+  }
+
+  .filterItemBtn:hover {
+    background-color: #274896 !important;
+    border: 2px solid white !important;
     color: white !important;
+    border-radius: 20px !important;
     text-align: center !important;
   }
 
@@ -3317,16 +3541,14 @@
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: -40px !important;
+      margin-right: 50px !important;
     }
 
     .errCon h1 {
       font-size: 28px !important;
     }
 
-    .chkEligBtn {
-      font-size: 12px !important;
-    }
+
 
     .collegeBannerCon h1 {
       font-size: 24px !important;
@@ -3363,11 +3585,11 @@
     }
 
     .newsLinkSec2 .fi-left {
-      margin-left: -35px !important;
+      margin-left: -40px !important;
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: -35px !important;
+      margin-right: 35px !important;
     }
 
     .errCon h1 {
@@ -3378,9 +3600,6 @@
       font-size: 12px !important;
     }
 
-    .chkEligBtn {
-      font-size: 12px !important;
-    }
 
     .collegeBannerCon h1 {
       font-size: 23px !important;
@@ -3402,7 +3621,24 @@
     }
   }
 
+  .nri-h2 h2 {
+    font-size: 21px !important;
+  }
+
+
   @media (min-width: 320px) and (max-width: 767px) {
+
+    .disclaimerCon>img {
+      height: 130px !important;
+      width: 100% !important;
+      object-fit: cover !important;
+    }
+
+    .filtercollge-card .text-truncate {
+      overflow: visible !important;
+      white-space: wrap;
+
+    }
 
     .newsLinkSec .fi-left {
       margin-left: -10px !important;
@@ -3417,7 +3653,7 @@
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: -10px !important;
+      margin-right: 15px !important;
     }
 
     .disclaimerCon h1 {
@@ -3428,16 +3664,16 @@
       font-size: 18px !important;
     }
 
-    .chkEligBtn {
+    /* .chkEligBtn {
       font-size: 12px !important;
-    }
+    } */
 
     .innerClg h2 {
-      font-size: 21px !important;
+      font-size: 22px !important;
     }
 
     .collegeBannerCon h1 {
-      font-size: 19px !important;
+      font-size: 22px !important;
     }
 
     .ratingBtn {
@@ -3471,6 +3707,13 @@
     .ratingBtn {
       font-size: 15px !important;
     }
+
+    .newsLinkSec2 .carousel-button-group {
+      position: absolute !important;
+      width: 100% !important;
+      top: 40% !important;
+      z-index: 20 !important;
+    }
   }
 
   .viewMoreClgBtn {
@@ -3490,7 +3733,7 @@
   }
 
   .examsBannerCon {
-    height: 300px !important;
+    height: 200px !important;
   }
 
   .examsCardCarousel .carousel-button-group {
@@ -3668,8 +3911,8 @@
 
   .categorySecCarousel .carousel-button-group {
     position: absolute !important;
-    top: 93px !important;
-    width: 100% !important;
+    top: 122px !important;
+    width: 62% !important;
   }
 
   .categorySecCarousel .fi-left {
@@ -3741,8 +3984,10 @@
   }
 
   @media (min-width:992px) and (max-width:1024px) {
-    .FeaturedClgCon .card-Image-top {
-      /* height: 166px !important; */
+    .categorySecCarousel .carousel-button-group {
+      position: absolute !important;
+      top: 122px !important;
+      width: 60% !important;
     }
 
 
@@ -3800,7 +4045,7 @@
 
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
-      top: 90px !important;
+      top: 122px !important;
       width: 100% !important;
     }
 
@@ -3822,8 +4067,14 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+
+    .latestNewsCon .card-text {
+
+      min-height: 88px !important;
+    }
+
     .examsBannerCon {
-      height: 400px !important;
+      height: 300px !important;
     }
 
     .newsPageImg img {
@@ -3832,8 +4083,15 @@
       overflow: hidden;
     }
 
-    .boardSec h1 {
+    /* .boardSec h1 {
       font-size: 20px;
+    } */
+    .adv17 h5 {
+      font-size: 17px !important;
+    }
+
+    .carrer20 {
+      font-size: 20px !important;
     }
 
     .FeaturedClgCon .card-Image-top {
@@ -3847,8 +4105,22 @@
 
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
-      top: 90px !important;
+      top: 122px !important;
       width: 100% !important;
+    }
+
+    .categorySecCarousel .exam-car .carousel-button-group {
+      position: absolute !important;
+      top: 148px !important;
+      width: 100% !important;
+      left: 0px;
+    }
+
+    .mbbs .carousel-button-group {
+      position: absolute !important;
+      top: 2135px !important;
+      width: 100% !important;
+      left: 0px;
     }
 
     .OverviewCarousel .carousel-button-group {
@@ -3863,11 +4135,11 @@
     }
 
     .categorySecCarousel .fi-left {
-      margin-left: 30px !important;
+      margin-left: 15px !important;
     }
 
     .categorySecCarousel .fi-right {
-      margin-right: 30px !important;
+      margin-right: 15px !important;
     }
 
     .OverviewCarousel .fi-left {
@@ -3880,8 +4152,18 @@
   }
 
   @media (min-width:424px) and (max-width:767px) {
-    .FeaturedClgCon .card-Image-top {
-      /* height: 300px !important; */
+    .categorySecCarousel .exam-car .carousel-button-group {
+      position: absolute !important;
+      top: 119px !important;
+      width: 100% !important;
+      left: 0px;
+    }
+
+    .mbbs .carousel-button-group {
+      position: absolute !important;
+      top: 2040px !important;
+      width: 100% !important;
+      left: 0px;
     }
 
     .StudyAbroadCard .card-img-top {
@@ -3897,7 +4179,7 @@
 
     .categorySecCarousel .carousel-button-group {
       position: absolute !important;
-      top: 83px !important;
+      top: 140px !important;
       width: 100% !important;
     }
 
@@ -3992,14 +4274,7 @@
   } */
 
   @media (min-width:320px) and (max-width:767px) {
-    /* .innerNewsCard {
-      min-height: 1500px;
-      max-height: 1500px;
-    } */
 
-    /* .examNewsSec {
-      min-height: 1125px !important;
-    } */
 
     .innerNewsCard .card-img-top {
       height: 200px !important;
@@ -4028,7 +4303,10 @@
   }
 
   .blogBannerSec {
-    height: 500px !important;
+    height: 300px !important;
+    background-image: url('/images/icons/Banner BG.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
   }
 
   /* .newsBannerSec input {
@@ -4091,6 +4369,7 @@
     width: auto !important;
     padding: 15px 12px !important;
     color: #254692 !important;
+
   }
 
   .newsTabsClr button.active {
@@ -4150,11 +4429,15 @@
 
   .innerBoardImg {
     width: 100% !important;
-    height: 100% !important;
+    height: 100px !important;
   }
 
   .blogCardspage .page-link:focus {
     box-shadow: none !important;
+  }
+
+  .blogCardspage h2 {
+    font-size: 20px !important;
   }
 
   .get-news img {
@@ -4205,16 +4488,21 @@
 
   @media (min-width:320px) and (max-width:767px) {
 
+
     /* .examLatest {
       min-height: 630px;
       max-height: 630px;
     } */
     .blogBannerSec {
-      height: 200px !important;
+      height: 300px !important;
+    }
+
+    .blogBannerSec h1 {
+      font-size: 23px !important;
     }
 
     .innerExam h3 {
-      font-size: 20px !important;
+      font-size: 22px !important;
     }
 
     .blogSec .card-img-top {
@@ -4225,6 +4513,12 @@
     .examNewsSec .card-img-top {
       height: 200px !important;
       object-fit: cover !important;
+    }
+
+    .innerBoardImg {
+      width: 50% !important;
+      height: 100px !important;
+      margin: auto !important;
     }
   }
 
@@ -4247,8 +4541,8 @@
       font-size: 15px !important;
     }
 
-    .cardInnerExam h5 {
-      font-size: 11px !important;
+    .cardInnerExam h6 {
+      font-size: 15px !important;
     }
 
     .newsCardText .card-img-top {
@@ -4276,7 +4570,7 @@
 
   @media (max-width:320px) {
     .innerExam h3 {
-      font-size: 18px !important;
+      font-size: 22px !important;
     }
 
     .newsBannerSec h1 {
@@ -4324,13 +4618,7 @@
   }
 
   .careerSec {
-    height: 500px !important;
-  }
-
-  .careerSec img {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
+    height: 400px !important;
   }
 
   .currentOpeningBtn {
@@ -4399,6 +4687,13 @@
   .DownloadBrchrBtn>img {
     width: 200px !important;
     height: 50px !important;
+    box-shadow: rgb(0, 0, 0, 0.5) 0 0 13px !important;
+    border-radius: 10px !important;
+  }
+
+  .boxShadow {
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 13px !important;
+    border-radius: 13px !important;
   }
 
   .bg-blur {
@@ -4436,14 +4731,9 @@
     }
 
     .careerSec {
-      height: 900px !important;
+      height: 300px !important;
     }
 
-    .careerSec img {
-      width: 100%;
-      height: 642px;
-      object-fit: cover;
-    }
   }
 
   @media (min-width:320px) and (max-width:767px) {
@@ -4457,13 +4747,7 @@
     }
 
     .careerSec {
-      height: 900px !important;
-    }
-
-    .careerSec img {
-      width: 100%;
-      height: 642px;
-      object-fit: cover;
+      height: 300px !important;
     }
 
     .DownloadBrchrBtn {
@@ -4475,7 +4759,7 @@
     }
 
     .collegeDetailCard h6 {
-      font-size: 17px !important;
+      font-size: 16px !important;
     }
 
     /* .collegeDetailBanner {
@@ -4713,21 +4997,21 @@
   }
 
   .AdvertiseBanner {
-    height: 300px;
+    height: 400px;
   }
 
   .AdvertiseBanner img {
-    height: 300px;
+    height: 400px;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .ServiceBanner {
-    height: 300px !important;
+    height: 400px !important;
   }
 
   .ServiceBanner img {
-    height: 300px !important;
+    height: 400px !important;
     width: 100% !important;
     object-fit: cover !important;
   }
@@ -4744,7 +5028,7 @@
   .teamworksec img {
     height: 400px;
     width: 100%;
-    object-fit: contain !important;
+    object-fit: cover !important;
   }
 
   .faqSec {
@@ -4853,8 +5137,8 @@
   }
 
   .aboutUsPageSec img {
-    height: 400px;
-    object-fit: contain;
+    height: 400px !important;
+    object-fit: cover !important;
   }
 
   .scholarShipBtn {
@@ -4886,22 +5170,22 @@
   }
 
   .innerCourseClgH1>h1 {
-    font-size: 20px !important;
+    /* font-size: 20px !important; */
   }
 
   .filterCountry {
     background-color: white !important;
     color: #254692 !important;
     border: 1px solid rgba(212, 218, 234, 1) !important;
-    padding: 10px 15px !important;
-    width: 150px !important;
+    padding: 10px 20px !important;
+    width: 160px !important;
+    font-size: 17px !important;
   }
 
   .filterCountry:hover {
     background-color: #254692 !important;
     color: white !important;
     padding: 10px 15px !important;
-    width: 150px !important;
   }
 
   .countryCarouselFilter .carousel-button-group {
@@ -5019,13 +5303,14 @@
     background-color: #f6f8fb !important;
     border: 1px solid #254692;
   }
-  .aboutUsSec .nav-link:hover{
+
+  .aboutUsSec .nav-link:hover {
     color: white !important;
     text-align: start !important;
     background-color: #254692 !important;
   }
 
-  .clr-black{
+  .clr-black {
     filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(284deg) brightness(107%) contrast(107%);
   }
 
@@ -5109,12 +5394,28 @@
   }
 
   .studentSpeakCardBody {
-    /* display: -webkit-box !important; */
-    /* -webkit-line-clamp: 5 !important; */
-    /* -webkit-box-orient: vertical !important; */
-    /* overflow: hidden !important; */
-    /* text-overflow: ellipsis !important; */
+
     height: 90px !important;
+    scrollbar-width: thin;
+    /* For Firefox */
+    scrollbar-color: #ccc transparent;
+    /* For Firefox */
+  }
+
+  /* For Chrome, Edge, and Safari */
+  .studentSpeakCardBody::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .studentSpeakCardBody::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    /* Scrollbar thumb color */
+    border-radius: 10px;
+  }
+
+  .studentSpeakCardBody::-webkit-scrollbar-track {
+    background: transparent;
+    /* Track color */
   }
 
   .eduLoanSec {
@@ -5372,7 +5673,7 @@
   }
 
   .medHeader h6 {
-    font-size: 14px !important;
+    font-size: 15px !important;
   }
 
   .medHeader h6:hover {
@@ -5400,7 +5701,7 @@
 
   .siteMapSec li {
     margin-bottom: 20px !important;
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
 
   .siteMapSec li a:hover {
@@ -5412,12 +5713,7 @@
     z-index: 20 !important;
   }
 
-  .innerClgCarousel .carousel-button-group {
-    width: 100% !important;
-    position: absolute !important;
-    top: 2px !important;
-    z-index: 0 !important;
-  }
+
 
   .innerClgCarousel .fi-left {
     z-index: 20 !important;
@@ -5473,15 +5769,12 @@
     z-index: 20 !important;
   }
 
-  .innerClgCarousel .react-multi-carousel-list {
-    width: 200px;
-    z-index: 20 !important;
-  }
+
 
   .innerClgCarousel .carousel-button-group {
     width: 100% !important;
     position: absolute !important;
-    top: 2px !important;
+    top: 0px !important;
     z-index: 0 !important;
   }
 
@@ -5496,6 +5789,14 @@
   }
 
   @media (min-width:993px) and (max-width:1024px) {
+    .marginLogo {
+      margin-left: -14px;
+    }
+
+    .filterCountry {
+      font-size: 14px !important
+    }
+
     .newsImgSize>img {
       height: 120px;
     }
@@ -5519,14 +5820,7 @@
       font-size: 15px !important;
     }
 
-    .studentSpeakCardBody {
-      display: -webkit-box !important;
-      -webkit-line-clamp: 5 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      min-height: 70px !important;
-    }
+
 
 
     .medHeader h6 {
@@ -5535,8 +5829,16 @@
   }
 
   @media (min-width:768px) and (max-width:992px) {
+    .marginLogo {
+      margin-left: -14px;
+    }
+
     .newsImgSize>img {
       height: 120px;
+    }
+
+    .filterCountry {
+      font-size: 13px !important
     }
 
     .medSec h5 {
@@ -5558,11 +5860,6 @@
     }
 
     .studentSpeakCardBody {
-      display: -webkit-box !important;
-      -webkit-line-clamp: 5 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
       min-height: 70px !important;
     }
 
@@ -5586,6 +5883,41 @@
   }
 
   @media (min-width:320px) and (max-width:767px) {
+
+    .scholarcrousel .btn {
+      width: 80% !important;
+    }
+
+    .innerschCarousel .react-multi-carousel-list {
+      width: 300px !important;
+      margin-left: 20px !important;
+      padding-right: 15px !important;
+      z-index: 20 !important;
+    }
+
+    .innerClgCarousel .react-multi-carousel-list {
+      width: 300px !important;
+      margin-left: 30px !important;
+      padding-right: 15px !important;
+      z-index: 20 !important;
+    }
+
+    .carouselInnerCourse .react-multi-carousel-list {
+      width: 300px !important;
+      margin-left: 30px !important;
+      padding-right: 15px !important;
+      z-index: 20 !important;
+    }
+
+    .innerNewsCarousel .react-multi-carousel-list {
+      width: 270px;
+
+    }
+
+    .marginLogo {
+      margin-left: -14px;
+    }
+
     .newsImgSize>img {
       height: 150px;
     }
@@ -5609,25 +5941,26 @@
     }
 
     .AdvertiseBanner {
-      height: 120px;
+      height: 200px;
     }
 
     .AdvertiseBanner img {
-      height: 120px;
+      height: 200px;
       width: 100%;
+      object-fit: cover;
     }
 
 
     .teamworksec {
-      height: 180px;
+      height: 200px;
     }
 
     .teamworksec img {
-      height: 180px;
+      height: 200px;
     }
 
     .mbbsAbroad h6 {
-      font-size: 12px !important;
+      font-size: 15px !important;
     }
 
     .mbbsAbroad h4 {
@@ -5659,13 +5992,13 @@
     }
 
     .medSec h5 {
-      font-size: 14px !important;
+      font-size: 15px !important;
     }
 
     .bankCarousel .carousel-button-group {
       width: 100% !important;
       position: absolute !important;
-      top: 35px !important;
+      top: 55px !important;
     }
 
     .servicesCardSec h5 {
@@ -5678,19 +6011,15 @@
 
     .testimonialPara {
       display: -webkit-box !important;
-      -webkit-line-clamp: 3 !important;
+      -webkit-line-clamp: 8 !important;
       -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
+      overflow-y: auto !important;
       text-overflow: ellipsis !important;
-      min-height: 70px !important;
+      max-height: 100px !important;
+      /* Set a max-height to trigger scrolling */
     }
 
     .studentSpeakCardBody {
-      display: -webkit-box !important;
-      -webkit-line-clamp: 3 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
       min-height: 70px !important;
     }
 
@@ -5767,12 +6096,12 @@
     }
 
     .aboutUsPageSec h1 {
-      font-size: 15px;
+      font-size: 20px;
     }
 
     .aboutUsPageSec img {
-      height: 200px;
-      object-fit: contain;
+      height: 200px !important;
+      object-fit: cover;
     }
 
 
@@ -5857,4 +6186,384 @@
   .clgVideo {
     width: 100%;
     height: 300px;
+  }
+
+  .faqImageWrapper {
+    max-width: 100%;
+    max-height: 350px;
+    /* Set a fixed height */
+    overflow: hidden;
+    /* Ensure the image doesn't overflow the container */
+  }
+
+  .faqImage {
+    object-fit: cover;
+    /* Maintain aspect ratio and fill the container */
+    width: 100%;
+    height: 100%;
+  }
+
+  .arrow-right {
+    font-size: 1.25rem;
+    /* Adjust as needed */
+  }
+
+  .arrow-down {
+    display: none;
+    font-size: 1.25rem;
+    /* Adjust as needed */
+  }
+
+  @media (max-width: 767px) {
+
+    /* Adjust the breakpoint as needed */
+    .arrow-right {
+      display: none;
+    }
+
+    .arrow-down {
+      display: inline;
+    }
+  }
+
+  .faxicon img svg {
+    stroke: white !important;
+  }
+
+  /* .mainText{
+    font-size: 12px !important;
+  } */
+  .examsForm form {
+    padding: 5px 0px !important;
+  }
+
+  .examsForm input {
+    height: 30px !important;
+  }
+
+  .newsLink2Container {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+
+
+  .cardHeight {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    height: 70px !important;
+  }
+
+  .organizationalCard {
+    position: relative !important;
+    border-right: 1px solid #274896 !important;
+    border-left: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    width: 200px !important;
+  }
+
+  .organizationImg>img {
+    height: 80px;
+    width: auto;
+  }
+
+  .right-arrow-orgazinational {
+    position: absolute !important;
+    top: 0% !important;
+    right: -7% !important;
+    background-color: white !important;
+    border-radius: 50% !important;
+    border: 1px solid #274896 !important;
+    padding: 5px !important;
+  }
+
+  .trainingBtn {
+    background-color: #f6f8fb !important;
+    border-radius: 20px !important;
+    padding: 5px 10px !important;
+  }
+
+  @media (min-width:320px) and (max-width:1400px) {
+    .organizationalCard {
+      width: 170px !important;
+    }
+  }
+
+  .blogCard {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 60px !important;
+  }
+
+  .heading-with-lines {
+    position: relative;
+    display: inline-block;
+  }
+
+  .heading-with-styled-lines {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 20px;
+    /* Adjust for space below */
+  }
+
+  .heading-with-styled-lines::before,
+  .heading-with-styled-lines::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+    height: 2px;
+  }
+
+  .heading-with-styled-lines::before {
+    width: 80px;
+    /* Wider top line */
+    top: 100%;
+    /* Below the text */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .heading-with-styled-lines::after {
+    width: 40px;
+    /* Smaller bottom line */
+    top: calc(100% + 8px);
+    /* Slightly more space below */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .jobFile {
+    position: relative !important;
+    overflow: hidden;
+  }
+
+  .jobFileInput {
+    color: transparent !important;
+  }
+
+  .placeholder-text {
+    position: absolute !important;
+    color: black !important;
+    left: 300px !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .file-name {
+    position: absolute !important;
+    color: black !important;
+    left: 200px !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .journey-video {
+    height: 400px !important;
+    width: 75%;
+  }
+
+  .contactuspage p {
+    font-size: 22px !important;
+  }
+
+  .scholarh2 {
+    font-size: 22px !important;
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .f20 {
+      font-size: 20px !important;
+
+    }
+
+    .scholarcrousel {
+      padding-left: 15px !important;
+      z-index: 20 !important;
+    }
+
+    .newsLink2Container .carousel-button-group {
+      padding: 0px 20px !important;
+    }
+
+    .placeholder-text {
+      position: absolute !important;
+      color: black !important;
+      left: 235px !important;
+      top: 45% !important;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 12px !important;
+    }
+
+    .tablecustom-border .d-md-table-cell {
+      border: 1px solid;
+    }
+
+    .contactuspage p {
+      font-size: 16px !important;
+    }
+
+    .journey-video {
+      height: 200px !important;
+      width: 100%;
+    }
+
+    .file-name {
+      display: none !important;
+    }
+  }
+
+  .tab-button {
+    flex: 1 1 auto;
+    min-width: 150px;
+    /* Optional: Ensure button size consistency */
+  }
+
+  .custom-edu-loan {
+    height: 100%;
+    width: 220px !important;
+  }
+
+  @media (max-width: 768px) {
+    .custom-edu-loan {
+      height: 100%;
+      width: auto !important;
+    }
+
+    .tab-button {
+      flex: 1 1 48%;
+      /* Adjusts to 2 buttons per row on mobile */
+      margin-bottom: 10px;
+      /* Adds spacing between rows */
+    }
+
+    .newsTabsClr button {
+      font-size: 13px !important;
+      padding: 11px 5px !important;
+      margin: 4px !important;
+    }
+  }
+
+  .team h4 {
+    font-size: 18px !important;
+  }
+
+  .innerBlogSec h2 {
+    font-size: 21px !important;
+  }
+
+  .responsive-card {
+    background: url('/images/icons/Card.webp') no-repeat center;
+    background-size: cover;
+    /* Default for larger screens */
+    height: auto;
+    /* Allow content height to adjust dynamically */
+    min-height: 200px;
+    /* Ensure a minimum height */
+  }
+
+
+
+  @media (max-width: 768px) {
+    .responsive-card {
+      background-size: contain;
+      background-position: bottom;
+      min-height: 309px;
+    }
+
+
+  }
+
+  .custom-select-bold-arrow {
+    appearance: none;
+    /* Removes native styling for most browsers */
+    -webkit-appearance: none;
+    /* Removes native styling on Webkit browsers */
+    -moz-appearance: none;
+    /* Removes native styling on Firefox */
+    font-weight: bold;
+    /* Makes text bold */
+    position: relative;
+    padding-right: 2rem;
+    /* Adds space for the custom arrow */
+    background: white;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23000'/%3E%3C/svg%3E");
+    /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    /* Positions the arrow */
+    background-size: 1rem;
+    /* Adjusts the size of the arrow */
+  }
+
+  .custom-select-bold-arrow::-ms-expand {
+    display: none;
+    /* Hides native arrow on IE/Edge */
+  }
+
+  .browseNews .getalert {
+    font-size: 24px !important;
+  }
+
+  @media (max-width: 424px) {
+    .infoBtn {
+      display: inline-flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      /* Align items to the start */
+      gap: 8px;
+      /* Add minimal spacing between items */
+    }
+
+    .infoBtn>* {
+      flex: 0 0 auto;
+      /* Prevent items from stretching */
+      white-space: nowrap;
+      /* Ensure text doesn’t wrap */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .infoBtn {
+      display: flex;
+      /* Maintain flex layout */
+      flex-wrap: wrap;
+      /* Allow wrapping on larger screens */
+      justify-content: center;
+      /* Center the items */
+      gap: 16px;
+      /* Add more space between tabs */
+      padding: 10px 0;
+      /* Add padding around the tabs */
+    }
+
+    .infoBtn>* {
+      flex: 0 0 auto;
+      /* Ensure tabs take space based on content */
+    }
+  }
+
+  .testimonialPara {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow-y: auto !important;
+    text-overflow: ellipsis !important;
+
+    /* Set a max-height to trigger scrolling */
   }
