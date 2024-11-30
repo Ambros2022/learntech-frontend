@@ -1,7 +1,7 @@
 # learntech-frontend
 
 
-
+ok
 Next Js + React + mui + vuxxy + bootstrap + formik
 ok
 npm i @types/react-star-rating-componentnpm install intl-tel-input
