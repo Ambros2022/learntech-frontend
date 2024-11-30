@@ -18,4 +18,5 @@ npm i sharp
 npm install framer-motion
 
 
-v1
+v1|
+V2
