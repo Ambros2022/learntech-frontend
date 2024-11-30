@@ -10,7 +10,7 @@ import defaultAuthConfig from 'src/configs/auth'
 // ** Types
 import { UserDataType } from 'src/context/types'
 
-const users:any = [
+const users: any = [
   {
     id: 1,
     role: 'admin',
@@ -31,9 +31,9 @@ const users:any = [
 
 // ! These two secrets should be in .env file and not in any other file
 const jwtConfig = {
-  secret: process.env.NEXT_PUBLIC_JWT_SECRET,
-  expirationTime: process.env.NEXT_PUBLIC_JWT_EXPIRATION,
-  refreshTokenSecret: process.env.NEXT_PUBLIC_JWT_REFRESH_TOKEN_SECRET
+  secret: process.env.JWT_SECRET,
+  expirationTime: process.env.JWT_EXPIRATION,
+  refreshTokenSecret: process.env.JWT_REFRESH_TOKEN_SECRET
 }
 
 type ResponseType = [number, { [key: string]: any }]
