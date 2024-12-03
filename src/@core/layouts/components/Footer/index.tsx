@@ -128,7 +128,7 @@ const Footer = () => {
         <div className="container text-white pt-3">
           <div className="row">
             <div className="col-md-6 text-sm-center order-2 order-md-1">
-              <p>©2024 Learntech Edu Solutions Pvt. Ltd. All Rights Reserved.</p>
+              <p className='text-start'>©2024 Learntech Edu Solutions Pvt. Ltd. All Rights Reserved.</p>
             </div>
             <div className="col-md-6 text-md-end order-1 order-md-2 text-center">
               <p className="d-inline-block">Follow us on</p>

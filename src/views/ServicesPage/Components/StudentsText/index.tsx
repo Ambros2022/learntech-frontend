@@ -22,7 +22,7 @@ const StudentsText = ({ data }) => {
                             For Colleges and Universities
                         </button>
                     </div>
-                    <div className="tab-content pt-3">
+                    <div className="tab-content pt-3 serviceh2">
                         <div className={`tab-pane fade ${activeTab === 'students' ? 'show active' : ''}`} role="tabpanel">
                             <h2 className="text-black fw-bold pt-3">
                                 Personalized Expert Counselling:

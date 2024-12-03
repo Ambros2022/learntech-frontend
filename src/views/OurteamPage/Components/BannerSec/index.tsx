@@ -28,15 +28,15 @@ const BannerSec = () => {
         <>
             <section className='teamworksec'>
                 {banners?.map((banner, index) => (
-                        <a href={banner.link}>
-                            <Image
-                                src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                                priority={true}
-                                alt={`Banner ${index}`}
-                                height={300}
-                                width={1400}
-                            />
-                        </a>
+                    // <a href={banner?.link}>
+                    <Image
+                        src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                        priority={true}
+                        alt={`Banner ${index}`}
+                        height={300}
+                        width={1400}
+                    />
+                    // </a>
                 ))}
             </section >
             <section className='linkFontSize bg-white py-2'>

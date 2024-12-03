@@ -98,7 +98,7 @@ function CollegeFilterSection() {
     const [total, setTotal] = useState<string>("0");
     const isMountedRef = useIsMountedRef();
     const [loading, setLoading] = useState<boolean>(false)
-    const [visibleCards, setVisibleCards] = useState(6);
+    const [visibleCards, setVisibleCards] = useState(7);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
 
 
@@ -176,7 +176,7 @@ function CollegeFilterSection() {
 
     const getPromobanner = useCallback(async () => {
         try {
-            const response = await axios1.get('api/website/banner/get?promo_banner=All_college_page');
+            const response = await axios1.get('api/website/banner/get?promo_banner=All_university_page');
             if (isMountedRef.current) {
 
                 setPromoban(response.data.data);
@@ -346,7 +346,7 @@ function CollegeFilterSection() {
 
         // If there are more filtered colleges to show, increment visibleCards
         if (visibleCards < filteredColleges.length) {
-            setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
+            setVisibleCards(prevVisibleCards => prevVisibleCards + 7);
         }
 
     };
@@ -729,7 +729,7 @@ function CollegeFilterSection() {
         });
     });
 
-    const PromoAddBanner = ({ url, title, description }) => {
+    const PromoAddBanner = ({ url, title, description,link }) => {
 
         return (
             <>
@@ -751,7 +751,7 @@ function CollegeFilterSection() {
                                     <div className="card-body" style={{ zIndex: '200' }}>
                                         <h5 className="card-text">{description}</h5>
                                         <h3 className="card-title fw-bold">{title}</h3>
-                                        <Link href='/colleges' className='mt-3 btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
+                                        <Link href={link} className='mt-3 btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
                                     </div>
                                 </div>
                             </div>
@@ -785,7 +785,7 @@ function CollegeFilterSection() {
                                     </button>
                                 </div>
                             )}
-                            {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} description={promoban[0].description} title={promoban[0].title} />}
+                            {promoban.length > 0 && <PromoAddBanner url={promoban[0].image} description={promoban[0].description} title={promoban[0].title} link={promoban[0]?.link} />}
                             <StateButtons
                                 options={options.find(option => option.id === 'state')?.options || []}
                                 setSelectedCheckboxes={setSelectedCheckboxes}

@@ -30,7 +30,7 @@ const BannerSec = () => {
         <>
             <section className=' aboutUsPageSec position-relative d-flex justify-content-center ' >
                 {banners.map((banner, index) => (
-                    <a href={banner.link}>
+                    <a href={banner?.link}>
                         <Image
                             width={1700} height={300}
                             src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}

@@ -178,7 +178,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('short_name', data.short_name);
             formData.append('gender', data.gender);
             formData.append('board_type', data.board_type);
-            formData.append('avg_rating', data.avg_rating);
+            if(data.avg_rating){
+                formData.append('avg_rating', data.avg_rating);
+            }
             formData.append('listing_order', data.listing_order);
             formData.append('established', data.established);
             formData.append('result_date', data.result_date);
@@ -245,7 +247,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('short_name', data.short_name);
             formData.append('gender', data.gender);
             formData.append('board_type', data.board_type);
-            formData.append('avg_rating', data.avg_rating);
+            if(data.avg_rating){
+                formData.append('avg_rating', data.avg_rating);
+            }
+           
             formData.append('listing_order', data.listing_order);
             formData.append('established', data.established);
             formData.append('result_date', data.result_date);

@@ -38,7 +38,7 @@ const ExperTraineeSec = ({ data }) => {
     };
     const TrainerCard = ({ trainee }: { trainee: { name: string; location: string; experience: string; description: string, image: string } }) => {
         return (
-            <div className="card py-3 hover-card h-100" style={{ border: '1px solid #274896' }}>
+            <div className="card py-3 hover-card h-100 justify-content-around" style={{ border: '1px solid #274896' }}>
                 <div className="row d-flex px-3">
                     <div className="col-4 mb-lg-0 mb-md-3 mb-0 text-center align-content-center">
                         <Image

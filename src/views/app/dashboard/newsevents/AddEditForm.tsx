@@ -196,15 +196,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
 
             formData.append('banner_image', selectedphoto);
-            // if (selectedpdf == '') {
-
-            //     toast.error('Please Upload Pdf', {
-            //         duration: 2000
-            //     })
-            //     setLoading(false);
-            //     return false;
-
-            // }
+    
             formData.append('pdf_file', selectedpdf);
 
             try {

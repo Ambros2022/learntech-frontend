@@ -102,7 +102,7 @@ function OverviewSection({ data, colleges, exams }) {
   ));
 
   return (
-    <section className='clgInfoSec innerClgCarousel bg-white'>
+    <section className='clgInfoSec innerClgCarousel bg-white subinner'>
       <div className="container position-relative">
         {isMobile ? (
           <Carousel

@@ -65,7 +65,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
 
     return (
         <>
-            <section className='bg-white pt-2 pb-5' style={{fontFamily:'Poppins !important'}}>
+            <section className='bg-white pt-2 pb-5' style={{ fontFamily: 'Poppins !important' }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-8 col-lg-8 col-md-7 col-10 mx-auto">
@@ -100,7 +100,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
                             <div className='row g-2 p-3 bg-skyBlue mt-5 rounded'>
                                 <div className="col-md-12">
                                     {banners.map((banner, index) => (
-                                        <a href={banner.link} key={index}>
+                                        <a href={banner?.link} key={index}>
                                             <Image
                                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                                                 priority={true}
