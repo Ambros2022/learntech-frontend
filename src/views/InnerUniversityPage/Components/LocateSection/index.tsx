@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic'
 function LocationSection({ data }) {
   return (
     <>
-      <section className='locationSec bg-white pb-5'>
+      <section className='locationSec bg-white pb-5 pt-3'>
         <div className="container">
           <h2 className='pt-0 text-center mb-4 text-blue fw-bold'>Locate the University</h2>
           <div className="row px-3">

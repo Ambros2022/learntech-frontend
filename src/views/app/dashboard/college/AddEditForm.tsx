@@ -344,7 +344,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('address', data.address);
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
-            formData.append('avg_rating', data.avg_rating);
+            if(data.avg_rating){
+                formData.append('avg_rating', data.avg_rating);
+            }
             formData.append('is_associated', data.is_associated);
             formData.append('info', data.info);
             formData.append('course_fees', data.course_fees);
@@ -413,7 +415,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
             formData.append('is_associated', data.is_associated);
-            formData.append('avg_rating', data.avg_rating);
+            if(data.avg_rating){
+                formData.append('avg_rating', data.avg_rating);
+            }
             formData.append('info', data.info);
             formData.append('course_fees', data.course_fees);
             formData.append('admissions', data.admissions);

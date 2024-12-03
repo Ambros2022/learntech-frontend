@@ -28,7 +28,7 @@ const NewsItem = ({ banner_image, id, title, text, slug}) => (
 const NewsListAbroad = ({ newsItems }) => (
 
     <>
-        <h2 className='fw-bold text-blue text-center pt-5 mb-3'>Latest News Of Abroad</h2>
+        <h3 className='fw-bold text-blue text-center pt-5 mb-3'>Latest News Of Abroad</h3>
         <div className='bg-skyBlue examNewsSec mt-3 px-4 py-3 overflow-y-auto' style={{ maxHeight: 'calc(3 * 160px)' }}>
             <div className="row " >
                 {newsItems.map((item, index) => (

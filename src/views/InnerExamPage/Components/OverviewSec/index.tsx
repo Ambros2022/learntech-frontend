@@ -210,7 +210,7 @@ function OverviewSec({ data }) {
   return (
     <section className='clgInfoSec bg-white'>
       <div className="container">
-        <div className='carouselInnerCourse position-relative' style={{ zIndex: '2' }}>
+        <div className='carouselInnerCourse position-relative exam' style={{ zIndex: '2' }}>
           <CustomCarousel items={items} setActiveTab={setActiveTab} />
         
 

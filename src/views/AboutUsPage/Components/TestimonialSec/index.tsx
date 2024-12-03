@@ -122,7 +122,7 @@ const TestimonialSec = () => {
                                                     </div>
                                                 </div>
                                                 <div className="col-md-9 col-lg-10 col-xl-10 align-content-center">
-                                                    <h5 className='text-blue'>{testimonial.name}
+                                                    <h5 className='text-blue text-center text-md-start'>{testimonial.name}
                                                         {/* ({testimonial.location}) */}
                                                     </h5>
                                                     <p className='text-black'>

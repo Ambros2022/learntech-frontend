@@ -19,6 +19,7 @@ const InfoSec = ({ data }) => {
                 imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
                 name: item.name || 'No description available',
                 id: item.id,
+                slug: item.slug,
             }));
             setNewsData(formattedNews);
         } catch (err) {

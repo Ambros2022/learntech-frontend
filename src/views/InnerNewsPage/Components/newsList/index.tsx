@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // NewsItem component
-const NewsItem = ({ imageSrc, id, name }) => (
+const NewsItem = ({ imageSrc, id, name,slug }) => (
     <div className="col-12">
-        <Link href={`/news/${id}/${name}`}>
+        <Link href={`/news/${id}/${slug}`}>
             <div className="card bg-skyBlue hover-card mb-3">
                 <div className="row g-0">
                     <div className="col-lg-4 col-md-4">
@@ -29,7 +29,7 @@ const NewsList = ({ newsItems }) => (
         <div className='mb-5 pt-3 bg-skyBlue innerNewsCard px-4 overflow-y-auto rounded'  style={{ maxHeight: 'calc(6 * 115px)' }}>
             <div className="row">
                 {newsItems.map((item, index) => (
-                    <NewsItem key={index} imageSrc={item.imageSrc} name={item.name} id={item.id} />
+                    <NewsItem key={index} imageSrc={item.imageSrc} name={item.name} id={item.id} slug={item.slug} />
                 ))}
             </div>
         </div>

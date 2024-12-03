@@ -192,7 +192,7 @@ const AdvertiseSec = ({ data }) => {
                                 </div>
                                 <div className="col-md-12 col-lg-12 mb-3 mx-md-0">
                                     <div className='bg-skyBlue p-3 rounded border text-center'>
-                                        <Image src="/images/icons/advertisement.png" width={200} height={200} alt={'advertisement-logo'} />
+                                        <Image src="/images/icons/advertisement.png" width={200} height={300} alt={'advertisement-logo'} />
                                     </div>
                                 </div>
                             </div>
