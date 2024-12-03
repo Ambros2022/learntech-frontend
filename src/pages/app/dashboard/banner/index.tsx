@@ -183,7 +183,7 @@ const SecondPage = () => {
       }
     },
     {
-      flex: 0.3,
+      flex: 0.2,
       minWidth: 100,
       field: 'link',
       headerName: 'Url',
@@ -202,6 +202,24 @@ const SecondPage = () => {
     },
     {
       flex: 0.2,
+      minWidth: 100,
+      field: 'promo_banner',
+      headerName: 'promo_banner',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params
+
+        return (
+
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row?.promo_banner}
+          </Typography>
+
+
+        )
+      }
+    },
+    {
+      flex: 0.1,
       minWidth: 200,
       field: 'status',
       headerName: 'status',

@@ -6,7 +6,7 @@ function FacilitiesSection({ data }) {
 
   function CardList() {
     return (
-      <div className="row pt-3">
+      <div className="row pt-3 ">
         {data.collegeamenities.map(card => (
           <CardComponent
             key={card.id}

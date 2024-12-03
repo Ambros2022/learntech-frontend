@@ -2205,6 +2205,9 @@
     .infoBtn .btn {
       width: 90% !important;
     }
+    .subinner .infoBtn .btn {
+      width: 90% !important;
+    }
 
     .font13-m .btn {
       font-size: 13px !important;
@@ -6521,6 +6524,9 @@
   }
 
   @media (max-width: 424px) {
+    .tab-pane {
+      overflow-x: auto;
+    }
     .infoBtn {
       display: inline-flex;
       flex-wrap: nowrap;
@@ -6534,6 +6540,15 @@
       flex: 0 0 auto;
       /* Prevent items from stretching */
       white-space: nowrap;
+      /* Ensure text doesn’t wrap */
+    }
+    .exam  .infoBtn .btn {
+      white-space: wrap !important; 
+    }
+    .subinner .infoBtn>* {
+      flex: 0 0 auto;
+      /* Prevent items from stretching */
+      white-space: pre-wrap;
       /* Ensure text doesn’t wrap */
     }
   }
@@ -6566,4 +6581,11 @@
     text-overflow: ellipsis !important;
 
     /* Set a max-height to trigger scrolling */
+  }
+
+  .exam  .infoBtn .btn {
+    white-space: pre-wrap !important; 
+  }
+  .serviceh2 h2{
+    font-size: 24px !important;
   }

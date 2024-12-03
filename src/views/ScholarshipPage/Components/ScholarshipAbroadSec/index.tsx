@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ContactForm from 'src/@core/components/popup/ContactForm';
-
+import Image from 'next/image';
 const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string } }) => {
   const [isExpanded, setIsExpanded] = useState(false); // State for handling read more
   const maxLength = 7700; // Adjust this value to control when "Read More" appears
@@ -43,6 +43,21 @@ const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string
             </div>
             <div className="col-md-4 pt-0 pt-md-0">
               <ContactForm heading={'Contact Us'} />
+
+
+              <div className="scholarship-banner pt-3">
+                <Image
+                  src="/images/icons/schloarship-banner.webp"
+                  alt="scholarship"
+                  layout="responsive" // Allows scaling in mobile
+                  width={420}
+                  height={400}
+                  className="img-fluid"
+                />
+              </div>
+
+
+
             </div>
           </div>
         </div>

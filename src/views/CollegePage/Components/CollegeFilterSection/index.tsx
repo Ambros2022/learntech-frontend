@@ -352,10 +352,10 @@ function CollegeFilterSection() {
         },
     ];
 
-    const [visibleCards, setVisibleCards] = useState(6);
+    const [visibleCards, setVisibleCards] = useState(7);
 
     const handleViewMore = () => {
-        setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
+        setVisibleCards(prevVisibleCards => prevVisibleCards + 7);
     };
     // State to store selected checkboxes
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});

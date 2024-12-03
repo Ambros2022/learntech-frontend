@@ -27,16 +27,16 @@ const BannerSec = () => {
         <>
             <section className='AdvertiseBanner'>
                 {banners?.map((banner, index) => (
-                    <a href={banner.link}>
-                        <Image
-                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                            priority={true}
-                            alt={`Banner ${index}`}
-                            height={300}
-                            width={1400}
-                            className='img-fluid'
-                        />
-                    </a>
+                    // <a href={banner?.link}>
+                    <Image
+                        src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                        priority={true}
+                        alt={`Banner ${index}`}
+                        height={300}
+                        width={1400}
+                        className='img-fluid'
+                    />
+                    // </a>
                 ))}
                 {/* <Image src='/images/icons/Banner BG.png' alt='Banner-img' width={1400} height={300} /> */}
             </section >
