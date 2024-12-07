@@ -6575,10 +6575,11 @@
 
   .testimonialPara {
     display: -webkit-box !important;
-    -webkit-line-clamp: 4 !important;
+    /* -webkit-line-clamp: 4 !important; */
     -webkit-box-orient: vertical !important;
     overflow-y: auto !important;
     text-overflow: ellipsis !important;
+    height: 97px !important;
 
     /* Set a max-height to trigger scrolling */
   }
