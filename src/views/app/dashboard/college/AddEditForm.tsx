@@ -165,7 +165,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
         state_id: isAddMode ? '' : olddata.state ? olddata.state : '',
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
-        is_associated: isAddMode ? false : olddata.is_associated ? olddata.is_associated : false,
+        is_associated: isAddMode ? 0 : olddata.is_associated ? olddata.is_associated : 0,
 
         collegeamenities: [],
         streams: [],
