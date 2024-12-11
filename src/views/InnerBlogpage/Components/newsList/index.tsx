@@ -1,8 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // NewsItem component
-const NewsItem = ({ imageSrc, name, id }) => (
+const NewsItem = ({ imageSrc, name, id,slug }) => (
     <div className="col-12">
         <div className="card mb-3 bg-skyBlue hover-card">
             <div className="row g-0">
@@ -10,11 +11,11 @@ const NewsItem = ({ imageSrc, name, id }) => (
                     <Image src={imageSrc} width={200} height={200} style={{width:'100%', height:'-webkit-fill-available', objectFit:'contain'}} className="ms-md-2 img-fluid rounded-start" alt="news-img" />
                 </div>
                 <div className="col-md-8">
-                    <a href={`/news/${id}/${name}`}>
+                    <Link href={`/news/${id}/${slug}`}>
                         <div className="card-body">
                             <h6 className="card-text text-black">{name}</h6>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
@@ -28,7 +29,7 @@ const NewsList = ({ newsItems, heading }) => (
         <div className='mb-5 bg-skyBlue pt-3 innerNewsCard px-4 overflow-y-auto rounded'  style={{ maxHeight: 'calc(20 * 115px)' }}>
             <div className="row">
                 {newsItems.map((item, index) => (
-                    <NewsItem key={index} id={item.id} imageSrc={item.imageSrc} name={item.name} />
+                    <NewsItem key={index} id={item.id} imageSrc={item.imageSrc} name={item.name} slug={item?.slug} />
                 ))}
             </div>
         </div>

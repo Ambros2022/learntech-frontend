@@ -1,10 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // NewsItem component
 const NewsItem = ({ id,slug, title, text }) => (
     <div className="col-12">
-        <a href={`/scholarship/${id}/${slug}`} >
+        <Link href={`/scholarship/${id}/${slug}`} >
             <div className="card mb-3 hover-card ">
                 <div className="row g-0">
                     <div className="col-md-12">
@@ -14,7 +15,7 @@ const NewsItem = ({ id,slug, title, text }) => (
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     </div>
 );
 

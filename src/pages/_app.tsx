@@ -129,17 +129,18 @@ const App = (props: ExtendedAppProps) => {
           />
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
+          
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
           <script type="application/ld+json">
             {JSON.stringify(
               {
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "Learntech",
-                "legalName": "Learntech Edu Solution Pvt.",
+                "name": "Learntech Edu Solutions",
+                "legalName": "Learntech Edu Solutions Pvt. Ltd.",
                 "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
                 "logo": `${process.env.NEXT_PUBLIC_WEB_URL}/images/icons/learntech-logo.png`,
-                "foundingDate": "2009",
+                "foundingDate": "1994",
                 "founders": [
                   {
                     "@type": "Person",

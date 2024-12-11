@@ -26,7 +26,7 @@ const BannerSec = () => {
         <>
             <section className='ServiceBanner bg-white'>
                 {banners?.map((banner, index) => (
-                    <a href={banner?.link}>
+               
                         <Image
                             width={1400}
                             height={300}
@@ -34,7 +34,7 @@ const BannerSec = () => {
                             priority={true}
                             alt={`Banner ${index}`}
                         />
-                    </a>
+                  
                 ))}
             </section>
             <section className='bg-white'>

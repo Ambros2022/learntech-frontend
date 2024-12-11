@@ -2,8 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios1 from 'src/configs/axios';
 
 import MainCarousel2 from 'src/@core/components/carousel2';
+import Link from 'next/link';
 
 interface Item {
+    slug: string;
     id: number;
     title: string;
     date: string;
@@ -20,6 +22,7 @@ function PopularCourses() {
                 const examData: Item[] = response.data.data.map((exam: any) => ({
                     id: exam.id,
                     title: exam.exam_title,
+                    slug: exam.slug,
                     date: formatDate(exam.upcoming_date) // Format the date here
                 }));
                 if (isMountedRef) {
@@ -59,16 +62,17 @@ function PopularCourses() {
                 key={card.id}
                 id={card.id}
                 title={card.title}
+                slug={card?.slug}
                 date={card.date}
             />
         ));
     }
 
     // CardComponent function
-    function CardComponent({ id, title, date }: { id: number; title: string; date: string }) {
+    function CardComponent({ id, title, date,slug }: { id: number; title: string; date: string,slug: string}) {
         return (
             <div className='topCourseConCarousel'>
-                 <a href={`/exam/${id}/${title}`} className='stretch-link'>
+                 <Link href={`/exam/${id}/${slug}`} className='stretch-link'>
                 <div className="card text-center hover-card bg-skyBlue d-flex mx-2 border-0">
                    
                         <div className="row flex-fill">
@@ -81,7 +85,7 @@ function PopularCourses() {
                         </div>
                    
                 </div>
-                </a>
+                </Link>
             </div>
         );
     }

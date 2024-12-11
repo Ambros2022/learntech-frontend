@@ -22,7 +22,7 @@ const news = () => {
   }
 
   const { slug } = router.query
-
+console.log("inner newspage");
   return (
     <>
       {Array.isArray(slug) && slug.length <= 2 && (

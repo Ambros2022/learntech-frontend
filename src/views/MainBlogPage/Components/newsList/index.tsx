@@ -1,10 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // NewsItem component
-const NewsItem = ({ id, banner_image, title }) => (
+const NewsItem = ({ id, banner_image, title,slug }) => (
     <div className="col-md-12 col-10 mx-md-0 mx-auto">
-        <a href={`/college/${id}/${title}`} >
+        <Link href={`/college/${id}/${slug}`} >
             <div className="card mb-3 bg-skyBlue hover-card">
                 <div className="row g-0">
                     <div className="col-md-4 col-xl-3 col-lg-3 upcomingAdmission">
@@ -17,7 +18,7 @@ const NewsItem = ({ id, banner_image, title }) => (
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     </div>
 );
 
@@ -28,7 +29,7 @@ const NewsList = ({ newsItems }) => (
         <div className='bg-skyBlue pt-3 examNewsSec rounded mt-3 px-4' >
             <div className="row">
                 {newsItems.map((item, index) => (
-                    <NewsItem key={index} id={item.id} banner_image={item.banner_image} title={item.name} />
+                    <NewsItem key={index} id={item.id} banner_image={item.banner_image} title={item.name} slug={item?.slug} />
                 ))}
             </div>
         </div>

@@ -33,9 +33,10 @@ const MainNewsPage = () => {
     try {
       const response = await axios.get('api/website/news/get')
 
-      const newsData = response.data.data.map(news => ({
+      const newsData = response.data.data.map((news: { id: any; name: any; slug: any; meta_description: any; banner_image: any; }) => ({
         id: news.id,
         title: news.name,
+        slug: news.slug,
         description: news.meta_description,
         imageUrl: `${process.env.NEXT_PUBLIC_IMG_URL}/${news.banner_image}`
 

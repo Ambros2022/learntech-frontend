@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 
@@ -20,7 +21,7 @@ const ExamCard = ({ title, slug, id,  date, cover_image }) => {
 
     return (
         <div className="col-md-4 mb-3">
-             <a href={`/exam/${id}/${slug}`} >
+             <Link href={`/exam/${id}/${slug}`} >
             <div className="card hover-card examsCardRow">
                 <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${cover_image}`} width={300} height={300} className="card-img-top" alt={title} />
                 <div className="card-body text-center">
@@ -28,7 +29,7 @@ const ExamCard = ({ title, slug, id,  date, cover_image }) => {
                     {/* <small className="text-blue card-text text-truncate">{formatDate(date)}</small> */}
                 </div>
             </div>
-            </a>
+            </Link>
         </div>
     );
 };
