@@ -30,7 +30,7 @@ const BannerSec = () => {
         <>
             <section className=' aboutUsPageSec position-relative d-flex justify-content-center ' >
                 {banners.map((banner, index) => (
-                    <a href={banner?.link}>
+          
                         <Image
                             width={1700} height={300}
                             src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
@@ -38,7 +38,7 @@ const BannerSec = () => {
                             alt={`Banner-img`}
                             className="banner-image-about"
                         />
-                    </a>
+                   
                 ))}
                 <div className='position-absolute w-100 h-100 d-flex justify-content-center AdvertiseBanner' style={{ top: '0px' }}>
                     <div className="container d-flex justify-content-center h-100 w-100">

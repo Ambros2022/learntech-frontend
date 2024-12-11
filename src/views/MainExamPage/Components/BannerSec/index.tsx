@@ -19,6 +19,7 @@ let cancelToken: any;
 interface SearchResult {
   id: number;
   exam_title: string;
+  slug: string;
 }
 
 
@@ -48,8 +49,9 @@ function BannerSection() {
         params: { searchfrom: 'exam_title', searchtext: value },
       });
 
-      const suggestions = response.data.data.map((item: { id: number; exam_title: string }) => ({
+      const suggestions = response.data.data.map((item: { id: number; exam_title: string, slug: string }) => ({
         exam_title: item.exam_title,
+        slug: item.slug,
         id: item.id,
       }));
 
@@ -105,7 +107,7 @@ function BannerSection() {
                       renderOption={(props, option: SearchResult) => (
                         <li {...props}>
                           <Link
-                            href={`/exam/${option.id}/${option.exam_title}`}
+                            href={`/exam/${option.id}/${option?.slug}`}
                             style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
                           >
                             {option.exam_title}

@@ -1,12 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // NewsItem component
 const NewsItem = ({ banner_image, id, title, text, slug}) => (
 
 
     <div className="col-12">
-        <a href={`/news/${id}/${slug}`} >
+        <Link href={`/news/${id}/${slug}`} >
             <div className="card mb-3 bg-skyBlue hover-card">
                 <div className="row g-0 d-flex">
                     <div className="col-md-4 align-self-center">
@@ -20,7 +21,7 @@ const NewsItem = ({ banner_image, id, title, text, slug}) => (
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     </div>
 );
 

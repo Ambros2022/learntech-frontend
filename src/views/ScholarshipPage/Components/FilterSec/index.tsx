@@ -5,7 +5,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
-    import axios1 from 'axios';
+import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -38,6 +38,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
     interface SearchResult {
         id: number;
         name: string;
+        slug: string;
     }
 
 
@@ -135,8 +136,9 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                 params: { searchfrom: 'name', searchtext: value },
             });
 
-            const suggestions = response.data.data.map((item: { id: number; name: string }) => ({
+            const suggestions = response.data.data.map((item: { id: number; name: string; slug: string }) => ({
                 name: item.name,
+                slug: item.slug,
                 id: item.id,
             }));
 
@@ -405,7 +407,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                             renderOption={(props, option: SearchResult) => (
                                 <li {...props}>
                                     <Link
-                                        href={`/scholarship/${option.id}/${option.name}`}
+                                        href={`/scholarship/${option.id}/${option.slug}`}
                                         style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
                                     >
                                         {option.name}

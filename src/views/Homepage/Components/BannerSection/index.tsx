@@ -124,7 +124,7 @@ function BannerSection() {
           <div className="carousel-inner" >
             {banners.map((banner, index) => (
               <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`} style={{ zIndex: '30' }}>
-                <a href={banner?.link}>
+                <Link href={banner?.link}>
                   <Image
                     fill
                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
@@ -132,7 +132,7 @@ function BannerSection() {
                     alt={`Banner ${index}`}
                     className="w-100"
                   />
-                </a>
+                </Link>
               </div>
             ))}
           </div>

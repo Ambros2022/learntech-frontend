@@ -6,6 +6,7 @@ import MainNewsPage from 'src/views/MainNewsPage'
 
 
 const news = () => {
+    console.log("main newspage");
     return <>
         <MainNewsPage />
     </>

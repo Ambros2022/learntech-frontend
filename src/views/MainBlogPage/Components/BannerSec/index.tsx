@@ -16,6 +16,7 @@ let cancelToken: any;
 interface SearchResult {
     id: number;
     name: string;
+    slug: string;
 }
 
 const BannerSec = () => {
@@ -42,8 +43,9 @@ const BannerSec = () => {
                 params: { searchfrom: 'name', searchtext: value },
             });
 
-            const suggestions = response.data.data.map((item: { id: number; name: string }) => ({
+            const suggestions = response.data.data.map((item: { id: number; name: string, slug: string }) => ({
                 name: item.name,
+                slug: item.slug,
                 id: item.id,
             }));
 
@@ -98,7 +100,7 @@ const BannerSec = () => {
                                                 renderOption={(props, option: SearchResult) => (
                                                     <li {...props}>
                                                         <Link
-                                                            href={`/blog/${option.id}/${option.name}`}
+                                                            href={`/blog/${option.id}/${option.slug}`}
                                                             style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
                                                         >
                                                             {option.name}

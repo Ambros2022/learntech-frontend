@@ -304,7 +304,7 @@ const Header = () => {
                 </li>
 
                 <li className="nav-item dropdown d-lg-inline-block d-none">
-                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/more') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/" id="navbarDropdownMenuLink" role="button"
+                  <Link className={`nav-link dropdown-toggle `} onClick={() => setIsOpen(false)} href="/" id="navbarDropdownMenuLink" role="button"
                     aria-expanded="false">
                     More
                   </Link>

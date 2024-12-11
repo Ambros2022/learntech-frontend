@@ -770,7 +770,7 @@ function CollegeFilterSection() {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-xl-3 col-md-4 mb-3 mb-lg-0 bg-skyDarkBlue rounded">
-                            <h5 className='text-blue fw-bold text-md-start text-center px-3 pt-3'>Found {total} Colleges</h5>
+                            <h5 className='text-blue fw-bold text-md-start text-center px-3 pt-3'>Found {total} Universities</h5>
                             <MultiSelectOptions options={options} />
                         </div>
                         <div className="col-lg-9 col-xl-9 col-md-8">

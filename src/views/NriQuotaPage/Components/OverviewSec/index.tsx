@@ -100,7 +100,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
                             <div className='row g-2 p-3 bg-skyBlue mt-5 rounded'>
                                 <div className="col-md-12">
                                     {banners.map((banner, index) => (
-                                        <a href={banner?.link} key={index}>
+                                        <Link href={banner?.link} key={index}>
                                             <Image
                                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                                                 priority={true}
@@ -108,7 +108,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
                                                 className='img-fluid'
                                                 alt={`Banner ${index}`}
                                             />
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
