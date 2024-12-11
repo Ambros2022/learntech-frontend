@@ -36,14 +36,14 @@ const CardComponent: React.FC<CardComponentProps> = React.memo(({ title, imageSr
                         </div>
                         <div className="col-2 cardArrow">
                             <span>
-                                <a href="#">
+                             
                                     <img
                                         width={27}
                                         height={27}
                                         src="/images/icons/right arrow.svg"
                                         alt="right-arrow"
                                     />
-                                </a>
+                           
                             </span>
                         </div>
                     </div>

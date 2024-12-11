@@ -54,6 +54,7 @@ function InnerBlogPage({ id }) {
                 imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
                 name: item.name || 'No description available',
                 id: item.id,
+                slug: item?.slug,
             }))
             setNewsData(formattedNews)
 
@@ -72,6 +73,7 @@ function InnerBlogPage({ id }) {
                 imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
                 name: item.name || 'No description available',
                 id: item.id,
+                slug: item?.slug,
             }))
             setBlogsData(formattedNews)
 

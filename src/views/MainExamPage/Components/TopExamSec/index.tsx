@@ -22,7 +22,7 @@ const TopExamSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
                 <div className='text-center'>
                     <button
                         onClick={toggleReadMore}
-                        className="btn viewMoreClgBtn"
+                        className="btn viewMoreClgBtn mt-3"
                     >
                         Read More
                     </button>
