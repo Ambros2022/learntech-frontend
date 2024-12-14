@@ -17,7 +17,7 @@ function PopularCourses() {
 
     const getExamData = useCallback(async () => {
         try {
-            const response = await axios1.get('/api/website/exams/get');
+            const response = await axios1.get('/api/website/exams/get?orderby=desc&columnname=upcoming_date');
             if (response.data.status === 1) {
                 const examData: Item[] = response.data.data.map((exam: any) => ({
                     id: exam.id,

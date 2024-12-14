@@ -6590,3 +6590,13 @@
   .serviceh2 h2{
     font-size: 24px !important;
   }
+
+  .advh3 h3{
+    font-size: 24px!important;
+  }
+
+  .editior-view .tab-pane {
+    overflow-y: auto; /* Keep vertical scrolling if content exceeds the height */
+    scrollbar-width: none; /* Hide vertical scrollbar in Firefox */
+    -ms-overflow-style: none; /* Hide vertical scrollbar in IE and Edge */
+  }
