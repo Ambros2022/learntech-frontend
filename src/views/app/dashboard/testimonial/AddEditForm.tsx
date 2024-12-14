@@ -96,10 +96,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
     const schema: any = yup.object().shape({
-        title: yup
-            .string()
-            .trim()
-            .required(),
+        // title: yup
+        //     .string()
+        //     .trim()
+        //     .required(),
         name: yup
             .string()
             .trim()
@@ -264,105 +264,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         <>
             <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
-
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='title'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Title'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.title)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.title && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='name'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Name'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.name)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.name && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='designation'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Designation'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    multiline={true}
-                                    rows={10}
-                                    error={Boolean(errors.designation)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.designation && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='video_url'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Video'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.video_url)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.video_url && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='full_url'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='full_url'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.full_url)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.full_url && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='type'
                             control={control}
@@ -386,6 +288,105 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             </FormHelperText>
                         )}
                     </Grid>
+                    {/* <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='title'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Title'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.title)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.title && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid> */}
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='name'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Name'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.name)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.name && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='full_url'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='College Name'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.full_url)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.full_url && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Controller
+                            name='designation'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Designation'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    multiline={true}
+                                    rows={8}
+                                    error={Boolean(errors.designation)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.designation && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Controller
+                            name='video_url'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Video'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.video_url)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.video_url && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+    
+
 
                     <Grid item xs={12} sm={4}>
                         <Controller

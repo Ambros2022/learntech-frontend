@@ -52,7 +52,7 @@ const Footer = () => {
                 to a Brighter Future.</p>
               <span className="footerIcon">
                 <div className="mb-3">
-                  <a href="tel:18001208969" target="_blank" className="d-inline-block"><i className='bi bi-telephone-fill fs-5 me-2'></i>1800 120 8969</a><br></br>
+                  <a href="tel:18001208696" target="_blank" className="d-inline-block"><i className='bi bi-telephone-fill fs-5 me-2'></i>1800 120 8696</a><br></br>
                 </div>
                 <div className="mb-3">
                   <a href="mailto:info@learntechww.com" target="_blank" className="d-inline-block"><i className='bi bi-envelope-fill fs-5 me-2'></i>info@learntechww.com</a><br></br>
