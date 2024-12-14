@@ -202,7 +202,7 @@ function CollegeInfoSection({ data }) {
         
         )}
 
-        <div className="tab-content pt-5" id="nav-tabContent">
+        <div className="tab-content editior-view pt-5" id="nav-tabContent">
           {renderTabContent()}
         </div>
       </div>

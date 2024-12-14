@@ -189,7 +189,7 @@ const Header = () => {
             <div className="col-md-9 d-flex align-items-center justify-content-end socialText">
               <div>
                 <span className='telHover'><Image className="m-0" src="/images/icons/Phone-blue.svg" width={26} height={22} alt="phone-icon" />
-                  <a href="tel:18001208969" target="_blank" className="mx-2 " style={{ color: '#274896' }}>1800 120 8969</a></span>
+                  <a href="tel:18001208696" target="_blank" className="mx-2 " style={{ color: '#274896' }}>1800 120 8696</a></span>
                 <span className="mailHover"><Image className="ms-2" src="/images/icons/email-icon.svg" width={26} height={22} alt="email-icon" />
 
                   <a href="mailto:info@learntechww.com" className="mx-2" style={{ color: '#274896' }}>info@learntechww.com</a></span>

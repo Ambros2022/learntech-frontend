@@ -159,7 +159,7 @@ const App = (props: ExtendedAppProps) => {
                 "contactPoint": {
                   "@type": "ContactPoint",
                   "contactType": "customer support",
-                  "telephone": "[1800 120 8969]",
+                  "telephone": "[1800 120 8696]",
                   "email": "info@learntechww.com"
                 },
                 "sameAs": [

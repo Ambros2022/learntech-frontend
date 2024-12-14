@@ -269,6 +269,7 @@ function CollegeFilterSection() {
             const params: any = {
                 page: 1,
                 size: 10000,
+                country_id:204,
                 type: 'college'
             };
 

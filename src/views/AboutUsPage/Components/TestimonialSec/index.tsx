@@ -9,6 +9,7 @@ import test from 'node:test';
 // Define the interface for a testimonial
 interface Testimonial {
     collegeTestimonials?: any;
+    full_url?: any;
     name: string;
     location: string;
     institution: string;
@@ -126,17 +127,8 @@ const TestimonialSec = () => {
                                                         {/* ({testimonial.location}) */}
                                                     </h5>
                                                     <p className='text-black'>
+                                                        {testimonial.full_url}
 
-
-                                                        {
-                                                            testimonial?.collegeTestimonials && testimonial.collegeTestimonials.map((element, index) => {
-                                                                return (
-                                                                    <>
-                                                                        {index == 0 ? ' ' + element?.collegeDetails?.name : ', ' + element?.collegeDetails?.name}
-                                                                    </>
-                                                                )
-                                                            })
-                                                        }
                                                     </p>
                                                 </div>
                                             </div>

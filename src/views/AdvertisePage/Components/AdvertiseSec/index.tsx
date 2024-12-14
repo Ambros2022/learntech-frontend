@@ -32,7 +32,7 @@ const AdvertiseSec = ({ data }) => {
                             </p>
 
                             {/* <div dangerouslySetInnerHTML={{ __html: data?.top_description }} /> */}
-                            <div className="d-flex gap-3 flex-wrap ServiceTabs flex-row" id="myTab">
+                            <div className="d-flex gap-3 flex-wrap ServiceTabs  flex-row" id="myTab">
                                 <button className={`btn nav-link ${activeTab === 'students' ? 'active' : ''}`}
                                     onClick={() => setActiveTab('students')}>
                                     Digital Marketing Activities
@@ -43,22 +43,22 @@ const AdvertiseSec = ({ data }) => {
                                 </button>
                             </div>
                             <div className="tab-content pt-3">
-                                <div className={`tab-pane fade ${activeTab === 'students' ? 'show active' : ''}`} role="tabpanel">
+                                <div className={` advh3 tab-pane fade ${activeTab === 'students' ? 'show active' : ''}`} role="tabpanel">
 
                                     <p className="text-black">
                                         Digital marketing for educational institutions can be done through a plethora of activities. Some of them are:
                                     </p>
 
-                                    <div className='row text-center adv17'>
+                                    <div className='row text-center adv17 '>
                                         <div className="col-6">
-                                            <Image src="/images/avertise/Social_Media_Marketing_3.png" width={100} height={100} alt={'Social Media Marketing-logo'} />
+                                            <Image src="/images/avertise/Social_Media_Marketing_3.png" width={80} height={80} alt={'Social Media Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Social Media Marketing</h5>
                                         </div>
-                                        <div className="col-6"><Image src="/images/avertise/Content_Marketing_3.png" width={100} height={100} alt={'Content Marketing-logo'} />
+                                        <div className="col-6"><Image src="/images/avertise/Content_Marketing_3.png" width={80} height={80} alt={'Content Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Content Marketing</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Pay-Per-Click_3.png" width={100} height={100} alt={'Pay-Per-Click-logo'} />
+                                        <div className="col-6"><Image src="/images/avertise/Pay-Per-Click_3.png" width={80} height={80} alt={'Pay-Per-Click-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Pay-Per-Click</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Direct_Marketing_3.png" width={100} height={100} alt={'Direct Marketing-logo'} />
+                                        <div className="col-6"><Image src="/images/avertise/Direct_Marketing_3.png" width={80} height={80} alt={'Direct Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Direct Marketing</h5></div>
 
                                     </div>
@@ -91,7 +91,7 @@ const AdvertiseSec = ({ data }) => {
                                     </p>
 
                                 </div>
-                                <div className={`tab-pane fade ${activeTab === 'colleges' ? 'show active' : ''}`} role="tabpanel">
+                                <div className={`advh3 tab-pane fade ${activeTab === 'colleges' ? 'show active' : ''}`} role="tabpanel">
 
                                     <p className="text-black">
                                         Some of the ‘On-Field’ educational advertising strategies that are inculcated by Learntech to improve your institute’s brand recognition are:
@@ -100,18 +100,18 @@ const AdvertiseSec = ({ data }) => {
 
                                     <div className='row text-center adv17'>
                                         <div className="col-6">
-                                            <Image src="/images/avertise/Expos_and_Educational_Fairs_3.png" width={100} height={100} alt={'Expos and Educational Fairs'} />
+                                            <Image src="/images/avertise/Expos_and_Educational_Fairs_3.png" width={80} height={80} alt={'Expos and Educational Fairs'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Expos and Educational Fairs</h5>
                                         </div>
-                                        <div className="col-6"><Image src="/images/avertise/Print-Media_Advertising_3.png" width={100} height={100} alt={'Print-Media Advertising'} />
+                                        <div className="col-6"><Image src="/images/avertise/Print-Media_Advertising_3.png" width={80} height={80} alt={'Print-Media Advertising'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Print-Media Advertising</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Transit_Advertising_3.png" width={100} height={100} alt={'Transit Advertising'} />
+                                        <div className="col-6"><Image src="/images/avertise/Transit_Advertising_3.png" width={80} height={80} alt={'Transit Advertising'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Transit Advertising</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Influencer_Marketing_3.png" width={100} height={100} alt={'Influencer Marketing-logo'} />
+                                        <div className="col-6"><Image src="/images/avertise/Influencer_Marketing_3.png" width={80} height={80} alt={'Influencer Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Influencer Marketing</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Collaborations_With_Local_Institutes_3.png" width={100} height={100} alt={'Collaborations with Local Institutes'} />
+                                        <div className="col-6"><Image src="/images/avertise/Collaborations_With_Local_Institutes_3.png" width={80} height={80} alt={'Collaborations with Local Institutes'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Collaborations with Local Institutes</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Targeted Survey_Analysis_3.png" width={100} height={100} alt={'Targeted Survey Analysis'} />
+                                        <div className="col-6"><Image src="/images/avertise/Targeted Survey_Analysis_3.png" width={80} height={80} alt={'Targeted Survey Analysis'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Targeted Survey Analysis</h5></div>
 
                                     </div>
@@ -185,14 +185,14 @@ const AdvertiseSec = ({ data }) => {
                         </div>
                         <div className="col-xl-3 col-lg-4 col-md-5">
                             <div className="row">
-                                <div className="col-md-12 col-lg-12 bg-skyBlue p-3 rounded mb-3">
-                                    <h2 className='text-center fw-bold text-blue pt-2 mb-3'>Connect With Us</h2>
+                                <div className="col-md-12 col-lg-12 bg-skyBlue p-3 rounded mb-3 py-md-5 py-3">
+                                    <h2 className='text-center fw-bold text-blue pt-2 mb-3 py-md-3'>Connect With Us</h2>
                                     <ContactUsForm />
 
                                 </div>
                                 <div className="col-md-12 col-lg-12 mb-3 mx-md-0">
                                     <div className='bg-skyBlue p-3 rounded border text-center'>
-                                        <Image src="/images/icons/advertisement.png" width={200} height={300} alt={'advertisement-logo'} />
+                                        <Image src="/images/icons/advertisement.png" width={200} height={500} alt={'advertisement-logo'} />
                                     </div>
                                 </div>
                             </div>
