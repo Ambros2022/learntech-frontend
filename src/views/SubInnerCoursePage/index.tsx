@@ -55,6 +55,7 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
         params: {
           page: 1,
           size: 8,
+          type: 'college',
           stream_id: [Streamid]
         }
       });

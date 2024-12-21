@@ -51,7 +51,7 @@ const renderClient = (params: GridRenderCellParams) => {
 
 
 
-const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
+const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: any }) => {
   const [open, setOpen] = useState(false);
 
   const handleDelete = () => {
@@ -193,10 +193,9 @@ const SecondPage = () => {
     setDialogOpen(false);
   };
 
-  const handleReloadPage = useCallback(() => {
-    setLoading(true);
-    setReloadpage('1');
-  }, []);
+  const handleReloadPage = () => {
+    setReloadpage((prev) => (prev === "0" ? "1" : "0"));
+  };
 
   let columns: GridColDef[] = [
 
@@ -215,21 +214,6 @@ const SecondPage = () => {
         )
       }
     },
-    // {
-    //   flex: 0.125,
-    //   minWidth: 100,
-    //   field: 'name',
-    //   headerName: 'Name',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params
-
-    //     return (
-    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //         {row.name}
-    //       </Typography>
-    //     )
-    //   }
-    // },
 
 
     {
@@ -454,16 +438,11 @@ const SecondPage = () => {
     [paginationModel, reloadpage]
   );
 
-  const paginationchange = (model: GridPaginationModel, details: GridCallbackDetails) => {
-    setSize(model.pageSize);
-    setPage(model.page + 1);
-    setPaginationModel({ page: model.page, pageSize: model.pageSize });
 
-  }
 
   useEffect(() => {
     fetchTableData(orderby, searchtext, searchfrom, size, page, columnname, college_id, course_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, college_id, course_id])
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, college_id, course_id,reloadpage])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {

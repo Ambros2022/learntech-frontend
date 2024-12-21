@@ -56,7 +56,7 @@ function MainBlogPage() {
 
   const getColleges = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10000 };
+      const roleparams = { page: 1, size: 10000, type: 'college' };
       const response = await axios.get('api/website/colleges/get', { params: roleparams });
       setcollegeData(response.data.data);
     } catch (err) {

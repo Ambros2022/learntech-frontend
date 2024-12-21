@@ -69,7 +69,7 @@ const MainNewsPage = () => {
   const getColleges = useCallback(async () => {
     try {
       const roleparams = { page: 1, size: 10000 };
-      const response = await axios.get('api/website/colleges/get', { params: roleparams });
+      const response = await axios.get('api/website/langingpage/get', { params: roleparams });
       setcollegeData(response.data.data);
     } catch (err) {
       console.error(err);
