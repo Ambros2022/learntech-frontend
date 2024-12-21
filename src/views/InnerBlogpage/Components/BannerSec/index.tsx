@@ -13,7 +13,7 @@ const BannerSec = ({ data, createdAt}) => {
             </section>
             <section className='bg-white'>
                 <div className='container py-3 linkFontSize'>
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/blogs" className='text-black'> Blogs <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>{data.meta_title}</span>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/blogs" className='text-black'> Blogs <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>{data.name}</span>
                 </div>
             </section>
         </>

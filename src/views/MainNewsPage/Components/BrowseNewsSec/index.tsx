@@ -42,7 +42,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
     const getNewsdata = useCallback(
         async (id, page = 1) => {
             try {
-                const roleparams = { page, size: newsPerPage }
+                const roleparams = { page, size: newsPerPage,columnname:'created_at',orderby:'desc' }
                 const url = id === 'all' ? '/api/website/news/get' : `/api/website/news/get?category_id=${id}`
                 const response = await axios.get(url, { params: roleparams })
 

@@ -1274,7 +1274,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
 
                                 <Grid item xs={12} sm={12}>
-                                    <Typography style={{ marginBottom: '10px' }}>Hostel</Typography>
+                                    <Typography style={{ marginBottom: '10px' }}>Infrastructure</Typography>
 
                                     <Controller
                                         name='hostel'

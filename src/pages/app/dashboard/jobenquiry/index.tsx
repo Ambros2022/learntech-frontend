@@ -197,10 +197,9 @@ const SecondPage = () => {
   params['size'] = 10000;
 
 
-  const handleReloadPage = useCallback(() => {
-    setLoading(true);
-    setReloadpage('1');
-  }, []);
+  const handleReloadPage = () => {
+    setReloadpage((prev) => (prev === "0" ? "1" : "0"));
+  };
 
 
 
@@ -292,8 +291,11 @@ const SecondPage = () => {
         const { row } = params;
 
         const handleViewClick = () => {
-          handleDialogOpen(row);
+          // Open the resume link in a new tab
+          const url = `${process.env.NEXT_PUBLIC_IMG_URL}/${row?.resume}`;
+          window.open(url, '_blank', 'noopener,noreferrer');
         };
+
 
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
@@ -448,13 +450,20 @@ const SecondPage = () => {
         <DialogTitle id="view-dialog-title" className='typographypopup'>View Details</DialogTitle>
         <DialogContent>
           {dialogData && (
+            <a href={`${process.env.NEXT_PUBLIC_IMG_URL}/${dialogData.resume}`} target="_blank" rel="noopener noreferrer">
+              View Resume
+            </a>
+
+          )}
+          {/* {dialogData && (
                 <iframe
                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${dialogData.resume}`}
                 title={dialogData.resume}
                 style={{ width: '100%', height: '500px', display: loading ? 'none' : 'block' }}
 
             />
-          )}
+          )} */}
+
 
         </DialogContent>
         <DialogActions>

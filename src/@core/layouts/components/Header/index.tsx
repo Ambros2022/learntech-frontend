@@ -64,6 +64,8 @@ const Header = () => {
       roleparams['page'] = 1;
       roleparams['size'] = 10000;
       roleparams['country_id'] = 204;
+      roleparams['columnname'] = 'created_at';
+      roleparams['orderby'] = 'desc';
       const response = await axios1.get('api/website/news/get', { params: roleparams });
       setNews(response.data.data);
 

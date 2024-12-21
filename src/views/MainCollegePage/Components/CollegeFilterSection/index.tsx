@@ -270,7 +270,8 @@ function CollegeFilterSection() {
                 page: 1,
                 size: 10000,
                 country_id:204,
-                type: 'college'
+                type: 'college',
+               
             };
 
 
@@ -280,7 +281,7 @@ function CollegeFilterSection() {
             if (streamIds && streamIds.length > 0) params['stream_id'] = `[${streamIds.join(',')}]`;
             if (ownership) params['college_type'] = ownership;
             if (courseType && courseType.length > 0) params['course_type'] = JSON.stringify(courseType);
-            const response = await axios1.get('api/website/colleges/get', { params });
+            const response = await axios1.get('api/website/colleges/get?orderby=asc&columnname=listing_order', { params });
             setColleges(response.data.data);
             setTotal(response.data.totalItems);
         } catch (err) {
@@ -738,8 +739,9 @@ function CollegeFilterSection() {
                                 </div>
                                 <div className="col-md-8">
                                     <div className="card-body" style={{ zIndex: '200' }}>
+                                    <h3 className="card-title fw-bold">{title}</h3>
                                         <h5 className="card-text">{description}</h5>
-                                        <h3 className="card-title fw-bold">{title}</h3>
+                                     
                                         <Link href={link} className='mt-3 btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
                                     </div>
                                 </div>

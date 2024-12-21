@@ -55,6 +55,7 @@ function InnerCoursePage({ id }) {
         params: {
           page: 1,
           size: 1000,
+          type: 'college',
           stream_id: [id]
         }
       });

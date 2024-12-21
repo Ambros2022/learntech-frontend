@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
 const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) => {
     const router = useRouter();
     const [isExpanded, setIsExpanded] = useState(false);
-    const maxLength = 9000;
+    const maxLength = 20000;
 
     const initialValues = {
         name: '',

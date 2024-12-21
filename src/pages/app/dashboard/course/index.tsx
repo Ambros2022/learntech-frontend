@@ -168,11 +168,9 @@ const SecondPage = () => {
 
   params['page'] = 1;
   params['size'] = 10000;
-
-  const handleReloadPage = useCallback(() => {
-    setLoading(true);
-    setReloadpage('1');
-  }, []);
+  const handleReloadPage = () => {
+    setReloadpage((prev) => (prev === "0" ? "1" : "0"));
+  };
 
   let columns: GridColDef[] = [
 

@@ -35,23 +35,41 @@ module.exports = {
     ];
   },
 
-  // async redirects() {
-  //   console.log('redirect next')
-  //   let array =  [
+  async redirects() {
 
-  //     {
-  //       source: '/homes',
-  //       destination: '/about',
-  //       permanent: true,
-  //     },]
-  //   return [
+    return [
 
-  //     {
-  //       source: '/homes',
-  //       destination: '/about',
-  //       permanent: true,
-  //     },
+      {
+        source: '/study-in-india',
+        destination: '/colleges',
+        permanent: true,
+      },
+      {
+        source: '/study-mbbs-abroad',
+        destination: 'mbbs-abroad',
+        permanent: true,
+      },
+      {
+        source: '/medical-admission',
+        destination: '/meds',
+        permanent: true,
+      },
+      {
+        source: '/copyright',
+        destination: '/terms-and-conditions',
+        permanent: true,
+      },
+      {
+        source: '/ayurvedic-course',
+        destination: '/course/7/ayurveda',
+        permanent: true,
+      },
+      {
+        source: '/meds-college',
+        destination: '/colleges',
+        permanent: true,
+      },
 
-  //   ]
-  // },
+    ]
+  },
 }
