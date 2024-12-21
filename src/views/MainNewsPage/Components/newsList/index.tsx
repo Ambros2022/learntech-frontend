@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // NewsItem component
-const NewsItem = ({ id, banner_image, title,slug }) => (
+const NewsItem = ({ id, banner_image, title, link }) => (
     <div className="col-md-12 col-10 mx-md-0 mx-auto">
-        <Link href={`/college/${id}/${slug}`} >
+        <Link href={link} >
             <div className="card mb-3 bg-skyBlue hover-card">
                 <div className="row g-0">
                     <div className="col-md-4 col-xl-3 col-lg-3 upcomingAdmission">
@@ -25,15 +25,28 @@ const NewsItem = ({ id, banner_image, title,slug }) => (
 // NewsList component
 const NewsList = ({ newsItems }) => (
     <>
-        <h4 className='fw-bold text-blue mt-3 text-center pt-3 mb-4'>Upcoming Admissions</h4>
-        <div className='bg-skyBlue pt-3 examNewsSec rounded mt-3 px-4' >
-            <div className="row">
-                {newsItems.map((item, index) => (
-                    <NewsItem key={index} id={item.id} banner_image={item.banner_image} title={item.name} slug={item?.slug} />
-                ))}
-            </div>
-        </div>
+        {newsItems?.length > 0 && (
+            <>
+                <h4 className="fw-bold text-blue mt-3 text-center pt-3 mb-4">
+                    Upcoming Admissions
+                </h4>
+                <div className="bg-skyBlue pt-3 examNewsSec rounded mt-3 px-4">
+                    <div className="row">
+                        {newsItems.map((item, index) => (
+                            <NewsItem
+                                key={item.id || index} // Prefer a unique ID if available
+                                id={item.id}
+                                banner_image={item.logo}
+                                title={item.name}
+                                link={item.link}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </>
+        )}
     </>
+
 );
 
 export default NewsList;

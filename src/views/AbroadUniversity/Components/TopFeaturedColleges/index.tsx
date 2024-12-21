@@ -16,7 +16,7 @@ function FeaturedCollegeSection({ data }) {
       const roleparams: any = {};
       roleparams['page'] = 1;
       roleparams['size'] = 10;
-      // roleparams['type'] = "university";
+      roleparams['type'] = "university";
       roleparams['country_id'] = [data?.country_id];
       const response = await axios1.get('api/website/colleges/get', { params: roleparams });
 

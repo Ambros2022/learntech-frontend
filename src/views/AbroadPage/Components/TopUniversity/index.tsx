@@ -14,7 +14,7 @@ function TopUniversity({ data }) {
       roleparams['page'] = 1;
       roleparams['size'] = 10;
       roleparams['country_id'] = [data?.country_id];
-      // roleparams['type'] = "university";
+      roleparams['type'] = "university";
       const response = await axios1.get('api/website/colleges/get', { params: roleparams });
 
       setColleges(response.data.data);

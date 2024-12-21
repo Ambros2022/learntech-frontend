@@ -18,9 +18,6 @@ function InnerCollegePage({ id }) {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [colleges, setColleges] = useState([]);
-  const [reviews, setreviews] = useState([]);
-  const [streams, setStreams] = useState([]);
   const [testdata, setTestdata] = useState<any>(null);
 
   const getPagedata = useCallback(async () => {
@@ -49,21 +46,7 @@ function InnerCollegePage({ id }) {
     }
   }, [id, isMountedRef, router]);
 
-  const getColleges = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/colleges/get', {
-        params: {
-          page: 1,
-          size: 8,
-        }
-      });
-      if (isMountedRef.current) {
-        setColleges(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [id, isMountedRef]);
+
 
   const formattedData = pagedata && pagedata.collegefaqs && pagedata.collegefaqs.map((item) => ({
     "@type": "Question",
@@ -79,7 +62,7 @@ function InnerCollegePage({ id }) {
 
   useEffect(() => {
     getPagedata();
-    getColleges();
+ 
     gettestimonials();
 
   }, [getPagedata]);

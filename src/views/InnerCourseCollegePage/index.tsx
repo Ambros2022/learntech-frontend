@@ -42,6 +42,8 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
         params: {
           page: 1,
           size: 1000,
+          type: 'college',
+          
         }
       });
       if (isMountedRef.current) {

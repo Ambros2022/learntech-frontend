@@ -273,7 +273,7 @@ function CollegeFilterSection() {
             if (streamIds && streamIds.length > 0) params['stream_id'] = `[${streamIds.join(',')}]`;
             if (ownership) params['college_type'] = ownership;
             if (courseType && courseType.length > 0) params['course_type'] = JSON.stringify(courseType);
-            const response = await axios1.get('api/website/colleges/get', { params });
+            const response = await axios1.get('api/website/colleges/get?orderby=asc&columnname=listing_order', { params });
             setColleges(response.data.data);
             setTotal(response.data.totalItems);
         } catch (err) {
