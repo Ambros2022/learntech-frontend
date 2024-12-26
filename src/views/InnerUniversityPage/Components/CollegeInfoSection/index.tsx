@@ -79,7 +79,7 @@ function CollegeInfoSection({ data }) {
           ))}
         </div>
       ) : ''
-    },    
+    },
     { id: 'review', label: 'Review', content: <ReviewSec data={data} /> },
     {
       id: 'faq',
@@ -146,9 +146,11 @@ function CollegeInfoSection({ data }) {
                     <GlobalPopupEnquiry className='viewMoreCollegeBtn btn-success2' />
                   </div>
                 </div>
-                <div className='clgVideo rounded'>
+
+                {data?.video_url && <div className='clgVideo rounded'>
                   <iframe width="100%" height="100%" className="rounded" src={data.video_url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 </div>
+                }
               </div>
 
             </div>
@@ -191,15 +193,15 @@ function CollegeInfoSection({ data }) {
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             responsive={responsive}
             className="infoBtn gap-3  text-center"
-            // className="infoBtn gap-3 mx-auto text-center"
+          // className="infoBtn gap-3 mx-auto text-center"
           >
             {renderTabs()}
           </Carousel>
         ) : (
           <div className={`pt-3 text-center ${isMobile ? '' : 'justify-content-start d-flex flex-fill'} flex-wrap infoBtn`} id="nav-tab" role="tablist">
-          {renderTabs()}
-        </div>
-        
+            {renderTabs()}
+          </div>
+
         )}
 
         <div className="tab-content editior-view pt-5" id="nav-tabContent">

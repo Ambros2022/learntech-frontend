@@ -2205,8 +2205,9 @@
     .infoBtn .btn {
       width: 90% !important;
     }
+
     .subinner .infoBtn .btn {
-      width: 90% !important;
+      width: 95% !important;
     }
 
     .font13-m .btn {
@@ -5724,7 +5725,7 @@
   }
 
   .innerClgCarousel .fi-right {
-    margin-right: 30px !important;
+    margin-right: 25px !important;
     z-index: 20 !important;
   }
 
@@ -5787,7 +5788,7 @@
   }
 
   .innerClgCarousel .fi-right {
-    margin-right: 30px !important;
+    margin-right: 25px !important;
     z-index: 20 !important;
   }
 
@@ -6362,7 +6363,7 @@
     text-overflow: ellipsis;
   }
 
-  .file-name {
+  /* .file-name {
     position: absolute !important;
     color: black !important;
     left: 200px !important;
@@ -6371,6 +6372,36 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  } */
+
+  .file-name {
+    position: absolute;
+    /* Keep absolute positioning */
+    color: black !important;
+    /* Maintain text color */
+    left: 200px;
+    /* Adjust the left alignment */
+    top: 50%;
+    /* Vertically align */
+    transform: translateY(-50%);
+    /* Center vertically without affecting horizontal alignment */
+    white-space: nowrap;
+    /* Prevent text wrapping */
+    overflow: hidden;
+    /* Hide overflow */
+    text-overflow: ellipsis;
+    /* Add ellipsis for long text */
+    max-width: calc(100% - 220px);
+    /* Ensure it doesn’t overlap container edges */
+  }
+
+  @media (max-width: 768px) {
+    .file-name {
+      left: 50px;
+      /* Adjust for smaller screens */
+      max-width: calc(100% - 100px);
+      /* Adjust width accordingly */
+    }
   }
 
   .journey-video {
@@ -6527,6 +6558,7 @@
     .tab-pane {
       overflow-x: auto;
     }
+
     .infoBtn {
       display: inline-flex;
       flex-wrap: nowrap;
@@ -6542,13 +6574,22 @@
       white-space: nowrap;
       /* Ensure text doesn’t wrap */
     }
-    .exam  .infoBtn .btn {
-      white-space: wrap !important; 
+
+    /* .exam .infoBtn .btn {
+      white-space: wrap !important;
+    } */
+    .exam .infoBtn li {
+     width: auto !important;
     }
+    .subinner .infoBtn li {
+     width: auto !important;
+    }
+
     .subinner .infoBtn>* {
-      flex: 0 0 auto;
+      flex: 0 auto auto;
+      gap: 5px !important;
       /* Prevent items from stretching */
-      white-space: pre-wrap;
+      /* white-space: pre-wrap; */
       /* Ensure text doesn’t wrap */
     }
   }
@@ -6571,6 +6612,10 @@
       flex: 0 0 auto;
       /* Ensure tabs take space based on content */
     }
+
+    /* .exam .infoBtn li {
+    width: auto !important;
+  } */
   }
 
   .testimonialPara {
@@ -6584,19 +6629,41 @@
     /* Set a max-height to trigger scrolling */
   }
 
-  .exam  .infoBtn .btn {
-    white-space: pre-wrap !important; 
-  }
-  .serviceh2 h2{
+  /* .exam .infoBtn .btn {
+    white-space: pre-wrap !important;
+  } */
+
+  /* .exam .infoBtn li {
+    width: auto !important;
+  } */
+
+  .serviceh2 h2 {
     font-size: 24px !important;
   }
 
-  .advh3 h3{
-    font-size: 24px!important;
+  .advh3 h3 {
+    font-size: 24px !important;
   }
 
   .editior-view .tab-pane {
-    overflow-y: auto; /* Keep vertical scrolling if content exceeds the height */
-    scrollbar-width: none; /* Hide vertical scrollbar in Firefox */
-    -ms-overflow-style: none; /* Hide vertical scrollbar in IE and Edge */
+    overflow-y: auto;
+    /* Keep vertical scrolling if content exceeds the height */
+    scrollbar-width: none;
+    /* Hide vertical scrollbar in Firefox */
+    -ms-overflow-style: none;
+    /* Hide vertical scrollbar in IE and Edge */
   }
+
+  /* Make left and right carousel arrows bold */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  font-weight: bold; /* Set bold for arrows */
+  background-color: #000; /* Optional: Change arrow color to black */
+  border-radius: 15%; /* Optional: Make arrow background round */
+}
+
+/* Optional: Change size of arrows */
+.carousel-control-prev-icon:before,
+.carousel-control-next-icon:before {
+  font-size: 2rem; /* Adjust size of the arrows */
+}

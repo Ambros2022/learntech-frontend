@@ -74,9 +74,10 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
             const response = await axios.post('api/website/addjobsenquires/get', formData);
             if (response.status === 200) {
                 toast.dismiss();
-                toast.success('Thank you. We will get back to you.');
+                toast.success('Thank you for submitting your details.');
                 resetForm();
-                router.push('/thank-you');
+                setResumeFileName('');
+                // router.push('/thank-you');
             }
         } catch (error) {
             toast.error('Error submitting form. Please try again later.');

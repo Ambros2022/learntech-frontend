@@ -5,6 +5,7 @@ import MainCarousel2 from 'src/@core/components/carousel2';
 import Link from 'next/link';
 
 interface Item {
+    upcoming_date: any;
     slug: string;
     id: number;
     title: string;
@@ -19,14 +20,20 @@ function PopularCourses() {
         try {
             const response = await axios1.get('/api/website/exams/get?orderby=desc&columnname=upcoming_date');
             if (response.data.status === 1) {
+                // Map and format exam data
                 const examData: Item[] = response.data.data.map((exam: any) => ({
                     id: exam.id,
                     title: exam.exam_title,
                     slug: exam.slug,
-                    date: formatDate(exam.upcoming_date) // Format the date here
+                    date: formatDate(exam.upcoming_date), // Format the date here
+                    upcoming_date: new Date(exam.upcoming_date) // Parse for sorting
                 }));
+
+                // Sort exams by the upcoming_date in ascending order
+                const sortedData = examData.sort((a, b) => a.upcoming_date.getTime() - b.upcoming_date.getTime());
+
                 if (isMountedRef) {
-                    setItems(examData);
+                    setItems(sortedData);
                 }
             } else {
                 console.error('Failed to fetch exam data');
@@ -35,6 +42,7 @@ function PopularCourses() {
             console.error('Error fetching exam data:', error);
         }
     }, [isMountedRef]);
+
 
     useEffect(() => {
         getExamData();
@@ -47,12 +55,28 @@ function PopularCourses() {
     // Function to format the date
     function formatDate(dateString: string): string {
         const date = new Date(dateString);
-        const options: Intl.DateTimeFormatOptions = {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
+
+        // Determine the day and its suffix
+        const day = date.getDate();
+        const daySuffix = (n: number) => {
+            if (n >= 11 && n <= 13) return 'th';
+            switch (n % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
         };
-        return date.toLocaleDateString('en-US', options);
+
+        const suffix = daySuffix(day);
+
+        // Get the month name and year
+        const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
+        const [month, year] = date.toLocaleDateString('en-US', options).split(' ');
+
+        // Return formatted date
+        // return `${day}${suffix} ${month} `;
+        return `${day}${suffix} ${month} ${year}`;
     }
 
     // Function to create card components
@@ -69,12 +93,12 @@ function PopularCourses() {
     }
 
     // CardComponent function
-    function CardComponent({ id, title, date,slug }: { id: number; title: string; date: string,slug: string}) {
+    function CardComponent({ id, title, date, slug }: { id: number; title: string; date: string, slug: string }) {
         return (
             <div className='topCourseConCarousel'>
-                 <Link href={`/exam/${id}/${slug}`} className='stretch-link'>
-                <div className="card text-center hover-card bg-skyBlue d-flex mx-2 border-0">
-                   
+                <Link href={`/exam/${id}/${slug}`} className='stretch-link'>
+                    <div className="card text-center hover-card bg-skyBlue d-flex mx-2 border-0">
+
                         <div className="row flex-fill">
                             <div className="col-12 text-center text-md-start px-0">
                                 <div className="ms-2 card-body">
@@ -83,8 +107,8 @@ function PopularCourses() {
                                 </div>
                             </div>
                         </div>
-                   
-                </div>
+
+                    </div>
                 </Link>
             </div>
         );
@@ -92,7 +116,7 @@ function PopularCourses() {
 
     return (
         <section className=''>
-            <div className="topCarouselCardsCon bg-examsCarouselCr examsCardCarousel px-5 pt-3 pb-3 position-relative" style={{zIndex:'2'}}>
+            <div className="topCarouselCardsCon bg-examsCarouselCr examsCardCarousel px-5 pt-3 pb-3 position-relative" style={{ zIndex: '2' }}>
                 <MainCarousel2 items={createCards()} />
             </div>
         </section>
