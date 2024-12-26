@@ -23,17 +23,17 @@ const BranchesSec = () => {
         },
         {
             name: 'Dubai',
-            address: '6, First, Al Mamzar Centre Al Qiyadah Metro Station, Dubai',
+            address: '6, 1st Floor, Al Itihaad Rd, Al Mamzar Center, HOR Al ANZ, Dubai, UAE',
             phone: '+971 502436552, +971 504955123',
             addressUrl: 'https://maps.app.goo.gl/jYyDjdE2LC8Z8cKm8',
-            mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28859.24506777377!2d55.330436832611674!3d25.290572261302543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d483c5491eb%3A0x9786494b91ce567d!2sAL%20MURAN!5e0!3m2!1sen!2sin!4v1721999344203!5m2!1sen!2sin'
+            mapUrl: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3607.726538879487!2d55.351192075384496!3d25.279782977657867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDE2JzQ3LjIiTiA1NcKwMjEnMTMuNiJF!5e0!3m2!1sen!2sin!4v1735199528138!5m2!1sen!2sin'
         },
         {
             name: 'Bahrain',
-            address: 'Shop 240, Road No: 5607, Block No: 756, Aali, Manama, Bahrain',
+            address: 'Building No: 155, Road: 2103, Block: 321, Manama, Alqudaybiyah Kingdom of Bahrain',
             phone: '+973 35480190, +973 38780368',
             addressUrl: 'https://maps.app.goo.gl/LMueZrcnxYG2xYMi9',
-            mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.4548974759305!2d50.49566057290878!3d26.14931064191346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49b1e9b2715933%3A0x1684da4adde65812!2sRd%20No%205607%2C%20Buri%2C%20Bahrain!5e0!3m2!1sen!2sin!4v1721999493971!5m2!1sen!2sin'
+            mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d580.1815282428278!2d50.58968752449173!3d26.22760670691746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49af4e672213e1%3A0x7945040ea1e6a385!2s321%20Rd%20No%202103%2C%20Manama%2C%20Bahrain!5e0!3m2!1sen!2sin!4v1735199459263!5m2!1sen!2sin'
         }
     ];
 

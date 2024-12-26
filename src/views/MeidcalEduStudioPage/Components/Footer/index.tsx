@@ -108,10 +108,10 @@ const Footer = () => {
                 <h6 className='text-center text-white'>Learntech Edu Solutions Pvt Ltd.</h6>
             </section>
             <div className="mt-md-3 col-md-4 text-md-end">
-                {/* <a href="tel:18001208969" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a> */}
+                {/* <a href="tel:18001208696" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a> */}
 
 
-                <a href="tel:18001208969" className="phone-icon">
+                <a href="tel:18001208696" className="phone-icon">
 
                     <Image src="/images/icons/Phone-blue.svg" width={35} height={35} alt="phone-icon" className="red-filter" />
                 </a>

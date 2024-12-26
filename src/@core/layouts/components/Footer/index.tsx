@@ -108,7 +108,7 @@ const Footer = () => {
         <div className="row container-fluid">
           <div className="text-md-start">
 
-            <a href="tel:18001208969" className="phone-icon">
+            <a href="tel:18001208696" className="phone-icon">
 
               <Image src="/images/icons/Phone-blue.svg" width={35} height={35} alt="phone-icon" className="red-filter" />
             </a>

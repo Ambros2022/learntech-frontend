@@ -42,6 +42,7 @@ interface PageData {
   Total_landingpage?: number;
   Published_landingpage?: number;
   Users?: number;
+  totalJobsEnquires?: number;
 }
 
 
@@ -218,6 +219,12 @@ const Home = () => {
           href="/app/dashboard/jobs_positions/"
           title="Jobs Positions"
           value={pagedata.jobs_positions}
+        />
+        <CardItem
+          icon={<BsFillPersonLinesFill />}
+          href="/app/dashboard/jobenquiry/"
+          title="Jobs Enquires"
+          value={pagedata?.totalJobsEnquires}
         />
         <CardItem
           icon={<BsFillPipFill />}
