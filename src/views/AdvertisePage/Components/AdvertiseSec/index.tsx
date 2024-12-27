@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import ContactUsForm from 'src/@core/components/popup/ContactUsForm';
-
+import axios1 from 'src/configs/axios';
 const AdvertiseSec = ({ data }) => {
     const [activeTab, setActiveTab] = useState('students');
     const [isReadMore, setIsReadMore] = useState(false);
@@ -11,6 +11,24 @@ const AdvertiseSec = ({ data }) => {
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+    const [banners, setBanners] = useState<any[]>([]);
+
+    const getbanner = useCallback(async () => {
+        try {
+            const roleparams: any = { page: 1, size: 10000 };
+            const response = await axios1.get('api/website/banner/get?promo_banner=Advertise_page', { params: roleparams });
+            setBanners(response.data.data);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setImagesLoaded(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        getbanner();
+    }, []);
 
     return (
         <>
@@ -20,7 +38,7 @@ const AdvertiseSec = ({ data }) => {
                         Advertise With Us
                     </h1>
                     <div className="row">
-                        <div className="col-xl-9 col-lg-8 col-md-7">
+                        <div className="col-xl-8 col-lg-8 col-md-7">
                             <p className="text-black">
                                 ‘Learntech’, a platform designed to elevate your brand/ institute one step at a time.
                             </p>
@@ -183,16 +201,29 @@ const AdvertiseSec = ({ data }) => {
                                 </h5>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-4 col-md-5">
+                        <div className="col-xl-4 col-lg-4 col-md-5">
                             <div className="row">
-                                <div className="col-md-12 col-lg-12 bg-skyBlue p-3 rounded mb-3 py-md-5 py-3">
+                                <div className="col-md-12 col-lg-12 bg-skyBlue p-3 rounded mb-3 py-md-3 py-3">
                                     <h2 className='text-center fw-bold text-blue pt-2 mb-3 py-md-3'>Connect With Us</h2>
                                     <ContactUsForm />
 
                                 </div>
                                 <div className="col-md-12 col-lg-12 mb-3 mx-md-0">
                                     <div className='bg-skyBlue p-3 rounded border text-center'>
-                                        <Image src="/images/icons/advertisement.png" width={200} height={500} alt={'advertisement-logo'} />
+                                        {/* <Image src="/images/icons/advertisement.png" width={200} height={500} alt={'advertisement-logo'} /> */}
+                                        {banners?.map((banner, index) => (
+
+                                            <Image
+                                                src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                                                priority={true}
+                                                alt={`Banner ${index}`}
+                                                height={200}
+                                                width={200}
+                                                className='img-fluid'
+                                            />
+
+                                        ))}
+
                                     </div>
                                 </div>
                             </div>
@@ -214,3 +245,5 @@ const AdvertiseSec = ({ data }) => {
 }
 
 export default AdvertiseSec;
+
+

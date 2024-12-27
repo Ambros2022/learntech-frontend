@@ -288,7 +288,7 @@ const Header = () => {
                                     <Image height={200} width={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} priority={true} className="card-img-top" alt="News Banner" />
                                   </div>
                                   <div className="card-body">
-                                    <h5 className="card-title text-truncate">{item.meta_title}</h5>
+                                    {/* <h5 className="card-title text-truncate">{item.meta_title}</h5> */}
                                     <p className="card-text" >{item.meta_description}</p>
                                   </div>
                                 </div>

@@ -13,7 +13,7 @@ import Skeleton from '@mui/material/Skeleton';
 import dynamic from 'next/dynamic';
 const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'), { ssr: false });
 const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
-
+import Carousel from 'react-bootstrap/Carousel';
 let cancelToken: any;
 
 const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
@@ -107,8 +107,15 @@ function BannerSection() {
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
-      {imagesLoaded && banners.length > 0 ? (
-        <div id="carouselExampleIndicators" className="carousel slide">
+      {/* {imagesLoaded && banners.length > 0 ? (
+        <div
+          id="carouselExampleIndicators"
+          className="carousel slide"
+          data-bs-ride="carousel" // Ensures autoplay starts immediately
+          data-bs-interval="1000" // Sets autoplay interval to 1 second
+          // data-bs-pause="false" // Prevents pausing on hover or touch
+          // data-bs-wrap="true" // Ensures continuous cycling without stopping
+        >
           <div className="carousel-indicators" style={{ zIndex: '40' }}>
             {banners.map((banner, index) => (
               <button
@@ -121,9 +128,13 @@ function BannerSection() {
               ></button>
             ))}
           </div>
-          <div className="carousel-inner" >
+          <div className="carousel-inner">
             {banners.map((banner, index) => (
-              <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`} style={{ zIndex: '30' }}>
+              <div
+                key={index}
+                className={`carousel-item ${index === 0 ? "active" : ""}`}
+                style={{ zIndex: '30' }}
+              >
                 <Link href={banner?.link}>
                   <Image
                     fill
@@ -137,18 +148,51 @@ function BannerSection() {
             ))}
           </div>
 
-          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style={{ zIndex: '40' }}>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev"
+            style={{ zIndex: '40' }}
+          >
             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
             <span className="visually-hidden">Previous</span>
           </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style={{ zIndex: '40' }}>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+            style={{ zIndex: '40' }}
+          >
             <span className="carousel-control-next-icon" aria-hidden="true"></span>
             <span className="visually-hidden">Next</span>
           </button>
         </div>
       ) : (
         <Skeleton height={500} />
+      )} */}
+      {imagesLoaded && banners.length > 0 ? (
+        <Carousel interval={1500} pause="hover">
+          {banners.map((banner, index) => (
+            <Carousel.Item key={index}>
+              <a href={banner.link}>
+                <img
+                  className="d-block w-100"
+                  src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                  alt={`Banner ${index}`}
+                  loading="lazy"
+                />
+              </a>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      ) : (
+        <Skeleton height={500} />
       )}
+
+
+
 
       <div className="bannerFormSec">
         <div className="container-fluid">

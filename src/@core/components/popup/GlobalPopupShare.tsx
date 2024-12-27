@@ -70,6 +70,7 @@ function MyVerticallyCenteredModal(props) {
                             <WhatsappShareButton
                                 url={props.pathname}
                                 title={props?.meta_title}
+                             
                             >
                                 <button className='btn btn-success text-white'> <i className="bi bi-whatsapp"></i></button>
                             </WhatsappShareButton>

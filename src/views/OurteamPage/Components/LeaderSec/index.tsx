@@ -86,7 +86,7 @@ const LeaderSec = () => {
                         </div>
                     </div>
                 </div>
-                <h2 className='fw-bold text-md-start text-center text-blue pt-3 mb-3'>Management Team
+                <h2 className='fw-bold text-md-start text-center text-blue pt-3 pt-md-5 mb-3'>Management Team
                 </h2>
                 <div className="row team">
                     {users.map((user, index) => (
