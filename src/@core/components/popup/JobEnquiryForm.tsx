@@ -44,14 +44,14 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
         job_location_id: Yup.string().required('Job Location is required').trim(),
         currentLocation: Yup.string().required('Current Location is required').trim(),
         total_exp: Yup.string().required('Total Experience is required').trim(),
-        resume: Yup.mixed()
-            .required('Resume is required')
-            .test('fileType', 'Only PDF and DOCX files are allowed', (value) => {
-                if (!value) return false;
-                const file = value as File;
-                const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-                return allowedTypes.includes(file.type);
-            }),
+        // resume: Yup.mixed()
+        //     .required('Resume is required')
+        //     .test('fileType', 'Only PDF and DOCX files are allowed', (value) => {
+        //         if (!value) return false;
+        //         const file = value as File;
+        //         const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        //         return allowedTypes.includes(file.type);
+        //     }),
     });
 
     const handleSubmit = async (values, { resetForm }) => {

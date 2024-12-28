@@ -128,7 +128,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-        stream_id: yup.object().required("This field is required"),
+        // stream_id: yup.object().required("This field is required"),
         country_id: yup.object().required("This field is required"),
         // level_of_study: yup
         //     .string()
@@ -169,6 +169,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         status: isAddMode ? 'Published' : olddata.status,
         promo_banner_status: isAddMode ? 'Draft' : olddata.promo_banner_status,
         stream_id: isAddMode ? '' : olddata.stream ? olddata.stream : '',
+        streams: [],
     }
 
     const {
@@ -184,6 +185,20 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
+    useEffect(() => {
+
+
+        if (!isAddMode && olddata.examstreams) {
+            const data = olddata.examstreams.map((item) => ({
+                id: item.examstrDetails.id,
+                name: item.examstrDetails.name,
+            }));
+            admfiledReset("streams", { defaultValue: data })
+        }
+
+
+
+    }, []);
 
     const getstreams = useCallback(async () => {
 
@@ -192,7 +207,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
             const response = await axios1.get('api/admin/stream/get', { params: roleparams });
-            setStreamsdata(response.data.data);
+            const strdata = response.data.data.map((news: { id: any; name: any; slug: any;  }) => ({
+                id: news.id,
+                name: news.name,
+                slug: news.slug,        
+              }))
+            setStreamsdata(strdata);
         } catch (err) {
             console.error(err);
         }
@@ -228,7 +248,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let url = 'api/admin/exam/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('stream_id', data.stream_id.id);
+            // formData.append('stream_id', data.stream_id.id);
+            formData.append('streams', JSON.stringify(data.streams));
             formData.append('country_id', data.country_id.id);
             formData.append('exam_title', data.exam_title);
             formData.append('slug', data.slug);
@@ -291,7 +312,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             let url = 'api/admin/exam/add';
 
             const formData = new FormData();
-            formData.append('stream_id', data.stream_id.id);
+            // formData.append('stream_id', data?.stream_id.id);
+            formData.append('streams', JSON.stringify(data.streams));
             formData.append('country_id', data.country_id.id);
             formData.append('exam_title', data.exam_title);
             formData.append('slug', data.slug);
@@ -546,9 +568,41 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                     <TabPanel sx={{ p: 0 }} value='basic-info'>
                         <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                             <Grid container spacing={5}>
-
-
                                 <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="streams"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={streamsdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select Streams'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.streams)}
+                                                            {...(errors.streams && { helperText: 'This field is required' })}
+                                                            placeholder='streams' />}
+                                                />
+                                            );
+                                        }}
+                                    />
+                                </Grid>
+
+                                {/* <Grid item xs={12} sm={4}>
                                     <Controller
                                         name='stream_id'
                                         control={control}
@@ -575,7 +629,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             />
                                         )}
                                     />
-                                </Grid>
+                                </Grid> */}
 
                                 <Grid item xs={12} sm={4}>
                                     <Controller

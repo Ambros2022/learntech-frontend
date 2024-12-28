@@ -178,7 +178,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
 
     const getnews = useCallback(async () => {
         try {
-            const roleparams = { page: 1, size: 10000, country_id: 204., includeIndia: true };
+            const roleparams = { page: 1, size: 15,orderby:'desc',columnname:'created_at', country_id: 204., includeIndia: true };
             const response = await axios.get('/api/website/news/get', { params: roleparams });
             setNewsData(response.data.data);
         } catch (err) {
@@ -188,7 +188,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
 
     const getabroadnews = useCallback(async () => {
         try {
-            const roleparams = { page: 1, size: 10000, includeIndia: false };
+            const roleparams = { page: 1, size: 15,orderby:'desc',columnname:'created_at', includeIndia: false };
             const response = await axios.get('/api/website/news/get', { params: roleparams });
             setNewsDataAbroad(response.data.data);
         } catch (err) {

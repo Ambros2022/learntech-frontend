@@ -31,7 +31,15 @@ const MainNewsPage = () => {
 
   const getNewsdata = useCallback(async () => {
     try {
-      const response = await axios.get('api/website/news/get')
+      const response = await axios.get('api/website/news/get', {
+        params: {
+          page: 1,
+          size: 10000,
+          is_trending:'1',
+          orderby: 'Asc', 
+          columnname: 'listing_order'
+        }
+      })
 
       const newsData = response.data.data.map((news: { id: any; name: any; slug: any; meta_description: any; banner_image: any; }) => ({
         id: news.id,
@@ -68,7 +76,8 @@ const MainNewsPage = () => {
 
   const getColleges = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10000 };
+      const roleparams = { page: 1, size: 10000,orderby:'asc',columnname:'listing_order'
+       };
       const response = await axios.get('api/website/langingpage/get', { params: roleparams });
       setcollegeData(response.data.data);
     } catch (err) {
