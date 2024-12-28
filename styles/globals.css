@@ -6363,17 +6363,6 @@
     text-overflow: ellipsis;
   }
 
-  /* .file-name {
-    position: absolute !important;
-    color: black !important;
-    left: 200px !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  } */
-
   .file-name {
     position: absolute;
     /* Keep absolute positioning */
@@ -6397,10 +6386,9 @@
 
   @media (max-width: 768px) {
     .file-name {
-      left: 50px;
-      /* Adjust for smaller screens */
+      left: 127px;
       max-width: calc(100% - 100px);
-      /* Adjust width accordingly */
+      font-size: small;
     }
   }
 
@@ -6457,9 +6445,6 @@
       width: 100%;
     }
 
-    .file-name {
-      display: none !important;
-    }
   }
 
   .tab-button {
@@ -6554,6 +6539,38 @@
     font-size: 24px !important;
   }
 
+  .exam .infoBtn .btn {
+    width: 100% !important;  /* Ensure button width adapts to content */
+    white-space: nowrap; 
+    box-sizing: content-box;
+  }
+
+
+
+
+  .exam .react-multi-carousel-list ul {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px !important;
+    padding: 0;
+    margin: 0;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for navigation */
+    overflow: hidden; /* Hides items outside the container */
+    transform: translateX(0); /* Initial position set to zero */
+}
+
+
+  .exam  .react-multi-carousel-item {
+    flex: 0 0 auto;
+    position: relative;
+    white-space: nowrap;
+    font-size: 13px;
+    padding: 5px 10px;
+    white-space: nowrap;  /* Prevent text from wrapping */
+    font-size: 13px;
+    width: auto;  /* Allow the item to take the width of its content */
+  }
+
   @media (max-width: 424px) {
     .tab-pane {
       overflow-x: auto;
@@ -6575,14 +6592,13 @@
       /* Ensure text doesn’t wrap */
     }
 
-    /* .exam .infoBtn .btn {
-      white-space: wrap !important;
-    } */
+
     .exam .infoBtn li {
-     width: auto !important;
+      width: auto !important;
     }
+
     .subinner .infoBtn li {
-     width: auto !important;
+      width: auto !important;
     }
 
     .subinner .infoBtn>* {
@@ -6613,9 +6629,6 @@
       /* Ensure tabs take space based on content */
     }
 
-    /* .exam .infoBtn li {
-    width: auto !important;
-  } */
   }
 
   .testimonialPara {
@@ -6629,13 +6642,7 @@
     /* Set a max-height to trigger scrolling */
   }
 
-  /* .exam .infoBtn .btn {
-    white-space: pre-wrap !important;
-  } */
 
-  /* .exam .infoBtn li {
-    width: auto !important;
-  } */
 
   .serviceh2 h2 {
     font-size: 24px !important;
@@ -6655,15 +6662,19 @@
   }
 
   /* Make left and right carousel arrows bold */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  font-weight: bold; /* Set bold for arrows */
-  background-color: #000; /* Optional: Change arrow color to black */
-  border-radius: 15%; /* Optional: Make arrow background round */
-}
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    font-weight: bold;
+    /* Set bold for arrows */
+    background-color: #000;
+    /* Optional: Change arrow color to black */
+    border-radius: 15%;
+    /* Optional: Make arrow background round */
+  }
 
-/* Optional: Change size of arrows */
-.carousel-control-prev-icon:before,
-.carousel-control-next-icon:before {
-  font-size: 2rem; /* Adjust size of the arrows */
-}
+  /* Optional: Change size of arrows */
+  .carousel-control-prev-icon:before,
+  .carousel-control-next-icon:before {
+    font-size: 2rem;
+    /* Adjust size of the arrows */
+  }

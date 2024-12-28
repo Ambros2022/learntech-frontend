@@ -67,6 +67,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         name: isAddMode ? '' : olddata.name,
         link: isAddMode ? '' : olddata.link,
         status: isAddMode ? 'Published' : olddata.status,
+        listing_order: isAddMode ? '' : olddata.listing_order,
     }
 
     const {
@@ -91,6 +92,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('name', data.name);
             formData.append('link', data.link);
             formData.append('status', data.status);
+            formData.append('listing_order', data.listing_order);
             formData.append('logo', selectedphoto);
 
             try {
@@ -128,6 +130,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('name', data.name);
             formData.append('link', data.link);
             formData.append('status', data.status);
+            formData.append('listing_order', data.listing_order);
             formData.append('logo', selectedphoto);
 
             try {
@@ -225,6 +228,26 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
 
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='listing_order'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    type='number'
+                                    label='Listing Order'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.listing_order)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.listing_order && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
                     </Grid>
 
                     <Grid item xs={12} sm={3}>

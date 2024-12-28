@@ -4,14 +4,14 @@ import Link from 'next/link';
 
 // NewsItem component
 const NewsItem = ({ id, banner_image, title, link }) => (
-    <div className="col-md-12 col-10 mx-md-0 mx-auto">
+    <div className="col-md-12 col-12 mx-md-0 mx-auto">
         <Link href={link} >
             <div className="card mb-3 bg-skyBlue hover-card">
                 <div className="row g-0">
-                    <div className="col-md-4 col-xl-3 col-lg-3 upcomingAdmission">
+                    <div className="col-4  upcomingAdmission">
                         <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner_image}`} width={300} height={300} className="mx-md-2 rounded img-fluid" alt="news-img" />
                     </div>
-                    <div className="col-md-8 col-lg-9 col-xl-9">
+                    <div className="col-8 ">
                         <div className="card-body">
                             <h6 className="card-title  fw-bold">{title}</h6>
                         </div>

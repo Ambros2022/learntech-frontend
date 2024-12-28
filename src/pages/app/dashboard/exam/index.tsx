@@ -442,6 +442,7 @@ const SecondPage = () => {
                 <Button sx={{ mt: 0 }} variant="contained" color='error'
                   onClick={(e: any) => {
                     setStream_id('');
+                    setCountry_id('');
 
 
                   }}

@@ -7,25 +7,27 @@ const InfoSec = ({ data }) => {
     const [newsData, setNewsData] = useState([]);
     const [showModal, setShowModal] = useState(false); // State to control modal visibility
     const [loading, setLoading] = useState(true); // State to manage loading status
-    console.log(data);
+    console.log(data?.id, "data1");
 
     const getNews = useCallback(async () => {
         setNewsData([]);
         try {
-            const roleparams = { page: 1, size: 10000 };
+            const roleparams = { page: 1, size: 10000, orderby: 'Desc', columnname: 'created_at' };
             const response = await axios.get('/api/website/news/get', { params: roleparams });
 
-            const formattedNews = response.data.data.map((item) => ({
-                imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
-                name: item.name || 'No description available',
-                id: item.id,
-                slug: item.slug,
-            }));
+            const formattedNews = response.data.data
+                .filter((item) => item.id !== data?.id) // Exclude news with matching id
+                .map((item) => ({
+                    imageSrc: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`,
+                    name: item.name || 'No description available',
+                    id: item.id,
+                    slug: item.slug,
+                }));
             setNewsData(formattedNews);
         } catch (err) {
             console.error('Failed to fetch news:', err);
         }
-    }, []);
+    }, [data?.id]); // Include data?.id in dependency array
 
     useEffect(() => {
         getNews();
@@ -43,6 +45,10 @@ const InfoSec = ({ data }) => {
     const handleIframeLoad = () => {
         setLoading(false); // Hide loader once PDF is loaded
     };
+    const handleViewClick = (val: any) => {
+        const url = `${process.env.NEXT_PUBLIC_IMG_URL}${val}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+    }
 
     return (
         <section className='bg-white'>
@@ -53,9 +59,17 @@ const InfoSec = ({ data }) => {
                     </div>
                     {data.pdf_file && data.pdf_name && (
                         <div className="col-md-3 pb-3 pb-md-0">
-                            <button className="btn applyNowButton align-content-center" onClick={handleOpenModal}>
-                                {data?.pdf_name ? data?.pdf_name  : "View PDF"}
+                            <button
+                                className="btn applyNowButton align-content-center"
+                                onClick={() => handleViewClick(data?.pdf_file)}
+                            >
+                                {data?.pdf_name ? data?.pdf_name : "View PDF"}
                             </button>
+                            {/* <button className="btn applyNowButton align-content-center" onClick={handleOpenModal}>
+                                {data?.pdf_name ? data?.pdf_name : "View PDF"}
+                            </button> */}
+
+
                         </div>
                     )}
                 </div>

@@ -16,14 +16,14 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller,useWatch  } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 import type { FC } from 'react';
-import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup, Typography } from '@mui/material'
+import { Alert, Checkbox, FormControlLabel, FormLabel, MenuItem, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
@@ -108,6 +108,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         overview: isAddMode ? '' : olddata.overview,
         status: isAddMode ? 'Published' : olddata.status,
         country_id: (isAddMode || !olddata) ? '' : olddata.country,
+        listing_order: isAddMode ? '' : olddata.listing_order,
+        is_trending: isAddMode ? 0 : olddata.is_trending ? olddata.is_trending : 0,
     }
 
     const {
@@ -142,6 +144,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('pdf_file', selectedpdf);
             formData.append('banner_image', selectedphoto);
+            formData.append('listing_order', data.listing_order);
+            formData.append('is_trending', data.is_trending);
             try {
                 let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
@@ -185,6 +189,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
             formData.append('overview', data.overview);
+            formData.append('listing_order', data.listing_order);
+            formData.append('is_trending', data.is_trending);
             if (selectedphoto == '') {
 
                 toast.error('Please Upload Photo', {
@@ -196,7 +202,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
 
             formData.append('banner_image', selectedphoto);
-    
+
             formData.append('pdf_file', selectedpdf);
 
             try {
@@ -269,6 +275,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     }, [getcategory, getCountry]);
 
 
+
+    
 
     return (
         <>
@@ -480,9 +488,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             olddata={!isAddMode && olddata.pdf_file ? olddata.pdf_file : ""}
                             onFileChange={handleFileChangepdf}
                             maxFiles={1}
-                            maxSize={2000000}
+                            maxSize={200000000}
                             fileNames={fileNamespdf}
-                            label=" Upload Pdf"
+                            label="Upload Pdf"
                             acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                             rejectionMessage='Try another file for upload.'
                         />
@@ -506,7 +514,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                         <Controller
                             name='status'
@@ -521,6 +529,47 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         />
 
                     </Grid>
+                    <Grid item xs={12} sm={3} style={{ marginTop: '15px' }}>
+                        <Controller
+                            name='is_trending'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <FormControlLabel
+                                    label='is_trending'
+                                    control={
+                                        <Checkbox
+                                            checked={value}
+                                            onChange={(e) => onChange(e.target.checked ? 1 : 0)}
+
+                                        />
+                                    }
+                                />
+                            )}
+                        />
+                    </Grid>
+                    {useWatch({ control, name: 'is_trending' }) === 1 && (
+                        <Grid item xs={12} sm={6}>
+                            <Controller
+                                name="listing_order"
+                                control={control}
+                                rules={{ required: true }}
+                                render={({ field: { value, onChange } }) => (
+                                    <CustomTextField
+                                        fullWidth
+                                        value={value}
+                                        type="number"
+                                        label="Listing Order"
+                                        onChange={onChange}
+                                        placeholder=""
+                                        error={Boolean(errors.listing_order)}
+                                        aria-describedby="validation-basic-first-name"
+                                        {...(errors.listing_order && { helperText: 'This field is required' })}
+                                    />
+                                )}
+                            />
+                        </Grid>
+                    )}
 
                     <Grid item xs={12}>
                         {error && <Alert severity='error'>{error}</Alert>}

@@ -208,8 +208,8 @@ const AdvertiseSec = ({ data }) => {
                                     <ContactUsForm />
 
                                 </div>
-                                <div className="col-md-12 col-lg-12 mb-3 mx-md-0">
-                                    <div className='bg-skyBlue p-3 rounded border text-center'>
+                                <div className="col-md-12 col-lg-12 mb-3 mx-md-0 pt-3 pt-md-5">
+                                    <div className='bg-skyBlue  rounded border text-center '>
                                         {/* <Image src="/images/icons/advertisement.png" width={200} height={500} alt={'advertisement-logo'} /> */}
                                         {banners?.map((banner, index) => (
 
@@ -217,9 +217,11 @@ const AdvertiseSec = ({ data }) => {
                                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                                                 priority={true}
                                                 alt={`Banner ${index}`}
-                                                height={200}
-                                                width={200}
+                                                width={420}
+                                                height={400}
                                                 className='img-fluid'
+                                                layout="responsive" // Allows scaling in mobile
+                                           
                                             />
 
                                         ))}

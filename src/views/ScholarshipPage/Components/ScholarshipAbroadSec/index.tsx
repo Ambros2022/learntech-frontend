@@ -45,7 +45,7 @@ const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string
               <ContactForm heading={'Contact Us'} />
 
 
-              <div className="scholarship-banner pt-3">
+              <div className="scholarship-banner pt-3 pt-md-5">
                 <Image
                   src="/images/icons/schloarship-banner.webp"
                   alt="scholarship"
