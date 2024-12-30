@@ -60,7 +60,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const [countries, setCountries] = useState([])
     const [states, setStates] = useState([])
     const [cities, setCities] = useState([])
-    const [boards, setBoards] = useState([])
+    const [boardsdata, setBoardsdata] = useState([])
     const [countryId, setCountryId] = useState<any>(isAddMode ? "" : olddata?.country?.id || '');
     const [stateId, setStateId] = useState<any>(isAddMode ? "" : olddata?.state?.id || '');
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
@@ -95,7 +95,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
             const response = await axios1.get('/api/admin/schoolboard/get', { params: roleparams });
-            setBoards(response.data.data);
+            setBoardsdata(response.data.data);
         } catch (err) {
             console.error(err);
         }
@@ -195,7 +195,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required("This field is required"),
-        school_board_id: yup.object().required("This field is required"),
+        // school_board_id: yup.object().required("This field is required"),
         country_id: yup.object().required("This field is required"),
         state_id: yup.object().required("This field is required"),
         city_id: yup.object().required("This field is required"),
@@ -212,7 +212,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
         slug: isAddMode ? '' : olddata.slug,
-        school_board_id: isAddMode ? '' : olddata.schoolboard ? olddata.schoolboard : '',
+        school_board_id: isAddMode ? '' : olddata?.schoolboard ? olddata?.schoolboard : '',
         country_id: isAddMode ? '' : olddata.country ? olddata.country : '',
         state_id: isAddMode ? '' : olddata.state ? olddata.state : '',
         city_id: isAddMode ? '' : olddata.citys ? olddata.citys : '',
@@ -233,6 +233,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         // avg_rating: isAddMode ? '' : olddata.avg_rating,
         amenities: [],
         levels: [],
+        boards: [],
     }
 
     const {
@@ -266,6 +267,13 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }));
             admfiledReset("levels", { defaultValue: LEVELS })
         }
+        if (!isAddMode && olddata.boardschools) {
+            const LEVELS = olddata.boardschools.map((item) => ({
+                id: item.schbordname.id,
+                name: item.schbordname.name,
+            }));
+            admfiledReset("boards", { defaultValue: LEVELS })
+        }
 
     }, []);
 
@@ -280,7 +288,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('id', updateid);
             formData.append('name', data.name);
             formData.append('slug', data.slug);
-            formData.append('school_board_id', data.school_board_id.id);
+            // formData.append('school_board_id', data.school_board_id.id);
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
@@ -301,6 +309,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('listing_order', data.listing_order);
             formData.append('amenities', JSON.stringify(data.amenities));
             formData.append('levels', JSON.stringify(data.levels));
+            formData.append('boards', JSON.stringify(data.boards));
             formData.append('icon', selectedphoto);
             formData.append('banner_image', selectedbanner);
 
@@ -339,7 +348,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             const formData = new FormData();
             formData.append('name', data.name);
             formData.append('slug', data.slug);
-            formData.append('school_board_id', data.school_board_id.id);
+            // formData.append('school_board_id', data.school_board_id.id);
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
@@ -360,6 +369,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('listing_order', data.listing_order);
             formData.append('amenities', JSON.stringify(data.amenities));
             formData.append('levels', JSON.stringify(data.levels));
+            formData.append('boards', JSON.stringify(data.boards));
 
             if (selectedphoto == '') {
 
@@ -625,7 +635,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4}>
+                                {/* <Grid item xs={12} sm={4}>
                                     <Controller
                                         name='school_board_id'
                                         control={control}
@@ -636,8 +646,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                             return (
                                                 <CustomAutocomplete
                                                     fullWidth
-                                                    options={boards}
-                                                    loading={!boards.length}
+                                                    options={boardsdata}
+                                                    loading={!boardsdata.length}
                                                     value={field.value}
                                                     onChange={(event, newValue) => {
                                                         if (newValue) {
@@ -649,6 +659,39 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                     getOptionLabel={(option: any) => option.name || ''}
                                                     renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.school_board_id)}
                                                         {...(errors.school_board_id && { helperText: 'This field is required' })} label='Select School Board' />}
+                                                />
+                                            );
+                                        }}
+                                    />
+                                </Grid> */}
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name="boards"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => {
+                                            // console.log(value); // Log value here
+
+                                            return (
+                                                <CustomAutocomplete
+                                                    multiple
+                                                    fullWidth
+                                                    value={value || []}
+                                                    options={boardsdata}
+                                                    onChange={(event, newValue) => {
+                                                        onChange(newValue);
+                                                    }}
+                                                    filterSelectedOptions
+                                                    id='autocomplete-multiple-outlined'
+                                                    getOptionLabel={(option: any) => option.name}
+                                                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                                                    renderInput={params =>
+                                                        <CustomTextField {...params}
+                                                            label='Select Boards'
+                                                            variant="outlined"
+                                                            error={Boolean(errors.boards)}
+                                                            {...(errors.levels && { helperText: 'This field is required' })}
+                                                            placeholder='Boards' />}
                                                 />
                                             );
                                         }}
