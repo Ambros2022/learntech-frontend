@@ -38,20 +38,20 @@ const DropdownMenu = React.memo(({ states }: any) => {
                             >
                                 <div className="d-flex justify-content-between text-truncate">
                                     {item.name}
-                                    {item.exam.length > 0 && (
+                                    {item?.examstr.length > 0 && (
                                         <Image className="ms-auto" src="/images/icons/right arrow.svg" width={20} height={25} alt="arrow-img" />
                                     )}
                                 </div>
                             </Link>
-                            {item.exam.length > 0 && (
+                            {item?.examstr.length > 0 && (
                                 <ul className="dropdown-menu dropdown-submenu menu-icon">
-                                    {item.exam.map(city => (
-                                        <li key={city.id}>
+                                    {item?.examstr.map(city => (
+                                        <li key={city?.examstreams?.id}>
                                             <Link
                                                 className="dropdown-item"
-                                                href={`/exam/${city.id}/${city.slug}`}
+                                                href={`/exam/${city?.examstreams?.id}/${city?.examstreams?.slug}`}
                                             >
-                                                {city.exam_title}
+                                                {city?.examstreams?.exam_title}
                                             </Link>
                                         </li>
 

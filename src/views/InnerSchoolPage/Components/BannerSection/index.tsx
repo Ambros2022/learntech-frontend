@@ -67,7 +67,13 @@ function BannerSection({ data }) {
                 <div className="card-body text-white">
                   <h1 className="card-title fw-bold mb-3 ">{data.name}</h1>
                   <h6 className='mb-3 d-flex '><i className='bi bi-geo-alt-fill text-danger me-1'></i> <span>{data.address}</span></h6>
-                  <h6 className='mb-3 location-img'><i className='bi bi-mortarboard-fill text-warning me-2'></i><strong>Board: </strong>{data.schoolboard.short_name}</h6>
+                  <h6 className='mb-3 location-img'><i className='bi bi-mortarboard-fill text-warning me-2'></i><strong>Board: </strong>
+                  
+                  {/* {data.schoolboard.short_name} */}
+
+                  {data?.boardschools.map((value) => value?.schbordname?.short_name).join(', ')}
+                  
+                  </h6>
                   <h6 className='mb-3 location-img d-flex'>
                     <i className='bi bi-award-fill text-primary me-2'></i>
                     <strong className='flex-shrink-0'>School Level:</strong>&nbsp;

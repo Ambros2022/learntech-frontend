@@ -12,7 +12,7 @@ import * as yup from 'yup'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
-
+import Rating from 'react-rating-stars-component';
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import ImageUploading, { ImageListType } from "react-images-uploading";
@@ -170,7 +170,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         collegeamenities: [],
         streams: [],
         recoginations: [],
-
+        avg_rating: isAddMode ? 0 : olddata.avg_rating,
     }
 
     const {
@@ -344,7 +344,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('address', data.address);
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
-            if(data.avg_rating){
+            if (data.avg_rating) {
                 formData.append('avg_rating', data.avg_rating);
             }
             formData.append('is_associated', data.is_associated);
@@ -415,7 +415,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('map', data.map);
             formData.append('video_url', data.video_url);
             formData.append('is_associated', data.is_associated);
-            if(data.avg_rating){
+            if (data.avg_rating) {
                 formData.append('avg_rating', data.avg_rating);
             }
             formData.append('info', data.info);
@@ -1137,28 +1137,55 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                         )}
                                     />
                                 </Grid>
+                                {/* <Grid item xs={12} sm={6}>
+                                Rating
+                                    <Controller
+                                        name='avg_rating'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <Rating
+                                                count={5}
+                                                value={value}
+                                                size={24}
+                                                activeColor="#ffd700"
+                                                onChange={onChange}
+                                            />
+                                        )}
+                                    />
+                                    {errors.avg_rating && (
+                                        <span style={{ color: 'red', fontSize: '12px' }}>{String(errors.avg_rating.message)}</span>
+                                    )}
+                                </Grid> */}
 
 
 
-                                {/* <Grid item xs={12} sm={4}>
-                        <Controller
-                            name='avg_rating'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='avg_rating'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.avg_rating)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.avg_rating && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid> */}
+                                <Grid item xs={12} sm={4}>
+                                    <Controller
+                                        name='avg_rating'
+                                        control={control}
+                                        rules={{
+                                            required: "This field is required",
+                                            max: {
+                                                value: 5,
+                                                message: "Rating cannot exceed 5"
+                                            }
+                                        }}
+                           
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Rating : 0 to 5 only'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.avg_rating)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.avg_rating && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
                                 <Grid item xs={12} sm={12}>
                                     <Typography style={{ marginBottom: '10px' }}>info</Typography>
 

@@ -135,7 +135,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
 
     return (
         <>
-            <section className='py-5 bg-white browseNews'>
+            <section className='py-5 pb-3 pb-md-5 bg-white browseNews'>
                 <div className='container'>
                     <h2 className='fw-bold text-blue text-center mb-3'>Browse News By Category</h2>
                     {isMobile ? (

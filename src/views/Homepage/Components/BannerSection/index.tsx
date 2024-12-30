@@ -64,7 +64,7 @@ function BannerSection() {
       const response = await axios.post('api/website/enquiry', formData);
       if (response.status === 200) {
         toast.dismiss();
-        toast.success('Thank you. We will get back to you.');
+        // toast.success('Thank you. We will get back to you.');
         resetForm();
         router.push('/thank-you');
       }

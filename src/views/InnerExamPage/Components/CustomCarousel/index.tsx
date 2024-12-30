@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { Tooltip } from '@mui/material';
 
 const responsive = {
   superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 7 },
   desktop: { breakpoint: { max: 1024, min: 768 }, items: 5 },
-  tablet: { breakpoint: { max: 768, min: 464 }, items: 2 },
+  tablet: { breakpoint: { max: 768, min: 464 }, items: 3 },
   mobile: { breakpoint: { max: 464, min: 0 }, items: 2 },
 };
 
@@ -45,18 +46,22 @@ const CustomCarousel = ({ items, setActiveTab }) => {
       className="pt-2 text-center infoBtn infoBtn2 justify-content-between d-flex"
     >
       {items.map((item, index) => (
-        <button
-          key={index}
-          className={`btn  py-2 mx-2 nav-item ${activeIndex === index ? 'active' : ''}`}
-          onClick={() => handleTabClick(index, item.id)}
-          style={{
-            whiteSpace: 'nowrap',
-            fontSize: '13px',
-            width: 'auto',
-          }}
-        >
-          {item.label}
-        </button>
+        <Tooltip title={item.label} arrow>
+          <button
+            key={index}
+            className={`btn py-2 mx-2 nav-item ${activeIndex === index ? 'active' : ''}`}
+            onClick={() => handleTabClick(index, item.id)}
+            style={{
+              whiteSpace: 'nowrap',
+              fontSize: '13px',
+              width: 'auto',
+            }}
+          >
+            {item.label}
+          </button>
+        </Tooltip>
+
+
       ))}
     </Carousel>
   );

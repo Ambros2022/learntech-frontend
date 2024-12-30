@@ -79,6 +79,8 @@ const NewsLinkSection: React.FC = React.memo(() => {
         params: {
           page: 1,
           size: 10000,
+          orderby: 'Desc', 
+          columnname: 'created_at'
         }
       });
       const newsData: NewsItem[] = response.data.data;

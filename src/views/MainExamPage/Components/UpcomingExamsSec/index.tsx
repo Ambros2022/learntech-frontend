@@ -21,16 +21,20 @@ function PopularCourses() {
             const response = await axios1.get('/api/website/exams/get?orderby=desc&columnname=upcoming_date');
             if (response.data.status === 1) {
                 // Map and format exam data
+                const currentDate = new Date(); // Get the current date and time
                 const examData: Item[] = response.data.data.map((exam: any) => ({
                     id: exam.id,
                     title: exam.exam_title,
                     slug: exam.slug,
                     date: formatDate(exam.upcoming_date), // Format the date here
-                    upcoming_date: new Date(exam.upcoming_date) // Parse for sorting
+                    upcoming_date: new Date(exam.upcoming_date) // Parse for filtering and sorting
                 }));
 
+                // Filter out exams with a date before the current date
+                const upcomingExams = examData.filter(exam => exam.upcoming_date >= currentDate);
+
                 // Sort exams by the upcoming_date in ascending order
-                const sortedData = examData.sort((a, b) => a.upcoming_date.getTime() - b.upcoming_date.getTime());
+                const sortedData = upcomingExams.sort((a, b) => a.upcoming_date.getTime() - b.upcoming_date.getTime());
 
                 if (isMountedRef) {
                     setItems(sortedData);
@@ -42,6 +46,7 @@ function PopularCourses() {
             console.error('Error fetching exam data:', error);
         }
     }, [isMountedRef]);
+
 
 
     useEffect(() => {
