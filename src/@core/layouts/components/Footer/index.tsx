@@ -59,7 +59,8 @@ const Footer = () => {
                 </div >
                 <div className="mb-3 address">
                   <a href="https://www.google.com/maps/place/Learntech+Edu+Solutions+Pvt+Ltd+-+Study+Abroad+Counselor/@12.9187833,77.5983055,15z/data=!4m6!3m5!1s0x3bae15064e759943:0x60dcac77858f6b5e!8m2!3d12.9187833!4d77.5983055!16s%2Fg%2F11cs1gwx25?entry=ttu" target="_blank" className="mb-3 d-inline-block"><i className='bi bi-geo-alt-fill fs-5 me-2'></i>#80 (4), 'D' Main Rd, East End, 9th Block,<br></br>
-                  Jayanagar, Bangalore, Karnataka - 560041</a>
+                    <span className='px-0 px-md-4'>
+                      Jayanagar, Bangalore, Karnataka - 560041</span></a>
                 </div>
               </span>
             </div>

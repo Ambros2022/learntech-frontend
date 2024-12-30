@@ -25,18 +25,39 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                     <div className="text-center">
                         <p style={{ fontWeight: 'bold', color: '#274896' }}>Best Country for Study</p>
                     </div>
-                    {states.slice(0, visibleStates).map(item => (
-                        <li key={item.id}>
-                            <Link
-                                href={`/${item.slug}`}
-                                className="dropdown-item"
-                            >
-                                <div className="d-flex justify-content-between">
-                                {item?.country?.name}
+                    {states.slice(0, visibleStates).map((item) => (
+                        <li key={item.id} className="list-unstyled">
+                            <Link href={`/${item.slug}`} className="dropdown-item">
+                                <div className="d-flex align-items-center">
+                                    <div
+                                        className="me-3"
+                                        style={{
+                                            width: "30px",
+                                            height: "30px",
+                                            overflow: "hidden",
+                                            // borderRadius: "50%",
+                                        }}
+                                    >
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item?.backgroundimage}`}
+                                            width={40}
+                                            height={40}
+                                            className="img-fluid"
+                                            alt="news-img"
+                                            style={{ objectFit: "contain" }}
+                                        />
+                                    </div>
+                                    <div className="flex-grow-1">
+                                        <span className="text-truncate d-block">
+                                            {item?.country?.name}
+                                        </span>
+                                    </div>
                                 </div>
                             </Link>
                         </li>
                     ))}
+
+
                     <div className="text-center text-blue dropdownBtn">
                         {visibleStates < states.length && (
                             <button className="btn" onClick={handleViewMore}>
