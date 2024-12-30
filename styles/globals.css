@@ -6540,36 +6540,18 @@
   }
 
   .exam .infoBtn .btn {
-    width: 100% !important;  /* Ensure button width adapts to content */
-    white-space: nowrap; 
-    box-sizing: content-box;
+    width: 95% !important;  
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    /* box-sizing: content-box; */
   }
 
 
 
 
-  .exam .react-multi-carousel-list ul {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 20px !important;
-    padding: 0;
-    margin: 0;
-    transition: transform 0.3s ease-in-out; /* Smooth transition for navigation */
-    overflow: hidden; /* Hides items outside the container */
-    transform: translateX(0); /* Initial position set to zero */
-}
 
 
-  .exam  .react-multi-carousel-item {
-    flex: 0 0 auto;
-    position: relative;
-    white-space: nowrap;
-    font-size: 13px;
-    padding: 5px 10px;
-    white-space: nowrap;  /* Prevent text from wrapping */
-    font-size: 13px;
-    width: auto;  /* Allow the item to take the width of its content */
-  }
 
   @media (max-width: 424px) {
     .tab-pane {
