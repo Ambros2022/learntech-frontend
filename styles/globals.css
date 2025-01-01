@@ -4432,8 +4432,8 @@
   }
 
   .innerBoardImg {
-    width: 100% !important;
-    height: 100px !important;
+    width: 90% !important;
+    height: 80px !important;
   }
 
   .blogCardspage .page-link:focus {
@@ -6575,9 +6575,9 @@
     }
 
 
-    .exam .infoBtn li {
+    /* .exam .infoBtn li {
       width: auto !important;
-    }
+    } */
 
     .subinner .infoBtn li {
       width: auto !important;

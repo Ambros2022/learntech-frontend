@@ -99,7 +99,7 @@ function InnerBlogPage({ id }) {
             {!loading && pagedata && <OverviewSec data={pagedata} createdAt={createdAt} newsData={newsData} 
             blogsData= {blogsData}/>}
       
-            {!loading && pagedata && <ExpertSec data={pagedata}  />}
+            {!loading && pagedata && <ExpertSec data={pagedata} />}
 
         </>
     )

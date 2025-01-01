@@ -26,7 +26,7 @@ type ExamData = {
 };
 
 function OverviewSec({ data }) {
-  const [examData, setExamData] = useState<ExamData[]>([]);
+  const [examData, setExamData] = useState<any[]>([]);
   const isMountedRef = useIsMountedRef();
   const [promoban, setPromoban] = useState<any[]>([]);
 
@@ -85,18 +85,70 @@ function OverviewSec({ data }) {
     }
   }, [isMountedRef]);
 
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+
+    // Determine the day and its suffix
+    const day = date.getDate();
+    const daySuffix = (n: number) => {
+      if (n >= 11 && n <= 13) return 'th';
+      switch (n % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+
+    const suffix = daySuffix(day);
+
+    // Get the month name and year
+    const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
+    const [month, year] = date.toLocaleDateString('en-US', options).split(' ');
+
+    // Return formatted date
+    // return `${day}${suffix} ${month} `;
+    return `${day}${suffix} ${month} ${year}`;
+  }
+
   const getExams = useCallback(async () => {
     try {
-      const roleparams: any = {};
-      roleparams['page'] = 1;
-      roleparams['size'] = 10000;
+      const roleparams: Record<string, any> = {
+        page: 1,
+        size: 10000,
+      };
 
       const response = await axios.get('api/website/exams/get', { params: roleparams });
-      setExamData(response.data.data);
+
+      const currentDate = new Date(); // Get the current date and time
+
+      // Map and format exam data
+      const examData = response.data.data.map((exam: any) => ({
+        id: exam.id,
+        title: exam.exam_title,
+        slug: exam.slug,
+        date: formatDate(exam.upcoming_date), // Format the date here
+        upcoming_date: new Date(exam.upcoming_date), // Parse for filtering and sorting
+      }));
+
+      // Filter out exams with a date before the current date
+      const upcomingExams = examData.filter(exam => exam.upcoming_date >= currentDate);
+
+      // Sort exams by the upcoming_date in ascending order
+      const sortedData = upcomingExams.sort(
+        (a, b) => a.upcoming_date.getTime() - b.upcoming_date.getTime()
+      );
+
+
+
+      if (isMountedRef.current) {
+        setExamData(sortedData);
+      }
     } catch (err) {
-      console.error(err);
+      console.error('Error fetching exams:', err);
     }
-  }, [isMountedRef]);
+  }, [isMountedRef, setExamData]);
+
 
   useEffect(() => {
     getExams();
@@ -137,19 +189,7 @@ function OverviewSec({ data }) {
     );
   };
 
-  function formatDate(date: Date): string {
-    const day = date.getDate();
-    const suffix = getDaySuffix(day);
-    const month = date.toLocaleString('en-GB', { month: 'long' });
-    return `${day}${suffix} ${month}`;
-  }
 
-  const newsData = examData.map(data => ({
-    date: formatDate(new Date(data.created_at)),
-    title: data.exam_title,
-    slug: data.slug,
-    id: data.id,
-  }));
 
   const renderContent = (content) => {
     if (typeof content === 'string') {
@@ -170,64 +210,48 @@ function OverviewSec({ data }) {
     );
   };
 
-  const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
-  };
 
-  const renderTabs = () => items.map((tab, index) => {
-    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>') {
-      return (
-        <button
-          key={index}
-          className={`btn ${activeTab === tab.id ? 'active' : ''}`}
-          onClick={() => handleTabClick(tab.id)}
-          style={{ fontSize: '12px' }}
-        >
-          {tab.label}
-        </button>
-      );
-    }
-    return null;
-  });
+
+
 
   return (
     <section className='clgInfoSec bg-white'>
       <div className="container">
         <div className='carouselInnerCourse position-relative exam' style={{ zIndex: '2' }}>
           <CustomCarousel items={items} setActiveTab={setActiveTab} />
-        
 
-            <div className="row">
-              <div className="col-md-8 text-black pt-3">
-                <div className="tab-content" id="nav-tabContent">
-                  {items.map((item, index) => (
-                    <div
-                      key={index}
-                      className={`tab-pane fade ${activeTab === item.id ? 'show active' : ''}`}
-                      id={`nav-${item.id}`}
-                      role="tabpanel"
-                      aria-labelledby={`nav-${item.id}-tab`}
-                    >
-                      {renderContent(item.content)}
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="col-md-4 mb-md-5 fixed-column pt-5">
-                <div className='bg-skyBlue px-lg-5 px-3  mb-5 rounded'>
-                  <h2 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h2>
-                  <SideContactUsForm />
-                </div>
-                <NewsList newsItems={newsData} />
+          <div className="row">
+            <div className="col-md-8 text-black pt-3">
+              <div className="tab-content" id="nav-tabContent">
+                {items.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`tab-pane fade ${activeTab === item.id ? 'show active' : ''}`}
+                    id={`nav-${item.id}`}
+                    role="tabpanel"
+                    aria-labelledby={`nav-${item.id}-tab`}
+                  >
+                    {renderContent(item.content)}
+                  </div>
+                ))}
               </div>
             </div>
+
+            <div className="col-md-4 mb-md-5 fixed-column pt-5">
+              <div className='bg-skyBlue px-lg-5 px-3  mb-5 rounded'>
+                <h2 className='fw-bold text-blue text-center pt-3 mb-3'>Contact Us</h2>
+                <SideContactUsForm />
+              </div>
+              <NewsList newsItems={examData} />
+            </div>
           </div>
-          {/* </div> */}
-          {promoban.map((ele, index) => (
-            <PromoAddBanner key={index} url={ele.banner_url} />
-          ))}
         </div>
+        {/* </div> */}
+        {promoban.map((ele, index) => (
+          <PromoAddBanner key={index} url={ele.banner_url} />
+        ))}
+      </div>
     </section>
   );
 }
