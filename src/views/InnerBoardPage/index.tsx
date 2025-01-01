@@ -15,7 +15,7 @@ function InnerBoardPage({ id }) {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [exams, setExams] = useState([]);
 
   const getPagedata = useCallback(async () => {
@@ -30,12 +30,65 @@ function InnerBoardPage({ id }) {
       console.error('Failed to fetch page data:', error);
     }
   }, [id, isMountedRef, router]);
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+
+    // Determine the day and its suffix
+    const day = date.getDate();
+    const daySuffix = (n: number) => {
+      if (n >= 11 && n <= 13) return 'th';
+      switch (n % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+
+    const suffix = daySuffix(day);
+
+    // Get the month name and year
+    const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
+    const [month, year] = date.toLocaleDateString('en-US', options).split(' ');
+
+    // Return formatted date
+    // return `${day}${suffix} ${month} `;
+    return `${day}${suffix} ${month} ${year}`;
+  }
 
   const getExams = useCallback(async () => {
     try {
-      const response = await axios.get('/api/website/exams/get');
+      const roleparams: Record<string, any> = {
+        page: 1,
+        size: 10000,
+      };
+
+      const response = await axios.get('api/website/exams/get', { params: roleparams });
+
+      const currentDate = new Date(); // Get the current date and time
+
+      // Map and format exam data
+      const examData = response.data.data.map((exam: any) => ({
+        id: exam.id,
+        exam_title: exam.exam_title,
+        slug: exam.slug,
+        logo: exam.logo,
+        date: formatDate(exam.upcoming_date), // Format the date here
+        upcoming_date: new Date(exam.upcoming_date), // Parse for filtering and sorting
+      }));
+
+      // Filter out exams with a date before the current date
+      const upcomingExams = examData.filter(exam => exam.upcoming_date >= currentDate);
+
+      // Sort exams by the upcoming_date in ascending order
+      const sortedData = upcomingExams.sort(
+        (a, b) => a.upcoming_date.getTime() - b.upcoming_date.getTime()
+      );
+
+
+
       if (isMountedRef.current) {
-        setExams(response.data.data);
+        setExams(sortedData);
       }
     } catch (error) {
       console.error('Failed to fetch exams:', error);
@@ -91,7 +144,7 @@ function InnerBoardPage({ id }) {
         </script>
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection data={pagedata} exams={exams}/>}
+      {!loading && pagedata && <CollegeInfoSection data={pagedata} exams={exams} />}
       {/* {!loading && pagedata && <FacilitiesSection data={pagedata} />} */}
       {!loading && pagedata && <LocationSection data={pagedata} />}
 

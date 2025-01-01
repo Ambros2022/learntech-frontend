@@ -16,7 +16,7 @@ const NewsLinkSection: React.FC = React.memo(() => {
 
   const fetchNews = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10 };
+      const roleparams = { page: 1, size: 10 ,columnname :'created_at',orderby : 'desc'};
       const response = await axios1.get('api/website/news/get', { params: roleparams });
       const newsData: NewsItem[] = response.data.data;
 

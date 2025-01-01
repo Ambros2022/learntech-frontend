@@ -174,15 +174,15 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.name}
-              </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.name}
+          </Typography>
         )
       }
     },
 
     {
-      flex: 0.175,
+      flex: 0.125,
       minWidth: 100,
       field: 'contact_number',
       headerName: 'Contact Number',
@@ -195,9 +195,9 @@ const SecondPage = () => {
         );
       }
     },
-  
+
     {
-      flex: 0.4,
+      flex: 0.3,
       minWidth: 100,
       field: 'current_url',
       headerName: 'Url',
@@ -212,6 +212,30 @@ const SecondPage = () => {
 
 
         )
+      }
+    },
+    {
+      flex: 0.2,
+      minWidth: 100,
+      field: 'created_at',
+      headerName: 'Date',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
+
+        // Format the date
+        const formattedDate = row?.created_at
+          ? new Date(row.created_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })
+          : 'N/A';
+
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {formattedDate}
+          </Typography>
+        );
       }
     },
   
