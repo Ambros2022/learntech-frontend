@@ -16,7 +16,7 @@ function InnerExamPage({ id }) {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [colleges, setColleges] = useState([]);
+
   const [exams, setexams] = useState([]);
   const [streams, setStreams] = useState([]);
 
@@ -33,21 +33,7 @@ function InnerExamPage({ id }) {
     }
   }, [id, isMountedRef, router]);
 
-  const getExams = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/exams/get', {
-        params: {
-          page: 1,
-          size: 8,
-        }
-      });
-      if (isMountedRef.current) {
-        setColleges(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [id, isMountedRef]);
+
 
   const formattedData = pagedata && pagedata.examfaqs && pagedata.examfaqs.map((item) => ({
     "@type": "Question",
@@ -62,8 +48,7 @@ function InnerExamPage({ id }) {
 
   useEffect(() => {
     getPagedata();
-    getExams();
-
+  
   }, [getPagedata]);
   return (
     <>

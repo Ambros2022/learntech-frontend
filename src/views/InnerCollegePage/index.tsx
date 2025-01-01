@@ -11,6 +11,7 @@ import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script'
+import { Box, CircularProgress } from '@mui/material'
 
 
 function InnerCollegePage({ id }) {
@@ -62,7 +63,7 @@ function InnerCollegePage({ id }) {
 
   useEffect(() => {
     getPagedata();
- 
+
     gettestimonials();
 
   }, [getPagedata]);
@@ -99,18 +100,22 @@ function InnerCollegePage({ id }) {
           )}
         </script>
       </Head>
-      {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
-      {!loading && pagedata && <FacilitiesSection data={pagedata} />}
-
-      {testdata && testdata.length > 0 && <Testimonial  testimonials={testdata}/>}
-      
-      {!loading && pagedata && <LocationSection data={pagedata} />}
-
-
-
-      <TopFeaturedColleges />
-      <ExpertSection />
+      {/* Show loader while loading */}
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          {!loading && pagedata && <BannerSection data={pagedata} />}
+          {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
+          {!loading && pagedata && <FacilitiesSection data={pagedata} />}
+          {testdata && testdata.length > 0 && <Testimonial testimonials={testdata} />}
+          {!loading && pagedata && <LocationSection data={pagedata} />}
+          <TopFeaturedColleges />
+          <ExpertSection />
+        </>
+      )}
 
     </>
   )
