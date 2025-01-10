@@ -235,7 +235,7 @@ const SecondPage = () => {
     },
 
     {
-      flex: 0.175,
+      flex: 0.115,
       minWidth: 100,
       field: 'phone',
       headerName: 'phone',
@@ -252,38 +252,51 @@ const SecondPage = () => {
 
 
 
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'current_location',
-      headerName: 'current location',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params;
-        return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.current_location}
-          </Typography>
-        );
-      }
-    },
+    // {
+    //   flex: 0.5,
+    //   minWidth: 100,
+    //   field: 'current_location',
+    //   headerName: 'current location',
+    //   renderCell: (params: GridRenderCellParams) => {
+    //     const { row } = params;
+    //     return (
+    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+    //         {row.current_location}
+    //       </Typography>
+    //     );
+    //   }
+    // },
 
     {
-      flex: 0.175,
+      flex: 0.200,
       minWidth: 100,
       field: 'jobspositions.name',
       headerName: 'Job Position',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
+        // return (
+        //   <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+        //     {row.jobspositions.name}
+        //     {row.current_location}
+        //   </Typography>
+
+        // );
+
         return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.jobspositions.name}
-          </Typography>
+          <div>
+            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+              Postion: {row.jobspositions.name}
+            </Typography>
+            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+              Location : {row.current_location}
+            </Typography>
+          </div>
         );
       }
     },
 
     {
-      flex: 0.175,
+      flex: 0.150,
       minWidth: 100,
       field: 'jobspositions.resume',
       headerName: 'Resume',
@@ -315,14 +328,34 @@ const SecondPage = () => {
           </Typography>
         );
       }
-    },
+    }, {
+      flex: 0.100,
+      minWidth: 100,
+      field: 'jobspositions.created_at',
+      headerName: 'Date',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
+        const createdAt = new Date(row?.created_at);
 
+        // Format date as MM-DD-YYYY
+        const formattedDate = createdAt.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        });
 
-
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {formattedDate}
+          </Typography>
+        );
+      }
+    }
+    ,
 
 
     {
-      flex: 0.175,
+      flex: 0.100,
       minWidth: 100,
       sortable: false,
       field: 'actions',

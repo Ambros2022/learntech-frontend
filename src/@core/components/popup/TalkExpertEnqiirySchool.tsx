@@ -21,7 +21,7 @@ const EnquiryForm: FC<Props> = ({ page, type, ...rest }) => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required').trim(),
     email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-    contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+    contact_number: Yup.string().required("Phone Number is required"),
     course: Yup.string().required('Grade is required').trim(),
     location: Yup.string().required('Location is required').trim(),
   });
@@ -91,7 +91,7 @@ const EnquiryForm: FC<Props> = ({ page, type, ...rest }) => {
             <ErrorMessage name="course" component="div" className="error text-danger" />
           </div>
           <div className=" col-lg-6  col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5">
-            <Field type="text" name="college_name" placeholder={type? type:"College Name"} className="form-control" />
+            <Field type="text" name="college_name" placeholder={type ? type : "College Name"} className="form-control" />
             <ErrorMessage name="college_name" component="div" className="error text-danger" />
           </div>
           {/* <div className=" col-md-3 mb-3">

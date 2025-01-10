@@ -16,7 +16,7 @@ const EnquiryFormMed = ({ heading }: { heading: string }) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+        contact_number: Yup.string().required("Phone Number is required"),
         location: Yup.string().required('Location is required').trim(),
         course: Yup.string().required('Course is required').trim(),
         message: Yup.string().trim(),

@@ -17,12 +17,13 @@ import Carousel from 'react-bootstrap/Carousel';
 let cancelToken: any;
 
 const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
+
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-  contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+  contact_number: Yup.string().required("Phone Number is required"),
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),
 });
@@ -61,6 +62,8 @@ function BannerSection() {
       formData.append('location', values.location);
       formData.append('course_in_mind', values.course);
       formData.append('current_url', window.location.href);
+
+   
       const response = await axios.post('api/website/enquiry', formData);
       if (response.status === 200) {
         toast.dismiss();

@@ -13,7 +13,7 @@ const responsive = {
   superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 5 },
   desktop: { breakpoint: { max: 1024, min: 768 }, items: 4 },
   tablet: { breakpoint: { max: 767, min: 425 }, items: 2 },
-  mobile: { breakpoint: { max: 424, min: 0 }, items: 3 }
+  mobile: { breakpoint: { max: 424, min: 0 }, items: 2 }
 };
 
 const ButtonGroup = ({ next, previous }) => (

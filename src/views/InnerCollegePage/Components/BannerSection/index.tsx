@@ -28,7 +28,7 @@ function BannerSection({ data }) {
               </div>
               <div className="col-lg-7 ps-xl-5 col-xl-8 col-md-10">
                 <div className="card-body text-white">
-                  <h1 className="card-title fw-bold mb-3">{data.name}</h1>
+                  <h1 className="card-title fw-bold mb-3 mt-3 mt-md-1">{data.name}</h1>
                   <h6 className='mb-3 d-flex '><i className='bi bi-geo-alt-fill text-danger me-1'></i> <span>{data.address}</span></h6>
                   <h6 className='mb-3 d-flex'>
                     <i className="text-warning bi bi-trophy-fill me-1"></i>
