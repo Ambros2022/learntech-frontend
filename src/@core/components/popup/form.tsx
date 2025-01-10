@@ -27,7 +27,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, ...rest }) => {
             oReq.onload = function () {
                 if (oReq.status === 200) {
                     const file = new Blob([oReq.response], { type: 'application/pdf' });
-                    saveAs(file, "Learntechww Brochure 2024.pdf");
+                    saveAs(file, "Learntechww Brochure 2025.pdf");
                 } else {
                     console.error(`Failed to download file: ${oReq.status} ${oReq.statusText}`);
                 }
@@ -50,7 +50,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, ...rest }) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        contact_number: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+        contact_number: Yup.string().required("Phone Number is required"),
         course: Yup.string().required(`${placeholder || 'Course'} is required`).trim(),  // Use placeholder if available
         location: Yup.string().required('Location is required').trim(),
         message: Yup.string().required('Message is required'),
@@ -114,7 +114,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, ...rest }) => {
                     <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                 </div>
                 <div className="mb-3">
-                    <Field type="text" name="course" placeholder={placeholder? (`Enter ${placeholder}`):("Enter Course")} className="form-control" />
+                    <Field type="text" name="course" placeholder={placeholder ? (`Enter ${placeholder}`) : ("Enter Course")} className="form-control" />
                     <ErrorMessage name="course" component="div" className="error text-danger" />
                 </div>
                 <div className="mb-3">

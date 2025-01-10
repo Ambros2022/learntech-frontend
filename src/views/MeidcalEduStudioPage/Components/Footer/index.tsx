@@ -104,7 +104,7 @@ const Footer = () => {
             </section>
             <section className='bg-blue py-5'>
                 <hr className='text-white' />
-                <h4 className='text-center text-white mb-3 mt-5'>Copyright @ 2024</h4>
+                <h4 className='text-center text-white mb-3 mt-5'>Copyright @ 2025</h4>
                 <h6 className='text-center text-white'>Learntech Edu Solutions Pvt Ltd.</h6>
             </section>
             <div className="mt-md-3 col-md-4 text-md-end">

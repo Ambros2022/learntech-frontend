@@ -38,7 +38,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     const validationSchema = Yup.object().shape({
         fullName: Yup.string().required('Full Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone Number is required'),
+        phone: Yup.string().required('Phone Number is required'),
         d_o_b: Yup.string().required('Date Of Birth is required').trim(),
         jobs_position_id: Yup.string().required('Post Applied is required').trim(),
         job_location_id: Yup.string().required('Job Location is required').trim(),
