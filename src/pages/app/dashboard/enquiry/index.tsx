@@ -153,7 +153,7 @@ const SecondPage = () => {
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
   const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [columnname, setColumnname] = useState<string>('updated_at')
+  const [columnname, setColumnname] = useState<string>('created_at')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
 
@@ -182,7 +182,7 @@ const SecondPage = () => {
     },
 
     {
-      flex: 0.125,
+      flex: 0.145,
       minWidth: 100,
       field: 'contact_number',
       headerName: 'Contact Number',
