@@ -181,11 +181,11 @@ const SecondPage = () => {
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
   const [page, setPage] = useState<number>(1)
-  const [orderby, setOrderby] = useState<SortType>('asc')
+  const [orderby, setOrderby] = useState<SortType>('desc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
   const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [columnname, setColumnname] = useState<string>('name')
+  const [columnname, setColumnname] = useState<string>('created_at')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const isMountedRef = useIsMountedRef();
   const ability = useContext(AbilityContext)
@@ -336,13 +336,14 @@ const SecondPage = () => {
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
         const createdAt = new Date(row?.created_at);
-
-        // Format date as MM-DD-YYYY
-        const formattedDate = createdAt.toLocaleDateString('en-US', {
+        
+        const formattedDate = row?.created_at
+        ? new Date(row.created_at).toLocaleDateString('en-US', {
           year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        });
+          month: 'short',
+          day: 'numeric',
+        })
+        : 'N/A';
 
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>

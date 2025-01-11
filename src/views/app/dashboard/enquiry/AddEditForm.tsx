@@ -50,7 +50,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
     })
-
+    const formatDateTime = (date) =>
+        date
+          ? new Date(date).toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: true, // Optional: for 12-hour format (AM/PM)
+            })
+          : 'N/A';
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
         email: isAddMode ? '' : olddata.email,
@@ -59,6 +70,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         course_in_mind: isAddMode ? '' : olddata.course_in_mind,
         college_name: isAddMode ? '' : olddata.college_name,
         school_name: isAddMode ? '' : olddata.school_name,
+        created_at: isAddMode ? '' : olddata?.created_at,
         current_url: isAddMode ? 'Draft' : olddata.current_url,
         description: isAddMode ? 'Draft' : olddata.description,
     }
@@ -128,7 +140,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             <form encType="application/x-www-form-urlencoded">
                 <Grid container spacing={5}>
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='name'
                             control={control}
@@ -147,7 +159,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='email'
                             control={control}
@@ -167,7 +179,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='contact_number'
                             control={control}
@@ -176,7 +188,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    type='number'
+                                    // type='number'
                                     label='Contact Number'
                                     onChange={onChange}
                                     placeholder=''
@@ -187,7 +199,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='location'
                             control={control}
@@ -207,7 +219,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='course_in_mind'
                             control={control}
@@ -227,7 +239,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='college_name'
                             control={control}
@@ -247,7 +259,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='school_name'
                             control={control}
@@ -267,8 +279,28 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Controller
+                            name='created_at'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={formatDateTime(value)}
 
-                    <Grid item xs={12} sm={6}>
+                                    label='Created Time'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.created_at)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.created_at && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='current_url'
                             control={control}
@@ -289,7 +321,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={4}>
                         <Controller
                             name='description'
                             control={control}
