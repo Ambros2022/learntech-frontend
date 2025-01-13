@@ -47,6 +47,18 @@ const Header = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [courses, setCourses] = useState<Courses[]>([]);
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+  const closeDropdown = () => setIsDropdownOpen(false);
+
+  const handleMouseEnter = () => {
+    setIsDropdownOpen(true); // Open dropdown on hover
+  };
+
+  const handleMouseLeave = () => {
+    setIsDropdownOpen(false); // Close dropdown when not hovering
+  };
 
   const isLinkActive = (href) => {
     return router.pathname === href;
@@ -217,55 +229,104 @@ const Header = () => {
                 <li className="nav-item">
                   <Link className={`nav-link ${isLinkActive('/') ? 'active' : ''}`} onClick={() => setIsOpen(false)} aria-current="page" href="/">Home</Link>
                 </li>
-                <li className="nav-item dropdown">
-                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`} onClick={() => setIsOpen(false)} href="/universities" id="navbarDropdownMenuLink" role="button"
+                <li className="nav-item dropdown"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/universities') ? 'activeDrpDwn' : ''}`}
+                    // onClick={() => setIsOpen(false)} 
+                    onClick={toggleDropdown}
+                    href="/universities" id="navbarDropdownMenuLink" role="button"
                     aria-expanded="false">
                     Universities
                   </Link>
+                  {isDropdownOpen && (
+                    <Statedropdown states={states} type="Universities" onClose={closeDropdown} />
+                  )}
 
-                  <Statedropdown states={states} type="Universities" />
+                  {/* <Statedropdown states={states} type="Universities" /> */}
                 </li>
-                <li className="nav-item dropdown">
-                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/colleges') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/colleges" id="navbarDropdownMenuLink" role="button"
+                <li className="nav-item dropdown"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}>
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/colleges') ? 'active' : ''}`}
+                    //  onClick={() => setIsOpen(false)} 
+                    onClick={toggleDropdown}
+                    href="/colleges" id="navbarDropdownMenuLink" role="button"
                     aria-expanded="false">
                     Colleges
                   </Link>
-                  <Statedropdown states={states} type="Colleges" />
+                  {isDropdownOpen && (
+                    <Statedropdown states={states} type="Colleges" onClose={closeDropdown} />
+                  )}
+                  {/* <Statedropdown states={states} type="Colleges" /> */}
                 </li>
-                <li className="nav-item dropdown">
-                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/courses" id="navbarDropdownMenuLink" role="button"
-                    aria-expanded="false">
+                <li
+                  className="nav-item dropdown"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link
+                    className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`}
+                    onClick={toggleDropdown}
+                    href="/courses"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    aria-expanded={isDropdownOpen}
+                  >
                     Courses
                   </Link>
-                  <Coursedropdown states={courses} type="Colleges" />
+                  {isDropdownOpen && (
+                    <Coursedropdown states={courses} type="Colleges" onClose={closeDropdown} />
+                  )}
                 </li>
-                <li className="nav-item dropdown">
-                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/exams') ? 'active' : ''}`} onClick={() => setIsOpen(false)} href="/exams" id="navbarDropdownMenuLink" role="button"
+
+                <li className="nav-item dropdown"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link className={`nav-link dropdown-toggle ${isLinkActive('/exams') ? 'active' : ''}`
+                  }
+                    //  onClick={() => setIsOpen(false)}
+                    onClick={toggleDropdown}
+                    href="/exams" id="navbarDropdownMenuLink" role="button"
                     aria-expanded="false">
                     Exams
                   </Link>
-                  <Examdropdown states={exams} />
+                  {isDropdownOpen && (
+                    <Examdropdown states={exams} onClose={closeDropdown} />
+                  )}
+
+                  {/* <Examdropdown states={exams} /> */}
+
                 </li>
 
-                <li className="nav-item dropdown">
+                <li className="nav-item dropdown" onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}>
                   <a
                     className={`nav-link dropdown-toggle`}
-                    onClick={() => setIsOpen(!isOpen)}
+                    // onClick={() => setIsOpen(!isOpen)}
+                    onClick={toggleDropdown}
                     id="navbarDropdownMenuLink"
                     role="button"
                     aria-expanded={isOpen}
                   >
                     Study Abroad
                   </a>
-                  <Abroaddropdown states={countries} type="Colleges" />
+                  {isDropdownOpen && (
+                    <Abroaddropdown states={countries} type="Colleges" onClose={closeDropdown} />
+                  )}
+                  {/* <Abroaddropdown states={countries} type="Colleges" /> */}
 
                 </li>
 
 
-                <li className="nav-item dropdown" style={{ position: 'static' }}>
+                <li className="nav-item dropdown" onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave} style={{ position: 'static' }}>
                   <Link
                     className={`nav-link dropdown-toggle ${isLinkActive('/news') ? 'activeDrpDwn' : ''}`}
-                    onClick={() => setIsOpen(false)}
+                    // onClick={() => setIsOpen(false)}
+                    onClick={toggleDropdown}
                     href="/news"
                     id="navbarDropdownMenuLink"
                     role="button"
@@ -273,7 +334,8 @@ const Header = () => {
                   >
                     Latest News
                   </Link>
-                  <div className="container-fluid">
+
+                  {isDropdownOpen && (<div className="container-fluid">
                     <ul className="newsDrpDwn newsHide dropdown-menu" style={{ textAlign: "center", left: '0', right: "0", width: '80%', margin: "0 auto" }} aria-labelledby="navbarDropdownMenuLink">
                       <div className="dropdown-row-news dropdown-row p-2">
                         <div className="row">
@@ -281,6 +343,7 @@ const Header = () => {
                             <li key={item.id} className="news-item mb-1 col-md-3">
                               <Link
                                 href={`/news/${item.id}/${item.slug}`}
+                                onClick={toggleDropdown}
 
                               >
                                 <div className="card-news hover-card bg-skyBlue card">
@@ -299,10 +362,13 @@ const Header = () => {
 
                       </div>
                       <div className="text-end mt-1 me-2">
-                        <Link href="/news" className="btn ">Read All News</Link>
+                        <Link href="/news" className="btn" onClick={toggleDropdown}>Read All News</Link>
                       </div>
                     </ul>
                   </div>
+                  )}
+
+
                 </li>
 
                 <li className="nav-item dropdown d-lg-inline-block d-none">

@@ -1,4 +1,3 @@
-// pages/api/auth/[...nextauth].ts
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import LinkedInProvider from 'next-auth/providers/linkedin';
@@ -6,6 +5,7 @@ import TwitterProvider from 'next-auth/providers/twitter';
 import FacebookProvider from 'next-auth/providers/facebook';
 
 export default NextAuth({
+  // Define authentication providers
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -21,20 +21,37 @@ export default NextAuth({
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET, // Fixed typo
     }),
   ],
+
+  // Secret for signing and encrypting tokens
+  secret: process.env.NEXTAUTH_SECRET,
+
+  // Custom callback functions
   callbacks: {
     async session({ session, token }) {
-      // Ensure token and session are correctly populated
+      if (token?.accessToken) {
+        session.accessToken = token.accessToken;
+      }
       return session;
     },
-    async jwt({ token, account }) {
-      // Handle JWT callback if needed
+    async jwt({ token, account, user }) {
       if (account?.access_token) {
         token.accessToken = account.access_token;
       }
+      if (user) {
+        token.user = user;
+      }
       return token;
     },
+  },
+
+  // Enable debugging during development
+  debug: process.env.NODE_ENV === 'development',
+
+  // Configure session handling
+  session: {
+    strategy: 'jwt',
   },
 });

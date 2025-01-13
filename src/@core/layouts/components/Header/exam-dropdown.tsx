@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 import { useAuth } from 'src/hooks/useAuth';
 
-const DropdownMenu = React.memo(({ states }: any) => {
+const DropdownMenu = React.memo(({ states ,onClose}: any) => {
     const [visibleStates, setVisibleStates] = useState(10); // Initially show 10 states
     const [isExpanded, setIsExpanded] = useState(false); // Track whether the list is expanded
 
@@ -34,7 +34,10 @@ const DropdownMenu = React.memo(({ states }: any) => {
                                     // query: { stream_id: item.id }
                                 }}
                                 className="dropdown-item"
-                                onClick={() => setStreamId(item.id)}
+                                onClick={() => {
+                                    setStreamId(item.id); // Set the stream ID
+                                    onClose(); // Close the dropdown
+                                }}
                             >
                                 <div className="d-flex justify-content-between text-truncate">
                                     {item.name}
@@ -50,6 +53,7 @@ const DropdownMenu = React.memo(({ states }: any) => {
                                             <Link
                                                 className="dropdown-item"
                                                 href={`/exam/${city?.examstreams?.id}/${city?.examstreams?.slug}`}
+                                                onClick={onClose}
                                             >
                                                 {city?.examstreams?.exam_title}
                                             </Link>
@@ -57,7 +61,7 @@ const DropdownMenu = React.memo(({ states }: any) => {
 
                                     ))}
                                     <div className='text-center text-blue dropdownBtn'>
-                                        <Link href="/exams" className='btn'>Exams</Link>
+                                        <Link href="/exams"  onClick={onClose} className='btn'>Exams</Link>
                                     </div>
 
                                 </ul>
