@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 import { useAuth } from 'src/hooks/useAuth';
 
-const DropdownMenu = React.memo(({ states, type }: any) => {
+const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
     const [visibleStates, setVisibleStates] = useState(10); // Initially show 10 states
     const [isExpanded, setIsExpanded] = useState(false); // Track whether the list is expanded
 
@@ -34,7 +34,11 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                                     // query: { state_id: item.id }
                                 }}
                                 className="dropdown-item"
-                                onClick={() => setStateId(item.id)}
+                                onClick={() => {
+                                    setStateId(item.id); // Set the stream ID
+                                    onClose(); // Close the dropdown
+                                }}
+                                // onClick={() => setStateId(item.id)}
 
                             >
                                 <div className="d-flex justify-content-between">
@@ -54,7 +58,11 @@ const DropdownMenu = React.memo(({ states, type }: any) => {
                                                     pathname: type === "Colleges" ? "/colleges" : "/universities",
                                                     // query: { city_id: city.id }
                                                 }}
-                                                onClick={() => setCityId(city.id)}
+                                                onClick={() => {
+                                                    setCityId(city.id); // Set the stream ID
+                                                    onClose(); // Close the dropdown
+                                                }}
+                                                // onClick={() => setCityId(city.id)}
                                             >
                                                 {city.name}
                                             </Link>
