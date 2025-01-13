@@ -2208,6 +2208,9 @@
 
     .subinner .infoBtn .btn {
       width: 95% !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
     }
 
     .font13-m .btn {
@@ -6540,7 +6543,7 @@
   }
 
   .exam .infoBtn .btn {
-    width: 95% !important;  
+    width: 95% !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
@@ -6579,16 +6582,15 @@
       width: auto !important;
     } */
 
-    .subinner .infoBtn li {
+    /* .subinner .infoBtn li {
       width: auto !important;
-    }
+    } */
 
     .subinner .infoBtn>* {
       flex: 0 auto auto;
-      gap: 5px !important;
-      /* Prevent items from stretching */
-      /* white-space: pre-wrap; */
-      /* Ensure text doesn’t wrap */
+
+
+
     }
   }
 

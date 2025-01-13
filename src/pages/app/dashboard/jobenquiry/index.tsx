@@ -181,11 +181,11 @@ const SecondPage = () => {
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
   const [page, setPage] = useState<number>(1)
-  const [orderby, setOrderby] = useState<SortType>('asc')
+  const [orderby, setOrderby] = useState<SortType>('desc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
   const [searchfrom, setSearchfrom] = useState<any>('name')
-  const [columnname, setColumnname] = useState<string>('name')
+  const [columnname, setColumnname] = useState<string>('created_at')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const isMountedRef = useIsMountedRef();
   const ability = useContext(AbilityContext)
@@ -235,7 +235,7 @@ const SecondPage = () => {
     },
 
     {
-      flex: 0.175,
+      flex: 0.115,
       minWidth: 100,
       field: 'phone',
       headerName: 'phone',
@@ -252,38 +252,51 @@ const SecondPage = () => {
 
 
 
-    {
-      flex: 0.175,
-      minWidth: 100,
-      field: 'current_location',
-      headerName: 'current location',
-      renderCell: (params: GridRenderCellParams) => {
-        const { row } = params;
-        return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.current_location}
-          </Typography>
-        );
-      }
-    },
+    // {
+    //   flex: 0.5,
+    //   minWidth: 100,
+    //   field: 'current_location',
+    //   headerName: 'current location',
+    //   renderCell: (params: GridRenderCellParams) => {
+    //     const { row } = params;
+    //     return (
+    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+    //         {row.current_location}
+    //       </Typography>
+    //     );
+    //   }
+    // },
 
     {
-      flex: 0.175,
+      flex: 0.200,
       minWidth: 100,
       field: 'jobspositions.name',
       headerName: 'Job Position',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
+        // return (
+        //   <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+        //     {row.jobspositions.name}
+        //     {row.current_location}
+        //   </Typography>
+
+        // );
+
         return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-            {row.jobspositions.name}
-          </Typography>
+          <div>
+            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+              Postion: {row.jobspositions.name}
+            </Typography>
+            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+              Location : {row.current_location}
+            </Typography>
+          </div>
         );
       }
     },
 
     {
-      flex: 0.175,
+      flex: 0.150,
       minWidth: 100,
       field: 'jobspositions.resume',
       headerName: 'Resume',
@@ -315,14 +328,35 @@ const SecondPage = () => {
           </Typography>
         );
       }
-    },
+    }, {
+      flex: 0.100,
+      minWidth: 100,
+      field: 'jobspositions.created_at',
+      headerName: 'Date',
+      renderCell: (params: GridRenderCellParams) => {
+        const { row } = params;
+        const createdAt = new Date(row?.created_at);
+        
+        const formattedDate = row?.created_at
+        ? new Date(row.created_at).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })
+        : 'N/A';
 
-
-
+        return (
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {formattedDate}
+          </Typography>
+        );
+      }
+    }
+    ,
 
 
     {
-      flex: 0.175,
+      flex: 0.100,
       minWidth: 100,
       sortable: false,
       field: 'actions',

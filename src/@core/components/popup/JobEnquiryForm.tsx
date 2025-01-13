@@ -18,7 +18,7 @@ interface Props {
 const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     const router = useRouter();
     const [resumeFileName, setResumeFileName] = useState('');
-
+    const [showPhoneInput, setShowPhoneInput] = useState(true);
 
     const initialValues = {
         fullName: '',
@@ -38,7 +38,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     const validationSchema = Yup.object().shape({
         fullName: Yup.string().required('Full Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone Number is required'),
+        phone: Yup.string().required('Phone Number is required'),
         d_o_b: Yup.string().required('Date Of Birth is required').trim(),
         jobs_position_id: Yup.string().required('Post Applied is required').trim(),
         job_location_id: Yup.string().required('Job Location is required').trim(),
@@ -55,6 +55,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     });
 
     const handleSubmit = async (values, { resetForm }) => {
+     
         try {
             toast.loading('Processing');
             const formData = new FormData();
@@ -77,6 +78,8 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                 toast.success('Thank you for submitting your details.');
                 resetForm();
                 setResumeFileName('');
+                setShowPhoneInput(false);
+                setTimeout(() => setShowPhoneInput(true), 0);
                 // router.push('/thank-you');
             }
         } catch (error) {
@@ -107,7 +110,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                     <div className='row mb-md-3 careerContact'>
                         <div className='col-md-6'>
                             <div className='mb-3 Jobenquiryphoneinput'>
-                                <PhoneInputField name='phone' />
+                            {showPhoneInput && <PhoneInputField name="phone" />}
                                 <ErrorMessage name='phone' component='div' className='text-danger' />
                             </div>
                         </div>

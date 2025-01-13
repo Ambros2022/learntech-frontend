@@ -16,7 +16,7 @@ const ContactUsSec = () => {
     const validationSchema = Yup.object().shape({
         fullName: Yup.string().required('Full Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        mobileNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Phone Number is required"),
+        mobileNumber: Yup.string().required("Phone Number is required"),
         courseInMind: Yup.string().required('Course In Mind is required').trim(),
         location: Yup.string().required('Location is required').trim(),
         message: Yup.string().trim(),
@@ -57,7 +57,7 @@ const ContactUsSec = () => {
                         height={1000}
                         alt="contact-us-img"
                         className="w-100 h-100"
-                        style={{objectFit:'cover'}}
+                        style={{ objectFit: 'cover' }}
                     />
                 </div>
                 <div className="col-md-6 position-relative">
@@ -70,7 +70,7 @@ const ContactUsSec = () => {
                                     email: '',
                                     mobileNumber: '',
                                     courseInMind: '',
-                                    location:'',
+                                    location: '',
                                     message: '',
                                 }}
                                 validationSchema={validationSchema}
@@ -118,7 +118,7 @@ const ContactUsSec = () => {
                                             />
                                             <ErrorMessage name="location" component="div" className="text-danger" />
                                         </div>
-                                         <div className="col-md-12 mb-3">
+                                        <div className="col-md-12 mb-3">
                                             <Field
                                                 as="textarea"
                                                 name="message"
@@ -126,7 +126,7 @@ const ContactUsSec = () => {
                                                 placeholder="Type your message"
                                             />
                                             <ErrorMessage name="message" component="div" className="text-danger" />
-                                        </div> 
+                                        </div>
                                         <div className="text-center">
                                             <button type="submit" className="btn btn-success btn-lg">Submit</button>
                                         </div>

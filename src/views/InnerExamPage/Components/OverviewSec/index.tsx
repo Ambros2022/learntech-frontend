@@ -178,7 +178,7 @@ function OverviewSec({ data }) {
               <div className="col-md-8">
                 <div className="card-body" style={{ zIndex: '200' }}>
                   <h5 className="card-text">PES University</h5>
-                  <h3 className="card-title fw-bold">B.Tech 2024 - Admissions Open</h3>
+                  <h3 className="card-title fw-bold">B.Tech 2025 - Admissions Open</h3>
                   <Link href='/colleges' className='btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
                 </div>
               </div>
