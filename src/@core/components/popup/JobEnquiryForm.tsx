@@ -18,7 +18,7 @@ interface Props {
 const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     const router = useRouter();
     const [resumeFileName, setResumeFileName] = useState('');
-
+    const [showPhoneInput, setShowPhoneInput] = useState(true);
 
     const initialValues = {
         fullName: '',
@@ -55,6 +55,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     });
 
     const handleSubmit = async (values, { resetForm }) => {
+     
         try {
             toast.loading('Processing');
             const formData = new FormData();
@@ -77,6 +78,8 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                 toast.success('Thank you for submitting your details.');
                 resetForm();
                 setResumeFileName('');
+                setShowPhoneInput(false);
+                setTimeout(() => setShowPhoneInput(true), 0);
                 // router.push('/thank-you');
             }
         } catch (error) {
@@ -107,7 +110,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                     <div className='row mb-md-3 careerContact'>
                         <div className='col-md-6'>
                             <div className='mb-3 Jobenquiryphoneinput'>
-                                <PhoneInputField name='phone' />
+                            {showPhoneInput && <PhoneInputField name="phone" />}
                                 <ErrorMessage name='phone' component='div' className='text-danger' />
                             </div>
                         </div>
