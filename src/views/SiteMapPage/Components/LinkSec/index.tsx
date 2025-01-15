@@ -54,6 +54,7 @@ const LinkSec = () => {
                                     <li><Link href='/nri-quota' className='text-black'>NRI Quota</Link></li>
                                     <li><Link href='/news' className='text-black'>News</Link></li>
                                     <li><Link href='/blogs' className='text-black'>Blogs</Link></li>
+                                    <li><Link href='/education-loan' className='text-black'>Educational Loan</Link></li>
                                 </ul>
                             </div>
                             <div className="col-md-3">
@@ -96,7 +97,7 @@ const LinkSec = () => {
                                             <div key={university.id} className="col-md-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/university/${university.slug}`} className='text-black'>{university.name}</Link>
+                                                        <Link href={`/university/${university.id}/${university.slug}`} className='text-black'>{university.name}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -110,7 +111,7 @@ const LinkSec = () => {
                                             <div key={school.id} className="col-md-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/school/${school.slug}`} className='text-black'>{school.name}</Link>
+                                                        <Link href={`/school/${school.id}/${school.slug}`} className='text-black'>{school.name}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -124,7 +125,7 @@ const LinkSec = () => {
                                             <div key={scholarships.id} className="col-md-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/scholarships/${scholarships.slug}`} className='text-black'>{scholarships.name}</Link>
+                                                        <Link href={`/scholarship/${scholarships.id}/${scholarships.slug}`} className='text-black'>{scholarships.name}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -138,7 +139,7 @@ const LinkSec = () => {
                                             <div key={schoolboards.id} className="col-md-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/schoolboards/${schoolboards.slug}`} className='text-black'>{schoolboards.name}</Link>
+                                                        <Link href={`/board/${schoolboards.id}/${schoolboards.slug}`} className='text-black'>{schoolboards.name}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -208,7 +209,7 @@ const LinkSec = () => {
                                             <div key={newsandevents.id} className="col-md-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/newsandevents/${newsandevents.slug}`} className='text-black'>{newsandevents.name}</Link>
+                                                        <Link href={`/news/${newsandevents.id}/${newsandevents.slug}`} className='text-black'>{newsandevents.name}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
