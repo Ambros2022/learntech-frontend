@@ -40,6 +40,11 @@ module.exports = {
     return [
 
       {
+        source: '/home',
+        destination: '/colleges',
+        permanent: true,
+      },
+      {
         source: '/study-in-india',
         destination: '/colleges',
         permanent: true,
