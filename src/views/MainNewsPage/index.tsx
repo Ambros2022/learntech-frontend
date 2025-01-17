@@ -35,8 +35,8 @@ const MainNewsPage = () => {
         params: {
           page: 1,
           size: 10000,
-          is_trending:'1',
-          orderby: 'Asc', 
+          is_trending: '1',
+          orderby: 'Asc',
           columnname: 'listing_order'
         }
       })
@@ -76,8 +76,9 @@ const MainNewsPage = () => {
 
   const getColleges = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10000,orderby:'asc',columnname:'listing_order'
-       };
+      const roleparams = {
+        page: 1, size: 10000, orderby: 'asc', columnname: 'listing_order'
+      };
       const response = await axios.get('api/website/langingpage/get', { params: roleparams });
       setcollegeData(response.data.data);
     } catch (err) {
@@ -127,7 +128,7 @@ const MainNewsPage = () => {
     <>
       <Head>
         <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
+        <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
         <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>

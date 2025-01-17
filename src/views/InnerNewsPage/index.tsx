@@ -48,28 +48,28 @@ function InnerNewsPage({ id }) {
   }, [id, isMountedRef]);
 
 
- 
+
 
 
   useEffect(() => {
     getPagedata();
     getNews();
-   
+
   }, [getPagedata]);
   return (
     <>
       <Head>
         <title>{pagedata?.meta_title || "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
+        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
 
-            {!loading && pagedata && <BannerSec data={pagedata}  />}
-            {!loading && pagedata && <InfoSec data={pagedata}  />}
-          
-            <ExpertSection />
-     
+      {!loading && pagedata && <BannerSec data={pagedata} />}
+      {!loading && pagedata && <InfoSec data={pagedata} />}
+
+      <ExpertSection />
+
     </>
   )
 }
