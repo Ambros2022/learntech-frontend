@@ -37,28 +37,30 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
 
-    const handleFileChangephoto = (files: any[]) => {
-        setSelectedphoto(files[0]);
-        setFileNamesphoto(
-            files.map((file) => ({
-                name: file.name,
-                preview: URL.createObjectURL(file),
-            }))
-        );
 
-    };
-
-    const schema: any = yup.object().shape({
-
-    })
+    const schema = yup.object().shape({
+        old_url: yup
+          .string()
+          .required("old_url is required")
+          .test(
+            "starts-with-slash",
+            "Enter a valid URL that must contain the first character as '/' (e.g., /example)",
+            (value) => value?.startsWith("/")
+          ),
+        new_url: yup
+          .string()
+          .required("new_url is required")
+          .test(
+            "starts-with-slash",
+            "Enter a valid URL that must contain the first character as '/' (e.g., /example)",
+            (value) => value?.startsWith("/")
+          ),
+      });
 
     const defaultValues = {
-        recognition_approval_name: isAddMode ? '' : olddata.recognition_approval_name,
-        recognition_approval_slug: isAddMode ? '' : olddata.recognition_approval_slug,
-        recognition_approval_full_name: isAddMode ? '' : olddata.recognition_approval_full_name,
+        old_url: isAddMode ? '' : olddata.old_url,
+        new_url: isAddMode ? '' : olddata.new_url,
     }
 
     const {
@@ -77,12 +79,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/recognition/update';
+            let url = 'api/admin/redirect/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('recognition_approval_name', data.recognition_approval_name);
-            formData.append('recognition_approval_slug', data.recognition_approval_slug);
-            formData.append('recognition_approval_full_name', data.recognition_approval_full_name);
+            formData.append('old_url', data.old_url);
+            formData.append('new_url', data.new_url);
+  
 
             try {
                 let response = await axios1.post(url, formData)
@@ -114,12 +116,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/recognition/add';
+            let url = 'api/admin/redirect/add';
 
             const formData = new FormData();
-            formData.append('recognition_approval_name', data.recognition_approval_name);
-            formData.append('recognition_approval_slug', data.recognition_approval_slug);
-            formData.append('recognition_approval_full_name', data.recognition_approval_full_name);
+            formData.append('old_url', data.old_url);
+            formData.append('new_url', data.new_url);
+
 
             try {
                 let response = await axios1.post(url, formData)
@@ -165,61 +167,45 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='recognition_approval_name'
+                            name='old_url'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
+                                //@ts-ignore
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Recognition Name'
+                                    label='Old URL'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.recognition_approval_name)}
+                                    error={Boolean(errors.old_url)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.recognition_approval_name && { helperText: 'This field is required' })}
+                                    {...(errors.old_url && { helperText: errors?.old_url?.message })}
                                 />
                             )}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='recognition_approval_slug'
+                            name='new_url'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
+                                //@ts-ignore
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label=' Slug'
+                                    label='New Url'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.recognition_approval_slug)}
+                                    error={Boolean(errors.new_url)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.recognition_approval_slug && { helperText: 'This field is required' })}
+                                    {...(errors.new_url && { helperText: errors?.new_url?.message })}
                                 />
                             )}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Controller
-                            name='recognition_approval_full_name'
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomTextField
-                                    fullWidth
-                                    value={value}
-                                    label='Full Name'
-                                    onChange={onChange}
-                                    placeholder=''
-                                    error={Boolean(errors.recognition_approval_full_name)}
-                                    aria-describedby='validation-basic-first-name'
-                                    {...(errors.recognition_approval_full_name && { helperText: 'This field is required' })}
-                                />
-                            )}
-                        />
-                    </Grid>
+                 
 
 
                     <Grid item xs={12}>
