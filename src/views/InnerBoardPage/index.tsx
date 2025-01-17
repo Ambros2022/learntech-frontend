@@ -117,15 +117,15 @@ function InnerBoardPage({ id }) {
         <meta name="description" content={pagedata?.meta_description || "Are you searching for which board is best for your child"} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-        <script type="application/ld+json">
-          {JSON.stringify(
-            {
+        {formattedData?.length > 0 && (
+          <script type="application/ld+json">
+            {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": formattedData,
-            }
-          )}
-        </script>
+            })}
+          </script>
+        )}
         <script type="application/ld+json">
           {JSON.stringify(
             {

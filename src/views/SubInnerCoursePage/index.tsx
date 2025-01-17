@@ -107,15 +107,15 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
         <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            {
+        {formattedData?.length > 0 && (
+          <script type="application/ld+json">
+            {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": formattedData,
-            }
-          )
-        }} />
+            })}
+          </script>
+        )}
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />}
