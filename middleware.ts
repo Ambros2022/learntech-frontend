@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export async function middleware(req) {
   const url = req.nextUrl.clone()
   let currentPath = url.pathname
-  console.log("middleware1", currentPath)
+  console.log("middleware2", currentPath)
   // Normalize the path by removing the trailing slash, except for the root path
   if (currentPath !== '/' && currentPath.endsWith('/')) {
     currentPath = currentPath.slice(0, -1)
