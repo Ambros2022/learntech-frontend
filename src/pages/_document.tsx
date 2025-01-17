@@ -21,12 +21,30 @@ class CustomDocument extends Document {
           <link rel='logo' sizes='180x180' href='/images/logo.png' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
           <link rel="icon" type="image/webp" href="/images/fav-icon.webp" />
-
-          {/* <link rel="stylesheet" href="/owl.carousel.min.css" /> */}
-          {/* <link rel="stylesheet" href="/owl.theme.default.min.css" /> */}
-          {/* <script src="jquery-3.7.1.min.js"></script> */}
+          {/* Google Tag Manager */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-MHML8KVC');
+              `,
+            }}
+          />
         </Head>
+
         <body>
+          {/* Google Tag Manager (noscript) */}
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-MHML8KVC"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            ></iframe>
+          </noscript>
           <Main />
           <NextScript />
         </body>

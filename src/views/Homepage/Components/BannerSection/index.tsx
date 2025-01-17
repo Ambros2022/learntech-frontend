@@ -176,7 +176,7 @@ function BannerSection() {
         <Skeleton height={500} />
       )} */}
       {imagesLoaded && banners.length > 0 ? (
-        <Carousel interval={1500} pause="hover">
+        <Carousel interval={1500} pause="hover" style={{ zIndex: '39' }}>
           {banners.map((banner, index) => (
             <Carousel.Item key={index}>
               <a href={banner.link}>
@@ -272,7 +272,7 @@ function BannerSection() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '40' }}>
+              <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '41' }}>
                 <div className="searchForm">
                   <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
                   <Formik

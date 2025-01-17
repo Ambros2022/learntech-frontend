@@ -11,9 +11,9 @@ function AnalysisSection() {
     <div className="Analysis-Section" id="animation4" data-aos="fade-up">
       <div className="container pt-5">
         <div className="row d-flex justify-content-center">
-          <div className="col-md-4 mb-5">
+          <div className="col-md-4 mb-5 ">
             <div className="row">
-              <div className="col-md-4 col-4 text-end">
+              <div className="col-md-4 col-4 text-end ps-2 ps-md-4">
                 <Image src="/images/icons/applications-filled.svg" width={70} height={70} alt="applications-filled-icon" />
               </div>
               <div className="col-md-8 col-8 text-start mt-2 mt-md-0">

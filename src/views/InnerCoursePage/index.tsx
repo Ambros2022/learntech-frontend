@@ -66,7 +66,7 @@ function InnerCoursePage({ id }) {
       console.error('Failed to fetch trending courses:', error);
     }
   }, [id, isMountedRef]);
-  
+
   const getExams = useCallback(async () => {
     try {
       const response = await axios.get('api/website/exams/get', {
@@ -139,7 +139,7 @@ function InnerCoursePage({ id }) {
     <>
       <Head>
         <title>{pagedata?.meta_title || "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!"} />
+        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
         <script type="application/ld+json">
@@ -159,8 +159,8 @@ function InnerCoursePage({ id }) {
 
       <OtherCourses streamdata={streams} />
       {testdata && testdata.length > 0 && <Testimonial testimonials={testdata} />}
-      <OrganizationSection data={pagedata}/>
-      <ExperTraineeSec data={pagedata}/>
+      <OrganizationSection data={pagedata} />
+      <ExperTraineeSec data={pagedata} />
       <ExpertSection />
     </>
   );

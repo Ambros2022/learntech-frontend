@@ -125,52 +125,50 @@ const App = (props: ExtendedAppProps) => {
           <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
           <meta
             name='description'
-            content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad. Call us today!'
+            content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad.'
           />
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
-          
+
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+          
           <script type="application/ld+json">
             {JSON.stringify(
               {
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "Learntech Edu Solutions",
-                "legalName": "Learntech Edu Solutions Pvt. Ltd.",
+                "name": "Learntech Edu Solutions Pvt. Ltd.",
+                "alternateName": "Learntech Edu Solutions",
                 "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
                 "logo": `${process.env.NEXT_PUBLIC_WEB_URL}/images/icons/learntech-logo.png`,
-                "foundingDate": "1994",
-                "founders": [
-                  {
-                    "@type": "Person",
-                    "name": "Mansoor Ali"
-                  }
-                ],
-                "address": [
-                  {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Bangalore",
-                    "addressRegion": "IND",
-                    "postalCode": "560069",
-                    "streetAddress": "#3/75, 'D' Main, East End,Jayanagar 9th Block, Bangalore, India"
-                  }
-                ],
                 "contactPoint": {
                   "@type": "ContactPoint",
-                  "contactType": "customer support",
-                  "telephone": "[1800 120 8696]",
-                  "email": "info@learntechww.com"
-                },
-                "sameAs": [
-                  "https://www.facebook.com/learntechedu/",
-                  "https://twitter.com/leartechww",
-                  "https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w",
-                  "https://www.instagram.com/learntechedus/",
-                ]
+                  "telephone": "1800 120 8696",
+                  "contactType": "customer service",
+                  "contactOption": "TollFree",
+                  "areaServed": "IN",
+                  "availableLanguage": "en"
+                }
               }
             )}
           </script>
+          <script type="application/ld+json">
+            {JSON.stringify(
+              {
+                "@context": "https://schema.org/",
+                "@type": "WebSite",
+                "name": "Learntech Edu Solutions",
+                "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "{search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              }
+            )}
+          </script>
+
+          <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
         </Head>
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
           <AuthProvider>
