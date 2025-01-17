@@ -262,6 +262,12 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
     {
+      title: 'Redirections',
+      path: '/app/dashboard/redirection',
+      icon: 'tabler:book',
+      auth: false
+    },
+    {
       title: 'Counsellor Team',
       path: '/app/dashboard/counsellor-team',
       icon: 'tabler:users',
