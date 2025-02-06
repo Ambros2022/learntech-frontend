@@ -63,7 +63,7 @@ function BannerSection() {
       formData.append('course_in_mind', values.course);
       formData.append('current_url', window.location.href);
 
-   
+
       const response = await axios.post('api/website/enquiry', formData);
       if (response.status === 200) {
         toast.dismiss();
@@ -93,8 +93,11 @@ function BannerSection() {
         name: entry.name,
         slug: entry.slug,
         id: entry.id,
+        streamID: entry?.streams?.id,
+        streamSlug: entry?.streams?.slug,
         type: item.type,
       })));
+      console.log(suggestions, "suggestions");
       setSearchResults(suggestions);
       setOpen(true);
     } catch (error) {
@@ -212,20 +215,24 @@ function BannerSection() {
                           onClose={() => setOpen(false)}
                           onInputChange={handleInputChange}
                           options={searchResults}
-                          getOptionLabel={(option: any) => option.name}
-                          renderOption={(props: any, option: any) => (
-                            <li {...props}>
-                              {option.type === "collegedata" ? (
-                                <Link href={`/college/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
+                          getOptionLabel={(option: any) => `${option.name} ${option.short_name}`} // Include both name and short_name
+                          renderOption={(props: any, option: any) => {
+                            const linkMap: { [key: string]: string } = {
+                              collegedata: `/college/${option.id}/${option.slug}`,
+                              schooldata: `/school/${option.id}/${option.slug}`,
+                              examdata: `/exam/${option.id}/${option.slug}`,
+                              coursesdata: `/course/${option?.streamID}/${option?.streamSlug}/${option.slug}`,
+                              // coursesdata: `/course/${option?.streamID}/${option.slug}}`,
+                            };
+
+                            return (
+                              <li {...props}>
+                                <Link href={linkMap[option.type] || "#"} style={{ color: "#000", textDecoration: "none", display: "block", width: "100%", height: "100%" }}>
                                   {option.name}
                                 </Link>
-                              ) : (
-                                <Link href={`/school/${option.id}/${option.slug}`} style={{ color: "#000", textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}>
-                                  {option.name}
-                                </Link>
-                              )}
-                            </li>
-                          )}
+                              </li>
+                            );
+                          }}
                           renderInput={(params) => (
                             <TextField
                               {...params}
@@ -235,9 +242,7 @@ function BannerSection() {
                               InputProps={{
                                 ...params.InputProps,
                                 sx: {
-                                  '& .MuiInputBase-input::placeholder': {
-                                    color: 'black',
-                                  },
+                                  "& .MuiInputBase-input::placeholder": { color: "black" }
                                 },
                                 endAdornment: (
                                   <React.Fragment>
@@ -248,12 +253,7 @@ function BannerSection() {
                                         <IconButton
                                           onClick={() => {
                                             if (params.inputProps.onChange) {
-                                              const event = {
-                                                target: {
-                                                  value: ''
-                                                }
-                                              } as React.ChangeEvent<HTMLInputElement>;
-                                              params.inputProps.onChange(event);
+                                              params.inputProps.onChange({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
                                             }
                                           }}
                                         >
@@ -262,11 +262,12 @@ function BannerSection() {
                                       </InputAdornment>
                                     ) : null}
                                   </React.Fragment>
-                                ),
+                                )
                               }}
                             />
                           )}
                         />
+
                       </div>
                     </div>
                   </div>
