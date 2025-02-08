@@ -24,15 +24,15 @@ function AbroadPage({ data }) {
   return (
     <>
       <Head>
-        <script type="application/ld+json">
-          {JSON.stringify(
-            {
+      {formattedData?.length > 0 && (
+          <script type="application/ld+json">
+            {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": formattedData,
-            }
-          )}
-        </script>
+            })}
+          </script>
+        )}
       </Head>
       <BannerSec data={data} />
       <StudySec data={data} />

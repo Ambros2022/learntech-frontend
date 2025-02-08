@@ -88,6 +88,8 @@ function CollegeInfoSection({ data }) {
     },
   ];
 
+  // Filter tabs to include only those with content
+
   const ButtonGroup = ({ next, previous }) => (
     <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2 small-tab">
       <span className='fi-left' onClick={previous}>
@@ -100,7 +102,7 @@ function CollegeInfoSection({ data }) {
   );
 
   const renderTabs = () => tabs.map((tab, index) => {
-    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>') {
+    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>') {
       return (
         <button
           key={index}

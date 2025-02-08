@@ -2,15 +2,11 @@
 const path = require('path')
 
 /** @type {import('next').NextConfig} */
-
-// Remove this if you're not using Fullcalendar features
-
-
 module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
   images: {
-    domains: ['localhost', 'preprod.keralastudy.com','3.6.46.89','api.learntechww.com'],
+    domains: ['localhost', 'preprod.keralastudy.com', '3.6.46.89', 'api.learntechww.com'],
   },
   webpack: config => {
     config.resolve.alias = {
@@ -34,47 +30,44 @@ module.exports = {
       }
     ];
   },
-
-  async redirects() {
-
-    return [
-
-      {
-        source: '/home',
-        destination: '/colleges',
-        permanent: true,
-      },
-      {
-        source: '/study-in-india',
-        destination: '/colleges',
-        permanent: true,
-      },
-      {
-        source: '/study-mbbs-abroad',
-        destination: 'mbbs-abroad',
-        permanent: true,
-      },
-      {
-        source: '/medical-admission',
-        destination: '/meds',
-        permanent: true,
-      },
-      {
-        source: '/copyright',
-        destination: '/terms-and-conditions',
-        permanent: true,
-      },
-      {
-        source: '/ayurvedic-course',
-        destination: '/course/7/ayurveda',
-        permanent: true,
-      },
-      {
-        source: '/meds-college',
-        destination: '/colleges',
-        permanent: true,
-      },
-
-    ]
-  },
+  // Remove the redirects since middleware will handle them
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/home',
+  //       destination: '/colleges',
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: '/study-in-india',
+  //       destination: '/colleges',
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: '/study-mbbs-abroad',
+  //       destination: '/mbbs-abroad',
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: '/medical-admission',
+  //       destination: '/meds',
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: '/copyright',
+  //       destination: '/terms-and-conditions',
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: '/ayurvedic-course',
+  //       destination: '/course/7/ayurveda',
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: '/meds-college',
+  //       destination: '/colleges',
+  //       permanent: true,
+  //     },
+  //   ]
+  // },
 }
