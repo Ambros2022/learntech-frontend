@@ -23,7 +23,7 @@ export async function middleware(req) {
       if (redirect) {
         // Redirect to the new URL
         url.pathname = redirect.new_url
-        return NextResponse.redirect(url)
+        return NextResponse.redirect(url,301)
       }
     } else {
       console.error(`Failed to fetch redirect mappings: ${response.statusText}`)
