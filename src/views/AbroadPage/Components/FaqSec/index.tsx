@@ -10,7 +10,7 @@ function FaqSec({ data }) {
           <div className="row faqImgCon">
             <div className="col-md-6 faqImgSec mb-3 rounded">
               <div className='faqImageWrapper h-100 w-100 rounded text-center'>
-                <Image
+                <img
                   src="/images/icons/FAQ-Banner.webp"
                   width={500}
                   height={500}

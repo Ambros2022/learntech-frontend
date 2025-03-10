@@ -11,7 +11,7 @@ function CoursesCard({ course }) {
       <div className="card h-100 d-flex flex-column p-2 hover-card bg-crsCard">
         <div className="row g-0 pt-2">
           <div className="col-3 p-0 mb-3 text-center text-md-start">
-            <Image
+            <img
               width={50}
               height={50}
               src={`${process.env.NEXT_PUBLIC_IMG_URL}/${course.logo}`}
@@ -53,7 +53,7 @@ const PromoAddBanner = ({ url, title, description }) => {
           <div className="card col-md-12 col-lg-9 col-xl-10 mx-auto p-0">
             <div className="row g-0">
               <div className="col-md-4 addImgClg position-relative">
-                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
+                <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
                 <div className="position-absolute iconsPosition">
                   {/* <div className="d-flex flex-column">
                                       <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-info-circle"></i></h6>

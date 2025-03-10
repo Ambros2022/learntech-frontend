@@ -66,14 +66,14 @@ const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string
               <div className="scholarship-banner pt-3 pt-md-5">
                 {banners?.map((banner, index) => (
 
-                  <Image
+                  <img
                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                    priority={true}
+                    // priority={true}
                     alt={`Banner ${index}`}
                     width={420}
                     height={400}
                     className='img-fluid'
-                    layout="responsive" // Allows scaling in mobile
+                    // layout="responsive" // Allows scaling in mobile
 
                   />
 

@@ -69,7 +69,7 @@ function PopularCourses() {
           <div className="card hover-card text-center d-flex mx-2">
             <div className="row flex-fill">
               <div className="col-12">
-                <Image width={70} height={70} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${name}-logo`} />
+                <img width={70} height={70} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${logo}`} className="p-2 img-fluid mx-auto mt-3" alt={`${logo}-logo`} />
               </div>
               <div className="col-12 text-center text-start px-0">
                 <div className="card-body d-flex text-center justify-content-center">

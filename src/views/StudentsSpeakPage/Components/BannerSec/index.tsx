@@ -45,7 +45,7 @@ const BannerSec = ({ handleSearchQuery }) => {
             <section className='newsBannerSec'>
                 <div className='position-relative'>
                     <div>
-                        <Image src='/images/icons/Banner BG.png' width={1400} height={400} alt='banner-img' className='position-relative w-100' />
+                        <img src='/images/icons/Banner BG.png' width={1400} height={400} alt='banner-img' className='position-relative w-100' />
                     </div>
                     <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
                         <div className="container h-100">

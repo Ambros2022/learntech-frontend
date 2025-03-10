@@ -16,7 +16,7 @@ const ServicesSec: React.FC<ServicesSecProps> = ({ scrollToBannerSec, scrollToEx
                 <div className="row bg-white d-flex">
                     <div className="col-md-4">
                         <div className="card border-0 p-3 rounded">
-                            <h4 className='text-center mb-3 fw-bold'><Image src='/images/icons/sapphire.svg' width={50} height={50} className='me-2 img-fluid' alt='saphhhire-img' />
+                            <h4 className='text-center mb-3 fw-bold'><img src='/images/icons/sapphire.svg' width={50} height={50} className='me-2 img-fluid' alt='saphhhire-img' />
                                 Sapphire package</h4>
                             <div className='bg-blue text-white text-center p-3 rounded'>
                                 <h5 className='fw-bold'>INR</h5>
@@ -36,7 +36,7 @@ const ServicesSec: React.FC<ServicesSecProps> = ({ scrollToBannerSec, scrollToEx
                     </div>
                     <div className="col-md-4">
                         <div className="card border-0 p-3 rounded">
-                            <h4 className='text-center mb-3 fw-bold'><Image src='/images/icons/diamond.svg' width={50} height={50} className='me-2 img-fluid' alt='saphhhire-img' />
+                            <h4 className='text-center mb-3 fw-bold'><img src='/images/icons/diamond.svg' width={50} height={50} className='me-2 img-fluid' alt='saphhhire-img' />
                                 Diamond package</h4>
                             <div className='bg-gray text-white text-center p-3 rounded'>
                                 <h5 className='fw-bold'>INR</h5>
@@ -56,7 +56,7 @@ const ServicesSec: React.FC<ServicesSecProps> = ({ scrollToBannerSec, scrollToEx
                     </div>
                     <div className="col-md-4">
                         <div className="card border-0 p-3 rounded">
-                            <h4 className='text-center mb-3 fw-bold'><Image src='/images/icons/luggage.svg' width={50} height={50} className='me-2 img-fluid' alt='saphhhire-img' />
+                            <h4 className='text-center mb-3 fw-bold'><img src='/images/icons/luggage.svg' width={50} height={50} className='me-2 img-fluid' alt='saphhhire-img' />
                                 Diamond package <br />
                                 <span className='fs-5 ms-3'>(For NRI Students)</span></h4>
                             <div className='bg-blue text-white text-center p-5 rounded'>

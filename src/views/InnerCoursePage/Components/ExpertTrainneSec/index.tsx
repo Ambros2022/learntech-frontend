@@ -133,7 +133,7 @@ const ExperTraineeSec = ({ data }) => {
                         {/* Modal Content */}
                         {selectedTraineer ? (
                             <>
-                                <Image
+                                <img
                                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${selectedTraineer.image}`}
                                     className='img-fluid mb-3 rounded'
                                     width={200}

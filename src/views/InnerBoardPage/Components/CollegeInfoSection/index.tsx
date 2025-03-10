@@ -177,7 +177,7 @@ const CollegeInfoSection = ({ data, exams }) => {
                         <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
                           <div className="row">
                             <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
-                              <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={100} height={100} className='align-self-center innerBoardImg' alt='clg-img' />
+                              <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={100} height={100} className='align-self-center innerBoardImg' alt='clg-img' />
                             </div>
                             <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
                               <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title} Exam</h6>

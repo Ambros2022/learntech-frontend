@@ -8,7 +8,7 @@ const NewsItem = ({ imageSrc, name, id,slug }) => (
         <div className="card mb-3 bg-skyBlue hover-card">
             <div className="row g-0">
                 <div className="col-md-4">
-                    <Image src={imageSrc} width={200} height={200} style={{width:'100%', height:'-webkit-fill-available', objectFit:'contain'}} className="ms-md-2 img-fluid rounded-start" alt="news-img" />
+                    <img src={imageSrc} width={200} height={200} style={{width:'100%', height:'-webkit-fill-available', objectFit:'contain'}} className="ms-md-2 img-fluid rounded-start" alt="news-img" />
                 </div>
                 <div className="col-md-8">
                     <Link href={`/news/${id}/${slug}`}>

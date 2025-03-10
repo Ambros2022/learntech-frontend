@@ -6,7 +6,7 @@ const BannerSec = () => {
   return (
     <>
         <section className='SitemapSec position-relative'>
-            <Image src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img'/>
+            <img src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img'/>
             <div className="d-flex h-100 w-100 justify-content-center position-absolute" style={{top:'0'}}>
                 <div className="container h-100 row justify-content-center text-center align-content-center">
                     <h1 className="col-12 text-white text-bold text-center align-self-center">Sitemap</h1>

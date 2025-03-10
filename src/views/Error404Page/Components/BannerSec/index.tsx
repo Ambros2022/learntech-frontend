@@ -47,7 +47,7 @@ const BannerSec = () => {
                             <div className='w-100 text-center'>
                                 <h1 className='fw-bold text-blue'>404: The page you are looking for isn't here</h1>
                                 <h6>You either tried some shady route or you came here by mistake. Whichever it is, try using the navigation</h6>
-                                <Image src="/images/icons/404-error.jpg" className="pt-4" width={300} height={300} alt='error 404 image' /><br />
+                                <img src="/images/icons/404-error.jpg" className="pt-4" width={300} height={300} alt='error 404 image' /><br />
                                 <Link href='/' className='mt-3 btn errBtn mb-3'>BACK TO HOME</Link>
                             </div>
                         </div>

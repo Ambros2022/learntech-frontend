@@ -9,7 +9,7 @@ const NewsItem = ({ imageSrc, id, name,slug }) => (
             <div className="card bg-skyBlue hover-card mb-3">
                 <div className="row g-0">
                     <div className="col-lg-4 col-md-4">
-                        <Image src={imageSrc} width={600} height={600} style={{ width: '100%', height: '-webkit-fill-available', objectFit:'contain'}} className="img-fluid rounded mx-md-1" alt="news-img" />
+                        <img src={imageSrc} width={600} height={600} style={{ width: '100%', height: '-webkit-fill-available', objectFit:'contain'}} className="img-fluid rounded mx-md-1" alt="news-img" />
                     </div>
                     <div className="col-lg-8 col-md-8">
                         <div className="card-body d-flex">

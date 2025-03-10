@@ -51,7 +51,7 @@ const ContactUsSec = () => {
         <section>
             <div className="row g-0">
                 <div className="col-md-6">
-                    <Image
+                    <img
                         src="/images/icons/contact-team.webp"
                         width={1000}
                         height={1000}

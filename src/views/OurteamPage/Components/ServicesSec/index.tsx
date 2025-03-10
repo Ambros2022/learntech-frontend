@@ -14,7 +14,7 @@ const ServicesSec = () => {
                     <div className="row">
                         <div className="col-md-7 col-xl-7 col-lg-7">
                             <div className='text-center h-100 d-flex justify-content-start servicesImg'>
-                                <Image src='/images/icons/ServicePage.webp' className='img-fluid align-self-center' width={700} height={700} alt='services-img' />
+                                <img src='/images/icons/ServicePage.webp' className='img-fluid align-self-center' width={700} height={700} alt='services-img' />
                             </div>
                         </div>
                         <div className="col-md-5 col-xl-5 col-lg-5 border rounded px-xl-5 px-lg-4 col-10 mx-md-0 mx-auto">

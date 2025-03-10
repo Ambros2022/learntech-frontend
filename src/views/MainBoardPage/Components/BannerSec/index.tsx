@@ -78,7 +78,7 @@ const BannerSec = () => {
     return (
         <>
             <section className='position-relative boardSec'>
-                <Image src='/images/icons/Banner BG.png' height={300} width={1400} alt='banner-img' />
+                <img src='/images/icons/Banner BG.png' height={300} width={1400} alt='banner-img' />
                 <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
                     <div className="container h-100">
                         <div className="d-flex justify-content-center h-100">

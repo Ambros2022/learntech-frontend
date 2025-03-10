@@ -69,7 +69,7 @@ const LeaderSec = () => {
                     <div className="row">
                         <div className="col-md-4 col-lg-3 col-xl-3">
                             <div className='userSecImg mx-auto'>
-                                <Image src='/images/icons/MansoorAli.jpeg' width={400} height={400} className='img-fluid rounded' alt='user-img' />
+                                <img src='/images/icons/MansoorAli.jpeg' width={400} height={400} className='img-fluid rounded' alt='user-img' />
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-9 col-xl-9 text-md-start text-center">
@@ -93,7 +93,7 @@ const LeaderSec = () => {
                         <div key={index} className="col-md-4 d-flex align-items-stretch mb-3"> {/* Ensures equal height */}
                             <div className="card p-3 bg-skyBlue h-100 w-100"> {/* h-100 and w-100 enforce full height and width */}
                                 <div className='userSec2Img mx-auto'>
-                                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${user.image}`} width={400} height={400} className='img-fluid rounded' alt='user-img' />
+                                    <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${user.image}`} width={400} height={400} className='img-fluid rounded' alt='user-img' />
                                 </div>
                                 <div className="card-body pb-0">
                                     <h3 className='fw-bold text-black'>{user.name}</h3>

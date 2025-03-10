@@ -17,7 +17,7 @@ const ContactCareerSec = ({ locations, data }) => {
             <p className='text-white'>To know more about this exciting opportunity, Connect with us</p>
             <div className='d-flex mb-3'>
               <div className='social-clr'>
-                <Image
+                <img
                   src='/images/icons/email-icon.svg'
                   className='icon-white'
                   width={30}
@@ -40,7 +40,7 @@ const ContactCareerSec = ({ locations, data }) => {
             </div>
             <div className='d-flex mb-3'>
               <div className='social-clr'>
-                <Image
+                <img
                   src='/images/icons/Phone-blue.svg'
                   className='clr-red'
                   width={30}
@@ -63,7 +63,7 @@ const ContactCareerSec = ({ locations, data }) => {
             </div>
             <div className='d-flex'>
               <div className='social-clr'>
-                <Image src='/images/icons/whatsapp-green.svg' width={30} height={30} alt='whatsapp-icon' />
+                <img src='/images/icons/whatsapp-green.svg' width={30} height={30} alt='whatsapp-icon' />
               </div>
               <div className='align-content-center ms-2'>
                 <p className='text-white m-0'>
