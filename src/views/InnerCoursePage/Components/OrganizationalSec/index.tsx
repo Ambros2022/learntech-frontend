@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
-import Image from 'next/image';
+
 
 const OrganizationSection = ({data}) => {
     const [organizationPage, setOrganizationPage] = useState<any>(null);
@@ -37,7 +37,7 @@ const OrganizationSection = ({data}) => {
                             {organizationPage.organizatiopagesteps.map((data) => (
                                 <div key={data.id} className='card rounded-0 px-3 organizationalCard' style={{marginBottom:'80px'}}>
                                     <div className='text-center organizationImg'>
-                                        <Image 
+                                        <img 
                                             src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} 
                                             width={700} 
                                             height={700} 
