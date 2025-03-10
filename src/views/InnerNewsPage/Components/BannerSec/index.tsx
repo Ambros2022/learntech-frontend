@@ -8,7 +8,7 @@ const BannerSec = ({ data }) => {
             <section className='newsBannerSec'>
                 <div className='position-relative'>
                     <div>
-                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={1400} height={400} alt='banner-img' className='position-relative ' />
+                        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={1400} height={400} alt='banner-img' className='position-relative ' />
                     </div>
                     {/* <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
                         <div className="container h-100">

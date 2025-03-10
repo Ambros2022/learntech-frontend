@@ -16,12 +16,12 @@ function LocationSection({ data }) {
               <div className="w-100 card mb-3 bg-lightCard p-3">
                 <div className="row g-0">
                   <div className="col-lg-4 mx-auto text-center locationClgImg">
-                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='rounded clgImg mb-3' width={100} height={100} alt="College Image" />
+                    <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='rounded clgImg mb-3' width={100} height={100} alt="College Image" />
                   </div>
                   <div className="col-lg-12 d-flex">
                     <div className="card-body align-content-start text-white p-0 mt-2 text-lg-start text-center text-md-center ">
                       <h3 className="card-title fw-bold mb-3">{data.name}</h3>
-                      <h6 className="card-text mb-0 mt-2 innerTextAddress"><Image width={25} height={20} src="/images/icons/Location Icon.svg" className='icon-white' alt={'location-icon'} /><span className="mt-2">{data.address}</span></h6>
+                      <h6 className="card-text mb-0 mt-2 innerTextAddress"><img width={25} height={20} src="/images/icons/Location Icon.svg" className='icon-white' alt={'location-icon'} /><span className="mt-2">{data.address}</span></h6>
                     </div>
                   </div>
                 </div>

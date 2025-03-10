@@ -16,7 +16,7 @@ function LocationSection({ data }) {
               <div className="w-100 card mb-3 bg-lightCard p-3">
                 <div className="row g-0 bg-white rounded">
                   <div className="col-lg-4 mx-auto text-center locationClgImg bg-white rounded p-2">
-                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='rounded clgImg mb-3' width={100} height={100} alt="College Image" />
+                    <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='rounded clgImg mb-3' width={100} height={100} alt="College Image" />
                   </div>
                   <div className="col-lg-12 d-flex bg-blue">
                     <div className="card-body align-content-start text-white p-0 mt-2 text-lg-start text-center text-md-center ">

@@ -170,20 +170,20 @@ const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
           </Form>
         )}
       </Formik>
-      <div className="mb-3">
+      {/* <div className="mb-3">
         <p className="fake-legend"><span>OR</span>
         </p>
-      </div>
-      <div className='text-black mb-3 text-center'>
+      </div> */}
+      {/* <div className='text-black mb-3 text-center'>
         <small>Sign up with social media</small>
-      </div>
+      </div> */}
       <div className="d-flex justify-content-between mb-3 flex-wrap">
         {/* <GoogleLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
         <FacebookLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
         <LinkedInLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
         <TwitterLoginButton onSuccess={handleSuccess} onFailure={handleFailure} /> */}
       </div>
-      <div className='text-black mb-3 text-center'>
+      {/* <div className='text-black mb-3 text-center'>
         <small>Already have an account? <span className='text-blue fw-bold'>Log In</span></small>
       </div>
       <div className="d-flex justify-content-around mb-3 flex-wrap">
@@ -191,7 +191,7 @@ const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
         <LinkedinLoginButton />
         <TwitterLoginButton/>
         <FacebookLoginButton/>
-      </div>
+      </div> */}
     </div >
   );
 };

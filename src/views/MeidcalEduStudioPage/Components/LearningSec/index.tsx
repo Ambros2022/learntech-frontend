@@ -12,15 +12,15 @@ const LearningSec = () => {
                     <div className="row d-flex justify-content-center mb-3">
                         <div className="col-lg-4 text-center">
                             <div className="event-img video-wrap">
-                                <Image src='/images/icons/event-img-5.png' width={500} height={500} alt='event-img' className='img-fluid' />
+                                <img src='/images/icons/event-img-5.png' width={500} height={500} alt='event-img' className='img-fluid' />
                                 <div className="video-content">
                                     <Link href="https://www.youtube.com/watch?v=F1OI7LZbm6E" target='blank' className='video-btn'> <i className='bi bi-play-circle-fill'></i></Link>
                                 </div>
                                 <div className="event-shape-1 rotated">
-                                    <Image src='/images/icons/event-shape-1.png' className='img-fluid' width={500} height={500} alt='event-img' />
+                                    <img src='/images/icons/event-shape-1.png' className='img-fluid' width={500} height={500} alt='event-img' />
                                 </div>
                                 <div className="event-shape-2">
-                                    <Image src='/images/icons/event-shape-2.png' className='img-fluid' width={500} height={500} alt='event-img' />
+                                    <img src='/images/icons/event-shape-2.png' className='img-fluid' width={500} height={500} alt='event-img' />
                                 </div>
                             </div>
                         </div>

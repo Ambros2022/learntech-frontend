@@ -480,7 +480,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
                     <div className="col-md-5 col-lg-4 pt-lg-3 pt-2">
                         <div className='border p-3 text-center rounded examAlertSec bg-skyBlue mb-5'>
                             <h2 className='text-blue fw-bold'>Are you interested in scholarship?</h2>
-                            <Image src="/images/icons/Scholarships.png" alt='exam-alert-img' className='img-fluid' width={300} height={300} />
+                            <img src="/images/icons/Scholarships.png" alt='exam-alert-img' className='img-fluid' width={300} height={300} />
                             {/* <h6 className='text-black mb-3'>Are you interested in scholarship?</h6> */}
                             <div className="d-flex justify-content-center gap-3 flex-wrap">
                                 <GlobalEnquiryForm

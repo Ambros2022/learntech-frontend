@@ -68,7 +68,7 @@ function CollegeInfoSection({ data }) {
         <div className="row">
           {data.clggallery.map((galleryItem, index) => (
             <div key={index} className="col-6 col-md-4 p-4">
-              <Image
+              <img
                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${galleryItem.image}`}
                 alt={`Gallery Image ${index + 1}`}
                 width={500}
@@ -130,7 +130,7 @@ function CollegeInfoSection({ data }) {
               </div>
               <div className="col-md-5 col-lg-4 col-xl-4">
                 <div className='position-relative innerClgImg2 mb-md-5 mb-3'>
-                  <Image
+                  <img
                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`}
                     alt="College Info"
                     width={700}

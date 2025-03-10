@@ -40,7 +40,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                 <div className="p-2">
                     <div className="row d-flex">
                         <div className="align-content-start col-md-12 col-lg-4 col-xl-3 clgCardImg">
-                            <Image width={500} height={500} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid rounded card-Image-top me-auto" alt="College Logo" style={{ objectFit: 'cover' }} />
+                            <img width={500} height={500} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid rounded card-Image-top me-auto" alt="College Logo" style={{ objectFit: 'cover' }} />
                         </div>
                         <div className="col-md-12 col-lg-8 col-xl-9">
                             <div className="row">
@@ -50,11 +50,10 @@ const CollegeCard = ({ id, slug, name, type, rating, location, state, establishe
                                     </div>
                                     <div className="card-text text-black">
                                         <p className="mb-3 text-truncate"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i>{`${location}`}</p>
-                                        {/* <p className="mb-3"><div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-column'><span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} alt='calendor Icon' />  Est. Year {established}</span><span className='me-auto align-self-center'><button className='ms-2 mt-md-0 mt-3 btn typeBtn'>{type}</button></span></div></p> */}
-
+                                   
                                         <p className="mb-3">
                                             <div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-row'>
-                                                <span className='align-self-center me-auto'> <Image src='/images/icons/calendor-filled.png' width={20} height={20} className='me-1' alt='calendor Icon' />
+                                                <span className='align-self-center me-auto'> <img src='/images/icons/calendor-filled.png' width={20} height={20} className='me-1' alt='calendor Icon' />
                                                     Est. Year  {established} </span><span className='me-auto align-self-center'>
                                                     <button className='ms-2 mt-md-0 mt-0 mt-md-3 btn typeBtn'>{type}</button>
                                                 </span>
@@ -711,7 +710,7 @@ function CollegeFilterSection() {
                                         <button
                                             className="btn"
                                             onClick={() => removeSelectedCheckbox(groupId, value)}
-                                        ><Image src="/images/icons/close-icon-white.png" width={18} height={18} alt='close-white' /></button>
+                                        ><img src="/images/icons/close-icon-white.png" width={18} height={18} alt='close-white' /></button>
                                     </div>
                                 ))
                             ))}
@@ -748,12 +747,9 @@ function CollegeFilterSection() {
                         <div className="card">
                             <div className="row g-0">
                                 <div className="col-md-4 addImgClg position-relative">
-                                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
+                                    <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
                                     <div className="position-absolute iconsPosition">
-                                        {/* <div className="d-flex flex-column">
-                                            <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-info-circle"></i></h6>
-                                            <h6 className='btn bg-gray text-white text-center d-flex'><i className="bi bi-x-circle"></i></h6>
-                                        </div> */}
+                                     
                                     </div>
                                     <h2 className='position-absolute text-white' style={{ backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px', zIndex: '3000', top: '50%', left: '50%', color: "white" }}>Ad</h2>
                                 </div>

@@ -6,7 +6,7 @@ const ExamSec = React.forwardRef<HTMLDivElement>((props, ref) => {
     <>
       <section ref={ref} className='bg-white py-5'>
         <div className="container">
-          <Image className='img-fluid w-100 h-100' width={2000} height={2000} alt='exams-img' src='/images/icons/servicesImg.png' />
+          <img className='img-fluid w-100 h-100' width={2000} height={2000} alt='exams-img' src='/images/icons/servicesImg.png' />
         </div>
       </section>
     </>

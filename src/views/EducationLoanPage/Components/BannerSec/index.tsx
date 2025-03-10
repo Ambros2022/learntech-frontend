@@ -7,7 +7,7 @@ const BannerSec = () => {
     return (
         <>
             <section className='eduLoanSec position-relative'>
-                <Image src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' />
+                <img src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' />
                 <div className="position-absolute h-100 w-100" style={{ top: '0px' }}>
                     <div className="container d-flex justify-content-center flex-column h-100">
                         <h1 className='text-white fw-bold text-center align-self-center'>
