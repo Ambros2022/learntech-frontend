@@ -172,7 +172,7 @@ function OverviewSec({ data }) {
           <div className="card col-md-12 col-lg-9 col-xl-10 mx-auto p-0">
             <div className="row g-0">
               <div className="col-md-4 addImgClg position-relative">
-                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
+                <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
                 <h2 className='position-absolute text-white' style={{ backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px', zIndex: '3000', top: '50%', left: '50%', color: "white" }}>Ad</h2>
               </div>
               <div className="col-md-8">

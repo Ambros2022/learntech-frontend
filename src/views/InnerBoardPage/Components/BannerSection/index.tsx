@@ -22,7 +22,7 @@ function BannerSection({ data }) {
             {/* <div className="row">
               <div className="col-lg-2 col-xl-1 col-md-2 gx-0">
                 <div className='innerClgImg mx-auto'>
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='img-fluid mt-md-3 bg-white rounded' width={100} height={100} alt={data.name} />
+                  <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='img-fluid mt-md-3 bg-white rounded' width={100} height={100} alt={data.name} />
                 </div>
               </div>
               <div className="col-lg-7 ps-md-3 ps-0 col-xl-8 col-md-10">
@@ -60,7 +60,7 @@ function BannerSection({ data }) {
             <div className="row g-0">
               <div className="col-lg-2 col-xl-1 text-center col-md-2 d-flex justify-content-between">
                 <div className='innerClgImg  mx-0 mx-md-auto'>
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={100} height={100} alt={data.name} className='img-fluid mt-md-3 p-2 bg-white rounded' />
+                  <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={100} height={100} alt={data.name} className='img-fluid mt-md-3 p-2 bg-white rounded' />
                 </div>
                 {data?.avg_rating && data?.avg_rating !== 0 ? (<div className=" d-flex justify-content-center align-items-center d-md-none col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-0">
                   <div className="d-flex gap-2 justify-content-md-end justify-content-start">

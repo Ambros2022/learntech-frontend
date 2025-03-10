@@ -86,7 +86,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
                                             <div className="card p-3 mb-3 hover-card2">
                                                 <div className="row">
                                                     <div className="col-md-3 col-xl-2 mb-md-0 mb-3 text-md-start text-center">
-                                                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${course.logo}`} alt={`${course.name}-logo`} width={50} height={50} />
+                                                        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${course.logo}`} alt={`${course.name}-logo`} width={50} height={50} />
                                                     </div>
                                                     <div className="col-md-9 col-xl-10 d-flex justify-content-md-start justify-content-center">
                                                         <h5 className='ms-4 text-blue align-self-center fw-bold text-md-start text-center'>{course.name}</h5>
@@ -101,9 +101,9 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
                                 <div className="col-md-12">
                                     {banners.map((banner, index) => (
                                         <Link href={banner?.link} key={index}>
-                                            <Image
+                                            <img
                                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                                                priority={true}
+                                                // priority={true}
                                                 height={500} width={500}
                                                 className='img-fluid'
                                                 alt={`Banner ${index}`}

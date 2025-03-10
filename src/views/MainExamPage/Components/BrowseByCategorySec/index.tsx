@@ -279,7 +279,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                     <div className="col-md-4 mb-3" key={scholarship.id}>
                         <Link href={`/exam/${scholarship.id}/${scholarship.slug}`}>
                             <div className="card hover-card examsCardRow">
-                                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${scholarship.cover_image}`} width={300} height={300} className="card-img-top" alt={scholarship.exam_title} />
+                                <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${scholarship.cover_image}`} width={300} height={300} className="card-img-top" alt={scholarship.exam_title} />
                                 <div className="card-body text-center">
                                     <h5 className="fw-bold text-center card-title text-truncate">{scholarship.exam_title}</h5>
                                 </div>

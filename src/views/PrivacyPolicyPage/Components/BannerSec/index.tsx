@@ -6,7 +6,7 @@ const BannerSec = () => {
   return (
     <>
       <section className='TermCon w-100 position-relative'>
-        <Image src='/images/icons/Banner BG.png' height={300} width={1400} alt='banner-img' />
+        <img src='/images/icons/Banner BG.png' height={300} width={1400} alt='banner-img' />
         <div className="w-100 position-absolute h-100" style={{ top: '1px' }}>
           <div className="container d-flex justify-content-center h-100">
             <div className="align-content-center text-center">

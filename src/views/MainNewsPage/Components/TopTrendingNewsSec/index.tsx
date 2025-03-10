@@ -15,12 +15,12 @@ const TopTrendingNews = ({ newsItems, loading }) => {
         {/* <Link className='text-blue' href={`/news/${news.id}/${encodeURIComponent(news.title)}`}> */}
             <div key={news.id} className="col-8 col-md-10 mx-auto mb-1">
                 <div className="card h-100 topNewsImg d-flex flex-fill  hover-card   ">
-                    <Image
+                    <img
                         src={news.imageUrl}
                         width={400}
                         height={300}
-                        layout="responsive"
-                        quality={75}
+                        // layout="responsive"
+                        // quality={75}
                         className="card-img-top"
                         alt={news.title}
                     />

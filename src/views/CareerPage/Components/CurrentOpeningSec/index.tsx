@@ -50,26 +50,26 @@ const CurrentOpeningSec: React.FC<CurrentOpeningSecProps> = ({ jobData }) => {
                             <div className="card mb-3 bg-skyBlue border-0" onClick={() => handleShow(job)}>
                                 <div className="row g-0">
                                     <div className="col-md-4 d-flex justify-content-center">
-                                        <Image src='/images/icons/suitcase-lg-fill.svg' className='mt-md-0 mt-3 align-self-center img-style' width={100} height={100} alt='suitcase-logo' />
+                                        <img src='/images/icons/suitcase-lg-fill.svg' className='mt-md-0 mt-3 align-self-center img-style' width={100} height={100} alt='suitcase-logo' />
                                     </div>
                                     <div className="col-md-8">
                                         <div className="card-body text-md-start text-center">
                                             <h5 className="card-title fw-bold text-black text-truncate">{job.name}</h5>
                                             {job.jobpositionlocation && job.jobpositionlocation.length > 0 ? (
                                                 <>
-                                                    <Image src="/images/icons/Locationicon.svg" width={20} height={20} alt='logo-location' className='me-2' />
+                                                    <img src="/images/icons/Locationicon.svg" width={20} height={20} alt='logo-location' className='me-2' />
                                                     <span className="card-text text-truncate">
                                                         {job.jobpositionlocation.map(location => location.jobpositionslocation.name).join(', ')}
                                                     </span>
                                                 </>
                                             ) : ''}
                                             <p className="card-text text-truncate mt-3">
-                                                <Image src="/images/icons/calendor-filled.png" width={20} height={20} alt='logo-location' /> {job.exp_required}
+                                                <img src="/images/icons/calendor-filled.png" width={20} height={20} alt='logo-location' /> {job.exp_required}
                                             </p>
                                             <div className="row">
                                                 <div className=''>
                                                     <p className="card-text">
-                                                        <Image src="/images/icons/chair-icon.png" width={20} height={20} alt='logo-location' /> {job.total_positions}
+                                                        <img src="/images/icons/chair-icon.png" width={20} height={20} alt='logo-location' /> {job.total_positions}
                                                     </p>
                                                 </div>
                                             </div>

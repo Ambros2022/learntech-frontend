@@ -31,10 +31,10 @@ const BannerSec = () => {
             <section className=' aboutUsPageSec position-relative d-flex justify-content-center ' >
                 {banners.map((banner, index) => (
           
-                        <Image
+                        <img
                             width={1700} height={300}
                             src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                            priority={true}
+                            // priority={true}
                             alt={`Banner-img`}
                             className="banner-image-about"
                         />

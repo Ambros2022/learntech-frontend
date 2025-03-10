@@ -39,11 +39,9 @@ const BlogCards = ({ collegeData, cardsData, totalPages, currentPage, getBlogsDa
                             {currentCards.map((card) => (
                                 <div className="col-md-6 col-lg-6 mb-5 d-flex" key={card.id}>
                                     <div className="card bg-skyBlue hover-card newsImgSize position-relative w-100">
-                                        <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={400} height={400} className="card-img-top" alt="news-img" />
+                                        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.banner_image}`} width={400} height={400} className="card-img-top" alt="news-img" />
                                         <span className='share-icon'>
-                                            {/* <Image src='/images/icons/icon-share.png' width={50} height={50} style={{
-                                                top: '20px', right: '20px', backgroundColor: 'rgba(0,0,0,0.5)'
-                                            }} className='position-absolute rounded p-1' alt='share-icon' /> */}
+                      
                                             <GlobalPopupShare
                                                 pathname={`${process.env.NEXT_PUBLIC_WEB_URL}/blog/${card.id}/${card.slug}`}
                                                 title={card.meta_title}

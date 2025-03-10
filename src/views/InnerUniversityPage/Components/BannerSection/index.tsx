@@ -11,7 +11,7 @@ function BannerSection({ data }) {
             <div className="row g-0">
               <div className="col-lg-2 col-xl-1 text-center col-md-2 d-flex justify-content-between">
                 <div className='innerClgImg  mx-0 mx-md-auto'>
-                  <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} className='img-fluid mt-md-3 p-2 bg-white rounded' />
+                  <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.icon}`} width={100} height={100} alt={data.name} className='img-fluid mt-md-3 p-2 bg-white rounded' />
                 </div>
                 {data?.avg_rating && data?.avg_rating !== 0 ? (<div className=" d-flex justify-content-center align-items-center d-md-none col-lg-3 col-xl-3 col-md-10 
                 pt-auto pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-0">

@@ -87,7 +87,7 @@ function CollegeInfoSection({ data, Countrydata }) {
           <div className="row bg-skyBlue">
             {tab.content.map((item, index) => (
               <div key={index} className="col-md-4 galleryImgStyle">
-                <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.image}`} className='' width={300} height={300} alt='College Card' />
+                <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.image}`} className='' width={300} height={300} alt='College Card' />
               </div>
             ))}
           </div>

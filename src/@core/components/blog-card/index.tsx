@@ -8,7 +8,7 @@ function BlogCard({ college }) {
     return (
         <div className="mx-xl-4 mx-lg-2 mx-md-2 mx-5 card hover-card mb-4">
             <div className="d-flex align-items-center justify-content-center">
-                <Image
+                <img
                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`}
                     width={500}
                     height={500}

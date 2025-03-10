@@ -9,10 +9,10 @@ const BannerSec = () => {
     return (
         <>
             <section className='AdvertiseBanner'>
-                <Image
+                <img
                     // src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                     src="/images/icons/handshake.webp"
-                    priority={true}
+                    // priority={true}
                     alt={`Banner advertisement`}
                     height={300}
                     width={1400}

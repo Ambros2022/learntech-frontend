@@ -34,7 +34,7 @@ const Footer = () => {
                 <div className="container">
                     <h2 className='fw-bold text-blue'>We are keen to hear about your future over refreshments, because every great idea has to begin somewhere!</h2>
                     <div className="d-flex justify-content-center">
-                        <Image src="/images/icons/coffee.png" width={200} height={200} alt='coffee.png' className='align-self-end img-fluid' />
+                        <img src="/images/icons/coffee.png" width={200} height={200} alt='coffee.png' className='align-self-end img-fluid' />
                     </div>
                 </div>
             </section>
@@ -52,10 +52,10 @@ const Footer = () => {
                                 <i className='bi bi-telephone-fill text-warning me-3 fs-4'></i>
                                 <div className="d-flex flex-column gap-3">
                                     <Link className='d-flex' href='tel:+91 90058 00200'>
-                                        <Image src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand"></Image><h6 className='m-0 text-white align-self-center'>+91 90058 00200</h6>
+                                        <img src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand" /><h6 className='m-0 text-white align-self-center'>+91 90058 00200</h6>
                                     </Link>
                                     <Link className='d-flex' href='tel:+91 90057 00300'>
-                                        <Image src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand"></Image><h6 className='m-0 text-white align-self-center'>+91 90057 00300</h6>
+                                        <img src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand" /><h6 className='m-0 text-white align-self-center'>+91 90057 00300</h6>
                                     </Link>
                                 </div>
                             </div>
@@ -71,10 +71,10 @@ const Footer = () => {
                                 <i className='bi bi-telephone-fill text-warning me-3 fs-4'></i>
                                 <div className="d-flex flex-column gap-3">
                                     <Link className='d-flex' href='tel:+971 50 2436552'>
-                                        <Image src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand"></Image><h6 className='m-0 text-white align-self-center'>+971 50 2436552</h6>
+                                        <img src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand" /><h6 className='m-0 text-white align-self-center'>+971 50 2436552</h6>
                                     </Link>
                                     <Link className='d-flex' href='tel:+971 50 4955123'>
-                                        <Image src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand"></Image><h6 className='m-0 text-white align-self-center'>+971 50 4955123</h6>
+                                        <img src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand" /><h6 className='m-0 text-white align-self-center'>+971 50 4955123</h6>
                                     </Link>
                                 </div>
                             </div>
@@ -91,10 +91,10 @@ const Footer = () => {
                                 <i className='bi bi-telephone-fill text-warning me-3 fs-4'></i>
                                 <div className="d-flex flex-column gap-3">
                                     <Link className='d-flex' href='tel:+973 35 480190'>
-                                        <Image src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand"></Image><h6 className='m-0 text-white align-self-center'>+973 35 480190</h6>
+                                        <img src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand" /><h6 className='m-0 text-white align-self-center'>+973 35 480190</h6>
                                     </Link>
                                     <Link className='d-flex' href='tel:+973 38 780368'>
-                                        <Image src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand"></Image><h6 className='m-0 text-white align-self-center'>+973 38 780368</h6>
+                                        <img src='/images/icons/whatsapp.png' width={20} height={20} alt='medical-logo' className="me-1 navbar-brand" /><h6 className='m-0 text-white align-self-center'>+973 38 780368</h6>
                                     </Link>
                                 </div>
                             </div>
@@ -108,16 +108,16 @@ const Footer = () => {
                 <h6 className='text-center text-white'>Learntech Edu Solutions Pvt Ltd.</h6>
             </section>
             <div className="mt-md-3 col-md-4 text-md-end">
-                {/* <a href="tel:18001208696" className="phone-icon"><Image src="/images/icons/Phone-blue.svg" width={30} height={30} alt="phone-icon" /></a> */}
+          
 
 
                 <a href="tel:18001208696" className="phone-icon">
 
-                    <Image src="/images/icons/Phone-blue.svg" width={35} height={35} alt="phone-icon" className="red-filter" />
+                    <img src="/images/icons/Phone-blue.svg" width={35} height={35} alt="phone-icon" className="red-filter" />
                 </a>
-                <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><Image width={30} height={30} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
+                <button onClick={scrollToTop} className={`arrowIcon ${showButton ? 'show' : 'hide'}`}><img width={30} height={30} className="footer-arrow" src="/images/icons/left arrow.svg" alt="arrow-icon" /></button>
 
-                <a href="https://wa.me/+919036020076" target='_blank' className="whatsappIcon" ><Image width={35} height={35} className="footer-arrow" src="/images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
+                <a href="https://wa.me/+919036020076" target='_blank' className="whatsappIcon" ><img width={35} height={35} className="footer-arrow" src="/images/icons/whatsapp.svg" alt="whatsapp-icon" /></a>
             </div>
         </>
     )
