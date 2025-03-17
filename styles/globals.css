@@ -991,6 +991,8 @@
 
   .top-nav .nav-link {
     font-size: 17px !important;
+    padding-left: 5px;
+    color: #666666 !important;
   }
 
   .card-image {
@@ -6662,3 +6664,103 @@
     font-size: 2rem;
     /* Adjust size of the arrows */
   }
+
+
+
+
+
+
+
+
+@media only screen and (max-width:450px) {
+  .collapseNavHeight {
+    height: 100% !important;
+
+    overflow-y: scroll !important;
+  }
+
+  .navbar-nav .nav-item:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  .navbar-nav .nav-item:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  
+}
+
+@media (max-width: 767px) { 
+.no-arrow::after {
+  display: none !important; 
+}
+}
+
+/* Style the custom dropdown icon */
+.dropdown-icon {
+display: inline-block;
+margin-left: auto; /* Push it to the right */
+transition: transform 0.3s ease;
+position: absolute;
+right: 15px;
+z-index: 10;
+pointer-events: auto;
+top: 10px;
+  font-size: 17px;
+}
+
+
+@media only screen and (min-width:900px)
+{
+.latest-static{
+  position: static !important;
+}
+}
+.rotate {
+transform: rotate(90deg);
+}
+
+/* Remove border & background from dropdown menu */
+.custom-dropdown {
+border: none !important;
+background: transparent !important;
+box-shadow: none !important;
+}
+
+@media (min-width: 775px) {
+.dropdown-icon {
+  display: none; /* Hide ">" on desktop */
+}
+}
+
+@media (max-width: 767px) {
+  .custom-dropdown {
+    display: none !important;
+  
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    background: #fff;
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .custom-dropdown.show {
+    display: block !important;
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    height:100% !important;
+  }
+  .top-nav .maintain .nav-link
+  {
+    max-width:20% !important;
+    width:100%;
+  }
+}
+
+
+
