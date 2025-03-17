@@ -38,7 +38,7 @@ const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
                                             // borderRadius: "50%",
                                         }}
                                     >
-                                        <Image
+                                        <img
                                             src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item?.backgroundimage}`}
                                             width={40}
                                             height={40}
