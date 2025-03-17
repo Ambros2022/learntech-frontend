@@ -348,7 +348,7 @@ const Header = () => {
                               >
                                 <div className="card-news hover-card bg-skyBlue card">
                                   <div className="cardImgNewsheight">
-                                    <Image height={200} width={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`} priority={true} className="card-img-top" alt="News Banner" />
+                                    <img height={200} width={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}  className="card-img-top" alt="News Banner" />
                                   </div>
                                   <div className="card-body">
                                     {/* <h5 className="card-title text-truncate">{item.meta_title}</h5> */}
