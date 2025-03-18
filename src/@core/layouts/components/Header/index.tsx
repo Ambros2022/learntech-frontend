@@ -931,62 +931,62 @@ const Header = () => {
                   >
                     More
                   </Link>
-                  <ul className='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
-                    <li>
-                      <Link className='d-flex justify-content-between dropdown-item' href='/about-us'>
+                  <ul className='dropdown-menu another-item' aria-labelledby='navbarDropdownMenuLink'>
+                    <li className='nav-items-select'>
+                      <Link className='d-flex justify-content-between dropdown-item ' href='/about-us'>
                         About US
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/our-team'>
                         Our Team
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/services'>
                         Services
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/blogs'>
                         Blogs
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/boards'>
                         Boards
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/schools'>
                         Schools
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/nri-quota'>
                         NRI Quota
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/scholarships'>
                         Scholarships
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/mbbs-abroad'>
                         MBBS Abroad
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/meds'>
                         Medical Edu Studio
                       </Link>
                     </li>
-                    <li>
+                    <li className='nav-items-select'>
                       <Link className='d-flex justify-content-between dropdown-item' href='/education-loan'>
                         Education Loan
                       </Link>
-                    </li>
+                    </li >
                   </ul>
                 </li>
                 <li className='hideBtnTxt'>
