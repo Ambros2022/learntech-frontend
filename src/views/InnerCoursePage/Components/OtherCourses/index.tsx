@@ -25,7 +25,7 @@ function OtherCourses({ streamdata }) {
         <div className="card hover-card text-center d-flex mx-2">
           <div className="row flex-fill">
             <div className="col-12">
-              <Image width={70} height={70} src={imageSrc} className="p-2 img-fluid mx-auto mt-3" alt={`${title}-logo`} />
+              <img width={70} height={70} src={imageSrc} className="p-2 img-fluid mx-auto mt-3" alt={`${title}-logo`} />
             </div>
             <div className="col-12 text-center text-start px-0">
               <div className="card-body d-flex text-center justify-content-center">

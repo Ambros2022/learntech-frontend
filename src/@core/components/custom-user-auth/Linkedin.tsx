@@ -16,13 +16,13 @@ function LinkedInPage() {
     });
 
     return (
-        <Image
+        <img
             src='/images/icons/linkedin.svg'
             width={50}
             height={50}
             alt='linkedin-img'
             onClick={linkedInLogin}
-        ></Image>
+        />
     );
 }
 export default LinkedInPage;

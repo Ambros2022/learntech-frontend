@@ -8,7 +8,7 @@ const NewsItem = ({ imageSrc, id, name,slug }) => (
         <div className="card mb-3 bg-skyBlue hover-card">
             <div className="row g-0">
                 <div className="d-flex col-md-4">
-                    <Image src={imageSrc} width={200} height={200} style={{ width: '100%', height: '-webkit-fill-available', objectFit: 'contain' }} className=" ms-md-2 rounded align-self-center img-fluid rounded-start" alt="news-img" />
+                    <img src={imageSrc} width={200} height={200} style={{ width: '100%', height: '-webkit-fill-available', objectFit: 'contain' }} className=" ms-md-2 rounded align-self-center img-fluid rounded-start" alt="news-img" />
                 </div>
                 <div className="col-md-8 align-self-center">
                     <Link href={`/blog/${id}/${slug}`} className=''>

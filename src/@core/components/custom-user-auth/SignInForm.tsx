@@ -140,7 +140,7 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
                 </Form>
               )}
             </Formik>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <p className="fake-legend"><span>OR</span></p>
             </div>
             <div className="text-black mb-3 text-center">
@@ -151,7 +151,7 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               <LinkedinLoginButton/>
               <TwitterLoginButton/>
               <FacebookLoginButton/>
-            </div>
+            </div> */}
           </>
         )}
       </div>

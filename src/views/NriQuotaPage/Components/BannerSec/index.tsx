@@ -8,7 +8,7 @@ const BannerSec = () => {
         <>
             <section className='NriQuotaSec'>
                 <div className='position-relative'>
-                    <Image src='/images/icons/Banner BG.png' alt='Banner-img' width={1400} height={300} />
+                    <img src='/images/icons/Banner BG.png' alt='Banner-img' width={1400} height={300} />
                     <div className="">
                         <div className="position-absolute h-100 w-100 d-flex justify-content-center" style={{ top: '1px' }}>
                             <div className="align-content-center">

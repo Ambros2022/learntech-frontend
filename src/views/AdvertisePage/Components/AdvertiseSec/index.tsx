@@ -69,14 +69,14 @@ const AdvertiseSec = ({ data }) => {
 
                                     <div className='row text-center adv17 '>
                                         <div className="col-6">
-                                            <Image src="/images/avertise/Social_Media_Marketing_3.png" width={80} height={80} alt={'Social Media Marketing-logo'} />
+                                            <img src="/images/avertise/Social_Media_Marketing_3.png" width={80} height={80} alt={'Social Media Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Social Media Marketing</h5>
                                         </div>
-                                        <div className="col-6"><Image src="/images/avertise/Content_Marketing_3.png" width={80} height={80} alt={'Content Marketing-logo'} />
+                                        <div className="col-6"><img src="/images/avertise/Content_Marketing_3.png" width={80} height={80} alt={'Content Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Content Marketing</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Pay-Per-Click_3.png" width={80} height={80} alt={'Pay-Per-Click-logo'} />
+                                        <div className="col-6"><img src="/images/avertise/Pay-Per-Click_3.png" width={80} height={80} alt={'Pay-Per-Click-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Pay-Per-Click</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Direct_Marketing_3.png" width={80} height={80} alt={'Direct Marketing-logo'} />
+                                        <div className="col-6"><img src="/images/avertise/Direct_Marketing_3.png" width={80} height={80} alt={'Direct Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Direct Marketing</h5></div>
 
                                     </div>
@@ -118,18 +118,18 @@ const AdvertiseSec = ({ data }) => {
 
                                     <div className='row text-center adv17'>
                                         <div className="col-6">
-                                            <Image src="/images/avertise/Expos_and_Educational_Fairs_3.png" width={80} height={80} alt={'Expos and Educational Fairs'} />
+                                            <img src="/images/avertise/Expos_and_Educational_Fairs_3.png" width={80} height={80} alt={'Expos and Educational Fairs'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Expos and Educational Fairs</h5>
                                         </div>
-                                        <div className="col-6"><Image src="/images/avertise/Print-Media_Advertising_3.png" width={80} height={80} alt={'Print-Media Advertising'} />
+                                        <div className="col-6"><img src="/images/avertise/Print-Media_Advertising_3.png" width={80} height={80} alt={'Print-Media Advertising'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Print-Media Advertising</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Transit_Advertising_3.png" width={80} height={80} alt={'Transit Advertising'} />
+                                        <div className="col-6"><img src="/images/avertise/Transit_Advertising_3.png" width={80} height={80} alt={'Transit Advertising'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Transit Advertising</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Influencer_Marketing_3.png" width={80} height={80} alt={'Influencer Marketing-logo'} />
+                                        <div className="col-6"><img src="/images/avertise/Influencer_Marketing_3.png" width={80} height={80} alt={'Influencer Marketing-logo'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Influencer Marketing</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Collaborations_With_Local_Institutes_3.png" width={80} height={80} alt={'Collaborations with Local Institutes'} />
+                                        <div className="col-6"><img src="/images/avertise/Collaborations_With_Local_Institutes_3.png" width={80} height={80} alt={'Collaborations with Local Institutes'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Collaborations with Local Institutes</h5></div>
-                                        <div className="col-6"><Image src="/images/avertise/Targeted Survey_Analysis_3.png" width={80} height={80} alt={'Targeted Survey Analysis'} />
+                                        <div className="col-6"><img src="/images/avertise/Targeted Survey_Analysis_3.png" width={80} height={80} alt={'Targeted Survey Analysis'} />
                                             <h5 className="text-black fw-bold pt-3 pb-2">Targeted Survey Analysis</h5></div>
 
                                     </div>
@@ -210,17 +210,17 @@ const AdvertiseSec = ({ data }) => {
                                 </div>
                                 <div className="col-md-12 col-lg-12 mb-3 mx-md-0 pt-3 pt-md-5">
                                     <div className='bg-skyBlue  rounded border text-center '>
-                                        {/* <Image src="/images/icons/advertisement.png" width={200} height={500} alt={'advertisement-logo'} /> */}
+                                        {/* <img src="/images/icons/advertisement.png" width={200} height={500} alt={'advertisement-logo'} /> */}
                                         {banners?.map((banner, index) => (
 
-                                            <Image
+                                            <img
                                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                                                priority={true}
+                                                // priority={true}
                                                 alt={`Banner ${index}`}
                                                 width={420}
                                                 height={400}
                                                 className='img-fluid'
-                                                layout="responsive" // Allows scaling in mobile
+                                                // layout="responsive" // Allows scaling in mobile
                                            
                                             />
 

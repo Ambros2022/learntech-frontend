@@ -179,7 +179,7 @@ const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setAct
                                                 <div key={item.id} className='col-lg-6 px-4 mx-lg-0 mb-5 d-flex'>
                                                     <div className='card h-100 w-100 d-flex flex-column bg-skyBlue'>
                                                         <div className='newsPageImg'>
-                                                            <Image
+                                                            <img
                                                                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}
                                                                 width={400}
                                                                 height={400}

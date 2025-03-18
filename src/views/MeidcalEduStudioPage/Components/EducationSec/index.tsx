@@ -15,7 +15,7 @@ const EducationSec: React.FC<EducationSecProps> = ({ scrollToExamSec }) => {
                     <div className="col-12">
                         <div className="education-img-wrap position-relative">
                             <div className="education-img-2 text-center">
-                                <Image src='/images/icons/goodHappy.png' width={700} height={700} style={{zIndex:1}} alt="good-logo" className='img-fluid' />
+                                <img src='/images/icons/goodHappy.png' width={700} height={700} style={{zIndex:1}} alt="good-logo" className='img-fluid' />
                             </div>
                         </div>
                     </div>

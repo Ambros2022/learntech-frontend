@@ -69,7 +69,7 @@ const BankSec = () => {
                                 <div className="card p-3 mx-md-0 mx-3 mt-3 mb-3">
                                     <div className="d-flex justify-content-center flex-fill">
                                         <div className="bankImg">
-                                            <Image src={country.bank} width={200} className='img-fluid' height={200} alt='bank-logo' />
+                                            <img src={country.bank} width={200} className='img-fluid' height={200} alt='bank-logo' />
                                         </div>
                                     </div>
                                 </div>

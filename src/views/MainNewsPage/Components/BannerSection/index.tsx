@@ -78,7 +78,7 @@ const BannerSection = () => {
       <section className='newsBannerSec'>
         <div className='position-relative'>
           <div>
-            <Image src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative ' />
+            <img src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative ' />
           </div>
           <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
             <div className="container h-100">

@@ -41,7 +41,7 @@ const ExperTraineeSec = ({ data }) => {
             <div className="card py-3 hover-card h-100 justify-content-around" style={{ border: '1px solid #274896' }}>
                 <div className="row d-flex px-3">
                     <div className="col-4 mb-lg-0 mb-md-3 mb-0 text-center align-content-center">
-                        <Image
+                        <img
                             src={`${process.env.NEXT_PUBLIC_IMG_URL}/${trainee.image}`}
                             width={200}
                             height={200}
@@ -132,7 +132,7 @@ const ExperTraineeSec = ({ data }) => {
                         {/* Modal Content */}
                         {selectedTraineer ? (
                             <>
-                                <Image
+                                <img
                                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${selectedTraineer.image}`}
                                     className='img-fluid mb-3 rounded'
                                     width={200}

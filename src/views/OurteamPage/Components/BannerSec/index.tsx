@@ -29,9 +29,9 @@ const BannerSec = () => {
             <section className='teamworksec'>
                 {banners?.map((banner, index) => (
               
-                    <Image
+                    <img
                         src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                        priority={true}
+                        // priority={true}
                         alt={`Banner ${index}`}
                         height={300}
                         width={1400}
