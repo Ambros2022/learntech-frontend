@@ -617,7 +617,7 @@ const Header = () => {
         <div className='container-xl'>
           <Link className='navbar-brand' href='/'>
             <Image src='/images/icons/learntech-logo.png' width={160} height={50} alt='learntech-logo' />
-          </Link>
+          </Link>0
           <button
             className='navbar-toggler'
             type='button'
