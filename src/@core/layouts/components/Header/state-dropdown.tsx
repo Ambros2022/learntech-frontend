@@ -31,14 +31,12 @@ const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
                             <Link
                                 href={{
                                     pathname: type === "Colleges" ? "/colleges" : "/universities",
-                                    // query: { state_id: item.id }
                                 }}
                                 className="dropdown-item"
                                 onClick={() => {
-                                    setStateId(item.id); // Set the stream ID
-                                    onClose(); // Close the dropdown
+                                    setStateId(item.id);
+                                    onClose(); 
                                 }}
-                                // onClick={() => setStateId(item.id)}
 
                             >
                                 <div className="d-flex justify-content-between">
@@ -56,13 +54,12 @@ const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
                                                 className="dropdown-item"
                                                 href={{
                                                     pathname: type === "Colleges" ? "/colleges" : "/universities",
-                                                    // query: { city_id: city.id }
                                                 }}
                                                 onClick={() => {
-                                                    setCityId(city.id); // Set the stream ID
-                                                    onClose(); // Close the dropdown
+                                                    setCityId(city.id);
+                                                    onClose(); 
                                                 }}
-                                                // onClick={() => setCityId(city.id)}
+                                               
                                             >
                                                 {city.name}
                                             </Link>
