@@ -613,7 +613,7 @@ const Header = () => {
                   </div>
                 </li> */}
 
-      <nav className='navbar navbar-expand-lg bg-white navt' style={{ zIndex: '100' }}>
+<nav className='navbar navbar-expand-lg bg-white navt' style={{ zIndex: '100' }}>
         <div className='container-xl'>
           <Link className='navbar-brand' href='/'>
             <Image src='/images/icons/learntech-logo.png' width={160} height={50} alt='learntech-logo' />

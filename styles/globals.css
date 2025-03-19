@@ -6670,120 +6670,120 @@
 
 
 
-
-
-
-@media only screen and (max-width:450px) {
-  .collapseNavHeight {
-    height: 100% !important;
-
-    overflow-y: scroll !important;
-  }
-
-  .navbar-nav .nav-item:nth-child(1) {
-    background-color: #f2f2f2;
+  @media only screen and (max-width:450px) {
+    .collapseNavHeight {
+      height: 100% !important;
+  
+      overflow-y: scroll !important;
+    }
+  
+    .navbar-nav .nav-item:nth-child(1) {
+      background-color: #f2f2f2;
+    }
+    
+    .navbar-nav .nav-item:nth-child(3) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(5) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(7) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(9) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(11) {
+      background-color: #ffffff;  
+    }
+    .navbar-nav .nav-item:nth-child(12) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(14) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(16) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(18) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(20) {
+      background-color: #f2f2f2;
+    }
   }
   
-  .navbar-nav .nav-item:nth-child(3) {
-    background-color: #f2f2f2;
+  @media (max-width: 767px) { 
+  .no-arrow::after {
+    display: none !important; 
   }
-  .navbar-nav .nav-item:nth-child(5) {
-    background-color: #f2f2f2;
   }
-  .navbar-nav .nav-item:nth-child(7) {
-    background-color: #f2f2f2;
+  
+  /* Style the custom dropdown icon */
+  .dropdown-icon {
+  display: inline-block;
+  margin-left: auto; /* Push it to the right */
+  transition: transform 0.3s ease;
+  position: absolute;
+  right: 15px;
+  z-index: 10;
+  pointer-events: auto;
+  top: 10px;
+    font-size: 17px;
   }
-  .navbar-nav .nav-item:nth-child(9) {
-    background-color: #f2f2f2;
-  }
-  .navbar-nav .nav-item:nth-child(11) {
-    background-color: #ffffff;  
-  }
-  .navbar-nav .nav-item:nth-child(12) {
-    background-color: #f2f2f2;
-  }
-  .navbar-nav .nav-item:nth-child(14) {
-    background-color: #f2f2f2;
-  }
-  .navbar-nav .nav-item:nth-child(16) {
-    background-color: #f2f2f2;
-  }
-  .navbar-nav .nav-item:nth-child(18) {
-    background-color: #f2f2f2;
-  }
-  .navbar-nav .nav-item:nth-child(20) {
-    background-color: #f2f2f2;
-  }
-}
-
-@media (max-width: 767px) { 
-.no-arrow::after {
-  display: none !important; 
-}
-}
-
-/* Style the custom dropdown icon */
-.dropdown-icon {
-display: inline-block;
-margin-left: auto; /* Push it to the right */
-transition: transform 0.3s ease;
-position: absolute;
-right: 15px;
-z-index: 10;
-pointer-events: auto;
-top: 10px;
-  font-size: 17px;
-}
-
-
-@media only screen and (min-width:900px)
-{
-.latest-static{
-  position: static !important;
-}
-}
-.rotate {
-transform: rotate(90deg);
-}
-
-/* Remove border & background from dropdown menu */
-.custom-dropdown {
-border: none !important;
-background: transparent !important;
-box-shadow: none !important;
-}
-
-@media (min-width: 775px) {
-.dropdown-icon {
-  display: none; /* Hide ">" on desktop */
-}}
-@media (max-width: 767px) {
-  .custom-dropdown {
-    display: none !important;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    width: 100%;
-    background: #fff;
-    transform: translateX(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  }
-
-  .custom-dropdown.show {
-    display: block !important;
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
-    height:100% !important;
-  }
-  .top-nav .maintain .nav-link
+  
+  
+  @media only screen and (min-width:900px)
   {
-    max-width:20% !important;
-    width:100%;
+  .latest-static{
+    position: static !important;
   }
-}
+  }
+  .rotate {
+  transform: rotate(90deg);
+  }
+  
+  /* Remove border & background from dropdown menu */
+  .custom-dropdown {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  }
+  
+  @media (min-width: 775px) {
+  .dropdown-icon {
+    display: none; /* Hide ">" on desktop */
+  }}
+  @media (max-width: 767px) {
+    .custom-dropdown {
+      display: none !important;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      background: #fff;
+      transform: translateX(-100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+  
+    .custom-dropdown.show {
+      display: block !important;
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+      height:100% !important;
+    }
+    .top-nav .maintain .nav-link
+    {
+      max-width:20% !important;
+      width:100%;
+    }
+  }
+  
+
+
 
 
 
