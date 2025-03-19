@@ -361,9 +361,9 @@
     color: #254692;
   }
 
-  .innerCollege {
-    /* background-color: rgba(39, 72, 150, 1) !important; */
-  }
+  /* .innerCollege {
+    background-color: rgba(39, 72, 150, 1) !important;
+  } */
 
   .innerCollege input,
   select {
@@ -2813,10 +2813,10 @@
     border-radius: 5px;
   }
 
-  .carouselCardsCon .card img {
-    /* background-color: rgba(39, 72, 150, 0.1); */
-    /* filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%); */
-  }
+  /* .carouselCardsCon .card img {
+    background-color: rgba(39, 72, 150, 0.1);
+    filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%);
+  } */
 
   .carouselCardsCon .carousel-button-group {
     position: absolute !important;
@@ -3481,9 +3481,9 @@
     font-size: 33px !important;
   }
 
-  .ExpertCon {
-    /* background-color: white !important; */
-  }
+  /* .ExpertCon {
+    background-color: white !important;
+  } */
 
   .ExpertCon label {
     color: white !important;
@@ -3863,9 +3863,9 @@
     height: 100%;
   }
 
-  .FeaturedClgCon .card-Image-top {
-    /* height: 235px !important; */
-  }
+  /* .FeaturedClgCon .card-Image-top {
+    height: 235px !important;
+  } */
 
   .StudyAbroadCard .card-img-top {
     height: 180px !important;
@@ -4038,9 +4038,9 @@
       overflow: hidden;
     }
 
-    .FeaturedClgCon .card-Image-top {
-      /* height: 166px !important; */
-    }
+    /* .FeaturedClgCon .card-Image-top {
+      height: 166px !important;
+    } */
 
     .StudyAbroadCard .card-img-top {
       height: 166px !important;
@@ -4104,9 +4104,9 @@
       font-size: 20px !important;
     }
 
-    .FeaturedClgCon .card-Image-top {
-      /* height: 262px !important; */
-    }
+    /* .FeaturedClgCon .card-Image-top {
+      height: 262px !important;
+    } */
 
     .StudyAbroadCard .card-img-top {
       height: 262px !important;
@@ -4193,9 +4193,9 @@
       width: 100% !important;
     }
 
-    .FeaturedClgCon .card-Image-top {
-      /* height: 220px !important; */
-    }
+    /* .FeaturedClgCon .card-Image-top {
+      height: 220px !important;
+    } */
 
     .StudyAbroadCard .card-img-top {
       height: 220px !important;
@@ -4931,7 +4931,7 @@
     text-align: center;
   }
 
-  .checkboxesSize {}
+  /* .checkboxesSize {} */
 
   .collegeApplyNow {
     background-color: yellow !important;
@@ -5090,9 +5090,9 @@
     max-height: 640px;
   }
 
-  .logoBoardImg {
-    /* height: 100px; */
-  }
+  /* .logoBoardImg {
+    height: 100px;
+  } */
 
   .logoBoardImg>img {
     height: auto;
@@ -5179,9 +5179,9 @@
     font-size: 25px !important;
   }
 
-  .innerCourseClgH1>h1 {
-    /* font-size: 20px !important; */
-  }
+  /* .innerCourseClgH1>h1 {
+    font-size: 20px !important;
+  } */
 
   .filterCountry {
     background-color: white !important;
@@ -5877,9 +5877,9 @@
       font-size: 15px !important;
     }
 
-    .logoBoardImg {
-      /* height: 150px; */
-    }
+    /* .logoBoardImg {
+      height: 150px;
+    } */
 
     .userSec2Img {
       width: 180px;
