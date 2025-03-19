@@ -6755,26 +6755,7 @@
     display: none; /* Hide ">" on desktop */
   }}
   @media (max-width: 767px) {
-    .custom-dropdown {
-      display: none !important;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      width: 100%;
-      background: #fff;
-      transform: translateX(-100%);
-      opacity: 0;
-      visibility: hidden;
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-  
-    .custom-dropdown.show {
-      display: block !important;
-      transform: translateX(0);
-      opacity: 1;
-      visibility: visible;
-      height:100% !important;
-    }
+   
     .top-nav .maintain .nav-link
     {
       max-width:20% !important;
