@@ -46,7 +46,12 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const toggleDropdown = () => setIsDropdownOpen(prev => !prev)
-  const closeDropdown = () => setIsDropdownOpen(false)
+  // const closeDropdown = () => setIsDropdownOpen(false)
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+    setIsOpen(false);
+  };
 
   const handleMouseEnter = () => {
     setIsDropdownOpen(true) // Open dropdown on hover
@@ -395,7 +400,7 @@ const Header = () => {
 
                               >
                                 <div className="card-news hover-card bg-skyBlue card">
-                                  <div className="cardImgNewsheight">
+                                  <div className="cardImgNewsheight">courses
                                     <img height={200} width={200} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}  className="card-img-top" alt="News Banner" />
                                   </div>
                                   <div className="card-body">
@@ -707,9 +712,16 @@ const Header = () => {
                     &gt;
                   </span>
 
-                  {isDropdownOpen && (
+                  <div
+                    className={`dropdown-menu custom-dropdown ${isDropdownOpen ? 'show' : ''}`}
+                    // data-bs-toggle='dropdown'
+                    data-bs-auto-close='outside'
+                  >
+                    <Statedropdown states={states} type="Universities"      onClose={closeDropdown}  />
+                  </div>
+                  {/* {isDropdownOpen && (
                     <Statedropdown states={states} type="Universities" onClose={closeDropdown} />
-                  )}
+                  )} */}
                 </li> 
      
                 <li
@@ -738,10 +750,17 @@ const Header = () => {
                     &gt;
                   </span>
 
+                  <div
+                    className={`dropdown-menu custom-dropdown ${isDropdownOpen ? 'show' : ''}`}
+                    // data-bs-toggle='dropdown'
+                    // data-bs-auto-close='outside'
+                  >
+                   <Statedropdown states={states} type="Colleges" onClose={closeDropdown} />
+                  </div>
 
-                  {isDropdownOpen && (
+                  {/* {isDropdownOpen && (
                     <Statedropdown states={states} type="Colleges" onClose={closeDropdown} />
-                  )}
+                  )} */}
                 </li>
 
                 <li
@@ -770,12 +789,41 @@ const Header = () => {
                     &gt;
                   </span>
 
+                  <div
+                    className={`dropdown-menu custom-dropdown ${isDropdownOpen ? 'show' : ''}`}
                 
+                  >
+                     <Coursedropdown states={courses} type="Colleges" onClose={closeDropdown} />
+                  </div>
+
+                
+             
+                  
+                </li>
+                {/* <li
+                  className="nav-item dropdown"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link
+                    className={`nav-link dropdown-toggle ${isLinkActive('/courses') ? 'active' : ''}`}
+                    onClick={toggleDropdown}
+                    href="/courses"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    aria-expanded={isDropdownOpen}
+                  >
+                    Courses2
+                  </Link>
                   {isDropdownOpen && (
                     <Coursedropdown states={courses} type="Colleges" onClose={closeDropdown} />
                   )}
-                  
-                </li>
+                </li> */}
+
+
+
+
+
 
                 <li
                   className='nav-item dropdown maintain'
@@ -803,10 +851,17 @@ const Header = () => {
                     &gt;
                   </span>
 
-                
-                  {isDropdownOpen && (
+                  <div
+                    className={`dropdown-menu custom-dropdown ${isDropdownOpen ? 'show' : ''}`}
+                    // data-bs-toggle='dropdown'
+                    // data-bs-auto-close='outside'
+                  >
+                     <Examdropdown states={exams} onClose={closeDropdown} />
+                  </div>
+
+                  {/* {isDropdownOpen && (
                     <Examdropdown states={exams} onClose={closeDropdown} />
-                  )}
+                  )} */}
                 </li>
 
                 <li
@@ -834,10 +889,16 @@ const Header = () => {
                     &gt;
                   </span>
 
-               
-                  {isDropdownOpen && (
+                  <div
+                    className={`dropdown-menu custom-dropdown ${isDropdownOpen ? 'show' : ''}`}
+                   
+                  >
+                     <Abroaddropdown states={countries} type="Colleges" onClose={closeDropdown} />
+                  </div>
+
+                  {/* {isDropdownOpen && (
                     <Abroaddropdown states={countries} type="Colleges" onClose={closeDropdown} />
-                  )}
+                  )} */}
                 </li>
 
                 <li
@@ -866,7 +927,36 @@ const Header = () => {
                     &gt;
                   </span>
 
-               
+                  {/* {isDropdownOpen && (
+                    <div className='container-fluid'>
+                      <ul
+                        className='newsDrpDwn newsHide dropdown-menu custom-dropdown'
+                        style={{ textAlign: 'center', left: '0', right: '0', width: '80%', margin: '0 auto' }}
+                        aria-labelledby='navbarDropdownMenuLink'
+                      >
+                        <div className='dropdown-row-news dropdown-row p-2'>
+                          <div className='row'>
+                            {news.slice(0, 4).map(item => (
+                              <li key={item.id} className='news-item mb-1 col-md-3'>
+                                <Link href={`/news/${item.id}/${item.slug}`} onClick={() => setIsDropdownOpen(false)}>
+                                  <div className='card-news hover-card bg-skyBlue card'>
+                                    <div className='cardImgNewsheight'>
+                                      <Image
+                                        height={200}
+                                        width={200}
+                                        src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}
+                                        priority={true}
+                                        className='card-img-top'
+                                        alt='News Banner'
+                                      />
+                                    </div>
+                                    <div className='card-body'>
+                                      <p className='card-text'>{item.meta_description}</p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              </li>
+                            ))} */}
                                  {isDropdownOpen && (<div className="container-fluid">
                     <ul className="newsDrpDwn newsHide dropdown-menu" style={{ textAlign: "center", left: '0', right: "0", width: '80%', margin: "0 auto" }} aria-labelledby="navbarDropdownMenuLink">
                       <div className="dropdown-row-news dropdown-row p-2">
