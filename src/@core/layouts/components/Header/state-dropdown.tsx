@@ -18,6 +18,8 @@ const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
         setIsExpanded(false); // Set to collapsed
     }, []);
     const { setStateId,setCityId } = useAuth();
+    
+    
     return (
         <>
 

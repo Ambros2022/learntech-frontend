@@ -68,7 +68,13 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
             formData.append('jobs_position_id', values.jobs_position_id);
             formData.append('job_location_id', values.job_location_id);
             formData.append('current_url', window.location.href);
-            console.log(values)
+            
+            if (!values.resume) {
+                toast.dismiss();
+                toast.error('Please upload resume.');
+                
+                return
+            }
             if (values.resume) {
                 formData.append('resume', values.resume);
             }
