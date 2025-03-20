@@ -6711,25 +6711,39 @@
     .navbar-nav .nav-item:nth-child(20) {
       background-color: #f2f2f2;
     }
+    .maintain .nav-link 
+    {
+      max-width:30% !important;
+      width:100%;
+    }
   }
   
   @media (max-width: 767px) { 
   .no-arrow::after {
     display: none !important; 
   }
+  .dropdown-item{
+    text-wrap: wrap !important;
+ }
+
   }
   
   /* Style the custom dropdown icon */
   .dropdown-icon {
-  display: inline-block;
-  margin-left: auto; /* Push it to the right */
-  transition: transform 0.3s ease;
-  position: absolute;
-  right: 15px;
-  z-index: 10;
-  pointer-events: auto;
-  top: 10px;
+    display: inline-block;
+    margin-left: auto; /* Push to the right */
+    transition: transform 0.3s ease-in-out;
+    position: absolute;
+    right: 15px;
+    z-index: 10;
+    pointer-events: auto;
+    top: 10px;
     font-size: 17px;
+  }
+  
+  /* Rotate the icon when dropdown is open */
+  .dropdown-icon.rotate {
+    transform: rotate(90deg);
   }
   
   
@@ -6739,9 +6753,7 @@
     position: static !important;
   }
   }
-  .rotate {
-  transform: rotate(90deg);
-  }
+ 
   
   /* Remove border & background from dropdown menu */
   .custom-dropdown {
@@ -6753,18 +6765,7 @@
   @media (min-width: 775px) {
   .dropdown-icon {
     display: none; /* Hide ">" on desktop */
-  }}
-  @media (max-width: 767px) {
-  
-    .top-nav .maintain .nav-link
-    {
-      max-width:20% !important;
-      width:100%;
-    }
   }
-  
 
-
-
-
-
+}
+ 
