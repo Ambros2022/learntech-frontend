@@ -60,7 +60,7 @@ function CollegeInfoSection({ data, Countrydata }) {
   ];
 
   const renderTabs = () => tabs.map((tab, index) => {
-    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>') {
+    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>') {
       return (
         <button
           key={index}

@@ -123,10 +123,10 @@ const App = (props: ExtendedAppProps) => {
       <CacheProvider value={emotionCache}>
         <Head>
           <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
-          <meta
+          {/* <meta
             name='description'
             content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad.'
-          />
+          /> */}
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
 

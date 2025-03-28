@@ -79,7 +79,7 @@ const CollegeInfoSection = ({ data, exams }) => {
     ];
 
     return tabs
-      .filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>')
+      .filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>')
       .map((tab) => (
         <button
           key={tab.id}
@@ -106,7 +106,7 @@ const CollegeInfoSection = ({ data, exams }) => {
     ];
 
     return tabs
-      .filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>')
+      .filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>')
       .map((tab) => (
         <div
           key={tab.id}

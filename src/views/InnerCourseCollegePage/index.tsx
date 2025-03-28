@@ -13,9 +13,7 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [colleges, setColleges] = useState([]);
-  const [exams, setexams] = useState([]);
-  const [streams, setStreams] = useState([]);
+
 
   const getPagedata = useCallback(async () => {
     try {
@@ -36,32 +34,34 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
     }
   }, [Collegeid, isMountedRef, router]);
 
-  const getColleges = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/colleges/get', {
-        params: {
-          page: 1,
-          size: 1000,
-          type: 'college',
-          
-        }
-      });
-      if (isMountedRef.current) {
-        setColleges(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [Collegeid, isMountedRef]);
-
-
   useEffect(() => {
     getPagedata();
-    getColleges();
   }, [getPagedata]);
 
   return (
     <>
+      <Head>
+        <title>{pagedata?.meta_title || "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
+        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
+        <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
+        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(
+            {
+              "@context": "https://schema.org/",
+              "@type": "CollegeOrUniversity",
+              "name": `${pagedata?.meta_title}`,
+              "logo": `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
+              "url": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": `${pagedata?.address}`
+              }
+
+            }
+          )}
+        </script>
+      </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
       {!loading && pagedata && <CourseDetailSec data={pagedata} />}
 

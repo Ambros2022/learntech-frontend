@@ -100,7 +100,7 @@ function CollegeInfoSection({ data }) {
   );
 
   const renderTabs = () => tabs.map((tab, index) => {
-    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>') {
+    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>') {
       return (
         <button
           key={index}
@@ -115,7 +115,7 @@ function CollegeInfoSection({ data }) {
   });
 
   const renderTabContent = () => tabs.map((tab, index) => {
-    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>') {
+    if (tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>') {
       return (
         <div
           key={index}

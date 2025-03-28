@@ -6596,8 +6596,15 @@
 
     }
   }
-
+  .service h1{
+    font-size: 1.5rem !important;
+  }
   @media (min-width: 768px) {
+
+    .service h1{
+      font-size: 2rem !important;
+    }
+
     .infoBtn {
       display: flex;
       /* Maintain flex layout */
