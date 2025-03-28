@@ -421,11 +421,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
-        formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
-        resolver: yupResolver(schema)
     })
     const { fields, append, remove } = useFieldArray({
         control: faqcontrol,
@@ -448,8 +446,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     };
 
     const faqonSubmit = async (data: any) => {
+        console.log("ddddddddddddddddddddddddddddddddd");
         console.log(data.faqs);
-        // return
+
+      
 
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
@@ -1318,9 +1318,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                     />
                                                 ) : null}
                                             </Button>
-                                            {/* <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
-                                Discard
-                            </Button> */}
+                                    
                                         </DialogActions>
                                     </Grid>
 

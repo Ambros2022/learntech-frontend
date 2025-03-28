@@ -53,7 +53,7 @@ function OverviewSec({ data }) {
       label: 'FAQ',
       content: data.examfaqs && data.examfaqs.length > 0 ? <FaqSec data={data.examfaqs} /> : null
     },
-  ].filter(item => item.content && item.content !== 'null'); ''
+  ].filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>'); ''
 
   const isMobileView = () => {
     if (typeof window !== 'undefined') {
@@ -155,15 +155,7 @@ function OverviewSec({ data }) {
     getPromobanner();
   }, [getPromobanner, getExams]);
 
-  function getDaySuffix(day: number): string {
-    if (day > 3 && day < 21) return 'th';
-    switch (day % 10) {
-      case 1: return 'st';
-      case 2: return 'nd';
-      case 3: return 'rd';
-      default: return 'th';
-    }
-  }
+
 
   const PromoAddBanner = ({ url }) => {
     return (
