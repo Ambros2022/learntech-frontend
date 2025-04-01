@@ -361,9 +361,9 @@
     color: #254692;
   }
 
-  .innerCollege {
-    /* background-color: rgba(39, 72, 150, 1) !important; */
-  }
+  /* .innerCollege {
+    background-color: rgba(39, 72, 150, 1) !important;
+  } */
 
   .innerCollege input,
   select {
@@ -991,6 +991,8 @@
 
   .top-nav .nav-link {
     font-size: 17px !important;
+    padding-left: 5px;
+    color: #000000 !important;
   }
 
   .card-image {
@@ -2811,10 +2813,10 @@
     border-radius: 5px;
   }
 
-  .carouselCardsCon .card img {
-    /* background-color: rgba(39, 72, 150, 0.1); */
-    /* filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%); */
-  }
+  /* .carouselCardsCon .card img {
+    background-color: rgba(39, 72, 150, 0.1);
+    filter: invert(19%) sepia(53%) saturate(3235%) hue-rotate(214deg) brightness(86%) contrast(82%);
+  } */
 
   .carouselCardsCon .carousel-button-group {
     position: absolute !important;
@@ -3479,9 +3481,9 @@
     font-size: 33px !important;
   }
 
-  .ExpertCon {
-    /* background-color: white !important; */
-  }
+  /* .ExpertCon {
+    background-color: white !important;
+  } */
 
   .ExpertCon label {
     color: white !important;
@@ -3861,9 +3863,9 @@
     height: 100%;
   }
 
-  .FeaturedClgCon .card-Image-top {
-    /* height: 235px !important; */
-  }
+  /* .FeaturedClgCon .card-Image-top {
+    height: 235px !important;
+  } */
 
   .StudyAbroadCard .card-img-top {
     height: 180px !important;
@@ -4036,9 +4038,9 @@
       overflow: hidden;
     }
 
-    .FeaturedClgCon .card-Image-top {
-      /* height: 166px !important; */
-    }
+    /* .FeaturedClgCon .card-Image-top {
+      height: 166px !important;
+    } */
 
     .StudyAbroadCard .card-img-top {
       height: 166px !important;
@@ -4102,9 +4104,9 @@
       font-size: 20px !important;
     }
 
-    .FeaturedClgCon .card-Image-top {
-      /* height: 262px !important; */
-    }
+    /* .FeaturedClgCon .card-Image-top {
+      height: 262px !important;
+    } */
 
     .StudyAbroadCard .card-img-top {
       height: 262px !important;
@@ -4191,9 +4193,9 @@
       width: 100% !important;
     }
 
-    .FeaturedClgCon .card-Image-top {
-      /* height: 220px !important; */
-    }
+    /* .FeaturedClgCon .card-Image-top {
+      height: 220px !important;
+    } */
 
     .StudyAbroadCard .card-img-top {
       height: 220px !important;
@@ -4929,7 +4931,7 @@
     text-align: center;
   }
 
-  .checkboxesSize {}
+  /* .checkboxesSize {} */
 
   .collegeApplyNow {
     background-color: yellow !important;
@@ -5088,9 +5090,9 @@
     max-height: 640px;
   }
 
-  .logoBoardImg {
-    /* height: 100px; */
-  }
+  /* .logoBoardImg {
+    height: 100px;
+  } */
 
   .logoBoardImg>img {
     height: auto;
@@ -5177,9 +5179,9 @@
     font-size: 25px !important;
   }
 
-  .innerCourseClgH1>h1 {
-    /* font-size: 20px !important; */
-  }
+  /* .innerCourseClgH1>h1 {
+    font-size: 20px !important;
+  } */
 
   .filterCountry {
     background-color: white !important;
@@ -5875,9 +5877,9 @@
       font-size: 15px !important;
     }
 
-    .logoBoardImg {
-      /* height: 150px; */
-    }
+    /* .logoBoardImg {
+      height: 150px;
+    } */
 
     .userSec2Img {
       width: 180px;
@@ -6594,8 +6596,15 @@
 
     }
   }
-
+  .service h1{
+    font-size: 1.5rem !important;
+  }
   @media (min-width: 768px) {
+
+    .service h1{
+      font-size: 2rem !important;
+    }
+
     .infoBtn {
       display: flex;
       /* Maintain flex layout */
@@ -6663,3 +6672,107 @@
     font-size: 2rem;
     /* Adjust size of the arrows */
   }
+
+
+
+
+
+  @media only screen and (max-width:450px) {
+    .collapseNavHeight {
+      height: 100% !important;
+  
+      overflow-y: scroll !important;
+    }
+  
+    .navbar-nav .nav-item:nth-child(1) {
+      background-color: #f2f2f2;
+    }
+    
+    .navbar-nav .nav-item:nth-child(3) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(5) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(7) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(9) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(11) {
+      background-color: #ffffff;  
+    }
+    .navbar-nav .nav-item:nth-child(12) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(14) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(16) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(18) {
+      background-color: #f2f2f2;
+    }
+    .navbar-nav .nav-item:nth-child(20) {
+      background-color: #f2f2f2;
+    }
+    .maintain .nav-link 
+    {
+      max-width:30% !important;
+      width:100%;
+    }
+  }
+  
+  @media (max-width: 767px) { 
+  .no-arrow::after {
+    display: none !important; 
+  }
+  .dropdown-item{
+    text-wrap: wrap !important;
+ }
+
+  }
+  
+  /* Style the custom dropdown icon */
+  .dropdown-icon {
+    display: inline-block;
+    margin-left: auto; /* Push to the right */
+    transition: transform 0.3s ease-in-out;
+    position: absolute;
+    right: 15px;
+    z-index: 10;
+    pointer-events: auto;
+    top: 10px;
+    font-size: 17px;
+  }
+  
+  /* Rotate the icon when dropdown is open */
+  .dropdown-icon.rotate {
+    transform: rotate(90deg);
+  }
+  
+  
+  @media only screen and (min-width:900px)
+  {
+  .latest-static{
+    position: static !important;
+  }
+  }
+ 
+  
+  /* Remove border & background from dropdown menu */
+  .custom-dropdown {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  }
+  
+  @media (min-width: 775px) {
+  .dropdown-icon {
+    display: none; /* Hide ">" on desktop */
+  }
+
+}
+ 

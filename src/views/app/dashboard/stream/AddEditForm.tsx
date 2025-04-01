@@ -51,19 +51,8 @@ interface Authordata {
 }
 
 const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
-    // ** States
-    // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
-    const [amenitiesdata, setAmenitiesdata] = useState([])
-    const [leveslsdata, setLeveslsdata] = useState([])
-    const [countries, setCountries] = useState([])
-    const [states, setStates] = useState([])
-    const [cities, setCities] = useState([])
-    const [boards, setBoards] = useState([])
-    const [countryId, setCountryId] = useState<any>(isAddMode ? "" : olddata?.country?.id || '');
-    const [stateId, setStateId] = useState<any>(isAddMode ? "" : olddata?.state?.id || '');
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
     const [fileNamesbanner, setFileNamesbanner] = useState<any>([]);
@@ -123,7 +112,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control,
         handleSubmit,
-        resetField: admfiledReset,
         reset,
         setValue,
         formState: { errors }
@@ -133,29 +121,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
-    // useEffect(() => {
-
-    //     if (!isAddMode && olddata.schoolamenities) {
-    //         const amenities = olddata.schoolamenities.map((item) => ({
-    //             id: item.schamenities.id,
-    //             amenities_name: item.schamenities.amenities_name,
-    //         }));
-    //         admfiledReset("amenities", { defaultValue: amenities })
-    //     }
-    //     if (!isAddMode && olddata.schoollevels) {
-    //         const LEVELS = olddata.schoollevels.map((item) => ({
-    //             id: item.schlevelname.id,
-    //             name: item.schlevelname.name,
-    //         }));
-    //         admfiledReset("levels", { defaultValue: LEVELS })
-    //     }
-
-    // }, []);
+   
 
     const onSubmit = async (data: any) => {
-
-        // console.log(data);
-        // return
 
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
@@ -180,14 +148,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
+            
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
+               
                 }
 
             } catch (err: any) {
@@ -195,10 +163,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -229,7 +195,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -238,17 +203,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -280,25 +242,19 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
-        formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
-        // resolver: yupResolver(schema)
     })
     const { fields, append, remove } = useFieldArray({
         control: faqcontrol,
         name: 'faqs',
     });
 
-    console.log(fields, "fields");
     const handleAddFaq = () => {
-
         append({
             questions: '',
             answers: '',
-
-
         });
 
     };
@@ -324,7 +280,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
@@ -332,13 +287,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
-                // history.push('/app/products');
+            
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
                 toast.error(err.message || "please try again")
 
             }
@@ -351,11 +304,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         setFormvalue(newValue)
     }
 
-    const handleBack = () => {
-        // setActiveStep(prevActiveStep => prevActiveStep - 1)
-    }
-
-   
 
     return (
         <Card>
@@ -665,7 +613,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                  onChange={(e) => {
                                                     onChange(e);
-                                                    setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                    setValue(`faqs[${index}].answers`, e);  
                                                 }} />
                                           
                                                 </>
@@ -682,7 +630,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                             style={{ margin: '17px 0 0 0px' , padding: '8px' }}
                                                         >
                                                             <CloseIcon />
-                                                            
                                                         </Button>
                                                     )}
                                                 </Grid>
@@ -732,7 +679,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         >
 
                                             <Button variant='contained' type='submit' sx={{ mr: 1 }} >
-                                                {/* <Button variant='contained' type='submit' sx={{ mr: 1 }} onClick={() => setShow(false)}> */}
                                                 Update
                                                 {loading ? (
                                                     <CircularProgress
@@ -745,9 +691,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                     />
                                                 ) : null}
                                             </Button>
-                                            {/* <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
-                                Discard
-                            </Button> */}
                                         </DialogActions>
                                     </Grid>
 
@@ -762,16 +705,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                   
                 </CardContent>
-                {/* <Divider sx={{ m: '0 !important' }} /> */}
-                {/* <CardActions>
-                    <Button type='submit' sx={{ mr: 2 }} variant='contained'>
-                        Submit
-                    </Button>
-                    <Button type='reset' variant='tonal' color='secondary'>
-                        Reset
-                    </Button>
-                </CardActions> */}
-                {/* </form> */}
+         
             </TabContext>
         </Card>
     )

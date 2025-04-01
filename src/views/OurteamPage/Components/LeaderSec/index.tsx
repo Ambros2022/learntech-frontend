@@ -60,7 +60,7 @@ const LeaderSec = () => {
     return (
         <section className='bg-white py-md-5 py-3'>
             <div className="container">
-                <h2 className='text-blue fw-bold'>Meet Our Leaders</h2>
+                <h1 className='text-blue fw-bold'>Meet Our Leaders</h1>
                 <p className="text-black">
                     Every team requires a group of strong-willed individuals who work hard towards achieving the company's collective goals. They should be capable of leading a team with a grasp of perseverance and understanding. The pillars of Learntech Edu Solutions have showcased the above-mentioned skills since the start of their journey to enable a just action towards their fellow employees as well as their clients. They seek to establish a dynamic work environment by creating an energetic atmosphere that is both pleasant as well as encouraging. Additionally, our leaders take the initiative towards guiding employees into becoming seasoned professionals and thereby aiding our clients with the most effective methods that are tailored to provide efficient career counselling and admission guidance.
                 </p>
