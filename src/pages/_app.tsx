@@ -46,6 +46,7 @@ import ReactHotToast from 'src/@core/styles/libs/react-hot-toast';
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
 // ** Prismjs Styles
 import 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -193,6 +194,7 @@ const App = (props: ExtendedAppProps) => {
           </AuthProvider>
         </SessionProvider>
       </CacheProvider>
+      <SpeedInsights />
       <Script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></Script>
     </>
   );
