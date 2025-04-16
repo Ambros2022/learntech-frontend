@@ -84,16 +84,17 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .required(),
 
         college_id: yup.object().required("This field is required"),
-        general_course_id: yup.object().required("This field is required"),
+        // general_course_id: yup.object().required("This field is required"),
 
     })
 
     const defaultValues = {
         college_id: isAddMode ? '' : olddata.college ? olddata.college : '',
-        general_course_id: isAddMode ? '' : olddata.generalcourse ? olddata.generalcourse : '',
+        general_course_id: isAddMode ? '' : olddata?.generalcourse ? olddata?.generalcourse : '',
         course_type: isAddMode ? '' : olddata.course_type,
         slug: isAddMode ? '' : olddata.slug,
         course_short_name: isAddMode ? '' : olddata.course_short_name,
+        title: isAddMode ? '' : olddata.title,
         meta_title: isAddMode ? '' : olddata.meta_title,
         meta_description: isAddMode ? '' : olddata.meta_description,
         meta_keywords: isAddMode ? '' : olddata.meta_keywords,
@@ -167,6 +168,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('course_type', data.course_type);
             formData.append('slug', data.slug);
             formData.append('course_short_name', data.course_short_name);
+            formData.append('title', data.title);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
@@ -175,7 +177,13 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('fee_structure', data.fee_structure);
             formData.append('status', data.status);
             formData.append('college_id', data.college_id.id);
-            formData.append('general_course_id', data.general_course_id.id);
+            if (data?.general_course_id?.id) {
+                formData.append('general_course_id', data.general_course_id.id);
+              } else {
+                formData.append('general_course_id', ''); // send empty string, not null, to avoid FormData issues
+              }
+
+           
 
             try {
                 let response = await axios1.post(url, formData)
@@ -213,6 +221,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('course_type', data.course_type);
             formData.append('slug', data.slug);
             formData.append('course_short_name', data.course_short_name);
+            formData.append('title', data.title);
             formData.append('meta_title', data.meta_title);
             formData.append('meta_description', data.meta_description);
             formData.append('meta_keywords', data.meta_keywords);
@@ -221,8 +230,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('fee_structure', data.fee_structure);
             formData.append('status', data.status);
             formData.append('college_id', data.college_id.id);
-            formData.append('general_course_id', data.general_course_id.id);
-
+            if (data?.general_course_id?.id) {
+                formData.append('general_course_id', data.general_course_id.id);
+              } else {
+                formData.append('general_course_id', ''); // send empty string, not null, to avoid FormData issues
+              }
 
             try {
                 let response = await axios1.post(url, formData)
@@ -391,6 +403,25 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     error={Boolean(errors.course_short_name)}
                                     aria-describedby='validation-basic-first-name'
                                     {...(errors.course_short_name && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='title'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Course Name'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.title)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.title && { helperText: 'This field is required' })}
                                 />
                             )}
                         />

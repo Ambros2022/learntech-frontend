@@ -166,81 +166,80 @@ const SecondPage = () => {
 
   let columns: GridColDef[] = [
     {
-      flex: 0.125,
+      flex: 0.3,
       minWidth: 100,
       field: 'name',
       headerName: 'Name',
       renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
+        const { row } = params;
+  
         return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+          <Typography variant='body2' sx={{ color: 'text.primary', fontWeight: 600, whiteSpace: 'normal', wordBreak: 'break-word' }}>
             {row.name}
           </Typography>
-        )
+        );
       }
     },
-
     {
-      flex: 0.145,
+      flex: 0.3,
       minWidth: 100,
       field: 'contact_number',
       headerName: 'Contact Number',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
+  
         return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+          <Typography variant='body2' sx={{ color: 'text.primary', fontWeight: 600, whiteSpace: 'normal', wordBreak: 'break-word' }}>
             {row.contact_number}
           </Typography>
         );
       }
     },
-
     {
-      flex: 0.3,
+      flex: 0.6,
       minWidth: 100,
       field: 'current_url',
       headerName: 'Url',
       renderCell: (params: GridRenderCellParams) => {
-        const { row } = params
-
+        const { row } = params;
+  
         return (
-
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+          //@ts-ignore
+          <Typography variant='body3' sx={{ color: 'text.primary', fontWeight: 600, whiteSpace: 'normal', wordBreak: 'break-word' }}>
             {row.current_url}
           </Typography>
-
-
-        )
+        );
       }
     },
     {
-      flex: 0.2,
+      flex: 0.3,
       minWidth: 100,
       field: 'created_at',
       headerName: 'Date',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
-
-        // Format the date
+  
         const formattedDate = row?.created_at
-          ? new Date(row.created_at).toLocaleDateString('en-US', {
+        ? new Date(row.created_at).toLocaleString('en-US', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true, // Change to false if you prefer 24-hour format
           })
-          : 'N/A';
-
+        : 'N/A';
+  
         return (
-          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+          //@ts-ignore
+          <Typography variant='body3' sx={{ color: 'text.primary', fontWeight: 600, whiteSpace: 'normal', wordBreak: 'break-word' }}>
             {formattedDate}
           </Typography>
         );
       }
     },
-  
     {
-      flex: 0.175,
+      flex: 0.2,
       minWidth: 100,
       sortable: false,
       field: 'actions',
@@ -248,9 +247,9 @@ const SecondPage = () => {
       renderCell: ({ row }: any) => (
         <RowOptions id={row.id} onReloadPage={handleReloadPage} />
       )
-
     }
-  ]
+  ];
+  
 
 
 
@@ -361,6 +360,15 @@ const SecondPage = () => {
             onSortModelChange={handleSortModel}
             slots={{ toolbar: ServerSideToolbar }}
             onPaginationModelChange={paginationchange}
+            getRowHeight={() => 'auto'} 
+            sx={{
+              '& .MuiDataGrid-cell': {
+                padding: 4, // spacing between columns (default is around 2)
+              },
+              '& .MuiDataGrid-columnHeaders': {
+                columnGap: 10,
+              },
+            }}
             slotProps={{
               baseButton: {
                 size: 'medium',

@@ -167,7 +167,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         counseling: isAddMode ? '' : olddata.counseling,
         accept_colleges: isAddMode ? '' : olddata.accept_colleges,
         status: isAddMode ? 'Published' : olddata.status,
-        promo_banner_status: isAddMode ? 'Draft' : olddata.promo_banner_status,
+        promo_banner_status: isAddMode ? 'Draft' : olddata.promo_banner_status ? olddata.promo_banner_status : 'Draft',
         stream_id: isAddMode ? '' : olddata.stream ? olddata.stream : '',
         streams: [],
     }
@@ -446,7 +446,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     };
 
     const faqonSubmit = async (data: any) => {
-        console.log("ddddddddddddddddddddddddddddddddd");
+   
         console.log(data.faqs);
 
       
