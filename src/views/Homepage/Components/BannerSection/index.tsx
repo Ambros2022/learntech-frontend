@@ -113,71 +113,7 @@ function BannerSection() {
 
   return (
     <section className="bannerCon bg-formClr" id="animation1">
-      {/* {imagesLoaded && banners.length > 0 ? (
-        <div
-          id="carouselExampleIndicators"
-          className="carousel slide"
-          data-bs-ride="carousel" // Ensures autoplay starts immediately
-          data-bs-interval="1000" // Sets autoplay interval to 1 second
-          // data-bs-pause="false" // Prevents pausing on hover or touch
-          // data-bs-wrap="true" // Ensures continuous cycling without stopping
-        >
-          <div className="carousel-indicators" style={{ zIndex: '40' }}>
-            {banners.map((banner, index) => (
-              <button
-                key={index}
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to={index}
-                className={index === 0 ? "active" : ""}
-                aria-label={`Slide ${index + 1}`}
-              ></button>
-            ))}
-          </div>
-          <div className="carousel-inner">
-            {banners.map((banner, index) => (
-              <div
-                key={index}
-                className={`carousel-item ${index === 0 ? "active" : ""}`}
-                style={{ zIndex: '30' }}
-              >
-                <Link href={banner?.link}>
-                  <Image
-                    fill
-                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                    priority={true}
-                    alt={`Banner ${index}`}
-                    className="w-100"
-                  />
-                </Link>
-              </div>
-            ))}
-          </div>
 
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-            style={{ zIndex: '40' }}
-          >
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-            style={{ zIndex: '40' }}
-          >
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-      ) : (
-        <Skeleton height={500} />
-      )} */}
       {imagesLoaded && banners.length > 0 ? (
         <Carousel interval={1500} pause="hover" style={{ zIndex: '39' }}>
           {banners.map((banner, index) => (
@@ -187,7 +123,7 @@ function BannerSection() {
                   className="d-block w-100"
                   src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                   alt={`Banner ${index}`}
-                  loading="lazy"
+                // loading="lazy" 
                 />
               </a>
             </Carousel.Item>
@@ -222,7 +158,7 @@ function BannerSection() {
                               schooldata: `/school/${option.id}/${option.slug}`,
                               examdata: `/exam/${option.id}/${option.slug}`,
                               coursesdata: `/course/${option?.streamID}/${option?.streamSlug}/${option.slug}`,
-                              // coursesdata: `/course/${option?.streamID}/${option.slug}}`,
+
                             };
 
                             return (

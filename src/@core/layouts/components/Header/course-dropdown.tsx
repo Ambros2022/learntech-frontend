@@ -22,7 +22,7 @@ const DropdownMenu = React.memo(({ states, type, onClose }: any) => {
     return (
         <>
             {states.length > 0 && (
-                <ul className="dropdown-menu menu-icon" aria-labelledby="navbarDropdownMenuLink">
+                <ul className="dropdown-menu menu-icon state-dropdwon-width" aria-labelledby="navbarDropdownMenuLink">
                     <div className="text-center">
                         <p style={{ fontWeight: 'bold', color: '#274896' }}>Popular Courses</p>
                     </div>

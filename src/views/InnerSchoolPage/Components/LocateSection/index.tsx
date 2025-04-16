@@ -35,7 +35,7 @@ function LocationSection({ data }) {
                     width="100%"
                     height="500px"
                     style={{ border: 0 }}
-                    loading="lazy"
+                    // loading="lazy"
                     allowFullScreen
                     className='rounded'
                   ></iframe>
