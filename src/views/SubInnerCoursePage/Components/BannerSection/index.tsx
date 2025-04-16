@@ -11,12 +11,12 @@ function BannerSection({ data }) {
       <section className="bg-blue dentalCourseCon py-5">
         <div className="container h-100 flex-column column-gap-0 d-flex justify-content-center">
           <div className='align-items-center'>
-            <h1 className=' fw-bold text-white mb-3'>{data.short_name} ({data.name}): Course, Duration, Eligibility, Fees, Admissions, Opportunities
+            <h1 className=' fw-bold text-white mb-3'> {data?.name} : Course, Duration, Eligibility, Fees, Admissions, Opportunities
             </h1>
             <div className='text-white  mb-2 row'>
               <h4 className='col-12 mb-3 f20'>Duration : {data.duration}</h4>
               <div className="d-flex">
-                <GlobalEnquiryForm className='btn btn-success font-18'/>
+                <GlobalEnquiryForm className='btn btn-success font-18' />
               </div>
             </div>
             <div className=''>
@@ -29,11 +29,11 @@ function BannerSection({ data }) {
         <div className='container linkFontSize'>
           <p><Link href={'/'} className="text-black">Home <i className='bi bi-chevron-right'></i></Link>
 
-          <Link href={'/courses'} className="text-black"> Courses  <i className='bi bi-chevron-right'></i></Link>
+            <Link href={'/courses'} className="text-black"> Courses  <i className='bi bi-chevron-right'></i></Link>
 
-          <Link href={`/course/${data?.streams?.id}/${data?.streams?.slug}`} className="text-black"> {data.streams.name}  <i className='bi bi-chevron-right'></i></Link>
+            <Link href={`/course/${data?.streams?.id}/${data?.streams?.slug}`} className="text-black"> {data.streams.name}  <i className='bi bi-chevron-right'></i></Link>
 
-          <span className="text-blue"> {data.short_name}</span></p>
+            <span className="text-blue"> {data.short_name}</span></p>
         </div>
       </section>
     </>

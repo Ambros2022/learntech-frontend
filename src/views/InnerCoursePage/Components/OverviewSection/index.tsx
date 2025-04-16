@@ -79,7 +79,7 @@ function OverviewSection({ data, collegedata, examdata }) {
         tab.content.map((item, index) => (
           <div key={index} className="col-12 mb-3">
             <div className="card bg-skyBlue hover-card p-3">
-              <h5 className='fw-bold text-blue text-center mb-3'>{item.short_name} {`(${item.name})`}</h5>
+              <h5 className='fw-bold text-blue text-center mb-3'> {`${item.name}`}</h5>
               <h5 className='text-blue text-center mb-3'>
                 <span className='fw-bold'>Duration:</span> <span className='text-black'>{item.duration}</span>
               </h5>

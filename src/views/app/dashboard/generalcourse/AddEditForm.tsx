@@ -161,8 +161,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         status: isAddMode ? 'Published' : olddata.status,
         stream_id: isAddMode ? '' : olddata.streams ? olddata.streams : '',
         sub_streams_id: isAddMode ? '' : olddata.sub_streams ? olddata.sub_streams : '',
-        is_trending: isAddMode ? false : olddata.is_trending ? olddata.is_trending : false,
-        is_top_rank: isAddMode ? false : olddata.is_top_rank ? olddata.is_top_rank : false,
+        is_trending: isAddMode ? 0 : olddata.is_trending ? olddata.is_trending : 0,
+        is_top_rank: isAddMode ? 0 : olddata.is_top_rank ? olddata.is_top_rank : 0,
     }
 
 
@@ -201,7 +201,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('name', data.name);
             formData.append('slug', data.slug);
             formData.append('course_type', data.course_type);
-            formData.append('short_name', data.short_name);
+            formData.append('short_name', data.short_name ? data.short_name : "" );
             formData.append('duration', data.duration);
             formData.append('syllabus', data.syllabus);
             formData.append('admissions', data.admissions);
