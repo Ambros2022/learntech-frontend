@@ -26,9 +26,9 @@ function BannerSec({ data }) {
                                         <div className="col-md-9 d-flex justify-content-center justify-content-md-start align-content-center">
                                             <div className="align-content-center">
                                                 <div className="p-lg-3">
-                                                    <h3 className="fw-bold text-white card-title py-3 py-md-0">
+                                                    <h1 className="fw-bold text-white card-title py-3 py-md-0">
                                                         {data.exam_title} Exam : {examDate}
-                                                    </h3>
+                                                    </h1>
                                                 </div>
                                             </div>
                                         </div>

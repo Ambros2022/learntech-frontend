@@ -11,13 +11,13 @@ interface CardComponentProps {
     Itemid: string;
 }
 
-const CardComponent: React.FC<CardComponentProps> = React.memo(({ title, imageSrc, count, link, activeTab,Itemid }) => {
+const CardComponent: React.FC<CardComponentProps> = React.memo(({ title, imageSrc, count, link, activeTab, Itemid }) => {
     const { setStreamId } = useAuth();
 
     return (
         <div className="col-md-4 col-lg-2 mb-3">
             <div className="card text-center exploreCardHover">
-                <Link href={link}   onClick={() => activeTab !== 'Courses' ? setStreamId(Itemid) : ""}>
+                <Link href={link} onClick={() => activeTab !== 'Courses' ? setStreamId(Itemid) : ""}>
                     <div className="row">
                         <div className="col-md-12 col-4 col-sm-3">
                             <img
@@ -36,14 +36,14 @@ const CardComponent: React.FC<CardComponentProps> = React.memo(({ title, imageSr
                         </div>
                         <div className="col-2 cardArrow">
                             <span>
-                             
-                                    <img
-                                        width={27}
-                                        height={27}
-                                        src="/images/icons/right arrow.svg"
-                                        alt="right-arrow"
-                                    />
-                           
+
+                                <img
+                                    width={27}
+                                    height={27}
+                                    src="/images/icons/right arrow.svg"
+                                    alt="right-arrow"
+                                />
+
                             </span>
                         </div>
                     </div>
