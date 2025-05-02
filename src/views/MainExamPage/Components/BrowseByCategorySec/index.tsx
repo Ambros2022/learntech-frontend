@@ -13,7 +13,7 @@ import { useAuth } from 'src/hooks/useAuth';
 import { useRouter } from 'next/router';
 
 const BrowsebyCategorySec = ({ countryData, streams }) => {
-    const {streamId, setStreamId } = useAuth();
+    const { streamId, setStreamId } = useAuth();
     const [scholarshipsData, setScholarshipsData] = useState<any>([]);  // Use any type for tabs
     const [scholarshipData, setScholarshipData] = useState<any>([]);  // Use any type for tabs
     const [totalScholarships, setTotalScholarships] = useState(0);
@@ -178,7 +178,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
 
     const getnews = useCallback(async () => {
         try {
-            const roleparams = { page: 1, size: 15,orderby:'desc',columnname:'created_at', country_id: 204., includeIndia: true };
+            const roleparams = { page: 1, size: 15, orderby: 'desc', columnname: 'created_at', country_id: 204., includeIndia: true };
             const response = await axios.get('/api/website/news/get', { params: roleparams });
             setNewsData(response.data.data);
         } catch (err) {
@@ -188,7 +188,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
 
     const getabroadnews = useCallback(async () => {
         try {
-            const roleparams = { page: 1, size: 15,orderby:'desc',columnname:'created_at', includeIndia: false };
+            const roleparams = { page: 1, size: 15, orderby: 'desc', columnname: 'created_at', includeIndia: false };
             const response = await axios.get('/api/website/news/get', { params: roleparams });
             setNewsDataAbroad(response.data.data);
         } catch (err) {
@@ -203,13 +203,13 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         getabroadnews();
     }, [getCategoriesData, getabroadnews, getnews, getScholarships]);
     useEffect(() => {
-   
+
         if (streamId) {
-       
+
             setActiveTab(streamId)
             setStreamId(null)
         }
-        
+
 
     }, [router, router.isReady]);
 
