@@ -8,14 +8,14 @@ import NewsLinkSection from '../NewsLinkSection';
 
 
 function BannerSec({ data }) {
-    // Ensure upcoming_date is a valid date
+
     const examDate = data.upcoming_date ? format(new Date(data.upcoming_date), 'd MMM yyyy') : 'Date not available';
 
     return (
         <>
             <section className='collegeBannerCon bg-blue examsBannerCon pt-4 pb-4'>
                 <div className='d-flex justify-content-center w-100 h-100'>
-                    <div className='align-content-center w-100 container'>
+                    <div className='align-content-center w-100 container'> 
                         <div className="row">
                             <div className="col-lg-8 col-md-9 mx-md-auto innerExam">
                                 <div className="card mb-2">
@@ -30,6 +30,7 @@ function BannerSec({ data }) {
                                                         {data.exam_title} Exam : {examDate}
                                                     </h1>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -37,6 +38,7 @@ function BannerSec({ data }) {
                             </div>
                             <div className="col-lg-4 col-md-3 d-flex justify-content-center mb-3">
                                 <div className="align-content-center">
+
                                     <div className='text-md-end text-center'>
                                         <GlobalEnquiryForm
                                             buttonText={<><i className="bi bi-bell-fill"></i> Get {data.exam_title} Alert</>}
