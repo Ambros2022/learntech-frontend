@@ -123,8 +123,8 @@ function BannerSection() {
                   className="d-block w-100"
                   src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
                   alt={`Banner ${index}`}
-                // loading="lazy" 
                 />
+
               </a>
             </Carousel.Item>
           ))}

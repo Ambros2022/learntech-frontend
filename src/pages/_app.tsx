@@ -107,10 +107,12 @@ const Guard = ({ children, authGuard, guestGuard }: GuardProps) => {
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+  // useEffect(() => {
+  //   import('bootstrap/dist/js/bootstrap.min.js');
+  // }, []);
   useEffect(() => {
-    import('bootstrap/dist/js/bootstrap.min.js');
+    require('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
-
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false;
   const getLayout =
@@ -133,7 +135,7 @@ const App = (props: ExtendedAppProps) => {
           <meta name='viewport' content='initial-scale=1, width=device-width' />
 
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
-          
+
           <script type="application/ld+json">
             {JSON.stringify(
               {
