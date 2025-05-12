@@ -3102,9 +3102,10 @@
   }
 
   .upcomingAdmission img {
-    width: 100%;
-    height: -webkit-fill-available !important;
-    object-fit: contain !important;
+    width: 103px !important;
+    height: 91px !important;
+    object-fit: cover !important;
+    padding: 2px !important;
   }
 
 
@@ -6390,3 +6391,8 @@
   .state-dropdwon-width {
     width: 230px !important;
   }
+  
+.height-fix-blogs{
+  height: 1105px !important;
+  overflow: scroll !important;
+}
