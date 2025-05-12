@@ -61,6 +61,7 @@ import 'src/iconify-bundle/icons-bundle-react';
 
 // ** Global css styles
 import '../../styles/globals.css';
+import '../../styles/embla.css';
 
 // ** Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css';

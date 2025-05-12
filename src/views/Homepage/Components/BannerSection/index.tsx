@@ -15,9 +15,10 @@ const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneIn
 const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
 import Carousel from 'react-bootstrap/Carousel';
 let cancelToken: any;
-
+import useEmblaCarousel from 'embla-carousel-react';
+// import 'embla-carousel/embla-carousel.css' ;
 const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
-
+import Autoplay from 'embla-carousel-autoplay';
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const validationSchema = Yup.object().shape({
@@ -110,11 +111,35 @@ function BannerSection() {
   const handleInputChange = (event, value) => {
     handleSearch(value);
   };
+  // const [imagesLoaded, setImagesLoaded] = useState(false);
 
+  // mark loaded once your images are ready (e.g. after fetch)
+  useEffect(() => {
+    if (banners.length) setImagesLoaded(true);
+  }, [banners]);
+
+  // pause on hover
+
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 1500, stopOnInteraction: false }),
+  ]);
+  
+  const [isHovered, setIsHovered] = useState(false);
+  
+  useEffect(() => {
+    if (!emblaApi) return;
+  
+    if (isHovered) {
+      emblaApi?.plugins()?.autoplay?.stop();
+    } else {
+      emblaApi?.plugins()?.autoplay?.play();
+    }
+  }, [isHovered, emblaApi]);
   return (
     <section className="bannerCon bg-formClr" id="animation1">
 
-      {imagesLoaded && banners.length > 0 ? (
+      {/* {imagesLoaded && banners.length > 0 ? (
         <Carousel interval={1500} pause="hover" style={{ zIndex: '39' }}>
           {banners.map((banner, index) => (
             <Carousel.Item key={index}>
@@ -131,8 +156,33 @@ function BannerSection() {
         </Carousel>
       ) : (
         <Skeleton height={500} />
-      )}
-
+      )} */}
+{imagesLoaded && banners.length > 0 ? (
+  <div
+    className="embla"
+    ref={emblaRef}
+    style={{ zIndex: 39 }}
+    onMouseEnter={() => setIsHovered(true)}
+    onMouseLeave={() => setIsHovered(false)}
+  >
+    <div className="embla__container">
+      {banners.map((banner, index) => (
+        <div className="embla__slide" key={index}>
+          <a href={banner.link}>
+            <img
+              src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+              alt={`Banner ${index}`}
+              // className="w-full h-full object-cover"
+                 className="d-block w-100"
+            />
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+) : (
+  <Skeleton height={500} />
+)}
 
 
 
