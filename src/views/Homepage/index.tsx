@@ -12,7 +12,18 @@ const StudyAbroadSection = dynamic(() => import("./Components/StudyAbroadSection
 const LatestNewsSection = dynamic(() => import("./Components/LatestNewsSection"), { ssr: false });
 const ExpertSection = dynamic(() => import("./Components/ExpertSection"), { ssr: false });
 import axios from 'src/configs/axios';
-const Work = () => {
+import { GetStaticProps } from "next/types";
+
+interface Banner {
+  image: string;
+  link: string;
+}
+
+interface WorkProps {
+  banners: Banner[];
+}
+
+const Work: React.FC<WorkProps> = ({ banners }) => {
   useEffect(() => {
     AOS.init({
       once: true,
@@ -94,7 +105,7 @@ const Work = () => {
           )}
         </script>
       </Head>
-      <BannerSection banners={[]} />
+      <BannerSection banners={banners} />
       <NewsLinkSection />
       <AnalysisSection />
       <FeaturedCollegeSection />
@@ -106,24 +117,24 @@ const Work = () => {
   );
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
-    const response = await axios.get('/api/website/banner/get?promo_banner=Draft', {
-      params: { page: 1, size: 10000 }
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_WEB_URL}/api/website/banner/get?promo_banner=Draft`, {
+      params: { page: 1, size: 10000 },
     });
 
     return {
       props: {
-        banners: response.data.data || []
+        banners: response.data.data || [],
       },
       revalidate: 60,
     };
-  } catch (error) {
-    console.error("Error loading banners:", error);
+  } catch (err) {
+    console.error(err);
     return {
       props: {
-        banners: []
-      }
+        banners: [],
+      },
     };
   }
 };
