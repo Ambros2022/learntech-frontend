@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik'; // Ensure correct import
+import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik'; 
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast';
@@ -44,14 +44,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
         job_location_id: Yup.string().required('Job Location is required').trim(),
         currentLocation: Yup.string().required('Current Location is required').trim(),
         total_exp: Yup.string().required('Total Experience is required').trim(),
-        // resume: Yup.mixed()
-        //     .required('Resume is required')
-        //     .test('fileType', 'Only PDF and DOCX files are allowed', (value) => {
-        //         if (!value) return false;
-        //         const file = value as File;
-        //         const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-        //         return allowedTypes.includes(file.type);
-        //     }),
+
     });
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -86,7 +79,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                 setResumeFileName('');
                 setShowPhoneInput(false);
                 setTimeout(() => setShowPhoneInput(true), 0);
-                // router.push('/thank-you');
+             
             }
         } catch (error) {
             toast.error('Error submitting form. Please try again later.');
@@ -197,7 +190,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                                         const file = event.currentTarget.files ? event.currentTarget.files[0] : null;
                                         console.log('Selected file:', file);
                                         setFieldValue('resume', file);
-                                        setResumeFileName(file ? file.name : ''); // Update state with file name
+                                        setResumeFileName(file ? file.name : ''); 
                                     }}
                                 />
                                 <ErrorMessage name='resume' component='div' className='text-danger' />

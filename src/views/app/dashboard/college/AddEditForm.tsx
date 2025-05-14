@@ -428,26 +428,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
-            // if (selectedphoto == '') {
-
-            //     toast.error('Please Upload Icon', {
-            //         duration: 2000
-            //     })
-            //     setLoading(false);
-
-            //     return false;
-
-            // }
-            // if (selectedbanner == '') {
-
-            //     toast.error('Please Upload BannerImage', {
-            //         duration: 2000
-            //     })
-            //     setLoading(false);
-
-            //     return false;
-
-            // }
+        
             if (selectedlogo == '') {
 
                 toast.error('Please Upload Logo', {
@@ -1197,9 +1178,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("info", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                              
                                             </>
                                         )}
                                     />
@@ -1217,9 +1196,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("course_fees", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                            
                                             </>
                                         )}
                                     />
@@ -1235,9 +1212,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("admissions", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                       
                                             </>
                                         )}
                                     />
@@ -1255,9 +1230,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("placements", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                              
                                             </>
                                         )}
                                     />
@@ -1273,9 +1246,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("rankings", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                               
                                             </>
                                         )}
                                     />
@@ -1291,9 +1262,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("scholarship", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                           
                                             </>
                                         )}
                                     />
@@ -1311,9 +1280,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("hostel", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                          
                                             </>
                                         )}
                                     />

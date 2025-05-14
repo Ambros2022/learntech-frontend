@@ -174,13 +174,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('exp_required', data.exp_required);
             formData.append('total_positions', data.total_positions);
             formData.append('status', data.status);
-            // let url = 'api/admin/jobsposition/add';
-            // let formData: any = {};
-            // formData.name = data.name;
-            // formData.job_description = data.job_description;
-            // formData.exp_required = data.exp_required;
-            // formData.total_positions = data.total_positions;
-            // formData.status = data.status;
+        
             formData.append('joblocations', data.joblocations);
             try {
                 let response = await axios1.post(url, formData)

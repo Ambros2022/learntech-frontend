@@ -146,9 +146,7 @@ const ReviewSec = ({ data }) => {
 
             });
 
-            // console.log(response.data.data.content)
-            // console.log(response.data.data)
-            // setCardData(response)
+      
             console.log(cardData)
             const updatedCardData = cardData.map(review => {
                 console.log(review.id)

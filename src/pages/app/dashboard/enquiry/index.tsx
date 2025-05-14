@@ -321,23 +321,7 @@ const SecondPage = () => {
 
 
 
-  // const AddButtonToolbar = () => {
-
-  //   return (
-  //     <>
-  //       <Link href={'./course/add'}>
-  //         <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
-  //           <Icon icon='tabler:plus' />
-  //           Add
-  //         </Fab>
-  //       </Link>
-
-  //     </>
-  //   );
-  // };
-
-  // const AddButtonComponent = <AddButtonToolbar />;
-
+  
   return (
     <Grid container spacing={6}>
 

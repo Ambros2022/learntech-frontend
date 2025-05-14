@@ -311,12 +311,7 @@ const SecondPage = () => {
           setLoading(false);
           console.error("API call error:", error);
         });
-      // } 
 
-      // else {
-      //   // schoolId is empty, handle accordingly (e.g., set loading to false)
-      //   setLoading(false);
-      // }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationModel, reloadpage]

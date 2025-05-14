@@ -61,7 +61,7 @@ import 'src/iconify-bundle/icons-bundle-react';
 
 // ** Global css styles
 import '../../styles/globals.css';
-import '../../styles/embla.css';
+
 
 // ** Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -108,9 +108,6 @@ const Guard = ({ children, authGuard, guestGuard }: GuardProps) => {
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  // useEffect(() => {
-  //   import('bootstrap/dist/js/bootstrap.min.js');
-  // }, []);
   useEffect(() => {
     require('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
@@ -128,14 +125,10 @@ const App = (props: ExtendedAppProps) => {
       <CacheProvider value={emotionCache}>
         <Head>
           <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
-          {/* <meta
-            name='description'
-            content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad.'
-          /> */}
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
 
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+
 
           <script type="application/ld+json">
             {JSON.stringify(
@@ -174,7 +167,13 @@ const App = (props: ExtendedAppProps) => {
           </script>
 
           <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
+          <link rel="preload" as="image" href="/images/icons/learntech-logo.webp" />
+          <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         </Head>
+        <Script
+          strategy='lazyOnload'
+          src='https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css'
+        />
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
           <AuthProvider>
             <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>

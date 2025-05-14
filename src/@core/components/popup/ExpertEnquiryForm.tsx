@@ -29,13 +29,13 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
         contact_number: Yup.string().required('Phone Number is required'),
         course: Yup.string().required('Stream is required').trim(),
-        // location: Yup.string().required('Location is required').trim(),
+        
     });
 
     const handleSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
         try {
             toast.loading('Processing');
-            console.log('Form values:', values); // Logging form values for debugging
+            console.log('Form values:', values); 
             const formData = new FormData();
             formData.append('name', values.name);
             formData.append('email', values.email);
@@ -83,7 +83,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
 
     useEffect(() => {
         getStreamData();
-        // getCoursesData();
+    
     }, [getStreamData]);
 
     return (
@@ -93,7 +93,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
                 email: '',
                 contact_number: '',
                 course: '',
-                // location: '',
+      
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}

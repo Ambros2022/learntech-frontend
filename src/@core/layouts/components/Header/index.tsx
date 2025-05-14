@@ -9,7 +9,7 @@ import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown'
 import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown'
 import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
-import dynamic from 'next/dynamic' // Dynamic import for Next.js
+import dynamic from 'next/dynamic' 
 import Avatar from '@mui/material/Avatar'
 const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false })
 const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false })
@@ -46,7 +46,6 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const toggleDropdown = () => setIsDropdownOpen(prev => !prev)
-  // const closeDropdown = () => setIsDropdownOpen(false)
 
   const closeDropdown = () => {
     setIsDropdownOpen(false);
@@ -54,11 +53,11 @@ const Header = () => {
   };
 
   const handleMouseEnter = () => {
-    setIsDropdownOpen(true) // Open dropdown on hover
+    setIsDropdownOpen(true) 
   }
 
   const handleMouseLeave = () => {
-    setIsDropdownOpen(false) // Close dropdown when not hovering
+    setIsDropdownOpen(false) 
   }
 
   const isLinkActive = href => {
@@ -224,7 +223,7 @@ const Header = () => {
       <nav className='navbar navbar-expand-lg bg-white navt' style={{ zIndex: '100' }}>
         <div className='container-xl'>
           <Link className='navbar-brand' href='/'>
-            <Image src='/images/icons/learntech-logo.png' width={160} height={50} alt='learntech-logo' />
+            <Image priority  src='/images/icons/learntech-logo.webp' width={160} height={50} alt='learntech-logo' />
           </Link>
           <button
             className='navbar-toggler'
@@ -318,9 +317,7 @@ const Header = () => {
 
                   <div
                     className={`dropdown-menu custom-dropdown ${isDropdownOpen ? 'show' : ''}`}
-                  // data-bs-auto-close='outside'
                   >
-                    {/* <Statedropdown states={states} type="Universities"      onClose={closeDropdown}  /> */}
                     {isDropdownOpen && <Statedropdown states={states} type="Colleges" onClose={closeDropdown} />}
 
                   </div>
@@ -389,7 +386,6 @@ const Header = () => {
                     onClick={event => {
                       event.stopPropagation();
                       setIsDropdownOpen(!isDropdownOpen)
-                      // setIsOpen(false);
                     }}
                   >
                     &gt;

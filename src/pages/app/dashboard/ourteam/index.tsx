@@ -211,13 +211,11 @@ const SecondPage = () => {
         return (
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
-              src={row.image} // replace 'imageSrc' with the field name containing the image URL in your data
-              alt={row.image} // replace 'designation' with the appropriate field name for alt text
-              style={{ width: 100, height: 40, marginRight: 10 }} // adjust width, height, and margin as needed
+              src={row.image} 
+              alt={row.image} 
+              style={{ width: 100, height: 40, marginRight: 10 }}
             />
-            {/* <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.image}
-            </Typography> */}
+            
           </div>
         );
       }

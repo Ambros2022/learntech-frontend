@@ -14,11 +14,21 @@ import dynamic from 'next/dynamic';
 const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'), { ssr: false });
 const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
 import Carousel from 'react-bootstrap/Carousel';
+import Head from 'next/head';
+import { GetStaticProps } from 'next/types';
 let cancelToken: any;
-import useEmblaCarousel from 'embla-carousel-react';
-// import 'embla-carousel/embla-carousel.css' ;
+
+interface Banner {
+  image: string;
+  link: string;
+}
+
+interface Props {
+  banners: Banner[];
+}
+
 const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
-import Autoplay from 'embla-carousel-autoplay';
+
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const validationSchema = Yup.object().shape({
@@ -29,29 +39,11 @@ const validationSchema = Yup.object().shape({
   location: Yup.string().required('Location is required'),
 });
 
-function BannerSection() {
+const BannerSection = ({ banners }: { banners: any[] }) => {
   const router = useRouter();
-  const [banners, setBanners] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-
-  const getbanner = useCallback(async () => {
-    try {
-      const roleparams: any = { page: 1, size: 10000 };
-      const response = await axios.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
-      setBanners(response.data.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setImagesLoaded(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    getbanner();
-  }, [getbanner]);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -111,203 +103,188 @@ function BannerSection() {
   const handleInputChange = (event, value) => {
     handleSearch(value);
   };
-  // const [imagesLoaded, setImagesLoaded] = useState(false);
+  const preloadImage = banners?.length ? banners[0].image : null;
 
-  // mark loaded once your images are ready (e.g. after fetch)
-  useEffect(() => {
-    if (banners.length) setImagesLoaded(true);
-  }, [banners]);
-
-  // pause on hover
-
-
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 1500, stopOnInteraction: false }),
-  ]);
-  
-  const [isHovered, setIsHovered] = useState(false);
-  
-  useEffect(() => {
-    if (!emblaApi) return;
-  
-    if (isHovered) {
-      emblaApi?.plugins()?.autoplay?.stop();
-    } else {
-      emblaApi?.plugins()?.autoplay?.play();
-    }
-  }, [isHovered, emblaApi]);
   return (
-    <section className="bannerCon bg-formClr" id="animation1">
-
-      {/* {imagesLoaded && banners.length > 0 ? (
-        <Carousel interval={1500} pause="hover" style={{ zIndex: '39' }}>
-          {banners.map((banner, index) => (
-            <Carousel.Item key={index}>
-              <a href={banner.link}>
-                <img
-                  className="d-block w-100"
-                  src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                  alt={`Banner ${index}`}
-                />
-
-              </a>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      ) : (
-        <Skeleton height={500} />
-      )} */}
-{imagesLoaded && banners.length > 0 ? (
-  <div
-    className="embla"
-    ref={emblaRef}
-    style={{ zIndex: 39 }}
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
-  >
-    <div className="embla__container">
-      {banners.map((banner, index) => (
-        <div className="embla__slide" key={index}>
-          <a href={banner.link}>
-            <img
-              src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-              alt={`Banner ${index}`}
-              // className="w-full h-full object-cover"
-                 className="d-block w-100"
-            />
-          </a>
-        </div>
-      ))}
-    </div>
-  </div>
-) : (
-  <Skeleton height={500} />
-)}
+    <>
+      <Head>
+        {preloadImage && (
+          <link
+            rel="preload"
+            as="image"
+            href={`${process.env.NEXT_PUBLIC_IMG_URL}/${preloadImage}`}
+          />
+        )}
+      </Head>
+      <section className="bannerCon bg-formClr" id="animation1">
 
 
 
-      <div className="bannerFormSec">
-        <div className="container-fluid">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2" >
-                <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
-                  <div className="outlineSec">
-                    <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
-                    <div className="row">
-                      <div className="col-12 position-relative">
-                        <Autocomplete
-                          open={open}
-                          onClose={() => setOpen(false)}
-                          onInputChange={handleInputChange}
-                          options={searchResults}
-                          getOptionLabel={(option: any) => `${option.name} ${option.short_name}`} // Include both name and short_name
-                          renderOption={(props: any, option: any) => {
-                            const linkMap: { [key: string]: string } = {
-                              collegedata: `/college/${option.id}/${option.slug}`,
-                              schooldata: `/school/${option.id}/${option.slug}`,
-                              examdata: `/exam/${option.id}/${option.slug}`,
-                              coursesdata: `/course/${option?.streamID}/${option?.streamSlug}/${option.slug}`,
+        {banners?.length > 0 ? (
+          <Carousel interval={1500} pause="hover" style={{ zIndex: '39' }}>
+            {banners.map((banner, index) => (
+              <Carousel.Item key={index}>
+                <a href={banner.link}>
+                  <Image
+                    className="d-block w-100"
+                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                    alt={`Banner ${index}`}
+                    width={1920}
+                    height={500}
+                    priority={index === 0} // preload the first image
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </a>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        ) : (
+          <Skeleton height={500} />
+        )}
 
-                            };
 
-                            return (
-                              <li {...props}>
-                                <Link href={linkMap[option.type] || "#"} style={{ color: "#000", textDecoration: "none", display: "block", width: "100%", height: "100%" }}>
-                                  {option.name}
-                                </Link>
-                              </li>
-                            );
-                          }}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              size="small"
-                              placeholder="Search for colleges, universities, exams & courses"
-                              className="form-control"
-                              InputProps={{
-                                ...params.InputProps,
-                                sx: {
-                                  "& .MuiInputBase-input::placeholder": { color: "black" }
-                                },
-                                endAdornment: (
-                                  <React.Fragment>
-                                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                    {params.InputProps.endAdornment}
-                                    {params.inputProps.value ? (
-                                      <InputAdornment position="end">
-                                        <IconButton
-                                          onClick={() => {
-                                            if (params.inputProps.onChange) {
-                                              params.inputProps.onChange({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
-                                            }
-                                          }}
-                                        >
-                                          <ClearIcon />
-                                        </IconButton>
-                                      </InputAdornment>
-                                    ) : null}
-                                  </React.Fragment>
-                                )
-                              }}
-                            />
-                          )}
-                        />
 
+
+        <div className="bannerFormSec">
+          <div className="container-fluid">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2" >
+                  <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
+                    <div className="outlineSec">
+                      <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
+                      <div className="row">
+                        <div className="col-12 position-relative">
+                          <Autocomplete
+                            open={open}
+                            onClose={() => setOpen(false)}
+                            onInputChange={handleInputChange}
+                            options={searchResults}
+                            getOptionLabel={(option: any) => `${option.name} ${option.short_name}`} // Include both name and short_name
+                            renderOption={(props: any, option: any) => {
+                              const linkMap: { [key: string]: string } = {
+                                collegedata: `/college/${option.id}/${option.slug}`,
+                                schooldata: `/school/${option.id}/${option.slug}`,
+                                examdata: `/exam/${option.id}/${option.slug}`,
+                                coursesdata: `/course/${option?.streamID}/${option?.streamSlug}/${option.slug}`,
+
+                              };
+
+                              return (
+                                <li {...props}>
+                                  <Link href={linkMap[option.type] || "#"} style={{ color: "#000", textDecoration: "none", display: "block", width: "100%", height: "100%" }}>
+                                    {option.name}
+                                  </Link>
+                                </li>
+                              );
+                            }}
+                            renderInput={(params) => (
+                              <TextField
+                                {...params}
+                                size="small"
+                                placeholder="Search for colleges, universities, exams & courses"
+                                className="form-control"
+                                InputProps={{
+                                  ...params.InputProps,
+                                  sx: {
+                                    "& .MuiInputBase-input::placeholder": { color: "black" }
+                                  },
+                                  endAdornment: (
+                                    <React.Fragment>
+                                      {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                      {params.InputProps.endAdornment}
+                                      {params.inputProps.value ? (
+                                        <InputAdornment position="end">
+                                          <IconButton
+                                            onClick={() => {
+                                              if (params.inputProps.onChange) {
+                                                params.inputProps.onChange({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
+                                              }
+                                            }}
+                                          >
+                                            <ClearIcon />
+                                          </IconButton>
+                                        </InputAdornment>
+                                      ) : null}
+                                    </React.Fragment>
+                                  )
+                                }}
+                              />
+                            )}
+                          />
+
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '41' }}>
-                <div className="searchForm">
-                  <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
-                  <Formik
-                    initialValues={{
-                      name: '',
-                      email: '',
-                      contact_number: '',
-                      current_url: '',
-                      course: '',
-                      location: '',
-                    }}
-                    validationSchema={validationSchema}
-                    onSubmit={handleSubmit}
-                  >
-                    <Form>
-                      <div className="mb-3">
-                        <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
-                        <ErrorMessage name="name" component="div" className="error text-danger" />
-                      </div>
-                      <div className="mb-3">
-                        <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                        <ErrorMessage name="email" component="div" className="error text-danger" />
-                      </div>
-                      <div className="mb-3">
-                        <PhoneInputField name="contact_number" />
-                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                      </div>
-                      <div className="mb-3">
-                        <Field type="text" name="course" placeholder="Course in mind" className="form-control" />
-                        <ErrorMessage name="course" component="div" className="error text-danger" />
-                      </div>
-                      <div className="mb-3">
-                        <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                        <ErrorMessage name="location" component="div" className="error text-danger" />
-                      </div>
-                      <div className="d-grid">
-                        <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                      </div>
-                    </Form>
-                  </Formik>
+                <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '41' }}>
+                  <div className="searchForm">
+                    <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
+                    <Formik
+                      initialValues={{
+                        name: '',
+                        email: '',
+                        contact_number: '',
+                        current_url: '',
+                        course: '',
+                        location: '',
+                      }}
+                      validationSchema={validationSchema}
+                      onSubmit={handleSubmit}
+                    >
+                      <Form>
+                        <div className="mb-3">
+                          <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
+                          <ErrorMessage name="name" component="div" className="error text-danger" />
+                        </div>
+                        <div className="mb-3">
+                          <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
+                          <ErrorMessage name="email" component="div" className="error text-danger" />
+                        </div>
+                        <div className="mb-3">
+                          <PhoneInputField name="contact_number" />
+                          <ErrorMessage name="contact_number" component="div" className="error text-danger" />
+                        </div>
+                        <div className="mb-3">
+                          <Field type="text" name="course" placeholder="Course in mind" className="form-control" />
+                          <ErrorMessage name="course" component="div" className="error text-danger" />
+                        </div>
+                        <div className="mb-3">
+                          <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
+                          <ErrorMessage name="location" component="div" className="error text-danger" />
+                        </div>
+                        <div className="d-grid">
+                          <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
+                        </div>
+                      </Form>
+                    </Formik>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
-
+export const getStaticProps = async () => {
+  try {
+    const response = await axios.get('/api/website/banner/get?promo_banner=Draft');
+    return {
+      props: {
+        banners: response.data.data || [],
+      },
+      revalidate: 60,
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      props: {
+        banners: [],
+      },
+    };
+  }
+};
 export default BannerSection;

@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useRef, useMemo, ChangeEvent, useEffect } from 'react';
-// import JoditEditor from 'jodit-react';
 import dynamic from 'next/dynamic';
 interface ExampleProps {
 	placeholder?: string;
@@ -24,10 +23,7 @@ const Example: React.FC<ExampleProps> = ({ placeholder, intaialvalue = '', onCha
 			ref={editor}
 			value={values}
 			onChange={onChanges}
-		// config={config}
-		// tabIndex={1} // tabIndex of textarea
-		// onBlur={handleBlur} // preferred to use only this option to update the content for performance reasons
-		// onChange={handleChange}
+	
 		/>
 	);
 }

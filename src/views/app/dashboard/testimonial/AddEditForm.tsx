@@ -96,10 +96,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
 
     const schema: any = yup.object().shape({
-        // title: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
+
         name: yup
             .string()
             .trim()

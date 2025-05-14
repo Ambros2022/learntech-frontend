@@ -166,22 +166,7 @@ const SecondPage = () => {
 
   let columns: GridColDef[] = [
 
-    // {
-    //   flex: 0.175,
-    //   minWidth: 100,
-    //   field: 'title',
-    //   headerName: 'title',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params;
-    //     return (
-    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //         {row.title}
-    //       </Typography>
-    //     );
-    //   }
-    // },
-    
-
+  
     {
       flex: 0.175,
       minWidth: 100,

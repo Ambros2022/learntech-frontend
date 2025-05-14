@@ -252,21 +252,6 @@ const SecondPage = () => {
 
 
 
-    // {
-    //   flex: 0.5,
-    //   minWidth: 100,
-    //   field: 'current_location',
-    //   headerName: 'current location',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params;
-    //     return (
-    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //         {row.current_location}
-    //       </Typography>
-    //     );
-    //   }
-    // },
-
     {
       flex: 0.200,
       minWidth: 100,
@@ -274,13 +259,7 @@ const SecondPage = () => {
       headerName: 'Job Position',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
-        // return (
-        //   <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-        //     {row.jobspositions.name}
-        //     {row.current_location}
-        //   </Typography>
-
-        // );
+      
 
         return (
           <div>

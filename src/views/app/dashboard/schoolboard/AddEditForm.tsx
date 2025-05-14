@@ -107,9 +107,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-        // country_id: yup.object().required("This field is required"),
-        // state_id: yup.object().required("This field is required"),
-        // city_id: yup.object().required("This field is required"),
+  
 
     })
     const defaultValues = {
