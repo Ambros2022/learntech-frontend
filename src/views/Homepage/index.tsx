@@ -94,7 +94,7 @@ const Work = () => {
           )}
         </script>
       </Head>
-      <BannerSection />
+      <BannerSection banners={[]} />
       <NewsLinkSection />
       <AnalysisSection />
       <FeaturedCollegeSection />
