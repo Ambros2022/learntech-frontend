@@ -11,7 +11,7 @@ const ExploreSection = dynamic(() => import("./Components/ExploreSection"), { ss
 const StudyAbroadSection = dynamic(() => import("./Components/StudyAbroadSection"), { ssr: false });
 const LatestNewsSection = dynamic(() => import("./Components/LatestNewsSection"), { ssr: false });
 const ExpertSection = dynamic(() => import("./Components/ExpertSection"), { ssr: false });
-
+import axios from 'src/configs/axios';
 const Work = () => {
   useEffect(() => {
     AOS.init({
@@ -105,4 +105,26 @@ const Work = () => {
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  try {
+    const response = await axios.get('/api/website/banner/get?promo_banner=Draft', {
+      params: { page: 1, size: 10000 }
+    });
+
+    return {
+      props: {
+        banners: response.data.data || []
+      },
+      revalidate: 60,
+    };
+  } catch (error) {
+    console.error("Error loading banners:", error);
+    return {
+      props: {
+        banners: []
+      }
+    };
+  }
+};
 export default Work;
