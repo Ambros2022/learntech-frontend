@@ -1,5 +1,5 @@
 // ** React Imports
-import {  ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 // ** Next Import
 import Link from 'next/link'
@@ -100,7 +100,7 @@ const LoginV1 = () => {
   const {
     control,
     handleSubmit,
-    
+
     formState: { errors }
   } = useForm<FormInputs>({ defaultValues })
 
@@ -113,7 +113,7 @@ const LoginV1 = () => {
       if (data.error) {
         toast.error(data.error)
         setLoading(false)
-        
+
         return
       }
       setLoading(false)
@@ -125,14 +125,14 @@ const LoginV1 = () => {
 
   return (
     <>
-    
+
       <Box className='content-center'>
         <AuthIllustrationV1Wrapper>
           <Card>
             <CardContent sx={{ p: theme => `${theme.spacing(10.5, 8, 8)} !important` }}>
               <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                 <Link href="/">
-                  <img src='/images/logo.png' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' /></Link>
+                  <img src='/images/Learntech200.webp' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' /></Link>
                 <Typography variant='h3' sx={{ ml: 2.5, fontWeight: 700 }}>
                   {themeConfig.templateName}
                 </Typography>
@@ -145,7 +145,7 @@ const LoginV1 = () => {
                     <Controller
                       name='email'
                       control={control}
-                     
+
                       rules={{
                         required: 'email is required',
                         validate: {

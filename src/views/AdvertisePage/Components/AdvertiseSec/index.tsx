@@ -210,7 +210,7 @@ const AdvertiseSec = ({ data }) => {
                                 </div>
                                 <div className="col-md-12 col-lg-12 mb-3 mx-md-0 pt-3 pt-md-5">
                                     <div className='bg-skyBlue  rounded border text-center '>
-                                        {/* <img src="/images/icons/advertisement.png" width={200} height={500} alt={'advertisement-logo'} /> */}
+                                        
                                         {banners?.map((banner, index) => (
 
                                             <img
