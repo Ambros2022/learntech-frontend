@@ -117,25 +117,5 @@ const Work: React.FC<WorkProps> = ({ banners }) => {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_WEB_URL}/api/website/banner/get?promo_banner=Draft`, {
-      params: { page: 1, size: 10000 },
-    });
 
-    return {
-      props: {
-        banners: response.data.data || [],
-      },
-      revalidate: 60,
-    };
-  } catch (err) {
-    console.error(err);
-    return {
-      props: {
-        banners: [],
-      },
-    };
-  }
-};
 export default Work;
