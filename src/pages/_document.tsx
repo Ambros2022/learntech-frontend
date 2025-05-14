@@ -30,7 +30,7 @@ class CustomDocument extends Document {
             //@ts-ignore
             onLoad="this.media='all'"
           />
-          <link rel='logo' sizes='180x180' href='/images/logo.png' />
+          <link rel='logo' sizes='180x180' href='/images/Learntech200.webp' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
           <link rel='icon' type='image/webp' href='/images/fav-icon.webp' />
 

@@ -8,7 +8,7 @@ const BannerSec = () => {
         <>
             <section className='scholarshipSec'>
                 <div className='position-relative scholarShipImg'>
-                    <img src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
+                    <img src='/images/icons/BannerBG.webp' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
                     <div className='position-absolute h-100 w-100 d-flex justify-content-center' style={{ top: '0px' }}>
                         <div className="align-content-center text-center">
 

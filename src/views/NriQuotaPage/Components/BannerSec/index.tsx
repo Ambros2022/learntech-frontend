@@ -8,12 +8,12 @@ const BannerSec = () => {
         <>
             <section className='NriQuotaSec'>
                 <div className='position-relative'>
-                    <img src='/images/icons/Banner BG.png' alt='Banner-img' width={1400} height={300} />
+                    <img src='/images/icons/BannerBG.webp' alt='Banner-img' width={1400} height={300} />
                     <div className="">
                         <div className="position-absolute h-100 w-100 d-flex justify-content-center" style={{ top: '1px' }}>
                             <div className="align-content-center">
                                 <h1 className='text-center fw-bold text-white mb-3'>Know All About NRI Quota Seats in India
-                                  
+
                                 </h1>
                                 <div className='text-center'>
                                     <GlobalPopupEnquiry className='btn btn-success' />

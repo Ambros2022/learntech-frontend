@@ -4,7 +4,7 @@ import React from 'react'
 const HelpSec = () => {
     return (
         <section className='helpSec position-relative'>
-            <img src='/images/icons/helpBanner.png' className='bannerHelp' alt='help-banner' width={1400} height={500} />
+            <img src='/images/icons/helpBanner.webp' className='bannerHelp' alt='help-banner' width={1400} height={500} />
             <div className="d-flex justify-content-center position-absolute h-100 w-100" style={{ top: '0px', backgroundColor: 'rgb(0,0,0,0.7)' }}>
                 <div className="container d-flex flex-column justify-content-center h-100">
                     <h2 className='text-white fw-bold text-center align-self-center mb-5'>WE WILL HELP YOU FROM BEGINNING TO END</h2>

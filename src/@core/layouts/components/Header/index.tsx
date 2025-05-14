@@ -223,7 +223,7 @@ const Header = () => {
       <nav className='navbar navbar-expand-lg bg-white navt' style={{ zIndex: '100' }}>
         <div className='container-xl'>
           <Link className='navbar-brand' href='/'>
-            <Image priority  src='/images/icons/learntech-logo.webp' width={160} height={50} alt='learntech-logo' />
+            <Image priority  src='/images/Learntech160.webp' width={160} height={50} alt='learntech-logo' />
           </Link>
           <button
             className='navbar-toggler'

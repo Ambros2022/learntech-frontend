@@ -39,7 +39,7 @@ const Header = () => {
                             </ul>
                             <form className="d-flex" role="search">
                                 <Link href='/'>
-                                    <img src='/images/icons/learntech-logo.png' width={250} height={250} alt='learntech-logo' className="marginLogo img-fluid" />
+                                    <img src='/images/Learntech325.webp' width={250} height={250} alt='learntech-logo' className="marginLogo img-fluid" />
                                 </Link>
                             </form>
                         </div>

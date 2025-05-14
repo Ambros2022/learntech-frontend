@@ -49,7 +49,7 @@ const LeaderSec = () => {
                     <div className="row">
                         <div className="col-md-4 col-lg-3 col-xl-3">
                             <div className='userSecImg mx-auto'>
-                                <img src='/images/icons/MansoorAli.jpeg' width={400} height={400} className='img-fluid rounded' alt='user-img' />
+                                <img src='/images/icons/MansoorAli.webp' width={200} height={200} className='img-fluid rounded' alt='user-img' />
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-9 col-xl-9 text-md-start text-center">

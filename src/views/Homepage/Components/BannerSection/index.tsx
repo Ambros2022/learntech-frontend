@@ -117,7 +117,7 @@
               />
             )}
           </Head>
-          <section className="bannerCon bg-formClr" id="animation1">
+          <section className="bannerCon bg-formClr" >
 
 
 
@@ -150,7 +150,7 @@
               <div className="container-fluid">
                 <div className="container">
                   <div className="row">
-                    <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2" >
+                    <div className="col-md-6 col-lg-6 mb-5 d-flex"  >
                       <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
                         <div className="outlineSec">
                           <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
@@ -219,7 +219,7 @@
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '41' }}>
+                    <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5"  style={{ zIndex: '41' }}>
                       <div className="searchForm">
                         <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
                         <Formik

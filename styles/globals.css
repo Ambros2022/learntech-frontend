@@ -3141,22 +3141,6 @@
     background-color: #005582 !important;
   }
 
-  .facebook-login-button {
-    background-color: #0077b5 !important;
-    color: #fff !important;
-    border: none !important;
-    padding: 10px 20px !important;
-    border-radius: 5px !important;
-    cursor: pointer !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 1px 0 rgba(0, 0, 0, 0.24) !important;
-  }
-
-  .facebook-login-button:hover {
-    background-color: #005582 !important;
-  }
 
   .linkedin-login-button {
     background-color: #0077b5 !important;
@@ -3277,8 +3261,8 @@
   }
 
   .socialThnks img {
-    width: 28px !important;
-    height: 28px !important;
+    width: 27px !important;
+    height: 27px !important;
   }
 
 
@@ -4035,7 +4019,7 @@
 
   .blogBannerSec {
     height: 300px !important;
-    background-image: url('/images/icons/Banner BG.png') !important;
+    background-image: url('/images/icons/BannerBG.webp') !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
   }
@@ -6391,8 +6375,8 @@
   .state-dropdwon-width {
     width: 230px !important;
   }
-  
-.height-fix-blogs{
-  height: 1105px !important;
-  overflow: scroll !important;
-}
+
+  .height-fix-blogs {
+    height: 1105px !important;
+    overflow: scroll !important;
+  }

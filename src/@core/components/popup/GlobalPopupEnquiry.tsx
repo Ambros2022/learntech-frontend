@@ -48,7 +48,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                         pagename == 'Brochure' ?
                     
                             <a onClick={() => setModalShow(true)} className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
-                                <img src="/images/icons/Download Brochure.webp" className='mb-md-0 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" />
+                                <img src="/images/icons/DownloadBrochure.webp" className='mb-md-0 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" />
 
                             </a>
                             :

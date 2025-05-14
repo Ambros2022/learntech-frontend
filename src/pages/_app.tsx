@@ -59,6 +59,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 
 import 'src/iconify-bundle/icons-bundle-react';
 
+import 'bootstrap-icons/font/bootstrap-icons.css';
 // ** Global css styles
 import '../../styles/globals.css';
 
@@ -170,10 +171,7 @@ const App = (props: ExtendedAppProps) => {
           <link rel="preload" as="image" href="/images/icons/learntech-logo.webp" />
           <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         </Head>
-        <Script
-          strategy='lazyOnload'
-          src='https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css'
-        />
+     
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
           <AuthProvider>
             <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>

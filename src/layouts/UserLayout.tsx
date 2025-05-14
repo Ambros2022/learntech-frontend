@@ -38,8 +38,8 @@ interface Props {
 const AppBrand = () => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-       <NextLink href="/" >
-      <img src='/images/logo.png' style={{objectFit:"contain"}} alt='logo' width='200' height='100' />
+      <NextLink href="/" >
+        <img src='/images/Learntech200.webp' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' />
       </NextLink>
     </Box>
   )
@@ -50,7 +50,7 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
   const { settings, saveSettings } = useSettings()
 
 
-   
+
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'))
 
   if (hidden && settings.layout === 'horizontal') {
@@ -74,7 +74,7 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
           // Uncomment the below line when using server-side menu in vertical layout and comment the above line
           // navItems: verticalMenuItems
         },
-      
+
         appBar: {
           content: props => (
             <VerticalAppBarContent
@@ -101,7 +101,7 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
       })}
     >
       {children}
-      
+
     </Layout>
   )
 }

@@ -88,7 +88,7 @@ function BannerSection() {
       <section className='collegeBannerCon bg-blue examBannerCon'>
         <div className="position-relative">
           <div>
-            <img src='/images/icons/Banner BG.png' width={1400} height={430} alt='banner-img' className='position-relative w-100' />
+            <img src='/images/icons/BannerBG.webp' width={1400} height={430} alt='banner-img' className='position-relative w-100' />
           </div>
           <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
             <div className='d-flex justify-content-center w-100 '>
