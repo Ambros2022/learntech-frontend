@@ -1,10 +1,8 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
-// import './stylesglobalpopup.css';
 import Modal from 'react-bootstrap/Modal';
 import EnquiryForm from 'src/@core/components/popup/form';
-// import CallNow from 'src/assets/img/call-now.svg';
-// import GetAppIcon from '@material-ui/icons/GetApp';
+
 
 interface Props {
     className?: any;

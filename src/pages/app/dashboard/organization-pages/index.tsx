@@ -200,47 +200,6 @@ const SecondPage = () => {
       }
     },
 
-    // {
-    //   flex: 0.175,
-    //   minWidth: 100,
-    //   field: 'image',
-    //   headerName: 'image',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params;
-    
-    //     return (
-    //       <div style={{ display: 'flex', alignItems: 'center' }}>
-    //         <img
-    //           src={row.image} // replace 'imageSrc' with the field name containing the image URL in your data
-    //           alt={row.image} // replace 'designation' with the appropriate field name for alt text
-    //           style={{ width: 100, height: 40, marginRight: 10 }} // adjust width, height, and margin as needed
-    //         />
-    //         {/* <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //           {row.image}
-    //         </Typography> */}
-    //       </div>
-    //     );
-    //   }
-    // },
-    
-
-    // {
-    //   flex: 0.3,
-    //   minWidth: 200,
-    //   field: 'content',
-    //   headerName: 'content',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params
-
-    //     return (
-    //           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //             {row.content}
-    //           </Typography>
-    //     )
-    //   }
-    // },
-   
-
     {
       flex: 0.175,
       minWidth: 100,

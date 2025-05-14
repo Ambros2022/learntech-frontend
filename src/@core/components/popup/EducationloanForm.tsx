@@ -15,8 +15,7 @@ interface Props {
 
 const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
     const router = useRouter();
-    const [cities, setCities] = useState<any>([]);  // Use any type for tabs
-    // const [courses, setCourses] = useState<any>([]);  // Use any type for tabs
+    const [cities, setCities] = useState<any>([]);  
 
     const getcities = useCallback(async () => {
 
@@ -976,22 +975,11 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
 
     ]
 
-    // const getcourses = useCallback(async () => {
-
-    //     try {
-    //         const roleparams: any = {}
-
-    //         roleparams['size'] = 10000;
-    //         const response = await axios1.get('api/website/stream/get', { params: roleparams });
-    //         setCourses(response.data.data);
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // }, []);
+  
 
     useEffect(() => {
         getcities();
-        // getcourses();
+        
     }, [])
 
 

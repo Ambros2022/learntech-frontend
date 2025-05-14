@@ -86,54 +86,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
-    // const onSubmit = async (data: any) => {
-
-    //     if (!isAddMode && olddata.id) {
-    //         let updateid = olddata.id;
-    //         setLoading(true)
-    //         let url = 'api/admin/courses/update';
-    //         const formData = new FormData();
-    //         formData.append('id', updateid);
-    //         formData.append('current_url', data.current_url);
-    //         formData.append('name', data.name);
-    //         formData.append('email', data.email);
-    //         formData.append('contact_number', data.contact_number);
-    //         formData.append('location', data.location);
-    //         formData.append('course_in_mind', data.course_in_mind);
-    //         formData.append('college_name', data.college_name);
-    //         formData.append('school_name', data.school_name);
-    //         formData.append('description', data.description);
-
-    //         try {
-    //             let response = await axios1.post(url, formData)
-    //             if (response.data.status == 1) {
-    //                 toast.success(response.data.message)
-    //                 setLoading(false)
-    //                 setError('')
-    //                 reset();
-    //                 router.back();
-    //             }
-    //             else {
-    //                 setLoading(false)
-    //                 toast.error(response.data.message)
-    //                 setError(response.data.message)
-    //             }
-
-    //         } catch (err: any) {
-
-    //             setLoading(false)
-    //             if (err.errors && err.errors.length > 0) {
-    //                 const errorMessage = err.errors[0].msg;
-    //                 setError(errorMessage || "Please try again");
-    //                 toast.error(errorMessage || "Please try again");
-    //             } else {
-    //                 setError(err.message || "Please try again");
-    //                 toast.error(err.message || "Please try again");
-    //             }
-
-    //         }
-    //     } 
-    // }
+  
 
     return (
         <>

@@ -51,85 +51,6 @@ const renderClient = (params: GridRenderCellParams) => {
 
 
 
-// const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
-//   const [open, setOpen] = useState(false);
-
-//   const handleDelete = () => {
-//     setOpen(true);
-//   }
-//   const handleClosePopup = () => {
-//     setOpen(false);
-//   };
-//   const handleConfirmRemove = async () => {
-//     await DeleteRow();
-//     setOpen(false);
-//   }
-
-//   const DeleteRow = async () => {
-//     try {
-//       await axios1.post('api/admin/review/delete/' + id)
-//         .then(response => {
-//           if (response.data.status == 1) {
-//             toast.success(response.data.message)
-//             // router.reload();
-//             onReloadPage();
-
-//           } else {
-//             toast.error(response.data.message)
-
-//           }
-//         })
-//     } catch (err: any) {
-//       console.error(err);
-//       toast.error(err.message || "please try again")
-
-//     }
-
-//   };
-
-//   return (
-//     <>
-//       <MenuItem sx={{ '& svg': { mr: 1 } }}>
-//         <Link href={`./review/edit/` + id} >
-//           <Icon icon='tabler:edit' fontSize={20} />
-//         </Link>
-//       </MenuItem>
-
-
-//       <MenuItem onClick={handleDelete} sx={{ '& svg': { mr: 1 } }}>
-//         <Icon icon='tabler:trash' fontSize={20} />
-
-//       </MenuItem>
-
-//       <Grid>
-
-//         <Dialog
-//           open={open}
-//           onClose={handleClosePopup}
-//           aria-labelledby="alert-dialog-title"
-//           aria-describedby="alert-dialog-description"
-//         >
-//           <DialogTitle className="popup-title" id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-//           <DialogContent style={{ paddingTop: '20px' }}>
-//             <DialogContentText id="alert-dialog-description">
-//               Would you like to delete?
-//             </DialogContentText>
-//           </DialogContent>
-//           <DialogActions>
-//             <Button onClick={handleClosePopup} color="primary">
-//               No
-//             </Button>
-//             <Button onClick={() => handleConfirmRemove()} color="primary" autoFocus>
-//               Yes
-//             </Button>
-//           </DialogActions>
-//         </Dialog>
-//       </Grid>
-//     </>
-
-
-//   )
-// }
 
 
 const RowOptions = ({ id, status, onReloadPage }: { id: number | string, status: string, onReloadPage: () => void }) => {
@@ -293,31 +214,7 @@ const SecondPage = () => {
       }
     },
 
-    // {
-    //   flex: 0.175,
-    //   minWidth: 100,
-    //   field: 'status',
-    //   headerName: 'status',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params;
-    //     return (
-    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //         {row.status}
-    //       </Typography>
-    //     );
-    //   }
-    // },
-  
-    // {
-    //   flex: 0.175,
-    //   minWidth: 100,
-    //   sortable: false,
-    //   field: 'actions',
-    //   headerName: 'Actions',
-    //   renderCell: ({ row }: any) => (
-    //     <RowOptions id={row.id} status={row.status} onReloadPage={handleReloadPage} />
-    //   )
-    // }
+    
   ]
 
 
@@ -390,22 +287,6 @@ const SecondPage = () => {
 
 
 
-  // const AddButtonToolbar = () => {
-
-  //   return (
-  //     <>
-  //       <Link href={'./course/add'}>
-  //         <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
-  //           <Icon icon='tabler:plus' />
-  //           Add
-  //         </Fab>
-  //       </Link>
-
-  //     </>
-  //   );
-  // };
-
-  // const AddButtonComponent = <AddButtonToolbar />;
 
   return (
     <Grid container spacing={6}>

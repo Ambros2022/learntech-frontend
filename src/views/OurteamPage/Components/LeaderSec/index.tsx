@@ -35,27 +35,7 @@ const LeaderSec = () => {
 
 
 
-    // const users = [
-    //     {
-    //         name: 'Pooja Gupta',
-    //         jobTitle: 'Business Development Manager',
-    //         imageUrl: '/images/icons/userImage.jpg',
-    //         linkedinUrl: 'https://www.linkedin.com/pooja-gupta',
-    //     },
-    //     {
-    //         name: 'Shiju Daniel',
-    //         jobTitle: 'Marketing Manager',
-    //         imageUrl: '/images/icons/userImage.jpg',
-    //         linkedinUrl: 'https://www.linkedin.com/shiju-daniel',
-    //     },
-    //     {
-    //         name: 'Ashish Gaidhane',
-    //         jobTitle: 'Digital Administrator',
-    //         imageUrl: '/images/icons/userImage.jpg',
-    //         linkedinUrl: 'https://www.linkedin.com/ashish-gaidhane',
-    //     },
-    //     // Add more users as needed
-    // ];
+  
 
     return (
         <section className='bg-white py-md-5 py-3'>

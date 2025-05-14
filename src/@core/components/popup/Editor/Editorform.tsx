@@ -6,7 +6,6 @@ import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-// import { useRouter } from 'next/router';
 interface Props {
     page?: any;
     onChanges?: any;
@@ -14,7 +13,6 @@ interface Props {
 
 const EnquiryForm: FC<Props> = ({ page, onChanges, ...rest }) => {
 
-    // const router = useRouter();
     const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 

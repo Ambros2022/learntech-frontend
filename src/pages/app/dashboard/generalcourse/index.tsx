@@ -286,7 +286,7 @@ const SecondPage = () => {
         .catch((error) => {
 
           setLoading(false);
-          // console.error("API call error:", error);
+          
         });
 
     },
@@ -375,8 +375,7 @@ const SecondPage = () => {
                   value={stream_id}
                   onChange={(e: any) => {
                     setStream_id(e.target.value);
-                    // console.log(setschoolId, "setschoolId");
-
+         
                   }}
                   SelectProps={{
                     displayEmpty: true,
@@ -410,7 +409,7 @@ const SecondPage = () => {
             rows={rows}
             rowCount={total}
             columns={columns}
-            // checkboxSelection/
+           
             sortingMode='server'
             paginationMode='server'
             pageSizeOptions={[10, 15, 25, 50]}

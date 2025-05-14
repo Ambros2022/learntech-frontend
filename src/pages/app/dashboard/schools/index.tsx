@@ -234,24 +234,7 @@ const SecondPage = () => {
         )
       }
     },
-    // {
-    //   flex: 0.175,
-    //   minWidth: 200,
-    //   field: 'country.name',
-    //   headerName: 'Location',
-    //   renderCell: (params: GridRenderCellParams) => {
-    //     const { row } = params
-
-    //     return (
-
-    //       <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-    //         {row.country.name},{row.state.name},{row.citys.name}
-    //       </Typography>
-
-
-    //     )
-    //   }
-    // },
+   
     {
       flex: 0.175,
       minWidth: 150,

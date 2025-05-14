@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
-// import Link from 'src/@core/theme/overrides/link';
 import Link from "next/link";
 const Footer = () => {
 

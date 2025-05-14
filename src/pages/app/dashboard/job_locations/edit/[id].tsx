@@ -23,18 +23,17 @@ const Edituserlayout = () => {
   const isMountedRef = useIsMountedRef();
   const router = useRouter();
   const { id } = router.query;
-  // console.log(router.query , "router.query")
+
   const isAddMode = !id;
   const [olddata, setolddata] = useState<any>(null);
   const [formloading, setFormloading] = useState(true);
   const ability = useContext(AbilityContext)
 
-  //get old data
   const getolddata = useCallback(async () => {
     try {
-      // this route needs to be swapped out to /Patient/, but it's currently returning 500
+    
       const response = await axios1.get('api/admin/alljoblocation/get/' + id);
-      // console.log(response);
+ 
 
       if (isMountedRef.current) {
         setolddata(response.data.data);

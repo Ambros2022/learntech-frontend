@@ -10,7 +10,7 @@ import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 interface Props {
     page?: any;
     onChanges?: any;
-    placeholder?: string;  // Add the placeholder prop to define its type
+    placeholder?: string;  
 }
 
 const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, ...rest }) => {
@@ -46,12 +46,11 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, ...rest }) => {
     const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    // Adjust validation schema to check for placeholder prop
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
         contact_number: Yup.string().required("Phone Number is required"),
-        course: Yup.string().required(`${placeholder || 'Course'} is required`).trim(),  // Use placeholder if available
+        course: Yup.string().required(`${placeholder || 'Course'} is required`).trim(),  
         location: Yup.string().required('Location is required').trim(),
         message: Yup.string().required('Message is required'),
     });

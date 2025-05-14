@@ -15,16 +15,25 @@ class CustomDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <link rel='preconnect' href='https://fonts.googleapis.com' />
-          <link rel='preconnect' href='https://fonts.gstatic.com' />
+
+          <link rel='preconnect' href='https://fonts.googleapis.com'
+            //@ts-ignore
+            crossOrigin='true' />
+
+          <link rel='preconnect' href='https://fonts.gstatic.com'
+            //@ts-ignore
+            crossOrigin='true' />
           <link
-            href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
             rel='stylesheet'
+            media='print'
+            //@ts-ignore
+            onLoad="this.media='all'"
           />
           <link rel='logo' sizes='180x180' href='/images/logo.png' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
           <link rel='icon' type='image/webp' href='/images/fav-icon.webp' />
-          {/* Google Tag Manager */}
+
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -36,7 +45,7 @@ class CustomDocument extends Document {
               `
             }}
           />
-          {/* Google Ads Global Site Tag (gtag.js) */}
+
           <script async src='https://www.googletagmanager.com/gtag/js?id=AW-990332405'></script>
           <script
             dangerouslySetInnerHTML={{
@@ -51,7 +60,7 @@ class CustomDocument extends Document {
         </Head>
 
         <body>
-          {/* Google Tag Manager (noscript) */}
+
           <noscript>
             <iframe
               src='https://www.googletagmanager.com/ns.html?id=GTM-MHML8KVC'
@@ -76,12 +85,12 @@ CustomDocument.getInitialProps = async ctx => {
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: App => props =>
-        (
-          <App
-            {...props} // @ts-ignore
-            emotionCache={cache}
-          />
-        )
+      (
+        <App
+          {...props} // @ts-ignore
+          emotionCache={cache}
+        />
+      )
     })
 
   const initialProps = await Document.getInitialProps(ctx)

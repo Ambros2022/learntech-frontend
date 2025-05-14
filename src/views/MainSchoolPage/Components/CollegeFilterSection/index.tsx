@@ -317,18 +317,7 @@ function CollegeFilterSection() {
                 // { label: 'Autonomous', value: 'Autonomous' },
             ]
         },
-        // {
-        //     id: 'courseType',
-        //     label: 'Course Type',
-        //     options: [
-        //         { label: 'UG', value: 'UG' },
-        //         { label: 'PG', value: 'PG' },
-        //         { label: 'Diploma', value: 'Diploma' },
-        //         { label: 'Doctorate', value: 'Doctorate' },
-        //         // { label: 'Default', value: 'Default' },
-        //     ],
-        // },
-        // { id: 'courses', label: 'Courses', options: courses },
+    
     ];
 
 
@@ -418,21 +407,7 @@ function CollegeFilterSection() {
             }
         }));
 
-        // if (groupId === 'state') {
-        //     const updatedStateIds = isChecked
-        //         ? [...selectedStateIds, value]
-        //         : selectedStateIds.filter(id => id !== value);
-
-        //     // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
-        // }
-
-        // if (groupId === 'city') {
-        //     const updatedCityIds = isChecked
-        //         ? [...selectedCityIds, value]
-        //         : selectedCityIds.filter(id => id !== value);
-
-        //     handleFilterChange(selectedStateIds.join(','), updatedCityIds.join(','), false);
-        // }
+      
     };
 
     useEffect(() => {
@@ -566,13 +541,6 @@ function CollegeFilterSection() {
                 debouncedHandleCheckboxChange("state", state, true);
                 window.scrollTo({ top: 650, behavior: 'smooth' });
 
-                // setCheckboxState(prevState => ({
-                //     ...prevState,
-                //     [groupId]: {
-                //         ...prevState[groupId],
-                //         [value]: isChecked
-                //     }
-                // }));
                 setCheckboxState(prevState => ({
                     ...prevState,
                     ["state"]: {
@@ -580,17 +548,7 @@ function CollegeFilterSection() {
                         [state]: true
                     }
                 }));
-                // setSelectedCheckboxes(prevSelected => {
-                //     const stateSelections = prevSelected.state || [];
-                //     const updatedSelections = stateSelections.includes(state)
-                //         ? stateSelections.filter(s => s !== state)
-                //         : [...stateSelections, state];
-
-                //     const updatedSelected = { ...prevSelected, state: updatedSelections };
-                //     // Call the API with the selected state IDs
-                //     getcollegedata(updatedSelected.state);
-                //     return updatedSelected;
-                // });
+               
             };
 
             return (

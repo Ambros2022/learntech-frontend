@@ -11,8 +11,19 @@ const ExploreSection = dynamic(() => import("./Components/ExploreSection"), { ss
 const StudyAbroadSection = dynamic(() => import("./Components/StudyAbroadSection"), { ssr: false });
 const LatestNewsSection = dynamic(() => import("./Components/LatestNewsSection"), { ssr: false });
 const ExpertSection = dynamic(() => import("./Components/ExpertSection"), { ssr: false });
+import axios from 'src/configs/axios';
+import { GetStaticProps } from "next/types";
 
-const Work = () => {
+interface Banner {
+  image: string;
+  link: string;
+}
+
+interface WorkProps {
+  banners: Banner[];
+}
+
+const Work: React.FC<WorkProps> = ({ banners }) => {
   useEffect(() => {
     AOS.init({
       once: true,
@@ -94,7 +105,7 @@ const Work = () => {
           )}
         </script>
       </Head>
-      <BannerSection />
+      <BannerSection banners={banners} />
       <NewsLinkSection />
       <AnalysisSection />
       <FeaturedCollegeSection />
@@ -105,4 +116,6 @@ const Work = () => {
     </>
   );
 }
+
+
 export default Work;

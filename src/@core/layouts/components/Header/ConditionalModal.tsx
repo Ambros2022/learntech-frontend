@@ -1,5 +1,5 @@
 import Image from "next/image";
-import dynamic from 'next/dynamic'; // Dynamic import for Next.js
+import dynamic from 'next/dynamic'; 
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false });

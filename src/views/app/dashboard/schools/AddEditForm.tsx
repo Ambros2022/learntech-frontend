@@ -515,9 +515,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         setFormvalue(newValue)
     }
 
-    // const [images, setImages] = useState<ImageListType>([
-    //     { "dataURL": "http://localhost:3000/images/logo.png" }
-    // ]);
+
     const [images, setImages] = useState<ImageListType>(() => {
         if (olddata && olddata.schgallery && Array.isArray(olddata.schgallery)) {
             return olddata.schgallery.map(item => ({ dataURL: Config.API_URL + '/' + item.image }));
@@ -635,35 +633,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-                                {/* <Grid item xs={12} sm={4}>
-                                    <Controller
-                                        name='school_board_id'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field }) => {
-                                            // console.log(field.value); // Print field value to console
-
-                                            return (
-                                                <CustomAutocomplete
-                                                    fullWidth
-                                                    options={boardsdata}
-                                                    loading={!boardsdata.length}
-                                                    value={field.value}
-                                                    onChange={(event, newValue) => {
-                                                        if (newValue) {
-                                                            field.onChange(newValue);
-                                                        } else {
-                                                            // Handle else condition if needed
-                                                        }
-                                                    }}
-                                                    getOptionLabel={(option: any) => option.name || ''}
-                                                    renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.school_board_id)}
-                                                        {...(errors.school_board_id && { helperText: 'This field is required' })} label='Select School Board' />}
-                                                />
-                                            );
-                                        }}
-                                    />
-                                </Grid> */}
+                                
                                 <Grid item xs={12} sm={4}>
                                     <Controller
                                         name="boards"

@@ -94,18 +94,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-        // meta_title: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
-        // meta_description: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
-        // meta_keyword: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
+       
     })
 
 
@@ -114,9 +103,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         categories: isAddMode ? '' : olddata.categories,
         // slug: isAddMode ? '' : olddata.slug,
         content: isAddMode ? '' : olddata.content,
-        // meta_title: isAddMode ? '' : olddata.meta_title,
-        // meta_description: isAddMode ? '' : olddata.meta_description,
-        // meta_keyword: isAddMode ? '' : olddata.meta_keyword,
+    
         status: isAddMode ? 'Published' : olddata.status,
 
     }
@@ -140,27 +127,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         title: yup
             .string()
             .trim()
-        //     .required(),
-        // categories: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
-        // content: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
-        // meta_title: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
-        // meta_description: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
-        // meta_keyword: yup
-        //     .string()
-        //     .trim()
-        //     .required(),
+       
     })
 
     const onSubmit = async (data: any) => {
@@ -174,11 +141,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('categories', data.categories);
             formData.append('content', data.content);
             formData.append('title', data.title);
-            // formData.append('status', data.status);
-            // formData.append('meta_title', data.meta_title);
-            // formData.append('meta_description', data.meta_description);
-            // formData.append('meta_keyword', data.meta_keyword);
-            // formData.append('backgroundimage', selectedphoto);
+           
 
             try {
                 let response = await axios1.post(url, formData)
@@ -217,20 +180,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('title', data.title);
             // formData.append('slug', data.slug);
             formData.append('content', data.content);
-            // formData.append('status', data.status);
-            // formData.append('meta_title', data.meta_title);
-            // formData.append('meta_description', data.meta_description);
-            // formData.append('meta_keyword', data.meta_keyword);
-            // if (selectedphoto == '') {
-
-            //     toast.error('Please Upload Icon', {
-            //         duration: 2000
-            //     })
-            //     setLoading(false);
-            //     return false;
-
-            // }
-            // formData.append('backgroundimage', selectedphoto);
+           
 
             try {
                 let response = await axios1.post(url, formData)
@@ -270,13 +220,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const stepsDefaultValues = {
         title: isAddMode ? '' : olddata.title,
         description: isAddMode ? '' : olddata.description,
-        // slug: isAddMode ? '' : olddata.slug,
+   
         icon: isAddMode ? '' : olddata.icon,
         order_by: isAddMode ? '' : olddata.order_by,
-        // meta_title: isAddMode ? '' : olddata.meta_title,
-        // meta_description: isAddMode ? '' : olddata.meta_description,
-        // meta_keyword: isAddMode ? '' : olddata.meta_keyword,
-        // order_by: isAddMode ? 'Published' : olddata.order_by,
+    
 
     }
 
@@ -292,11 +239,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('description', data.description);
             formData.append('icon', data.icon);
             formData.append('order_by', data.order_by);
-            // formData.append('status', data.status);
-            // formData.append('meta_title', data.meta_title);
-            // formData.append('meta_description', data.meta_description);
-            // formData.append('meta_keyword', data.meta_keyword);
-            // formData.append('backgroundimage', selectedphoto);
+  
 
             try {
                 let response = await axios1.post(url, formData)
@@ -336,19 +279,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('order_by', data.order_by);
             formData.append('description', data.description);
             formData.append('icon', data.icon);
-            // formData.append('meta_title', data.meta_title);
-            // formData.append('meta_description', data.meta_description);
-            // formData.append('meta_keyword', data.meta_keyword);
-            // if (selectedphoto == '') {
-
-            //     toast.error('Please Upload Icon', {
-            //         duration: 2000
-            //     })
-            //     setLoading(false);
-            //     return false;
-
-            // }
-            // formData.append('backgroundimage', selectedphoto);
+           
 
             try {
                 let response = await axios1.post(url, formData)

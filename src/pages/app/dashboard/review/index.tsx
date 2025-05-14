@@ -499,58 +499,7 @@ const SecondPage = () => {
 
 
   return (
-    // <Grid container spacing={6}>
-
-    //   <Grid item xs={12}>
-    //     <Card>
-
-    //       <DataGrid
-    //         autoHeight
-    //         pagination
-    //         loading={loading}
-    //         rows={rows}
-    //         rowCount={total}
-    //         columns={columns}
-    //         // checkboxSelection/
-    //         sortingMode='server'
-    //         paginationMode='server'
-    //         pageSizeOptions={[10, 15, 25, 50]}
-    //         getRowId={(row) => row.id}
-    //         paginationModel={paginationModel}
-    //         onSortModelChange={handleSortModel}
-    //         slots={{ toolbar: ServerSideToolbar }}
-    //         onPaginationModelChange={paginationchange}
-    //         slotProps={{
-    //           baseButton: {
-    //             size: 'medium',
-    //             variant: 'tonal',
-    //           },
-    //           toolbar: {
-    //             value: searchtext,
-    //             clearSearch: () => handleSearch(''),
-    //             onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value),
-    //             // CustomToolbar: AddButtonComponent
-    //           },
-    //         }}
-    //       />
-    //     </Card>
-    //   </Grid>
-    //   <Dialog open={dialogOpen} onClose={handleDialogClose} aria-labelledby="view-dialog-title">
-    //     <DialogTitle id="view-dialog-title">View Details</DialogTitle>
-    //     <DialogContent>
-    //       <DialogContentText>
-    //         {/* Display the relevant details of the row here */}
-    //         {dialogData && JSON.stringify(dialogData, null, 2)}
-    //       </DialogContentText>
-    //     </DialogContent>
-    //     <DialogActions>
-    //       <Button onClick={handleDialogClose} color="primary">
-    //         Close
-    //       </Button>
-    //     </DialogActions>
-    //   </Dialog>
-    // </Grid>
-
+  
     <Grid container spacing={6}>
       <Grid item xs={12}>
         <Card>

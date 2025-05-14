@@ -65,7 +65,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
-        // state_id: isAddMode ? '' : olddata.state,
+       
         state_id: (isAddMode || !olddata) ? '' : olddata.state,
 
     }

@@ -1,4 +1,3 @@
-// CollegeCard.js
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -28,4 +27,4 @@ function SchoolCard({ college }) {
     );
 }
 
-export default SchoolCard; // Make sure to export the component
+export default SchoolCard; 

@@ -63,8 +63,6 @@
     "clsx": "1.2.1",
     "date-fns": "2.30.0",
     "draft-js": "0.11.7",
-    "embla-carousel-autoplay": "^8.6.0",
-    "embla-carousel-react": "^8.6.0",
     "file-saver": "^2.0.5",
     "firebase": "^10.13.0",
     "formik": "^2.4.6",
@@ -127,12 +125,9 @@
     "react-twitter-auth": "^0.0.13",
     "react-twitter-login": "^1.5.0",
     "react-web-share": "^2.0.2",
-    "reactjs-social-login": "^2.6.3",
-    "recharts": "2.5.0",
     "sharp": "^0.33.4",
     "stylis": "4.1.4",
     "stylis-plugin-rtl": "2.1.1",
-    "tailwindcss": "^3.4.1",
     "yup": "1.1.1"
   },
   "devDependencies": {
