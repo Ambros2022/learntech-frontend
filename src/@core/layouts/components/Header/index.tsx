@@ -9,7 +9,7 @@ import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown'
 import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown'
 import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
-import dynamic from 'next/dynamic' 
+import dynamic from 'next/dynamic'
 import Avatar from '@mui/material/Avatar'
 const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false })
 const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false })
@@ -53,11 +53,11 @@ const Header = () => {
   };
 
   const handleMouseEnter = () => {
-    setIsDropdownOpen(true) 
+    setIsDropdownOpen(true)
   }
 
   const handleMouseLeave = () => {
-    setIsDropdownOpen(false) 
+    setIsDropdownOpen(false)
   }
 
   const isLinkActive = href => {
@@ -222,8 +222,20 @@ const Header = () => {
 
       <nav className='navbar navbar-expand-lg bg-white navt' style={{ zIndex: '100' }}>
         <div className='container-xl'>
-          <Link className='navbar-brand' href='/'>
+          {/* <Link className='navbar-brand' href='/'>
             <Image priority  src='/images/Learntech160.webp' width={160} height={50} alt='learntech-logo' />
+          </Link> */}
+          <Link className='navbar-brand' href='/' style={{ display: 'inline-block', width: 160, height: 50 }}>
+            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+              <Image
+                src='/images/Learntech160.webp'
+                alt='learntech-logo'
+                fill
+                priority
+                sizes='160px'
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
           </Link>
           <button
             className='navbar-toggler'

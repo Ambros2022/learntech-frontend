@@ -194,11 +194,12 @@
     position: relative !important;
   }
 
+  /* 
   .carousel-item {
     width: 100%;
     height: 600px;
     overflow: hidden;
-  }
+  } */
 
   .bg-formClr {
     background-color: rgba(0, 0, 0, 0.8) !important;
@@ -268,6 +269,12 @@
     background-color: white;
     padding: 30px;
     border-radius: 10px;
+    min-height: 400px;
+  }
+
+  .error.text-danger {
+    min-height: 0.8rem;
+    display: block;
   }
 
   .submtBtn {
@@ -1442,7 +1449,7 @@
     }
 
     .searchSec {
-      margin: 155px auto 0 auto !important;
+      margin: 40px auto 0 auto !important;
     }
 
     header {
@@ -1725,9 +1732,9 @@
   }
 
   @media (min-width: 320px) and (max-width: 425px) {
-    .bannerCon {
+    /* .bannerCon {
       height: 860px !important;
-    }
+    } */
 
     .carousel-item {
       width: 100%;

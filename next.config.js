@@ -5,6 +5,7 @@ const path = require('path')
 module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
+  swcMinify: true,
   images: {
     domains: ['api.learntechww.com','learntechww.com'],
   },
