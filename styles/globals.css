@@ -48,6 +48,11 @@
     margin-bottom: 0px !important;
   }
 
+  .bannerFormSec .col-md-5 {
+    min-height: 400px;
+    /* Or based on your design */
+  }
+
 
   .bg-header {
     background-color: rgba(39, 72, 150, 0.1) !important;
