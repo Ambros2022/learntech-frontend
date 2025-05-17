@@ -48,10 +48,10 @@
     margin-bottom: 0px !important;
   }
 
-  .navt {
-  min-height: 70px;
-}
-
+  .bannerFormSec .col-md-5 {
+    min-height: 400px;
+    /* Or based on your design */
+  }
 
 
   .bg-header {

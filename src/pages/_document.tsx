@@ -33,7 +33,7 @@ class CustomDocument extends Document {
           <link rel='logo' sizes='180x180' href='/images/Learntech200.webp' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
           <link rel='icon' type='image/webp' href='/images/fav-icon.webp' />
-          <Head>
+     
 
             <link
               rel="preload"
@@ -46,7 +46,7 @@ class CustomDocument extends Document {
               href="/_next/image/?url=https%3A%2F%2Fapi.learntechww.com%2Fbanners%2Flogo1734425264066.webp&w=1920&q=75"
             />
 
-          </Head>
+        
 
           <script
             dangerouslySetInnerHTML={{
@@ -86,7 +86,7 @@ class CustomDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </Html>
+      </Html >
     )
   }
 }
