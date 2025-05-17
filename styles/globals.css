@@ -48,6 +48,11 @@
     margin-bottom: 0px !important;
   }
 
+  .navt {
+  min-height: 70px;
+}
+
+
 
   .bg-header {
     background-color: rgba(39, 72, 150, 0.1) !important;

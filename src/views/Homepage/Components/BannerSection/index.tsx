@@ -117,6 +117,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
           />
         )}
       </Head>
+     
       <section className="bannerCon bg-formClr" >
 
 
