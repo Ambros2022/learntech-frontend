@@ -109,15 +109,15 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
   return (
     <>
       <Head>
-        {preloadImage && (
-          <link
-            rel="preload"
-            as="image"
-            href={`${process.env.NEXT_PUBLIC_IMG_URL}/${preloadImage}`}
-          />
-        )}
+        <link
+          rel="preload"
+          as="image"
+          href="https://api.learntechww.com/banners/logo1734425264066.webp"
+          imageSrcSet="https://api.learntechww.com/banners/logo1734425264066.webp 1920w"
+          imageSizes="100vw"
+        />
       </Head>
-     
+
       <section className="bannerCon bg-formClr" >
 
 
@@ -143,40 +143,38 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
         ) : (
           <Skeleton height={500} />
         )} */}
-        <section className="bannerCon bg-formClr">
-          {banners?.length > 0 ? (
-            <Carousel interval={2500} pause="hover" style={{ zIndex: '39' }}>
-              {banners.map((banner, index) => (
-                <Carousel.Item key={index}>
-                  <a
-                    href={banner.link}
-                    style={{
-                      display: 'block',
-                      position: 'relative',
-                      width: '100%',
-                      aspectRatio: '16 / 9', // responsive aspect ratio for mobile + desktop
-                      maxHeight: '600px',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                      alt={`Banner ${index}`}
-                      fill
-                      priority={index === 0}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
-                      style={{ objectFit: 'cover' }}
-                      placeholder="blur"
-                      blurDataURL="/images/placeholder.png"
-                    />
-                  </a>
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          ) : (
-            <Skeleton height={500} />
-          )}
-        </section>
+        {banners?.length > 0 ? (
+          <Carousel interval={5000} pause="hover" style={{ zIndex: '39' }}>
+            {banners.map((banner, index) => (
+              <Carousel.Item key={index}>
+                <a
+                  href={banner.link}
+                  style={{
+                    display: 'block',
+                    position: 'relative',
+                    width: '100%',
+                    aspectRatio: '16 / 9',
+                    maxHeight: '600px',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                    alt={`Banner ${index}`}
+                    fill
+                    priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
+                    style={{ objectFit: 'cover' }}
+                    placeholder="blur"
+                    blurDataURL="/images/placeholder.png"
+                  />
+                </a>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        ) : (
+          <Skeleton height={600} />
+        )}
 
 
 

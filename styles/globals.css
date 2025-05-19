@@ -53,6 +53,11 @@
     /* Or based on your design */
   }
 
+  .navbar {
+    transition: none !important;
+    min-height: 70px;
+  }
+
 
   .bg-header {
     background-color: rgba(39, 72, 150, 0.1) !important;
@@ -226,6 +231,7 @@
     width: 100% !important;
     margin: auto 0 !important;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px;
+    min-height: 100px !important;
   }
 
   .w-90 {
@@ -274,7 +280,7 @@
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    min-height: 400px;
+    min-height: 430px;
   }
 
   .error.text-danger {
@@ -697,6 +703,7 @@
   .newsLinkSec {
     background-color: #274896;
     color: white;
+    min-height: 58px;
   }
 
   .newsLinkSec li {

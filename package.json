@@ -9,7 +9,8 @@
     "export": "next export",
     "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "build:icons": "tsc -b src/iconify-bundle && node src/iconify-bundle/bundle-icons-react.js"
+    "build:icons": "tsc -b src/iconify-bundle && node src/iconify-bundle/bundle-icons-react.js",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@casl/ability": "6.5.0",
@@ -43,6 +44,7 @@
     "@mui/system": "5.12.1",
     "@mui/x-charts": "^7.7.0",
     "@mui/x-data-grid": "6.0.3",
+    "@next/bundle-analyzer": "^15.3.2",
     "@nextui-org/navbar": "^2.0.27",
     "@nextui-org/react": "^2.2.10",
     "@popperjs/core": "2.11.7",
@@ -152,12 +154,14 @@
     "@types/react-twitter-auth": "^0.0.6",
     "@typescript-eslint/eslint-plugin": "5.55.0",
     "@typescript-eslint/parser": "5.55.0",
+    "cross-env": "^7.0.3",
     "eslint": "8.36.0",
     "eslint-config-next": "13.3.2",
     "eslint-config-prettier": "8.7.0",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-import-resolver-typescript": "3.5.3",
     "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "2.8.4",
     "typescript": "^5.4.5"
   },

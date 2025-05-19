@@ -66,7 +66,7 @@ import '../../styles/globals.css';
 
 // ** Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -169,7 +169,7 @@ const App = (props: ExtendedAppProps) => {
 
           <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
           <link rel="preload" as="image" href="/images/icons/learntech-logo.webp" />
-          <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+         
         </Head>
      
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
@@ -178,7 +178,7 @@ const App = (props: ExtendedAppProps) => {
               <SettingsConsumer>
                 {({ settings }) => {
                   return (
-                    <GoogleOAuthProvider clientId="605863392131-ftqj61h4djtrt0d0aa0dtjuo5lcbt7km.apps.googleusercontent.com">
+                   
                       <ThemeComponent settings={settings}>
                         <Guard authGuard={authGuard} guestGuard={guestGuard}>
                           {getLayout(<Component {...pageProps} />)}
@@ -187,7 +187,7 @@ const App = (props: ExtendedAppProps) => {
                           <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
                         </ReactHotToast>
                       </ThemeComponent>
-                    </GoogleOAuthProvider>
+              
                   );
                 }}
               </SettingsConsumer>
