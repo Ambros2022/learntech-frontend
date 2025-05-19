@@ -9,6 +9,7 @@ import createEmotionServer from '@emotion/server/create-instance'
 
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
+import Script from 'next/script'
 
 class CustomDocument extends Document {
   render() {
@@ -33,20 +34,6 @@ class CustomDocument extends Document {
           <link rel='logo' sizes='180x180' href='/images/Learntech200.webp' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
           <link rel='icon' type='image/webp' href='/images/fav-icon.webp' />
-     
-
-            <link
-              rel="preload"
-              as="image"
-              href="https://api.learntechww.com/banners/logo1734425264066.webp"
-            />
-            <link
-              rel="preload"
-              as="image"
-              href="/_next/image/?url=https%3A%2F%2Fapi.learntechww.com%2Fbanners%2Flogo1734425264066.webp&w=1920&q=75"
-            />
-
-        
 
           <script
             dangerouslySetInnerHTML={{
@@ -60,18 +47,22 @@ class CustomDocument extends Document {
             }}
           />
 
-          <script async src='https://www.googletagmanager.com/gtag/js?id=AW-990332405'></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'AW-990332405');
-      `
-            }}
+     
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=AW-990332405"
+            strategy="lazyOnload"
           />
+
+          <Script id="gtag-init" strategy="lazyOnload">
+            {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-990332405');
+  `}
+          </Script>
         </Head>
+
 
         <body>
 
