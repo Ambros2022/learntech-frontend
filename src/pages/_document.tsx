@@ -16,21 +16,21 @@ class CustomDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-
+{/* 
           <link rel='preconnect' href='https://fonts.googleapis.com'
             //@ts-ignore
-            crossOrigin='true' />
+            crossOrigin='true' /> */}
 
-          <link rel='preconnect' href='https://fonts.gstatic.com'
+          {/* <link rel='preconnect' href='https://fonts.gstatic.com'
             //@ts-ignore
-            crossOrigin='true' />
-          <link
+            crossOrigin='true' /> */}
+          {/* <link
             href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
             rel='stylesheet'
             media='print'
             //@ts-ignore
             onLoad="this.media='all'"
-          />
+          /> */}
           <link rel='logo' sizes='180x180' href='/images/Learntech200.webp' />
           <link rel='shortcut icon' href='/images/fav-icon.webp' />
           <link rel='icon' type='image/webp' href='/images/fav-icon.webp' />

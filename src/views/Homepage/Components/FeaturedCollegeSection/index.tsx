@@ -3,7 +3,7 @@ import axios1 from 'src/configs/axios'
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
-const CollegeCard = dynamic(() => import('src/@core/components/college-card-next'), { ssr: false });
+const CollegeCard = dynamic(() => import('src/@core/components/college-card copy'), { ssr: false });
 function FeaturedCollegeSection() {
   const [colleges, setColleges] = useState<any[]>([]);
 
