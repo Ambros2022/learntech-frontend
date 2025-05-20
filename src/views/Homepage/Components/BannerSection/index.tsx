@@ -12,7 +12,7 @@ import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import dynamic from 'next/dynamic';
 const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'));
-const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
+const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'));
 import Carousel from 'react-bootstrap/Carousel';
 import Head from 'next/head';
 import { GetStaticProps } from 'next/types';
@@ -40,7 +40,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const BannerSection = ({ banners }: { banners: any[] }) => {
-  console.log(banners, "banners")
+
   const router = useRouter();
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -144,7 +144,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
           <Skeleton height={500} />
         )} */}
         {banners?.length > 0 ? (
-          <Carousel interval={null} style={{ zIndex: '39' }}>
+          <Carousel interval={5000} style={{ zIndex: '39' }}>
             {banners.map((banner, index) => (
               <Carousel.Item key={index}>
                 <a
@@ -180,8 +180,8 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                   <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
                     <div className="outlineSec">
                       <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
-                      {/* <div className="row">
-                        <div className="col-12 position-relative">
+                      <div className="row">
+                        <div className="col-12 position-relative ">
                           <Autocomplete
                             open={open}
                             onClose={() => setOpen(false)}
@@ -241,7 +241,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                           />
 
                         </div>
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                 </div>

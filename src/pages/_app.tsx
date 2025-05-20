@@ -179,7 +179,7 @@ const App = (props: ExtendedAppProps) => {
 
 
         </Head>
-        {/* <div className={poppins.className}> */}
+        <div className={poppins.className}>
           <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
             <AuthProvider>
               <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
@@ -202,7 +202,7 @@ const App = (props: ExtendedAppProps) => {
               </SettingsProvider>
             </AuthProvider>
           </SessionProvider>
-        {/* </div> */}
+        </div>
       </CacheProvider>
       <SpeedInsights />
       <Analytics />
