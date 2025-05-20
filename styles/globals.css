@@ -1,9 +1,10 @@
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  /* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
 
   html,
   body {
     min-height: 100%;
-    font-family: 'Poppins' !important;
+    font-family: inherit;
+    /* font-family: 'Poppins' !important; */
   }
 
   p {
@@ -58,6 +59,57 @@
     min-height: 70px;
   }
 
+  .navbar .container-xl {
+    transition: none !important;
+    min-height: 70px;
+
+
+  }
+
+
+  /* Adjust for typical laptop screens */
+  @media (max-width: 1440px) {
+    .navbar .container-xl {
+      min-width: 1300px !important;
+    }
+
+    .navbar .mainNav {
+
+      min-width: 1140px;
+
+
+    }
+  }
+
+  @media (max-width: 1280px) {
+    .navbar .container-xl {
+      min-width: 1184px !important;
+    }
+
+    .navbar .mainNav {
+
+      min-width: 1024px;
+
+
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .navbar .container-xl {
+      min-width: 100% !important;
+      /* Fluid for tablets and smaller laptops */
+
+      /* Optional: add spacing */
+    }
+
+    .navbar .mainNav {
+
+      min-width: 100% !important;
+
+
+    }
+  }
+
 
   .bg-header {
     background-color: rgba(39, 72, 150, 0.1) !important;
@@ -92,6 +144,7 @@
     padding: 10px !important;
     font-size: 17px !important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    min-width: 135px;
   }
 
   .counsellingBtn:hover {
@@ -231,7 +284,7 @@
     width: 100% !important;
     margin: auto 0 !important;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px;
-    min-height: 100px !important;
+    min-height: 115px !important;
   }
 
   .w-90 {
@@ -513,11 +566,16 @@
     font-size: 15px !important;
   }
 
-  .hideBtnTxt .btn:first-child:active {
-    border: 0px !important;
-    color: transparent !important;
-    background-color: transparent !important;
+  .nav-avt {
+    min-width: 50px !important;
   }
+
+  .nav-cons {
+    min-width: 150px !important;
+    
+  }
+
+
 
   .studyAbroadNav a {
     border-radius: 10px !important;
@@ -4326,7 +4384,13 @@
   }
 
   @media(max-width:1023px) {
-    .hideBtnTxt {
+
+  
+    .nav-avt {
+      display: none;
+    }
+
+    .nav-cons {
       display: none;
     }
   }

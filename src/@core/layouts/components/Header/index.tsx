@@ -1,21 +1,32 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import axios1 from 'src/configs/axios'
+import { createRoot } from 'react-dom/client'
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
-import Statedropdown from 'src/@core/layouts/components/Header/state-dropdown'
-import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown'
-import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown'
-import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown'
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
-import dynamic from 'next/dynamic'
-import Avatar from '@mui/material/Avatar'
+const Statedropdown = dynamic(() => import('src/@core/layouts/components/Header/state-dropdown'), { ssr: false })
+const Coursedropdown = dynamic(() => import('src/@core/layouts/components/Header/course-dropdown'), { ssr: false })
+const Examdropdown = dynamic(() => import('src/@core/layouts/components/Header/exam-dropdown'), { ssr: false })
+const Abroaddropdown = dynamic(() => import('src/@core/layouts/components/Header/abroad-dropdown'), { ssr: false })
+// const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false })
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), {
+  ssr: false,
+  loading: () => <button className='btn counsellingBtn'>Loading...</button>
+})
+// import Statedropdown from 'src/@core/layouts/components/Header/state-dropdown'
+// import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown'
+// import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown'
+// import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown'
+// import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
 const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false })
-const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false })
-const SignInForm = dynamic(() => import('src/@core/components/custom-user-auth/SignInForm'), { ssr: false })
-
 const ConditionalModal = dynamic(() => import('./ConditionalModal'), { ssr: false })
+const AvatarDropdown = dynamic(() => import('src/@core/components/avatar'))
+
+
+// import AvatarDropdown from 'src/@core/components/avatar'
+
 interface Country {
   id: number
   name: string
@@ -25,8 +36,7 @@ interface Courses {
   id: number
   slug: string
 }
-import { createRoot } from 'react-dom/client'
-import AvatarDropdown from 'src/@core/components/avatar'
+
 
 const Header = () => {
   const router = useRouter()
@@ -250,7 +260,7 @@ const Header = () => {
             <span className='navbar-toggler-icon'></span>
           </button>
           <div
-            className={`${isOpen ? 'show' : ''}collapse navbar-collapse collapseNavHeight`}
+            className={`${isOpen ? 'show' : ''}collapse navbar-collapse collapseNavHeight mainNav `}
             id='navbarSupportedContent'
           >
             <div className='d-lg-none text-center py-3'>
@@ -287,8 +297,8 @@ const Header = () => {
                 </button>
               </div>
             </div>
-            <span className='top-nav ms-auto'>
-              <ul className='navbar-nav'>
+            <span className='top-nav ms-auto '>
+              <ul className='navbar-nav '>
                 <li className='nav-item'>
                   <Link
                     className={`nav-link ${isLinkActive('/') ? 'active' : ''}`}
@@ -418,12 +428,6 @@ const Header = () => {
 
 
                 </li>
-
-
-
-
-
-
 
                 <li
                   className='nav-item dropdown maintain'
@@ -629,10 +633,10 @@ const Header = () => {
                     </li >
                   </ul>
                 </li>
-                <li className='hideBtnTxt'>
+                 <li className='nav-avt'>
                   <AvatarDropdown />
                 </li>
-                <li className='hideBtnTxt'>
+               <li className='hideBtnTxt nav-cons'>
                   <GlobalEnquiryForm buttonText='Get Counselling' className='btn counsellingBtn' />
                 </li>
                 <li className='nav-item dropdown d-lg-none d-md-inline-block'>

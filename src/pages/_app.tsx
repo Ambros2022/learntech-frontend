@@ -7,6 +7,8 @@ import Head from 'next/head';
 import { Router } from 'next/router';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import { Poppins } from 'next/font/google';
+
 
 // ** Loader Import
 import NProgress from 'nprogress';
@@ -49,10 +51,10 @@ import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 // ** Prismjs Styles
-import 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-tsx';
+// import 'prismjs';
+// import 'prismjs/themes/prism-tomorrow.css';
+// import 'prismjs/components/prism-jsx';
+// import 'prismjs/components/prism-tsx';
 
 // ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -105,6 +107,11 @@ const Guard = ({ children, authGuard, guestGuard }: GuardProps) => {
   }
 };
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+});
 // ** Configure JSS & ClassName
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
@@ -169,16 +176,17 @@ const App = (props: ExtendedAppProps) => {
 
           <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
           <link rel="preload" as="image" href="/images/icons/learntech-logo.webp" />
-         
+
+
         </Head>
-     
-        <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
-          <AuthProvider>
-            <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
-              <SettingsConsumer>
-                {({ settings }) => {
-                  return (
-                   
+        {/* <div className={poppins.className}> */}
+          <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
+            <AuthProvider>
+              <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+                <SettingsConsumer>
+                  {({ settings }) => {
+                    return (
+
                       <ThemeComponent settings={settings}>
                         <Guard authGuard={authGuard} guestGuard={guestGuard}>
                           {getLayout(<Component {...pageProps} />)}
@@ -187,18 +195,22 @@ const App = (props: ExtendedAppProps) => {
                           <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
                         </ReactHotToast>
                       </ThemeComponent>
-              
-                  );
-                }}
-              </SettingsConsumer>
-            </SettingsProvider>
-          </AuthProvider>
-        </SessionProvider>
+
+                    );
+                  }}
+                </SettingsConsumer>
+              </SettingsProvider>
+            </AuthProvider>
+          </SessionProvider>
+        {/* </div> */}
       </CacheProvider>
       <SpeedInsights />
       <Analytics />
 
-      <Script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></Script>
+      <Script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        strategy="afterInteractive"
+      />
     </>
   );
 };
