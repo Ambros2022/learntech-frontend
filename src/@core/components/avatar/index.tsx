@@ -74,10 +74,7 @@ const AvatarDropdown = () => {
           </>
         ) : (
           <>
-            {/* <h5 className="mb-2 p-2 text-blue">
-              Welcome, Guest!
-            </h5> */}
-            {/* Add login and signup buttons here */}
+
           </>
         )}
       </Dropdown>

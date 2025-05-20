@@ -22,7 +22,11 @@ const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/Globa
 // import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
 const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false })
 const ConditionalModal = dynamic(() => import('./ConditionalModal'), { ssr: false })
-const AvatarDropdown = dynamic(() => import('src/@core/components/avatar'))
+
+const AvatarDropdown = dynamic(() => import('src/@core/components/avatar'), {
+  ssr: false,
+  // loading: () => <p>Loading...</p>
+})
 
 
 // import AvatarDropdown from 'src/@core/components/avatar'
