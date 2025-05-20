@@ -103,7 +103,7 @@ const StudyAbroadSection = () => {
   };
 
   return (
-    <section className="StudyAbroadCon bg-white" id="animation7" data-aos="fade-up">
+    <section className="StudyAbroadCon bg-white" >
       <div className="container pt-4 pt-md-5">
         <h2 className="fw-bold text-blue text-center">Study Abroad</h2>
         <p className="text-black mt-3">

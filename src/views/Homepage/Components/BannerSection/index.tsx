@@ -11,7 +11,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import dynamic from 'next/dynamic';
-const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'), { ssr: false });
+const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'));
 const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
 import Carousel from 'react-bootstrap/Carousel';
 import Head from 'next/head';
@@ -144,19 +144,13 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
           <Skeleton height={500} />
         )} */}
         {banners?.length > 0 ? (
-          <Carousel interval={5000} pause="hover" style={{ zIndex: '39' }}>
+          <Carousel interval={null} style={{ zIndex: '39' }}>
             {banners.map((banner, index) => (
               <Carousel.Item key={index}>
                 <a
                   href={banner.link}
-                  style={{
-                    display: 'block',
-                    position: 'relative',
-                    width: '100%',
-                    aspectRatio: '16 / 9',
-                    maxHeight: '600px',
-                    overflow: 'hidden'
-                  }}
+                  className="HomebannerLink"
+
                 >
                   <Image
                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
@@ -186,7 +180,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                   <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
                     <div className="outlineSec">
                       <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
-                      <div className="row">
+                      {/* <div className="row">
                         <div className="col-12 position-relative">
                           <Autocomplete
                             open={open}
@@ -247,7 +241,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                           />
 
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

@@ -57,21 +57,29 @@
   .navbar {
     transition: none !important;
     min-height: 70px;
+    min-width: auto;
   }
 
-  .navbar .container-xl {
-    transition: none !important;
-    min-height: 70px;
-
-
+  .HomebannerLink {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 600px;
+    overflow: hidden;
   }
+
+  /* .navbar .container-xl {
+  
+
+  } */
 
 
   /* Adjust for typical laptop screens */
   @media (max-width: 1440px) {
-    .navbar .container-xl {
+    /* .navbar .container-xl {
       min-width: 1300px !important;
-    }
+    } */
 
     .navbar .mainNav {
 
@@ -82,9 +90,9 @@
   }
 
   @media (max-width: 1280px) {
-    .navbar .container-xl {
+    /* .navbar .container-xl {
       min-width: 1184px !important;
-    }
+    } */
 
     .navbar .mainNav {
 
@@ -95,12 +103,10 @@
   }
 
   @media (max-width: 1024px) {
-    .navbar .container-xl {
+    /* .navbar .container-xl {
       min-width: 100% !important;
-      /* Fluid for tablets and smaller laptops */
-
-      /* Optional: add spacing */
-    }
+ 
+    } */
 
     .navbar .mainNav {
 
@@ -572,7 +578,7 @@
 
   .nav-cons {
     min-width: 150px !important;
-    
+
   }
 
 
@@ -4385,7 +4391,7 @@
 
   @media(max-width:1023px) {
 
-  
+
     .nav-avt {
       display: none;
     }
@@ -6105,6 +6111,10 @@
   }
 
   @media (max-width: 768px) {
+    .HomebannerLink {
+      aspect-ratio: 16 / 6;
+    }
+
     .file-name {
       left: 127px;
       max-width: calc(100% - 100px);
