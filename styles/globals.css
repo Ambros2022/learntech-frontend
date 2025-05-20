@@ -60,6 +60,13 @@
     min-width: auto;
   }
 
+  .navbar .hlogo {
+    display: inline-block;
+    width: 350px;
+    height: 50px;
+  }
+
+
   .HomebannerLink {
     display: block;
     position: relative;
@@ -69,52 +76,6 @@
     overflow: hidden;
   }
 
-  /* .navbar .container-xl {
-  
-
-  } */
-
-
-  /* Adjust for typical laptop screens */
-  @media (max-width: 1440px) {
-    /* .navbar .container-xl {
-      min-width: 1300px !important;
-    } */
-
-    .navbar .mainNav {
-
-      min-width: 1140px;
-
-
-    }
-  }
-
-  @media (max-width: 1280px) {
-    /* .navbar .container-xl {
-      min-width: 1184px !important;
-    } */
-
-    .navbar .mainNav {
-
-      min-width: 1024px;
-
-
-    }
-  }
-
-  @media (max-width: 1024px) {
-    /* .navbar .container-xl {
-      min-width: 100% !important;
- 
-    } */
-
-    .navbar .mainNav {
-
-      min-width: 100% !important;
-
-
-    }
-  }
 
 
   .bg-header {
@@ -150,7 +111,7 @@
     padding: 10px !important;
     font-size: 17px !important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    min-width: 135px;
+    min-width: 160px;
   }
 
   .counsellingBtn:hover {
@@ -577,7 +538,7 @@
   }
 
   .nav-cons {
-    min-width: 150px !important;
+    min-width: 160px !important;
 
   }
 
@@ -6114,6 +6075,13 @@
     .HomebannerLink {
       aspect-ratio: 16 / 6;
     }
+
+    .navbar .hlogo {
+      display: inline-block;
+      width: 160px;
+      height: 50px;
+    }
+
 
     .file-name {
       left: 127px;
