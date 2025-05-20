@@ -111,6 +111,8 @@ const poppins = Poppins({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
+  variable: '--font-poppins',
+  preload: true,
 });
 // ** Configure JSS & ClassName
 const App = (props: ExtendedAppProps) => {
@@ -194,6 +196,8 @@ const App = (props: ExtendedAppProps) => {
                         <ReactHotToast>
                           <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
                         </ReactHotToast>
+                        <SpeedInsights />
+                        <Analytics />
                       </ThemeComponent>
 
                     );
@@ -204,8 +208,7 @@ const App = (props: ExtendedAppProps) => {
           </SessionProvider>
         </div>
       </CacheProvider>
-      <SpeedInsights />
-      <Analytics />
+
 
       <Script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
