@@ -139,6 +139,10 @@ const App = (props: ExtendedAppProps) => {
           <meta name='viewport' content='initial-scale=1, width=device-width' />
 
 
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
+          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
           <script type="application/ld+json">
             {JSON.stringify(
@@ -181,31 +185,31 @@ const App = (props: ExtendedAppProps) => {
 
 
         </Head>
-        <div className={poppins.className}>
-          <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
-            <AuthProvider>
-              <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
-                <SettingsConsumer>
-                  {({ settings }) => {
-                    return (
+     <div style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
+          <AuthProvider>
+            <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+              <SettingsConsumer>
+                {({ settings }) => {
+                  return (
 
-                      <ThemeComponent settings={settings}>
-                        <Guard authGuard={authGuard} guestGuard={guestGuard}>
-                          {getLayout(<Component {...pageProps} />)}
-                        </Guard>
-                        <ReactHotToast>
-                          <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
-                        </ReactHotToast>
-                        <SpeedInsights />
-                        <Analytics />
-                      </ThemeComponent>
+                    <ThemeComponent settings={settings}>
+                      <Guard authGuard={authGuard} guestGuard={guestGuard}>
+                        {getLayout(<Component {...pageProps} />)}
+                      </Guard>
+                      <ReactHotToast>
+                        <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
+                      </ReactHotToast>
+                      <SpeedInsights />
+                      <Analytics />
+                    </ThemeComponent>
 
-                    );
-                  }}
-                </SettingsConsumer>
-              </SettingsProvider>
-            </AuthProvider>
-          </SessionProvider>
+                  );
+                }}
+              </SettingsConsumer>
+            </SettingsProvider>
+          </AuthProvider>
+        </SessionProvider>
         </div>
       </CacheProvider>
 

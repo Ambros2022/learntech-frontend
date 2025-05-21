@@ -3,8 +3,8 @@
   html,
   body {
     min-height: 100%;
-    font-family: inherit;
     /* font-family: 'Poppins' !important; */
+
   }
 
   p {
@@ -57,6 +57,7 @@
   .navbar {
     transition: none !important;
     min-height: 70px;
+    height: 70px;
     min-width: auto;
   }
 

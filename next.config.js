@@ -10,7 +10,11 @@ module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
   images: {
-    domains: ['api.learntechww.com','learntechww.com'],
+    domains: ['api.learntechww.com', 'learntechww.com'],
+  },
+  swcMinify: true,
+  experimental: {
+    optimizeCss: true,
   },
   webpack: config => {
     config.resolve.alias = {
