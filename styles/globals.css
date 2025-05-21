@@ -77,6 +77,45 @@
     overflow: hidden;
   }
 
+  .innerClgImg {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .innerClgImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+
+  .locationClgImg {
+    max-width: 100%;
+    width: 100%;
+    /* Centers itself */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .clgImg {
+    width: 200px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    /* Matches Bootstrap's .rounded */
+
+    background-color: #fff;
+    /* optional, good contrast */
+    box-sizing: border-box;
+  }
+
 
 
   .bg-header {
@@ -2357,21 +2396,21 @@
     background-color: transparent !important;
   }
 
-  .clgImg {
+  /* .clgImg {
     width: 100%;
     height: 100%;
-  }
+  } */
 
   .bg-gray {
     background-color: #8f8f8f !important;
     width: 100%;
   }
 
-  @media (min-width: 768px) and (max-width: 992px) {
+  /* @media (min-width: 768px) and (max-width: 992px) {
     .clgImg {
       width: 70% !important;
     }
-  }
+  } */
 
   @media (min-width: 320px) and (max-width: 767px) {
     .schlBannerTxt h5 {
@@ -2382,9 +2421,9 @@
       font-size: 17px;
     }
 
-    .clgImg {
+    /* .clgImg {
       width: 50% !important;
-    }
+    } */
   }
 
   .courseSec h1 {
@@ -3316,10 +3355,10 @@
     color: #254692 !important;
   }
 
-  .locatedSec .clgImg img {
+  /* .locatedSec .clgImg img {
     width: 100%;
     height: 100%;
-  }
+  } */
 
   .topNewsImg>img {
     width: 100% !important;
@@ -4571,12 +4610,12 @@
     }
   }
 
-  .innerClgImg {
+  /* .innerClgImg {
     min-height: 130px !important;
     min-width: 130px !important;
     max-height: 130px !important;
     max-width: 130px !important;
-  }
+  } */
 
   .logoBoardImg {
     min-height: 130px !important;
@@ -4585,10 +4624,11 @@
     max-width: 130px !important;
   }
 
+  /* 
   .innerClgImg img {
     object-fit: contain !important;
 
-  }
+  } */
 
   .logoBoardImg img {
     object-fit: contain !important;
@@ -5643,12 +5683,12 @@
       overflow-x: scroll !important;
     }
 
-    .innerClgImg {
+    /* .innerClgImg {
       min-height: 100px !important;
       min-width: 100px !important;
       max-height: 100px !important;
       max-width: 100px !important;
-    }
+    } */
 
     .logoBoardImg {
       min-height: 100px !important;
