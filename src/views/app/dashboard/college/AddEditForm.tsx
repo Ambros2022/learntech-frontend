@@ -19,7 +19,7 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import { FaTrash } from 'react-icons/fa';
 
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
+import { Alert, Box, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
@@ -428,7 +428,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
-        
+
             if (selectedlogo == '') {
 
                 toast.error('Please Upload Logo', {
@@ -1152,7 +1152,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                                 message: "Rating cannot exceed 5"
                                             }
                                         }}
-                           
+
                                         render={({ field: { value, onChange } }) => (
                                             <CustomTextField
                                                 fullWidth
@@ -1178,7 +1178,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("info", value)} />
-                                              
+
                                             </>
                                         )}
                                     />
@@ -1196,7 +1196,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("course_fees", value)} />
-                                            
+
                                             </>
                                         )}
                                     />
@@ -1212,7 +1212,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("admissions", value)} />
-                                       
+
                                             </>
                                         )}
                                     />
@@ -1230,7 +1230,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("placements", value)} />
-                                              
+
                                             </>
                                         )}
                                     />
@@ -1246,7 +1246,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("rankings", value)} />
-                                               
+
                                             </>
                                         )}
                                     />
@@ -1262,7 +1262,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("scholarship", value)} />
-                                           
+
                                             </>
                                         )}
                                     />
@@ -1280,7 +1280,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("hostel", value)} />
-                                          
+
                                             </>
                                         )}
                                     />
@@ -1290,17 +1290,19 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
 
                                 <Grid item xs={12} sm={3}>
-                                    <FileUpload
-                                        isAddMode={isAddMode}
-                                        olddata={!isAddMode && olddata.icon ? olddata.icon : ""}
-                                        onFileChange={handleFileChangephoto}
-                                        maxFiles={1}
-                                        maxSize={2000000}
-                                        fileNames={fileNamesphoto}
-                                        label=" Upload Icon"
-                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                                        rejectionMessage='Try another file for upload.'
-                                    />
+                                    <Box sx={{ pointerEvents: 'none', opacity: 0.5 }}>
+                                        <FileUpload
+                                            isAddMode={isAddMode}
+                                            olddata={!isAddMode && olddata.icon ? olddata.icon : ""}
+                                            onFileChange={handleFileChangephoto}
+                                            maxFiles={1}
+                                            maxSize={2000000}
+                                            fileNames={fileNamesphoto}
+                                            label="Disabled Not required Upload Icon"
+                                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                            rejectionMessage='Try another file for upload.'
+                                        />
+                                    </Box>
                                 </Grid>
 
                                 <Grid item xs={12} sm={3}>
@@ -1312,6 +1314,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                         maxSize={2000000}
                                         fileNames={fileNameslogo}
                                         label=" Upload Logo"
+                                        helpertext="Recommended size: 600 × 450 px (minimum 300 × 225 px)" 
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />
@@ -1327,7 +1330,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                         maxSize={2000000}
                                         fileNames={fileNamesbanner}
                                         label="Upload banner_image"
-                                        helpertext="Estimated Size: 216*124px"
+                                        helpertext="Upload size webp :800×600 px (min 550×412)"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />

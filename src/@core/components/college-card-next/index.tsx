@@ -11,7 +11,7 @@ function CollegeCard({ college }) {
 
     return (
         <div className="mx-xl-4 mx-lg-2 mx-md-2 mx-5 card hover-card featuredClgCard mb-4">
-            <div className="card-image position-relative" style={{ aspectRatio: '4/3' }}>
+            <div className=" position-relative" style={{ aspectRatio: '4/3' }}>
                 <Image
                     src={imageUrl}
                     alt={`${college.name} banner`}
