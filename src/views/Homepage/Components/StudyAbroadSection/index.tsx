@@ -5,7 +5,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import CountryCarosuel from './CountryCarousel/indes';
 import { Spinner } from 'react-bootstrap';
-const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
+const CollegeCard = dynamic(() => import('src/@core/components/college-card-next'), { ssr: false });
 
 const StudyAbroadSection = () => {
   const [activeCountry, setActiveCountry] = useState<number | null>(null);
