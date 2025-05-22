@@ -132,7 +132,7 @@ const LoginV1 = () => {
             <CardContent sx={{ p: theme => `${theme.spacing(10.5, 8, 8)} !important` }}>
               <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                 <Link href="/">
-                  <img src='/images/Learntech200.webp' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' /></Link>
+                  <img src='/images/Learntech160.webp' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' /></Link>
                 <Typography variant='h3' sx={{ ml: 2.5, fontWeight: 700 }}>
                   {themeConfig.templateName}
                 </Typography>

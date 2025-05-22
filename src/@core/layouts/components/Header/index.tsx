@@ -242,15 +242,15 @@ const Header = () => {
             width: '100%',
             height: '100%',
             display: 'flex',
-            justifyContent: 'center',  
+            justifyContent: 'flex-end',  
             alignItems: 'center',       
-          }}>
+          }} className='ps-md-5 ps-0'>
             <Image
               src='/images/Learntech160.webp'
               alt='learntech-logo'
               priority
               width={160}
-              height={50}
+              height={40}
               style={{objectFit:'contain'}}
             />
           </div>

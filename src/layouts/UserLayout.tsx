@@ -39,7 +39,7 @@ const AppBrand = () => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <NextLink href="/" >
-        <img src='/images/Learntech200.webp' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' />
+        <img src='/images/Learntech160.webp' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' />
       </NextLink>
     </Box>
   )
