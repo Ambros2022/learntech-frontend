@@ -1,22 +1,18 @@
 import BannerSection from './Components/BannerSec'
 import TopExamSec from './Components/TopExamSec'
-import BrowsebyCategorySec from './Components/BrowseByCategorySec'
+// import BrowsebyCategorySec from './Components/BrowseByCategorySec'
 import React, { useCallback, useEffect, useState } from 'react';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import NewsLetterSec from '../MainNewsPage/Components/NewsLetterSec';
 import axios1 from 'src/configs/axios'
-
+import dynamic from 'next/dynamic';
+const BrowsebyCategorySec = dynamic(() => import('./Components/BrowseByCategorySec'), { ssr: false, });
 const MainExamPage = () => {
   const router = useRouter()
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>();
-  const [abroadData, setAbroadData] = useState([]);
-  const [levelOptions, setLevelOptions] = useState([]);
-  const [typeOptions, setTypeOptions] = useState([]);
-
   const [countryData, setCountryData] = useState([]);
   const [streams, setStreams] = useState([]);
 

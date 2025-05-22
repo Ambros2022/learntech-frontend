@@ -26,6 +26,7 @@ const CardComponent: React.FC<CardComponentProps> = React.memo(({ title, imageSr
                                 src={imageSrc}
                                 className="img-fluid mx-auto mt-3"
                                 alt={`${title}-logo`}
+                                loading="lazy"
                             />
                         </div>
                         <div className="col-md-12 col-6 col-sm-7 text-md-center text-start">
@@ -42,6 +43,7 @@ const CardComponent: React.FC<CardComponentProps> = React.memo(({ title, imageSr
                                     height={27}
                                     src="/images/icons/right arrow.svg"
                                     alt="right-arrow"
+                                    loading="lazy"
                                 />
 
                             </span>

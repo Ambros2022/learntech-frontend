@@ -1,7 +1,8 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
-import Carousel from "react-multi-carousel";
+// import Carousel from "react-multi-carousel";
+const Carousel = dynamic(() => import('react-multi-carousel'), { ssr: false });
 import "react-multi-carousel/lib/styles.css";
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const CountryCarosuel = ({ items }) => {
   const responsive = {

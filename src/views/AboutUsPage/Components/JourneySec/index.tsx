@@ -10,7 +10,7 @@ const JourneySec = () => {
                     </h2>
                     <p className="text-black mb-5 text-center">
                     </p>
-                    <div style={{  margin:'auto' }} className='bg-blue rounded p-2 journey-video'>
+                    <div style={{ margin: 'auto' }} className='bg-blue rounded p-2 journey-video'>
                         <iframe src="https://www.youtube.com/embed/ubcwVybnL4Q?si=osGRhTdono9EcJxK" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className='h-100 rounded w-100'></iframe>
                     </div>
                 </div>

@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import MainCarousel from 'src/@core/components/main-carousel';
+import dynamic from 'next/dynamic';
+// import MainCarousel from 'src/@core/components/main-carousel';
+const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
 import axios1 from 'src/configs/axios';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import CountryCarosuel from './CountryCarousel/indes';
+
+// import CountryCarosuel from './CountryCarousel/indes';
+const CountryCarosuel = dynamic(() => import('./CountryCarousel/indes'), { ssr: false });
 import { Spinner } from 'react-bootstrap';
 const CollegeCard = dynamic(() => import('src/@core/components/college-card-next'), { ssr: false });
 

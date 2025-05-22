@@ -1,6 +1,14 @@
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import React, { useState, useEffect } from 'react';
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), {
+  ssr: false, loading: () =>
+    <a className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
+      <img src="/images/icons/DownloadBrochure.webp" className='mb-md-0 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" loading="lazy" />
+
+    </a>
+});
+// import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from "next/link";
 const Footer = () => {
 

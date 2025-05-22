@@ -50,11 +50,6 @@ import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
-// ** Prismjs Styles
-// import 'prismjs';
-// import 'prismjs/themes/prism-tomorrow.css';
-// import 'prismjs/components/prism-jsx';
-// import 'prismjs/components/prism-tsx';
 
 // ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -144,48 +139,55 @@ const App = (props: ExtendedAppProps) => {
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-          <script type="application/ld+json">
-            {JSON.stringify(
-              {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "name": "Learntech Edu Solutions Pvt. Ltd.",
-                "alternateName": "Learntech Edu Solutions",
-                "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
-                "logo": `${process.env.NEXT_PUBLIC_WEB_URL}/images/icons/learntech-logo.png`,
-                "contactPoint": {
-                  "@type": "ContactPoint",
-                  "telephone": "1800 120 8696",
-                  "contactType": "customer service",
-                  "contactOption": "TollFree",
-                  "areaServed": "IN",
-                  "availableLanguage": "en"
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(
+                {
+                  "@context": "https://schema.org",
+                  "@type": "Organization",
+                  "name": "Learntech Edu Solutions Pvt. Ltd.",
+                  "alternateName": "Learntech Edu Solutions",
+                  "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
+                  "logo": `${process.env.NEXT_PUBLIC_WEB_URL}/images/icons/learntech-logo.png`,
+                  "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "1800 120 8696",
+                    "contactType": "customer service",
+                    "contactOption": "TollFree",
+                    "areaServed": "IN",
+                    "availableLanguage": "en"
+                  }
                 }
-              }
-            )}
-          </script>
-          <script type="application/ld+json">
-            {JSON.stringify(
-              {
-                "@context": "https://schema.org/",
-                "@type": "WebSite",
-                "name": "Learntech Edu Solutions",
-                "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
-                "potentialAction": {
-                  "@type": "SearchAction",
-                  "target": "{search_term_string}",
-                  "query-input": "required name=search_term_string"
+              ),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(
+                {
+                  "@context": "https://schema.org/",
+                  "@type": "WebSite",
+                  "name": "Learntech Edu Solutions",
+                  "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "{search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
                 }
-              }
-            )}
-          </script>
+              ),
+            }}
+          />
+        
 
           <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
           <link rel="preload" as="image" href="/images/icons/learntech-logo.webp" />
 
 
         </Head>
-     <div style={{ fontFamily: 'Poppins, sans-serif' }}>
+        {/* <div style={{ fontFamily: 'Poppins, sans-serif' }}> */}
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
           <AuthProvider>
             <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
@@ -210,14 +212,14 @@ const App = (props: ExtendedAppProps) => {
             </SettingsProvider>
           </AuthProvider>
         </SessionProvider>
-        </div>
+        {/* </div> */}
       </CacheProvider>
 
 
-      <Script
+      {/* <Script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         strategy="afterInteractive"
-      />
+      /> */}
     </>
   );
 };
