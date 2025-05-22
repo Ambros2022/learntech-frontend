@@ -6,10 +6,7 @@ import axios1 from 'src/configs/axios';
 
 
 const BannerSec = () => {
-    const [imagesLoaded, setImagesLoaded] = useState(false);
     const [banners, setBanners] = useState<any[]>([]);
-
-
     const getbanner = useCallback(async () => {
         try {
             const roleparams: any = { page: 1, size: 10000 };
@@ -18,8 +15,6 @@ const BannerSec = () => {
             console.log(response.data.data)
         } catch (err) {
             console.error(err);
-        } finally {
-            setImagesLoaded(true);
         }
     }, []);
 
@@ -30,15 +25,16 @@ const BannerSec = () => {
         <>
             <section className=' aboutUsPageSec position-relative d-flex justify-content-center ' >
                 {banners.map((banner, index) => (
-          
-                        <img
-                            width={1700} height={300}
-                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                            // priority={true}
-                            alt={`Banner-img`}
-                            className="banner-image-about"
-                        />
-                   
+
+                    <img
+                        width={1700} height={300}
+                        src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                        fetchPriority="high"
+                        loading="eager"
+                        alt={`Banner-img`}
+                        className="banner-image-about"
+                    />
+
                 ))}
                 <div className='position-absolute w-100 h-100 d-flex justify-content-center AdvertiseBanner' style={{ top: '0px' }}>
                     <div className="container d-flex justify-content-center h-100 w-100">

@@ -1,7 +1,25 @@
 import React from 'react'
 import Image from 'next/image'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
+const renderStars = (rating: number): JSX.Element[] => {
+  const stars: JSX.Element[] = [];
+
+  for (let i = 1; i <= 5; i++) {
+    if (rating >= i) {
+      stars.push(<i key={i} className="bi bi-star-fill text-warning"></i>);
+    } else if (rating >= i - 0.5) {
+      stars.push(<i key={i} className="bi bi-star-half text-warning"></i>);
+    } else {
+      stars.push(<i key={i} className="bi bi-star-fill text-white"></i>);
+    }
+  }
+
+  return stars;
+};
+
 function BannerSection({ data }) {
+
+
 
   return (
     <>
@@ -62,11 +80,7 @@ function BannerSection({ data }) {
               {data?.avg_rating && data?.avg_rating !== 0 ? (<div className=" d-none d-md-block col-lg-3 col-xl-3 col-md-10 pt-lg-3 ms-md-auto mb-md-3 mb-3 ps-md-3 ps-0">
                 <div className="d-flex gap-2 justify-content-md-end justify-content-start">
 
-                  <i className={`bi bi-star-fill ${data.avg_rating >= 1 ? "text-warning" : "text-white"} `}></i>
-                  <i className={`bi bi-star-fill ${data.avg_rating >= 2 ? "text-warning" : "text-white"} `}></i>
-                  <i className={`bi bi-star-fill ${data.avg_rating >= 3 ? "text-warning" : "text-white"} `}></i>
-                  <i className={`bi bi-star-fill ${data.avg_rating >= 4 ? "text-warning" : "text-white"} `}></i>
-                  <i className={`bi bi-star-fill ${data.avg_rating >= 5 ? "text-warning" : "text-white"} `}></i>
+                  {renderStars(data?.avg_rating)}
 
                   <h6 className='mb-0 text-white align-self-center'>{data.avg_rating}/5 Review</h6>
                 </div>

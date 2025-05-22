@@ -1,15 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import BannerSec from './Components/BannerSec'
 import AboutSec from './Components/AboutSec'
-import DetailSec from './Components/DetailSec'
-import StepSection from './Components/StepsSection'
-import BankSec from './Components/BankSec'
-import FaqSec from './Components/FaqSec'
-import LoanCalculator from './Components/LoanCalculator'
+// import DetailSec from './Components/DetailSec'
+// import StepSection from './Components/StepsSection'
+// import BankSec from './Components/BankSec'
+// import FaqSec from './Components/FaqSec'
+// import LoanCalculator from './Components/LoanCalculator'
+const LoanCalculator = dynamic(() => import('./Components/LoanCalculator'), {ssr: false,});
+const DetailSec = dynamic(() => import('./Components/DetailSec'), {ssr: false,});
+const StepSection = dynamic(() => import('./Components/StepsSection'), {ssr: false,});
+const BankSec = dynamic(() => import('./Components/BankSec'), {ssr: false,});
+const FaqSec = dynamic(() => import('./Components/FaqSec'), {ssr: false,});
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 
 
 

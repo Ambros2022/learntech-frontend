@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import PopularCourses from '../UpcomingExamsSec'
+import dynamic from 'next/dynamic';
+// import PopularCourses from '../UpcomingExamsSec'
+const PopularCourses = dynamic(() => import("../UpcomingExamsSec"), {
+  ssr: false,
+  loading: () =>
+    <p>Loading</p>
+});
 import Link from 'next/link';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import axios1 from 'axios';
@@ -8,10 +14,16 @@ import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import Image from 'next/image';
 import Autocomplete from 'src/@core/components/mui/autocomplete';
-import dynamic from 'next/dynamic';
 
 
-const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
+
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), {
+  ssr: false,
+  loading: () =>
+    <a className="btn alertExamBtn" style={{ cursor: 'pointer' }}>
+      Get Exams Alert
+    </a>
+});
 
 
 let cancelToken: any;
@@ -88,7 +100,8 @@ function BannerSection() {
       <section className='collegeBannerCon bg-blue examBannerCon'>
         <div className="position-relative">
           <div>
-            <img src='/images/icons/BannerBG.webp' width={1400} height={430} alt='banner-img' className='position-relative w-100' />
+            <img src='/images/icons/BannerBG.webp' width={1400} height={300} alt='banner-img' className='position-relative w-100' fetchPriority="high"
+              loading="eager" />
           </div>
           <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
             <div className='d-flex justify-content-center w-100 '>
@@ -151,7 +164,12 @@ function BannerSection() {
                 <div className="row text-white text-md-start text-center pt-3 mb-3">
                   <h2>Upcoming Entrance Exams</h2>
                 </div>
-                <PopularCourses />
+                <div className='popularcourse'>
+
+
+                  <PopularCourses />
+                </div>
+
                 <div className='text-md-end text-center pt-5'>
                   {/* <button className='btn  alertExamBtn'>Get Exams Alert</button> */}
                   <GlobalEnquiryForm

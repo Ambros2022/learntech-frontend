@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 const Overview = () => {
     return (
@@ -57,19 +56,20 @@ const Overview = () => {
                                             <tr>
                                                 <td className="d-block d-md-table-cell">
                                                     <div className="col">
-                                                        <img src="/images/aboutus/Career_Counselling.png" width={50} height={50} alt="Career Counselling" />
+                                                        <img src="/images/aboutus/Career_Counselling.png" width={50} height={50} alt="Career Counselling" loading="lazy" />
                                                         <h6 className="text-black fw-bold pt-3">Career Counselling</h6>
                                                     </div>
                                                 </td>
                                                 <td className="d-block d-md-table-cell">
                                                     <div className="col">
-                                                        <img src="/images/aboutus/Mentoring_for_Entrance_Exams.png" width={50} height={50} alt="Mentoring for Entrance Exams" />
+                                                        <img src="/images/aboutus/Mentoring_for_Entrance_Exams.png" width={50} height={50} alt="Mentoring for Entrance Exams" loading="lazy" />
                                                         <h6 className="text-black fw-bold pt-3">Mentoring for Entrance Exams</h6>
                                                     </div>
                                                 </td>
                                                 <td className="d-block d-md-table-cell">
                                                     <div className="col">
-                                                        <img src="/images/aboutus/Assistance.png" width={50} height={50} alt="Assistance for Educational Loans and Scholarships" />
+                                                        <img src="/images/aboutus/Assistance.png" width={50} height={50} alt="Assistance for Educational Loans and Scholarships" loading="lazy"
+                                                        />
                                                         <h6 className="text-black fw-bold pt-3">Assistance for Educational Loans and Scholarships</h6>
                                                     </div>
 
@@ -77,28 +77,32 @@ const Overview = () => {
                                                 <td className="d-block d-md-table-cell">
 
                                                     <div className="col">
-                                                        <img src="/images/aboutus/Seat_Reservation_Facilities.png" width={50} height={50} alt="Seat Reservation Facilities" />
+                                                        <img src="/images/aboutus/Seat_Reservation_Facilities.png" width={50} height={50} alt="Seat Reservation Facilities" loading="lazy"
+                                                        />
                                                         <h6 className="text-black fw-bold pt-3">Seat Reservation Facilities</h6>
                                                     </div>
 
                                                 </td>
                                                 <td className="d-block d-md-table-cell">
                                                     <div className="col">
-                                                        <img src="/images/aboutus/facilitate.png" width={50} height={50} alt="Facilitate Direct Meetings with Colleges and Universities" />
+                                                        <img src="/images/aboutus/facilitate.png" width={50} height={50} alt="Facilitate Direct Meetings with Colleges and Universities" loading="lazy"
+                                                        />
                                                         <h6 className="text-black fw-bold pt-3">Facilitate Direct Meetings with Colleges and Universities</h6>
                                                     </div>
 
                                                 </td>
                                                 <td className="d-block d-md-table-cell">
                                                     <div className="col">
-                                                        <img src="/images/aboutus/nri.png" width={50} height={50} alt="  NRI Admission Assistance" />
+                                                        <img src="/images/aboutus/nri.png" width={50} height={50} alt="  NRI Admission Assistance" loading="lazy"
+                                                        />
                                                         <h6 className="text-black fw-bold pt-3">  NRI Admission Assistance</h6>
                                                     </div>
 
                                                 </td>
                                                 <td className="d-block d-md-table-cell">
                                                     <div className="col">
-                                                        <img src="/images/aboutus/assistance_to_Pay.png" width={50} height={50} alt="Assistance to Pay Fees via EMI" />
+                                                        <img src="/images/aboutus/assistance_to_Pay.png" width={50} height={50} alt="Assistance to Pay Fees via EMI" loading="lazy"
+                                                        />
                                                         <h6 className="text-black fw-bold pt-3">    Assistance to Pay Fees via EMI</h6>
                                                     </div>
 
@@ -117,31 +121,36 @@ const Overview = () => {
                                                 <tr>
                                                     <td className="d-block d-md-table-cell">
                                                         <div>
-                                                            <img src="/images/aboutus/Branding.png" width={50} height={50} alt="Branding and Visibility" />
+                                                            <img src="/images/aboutus/Branding.png" width={50} height={50} alt="Branding and Visibility" loading="lazy"
+                                                            />
                                                             <h6 className="text-black fw-bold pt-3">Branding and Visibility</h6>
                                                         </div>
                                                     </td>
                                                     <td className="d-block d-md-table-cell">
                                                         <div>
-                                                            <img src="/images/aboutus/Lead_Generation.png" width={50} height={50} alt="Lead Generation for Admissions" />
+                                                            <img src="/images/aboutus/Lead_Generation.png" width={50} height={50} alt="Lead Generation for Admissions" loading="lazy"
+                                                            />
                                                             <h6 className="text-black fw-bold pt-3">Lead Generation for Admissions</h6>
                                                         </div>
                                                     </td>
                                                     <td className="d-block d-md-table-cell">
                                                         <div>
-                                                            <img src="/images/aboutus/Collaborative.png" width={50} height={50} alt="Collaborative Promotional Events" />
+                                                            <img src="/images/aboutus/Collaborative.png" width={50} height={50} alt="Collaborative Promotional Events" loading="lazy"
+                                                            />
                                                             <h6 className="text-black fw-bold pt-3">Collaborative Promotional Events</h6>
                                                         </div>
                                                     </td>
                                                     <td className="d-block d-md-table-cell">
                                                         <div>
-                                                            <img src="/images/aboutus/Social_Media.png" width={50} height={50} alt="Social Media Management" />
+                                                            <img src="/images/aboutus/Social_Media.png" width={50} height={50} alt="Social Media Management" loading="lazy"
+                                                            />
                                                             <h6 className="text-black fw-bold pt-3">Social Media Management</h6>
                                                         </div>
                                                     </td>
                                                     <td className="d-block d-md-table-cell">
                                                         <div>
-                                                            <img src="/images/aboutus/Digital_Marketing.png" width={50} height={50} alt="Digital Marketing" />
+                                                            <img src="/images/aboutus/Digital_Marketing.png" width={50} height={50} alt="Digital Marketing" loading="lazy"
+                                                            />
                                                             <h6 className="text-black fw-bold pt-3">Digital Marketing</h6>
                                                         </div>
                                                     </td>

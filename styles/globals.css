@@ -116,7 +116,9 @@
     box-sizing: border-box;
   }
 
-
+  .texteditior {
+    min-height: 350px !important;
+  }
 
   .bg-header {
     background-color: rgba(39, 72, 150, 0.1) !important;
@@ -3573,6 +3575,9 @@
   .examBannerCon {
     height: 500px !important;
   }
+  .examBannerCon .popularcourse{
+    height: 150px !important;
+  }
 
   .examBannerCon img {
     object-fit: cover !important;
@@ -6121,6 +6126,10 @@
       display: inline-block;
       width: 160px;
       height: 50px;
+    }
+
+    .texteditior {
+      min-height: 850px !important;
     }
 
 

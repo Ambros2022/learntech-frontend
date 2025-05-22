@@ -1,16 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import CategoryCarousel from './CategoryCarousel'; // Adjust the import path as necessary
-import NewsList from '../newsList';
-import NewsListAbroad from '../newsListAbroad';
-import ExamCard from '../ExamCardList';
+import dynamic from 'next/dynamic';
+const CategoryCarousel = dynamic(() => import('./CategoryCarousel'), { ssr: false, });
+// import CategoryCarousel from './CategoryCarousel'; // Adjust the import path as necessary
+const NewsList = dynamic(() => import('../newsList'), { ssr: false, });
+// import NewsList from '../newsList';
+// import NewsListAbroad from '../newsListAbroad';
+const NewsListAbroad = dynamic(() => import('../newsListAbroad'), { ssr: false, });
+const ExamCard = dynamic(() => import('../ExamCardList'), { ssr: false, });
+// import ExamCard from '../ExamCardList';
 import axios from 'src/configs/axios';
-import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
+const SideContactUsForm = dynamic(() => import('src/@core/components/popup/SideContactUsForm'), { ssr: false, });
+// import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios1 from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from 'src/hooks/useAuth';
 import { useRouter } from 'next/router';
+
 
 const BrowsebyCategorySec = ({ countryData, streams }) => {
     const { streamId, setStreamId } = useAuth();

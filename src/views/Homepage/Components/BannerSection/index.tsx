@@ -104,7 +104,6 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
   const handleInputChange = (event, value) => {
     handleSearch(value);
   };
-  const preloadImage = banners?.length ? banners[0].image : null;
 
   return (
     <>
@@ -120,29 +119,6 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
 
       <section className="bannerCon bg-formClr" >
 
-
-
-        {/* {banners?.length > 0 ? (
-          <Carousel interval={1500} pause="hover" style={{ zIndex: '39' }}>
-            {banners.map((banner, index) => (
-              <Carousel.Item key={index}>
-                <a href={banner.link}>
-                  <Image
-                    className="d-block w-100"
-                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                    alt={`Banner ${index}`}
-                    width={1920}
-                    height={500}
-                    priority={index === 0} // preload the first image
-                    style={{ width: '100%', height: 'auto' }}
-                  />
-                </a>
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        ) : (
-          <Skeleton height={500} />
-        )} */}
         {banners?.length > 0 ? (
           <Carousel interval={5000} style={{ zIndex: '39' }}>
             {banners.map((banner, index) => (
