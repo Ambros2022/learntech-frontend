@@ -1,6 +1,5 @@
 // ** Type import
 import { VerticalNavItemsType } from 'src/@core/layouts/types'
-import { useAuth } from 'src/hooks/useAuth'
 
 const navigation = (): VerticalNavItemsType => {
   return [

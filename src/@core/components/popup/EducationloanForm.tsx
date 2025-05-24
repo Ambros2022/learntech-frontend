@@ -1,34 +1,22 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { saveAs } from 'file-saver'
 import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import axios1 from 'src/configs/axios'
+
 
 interface Props {
     page?: any;
     onChanges?: any;
 }
 
-const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
+const EducationLoanPage: FC<Props> = ({ }) => {
     const router = useRouter();
-    const [cities, setCities] = useState<any>([]);  
 
-    const getcities = useCallback(async () => {
 
-        try {
-            const roleparams: any = {}
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/website/cities/get', { params: roleparams });
-            setCities(response.data.data);
-        } catch (err) {
-            console.error(err);
-        }
-    }, []);
+
     const courses = [
         {
             group: "Popular Courses",
@@ -967,7 +955,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
                 { name: "West Mednapur" },
 
             ]
-            
+
         },
 
 
@@ -975,16 +963,7 @@ const EducationLoanPage: FC<Props> = ({ page, ...rest }) => {
 
     ]
 
-  
 
-    useEffect(() => {
-        getcities();
-        
-    }, [])
-
-
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
-    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const validationSchema = Yup.object({
         fullName: Yup.string().required('Full Name is required'),

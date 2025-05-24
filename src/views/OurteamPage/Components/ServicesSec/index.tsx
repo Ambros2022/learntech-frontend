@@ -1,7 +1,4 @@
-import Image from 'next/image';
 import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import SideContactUsFormfrom from 'src/@core/components/popup/SideContactUsForm';
 
 const ServicesSec = () => {

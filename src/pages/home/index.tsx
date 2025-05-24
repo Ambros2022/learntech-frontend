@@ -7,14 +7,6 @@ import FrontLayout from 'src/@core/layouts/FrontLayout'
 import Homepage from 'src/views/Homepage'
 
 
-interface Banner {
-  image: string;
-  link: string;
-}
-
-interface HomeProps {
-  banners: Banner[];
-}
 
 const Home: any = ({ banners }) => {
   return <Homepage banners={banners} />;

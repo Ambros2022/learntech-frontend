@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import axios1 from 'src/configs/axios'
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import Image from 'next/image'
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
 // const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });

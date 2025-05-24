@@ -10,7 +10,6 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Script from 'next/script'
 import { Box, CircularProgress } from '@mui/material'
 
 

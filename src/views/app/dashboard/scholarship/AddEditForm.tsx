@@ -1,14 +1,8 @@
 
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import CustomInput from 'src/@core/components/pickersCoustomInput/index'
+import {  useState, useEffect, useCallback } from 'react'
 
-import DialogContent from '@mui/material/DialogContent'
+import CustomInput from 'src/@core/components/pickersCoustomInput/index'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
 import Button from '@mui/material/Button'
@@ -41,7 +35,7 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode,  }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
@@ -68,11 +62,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     };
 
-    const optionseligible = [
-        'male',
-        'female',
-        'others',
-    ];
 
     const options = [
         { label: 'Yes', value: '1' },
@@ -676,7 +665,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='overview'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value,  } }) => (
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                         onChange={(value) => setValue("overview", value)} />

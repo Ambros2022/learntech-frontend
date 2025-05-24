@@ -1,5 +1,5 @@
 // ** React Imports
-import { ChangeEvent, Component } from 'react'
+import { ChangeEvent } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'

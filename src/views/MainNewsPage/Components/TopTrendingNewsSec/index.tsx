@@ -1,9 +1,6 @@
-import Image from 'next/image'
-import React, { useEffect, useState, useCallback, useRef } from 'react'
-import axios from 'src/configs/axios';
+import React from 'react'
 import Carousel3 from 'src/@core/components/carousel3'
 import Link from 'next/link';
-import Spinner from 'src/@core/components/spinner'
 
 
 

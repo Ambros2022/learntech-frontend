@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Carousel from 'react-multi-carousel';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';

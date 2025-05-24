@@ -12,14 +12,13 @@ import * as yup from 'yup'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
-import Rating from 'react-rating-stars-component';
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { FaTrash } from 'react-icons/fa';
 
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, Box, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
+import { Box, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
@@ -41,7 +40,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
     const [fileNameslogo, setFileNameslogo] = useState<any>([]);
@@ -372,14 +370,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -387,10 +383,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -457,7 +451,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -466,17 +459,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -502,8 +492,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
@@ -546,7 +534,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
@@ -554,7 +541,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
                 // history.push('/app/products');
@@ -562,7 +548,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
                 toast.error(err.message || "please try again")
 
             }
@@ -616,13 +601,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             if (response.data.status === 1) {
                 toast.success(response.data.message);
                 setLoading(false);
-                setError('');
                 reset();
                 router.back();
             } else {
                 setLoading(false);
                 toast.error(response.data.message);
-                setError(response.data.message);
             }
         } catch (err) {
             console.error(err);

@@ -10,11 +10,9 @@ interface StepsFormContainerProps {
 }
 
 const StepsFormContainer: React.FC<StepsFormContainerProps> = ({ isAddMode, olddata }) => {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
+    const [loading] = useState<boolean>(false);
     const router = useRouter();
 
-    const [submitResponse, setSubmitResponse] = useState<any>(null); 
 
     const onStepsSubmit = async (formData: FormData, index: number | null = null, setSubmitLoading: (loading: boolean) => void) => {
         setSubmitLoading(true);
@@ -34,19 +32,17 @@ const StepsFormContainer: React.FC<StepsFormContainerProps> = ({ isAddMode, oldd
                 response = await axios1.post(url, formData);
             }
 
-            console.log("API Response:", response.data);
-            setSubmitResponse(response.data); 
-
+      
             if (response.data.status === 1) {
                 toast.success(response.data.message);
-                setError('');
+             
                 router.reload(); 
             } else {
                 toast.error(response.data.message);
-                setError(response.data.message);
+           
             }
         } catch (err: any) {
-            setError(err.message || 'Please try again');
+         
             toast.error(err.message || 'Please try again');
         } finally {
             setSubmitLoading(false);

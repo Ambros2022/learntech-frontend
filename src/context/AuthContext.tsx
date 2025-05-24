@@ -16,7 +16,7 @@ import Cookies from 'js-cookie';
 // ** Types
 import {
   AuthValuesType, LoginParams, ErrCallbackType, ForgotPasswordParams, handelVerifyemailOtpParams,
-  handelhandelResetPasswordParams, UserDataType
+  handelhandelResetPasswordParams
 } from './types'
 
 // ** Defaults
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }: Props) => {
   const [stateId, setStateId] = useState(null);
   const [cityId, setCityId] = useState(null);
   const [streamId, setStreamId] = useState(null);
-  const [permission, setPermission] = useState<any>(null);
+  const [permission] = useState<any>(null);
   const setAuthToken = (token: string) => {
     Cookies.set(authConfig.storageTokenKeyName, token, { expires: 1 });
   }
@@ -270,7 +270,7 @@ const AuthProvider = ({ children }: Props) => {
       const response = await axios1.post('/api/auth/user/signout');
 
       if (response && response.status === 200) {
-        const data = response.data;
+      
 
         setUser(null)
         setisAuthenticated(false);

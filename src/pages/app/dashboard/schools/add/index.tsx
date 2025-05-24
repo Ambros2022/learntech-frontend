@@ -4,7 +4,6 @@ import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
 import AddEditFormnew from 'src/views/app/dashboard/schools/AddEditForm'
-import CardContent from '@mui/material/CardContent'
 
 
 const Adduserlayout = () => {

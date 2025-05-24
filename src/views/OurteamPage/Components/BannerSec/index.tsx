@@ -1,11 +1,10 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import axios1 from 'src/configs/axios';
 import React, { useCallback, useEffect, useState } from 'react';
 
 
 const BannerSec = () => {
-    const [imagesLoaded, setImagesLoaded] = useState(false);
+
     const [banners, setBanners] = useState<any[]>([]);
 
     const getbanner = useCallback(async () => {
@@ -15,9 +14,7 @@ const BannerSec = () => {
             setBanners(response.data.data);
         } catch (err) {
             console.error(err);
-        } finally {
-            setImagesLoaded(true);
-        }
+        } 
     }, []);
 
     useEffect(() => {

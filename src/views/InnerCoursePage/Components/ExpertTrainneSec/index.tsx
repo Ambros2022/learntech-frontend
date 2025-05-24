@@ -3,7 +3,6 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
 import { format } from 'date-fns';
 import Modal from '@mui/material/Modal';
 import { Button, IconButton } from '@mui/material';

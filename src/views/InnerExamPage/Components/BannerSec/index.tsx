@@ -1,7 +1,5 @@
 import React from 'react'
-import PopularCourses from '../UpcomingExamsSec'
 import Link from 'next/link';
-import Image from 'next/image';
 import { format } from 'date-fns';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import NewsLinkSection from '../NewsLinkSection';

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import axios1 from 'src/configs/axios';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -74,8 +73,7 @@ const NewsLinkSection: React.FC = React.memo(() => {
 
   const fetchNews = useCallback(async () => {
     try {
-      const roleparams = { page: 1, size: 10 };
-      const response = await axios1.get('api/website/news/get?category_id =4', {
+      const response = await axios1.get('api/website/news/get?category_id=4', {
         params: {
           page: 1,
           size: 10000,

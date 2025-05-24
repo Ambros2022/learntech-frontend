@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
@@ -50,13 +50,6 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const handleNewPasswordNext = () => {
     setIsOtpVerification(false);
     setIsNewPassword(true);
-  };
-
-  const responseMessage = (response) => {
-    console.log(response);
-  };
-  const errorMessage = (error) => {
-    console.log(error);
   };
 
 
@@ -137,7 +130,7 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
                 </Form>
               )}
             </Formik>
-           
+
           </>
         )}
       </div>

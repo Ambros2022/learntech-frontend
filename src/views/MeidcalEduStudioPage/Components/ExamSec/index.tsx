@@ -1,4 +1,4 @@
-import Image from 'next/image'
+
 import React from 'react'
 
 const ExamSec = React.forwardRef<HTMLDivElement>((props, ref) => {

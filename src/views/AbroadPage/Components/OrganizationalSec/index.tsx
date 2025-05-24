@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
-import Image from 'next/image';
 
 const OrganizationSection = ({ data }) => {
     const [organizationPage, setOrganizationPage] = useState<any>(null);

@@ -1,29 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import YoutubeVideo from 'src/@core/components/youtube-videos';
-import Image from 'next/image';
-import * as Yup from 'yup';
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import dynamic from 'next/dynamic';
 import axios from 'src/configs/axios';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
 import NewsList from '../newsList';
 import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import CustomCarousel from '../CustomCarousel';
-import Carousel from 'react-multi-carousel';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import 'react-multi-carousel/lib/styles.css';
-
-
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 
-type ExamData = {
-  exam_title: string;
-  created_at: string;
-  id: number;
-  slug: string;
-};
 
 function OverviewSec({ data }) {
   const [examData, setExamData] = useState<any[]>([]);
@@ -55,24 +40,10 @@ function OverviewSec({ data }) {
     },
   ].filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>'); ''
 
-  const isMobileView = () => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth >= 320 && window.innerWidth <= 767;
-    }
-    return false;
-  };
+
 
   const [activeTab, setActiveTab] = useState(items[0].id);
-  const [isMobile, setIsMobile] = useState(isMobileView());
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(isMobileView());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const getPromobanner = useCallback(async () => {
     try {

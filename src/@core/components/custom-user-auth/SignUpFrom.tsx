@@ -32,15 +32,6 @@ const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleSuccess = () => {
-    console.log('sucess');
-  };
-
-  const handleFailure = () => {
-    console.error('error:');
-  };
-
-
   return (
     <div className="container mt-3">
       <h5 className="text-center text-black">Create new account</h5>
@@ -169,7 +160,7 @@ const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
       </Formik>
 
       <div className="d-flex justify-content-between mb-3 flex-wrap">
-   
+
       </div>
 
     </div >

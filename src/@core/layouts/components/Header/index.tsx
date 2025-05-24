@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import axios1 from 'src/configs/axios'
 import { createRoot } from 'react-dom/client'
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
@@ -66,13 +66,6 @@ const Header = () => {
     setIsOpen(false);
   };
 
-  const handleMouseEnter = () => {
-    setIsDropdownOpen(true)
-  }
-
-  const handleMouseLeave = () => {
-    setIsDropdownOpen(false)
-  }
 
   const isLinkActive = href => {
     return router.pathname === href
@@ -234,7 +227,7 @@ const Header = () => {
 
 
 
-      <nav className='navbar navbar-expand-lg bg-white  mx-2 ' style={{ zIndex: '100' }}>
+      <nav className='navbar navbar-expand-lg bg-white ' style={{ zIndex: '100' }}>
         {/* <Link className='navbar-brand hlogo' href='/' style={{ display: 'inline-block', width: 160, height: 50 }}> */}
         <Link className='navbar-brand hlogo' href='/' >
           <div style={{
@@ -242,8 +235,8 @@ const Header = () => {
             width: '100%',
             height: '100%',
             display: 'flex',
-            justifyContent: 'flex-end',  
-            alignItems: 'center',       
+            justifyContent: 'flex-end',
+            alignItems: 'center',
           }} className='ps-md-5 ps-0'>
             <Image
               src='/images/Learntech160.webp'
@@ -251,7 +244,7 @@ const Header = () => {
               priority
               width={160}
               height={40}
-              style={{objectFit:'contain'}}
+              style={{ objectFit: 'contain' }}
             />
           </div>
         </Link>

@@ -58,11 +58,16 @@ const Example: React.FC<ExampleProps> = ({ placeholder, intaialvalue = '', onCha
 
   return (
     <>
-      <style jsx global>{`
+      {/* <style jsx global>{`
         .custom-jodit-css .jodit-wysiwyg {
           font-family: 'Poppins', sans-serif !important;
         }
-      `}</style>
+      `}</style> */}
+      <style>{`
+  .custom-jodit-css .jodit-wysiwyg {
+    font-family: 'Poppins', sans-serif !important;
+  }
+`}</style>
       <DynamicJoditEditor
         ref={editor}
         value={values}

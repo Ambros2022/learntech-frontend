@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useState } from 'react'
 import axios1 from 'src/configs/axios';
@@ -24,7 +23,7 @@ const BannerSec = () => {
     return (
         <>
             <section className=' aboutUsPageSec position-relative d-flex justify-content-center ' >
-                {banners.map((banner, index) => (
+                {banners.map((banner) => (
 
                     <img
                         width={1700} height={300}

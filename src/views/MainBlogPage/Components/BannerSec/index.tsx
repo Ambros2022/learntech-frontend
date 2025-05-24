@@ -6,11 +6,6 @@ import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-
-const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
-
 let cancelToken: any;
 
 interface SearchResult {

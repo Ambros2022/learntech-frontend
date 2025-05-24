@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-hot-toast';
@@ -11,8 +10,6 @@ const PhoneInputField = dynamic(() => import("src/@core/components/popup/PhoneIn
 
 const ContactUsSec = () => {
     const router = useRouter();
-
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validationSchema = Yup.object().shape({

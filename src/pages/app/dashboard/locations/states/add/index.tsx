@@ -1,19 +1,14 @@
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import Fab from '@mui/material/Fab'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
 import AddEditFormnew from 'src/views/app/dashboard/locations/states/AddEditForm'
 import CardContent from '@mui/material/CardContent'
-import NotAuthorized from 'src/pages/401'
-import Grid from '@mui/material/Grid';
 
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-import { useState, useEffect, useContext } from 'react';
 
 const Adduserlayout = () => {
-    const ability = useContext(AbilityContext)
+
     return (
         <>
             <Card>

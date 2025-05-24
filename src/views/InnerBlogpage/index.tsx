@@ -14,9 +14,6 @@ function InnerBlogPage({ id }) {
     const isMountedRef = useIsMountedRef();
     const [pagedata, setPagedata] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [colleges, setColleges] = useState([]);
-    const [exams, setexams] = useState([]);
-    const [streams, setStreams] = useState([]);
     const [createdAt, setCreatedAt] = useState('');
     const [newsData, setNewsData] = useState([]);
     const [blogsData, setBlogsData] = useState([]);
@@ -96,7 +93,7 @@ function InnerBlogPage({ id }) {
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
             {!loading && pagedata && <BannerSec data={pagedata} createdAt={createdAt} />}
-            {!loading && pagedata && <OverviewSec data={pagedata} createdAt={createdAt} newsData={newsData}
+            {!loading && pagedata && <OverviewSec data={pagedata}  newsData={newsData}
                 blogsData={blogsData} />}
 
             {!loading && pagedata && <ExpertSec data={pagedata} />}

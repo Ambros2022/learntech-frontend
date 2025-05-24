@@ -19,7 +19,6 @@ function InnerCoursePage({ id }) {
   const [colleges, setColleges] = useState([]);
   const [exams, setexams] = useState([]);
   const [streams, setStreams] = useState([]);
-  const [organizationData, setOrganizationData] = useState([]);
   const [testdata, setTestdata] = useState<any>(null);
 
 
@@ -95,22 +94,6 @@ function InnerCoursePage({ id }) {
       });
       if (isMountedRef.current) {
         setStreams(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [id, isMountedRef]);
-
-  const getOrganizationData = useCallback(async () => {
-    try {
-      const response = await axios.get('api/admin/organizationpage/get/9', {
-        params: {
-          page: 1,
-          size: 1000,
-        }
-      });
-      if (isMountedRef.current) {
-        setOrganizationData(response.data.data);
       }
     } catch (error) {
       console.error('Failed to fetch trending courses:', error);
