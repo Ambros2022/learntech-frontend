@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 function BannerSection({ data }) {
 

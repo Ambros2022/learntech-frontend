@@ -1,21 +1,11 @@
 import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
-import MainCarousel from 'src/@core/components/main-carousel';
-import axios from 'src/configs/axios';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import React from 'react';
 import NewsCarousel from 'src/views/Homepage/Components/NewsCarousel';
 
 import { format } from 'date-fns';
 const LatestUpdateSec = ({ updates }) => {
 
-    const formatDate = (dateString: string) => {
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-        };
-        return new Date(dateString).toLocaleDateString('en-US', options);
-    };
+
 
 
     return (

@@ -1,23 +1,15 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
-// ** MUI Imports
-
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
 import axios1 from 'src/configs/axios'
-import CustomAvatar from 'src/@core/components/mui/avatar'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
-// ** Types Imports
-import { ThemeColor } from 'src/@core/layouts/types'
-import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, CardHeader, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import { Button, CardContent, CardHeader, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, MenuItem } from '@mui/material'
 
 // ** Icon Imports
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
 import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -32,23 +24,6 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 let cancelToken: any;
 
 type SortType = 'asc' | 'desc' | undefined | null
-
-// ** renders client column
-const renderClient = (params: GridRenderCellParams) => {
-  const { row } = params
-  const stateNum = Math.floor(Math.random() * 6)
-  const states = ['success', 'error', 'warning', 'info', 'primary', 'secondary']
-  const color = states[stateNum]
-  return (
-    <CustomAvatar
-      skin='light'
-      color={color as ThemeColor}
-      sx={{ mr: 3, fontSize: '.8rem', width: '1.875rem', height: '1.875rem' }}
-    >
-      {getInitials(row.name ? row.name : 'John Doe')}
-    </CustomAvatar>
-  )
-}
 
 
 
@@ -154,7 +129,7 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
+  const [searchfrom] = useState<any>('name')
   const [columnname, setColumnname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
@@ -298,7 +273,7 @@ const SecondPage = () => {
 
           setLoading(false);
         })
-        .catch((error) => {
+        .catch(() => {
 
           setLoading(false);
           // console.error("API call error:", error);
@@ -309,7 +284,7 @@ const SecondPage = () => {
     [paginationModel, reloadpage]
   );
 
-  const paginationchange = (model: GridPaginationModel, details: GridCallbackDetails) => {
+  const paginationchange = (model: GridPaginationModel) => {
     setSize(model.pageSize);
     setPage(model.page + 1);
     setPaginationModel({ page: model.page, pageSize: model.pageSize });
@@ -390,7 +365,7 @@ const SecondPage = () => {
 
               <Grid item sm={3} xs={12}>
                 <Button sx={{ mt: 0 }} variant="contained" color='error'
-                  onClick={(e: any) => {
+                  onClick={() => {
                     setCategory_id('');
                   }}
                   startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>

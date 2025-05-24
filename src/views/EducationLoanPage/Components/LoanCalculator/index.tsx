@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import DiscreteSliderLabel from './Slider';
-import PieChart from './PieChart';
+// import PieChart from './PieChart';
+const PieChart = dynamic(() => import('./PieChart'), {
+    ssr: false, // disable server-side rendering for Chart.js
+    loading: () => <p>Loading chart...</p>,
+});
 
 interface Mark {
     value: number;

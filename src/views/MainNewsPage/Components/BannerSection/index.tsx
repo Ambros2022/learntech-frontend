@@ -1,7 +1,6 @@
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import axios1 from 'axios';
 import axios from 'src/configs/axios';
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import Autocomplete from 'src/@core/components/mui/autocomplete';

@@ -5,14 +5,10 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
-import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
 import axios1 from 'src/configs/axios'
-// ** Context
-import { useAuth } from 'src/hooks/useAuth'
-import { useParams } from "react-router-dom";
-// ** Custom Components
-import CustomChip from 'src/@core/components/mui/chip'
+
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 // ** Types Imports
@@ -20,28 +16,16 @@ import { ThemeColor } from 'src/@core/layouts/types'
 // import { DataGridRowType } from 'src/@fake-db/types'
 // ** Utils Import
 import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, MenuItem } from '@mui/material'
 
 import CustomTextField from 'src/@core/components/mui/text-field'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import NotAuthorized from 'src/pages/401'
-// ** React Imports
-import { useContext } from 'react'
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-// ** Icon Imports
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
 import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
 
-interface StatusObj {
-  [key: number]: {
-    title: string
-    color: ThemeColor
-  }
-}
 
 let cancelToken: any;
 
@@ -64,24 +48,10 @@ const renderClient = (params: GridRenderCellParams) => {
   )
 }
 
-const statusObj: StatusObj = {
-  1: { title: 'current', color: 'primary' },
-  2: { title: 'professional', color: 'success' },
-  3: { title: 'rejected', color: 'error' },
-  4: { title: 'resigned', color: 'warning' },
-  5: { title: 'applied', color: 'info' }
-}
 
 const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
 
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const [show, setShow] = useState<boolean>(false)
-  const ability = useContext(AbilityContext)
-  const handleRowOptionsClose = () => {
-    setShow(true);
-  }
-
   const handleDelete = () => {
     setOpen(true);
   }
@@ -160,11 +130,6 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   )
 }
 
-interface Props {
-  value: string
-  clearSearch: () => void
-  onChange: (e: ChangeEvent) => void
-}
 
 type DataGridRowType = {
   id: number
@@ -175,13 +140,9 @@ type DataGridRowType = {
 }
 
 const SecondPage = () => {
-  // ** States
-  const { user } = useAuth();
   const [reloadpage, setReloadpage] = useState("0");
   const [country_id, setCountry_id] = useState('')
-  const [countryId, setcountryId] = useState<string>('')
   const [countries, setCountries] = useState([])
-  const [status, setStatus] = useState('')
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
@@ -189,11 +150,10 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
+  const [searchfrom] = useState<any>('name')
   const [fieldname, setFieldname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const isMountedRef = useIsMountedRef();
-  const ability = useContext(AbilityContext)
   const params: any = {}
 
   params['page'] = 1;
@@ -202,7 +162,7 @@ const SecondPage = () => {
   const handleReloadPage = () => {
     setReloadpage((prev) => (prev === "0" ? "1" : "0"));
   };
-   
+
 
 
 
@@ -262,7 +222,7 @@ const SecondPage = () => {
         cancelToken.cancel("Operation canceled due to new request.");
       }
       cancelToken = axios.CancelToken.source();
-      
+
       await axios1
         .get('api/admin/state/get', {
           cancelToken: cancelToken.token,
@@ -290,13 +250,13 @@ const SecondPage = () => {
           setLoading(false);
           console.error("API call error:", error);
         });
-    
+
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationModel, reloadpage]
   );
 
-  const paginationchange = (model: GridPaginationModel, details: GridCallbackDetails) => {
+  const paginationchange = (model: GridPaginationModel) => {
     setSize(model.pageSize);
     setPage(model.page + 1);
     setPaginationModel({ page: model.page, pageSize: model.pageSize });
@@ -341,67 +301,67 @@ const SecondPage = () => {
   const getcountries = useCallback(async () => {
 
     try {
-        const roleparams: any = {};
-        roleparams['page'] = 1;
-        roleparams['size'] = 10000;
-        const response = await axios1.get('api/admin/countries/get', { params: roleparams });
+      const roleparams: any = {};
+      roleparams['page'] = 1;
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/countries/get', { params: roleparams });
 
-        setCountries(response.data.data);
+      setCountries(response.data.data);
 
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
-}, [isMountedRef]);
+  }, [isMountedRef]);
 
-useEffect(() => {
+  useEffect(() => {
 
     getcountries();
 
-}, [getcountries]);
+  }, [getcountries]);
   return (
     <Grid container spacing={6}>
-  
-      <Grid item xs={12}>
-      <Card>
-      <CardHeader title="Search Filters" />
-                <CardContent>
-                  <Grid container spacing={6}>
-                    <Grid item sm={4} xs={12}>
-                      <CustomTextField
-                        select
-                        fullWidth
-                        defaultValue="Select School"
-                        value={country_id}
-                        onChange={(e: any) => {
-                          setCountry_id(e.target.value);
-                          // console.log(setschoolId, "setschoolId");
-                          
-                        }}
-                        SelectProps={{
-                          displayEmpty: true,
-                        }}
-                      >
-                        <MenuItem value=''>Select Country</MenuItem>
-                        {countries && countries.map((val: any) => (
-                          <MenuItem value={val.id}>{val.name}</MenuItem>
-                        ))}
-                        {countries.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
-                      </CustomTextField>
-                    </Grid>
-                    <Grid item sm={4} xs={12}>
-                      <Button sx={{ mt: 0 }} variant="contained" color='error'
-                        onClick={(e: any) => {
-                          // setClassId('');
-                          setCountry_id('');
-                          // setStatus('');
-                        }}
-                        startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-       
 
-                <Divider sx={{ m: '0 !important' }} />
+      <Grid item xs={12}>
+        <Card>
+          <CardHeader title="Search Filters" />
+          <CardContent>
+            <Grid container spacing={6}>
+              <Grid item sm={4} xs={12}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  defaultValue="Select School"
+                  value={country_id}
+                  onChange={(e: any) => {
+                    setCountry_id(e.target.value);
+                    // console.log(setschoolId, "setschoolId");
+
+                  }}
+                  SelectProps={{
+                    displayEmpty: true,
+                  }}
+                >
+                  <MenuItem value=''>Select Country</MenuItem>
+                  {countries && countries.map((val: any) => (
+                    <MenuItem value={val.id}>{val.name}</MenuItem>
+                  ))}
+                  {countries.length === 0 && <MenuItem disabled>Loading...</MenuItem>}
+                </CustomTextField>
+              </Grid>
+              <Grid item sm={4} xs={12}>
+                <Button sx={{ mt: 0 }} variant="contained" color='error'
+                  onClick={() => {
+                    // setClassId('');
+                    setCountry_id('');
+                    // setStatus('');
+                  }}
+                  startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>
+              </Grid>
+            </Grid>
+          </CardContent>
+
+
+          <Divider sx={{ m: '0 !important' }} />
           <DataGrid
             autoHeight
             pagination

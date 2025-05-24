@@ -1,17 +1,8 @@
-import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import ContactUsForm from 'src/@core/components/popup/ContactUsForm';
 import axios1 from 'src/configs/axios';
-const AdvertiseSec = ({ data }) => {
+const AdvertiseSec = () => {
     const [activeTab, setActiveTab] = useState('students');
-    const [isReadMore, setIsReadMore] = useState(false);
-
-    const toggleReadMore = () => {
-        setIsReadMore(!isReadMore);
-    };
-    const [imagesLoaded, setImagesLoaded] = useState(false);
     const [banners, setBanners] = useState<any[]>([]);
 
     const getbanner = useCallback(async () => {
@@ -21,8 +12,6 @@ const AdvertiseSec = ({ data }) => {
             setBanners(response.data.data);
         } catch (err) {
             console.error(err);
-        } finally {
-            setImagesLoaded(true);
         }
     }, []);
 
@@ -210,7 +199,7 @@ const AdvertiseSec = ({ data }) => {
                                 </div>
                                 <div className="col-md-12 col-lg-12 mb-3 mx-md-0 pt-3 pt-md-5">
                                     <div className='bg-skyBlue  rounded border text-center '>
-                                        
+
                                         {banners?.map((banner, index) => (
 
                                             <img
@@ -220,8 +209,8 @@ const AdvertiseSec = ({ data }) => {
                                                 width={420}
                                                 height={400}
                                                 className='img-fluid'
-                                                // layout="responsive" // Allows scaling in mobile
-                                           
+                                            // layout="responsive" // Allows scaling in mobile
+
                                             />
 
                                         ))}

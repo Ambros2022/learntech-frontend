@@ -1,17 +1,7 @@
 import React from 'react';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-// Define the interface for a testimonial
-interface Testimonial {
-    name: string;
-    location: string;
-    institution: string;
-    image: string;
-    designation: string;
-    type: string;
-}
 
 const responsive = {
     superLargeDesktop: {
@@ -32,18 +22,6 @@ const responsive = {
     }
 };
 
-const ButtonGroup = ({ next, previous }: { next?: () => void; previous?: () => void }) => {
-    return (
-        <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
-            <span className='fi-left' onClick={previous}>
-                <FiChevronLeft />
-            </span>
-            <span className='fi-right' onClick={next}>
-                <FiChevronRight />
-            </span>
-        </div>
-    );
-};
 
 const TestimonialSec = ({ testimonials }) => {
     const showButtons = testimonials && testimonials.length > 1;
@@ -68,7 +46,7 @@ const TestimonialSec = ({ testimonials }) => {
                                 renderButtonGroupOutside={showButtons}
                                 // customButtonGroup={showButtons ? <ButtonGroup /> : null}
                             >
-                                {testimonials.map((card, index) => (
+                                {testimonials.map((card) => (
                                     <div key={card.id} className="d-flex m-2">
                                         <div className="card p-3 d-flex flex-column flex-fill">
                                             <div className="row flex-fill">

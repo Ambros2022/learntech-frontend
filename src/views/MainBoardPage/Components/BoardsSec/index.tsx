@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import axios from 'src/configs/axios';
+import React from 'react';
 import Link from 'next/link';
 
 const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDisplayCount }) => {

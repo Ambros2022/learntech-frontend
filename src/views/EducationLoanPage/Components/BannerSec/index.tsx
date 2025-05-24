@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 // import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry'

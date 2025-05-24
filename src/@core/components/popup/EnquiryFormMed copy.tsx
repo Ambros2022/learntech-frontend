@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { saveAs } from 'file-saver'
 import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router';
@@ -10,7 +9,6 @@ import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 const EnquiryFormMed = ({ heading }: { heading: string }) => {
     const router = useRouter();
 
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const validationSchema = Yup.object().shape({

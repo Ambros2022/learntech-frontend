@@ -7,7 +7,7 @@ import Head from 'next/head';
 import { Router } from 'next/router';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { Poppins } from 'next/font/google';
+
 
 
 // ** Loader Import
@@ -21,7 +21,7 @@ import type { EmotionCache } from '@emotion/cache';
 import themeConfig from 'src/configs/themeConfig';
 
 // ** Fake-DB Import
-import 'src/@fake-db';
+// import 'src/@fake-db';
 
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast';
@@ -102,13 +102,7 @@ const Guard = ({ children, authGuard, guestGuard }: GuardProps) => {
   }
 };
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-  variable: '--font-poppins',
-  preload: true,
-});
+
 // ** Configure JSS & ClassName
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
@@ -132,13 +126,7 @@ const App = (props: ExtendedAppProps) => {
           <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
-
-
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
-          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
+          <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -180,10 +168,10 @@ const App = (props: ExtendedAppProps) => {
               ),
             }}
           />
-        
 
-          <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
-          <link rel="preload" as="image" href="/images/icons/learntech-logo.webp" />
+
+
+
 
 
         </Head>
@@ -214,7 +202,35 @@ const App = (props: ExtendedAppProps) => {
         </SessionProvider>
         {/* </div> */}
       </CacheProvider>
+      <Script
+        id="gtm"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-MHML8KVC');
+              `
+        }}
+      />
 
+
+      <Script
+        id="googletagmanager"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-990332405"
+        strategy="afterInteractive"
+      />
+
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-990332405');
+  `}
+      </Script>
 
       {/* <Script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

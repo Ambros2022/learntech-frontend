@@ -11,8 +11,7 @@ const ExploreSection = dynamic(() => import("./Components/ExploreSection"), { ss
 const StudyAbroadSection = dynamic(() => import("./Components/StudyAbroadSection"), { ssr: false });
 const LatestNewsSection = dynamic(() => import("./Components/LatestNewsSection"), { ssr: false });
 const ExpertSection = dynamic(() => import("./Components/ExpertSection"), { ssr: false });
-import axios from 'src/configs/axios';
-import { GetStaticProps } from "next/types";
+
 
 interface Banner {
   image: string;

@@ -29,7 +29,7 @@ const stepsSchema = yup.object().shape({
     order_by: yup.number().required('Listing order is required'),
 });
 
-const StepsForm: React.FC<StepsFormProps> = ({ isAddMode, olddata, onSubmit, onDelete, loading }) => {
+const StepsForm: React.FC<StepsFormProps> = ({ isAddMode, olddata, onSubmit, onDelete }) => {
     const [expanded, setExpanded] = useState<string | false>(false);
     const [submitLoading, setSubmitLoading] = useState<boolean>(false);
     const [deleteLoading, setDeleteLoading] = useState<number | null>(null);

@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import Image from 'next/image';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import axios from 'src/configs/axios';
-import test from 'node:test';
 
 // Define the interface for a testimonial
 interface Testimonial {

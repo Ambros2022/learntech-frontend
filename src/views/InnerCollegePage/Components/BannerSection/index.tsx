@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 const renderStars = (rating: number): JSX.Element[] => {
   const stars: JSX.Element[] = [];

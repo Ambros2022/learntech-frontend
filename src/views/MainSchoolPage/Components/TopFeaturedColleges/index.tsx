@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import axios1 from 'src/configs/axios'
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
 const BlogCard = dynamic(() => import('src/@core/components/blog-card'), { ssr: false });
 import Carousel from "react-multi-carousel";

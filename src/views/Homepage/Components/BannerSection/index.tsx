@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
@@ -15,19 +15,11 @@ const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneIn
 const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'));
 import Carousel from 'react-bootstrap/Carousel';
 import Head from 'next/head';
-import { GetStaticProps } from 'next/types';
 let cancelToken: any;
 
-interface Banner {
-  image: string;
-  link: string;
-}
 
-interface Props {
-  banners: Banner[];
-}
 
-const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
+
 
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

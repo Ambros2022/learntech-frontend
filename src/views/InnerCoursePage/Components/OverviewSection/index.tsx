@@ -4,7 +4,6 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import 'react-multi-carousel/lib/styles.css';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
@@ -151,7 +150,7 @@ function OverviewSection({ data, collegedata, examdata }) {
                     className="col-12 cardConBrdr p-3 mb-5 text-center overflow-y-auto bg-skyBlue"
                     style={{ maxHeight: 'calc(6 * 150px)' }}
                   >
-                    {collegedata.map((val, ind) => (
+                    {collegedata.map((val) => (
                       <Link key={val.id} href={`/college/${val.id}/${val.slug}`}>
                         <div className="card p-3 mb-3 d-flex flex-row bg-skyBlue hover-card">
                           <div className="row d-flex">

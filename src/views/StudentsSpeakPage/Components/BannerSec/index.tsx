@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-import MicIcon from '@mui/icons-material/Mic';
 import Link from 'next/link';
 
 const BannerSec = ({ handleSearchQuery }) => {

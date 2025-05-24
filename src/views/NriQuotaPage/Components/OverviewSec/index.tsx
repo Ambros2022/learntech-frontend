@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import ContactForm from 'src/@core/components/popup/ContactForm';
@@ -6,7 +5,6 @@ import axios1 from 'src/configs/axios';
 
 const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) => {
     const [courses, setCourses] = useState<any[]>([]);
-    const [imagesLoaded, setImagesLoaded] = useState(false);
     const [banners, setBanners] = useState<any[]>([]);
     const [isExpanded, setIsExpanded] = useState(false); // State to handle the read more functionality
     const maxLength = 35600; // Adjust this value to control when "Read More" appears
@@ -23,9 +21,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
             setBanners(response.data.data);
         } catch (err) {
             console.error(err);
-        } finally {
-            setImagesLoaded(true);
-        }
+        } 
     }, []);
 
     // Fetch courses from the API

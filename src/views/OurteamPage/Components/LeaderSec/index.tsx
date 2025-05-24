@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';

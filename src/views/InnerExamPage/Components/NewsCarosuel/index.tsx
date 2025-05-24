@@ -51,7 +51,7 @@ const NewsCarosuel = ({ items }) => {
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup />}
         >
-            {items.map((item, index) => (
+            {items.map((item) => (
                 <Link href={`/exam/${item.id}/${item.slug}`}>
                     <div className="card mb-3 bg-skyBlue hover-card cardInnerExam" style={{zIndex:'10'}}>
                         <div className="card-body text-center d-flex flex-column gap-3 flex-wrap justify-content-center">

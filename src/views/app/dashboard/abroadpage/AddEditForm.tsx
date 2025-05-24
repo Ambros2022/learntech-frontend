@@ -1,7 +1,6 @@
 
 'use client'
-import { ChangeEvent, FC, forwardRef, SyntheticEvent, useCallback, useEffect, useState } from 'react'
-
+import { FC, SyntheticEvent, useCallback, useEffect, useState } from 'react'
 // ** MUI Imports
 import Tab from '@mui/material/Tab'
 import Card from '@mui/material/Card'
@@ -9,36 +8,20 @@ import Grid from '@mui/material/Grid'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import TabContext from '@mui/lab/TabContext'
-import MenuItem from '@mui/material/MenuItem'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import InputAdornment from '@mui/material/InputAdornment'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-// ** Third Party Imports
-import DatePicker from 'react-datepicker'
 import CircularProgress from '@mui/material/CircularProgress'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
-
-// ** Types
-// import { DateType } from 'src/types/forms/reactDatepickerTypes'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios1 from 'src/configs/axios'
-import { Checkbox, DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
+import { DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import { FaTrash } from 'react-icons/fa';
 import toast from 'react-hot-toast'
 import router from 'next/router'
-import { Config } from 'src/configs/mainconfig'
-import ImageUploading, { ImageListType } from "react-images-uploading";
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import QuillEditor from 'src/@core/components/html-editor/index';
 import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
@@ -52,19 +35,17 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
     // ** States
     // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
     const [countries, setCountries] = useState([])
-    const [streamId, setStreamId] = useState<any>(isAddMode ? "" : olddata?.stream?.id || '');
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
     const isMountedRef = useIsMountedRef();
 
-    
+
 
 
     const handleFileChangephoto = (files: any[]) => {
@@ -78,29 +59,29 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     };
 
-   //get all countries
-   const getcountries = useCallback(async () => {
+    //get all countries
+    const getcountries = useCallback(async () => {
 
-    try {
-        const roleparams: any = {};
-        roleparams['page'] = 1;
-        roleparams['size'] = 10000;
-        const response = await axios1.get('api/admin/countries/get', { params: roleparams });
+        try {
+            const roleparams: any = {};
+            roleparams['page'] = 1;
+            roleparams['size'] = 10000;
+            const response = await axios1.get('api/admin/countries/get', { params: roleparams });
 
-        setCountries(response.data.data);
+            setCountries(response.data.data);
 
-    } catch (err) {
-        console.error(err);
-    }
-}, [isMountedRef]);
+        } catch (err) {
+            console.error(err);
+        }
+    }, [isMountedRef]);
 
-useEffect(() => {
+    useEffect(() => {
 
-    getcountries();
+        getcountries();
 
-}, [getcountries]);
+    }, [getcountries]);
 
-  
+
     const schema: any = yup.object().shape({
         name: yup
             .string()
@@ -110,23 +91,23 @@ useEffect(() => {
             .string()
             .trim()
             .required(),
-            info: yup
+        info: yup
             .string()
             .trim()
             .required(),
-            meta_title: yup
+        meta_title: yup
             .string()
             .trim()
             .required(),
-            meta_description: yup
+        meta_description: yup
             .string()
             .trim()
             .required(),
-            meta_keyword: yup
+        meta_keyword: yup
             .string()
             .trim()
             .required(),
-        country_id: yup.object().required("This field is required"),          
+        country_id: yup.object().required("This field is required"),
     })
 
 
@@ -147,7 +128,6 @@ useEffect(() => {
     const {
         control,
         handleSubmit,
-        resetField: admfiledReset,
         reset,
         setValue,
         formState: { errors }
@@ -157,7 +137,7 @@ useEffect(() => {
         resolver: yupResolver(schema)
     })
 
-    
+
 
     const onSubmit = async (data: any) => {
 
@@ -182,14 +162,12 @@ useEffect(() => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -197,10 +175,8 @@ useEffect(() => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -237,7 +213,6 @@ useEffect(() => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -246,17 +221,14 @@ useEffect(() => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -288,7 +260,6 @@ useEffect(() => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
-        formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
@@ -331,7 +302,6 @@ useEffect(() => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
@@ -339,13 +309,11 @@ useEffect(() => {
 
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
                 // history.push('/app/products');
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
                 toast.error(err.message || "please try again")
 
             }
@@ -377,176 +345,176 @@ useEffect(() => {
                         <form onSubmit={handleSubmit(onSubmit)} encType="application/x-www-form-urlencoded">
                             <Grid container spacing={5}>
 
-                            <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} sm={6}>
 
-                            <Controller
-                                name='country_id'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field }) => (
-                                    <CustomAutocomplete
-                                        fullWidth
-                                        options={countries}
-                                        loading={!countries.length}
-                                        value={field.value}
-                                        onChange={(event, newValue) => {
-                                            field.onChange(newValue)
-                                        }}
-                                        getOptionLabel={(option: any) => option.name || ''}
-                                        renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.country_id)}
-                                            {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
+                                    <Controller
+                                        name='country_id'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <CustomAutocomplete
+                                                fullWidth
+                                                options={countries}
+                                                loading={!countries.length}
+                                                value={field.value}
+                                                onChange={(event, newValue) => {
+                                                    field.onChange(newValue)
+                                                }}
+                                                getOptionLabel={(option: any) => option.name || ''}
+                                                renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.country_id)}
+                                                    {...(errors.country_id && { helperText: 'This field is required' })} label='Select Country' />}
+                                            />
+                                        )}
                                     />
-                                )}
-                            />
-                            </Grid>
+                                </Grid>
 
-                            <Grid item xs={12} sm={6}>
-                            <Controller
-                                name='name'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field: { value, onChange } }) => (
-                                    <CustomTextField
-                                        fullWidth
-                                        value={value}
-                                        label='Name'
-                                        onChange={onChange}
-                                        placeholder=''
-                                        error={Boolean(errors.name)}
-                                        aria-describedby='validation-basic-first-name'
-                                        {...(errors.name && { helperText: 'This field is required' })}
+                                <Grid item xs={12} sm={6}>
+                                    <Controller
+                                        name='name'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Name'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.name)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.name && { helperText: 'This field is required' })}
+                                            />
+                                        )}
                                     />
-                                )}
-                            />
-                            </Grid>
+                                </Grid>
 
-                            <Grid item xs={12} sm={6}>
-                                <Controller
-                                    name='slug'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <CustomTextField
-                                            fullWidth
-                                            value={value}
-                                            label='Slug'
-                                            onChange={onChange}
-                                            placeholder=''
-                                            error={Boolean(errors.slug)}
-                                            aria-describedby='validation-basic-first-name'
-                                            {...(errors.slug && { helperText: 'This field is required' })}
-                                        />
-                                    )}
-                                />
-                            </Grid>
-                           
+                                <Grid item xs={12} sm={6}>
+                                    <Controller
+                                        name='slug'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Slug'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.slug)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.slug && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
 
 
-                            <Grid item xs={12} sm={6}>
-                                <Controller
-                                    name='meta_keyword'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <CustomTextField
-                                            fullWidth
-                                            value={value}
-                                            label='Keywords'
-                                            onChange={onChange}
-                                            placeholder=''
-                                            error={Boolean(errors.meta_keyword)}
-                                            aria-describedby='validation-basic-first-name'
-                                            {...(errors.meta_keyword && { helperText: 'This field is required' })}
-                                        />
-                                    )}
-                                />
-                            </Grid>
 
-                            
-                         
+                                <Grid item xs={12} sm={6}>
+                                    <Controller
+                                        name='meta_keyword'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                label='Keywords'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.meta_keyword)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_keyword && { helperText: 'This field is required' })}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
 
-                            <Grid item xs={12} sm={6}>
-                                <Controller
-                                    name='meta_title'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <CustomTextField
-                                            fullWidth
-                                            value={value}
-                                            multiline
-                                            rows={3}
-                                            label='Meta Title'
-                                            onChange={onChange}
-                                            placeholder=''
-                                            error={Boolean(errors.meta_title)}
-                                            aria-describedby='validation-basic-first-name'
-                                            {...(errors.meta_title && { helperText: 'This field is required' })}
-                                        
-                                        />
-                                    )}
-                                />
-                            </Grid>
-                          
 
-                            <Grid item xs={12} sm={6}>
-                                <Controller
-                                    name='meta_description'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <CustomTextField
-                                            fullWidth
-                                            value={value}
-                                            multiline
-                                            rows={3}
-                                            label='Meta description'
-                                            onChange={onChange}
-                                            placeholder=''
-                                            error={Boolean(errors.meta_description)}
-                                            aria-describedby='validation-basic-first-name'
-                                            {...(errors.meta_description && { helperText: 'This field is required' })}
-                                        
-                                        />
-                                    )}
-                                />
-                            </Grid>
 
-                            <Grid item xs={12} sm={12}>
-                    <Typography style={{ marginBottom: '10px' }}>info</Typography>
 
-                                <Controller
-                                    name='info'
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { value, onChange } }) => (
-                                        <>
-                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                    onChange={(value) => setValue("info", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
+                                <Grid item xs={12} sm={6}>
+                                    <Controller
+                                        name='meta_title'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                multiline
+                                                rows={3}
+                                                label='Meta Title'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.meta_title)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_title && { helperText: 'This field is required' })}
+
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={6}>
+                                    <Controller
+                                        name='meta_description'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, onChange } }) => (
+                                            <CustomTextField
+                                                fullWidth
+                                                value={value}
+                                                multiline
+                                                rows={3}
+                                                label='Meta description'
+                                                onChange={onChange}
+                                                placeholder=''
+                                                error={Boolean(errors.meta_description)}
+                                                aria-describedby='validation-basic-first-name'
+                                                {...(errors.meta_description && { helperText: 'This field is required' })}
+
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={12}>
+                                    <Typography style={{ marginBottom: '10px' }}>info</Typography>
+
+                                    <Controller
+                                        name='info'
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field: { value, } }) => (
+                                            <>
+                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                    onChange={(value) => setValue("info", value)} />
+                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
                                 //  onChange={(value)=>  setValue("bottom_description", value)} />
                                 onChange={(value)=>console.log(value)} /> */}
-                            </>
-                                    )}
-                                />
-                            </Grid>
-                           
-                        
-                            <Grid item xs={12} sm={3}>
-                                <FileUpload
-                                    isAddMode={isAddMode}
-                                    olddata={!isAddMode && olddata.backgroundimage ? olddata.backgroundimage : ""}
-                                    onFileChange={handleFileChangephoto}
-                                    maxFiles={1}
-                                    maxSize={2000000}
-                                    fileNames={fileNamesphoto}
-                                    label=" Upload Image"
-                                    acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                                    rejectionMessage='Try another file for upload.'
-                                />
-                            </Grid>
+                                            </>
+                                        )}
+                                    />
+                                </Grid>
 
-                            <Grid item xs={12} sm={6}>
+
+                                <Grid item xs={12} sm={3}>
+                                    <FileUpload
+                                        isAddMode={isAddMode}
+                                        olddata={!isAddMode && olddata.backgroundimage ? olddata.backgroundimage : ""}
+                                        onFileChange={handleFileChangephoto}
+                                        maxFiles={1}
+                                        maxSize={2000000}
+                                        fileNames={fileNamesphoto}
+                                        label=" Upload Image"
+                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                        rejectionMessage='Try another file for upload.'
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
                                     <FormLabel component='legend' style={{ marginBottom: 0 }}>Select status</FormLabel>
                                     <Controller
                                         name='status'
@@ -563,7 +531,7 @@ useEffect(() => {
                                 </Grid>
 
 
-                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
                                     <Button type='submit' variant='contained'>
                                         Submit
@@ -578,7 +546,7 @@ useEffect(() => {
                                             />
                                         ) : null}
                                     </Button>
-                    </Grid>
+                                </Grid>
                             </Grid>
                         </form >
                     </TabPanel>
@@ -613,7 +581,7 @@ useEffect(() => {
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12} sm={11}>
-                                                <Typography>Answers</Typography>
+                                                    <Typography>Answers</Typography>
                                                     <Controller
                                                         //@ts-ignore
                                                         name={`faqs[${index}].answers`}
@@ -623,13 +591,13 @@ useEffect(() => {
                                                         defaultValue={val.answers}
                                                         render={({ field: { value, onChange } }) => (
                                                             <>
-                                                    <QuillEditor placeholder='Start Writing...' intaialvalue={value}
-                                                    onChange={(e) => {
-                                                    onChange(e);
-                                                    setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
-                                                    }} />
-                                          
-                                                    </>
+                                                                <QuillEditor placeholder='Start Writing...' intaialvalue={value}
+                                                                    onChange={(e) => {
+                                                                        onChange(e);
+                                                                        setValue(`faqs[${index}].answers`, e);  // Provide the new value 'e'
+                                                                    }} />
+
+                                                            </>
                                                         )}
                                                     />
                                                 </Grid>
@@ -639,10 +607,10 @@ useEffect(() => {
                                                 <Grid item xs={1}>
                                                     {index !== 0 && (
                                                         <Button
-                                                        variant="contained"
-                                                        color="error"
-                                                        onClick={() => handleRemoveFaq(index)}
-                                                        style={{ margin: '17px 0 0 0px', padding: '8px' }}
+                                                            variant="contained"
+                                                            color="error"
+                                                            onClick={() => handleRemoveFaq(index)}
+                                                            style={{ margin: '17px 0 0 0px', padding: '8px' }}
                                                         >
                                                             <CloseIcon />
                                                         </Button>
@@ -722,7 +690,7 @@ useEffect(() => {
 
                     </TabPanel>
 
-                   
+
                 </CardContent>
                 {/* <Divider sx={{ m: '0 !important' }} /> */}
                 {/* <CardActions>

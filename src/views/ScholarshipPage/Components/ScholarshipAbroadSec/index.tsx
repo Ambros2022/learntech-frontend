@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import ContactForm from 'src/@core/components/popup/ContactForm';
-import Image from 'next/image';
 import axios1 from 'src/configs/axios';
 const ScholarshipAbroadSec = ({ data = {} }: { data?: { top_description?: string } }) => {
   const [isExpanded, setIsExpanded] = useState(false); // State for handling read more

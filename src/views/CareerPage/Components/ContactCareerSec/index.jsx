@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 import JObEnquiryForm from 'src/@core/components/popup/JobEnquiryForm';
 import Link from 'next/link';

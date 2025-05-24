@@ -11,7 +11,7 @@ interface Props {
     onChanges?: any;
 }
 
-const EnquiryForm: FC<Props> = ({ ...rest }) => {
+const EnquiryForm: FC<Props> = ({ }) => {
     const router = useRouter();
 
     const grades = [
@@ -33,7 +33,6 @@ const EnquiryForm: FC<Props> = ({ ...rest }) => {
         { label: 'Grade 12', value: 'Grade 12' },
     ];
 
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validationSchema = Yup.object().shape({
@@ -80,7 +79,7 @@ const EnquiryForm: FC<Props> = ({ ...rest }) => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-            {({ setFieldValue }) => (
+            {({ }) => (
                 <Form className="container expertInquirySec">
                     <div className='row mb-3'>
                         <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
