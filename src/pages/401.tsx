@@ -1,17 +1,18 @@
 // ** React Imports
 import { ReactNode } from 'react'
 
-// ** Next Import
-import Link from 'next/link'
-
+import dynamic from 'next/dynamic'
 // ** MUI Components (tree-shaken)
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
+const Button = dynamic(() => import('@mui/material/Button'))
+const Typography = dynamic(() => import('@mui/material/Typography'))
+const Box = dynamic(() => import('@mui/material/Box'))
+// import Button from '@mui/material/Button'
+// import Typography from '@mui/material/Typography'
+// import Box from '@mui/material/Box'
 import { styled } from '@mui/material/styles'
 
 // ** Dynamic Imports
-import dynamic from 'next/dynamic'
+
 const BlankLayout = dynamic(() => import('src/@core/layouts/BlankLayout'))
 
 // ** Styled Components
@@ -56,7 +57,7 @@ const Error401 = () => {
           <Typography sx={{ mb: 6, color: 'text.secondary' }}>
             Please contact your site administrator.
           </Typography>
-          <Button href='/' component={Link} variant='contained'>
+          <Button href='/' variant='contained'>
             Back to Home
           </Button>
         </BoxWrapper>

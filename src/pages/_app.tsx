@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from 'react';
 
 // ** Next Imports
 import Head from 'next/head';
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
@@ -27,7 +27,7 @@ import themeConfig from 'src/configs/themeConfig';
 import { Toaster } from 'react-hot-toast';
 
 // ** Component Imports
-import UserLayout from 'src/layouts/UserLayout';
+// import UserLayout from 'src/layouts/UserLayout';
 import ThemeComponent from 'src/@core/theme/ThemeComponent';
 import AuthGuard from 'src/@core/components/auth/AuthGuard';
 import GuestGuard from 'src/@core/components/auth/GuestGuard';
@@ -48,8 +48,6 @@ import ReactHotToast from 'src/@core/styles/libs/react-hot-toast';
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
 
 // ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -63,6 +61,11 @@ import '../../styles/globals.css';
 
 // ** Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css';
+import dynamic from 'next/dynamic';
+const UserLayout = dynamic(() => import('src/layouts/UserLayout'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
 
 
 // ** Extend App Props with Emotion
@@ -112,8 +115,18 @@ const App = (props: ExtendedAppProps) => {
   }, []);
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false;
+  const router = useRouter();
+
+  const isAdminRoute = router.pathname.startsWith('/app/dashboard') || router.pathname.startsWith('/admin');
+
   const getLayout =
-    Component.getLayout ?? (page => <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>);
+    Component.getLayout ??
+    (page =>
+      isAdminRoute
+        ? <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>
+        : <>{page}</>);
+  // const getLayout =
+  //   Component.getLayout ?? (page => <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>);
 
   const setConfig = Component.setConfig ?? undefined;
   const authGuard = Component.authGuard ?? true;
@@ -175,7 +188,7 @@ const App = (props: ExtendedAppProps) => {
 
 
         </Head>
-        {/* <div style={{ fontFamily: 'Poppins, sans-serif' }}> */}
+
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
           <AuthProvider>
             <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
@@ -190,8 +203,6 @@ const App = (props: ExtendedAppProps) => {
                       <ReactHotToast>
                         <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
                       </ReactHotToast>
-                      <SpeedInsights />
-                      <Analytics />
                     </ThemeComponent>
 
                   );
@@ -200,8 +211,9 @@ const App = (props: ExtendedAppProps) => {
             </SettingsProvider>
           </AuthProvider>
         </SessionProvider>
-        {/* </div> */}
       </CacheProvider>
+
+
       <Script
         id="gtm"
         strategy="afterInteractive"

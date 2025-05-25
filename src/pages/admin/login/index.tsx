@@ -3,34 +3,46 @@ import { ReactNode, useState } from 'react'
 
 // ** Next Import
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 
+// ** MUI Imports (dynamically loaded)
+const Grid = dynamic(() => import('@mui/material/Grid'))
+const Box = dynamic(() => import('@mui/material/Box'))
+const Button = dynamic(() => import('@mui/material/Button'))
+const Typography = dynamic(() => import('@mui/material/Typography'))
+const IconButton = dynamic(() => import('@mui/material/IconButton'))
+const CardContent = dynamic(() => import('@mui/material/CardContent'))
+const CircularProgress = dynamic(() => import('@mui/material/CircularProgress'))
+const InputAdornment = dynamic(() => import('@mui/material/InputAdornment'))
+// const MuiCard = dynamic(() => import('@mui/material/Card'))
 // ** MUI Imports
-import Grid from '@mui/material/Grid'
+// import Grid from '@mui/material/Grid'
 
-import CircularProgress from '@mui/material/CircularProgress'
+// import CircularProgress from '@mui/material/CircularProgress'
 
 // ** MUI Components
 
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+// import Box from '@mui/material/Box'
+// import Button from '@mui/material/Button'
 
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import CardContent from '@mui/material/CardContent'
+// import Typography from '@mui/material/Typography'
+// import IconButton from '@mui/material/IconButton'
+// import CardContent from '@mui/material/CardContent'
 import { styled } from '@mui/material/styles'
 import MuiCard, { CardProps } from '@mui/material/Card'
-import InputAdornment from '@mui/material/InputAdornment'
+// import InputAdornment from '@mui/material/InputAdornment'
 
 import { useForm, Controller } from 'react-hook-form'
 
 import { useAuth } from 'src/hooks/useAuth'
 
 // ** Custom Component Import
-
-import CustomTextField from 'src/@core/components/mui/text-field'
+const CustomTextField = dynamic(() => import('src/@core/components/mui/text-field'))
+const Icon = dynamic(() => import('src/@core/components/icon'))
+// import CustomTextField from 'src/@core/components/mui/text-field'
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon'
+// import Icon from 'src/@core/components/icon'
 
 // ** Configs
 import themeConfig from 'src/configs/themeConfig'
@@ -39,7 +51,11 @@ import themeConfig from 'src/configs/themeConfig'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
-import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
+// import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
+const AuthIllustrationV1Wrapper = dynamic(() => import('src/views/pages/auth/AuthIllustrationV1Wrapper'))
+
+// ** Toast
+// const toast = dynamic(() => import('react-hot-toast'), { ssr: false })
 
 // ** Third Party Imports
 import toast from 'react-hot-toast'
@@ -54,12 +70,6 @@ interface State {
 const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '25rem' }
 }))
-
-// const LinkStyled = styled(Link)(({ theme }) => ({
-//   textDecoration: 'none',
-//   color: `${theme.palette.primary.main} !important`
-// }))
-
 
 
 
