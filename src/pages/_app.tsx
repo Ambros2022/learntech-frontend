@@ -24,18 +24,18 @@ import themeConfig from 'src/configs/themeConfig';
 // import 'src/@fake-db';
 
 // ** Third Party Import
-import { Toaster } from 'react-hot-toast';
+// import { Toaster } from 'react-hot-toast';
 
 // ** Component Imports
 // import UserLayout from 'src/layouts/UserLayout';
-import ThemeComponent from 'src/@core/theme/ThemeComponent';
-import AuthGuard from 'src/@core/components/auth/AuthGuard';
-import GuestGuard from 'src/@core/components/auth/GuestGuard';
+// import ThemeComponent from 'src/@core/theme/ThemeComponent';
+// import AuthGuard from 'src/@core/components/auth/AuthGuard';
+// import GuestGuard from 'src/@core/components/auth/GuestGuard';
 
 import Script from 'next/script';
 
 // ** Spinner Import
-import Spinner from 'src/@core/components/spinner';
+// import Spinner from 'src/@core/components/spinner';
 
 // ** Contexts
 import { AuthProvider } from 'src/context/AuthContext'; // Rename AuthProvider from your context
@@ -43,7 +43,7 @@ import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsCo
 import { SessionProvider } from 'next-auth/react'; // Import SessionProvider
 
 // ** Styled Components
-import ReactHotToast from 'src/@core/styles/libs/react-hot-toast';
+// import ReactHotToast from 'src/@core/styles/libs/react-hot-toast';
 
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
@@ -62,6 +62,22 @@ import '../../styles/globals.css';
 // ** Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css';
 import dynamic from 'next/dynamic';
+const ThemeComponent = dynamic(() => import('src/@core/theme/ThemeComponent'), {
+  ssr: false,
+
+});
+const AuthGuard = dynamic(() => import('src/@core/components/auth/AuthGuard'), {
+  ssr: false,
+
+});
+const GuestGuard = dynamic(() => import('src/@core/components/auth/AuthGuard'), {
+  ssr: false,
+
+});
+const Spinner = dynamic(() => import('src/@core/components/spinner'), {
+  ssr: false,
+
+});
 const UserLayout = dynamic(() => import('src/layouts/UserLayout'), {
   ssr: false,
   loading: () => <Spinner />,
@@ -117,7 +133,7 @@ const App = (props: ExtendedAppProps) => {
   const contentHeightFixed = Component.contentHeightFixed ?? false;
   const router = useRouter();
 
-  const isAdminRoute = router.pathname.startsWith('/app/dashboard') || router.pathname.startsWith('/admin');
+  const isAdminRoute = router.pathname.startsWith('/app/dashboard') || router.pathname.startsWith('/write-review') || router.pathname.startsWith('/admin');
 
   const getLayout =
     Component.getLayout ??
@@ -190,26 +206,27 @@ const App = (props: ExtendedAppProps) => {
         </Head>
 
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
-          <AuthProvider>
-            <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
-              <SettingsConsumer>
-                {({ settings }) => {
-                  return (
 
+          <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+            <SettingsConsumer>
+              {({ settings }) => {
+                const content = isAdminRoute ? (
+                  <AuthProvider>
                     <ThemeComponent settings={settings}>
                       <Guard authGuard={authGuard} guestGuard={guestGuard}>
                         {getLayout(<Component {...pageProps} />)}
                       </Guard>
-                      <ReactHotToast>
-                        <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
-                      </ReactHotToast>
                     </ThemeComponent>
+                  </AuthProvider>
+                ) : (
+                  getLayout(<Component {...pageProps} />)
+                )
 
-                  );
-                }}
-              </SettingsConsumer>
-            </SettingsProvider>
-          </AuthProvider>
+                return content
+              }}
+            </SettingsConsumer>
+          </SettingsProvider>
+
         </SessionProvider>
       </CacheProvider>
 
