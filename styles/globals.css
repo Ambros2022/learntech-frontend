@@ -3576,7 +3576,8 @@
   .examBannerCon {
     height: 500px !important;
   }
-  .examBannerCon .popularcourse{
+
+  .examBannerCon .popularcourse {
     height: 150px !important;
   }
 
@@ -6491,4 +6492,182 @@
   .height-fix-blogs {
     height: 1105px !important;
     overflow: scroll !important;
+  }
+
+
+
+  /* ----bams landing page--- */
+
+
+
+
+  .bams-navbar-tag {
+
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+  }
+
+  .bamsimage {
+    min-height: 843px;
+    width: 100%;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .bgblacksvyasa {
+    background: #00000069 !important;
+    border-radius: 11px;
+  }
+
+  .h1svyasa {
+    margin: 0;
+
+    font-size: 32px !important;
+    font-weight: 700;
+    color: #ffffff !important;
+    letter-spacing: 1px;
+    line-height: 45px;
+  }
+
+  .h3syyasa {
+    font-size: 18px !important;
+    font-weight: 500;
+    color: #ffffff !important;
+    letter-spacing: 1px;
+  }
+
+  .bams-blue {
+    margin: 0;
+
+    font-size: 32px !important;
+    font-weight: 700;
+    color: blue !important;
+    letter-spacing: 1px;
+    line-height: 45px;
+  }
+
+  .bams-phomepage {
+    color: white;
+    font-size: 21px !important;
+    font-weight: 500;
+  }
+
+  @media only screen and (max-width:600px) {
+    .h1svyasa {
+
+      font-size: 24px !important;
+
+    }
+
+    .bams-blue {
+
+      font-size: 24px !important;
+
+    }
+
+    .bams-phomepage {
+      font-size: 16px !important;
+      padding-top: 20px !important;
+      padding: 10px !important;
+    }
+
+  }
+
+
+
+  .bams-font20 {
+    font-size: 20px !important;
+  }
+
+  .h3syyasa span {
+    font-weight: 600;
+  }
+
+  .h1svyasa span {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+
+  .color-btn-add-apply {
+    background-color: #F84365 !important;
+  }
+
+  .form-boxamb {
+    max-width: 425px;
+    margin: auto;
+    padding: 25px;
+    background: #00000069;
+    border-radius: 11px;
+  }
+
+  .blinking-mount-text-decrease {
+    animation: blink-decrease 1s infinite;
+  }
+
+  .svyasa-image-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .svyasa-image-container .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 18%;
+    /* transform: translate(-50%, -50%); */
+
+    color: white;
+    text-align: center;
+  }
+
+  .white-bg-black-text {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    appearance: none;
+    /* optional: cleaner look */
+  }
+
+  @media only screen and (min-width:700px) {
+    .bams-home-padding {
+      padding-top: 130px !important;
+    }
+  }
+
+  @media (max-width: 991.98px) {
+
+    /* Bootstrap lg breakpoint */
+    .navbar-bams-top #navbarNav {
+      background-color: white;
+      width: 100%;
+      padding: 1rem;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-bams-top .navbar-nav .nav-link {
+      color: #000;
+      /* Ensure readable black text */
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.75rem 1rem;
+    }
+
+    .navbar-bams-top .navbar-nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .navbar-bams-top .navbar-nav .nav-item {
+      background-color: white;
+    }
   }
