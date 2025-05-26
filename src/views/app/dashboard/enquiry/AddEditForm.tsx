@@ -1,33 +1,14 @@
 
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
+import { useState } from 'react'
 import Grid from '@mui/material/Grid'
-import Radio from '@mui/material/Radio'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import { useRouter } from 'next/router';
-// ** Third Party Imports
-import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
-import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
-import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-
-
 import type { FC } from 'react';
-import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup } from '@mui/material'
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import { Alert, } from '@mui/material'
+
 
 
 
@@ -36,15 +17,8 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
-    const router = useRouter();
-    const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
-    const [college, setCollege] = useState([]);
-    const [generalcollege, setGeneralcollege] = useState([]);
-    const isMountedRef = useIsMountedRef();
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
+    const [error] = useState("")
 
     const schema: any = yup.object().shape({
 
@@ -52,16 +26,16 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
     const formatDateTime = (date) =>
         date
-          ? new Date(date).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              second: '2-digit',
-              hour12: true, // Optional: for 12-hour format (AM/PM)
+            ? new Date(date).toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true, // Optional: for 12-hour format (AM/PM)
             })
-          : 'N/A';
+            : 'N/A';
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
         email: isAddMode ? '' : olddata.email,
@@ -77,8 +51,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const {
         control,
-        handleSubmit,
-        reset,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -86,7 +58,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
-  
+
 
     return (
         <>

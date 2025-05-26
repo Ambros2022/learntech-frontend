@@ -1,11 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import * as Yup from 'yup';
-import { debounce } from 'lodash'; // Import debounce function from lodash library
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import emailjs from 'emailjs-com';
-import { Modal } from 'react-bootstrap';
-import { toast } from 'react-hot-toast'
-import Image from 'next/image';
+import React, { useCallback, useEffect,  useState } from 'react'
+import debounce from 'lodash.debounce'; // Import debounce function from lodash library
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios1 from 'src/configs/axios'
@@ -14,10 +8,6 @@ import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import { useAuth } from 'src/hooks/useAuth';
 
 
-interface City {
-    id: number;
-    name: string;
-}
 
 interface College {
     id: number;
@@ -33,7 +23,7 @@ interface College {
 
 }
 
-const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
+const CollegeCard = ({ id, slug, name, type, rating, location,  established, imageUrl }: any) => {
     return (
         <div className='col-md-10 col-lg-12 mx-auto mb-3 filtercollge-card'>
             <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
@@ -102,7 +92,6 @@ function CollegeFilterSection() {
     const [colleges, setColleges] = useState<College[]>([]);
     const [total, setTotal] = useState<string>("0");
     const isMountedRef = useIsMountedRef();
-    const [loading, setLoading] = useState<boolean>(false)
     const [visibleCards, setVisibleCards] = useState(7);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
 
@@ -113,9 +102,6 @@ function CollegeFilterSection() {
     const [courses, setCourses] = useState<any[]>([]);
     const [promoban, setPromoban] = useState<any[]>([]);
 
-    const [selectedOptions, setSelectedOptions] = useState({});
-    const [selectedStateIds, setSelectedStateIds] = useState<string[]>([]);
-    const [selectedCityIds, setSelectedCityIds] = useState<string[]>([]);
 
     const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
         state: true,
@@ -269,9 +255,9 @@ function CollegeFilterSection() {
             const params: any = {
                 page: 1,
                 size: 10000,
-                country_id:204,
+                country_id: 204,
                 type: 'college',
-               
+
             };
 
 
@@ -529,7 +515,7 @@ function CollegeFilterSection() {
                         type={college.college_type}
                         rating={college.avg_rating}
                         location={college.address}
-                        state={college.state}
+                        // state={college.state}
                         established={college.established}
                         imageUrl={college.banner_image}
                     />
@@ -555,9 +541,9 @@ function CollegeFilterSection() {
         selectedCheckboxes: Record<string, string[]>;
 
     }> =
-        ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
+        ({ options,  selectedCheckboxes }) => {
 
-  
+
 
             const handleStateButtonClick = (state: string) => {
 
@@ -581,7 +567,7 @@ function CollegeFilterSection() {
                 <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2 rounded">
                     <div className="col-12">
                         <h6 className="text-black">Filters By Location</h6>
-                        
+
                         <div className="d-flex flex-wrap">
                             {options.map((option, index) => (
                                 option.is_top === "1" && (
@@ -723,7 +709,7 @@ function CollegeFilterSection() {
         });
     });
 
-    const PromoAddBanner = ({ url, title, description,link }) => {
+    const PromoAddBanner = ({ url, title, description, link }) => {
 
         return (
             <>
@@ -739,9 +725,9 @@ function CollegeFilterSection() {
                                 </div>
                                 <div className="col-md-8">
                                     <div className="card-body" style={{ zIndex: '200' }}>
-                                    <h3 className="card-title fw-bold">{title}</h3>
+                                        <h3 className="card-title fw-bold">{title}</h3>
                                         <h5 className="card-text">{description}</h5>
-                                     
+
                                         <Link href={link} className='mt-3 btn openAddBtn'>Open <i className="bi bi-chevron-right"></i></Link>
                                     </div>
                                 </div>

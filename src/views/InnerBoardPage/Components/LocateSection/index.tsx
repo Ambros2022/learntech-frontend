@@ -1,8 +1,3 @@
-import Image from 'next/image';
-
-import dynamic from 'next/dynamic'
-
-
 
 
 function LocationSection({ data }) {

@@ -3,7 +3,6 @@ import { ReactNode } from 'react'
 
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
-import ServicesPage from 'src/views/ServicesPage'
 import StudentsSpeakPage from 'src/views/StudentsSpeakPage'
 
 

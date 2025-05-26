@@ -31,7 +31,7 @@ const path = require('path')
 
 // Remove this if you're not using Fullcalendar features
 
-
+++
 module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
@@ -105,6 +105,7 @@ module.exports = {
   },
  
 }
+
 
 
 

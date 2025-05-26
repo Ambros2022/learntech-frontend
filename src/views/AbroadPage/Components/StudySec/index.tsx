@@ -1,6 +1,4 @@
 import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import dynamic from 'next/dynamic';
 
 const AbroadEnquiryForm = dynamic(() => import('src/@core/components/popup/AbroadEnquiryForm'), { ssr: false });

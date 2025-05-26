@@ -4,10 +4,10 @@ import { ReactNode, useEffect } from 'react';
 
 // ** Next Imports
 import Head from 'next/head';
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { Poppins } from 'next/font/google';
+
 
 
 // ** Loader Import
@@ -21,13 +21,13 @@ import type { EmotionCache } from '@emotion/cache';
 import themeConfig from 'src/configs/themeConfig';
 
 // ** Fake-DB Import
-import 'src/@fake-db';
+// import 'src/@fake-db';
 
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast';
 
 // ** Component Imports
-import UserLayout from 'src/layouts/UserLayout';
+// import UserLayout from 'src/layouts/UserLayout';
 import ThemeComponent from 'src/@core/theme/ThemeComponent';
 import AuthGuard from 'src/@core/components/auth/AuthGuard';
 import GuestGuard from 'src/@core/components/auth/GuestGuard';
@@ -48,8 +48,6 @@ import ReactHotToast from 'src/@core/styles/libs/react-hot-toast';
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
 
 // ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -63,6 +61,11 @@ import '../../styles/globals.css';
 
 // ** Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css';
+import dynamic from 'next/dynamic';
+const UserLayout = dynamic(() => import('src/layouts/UserLayout'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
 
 
 // ** Extend App Props with Emotion
@@ -102,13 +105,7 @@ const Guard = ({ children, authGuard, guestGuard }: GuardProps) => {
   }
 };
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-  variable: '--font-poppins',
-  preload: true,
-});
+
 // ** Configure JSS & ClassName
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
@@ -118,8 +115,18 @@ const App = (props: ExtendedAppProps) => {
   }, []);
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false;
+  const router = useRouter();
+
+  const isAdminRoute = router.pathname.startsWith('/app/dashboard') || router.pathname.startsWith('/admin');
+
   const getLayout =
-    Component.getLayout ?? (page => <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>);
+    Component.getLayout ??
+    (page =>
+      isAdminRoute
+        ? <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>
+        : <>{page}</>);
+  // const getLayout =
+  //   Component.getLayout ?? (page => <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>);
 
   const setConfig = Component.setConfig ?? undefined;
   const authGuard = Component.authGuard ?? true;
@@ -132,13 +139,7 @@ const App = (props: ExtendedAppProps) => {
           <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
-
-
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
-          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
+          <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -180,14 +181,14 @@ const App = (props: ExtendedAppProps) => {
               ),
             }}
           />
-        
 
-          <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
-          <link rel="preload" as="image" href="/images/icons/learntech-logo.webp" />
+
+
+
 
 
         </Head>
-        {/* <div style={{ fontFamily: 'Poppins, sans-serif' }}> */}
+
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
           <AuthProvider>
             <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
@@ -202,8 +203,6 @@ const App = (props: ExtendedAppProps) => {
                       <ReactHotToast>
                         <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
                       </ReactHotToast>
-                      <SpeedInsights />
-                      <Analytics />
                     </ThemeComponent>
 
                   );
@@ -212,9 +211,38 @@ const App = (props: ExtendedAppProps) => {
             </SettingsProvider>
           </AuthProvider>
         </SessionProvider>
-        {/* </div> */}
       </CacheProvider>
 
+
+      <Script
+        id="gtm"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-MHML8KVC');
+              `
+        }}
+      />
+
+
+      <Script
+        id="googletagmanager"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-990332405"
+        strategy="afterInteractive"
+      />
+
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-990332405');
+  `}
+      </Script>
 
       {/* <Script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

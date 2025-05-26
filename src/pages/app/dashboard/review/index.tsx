@@ -6,21 +6,17 @@ import CardHeader from '@mui/material/CardHeader'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
 import axios1 from 'src/configs/axios'
-import CustomAvatar from 'src/@core/components/mui/avatar'
+
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
-// ** Types Imports
-import { ThemeColor } from 'src/@core/layouts/types'
-import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+
+import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, MenuItem } from '@mui/material'
 
 
 // ** Icon Imports
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
-import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
@@ -32,22 +28,6 @@ let cancelToken: any;
 
 type SortType = 'asc' | 'desc' | undefined | null
 
-// ** renders client column
-const renderClient = (params: GridRenderCellParams) => {
-  const { row } = params
-  const stateNum = Math.floor(Math.random() * 6)
-  const states = ['success', 'error', 'warning', 'info', 'primary', 'secondary']
-  const color = states[stateNum]
-  return (
-    <CustomAvatar
-      skin='light'
-      color={color as ThemeColor}
-      sx={{ mr: 3, fontSize: '.8rem', width: '1.875rem', height: '1.875rem' }}
-    >
-      {getInitials(row.name ? row.name : 'John Doe')}
-    </CustomAvatar>
-  )
-}
 
 
 
@@ -172,7 +152,7 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
+  const [searchfrom] = useState<any>('name')
   const [columnname, setColumnname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
@@ -396,7 +376,7 @@ const SecondPage = () => {
 
 
   const fetchTableData = useCallback(
-    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string, college_id: string , course_id: string) => {
+    async (orderby: SortType, searchtext: string, searchfrom: any, size: number, page: number, columnname: string, college_id: string, course_id: string) => {
       setLoading(true);
       if (typeof cancelToken !== typeof undefined) {
         cancelToken.cancel("Operation canceled due to new request.");
@@ -427,7 +407,7 @@ const SecondPage = () => {
 
           setLoading(false);
         })
-        .catch((error) => {
+        .catch(() => {
 
           setLoading(false);
           // console.error("API call error:", error);
@@ -442,7 +422,7 @@ const SecondPage = () => {
 
   useEffect(() => {
     fetchTableData(orderby, searchtext, searchfrom, size, page, columnname, college_id, course_id)
-  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, college_id, course_id,reloadpage])
+  }, [fetchTableData, searchtext, orderby, searchfrom, size, page, columnname, college_id, course_id, reloadpage])
 
   const handleSortModel = (newModel: GridSortModel) => {
     if (newModel.length) {
@@ -495,11 +475,11 @@ const SecondPage = () => {
     getcolleges();
     getcourses();
 
-  }, [getcolleges , getcourses]);
+  }, [getcolleges, getcourses]);
 
 
   return (
-  
+
     <Grid container spacing={6}>
       <Grid item xs={12}>
         <Card>
@@ -553,7 +533,7 @@ const SecondPage = () => {
               </Grid>
               <Grid item sm={4} xs={12}>
                 <Button sx={{ mt: 0 }} variant="contained" color='error'
-                  onClick={(e: any) => {
+                  onClick={() => {
                     setCollege_id('');
                     setCourse_id('');
                   }}
@@ -579,7 +559,7 @@ const SecondPage = () => {
             paginationModel={paginationModel}
             onSortModelChange={handleSortModel}
             slots={{ toolbar: ServerSideToolbar }}
-            onPaginationModelChange={(model, details) => {
+            onPaginationModelChange={(model) => {
               setSize(model.pageSize);
               setPage(model.page + 1);
               setPaginationModel({ page: model.page, pageSize: model.pageSize });

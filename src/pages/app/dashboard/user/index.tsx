@@ -1,27 +1,12 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
-// ** MUI Imports
-
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
-import Link from 'next/link'
+import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import axios1 from 'src/configs/axios'
-import CustomAvatar from 'src/@core/components/mui/avatar'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
-// ** Types Imports
-import { ThemeColor } from 'src/@core/layouts/types'
-import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
+import { Grid, } from '@mui/material'
 
-
-// ** Icon Imports
-import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
-import Fab from '@mui/material/Fab'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
 import axios from 'axios'
 
 
@@ -32,84 +17,12 @@ let cancelToken: any;
 
 type SortType = 'asc' | 'desc' | undefined | null
 
-// ** renders client column
-const renderClient = (params: GridRenderCellParams) => {
-  const { row } = params
-  const stateNum = Math.floor(Math.random() * 6)
-  const states = ['success', 'error', 'warning', 'info', 'primary', 'secondary']
-  const color = states[stateNum]
-  return (
-    <CustomAvatar
-      skin='light'
-      color={color as ThemeColor}
-      sx={{ mr: 3, fontSize: '.8rem', width: '1.875rem', height: '1.875rem' }}
-    >
-      {getInitials(row.name ? row.name : 'John Doe')}
-    </CustomAvatar>
-  )
-}
 
 
 
 
 
-const RowOptions = ({ id, status, onReloadPage }: { id: number | string, status: string, onReloadPage: () => void }) => {
-  const [open, setOpen] = useState(false);
 
-  const handleBlockUnblock = async () => {
-    await BlockUnblockRow();
-    setOpen(false);
-  }
-
-  const BlockUnblockRow = async () => {
-    try {
-      const endpoint = status === 'active' ? 'api/admin/user/block/' : 'api/admin/user/unblock/';
-      await axios1.post(endpoint + id)
-        .then(response => {
-          if (response.data.status == 1) {
-            toast.success(response.data.message)
-            onReloadPage();
-          } else {
-            toast.error(response.data.message)
-          }
-        })
-    } catch (err: any) {
-      console.error(err);
-      toast.error(err.message || "please try again")
-    }
-  };
-
-  return (
-    <>
-      {/* <MenuItem sx={{ '& svg': { mr: 1 } }}>
-        <Link href={`./review/edit/` + id} >
-          <Icon icon='tabler:edit' fontSize={20} />
-        </Link>
-      </MenuItem> */}
-
-      <Button
-        onClick={handleBlockUnblock}
-        variant="contained"
-        color={status === 'active' ? 'error' : 'success'}
-        startIcon={<Icon icon={status === 'active' ? 'tabler:lock' : 'tabler:lock-open'} fontSize={20} />}
-        sx={{ mr: 2 }}
-      >
-        {status === 'active' ? 'Block' : 'Unblock'}
-      </Button>
-
-      {/* <Button
-        onClick={() => setOpen(true)}
-        variant="contained"
-        color="error"
-        startIcon={<Icon icon='tabler:trash' fontSize={20} />}
-      >
-        Delete
-      </Button> */}
-
-      
-    </>
-  )
-}
 
 
 
@@ -125,7 +38,7 @@ const SecondPage = () => {
   // ** States
 
 
-  const [reloadpage, setReloadpage] = useState("0");
+  const [reloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
@@ -133,7 +46,7 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('desc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name,email')
+  const [searchfrom] = useState<any>('name,email')
   const [columnname, setColumnname] = useState<string>('updated_at')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
@@ -141,9 +54,6 @@ const SecondPage = () => {
   params['page'] = 1;
   params['size'] = 10000;
 
-  const handleReloadPage = () => {
-    setReloadpage((prev) => (prev === "0" ? "1" : "0"));
-  };
 
   let columns: GridColDef[] = [
 
@@ -156,9 +66,9 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.name}
-              </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.name}
+          </Typography>
         )
       }
     },
@@ -177,9 +87,9 @@ const SecondPage = () => {
         );
       }
     },
-    
 
-   
+
+
     {
       flex: 0.175,
       minWidth: 100,
@@ -214,7 +124,7 @@ const SecondPage = () => {
       }
     },
 
-    
+
   ]
 
 
@@ -249,7 +159,7 @@ const SecondPage = () => {
 
           setLoading(false);
         })
-        .catch((error) => {
+        .catch(() => {
 
           setLoading(false);
           // console.error("API call error:", error);
@@ -260,7 +170,7 @@ const SecondPage = () => {
     [paginationModel, reloadpage]
   );
 
-  const paginationchange = (model: GridPaginationModel, details: GridCallbackDetails) => {
+  const paginationchange = (model: GridPaginationModel) => {
     setSize(model.pageSize);
     setPage(model.page + 1);
     setPaginationModel({ page: model.page, pageSize: model.pageSize });

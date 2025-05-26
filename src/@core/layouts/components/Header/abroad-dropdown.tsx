@@ -1,11 +1,10 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import React from 'react';
 
-const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
-    const [visibleStates, setVisibleStates] = useState(10); 
-    const [isExpanded, setIsExpanded] = useState(false); 
+const DropdownMenu = React.memo(({ states, onClose }: any) => {
+    const [visibleStates, setVisibleStates] = useState(10);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     const handleViewMore = useCallback(() => {
         setVisibleStates(prev => Math.min(prev + 5, states.length));
@@ -13,8 +12,8 @@ const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
     }, [states.length]);
 
     const handleShowLess = useCallback(() => {
-        setVisibleStates(10); 
-        setIsExpanded(false); 
+        setVisibleStates(10);
+        setIsExpanded(false);
     }, []);
 
     return (
@@ -27,7 +26,7 @@ const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
                     </div>
                     {states.slice(0, visibleStates).map((item) => (
                         <li key={item.id} className="list-unstyled">
-                            <Link href={`/${item.slug}`}   onClick={onClose} className="dropdown-item">
+                            <Link href={`/${item.slug}`} onClick={onClose} className="dropdown-item">
                                 <div className="d-flex align-items-center">
                                     <div
                                         className="me-3"

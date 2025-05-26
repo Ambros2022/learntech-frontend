@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 
-const StudentsText = ({ data }) => {
+const StudentsText = ({  }) => {
     const [activeTab, setActiveTab] = useState('students');
-    const [isReadMore, setIsReadMore] = useState(false);
-
-    const toggleReadMore = () => {
-        setIsReadMore(!isReadMore);
-    };
 
     return (
         <>

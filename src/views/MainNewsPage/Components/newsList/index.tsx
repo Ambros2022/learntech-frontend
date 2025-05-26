@@ -1,9 +1,8 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 // NewsItem component
-const NewsItem = ({ id, banner_image, title, link }) => (
+const NewsItem = ({ banner_image, title, link }) => (
     <div className="col-md-12 col-12 mx-md-0 mx-auto">
         <Link href={link} >
             <div className="card mb-3 bg-skyBlue hover-card">
@@ -35,7 +34,6 @@ const NewsList = ({ newsItems }) => (
                         {newsItems.map((item, index) => (
                             <NewsItem
                                 key={item.id || index} // Prefer a unique ID if available
-                                id={item.id}
                                 banner_image={item.logo}
                                 title={item.name}
                                 link={item.link}

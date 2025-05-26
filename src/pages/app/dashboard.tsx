@@ -1,14 +1,9 @@
 // ** MUI Imports
 import { ReactNode, useCallback, useEffect, useState } from 'react';
-import FrontLayout from 'src/@core/layouts/FrontLayout';
-import InnerCoursePage from 'src/views/InnerCoursePage';
-import SubInnerCoursePage from 'src/views/SubInnerCoursePage';
-import { useRouter } from 'next/router';
 import Spinner from 'src/@core/components/spinner';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
@@ -69,7 +64,6 @@ const CardItem = ({ href, title, value, icon }: { href: string; title: string; v
 );
 
 const Home = () => {
-  const router = useRouter();
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<PageData | null>(null);
   const [enquirydata, setEnquirydata] = useState<any | null>(null);

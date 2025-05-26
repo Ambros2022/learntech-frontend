@@ -1,19 +1,14 @@
 // ** React Imports
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 // ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-import Radio from '@mui/material/Radio'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -38,7 +33,7 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode}) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")

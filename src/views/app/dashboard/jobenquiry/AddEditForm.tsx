@@ -1,23 +1,7 @@
 // ** React Imports
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import CustomInput from 'src/@core/components/pickersCoustomInput/index'
-
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
+import { useState, useEffect, useCallback } from 'react'
 import Grid from '@mui/material/Grid'
-import Radio from '@mui/material/Radio'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import { useRouter } from 'next/router';
-// ** Third Party Imports
-import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -26,10 +10,7 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import type { FC } from 'react';
-import { useAuth } from 'src/hooks/useAuth'
-
-import { Alert, FormControlLabel, FormLabel, RadioGroup, useTheme } from '@mui/material'
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import { Alert } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 
 
@@ -39,23 +20,17 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
-    const router = useRouter();
-    const { user } = useAuth();
-    const [loading, setLoading] = useState<boolean>(false)
-    const [superadmin, setSuperadmin] = useState<boolean>(true)
-    const [error, setError] = useState("")
-    const [schools, setSchools] = useState([])
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
+
+    const [error] = useState("")
     const [joblocations, setJoblocations] = useState([])
     const [jobposition, setJobPosition] = useState([])
     const isMountedRef = useIsMountedRef();
     const params: any = {}
     params['page'] = 1;
     params['size'] = 10000;
-    const theme = useTheme()
-    const { direction } = theme
 
-    const popperPlacement: ReactDatePickerProps['popperPlacement'] = direction === 'ltr' ? 'bottom-start' : 'bottom-end'
+
 
 
 
@@ -98,8 +73,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const {
         control,
-        handleSubmit,
-        reset,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -147,7 +120,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     }, [getlocation]);
 
-   
+
 
 
     const handleFilechange = () => {

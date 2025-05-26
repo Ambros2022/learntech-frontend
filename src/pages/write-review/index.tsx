@@ -13,7 +13,6 @@ const WriteReview = () => {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
   useEffect(() => {

@@ -1,87 +1,32 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
-// ** MUI Imports
-
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import CardHeader from '@mui/material/CardHeader'
-import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
+import { DataGrid,  GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
 import axios1 from 'src/configs/axios'
-// ** Context
-import { useAuth } from 'src/hooks/useAuth'
-
-import CustomAvatar from 'src/@core/components/mui/avatar'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
-// ** Types Imports
-import { ThemeColor } from 'src/@core/layouts/types'
-// import { DataGridRowType } from 'src/@fake-db/types'
-// ** Utils Import
-import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
-import IconButton from '@mui/material/IconButton'
-import { GridToolbarExport } from '@mui/x-data-grid'
-// ** Custom Component Import
-import CustomTextField from 'src/@core/components/mui/text-field'
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import NotAuthorized from 'src/pages/401'
-// ** React Imports
-import { useContext } from 'react'
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-// ** Icon Imports
+
+
+import { Button,  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,  Grid,  MenuItem } from '@mui/material'
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
 import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
 
 
-interface StatusObj {
-  [key: number]: {
-    title: string
-    color: ThemeColor
-  }
-}
 
 let cancelToken: any;
 
 type SortType = 'asc' | 'desc' | undefined | null
 
-// ** renders client column
-const renderClient = (params: GridRenderCellParams) => {
-  const { row } = params
-  const stateNum = Math.floor(Math.random() * 6)
-  const states = ['success', 'error', 'warning', 'info', 'primary', 'secondary']
-  const color = states[stateNum]
-  return (
-    <CustomAvatar
-      skin='light'
-      color={color as ThemeColor}
-      sx={{ mr: 3, fontSize: '.8rem', width: '1.875rem', height: '1.875rem' }}
-    >
-      {getInitials(row.name ? row.name : 'John Doe')}
-    </CustomAvatar>
-  )
-}
 
-const statusObj: StatusObj = {
-  1: { title: 'current', color: 'primary' },
-  2: { title: 'professional', color: 'success' },
-  3: { title: 'rejected', color: 'error' },
-  4: { title: 'resigned', color: 'warning' },
-  5: { title: 'applied', color: 'info' }
-}
+
 
 const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const [show, setShow] = useState<boolean>(false)
-  const ability = useContext(AbilityContext)
-  const handleRowOptionsClose = () => {
-    setShow(true);
-  }
+
 
   const handleDelete = () => {
     setOpen(true);
@@ -159,11 +104,6 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   )
 }
 
-interface Props {
-  value: string
-  clearSearch: () => void
-  onChange: (e: ChangeEvent) => void
-}
 
 type DataGridRowType = {
   id: number
@@ -174,8 +114,7 @@ type DataGridRowType = {
 }
 
 const SecondPage = () => {
-  // ** States
-  const { user } = useAuth();
+
   const [reloadpage, setReloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
@@ -184,11 +123,10 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('alljoblocations.name')
+  const [searchfrom] = useState<any>('alljoblocations.name')
   const [columnname, setColumnname] = useState<string>('alljoblocations.name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
-  const isMountedRef = useIsMountedRef();
-  const ability = useContext(AbilityContext)
+
   const params: any = {}
 
   params['page'] = 1;
@@ -279,7 +217,7 @@ const SecondPage = () => {
 
           setLoading(false);
         })
-        .catch((error) => {
+        .catch(() => {
           // Handle error if needed
           setLoading(false);
          
@@ -290,7 +228,7 @@ const SecondPage = () => {
     [paginationModel, reloadpage]
   );
 
-  const paginationchange = (model: GridPaginationModel, details: GridCallbackDetails) => {
+  const paginationchange = (model: GridPaginationModel) => {
     setSize(model.pageSize);
     setPage(model.page + 1);
     setPaginationModel({ page: model.page, pageSize: model.pageSize });

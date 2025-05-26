@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import TabCarousel from '../TabCarousel';
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
@@ -46,10 +45,7 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
     const [loading, setLoading] = useState(false);
 
-    // Function to handle input change for search text
-    const handleSearchInputChange = (e) => {
-        setSearchText(e.target.value);
-    };
+
 
     const handleClearAll = () => {
         setFormData({
@@ -189,12 +185,6 @@ const FilterSec = ({ abroadData, levelOptions, typeOptions, countryData }) => {
         setCurrentPage(page);
     };
 
-
-
-    // Function to handle page change
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
 
     const ScholarshipCards = ({ }) => {
         const startIndex = (currentPage - 1) * perPage;

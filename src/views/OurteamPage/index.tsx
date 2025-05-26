@@ -12,7 +12,6 @@ const OurTeamPage = () => {
   const router = useRouter()
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>();
-  const [trendingCourses, setTrendingCourses] = useState([]);
 
   const getPagedata = useCallback(async () => {
     try {

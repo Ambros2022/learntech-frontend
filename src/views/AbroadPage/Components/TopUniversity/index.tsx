@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import Image from 'next/image'
 import React, { useCallback, useEffect, useState } from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });

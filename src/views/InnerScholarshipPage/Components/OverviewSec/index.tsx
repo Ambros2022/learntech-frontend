@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 
 import ContactForm from 'src/@core/components/popup/ContactForm';
 import ScholarshipList from '../ScholarshipList/index';

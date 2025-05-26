@@ -13,21 +13,15 @@ import Layout from 'src/@core/layouts/Layout'
 import VerticalNavItems from 'src/navigation/vertical'
 import HorizontalNavItems from 'src/navigation/horizontal'
 
-// ** Component Import
-// Uncomment the below line (according to the layout type) when using server-side menu
-import ServerSideVerticalNavItems from './components/vertical/ServerSideNavItems'
-import ServerSideHorizontalNavItems from './components/horizontal/ServerSideNavItems'
 
 import VerticalAppBarContent from './components/vertical/AppBarContent'
 import HorizontalAppBarContent from './components/horizontal/AppBarContent'
 
 //change our logo
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
-import Link from 'src/@core/theme/overrides/link'
 
 interface Props {
   children: ReactNode

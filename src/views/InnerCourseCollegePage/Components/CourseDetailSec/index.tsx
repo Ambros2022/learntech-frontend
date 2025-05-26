@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import Carousel from 'react-multi-carousel';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import 'react-multi-carousel/lib/styles.css';
-import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry';
+
 
 
 

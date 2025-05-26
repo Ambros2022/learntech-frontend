@@ -1,20 +1,10 @@
-import Image from 'next/image';
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import Link from 'next/link';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
-import axios from 'src/configs/axios';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 import ContactPageUsForm from 'src/@core/components/popup/ContactPageUsForm';
 
 
 
 const CareerSec = () => {
-    const router = useRouter();
-
-
 
     return (
         <section className='bg-white py-5 careerLink'>

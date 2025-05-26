@@ -1,25 +1,18 @@
 // ** React Imports
-import { useEffect, useState, useCallback, ChangeEvent } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 // ** MUI Imports
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
-import Link from 'next/link'
+import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import axios1 from 'src/configs/axios'
-import CustomAvatar from 'src/@core/components/mui/avatar'
+
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
-// ** Types Imports
-import { ThemeColor } from 'src/@core/layouts/types'
-import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, IconButton, Menu, MenuItem } from '@mui/material'
+import { Button, Grid, IconButton, MenuItem } from '@mui/material'
 
 
 // ** Icon Imports
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
 import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -33,67 +26,50 @@ let cancelToken: any;
 
 type SortType = 'asc' | 'desc' | undefined | null
 
-// ** renders client column
-const renderClient = (params: GridRenderCellParams) => {
-  const { row } = params
-  const stateNum = Math.floor(Math.random() * 6)
-  const states = ['success', 'error', 'warning', 'info', 'primary', 'secondary']
-  const color = states[stateNum]
-  return (
-    <CustomAvatar
-      skin='light'
-      color={color as ThemeColor}
-      sx={{ mr: 3, fontSize: '.8rem', width: '1.875rem', height: '1.875rem' }}
-    >
-      {getInitials(row.name ? row.name : 'John Doe')}
-    </CustomAvatar>
-  )
-}
 
 
-
-const RowOptions = ({ path, onReloadPage }: { path: any  | string; onReloadPage: () => void }) => {
+const RowOptions = ({ path }: { path: any | string; }) => {
 
   const handledownloadfile = async () => {
     try {
       const response = await axios1.get('api/admin/backup/download/' + path, { responseType: 'blob' });
-  
+
       // Create a Blob object from the response data
       const blob = new Blob([response.data], { type: 'application/sql' }); // Adjust the type as per your API response
-  
+
       // Create a temporary URL for the blob
       const url = window.URL.createObjectURL(blob);
-  
+
       // Create a temporary anchor element
       const a = document.createElement('a');
       a.href = url;
       a.download = 'backup.sql'; // Specify the filename for the SQL file
       document.body.appendChild(a);
-  
+
       // Programmatically trigger a click event on the anchor element
       a.click();
-  
+
       // Cleanup: remove the temporary anchor element and URL object
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      
+
       toast.success('SQL file downloaded successfully');
     } catch (error) {
       console.error(error);
       toast.error('An error occurred while downloading the SQL file. Please try again.');
     }
   };
-  
+
   return (
     <>
-    
 
-<MenuItem onClick={() => handledownloadfile()} sx={{ '& svg': { mr: 1 }, backgroundColor: '#3949ab', color: 'white', borderRadius: '8px', padding: '5px' }}>
-<IconButton size="small" color="inherit">
-        <CloudDownloadIcon />
-      </IconButton>
-  Download
-</MenuItem>
+
+      <MenuItem onClick={() => handledownloadfile()} sx={{ '& svg': { mr: 1 }, backgroundColor: '#3949ab', color: 'white', borderRadius: '8px', padding: '5px' }}>
+        <IconButton size="small" color="inherit">
+          <CloudDownloadIcon />
+        </IconButton>
+        Download
+      </MenuItem>
 
     </>
 
@@ -114,15 +90,15 @@ const SecondPage = () => {
   // ** States
 
 
-  const [reloadpage, setReloadpage] = useState("0");
+  const [reloadpage] = useState("0");
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
   const [page, setPage] = useState<number>(1)
   const [orderby, setOrderby] = useState<SortType>('desc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
-  const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('created_at')
+  const [searchtext] = useState<string>('')
+  const [searchfrom] = useState<any>('created_at')
   const [columnname, setColumnname] = useState<string>('created_at')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const params: any = {}
@@ -130,9 +106,7 @@ const SecondPage = () => {
   params['page'] = 1;
   params['size'] = 10000;
 
-  const handleReloadPage = () => {
-    setReloadpage((prev) => (prev === "0" ? "1" : "0"));
-  };
+
 
   let columns: GridColDef[] = [
 
@@ -145,9 +119,9 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.id}
-              </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.id}
+          </Typography>
         )
       }
     },
@@ -161,9 +135,9 @@ const SecondPage = () => {
         const { row } = params
 
         return (
-              <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-                {row.title}
-              </Typography>
+          <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
+            {row.title}
+          </Typography>
         )
       }
     },
@@ -175,7 +149,7 @@ const SecondPage = () => {
       headerName: 'Status',
       renderCell: (params: GridRenderCellParams) => {
         const { row } = params;
-    
+
         let button;
         switch (row.status) {
           case 0:
@@ -194,7 +168,7 @@ const SecondPage = () => {
             button = <Button variant="contained" color="primary" sx={{ width: '100px', height: '40px' }}>Unknown</Button>;
             break;
         }
-    
+
         return (
           <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
             {button}
@@ -202,7 +176,7 @@ const SecondPage = () => {
         );
       }
     },
-    
+
 
     {
       flex: 0.175,
@@ -211,7 +185,7 @@ const SecondPage = () => {
       field: 'actions',
       headerName: 'Actions',
       renderCell: ({ row }: any) => (
-        <RowOptions path={row.path} onReloadPage={handleReloadPage} />
+        <RowOptions path={row.path}/>
       )
 
     }
@@ -249,7 +223,7 @@ const SecondPage = () => {
 
           setLoading(false);
         })
-        .catch((error) => {
+        .catch(() => {
 
           setLoading(false);
           // console.error("API call error:", error);
@@ -260,7 +234,7 @@ const SecondPage = () => {
     [paginationModel, reloadpage]
   );
 
-  const paginationchange = (model: GridPaginationModel, details: GridCallbackDetails) => {
+  const paginationchange = (model: GridPaginationModel,) => {
     setSize(model.pageSize);
     setPage(model.page + 1);
     setPaginationModel({ page: model.page, pageSize: model.pageSize });
@@ -281,20 +255,16 @@ const SecondPage = () => {
     }
   }
 
-  const handleSearch = (value: string) => {
-    setSearchtext(value)
-  }
-
 
 
   const AddButtonToolbar = () => {
-    
+
     const handleRequestBackup = async () => {
       try {
         window.location.reload();
         // Make a GET request to your API endpoint
         const response = await axios1.get('api/admin/backup/request');
-        
+
         // Handle the response
         if (response.data.status === 1) {
           // Request was successful, display a success message or perform any other actions
@@ -310,7 +280,7 @@ const SecondPage = () => {
         toast.error("An error occurred. Please try again.");
       }
     };
-  
+
     return (
       <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }} onClick={handleRequestBackup}>
         <Icon icon='tabler:plus' />

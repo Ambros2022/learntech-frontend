@@ -1,7 +1,7 @@
 // FileUpload.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Box, Typography, Grid, Avatar, Card, CardContent, Divider } from '@mui/material';
+import { Box, Typography, Grid, Avatar, Card, CardContent } from '@mui/material';
 import { Config } from '../../../configs/mainconfig';
 import Icon from 'src/@core/components/icon'
 interface FileUploadProps {

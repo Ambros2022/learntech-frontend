@@ -10,7 +10,7 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
         }
         return false;
     };
-    const [isMobile, setIsMobile] = useState(isMobileView());
+   const [isMobile] = useState(isMobileView());
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 1023 },

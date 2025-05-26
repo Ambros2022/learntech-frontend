@@ -12,8 +12,6 @@ function MainBlogPage() {
   const router = useRouter()
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>();
-  const [newsData, setNewsData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [cardsData, setCardsData] = useState<any[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,14 +43,7 @@ function MainBlogPage() {
   }, [isMountedRef]);
 
 
-  const getNewsData = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/news/get');
-      setNewsData(response.data.data);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [isMountedRef]);
+
 
   const getColleges = useCallback(async () => {
     try {
@@ -61,7 +52,6 @@ function MainBlogPage() {
       setcollegeData(response.data.data);
     } catch (err) {
       console.error(err);
-      setLoading(false); // Set loading to false in case of error
     }
   }, [isMountedRef]);
 

@@ -9,7 +9,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Script from 'next/script'
+
 import SchoolBannerSec from './Components/SchoolBannerSec'
 
 
@@ -18,9 +18,6 @@ function InnerSchoolPage({ id }) {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [colleges, setColleges] = useState([]);
-  const [reviews, setreviews] = useState([]);
-  const [streams, setStreams] = useState([]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -35,21 +32,7 @@ function InnerSchoolPage({ id }) {
     }
   }, [id, isMountedRef, router]);
 
-  const getColleges = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/schools/get', {
-        params: {
-          page: 1,
-          size: 8,
-        }
-      });
-      if (isMountedRef.current) {
-        setColleges(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [id, isMountedRef]);
+
 
   const formattedData = pagedata && pagedata.collegefaqs && pagedata.collegefaqs.map((item) => ({
     "@type": "Question",
@@ -63,7 +46,6 @@ function InnerSchoolPage({ id }) {
 
   useEffect(() => {
     getPagedata();
-    getColleges();
 
   }, [getPagedata]);
   return (

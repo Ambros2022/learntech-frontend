@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Carousel from 'react-multi-carousel';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import 'react-multi-carousel/lib/styles.css';
-
-const YoutubeVideo = dynamic(() => import('src/@core/components/youtube-videos'), { ssr: false });
-const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
-const AbroadEnquiryForm = dynamic(() => import('src/@core/components/popup/AbroadEnquiryForm'), { ssr: false });
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 const ReviewSec = dynamic(() => import('../ReviewSec'), { ssr: false });
 
@@ -128,7 +123,7 @@ function CollegeInfoSection({ data, Countrydata }) {
               customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
               responsive={responsive}
               className="infoBtn gap-3  text-center"
-              // className="infoBtn gap-3 mx-auto text-center"
+            // className="infoBtn gap-3 mx-auto text-center"
             >
               {renderTabs()}
             </Carousel>

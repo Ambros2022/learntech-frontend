@@ -39,7 +39,7 @@ const AdvertisePage = () => {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       <BannerSec />
-      <AdvertiseSec data={pagedata} />
+      <AdvertiseSec />
       <AssociatedClg />
     </>
   )

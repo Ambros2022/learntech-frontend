@@ -12,7 +12,6 @@ import axios1 from 'axios';
 import axios from 'src/configs/axios';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-import Image from 'next/image';
 import Autocomplete from 'src/@core/components/mui/autocomplete';
 
 

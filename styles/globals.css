@@ -68,6 +68,9 @@
     height: 50px;
   }
 
+  .collapseNavHeight {
+    background-color: white !important;
+  }
 
   .HomebannerLink {
     display: block;
@@ -1196,10 +1199,10 @@
     }
 
 
-    .collapseNavHeight {
+    /* .collapseNavHeight {
       height: 280px !important;
       overflow-y: scroll !important;
-    }
+    } */
 
     .footer-logo {
       width: 95% !important;
@@ -1417,10 +1420,10 @@
 
 
 
-    .collapseNavHeight {
+    /* .collapseNavHeight {
       height: 280px !important;
       overflow-y: scroll !important;
-    }
+    } */
 
     .featuredClgCard a {
       background-color: white;
@@ -6128,6 +6131,10 @@
       display: inline-block;
       width: 160px;
       height: 50px;
+      margin-left: 8px !important;
+    }
+    .navbar-toggler{
+      margin-right: 8px !important;
     }
 
     .texteditior {
@@ -6380,11 +6387,10 @@
 
 
   @media only screen and (max-width:450px) {
-    .collapseNavHeight {
+    /* .collapseNavHeight {
       height: 100% !important;
-
       overflow-y: scroll !important;
-    }
+    } */
 
     .navbar-nav .nav-item:nth-child(1) {
       background-color: #f2f2f2;

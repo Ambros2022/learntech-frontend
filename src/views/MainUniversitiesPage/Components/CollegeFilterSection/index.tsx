@@ -1,11 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import * as Yup from 'yup';
-import { debounce } from 'lodash'; // Import debounce function from lodash library
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import emailjs from 'emailjs-com';
-import { Modal } from 'react-bootstrap';
-import { toast } from 'react-hot-toast'
-import Image from 'next/image';
+import React, { useCallback, useEffect, useState } from 'react'
+import debounce from 'lodash.debounce';// Import debounce function from lodash library
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios1 from 'src/configs/axios'
@@ -14,10 +8,7 @@ import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import { useAuth } from 'src/hooks/useAuth';
 
 
-interface City {
-    id: number;
-    name: string;
-}
+
 
 interface College {
     id: number;
@@ -33,7 +24,7 @@ interface College {
 
 }
 
-const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
+const CollegeCard = ({ id, slug, name, type, rating, location,  established, imageUrl }: any) => {
     return (
         <div className='col-md-10 col-lg-12 mx-auto mb-3 '>
             <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
@@ -91,26 +82,16 @@ function CollegeFilterSection() {
 
 
     const router = useRouter();
-    const { city_id } = router.query;
-    // let state_id = 92;
-    // console.log(state_id, "state_id");
     const [colleges, setColleges] = useState<College[]>([]);
     const [total, setTotal] = useState<string>("0");
     const isMountedRef = useIsMountedRef();
-    const [loading, setLoading] = useState<boolean>(false)
     const [visibleCards, setVisibleCards] = useState(7);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
-
-
     const [states, setStates] = useState<Option[]>([]);
     const [citys, setCitys] = useState<any[]>([]);
     const [streams, setStreams] = useState<any[]>([]);
     const [courses, setCourses] = useState<any[]>([]);
     const [promoban, setPromoban] = useState<any[]>([]);
-
-    const [selectedOptions, setSelectedOptions] = useState({});
-    const [selectedStateIds, setSelectedStateIds] = useState<string[]>([]);
-    const [selectedCityIds, setSelectedCityIds] = useState<string[]>([]);
 
     const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
         state: true,
@@ -510,7 +491,7 @@ function CollegeFilterSection() {
                         type={college.college_type}
                         rating={college.avg_rating}
                         location={college.address}
-                        state={college.state}
+                        // state={college.state}
                         established={college.established}
                         imageUrl={college.banner_image}
                     />
@@ -535,7 +516,7 @@ function CollegeFilterSection() {
         setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
         selectedCheckboxes: Record<string, string[]>;
     }> =
-        ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
+        ({ options, selectedCheckboxes }) => {
 
 
             const handleStateButtonClick = (state: string) => {

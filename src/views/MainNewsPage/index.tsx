@@ -134,7 +134,7 @@ const MainNewsPage = () => {
       </Head>
       <BannerSection />
       <TopTrendingNews newsItems={newsItems} loading={loading} />
-      <BrowseNewsSec collegeData={collegeData} getColleges={getColleges} categories={categories} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <BrowseNewsSec collegeData={collegeData}  categories={categories} activeTab={activeTab} setActiveTab={setActiveTab} />
       <NewsLetterSec />
     </>
   )

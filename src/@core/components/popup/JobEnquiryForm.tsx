@@ -1,13 +1,11 @@
 import React, { FC, useState } from 'react';
-import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik'; 
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
-import { DatePicker } from "@nextui-org/react";
+
+
 
 
 interface Props {
@@ -16,7 +14,6 @@ interface Props {
 }
 
 const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
-    const router = useRouter();
     const [resumeFileName, setResumeFileName] = useState('');
     const [showPhoneInput, setShowPhoneInput] = useState(true);
 
@@ -32,7 +29,6 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
         resume: null,
     };
 
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validationSchema = Yup.object().shape({
@@ -48,7 +44,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
     });
 
     const handleSubmit = async (values, { resetForm }) => {
-     
+
         try {
             toast.loading('Processing');
             const formData = new FormData();
@@ -61,11 +57,11 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
             formData.append('jobs_position_id', values.jobs_position_id);
             formData.append('job_location_id', values.job_location_id);
             formData.append('current_url', window.location.href);
-            
+
             if (!values.resume) {
                 toast.dismiss();
                 toast.error('Please upload resume.');
-                
+
                 return
             }
             if (values.resume) {
@@ -79,7 +75,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                 setResumeFileName('');
                 setShowPhoneInput(false);
                 setTimeout(() => setShowPhoneInput(true), 0);
-             
+
             }
         } catch (error) {
             toast.error('Error submitting form. Please try again later.');
@@ -109,7 +105,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                     <div className='row mb-md-3 careerContact'>
                         <div className='col-md-6'>
                             <div className='mb-3 Jobenquiryphoneinput'>
-                            {showPhoneInput && <PhoneInputField name="phone" />}
+                                {showPhoneInput && <PhoneInputField name="phone" />}
                                 <ErrorMessage name='phone' component='div' className='text-danger' />
                             </div>
                         </div>
@@ -190,7 +186,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                                         const file = event.currentTarget.files ? event.currentTarget.files[0] : null;
                                         console.log('Selected file:', file);
                                         setFieldValue('resume', file);
-                                        setResumeFileName(file ? file.name : ''); 
+                                        setResumeFileName(file ? file.name : '');
                                     }}
                                 />
                                 <ErrorMessage name='resume' component='div' className='text-danger' />

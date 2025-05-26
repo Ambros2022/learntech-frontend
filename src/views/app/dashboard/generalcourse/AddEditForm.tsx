@@ -1,7 +1,6 @@
 
 'use client'
-import { ChangeEvent, FC, forwardRef, SyntheticEvent, useCallback, useEffect, useState } from 'react'
-
+import { FC, SyntheticEvent, useCallback, useEffect, useState } from 'react'
 // ** MUI Imports
 import Tab from '@mui/material/Tab'
 import Card from '@mui/material/Card'
@@ -9,36 +8,21 @@ import Grid from '@mui/material/Grid'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import TabContext from '@mui/lab/TabContext'
 import MenuItem from '@mui/material/MenuItem'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import InputAdornment from '@mui/material/InputAdornment'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-// ** Third Party Imports
-import DatePicker from 'react-datepicker'
 import CircularProgress from '@mui/material/CircularProgress'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
-
-// ** Types
-// import { DateType } from 'src/types/forms/reactDatepickerTypes'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios1 from 'src/configs/axios'
 import { Checkbox, DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import { FaTrash } from 'react-icons/fa';
 import toast from 'react-hot-toast'
 import router from 'next/router'
-import { Config } from 'src/configs/mainconfig'
-import ImageUploading, { ImageListType } from "react-images-uploading";
 import QuillEditor from 'src/@core/components/html-editor/index';
 import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
 
@@ -51,12 +35,11 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
     // ** States
     // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
     const [streams, setStreams] = useState([])
     const [substreams, setSubStreams] = useState([])
     const [streamId, setStreamId] = useState<any>(isAddMode ? "" : olddata?.stream?.id || '');
@@ -201,7 +184,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('name', data.name);
             formData.append('slug', data.slug);
             formData.append('course_type', data.course_type);
-            formData.append('short_name', data.short_name ? data.short_name : "" );
+            formData.append('short_name', data.short_name ? data.short_name : "");
             formData.append('duration', data.duration);
             formData.append('syllabus', data.syllabus);
             formData.append('admissions', data.admissions);
@@ -222,14 +205,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -237,10 +218,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -279,7 +258,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -288,17 +266,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -330,7 +305,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
-        formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
@@ -373,7 +347,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
@@ -381,13 +354,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
                 // history.push('/app/products');
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
                 toast.error(err.message || "please try again")
 
             }
@@ -658,11 +629,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='description'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("description", value)} />
-                                                
+
                                             </>
                                         )}
                                     />
@@ -673,13 +644,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='syllabus'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("syllabus", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                    onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -692,11 +661,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='admissions'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("admissions", value)} />
-                                                
+
                                             </>
                                         )}
                                     />
@@ -709,11 +678,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='career_opportunities'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("career_opportunities", value)} />
-                                                
+
                                             </>
                                         )}
                                     />
@@ -726,11 +695,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='top_college'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("top_college", value)} />
-                                                
+
                                             </>
                                         )}
                                     />

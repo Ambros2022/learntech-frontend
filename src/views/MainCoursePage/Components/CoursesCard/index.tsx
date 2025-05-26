@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';

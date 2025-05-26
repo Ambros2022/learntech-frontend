@@ -4,7 +4,6 @@ import TopCollegesSection from './Components/TopCollegesSection';
 import ExpertSection from './Components/ExpertSection';
 import TopFeaturedColleges from './Components/TopFeaturedColleges';
 import CollegeFilterSection from './Components/CollegeFilterSection';
-import BestCollegeSec from './Components/BestCollegeSec';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -15,8 +14,6 @@ function MainCollegePage() {
   const router = useRouter()
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>();
-  const [collegePagedata, setCollegePagedata] = useState<any>();
-  const [trendingCourses, setTrendingCourses] = useState([]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -32,30 +29,15 @@ function MainCollegePage() {
 
 
 
-  const getTrendingCourses = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/generalcourse/get', {
-        params: {
-          page: 1,
-          size: 8,
-          is_trending: 1
-        }
-      });
-      if (isMountedRef.current) {
-        setTrendingCourses(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
+
 
 
 
 
   useEffect(() => {
     getPagedata();
-    getTrendingCourses();
-  }, [getPagedata, getTrendingCourses,]);
+
+  }, [getPagedata, ]);
   return (
     <>
       <Head>

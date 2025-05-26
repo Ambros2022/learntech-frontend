@@ -1,5 +1,5 @@
 // ** React Imports
-import { ReactNode, ReactElement, useEffect } from 'react'
+import {  useEffect } from 'react'
 import axios from '../../../configs/axios'
 // ** Next Import
 import { useRouter } from 'next/router'

@@ -1,7 +1,6 @@
 
 'use client'
-import { ChangeEvent, FC, forwardRef, SyntheticEvent, useCallback, useEffect, useState } from 'react'
-
+import { FC, SyntheticEvent, useState } from 'react'
 // ** MUI Imports
 import Tab from '@mui/material/Tab'
 import Card from '@mui/material/Card'
@@ -9,42 +8,20 @@ import Grid from '@mui/material/Grid'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import TabContext from '@mui/lab/TabContext'
 import MenuItem from '@mui/material/MenuItem'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import InputAdornment from '@mui/material/InputAdornment'
-import { useForm, Controller, useFieldArray } from 'react-hook-form'
-// ** Custom Component Import
+import { useForm, Controller } from 'react-hook-form'
 import CustomTextField from 'src/@core/components/mui/text-field'
-import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-// ** Third Party Imports
-import DatePicker from 'react-datepicker'
-import CircularProgress from '@mui/material/CircularProgress'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
 import CustomSelectField from 'src/@core/components/mui/select-feild'
-
-// ** Types
-// import { DateType } from 'src/types/forms/reactDatepickerTypes'
-import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios1 from 'src/configs/axios'
-import { Checkbox, DialogActions, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import { FaTrash } from 'react-icons/fa';
+import { CircularProgress, FormHelperText, Typography } from '@mui/material'
 import toast from 'react-hot-toast'
 import router from 'next/router'
-import { Config } from 'src/configs/mainconfig'
-import ImageUploading, { ImageListType } from "react-images-uploading";
-import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import QuillEditor from 'src/@core/components/html-editor/index';
-import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
 import StepsFormContainer from '../stepsFormContainer'
-
+import { yupResolver } from '@hookform/resolvers/yup'
 
 
 
@@ -54,31 +31,18 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
-    // ** States
-    // const { setValue } = useForm();
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
+
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
-    const [countries, setCountries] = useState([])
-    const [streamId, setStreamId] = useState<any>(isAddMode ? "" : olddata?.stream?.id || '');
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
-    const isMountedRef = useIsMountedRef();
 
 
 
 
-    const handleFileChangephoto = (files: any[]) => {
-        setSelectedphoto(files[0]);
-        setFileNamesphoto(
-            files.map((file) => ({
-                name: file.name,
-                preview: URL.createObjectURL(file),
-            }))
-        );
 
-    };
+
+
+
 
 
     const schema: any = yup.object().shape({
@@ -94,7 +58,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-       
+
     })
 
 
@@ -103,7 +67,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         categories: isAddMode ? '' : olddata.categories,
         // slug: isAddMode ? '' : olddata.slug,
         content: isAddMode ? '' : olddata.content,
-    
+
         status: isAddMode ? 'Published' : olddata.status,
 
     }
@@ -113,7 +77,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control,
         handleSubmit,
-        resetField: admfiledReset,
         reset,
         setValue,
         formState: { errors }
@@ -127,7 +90,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         title: yup
             .string()
             .trim()
-       
+
     })
 
     const onSubmit = async (data: any) => {
@@ -141,21 +104,19 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('categories', data.categories);
             formData.append('content', data.content);
             formData.append('title', data.title);
-           
+
 
             try {
                 let response = await axios1.post(url, formData)
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -163,10 +124,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -180,7 +139,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('title', data.title);
             // formData.append('slug', data.slug);
             formData.append('content', data.content);
-           
+
 
             try {
                 let response = await axios1.post(url, formData)
@@ -190,7 +149,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -199,17 +157,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -220,109 +175,15 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const stepsDefaultValues = {
         title: isAddMode ? '' : olddata.title,
         description: isAddMode ? '' : olddata.description,
-   
+
         icon: isAddMode ? '' : olddata.icon,
         order_by: isAddMode ? '' : olddata.order_by,
-    
+
 
     }
 
-    const onStepsSubmit = async (data: any) => {
-
-        if (!isAddMode && olddata.id && olddata.description) {
-            let updateid = olddata.id;
-            setLoading(true)
-            let url = 'api/admin/organizationpagesteps/update';
-            const formData = new FormData();
-            formData.append('id', updateid);
-            formData.append('title', data.title);
-            formData.append('description', data.description);
-            formData.append('icon', data.icon);
-            formData.append('order_by', data.order_by);
-  
-
-            try {
-                let response = await axios1.post(url, formData)
-                if (response.data.status == 1) {
-                    toast.success(response.data.message)
-                    setLoading(false)
-                    setError('')
-                    stepsReset();
-                    router.back();
-                }
-                else {
-                    setLoading(false)
-                    toast.error(response.data.message)
-                    setError(response.data.message)
-                }
-
-            } catch (err: any) {
-
-                setLoading(false)
-                if (err.errors && err.errors.length > 0) {
-                    const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
-                    toast.error(errorMessage || "Please try again");
-                } else {
-                    setError(err.message || "Please try again");
-                    toast.error(err.message || "Please try again");
-                }
-
-            }
-        } else {
-            setLoading(true)
-            let url = 'api/admin/organizationpagesteps/add';
-
-            const formData = new FormData();
-            // formData.append('categories', data.categories);
-            formData.append('title', data.title);
-            formData.append('order_by', data.order_by);
-            formData.append('description', data.description);
-            formData.append('icon', data.icon);
-           
-
-            try {
-                let response = await axios1.post(url, formData)
-                console.log(response, "response")
-
-                if (response.data.status == 1) {
-
-                    toast.success(response.data.message)
-                    setLoading(false)
-                    setError('')
-                    stepsReset();
-                    router.push('./');
-
-
-                }
-                else {
-                    setLoading(false)
-                    toast.error(response.data.message)
-                    setError(response.data.message)
-                }
-            } catch (err: any) {
-                console.error(err);
-                setLoading(false)
-                if (err.errors && err.errors.length > 0) {
-                    const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
-                    toast.error(errorMessage || "Please try again");
-                } else {
-                    setError(err.message || "Please try again");
-                    toast.error(err.message || "Please try again");
-                }
-
-            }
-        }
-    }
 
     const {
-        control: stepsControl,
-        handleSubmit: handleStepsSubmit,
-        resetField: stepsResetField,
-        reset: stepsReset,
-        setValue: stepsSetValue,
-        formState: { errors: stepsErrors }
     } = useForm<any>({
         defaultValues: stepsDefaultValues,
         mode: 'onChange',
@@ -408,13 +269,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='content'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("content", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />

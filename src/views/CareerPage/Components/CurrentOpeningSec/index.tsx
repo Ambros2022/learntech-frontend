@@ -1,8 +1,5 @@
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import React, { useState } from 'react'; // Import useState
 import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap Modal
-const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 
 interface Job {
     name: string;

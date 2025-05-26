@@ -7,7 +7,6 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import UpcomingExamsSec from './Components/UpcomingExamsSec';
 import OrganizationSection from './Components/OrganizationalSec';
 import ExperTraineeSec from './Components/ExpertTrainneSec';
 
@@ -16,10 +15,6 @@ function InnerExamPage({ id }) {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-
-  const [exams, setexams] = useState([]);
-  const [streams, setStreams] = useState([]);
-
   const getPagedata = useCallback(async () => {
     try {
       const response = await axios.get('api/website/examfindone/get/' + id);
