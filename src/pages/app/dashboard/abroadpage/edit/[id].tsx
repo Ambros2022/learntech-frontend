@@ -1,17 +1,22 @@
 // ** React Imports
-import {  useState,  useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditForm from 'src/views/app/dashboard/abroadpage/AddEditForm'
+// import AddEditForm from 'src/views/app/dashboard/abroadpage/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios1 from 'src/configs/axios'
 import LinearProgress from '@mui/material/LinearProgress'
+import dynamic from 'next/dynamic'
+// Lazy load the heavy admin component
+const AddEditForm = dynamic(() => import('src/views/app/dashboard/abroadpage/AddEditForm'), {
+  ssr: false,
 
+})
 
 const Edituserlayout = () => {
   const isMountedRef = useIsMountedRef();
@@ -47,33 +52,33 @@ const Edituserlayout = () => {
 
   return (
     <>
-     
-        <Card>
-          <Box
-            sx={{
-              gap: 2,
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              p: theme => theme.spacing(2, 5, 4, 5)
-            }}
-          >
-            <h5>Edit Abroad Pages</h5>
-    
 
-            <Link href={`../`} >
-              <Button variant='contained'>View All abroadpages</Button>
-            </Link>
-          </Box>
-          <CardContent>
+      <Card>
+        <Box
+          sx={{
+            gap: 2,
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            p: theme => theme.spacing(2, 5, 4, 5)
+          }}
+        >
+          <h5>Edit Abroad Pages</h5>
 
-            {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
 
-          </CardContent>
-        </Card>
+          <Link href={`../`} >
+            <Button variant='contained'>View All abroadpages</Button>
+          </Link>
+        </Box>
+        <CardContent>
 
-      
+          {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
+
+        </CardContent>
+      </Card>
+
+
     </>
   )
 }
