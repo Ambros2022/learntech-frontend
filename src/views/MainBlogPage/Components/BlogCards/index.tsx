@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import React from 'react';
-import NewsList from '../newsList';
-import ContactForm from 'src/@core/components/popup/ContactForm';
-import GlobalPopupShare from 'src/@core/components/popup/GlobalPopupShare';
+import dynamic from 'next/dynamic';
+const NewsList = dynamic(() => import('../newsList'), { ssr: false });
+const ContactForm = dynamic(() => import('src/@core/components/popup/ContactForm'), { ssr: false });
+const GlobalPopupShare = dynamic(() => import('src/@core/components/popup/GlobalPopupShare'), { ssr: false });
+// import NewsList from '../newsList';
+// import ContactForm from 'src/@core/components/popup/ContactForm';
+// import GlobalPopupShare from 'src/@core/components/popup/GlobalPopupShare';
+
 
 const BlogCards = ({ collegeData, cardsData, totalPages, currentPage, getBlogsData, setCurrentPage }) => {
 

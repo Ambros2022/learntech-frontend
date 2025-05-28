@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import BannerSection from './Components/BannerSection';
 import TopCollegesSection from './Components/TopCollegesSection';
-import ExpertSection from './Components/ExpertSection';
-import TopFeaturedColleges from './Components/TopFeaturedColleges';
-import CollegeFilterSection from './Components/CollegeFilterSection';
+// import ExpertSection from './Components/ExpertSection';
+// import TopFeaturedColleges from './Components/TopFeaturedColleges';
+// import CollegeFilterSection from './Components/CollegeFilterSection';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-
+import dynamic from 'next/dynamic';
+const TopFeaturedColleges = dynamic(() => import('./Components/TopFeaturedColleges'), { ssr: false });
+const ExpertSection = dynamic(() => import('./Components/ExpertSection'), { ssr: false });
+const CollegeFilterSection = dynamic(() => import('./Components/CollegeFilterSection'), { ssr: false });
 
 function MainSchoolPage() {
   const router = useRouter()
