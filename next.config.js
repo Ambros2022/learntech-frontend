@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true'
-})
-
 
 /** @type {import('next').NextConfig} */
 module.exports = {
@@ -15,14 +11,6 @@ module.exports = {
   swcMinify: true,
   experimental: {
     optimizeCss: true,
-  },
-  webpack: config => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
-    }
-
-    return config
   },
   async headers() {
     return [
@@ -38,44 +26,5 @@ module.exports = {
       }
     ];
   },
-  // Remove the redirects since middleware will handle them
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/home',
-  //       destination: '/colleges',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/study-in-india',
-  //       destination: '/colleges',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/study-mbbs-abroad',
-  //       destination: '/mbbs-abroad',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/medical-admission',
-  //       destination: '/meds',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/copyright',
-  //       destination: '/terms-and-conditions',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/ayurvedic-course',
-  //       destination: '/course/7/ayurveda',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/meds-college',
-  //       destination: '/colleges',
-  //       permanent: true,
-  //     },
-  //   ]
-  // },
+
 }
