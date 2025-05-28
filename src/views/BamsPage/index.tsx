@@ -37,7 +37,7 @@ import axios from 'src/configs/axios';
 
 
 
-
+// dqfqwfqw
 const whatsappc = '/images/bams/whatsappc.webp';
 // const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 const BamsPage = () => {
