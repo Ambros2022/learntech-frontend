@@ -1679,125 +1679,125 @@ const BamsPage = () => {
                             the BAMS Counselling Process 2025-26.
                         </h4>
                     </div>
-                    <form
-                    // onSubmit={onSubmit}
+                    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                        {() => (
+                            <Form>
+                                <div className="form-group mb-3">
+                                    <Field
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        placeholder="Name*"
+                                        required
+                                        className="form-control bams-form-field py-3"
+                                    />
+                                </div>
 
-                    >
+                                <div className="form-group mb-3">
+                                    <Field
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        placeholder="Your Email*"
+                                        required
+                                        className="form-control bams-form-field py-3"
+                                    />
+                                </div>
 
-                        <fieldset>
-                            <input
-                                type="text"
-                                id="name1"
-                                name="name"
-                                placeholder="Name* "
-                                required
-                            // value={values.name} onChange={set('name')}
-                            />
-                        </fieldset>
-                        <small className="text-danger " />
-                        <fieldset className="form-group group_field">
-                            <input
-                                type="email"
-                                id="email1"
-                                name="email"
-                                placeholder="Email ID* "
-                                required
-                            // value={values.email} onChange={set('email')}
-                            />
-                        </fieldset>
+                                <div className="form-group mb-3">
+                                    <Field
+                                        type="number"
+                                        id="contact"
+                                        name="contact"
+                                        placeholder="Contact No.*"
+                                        required
+                                        className="form-control bams-form-field py-3"
+                                    />
+                                </div>
 
-                        <small className="text-danger " />
-                        <fieldset className="form-group group_field">
-                            <input
-                                name="contact"
-                                type="number"
-                                id="contact1"
-                                // min={0}
-                                required
-                                placeholder="Contact No. * "
-                            // aria-required="true"
-                            // value={values.contact} onChange={set('contact')}
-                            />
-                        </fieldset>
-                        <fieldset className="form-group group_field">
-                            <input
-                                name="course_in_mind"
-                                type="number"
-                                id="course_in_mind"
-                                // min={0}
-                                required
-                                placeholder="NEET Score
-"
-                            // aria-required="true"
-                            // value={values.course_in_mind} onChange={set('course_in_mind')}
-                            />
-                        </fieldset>
-                        <small className="text-danger " />
-                        <fieldset className="form-group group_field">
-                            <small className="text-danger " />
-                            <fieldset className="form-group group_field">
+                                <div className="form-group mb-3">
+                                    <Field
+                                        type="number"
+                                        id="neetscore"
+                                        name="neetscore"
+                                        placeholder="NEET Score"
+                                        required
+                                        className="form-control bams-form-field py-3"
+                                    />
+                                </div>
 
-                                <select name="location" id="location1" className="custom-select-black"
-                                // value={values.location} onChange={set('location')} required
-                                >
-                                    <option value=" ">--select state--</option>
-                                    <option value="Andaman & Nicobar">Andaman & Nicobar</option>
-                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                    <option value="Assam">Assam</option>
-                                    <option value="Bihar">Bihar</option>
-                                    <option value="Chandigarh">Chandigarh</option>
-                                    <option value="Chhattisgarh">Chhattisgarh</option>
-                                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                                    <option value="Daman & Diu">Daman & Diu</option>
-                                    <option value="Delhi">Delhi</option>
-                                    <option value="Goa">Goa</option>
-                                    <option value="Gujarat">Gujarat</option>
-                                    <option value="Haryana">Haryana</option>
-                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                    <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-                                    <option value="Jharkhand">Jharkhand</option>
-                                    <option value="Karnataka">Karnataka</option>
-                                    <option value="Kerala">Kerala</option>
-                                    <option value="Lakshadweep">Lakshadweep</option>
-                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                    <option value="Maharashtra">Maharashtra</option>
-                                    <option value="Manipur">Manipur</option>
-                                    <option value="Meghalaya">Meghalaya</option>
-                                    <option value="Mizoram">Mizoram</option>
-                                    <option value="Nagaland">Nagaland</option>
-                                    <option value="Odisha">Odisha</option>
-                                    <option value="Puducherry">Puducherry</option>
-                                    <option value="Punjab">Punjab</option>
-                                    <option value="Rajasthan">Rajasthan</option>
-                                    <option value="Sikkim">Sikkim</option>
-                                    <option value="Tamil Nadu">Tamil Nadu</option>
-                                    <option value="Telangana">Telangana</option>
-                                    <option value="Tripura">Tripura</option>
-                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                    <option value="Uttarakhand">Uttarakhand</option>
-                                    <option value="West Bengal">West Bengal</option>
+                                <div className="form-group mb-3">
+                                    <Field
+                                        as="select"
+                                        id="location"
+                                        name="location"
+                                        required
+                                        className="browser-default custom-select form-control white-bg-black-text bams-form-field py-3"
+                                    >
+                                        <option value="">State</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                        <option value="Andaman & Nicobar">Andaman & Nicobar</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                        <option value="Daman & Diu">Daman & Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Lakshadweep">Lakshadweep</option>
+                                        <option value="Puducherry">Puducherry</option>
+                                    </Field>
+                                </div>
 
-                                </select>
+                                <div className="form-group mb-3">
+                                    <Field
+                                        as="textarea"
+                                        id="description"
+                                        name="description"
+                                        placeholder="Message (Optional)"
+                                        className="form-control bams-form-field py-3"
+                                        rows={3}
+                                    />
+                                </div>
 
-
-                            </fieldset>
-                            <small className="text-danger " />
-                            <fieldset className="form-group ">
-                                <input
-                                    //   value={values.description} onChange={set('description')}
-                                    type="text "
-                                    name="description"
-                                    id="description1"
-                                    placeholder="Message (optional) "
-                                />
-                            </fieldset>
-                            <small className="text-danger " />
-                            <fieldset className="form-group ">
-                                <button type="submit" className='btn btn-primary  btn-model mt-4 py-3'>Submit</button>
-                            </fieldset>
-                        </fieldset>
-                    </form>
+                                <div className="form-group text-center">
+                                    <button
+                                        type="submit"
+                                        id="about"
+                                        name="submit"
+                                        className='btn btn-primary  btn-model mt-2 py-3'
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
 
                 </Modal.Body>
 
@@ -1817,125 +1817,126 @@ const BamsPage = () => {
                             Prediction Report.
                         </h4>
                     </div>
-                    <form
-                    // onSubmit={onSubmit}
+                    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                        {() => (
+                            <Form>
+                                <div className="form-group mb-3">
+                                    <Field
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        placeholder="Name*"
+                                        required
+                                        className="form-control bams-form-field py-3"
+                                    />
+                                </div>
 
-                    >
+                                <div className="form-group mb-3">
+                                    <Field
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        placeholder="Your Email*"
+                                        required
+                                        className="form-control bams-form-field py-3"
+                                    />
+                                </div>
 
-                        <fieldset>
-                            <input
-                                type="text"
-                                id="name1"
-                                name="name"
-                                placeholder="Name* "
-                                required
-                            // value={values.name} onChange={set('name')}
-                            />
-                        </fieldset>
-                        <small className="text-danger " />
-                        <fieldset className="form-group group_field">
-                            <input
-                                type="email"
-                                id="email1"
-                                name="email"
-                                placeholder="Email ID* "
-                                required
-                            // value={values.email} onChange={set('email')}
-                            />
-                        </fieldset>
+                                <div className="form-group mb-3">
+                                    <Field
+                                        type="number"
+                                        id="contact"
+                                        name="contact"
+                                        placeholder="Contact No.*"
+                                        required
+                                        className="form-control bams-form-field py-3"
+                                    />
+                                </div>
 
-                        <small className="text-danger " />
-                        <fieldset className="form-group group_field">
-                            <input
-                                name="contact"
-                                type="number"
-                                id="contact1"
-                                // min={0}
-                                required
-                                placeholder="Contact No. * "
-                            // aria-required="true"
-                            // value={values.contact} onChange={set('contact')}
-                            />
-                        </fieldset>
-                        <fieldset className="form-group group_field">
-                            <input
-                                name="course_in_mind"
-                                type="number"
-                                id="course_in_mind"
-                                // min={0}
-                                required
-                                placeholder="NEET Score
-"
-                            // aria-required="true"
-                            // value={values.course_in_mind} onChange={set('course_in_mind')}
-                            />
-                        </fieldset>
-                        <small className="text-danger " />
-                        <fieldset className="form-group group_field">
-                            <small className="text-danger " />
-                            <fieldset className="form-group group_field">
+                                <div className="form-group mb-3">
+                                    <Field
+                                        type="number"
+                                        id="neetscore"
+                                        name="neetscore"
+                                        placeholder="NEET Score"
+                                        required
+                                        className="form-control bams-form-field py-3"
+                                    />
+                                </div>
 
-                                <select name="location" id="location1" className="custom-select-black"
-                                // value={values.location} onChange={set('location')} required
-                                >
-                                    <option value=" ">--select state--</option>
-                                    <option value="Andaman & Nicobar">Andaman & Nicobar</option>
-                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                    <option value="Assam">Assam</option>
-                                    <option value="Bihar">Bihar</option>
-                                    <option value="Chandigarh">Chandigarh</option>
-                                    <option value="Chhattisgarh">Chhattisgarh</option>
-                                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                                    <option value="Daman & Diu">Daman & Diu</option>
-                                    <option value="Delhi">Delhi</option>
-                                    <option value="Goa">Goa</option>
-                                    <option value="Gujarat">Gujarat</option>
-                                    <option value="Haryana">Haryana</option>
-                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                    <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-                                    <option value="Jharkhand">Jharkhand</option>
-                                    <option value="Karnataka">Karnataka</option>
-                                    <option value="Kerala">Kerala</option>
-                                    <option value="Lakshadweep">Lakshadweep</option>
-                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                    <option value="Maharashtra">Maharashtra</option>
-                                    <option value="Manipur">Manipur</option>
-                                    <option value="Meghalaya">Meghalaya</option>
-                                    <option value="Mizoram">Mizoram</option>
-                                    <option value="Nagaland">Nagaland</option>
-                                    <option value="Odisha">Odisha</option>
-                                    <option value="Puducherry">Puducherry</option>
-                                    <option value="Punjab">Punjab</option>
-                                    <option value="Rajasthan">Rajasthan</option>
-                                    <option value="Sikkim">Sikkim</option>
-                                    <option value="Tamil Nadu">Tamil Nadu</option>
-                                    <option value="Telangana">Telangana</option>
-                                    <option value="Tripura">Tripura</option>
-                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                    <option value="Uttarakhand">Uttarakhand</option>
-                                    <option value="West Bengal">West Bengal</option>
+                                <div className="form-group mb-3">
+                                    <Field
+                                        as="select"
+                                        id="location"
+                                        name="location"
+                                        required
+                                        className="browser-default custom-select form-control white-bg-black-text bams-form-field py-3"
+                                    >
+                                        <option value="">State</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                        <option value="Andaman & Nicobar">Andaman & Nicobar</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                        <option value="Daman & Diu">Daman & Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Lakshadweep">Lakshadweep</option>
+                                        <option value="Puducherry">Puducherry</option>
+                                    </Field>
+                                </div>
 
-                                </select>
+                                <div className="form-group mb-3">
+                                    <Field
+                                        as="textarea"
+                                        id="description"
+                                        name="description"
+                                        placeholder="Message (Optional)"
+                                        className="form-control bams-form-field py-3"
+                                        rows={3}
+                                    />
+                                </div>
 
+                                <div className="form-group text-center">
+                                    <button
+                                        type="submit"
+                                        id="about"
+                                        name="submit"
+                                        className='btn btn-primary  btn-model mt-2 py-3'
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
 
-                            </fieldset>
-                            <small className="text-danger " />
-                            <fieldset className="form-group ">
-                                <input
-                                    //   value={values.description} onChange={set('description')}
-                                    type="text "
-                                    name="description"
-                                    id="description1"
-                                    placeholder="Message (optional) "
-                                />
-                            </fieldset>
-                            <small className="text-danger " />
-                            <fieldset className="form-group ">
-                                <button type="submit" className='btn btn-primary  btn-model mt-4 py-3'>Submit</button>
-                            </fieldset>
-                        </fieldset>
-                    </form>
 
                 </Modal.Body>
 

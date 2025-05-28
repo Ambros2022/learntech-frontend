@@ -1074,3 +1074,19 @@ input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+
+
+.bams-form-field {
+    width: 100%;
+    border-radius: 6px;
+    padding: 17px 30px;
+    margin-top: 15px;
+    border: none;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 10%);
+    background: #fff;
+    outline: none;
+    color: #525151;
+    font-size: 14px;
+    font-weight: 400;
+}
