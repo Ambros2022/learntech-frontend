@@ -13,7 +13,6 @@ const AACCC = '/images/bams/AACCC.webp'
 const KEA = '/images/bams/KEA.webp'
 import Modal from 'react-bootstrap/Modal';
 const Amrutha = '/images/bams/Amrutha.webp'
-
 const Ashwini = '/images/bams/Ashwini.webp'
 const Atreya = '/images/bams/Atreya.webp'
 const JSS = '/images/bams/JSS.webp'
@@ -193,7 +192,10 @@ const BamsPage = () => {
             navbar.classList.remove('show');
         }
     };
-
+    useEffect(() => {
+        const img = new window.Image();
+        img.src = backgroundImageUrl;
+    }, [backgroundImageUrl]);
     return (
 
 
@@ -225,7 +227,7 @@ const BamsPage = () => {
                     width: 63,
                     height: 64,
                     bottom: 8,
-                    right: 24,
+                    right: 8,
                     borderRadius: 50,
                     textAlign: 'center',
                     fontSize: 44,
@@ -247,7 +249,7 @@ const BamsPage = () => {
                 zIndex: 1000,
                 boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
             }}>
-                <div className="container-fluid navbar-bams-top">
+                <div className="container-fluid navbar-bams-top navbarmobilebams">
                     <Link className="navbar-brand d-flex align-items-center p-md-5" href="/">
                         <Image src="/images/bams/logo.webp" alt="Logo" width={209} height={58} priority />
                     </Link>
@@ -313,9 +315,9 @@ const BamsPage = () => {
                                     <h1 className="text-center h1svyasa pt-4 pt-md-5">
                                         Navigate through the NEET-UG 2025 BAMS Counselling Process
                                     </h1>
-                                    <h1 className="text-center bams-blue pt-4 blinking-text pb-md-0 pb-2">
+                                    <h2 className="text-center bams-blue pt-4 blinking-text pb-md-0 pb-2">
                                         Begin Your Journey in Ayurvedic Medicine Today!
-                                    </h1>
+                                    </h2>
 
 
                                     <p className="bams-phomepage pt-md-4">
@@ -600,7 +602,7 @@ const BamsPage = () => {
                     </h3>
                 </div>
 
-                <section className="why-us-section py-5 text-white">
+                <section className="why-us-section  text-white">
 
 
                     <div className="container">
@@ -709,7 +711,7 @@ const BamsPage = () => {
                             <li>Stray Vacancy Round</li>
                         </ol>
 
-                        <div className="col-lg-12 container text-center pt-md-3 pt-2 px-0 ">
+                        <div className="col-lg-12 container  pt-md-3 pt-2 px-0 ">
                             <p className=" pb-3 paragaph-font18">
                                 However, the Stray Vacancy Round (SVR) will be held only if there are any vacant seats (empty, forfeited, declined) in government, government-aided, deemed, central universities, and national institutes after the completion of the first 3 counselling rounds. The SVR round for All India Quota (AIQ) seats in government, government-aided, central universities, and national institutes will be conducted online in two phases: SVR-I and SVR-II. A separate stray vacancy round, known as Stray Vacancy Round-Deemed Universities (SVR-DU), will be held for admission to seats in deemed universities. This is because seats at deemed universities are unreserved, i.e., the central government’s reservation policy does not apply to them.
                             </p>
@@ -720,7 +722,7 @@ const BamsPage = () => {
 
             <section>
                 <div className="col-lg-12 text-center  pb-3 bg-white">
-                    <h3 className="f3mount-svayauni pt-md-2 pt-0 mt-md-0 mb-md-0">
+                    <h3 className="f3mount-svayauni pt-md-2 pt-0 mt-md-0 mb-md-0 padding-mobilebams">
                         All-India NEET-UG BAMS Counselling 2025 Stages
                     </h3>
                 </div>
@@ -765,9 +767,9 @@ const BamsPage = () => {
 
 
                                     <tr>
-                                        <th>Selection of Counselling Type</th>
-                                        <th>Candidate Category</th>
-                                        <th>Registration Fee</th>
+                                        <th className='bdr-mainatin'>Selection of Counselling Type</th>
+                                        <th className='bdr-mainatin'>Candidate Category</th>
+                                        <th className='bdr-mainatin'>Registration Fee</th>
                                         <th>Security Deposit</th>
                                     </tr>
                                 </thead>
@@ -775,9 +777,9 @@ const BamsPage = () => {
                                     <tr>
                                         <td rowSpan={2}>
                                             <ul>
-                                                <li>AIQ - Government College</li>
-                                                <li>AIQ - Government Aided College</li>
-                                                <li>Central University / National Institute </li>
+                                                <li className='list-none'>AIQ - Government College</li>
+                                                <li className='list-none'>AIQ - Government Aided College</li>
+                                                <li className='list-none'> Central University / National Institute </li>
                                             </ul>
                                         </td>
                                         <td>UR / EWS / OBC-NCL</td>
@@ -790,14 +792,19 @@ const BamsPage = () => {
                                         {/* <td>Rs. 20,000</td> */}
                                     </tr>
                                     <tr className='tr-design'>
-                                        <td> Deemed University</td>
-                                        <td>All Categories</td>
-                                        <td>Rs. 5,000</td>
+                                        <td className='bdr-mainatin'> Deemed University</td>
+                                        <td className='bdr-mainatin'>All Categories</td>
+                                        <td className='bdr-mainatin'>Rs. 5,000</td>
                                         <td>Rs. 50,000</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+
+
+
+
+
                         <div className="">
                             <p className='paragaph-font18'>
                                 <span className='note'> Note:</span> Candidates willing to apply for both the counselling categories have to pay the higher amount, i.e., the fee for Deemed University (Rs 5,000 for registration + Rs 50,000 for security amount)
@@ -852,25 +859,25 @@ const BamsPage = () => {
                     </h3>
                 </div>
 
-                <div className="table-wrapper  table2heightfixed bg-white">
+                <div className="table-wrapper mx-auto  table2heightfixed bg-white">
                     <table className="custom-table ">
                         <thead>
                             <tr>
-                                <th>Process</th>
-                                <th>Round 1</th>
-                                <th>Round 2</th>
-                                <th>Round 3</th>
+                                <th className='bdr-mainatin'>Process</th>
+                                <th className='bdr-mainatin '>Round 1</th>
+                                <th className='bdr-mainatin'>Round 2 </th>
+                                <th className='bdr-mainatin'>Round 3</th>
                                 <th>Stray Vacancy Round 1</th>
                             </tr>
                         </thead>
                         <tbody>
                             {scheduleData.map((item, idx) => (
                                 <tr key={idx}>
-                                    <td className='fw-medium'>{item.process}</td>
-                                    <td dangerouslySetInnerHTML={{ __html: item.round1.replace(/\n/g, "<br/>") }} />
-                                    <td dangerouslySetInnerHTML={{ __html: item.round2.replace(/\n/g, "<br/>") }} />
-                                    <td dangerouslySetInnerHTML={{ __html: item.round3.replace(/\n/g, "<br/>") }} />
-                                    <td dangerouslySetInnerHTML={{ __html: item.stray.replace(/\n/g, "<br/>") }} />
+                                    <td className='fw-medium bdr-mainatin sizebams'>{item.process}</td>
+                                    <td className='bdr-mainatin' dangerouslySetInnerHTML={{ __html: item.round1.replace(/\n/g, "<br/>") }} />
+                                    <td className='bdr-mainatin' dangerouslySetInnerHTML={{ __html: item.round2.replace(/\n/g, "<br/>") }} />
+                                    <td className='bdr-mainatin' dangerouslySetInnerHTML={{ __html: item.round3.replace(/\n/g, "<br/>") }} />
+                                    <td className='bdr-mainatin' dangerouslySetInnerHTML={{ __html: item.stray.replace(/\n/g, "<br/>") }} />
                                 </tr>
                             ))}
                         </tbody>
@@ -930,7 +937,7 @@ const BamsPage = () => {
 
 
                         <div className="">
-                            <p className='paragaph-font18'>
+                            <p className='paragaph-font18 text-center'>
 
                                 The KEA NEET-UG BAMS counselling takes place in various rounds. Each round has multiple stages, which are explained below.
 
@@ -943,7 +950,7 @@ const BamsPage = () => {
 
                             </p>
 
-                            <h3 className="fw-semibold mt-4" style={{ color: '#003366' }}>Stage 2: Document verification
+                            <h3 className="fw-semibold mt-4" style={{ color: '#003366' }}>Stage 2: Document Verification
                             </h3>
                             <p className='paragaph-font18'>In this stage, students must get their documents verified by the concerned authorities within the stipulated time. Once the verification is complete, eligible students must download the verification slip. The eligible rank holders must note that the organising body will not send any message/ reminder regarding the date and time of the verification process. The candidates who fail to verify the documents within the given time frame will not be eligible to exercise their options as part of the next stage. I.e., option entry.</p>
 
@@ -979,12 +986,12 @@ const BamsPage = () => {
                             </p>
 
 
-                            <h3 className="fw-semibold mt-4" style={{ color: '#003366' }}>Phase 1:</h3>
+                            <h3 className="fw-semibold mt-4 font-25bams" style={{ color: '#003366' }}>Phase 1:</h3>
                             <p className='paragaph-font18'>
                                 In this phase, all the candidates are eligible. However, the order of seat allotment will depend on the category of candidates. Phase 1 of the BAMS Round 1 counselling process will commence with the allotment of a certain number of seats, known as Special Category Seats, to candidates of Karnataka in the order given below:
                             </p>
 
-                            <ul className="neet-list mb-4">
+                            <ul className="neet-list mb-4 ">
                                 <li>People with Disabilities (PwD)</li>
                                 <li>NCC Candidates</li>
                                 <li>Sports Candidates</li>
@@ -993,7 +1000,7 @@ const BamsPage = () => {
                                 After the successful completion of Special Category seats, all candidates, regardless of their category, will be first considered for General Merit (GM) seats. After this, candidates who have not been allotted a GM seat will be considered for a seat in their respective category based on their rank and preferences. The same allotment order will continue until all candidates' allotments stay the same.
                             </p>
 
-                            <h3 className="fw-semibold mt-4" style={{ color: '#003366' }}>Phase 2:
+                            <h3 className="fw-semibold mt-4 font-25bams" style={{ color: '#003366' }}>Phase 2:
                             </h3>
                             <p className='paragaph-font18'>
                                 There are 5 distinct points that a candidate must know before participating in the second phase of the respective KEA BAMS counselling rounds.
@@ -1016,7 +1023,7 @@ const BamsPage = () => {
                                 <li>Phase 2 will follow the same allotment order repeatedly until there is no change in the allotment of any candidate.</li>
                             </ol>
 
-                            <h3 className="fw-semibold mt-4" style={{ color: '#003366' }}>Phase 3:
+                            <h3 className="fw-semibold mt-4 font-25bams" style={{ color: '#003366' }}>Phase 3:
                             </h3>
                             <p className='paragaph-font18'>
                                 Candidates must be aware of the following points before participating in this phase of the BAMS counselling rounds.
@@ -1044,7 +1051,7 @@ const BamsPage = () => {
                             </ol>
 
                             <p className='paragaph-font18'>
-                                The seat allotment results are published by the end of each round. Students who have been allotted a seat in phase 1or phase 2 must wait until the entire round is completed to take a decision for the post seat allotment procedure.
+                                The seat allotment results are published by the end of each round. Students who have been allotted a seat in phase 1 or phase 2 must wait until the entire round is completed to take a decision for the post seat allotment procedure.
 
                             </p>
 
@@ -1080,10 +1087,10 @@ const BamsPage = () => {
                     </div>
                     <div className="bams-column">
                         <ul>
-                            <li>Recent Passport Size</li>
+                            <li>Recent Passport Size Photographs</li>
                             <li>Transfer Certificate</li>
                             <li>Medical Fitness Certificate (Issued by Registered Medical Practitioner)</li>
-                            <li>Photographs</li>
+                            {/* <li>Photographs</li> */}
                             <li>Migration Certificate (If Applicable)</li>
                             <li>Caste Certificate (If Applicable)</li>
                             <li>Income Certificate (If Applicable)</li>
@@ -1117,18 +1124,20 @@ const BamsPage = () => {
                 <button className="predictor-button " onClick={handleShow1}>Submit</button> */}
 
                 <div className="predictor-inputs">
-                    <input type="text" className="fw-bold" placeholder="Out of 180 Questions" disabled />
+                    <input type="text" className="fw-bold text-center" placeholder="Out of 180 Questions" disabled />
 
                     <input
                         type="number"
                         placeholder="No. of Questions Attempted"
                         id="attempted"
+                        className='text-center'
                     />
 
                     <input
                         type="number"
                         placeholder="No. of Correct Answers"
                         id="correct"
+                       className='text-center'
                     />
                 </div>
 
@@ -1188,7 +1197,7 @@ const BamsPage = () => {
 
                             <div className="col">
                                 <div className="card  justify-content-center align-items-center  justify-content-center align-items-center">
-                                    <img className="card-img-top imgcontain" src={Kankanawadi} alt="KAHER’s Shri BM Kankanawadi Ayurveda Mahavidyalaya Post Graduate Studies and Research Centre" />
+                                    <img className="card-img-top imgcontain" src={Kankanawadi} alt="KAHER’s Shri BM Kankanawadi Ayurveda Mahavidyalaya Post Graduate Studies and Research Centre" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className=" card-titlebams  bams-height-college">KAHER’s Shri BM Kankanawadi Ayurveda Mahavidyalaya Post Graduate Studies and Research Centre</h5>
                                         <p className="card-text  paragaph-font18">
@@ -1205,8 +1214,10 @@ const BamsPage = () => {
                             </div>
                             <div className="col">
 
-                                <div className="card  justify-content-center align-items-center  justify-content-center align-items-center">
-                                    <img className="card-img-top imgcontain" src={Yenepoya} alt="Yenepoya Ayurveda Medical College and Hospital" />
+                                <div className="card  justify-content-center align-items-center  justify-content-center align-items-center" >
+                                    <img className="card-img-top imgcontain" src={Yenepoya} alt="Yenepoya Ayurveda Medical College and Hospital" loading="lazy" />
+
+
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height-college">Yenepoya Ayurveda Medical College and Hospital </h5>
                                         <p className="card-text  paragaph-font18">
@@ -1223,7 +1234,7 @@ const BamsPage = () => {
                             </div>
                             <div className="col">
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={Amrutha} alt="Amrutha Ayurvedic Medical College (AAMC)" />
+                                    <img className="card-img-top imgcontain" src={Amrutha} alt="Amrutha Ayurvedic Medical College (AAMC)" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height-college">Amrutha Ayurvedic Medical College (AAMC)</h5>
                                         <p className="card-text  paragaph-font18">
@@ -1239,7 +1250,7 @@ const BamsPage = () => {
                             </div>
                             <div className="col">
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={Sri} alt="Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital and Research Centre (SKAMCH & RC)" />
+                                    <img className="card-img-top imgcontain" src={Sri} alt="Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital and Research Centre (SKAMCH & RC)" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height-college">Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital and Research Centre (SKAMCH & RC)</h5>
                                         <p className="card-text  paragaph-font18">
@@ -1256,7 +1267,7 @@ const BamsPage = () => {
                             </div>
                             <div className="col ">
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={Sharada} alt="Sharada Ayurveda Medical College and Hospital (SAMCH)" />
+                                    <img className="card-img-top imgcontain" src={Sharada} alt="Sharada Ayurveda Medical College and Hospital (SAMCH)" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height">Sharada Ayurveda Medical College and Hospital (SAMCH)</h5>
                                         <p className="card-text  paragaph-font18">
@@ -1274,7 +1285,7 @@ const BamsPage = () => {
                             <div className="col">
 
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={Sushrutha} alt="Sushrutha Ayurvedic Medical College & Hospital" />
+                                    <img className="card-img-top imgcontain" src={Sushrutha} alt="Sushrutha Ayurvedic Medical College & Hospital" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height">Sushrutha Ayurvedic Medical College & Hospital
                                         </h5>
@@ -1293,7 +1304,7 @@ const BamsPage = () => {
                             <div className="col">
 
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={Ashwini} alt="Ashwini Ayurvedic Medical College & Research Centre" />
+                                    <img className="card-img-top imgcontain" src={Ashwini} alt="Ashwini Ayurvedic Medical College & Research Centre" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height ">Ashwini Ayurvedic Medical College & Research Centre</h5>
                                         <p className="card-text  paragaph-font18">
@@ -1311,7 +1322,7 @@ const BamsPage = () => {
                             <div className="col">
 
                                 <div className="card justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={SDM} alt="SDM College of Ayurveda & Hospital" />
+                                    <img className="card-img-top imgcontain" src={SDM} alt="SDM College of Ayurveda & Hospital" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height ">SDM College of Ayurveda & Hospital
                                         </h5>
@@ -1331,7 +1342,7 @@ const BamsPage = () => {
                             <div className="col">
 
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={Atreya} alt="Atreya Ayurvedic Medical College Hospital & Research Centre" />
+                                    <img className="card-img-top imgcontain" src={Atreya} alt="Atreya Ayurvedic Medical College Hospital & Research Centre" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height">Atreya Ayurvedic Medical College Hospital & Research Centre
                                         </h5>
@@ -1350,7 +1361,7 @@ const BamsPage = () => {
                             <div className="col">
 
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={Shri} alt="Shri Kalidas Ayurvedic Medical College and Hospital" />
+                                    <img className="card-img-top imgcontain" src={Shri} alt="Shri Kalidas Ayurvedic Medical College and Hospital" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height">Shri Kalidas Ayurvedic Medical College and Hospital
 
@@ -1370,7 +1381,7 @@ const BamsPage = () => {
                             </div>
                             <div className="col">
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={Indian} alt="Indian Institute of Ayurvedic Medicine & Research" />
+                                    <img className="card-img-top imgcontain" src={Indian} alt="Indian Institute of Ayurvedic Medicine & Research" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height">Indian Institute of Ayurvedic Medicine & Research
                                         </h5>
@@ -1388,7 +1399,7 @@ const BamsPage = () => {
                             </div>
                             <div className="col">
                                 <div className="card  justify-content-center align-items-center ">
-                                    <img className="card-img-top imgcontain" src={JSS} alt="JSS Ayurveda Medical College" />
+                                    <img className="card-img-top imgcontain" src={JSS} alt="JSS Ayurveda Medical College" loading="lazy" />
                                     <div className="card-body">
                                         <h5 className="card-titlebams bams-height">JSS Ayurveda Medical College
                                         </h5>
@@ -1514,12 +1525,13 @@ const BamsPage = () => {
                                         <i className="bi bi-facebook" style={{ color: "white" }} />&nbsp; &nbsp;&nbsp;
                                     </a>
                                     {/* <a target="_blank " href="https://twitter.com/BangaloreStudy2 "> */}
-                                    <a target="_blank " href="https://x.com/i/flow/login?redirect_after_login=%2Flearntechww">
+                                    <a target="_blank " href="https://x.com/learntechww">
 
 
 
 
-                                        <i className="bi bi-twitter" style={{ color: "white" }} />&nbsp; &nbsp;&nbsp;
+                                        {/* <i className="bi bi-twitter" style={{ color: "white" }} />&nbsp; &nbsp;&nbsp; */}
+                                        <Image width={20} height={20} className='icon-white me-3 twitter-width' src="/images/icons/twitter-x.png" alt="twitter-icon" />
                                     </a>
                                     <a
                                         target="_blank "
@@ -1531,7 +1543,7 @@ const BamsPage = () => {
                                         <i className="bi bi-youtube" style={{ color: "white" }} />&nbsp;&nbsp;&nbsp;
                                     </a>
                                     {/* <a target="_blank " href="https://instagram.com/bangalorestudy "> */}
-                                    <a target="_blank " href="https://www.instagram.com/learntechedus/#">
+                                    <a target="_blank " href="https://www.instagram.com/learntechedus/">
 
                                         <i className="bi bi-instagram" style={{ color: "white" }} />&nbsp;&nbsp;&nbsp;
                                     </a>
@@ -1571,7 +1583,7 @@ const BamsPage = () => {
                         <div className="app-unit col-md-7  col-md-5 ">
 
                         </div>
-                        <div className="social-unit col-md-5 mt-4">
+                        <div className="social-unit col-md-5 mt-4 pb-5">
                             <div>
                                 <p className="font-white23">Connect with us</p><a
                                     href="tel:08022454991 "
@@ -1625,9 +1637,11 @@ const BamsPage = () => {
                                     </a>
                                     {/* <a target="_blank " href="https://twitter.com/BangaloreStudy2 "> */}
 
-                                    <a target="_blank " href="https://x.com/i/flow/login?redirect_after_login=%2Flearntechww">
+                                    <a target="_blank " href="https://x.com/learntechww">
 
-                                        <i className=" bi bi-twitter" style={{ color: "white" }} />&nbsp; &nbsp;&nbsp;
+                                        {/* <i className=" bi bi-twitter" style={{ color: "white" }} />&nbsp; &nbsp;&nbsp; */}
+
+                                       <Image width={20} height={20} className='icon-white me-3 twitter-width' src="/images/icons/twitter-x.png" alt="twitter-icon" />
                                     </a>
                                     <a
                                         target="_blank "
@@ -1639,7 +1653,7 @@ const BamsPage = () => {
                                         <i className="bi bi-youtube" style={{ color: "white" }} />&nbsp;&nbsp;&nbsp;
                                     </a>
                                     {/* <a target="_blank " href="https://instagram.com/bangalorestudy "> */}
-                                    <a target="_blank " href=" https://www.instagram.com/learntechedus/# ">
+                                    <a target="_blank " href="https://www.instagram.com/learntechedus/ ">
 
 
 
