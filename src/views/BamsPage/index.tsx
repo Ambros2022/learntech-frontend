@@ -1384,7 +1384,7 @@ const BamsPage = () => {
                         <div className="col-md-8">
 
                             <div className="ft-left mb-3 px-5" style={{ marginBottom: 20 }}>
-                                <img src="/images/Learntech325.webp" className="imgfooter" alt="bangalorestudy " />
+                                <img src="/images/footer650.webp" className="imgfooter" alt="bangalorestudy " />
                             </div>
 
 
