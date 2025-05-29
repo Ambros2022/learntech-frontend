@@ -239,6 +239,7 @@ const BamsPage = () => {
 "
                 />
                 <link rel="stylesheet" href="/css/bamslandingpage.css" />
+                 <link rel="canonical" href="https://learntechww.com/bams-counselling-process " />
             </Head>
 
             <div className="text-md-start">
@@ -784,7 +785,14 @@ const BamsPage = () => {
                         <tbody>
                             {scheduleData.map((item, idx) => (
                                 <tr key={idx}>
-                                    <td className='fw-medium bdr-mainatin sizebams'>{item.process}</td>
+                                    {/* <td className='fw-medium bdr-mainatin sizebams'>{item.process}</td> */}
+                                    <td
+  className={`fw-medium bdr-mainatin sizebams ${
+    item.process === "Candidates' Data Verification by Institutes" ? "highlight-row" : ""
+  }`}
+>
+  {item.process}
+</td>
                                     <td className='bdr-mainatin' dangerouslySetInnerHTML={{ __html: item.round1.replace(/\n/g, "<br/>") }} />
                                     <td className='bdr-mainatin' dangerouslySetInnerHTML={{ __html: item.round2.replace(/\n/g, "<br/>") }} />
                                     <td className='bdr-mainatin' dangerouslySetInnerHTML={{ __html: item.round3.replace(/\n/g, "<br/>") }} />
