@@ -54,15 +54,15 @@ const BamsPage = () => {
         name: '',
         email: '',
         contact: '',
-        neetscore: '',
+        neetrank: '',
         location: '',
         description: '',
     };
 
-    const handleSubmit = (values, { resetForm }) => {
-        console.log('Form Values:', values);
-        resetForm();
-    };
+    // const handleSubmit = (values, { resetForm }) => {
+    //     console.log('Form Values:', values);
+    //     resetForm();
+    // };
 
 
     // const handleSubmit = async (values, { resetForm }) => {
@@ -72,12 +72,12 @@ const BamsPage = () => {
     //         const formData = new FormData();
     //         formData.append('name', values.name);
     //         formData.append('email', values.email);
-    //         formData.append('contact', values.contact);
+    //         formData.append('contact', values.contact); 
     //         formData.append('location', values.location);
-    //         formData.append('neetscore', values.neetscore);
+    //         formData.append('neetrank', values.neetrank);
     //         formData.append('current_url', window.location.href);
     //         formData.append('description', values.message);
-    //         const response = await axios.post('api/website/enquiry', formData);
+    //         const response = await axios.post('api/website/landingpage/enquiry', formData);
 
     //         console.log('Response status:', response.status);
 
@@ -93,6 +93,36 @@ const BamsPage = () => {
     //         console.error('Error submitting form:', error);
     //     }
     // };
+
+    const handleSubmit = async (values, { resetForm }) => {
+    try {
+        toast.loading('Processing');
+
+        const formData = new FormData();
+        formData.append('name', values.name);
+        formData.append('email', values.email);
+        formData.append('contact_number', values.contact); 
+        formData.append('location', values.location);
+        formData.append('neetrank', values.neetrank);
+        formData.append('current_url', window.location.href); 
+        formData.append('description', values.description);
+          formData.append('SourceCampaign', 'BAMS Counselling 2025-26'); 
+
+        const response = await axios.post('api/website/landingpage/enquiry', formData);
+
+        if (response.status === 200) {
+            toast.dismiss();
+            toast.success('Thank you. We will get back to you.');
+            resetForm();
+            router.push('/thank-you');
+        }
+    } catch (error) {
+        toast.dismiss();
+        toast.error('Try again later!');
+        console.error('Error submitting form:', error);
+    }
+};
+
     const scheduleData = [
         {
             process: "Registration",
@@ -346,126 +376,7 @@ const BamsPage = () => {
 
                                     </h3>
 
-                                    {/* <form
-                                        id="formoid"
-                                        action="https://api.bangalorestudy.com:3000/api/website/home/landingpageenquiry"
-                                        method="post"
-                                    >
-                                        <div className="form-group mb-3">
-                                            <input
-                                                type="text"
-                                                id="name"
-                                                name="name"
-                                                placeholder="Name"
-                                                required
-                                                className="form-control"
-                                            />
-                                        </div>
-
-                                        <div className="form-group mb-3">
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                name="email"
-                                                placeholder="Your Email"
-                                                required
-                                                className="form-control"
-                                            />
-                                        </div>
-
-                                        <div className="form-group mb-3">
-                                            <input
-                                                type="number"
-                                                id="contact"
-                                                name="contact"
-                                                placeholder="Contact No."
-                                                required
-                                                className="form-control"
-                                            />
-                                        </div>
-                                        <div className="form-group mb-3">
-                                            <input
-                                                type="number"
-                                                id="neetscore"
-                                                name="neetscore"
-                                                placeholder="NEET Score"
-                                                required
-                                                className="form-control"
-                                            />
-                                        </div>
-
-                                        <div className="form-group mb-3">
-                                            <select
-                                                id="location"
-                                                name="location"
-                                                required
-                                                className="browser-default custom-select form-control white-bg-black-text"
-                                            >
-                                                <option value="">State</option>
-                                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                                <option value="Assam">Assam</option>
-                                                <option value="Bihar">Bihar</option>
-                                                <option value="Chhattisgarh">Chhattisgarh</option>
-                                                <option value="Goa">Goa</option>
-                                                <option value="Gujarat">Gujarat</option>
-                                                <option value="Haryana">Haryana</option>
-                                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                                <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-                                                <option value="Jharkhand">Jharkhand</option>
-                                                <option value="Karnataka">Karnataka</option>
-                                                <option value="Kerala">Kerala</option>
-                                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                                <option value="Maharashtra">Maharashtra</option>
-                                                <option value="Manipur">Manipur</option>
-                                                <option value="Meghalaya">Meghalaya</option>
-                                                <option value="Mizoram">Mizoram</option>
-                                                <option value="Nagaland">Nagaland</option>
-                                                <option value="Odisha">Odisha</option>
-                                                <option value="Punjab">Punjab</option>
-                                                <option value="Rajasthan">Rajasthan</option>
-                                                <option value="Sikkim">Sikkim</option>
-                                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                                <option value="Tripura">Tripura</option>
-                                                <option value="Telangana">Telangana</option>
-                                                <option value="Uttarakhand">Uttarakhand</option>
-                                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                                <option value="West Bengal">West Bengal</option>
-                                                <option value="Andaman & Nicobar">Andaman & Nicobar</option>
-                                                <option value="Chandigarh">Chandigarh</option>
-                                                <option value="Dadra and Nagar Haveli">
-                                                    Dadra and Nagar Haveli
-                                                </option>
-                                                <option value="Daman & Diu">Daman & Diu</option>
-                                                <option value="Delhi">Delhi</option>
-                                                <option value="Lakshadweep">Lakshadweep</option>
-                                                <option value="Puducherry">Puducherry</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div className="form-group mb-3">
-                                            <textarea
-                                                id="description"
-                                                name="description"
-                                                placeholder="Message (Optional)"
-                                                className="form-control"
-                                                rows={3}
-                                                defaultValue={''}
-                                            />
-                                        </div>
-
-                                        <div className="form-group text-center">
-                                            <button
-                                                type="submit"
-                                                id="about"
-                                                name="submit"
-                                                className="btn btn-success btn-bds-add-svyasa-apply color-btn-add-apply p-3 px-5"
-                                            >
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </form> */}
+                                 
                                     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                                         {() => (
                                             <Form>
@@ -505,8 +416,8 @@ const BamsPage = () => {
                                                 <div className="form-group mb-3">
                                                     <Field
                                                         type="number"
-                                                        id="neetscore"
-                                                        name="neetscore"
+                                                        id="neetrank"
+                                                        name="neetrank"
                                                         placeholder="NEET Score"
                                                         required
                                                         className="form-control"
@@ -1732,8 +1643,8 @@ const BamsPage = () => {
                                 <div className="form-group mb-3">
                                     <Field
                                         type="number"
-                                        id="neetscore"
-                                        name="neetscore"
+                                        id="neetrank"
+                                        name="neetrank"
                                         placeholder="NEET Score"
                                         required
                                         className="form-control bams-form-field py-3"
@@ -1870,8 +1781,8 @@ const BamsPage = () => {
                                 <div className="form-group mb-3">
                                     <Field
                                         type="number"
-                                        id="neetscore"
-                                        name="neetscore"
+                                        id="neetrank"
+                                        name="neetrank"
                                         placeholder="NEET Score"
                                         required
                                         className="form-control bams-form-field py-3"
