@@ -45,8 +45,11 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
 
     const handleSubmit = async (values, { resetForm }) => {
 
+        // return
         try {
-            toast.loading('Processing');
+            toast.loading('Processing', {
+                duration: 3000, // Duration in milliseconds
+            });
             const formData = new FormData();
             formData.append('name', values.fullName);
             formData.append('email', values.email);
@@ -69,8 +72,11 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
             }
             const response = await axios.post('api/website/addjobsenquires/get', formData);
             if (response.status === 200) {
-                toast.dismiss();
-                toast.success('Thank you for submitting your details.');
+
+                toast.success('Thank you for submitting your details.', {
+                    duration: 5000, // Duration in milliseconds
+                });
+
                 resetForm();
                 setResumeFileName('');
                 setShowPhoneInput(false);
