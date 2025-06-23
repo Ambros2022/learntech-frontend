@@ -48,7 +48,19 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        contact_number: Yup.string().required("Phone Number is required"),
+          contact_number: Yup.string()
+            .required("Phone Number is required")
+            .test(
+              "is-valid-contact",
+              "Enter valid 10 digits Number",
+              function (value) {
+                if (!value) return false;
+                if (value.startsWith("+91-")) {
+                  return /^\+91-\d{10}$/.test(value); // Apply strict rule for +91-
+                }
+                return true; // Accept other formats (other country codes)
+              }
+            ),
         course: Yup.string().required(`${placeholder || 'Course'} is required`).trim(),
         location: Yup.string().required('Location is required').trim(),
         message: Yup.string().required('Message is required'),

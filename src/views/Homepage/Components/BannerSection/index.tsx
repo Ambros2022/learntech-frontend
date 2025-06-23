@@ -26,7 +26,20 @@ const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-  contact_number: Yup.string().required("Phone Number is required"),
+  // contact_number: Yup.string().required("Phone Number is required"),
+  contact_number: Yup.string()
+    .required("Phone Number is required")
+    .test(
+      "is-valid-contact",
+      "Enter valid 10 digits Number",
+      function (value) {
+        if (!value) return false;
+        if (value.startsWith("+91-")) {
+          return /^\+91-\d{10}$/.test(value); // Apply strict rule for +91-
+        }
+        return true; // Accept other formats (other country codes)
+      }
+    ),
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),
 });
@@ -39,6 +52,8 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
   const [open, setOpen] = useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
+    alert(JSON.stringify(values.contact_number));
+    return
     try {
       toast.loading('Processing');
       const formData = new FormData();
@@ -227,6 +242,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                       }}
                       validationSchema={validationSchema}
                       onSubmit={handleSubmit}
+                      validateOnChange={false}
                     >
                       <Form>
                         <div className="mb-3">

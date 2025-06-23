@@ -26,6 +26,7 @@ const PhoneInputField = ({ name, ...props }: { name: string }) => {
       value={field.value}
       onChange={(value, country) => {
         const formattedPhoneNumber = formatPhoneNumber(value, country);
+        console.log(formattedPhoneNumber,"formattedPhoneNumber");
         helpers.setValue(formattedPhoneNumber); 
       }}
 
