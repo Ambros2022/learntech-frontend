@@ -60,7 +60,7 @@ module.exports = {
       }
     ];
   },
-
+q
   async redirects() {
 
     return [
