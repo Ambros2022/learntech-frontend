@@ -28,7 +28,7 @@ const ExpertSec = ({ data }) => {
                     content={
                         data?.banner_image
                             ? `${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`
-                            : "/images/icons/footer-learntech-logo.png"
+                            : "/images/Learntech160.webp"
                     }
                 />
                 <meta property="og:url" content={location} />
@@ -43,7 +43,7 @@ const ExpertSec = ({ data }) => {
                     content={
                         data?.banner_image
                             ? `${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`
-                            : "/images/icons/footer-learntech-logo.png"
+                            : "/images/Learntech160.webp"
                     }
                 />
                 <meta name="twitter:url" content={location} />

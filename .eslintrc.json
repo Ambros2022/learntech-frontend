@@ -4,6 +4,10 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
+  "plugins": [
+    "import",
+    "unused-imports"
+  ],
   "rules": {
     "react/display-name": "off",
     "@next/next/no-img-element": "off",
@@ -18,18 +22,21 @@
     "react-hooks/exhaustive-deps": "off",
     "react/jsx-key": "off",
     "react-hooks/rules-of-hooks": "off",
-    "@typescript-eslint/no-var-requires":"off",
-    // "import/newline-after-import": [
-    //   "error",
-    //   {
-    //     "count": 1
-    //   }
-    // ],
-    "@typescript-eslint/ban-types":"off"
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/ban-types": "off",
+
+    // ✅ Added rules
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
   },
-  "plugins": [
-    "import"
-  ],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [
@@ -51,9 +58,7 @@
       "files": [
         "src/iconify-bundle/*"
       ],
-      "rules": {
-        
-      }
+      "rules": {}
     }
   ]
 }

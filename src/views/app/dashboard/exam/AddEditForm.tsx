@@ -1,13 +1,7 @@
 
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
+import {  useState,  useEffect, useCallback } from 'react'
 import CustomInput from 'src/@core/components/pickersCoustomInput/index'
-
-import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
@@ -28,7 +22,7 @@ import { FaTrash } from 'react-icons/fa';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, CardContent, FormControlLabel, FormHelperText, FormLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
+import {  CardContent, FormControlLabel, FormHelperText, FormLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import TabContext from '@mui/lab/TabContext'
@@ -48,12 +42,11 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
     const router = useRouter();
     // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
     const [fileNamesbanner, setFileNamesbanner] = useState<any>([]);
@@ -130,12 +123,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .required(),
         // stream_id: yup.object().required("This field is required"),
         country_id: yup.object().required("This field is required"),
-        // level_of_study: yup
-        //     .string()
-        //     .required('Level of Study is required'),
-        // types_of_exams: yup
-        //     .string()
-        //     .required('Type of exam is required'),
+
 
 
     })
@@ -207,11 +195,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             roleparams['page'] = 1;
             roleparams['size'] = 10000;
             const response = await axios1.get('api/admin/stream/get', { params: roleparams });
-            const strdata = response.data.data.map((news: { id: any; name: any; slug: any;  }) => ({
+            const strdata = response.data.data.map((news: { id: any; name: any; slug: any; }) => ({
                 id: news.id,
                 name: news.name,
-                slug: news.slug,        
-              }))
+                slug: news.slug,
+            }))
             setStreamsdata(strdata);
         } catch (err) {
             console.error(err);
@@ -284,14 +272,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -299,10 +285,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -348,15 +332,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
 
             formData.append('cover_image', selectedphoto);
-            // if (selectedlogo == '') {
 
-            //     toast.error('Please Upload Logo', {
-            //         duration: 2000
-            //     })
-            //     setLoading(false);
-            //     return false;
-
-            // }
             formData.append('logo', selectedlogo);
             formData.append('promo_banner', selectedbannner);
 
@@ -370,7 +346,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -379,17 +354,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -446,10 +418,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     };
 
     const faqonSubmit = async (data: any) => {
-   
+
         console.log(data.faqs);
 
-      
+
 
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
@@ -464,7 +436,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
@@ -472,13 +443,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
                 // history.push('/app/products');
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
                 toast.error(err.message || "please try again")
 
             }
@@ -502,10 +471,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const onChangeimages = (
         imageList: ImageListType,
-        addUpdateIndex: number[] | undefined
     ) => {
-        // data for submit
-        // console.log(imageList, addUpdateIndex);
+
         setImages(imageList);
     };
 
@@ -533,13 +500,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             if (response.data.status === 1) {
                 toast.success(response.data.message);
                 setLoading(false);
-                setError('');
                 reset();
                 router.back();
             } else {
                 setLoading(false);
                 toast.error(response.data.message);
-                setError(response.data.message);
             }
         } catch (err) {
             console.error(err);
@@ -892,13 +857,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='overview'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("overview", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -911,13 +874,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='exam_dates'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("exam_dates", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -929,13 +890,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='eligibility_criteria'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("eligibility_criteria", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -947,13 +906,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='syllabus'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("syllabus", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -965,13 +922,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='cutoff'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("cutoff", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -983,13 +938,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='admit_card'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("admit_card", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1001,13 +954,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='exam_centers'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("exam_centers", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1019,13 +970,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='results'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("results", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1037,13 +986,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='prepretion_tips'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("prepretion_tips", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1055,13 +1002,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='counseling'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("counseling", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1073,13 +1018,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='accept_colleges'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value, } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("accept_colleges", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1129,6 +1072,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         maxSize={2000000}
                                         fileNames={fileNamesphoto}
                                         label=" Upload Cover_image"
+                                        helpertext="Recommended upload size: 784 × 392 px "
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />
@@ -1157,6 +1101,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         maxSize={2000000}
                                         fileNames={fileNameslogo}
                                         label=" Upload Logo"
+                                        helpertext="Recommended size: 600 × 450 px (minimum 300 × 225 px)"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />
@@ -1318,7 +1263,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                                     />
                                                 ) : null}
                                             </Button>
-                                    
+
                                         </DialogActions>
                                     </Grid>
 
@@ -1343,8 +1288,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     {({
                                         imageList,
                                         onImageUpload,
-                                        onImageRemoveAll,
-                                        onImageUpdate,
                                         onImageRemove,
                                         isDragging,
                                         dragProps

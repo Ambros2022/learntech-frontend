@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import BannerSec from './Components/BannerSec';
 import BestCoursesSec from './Components/BestCoursesSec';
-import CoursesCard from './Components/CoursesCard';
+// import CoursesCard from './Components/CoursesCard';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+const CoursesCard = dynamic(() => import('./Components/CoursesCard'), { ssr: false });
 
 function MainCoursePage() {
   const router = useRouter()

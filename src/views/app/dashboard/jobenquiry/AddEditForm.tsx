@@ -1,23 +1,7 @@
 // ** React Imports
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import CustomInput from 'src/@core/components/pickersCoustomInput/index'
-
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
+import { useState, useEffect, useCallback } from 'react'
 import Grid from '@mui/material/Grid'
-import Radio from '@mui/material/Radio'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import { useRouter } from 'next/router';
-// ** Third Party Imports
-import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -26,10 +10,7 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import type { FC } from 'react';
-import { useAuth } from 'src/hooks/useAuth'
-
-import { Alert, FormControlLabel, FormLabel, RadioGroup, useTheme } from '@mui/material'
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import { Alert } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 
 
@@ -39,23 +20,17 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
-    const router = useRouter();
-    const { user } = useAuth();
-    const [loading, setLoading] = useState<boolean>(false)
-    const [superadmin, setSuperadmin] = useState<boolean>(true)
-    const [error, setError] = useState("")
-    const [schools, setSchools] = useState([])
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
+
+    const [error] = useState("")
     const [joblocations, setJoblocations] = useState([])
     const [jobposition, setJobPosition] = useState([])
     const isMountedRef = useIsMountedRef();
     const params: any = {}
     params['page'] = 1;
     params['size'] = 10000;
-    const theme = useTheme()
-    const { direction } = theme
 
-    const popperPlacement: ReactDatePickerProps['popperPlacement'] = direction === 'ltr' ? 'bottom-start' : 'bottom-end'
+
 
 
 
@@ -98,8 +73,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const {
         control,
-        handleSubmit,
-        reset,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -147,101 +120,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     }, [getlocation]);
 
-    // const onSubmit = async (data: any) => {
 
-    //     if (!isAddMode && olddata.id) {
-    //         let updateid = olddata.id;
-    //         setLoading(true)
-    //         let url = 'api/admin/jobsenquires/update';
-    //         let formData: any = {};
-    //         formData.id = updateid;
-    //         formData.name = data.name;
-    //         formData.email = data.email;
-    //         formData.phone = data.phone;
-    //         formData.d_o_b = data.d_o_b;
-    //         formData.current_location = data.current_location;
-    //         formData.total_exp = data.total_exp;
-    //         formData.resume = data.resume;
-    //         formData.status = data.status;
-    //         formData.job_location_id = data.job_location_id.id;
-    //         formData.jobs_position_id = data.jobs_position_id.id;
-
-    //         try {
-    //             let response = await axios1.post(url, formData)
-    //             if (response.data.status == 1) {
-    //                 toast.success(response.data.message)
-    //                 setLoading(false)
-    //                 setError('')
-    //                 reset();
-    //                 router.back();
-    //             }
-    //             else {
-    //                 setLoading(false)
-    //                 toast.error(response.data.message)
-    //                 setError(response.data.message)
-    //             }
-
-    //         } catch (err: any) {
-    //             console.error(err);
-    //             setLoading(false)
-    //             if (err.errors && err.errors.length > 0) {
-    //                 const errorMessage = err.errors[0].msg;
-    //                 setError(errorMessage || "Please try again");
-    //                 toast.error(errorMessage || "Please try again");
-    //             } else {
-    //                 setError(err.message || "Please try again");
-    //                 toast.error(err.message || "Please try again");
-    //             }
-
-    //         }
-    //     } else {
-    //         setLoading(true)
-    //         let url = 'api/admin/jobsenquires/add';
-    //         let formData: any = {};
-    //         formData.job_location_id = data.job_location_id.id;
-    //         formData.jobs_position_id = data.jobs_position_id.id;
-    //         formData.name = data.name;
-    //         formData.email = data.email;
-    //         formData.phone = data.phone;
-    //         formData.d_o_b = data.d_o_b;
-    //         formData.current_location = data.current_location;
-    //         formData.total_exp = data.total_exp;
-    //         formData.resume = data.resume;
-    //         formData.status = data.status;
-
-    //         try {
-    //             let response = await axios1.post(url, formData)
-    //             // console.log(response, "response")
-
-    //             if (response.data.status == 1) {
-    //                 // console.log("response.data", response.data)
-    //                 toast.success(response.data.message)
-    //                 setLoading(false)
-    //                 setError('')
-    //                 reset();
-    //                 router.push('./');
-
-
-    //             }
-    //             else {
-    //                 setLoading(false)
-    //                 toast.error(response.data.message)
-    //                 setError(response.data.message)
-    //             }
-    //         } catch (err: any) {
-    //             setLoading(false)
-    //             if (err.errors && err.errors.length > 0) {
-    //                 const errorMessage = err.errors[0].msg;
-    //                 setError(errorMessage || "Please try again");
-    //                 toast.error(errorMessage || "Please try again");
-    //             } else {
-    //                 setError(err.message || "Please try again");
-    //                 toast.error(err.message || "Please try again");
-    //             }
-
-    //         }
-    //     }
-    // }
 
 
     const handleFilechange = () => {

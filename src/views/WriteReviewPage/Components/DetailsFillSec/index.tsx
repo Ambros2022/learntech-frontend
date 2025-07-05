@@ -19,10 +19,10 @@ function DetailsFillSec() {
   const [schema, setSchema] = useState<any>();
   const [collegeid, setCollegeid] = useState<any>();
   const [coursetype, setCoursetype] = useState<any>();
-  const [loading, setLoading] = useState<boolean>(false);
+
   const [showStep2, setShowStep2] = useState<boolean>(false); // New state for step 2 visibility
 
-  const [userData, setUserData] = useState<{ name: string; email: string } | null>(null);
+
   const [datatype, setDatatype] = useState<any>('college');
 
 
@@ -109,7 +109,7 @@ function DetailsFillSec() {
     if (!showStep2) {
       setShowStep2(true);
     } else {
-      setLoading(true);
+      
       const url = 'api/website/addreview/post';
       const formData = new FormData();
 
@@ -139,16 +139,16 @@ function DetailsFillSec() {
         const response = await axios1.post(url, formData);
         if (response.data.status === 1) {
           toast.success(response.data.message);
-          setLoading(false);
+          
           router.push("/");
           reset();
         } else {
-          setLoading(false);
+         
           toast.error(response.data.message);
         }
       } catch (err: any) {
         console.error(err);
-        setLoading(false);
+
         toast.error(err.message || "Please try again");
       }
     }
@@ -188,7 +188,7 @@ function DetailsFillSec() {
     const storedUserData = localStorage.getItem('UserData');
     if (storedUserData) {
       const parsedUserData = JSON.parse(storedUserData);
-      setUserData(parsedUserData);
+  
 
       // Update the form's default values with the parsed user data
       reset({

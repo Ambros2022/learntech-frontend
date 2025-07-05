@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import NewsList from '../newsList';
 import BlogList from '../blogsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
-import axios from 'src/configs/axios';
 
-const OverviewSec = ({ data, createdAt , newsData , blogsData }) => {
+const OverviewSec = ({ data , newsData , blogsData }) => {
 
     return (
         <section className='innerBlogSec bg-white pt-3'>
@@ -14,8 +13,7 @@ const OverviewSec = ({ data, createdAt , newsData , blogsData }) => {
                 <div className="row">
                     <div className="col-md-8">
                         <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.overview }} /></p>
-                        {/* <p className='text-black'>{data.meta_description}</p>
-                        <p className='text-black'>{data.meta_title}</p> */}
+                     
 
                     </div>
                     <div className="col-md-4">

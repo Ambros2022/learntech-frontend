@@ -1,30 +1,21 @@
 'use client';
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
+import {  useState } from 'react'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-import Radio from '@mui/material/Radio'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import type { FC } from 'react';
-import { Alert, Typography } from '@mui/material'
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import dynamic from 'next/dynamic'
+import {  Typography } from '@mui/material'
+
 import QuillEditor from 'src/@core/components/html-editor/index';
 
 
@@ -35,30 +26,9 @@ interface Authordata {
 
 // const DynamicJoditEditor = dynamic(() => import('jodit-react'), { ssr: false });ReactQuill
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode,  }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
-
-    const handleFileChangephoto = (files: any[]) => {
-        setSelectedphoto(files[0]);
-        setFileNamesphoto(
-            files.map((file) => ({
-                name: file.name,
-                preview: URL.createObjectURL(file),
-            }))
-        );
-
-    };
-
-    const [fieldvalue, setEditorValue] = useState('');
-
-    const handleEditorChange = (newValue) => {
-        // Set the new value to editorValue state
-        setEditorValue(newValue);
-    };
 
 
 
@@ -113,14 +83,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -128,10 +96,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -159,7 +125,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -168,17 +133,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -286,13 +248,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='top_description'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value,  } }) => (
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                         onChange={(value) => setValue("top_description", value)} />
-                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                  
                                 </>
                             )}
                         />
@@ -304,13 +264,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='bottom_description'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value,  } }) => (
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                         onChange={(value) => setValue("bottom_description", value)} />
-                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                    onChange={(value)=>console.log(value)} /> */}
+                                  
                                 </>
                             )}
                         />

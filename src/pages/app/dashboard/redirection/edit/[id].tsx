@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditForm from 'src/views/app/dashboard/recognition/AddEditForm'
+import AddEditForm from 'src/views/app/dashboard/redirection/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';

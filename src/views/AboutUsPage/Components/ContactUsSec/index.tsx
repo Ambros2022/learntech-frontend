@@ -1,16 +1,15 @@
 import React from 'react';
-import Image from 'next/image';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import axios from 'src/configs/axios';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import dynamic from 'next/dynamic';
+const PhoneInputField = dynamic(() => import("src/@core/components/popup/PhoneInput"), { ssr: false });
+// import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 
 const ContactUsSec = () => {
     const router = useRouter();
-
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validationSchema = Yup.object().shape({
@@ -58,6 +57,7 @@ const ContactUsSec = () => {
                         alt="contact-us-img"
                         className="w-100 h-100"
                         style={{ objectFit: 'cover' }}
+                        loading="lazy"
                     />
                 </div>
                 <div className="col-md-6 position-relative">

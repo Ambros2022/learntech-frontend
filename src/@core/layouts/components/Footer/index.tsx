@@ -1,7 +1,16 @@
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import React, { useState, useEffect } from 'react';
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
-// import Link from 'src/@core/theme/overrides/link';
+
+const Toster = dynamic(() => import('src/@core/components/popup/Toster'), { ssr: false })
+const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), {
+  ssr: false, loading: () =>
+    <a className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
+      <img src="/images/icons/DownloadBrochure.webp" className='mb-md-0 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" loading="lazy" />
+
+    </a>
+});
+// import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from "next/link";
 const Footer = () => {
 
@@ -33,13 +42,13 @@ const Footer = () => {
 
   return (
     <>
-      {/* <section className="footerCon" style={{backgroundImage:'url(/images/icons/Footer_Banner.webp)',backgroundRepeat:'no-repeat',backgroundSize:'cover'}}> */}
+
       <section className="footerCon">
         <div className="container pt-3">
           <div className="d-flex">
             <div className="col-xl-3 col-lg-4 col-md-4 col-8">
               <Link href='/'>
-                <Image className="footer-logo" src="/images/icons/footer-learntech-logo.png" width={500} height={500} alt="learntech-logo" />
+                <img className="footer-logo" src="/images/Learntech325.webp" width={500} height={500} alt="learntech-logo" />
               </Link>
             </div>
           </div>
@@ -99,10 +108,10 @@ const Footer = () => {
             <div className="text-white">
               <h5 className="fw-bold mb-3 mb-md-3">Download Our App</h5>
               <div className='d-flex px-2 px-md-0  flex-row flex-md-column justify-content-around'>
-                <a href="https://apps.apple.com/in/app/learntech/id1623567055" target='_blank'><Image className="mb-1 mb-md-3  boxShadow" width={150} height={50} alt="app-store-img" src="/images/icons/app-store.png" /></a>
+                <a href="https://apps.apple.com/in/app/learntech/id1623567055" target='_blank'><Image className="mb-1 mb-md-3  boxShadow" width={150} height={50} alt="app-store-img" src="/images/icons/app-store.webp" /></a>
 
 
-                <a href="https://play.google.com/store/apps/details?id=com.ilearntech.app" target='_blank'><Image className=" boxShadow" width={150} height={50} alt="google-play-img" src="/images/icons/google-play.png" /></a>
+                <a href="https://play.google.com/store/apps/details?id=com.ilearntech.app" target='_blank'><Image className=" boxShadow" width={150} height={50} alt="google-play-img" src="/images/icons/google-play.webp" /></a>
               </div>
             </div>
           </div>
@@ -142,6 +151,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <Toster />
       </footer>
     </>
   );

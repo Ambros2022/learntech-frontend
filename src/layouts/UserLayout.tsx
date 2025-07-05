@@ -13,21 +13,15 @@ import Layout from 'src/@core/layouts/Layout'
 import VerticalNavItems from 'src/navigation/vertical'
 import HorizontalNavItems from 'src/navigation/horizontal'
 
-// ** Component Import
-// Uncomment the below line (according to the layout type) when using server-side menu
-import ServerSideVerticalNavItems from './components/vertical/ServerSideNavItems'
-import ServerSideHorizontalNavItems from './components/horizontal/ServerSideNavItems'
 
 import VerticalAppBarContent from './components/vertical/AppBarContent'
 import HorizontalAppBarContent from './components/horizontal/AppBarContent'
 
 //change our logo
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
-import Link from 'src/@core/theme/overrides/link'
 
 interface Props {
   children: ReactNode
@@ -38,8 +32,8 @@ interface Props {
 const AppBrand = () => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-       <NextLink href="/" >
-      <img src='/images/logo.png' style={{objectFit:"contain"}} alt='logo' width='200' height='100' />
+      <NextLink href="/" >
+        <img src='/images/Learntech160.webp' style={{ objectFit: "contain" }} alt='logo' width='200' height='100' />
       </NextLink>
     </Box>
   )
@@ -50,7 +44,7 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
   const { settings, saveSettings } = useSettings()
 
 
-   
+
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'))
 
   if (hidden && settings.layout === 'horizontal') {
@@ -74,7 +68,7 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
           // Uncomment the below line when using server-side menu in vertical layout and comment the above line
           // navItems: verticalMenuItems
         },
-      
+
         appBar: {
           content: props => (
             <VerticalAppBarContent
@@ -101,7 +95,7 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
       })}
     >
       {children}
-      
+
     </Layout>
   )
 }

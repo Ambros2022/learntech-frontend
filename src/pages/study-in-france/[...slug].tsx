@@ -1,13 +1,11 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
-import InnerCollegePage from 'src/views/InnerCollegePage'
 import { useRouter } from 'next/router';
 import Spinner from 'src/@core/components/spinner';
 import AbroadUniversity from 'src/views/AbroadUniversity'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
-import Head from 'next/head';
 
 const college = () => {
     const router = useRouter();

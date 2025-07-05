@@ -1,8 +1,6 @@
-// CollegeCard.js
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
+
 
 function CollegeCard2({ college }) {
     return (
@@ -20,4 +18,4 @@ function CollegeCard2({ college }) {
     );
 }
 
-export default CollegeCard2; // Make sure to export the component
+export default CollegeCard2;

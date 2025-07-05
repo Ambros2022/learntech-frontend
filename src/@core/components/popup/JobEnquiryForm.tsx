@@ -1,13 +1,11 @@
 import React, { FC, useState } from 'react';
-import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik'; // Ensure correct import
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
-import { DatePicker } from "@nextui-org/react";
+
+
 
 
 interface Props {
@@ -16,7 +14,6 @@ interface Props {
 }
 
 const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
-    const router = useRouter();
     const [resumeFileName, setResumeFileName] = useState('');
     const [showPhoneInput, setShowPhoneInput] = useState(true);
 
@@ -32,7 +29,6 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
         resume: null,
     };
 
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validationSchema = Yup.object().shape({
@@ -44,20 +40,16 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
         job_location_id: Yup.string().required('Job Location is required').trim(),
         currentLocation: Yup.string().required('Current Location is required').trim(),
         total_exp: Yup.string().required('Total Experience is required').trim(),
-        // resume: Yup.mixed()
-        //     .required('Resume is required')
-        //     .test('fileType', 'Only PDF and DOCX files are allowed', (value) => {
-        //         if (!value) return false;
-        //         const file = value as File;
-        //         const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-        //         return allowedTypes.includes(file.type);
-        //     }),
+
     });
 
     const handleSubmit = async (values, { resetForm }) => {
-     
+
+        // return
         try {
-            toast.loading('Processing');
+            toast.loading('Processing', {
+                duration: 3000, // Duration in milliseconds
+            });
             const formData = new FormData();
             formData.append('name', values.fullName);
             formData.append('email', values.email);
@@ -68,11 +60,11 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
             formData.append('jobs_position_id', values.jobs_position_id);
             formData.append('job_location_id', values.job_location_id);
             formData.append('current_url', window.location.href);
-            
+
             if (!values.resume) {
                 toast.dismiss();
                 toast.error('Please upload resume.');
-                
+
                 return
             }
             if (values.resume) {
@@ -80,13 +72,16 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
             }
             const response = await axios.post('api/website/addjobsenquires/get', formData);
             if (response.status === 200) {
-                toast.dismiss();
-                toast.success('Thank you for submitting your details.');
+
+                toast.success('Thank you for submitting your details.', {
+                    duration: 5000, // Duration in milliseconds
+                });
+
                 resetForm();
                 setResumeFileName('');
                 setShowPhoneInput(false);
                 setTimeout(() => setShowPhoneInput(true), 0);
-                // router.push('/thank-you');
+
             }
         } catch (error) {
             toast.error('Error submitting form. Please try again later.');
@@ -116,7 +111,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                     <div className='row mb-md-3 careerContact'>
                         <div className='col-md-6'>
                             <div className='mb-3 Jobenquiryphoneinput'>
-                            {showPhoneInput && <PhoneInputField name="phone" />}
+                                {showPhoneInput && <PhoneInputField name="phone" />}
                                 <ErrorMessage name='phone' component='div' className='text-danger' />
                             </div>
                         </div>
@@ -197,7 +192,7 @@ const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
                                         const file = event.currentTarget.files ? event.currentTarget.files[0] : null;
                                         console.log('Selected file:', file);
                                         setFieldValue('resume', file);
-                                        setResumeFileName(file ? file.name : ''); // Update state with file name
+                                        setResumeFileName(file ? file.name : '');
                                     }}
                                 />
                                 <ErrorMessage name='resume' component='div' className='text-danger' />

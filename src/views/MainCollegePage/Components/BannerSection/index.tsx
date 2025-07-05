@@ -6,7 +6,6 @@ import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
@@ -40,10 +39,10 @@ function BannerSection() {
 
       const response = await axios.get('api/website/colleges/get', {
         cancelToken: cancelToken.token,
-        params: { searchfrom: 'name', searchtext: value, type:'college' },
+        params: { searchfrom: 'name', searchtext: value, type: 'college' },
       });
 
-      const suggestions = response.data.data.map((item: { id: number; name: string ,slug:string}) => ({
+      const suggestions = response.data.data.map((item: { id: number; name: string, slug: string }) => ({
         name: item.name,
         slug: item.slug,
         id: item.id,
@@ -80,7 +79,7 @@ function BannerSection() {
       <section className="collegeBannerCon">
         <div className="position-relative">
           <div>
-            <img src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
+            <img src='/images/icons/BannerBG.webp' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
           </div>
           <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
             <div className="d-flex justify-content-center h-100 w-100 container">

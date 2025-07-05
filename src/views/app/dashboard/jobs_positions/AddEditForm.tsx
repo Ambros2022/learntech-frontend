@@ -1,12 +1,6 @@
 // ** React Imports
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
+import { useState, useEffect, useCallback } from 'react'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
 import Button from '@mui/material/Button'
@@ -15,16 +9,13 @@ import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import type { FC } from 'react';
-import { useAuth } from 'src/hooks/useAuth'
 import { Alert, FormControlLabel, FormLabel, RadioGroup, Typography } from '@mui/material'
 import QuillEditor from 'src/@core/components/html-editor/index';
 
@@ -35,24 +26,13 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-interface JobPositionLocation {
-    jobposition: {
-        id: string;
-        name: string;
-    };
 
-}
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
     const router = useRouter();
-    const { user } = useAuth();
     const [loading, setLoading] = useState<boolean>(false)
-    const [superadmin, setSuperadmin] = useState<boolean>(true)
     const [error, setError] = useState("")
     const [jobsdata, setJobsdata] = useState([])
-
-    const [schools, setSchools] = useState([])
-    const isMountedRef = useIsMountedRef();
     const params: any = {}
     params['page'] = 1;
     params['size'] = 10000;
@@ -113,7 +93,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         handleSubmit,
         reset,
         setValue,
-        resetField: admfiledReset,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -174,13 +153,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('exp_required', data.exp_required);
             formData.append('total_positions', data.total_positions);
             formData.append('status', data.status);
-            // let url = 'api/admin/jobsposition/add';
-            // let formData: any = {};
-            // formData.name = data.name;
-            // formData.job_description = data.job_description;
-            // formData.exp_required = data.exp_required;
-            // formData.total_positions = data.total_positions;
-            // formData.status = data.status;
+
             formData.append('joblocations', data.joblocations);
             try {
                 let response = await axios1.post(url, formData)

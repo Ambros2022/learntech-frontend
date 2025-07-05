@@ -1,5 +1,5 @@
 // ** React Imports
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -12,11 +12,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios1 from 'src/configs/axios'
 // import Resetpasswordform from 'src/views/users/ResetPassword'
 import LinearProgress from '@mui/material/LinearProgress'
-import NotAuthorized from 'src/pages/401'
-import Grid from '@mui/material/Grid';
-// ** React Imports
-import { useContext } from 'react'
-import { AbilityContext } from 'src/layouts/components/acl/Can'
+
 
 
 const Edituserlayout = () => {
@@ -26,7 +22,7 @@ const Edituserlayout = () => {
   const isAddMode = !id;
   const [olddata, setolddata] = useState<any>(null);
   const [formloading, setFormloading] = useState(true);
-  const ability = useContext(AbilityContext)
+
 
   //get old data
   const getolddata = useCallback(async () => {
@@ -54,28 +50,28 @@ const Edituserlayout = () => {
   return (
     <>
 
-        <Card>
-          <Box
-            sx={{
-              gap: 2,
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              p: theme => theme.spacing(2, 5, 4, 5)
-            }}
-          >
-            <h5>Edit States</h5>
-            <Link href={`../`} >
-              <Button variant='contained'>View All States</Button>
-            </Link>
-          </Box>
-          <CardContent>
+      <Card>
+        <Box
+          sx={{
+            gap: 2,
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            p: theme => theme.spacing(2, 5, 4, 5)
+          }}
+        >
+          <h5>Edit States</h5>
+          <Link href={`../`} >
+            <Button variant='contained'>View All States</Button>
+          </Link>
+        </Box>
+        <CardContent>
 
-            {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
+          {formloading ? <LinearProgress /> : <AddEditForm olddata={olddata} isAddMode={isAddMode} />}
 
-          </CardContent>
-        </Card>
+        </CardContent>
+      </Card>
     </>
   )
 }

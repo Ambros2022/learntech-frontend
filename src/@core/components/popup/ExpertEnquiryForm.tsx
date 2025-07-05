@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios1 from 'src/configs/axios';
-import { height } from '@mui/system';
 
 interface Props {
     page?: any;
@@ -15,27 +14,37 @@ interface Props {
     placeholder?: string;
 }
 
-const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
+const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', }) => {
     const router = useRouter();
     const isMountedRef = useIsMountedRef();
     const [streams, setStreams] = useState<any[]>([]);
-    const [courses, setCourses] = useState<any[]>([]);
 
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        contact_number: Yup.string().required('Phone Number is required'),
+        contact_number: Yup.string()
+            .required("Phone Number is required")
+            .test(
+                "is-valid-contact",
+                "Enter valid 10 digits Number",
+                function (value) {
+                    if (!value) return false;
+                    if (value.startsWith("+91-")) {
+                        return /^\+91-\d{10}$/.test(value); // Apply strict rule for +91-
+                    }
+                    return true; // Accept other formats (other country codes)
+                }
+            ),
         course: Yup.string().required('Stream is required').trim(),
-        // location: Yup.string().required('Location is required').trim(),
+
     });
 
     const handleSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
         try {
             toast.loading('Processing');
-            console.log('Form values:', values); // Logging form values for debugging
+            console.log('Form values:', values);
             const formData = new FormData();
             formData.append('name', values.name);
             formData.append('email', values.email);
@@ -83,7 +92,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
 
     useEffect(() => {
         getStreamData();
-        // getCoursesData();
+
     }, [getStreamData]);
 
     return (
@@ -93,12 +102,12 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', ...rest }) => {
                 email: '',
                 contact_number: '',
                 course: '',
-                // location: '',
+
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-            {({ setFieldValue }) => (
+            {({ }) => (
                 <Form className="container expertInquirySec">
                     <div className='row mb-3'>
                         <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">

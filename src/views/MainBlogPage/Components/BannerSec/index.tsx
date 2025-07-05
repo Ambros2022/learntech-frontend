@@ -6,11 +6,6 @@ import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-
-const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
-
 let cancelToken: any;
 
 interface SearchResult {
@@ -79,7 +74,7 @@ const BannerSec = () => {
             <section className='newsBannerSec'>
                 <div className='position-relative'>
                     <div>
-                        <img src='/images/icons/Banner BG.png' width={1400} height={400} alt='banner-img' className='position-relative w-100' />
+                        <img src='/images/icons/BannerBG.webp' width={1400} height={400} alt='banner-img' className='position-relative w-100' />
                     </div>
                     <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
                         <div className="container h-100">

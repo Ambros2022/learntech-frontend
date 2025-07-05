@@ -1,20 +1,19 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import React from 'react';
 
-const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
-    const [visibleStates, setVisibleStates] = useState(10); // Initially show 10 states
-    const [isExpanded, setIsExpanded] = useState(false); // Track whether the list is expanded
+const DropdownMenu = React.memo(({ states, onClose }: any) => {
+    const [visibleStates, setVisibleStates] = useState(10);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     const handleViewMore = useCallback(() => {
         setVisibleStates(prev => Math.min(prev + 5, states.length));
-        setIsExpanded(true); // Set to expanded when viewing more
+        setIsExpanded(true);
     }, [states.length]);
 
     const handleShowLess = useCallback(() => {
-        setVisibleStates(10); // Reset to initial number of visible states
-        setIsExpanded(false); // Set to collapsed
+        setVisibleStates(10);
+        setIsExpanded(false);
     }, []);
 
     return (
@@ -27,7 +26,7 @@ const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
                     </div>
                     {states.slice(0, visibleStates).map((item) => (
                         <li key={item.id} className="list-unstyled">
-                            <Link href={`/${item.slug}`}   onClick={onClose} className="dropdown-item">
+                            <Link href={`/${item.slug}`} onClick={onClose} className="dropdown-item">
                                 <div className="d-flex align-items-center">
                                     <div
                                         className="me-3"
@@ -35,7 +34,6 @@ const DropdownMenu = React.memo(({ states, type,onClose }: any) => {
                                             width: "30px",
                                             height: "30px",
                                             overflow: "hidden",
-                                            // borderRadius: "50%",
                                         }}
                                     >
                                         <img

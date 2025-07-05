@@ -1,10 +1,7 @@
 import React, { FC } from 'react';
-import Image from 'next/image';
-// import './stylesglobalpopup.css';
 import Modal from 'react-bootstrap/Modal';
 import EnquiryForm from 'src/@core/components/popup/form';
-// import CallNow from 'src/assets/img/call-now.svg';
-// import GetAppIcon from '@material-ui/icons/GetApp';
+
 
 interface Props {
     className?: any;
@@ -16,7 +13,7 @@ interface Props {
 
 
 
-const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, placeholder='', ...rest }) => {
+const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, placeholder = '', }) => {
     const [modalShow, setModalShow] = React.useState(false);
     function onChanges() {
 
@@ -33,7 +30,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                     </div>
                 </div>
             </Modal>
- 
+
         );
     }
 
@@ -48,9 +45,9 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                 <>
                     {
                         pagename == 'Brochure' ?
-                    
+
                             <a onClick={() => setModalShow(true)} className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
-                                <img src="/images/icons/Download Brochure.webp" className='mb-md-0 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" />
+                                <img src="/images/icons/DownloadBrochure.webp" className='mb-md-0 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" loading="lazy" />
 
                             </a>
                             :

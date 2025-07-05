@@ -1,12 +1,6 @@
 
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
+import {  useState,  useEffect, useCallback } from 'react'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
 import Button from '@mui/material/Button'
@@ -15,7 +9,6 @@ import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -26,7 +19,6 @@ import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 
 import type { FC } from 'react';
 import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup, Typography } from '@mui/material'
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import QuillEditor from 'src/@core/components/html-editor/index';
 
@@ -38,29 +30,17 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
     const [college, setCollege] = useState([]);
     const [generalcollege, setGeneralcollege] = useState([]);
     const isMountedRef = useIsMountedRef();
 
 
 
-    const handleFileChangephoto = (files: any[]) => {
-        setSelectedphoto(files[0]);
-        setFileNamesphoto(
-            files.map((file) => ({
-                name: file.name,
-                preview: URL.createObjectURL(file),
-            }))
-        );
-
-    };
-
+  
     const schema: any = yup.object().shape({
         course_type: yup
             .string()
@@ -84,7 +64,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .required(),
 
         college_id: yup.object().required("This field is required"),
-        // general_course_id: yup.object().required("This field is required"),
 
     })
 
@@ -499,13 +478,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='course_details'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value,  } }) => (
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                         onChange={(value) => setValue("course_details", value)} />
-                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                    //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                    onChange={(value)=>console.log(value)} /> */}
+                                   
                                 </>
                             )}
                         />
@@ -517,13 +494,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='eligibility'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value,  } }) => (
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                         onChange={(value) => setValue("eligibility", value)} />
-                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                   
                                 </>
                             )}
                         />
@@ -535,13 +510,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                             name='fee_structure'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field: { value, onChange } }) => (
+                            render={({ field: { value,  } }) => (
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                         onChange={(value) => setValue("fee_structure", value)} />
-                                    {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                                    
                                 </>
                             )}
                         />

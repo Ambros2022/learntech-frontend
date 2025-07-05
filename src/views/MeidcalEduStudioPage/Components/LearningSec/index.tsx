@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -12,7 +11,7 @@ const LearningSec = () => {
                     <div className="row d-flex justify-content-center mb-3">
                         <div className="col-lg-4 text-center">
                             <div className="event-img video-wrap">
-                                <img src='/images/icons/event-img-5.png' width={500} height={500} alt='event-img' className='img-fluid' />
+                                <img src='/images/icons/event-img-5.webp' width={500} height={500} alt='event-img' className='img-fluid' />
                                 <div className="video-content">
                                     <Link href="https://www.youtube.com/watch?v=F1OI7LZbm6E" target='blank' className='video-btn'> <i className='bi bi-play-circle-fill'></i></Link>
                                 </div>

@@ -1,9 +1,8 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 // NewsItem component
-const NewsItem = ({ id,slug, title, text }) => (
+const NewsItem = ({ id,slug, title }) => (
     <div className="col-12">
         <Link href={`/scholarship/${id}/${slug}`} >
             <div className="card mb-3 hover-card ">
@@ -26,7 +25,7 @@ const NewsList = ({ newsItems }) => (
         <div className='bg-skyBlue examNewsSec blogSec pt-3 mt-3 px-4 overflow-y-auto rounded' style={{ maxHeight: 'calc(7 * 115px)' }}>
             <div className="row">
                 {newsItems.map((item, index) => (
-                    <NewsItem key={index} id={item.id} title={item.name} slug={item.slug} text={item.text} />
+                    <NewsItem key={index} id={item.id} title={item.name} slug={item.slug}  />
                 ))}
             </div>
         </div>

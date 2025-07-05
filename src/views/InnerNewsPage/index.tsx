@@ -14,9 +14,7 @@ function InnerNewsPage({ id }) {
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [news, setNews] = useState([]);
-  const [exams, setexams] = useState([]);
-  const [streams, setStreams] = useState([]);
+
 
   const getPagedata = useCallback(async () => {
     try {
@@ -31,21 +29,7 @@ function InnerNewsPage({ id }) {
     }
   }, [id, isMountedRef, router]);
 
-  const getNews = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/news/get', {
-        params: {
-          page: 1,
-          size: 8,
-        }
-      });
-      if (isMountedRef.current) {
-        setNews(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [id, isMountedRef]);
+
 
 
 
@@ -53,7 +37,6 @@ function InnerNewsPage({ id }) {
 
   useEffect(() => {
     getPagedata();
-    getNews();
 
   }, [getPagedata]);
   return (

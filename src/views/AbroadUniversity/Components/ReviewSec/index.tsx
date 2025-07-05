@@ -16,10 +16,8 @@ const ReviewSec = ({ data }) => {
     const [avgRating, setAvgRating] = useState<number>(0);
     const [totalReviews, setTotalReviews] = useState<number>(0);
     const [ratingCounts, setRatingCounts] = useState<RatingCount>({});
-    const [rating, setRating] = useState(0);
     const [cardData, setCardData] = useState<any>([]);
     const [showReplyForm, setShowReplyForm] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [replyContent, setReplyContent] = useState('');
     const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
     const [userId, setUserId] = useState<string>(''); // Assuming user_id is a string
@@ -93,9 +91,7 @@ const ReviewSec = ({ data }) => {
 
 
 
-    const handleClick = (value) => {
-        setRating(value);
-    };
+  
 
     const generateRatingDistribution = (): RatingDistribution[] => {
         const distribution: RatingDistribution[] = [];
@@ -120,7 +116,7 @@ const ReviewSec = ({ data }) => {
                     <span
                         key={value}
                         className={`star ${value <= roundedRating ? 'selected' : ''}`}
-                        onClick={() => handleClick(value)}
+                      
                     >
                         &#9733;
                     </span>
@@ -146,16 +142,14 @@ const ReviewSec = ({ data }) => {
 
             });
 
-            // console.log(response.data.data.content)
-            // console.log(response.data.data)
-            // setCardData(response)
+         
             console.log(cardData)
             const updatedCardData = cardData.map(review => {
                 console.log(review.id)
                 if (review.id === selectedReviewId) {
-                    // console.log(review.reviewreply)
+               
                     const updatedReplies = review.reviewreply ? [...review.reviewreply, response.data.data] : [response.data.data];
-                    // console.log(updatedReplies)
+             
                     return { ...review, reviewreply: updatedReplies };
                 }
                 return review;
@@ -165,7 +159,7 @@ const ReviewSec = ({ data }) => {
 
             setShowReplyForm(false);
             setReplyContent('');
-            setLoading(true);
+      
         } catch (error) {
             console.error('Failed to add reply:', error);
         }

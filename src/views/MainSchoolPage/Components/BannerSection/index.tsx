@@ -6,7 +6,6 @@ import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
@@ -40,10 +39,10 @@ function BannerSection() {
 
       const response = await axios.get('api/website/schools/get', {
         cancelToken: cancelToken.token,
-        params: { searchfrom: 'name', searchtext: value, type:'university' },
+        params: { searchfrom: 'name', searchtext: value, type: 'university' },
       });
 
-      const suggestions = response.data.data.map((item: { id: number; name: string ,slug:string}) => ({
+      const suggestions = response.data.data.map((item: { id: number; name: string, slug: string }) => ({
         name: item.name,
         slug: item.slug,
         id: item.id,
@@ -80,13 +79,13 @@ function BannerSection() {
       <section className="collegeBannerCon">
         <div className="position-relative">
           <div>
-            <img src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
+            <img src='/images/icons/BannerBG.webp' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
           </div>
           <div className="position-absolute w-100 h-100" style={{ top: '1px' }}>
             <div className="d-flex justify-content-center h-100 w-100 container">
               <div className="align-content-center w-100">
                 <h1 className="fw-bold text-white mb-3">
-                Start Your Child’s Journey with the Best Schools in India                </h1>
+                  Start Your Child’s Journey with the Best Schools in India                </h1>
                 <div className="row d-flex ">
                   <div className="col-md-7 mb-3">
                     <Autocomplete
@@ -142,7 +141,7 @@ function BannerSection() {
                     />
                   </div>
                   <div className="col-md-5 d-flex mb-3">
-                    <GlobalEnquiryForm className="btn align-self-center btn-success2" placeholder={'Grade'}/>
+                    <GlobalEnquiryForm className="btn align-self-center btn-success2" placeholder={'Grade'} />
                   </div>
                 </div>
               </div>

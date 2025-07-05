@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { saveAs } from 'file-saver'
 import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router';
@@ -11,16 +10,27 @@ interface Props {
     onChanges?: any;
 }
 
-const ContactUsForm: FC<Props> = ({ page, ...rest }) => {
+const ContactUsForm: FC<Props> = ({ }) => {
     const router = useRouter();
 
-    const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        contact_number: Yup.string().required("Phone Number is required"),
+        contact_number: Yup.string()
+            .required("Phone Number is required")
+            .test(
+                "is-valid-contact",
+                "Enter valid 10 digits Number",
+                function (value) {
+                    if (!value) return false;
+                    if (value.startsWith("+91-")) {
+                        return /^\+91-\d{10}$/.test(value); // Apply strict rule for +91-
+                    }
+                    return true; // Accept other formats (other country codes)
+                }
+            ),
         location: Yup.string().required('Location is required').trim(),
         message: Yup.string().trim(),
     });

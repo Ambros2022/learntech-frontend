@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -7,7 +6,7 @@ const BannerSec = () => {
         <>
             <section className='scholarshipSec contactuspage'>
                 <div className='position-relative scholarShipImg'>
-                    <img src='/images/icons/Banner BG.png' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
+                    <img src='/images/icons/BannerBG.webp' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
                     <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
                         <div className="container">
                             <div className="py-5 text-start">

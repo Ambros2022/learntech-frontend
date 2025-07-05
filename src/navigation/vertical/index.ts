@@ -1,6 +1,5 @@
 // ** Type import
 import { VerticalNavItemsType } from 'src/@core/layouts/types'
-import { useAuth } from 'src/hooks/useAuth'
 
 const navigation = (): VerticalNavItemsType => {
   return [
@@ -100,12 +99,7 @@ const navigation = (): VerticalNavItemsType => {
         }
       ]
     },
-    // {
-    //   title: 'Blog',
-    //   path: '/app/dashboard/blog',
-    //   icon: 'tabler:file-pencil',
-    //   auth: false
-    // },
+
 
     {
       title: 'User',
@@ -293,12 +287,7 @@ const navigation = (): VerticalNavItemsType => {
           auth: false
         },
 
-        // {
-        //   title: 'Job Location',
-        //   path: '/app/dashboard/joblocation ',
-        //   // icon: 'tabler:notes',
-        //   auth: false
-        // },
+
 
         {
           title: 'Job Enquiry',
@@ -316,38 +305,6 @@ const navigation = (): VerticalNavItemsType => {
       auth: false
     },
 
-    // {
-    //   title: 'School',
-    //   icon: 'tabler:school',
-    //   auth: false,
-    //   children: [
-    //     {
-    //       title: 'School Board',
-    //       path: '/app/dashboard/schoolboard',
-    //       auth: false
-    //     },
-    //     {
-    //       title: 'Schools',
-    //       path: '/app/dashboard/schools',
-    //       // icon: 'tabler:mail',
-    //       auth: false
-    //     }
-    //   ]
-    // },
-
-    // {
-    //   title: 'School Board',
-    //   path: '/app/dashboard/schoolboard',
-    //   icon: 'tabler:school',
-    //   auth: false
-    // },
-
-    // {
-    //   title: 'Second Page',
-    //   path: '/second-page',
-    //   icon: 'tabler:mail',
-    //   auth: false
-    // },
     {
       path: '/acl',
       action: 'read',

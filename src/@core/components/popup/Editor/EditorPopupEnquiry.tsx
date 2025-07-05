@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import Image from 'next/image';
 import Modal from 'react-bootstrap/Modal';
 import EnquiryForm from 'src/@core/components/popup/Editor/Editorform';
 
@@ -14,7 +13,7 @@ interface Props {
 
 
 
-const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, ...rest }) => {
+const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, }) => {
     const [modalShow, setModalShow] = React.useState(false);
     function onChanges() {
 

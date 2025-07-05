@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import Image from 'next/image'
 import NewsList from '../newsList'
 import Link from 'next/link'
 import axios from 'src/configs/axios'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
-import Spinner from 'src/@core/components/spinner'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
@@ -23,7 +21,7 @@ interface GroupedNewsItems {
     [key: string]: NewsItem[]
 }
 
-const BrowseNewsSec = ({ collegeData, getColleges, categories, activeTab, setActiveTab }) => {
+const BrowseNewsSec = ({ collegeData,categories, activeTab, setActiveTab }) => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
     const [loading, setLoading] = useState(false)

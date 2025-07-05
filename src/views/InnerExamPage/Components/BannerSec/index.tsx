@@ -1,7 +1,5 @@
 import React from 'react'
-import PopularCourses from '../UpcomingExamsSec'
 import Link from 'next/link';
-import Image from 'next/image';
 import { format } from 'date-fns';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import NewsLinkSection from '../NewsLinkSection';
@@ -15,13 +13,23 @@ function BannerSec({ data }) {
         <>
             <section className='collegeBannerCon bg-blue examsBannerCon pt-4 pb-4'>
                 <div className='d-flex justify-content-center w-100 h-100'>
-                    <div className='align-content-center w-100 container'> 
+                    <div className='align-content-center w-100 container'>
                         <div className="row">
                             <div className="col-lg-8 col-md-9 mx-md-auto innerExam">
                                 <div className="card mb-2">
                                     <div className="row g-0 d-flex flex-row">
-                                        <div className="col-md-3 text-center innerClgImg mx-md-0 mx-auto align-content-center">
-                                            <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} width={100} height={100} className='bg-white p-2 rounded img-fluid' alt={data.name} />
+                                        <div className="col-md-2 text-center  mx-md-0 mx-auto d-flex justify-content-center">
+                                            <div className='innerClgImg'>
+                                                <img
+                                                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`}
+                                                    alt={data.name}
+                                                    width="100"
+                                                    height="100"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    className="img-fluid p-2 bg-white rounded"
+                                                />
+                                            </div>
                                         </div>
                                         <div className="col-md-9 d-flex justify-content-center justify-content-md-start align-content-center">
                                             <div className="align-content-center">

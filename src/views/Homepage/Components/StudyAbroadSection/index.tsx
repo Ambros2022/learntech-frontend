@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import MainCarousel from 'src/@core/components/main-carousel';
+import dynamic from 'next/dynamic';
+// import MainCarousel from 'src/@core/components/main-carousel';
+const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
 import axios1 from 'src/configs/axios';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import CountryCarosuel from './CountryCarousel/indes';
+
+// import CountryCarosuel from './CountryCarousel/indes';
+const CountryCarosuel = dynamic(() => import('./CountryCarousel/indes'), { ssr: false });
 import { Spinner } from 'react-bootstrap';
-const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
+const CollegeCard = dynamic(() => import('src/@core/components/college-card-next'), { ssr: false });
 
 const StudyAbroadSection = () => {
   const [activeCountry, setActiveCountry] = useState<number | null>(null);
-  const [showMore, setShowMore] = useState(false); // State to control "Read More"
 
   interface Country {
     id: number;
@@ -83,27 +85,10 @@ const StudyAbroadSection = () => {
     ));
   };
 
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 6
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 6
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  };
+
 
   return (
-    <section className="StudyAbroadCon bg-white" id="animation7" data-aos="fade-up">
+    <section className="StudyAbroadCon bg-white" >
       <div className="container pt-4 pt-md-5">
         <h2 className="fw-bold text-blue text-center">Study Abroad</h2>
         <p className="text-black mt-3">

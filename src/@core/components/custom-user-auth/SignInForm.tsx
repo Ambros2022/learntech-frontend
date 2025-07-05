@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
@@ -7,10 +7,7 @@ import router from 'next/router';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import OtpVerificationForm from './OtpVerificationForm';
 import NewPasswordForm from './NewPasswordForm';
-import GoogleLoginButton from './GoogleLoginButton';
-import LinkedinLoginButton from './LinkedinLoginButton';
-import TwitterLoginButton from './TwitterLoginButton';
-import FacebookLoginButton from './FacebookLoginButton';
+
 
 
 
@@ -53,13 +50,6 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const handleNewPasswordNext = () => {
     setIsOtpVerification(false);
     setIsNewPassword(true);
-  };
-
-  const responseMessage = (response) => {
-    console.log(response);
-  };
-  const errorMessage = (error) => {
-    console.log(error);
   };
 
 
@@ -140,18 +130,7 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
                 </Form>
               )}
             </Formik>
-            {/* <div className="mb-3">
-              <p className="fake-legend"><span>OR</span></p>
-            </div>
-            <div className="text-black mb-3 text-center">
-              <small>Log in with social media</small>
-            </div>
-            <div className="d-flex justify-content-around mb-3 flex-wrap">
-              <GoogleLoginButton/>
-              <LinkedinLoginButton/>
-              <TwitterLoginButton/>
-              <FacebookLoginButton/>
-            </div> */}
+
           </>
         )}
       </div>

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import axios1 from 'src/configs/axios';
@@ -77,7 +76,7 @@ function ExploreSection() {
   }, []);
 
   return (
-    <section className="exploreCon" id="animation6" data-aos="fade-up">
+    <section className="exploreCon" >
       <div className="container  py-4 py-md-5">
         <h2 className="fw-bold text-blue text-center mb-4">
           Discover Colleges, Courses and Exams that Matches with Your Aspirations

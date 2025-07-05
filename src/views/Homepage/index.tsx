@@ -12,7 +12,17 @@ const StudyAbroadSection = dynamic(() => import("./Components/StudyAbroadSection
 const LatestNewsSection = dynamic(() => import("./Components/LatestNewsSection"), { ssr: false });
 const ExpertSection = dynamic(() => import("./Components/ExpertSection"), { ssr: false });
 
-const Work = () => {
+
+interface Banner {
+  image: string;
+  link: string;
+}
+
+interface WorkProps {
+  banners: Banner[];
+}
+
+const Work: React.FC<WorkProps> = ({ banners }) => {
   useEffect(() => {
     AOS.init({
       once: true,
@@ -94,7 +104,7 @@ const Work = () => {
           )}
         </script>
       </Head>
-      <BannerSection />
+      <BannerSection banners={banners} />
       <NewsLinkSection />
       <AnalysisSection />
       <FeaturedCollegeSection />
@@ -105,4 +115,6 @@ const Work = () => {
     </>
   );
 }
+
+
 export default Work;

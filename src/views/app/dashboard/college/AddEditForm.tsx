@@ -12,14 +12,13 @@ import * as yup from 'yup'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
-import Rating from 'react-rating-stars-component';
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { FaTrash } from 'react-icons/fa';
 
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
+import { Box, CardContent, FormControlLabel, FormLabel, MenuItem, RadioGroup, Tab, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
@@ -41,7 +40,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
     const [fileNameslogo, setFileNameslogo] = useState<any>([]);
@@ -372,14 +370,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -387,10 +383,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -428,26 +422,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             formData.append('country_id', data.country_id.id);
             formData.append('state_id', data.state_id.id);
             formData.append('city_id', data.city_id.id);
-            // if (selectedphoto == '') {
 
-            //     toast.error('Please Upload Icon', {
-            //         duration: 2000
-            //     })
-            //     setLoading(false);
-
-            //     return false;
-
-            // }
-            // if (selectedbanner == '') {
-
-            //     toast.error('Please Upload BannerImage', {
-            //         duration: 2000
-            //     })
-            //     setLoading(false);
-
-            //     return false;
-
-            // }
             if (selectedlogo == '') {
 
                 toast.error('Please Upload Logo', {
@@ -476,7 +451,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -485,17 +459,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -521,8 +492,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
@@ -565,7 +534,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
@@ -573,7 +541,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
                 // history.push('/app/products');
@@ -581,7 +548,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
                 toast.error(err.message || "please try again")
 
             }
@@ -635,13 +601,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
             if (response.data.status === 1) {
                 toast.success(response.data.message);
                 setLoading(false);
-                setError('');
                 reset();
                 router.back();
             } else {
                 setLoading(false);
                 toast.error(response.data.message);
-                setError(response.data.message);
             }
         } catch (err) {
             console.error(err);
@@ -1171,7 +1135,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                                 message: "Rating cannot exceed 5"
                                             }
                                         }}
-                           
+
                                         render={({ field: { value, onChange } }) => (
                                             <CustomTextField
                                                 fullWidth
@@ -1197,9 +1161,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("info", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1217,9 +1179,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("course_fees", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1235,9 +1195,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("admissions", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1255,9 +1213,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("placements", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1273,9 +1229,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("rankings", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1291,9 +1245,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("scholarship", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1311,9 +1263,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("hostel", value)} />
-                                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+
                                             </>
                                         )}
                                     />
@@ -1323,17 +1273,19 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
 
                                 <Grid item xs={12} sm={3}>
-                                    <FileUpload
-                                        isAddMode={isAddMode}
-                                        olddata={!isAddMode && olddata.icon ? olddata.icon : ""}
-                                        onFileChange={handleFileChangephoto}
-                                        maxFiles={1}
-                                        maxSize={2000000}
-                                        fileNames={fileNamesphoto}
-                                        label=" Upload Icon"
-                                        acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
-                                        rejectionMessage='Try another file for upload.'
-                                    />
+                                    <Box sx={{ pointerEvents: 'none', opacity: 0.5 }}>
+                                        <FileUpload
+                                            isAddMode={isAddMode}
+                                            olddata={!isAddMode && olddata.icon ? olddata.icon : ""}
+                                            onFileChange={handleFileChangephoto}
+                                            maxFiles={1}
+                                            maxSize={2000000}
+                                            fileNames={fileNamesphoto}
+                                            label="Disabled Not required Upload Icon"
+                                            acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
+                                            rejectionMessage='Try another file for upload.'
+                                        />
+                                    </Box>
                                 </Grid>
 
                                 <Grid item xs={12} sm={3}>
@@ -1345,6 +1297,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                         maxSize={2000000}
                                         fileNames={fileNameslogo}
                                         label=" Upload Logo"
+                                        helpertext="Recommended size: 600 × 450 px (minimum 300 × 225 px)" 
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />
@@ -1360,7 +1313,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                         maxSize={2000000}
                                         fileNames={fileNamesbanner}
                                         label="Upload banner_image"
-                                        helpertext="Estimated Size: 216*124px"
+                                        helpertext="Upload size webp :800×600 px (min 550×412)"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />

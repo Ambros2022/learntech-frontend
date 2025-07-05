@@ -1,8 +1,3 @@
-import Image from 'next/image';
-
-import dynamic from 'next/dynamic'
-
-
 
 
 function LocationSection({ data }) {
@@ -15,9 +10,22 @@ function LocationSection({ data }) {
             <div className="col-md-6 mb-md-0 mb-3 d-flex justify-content-start locatedSec py-5 rounded px-md-5">
               <div className="w-100 card mb-3 bg-lightCard p-3">
                 <div className="row rounded g-0 bg-white">
-                  <div className="col-lg-4 mx-auto text-center locationClgImg">
-                    <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`} className='rounded p-3 clgImg mb-3' width={100} height={100} alt="College Image" />
+
+                  <div className="col-lg-4 mx-auto text-center locationClgImg" role="img" aria-label={data?.name}>
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`}
+                      alt={data?.name || "College Logo"}
+                      width={100}
+                      height={100}
+                      loading="lazy"
+                      decoding="async"
+                      className="clgImg"
+                      // className="clgImg"
+                      style={{ objectFit: "contain", display: "block", margin: "0 auto" }}
+                    />
                   </div>
+
+
                   <div className="col-lg-12 d-flex bg-blue">
                     <div className="card-body align-content-start text-white p-0 mt-2 text-lg-start text-center text-md-center ">
                       <h5 className="card-title fw-bold mb-3 pt-3">{data.name}</h5>

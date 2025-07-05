@@ -4,9 +4,11 @@ import { ReactNode, useEffect } from 'react';
 
 // ** Next Imports
 import Head from 'next/head';
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+
+
 
 // ** Loader Import
 import NProgress from 'nprogress';
@@ -19,13 +21,13 @@ import type { EmotionCache } from '@emotion/cache';
 import themeConfig from 'src/configs/themeConfig';
 
 // ** Fake-DB Import
-import 'src/@fake-db';
+// import 'src/@fake-db';
 
 // ** Third Party Import
-import { Toaster } from 'react-hot-toast';
+// import { Toaster } from 'react-hot-toast';
 
 // ** Component Imports
-import UserLayout from 'src/layouts/UserLayout';
+// import UserLayout from 'src/layouts/UserLayout';
 import ThemeComponent from 'src/@core/theme/ThemeComponent';
 import AuthGuard from 'src/@core/components/auth/AuthGuard';
 import GuestGuard from 'src/@core/components/auth/GuestGuard';
@@ -41,30 +43,30 @@ import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsCo
 import { SessionProvider } from 'next-auth/react'; // Import SessionProvider
 
 // ** Styled Components
-import ReactHotToast from 'src/@core/styles/libs/react-hot-toast';
+// import ReactHotToast from 'src/@core/styles/libs/react-hot-toast';
 
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
-// ** Prismjs Styles
-import 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-tsx';
 
 // ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 import 'src/iconify-bundle/icons-bundle-react';
 
+import 'bootstrap-icons/font/bootstrap-icons.css';
 // ** Global css styles
 import '../../styles/globals.css';
 
+
 // ** Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import dynamic from 'next/dynamic';
+const UserLayout = dynamic(() => import('src/layouts/UserLayout'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
+
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -103,20 +105,28 @@ const Guard = ({ children, authGuard, guestGuard }: GuardProps) => {
   }
 };
 
+
 // ** Configure JSS & ClassName
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  // useEffect(() => {
-  //   import('bootstrap/dist/js/bootstrap.min.js');
-  // }, []);
   useEffect(() => {
     require('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false;
+  const router = useRouter();
+
+  const isAdminRoute = router.pathname.startsWith('/app/dashboard') || router.pathname.startsWith('/admin');
+
   const getLayout =
-    Component.getLayout ?? (page => <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>);
+    Component.getLayout ??
+    (page =>
+      isAdminRoute
+        ? <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>
+        : <>{page}</>);
+  // const getLayout =
+  //   Component.getLayout ?? (page => <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>);
 
   const setConfig = Component.setConfig ?? undefined;
   const authGuard = Component.authGuard ?? true;
@@ -127,69 +137,74 @@ const App = (props: ExtendedAppProps) => {
       <CacheProvider value={emotionCache}>
         <Head>
           <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
-          {/* <meta
-            name='description'
-            content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad.'
-          /> */}
           <meta name='keywords' content='Learntechweb' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
-
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
-
-          <script type="application/ld+json">
-            {JSON.stringify(
-              {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "name": "Learntech Edu Solutions Pvt. Ltd.",
-                "alternateName": "Learntech Edu Solutions",
-                "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
-                "logo": `${process.env.NEXT_PUBLIC_WEB_URL}/images/icons/learntech-logo.png`,
-                "contactPoint": {
-                  "@type": "ContactPoint",
-                  "telephone": "1800 120 8696",
-                  "contactType": "customer service",
-                  "contactOption": "TollFree",
-                  "areaServed": "IN",
-                  "availableLanguage": "en"
-                }
-              }
-            )}
-          </script>
-          <script type="application/ld+json">
-            {JSON.stringify(
-              {
-                "@context": "https://schema.org/",
-                "@type": "WebSite",
-                "name": "Learntech Edu Solutions",
-                "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
-                "potentialAction": {
-                  "@type": "SearchAction",
-                  "target": "{search_term_string}",
-                  "query-input": "required name=search_term_string"
-                }
-              }
-            )}
-          </script>
-
           <meta name="google-site-verification" content="aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA" />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(
+                {
+                  "@context": "https://schema.org",
+                  "@type": "Organization",
+                  "name": "Learntech Edu Solutions Pvt. Ltd.",
+                  "alternateName": "Learntech Edu Solutions",
+                  "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
+                  "logo": `${process.env.NEXT_PUBLIC_WEB_URL}/images/icons/learntech-logo.png`,
+                  "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "1800 120 8696",
+                    "contactType": "customer service",
+                    "contactOption": "TollFree",
+                    "areaServed": "IN",
+                    "availableLanguage": "en"
+                  }
+                }
+              ),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(
+                {
+                  "@context": "https://schema.org/",
+                  "@type": "WebSite",
+                  "name": "Learntech Edu Solutions",
+                  "url": `${process.env.NEXT_PUBLIC_WEB_URL}`,
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "{search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                }
+              ),
+            }}
+          />
+
+
+
+
+
+
         </Head>
+
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
           <AuthProvider>
             <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
               <SettingsConsumer>
                 {({ settings }) => {
                   return (
-                    <GoogleOAuthProvider clientId="605863392131-ftqj61h4djtrt0d0aa0dtjuo5lcbt7km.apps.googleusercontent.com">
-                      <ThemeComponent settings={settings}>
-                        <Guard authGuard={authGuard} guestGuard={guestGuard}>
-                          {getLayout(<Component {...pageProps} />)}
-                        </Guard>
-                        <ReactHotToast>
-                          <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
-                        </ReactHotToast>
-                      </ThemeComponent>
-                    </GoogleOAuthProvider>
+
+                    <ThemeComponent settings={settings}>
+                      <Guard authGuard={authGuard} guestGuard={guestGuard}>
+                        {getLayout(<Component {...pageProps} />)}
+                      </Guard>
+                      {/* <ReactHotToast>
+                        <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
+                      </ReactHotToast> */}
+                    </ThemeComponent>
+
                   );
                 }}
               </SettingsConsumer>
@@ -197,9 +212,42 @@ const App = (props: ExtendedAppProps) => {
           </AuthProvider>
         </SessionProvider>
       </CacheProvider>
-      <SpeedInsights />
-      <Analytics />
-      <Script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></Script>
+
+
+      <Script
+        id="gtm"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-MHML8KVC');
+              `
+        }}
+      />
+
+
+      <Script
+        id="googletagmanager"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-990332405"
+        strategy="afterInteractive"
+      />
+
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-990332405');
+  `}
+      </Script>
+
+      {/* <Script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        strategy="afterInteractive"
+      /> */}
     </>
   );
 };

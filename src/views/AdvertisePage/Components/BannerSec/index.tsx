@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import Image from 'next/image'
-import Link from 'next/link'
-import axios1 from 'src/configs/axios';
+import React from 'react';
 
+import Link from 'next/link'
 
 const BannerSec = () => {
 

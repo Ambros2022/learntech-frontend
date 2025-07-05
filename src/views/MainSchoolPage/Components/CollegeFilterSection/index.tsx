@@ -1,11 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import * as Yup from 'yup';
-import { debounce } from 'lodash'; // Import debounce function from lodash library
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import emailjs from 'emailjs-com';
-import { Modal } from 'react-bootstrap';
-import { toast } from 'react-hot-toast'
-import Image from 'next/image';
+import React, { useCallback, useEffect,  useState } from 'react'
+import debounce from 'lodash.debounce';// Import debounce function from lodash library
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios1 from 'src/configs/axios'
@@ -13,11 +7,6 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import { useAuth } from 'src/hooks/useAuth';
 
-
-interface City {
-    id: number;
-    name: string;
-}
 
 interface College {
     id: number;
@@ -33,7 +22,7 @@ interface College {
 
 }
 
-const CollegeCard = ({ id, slug, name, type, rating, location, state, established, imageUrl }: any) => {
+const CollegeCard = ({ id, slug, name, type, rating, location,  established, imageUrl }: any) => {
     return (
         <div className='col-md-10 col-lg-12 mx-auto mb-3 filtercollge-card '>
             <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
@@ -98,13 +87,9 @@ function CollegeFilterSection() {
 
 
     const router = useRouter();
-    const { city_id } = router.query;
-    // let state_id = 92;
-    // console.log(state_id, "state_id");
     const [colleges, setColleges] = useState<College[]>([]);
     const [total, setTotal] = useState<string>("0");
     const isMountedRef = useIsMountedRef();
-    const [loading, setLoading] = useState<boolean>(false)
     const [visibleCards, setVisibleCards] = useState(7);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<Record<string, string[]>>({});
 
@@ -112,12 +97,9 @@ function CollegeFilterSection() {
     const [states, setStates] = useState<Option[]>([]);
     const [citys, setCitys] = useState<any[]>([]);
     const [streams, setStreams] = useState<any[]>([]);
-    const [courses, setCourses] = useState<any[]>([]);
     const [promoban, setPromoban] = useState<any[]>([]);
 
-    const [selectedOptions, setSelectedOptions] = useState({});
-    const [selectedStateIds, setSelectedStateIds] = useState<string[]>([]);
-    const [selectedCityIds, setSelectedCityIds] = useState<string[]>([]);
+
 
     const [accordionOpen, setAccordionOpen] = useState<{ [groupId: string]: boolean }>({
         state: true,
@@ -214,25 +196,7 @@ function CollegeFilterSection() {
     }, [isMountedRef]);
 
 
-    const getcoursesdata = useCallback(async () => {
-        try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/website/generalcourse/get');
-            if (response.data.status === 1) {
-                const courseData = response.data.data.map((course: any) => ({
-                    label: course.short_name,
-                    value: course.id.toString()
-                }));
-                setCourses(courseData);
-            } else {
-                console.error('Failed to fetch states');
-            }
-        } catch (error) {
-            console.error('Error fetching states:', error);
-        }
-    }, [isMountedRef]);
+  
 
 
     const fetchStatesData = useCallback(async () => {
@@ -294,7 +258,6 @@ function CollegeFilterSection() {
         fetchStatesData();
         getcollegedata();
         getstreamdata();
-        getcoursesdata();
         getPromobanner();
     }, []);
 
@@ -317,18 +280,7 @@ function CollegeFilterSection() {
                 // { label: 'Autonomous', value: 'Autonomous' },
             ]
         },
-        // {
-        //     id: 'courseType',
-        //     label: 'Course Type',
-        //     options: [
-        //         { label: 'UG', value: 'UG' },
-        //         { label: 'PG', value: 'PG' },
-        //         { label: 'Diploma', value: 'Diploma' },
-        //         { label: 'Doctorate', value: 'Doctorate' },
-        //         // { label: 'Default', value: 'Default' },
-        //     ],
-        // },
-        // { id: 'courses', label: 'Courses', options: courses },
+    
     ];
 
 
@@ -418,21 +370,7 @@ function CollegeFilterSection() {
             }
         }));
 
-        // if (groupId === 'state') {
-        //     const updatedStateIds = isChecked
-        //         ? [...selectedStateIds, value]
-        //         : selectedStateIds.filter(id => id !== value);
-
-        //     // handleFilterChange(updatedStateIds.join(','), selectedCityIds.join(','), true);
-        // }
-
-        // if (groupId === 'city') {
-        //     const updatedCityIds = isChecked
-        //         ? [...selectedCityIds, value]
-        //         : selectedCityIds.filter(id => id !== value);
-
-        //     handleFilterChange(selectedStateIds.join(','), updatedCityIds.join(','), false);
-        // }
+      
     };
 
     useEffect(() => {
@@ -531,7 +469,7 @@ function CollegeFilterSection() {
                         type={college.school_type}
                         rating={college.avg_rating}
                         location={college.address}
-                        state={college.state}
+                        // state={college.state}
                         established={college.established}
                         imageUrl={college.banner_image}
                     />
@@ -551,69 +489,6 @@ function CollegeFilterSection() {
     };
 
 
-    const StateButtons: React.FC<{
-        options: Option[];
-        setSelectedCheckboxes: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
-        selectedCheckboxes: Record<string, string[]>;
-    }> =
-        ({ options, setSelectedCheckboxes, selectedCheckboxes }) => {
-
-
-            const handleStateButtonClick = (state: string) => {
-
-                console.log("handleStateButtonClick", state);
-
-                debouncedHandleCheckboxChange("state", state, true);
-                window.scrollTo({ top: 650, behavior: 'smooth' });
-
-                // setCheckboxState(prevState => ({
-                //     ...prevState,
-                //     [groupId]: {
-                //         ...prevState[groupId],
-                //         [value]: isChecked
-                //     }
-                // }));
-                setCheckboxState(prevState => ({
-                    ...prevState,
-                    ["state"]: {
-                        ...prevState["state"],
-                        [state]: true
-                    }
-                }));
-                // setSelectedCheckboxes(prevSelected => {
-                //     const stateSelections = prevSelected.state || [];
-                //     const updatedSelections = stateSelections.includes(state)
-                //         ? stateSelections.filter(s => s !== state)
-                //         : [...stateSelections, state];
-
-                //     const updatedSelected = { ...prevSelected, state: updatedSelections };
-                //     // Call the API with the selected state IDs
-                //     getcollegedata(updatedSelected.state);
-                //     return updatedSelected;
-                // });
-            };
-
-            return (
-                <div className="row bg-skyBlue gx-0 p-3 my-3 mx-2 rounded">
-                    <div className="col-12">
-                        <h6 className="text-black">Filters By Location</h6>
-                        <div className="d-flex flex-wrap">
-                            {options.map((option, index) => (
-                                option.is_top === "1" && (
-                                    <button
-                                        key={index}
-                                        className={`btn text-center m-1 p-2 filterItemBtn ${selectedCheckboxes.state?.includes(option.value) ? 'active' : ''}`}
-                                        onClick={() => handleStateButtonClick(option.value)}
-                                    >
-                                        {option.label}
-                                    </button>
-                                )
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            );
-        };
 
     const MultiSelectOptions: React.FC<{ options: OptionGroup[] }> = ({ options }) => {
         const [searchTexts, setSearchTexts] = useState<Record<string, string>>({});
@@ -622,7 +497,7 @@ function CollegeFilterSection() {
         };
 
         const filteredOptions = (optionGroup: OptionGroup) => {
-            const searchText = searchTexts[optionGroup.id] || '';
+         
             return optionGroup.options.filter(option =>
                 // option.label.toLowerCase().includes(searchText.toLowerCase())
                 option.label

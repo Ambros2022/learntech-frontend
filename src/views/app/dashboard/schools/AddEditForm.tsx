@@ -1,6 +1,6 @@
 
 'use client'
-import { ChangeEvent, FC, forwardRef, SyntheticEvent, useCallback, useEffect, useState } from 'react'
+import {  FC,  SyntheticEvent, useCallback, useEffect, useState } from 'react'
 
 // ** MUI Imports
 import Tab from '@mui/material/Tab'
@@ -9,34 +9,20 @@ import Grid from '@mui/material/Grid'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import TabContext from '@mui/lab/TabContext'
 import MenuItem from '@mui/material/MenuItem'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import InputAdornment from '@mui/material/InputAdornment'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-// ** Third Party Imports
-import DatePicker from 'react-datepicker'
 import CircularProgress from '@mui/material/CircularProgress'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
-
-// ** Types
-// import { DateType } from 'src/types/forms/reactDatepickerTypes'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios1 from 'src/configs/axios'
 import { DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import { Config } from 'src/configs/mainconfig';
-import JoditEditor from 'src/@core/components/html-editor';
-// import { Config } from '../../../configs/mainconfig';
 import toast from 'react-hot-toast'
 import router from 'next/router'
 import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
@@ -49,12 +35,11 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode,  }) => {
     // ** States
     // const { setValue } = useForm();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
     const [amenitiesdata, setAmenitiesdata] = useState([])
     const [leveslsdata, setLeveslsdata] = useState([])
     const [countries, setCountries] = useState([])
@@ -318,14 +303,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -333,10 +316,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -392,7 +373,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -401,17 +381,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -445,7 +422,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
-        formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
@@ -488,7 +464,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
@@ -496,13 +471,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
                 // history.push('/app/products');
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
                 toast.error(err.message || "please try again")
 
             }
@@ -515,9 +488,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         setFormvalue(newValue)
     }
 
-    // const [images, setImages] = useState<ImageListType>([
-    //     { "dataURL": "http://localhost:3000/images/logo.png" }
-    // ]);
+
     const [images, setImages] = useState<ImageListType>(() => {
         if (olddata && olddata.schgallery && Array.isArray(olddata.schgallery)) {
             return olddata.schgallery.map(item => ({ dataURL: Config.API_URL + '/' + item.image }));
@@ -529,7 +500,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const onChangeimages = (
         imageList: ImageListType,
-        addUpdateIndex: number[] | undefined
+
     ) => {
         // data for submit
         // console.log(imageList, addUpdateIndex);
@@ -560,13 +531,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             if (response.data.status === 1) {
                 toast.success(response.data.message);
                 setLoading(false);
-                setError('');
                 reset();
                 router.back();
             } else {
                 setLoading(false);
                 toast.error(response.data.message);
-                setError(response.data.message);
             }
         } catch (err) {
             console.error(err);
@@ -635,35 +604,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         )}
                                     />
                                 </Grid>
-                                {/* <Grid item xs={12} sm={4}>
-                                    <Controller
-                                        name='school_board_id'
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field }) => {
-                                            // console.log(field.value); // Print field value to console
-
-                                            return (
-                                                <CustomAutocomplete
-                                                    fullWidth
-                                                    options={boardsdata}
-                                                    loading={!boardsdata.length}
-                                                    value={field.value}
-                                                    onChange={(event, newValue) => {
-                                                        if (newValue) {
-                                                            field.onChange(newValue);
-                                                        } else {
-                                                            // Handle else condition if needed
-                                                        }
-                                                    }}
-                                                    getOptionLabel={(option: any) => option.name || ''}
-                                                    renderInput={(params: any) => <CustomTextField {...params} error={Boolean(errors.school_board_id)}
-                                                        {...(errors.school_board_id && { helperText: 'This field is required' })} label='Select School Board' />}
-                                                />
-                                            );
-                                        }}
-                                    />
-                                </Grid> */}
+                                
                                 <Grid item xs={12} sm={4}>
                                     <Controller
                                         name="boards"
@@ -1062,7 +1003,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='info'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value,  } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("info", value)} />
@@ -1077,7 +1018,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='admissions_process'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("admissions_process", value)} />
@@ -1092,7 +1033,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='extracurriculars'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value,  } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("extracurriculars", value)} />
@@ -1159,6 +1100,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         maxSize={2000000}
                                         fileNames={fileNamesphoto}
                                         label="Upload icon Image"
+                                        helpertext="Recommended size: 600 × 450 px (minimum 300 × 225 px)" 
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />
@@ -1171,6 +1113,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         maxFiles={1}
                                         maxSize={2000000}
                                         fileNames={fileNamesbanner}
+                                        helpertext="Upload size webp :800×600 px (min 550×412)"
                                         label="Upload Main Banner Image"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
@@ -1407,8 +1350,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                     {({
                                         imageList,
                                         onImageUpload,
-                                        onImageRemoveAll,
-                                        onImageUpdate,
                                         onImageRemove,
                                         isDragging,
                                         dragProps
@@ -1478,16 +1419,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                         </>}
                     </TabPanel>
                 </CardContent>
-                {/* <Divider sx={{ m: '0 !important' }} /> */}
-                {/* <CardActions>
-                    <Button type='submit' sx={{ mr: 2 }} variant='contained'>
-                        Submit
-                    </Button>
-                    <Button type='reset' variant='tonal' color='secondary'>
-                        Reset
-                    </Button>
-                </CardActions> */}
-                {/* </form> */}
+    
             </TabContext>
         </Card>
     )

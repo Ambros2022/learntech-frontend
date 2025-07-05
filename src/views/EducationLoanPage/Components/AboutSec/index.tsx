@@ -18,6 +18,9 @@ const AboutSec = ({ pagedata }) => {
         const truncatedText = pagedata?.top_description.slice(0, maxLength) + '...';
         return (
             <>
+
+
+
                 <div dangerouslySetInnerHTML={{ __html: truncatedText }} />
                 <div className='text-center'>
                     <button
@@ -27,6 +30,7 @@ const AboutSec = ({ pagedata }) => {
                         Read More
                     </button>
                 </div>
+
             </>
         );
     };
@@ -38,8 +42,9 @@ const AboutSec = ({ pagedata }) => {
 
                 </h2>
                 {/* <div dangerouslySetInnerHTML={{ __html: pagedata?.top_description }} /> */}
-
-                {renderDescription()}
+                <div className='texteditior' >
+                    {renderDescription()}
+                </div>
                 {isExpanded && (
                     <div className='text-center'>
                         <button
@@ -51,7 +56,7 @@ const AboutSec = ({ pagedata }) => {
                     </div>
                 )}
             </div>
-        </section>
+        </section >
     )
 }
 

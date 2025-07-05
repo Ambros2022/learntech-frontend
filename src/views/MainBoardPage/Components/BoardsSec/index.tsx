@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import axios from 'src/configs/axios';
+import React from 'react';
 import Link from 'next/link';
 
 const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDisplayCount }) => {
@@ -48,7 +46,15 @@ const BoardsSec = ({ boardItems, activeTab, displayCount, setActiveTab, setDispl
                                                             <div className="row d-flex">
                                                                 <div className="col-lg-4 col-xl-3 align-self-center mb-lg-0 mb-3 d-flex">
                                                                     <div className="innerClgImg text-center align-content-center">
-                                                                        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`} width={100} height={100} alt='clg-card' className='mx-auto img-fluid' />
+                                                                        <img
+                                                                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.logo}`}
+                                                                            alt={item.name}
+                                                                            width="100"
+                                                                            height="100"
+                                                                            loading="lazy"
+                                                                            decoding="async"
+                                                                            className="img-fluid p-2 bg-white rounded"
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-lg-8 col-xl-6 align-content-center">

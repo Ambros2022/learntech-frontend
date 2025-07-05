@@ -2,10 +2,6 @@ import React from 'react';
 import TALKExpertForm from 'src/@core/components/popup/TalkExpertEnqiirySchool';
 
 function ExpertSection() {
-  const handlePhoneChange = (event) => {
-    console.log(event.target.value);
-  };
-
   return (
     <section className='collegeExpertSection bg-blue py-5'>
       <div className="row">

@@ -1,7 +1,6 @@
 
 'use client'
-import { ChangeEvent, FC, forwardRef, SyntheticEvent, useCallback, useEffect, useState } from 'react'
-
+import {  FC, SyntheticEvent,  useState } from 'react'
 // ** MUI Imports
 import Tab from '@mui/material/Tab'
 import Card from '@mui/material/Card'
@@ -9,38 +8,20 @@ import Grid from '@mui/material/Grid'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import TabContext from '@mui/lab/TabContext'
-import MenuItem from '@mui/material/MenuItem'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import InputAdornment from '@mui/material/InputAdornment'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
-import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-// ** Third Party Imports
-import DatePicker from 'react-datepicker'
 import CircularProgress from '@mui/material/CircularProgress'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
-
-// ** Types
-// import { DateType } from 'src/types/forms/reactDatepickerTypes'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios1 from 'src/configs/axios'
-import { DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
+import { DialogActions ,Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 
 import toast from 'react-hot-toast'
 import router from 'next/router'
-import { Config } from 'src/configs/mainconfig'
-// import { ImageListType } from 'react-images-uploading'
-import ImageUploading, { ImageListType } from "react-images-uploading";
-import { FaTrash } from 'react-icons/fa'
 import QuillEditor from 'src/@core/components/html-editor/index';
 import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
 
@@ -50,7 +31,7 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [loading, setLoading] = useState<boolean>(false)
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
@@ -464,13 +445,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='description'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value } }) => (
                                             <>
                                             <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                 onChange={(value) => setValue("description", value)} />
-                                            {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                            //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                            onChange={(value)=>console.log(value)} /> */}
+                                            
                                         </>
                                         )}
                                     />
@@ -483,13 +462,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='top_college'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value } }) => (
                                             <>
                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                     onChange={(value) => setValue("top_college", value)} />
-                                {/* <QuillEditor placeholder='Start Writing...' initialValue={value}
-                                //  onChange={(value)=>  setValue("bottom_description", value)} />
-                                onChange={(value)=>console.log(value)} /> */}
+                        
                             </>
                                         )}
                                     />

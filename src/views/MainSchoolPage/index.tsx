@@ -1,22 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import BannerSection from './Components/BannerSection';
 import TopCollegesSection from './Components/TopCollegesSection';
-import ExpertSection from './Components/ExpertSection';
-import TopFeaturedColleges from './Components/TopFeaturedColleges';
-import CollegeFilterSection from './Components/CollegeFilterSection';
-import BestCollegeSec from './Components/BestCollegeSec';
+// import ExpertSection from './Components/ExpertSection';
+// import TopFeaturedColleges from './Components/TopFeaturedColleges';
+// import CollegeFilterSection from './Components/CollegeFilterSection';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-
+import dynamic from 'next/dynamic';
+const TopFeaturedColleges = dynamic(() => import('./Components/TopFeaturedColleges'), { ssr: false });
+const ExpertSection = dynamic(() => import('./Components/ExpertSection'), { ssr: false });
+const CollegeFilterSection = dynamic(() => import('./Components/CollegeFilterSection'), { ssr: false });
 
 function MainSchoolPage() {
   const router = useRouter()
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>();
-  const [collegePagedata, setCollegePagedata] = useState<any>();
-  const [trendingCourses, setTrendingCourses] = useState([]);
 
   const getPagedata = useCallback(async () => {
     try {
@@ -32,30 +32,14 @@ function MainSchoolPage() {
 
 
 
-  const getTrendingCourses = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/generalcourse/get', {
-        params: {
-          page: 1,
-          size: 8,
-          is_trending: 1
-        }
-      });
-      if (isMountedRef.current) {
-        setTrendingCourses(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
+
 
 
 
 
   useEffect(() => {
     getPagedata();
-    getTrendingCourses();
-  }, [getPagedata, getTrendingCourses,]);
+  }, [getPagedata,]);
   return (
     <>
       <Head>
@@ -67,7 +51,6 @@ function MainSchoolPage() {
       <BannerSection />
       <TopCollegesSection data={pagedata} />
       <CollegeFilterSection />
-      {/* <BestCollegeSec /> */}
       <ExpertSection />
       <TopFeaturedColleges />
     </>

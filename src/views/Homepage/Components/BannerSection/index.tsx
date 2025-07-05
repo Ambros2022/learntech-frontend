@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
@@ -11,48 +11,49 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import dynamic from 'next/dynamic';
-const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'), { ssr: false });
-const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'), { ssr: false });
+const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'));
+const Autocomplete = dynamic(() => import('src/@core/components/mui/autocomplete'));
 import Carousel from 'react-bootstrap/Carousel';
+import Head from 'next/head';
 let cancelToken: any;
 
-const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
+
+
+
 
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
-  contact_number: Yup.string().required("Phone Number is required"),
+  // contact_number: Yup.string().required("Phone Number is required"),
+  contact_number: Yup.string()
+    .required("Phone Number is required")
+    .test(
+      "is-valid-contact",
+      "Enter valid 10 digits Number",
+      function (value) {
+        if (!value) return false;
+        if (value.startsWith("+91-")) {
+          return /^\+91-\d{10}$/.test(value); // Apply strict rule for +91-
+        }
+        return true; // Accept other formats (other country codes)
+      }
+    ),
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),
 });
 
-function BannerSection() {
+const BannerSection = ({ banners }: { banners: any[] }) => {
+
   const router = useRouter();
-  const [banners, setBanners] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-
-  const getbanner = useCallback(async () => {
-    try {
-      const roleparams: any = { page: 1, size: 10000 };
-      const response = await axios.get('api/website/banner/get?promo_banner=Draft', { params: roleparams });
-      setBanners(response.data.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setImagesLoaded(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    getbanner();
-  }, [getbanner]);
 
   const handleSubmit = async (values, { resetForm }) => {
+    alert(JSON.stringify(values.contact_number));
+    return
     try {
       toast.loading('Processing');
       const formData = new FormData();
@@ -112,151 +113,171 @@ function BannerSection() {
   };
 
   return (
-    <section className="bannerCon bg-formClr" id="animation1">
+    <>
+      <Head>
+        <link
+          rel="preload"
+          as="image"
+          href="https://api.learntechww.com/banners/logo1734425264066.webp"
+          imageSrcSet="https://api.learntechww.com/banners/logo1734425264066.webp 1920w"
+          imageSizes="100vw"
+        />
+      </Head>
 
-      {imagesLoaded && banners.length > 0 ? (
-        <Carousel interval={1500} pause="hover" style={{ zIndex: '39' }}>
-          {banners.map((banner, index) => (
-            <Carousel.Item key={index}>
-              <a href={banner.link}>
-                <img
-                  className="d-block w-100"
-                  src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                  alt={`Banner ${index}`}
-                />
+      <section className="bannerCon bg-formClr" >
 
-              </a>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      ) : (
-        <Skeleton height={500} />
-      )}
+        {banners?.length > 0 ? (
+          <Carousel interval={5000} style={{ zIndex: '39' }}>
+            {banners.map((banner, index) => (
+              <Carousel.Item key={index}>
+                <a
+                  href={banner.link}
+                  className="HomebannerLink"
+
+                >
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                    alt={`Banner ${index}`}
+                    fill
+                    priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
+                    style={{ objectFit: 'cover' }}
+                    placeholder="blur"
+                    blurDataURL="/images/placeholder.png"
+                  />
+                </a>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        ) : (
+          <Skeleton height={600} />
+        )}
 
 
 
+        <div className="bannerFormSec">
+          <div className="container-fluid">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6 col-lg-6 mb-5 d-flex"  >
+                  <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
+                    <div className="outlineSec">
+                      <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
+                      <div className="row">
+                        <div className="col-12 position-relative ">
+                          <Autocomplete
+                            open={open}
+                            onClose={() => setOpen(false)}
+                            onInputChange={handleInputChange}
+                            options={searchResults}
+                            getOptionLabel={(option: any) => `${option.name} ${option.short_name}`} // Include both name and short_name
+                            renderOption={(props: any, option: any) => {
+                              const linkMap: { [key: string]: string } = {
+                                collegedata: `/college/${option.id}/${option.slug}`,
+                                schooldata: `/school/${option.id}/${option.slug}`,
+                                examdata: `/exam/${option.id}/${option.slug}`,
+                                coursesdata: `/course/${option?.streamID}/${option?.streamSlug}/${option.slug}`,
 
-      <div className="bannerFormSec">
-        <div className="container-fluid">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 col-lg-6 mb-5 d-flex" id="animation2" >
-                <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
-                  <div className="outlineSec">
-                    <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
-                    <div className="row">
-                      <div className="col-12 position-relative">
-                        <Autocomplete
-                          open={open}
-                          onClose={() => setOpen(false)}
-                          onInputChange={handleInputChange}
-                          options={searchResults}
-                          getOptionLabel={(option: any) => `${option.name} ${option.short_name}`} // Include both name and short_name
-                          renderOption={(props: any, option: any) => {
-                            const linkMap: { [key: string]: string } = {
-                              collegedata: `/college/${option.id}/${option.slug}`,
-                              schooldata: `/school/${option.id}/${option.slug}`,
-                              examdata: `/exam/${option.id}/${option.slug}`,
-                              coursesdata: `/course/${option?.streamID}/${option?.streamSlug}/${option.slug}`,
+                              };
 
-                            };
+                              return (
+                                <li {...props}>
+                                  <Link href={linkMap[option.type] || "#"} style={{ color: "#000", textDecoration: "none", display: "block", width: "100%", height: "100%" }}>
+                                    {option.name}
+                                  </Link>
+                                </li>
+                              );
+                            }}
+                            renderInput={(params) => (
+                              <TextField
+                                {...params}
+                                size="small"
+                                placeholder="Search for colleges, universities, exams & courses"
+                                className="form-control"
+                                InputProps={{
+                                  ...params.InputProps,
+                                  sx: {
+                                    "& .MuiInputBase-input::placeholder": { color: "black" }
+                                  },
+                                  endAdornment: (
+                                    <React.Fragment>
+                                      {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                      {params.InputProps.endAdornment}
+                                      {params.inputProps.value ? (
+                                        <InputAdornment position="end">
+                                          <IconButton
+                                            onClick={() => {
+                                              if (params.inputProps.onChange) {
+                                                params.inputProps.onChange({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
+                                              }
+                                            }}
+                                          >
+                                            <ClearIcon />
+                                          </IconButton>
+                                        </InputAdornment>
+                                      ) : null}
+                                    </React.Fragment>
+                                  )
+                                }}
+                              />
+                            )}
+                          />
 
-                            return (
-                              <li {...props}>
-                                <Link href={linkMap[option.type] || "#"} style={{ color: "#000", textDecoration: "none", display: "block", width: "100%", height: "100%" }}>
-                                  {option.name}
-                                </Link>
-                              </li>
-                            );
-                          }}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              size="small"
-                              placeholder="Search for colleges, universities, exams & courses"
-                              className="form-control"
-                              InputProps={{
-                                ...params.InputProps,
-                                sx: {
-                                  "& .MuiInputBase-input::placeholder": { color: "black" }
-                                },
-                                endAdornment: (
-                                  <React.Fragment>
-                                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                    {params.InputProps.endAdornment}
-                                    {params.inputProps.value ? (
-                                      <InputAdornment position="end">
-                                        <IconButton
-                                          onClick={() => {
-                                            if (params.inputProps.onChange) {
-                                              params.inputProps.onChange({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
-                                            }
-                                          }}
-                                        >
-                                          <ClearIcon />
-                                        </IconButton>
-                                      </InputAdornment>
-                                    ) : null}
-                                  </React.Fragment>
-                                )
-                              }}
-                            />
-                          )}
-                        />
-
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" id="animation3" style={{ zIndex: '41' }}>
-                <div className="searchForm">
-                  <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
-                  <Formik
-                    initialValues={{
-                      name: '',
-                      email: '',
-                      contact_number: '',
-                      current_url: '',
-                      course: '',
-                      location: '',
-                    }}
-                    validationSchema={validationSchema}
-                    onSubmit={handleSubmit}
-                  >
-                    <Form>
-                      <div className="mb-3">
-                        <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
-                        <ErrorMessage name="name" component="div" className="error text-danger" />
-                      </div>
-                      <div className="mb-3">
-                        <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                        <ErrorMessage name="email" component="div" className="error text-danger" />
-                      </div>
-                      <div className="mb-3">
-                        <PhoneInputField name="contact_number" />
-                        <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                      </div>
-                      <div className="mb-3">
-                        <Field type="text" name="course" placeholder="Course in mind" className="form-control" />
-                        <ErrorMessage name="course" component="div" className="error text-danger" />
-                      </div>
-                      <div className="mb-3">
-                        <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                        <ErrorMessage name="location" component="div" className="error text-danger" />
-                      </div>
-                      <div className="d-grid">
-                        <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
-                      </div>
-                    </Form>
-                  </Formik>
+                <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" style={{ zIndex: '41' }}>
+                  <div className="searchForm">
+                    <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
+                    <Formik
+                      initialValues={{
+                        name: '',
+                        email: '',
+                        contact_number: '',
+                        current_url: '',
+                        course: '',
+                        location: '',
+                      }}
+                      validationSchema={validationSchema}
+                      onSubmit={handleSubmit}
+                      validateOnChange={false}
+                    >
+                      <Form>
+                        <div className="mb-3">
+                          <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
+                          <ErrorMessage name="name" component="div" className="error text-danger" />
+                        </div>
+                        <div className="mb-3">
+                          <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
+                          <ErrorMessage name="email" component="div" className="error text-danger" />
+                        </div>
+                        <div className="mb-3">
+                          <PhoneInputField name="contact_number" />
+                          <ErrorMessage name="contact_number" component="div" className="error text-danger" />
+                        </div>
+                        <div className="mb-3">
+                          <Field type="text" name="course" placeholder="Course in mind" className="form-control" />
+                          <ErrorMessage name="course" component="div" className="error text-danger" />
+                        </div>
+                        <div className="mb-3">
+                          <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
+                          <ErrorMessage name="location" component="div" className="error text-danger" />
+                        </div>
+                        <div className="d-grid">
+                          <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
+                        </div>
+                      </Form>
+                    </Formik>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

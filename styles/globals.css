@@ -1,9 +1,10 @@
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  /* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
 
   html,
   body {
     min-height: 100%;
-    font-family: 'Poppins' !important;
+    /* font-family: 'Poppins' !important; */
+
   }
 
   p {
@@ -48,6 +49,80 @@
     margin-bottom: 0px !important;
   }
 
+  .bannerFormSec .col-md-5 {
+    min-height: 400px;
+    /* Or based on your design */
+  }
+
+  .navbar {
+    transition: none !important;
+    min-height: 70px;
+    height: 70px;
+    min-width: auto;
+  }
+
+  .navbar .hlogo {
+    display: inline-block;
+    width: 256px;
+    /* width: 350px; */
+    height: 50px;
+  }
+
+  .collapseNavHeight {
+    background-color: white !important;
+  }
+
+  .HomebannerLink {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 600px;
+    overflow: hidden;
+  }
+
+  .innerClgImg {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .innerClgImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+
+  .locationClgImg {
+    max-width: 100%;
+    width: 100%;
+    /* Centers itself */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .clgImg {
+    width: 200px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    /* Matches Bootstrap's .rounded */
+
+    background-color: #fff;
+    /* optional, good contrast */
+    box-sizing: border-box;
+  }
+
+  .texteditior {
+    min-height: 350px !important;
+  }
 
   .bg-header {
     background-color: rgba(39, 72, 150, 0.1) !important;
@@ -82,6 +157,7 @@
     padding: 10px !important;
     font-size: 17px !important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    min-width: 160px;
   }
 
   .counsellingBtn:hover {
@@ -194,11 +270,12 @@
     position: relative !important;
   }
 
+  /* 
   .carousel-item {
     width: 100%;
     height: 600px;
     overflow: hidden;
-  }
+  } */
 
   .bg-formClr {
     background-color: rgba(0, 0, 0, 0.8) !important;
@@ -220,6 +297,7 @@
     width: 100% !important;
     margin: auto 0 !important;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 15px;
+    min-height: 115px !important;
   }
 
   .w-90 {
@@ -268,6 +346,12 @@
     background-color: white;
     padding: 30px;
     border-radius: 10px;
+    min-height: 430px;
+  }
+
+  .error.text-danger {
+    min-height: 0.8rem;
+    display: block;
   }
 
   .submtBtn {
@@ -495,11 +579,16 @@
     font-size: 15px !important;
   }
 
-  .hideBtnTxt .btn:first-child:active {
-    border: 0px !important;
-    color: transparent !important;
-    background-color: transparent !important;
+  .nav-avt {
+    min-width: 50px !important;
   }
+
+  .nav-cons {
+    min-width: 160px !important;
+
+  }
+
+
 
   .studyAbroadNav a {
     border-radius: 10px !important;
@@ -685,6 +774,7 @@
   .newsLinkSec {
     background-color: #274896;
     color: white;
+    min-height: 58px;
   }
 
   .newsLinkSec li {
@@ -1109,10 +1199,10 @@
     }
 
 
-    .collapseNavHeight {
+    /* .collapseNavHeight {
       height: 280px !important;
       overflow-y: scroll !important;
-    }
+    } */
 
     .footer-logo {
       width: 95% !important;
@@ -1330,10 +1420,10 @@
 
 
 
-    .collapseNavHeight {
+    /* .collapseNavHeight {
       height: 280px !important;
       overflow-y: scroll !important;
-    }
+    } */
 
     .featuredClgCard a {
       background-color: white;
@@ -1442,7 +1532,7 @@
     }
 
     .searchSec {
-      margin: 155px auto 0 auto !important;
+      margin: 40px auto 0 auto !important;
     }
 
     header {
@@ -1725,9 +1815,9 @@
   }
 
   @media (min-width: 320px) and (max-width: 425px) {
-    .bannerCon {
+    /* .bannerCon {
       height: 860px !important;
-    }
+    } */
 
     .carousel-item {
       width: 100%;
@@ -2312,21 +2402,21 @@
     background-color: transparent !important;
   }
 
-  .clgImg {
+  /* .clgImg {
     width: 100%;
     height: 100%;
-  }
+  } */
 
   .bg-gray {
     background-color: #8f8f8f !important;
     width: 100%;
   }
 
-  @media (min-width: 768px) and (max-width: 992px) {
+  /* @media (min-width: 768px) and (max-width: 992px) {
     .clgImg {
       width: 70% !important;
     }
-  }
+  } */
 
   @media (min-width: 320px) and (max-width: 767px) {
     .schlBannerTxt h5 {
@@ -2337,9 +2427,9 @@
       font-size: 17px;
     }
 
-    .clgImg {
+    /* .clgImg {
       width: 50% !important;
-    }
+    } */
   }
 
   .courseSec h1 {
@@ -3141,22 +3231,6 @@
     background-color: #005582 !important;
   }
 
-  .facebook-login-button {
-    background-color: #0077b5 !important;
-    color: #fff !important;
-    border: none !important;
-    padding: 10px 20px !important;
-    border-radius: 5px !important;
-    cursor: pointer !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 1px 0 rgba(0, 0, 0, 0.24) !important;
-  }
-
-  .facebook-login-button:hover {
-    background-color: #005582 !important;
-  }
 
   .linkedin-login-button {
     background-color: #0077b5 !important;
@@ -3277,8 +3351,8 @@
   }
 
   .socialThnks img {
-    width: 28px !important;
-    height: 28px !important;
+    width: 27px !important;
+    height: 27px !important;
   }
 
 
@@ -3287,10 +3361,10 @@
     color: #254692 !important;
   }
 
-  .locatedSec .clgImg img {
+  /* .locatedSec .clgImg img {
     width: 100%;
     height: 100%;
-  }
+  } */
 
   .topNewsImg>img {
     width: 100% !important;
@@ -3504,6 +3578,10 @@
 
   .examBannerCon {
     height: 500px !important;
+  }
+
+  .examBannerCon .popularcourse {
+    height: 150px !important;
   }
 
   .examBannerCon img {
@@ -4035,7 +4113,7 @@
 
   .blogBannerSec {
     height: 300px !important;
-    background-image: url('/images/icons/Banner BG.png') !important;
+    background-image: url('/images/icons/BannerBG.webp') !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
   }
@@ -4323,7 +4401,13 @@
   }
 
   @media(max-width:1023px) {
-    .hideBtnTxt {
+
+
+    .nav-avt {
+      display: none;
+    }
+
+    .nav-cons {
       display: none;
     }
   }
@@ -4536,12 +4620,12 @@
     }
   }
 
-  .innerClgImg {
+  /* .innerClgImg {
     min-height: 130px !important;
     min-width: 130px !important;
     max-height: 130px !important;
     max-width: 130px !important;
-  }
+  } */
 
   .logoBoardImg {
     min-height: 130px !important;
@@ -4550,10 +4634,11 @@
     max-width: 130px !important;
   }
 
+  /* 
   .innerClgImg img {
     object-fit: contain !important;
 
-  }
+  } */
 
   .logoBoardImg img {
     object-fit: contain !important;
@@ -5608,12 +5693,12 @@
       overflow-x: scroll !important;
     }
 
-    .innerClgImg {
+    /* .innerClgImg {
       min-height: 100px !important;
       min-width: 100px !important;
       max-height: 100px !important;
       max-width: 100px !important;
-    }
+    } */
 
     .logoBoardImg {
       min-height: 100px !important;
@@ -6038,6 +6123,26 @@
   }
 
   @media (max-width: 768px) {
+    .HomebannerLink {
+      aspect-ratio: 16 / 6;
+    }
+
+    .navbar .hlogo {
+      display: inline-block;
+      width: 160px;
+      height: 50px;
+      margin-left: 8px !important;
+    }
+
+    .navbar-toggler {
+      margin-right: 8px !important;
+    }
+
+    .texteditior {
+      min-height: 850px !important;
+    }
+
+
     .file-name {
       left: 127px;
       max-width: calc(100% - 100px);
@@ -6283,11 +6388,10 @@
 
 
   @media only screen and (max-width:450px) {
-    .collapseNavHeight {
+    /* .collapseNavHeight {
       height: 100% !important;
-
       overflow-y: scroll !important;
-    }
+    } */
 
     .navbar-nav .nav-item:nth-child(1) {
       background-color: #f2f2f2;
@@ -6391,8 +6495,15 @@
   .state-dropdwon-width {
     width: 230px !important;
   }
-  
-.height-fix-blogs{
-  height: 1105px !important;
-  overflow: scroll !important;
-}
+
+  .height-fix-blogs {
+    height: 1105px !important;
+    overflow: scroll !important;
+  }
+
+
+
+  /* ----bams landing page--- */
+
+
+

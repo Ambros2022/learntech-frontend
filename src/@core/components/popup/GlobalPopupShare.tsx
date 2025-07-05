@@ -2,17 +2,11 @@ import React, { FC } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import {
     FacebookShareButton,
-    FacebookIcon,
     LinkedinShareButton,
-    LinkedinIcon,
     TwitterShareButton,
-    EmailShareButton,
     PinterestShareButton,
-    EmailIcon,
     WhatsappShareButton,
-    WhatsappIcon,
 } from 'next-share'
-import Image from 'next/image';
 import { RWebShare } from "react-web-share";
 interface Props {
     className?: any;
@@ -26,7 +20,7 @@ function MyVerticallyCenteredModal(props) {
     return (
         <Modal
             {...props}
-            // size="lg"
+
             aria-labelledby="contained-modal-title-vcenter"
             centered
             id="share-this"
@@ -70,7 +64,7 @@ function MyVerticallyCenteredModal(props) {
                             <WhatsappShareButton
                                 url={props.pathname}
                                 title={props?.meta_title}
-                             
+
                             >
                                 <button className='btn btn-success text-white'> <i className="bi bi-whatsapp"></i></button>
                             </WhatsappShareButton>
@@ -94,14 +88,11 @@ function MyVerticallyCenteredModal(props) {
     );
 }
 
-const GlobalPopupShare: FC<Props> = ({ className, title, pathname, logourl, ...rest }) => {
+const GlobalPopupShare: FC<Props> = ({  title, pathname, logourl }) => {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
-            {/* <a className="share-this" onClick={() => setModalShow(true)}><i className="bi bi-share-fill"></i></a> */}
-            {/* <a onClick={() => setModalShow(true)} className={className ? className : 'active_bt'}>
-                {title ? title : 'Apply Now'}
-            </a> */}
+
             <a onClick={() => setModalShow(true)} style={{ cursor: "pointer" }}>
                 <span className='share-icon'>
                     <img src='/images/icons/icon-share.png' width={35} height={35} style={{

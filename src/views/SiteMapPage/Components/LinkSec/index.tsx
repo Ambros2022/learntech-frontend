@@ -195,7 +195,7 @@ const LinkSec = () => {
                                             <div key={blog.id} className="col-md-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/blog/${blog.slug}`} className='text-black'>{blog.name}</Link>
+                                                        <Link href={`/blog/${blog.id}/${blog.slug}`} className='text-black'>{blog.name}</Link>
                                                     </li>
                                                 </ul>
                                             </div>

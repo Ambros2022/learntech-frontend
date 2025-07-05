@@ -1,13 +1,7 @@
-import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 
 function FaqSec({ data }) {
-  const [activeIndex, setActiveIndex] = useState(null);
-
-  const handleAccordionClick = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
-
+ 
   return (
     <section className='bg-white faqSec pb-3'>
       <div className="container">
@@ -21,6 +15,7 @@ function FaqSec({ data }) {
                 height={500}
                 className='faqImage img-fluid'
                 alt='faq-img'
+                loading='lazy'
               />
             </div>
           </div>

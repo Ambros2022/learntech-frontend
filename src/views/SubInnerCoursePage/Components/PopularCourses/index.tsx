@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import axios1 from 'src/configs/axios'
 import Link from 'next/link';
-import Image from 'next/image';
 import CoursesCraousel from './CoursesCraousel';
 
 // Define a type for the course items

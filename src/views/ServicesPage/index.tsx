@@ -38,7 +38,7 @@ const ServicesPage = () => {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
       <BannerSec />
-      <StudentsText data={pagedata} />
+      <StudentsText  />
       <ServicesSec />
     </>
   )

@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import Image from 'next/image';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import axios from 'src/configs/axios';
-import test from 'node:test';
 
 // Define the interface for a testimonial
 interface Testimonial {
@@ -119,7 +117,7 @@ const TestimonialSec = () => {
                                             <div className="row d-flex">
                                                 <div className="col-md-3 col-lg-2 col-xl-2 align-content-center">
                                                     <div className='testimonalImg'>
-                                                        <img src={'/images/icons/userImage.jpg'} className='mx-auto' width={50} height={50} alt='testimonial-img' />
+                                                        <img src={'/images/icons/userImage.webp'} className='mx-auto' width={50} height={50} alt='testimonial-img' loading="lazy" />
                                                     </div>
                                                 </div>
                                                 <div className="col-md-9 col-lg-10 col-xl-10 align-content-center">

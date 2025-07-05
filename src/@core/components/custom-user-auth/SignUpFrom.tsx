@@ -7,10 +7,7 @@ import toast from 'react-hot-toast'
 import Link from 'next/link';
 import axios1 from 'src/configs/axios'
 import router from 'next/router';
-import GoogleLoginButton from './GoogleLoginButton';
-import LinkedinLoginButton from './LinkedinLoginButton';
-import TwitterLoginButton from './TwitterLoginButton';
-import FacebookLoginButton from './FacebookLoginButton';
+
 interface FormValues {
   name: string;
   email: string;
@@ -34,15 +31,6 @@ const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
-
-  const handleSuccess = () => {
-    console.log('sucess');
-  };
-
-  const handleFailure = () => {
-    console.error('error:');
-  };
-
 
   return (
     <div className="container mt-3">
@@ -170,28 +158,11 @@ const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
           </Form>
         )}
       </Formik>
-      {/* <div className="mb-3">
-        <p className="fake-legend"><span>OR</span>
-        </p>
-      </div> */}
-      {/* <div className='text-black mb-3 text-center'>
-        <small>Sign up with social media</small>
-      </div> */}
+
       <div className="d-flex justify-content-between mb-3 flex-wrap">
-        {/* <GoogleLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
-        <FacebookLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
-        <LinkedInLoginButton onSuccess={handleSuccess} onFailure={handleFailure} />
-        <TwitterLoginButton onSuccess={handleSuccess} onFailure={handleFailure} /> */}
+
       </div>
-      {/* <div className='text-black mb-3 text-center'>
-        <small>Already have an account? <span className='text-blue fw-bold'>Log In</span></small>
-      </div>
-      <div className="d-flex justify-content-around mb-3 flex-wrap">
-        <GoogleLoginButton/>
-        <LinkedinLoginButton />
-        <TwitterLoginButton/>
-        <FacebookLoginButton/>
-      </div> */}
+
     </div >
   );
 };

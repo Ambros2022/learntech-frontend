@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -6,7 +5,7 @@ const BannerSec = () => {
   return (
     <>
       <section className='TermCon w-100 position-relative'>
-        <img src='/images/icons/Banner BG.png' height={300} width={1400} alt='banner-img' />
+        <img src='/images/icons/BannerBG.webp' height={300} width={1400} alt='banner-img' />
         <div className="position-absolute h-100 w-100" style={{ top: '0px' }}>
           <div className="container h-100">
             <div className="d-flex justify-content-center h-100">

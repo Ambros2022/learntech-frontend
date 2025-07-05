@@ -46,7 +46,7 @@ const Carousel3 = ({ items }) => {
 
             autoPlay
             autoPlaySpeed={2000}
-            ssr  // SSR true for server-side rendering
+            ssr 
             responsive={responsive}
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup />}

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
@@ -157,7 +157,7 @@ function OverviewSection({ data, colleges, exams }) {
                     className="col-12 cardConBrdr p-3 mb-5 text-center overflow-y-auto bg-skyBlue"
                     style={{ maxHeight: 'calc(6 * 150px)' }}
                   >
-                    {colleges.map((val, ind) => (
+                    {colleges.map((val) => (
                       <Link key={val.id} href={`/college/${val.id}/${val.slug}`}>
                         <div className="card p-3 mb-3 d-flex flex-row bg-skyBlue hover-card">
                           <div className="row d-flex">

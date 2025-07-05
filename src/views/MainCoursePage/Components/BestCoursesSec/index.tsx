@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function BestCoursesSec() {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
+ 
   return (
     <>
       <section className='bg-white py-3'>

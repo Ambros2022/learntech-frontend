@@ -3,7 +3,7 @@ import axios1 from 'src/configs/axios'
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
-const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
+const CollegeCard = dynamic(() => import('src/@core/components/college-card-next'), { ssr: false });
 function FeaturedCollegeSection() {
   const [colleges, setColleges] = useState<any[]>([]);
 
@@ -33,7 +33,7 @@ function FeaturedCollegeSection() {
 
 
   return (
-    <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
+    <section className="FeaturedClgCon bg-white">
       <div className="container pt-4 pt-md-5  position-relative">
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">Featured Colleges</h2>
         <MainCarousel items={colleges.map(college => (

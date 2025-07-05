@@ -6,7 +6,6 @@ import axios1 from 'axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
@@ -44,7 +43,7 @@ const BannerSec = () => {
                 params: { searchfrom: 'name', searchtext: value },
             });
 
-            const suggestions = response.data.data.map((item: { id: number; name: string,slug:string }) => ({
+            const suggestions = response.data.data.map((item: { id: number; name: string, slug: string }) => ({
                 name: item.name,
                 slug: item.slug,
                 id: item.id,
@@ -78,7 +77,7 @@ const BannerSec = () => {
     return (
         <>
             <section className='position-relative boardSec'>
-                <img src='/images/icons/Banner BG.png' height={300} width={1400} alt='banner-img' />
+                <img src='/images/icons/BannerBG.webp' height={300} width={1400} alt='banner-img' />
                 <div className='position-absolute w-100 h-100' style={{ top: '0px' }}>
                     <div className="container h-100">
                         <div className="d-flex justify-content-center h-100">

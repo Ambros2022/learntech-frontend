@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import React from 'react'
 
 const StepSection = () => {
@@ -10,7 +9,7 @@ const StepSection = () => {
                     <div className="row justify-content-center align-items-baseline">
 
                         <div className='rounded col-12 col-md-8 custom-edu-loan' >
-                            <img src='/images/icons/Filling_up_of_Application_Form.jpg' className='rounded img-fluid' width={500} height={500} alt='filling-up-of-application-form' />
+                            <img src='/images/icons/Filling_up_of_Application_Form.jpg' className='rounded img-fluid' width={500} height={500} alt='filling-up-of-application-form' loading='lazy' />
                             <p className='fw-bold text-black my-3 mb-0 mb-md-3 text-center'>Fill out the Student Loan Application Form</p>
                         </div>
                         <div className='col-12 col-md-2'>
@@ -24,7 +23,7 @@ const StepSection = () => {
                     <div className="row justify-content-center align-items-baseline">
 
                         <div className='rounded col-12 col-md-8 custom-edu-loan' >
-                            <img src='/images/icons/Document_Verification_Interview.jpg' className='rounded img-fluid' width={500} height={500} alt='document-verification-interview' />
+                            <img src='/images/icons/Document_Verification_Interview.jpg' className='rounded img-fluid' width={500} height={500} alt='document-verification-interview' loading='lazy' />
                             <p className='fw-bold text-black my-3 mb-0 mb-md-3 text-center'>Submit the Required Documents   </p>
                         </div>
                         <div className='col-12 col-md-2'>
@@ -37,7 +36,7 @@ const StepSection = () => {
                     <div className="row justify-content-center align-items-baseline">
 
                         <div className='rounded col-12 col-md-8 custom-edu-loan' >
-                            <img src='/images/icons/Loan_Approval.jpg' className='rounded img-fluid' width={500} height={500} alt='loan-approval' />
+                            <img src='/images/icons/Loan_Approval.jpg' className='rounded img-fluid' width={500} height={500} alt='loan-approval' loading='lazy'  />
                             <p className='fw-bold text-black my-3 mb-0 mb-md-3 text-center'>Application Review by the Bank</p>
                         </div>
                         <div className='col-12 col-md-2'>
@@ -50,7 +49,7 @@ const StepSection = () => {
                     <div className="row justify-content-center align-items-baseline">
 
                         <div className='rounded col-12 col-md-8 custom-edu-loan' >
-                            <img src='/images/icons/Loan_Disbursal.jpg' className='rounded img-fluid' width={500} height={500} alt='loan-disbursal' />
+                            <img src='/images/icons/Loan_Disbursal.jpg' className='rounded img-fluid' width={500} height={500} alt='loan-disbursal' loading='lazy'  />
                             <p className='fw-bold text-black my-3 mb-0 mb-md-3 text-center'>Pay the Loan to your Educational Institute</p>
                         </div>
                         <div className='col-12 col-md-2'>

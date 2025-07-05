@@ -3,18 +3,14 @@ const path = require('path')
 
 /** @type {import('next').NextConfig} */
 module.exports = {
-  trailingSlash: true,
-  reactStrictMode: false,
+  trailingSlash: false, // ← IMPORTANT
+  skipTrailingSlashRedirect: true, // ← THIS DISABLES 308 REDIRECTS
   images: {
-    domains: ['localhost', 'preprod.keralastudy.com', '3.6.46.89', 'api.learntechww.com'],
+    domains: ['api.learntechww.com', 'learntechww.com'],
   },
-  webpack: config => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
-    }
-
-    return config
+  swcMinify: true,
+  experimental: {
+    optimizeCss: true,
   },
   async headers() {
     return [
@@ -30,44 +26,5 @@ module.exports = {
       }
     ];
   },
-  // Remove the redirects since middleware will handle them
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/home',
-  //       destination: '/colleges',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/study-in-india',
-  //       destination: '/colleges',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/study-mbbs-abroad',
-  //       destination: '/mbbs-abroad',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/medical-admission',
-  //       destination: '/meds',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/copyright',
-  //       destination: '/terms-and-conditions',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/ayurvedic-course',
-  //       destination: '/course/7/ayurveda',
-  //       permanent: true,
-  //     },
-  //     {
-  //       source: '/meds-college',
-  //       destination: '/colleges',
-  //       permanent: true,
-  //     },
-  //   ]
-  // },
+
 }

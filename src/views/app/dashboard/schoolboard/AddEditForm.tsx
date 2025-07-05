@@ -1,13 +1,7 @@
 
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
+import {  useState, useEffect, useCallback } from 'react'
 import CustomInput from 'src/@core/components/pickersCoustomInput/index'
-
-import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
@@ -25,13 +19,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 import type { FC, SyntheticEvent } from 'react';
-import { Alert, CardContent, FormLabel, FormControlLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
+import { CardContent, FormLabel, FormControlLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete';
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 import QuillEditor from 'src/@core/components/html-editor/index';
-import { Config } from 'src/configs/mainconfig'
-import { ImageListType } from 'react-images-uploading'
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
@@ -47,13 +39,12 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
     const router = useRouter();
     const [formvalue, setFormvalue] = useState<string>('basic-info')
     const [recoginationsdata, setRecoginationsdata] = useState([])
 
     const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
     const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
     const [selectedphoto, setSelectedphoto] = useState('');
     const [countries, setCountries] = useState([])
@@ -107,9 +98,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             .string()
             .trim()
             .required(),
-        // country_id: yup.object().required("This field is required"),
-        // state_id: yup.object().required("This field is required"),
-        // city_id: yup.object().required("This field is required"),
+
 
     })
     const defaultValues = {
@@ -178,7 +167,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('short_name', data.short_name);
             formData.append('gender', data.gender);
             formData.append('board_type', data.board_type);
-            if(data.avg_rating){
+            if (data.avg_rating) {
                 formData.append('avg_rating', data.avg_rating);
             }
             formData.append('listing_order', data.listing_order);
@@ -205,14 +194,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
 
             } catch (err: any) {
@@ -220,10 +207,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -247,10 +232,10 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             formData.append('short_name', data.short_name);
             formData.append('gender', data.gender);
             formData.append('board_type', data.board_type);
-            if(data.avg_rating){
+            if (data.avg_rating) {
                 formData.append('avg_rating', data.avg_rating);
             }
-           
+
             formData.append('listing_order', data.listing_order);
             formData.append('established', data.established);
             formData.append('result_date', data.result_date);
@@ -288,7 +273,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.push('./');
 
@@ -297,17 +281,14 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 else {
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
                 if (err.errors && err.errors.length > 0) {
                     const errorMessage = err.errors[0].msg;
-                    setError(errorMessage || "Please try again");
                     toast.error(errorMessage || "Please try again");
                 } else {
-                    setError(err.message || "Please try again");
                     toast.error(err.message || "Please try again");
                 }
 
@@ -426,7 +407,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     const {
         control: faqcontrol,
         handleSubmit: faqhandleSubmit,
-        formState: { errors: faqerrors }
     } = useForm<any>({
         defaultValues: faqdefaultValues,
         mode: 'onChange',
@@ -469,7 +449,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                 if (response.data.status == 1) {
                     toast.success(response.data.message)
                     setLoading(false)
-                    setError('')
                     reset();
                     router.back();
                 }
@@ -477,13 +456,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     setLoading(false)
                     toast.error(response.data.message)
-                    setError(response.data.message)
                 }
                 // history.push('/app/products');
             } catch (err: any) {
                 console.error(err);
                 setLoading(false)
-                setError(err.message)
                 toast.error(err.message || "please try again")
 
             }
@@ -496,62 +473,11 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         setFormvalue(newValue)
     }
 
-    const [images, setImages] = useState<ImageListType>(() => {
-        if (olddata && olddata.clggallery && Array.isArray(olddata.clggallery)) {
-            return olddata.clggallery.map(item => ({ dataURL: Config.API_URL + '/' + item.image }));
-        } else {
-            return [];
-        }
-    });
-    const maxNumber = 69;
-
-    const onChangeimages = (
-        imageList: ImageListType,
-        addUpdateIndex: number[] | undefined
-    ) => {
-        // data for submit
-        // console.log(imageList, addUpdateIndex);
-        setImages(imageList);
-    };
+ 
 
 
-    const GalleryImage = async () => {
-        // console.log(images, "imageLists");
-        try {
-            const formData = new FormData();
-            formData.append('id', olddata.id);
 
-            let oldimages: any = [];
-            images.forEach((image, index) => {
-                console.log(image);
-                if (image.file) {
-                    formData.append(`image${index}`, image.file);
-                } else {
-                    oldimages.push(image);
-                }
-            });
-            // formData.append("oldimages", oldimages);
-            formData.append("oldimages", JSON.stringify(oldimages));
 
-            const url = '/api/admin/college/updategallery';
-            const response = await axios1.post(url, formData);
-            if (response.data.status === 1) {
-                toast.success(response.data.message);
-                setLoading(false);
-                setError('');
-                reset();
-                router.back();
-            } else {
-                setLoading(false);
-                toast.error(response.data.message);
-                setError(response.data.message);
-            }
-        } catch (err) {
-            console.error(err);
-            setLoading(false);
-
-        }
-    }
 
 
 
@@ -1002,7 +928,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='info'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value,  } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("info", value)} />
@@ -1018,7 +944,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='time_table'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value,  } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("time_table", value)} />
@@ -1034,7 +960,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='reg_form'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value,  } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("reg_form", value)} />
@@ -1049,7 +975,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='syllabus'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value,  } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("syllabus", value)} />
@@ -1064,7 +990,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='results'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value,  } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("results", value)} />
@@ -1079,7 +1005,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         name='sample_paper'
                                         control={control}
                                         rules={{ required: true }}
-                                        render={({ field: { value, onChange } }) => (
+                                        render={({ field: { value,  } }) => (
                                             <>
                                                 <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                                     onChange={(value) => setValue("sample_paper", value)} />
@@ -1100,6 +1026,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
                                         maxSize={2000000}
                                         fileNames={fileNamesphoto}
                                         label="Upload logo"
+                                        helpertext="Recommended size: 600 × 450 px (minimum 300 × 225 px)"
                                         acceptedFormats={['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.pdf']}
                                         rejectionMessage='Try another file for upload.'
                                     />
@@ -1338,99 +1265,9 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     </TabPanel>
 
-                    {/* <TabPanel sx={{ p: 0 }} value='social-links'>
-                    {isAddMode ? <> <h6>Please add College First.</h6> </> : <>
-                            <div className="App">
-                                <ImageUploading
-                                    multiple
-                                    value={images}
-                                    onChange={onChangeimages}
-                                    maxNumber={maxNumber}
-                                >
-                                    {({
-                                        imageList,
-                                        onImageUpload,
-                                        onImageRemoveAll,
-                                        onImageUpdate,
-                                        onImageRemove,
-                                        isDragging,
-                                        dragProps
-                                    }) => (
-                                       
-                                        <div className="upload__image-wrapper">
-                                            <button
-                                                style={isDragging ? { color: "red" } : undefined}
-                                                onClick={onImageUpload}
-                                                {...dragProps}
-                                            >
-                                                Click or Drop here
-                                            </button>
-                                            &nbsp;
-                                            
-                                            <div className="container pt-3 pb-3">
-                                                <div className="row">
-                                                    {imageList.map((image, index) => (
-
-
-                                                        <div className="col-sm-6 col-md-4 col-lg-3">
-                                                            <div className="image-item ">
-                                                               
-                                                                <img
-                                                                    src={image.dataURL}
-                                                                    style={{ width: '100%', height: '100px', maxWidth: '200px', maxHeight: '500px' }}
-                                                                    className="rounded"
-                                                                    alt=""
-                                                                />
-
-                                                                <div className="image-item__btn-wrapper d-flex justify-content-between align-items-center mt-2">
-                                                                  
-                                                                    <button className="btn btn-danger btn-block" onClick={() => onImageRemove(index)}><FaTrash /></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-
-                                                    ))}
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    )}
-                                </ImageUploading>
-
-
-
-                                {loading ? (
-                                    <CircularProgress
-                                        sx={{
-                                            color: 'common.white',
-                                            width: '20px !important',
-                                            height: '20px !important',
-                                            mr: theme => theme.spacing(2)
-                                        }}
-                                    />
-                                ) : <Button variant='contained' type='submit' sx={{ mr: 1, mt: 2 }} onClick={() => GalleryImage()}>
-                                    Update                                </Button>}
-                            </div>
-
-
-
-                        </>}
-                    </TabPanel> */}
+                   
                 </CardContent>
-                {/* <Divider sx={{ m: '0 !important' }} /> */}
-                {/* <CardActions>
-                    <Button type='submit' sx={{ mr: 2 }} variant='contained'>
-                        Submit
-                    </Button>
-                    <Button type='reset' variant='tonal' color='secondary'>
-                        Reset
-                    </Button>
-                </CardActions> */}
-                {/* </form> */}
+                
             </TabContext>
         </Card>
     )

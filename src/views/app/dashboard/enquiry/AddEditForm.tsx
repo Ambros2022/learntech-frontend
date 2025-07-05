@@ -1,33 +1,14 @@
 
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
+import { useState } from 'react'
 import Grid from '@mui/material/Grid'
-import Radio from '@mui/material/Radio'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import { useRouter } from 'next/router';
-// ** Third Party Imports
-import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
-import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
-import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
-
-
 import type { FC } from 'react';
-import { Alert, FormControlLabel, FormLabel, MenuItem, RadioGroup } from '@mui/material'
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
-import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import { Alert, } from '@mui/material'
+
 
 
 
@@ -36,15 +17,8 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
-    const router = useRouter();
-    const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState("")
-    const [fileNamesphoto, setFileNamesphoto] = useState<any>([]);
-    const [selectedphoto, setSelectedphoto] = useState('');
-    const [college, setCollege] = useState([]);
-    const [generalcollege, setGeneralcollege] = useState([]);
-    const isMountedRef = useIsMountedRef();
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
+    const [error] = useState("")
 
     const schema: any = yup.object().shape({
 
@@ -52,16 +26,16 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
     })
     const formatDateTime = (date) =>
         date
-          ? new Date(date).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              second: '2-digit',
-              hour12: true, // Optional: for 12-hour format (AM/PM)
+            ? new Date(date).toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true, // Optional: for 12-hour format (AM/PM)
             })
-          : 'N/A';
+            : 'N/A';
     const defaultValues = {
         name: isAddMode ? '' : olddata.name,
         email: isAddMode ? '' : olddata.email,
@@ -77,8 +51,6 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
     const {
         control,
-        handleSubmit,
-        reset,
         formState: { errors }
     } = useForm<any>({
         defaultValues,
@@ -86,54 +58,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         resolver: yupResolver(schema)
     })
 
-    // const onSubmit = async (data: any) => {
 
-    //     if (!isAddMode && olddata.id) {
-    //         let updateid = olddata.id;
-    //         setLoading(true)
-    //         let url = 'api/admin/courses/update';
-    //         const formData = new FormData();
-    //         formData.append('id', updateid);
-    //         formData.append('current_url', data.current_url);
-    //         formData.append('name', data.name);
-    //         formData.append('email', data.email);
-    //         formData.append('contact_number', data.contact_number);
-    //         formData.append('location', data.location);
-    //         formData.append('course_in_mind', data.course_in_mind);
-    //         formData.append('college_name', data.college_name);
-    //         formData.append('school_name', data.school_name);
-    //         formData.append('description', data.description);
-
-    //         try {
-    //             let response = await axios1.post(url, formData)
-    //             if (response.data.status == 1) {
-    //                 toast.success(response.data.message)
-    //                 setLoading(false)
-    //                 setError('')
-    //                 reset();
-    //                 router.back();
-    //             }
-    //             else {
-    //                 setLoading(false)
-    //                 toast.error(response.data.message)
-    //                 setError(response.data.message)
-    //             }
-
-    //         } catch (err: any) {
-
-    //             setLoading(false)
-    //             if (err.errors && err.errors.length > 0) {
-    //                 const errorMessage = err.errors[0].msg;
-    //                 setError(errorMessage || "Please try again");
-    //                 toast.error(errorMessage || "Please try again");
-    //             } else {
-    //                 setError(err.message || "Please try again");
-    //                 toast.error(err.message || "Please try again");
-    //             }
-
-    //         }
-    //     } 
-    // }
 
     return (
         <>

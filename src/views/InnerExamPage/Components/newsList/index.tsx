@@ -1,5 +1,4 @@
 import React from 'react';
-import NewsCarosuel from '../NewsCarosuel';
 import Link from 'next/link';
 
 // NewsItem component

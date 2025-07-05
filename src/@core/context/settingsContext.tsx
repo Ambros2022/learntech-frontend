@@ -15,7 +15,7 @@ export type Settings = {
   mode: Mode
   appBar?: AppBar
   footer?: Footer
-  navHidden?: boolean // navigation menu
+  navHidden?: boolean 
   appBarBlur: boolean
   direction: Direction
   navCollapsed: boolean

@@ -1,89 +1,31 @@
 // ** React Imports
 import { useEffect, useState, useCallback, ChangeEvent } from 'react'
-// ** MUI Imports
-
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
-import { DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
 import axios1 from 'src/configs/axios'
-// ** Context
-import { useAuth } from 'src/hooks/useAuth'
-import { useParams } from "react-router-dom";
-// ** Custom Components
-import CustomChip from 'src/@core/components/mui/chip'
-import CustomAvatar from 'src/@core/components/mui/avatar'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
-// ** Types Imports
-import { ThemeColor } from 'src/@core/layouts/types'
-// import { DataGridRowType } from 'src/@fake-db/types'
-// ** Utils Import
-import { getInitials } from 'src/@core/utils/get-initials'
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Menu, MenuItem } from '@mui/material'
-import IconButton from '@mui/material/IconButton'
-import { GridToolbarExport } from '@mui/x-data-grid'
-// ** Custom Component Import
+import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, MenuItem } from '@mui/material'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import NotAuthorized from 'src/pages/401'
-// ** React Imports
-import { useContext } from 'react'
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-// ** Icon Imports
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
 import Fab from '@mui/material/Fab'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import axios from 'axios'
-import Add from '../../../../../views/app/dashboard/locations/countries/AddEditForm'
-
-interface StatusObj {
-  [key: number]: {
-    title: string
-    color: ThemeColor
-  }
-}
 
 let cancelToken: any;
 
 type SortType = 'asc' | 'desc' | undefined | null
 
 // ** renders client column
-const renderClient = (params: GridRenderCellParams) => {
-  const { row } = params
-  const stateNum = Math.floor(Math.random() * 6)
-  const states = ['success', 'error', 'warning', 'info', 'primary', 'secondary']
-  const color = states[stateNum]
-  return (
-    <CustomAvatar
-      skin='light'
-      color={color as ThemeColor}
-      sx={{ mr: 3, fontSize: '.8rem', width: '1.875rem', height: '1.875rem' }}
-    >
-      {getInitials(row.name ? row.name : 'John Doe')}
-    </CustomAvatar>
-  )
-}
 
-const statusObj: StatusObj = {
-  1: { title: 'current', color: 'primary' },
-  2: { title: 'professional', color: 'success' },
-  3: { title: 'rejected', color: 'error' },
-  4: { title: 'resigned', color: 'warning' },
-  5: { title: 'applied', color: 'info' }
-}
+
 
 const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: () => void }) => {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const [show, setShow] = useState<boolean>(false)
-  const ability = useContext(AbilityContext)
-  const handleRowOptionsClose = () => {
-    setShow(true);
-  }
 
   const handleDelete = () => {
     setOpen(true);
@@ -163,12 +105,6 @@ const RowOptions = ({ id, onReloadPage }: { id: number | string, onReloadPage: (
   )
 }
 
-interface Props {
-  value: string
-  clearSearch: () => void
-  onChange: (e: ChangeEvent) => void
-}
-
 type DataGridRowType = {
   id: number
   username: string
@@ -182,7 +118,7 @@ const SecondPage = () => {
   const [states, setStates] = useState([]);
   const [state_id, setState_id] = useState('')
   const [reloadpage, setReloadpage] = useState("0");
-  const [city_id, setcity_id] = useState('')
+
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0)
   const [size, setSize] = useState<number>(10)
@@ -190,11 +126,10 @@ const SecondPage = () => {
   const [orderby, setOrderby] = useState<SortType>('asc')
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchtext, setSearchtext] = useState<string>('')
-  const [searchfrom, setSearchfrom] = useState<any>('name')
+  const [searchfrom] = useState<any>('name')
   const [fieldname, setFieldname] = useState<string>('name')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
   const isMountedRef = useIsMountedRef();
-  const ability = useContext(AbilityContext)
   const params: any = {}
 
   params['page'] = 1;
@@ -202,31 +137,31 @@ const SecondPage = () => {
 
 
 
-    //get all states
-    const getstates = useCallback(async () => {
-      try {
-        const roleparams: any = {};
-        roleparams['size'] = 10000;
-        const response = await axios1.get('api/admin/state/get/', { params: roleparams });
-  
-        setStates(response.data.data);
-  
-      } catch (err) {
-        console.error(err);
-      }
-    }, [isMountedRef]);
-  
-  
-    useEffect(() => {
-  
-      getstates();
-      // getcourses();
-  
-    }, [getstates]);
+  //get all states
+  const getstates = useCallback(async () => {
+    try {
+      const roleparams: any = {};
+      roleparams['size'] = 10000;
+      const response = await axios1.get('api/admin/state/get/', { params: roleparams });
 
-    const handleReloadPage = () => {
-      setReloadpage((prev) => (prev === "0" ? "1" : "0"));
-    };
+      setStates(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+
+  useEffect(() => {
+
+    getstates();
+    // getcourses();
+
+  }, [getstates]);
+
+  const handleReloadPage = () => {
+    setReloadpage((prev) => (prev === "0" ? "1" : "0"));
+  };
 
   let columns: GridColDef[] = [
 
@@ -283,7 +218,7 @@ const SecondPage = () => {
         cancelToken.cancel("Operation canceled due to new request.");
       }
       cancelToken = axios.CancelToken.source();
-  
+
       await axios1
         .get('api/admin/city/get', {
           cancelToken: cancelToken.token,
@@ -311,18 +246,13 @@ const SecondPage = () => {
           setLoading(false);
           console.error("API call error:", error);
         });
-      // } 
 
-      // else {
-      //   // schoolId is empty, handle accordingly (e.g., set loading to false)
-      //   setLoading(false);
-      // }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationModel, reloadpage]
   );
 
-  const paginationchange = (model: GridPaginationModel, details: GridCallbackDetails) => {
+  const paginationchange = (model: GridPaginationModel) => {
     setSize(model.pageSize);
     setPage(model.page + 1);
     setPaginationModel({ page: model.page, pageSize: model.pageSize });
@@ -370,7 +300,7 @@ const SecondPage = () => {
 
       <Grid item xs={12}>
         <Card>
-        <CardHeader title="Search Filters" />
+          <CardHeader title="Search Filters" />
           <CardContent>
             <Grid container spacing={6}>
               <Grid item sm={4} xs={12}>
@@ -398,7 +328,7 @@ const SecondPage = () => {
 
               <Grid item sm={4} xs={12}>
                 <Button sx={{ mt: 0 }} variant="contained" color='error'
-                  onClick={(e: any) => {
+                  onClick={() => {
                     setState_id('');
                   }}
                   startIcon={<Icon icon='tabler:trash' />} >Clear Filter</Button>

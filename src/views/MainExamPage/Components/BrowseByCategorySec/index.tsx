@@ -1,22 +1,24 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import CategoryCarousel from './CategoryCarousel'; // Adjust the import path as necessary
-import NewsList from '../newsList';
-import NewsListAbroad from '../newsListAbroad';
-import ExamCard from '../ExamCardList';
+import dynamic from 'next/dynamic';
+const CategoryCarousel = dynamic(() => import('./CategoryCarousel'), { ssr: false, });
+// import CategoryCarousel from './CategoryCarousel'; // Adjust the import path as necessary
+const NewsList = dynamic(() => import('../newsList'), { ssr: false, });
+// import NewsList from '../newsList';
+// import NewsListAbroad from '../newsListAbroad';
+const NewsListAbroad = dynamic(() => import('../newsListAbroad'), { ssr: false, });
+const ExamCard = dynamic(() => import('../ExamCardList'), { ssr: false, });
 import axios from 'src/configs/axios';
-import SideContactUsForm from 'src/@core/components/popup/SideContactUsForm';
+const SideContactUsForm = dynamic(() => import('src/@core/components/popup/SideContactUsForm'), { ssr: false, });
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios1 from 'axios';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useAuth } from 'src/hooks/useAuth';
 import { useRouter } from 'next/router';
+
 
 const BrowsebyCategorySec = ({ countryData, streams }) => {
     const { streamId, setStreamId } = useAuth();
     const [scholarshipsData, setScholarshipsData] = useState<any>([]);  // Use any type for tabs
     const [scholarshipData, setScholarshipData] = useState<any>([]);  // Use any type for tabs
-    const [totalScholarships, setTotalScholarships] = useState(0);
     const [items, setItems] = useState<{ id: string; title: string }[]>([]);
     const [examsData, setExamsData] = useState({});
     const [newsData, setNewsData] = useState([]);
@@ -35,19 +37,10 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
     const router = useRouter();
 
 
-    interface SearchResult {
-        id: number;
-        name: string;
-    }
+ 
 
     const [activeTab, setActiveTab] = useState('all');
-    // const [currentExams, setCurrentExams] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    // const examsPerPage = 9;
-    const [open, setOpen] = useState(false);
-    const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-    const [loading, setLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -101,7 +94,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
 
             const response = await axios.get(url, { params });
             setScholarshipsData(response.data.data);
-            setTotalScholarships(response.data.data.length);
+
             setTotalScholarshipPages(Math.ceil(response.data.totalItems / scholarshipsPerPage));
         } catch (error) {
             console.error('Error fetching scholarships:', error);
@@ -275,7 +268,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
 
         return (
             <div className="row d-flex flex-fill px-md-0 px-3">
-                {paginatedScholarships.map((scholarship, index) => (
+                {paginatedScholarships.map((scholarship) => (
                     <div className="col-md-4 mb-3" key={scholarship.id}>
                         <Link href={`/exam/${scholarship.id}/${scholarship.slug}`}>
                             <div className="card hover-card examsCardRow">
@@ -340,7 +333,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                         <div className="row px-md-0 px-3">
                                             {currentExams.length > 0 ? (
                                                 currentExams.map((exam, index) => (
-                                                    <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} slug={exam.slug} date={exam.created_at} />
+                                                    <ExamCard key={index} id={exam.id} cover_image={exam.cover_image} title={exam.exam_title} slug={exam.slug} />
                                                 ))
                                             ) : (
                                                 <div className="text-center mb-5">No data</div>

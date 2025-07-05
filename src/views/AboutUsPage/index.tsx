@@ -1,14 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import BannerSec from './Components/BannerSec'
 import Overview from './Components/Overview'
-import JourneySec from './Components/JourneySec'
-import TestimonialSec from './Components/TestimonialSec'
-import OurPortalSec from './Components/OurPortalsSec'
-import ContactUsSec from './Components/ContactUsSec'
+// import JourneySec from './Components/JourneySec'
+const JourneySec = dynamic(() => import("./Components/JourneySec"), { ssr: false });
+const TestimonialSec = dynamic(() => import("./Components/TestimonialSec"), { ssr: false });
+// import TestimonialSec from './Components/TestimonialSec'
+const OurPortalSec = dynamic(() => import("./Components/OurPortalsSec"), { ssr: false });
+// import OurPortalSec from './Components/OurPortalsSec'
+// import ContactUsSec from './Components/ContactUsSec'
+const ContactUsSec = dynamic(() => import("./Components/ContactUsSec"), { ssr: false });
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head'
+import dynamic from 'next/dynamic';
 
 const AboutUsPage = () => {
   const router = useRouter()

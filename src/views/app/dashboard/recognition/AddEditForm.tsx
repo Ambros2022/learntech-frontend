@@ -1,21 +1,13 @@
 
-import { Ref, useState, forwardRef, ReactElement, ChangeEvent, useEffect, useCallback } from 'react'
-// ** MUI Imports
-import Fade, { FadeProps } from '@mui/material/Fade'
-import DialogContent from '@mui/material/DialogContent'
+import { useState } from 'react'
 import DialogActions from '@mui/material/DialogActions'
-import { SelectChangeEvent } from '@mui/material/Select'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-import Radio from '@mui/material/Radio'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import axios1 from 'src/configs/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -24,7 +16,6 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 
 import type { FC } from 'react';
 import { Alert } from '@mui/material'
-import FileUpload from 'src/@core/components/dropzone/FileUpload';
 
 
 
@@ -33,34 +24,32 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode,  }) => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
 
 
-    const schema = yup.object().shape({
-        old_url: yup
-          .string()
-          .required("old_url is required")
-          .test(
-            "starts-with-slash",
-            "Enter a valid URL that must contain the first character as '/' (e.g., /example)",
-            (value) => value?.startsWith("/")
-          ),
-        new_url: yup
-          .string()
-          .required("new_url is required")
-          .test(
-            "starts-with-slash",
-            "Enter a valid URL that must contain the first character as '/' (e.g., /example)",
-            (value) => value?.startsWith("/")
-          ),
-      });
+    const schema: any = yup.object().shape({
+        recognition_approval_name: yup
+            .string()
+            .trim()
+            .required(),
+        recognition_approval_slug: yup
+            .string()
+            .trim()
+            .required(),
+        recognition_approval_full_name: yup
+            .string()
+            .trim()
+            .required(),
+
+    })
 
     const defaultValues = {
-        old_url: isAddMode ? '' : olddata.old_url,
-        new_url: isAddMode ? '' : olddata.new_url,
+        recognition_approval_name: isAddMode ? '' : olddata.recognition_approval_name,
+        recognition_approval_slug: isAddMode ? '' : olddata.recognition_approval_slug,
+        recognition_approval_full_name: isAddMode ? '' : olddata.recognition_approval_full_name,
     }
 
     const {
@@ -79,12 +68,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
         if (!isAddMode && olddata.id) {
             let updateid = olddata.id;
             setLoading(true)
-            let url = 'api/admin/redirect/update';
+            let url = 'api/admin/recognition/update';
             const formData = new FormData();
             formData.append('id', updateid);
-            formData.append('old_url', data.old_url);
-            formData.append('new_url', data.new_url);
-  
+            formData.append('recognition_approval_name', data.recognition_approval_name);
+            formData.append('recognition_approval_slug', data.recognition_approval_slug);
+            formData.append('recognition_approval_full_name', data.recognition_approval_full_name);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -116,12 +105,12 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
             }
         } else {
             setLoading(true)
-            let url = 'api/admin/redirect/add';
+            let url = 'api/admin/recognition/add';
 
             const formData = new FormData();
-            formData.append('old_url', data.old_url);
-            formData.append('new_url', data.new_url);
-
+            formData.append('recognition_approval_name', data.recognition_approval_name);
+            formData.append('recognition_approval_slug', data.recognition_approval_slug);
+            formData.append('recognition_approval_full_name', data.recognition_approval_full_name);
 
             try {
                 let response = await axios1.post(url, formData)
@@ -167,45 +156,61 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
 
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='old_url'
+                            name='recognition_approval_name'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                //@ts-ignore
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='Old URL'
+                                    label='Recognition Name'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.old_url)}
+                                    error={Boolean(errors.recognition_approval_name)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.old_url && { helperText: errors?.old_url?.message })}
+                                    {...(errors.recognition_approval_name && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Controller
-                            name='new_url'
+                            name='recognition_approval_slug'
                             control={control}
                             rules={{ required: true }}
                             render={({ field: { value, onChange } }) => (
-                                //@ts-ignore
                                 <CustomTextField
                                     fullWidth
                                     value={value}
-                                    label='New Url'
+                                    label=' Slug'
                                     onChange={onChange}
                                     placeholder=''
-                                    error={Boolean(errors.new_url)}
+                                    error={Boolean(errors.recognition_approval_slug)}
                                     aria-describedby='validation-basic-first-name'
-                                    {...(errors.new_url && { helperText: errors?.new_url?.message })}
+                                    {...(errors.recognition_approval_slug && { helperText: 'This field is required' })}
                                 />
                             )}
                         />
                     </Grid>
-                 
+                    <Grid item xs={12} sm={6}>
+                        <Controller
+                            name='recognition_approval_full_name'
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { value, onChange } }) => (
+                                <CustomTextField
+                                    fullWidth
+                                    value={value}
+                                    label='Full Name'
+                                    onChange={onChange}
+                                    placeholder=''
+                                    error={Boolean(errors.recognition_approval_full_name)}
+                                    aria-describedby='validation-basic-first-name'
+                                    {...(errors.recognition_approval_full_name && { helperText: 'This field is required' })}
+                                />
+                            )}
+                        />
+                    </Grid>
 
 
                     <Grid item xs={12}>

@@ -1,7 +1,6 @@
 import React from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Image from 'next/image';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const BankSec = () => {
@@ -69,7 +68,7 @@ const BankSec = () => {
                                 <div className="card p-3 mx-md-0 mx-3 mt-3 mb-3">
                                     <div className="d-flex justify-content-center flex-fill">
                                         <div className="bankImg">
-                                            <img src={country.bank} width={200} className='img-fluid' height={200} alt='bank-logo' />
+                                            <img src={country.bank} width={200} className='img-fluid' height={200} alt='bank-logo' loading='lazy' />
                                         </div>
                                     </div>
                                 </div>
