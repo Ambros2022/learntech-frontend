@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+  console.log("===========================================================================================================================")
   const { pathname } = request.nextUrl
   const url = request.nextUrl.clone()
 
-  // console.log('1', pathname)
+  console.log('mid1', pathname)
   // Skip static files and API routes
-  if (pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname.includes('.') ) {
-    return NextResponse.next()
-  }
+  // if (pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname.includes('.') ) {
+  //   return NextResponse.next()
+  // }
 
   // Remove trailing slash (e.g., /about/ → /about)
   // let currentPath = pathname
@@ -20,7 +21,7 @@ export async function middleware(request: NextRequest) {
   //   // return NextResponse.rewrite(url)
     
   // }
-// console.log('3', url.pathname)
+// console.log('mid2', pathname)
   try {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
     const response = await fetch(apiUrl)
@@ -44,6 +45,18 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
+// export const config = {
+//   matcher: ['/((?!_next|.*\\..*|api).*)'] // Avoid static, api, etc.
+// }
+
+// export const config = {
+//   matcher: [
+//     '/((?!_next|api|.*\\.(?!html$)[^.]+$).*)'
+//   ]
+// }
+
 export const config = {
-  matcher: ['/((?!_next|.*\\..*|api).*)'] // Avoid static, api, etc.
+  matcher: [
+    '/((?!_next|api|app/dashboard(?:/.*)?$|.*\\.(?!html$)[^.]+$).*)'
+  ]
 }
