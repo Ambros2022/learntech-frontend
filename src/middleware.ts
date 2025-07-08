@@ -45,21 +45,7 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-// export const config = {
-//   matcher: ['/((?!_next|.*\\..*|api).*)'] // Avoid static, api, etc.
-// }
 
-// export const config = {
-//   matcher: [
-//     '/((?!_next|api|.*\\.(?!html$)[^.]+$).*)'
-//   ]
-// }
-
-// export const config = {
-//   matcher: [
-//     '/((?!_next|api|app/dashboard(?:/.*)?$|.*\\.(?!html$)[^.]+$).*)'
-//   ]
-// }
 
 export const config = {
   matcher: [
