@@ -55,8 +55,22 @@ export async function middleware(request: NextRequest) {
 //   ]
 // }
 
+// export const config = {
+//   matcher: [
+//     '/((?!_next|api|app/dashboard(?:/.*)?$|.*\\.(?!html$)[^.]+$).*)'
+//   ]
+// }
+
 export const config = {
   matcher: [
-    '/((?!_next|api|app/dashboard(?:/.*)?$|.*\\.(?!html$)[^.]+$).*)'
+    /*
+      Match all routes, but skip:
+      - _next/*
+      - api/*
+      - /
+      - app/dashboard/*
+      - any file with an extension other than .html
+    */
+    '/((?!_next/|api/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)',
   ]
 }
