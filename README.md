@@ -50,13 +50,10 @@ export async function middleware(req) {
         url.pathname = redirect.new_url
         return NextResponse.redirect(url,301)
       }
-    } else {
-      console.error(`Failed to fetch redirect mappings: ${response.statusText}`)
-    }
-  } catch (error) {
-    console.error('Error fetching redirect mappings:', error)
-  }
-
+    ];
+  },
+q
+  async redirects() {
 
   return NextResponse.next()
 }
@@ -66,24 +63,5 @@ export const config = {
   matcher: '/:path*' 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-..
 
 
