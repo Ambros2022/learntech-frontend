@@ -3,8 +3,8 @@ const path = require('path')
 
 /** @type {import('next').NextConfig} */
 module.exports = {
-  trailingSlash: false, // ← IMPORTANT
-  skipTrailingSlashRedirect: true, // ← THIS DISABLES 308 REDIRECTS
+  trailingSlash: true, // ← IMPORTANT
+  // skipTrailingSlashRedirect: true, // ← THIS DISABLES 308 REDIRECTS
   images: {
     domains: ['api.learntechww.com', 'learntechww.com'],
   },

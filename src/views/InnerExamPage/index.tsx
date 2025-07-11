@@ -9,6 +9,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import OrganizationSection from './Components/OrganizationalSec';
 import ExperTraineeSec from './Components/ExpertTrainneSec';
+import { CircularProgress, Box } from '@mui/material'; 
 
 function InnerExamPage({ id }) {
   const router = useRouter();
@@ -62,8 +63,17 @@ function InnerExamPage({ id }) {
           </script>
         )}
       </Head>
-      {!loading && pagedata && <BannerSec data={pagedata} />}
-      {!loading && pagedata && <OverviewSec data={pagedata} />}
+      {/* {!loading && pagedata && <BannerSec data={pagedata} />} */}
+      <BannerSec data={pagedata} />
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          {pagedata && <OverviewSec data={pagedata} />}
+        </>
+      )}
       <OrganizationSection data={pagedata} />
       <ExperTraineeSec data={pagedata} />
       {/* {!loading && pagedata && <UpcomingExamsSec data={news} />} */}
