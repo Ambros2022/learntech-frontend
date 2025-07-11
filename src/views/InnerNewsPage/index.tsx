@@ -8,6 +8,7 @@ import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import ExpertSection from './Components/ExpertSection';
+import { Box, CircularProgress } from '@mui/material'
 
 function InnerNewsPage({ id }) {
   const router = useRouter();
@@ -48,10 +49,20 @@ function InnerNewsPage({ id }) {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
       </Head>
 
-      {!loading && pagedata && <BannerSec data={pagedata} />}
-      {!loading && pagedata && <InfoSec data={pagedata} />}
 
-      <ExpertSection />
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+           <BannerSec data={pagedata} />
+           <InfoSec data={pagedata} />
+
+          <ExpertSection />
+        </>)}
+
+
 
     </>
   )

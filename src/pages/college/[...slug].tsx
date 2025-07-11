@@ -1,40 +1,39 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
+import { useRouter } from 'next/router'
+
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
+import Spinner from 'src/@core/components/spinner'
 import InnerCollegePage from 'src/views/InnerCollegePage'
-import { useRouter } from 'next/router';
-import Spinner from 'src/@core/components/spinner';
 import InnerCourseCollegePage from 'src/views/InnerCourseCollegePage'
 
-const college = () => {
-  const router = useRouter();
-  const [isRouterReady, setIsRouterReady] = useState(false);
+const CollegeContent = () => {
+  const router = useRouter()
 
-  useEffect(() => {
-    if (router.isReady) {
-      setIsRouterReady(true);
-    }
-  }, [router.isReady]);
-
-
-  if (!isRouterReady) {
-    return <Spinner /> // Or a loading spinner
+  if (!router.isReady) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Spinner />
+      </div>
+    )
   }
 
-  return <>
+  const { slug } = router.query
 
-    {Array.isArray(router.query.slug) && (
-      router.query.slug.length <= 2 ? (
-        <InnerCollegePage id={router.query.slug[0]} />
-      ) : (
-        <InnerCourseCollegePage Collegeid={router.query.slug[0]} Courseslug={router.query.slug[2]} />
-      )
-    )}
-  </>
+  if (Array.isArray(slug)) {
+    if (slug.length <= 2) {
+      return <InnerCollegePage id={slug[0]} />
+    } else if (slug.length >= 3) {
+      return <InnerCourseCollegePage Collegeid={slug[0]} Courseslug={slug[2]} />
+    }
+  }
+
+  return null
 }
 
-college.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+const College = () => <CollegeContent />
 
-college.guestGuard = true
+College.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+College.guestGuard = true
 
-export default college
+export default College

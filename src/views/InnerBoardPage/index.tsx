@@ -7,7 +7,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
+import { Box, CircularProgress } from '@mui/material'
 
 function InnerBoardPage({ id }) {
   const router = useRouter();
@@ -141,11 +141,17 @@ function InnerBoardPage({ id }) {
           )}
         </script>
       </Head>
-      {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection data={pagedata} exams={exams} />}
-      {/* {!loading && pagedata && <FacilitiesSection data={pagedata} />} */}
-      {!loading && pagedata && <LocationSection data={pagedata} />}
 
+      {loading  ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          <BannerSection data={pagedata} />
+          <CollegeInfoSection data={pagedata} exams={exams} />
+          <LocationSection data={pagedata} />
+        </>)}
 
       <TopFeaturedColleges />
 
