@@ -127,10 +127,10 @@ const InfoSec = ({ data }) => {
                 </section>
                 <div className='pt-0'>
                     <div className="row">
-                        <div className="col-md-8 text-black">
-                            <p>
-                                <div dangerouslySetInnerHTML={{ __html: data.overview }} />
-                            </p>
+                        <div className="col-md-8 text-black overflow-auto " style={{ maxWidth: '100%' }}>
+                            {/* <p > */}
+                                <div  dangerouslySetInnerHTML={{ __html: data.overview }} />
+                            {/* </p> */}
                         </div>
                         <div className="col-md-4">
                             <NewsList newsItems={newsData} />
