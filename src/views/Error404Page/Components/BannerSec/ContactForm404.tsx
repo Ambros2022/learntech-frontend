@@ -18,7 +18,7 @@ const ContactForm404 = () => {
         name: Yup.string().required('Name is required'),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
         contact_number: Yup.string().required('Phone Number is required'),
-        message: Yup.string().required('Message is required'),
+        // message: Yup.string().required('Message is required'),
     })
 
     const handleSubmit = async (values, { resetForm }) => {

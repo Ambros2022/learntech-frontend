@@ -63,7 +63,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
             ),
         course: Yup.string().required(`${placeholder || 'Course'} is required`).trim(),
         location: Yup.string().required('Location is required').trim(),
-        message: Yup.string().required('Message is required'),
+        // message: Yup.string().required('Message is required'),
     });
 
     const handleSubmit = async (values, { resetForm }) => {
