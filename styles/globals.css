@@ -4118,10 +4118,32 @@
     background-size: cover !important;
   } */
 
-  .blogBannerSec {
+  /* .blogBannerSec {
     height: 300px;
     position: relative;
     overflow: hidden;
+  } */
+  .blogBannerSec {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 1;
+    width: 100%;
+    /* Ensures predictable height on all screens */
+  }
+
+  /* Fallback for old browsers */
+  @supports not (aspect-ratio: 3 / 1) {
+    .blogBannerSec {
+      height: 33vw;
+      /* ~3:1 ratio fallback */
+    }
+  }
+
+  /* Slightly taller for mobile to allow for text space */
+  @media (max-width: 576px) {
+    .blogBannerSec {
+      aspect-ratio: 2.5 / 1;
+    }
   }
 
 
@@ -4288,9 +4310,9 @@
 
 
 
-    .blogBannerSec {
+    /* .blogBannerSec {
       height: 300px !important;
-    }
+    } */
 
     .blogBannerSec h1 {
       font-size: 23px !important;
@@ -6511,13 +6533,14 @@
 
   /* ----bams landing page--- */
 
-    .clsheight .collegeDetailCard{
+  .clsheight .collegeDetailCard {
     min-height: 270px !important;
   }
+
   @media (max-width: 768px) {
-  .clsheight .collegeDetailCard{
-    min-height: 550px !important;
-  }
+    .clsheight .collegeDetailCard {
+      min-height: 550px !important;
+    }
 
 
   }
