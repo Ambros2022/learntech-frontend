@@ -319,7 +319,7 @@ const Header = () => {
               >
                 <Link
                   className={`nav-link dropdown-toggle no-arrow ${isLinkActive('/universities') ? 'active' : ''}`}
-                  href='/universities'
+                  href='/universities/'
                   id='navbarDropdownMenuLink'
                   role='button'
                   aria-expanded={isDropdownOpen}
@@ -356,7 +356,7 @@ const Header = () => {
               >
                 <Link
                   className={`nav-link dropdown-toggle no-arrow ${isLinkActive('/colleges') ? 'active' : ''}`}
-                  href='/colleges'
+                  href='/colleges/'
                   id='navbarDropdownMenuLink'
                   role='button'
                   aria-expanded={isDropdownOpen}
@@ -578,7 +578,7 @@ const Header = () => {
                 </Link>
                 <ul className='dropdown-menu another-item' aria-labelledby='navbarDropdownMenuLink'>
                   <li className='nav-items-select'>
-                    <Link className='d-flex justify-content-between dropdown-item ' href='/about-us'>
+                    <Link className='d-flex justify-content-between dropdown-item ' href='/about-us/'>
                       About US
                     </Link>
                   </li>

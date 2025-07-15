@@ -206,3 +206,39 @@ export const config = {
   ]
 }
 =====end
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+middelware without '/' to / 301
+
+import { NextRequest, NextResponse } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  console.log("=========== MIDDLEWARE ===========")
+  console.log("Requested URL:", request.url)
+  console.log("Original pathname:", pathname)
+
+  // const isFile = pathname.includes('.')
+  const shouldRedirect =
+    !pathname.endsWith('/') 
+
+  if (shouldRedirect) {
+    console.log("=========== MIDDLEWARE2 ===========")
+    const redirectUrl = request.nextUrl.clone()
+    redirectUrl.href = `${redirectUrl.href}/`
+
+    // console.log("✅ Redirecting to:", redirectUrl.href)
+    return NextResponse.redirect(redirectUrl, 301)
+  }
+
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: [
+    '/((?!_next/|api/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)',
+  ],
+}
+
+______________________________________________________________________________________________________________________________
