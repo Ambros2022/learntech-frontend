@@ -2910,6 +2910,7 @@
   .innerNewsSec table {
     width: 100% !important;
     border: 1px solid black !important;
+    table-layout: auto !important;
   }
 
   .innerNewsSec table td {
