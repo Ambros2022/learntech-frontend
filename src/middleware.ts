@@ -2,48 +2,46 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const url = request.nextUrl.clone()
 
-  // Skip middleware for API, _next/static, and _next/data/*.json
-  const isIgnored =
+  // ✅ Skip Next.js internals, static files, and .json data requests
+  const isInternalOrStatic =
+    pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.startsWith('/_next/static') ||
-    (pathname.startsWith('/_next/data') && pathname.endsWith('.json'))
+    pathname.includes('.json') ||
+    pathname.includes('.') || // like .js, .css, .png, etc.
+    pathname === '/favicon.ico'
 
-  if (isIgnored) {
+  if (isInternalOrStatic) {
     return NextResponse.next()
   }
 
+  // ✅ Add trailing slash if missing
+  if (!pathname.endsWith('/')) {
+    const newUrl = request.nextUrl.clone()
+    newUrl.pathname += '/'
+    return NextResponse.redirect(newUrl, 308)
+  }
+
+  // ✅ Only reach here if it's a valid content route
   try {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
-
     const response = await fetch(apiUrl)
-    if (!response.ok) {
-      console.error(`Failed to fetch redirect mappings: ${response.statusText}`)
-      return NextResponse.next()
+
+    if (response.ok) {
+      const redirections = await response.json()
+      const redirect = redirections.find(
+        (item: { old_url: string; new_url: string }) => item.old_url === pathname || item.old_url === pathname + '/'
+      )
+
+      if (redirect) {
+        const newUrl = new URL(redirect.new_url, request.nextUrl.origin)
+        return NextResponse.redirect(newUrl, 301)
+      }
+    } else {
+      console.error('Redirect API fetch failed:', response.statusText)
     }
-
-    const redirections = await response.json()
-    const redirect = redirections.find(
-      (item: { old_url: string; new_url: string }) => item.old_url === pathname || item.old_url === pathname + '/'
-    )
-
-    if (redirect) {
-      const newUrl = new URL(redirect.new_url, request.nextUrl.origin)
-      return NextResponse.redirect(newUrl, 301)
-    }
-
-    // Add trailing slash if missing, but skip .json requests
-    const shouldRedirect = !url.pathname.endsWith('/') && !url.pathname.endsWith('.json')
-
-    if (shouldRedirect) {
-      const newUrl = request.nextUrl.clone()
-      newUrl.pathname += '/'
-      console.log('Redirecting to:', newUrl.href)
-      return NextResponse.redirect(newUrl, 308) // or 308 if permanent
-    }
-  } catch (error) {
-    console.error('Error fetching redirect mappings:', error)
+  } catch (err) {
+    console.error('Redirect API fetch error:', err)
   }
 
   return NextResponse.next()
