@@ -38,6 +38,7 @@ export async function middleware(request: NextRequest) {
 
     if (shouldRedirect) {
       const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
+      console.log('newUrlv2', url, url.pathname, newUrl)
       return NextResponse.redirect(newUrl, 302)
     }
   } catch (error) {
