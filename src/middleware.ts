@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+function normalizePath(path: string) {
+  return path.endsWith('/') ? path : path + '/'
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // ✅ Skip Next.js internals, static files, and .json data requests
+  // ✅ Skip internal/static/asset/data files
   const isInternalOrStatic =
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.includes('.json') ||
-    pathname.includes('.') || // like .js, .css, .png, etc.
+    pathname.includes('.') || // like .js, .json, .css, images etc.
     pathname === '/favicon.ico'
 
   if (isInternalOrStatic) {
@@ -22,15 +25,18 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(newUrl, 308)
   }
 
-  // ✅ Only reach here if it's a valid content route
+  // ✅ Redirect from backend-defined old URLs
   try {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
     const response = await fetch(apiUrl)
 
     if (response.ok) {
       const redirections = await response.json()
+
+      const normalizedPath = normalizePath(pathname)
+
       const redirect = redirections.find(
-        (item: { old_url: string; new_url: string }) => item.old_url === pathname || item.old_url === pathname + '/'
+        (item: { old_url: string; new_url: string }) => normalizePath(item.old_url) === normalizedPath
       )
 
       if (redirect) {
@@ -47,9 +53,8 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-// ✅ Final matcher: exclude _next/data, _next/static, api, assets, etc.
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/data|api|app/dashboard|.*\\.(?:ico|jpg|jpeg|png|svg|webp|json|js|css|woff2?|ttf|eot|otf|txt|xml|pdf|map)$).*)'
+    '/((?!_next/static|_next/data|api|.*\\.(?:ico|jpg|jpeg|png|svg|webp|json|js|css|woff2?|ttf|eot|otf|txt|xml|pdf|map)$).*)'
   ]
 }
