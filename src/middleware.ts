@@ -34,7 +34,8 @@ export async function middleware(request: NextRequest) {
     }
 
     // Add trailing slash if missing
-    const shouldRedirect = !url.pathname.endsWith('/')
+    const shouldRedirect = !url.pathname.endsWith('/') && !url.pathname.endsWith('.json')
+
     if (shouldRedirect) {
       const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
       return NextResponse.redirect(newUrl, 301)
