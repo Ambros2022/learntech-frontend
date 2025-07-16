@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest) {
 
     if (shouldRedirect) {
       const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
-      return NextResponse.redirect(newUrl, 301)
+      return NextResponse.redirect(newUrl, 302)
     }
   } catch (error) {
     console.error('Error fetching redirect mappings:', error)
