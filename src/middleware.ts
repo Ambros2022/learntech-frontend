@@ -33,13 +33,14 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(newUrl, 301)
     }
 
-    // Add trailing slash if missing
+    // Add trailing slash if missing, but skip .json requests
     const shouldRedirect = !url.pathname.endsWith('/') && !url.pathname.endsWith('.json')
 
     if (shouldRedirect) {
-      const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
-      console.log('newUrlv2', url, url.pathname, newUrl)
-      return NextResponse.redirect(newUrl, 302)
+      const newUrl = request.nextUrl.clone()
+      newUrl.pathname += '/'
+      console.log('Redirecting to:', newUrl.href)
+      return NextResponse.redirect(newUrl, 308) // or 308 if permanent
     }
   } catch (error) {
     console.error('Error fetching redirect mappings:', error)
