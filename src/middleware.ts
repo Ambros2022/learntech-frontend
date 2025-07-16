@@ -5,6 +5,11 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
 
   console.log('Original pathname:', url)
+  const isPrefetch = request.headers.get('x-middleware-prefetch') === '1'
+  if (isPrefetch) {
+    console.log('Original pathname preeeeeeeeeeeeeeeeeeeeeee:', url)
+    return NextResponse.next()
+  }
 
   try {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
@@ -23,10 +28,11 @@ export async function middleware(request: NextRequest) {
         console.log('3', url)
         return NextResponse.redirect(url, 301)
       }
+      console.log('4', url)
       const shouldRedirect = !url.href.endsWith('/')
       if (shouldRedirect) {
         url.href = url.href + '/'
-        console.log('4', url)
+        console.log('5', url)
         return NextResponse.redirect(url, 301)
       }
     } else {
