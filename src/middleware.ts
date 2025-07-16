@@ -5,10 +5,18 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
 
   // Skip middleware for static files and special Next.js paths
-  const isFile = pathname.includes('.') || pathname.startsWith('/_next') || pathname.startsWith('/api')
-  if (isFile) {
+  //const isFile = pathname.includes('.') || pathname.startsWith('/_next') || pathname.startsWith('/api')
+  const isIgnored =
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next/static') ||
+    (pathname.startsWith('/_next/data') && pathname.endsWith('.json'))
+
+  if (isIgnored) {
     return NextResponse.next()
   }
+  // if (isFile) {
+  //   return NextResponse.next()
+  // }
 
   // Normalize trailing slash
   if (!pathname.endsWith('/')) {
