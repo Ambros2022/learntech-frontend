@@ -52,8 +52,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
   const [open, setOpen] = useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
-    alert(JSON.stringify(values.contact_number));
-    return
+
     try {
       toast.loading('Processing');
       const formData = new FormData();
