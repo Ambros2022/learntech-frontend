@@ -48,3 +48,16 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: ['/((?!_next/|api/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)']
 }
+
+// export const config = {
+//   matcher: [
+//     // Match all pages EXCEPT:
+//     // - _next/* (includes prefetch .json)
+//     // - api/*
+//     // - root path '/'
+//     // - app/dashboard/*
+//     // - all static file extensions (e.g., .js, .css, .json, .jpg, etc.)
+//     '/((?!_next/|api/|$|app/dashboard/|.*\\.(?:json|js|ts|css|png|jpg|jpeg|svg|webp|woff2?|eot|ttf|map|ico)$).*)',
+//   ]
+// }
+
