@@ -14,15 +14,6 @@ export async function middleware(request: NextRequest) {
   if (isIgnored) {
     return NextResponse.next()
   }
-  // if (isFile) {
-  //   return NextResponse.next()
-  // }
-
-  // Normalize trailing slash
-  if (!pathname.endsWith('/')) {
-    url.pathname += '/'
-    //return NextResponse.redirect(url)
-  }
 
   try {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
@@ -56,6 +47,11 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
+// export const config = {
+//   matcher: ['/((?!_next/|api/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)']
+// }
 export const config = {
-  matcher: ['/((?!_next/|api/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)']
+  matcher: [
+    '/((?!_next/|/_next/|/_next/data/|api/|_next/data/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)'
+  ]
 }
