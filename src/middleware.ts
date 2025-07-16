@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
   // Normalize trailing slash
   if (!pathname.endsWith('/')) {
     url.pathname += '/'
-   return NextResponse.redirect(url)
+    //return NextResponse.redirect(url)
   }
 
   try {
@@ -33,6 +33,13 @@ export async function middleware(request: NextRequest) {
     if (redirect) {
       const newUrl = new URL(redirect.new_url, request.nextUrl.origin)
       return NextResponse.redirect(newUrl, 301)
+    }
+    const shouldRedirect = !url.href.endsWith('/')
+    if (shouldRedirect) {
+      //url.href = url.href + '/'
+      const newUrlv2 = new URL(url.href + '/', request.nextUrl.origin)
+      console.log('newUrlv2', newUrlv2)
+      return NextResponse.redirect(newUrlv2, 301)
     }
   } catch (error) {
     console.error('Error fetching redirect mappings:', error)
