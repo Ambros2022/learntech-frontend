@@ -4,8 +4,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const url = request.nextUrl.clone()
 
-  // Skip middleware for static files and special Next.js paths
-  //const isFile = pathname.includes('.') || pathname.startsWith('/_next') || pathname.startsWith('/api')
+  // Skip middleware for API, _next/static, and _next/data/*.json
   const isIgnored =
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next/static') ||
@@ -33,12 +32,12 @@ export async function middleware(request: NextRequest) {
       const newUrl = new URL(redirect.new_url, request.nextUrl.origin)
       return NextResponse.redirect(newUrl, 301)
     }
-    const shouldRedirect = !url.href.endsWith('/')
+
+    // Add trailing slash if missing
+    const shouldRedirect = !url.pathname.endsWith('/')
     if (shouldRedirect) {
-      //url.href = url.href + '/'
-      const newUrlv2 = new URL(url.href + '/', request.nextUrl.origin)
-      console.log('newUrlv2', newUrlv2)
-      return NextResponse.redirect(newUrlv2, 301)
+      const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
+      return NextResponse.redirect(newUrl, 301)
     }
   } catch (error) {
     console.error('Error fetching redirect mappings:', error)
@@ -47,11 +46,9 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-// export const config = {
-//   matcher: ['/((?!_next/|api/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)']
-// }
+// ✅ Final matcher: exclude _next/data, _next/static, api, assets, etc.
 export const config = {
   matcher: [
-    '/((?!_next/|/_next/|/_next/data/|api/|_next/data/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)'
+    '/((?!_next/static|_next/data|api|app/dashboard|.*\\.(?:ico|jpg|jpeg|png|svg|webp|json|js|css|woff2?|ttf|eot|otf|txt|xml|pdf|map)$).*)'
   ]
 }
