@@ -37,17 +37,16 @@ export async function middleware(request: NextRequest) {
     }
 
     // Add trailing slash if needed (but avoid re-redirecting)
-    const hasExtension = pathname.includes('.') // for .js, .json, etc.
-    const hasTrailingSlash = pathname.endsWith('/')
 
-    if (!hasTrailingSlash && !hasExtension) {
-      url.pathname = pathname + '/'
-      return NextResponse.redirect(url, 301)
-    }
+    // Only redirect if it's not already the correct slash-ending form
   } catch (error) {
     console.error('Error fetching redirect mappings:', error)
   }
-
+  if (!pathname.endsWith('/') && !pathname.includes('.') && request.nextUrl.pathname !== pathname + '/') {
+    const newUrl = request.nextUrl.clone()
+    newUrl.pathname = `${pathname}/`
+    return NextResponse.redirect(newUrl, 301)
+  }
   return NextResponse.next()
 }
 
