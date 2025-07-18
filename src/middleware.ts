@@ -56,6 +56,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(url, 301) // Permanent redirect
     }
   }
+}
 
 // ✅ Final matcher: exclude _next/data, _next/static, api, assets, etc.
 export const config = {
