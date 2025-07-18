@@ -2,33 +2,28 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  const url = request.nextUrl.clone()
 
-  // ✅ Skip static files and API routes
+  // Skip middleware for API, _next/static, and _next/data/*.json
   const isIgnored =
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next/static') ||
-    pathname.startsWith('/_next/image') ||
-    (pathname.startsWith('/_next/data') && pathname.endsWith('.json')) ||
-    pathname.match(/\.(ico|jpg|jpeg|png|svg|webp|json|js|css|woff2?|ttf|eot|otf|txt|xml|pdf|map)$/)
+    (pathname.startsWith('/_next/data') && pathname.endsWith('.json'))
 
-  if (isIgnored) return NextResponse.next()
-
-  // ✅ Manual 301 redirect to add trailing slash
-  if (!pathname.endsWith('/') && !pathname.includes('.')) {
-    const url = request.nextUrl.clone()
-    url.pathname = `${pathname}/` // Avoid double slashes
-    return NextResponse.redirect(url, 301)
+  if (isIgnored) {
+    return NextResponse.next()
   }
 
   try {
-    // ✅ Your redirect mapping API
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
 
     const response = await fetch(apiUrl)
-    if (!response.ok) return NextResponse.next()
+    if (!response.ok) {
+      console.error(`Failed to fetch redirect mappings: ${response.statusText}`)
+      return NextResponse.next()
+    }
 
     const redirections = await response.json()
-
     const redirect = redirections.find(
       (item: { old_url: string; new_url: string }) => item.old_url === pathname || item.old_url === pathname + '/'
     )
@@ -37,9 +32,34 @@ export async function middleware(request: NextRequest) {
       const newUrl = new URL(redirect.new_url, request.nextUrl.origin)
       return NextResponse.redirect(newUrl, 301)
     }
+
+    // Add trailing slash if missing
+    // const shouldRedirect = !url.pathname.endsWith('/') && !url.pathname.endsWith('.json')
+
+    // if (shouldRedirect) {
+    //   const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
+    //   return NextResponse.redirect(newUrl, 302)
+    // }
   } catch (error) {
-    console.error('Middleware error:', error)
+    console.error('Error fetching redirect mappings:', error)
   }
 
-  return NextResponse.next()
+  const hasTrailingSlash = pathname.endsWith('/')
+
+  // ✅ Prevent redirect loop by skipping if already has trailing slash
+  if (!hasTrailingSlash) {
+    const url = request.nextUrl.clone()
+    url.pathname = `${pathname}/`
+
+    // ✅ Only redirect if new URL is different
+    if (url.pathname !== pathname) {
+      return NextResponse.redirect(url, 301) // Permanent redirect
+    }
+  }
+
+// ✅ Final matcher: exclude _next/data, _next/static, api, assets, etc.
+export const config = {
+  matcher: [
+    '/((?!_next/static|_next/data|api|app/dashboard|.*\\.(?:ico|jpg|jpeg|png|svg|webp|json|js|css|woff2?|ttf|eot|otf|txt|xml|pdf|map)$).*)'
+  ]
 }
