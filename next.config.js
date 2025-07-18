@@ -32,12 +32,7 @@ module.exports = {
   async headers() {
     return [
       {
-<<<<<<< HEAD
         source: "/api/:path*",
-=======
-        // matching all API routes
-        source: '/api/:path*',
->>>>>>> 4c954bd3c5640d1b12db2f7425cabc07b461ffe2
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
           { key: 'Access-Control-Allow-Origin', value: '*' },
@@ -49,12 +44,6 @@ module.exports = {
           }
         ]
       }
-<<<<<<< HEAD
     ];
   },
 }
-=======
-    ]
-  }
-}
->>>>>>> 4c954bd3c5640d1b12db2f7425cabc07b461ffe2
