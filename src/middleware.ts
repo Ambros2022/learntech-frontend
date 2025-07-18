@@ -34,12 +34,12 @@ export async function middleware(request: NextRequest) {
     }
 
     // Add trailing slash if missing
-    const shouldRedirect = !url.pathname.endsWith('/') && !url.pathname.endsWith('.json')
+    // const shouldRedirect = !url.pathname.endsWith('/') && !url.pathname.endsWith('.json')
 
-    if (shouldRedirect) {
-      const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
-      return NextResponse.redirect(newUrl, 302)
-    }
+    // if (shouldRedirect) {
+    //   const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
+    //   return NextResponse.redirect(newUrl, 302)
+    // }
   } catch (error) {
     console.error('Error fetching redirect mappings:', error)
   }
