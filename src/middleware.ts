@@ -4,7 +4,6 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const url = request.nextUrl.clone()
 
-  // Skip middleware for API, _next/static, and _next/data/*.json
   const isIgnored =
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next/static') ||
@@ -16,8 +15,8 @@ export async function middleware(request: NextRequest) {
 
   try {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
-
     const response = await fetch(apiUrl)
+
     if (!response.ok) {
       console.error(`Failed to fetch redirect mappings: ${response.statusText}`)
       return NextResponse.next()
@@ -30,37 +29,30 @@ export async function middleware(request: NextRequest) {
 
     if (redirect) {
       const newUrl = new URL(redirect.new_url, request.nextUrl.origin)
-      return NextResponse.redirect(newUrl, 301)
+
+      // Prevent redirect loop
+      if (newUrl.pathname !== pathname && newUrl.pathname !== pathname + '/') {
+        return NextResponse.redirect(newUrl, 301)
+      }
     }
 
-    // Add trailing slash if missing
-    // const shouldRedirect = !url.pathname.endsWith('/') && !url.pathname.endsWith('.json')
+    // Add trailing slash if needed (but avoid re-redirecting)
+    const hasExtension = pathname.includes('.') // for .js, .json, etc.
+    const hasTrailingSlash = pathname.endsWith('/')
 
-    // if (shouldRedirect) {
-    //   const newUrl = new URL(`${url.href}/`, request.nextUrl.origin)
-    //   return NextResponse.redirect(newUrl, 302)
-    // }
+    if (!hasTrailingSlash && !hasExtension) {
+      url.pathname = pathname + '/'
+      return NextResponse.redirect(url, 301)
+    }
   } catch (error) {
     console.error('Error fetching redirect mappings:', error)
   }
 
-  const hasTrailingSlash = pathname.endsWith('/')
-
-  // ✅ Prevent redirect loop by skipping if already has trailing slash
-  if (!hasTrailingSlash) {
-    const url = request.nextUrl.clone()
-    url.pathname = `${pathname}/`
-
-    // ✅ Only redirect if new URL is different
-    if (url.pathname !== pathname) {
-      return NextResponse.redirect(url, 301) // Permanent redirect
-    }
-  }
+  return NextResponse.next()
 }
 
-// ✅ Final matcher: exclude _next/data, _next/static, api, assets, etc.
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/data|api|app/dashboard|.*\\.(?:ico|jpg|jpeg|png|svg|webp|json|js|css|woff2?|ttf|eot|otf|txt|xml|pdf|map)$).*)'
+    '/((?!_next/static|_next/data|api|.*\\.(?:ico|jpg|jpeg|png|svg|webp|json|js|css|woff2?|ttf|eot|otf|txt|xml|pdf|map)$).*)'
   ]
 }
