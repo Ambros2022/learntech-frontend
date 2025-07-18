@@ -3,8 +3,10 @@ const path = require('path')
 
 /** @type {import('next').NextConfig} */
 module.exports = {
-  trailingSlash: true, // ← IMPORTANT
-  skipTrailingSlashRedirect: true, // ← THIS DISABLES 308 REDIRECTS
+
+  trailingSlash: false, // REMOVE
+  skipTrailingSlashRedirect: true, // REMOVE
+
   images: {
     domains: ['api.learntechww.com', 'learntechww.com'],
   },
@@ -15,7 +17,6 @@ module.exports = {
   async headers() {
     return [
       {
-        // matching all API routes
         source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
@@ -26,5 +27,4 @@ module.exports = {
       }
     ];
   },
-
 }

@@ -1,60 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-function normalizePath(path: string) {
-  return path.endsWith('/') ? path : path + '/'
-}
-
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const url = request.nextUrl.clone()
+  console.log('Request URL:', url.href)
 
-  // ✅ Skip internal/static/asset/data files
-  const isInternalOrStatic =
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
-    pathname.includes('.') || // like .js, .json, .css, images etc.
-    pathname === '/favicon.ico'
-
-  if (isInternalOrStatic) {
+  const isPrefetch = request.headers.get('x-middleware-prefetch') === '1'
+  if (isPrefetch) {
+    console.log('Prefetch detected:', url.href)
     return NextResponse.next()
   }
 
-  // ✅ Add trailing slash if missing
-  if (!pathname.endsWith('/')) {
-    const newUrl = request.nextUrl.clone()
-    newUrl.pathname += '/'
-    return NextResponse.redirect(newUrl, 308)
-  }
-
-  // ✅ Redirect from backend-defined old URLs
   try {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
     const response = await fetch(apiUrl)
 
     if (response.ok) {
       const redirections = await response.json()
-
-      const normalizedPath = normalizePath(pathname)
-
       const redirect = redirections.find(
-        (item: { old_url: string; new_url: string }) => normalizePath(item.old_url) === normalizedPath
+        (item: { old_url: string; new_url: string }) => item.old_url === url.pathname
       )
 
       if (redirect) {
-        const newUrl = new URL(redirect.new_url, request.nextUrl.origin)
-        return NextResponse.redirect(newUrl, 301)
+        url.pathname = redirect.new_url
+        url.href = url.origin + redirect.new_url
+        console.log('Redirecting from backend mapping to:', url.href)
+        return NextResponse.redirect(url, 301)
+      }
+
+      // Redirect trailing slash to no slash (e.g., /colleges/ -> /colleges)
+      if (url.pathname !== '/' && url.pathname.endsWith('/')) {
+        const cleanPath = url.pathname.slice(0, -1)
+        url.pathname = cleanPath
+        url.href = url.origin + cleanPath
+        console.log('Removing trailing slash, redirecting to:', url.href)
+        return NextResponse.redirect(url, 301)
       }
     } else {
-      console.error('Redirect API fetch failed:', response.statusText)
+      console.error(`Failed to fetch redirect mappings: ${response.statusText}`)
     }
-  } catch (err) {
-    console.error('Redirect API fetch error:', err)
+  } catch (error) {
+    console.error('Error fetching redirect mappings:', error)
   }
 
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/data|api|.*\\.(?:ico|jpg|jpeg|png|svg|webp|json|js|css|woff2?|ttf|eot|otf|txt|xml|pdf|map)$).*)'
-  ]
+  matcher: ['/((?!_next/|api/|$|app/dashboard/|.*[^/]*\\.(?!html$)[^/]+$).*)']
 }
