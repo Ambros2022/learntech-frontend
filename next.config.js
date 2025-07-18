@@ -4,7 +4,7 @@ const path = require('path')
 /** @type {import('next').NextConfig} */
 module.exports = {
   trailingSlash: true, // ← IMPORTANT
-  skipTrailingSlashRedirect: false, // ← THIS DISABLES 308 REDIRECTS
+  skipTrailingSlashRedirect: true, // ← THIS DISABLES 308 REDIRECTS
   images: {
     domains: ['api.learntechww.com', 'learntechww.com']
   },

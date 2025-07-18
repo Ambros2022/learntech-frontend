@@ -44,6 +44,15 @@ export async function middleware(request: NextRequest) {
     console.error('Error fetching redirect mappings:', error)
   }
 
+  const isAsset = pathname.includes('.') // Don't redirect static assets
+  const hasTrailingSlash = pathname.endsWith('/')
+
+  if (!hasTrailingSlash && !isAsset) {
+    const url = request.nextUrl.clone()
+    url.pathname += '/'
+    return NextResponse.redirect(url, 301) // Force 301 instead of default 308
+  }
+
   return NextResponse.next()
 }
 
