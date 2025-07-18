@@ -8,25 +8,21 @@ module.exports = {
   images: {
     domains: ['api.learntechww.com', 'learntechww.com']
   },
-  redirects: async () => [
-    {
-      source: '/:path((?!_next|api).*)',
-      has: [
-        {
-          type: 'header',
-          key: 'x-vercel-id'
-        }
-      ],
-      missing: [
-        {
-          type: 'query',
-          key: '_nextDataReq'
-        }
-      ],
-      permanent: true, // 👈 this ensures 301 instead of 308
-      destination: '/:path/' // add trailing slash
-    }
-  ],
+  async redirects() {
+    return [
+      {
+        source: '/:path((?!.*\\/).+)',
+        has: [
+          {
+            type: 'header',
+            key: 'x-vercel-id'
+          }
+        ],
+        permanent: true, // 🔁 This forces a 301 instead of 308
+        destination: '/:path/'
+      }
+    ]
+  },
   swcMinify: true,
   experimental: {
     optimizeCss: true
