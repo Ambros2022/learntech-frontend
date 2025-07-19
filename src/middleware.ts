@@ -1,45 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+let redirectionsCache: { old_url: string; new_url: string }[] | null = null
+let lastCacheTime = 0
+const CACHE_TTL = 1000 * 60 * 10 // 5 minutes
+
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
-  console.log('Request URL:', url.href)
+  const pathname = url.pathname
 
+  // ✅ Skip Next.js internal prefetch requests
   const isPrefetch = request.headers.get('x-middleware-prefetch') === '1'
-  if (isPrefetch) {
-    console.log('Prefetch detected:', url.href)
-    return NextResponse.next()
-  }
+  if (isPrefetch) return NextResponse.next()
 
   try {
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
-    const response = await fetch(apiUrl)
-
-    if (response.ok) {
-      const redirections = await response.json()
-      const redirect = redirections.find(
-        (item: { old_url: string; new_url: string }) => item.old_url === url.pathname
-      )
-
-      if (redirect) {
-        url.pathname = redirect.new_url
-        url.href = url.origin + redirect.new_url
-        console.log('Redirecting from backend mapping to:', url.href)
-        return NextResponse.redirect(url, 301)
+    // ✅ Cache redirect rules for 5 minutes
+    const now = Date.now()
+    if (!redirectionsCache || now - lastCacheTime > CACHE_TTL) {
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
+      const response = await fetch(apiUrl)
+      console.log("new req")
+      if (response.ok) {
+        redirectionsCache = await response.json()
+        lastCacheTime = now
+      } else {
+        console.error('Redirect fetch failed:', response.statusText)
       }
+    }
 
-      // Redirect trailing slash to no slash (e.g., /colleges/ -> /colleges)
-      if (url.pathname !== '/' && url.pathname.endsWith('/')) {
-        const cleanPath = url.pathname.slice(0, -1)
-        url.pathname = cleanPath
-        url.href = url.origin + cleanPath
-        console.log('Removing trailing slash, redirecting to:', url.href)
-        return NextResponse.redirect(url, 301)
-      }
-    } else {
-      console.error(`Failed to fetch redirect mappings: ${response.statusText}`)
+    const redirect = redirectionsCache?.find(item => item.old_url === pathname)
+
+    if (redirect) {
+      url.pathname = redirect.new_url
+      url.href = url.origin + redirect.new_url
+      return NextResponse.redirect(url, 301)
+    }
+
+    // ✅ Trailing slash normalization
+    if (pathname !== '/' && pathname.endsWith('/')) {
+      const cleanPath = pathname.slice(0, -1)
+      url.pathname = cleanPath
+      url.href = url.origin + cleanPath
+      return NextResponse.redirect(url, 301)
     }
   } catch (error) {
-    console.error('Error fetching redirect mappings:', error)
+    console.error('Middleware error:', error)
   }
 
   return NextResponse.next()
