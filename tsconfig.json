@@ -33,7 +33,7 @@
   "include": [
     "src",
     "declaration.d.ts"
-, "middleware.ts"  ],
+, "src/middleware.ts"  ],
   "exclude": [
     "node_modules"
   ]
