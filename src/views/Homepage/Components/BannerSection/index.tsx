@@ -52,7 +52,6 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
   const [open, setOpen] = useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
-   
     try {
       toast.loading('Processing');
       const formData = new FormData();
