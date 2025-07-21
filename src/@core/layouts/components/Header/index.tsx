@@ -319,7 +319,7 @@ const Header = () => {
               >
                 <Link
                   className={`nav-link dropdown-toggle no-arrow ${isLinkActive('/universities') ? 'active' : ''}`}
-                  href='/universities/'
+                  href='/universities'
                   id='navbarDropdownMenuLink'
                   role='button'
                   aria-expanded={isDropdownOpen}
@@ -356,7 +356,7 @@ const Header = () => {
               >
                 <Link
                   className={`nav-link dropdown-toggle no-arrow ${isLinkActive('/colleges') ? 'active' : ''}`}
-                  href='/colleges/'
+                  href='/colleges'
                   id='navbarDropdownMenuLink'
                   role='button'
                   aria-expanded={isDropdownOpen}
