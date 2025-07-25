@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
 
   // console.log("json=======================")
   if (pathname.endsWith('.json')) return NextResponse.next()
-    console.log("json=======================2",pathname)
+    // console.log("json=======================2",pathname)
   // ✅ Skip Next.js internal prefetch requests
   const isPrefetch = request.headers.get('x-middleware-prefetch') === '1'
   if (isPrefetch) return NextResponse.next()
