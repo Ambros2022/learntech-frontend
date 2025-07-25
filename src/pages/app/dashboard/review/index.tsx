@@ -8,7 +8,7 @@ import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import { DataGrid, GridColDef, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 

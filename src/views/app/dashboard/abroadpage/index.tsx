@@ -4,7 +4,7 @@ import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import { DataGrid,  GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import Link from 'next/link'
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 
 import { Button, CardContent, CardHeader, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,  Grid,  MenuItem } from '@mui/material'

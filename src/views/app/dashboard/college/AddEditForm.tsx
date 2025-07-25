@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
