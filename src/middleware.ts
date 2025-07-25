@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 let redirectionsCache: { old_url: string; new_url: string }[] | null = null
 let lastCacheTime = 0
-const CACHE_TTL = 1000 * 60 * 10 // 5 minutes
+const CACHE_TTL = 1000 * 60 * 60 * 12 // 5 minutes
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
