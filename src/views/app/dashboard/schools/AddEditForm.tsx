@@ -19,7 +19,7 @@ import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import CircularProgress from '@mui/material/CircularProgress'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 import { DialogActions, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import { Config } from 'src/configs/mainconfig';

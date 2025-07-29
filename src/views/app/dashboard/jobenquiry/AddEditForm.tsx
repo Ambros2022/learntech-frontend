@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Grid from '@mui/material/Grid'
 import * as yup from 'yup'
 import { useForm, Controller } from 'react-hook-form'
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'

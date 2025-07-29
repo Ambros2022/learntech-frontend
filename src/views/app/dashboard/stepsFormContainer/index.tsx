@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import axios1 from 'src/configs/axios';
+import axios1 from 'src/configs/adminaxios';
 import toast from 'react-hot-toast';
 import StepsForm from './stepsForm';
 

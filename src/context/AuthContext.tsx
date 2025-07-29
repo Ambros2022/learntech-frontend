@@ -4,7 +4,7 @@ import { createContext, useEffect, useState, ReactNode } from 'react'
 // ** Next Import
 import { useRouter } from 'next/router'
 
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 
 // ** Config
 import authConfig from 'src/configs/auth'
