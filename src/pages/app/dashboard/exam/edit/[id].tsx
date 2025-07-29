@@ -9,7 +9,7 @@ import Link from 'next/link'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 import LinearProgress from '@mui/material/LinearProgress'
 import dynamic from 'next/dynamic'
 

@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback, ChangeEvent } from 'react'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 import { Grid, } from '@mui/material'
 

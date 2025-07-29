@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 let redirectionsCache: { old_url: string; new_url: string }[] | null = null
 let lastCacheTime = 0
-const CACHE_TTL = 1000 * 60 * 10 // 5 minutes
+const CACHE_TTL = 1000 * 60 * 60 * 12 
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
     if (!redirectionsCache || now - lastCacheTime > CACHE_TTL) {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}redirecturls`
       const response = await fetch(apiUrl)
-      console.log("new req")
+      // console.log("new req")
       if (response.ok) {
         redirectionsCache = await response.json()
         lastCacheTime = now
@@ -54,6 +54,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/|api/|admin/login|app/dashboard(?:/.*)?|.*\\.(?:js|css|json|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|eot|map)).*)',
+    '/((?!_next/|api/|$|admin/login|thank-you|app/dashboard(?:/.*)?|.*\\.(?:js|css|json|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|eot|map)).*)',
   ],
 }
