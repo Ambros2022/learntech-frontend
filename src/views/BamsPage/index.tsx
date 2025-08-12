@@ -59,40 +59,7 @@ const BamsPage = () => {
         description: '',
     };
 
-    // const handleSubmit = (values, { resetForm }) => {
-    //     console.log('Form Values:', values);
-    //     resetForm();
-    // };
-
-
-    // const handleSubmit = async (values, { resetForm }) => {
-    //     try {
-    //         toast.loading('Processing');
-    //         // Prepare FormData as you did
-    //         const formData = new FormData();
-    //         formData.append('name', values.name);
-    //         formData.append('email', values.email);
-    //         formData.append('contact', values.contact); 
-    //         formData.append('location', values.location);
-    //         formData.append('neetrank', values.neetrank);
-    //         formData.append('current_url', window.location.href);
-    //         formData.append('description', values.message);
-    //         const response = await axios.post('api/website/landingpage/enquiry', formData);
-
-    //         console.log('Response status:', response.status);
-
-    //         if (response.status === 200) {
-    //             toast.dismiss();
-    //             toast.success('Thank you. We will get back to you.');
-    //             resetForm();
-    //             console.log('Redirecting...');
-    //             router.push('/thank-you');
-    //         }
-    //     } catch (error) {
-    //         toast.error('try again later!');
-    //         console.error('Error submitting form:', error);
-    //     }
-    // };
+   
 
     const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -371,7 +338,7 @@ const BamsPage = () => {
                                         className="f700 pb-2 bams-font20"
                                         style={{ color: 'white', textAlign: 'center' }}
                                     >
-
+                                        
                                         Fill Out the Form to Get Assistance in Securing Your BAMS Seat for
                                         A.Y. 2025-26
 
