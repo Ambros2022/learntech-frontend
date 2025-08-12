@@ -5,8 +5,7 @@ import Image from 'next/image'
 const BannerSec = ({ data, createdAt }) => {
   return (
     <>
-      <section className="newsBannerSec blogBannerSec position-relative">
-        {/* Optimized LCP image with next/image */}
+      <section className="newsBannerSec blogBannerSec">
         <Image
           src="/images/icons/BannerBG.webp"
           alt="Blog Banner"
@@ -14,8 +13,8 @@ const BannerSec = ({ data, createdAt }) => {
           priority
           fetchPriority="high"
           style={{ objectFit: 'cover', zIndex: -1 }}
+          sizes="100vw"
         />
-
         <div className="container d-flex h-100 w-100 justify-content-center flex-column align-content-center text-center position-relative">
           <h1 className="fw-bold text-white mb-3">{data?.name}</h1>
           <h6 className="text-white pt-3 pt-md-0">

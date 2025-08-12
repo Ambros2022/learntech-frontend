@@ -13,7 +13,7 @@ import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'

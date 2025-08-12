@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         banners: res.data.data || [],
       },
-      revalidate: 60,
+      revalidate: 60 * 60 * 12,
     };
   } catch (error) {
     console.error("Error fetching banners:", error);

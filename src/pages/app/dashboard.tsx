@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios from 'src/configs/axios';
+import axios from 'src/configs/adminaxios';
 import Link from 'next/link';
 import { BsFileBarGraphFill, BsCardHeading, BsBuilding, BsBank, BsBank2, BsBookHalf, BsBorderWidth, BsAirplaneEnginesFill, BsFillPassFill, BsBlockquoteLeft, BsFillPersonLinesFill, BsFillPostageFill, BsFillPipFill, BsFillJournalBookmarkFill } from "react-icons/bs";
 

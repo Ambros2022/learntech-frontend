@@ -3,9 +3,9 @@ import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-import axios1 from 'src/configs/axios'
+import axios1 from 'src/configs/adminaxios'
 const Home = () => {
-  console.log(axios1, "main");
+ 
   if (axios1.defaults.headers.common["x-access-token"]) {
     console.log("x-access-token header is set:", axios1.defaults.headers.common["x-access-token"]);
   } else {

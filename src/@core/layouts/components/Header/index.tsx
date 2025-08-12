@@ -578,7 +578,7 @@ const Header = () => {
                 </Link>
                 <ul className='dropdown-menu another-item' aria-labelledby='navbarDropdownMenuLink'>
                   <li className='nav-items-select'>
-                    <Link className='d-flex justify-content-between dropdown-item ' href='/about-us'>
+                    <Link className='d-flex justify-content-between dropdown-item ' href='/about-us/'>
                       About US
                     </Link>
                   </li>
