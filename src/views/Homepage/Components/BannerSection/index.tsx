@@ -228,7 +228,16 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                 </div>
                 <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" style={{ zIndex: '41' }}>
                   <div className="searchForm">
-                    <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
+                    {/* <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2> */}
+                    <h2
+  className="pb-3 fw-bold text-center text-blue"
+  style={{
+    minHeight: '2.5rem', // reserves height
+    lineHeight: '1.2',   // prevents reflow
+  }}
+>
+  Start Your Journey with Expert Guidance!
+</h2>
                     <Formik
                       initialValues={{
                         name: '',
