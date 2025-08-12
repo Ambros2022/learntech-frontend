@@ -1,5 +1,4 @@
-
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 import { useRouter } from 'next/router'
 
 // ** Layout Import
@@ -7,22 +6,20 @@ import FrontLayout from 'src/@core/layouts/FrontLayout'
 import Spinner from 'src/@core/components/spinner'
 import InnerNewsPage from 'src/views/InnerNewsPage'
 
-const news = () => {
+const NewsContent = () => {
   const router = useRouter()
-  const [isRouterReady, setIsRouterReady] = useState(false)
 
-  useEffect(() => {
-    if (router.isReady) {
-      setIsRouterReady(true)
-    }
-  }, [router.isReady])
-
-  if (!isRouterReady) {
-    return <Spinner />
+  if (!router.isReady) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Spinner />
+      </div>
+    )
   }
 
   const { slug } = router.query
-console.log("inner newspage");
+
+
   return (
     <>
       {Array.isArray(slug) && slug.length <= 2 && (
@@ -32,10 +29,9 @@ console.log("inner newspage");
   )
 }
 
-news.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+const News = () => <NewsContent />
 
-news.guestGuard = true
+News.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+News.guestGuard = true
 
-export default news
-
-
+export default News

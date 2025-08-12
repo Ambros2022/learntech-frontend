@@ -1,35 +1,31 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 // ** Layout Import
 import FrontLayout from 'src/@core/layouts/FrontLayout'
-import { useRouter } from 'next/router';
-import Spinner from 'src/@core/components/spinner';
+import { useRouter } from 'next/router'
+import Spinner from 'src/@core/components/spinner'
 import InnerBlogPage from 'src/views/InnerBlogpage'
 
-const Blog = () => {
-  const router = useRouter();
-  const [isRouterReady, setIsRouterReady] = useState(false);
+const BlogContent = () => {
+  const router = useRouter()
 
-  useEffect(() => {
-    if (router.isReady) {
-      setIsRouterReady(true);
-    }
-  }, [router.isReady]);
-
-  if (!isRouterReady) {
-    return <Spinner />; // Or a loading spinner
+  if (!router.isReady) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Spinner />
+      </div>
+    )
   }
 
-  return (
-    <>
-      {Array.isArray(router.query.slug) && router.query.slug.length <= 2 && (
-        <InnerBlogPage id={router.query.slug[0]} />
-      )}
-    </>
-  );
-};
+  if (Array.isArray(router.query.slug) && router.query.slug.length <= 2) {
+    return <InnerBlogPage id={router.query.slug[0]} />
+  }
 
-Blog.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>;
+  return null
+}
 
-Blog.guestGuard = true;
+const Blog = () => <BlogContent />
 
-export default Blog;
+Blog.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
+Blog.guestGuard = true
+
+export default Blog

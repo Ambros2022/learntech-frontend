@@ -11,6 +11,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import SchoolBannerSec from './Components/SchoolBannerSec'
+import { CircularProgress, Box } from '@mui/material';
 
 
 function InnerSchoolPage({ id }) {
@@ -81,8 +82,17 @@ function InnerSchoolPage({ id }) {
           )}
         </script>
       </Head>
-      {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CollegeInfoSection data={pagedata} />}
+      <BannerSection data={pagedata} />
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          {pagedata && <CollegeInfoSection data={pagedata} />}
+        </>
+      )}
+
       {!loading && pagedata && <FacilitiesSection data={pagedata} />}
       {!loading && pagedata && <SchoolBannerSec data={pagedata} />}
       {!loading && pagedata && <LocationSection data={pagedata} />}

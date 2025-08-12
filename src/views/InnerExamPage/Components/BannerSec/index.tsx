@@ -7,7 +7,7 @@ import NewsLinkSection from '../NewsLinkSection';
 
 function BannerSec({ data }) {
 
-    const examDate = data.upcoming_date ? format(new Date(data.upcoming_date), 'd MMM yyyy') : 'Date not available';
+    const examDate = data?.upcoming_date ? format(new Date(data?.upcoming_date), 'd MMM yyyy') : 'Date not available';
 
     return (
         <>
@@ -21,8 +21,8 @@ function BannerSec({ data }) {
                                         <div className="col-md-2 text-center  mx-md-0 mx-auto d-flex justify-content-center">
                                             <div className='innerClgImg'>
                                                 <img
-                                                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.logo}`}
-                                                    alt={data.name}
+                                                    src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data?.logo}`}
+                                                    alt={data?.name}
                                                     width="100"
                                                     height="100"
                                                     loading="lazy"
@@ -35,7 +35,7 @@ function BannerSec({ data }) {
                                             <div className="align-content-center">
                                                 <div className="p-lg-3">
                                                     <h1 className="fw-bold text-white card-title py-3 py-md-0">
-                                                        {data.exam_title} Exam : {examDate}
+                                                        {data?.exam_title} Exam : {examDate}
                                                     </h1>
                                                 </div>
 
@@ -49,7 +49,7 @@ function BannerSec({ data }) {
 
                                     <div className='text-md-end text-center'>
                                         <GlobalEnquiryForm
-                                            buttonText={<><i className="bi bi-bell-fill"></i> Get {data.exam_title} Alert</>}
+                                            buttonText={<><i className="bi bi-bell-fill"></i> Get {data?.exam_title} Alert</>}
                                             className="btn alertExamBtn"
                                         />
                                     </div>
@@ -65,7 +65,7 @@ function BannerSec({ data }) {
 
             <div className="bg-white">
                 <section className='container InnerCollegeNavigationLink linkFontSize py-3'>
-                    <p className='mb-3 '><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={"/exams"}> Exams <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data.exam_title}</span></p>
+                    <p className='mb-3 '><Link href="/">Home <i className='bi bi-chevron-right'></i></Link><Link href={"/exams"}> Exams <i className='bi bi-chevron-right'></i></Link><span className='text-blue' style={{ cursor: 'pointer' }}> {data?.exam_title}</span></p>
                 </section>
             </div>
         </>

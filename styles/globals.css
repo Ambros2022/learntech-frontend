@@ -4111,11 +4111,17 @@
     object-fit: cover;
   }
 
-  .blogBannerSec {
+  /* .blogBannerSec {
     height: 300px !important;
     background-image: url('/images/icons/BannerBG.webp') !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
+  } */
+
+  .blogBannerSec {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
   }
 
 
@@ -6505,5 +6511,13 @@
 
   /* ----bams landing page--- */
 
+    .clsheight .collegeDetailCard{
+    min-height: 270px !important;
+  }
+  @media (max-width: 768px) {
+  .clsheight .collegeDetailCard{
+    min-height: 550px !important;
+  }
 
 
+  }

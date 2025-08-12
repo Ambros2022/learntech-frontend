@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import React, { useState, useEffect } from 'react';
+
+const Toster = dynamic(() => import('src/@core/components/popup/Toster'), { ssr: false })
 const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), {
   ssr: false, loading: () =>
     <a className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
@@ -149,6 +151,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <Toster />
       </footer>
     </>
   );

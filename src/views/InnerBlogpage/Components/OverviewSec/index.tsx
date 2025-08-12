@@ -12,7 +12,7 @@ const OverviewSec = ({ data , newsData , blogsData }) => {
                 <h6>Team Learntech | {createdAt}</h6> */}
                 <div className="row">
                     <div className="col-md-8">
-                        <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.overview }} /></p>
+                        <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data?.overview }} /></p>
                      
 
                     </div>

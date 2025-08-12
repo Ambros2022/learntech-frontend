@@ -93,7 +93,7 @@ function InnerUniversityPage({ id }) {
 
       {/* Show loading spinner while fetching data */}
       {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
           <CircularProgress />
         </Box>
       ) : (

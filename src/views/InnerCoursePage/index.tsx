@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import OrganizationSection from './Components/OrganizationalSec';
 import ExperTraineeSec from './Components/ExpertTrainneSec';
 import Testimonial from './Components/TestimonialSec'
+import { Box, CircularProgress } from '@mui/material'
 
 function InnerCoursePage({ id }) {
   const router = useRouter();
@@ -135,16 +136,23 @@ function InnerCoursePage({ id }) {
           </script>
         )}
       </Head>
-      {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <OverviewSection data={pagedata} collegedata={colleges} examdata={exams} />}
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          <BannerSection data={pagedata} />
+          <OverviewSection data={pagedata} collegedata={colleges} examdata={exams} />
+          <OtherCourses streamdata={streams} />
+          {testdata && testdata.length > 0 && <Testimonial testimonials={testdata} />}
+          <OrganizationSection data={pagedata} />
+          <ExperTraineeSec data={pagedata} />
+          <ExpertSection />
 
+        </>)
+      }
 
-
-      <OtherCourses streamdata={streams} />
-      {testdata && testdata.length > 0 && <Testimonial testimonials={testdata} />}
-      <OrganizationSection data={pagedata} />
-      <ExperTraineeSec data={pagedata} />
-      <ExpertSection />
     </>
   );
 }

@@ -92,9 +92,11 @@ function InnerBlogPage({ id }) {
                 <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
             </Head>
-            {!loading && pagedata && <BannerSec data={pagedata} createdAt={createdAt} />}
-            {!loading && pagedata && <OverviewSec data={pagedata}  newsData={newsData}
-                blogsData={blogsData} />}
+            <BannerSec data={pagedata} createdAt={createdAt} />
+            {/* {!loading && pagedata && <BannerSec data={pagedata} createdAt={createdAt} />} */}
+
+            <OverviewSec data={pagedata} newsData={newsData}
+                blogsData={blogsData} />
 
             {!loading && pagedata && <ExpertSec data={pagedata} />}
 

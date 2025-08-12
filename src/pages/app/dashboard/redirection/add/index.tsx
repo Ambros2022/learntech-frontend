@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import AddEditFormnew from 'src/views/app/dashboard/recognition/AddEditForm'
+import AddEditFormnew from 'src/views/app/dashboard/redirection/AddEditForm'
 import CardContent from '@mui/material/CardContent'
 
 

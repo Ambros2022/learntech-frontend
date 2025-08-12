@@ -21,35 +21,35 @@ function OverviewSec({ data }) {
 
 
   const items = [
-    { id: 'info', label: 'OVERVIEW', content: data.overview },
-    { id: 'exams', label: 'EXAM DATES', content: data.exam_dates },
-    { id: 'eligibility', label: 'ELIGIBILITY & REGISTRATION', content: data.eligibility_criteria },
-    { id: 'admitcard', label: 'ADMIT CARD', content: data.admit_card },
-    { id: 'examcenters', label: 'EXAM CENTRES', content: data.exam_centers },
-    { id: 'syllabus', label: 'EXAM PATTERN & SYLLABUS', content: data.syllabus },
-    { id: 'results', label: 'RESULT', content: data.results },
-    { id: 'cutoff', label: 'CUTOFF', content: data.cutoff },
-    { id: 'counseling', label: 'COUNSELLING', content: data.counseling },
-    { id: 'prepretiontips', label: 'PREPARATION TIPS', content: data.prepretion_tips },
-    { id: 'acceptcolleges', label: 'ACCEPTING COLLEGES', content: data.accept_colleges },
-    { id: 'gallery', label: 'GALLERY', content: data.clggallery },
+    { id: 'info', label: 'OVERVIEW', content: data?.overview },
+    { id: 'exams', label: 'EXAM DATES', content: data?.exam_dates },
+    { id: 'eligibility', label: 'ELIGIBILITY & REGISTRATION', content: data?.eligibility_criteria },
+    { id: 'admitcard', label: 'ADMIT CARD', content: data?.admit_card },
+    { id: 'examcenters', label: 'EXAM CENTRES', content: data?.exam_centers },
+    { id: 'syllabus', label: 'EXAM PATTERN & SYLLABUS', content: data?.syllabus },
+    { id: 'results', label: 'RESULT', content: data?.results },
+    { id: 'cutoff', label: 'CUTOFF', content: data?.cutoff },
+    { id: 'counseling', label: 'COUNSELLING', content: data?.counseling },
+    { id: 'prepretiontips', label: 'PREPARATION TIPS', content: data?.prepretion_tips },
+    { id: 'acceptcolleges', label: 'ACCEPTING COLLEGES', content: data?.accept_colleges },
+    { id: 'gallery', label: 'GALLERY', content: data?.clggallery },
     {
       id: 'faq',
       label: 'FAQ',
-      content: data.examfaqs && data.examfaqs.length > 0 ? <FaqSec data={data.examfaqs} /> : null
+      content: data?.examfaqs && data?.examfaqs.length > 0 ? <FaqSec data={data?.examfaqs} /> : null
     },
   ].filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>'); ''
 
 
 
-  const [activeTab, setActiveTab] = useState(items[0].id);
+  const [activeTab, setActiveTab] = useState(items[0]?.id);
 
 
   const getPromobanner = useCallback(async () => {
     try {
       const response = await axios.get('api/website/banner/get?promo_banner=All_Exam_page');
       if (isMountedRef.current) {
-        setPromoban(response.data.data);
+        setPromoban(response.data?.data);
       }
     } catch (error) {
       console.error('Failed to fetch trending courses:', error);
@@ -94,7 +94,7 @@ function OverviewSec({ data }) {
       const currentDate = new Date(); // Get the current date and time
 
       // Map and format exam data
-      const examData = response.data.data.map((exam: any) => ({
+      const examData = response.data?.data?.map((exam: any) => ({
         id: exam.id,
         title: exam.exam_title,
         slug: exam.slug,
