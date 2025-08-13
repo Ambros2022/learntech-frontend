@@ -28,8 +28,8 @@ const contactbanner = '/images/bams/contactbanner.webp';
 // import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-
+import { Field, Form, Formik } from 'formik';
+// ErrorMessage, 
 import { toast } from 'react-hot-toast';
 import axios from 'src/configs/axios';
 
@@ -168,6 +168,7 @@ const BamsPage = () => {
     const handleShow1 = () => setShow1(true);
     const [expanded, setExpanded] = useState(false);
 
+    
     const navigate = (id, offset = 0) => {
         const elementToView = document.getElementById(id);
         if (elementToView) {
