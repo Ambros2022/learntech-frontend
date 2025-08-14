@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react';
-import { Roboto } from 'next/font/google'; // 1. Import font properly
+import Head from 'next/head';
+import { Roboto } from 'next/font/google';
 import NewsList from '../newsList';
 import BlogList from '../blogsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
 
-// Load Google Font with proper swap display to avoid CLS
+// Load Roboto locally (avoids CLS from late font swap)
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
-  display: 'swap', // ensures fallback text is shown instantly
+  display: 'swap',
 });
 
-// Function to ensure images reserve space
+// Fix images by adding width/height & aspect ratio
 function fixImages(html) {
   if (!html) return '';
 
@@ -22,7 +23,7 @@ function fixImages(html) {
     const width = widthMatch ? parseInt(widthMatch[1], 10) : 600;
     const height = heightMatch ? parseInt(heightMatch[1], 10) : 400;
 
-    // Reserve aspect ratio for responsive images
+    // Maintain aspect ratio and prevent CLS
     const style = `style="width:100%;height:auto;aspect-ratio:${width}/${height};object-fit:cover;"`;
 
     return `<img width="${width}" height="${height}" ${style} ${group}>`;
@@ -33,33 +34,46 @@ const OverviewSec = ({ data, newsData, blogsData }) => {
   const processedHTML = useMemo(() => fixImages(data?.overview), [data?.overview]);
 
   return (
-    <section className={`innerBlogSec bg-white pt-3 ${roboto.className}`}>
-      <div className="container">
-        <div className="row">
-          {/* Left Column - Overview */}
-          <div className="col-md-8">
-            <div
-              className="text-black"
-              style={{ minHeight: '500px' }} // Reserve space to avoid CLS
-              dangerouslySetInnerHTML={{ __html: processedHTML }}
-            />
-          </div>
+    <>
+      {/* Preload the font that Lighthouse flagged for CLS */}
+      <Head>
+        <link
+          rel="preload"
+          href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5Q.woff2" // Replace with exact URL from Lighthouse report
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </Head>
 
-          {/* Right Column - Sidebar */}
-          <div className="col-md-4">
-            <div className="mb-3" style={{ minHeight: '200px' }}>
-              <ContactForm heading={'Get More Details'} />
+      <section className={`innerBlogSec bg-white pt-3 ${roboto.className}`}>
+        <div className="container">
+          <div className="row">
+            {/* Left Column */}
+            <div className="col-md-8">
+              <div
+                className="text-black"
+                style={{ minHeight: '500px' }}
+                dangerouslySetInnerHTML={{ __html: processedHTML }}
+              />
             </div>
-            <div style={{ minHeight: '300px' }}>
-              <BlogList blogItems={blogsData} heading={'Latest Blogs'} />
-            </div>
-            <div style={{ minHeight: '300px' }}>
-              <NewsList newsItems={newsData} heading={'Latest News'} />
+
+            {/* Right Column */}
+            <div className="col-md-4">
+              <div className="mb-3" style={{ minHeight: '200px' }}>
+                <ContactForm heading={'Get More Details'} />
+              </div>
+              <div style={{ minHeight: '300px' }}>
+                <BlogList blogItems={blogsData} heading={'Latest Blogs'} />
+              </div>
+              <div style={{ minHeight: '300px' }}>
+                <NewsList newsItems={newsData} heading={'Latest News'} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
