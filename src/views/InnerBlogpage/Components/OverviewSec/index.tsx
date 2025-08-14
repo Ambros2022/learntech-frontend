@@ -8,25 +8,21 @@ function fixImages(html) {
   if (!html) return '';
 
   return html.replace(/<img(.*?)>/g, (match, group) => {
-    let hasWidth = /width=/.test(group);
-    let hasHeight = /height=/.test(group);
-
-    // Extract width and height if present
+    // Extract width and height if present in original tag
     let widthMatch = group.match(/width=["']?(\d+)["']?/);
     let heightMatch = group.match(/height=["']?(\d+)["']?/);
 
-    let width = widthMatch ? widthMatch[1] : 600;
-    let height = heightMatch ? heightMatch[1] : 400;
+    let width = widthMatch ? parseInt(widthMatch[1], 10) : 600; // default width
+    let height = heightMatch ? parseInt(heightMatch[1], 10) : 400; // default height
 
-    // Add inline style to preserve aspect ratio
-    let style = `style="width:${width}px;height:${height}px;object-fit:cover;"`;
+    // Inline style for responsive image with reserved aspect ratio
+    let style = `style="width:100%;height:auto;aspect-ratio:${width}/${height};object-fit:cover;"`;
 
-    // If width/height not present, add them
-    let newTag = `<img width="${width}" height="${height}" ${style} ${group}>`;
-
-    return newTag;
+    // Return updated <img> with guaranteed width/height + style
+    return `<img width="${width}" height="${height}" ${style} ${group}>`;
   });
 }
+
 
 const OverviewSec = ({ data, newsData, blogsData }) => {
   const processedHTML = useMemo(
