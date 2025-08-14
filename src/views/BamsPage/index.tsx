@@ -177,7 +177,7 @@ const BamsPage = () => {
                 top: offsetTop - offset,
                 behavior: "smooth"
             });
-            setExpanded(false); // Collapse the navbar after clicking any link
+            setExpanded(false);
         } else {
             console.error("Element not found:", id);
         }
