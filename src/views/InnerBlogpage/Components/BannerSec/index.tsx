@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-
+import { Roboto } from "next/font/google";
+const roboto = Roboto({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap", // keeps text visible while font loads
+});
 const BannerSec = ({ data, createdAt }) => {
   return (
     <>
@@ -24,7 +29,7 @@ const BannerSec = ({ data, createdAt }) => {
             <span className="px-2 d-none d-md-inline">|</span> {createdAt}
           </h6>
         </div> */}
-<div
+{/* <div
   className="container d-flex h-100 w-100 justify-content-center flex-column align-content-center text-center position-relative"
   style={{ minHeight: '300px' }} // hero height lock
 >
@@ -41,7 +46,34 @@ const BannerSec = ({ data, createdAt }) => {
     Team Learntech <br className="d-block d-md-none" />
     <span className="px-2 d-none d-md-inline">|</span> {createdAt}
   </p>
-</div>
+</div> */}
+  <div
+      className={`container d-flex h-100 w-100 justify-content-center flex-column align-content-center text-center position-relative ${roboto.className}`}
+      style={{ minHeight: "300px" }}
+    >
+      <h1 className="fw-bold text-white mb-3" style={{ minHeight: "3rem" }}>
+        {data?.name}
+      </h1>
+      {/* <p
+        className="text-white pt-3 pt-md-0 fw-semibold"
+        style={{ minHeight: "2rem", margin: 0 }}
+      >
+        Team Learntech <br className="d-block d-md-none" />
+        <span className="px-2 d-none d-md-inline">|</span> {createdAt}
+      </p> */}
+
+      <p
+  className="text-white pt-3 pt-md-0 fw-semibold"
+  style={{
+    minHeight: "2rem",     // reserves space for 1 line
+    lineHeight: "2rem",    // matches minHeight so text box doesn't grow/shrink
+    margin: 0
+  }}
+>
+  Team Learntech <br className="d-block d-md-none" />
+  <span className="px-2 d-none d-md-inline">|</span> {createdAt}
+</p>
+    </div>
 
       </section>
 
