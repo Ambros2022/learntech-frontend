@@ -33,7 +33,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
             </Modal>
 
         );
-    }
+    } 
 
     return (
         <>
