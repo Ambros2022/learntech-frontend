@@ -42,6 +42,8 @@ const validationSchema = Yup.object().shape({
     ),
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),
+  terms: Yup.boolean()
+  .oneOf([true], "You must accept the terms and conditions"),
 });
 
 const BannerSection = ({ banners }: { banners: any[] }) => {
@@ -228,7 +230,9 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                 </div>
                 <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" style={{ zIndex: '41' }}>
                   <div className="searchForm">
-                    <h2 className="pb-3 fw-bold text-center text-blue">Start Your Journey with Expert Guidance!</h2>
+                    <h2 className="pb-3 fw-bold text-center text-blue">
+                      Start Your Journey with Expert Guidance!
+                    </h2>
                     <Formik
                       initialValues={{
                         name: '',
@@ -237,6 +241,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                         current_url: '',
                         course: '',
                         location: '',
+                        terms: false, // ✅ add terms field
                       }}
                       validationSchema={validationSchema}
                       onSubmit={handleSubmit}
@@ -247,28 +252,45 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                           <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
                           <ErrorMessage name="name" component="div" className="error text-danger" />
                         </div>
+
                         <div className="mb-3">
                           <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
                           <ErrorMessage name="email" component="div" className="error text-danger" />
                         </div>
+
                         <div className="mb-3">
                           <PhoneInputField name="contact_number" />
                           <ErrorMessage name="contact_number" component="div" className="error text-danger" />
                         </div>
+
                         <div className="mb-3">
                           <Field type="text" name="course" placeholder="Course in mind" className="form-control" />
                           <ErrorMessage name="course" component="div" className="error text-danger" />
                         </div>
+
                         <div className="mb-3">
                           <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
                           <ErrorMessage name="location" component="div" className="error text-danger" />
                         </div>
+
+                        {/* ✅ Terms & Conditions Checkbox */}
+                        <div className="mb-3 form-check">
+                          <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
+                          <label className="form-check-label" htmlFor="terms">
+                            By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
+                          </label>
+                          <ErrorMessage name="terms" component="div" className="error text-danger" />
+                        </div>
+
                         <div className="d-grid">
-                          <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">Submit</button>
+                          <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">
+                            Submit
+                          </button>
                         </div>
                       </Form>
                     </Formik>
                   </div>
+
                 </div>
               </div>
             </div>
