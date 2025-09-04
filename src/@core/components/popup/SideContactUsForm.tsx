@@ -5,6 +5,7 @@ import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import Link from 'next/link';
 interface Props {
     page?: any;
     onChanges?: any;
@@ -34,6 +35,8 @@ const SideContactUsForm: FC<Props> = ({ }) => {
         location: Yup.string().required('Location is required').trim(),
         course: Yup.string().required('Course is required').trim(),
         message: Yup.string().trim(),
+        terms: Yup.boolean()
+            .oneOf([true], "You must accept the terms and conditions"),
     });
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -76,6 +79,7 @@ const SideContactUsForm: FC<Props> = ({ }) => {
                 message: '',
                 course: '',
                 location: '',
+                terms: false,
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -105,6 +109,13 @@ const SideContactUsForm: FC<Props> = ({ }) => {
                 <div className="mb-3">
                     <Field as="textarea" name="message" placeholder="Type your message" className="form-control" />
                     <ErrorMessage name="message" component="div" className="error text-danger" />
+                </div>
+                <div className="mb-3 form-check">
+                    <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
+                    <label className="form-check-label" htmlFor="terms">
+                        By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
+                    </label>
+                    <ErrorMessage name="terms" component="div" className="error text-danger" />
                 </div>
 
                 <div className="d-grid pb-3">

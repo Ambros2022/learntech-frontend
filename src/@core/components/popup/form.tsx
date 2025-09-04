@@ -6,6 +6,7 @@ import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import Link from 'next/link';
 
 interface Props {
     page?: any;
@@ -48,21 +49,23 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-          contact_number: Yup.string()
+        contact_number: Yup.string()
             .required("Phone Number is required")
             .test(
-              "is-valid-contact",
-              "Enter valid 10 digits Number",
-              function (value) {
-                if (!value) return false;
-                if (value.startsWith("+91-")) {
-                  return /^\+91-\d{10}$/.test(value); // Apply strict rule for +91-
+                "is-valid-contact",
+                "Enter valid 10 digits Number",
+                function (value) {
+                    if (!value) return false;
+                    if (value.startsWith("+91-")) {
+                        return /^\+91-\d{10}$/.test(value); // Apply strict rule for +91-
+                    }
+                    return true; // Accept other formats (other country codes)
                 }
-                return true; // Accept other formats (other country codes)
-              }
             ),
         course: Yup.string().required(`${placeholder || 'Course'} is required`).trim(),
         location: Yup.string().required('Location is required').trim(),
+        terms: Yup.boolean()
+            .oneOf([true], "You must accept the terms and conditions"),
         // message: Yup.string().required('Message is required'),
     });
 
@@ -106,6 +109,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
                 course: '',
                 location: '',
                 message: '',
+                terms: false,
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -134,6 +138,14 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
                 <div className="mb-3">
                     <Field as="textarea" name="message" placeholder="Enter Message" className="form-control" />
                     <ErrorMessage name="message" component="div" className="error text-danger" />
+                </div>
+                {/* ✅ Terms & Conditions Checkbox */}
+                <div className="mb-3 form-check">
+                    <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
+                    <label className="form-check-label" htmlFor="terms">
+                        By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
+                    </label>
+                    <ErrorMessage name="terms" component="div" className="error text-danger" />
                 </div>
                 <div className="d-grid">
                     <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">

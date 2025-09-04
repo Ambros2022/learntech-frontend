@@ -5,6 +5,7 @@ import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import Link from 'next/link';
 interface Props {
     page?: any;
     onChanges?: any;
@@ -22,6 +23,8 @@ const contact_numberPageUsForm: FC<Props> = ({ }) => {
         course: Yup.string().required('Preferred course is required'),
         college: Yup.string().notRequired(), // College is optional
         message: Yup.string().notRequired(), // Message is optional
+        terms: Yup.boolean()
+            .oneOf([true], "You must accept the terms and conditions"),
     });
 
 
@@ -33,6 +36,7 @@ const contact_numberPageUsForm: FC<Props> = ({ }) => {
         course: '',
         college: '',
         message: '',
+        terms: false,
     };
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -102,6 +106,13 @@ const contact_numberPageUsForm: FC<Props> = ({ }) => {
                     <div className="mb-3">
                         <Field as="textarea" className='form-control' name='message' placeholder='Type your message' />
                         {errors.message && touched.message ? <div className="text-danger">{errors.message}</div> : null}
+                    </div>
+                    <div className="mb-3 form-check">
+                        <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
+                        <label className="form-check-label" htmlFor="terms">
+                            By Clicking this, I agree to the <Link href="/terms-and-conditions"  >Terms & Conditions</Link>
+                        </label>
+                        {errors.terms && touched.terms ? <div className="text-danger">{errors.terms}</div> : null}
                     </div>
                     <div className="mb-3 text-center">
                         <button type="submit" className='btn submitBtn'>Submit</button>

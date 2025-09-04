@@ -5,6 +5,7 @@ import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import Link from 'next/link';
 
 
 interface Props {
@@ -973,6 +974,8 @@ const EducationLoanPage: FC<Props> = ({ }) => {
         city: Yup.string().required('City selection is required'),
         bank: Yup.string().required('Bank selection is required'),
         notes: Yup.string().max(500, 'Notes must be 500 characters or less').required('Notes is required'),
+        terms: Yup.boolean()
+            .oneOf([true], "You must accept the terms and conditions"),
     });
 
 
@@ -1014,6 +1017,7 @@ const EducationLoanPage: FC<Props> = ({ }) => {
                 city: '',
                 bank: '',
                 notes: '',
+                terms: false,
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -1150,6 +1154,13 @@ const EducationLoanPage: FC<Props> = ({ }) => {
                         <div className="col-lg-12 mb-3">
                             <Field as="textarea" name="notes" className='form-control' placeholder='Notes' />
                             <ErrorMessage name="notes" component="div" className="text-danger" />
+                        </div>
+                        <div className="mb-3 form-check">
+                            <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
+                            <label className="form-check-label" htmlFor="terms">
+                                By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
+                            </label>
+                            <ErrorMessage name="terms" component="div" className="error text-danger" />
                         </div>
                         <div className='text-center'>
                             <button type="submit" className='btn submitBtn' disabled={isSubmitting}>Submit</button>
