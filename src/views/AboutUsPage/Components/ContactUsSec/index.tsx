@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import axios from 'src/configs/axios';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 const PhoneInputField = dynamic(() => import("src/@core/components/popup/PhoneInput"), { ssr: false });
 // import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 
@@ -19,6 +20,8 @@ const ContactUsSec = () => {
         courseInMind: Yup.string().required('Course In Mind is required').trim(),
         location: Yup.string().required('Location is required').trim(),
         message: Yup.string().trim(),
+        terms: Yup.boolean()
+            .oneOf([true], "You must accept the terms and conditions"),
     });
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -72,6 +75,7 @@ const ContactUsSec = () => {
                                     courseInMind: '',
                                     location: '',
                                     message: '',
+                                    terms: false,
                                 }}
                                 validationSchema={validationSchema}
                                 onSubmit={handleSubmit}
@@ -126,6 +130,13 @@ const ContactUsSec = () => {
                                                 placeholder="Type your message"
                                             />
                                             <ErrorMessage name="message" component="div" className="text-danger" />
+                                        </div>
+                                        <div className="mb-3 form-check">
+                                            <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
+                                            <label className="form-check-label text-white" htmlFor="terms">
+                                                By Clicking this, I agree to the <Link href="/terms-and-conditions" className='text-warning' >Terms & Conditions</Link>
+                                            </label>
+                                            <ErrorMessage name="terms" component="div" className="error text-danger" />
                                         </div>
                                         <div className="text-center">
                                             <button type="submit" className="btn btn-success btn-lg">Submit</button>

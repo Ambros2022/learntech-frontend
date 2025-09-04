@@ -10,7 +10,7 @@ const CareerSec = () => {
         <section className='bg-white py-5 careerLink'>
             <div className="container">
                 <div className="row">
-                    <div className="col-xl-6 col-md-6 mb-md-0 mb-3">
+                    <div className="col-xl-6 col-md-6 mb-md-0 mb-3 section1">
                         <div className='bg-blue p-md-4 p-3 h-100 rounded'>
                             <h2 className="fw-bold text-white">Connect with Our Expert Advisors</h2>
                             <p className='text-white mb-5'>Fill and submit the form to initiate a conversation with our expert advisors, who will promptly reach out to provide insightful guidance and tailored support for your inquiries.

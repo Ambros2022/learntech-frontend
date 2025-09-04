@@ -5,6 +5,7 @@ import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import Link from 'next/link';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required('Full Name is required').trim(),
@@ -14,6 +15,8 @@ const validationSchema = Yup.object().shape({
     country: Yup.string().required('Preferred Country is required').trim(),
     college: Yup.string().notRequired().trim(),
     message: Yup.string().notRequired().trim(),
+    terms: Yup.boolean()
+        .oneOf([true], "You must accept the terms and conditions"),
 });
 
 const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) => {
@@ -29,6 +32,7 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
         country: '',
         college: '',
         message: '',
+        terms: false,
     };
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -126,6 +130,13 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
                                     </div>
                                     <div className="mb-3">
                                         <Field as="textarea" className='form-control' name='message' placeholder='Type your message' />
+                                    </div>
+                                    <div className="mb-3 form-check">
+                                        <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
+                                        <label className="form-check-label" htmlFor="terms">
+                                            By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
+                                        </label>
+                                        <ErrorMessage name="terms" component="div" className="error text-danger" />
                                     </div>
                                     <div className="mb-3 text-center">
                                         <button type="submit" className='btn submitBtn'>Make me a Doctor!</button>
