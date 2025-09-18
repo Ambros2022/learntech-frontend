@@ -17,6 +17,8 @@ const InfoSec = ({ data }) => {
     const [loading, setLoading] = useState(true); // State to manage loading status
     console.log(data?.id, "data1");
 
+    // console.log("InfoSec data object:", data);
+
     const getNews = useCallback(async () => {
         setNewsData([]);
         try {
@@ -65,7 +67,11 @@ const InfoSec = ({ data }) => {
                 <div className="row pt-3 pt-md-3 pb-0">
 
                     <div className="col-md-9 mb-3">
-                        <h1 className='text-blue fw-bold'>{data.meta_title}</h1>
+                        {/* <h1 className='text-blue fw-bold'>{data.meta_title}</h1>     */}
+                        <h1 className='text-blue fw-bold'>{data?.name}</h1>    
+
+
+
                     </div>
                     {data.pdf_file && data.pdf_name && (
                         <div className="col-md-3 pb-3 pb-md-0">

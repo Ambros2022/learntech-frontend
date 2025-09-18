@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import EnquiryForm from 'src/@core/components/popup/form';
+import Image from 'next/image';
 
 
 interface Props {
@@ -32,7 +33,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
             </Modal>
 
         );
-    }
+    } 
 
     return (
         <>
@@ -47,7 +48,15 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                         pagename == 'Brochure' ?
 
                             <a onClick={() => setModalShow(true)} className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
-                                <img src="/images/icons/DownloadBrochure.webp" className='mb-md-0 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" loading="lazy" />
+                                {/* <img src="/images/icons/DownloadBrochure.webp" className='mb-md-0 my-3 mb-md-0 my-md-0' width={150} height={70} alt="download-brochure-icon" loading="lazy" /> */}
+<Image
+  src="/images/icons/DownloadBrochure.webp"
+  alt="Download Brochure Icon"
+  width={150}
+  height={70}
+  priority={false} // keep lazy-like behavior
+  style={{ maxWidth: '100%', height: 'auto' }}
+/>
 
                             </a>
                             :
