@@ -28,8 +28,8 @@ const contactbanner = '/images/bams/contactbanner.webp';
 // import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-
+import { Field, Form, Formik } from 'formik';
+// ErrorMessage, 
 import { toast } from 'react-hot-toast';
 import axios from 'src/configs/axios';
 
@@ -59,40 +59,7 @@ const BamsPage = () => {
         description: '',
     };
 
-    // const handleSubmit = (values, { resetForm }) => {
-    //     console.log('Form Values:', values);
-    //     resetForm();
-    // };
-
-
-    // const handleSubmit = async (values, { resetForm }) => {
-    //     try {
-    //         toast.loading('Processing');
-    //         // Prepare FormData as you did
-    //         const formData = new FormData();
-    //         formData.append('name', values.name);
-    //         formData.append('email', values.email);
-    //         formData.append('contact', values.contact); 
-    //         formData.append('location', values.location);
-    //         formData.append('neetrank', values.neetrank);
-    //         formData.append('current_url', window.location.href);
-    //         formData.append('description', values.message);
-    //         const response = await axios.post('api/website/landingpage/enquiry', formData);
-
-    //         console.log('Response status:', response.status);
-
-    //         if (response.status === 200) {
-    //             toast.dismiss();
-    //             toast.success('Thank you. We will get back to you.');
-    //             resetForm();
-    //             console.log('Redirecting...');
-    //             router.push('/thank-you');
-    //         }
-    //     } catch (error) {
-    //         toast.error('try again later!');
-    //         console.error('Error submitting form:', error);
-    //     }
-    // };
+   
 
     const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -201,6 +168,7 @@ const BamsPage = () => {
     const handleShow1 = () => setShow1(true);
     const [expanded, setExpanded] = useState(false);
 
+    
     const navigate = (id, offset = 0) => {
         const elementToView = document.getElementById(id);
         if (elementToView) {
@@ -209,7 +177,7 @@ const BamsPage = () => {
                 top: offsetTop - offset,
                 behavior: "smooth"
             });
-            setExpanded(false); // Collapse the navbar after clicking any link
+            setExpanded(false);
         } else {
             console.error("Element not found:", id);
         }
@@ -371,7 +339,7 @@ const BamsPage = () => {
                                         className="f700 pb-2 bams-font20"
                                         style={{ color: 'white', textAlign: 'center' }}
                                     >
-
+                                        
                                         Fill Out the Form to Get Assistance in Securing Your BAMS Seat for
                                         A.Y. 2025-26
 

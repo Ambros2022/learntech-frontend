@@ -78,9 +78,9 @@ function ExploreSection() {
   return (
     <section className="exploreCon" >
       <div className="container  py-4 py-md-5">
-        <h2 className="fw-bold text-blue text-center mb-4">
+        <h1 className="fw-bold text-blue text-center mb-4 h2sizeadded">
           Discover Colleges, Courses and Exams that Matches with Your Aspirations
-        </h2>
+        </h1>
         <div className="d-flex exploreNav justify-content-center mb-4" role="tablist">
           <a
             className={`btn ${activeTab === 'Colleges' ? 'active' : ''}`}

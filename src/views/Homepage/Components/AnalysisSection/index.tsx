@@ -27,7 +27,17 @@ function AnalysisSection() {
                 {/* <Image src="/images/icons/applications-filled.svg" width={70} height={70} alt="applications-filled-icon" /> */}
               </div>
               <div className="col-md-9 col-8 text-start mt-2 mt-md-0">
-                <h4 className="fw-bold" style={{ minHeight: 30 }}><AnimatedCounter /></h4>
+                {/* <h4 className="fw-bold" style={{ minHeight: 30 }}><AnimatedCounter /></h4> */}
+                <h4
+  className="fw-bold"
+  style={{
+    minHeight: 30,
+    minWidth: '8ch', // enough for "500,000+"
+    display: 'inline-block'
+  }}
+>
+  <AnimatedCounter />
+</h4>
                 <h6> Admission Success</h6>
               </div>
             </div>

@@ -162,7 +162,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                 <div className="col-md-6 col-lg-6 mb-5 d-flex"  >
                   <div className="searchSec align-content-center" style={{ zIndex: '40' }}>
                     <div className="outlineSec">
-                      <h1 className="fw-bold text-blue mb-3">Unlock a World of Academic Opportunities</h1>
+                      <h3 className="fw-bold text-blue mb-3 searchnewh3">Unlock a World of Academic Opportunities</h3>
                       <div className="row">
                         <div className="col-12 position-relative ">
                           <Autocomplete
