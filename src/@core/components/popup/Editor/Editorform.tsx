@@ -5,6 +5,7 @@ import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
 
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import Link from 'next/link';
 interface Props {
     page?: any;
     onChanges?: any;
@@ -32,6 +33,8 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, }) => {
             ),
         course: Yup.string().required('Course is required').trim(),
         location: Yup.string().required('Location is required').trim(),
+        terms: Yup.boolean()
+            .oneOf([true], "You must accept the terms and conditions"),
     });
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -73,6 +76,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, }) => {
                 contact_number: '',
                 course: '',
                 location: '',
+                terms: false,
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -100,7 +104,13 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, }) => {
                     <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
                     <ErrorMessage name="location" component="div" className="error text-danger" />
                 </div>
-
+                <div className="mb-3 form-check">
+                    <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
+                    <label className="form-check-label" htmlFor="terms">
+                        By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
+                    </label>
+                    <ErrorMessage name="terms" component="div" className="error text-danger" />
+                </div>
                 <div className="d-grid">
                     <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">
                         {page && page == "Brochure" ? "Download Brochure" : "Submit"}

@@ -2830,11 +2830,11 @@
     z-index: -1;
   }
 
-  .careerLink a {
+  .careerLink .section1 a {
     color: white !important;
   }
 
-  .careerLink a:hover {
+  .careerLink  .section1 a:hover {
     color: rgb(159, 224, 250) !important;
   }
 
@@ -6022,9 +6022,9 @@
     padding: 5px 0px !important;
   }
 
-  .examsForm input {
+  /* .examsForm input {
     height: 30px !important;
-  }
+  } */
 
   .newsLink2Container {
     background-color: rgba(255, 255, 255, 0.2) !important;
@@ -6545,3 +6545,6 @@
 
 
   }
+  .is-invalid {
+  border: 2px solid red !important;
+}
