@@ -310,10 +310,11 @@
     cursor: pointer;
   }
 
-  .searchnewh3{
-     font-size: 18px !important;
+  .searchnewh3 {
+    font-size: 18px !important;
     cursor: pointer;
   }
+
   .searchSec .form-control {
     color: white !important;
   }
@@ -1222,13 +1223,13 @@
       font-size: 1rem !important;
       cursor: pointer;
     }
-    
 
-    .searchnewh3{
+
+    .searchnewh3 {
       font-size: 1rem !important;
       cursor: pointer;
     }
-    
+
 
     .Analysis-Section h6 {
       font-size: 0.8rem;
@@ -1484,6 +1485,7 @@
       font-size: 0.9rem !important;
       cursor: pointer;
     }
+
     .searchnewh3 {
       font-size: 0.9rem !important;
       cursor: pointer;
@@ -2561,6 +2563,7 @@
       font-size: 15px !important;
       cursor: pointer;
     }
+
     .searchnewh3 {
       font-size: 15px !important;
       cursor: pointer;
@@ -2853,7 +2856,7 @@
     color: white !important;
   }
 
-  .careerLink  .section1 a:hover {
+  .careerLink .section1 a:hover {
     color: rgb(159, 224, 250) !important;
   }
 
@@ -3452,6 +3455,7 @@
       font-size: 15px !important;
       cursor: pointer;
     }
+
     .searchnewh3 {
       font-size: 15px !important;
       cursor: pointer;
@@ -6568,17 +6572,33 @@
 
 
   }
+
   .is-invalid {
-  border: 2px solid red !important;
-}
+    border: 2px solid red !important;
+  }
 
-.h2sizeadded{
-  font-size: 2rem !important;
-}
+  .h2sizeadded {
+    font-size: 2rem !important;
+  }
+
   @media (max-width: 768px) {
-   .h2sizeadded{
-  font-size: 1.5rem !important;
-}
+    .h2sizeadded {
+      font-size: 1.5rem !important;
+    }
 
 
+  }
+
+  .minehightnriquto {
+    min-height: 250px !important;
+  }
+  .innercourse_height{
+    min-height: 150px !important;
+
+  }
+  .minehightinnercourse {
+    min-height: 250px !important;
+  }
+  .minhrighth1{
+    min-height: 50px !important;
   }

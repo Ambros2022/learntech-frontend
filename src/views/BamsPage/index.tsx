@@ -234,7 +234,6 @@ const BamsPage = () => {
                 }}
                 target="_blank "
             >
-                {/* <i className="bi bi-whatsapp my-float " /> */}
                 <img src={whatsappc} alt="whtsplogo" style={{ width: '66px' }}></img>
             </a>
 

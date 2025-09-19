@@ -29,7 +29,7 @@ const OrganizationSection = ({ data }) => {
         <>
             {organizationPage && organizationPage !== '' ? (
                 <section className='bg-white pt-3'>
-                    <div className="container">
+                    <div className="container minehightinnercourse">
                         <h2 className='text-center fw-bold text-blue mb-3'>Learntech’s Approach for {data?.short_name} Course</h2>
                         {/* <h2 className='text-center fw-bold text-blue mb-3'>Learntech’s Approach for{organizationPage.title}</h2> */}
                         <p className='text-black' dangerouslySetInnerHTML={{ __html: organizationPage.content }}></p>

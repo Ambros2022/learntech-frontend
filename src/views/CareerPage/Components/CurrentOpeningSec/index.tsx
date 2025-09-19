@@ -38,7 +38,7 @@ const CurrentOpeningSec: React.FC<CurrentOpeningSecProps> = ({ jobData }) => {
     }
 
     return (
-        <section className='bg-white py-3' id="currentOpeningSection">
+        <section className='bg-white py-3 innercourse_height' id="currentOpeningSection">
             <div className="container">
                 <h2 className='fw-bold text-center text-blue pb-3'>Current Openings</h2>
                 <div className="row">

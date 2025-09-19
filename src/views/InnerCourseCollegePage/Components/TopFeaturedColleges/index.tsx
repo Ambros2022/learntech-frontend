@@ -33,7 +33,7 @@ function FeaturedCollegeSection({ data }) {
   }
 
   return (
-    <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
+    <section className="FeaturedClgCon bg-white innercourse_height" id="animation5" data-aos="fade-up">
       <div className="container pt-5 position-relative">
         <h2 className="fw-bold text-blue text-center mb-5">
           Top {data.short_name} Featured Colleges
