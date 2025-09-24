@@ -35,7 +35,7 @@ const BannerSec = () => {
                     //     className="banner-image-about"
                     // />
                        <Image
-      src="https://api.learntechww.com/banners/logo1747893725305.webp"
+         src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
       alt="Banner-img"
       width={1700}
       height={300}

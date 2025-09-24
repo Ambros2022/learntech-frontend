@@ -30,7 +30,9 @@ interface Authordata {
     isAddMode: boolean;
 }
 
-const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+const AddEditForm: FC<Authordata> = ({ olddata, isAddMode,  }) => {
+// const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, ...rest }) => {
+
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
