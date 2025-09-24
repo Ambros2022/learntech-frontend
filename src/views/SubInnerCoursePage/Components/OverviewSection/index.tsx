@@ -69,7 +69,7 @@ function OverviewSection({ data, colleges, exams }) {
     tab.content ? (
       <div
         key={tab.id}
-        className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
+        className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''} `}
         id={`nav-${tab.id}`}
         role="tabpanel"
         aria-labelledby={`nav-${tab.id}-tab`}
@@ -92,7 +92,7 @@ function OverviewSection({ data, colleges, exams }) {
           ))
         ) : (
           typeof tab.content === 'string' ? (
-            <div dangerouslySetInnerHTML={{ __html: tab.content }} />
+            <div className="minehightinnercourse" dangerouslySetInnerHTML={{ __html: tab.content }} />
           ) : (
             tab.content
           )

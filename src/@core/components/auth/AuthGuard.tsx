@@ -35,7 +35,6 @@ const AuthGuard = (props: AuthGuardProps) => {
    
 
       if (!storedToken  && router.route !== "/404") {
-        // console.log("AuthGuard", 2);
         if (router.asPath !== '/') {
           router.replace({
             pathname: '/admin/login',
@@ -46,14 +45,12 @@ const AuthGuard = (props: AuthGuardProps) => {
         }
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [router.route]
   )
   if (!router.isReady) {
-    return fallback; // Return fallback if router is not ready
+    return fallback; 
   }
   if (auth.loading || auth.user === null && router.route !== "/404") {
-    // console.log("AuthGuard", 3);
     return fallback
   }
   

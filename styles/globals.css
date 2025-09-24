@@ -6602,3 +6602,11 @@
   .minhrighth1{
     min-height: 50px !important;
   }
+
+
+  @media only screen and (max-width:600px)
+  {
+  .minheight200mobile{
+  min-height: 300px !important;
+  }
+  }
