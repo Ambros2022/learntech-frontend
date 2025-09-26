@@ -584,9 +584,24 @@
     font-size: 15px !important;
   }
 
-  .nav-avt {
-    min-width: 50px !important;
-  }
+.nav-avt {
+  min-width: 50px !important;
+  height: 50px;               /* reserve fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-avt .MuiAvatar-root {
+  width: 40px !important;     /* fixed avatar size */
+  height: 40px !important;
+  font-size: 1rem;            /* text inside avatar */
+}
+
+.nav-avt i {
+  font-size: 2rem;            /* keep consistent icon size */
+  line-height: 1;
+}
 
   .nav-cons {
     min-width: 160px !important;
