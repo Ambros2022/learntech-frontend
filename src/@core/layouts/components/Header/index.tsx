@@ -376,12 +376,7 @@ const Header = () => {
                 </span>
 
 
-                {/* <div
-                    className={`dropdown-menu custom-dropdown ${isDropdownOpen ? 'show' : ''}`}
-                   
-                  >
-                   <Statedropdown states={states} type="Colleges" onClose={closeDropdown} />
-                  </div> */}
+              
 
                 <div className={`dropdown-menu custom-dropdown ${isDropdownOpen ? "show" : ""}`}>
                   {isDropdownOpen && <Statedropdown states={states} type="Colleges" onClose={closeDropdown} />}
@@ -635,7 +630,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className='nav-avt'>
-                <AvatarDropdown />
+                <AvatarDropdown openModal={openModal} />
               </li>
               <li className='hideBtnTxt nav-cons'>
                 <GlobalEnquiryForm buttonText='Get Counselling' className='btn counsellingBtn' />

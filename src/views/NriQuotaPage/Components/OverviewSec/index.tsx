@@ -64,7 +64,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
             <section className='bg-white pt-2 pb-5' style={{ fontFamily: 'Poppins !important' }}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-xl-8 col-lg-8 col-md-7 col-10 mx-auto">
+                        <div className="col-xl-8 col-lg-8 col-md-7 col-10 mx-auto minehightnriquto">
                             {renderDescription()}
                             {isExpanded && (
                                 <div className='text-center'>
@@ -75,7 +75,7 @@ const OverviewSec = ({ data = {} }: { data?: { meta_title?: string, top_descript
                         <div className="col-xl-4 col-lg-4 pt-4  pt-md-0 col-md-5 nri-h2">
                             <ContactForm heading={'Expert Guidance for Securing NRI Quota Seats'} />
                             <h2 className='pt-5 fw-bold text-blue text-center mb-3 '>Top Trending Courses</h2>
-                            <div className='p-3 border mt-3 rounded bg-skyBlue'>
+                            <div className='p-3 border mt-3 rounded bg-skyBlue minehightnriquto'>
                                 <div className='overflow-y-auto' style={{ maxHeight: 'calc(7 * 100px)' }}>
                                     {courses.map(course => (
                                         <Link href={`/course/${course.id}/${course.slug}`} key={course.id}>

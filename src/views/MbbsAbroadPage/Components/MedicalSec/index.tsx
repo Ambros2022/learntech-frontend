@@ -87,7 +87,7 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
         <section className='py-3 bg-white'>
             <div className="container">
                 <div className="row">
-                    <div className="col-md-7 col-lg-8 col-xl-8">
+                    <div className="col-md-7 col-lg-8 col-xl-8 minehightinnercourse">
                         {renderDescription()}
                         {isExpanded && (
                             <div className='text-center'>

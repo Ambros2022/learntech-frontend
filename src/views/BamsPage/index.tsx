@@ -37,7 +37,7 @@ import axios from 'src/configs/axios';
 
 
 // dqfqwfqw
-const whatsappc = '/images/bams/whatsappc.webp';
+const whatsappc = '/images/bams/whatsappc.gif';
 // const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
 const BamsPage = () => {
     // useEffect(() => {
@@ -230,13 +230,31 @@ const BamsPage = () => {
                     borderRadius: 50,
                     textAlign: 'center',
                     fontSize: 44,
-                    zIndex: 1059
+                    zIndex: 1059,
                 }}
                 target="_blank "
             >
-                {/* <i className="bi bi-whatsapp my-float " /> */}
                 <img src={whatsappc} alt="whtsplogo" style={{ width: '66px' }}></img>
             </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-3 sticky-top py-md-5  " style={{
                 position: 'fixed',

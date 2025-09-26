@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const ContactCareerSec = ({ locations, data }) => {
   return (
-    <section className='bg-white'>
+    <section className='bg-white innercourse_height'>
       <div className='container'>
         <h2 className='fw-bold text-center text-blue pb-3 d-none d-md-block'>Job Vacancy Application Form</h2>
         <div className='row py-3'>
