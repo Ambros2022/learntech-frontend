@@ -16,19 +16,25 @@ function InnerNewsPage({ id }) {
   const [pagedata, setPagedata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+const getPagedata = useCallback(async () => {
+  try {
+    const response = await axios.get('/api/website/newsfindone/get/' + id);
 
-  const getPagedata = useCallback(async () => {
-    try {
-      const response = await axios.get('/api/website/newsfindone/get/' + id);
-      if (isMountedRef.current) {
-        setPagedata(response.data.data);
-        setLoading(false);
-      }
-    } catch (error) {
-      router.push("/404");
-      console.error('Failed to fetch page data:', error);
+    // 👇 log full API response
+    console.log("API full response:", response);
+
+    // 👇 log only the data field
+    console.log("API data:", response.data);
+
+    if (isMountedRef.current) {
+      setPagedata(response.data.data);
+      setLoading(false);
     }
-  }, [id, isMountedRef, router]);
+  } catch (error) {
+    router.push("/404");
+    console.error('Failed to fetch page data:', error);
+  }
+}, [id, isMountedRef, router]);
 
 
 
