@@ -19,7 +19,16 @@ let cancelToken: any;
 
 
 
-
+const phoneRules: Record<string, RegExp> = {
+  "^\\+91-": /^\+91-\d{10}$/,                // India (10 digits)
+  "^\\+966": /^\+9665\d{8}$/,                // Saudi Arabia (+966 5XX XXX XXX → 9 digits, starts with 5)
+  "^\\+971": /^\+9715\d{8}$/,                // UAE (+971 5X XXX XXXX → 9 digits, starts with 5)
+  "^\\+974": /^\+9743\d{7}$/,                // Qatar (+974 3X XXX XXX → 8 digits, starts with 3)
+  "^\\+968": /^\+9689\d{7}$/,                // Oman (+968 9X XXX XXX → 8 digits, starts with 9)
+  "^\\+965": /^\+9655\d{7}$/,                // Kuwait (+965 5X XXX XXX → 8 digits, starts with 5)
+  "^\\+973": /^\+9733\d{7}$/,                // Bahrain (+973 3X XXX XXX → 8 digits, starts with 3)
+  "^\\+977": /^\+97798\d{8}$/                // Nepal (+977 98X XXX XXXX → 10 digits, starts with 98)
+};
 
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -27,19 +36,34 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required'),
   // contact_number: Yup.string().required("Phone Number is required"),
-  contact_number: Yup.string()
+  // contact_number: Yup.string()
+  //   .required("Phone Number is required")
+  //   .test(
+  //     "is-valid-contact",
+  //     "Enter valid 10 digits Number",
+  //     function (value) {
+  //       if (!value) return false;
+  //       if (value.startsWith("+91-")) {
+  //         return /^\+91-\d{10}$/.test(value); 
+  //       }
+  //       return true;
+  //     }
+  //   ),
+   contact_number: Yup.string()
     .required("Phone Number is required")
-    .test(
-      "is-valid-contact",
-      "Enter valid 10 digits Number",
-      function (value) {
-        if (!value) return false;
-        if (value.startsWith("+91-")) {
-          return /^\+91-\d{10}$/.test(value); // Apply strict rule for +91-
+    .test("is-valid-contact", "Invalid phone number", function (value) {
+      if (!value) return false;
+
+      // Iterate through country-specific rules
+      for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
+        if (new RegExp(prefixPattern).test(value)) {
+          return regex.test(value); // strict check
         }
-        return true; // Accept other formats (other country codes)
       }
-    ),
+
+      return false; // ❌ not matching any supported country
+    }),
+
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),
   terms: Yup.boolean()
