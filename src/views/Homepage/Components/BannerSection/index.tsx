@@ -20,14 +20,14 @@ let cancelToken: any;
 
 
 const phoneRules: Record<string, RegExp> = {
-  "^\\+91-": /^\+91-\d{10}$/,                // India (10 digits)
-  "^\\+966": /^\+9665\d{8}$/,                // Saudi Arabia (+966 5XX XXX XXX → 9 digits, starts with 5)
-  "^\\+971": /^\+9715\d{8}$/,                // UAE (+971 5X XXX XXXX → 9 digits, starts with 5)
-  "^\\+974": /^\+9743\d{7}$/,                // Qatar (+974 3X XXX XXX → 8 digits, starts with 3)
-  "^\\+968": /^\+9689\d{7}$/,                // Oman (+968 9X XXX XXX → 8 digits, starts with 9)
-  "^\\+965": /^\+9655\d{7}$/,                // Kuwait (+965 5X XXX XXX → 8 digits, starts with 5)
-  "^\\+973": /^\+9733\d{7}$/,                // Bahrain (+973 3X XXX XXX → 8 digits, starts with 3)
-  "^\\+977": /^\+97798\d{8}$/                // Nepal (+977 98X XXX XXXX → 10 digits, starts with 98)
+  "^\\+91-": /^\+91-\d{10}$/,  // India → 10 digits after +91-
+  "^\\+966-": /^\+966-\d{9}$/, // Saudi Arabia → 9 digits after +966-
+  "^\\+971-": /^\+971-\d{9}$/, // UAE → 9 digits after +971-
+  "^\\+974-": /^\+974-\d{8}$/, // Qatar → 8 digits after +974-
+  "^\\+968-": /^\+968-\d{8}$/, // Oman → 8 digits after +968-
+  "^\\+965-": /^\+965-\d{8}$/, // Kuwait → 8 digits after +965-
+  "^\\+973-": /^\+973-\d{8}$/, // Bahrain → 8 digits after +973-
+  "^\\+977-": /^\+977-\d{10}$/ // Nepal → 10 digits after +977-
 };
 
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -49,20 +49,20 @@ const validationSchema = Yup.object().shape({
   //       return true;
   //     }
   //   ),
-   contact_number: Yup.string()
-    .required("Phone Number is required")
-    .test("is-valid-contact", "Invalid phone number", function (value) {
-      if (!value) return false;
+contact_number: Yup.string()
+  .required("Phone Number is required")
+  .test("is-valid-contact", "Invalid phone number", function (value) {
+    if (!value) return false;
 
-      // Iterate through country-specific rules
-      for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
-        if (new RegExp(prefixPattern).test(value)) {
-          return regex.test(value); // strict check
-        }
+    for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
+      if (new RegExp(prefixPattern).test(value)) {
+        return regex.test(value);
       }
+    }
 
-      return false; // ❌ not matching any supported country
-    }),
+    return false;
+  }),
+
 
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),

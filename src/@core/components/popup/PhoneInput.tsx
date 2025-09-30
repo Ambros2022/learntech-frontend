@@ -20,7 +20,7 @@ const PhoneInputField = ({ name, ...props }: { name: string }) => {
     }
 
     // Default: return as +<dialCode><digits>
-    return `+${dialCode}${numberWithoutDialCode}`;
+    return `+${dialCode}-${numberWithoutDialCode}`;
   };
 
   return (
@@ -29,6 +29,7 @@ const PhoneInputField = ({ name, ...props }: { name: string }) => {
       {...props}
       country={'in'}
       value={field.value}
+      
       onChange={(value, country) => {
         const formattedPhoneNumber = formatPhoneNumber(value, country);
         console.log(formattedPhoneNumber,"formattedPhoneNumber");
