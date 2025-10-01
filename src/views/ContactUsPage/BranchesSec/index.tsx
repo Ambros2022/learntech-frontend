@@ -22,7 +22,7 @@ const BranchesSec = () => {
         },
         {
             name: 'Dubai',
-            address: '6, 1st Floor, Al Itihaad Rd, Al Mamzar Center, HOR Al ANZ, Dubai, UAE',
+            address: '3rd Floor, Office no 15, Room no 3, Al Itihaad road, Al Mamzar centre, Hor Al Anz, Dubai, UAE ',
             phone: '+971 502436552, +971 504955123',
             addressUrl: 'https://maps.app.goo.gl/jYyDjdE2LC8Z8cKm8',
             mapUrl: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3607.726538879487!2d55.351192075384496!3d25.279782977657867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDE2JzQ3LjIiTiA1NcKwMjEnMTMuNiJF!5e0!3m2!1sen!2sin!4v1735199528138!5m2!1sen!2sin'
