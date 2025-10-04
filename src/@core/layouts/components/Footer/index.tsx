@@ -108,7 +108,11 @@ const Footer = () => {
             <div className="text-white">
               <h5 className="fw-bold mb-3 mb-md-3">Download Our App</h5>
               <div className='d-flex px-2 px-md-0  flex-row flex-md-column justify-content-around'>
-                <a href="https://apps.apple.com/in/app/learntech/id1623567055" target='_blank'><Image className="mb-1 mb-md-3  boxShadow" width={150} height={50} alt="app-store-img" src="/images/icons/app-store.webp" /></a>
+                <a
+                //  href="https://apps.apple.com/in/app/learntech/id1623567055" 
+                 href="https://play.google.com/store/apps/details?id=com.ilearntech.app" 
+                
+                target='_blank'><Image className="mb-1 mb-md-3  boxShadow" width={150} height={50} alt="app-store-img" src="/images/icons/app-store.webp" /></a>
 
 
                 <a href="https://play.google.com/store/apps/details?id=com.ilearntech.app" target='_blank'><Image className=" boxShadow" width={150} height={50} alt="google-play-img" src="/images/icons/google-play.webp" /></a>
