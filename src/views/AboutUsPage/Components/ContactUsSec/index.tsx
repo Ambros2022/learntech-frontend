@@ -11,12 +11,36 @@ const PhoneInputField = dynamic(() => import("src/@core/components/popup/PhoneIn
 
 const ContactUsSec = () => {
     const router = useRouter();
+    const phoneRules: Record<string, RegExp> = {
+        "^\\+91-": /^\+91-\d{10}$/,  // India → 10 digits
+        "^\\+966-": /^\+966-\d{9}$/, // Saudi Arabia → 9 digits
+        "^\\+971-": /^\+971-\d{9}$/, // UAE → 9 digits
+        "^\\+974-": /^\+974-\d{8}$/, // Qatar → 8 digits
+        "^\\+968-": /^\+968-\d{8}$/, // Oman → 8 digits
+        "^\\+965-": /^\+965-\d{8}$/, // Kuwait → 8 digits
+        "^\\+973-": /^\+973-\d{8}$/, // Bahrain → 8 digits
+        "^\\+977-": /^\+977-\d{10}$/ // Nepal → 10 digits
+    };
     const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validationSchema = Yup.object().shape({
         fullName: Yup.string().required('Full Name is required').trim(),
         email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        mobileNumber: Yup.string().required("Phone Number is required"),
+        // mobileNumber: Yup.string().required("Phone Number is required"),
+        mobileNumber: Yup.string()
+            .required("Phone Number is required")
+            .test("is-valid-contact", "Enter a valid phone number", function (value) {
+                if (!value) return false;
+
+                // Iterate through all phone rules
+                for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
+                    if (new RegExp(prefixPattern).test(value)) {
+                        return regex.test(value); // ✅ Valid if it matches the country's rule
+                    }
+                }
+
+                return false; // ❌ Not matching any supported country
+            }),
         courseInMind: Yup.string().required('Course In Mind is required').trim(),
         location: Yup.string().required('Location is required').trim(),
         message: Yup.string().trim(),
