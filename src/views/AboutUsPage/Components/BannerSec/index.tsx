@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React, { useCallback, useEffect, useState } from 'react'
 import axios1 from 'src/configs/axios';
 
+import Image from "next/image";
 
 
 const BannerSec = () => {
@@ -25,14 +26,22 @@ const BannerSec = () => {
             <section className=' aboutUsPageSec position-relative d-flex justify-content-center ' >
                 {banners.map((banner) => (
 
-                    <img
-                        width={1700} height={300}
-                        src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                        fetchPriority="high"
-                        loading="eager"
-                        alt={`Banner-img`}
-                        className="banner-image-about"
-                    />
+                    // <img
+                    //     width={1700} height={300}
+                    //     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+                    //     fetchPriority="high"
+                    //     loading="eager"
+                    //     alt={`Banner-img`}
+                    //     className="banner-image-about"
+                    // />
+                       <Image
+         src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
+      alt="Banner-img"
+      width={1700}
+      height={300}
+      priority 
+      className="banner-image-about"
+    />
 
                 ))}
                 <div className='position-absolute w-100 h-100 d-flex justify-content-center AdvertiseBanner' style={{ top: '0px' }}>

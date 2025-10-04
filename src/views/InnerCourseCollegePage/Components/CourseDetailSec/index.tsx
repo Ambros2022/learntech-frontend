@@ -104,7 +104,7 @@ function CollegeInfoSection({ data }) {
   });
 
   return (
-    <section className='clgInfoSec bg-white'>
+    <section className='clgInfoSec bg-white minehightnriquto'>
 
       <div className="container position-relative innerClgCarousel">
         {isMobile ? (
@@ -116,12 +116,11 @@ function CollegeInfoSection({ data }) {
             infinite
             autoPlay={false}
             autoPlaySpeed={2000}
-            ssr // SSR true for server-side rendering
+            ssr 
             renderButtonGroupOutside
             customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
             responsive={responsive}
             className="infoBtn gap-3  text-center"
-          // className="infoBtn gap-3 mx-auto text-center"
           >
             {renderTabs()}
           </Carousel>

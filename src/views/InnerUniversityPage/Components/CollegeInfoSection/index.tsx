@@ -135,6 +135,8 @@ function CollegeInfoSection({ data }) {
                     width={700}
                     height={700}
                     className='rounded img-fluid'
+                     loading="lazy"
+  decoding="async"
                   />
                   <div
                     className='position-absolute'

@@ -310,6 +310,11 @@
     cursor: pointer;
   }
 
+  .searchnewh3 {
+    font-size: 18px !important;
+    cursor: pointer;
+  }
+
   .searchSec .form-control {
     color: white !important;
   }
@@ -579,9 +584,24 @@
     font-size: 15px !important;
   }
 
-  .nav-avt {
-    min-width: 50px !important;
-  }
+.nav-avt {
+  min-width: 50px !important;
+  height: 50px;               /* reserve fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-avt .MuiAvatar-root {
+  width: 40px !important;     /* fixed avatar size */
+  height: 40px !important;
+  font-size: 1rem;            /* text inside avatar */
+}
+
+.nav-avt i {
+  font-size: 2rem;            /* keep consistent icon size */
+  line-height: 1;
+}
 
   .nav-cons {
     min-width: 160px !important;
@@ -1219,6 +1239,13 @@
       cursor: pointer;
     }
 
+
+    .searchnewh3 {
+      font-size: 1rem !important;
+      cursor: pointer;
+    }
+
+
     .Analysis-Section h6 {
       font-size: 0.8rem;
     }
@@ -1470,6 +1497,11 @@
     }
 
     .searchSec h1 {
+      font-size: 0.9rem !important;
+      cursor: pointer;
+    }
+
+    .searchnewh3 {
       font-size: 0.9rem !important;
       cursor: pointer;
     }
@@ -2547,6 +2579,11 @@
       cursor: pointer;
     }
 
+    .searchnewh3 {
+      font-size: 15px !important;
+      cursor: pointer;
+    }
+
     .dentalCourseCon h1 {
       font-size: 22px !important;
       font-weight: bold !important;
@@ -2834,7 +2871,7 @@
     color: white !important;
   }
 
-  .careerLink  .section1 a:hover {
+  .careerLink .section1 a:hover {
     color: rgb(159, 224, 250) !important;
   }
 
@@ -3430,6 +3467,11 @@
 
   @media (min-width: 768px) and (max-width: 991px) {
     .searchSec h1 {
+      font-size: 15px !important;
+      cursor: pointer;
+    }
+
+    .searchnewh3 {
       font-size: 15px !important;
       cursor: pointer;
     }
@@ -6545,6 +6587,41 @@
 
 
   }
+
   .is-invalid {
-  border: 2px solid red !important;
-}
+    border: 2px solid red !important;
+  }
+
+  .h2sizeadded {
+    font-size: 2rem !important;
+  }
+
+  @media (max-width: 768px) {
+    .h2sizeadded {
+      font-size: 1.5rem !important;
+    }
+
+
+  }
+
+  .minehightnriquto {
+    min-height: 250px !important;
+  }
+  .innercourse_height{
+    min-height: 150px !important;
+
+  }
+  .minehightinnercourse {
+    min-height: 250px !important;
+  }
+  .minhrighth1{
+    min-height: 50px !important;
+  }
+
+
+  @media only screen and (max-width:600px)
+  {
+  .minheight200mobile{
+  min-height: 300px !important;
+  }
+  }

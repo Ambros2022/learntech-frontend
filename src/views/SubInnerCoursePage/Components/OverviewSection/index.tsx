@@ -69,7 +69,7 @@ function OverviewSection({ data, colleges, exams }) {
     tab.content ? (
       <div
         key={tab.id}
-        className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
+        className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''} `}
         id={`nav-${tab.id}`}
         role="tabpanel"
         aria-labelledby={`nav-${tab.id}-tab`}
@@ -92,7 +92,7 @@ function OverviewSection({ data, colleges, exams }) {
           ))
         ) : (
           typeof tab.content === 'string' ? (
-            <div dangerouslySetInnerHTML={{ __html: tab.content }} />
+            <div className="minehightinnercourse" dangerouslySetInnerHTML={{ __html: tab.content }} />
           ) : (
             tab.content
           )
@@ -102,7 +102,7 @@ function OverviewSection({ data, colleges, exams }) {
   ));
 
   return (
-    <section className='clgInfoSec innerClgCarousel bg-white subinner'>
+    <section className='clgInfoSec innerClgCarousel bg-white subinner '>
       <div className="container position-relative">
         {isMobile ? (
           <Carousel
@@ -130,7 +130,7 @@ function OverviewSection({ data, colleges, exams }) {
         )}
 
         <div className="row">
-          <div className="col-md-8 col-lg-9 pe-md-5">
+          <div className="col-md-8 col-lg-9 pe-md-5 minehightinnercourse">
             <div className="tab-content pt-2" id="nav-tabContent">
               {renderTabContent()}
             </div>

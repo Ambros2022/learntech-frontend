@@ -84,6 +84,7 @@ const SignInForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
                   const response = await axios1.post(url, formData);
                   if (response.data.status === 1) {
                     localStorage.setItem("UserData", JSON.stringify(response.data.data));
+                    window.dispatchEvent(new Event("storage"));
                     toast.success(response.data.message);
                     setSubmitting(false);
                     resetForm();

@@ -6,9 +6,11 @@ import { styled } from '@mui/material/styles';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
+// ---------- Styled Components ----------
 const AvatarContainer = styled('div')({
   position: 'relative',
   display: 'inline-block',
+  cursor: 'pointer',
 });
 
 interface DropdownProps {
@@ -30,7 +32,13 @@ const Dropdown = styled(Box, {
   zIndex: 1,
 }));
 
-const AvatarDropdown = () => {
+// ---------- Props ----------
+interface AvatarDropdownProps {
+  openModal: () => void;
+}
+
+// ---------- Component ----------
+const AvatarDropdown: React.FC<AvatarDropdownProps> = ({ openModal }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [userData, setUserData] = useState<{ name: string; email: string } | null>(null);
   const router = useRouter();
@@ -43,43 +51,91 @@ const AvatarDropdown = () => {
     }
   }, []);
 
-  const handleLogout = async () =>{
+
+  // --new added--
+
+  useEffect(() => {
+  const loadUser = () => {
+    const storedUserData = localStorage.getItem('UserData');
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    } else {
+      setUserData(null);
+    }
+  };
+
+  loadUser(); // run once on mount
+
+  // listen for storage changes (like after login)
+  window.addEventListener("storage", loadUser);
+
+  return () => {
+    window.removeEventListener("storage", loadUser);
+  };
+}, []);
+
+// -----
+  const handleLogout = async () => {
     localStorage.removeItem('UserData');
     setUserData(null);
     await signOut({ redirect: false });
     router.push('/');
   };
 
+  // 👉 If no user logged in → open modal on click
+  const handleClick = () => {
+    if (!userData) {
+      openModal();
+    }
+  };
+
   return (
     <AvatarContainer
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => userData && setIsHovered(true)}
+      onMouseLeave={() => userData && setIsHovered(false)}
+      onClick={handleClick}
     >
-      {userData ? (
+      {/* {userData ? (
         <Avatar alt={userData.name} className="mx-2">
           {userData.name.charAt(0)}
         </Avatar>
       ) : (
-        <i className='bi bi-person-fill text-blue mx-2 fs-2'></i>
-      )}
-      <Dropdown isHovered={isHovered} className='p-3'>
-        {userData ? (
-          <>
-            <h5 className="mb-2 text-blue">
-              Welcome, {userData.name}!
-            </h5>
-            <Button variant="outlined" className="mb-2 p-2 viewMoreCollegeBtn" color="secondary" fullWidth onClick={handleLogout}>
-              Logout
-            </Button>
-          </>
-        ) : (
-          <>
+        <i className="bi bi-person-fill text-blue mx-2 fs-2"></i>
+      )} */}
 
-          </>
-        )}
-      </Dropdown>
+      {userData ? (
+        <Avatar
+          alt={userData.name}
+          className="mx-2"
+          sx={{ width: 40, height: 40 }}
+        >
+          {userData.name.charAt(0)}
+        </Avatar>
+      ) : (
+        <i className="bi bi-person-fill text-blue mx-2 fs-2"></i>
+      )}
+
+    
+      {userData && (
+        <Dropdown isHovered={isHovered} className="p-3">
+          <h5 className="mb-2 text-blue">
+            Welcome, {userData.name}!
+          </h5>
+          <Button
+            variant="outlined"
+            className="mb-2 p-2 viewMoreCollegeBtn"
+            color="secondary"
+            fullWidth
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </Dropdown>
+      )}
     </AvatarContainer>
   );
 };
 
 export default AvatarDropdown;
+
+

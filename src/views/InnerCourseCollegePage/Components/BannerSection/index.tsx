@@ -6,7 +6,7 @@ function BannerSection({ data }) {
 console.log("ddd",data);
   return (
     <>
-      <section className="bg-blue collegeCourseCon py-5">
+      <section className="bg-blue collegeCourseCon py-5 minehightnriquto">
         <div className="container h-100 flex-column column-gap-0 d-flex justify-content-center">
           <div className="align-items-center">
             <div className="row px-5 px-md-0">
