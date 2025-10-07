@@ -129,7 +129,7 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
       )}
 
       {loading ? (
-        <section className=" dentalCourseCon py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
+        <section className=" dentalCourseCon py-5 minehight500 d-flex align-items-center justify-content-center">
           <h2 className="text-white">Loading...</h2>
         </section>
       ) : (
