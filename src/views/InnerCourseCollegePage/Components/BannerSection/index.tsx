@@ -3,7 +3,7 @@ import React from 'react';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 
 function BannerSection({ data }) {
-console.log("ddd",data);
+  console.log("ddd", data);
   return (
     <>
       <section className="bg-blue collegeCourseCon py-5 minehightnriquto">

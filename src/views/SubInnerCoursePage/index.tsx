@@ -117,8 +117,25 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
           </script>
         )}
       </Head>
-      {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />}
+      {/* {!loading && pagedata && <BannerSection data={pagedata} />}
+      {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />} */}
+      {/* {!loading && pagedata && <BannerSection data={pagedata}  />} */}
+      {loading ? (
+        <section className="bg-blue dentalCourseCon py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
+          <h2 className="text-white">Loading...</h2>
+        </section>
+      ) : (
+        <BannerSection data={pagedata} />
+      )}
+
+      {loading ? (
+        <section className=" dentalCourseCon py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
+          <h2 className="text-white">Loading...</h2>
+        </section>
+      ) : (
+        <OverviewSection data={pagedata} colleges={colleges} exams={exams} />
+      )}
+
       <PopularCourses />
       {!loading && pagedata && <Testimonial data={pagedata} />}
       <OrganizationSection data={pagedata} />

@@ -8,9 +8,9 @@ function BannerSection({ data }) {
 
   return (
     <>
-      <section className="bg-blue dentalCourseCon py-5 innercourse_height">
+      <section className="bg-blue dentalCourseCon py-5  minehightcoursesneew">
         <div className="container h-100 flex-column column-gap-0 d-flex justify-content-center">
-          <div className='align-items-center innercourse_height'>
+          <div className='align-items-center '>
             <h1 className=' fw-bold text-white mb-3'> {data?.name} : Course, Duration, Eligibility, Fees, Admissions, Opportunities
             </h1>
             <div className='text-white  mb-2 row'>
