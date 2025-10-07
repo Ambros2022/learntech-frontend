@@ -75,8 +75,8 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
         <BannerSection data={pagedata} />
       )}
       {loading ? (
-        <section className=" dentalCourseCon py-5 minehight500 d-flex align-items-center justify-content-center">
-          <h2 className="text-white">Loading...</h2>
+        <section className=" dentalCourseCon py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
+          <h2 className="text-black">Loading...</h2>
         </section>
       ) : (
         <CourseDetailSec data={pagedata} />
