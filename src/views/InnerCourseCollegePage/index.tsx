@@ -68,20 +68,20 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
 
 
       {loading ? (
-        <section className="bg-blue  dentalCourseCon py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
+        <section className="bg-blue   py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
           <h2 className="text-white">Loading...</h2>
         </section>
       ) : (
         <BannerSection data={pagedata} />
       )}
       {loading ? (
-        <section className=" dentalCourseCon py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
+        <section className="  py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
           <h2 className="text-black">Loading...</h2>
         </section>
       ) : (
         <CourseDetailSec data={pagedata} />
       )}
-
+{/* dentalCourseCon */}
 
       <ExpertSection />
       {!loading && pagedata && <TopFeaturedColleges data={pagedata} />}

@@ -6577,6 +6577,9 @@
   }
 
 
+  .minehightcoursesneew {
+    min-height: 300px !important;
+  }
 
   /* ----bams landing page--- */
 
@@ -6634,20 +6637,3 @@
       min-height: 300px !important;
     }
   }
-
-
-  .minehightcoursesneew {
-    min-height: 250px !important;
-
-
-
-
-  }
-
-  /* .minehight500 {
-    min-height: 500px !important;
-
-
-
-
-  } */
