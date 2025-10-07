@@ -62,8 +62,26 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
           )}
         </script>
       </Head>
-      {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <CourseDetailSec data={pagedata} />}
+      {/* {!loading && pagedata && <BannerSection data={pagedata} />} */}
+      {/* {!loading && pagedata && <CourseDetailSec data={pagedata} />} */}
+
+
+
+      {loading ? (
+        <section className="bg-blue   py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
+          <h2 className="text-white">Loading...</h2>
+        </section>
+      ) : (
+        <BannerSection data={pagedata} />
+      )}
+      {loading ? (
+        <section className="  py-5 heightparanew d-flex align-items-center justify-content-center">
+          <h2 className="text-black">Loading...</h2>
+        </section>
+      ) : (
+        <CourseDetailSec data={pagedata} />
+      )}
+{/* dentalCourseCon */}
 
       <ExpertSection />
       {!loading && pagedata && <TopFeaturedColleges data={pagedata} />}

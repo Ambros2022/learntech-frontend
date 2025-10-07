@@ -92,7 +92,7 @@ function OverviewSection({ data, colleges, exams }) {
           ))
         ) : (
           typeof tab.content === 'string' ? (
-            <div className="minehightinnercourse" dangerouslySetInnerHTML={{ __html: tab.content }} />
+            <div className="minehightcoursesneew" dangerouslySetInnerHTML={{ __html: tab.content }} />
           ) : (
             tab.content
           )
