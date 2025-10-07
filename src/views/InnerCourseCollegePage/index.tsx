@@ -75,7 +75,7 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
         <BannerSection data={pagedata} />
       )}
       {loading ? (
-        <section className="  py-5 minehightcoursesneew d-flex align-items-center justify-content-center">
+        <section className="  py-5 heightparanew d-flex align-items-center justify-content-center">
           <h2 className="text-black">Loading...</h2>
         </section>
       ) : (

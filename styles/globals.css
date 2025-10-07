@@ -6578,7 +6578,11 @@
 
 
   .minehightcoursesneew {
-    min-height: 400px !important;
+    min-height: 300px !important;
+  }
+
+  .heightparanew {
+    min-height: 500px !important;
   }
 
   /* ----bams landing page--- */
