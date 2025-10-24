@@ -24,6 +24,22 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
 
       const response = await axios.get(`/api/website/coursefindone/get/${slug}/${id}`);
 
+      // Print API response data
+      console.log('API Response:', {
+        fullResponse: response.data,
+        data: response.data.data,
+        meta: {
+          title: response.data.data?.meta_title,
+          description: response.data.data?.meta_description,
+          keywords: response.data.data?.meta_keyword
+        },
+        courseInfo: {
+          name: response.data.data?.course_name,
+          slug: response.data.data?.slug,
+          collegeId: id
+        }
+      });
+
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -46,20 +62,49 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
         <script type="application/ld+json">
-          {JSON.stringify(
+          {JSON.stringify([
+            // {
+            //   "@context": "https://schema.org/",
+            //   "@type": "CollegeOrUniversity",
+            //   "name": `${pagedata?.meta_title}`,
+            //   "logo": `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
+            //   "url": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`,
+            //   "address": {
+            //     "@type": "PostalAddress",
+            //     "streetAddress": `${pagedata?.address}`
+            //   }
+            // },
             {
               "@context": "https://schema.org/",
-              "@type": "CollegeOrUniversity",
-              "name": `${pagedata?.meta_title}`,
-              "logo": `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
-              "url": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`,
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": `${pagedata?.address}`
-              }
-
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Colleges",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/colleges`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": pagedata?.college?.name,
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/college/${Collegeid}/${pagedata?.college?.slug}`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": pagedata?.course_short_name,
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                }
+              ]
             }
-          )}
+          ])}
         </script>
       </Head>
       {/* {!loading && pagedata && <BannerSection data={pagedata} />} */}
@@ -81,7 +126,7 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
       ) : (
         <CourseDetailSec data={pagedata} />
       )}
-{/* dentalCourseCon */}
+      {/* dentalCourseCon */}
 
       <ExpertSection />
       {!loading && pagedata && <TopFeaturedColleges data={pagedata} />}
