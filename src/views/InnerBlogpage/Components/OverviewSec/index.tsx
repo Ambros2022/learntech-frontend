@@ -4,7 +4,8 @@ import { Roboto } from 'next/font/google';
 import NewsList from '../newsList';
 import BlogList from '../blogsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
-
+import dynamic from 'next/dynamic';
+const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
 // Load Roboto locally (avoids CLS from late font swap)
 const roboto = Roboto({
   subsets: ['latin'],
@@ -56,6 +57,14 @@ const OverviewSec = ({ data, newsData, blogsData }) => {
                 style={{ minHeight: '500px' }}
                 dangerouslySetInnerHTML={{ __html: processedHTML }}
               />
+
+              {Array.isArray(data?.blogfaqs) && data.blogfaqs.length > 0 && (
+                <div className="col-12">
+                  <h4 className='fw-bold text-center text-md-left py-3 text-blue'>FAQs</h4>
+                  <FaqSec data={data.blogfaqs} />
+                </div>
+              )}
+
             </div>
 
             {/* Right Column */}
@@ -70,6 +79,7 @@ const OverviewSec = ({ data, newsData, blogsData }) => {
                 <NewsList newsItems={newsData} heading={'Latest News'} />
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -81,38 +91,3 @@ export default OverviewSec;
 
 
 
-
-
-// import React from 'react'
-// import NewsList from '../newsList';
-// import BlogList from '../blogsList';
-// import ContactForm from 'src/@core/components/popup/ContactForm';
-
-// const OverviewSec = ({ data , newsData , blogsData }) => {
-
-//     return (
-//         <section className='innerBlogSec bg-white pt-3'>
-//             <div className="container">
-             
-//                 <div className="row">
-//                     <div className="col-md-8">
-//                         <p className='text-black'>
-//                               <div dangerouslySetInnerHTML={{ __html: data?.overview }} />
-//                               </p>
-                     
-
-//                     </div>
-//                     <div className="col-md-4">
-//                         <div className='mb-3'>
-//                             <ContactForm heading={'Get More Details'} />
-//                         </div>
-//                         <BlogList blogItems={blogsData} heading={'Latest Blogs'} />
-//                         <NewsList newsItems={newsData} heading={'Latest News'} />
-//                     </div>
-//                 </div>
-//             </div>
-//         </section>
-//     )
-// }
-
-// export default OverviewSec
