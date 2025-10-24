@@ -83,6 +83,7 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
                   "position": 1,
                   "name": "Home",
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                  
                 },
                 {
                   "@type": "ListItem",

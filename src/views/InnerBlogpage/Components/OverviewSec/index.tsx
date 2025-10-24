@@ -5,7 +5,7 @@ import NewsList from '../newsList';
 import BlogList from '../blogsList';
 import ContactForm from 'src/@core/components/popup/ContactForm';
 import dynamic from 'next/dynamic';
-const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
+const FaqSec = dynamic(() => import('src/@core/components/blog-faq/index'), { ssr: false });
 // Load Roboto locally (avoids CLS from late font swap)
 const roboto = Roboto({
   subsets: ['latin'],
@@ -60,8 +60,8 @@ const OverviewSec = ({ data, newsData, blogsData }) => {
 
               {Array.isArray(data?.blogfaqs) && data.blogfaqs.length > 0 && (
                 <div className="col-12">
-                  <h4 className='fw-bold text-center text-md-left py-3 text-blue'>FAQs</h4>
-                  <FaqSec data={data.blogfaqs} />
+                  <h4 className='fw-bold  py-3 px-3 text-blue'> Frequently Asked Questions</h4>
+                  <FaqSec data={data.blogfaqs}  />
                 </div>
               )}
 
