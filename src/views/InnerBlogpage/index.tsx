@@ -109,6 +109,40 @@ function InnerBlogPage({ id }) {
                         })}
                     </script>
                 )}
+                   <script type="application/ld+json">
+              {JSON.stringify([
+                {
+                  "@context": "https://schema.org/",
+                  "@type": "BreadcrumbList",
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "blog",
+                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/blog`
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": pagedata?.meta_title,
+                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/blog/${pagedata?.id}/${pagedata?.slug}`
+                    },
+                    // {
+                    //   "@type": "ListItem",
+                    //   "position": 4,
+                    //   "name": pagedata?.name,
+                    //   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                    // }
+                  ]
+                }
+              ])}
+            </script>
             </Head>
             <BannerSec data={pagedata} createdAt={createdAt} />
             {/* {!loading && pagedata && <BannerSec data={pagedata} createdAt={createdAt} />} */}

@@ -41,7 +41,7 @@ function BannerSec({ data }) {
         params: { searchfrom: 'name', searchtext: value, country_id: [data?.country_id] },
       });
 
-      const suggestions = response.data.data.map((item: { id: number; name: string,slug:string}) => ({
+      const suggestions = response.data.data.map((item: { id: number; name: string, slug: string }) => ({
         name: item.name,
         slug: item.slug,
         id: item.id,
@@ -87,7 +87,7 @@ function BannerSec({ data }) {
           <div className='text-white align-content-center text-center'>
             <h1 className='fw-bold'>Study in {data?.country?.name}</h1>
             <div className="searchSec1 text-center mb-4">
-              
+
               <h3 className='mb-3'>Explore Top Colleges and Universities in {data?.country?.name}.</h3>
               {/* <h3 className='mb-0'>Explore Top Universities and Colleges in {data?.country?.name}.</h3> */}
               {/* <h3 className='mb-3'>Get Updates on Tuition, Courses Offered, Duration and more.</h3> */}

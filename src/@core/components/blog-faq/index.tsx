@@ -1,9 +1,9 @@
 import React from "react";
 
 const FaqSec = ({ data }) => {
-    return (
-        <section className="faqSec ">
-            <style>{`
+  return (
+    <section className="faqSec mb-4">
+      <style>{`
         .faqSec {
           background-color: #fff !important;
           font-family: 'Inter', sans-serif;
@@ -56,37 +56,37 @@ const FaqSec = ({ data }) => {
         }
       `}</style>
 
-            <div className="container">
-                <div className="accordion" id="faqAccordion">
-                    {data.map((item, index) => (
-                        <div className="accordion-item" key={index}>
-                            <h2 className="accordion-heade">
-                                <button
-                                    className={`accordion-button ${index === 0 ? "" : "collapsed"}`}
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target={`#col${index}`}
-                                    aria-expanded={index === 0 ? "true" : "false"}
-                                    aria-controls={`col${index}`}
-                                >
-                                    {item.questions}
-                                </button>
-                            </h2>
-                            <div
-                                id={`col${index}`}
-                                className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
-                                data-bs-parent="#faqAccordion"
-                            >
-                                <div className="accordion-body">
-                                    <div dangerouslySetInnerHTML={{ __html: item.answers }} />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+      <div className="container">
+        <div className="accordion" id="faqAccordion">
+          {data.map((item, index) => (
+            <div className="accordion-item" key={index}>
+              <h2 className="accordion-heade">
+                <button
+                  className={`accordion-button ${index === 0 ? "" : "collapsed"}`}
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#col${index}`}
+                  aria-expanded={index === 0 ? "true" : "false"}
+                  aria-controls={`col${index}`}
+                >
+                  {item.questions}
+                </button>
+              </h2>
+              <div
+                id={`col${index}`}
+                className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
+                data-bs-parent="#faqAccordion"
+              >
+                <div className="accordion-body">
+                  <div dangerouslySetInnerHTML={{ __html: item.answers }} />
                 </div>
+              </div>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default FaqSec;
