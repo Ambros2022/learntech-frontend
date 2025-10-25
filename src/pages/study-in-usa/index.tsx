@@ -31,6 +31,7 @@ const StudyInUSA = () => {
 
     try {
       const response = await axios.get(`api/website/abroadpagefindone/get/study-in-usa`);
+      console.log('Study in USA Page API Response:', response.data);
       if (isMountedRef.current) {
         setPageData(response.data.data);
         setLoading(false);
@@ -66,7 +67,7 @@ const StudyInUSA = () => {
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
 
 
-            <script type="application/ld+json">
+            {/* <script type="application/ld+json">
 
           {JSON.stringify([
 
@@ -126,7 +127,7 @@ const StudyInUSA = () => {
 
           ])}
 
-        </script>
+        </script> */}
       </Head>
       <AbroadPage data={pageData} />
     </>

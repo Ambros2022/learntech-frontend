@@ -21,6 +21,7 @@ function MainCollegePage() {
   const getPagedata = useCallback(async () => {
     try {
       const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
+      console.log('Main College Page API Response:', response.data);
       if (isMountedRef.current) {
 
         setPagedata(response.data.data);
@@ -40,7 +41,7 @@ function MainCollegePage() {
   useEffect(() => {
     getPagedata();
 
-  }, [getPagedata, ]);
+  }, [getPagedata,]);
   return (
     <>
       <Head>
@@ -48,7 +49,7 @@ function MainCollegePage() {
         <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
         <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-              <script type="application/ld+json">
+        <script type="application/ld+json">
 
           {JSON.stringify([
 
@@ -83,7 +84,7 @@ function MainCollegePage() {
 
                   "position": 2,
 
-                  "name": pagedata?.meta_title,
+                  "name": "Colleges",
 
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
 

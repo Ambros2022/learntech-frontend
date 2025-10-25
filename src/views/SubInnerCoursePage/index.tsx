@@ -128,11 +128,7 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
         {pagedata && (
           <script type="application/ld+json">
             {JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": formattedData,
-              },
+
               {
                 "@context": "https://schema.org/",
                 "@type": "BreadcrumbList",
@@ -146,8 +142,8 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
                   {
                     "@type": "ListItem",
                     "position": 2,
-                    "name": "courses",
-                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/courses`
+                    "name": "course",
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/course`
                   },
 
                   {

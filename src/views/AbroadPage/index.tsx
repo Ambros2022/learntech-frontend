@@ -9,7 +9,9 @@ import ExperTraineeSec from './Components/ExpertTrainneSec';
 import { useRouter } from 'next/router';
 function AbroadPage({ data }) {
   const router = useRouter();
+
   const formattedData = data && data?.abroadpagefaqs && data?.abroadpagefaqs.map((item) => ({
+
     "@type": "Question",
     "name": item.questions,
     "acceptedAnswer": {
@@ -30,62 +32,56 @@ function AbroadPage({ data }) {
             })}
           </script>
         )}
-           <script type="application/ld+json">
+        <script type="application/ld+json">
 
-            {JSON.stringify([
-
-
-              {
-
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": formattedData,
-
-              },
-
-              {
-
-                "@context": "https://schema.org/",
-
-                "@type": "BreadcrumbList",
-
-                "itemListElement": [
-
-                  {
-
-                    "@type": "ListItem",
-
-                    "position": 1,
-
-                    "name": "Home",
-
-                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+          {JSON.stringify([
 
 
 
-                  },
 
-                  {
+            {
 
-                    "@type": "ListItem",
+              "@context": "https://schema.org/",
 
-                    "position": 2,
+              "@type": "BreadcrumbList",
 
-                    "name": `${data?.country?.name}`,
+              "itemListElement": [
 
-                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                {
 
-                  },
+                  "@type": "ListItem",
 
-                
+                  "position": 1,
 
-                ]
+                  "name": "Home",
 
-              }
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
 
-            ])}
 
-          </script>
+
+                },
+
+                {
+
+                  "@type": "ListItem",
+
+                  "position": 2,
+
+                  "name": `${data?.name}`,
+
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+
+                },
+
+
+
+              ]
+
+            }
+
+          ])}
+
+        </script>
 
       </Head>
       <BannerSec data={data} />

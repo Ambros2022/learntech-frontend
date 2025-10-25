@@ -35,56 +35,56 @@ const ThankyouPage = () => {
                 <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
                 <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-                      <script type="application/ld+json">
+                <script type="application/ld+json">
 
-          {JSON.stringify([
-
-
-
-
-            {
-
-              "@context": "https://schema.org/",
-
-              "@type": "BreadcrumbList",
-
-              "itemListElement": [
-
-                {
-
-                  "@type": "ListItem",
-
-                  "position": 1,
-
-                  "name": "Home",
-
-                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                    {JSON.stringify([
 
 
 
-                },
 
-                {
+                        {
 
-                  "@type": "ListItem",
+                            "@context": "https://schema.org/",
 
-                  "position": 2,
+                            "@type": "BreadcrumbList",
 
-                  "name": pagedata?.meta_title,
+                            "itemListElement": [
 
-                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                                {
 
-                },
+                                    "@type": "ListItem",
+
+                                    "position": 1,
+
+                                    "name": "Home",
+
+                                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
 
 
 
-              ]
+                                },
 
-            }
+                                {
 
-          ])}
+                                    "@type": "ListItem",
 
-        </script>
+                                    "position": 2,
+
+                                    "name": "Thank you",
+
+                                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+
+                                },
+
+
+
+                            ]
+
+                        }
+
+                    ])}
+
+                </script>
             </Head>
             <section className='bg-skyBlue thnkCon'>
                 <div className="container py-5">

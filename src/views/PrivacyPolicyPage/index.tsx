@@ -36,7 +36,7 @@ const PrivacyPolicypage = () => {
         <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
         <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-               <script type="application/ld+json">
+        <script type="application/ld+json">
 
           {JSON.stringify([
 
@@ -71,7 +71,7 @@ const PrivacyPolicypage = () => {
 
                   "position": 2,
 
-                  "name": pagedata?.meta_title,
+                  "name": "Privacy Policy",
 
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
 

@@ -119,7 +119,7 @@ const MbbsAbroadPage = () => {
 
                   "position": 2,
 
-                  "name": pagedata?.meta_title,
+                  "name": "MBBS Abroad",
 
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
 

@@ -70,7 +70,7 @@ const SiteMapPage = () => {
 
                   "position": 2,
 
-                  "name": pagedata?.meta_title,
+                  "name": " Sitemap",
 
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
 
