@@ -119,7 +119,7 @@ function InnerCollegePage({ id }) {
                 {
                   "@type": "ListItem",
                   "position": 3,
-                  "name": pagedata?.meta_title,
+                  "name": pagedata?.name,
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}/college/${pagedata?.id}/${pagedata?.slug}`
                 },
                 // {
