@@ -153,7 +153,7 @@ const BannerSec = () => {
             </section>
             <section className='bg-white'>
                 <div className="container linkFontSize py-2">
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'>Board</span>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'>Boards</span>
                 </div>
             </section>
         </>

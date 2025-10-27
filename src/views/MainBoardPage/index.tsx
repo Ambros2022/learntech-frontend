@@ -108,7 +108,7 @@ const MainBoardPage = () => {
 
                   "position": 2,
 
-                  "name": "Board",
+                  "name": "Boards",
 
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
 

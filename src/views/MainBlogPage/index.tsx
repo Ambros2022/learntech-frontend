@@ -107,7 +107,7 @@ function MainBlogPage() {
 
                   "position": 2,
 
-                  "name": "Blog",
+                  "name": "Blogs",
 
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
 

@@ -24,7 +24,7 @@ const MedicalEduStudioPage = () => {
     const getPagedata = useCallback(async () => {
         try {
             const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
-            console.log('Medical Edu Studio Page API Response:', response.data);
+            // console.log('Medical Edu Studio Page API Response:', response.data);
             if (isMountedRef.current) {
 
                 setPagedata(response.data.data);

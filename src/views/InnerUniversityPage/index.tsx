@@ -22,6 +22,8 @@ function InnerUniversityPage({ id }) {
   const gettestimonials = useCallback(async () => {
     try {
       const response = await axios.get('api/website/testimonial/filter/get?page=1&size=15&college_id=' + id);
+      console.log('Medical Edu Studio Page API Response:', response.data);
+
       if (isMountedRef.current) {
         setTestdata(response.data.data);
       }
@@ -114,7 +116,7 @@ function InnerUniversityPage({ id }) {
                     {
                       "@type": "ListItem",
                       "position": 3,
-                      "name": pagedata?.meta_title,
+                      "name": pagedata?.name,
                       "item": `${process.env.NEXT_PUBLIC_WEB_URL}/university/${pagedata?.id}/${pagedata?.slug}`
                     },
                     // {
