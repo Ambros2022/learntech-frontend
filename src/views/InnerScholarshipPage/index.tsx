@@ -13,12 +13,13 @@ function InnerScholarshipPage({ id }) {
   const router = useRouter();
   const isMountedRef = useIsMountedRef();
   const [pagedata, setPagedata] = useState<any>(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [scholarship, setScholarship] = useState([]);
 
   const getPagedata = useCallback(async () => {
     try {
       const response = await axios.get('api/website/scholarshipfindone/get/' + id);
+      // console.log('Board Page API Response:', response.data);
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -54,44 +55,44 @@ function InnerScholarshipPage({ id }) {
         <meta name="description" content={pagedata?.meta_description || "Are you searching for which board is best for your child"} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-         <script type="application/ld+json">
-              {JSON.stringify([
+        <script type="application/ld+json">
+          {JSON.stringify([
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
                 {
-                  "@context": "https://schema.org/",
-                  "@type": "BreadcrumbList",
-                  "itemListElement": [
-                    {
-                      "@type": "ListItem",
-                      "position": 1,
-                      "name": "Home",
-                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
-                    },
-                    {
-                      "@type": "ListItem",
-                      "position": 2,
-                      "name": "scholarship",
-                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/scholarship`
-                    },
-                    {
-                      "@type": "ListItem",
-                      "position": 3,
-                      "name": pagedata?.meta_title,
-                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/scholarship/${pagedata?.id}/${pagedata?.slug}`
-                    },
-                    // {
-                    //   "@type": "ListItem",
-                    //   "position": 4,
-                    //   "name": pagedata?.name,
-                    //   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
-                    // }
-                  ]
-                }
-              ])}
-            </script>
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Scholarships",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/scholarships`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": pagedata?.name,
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/scholarship/${pagedata?.id}/${pagedata?.slug}`
+                },
+                // {
+                //   "@type": "ListItem",
+                //   "position": 4,
+                //   "name": pagedata?.name,
+                //   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                // }
+              ]
+            }
+          ])}
+        </script>
       </Head>
       {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <OverviewSec data={pagedata} scholarship ={scholarship} />}
-    
+      {!loading && pagedata && <OverviewSec data={pagedata} scholarship={scholarship} />}
+
 
     </>
   )

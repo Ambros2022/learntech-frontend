@@ -108,8 +108,8 @@ function InnerUniversityPage({ id }) {
                     {
                       "@type": "ListItem",
                       "position": 2,
-                      "name": "University",
-                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/university`
+                      "name": "Universities",
+                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/universities`
                     },
                     {
                       "@type": "ListItem",

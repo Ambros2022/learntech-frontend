@@ -20,6 +20,7 @@ interface Pagedata {
   name?: string;
   short_name?: string;
   streams?: {
+    id?: number;
     name?: string;
     slug?: string;
     banner?: string;
@@ -142,14 +143,19 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
                   {
                     "@type": "ListItem",
                     "position": 2,
-                    "name": "course",
-                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/course`
+                    "name": "Courses",
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/courses`
                   },
-
                   {
                     "@type": "ListItem",
                     "position": 3,
-                    "name": pagedata?.name || null,
+                    "name": pagedata?.streams?.name || null,
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": pagedata?.short_name || null,
                     "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
                   }
                 ]

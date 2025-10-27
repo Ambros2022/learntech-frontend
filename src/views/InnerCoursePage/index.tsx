@@ -173,13 +173,13 @@ function InnerCoursePage({ id }) {
 
                     "position": 2,
 
-                    "name": "course",
+                    "name": "Courses ",
 
-                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/course`
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/courses`
 
                   },
 
-                 
+
                   {
                     "@type": "ListItem",
                     "position": 3,

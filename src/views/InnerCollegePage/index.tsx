@@ -98,40 +98,40 @@ function InnerCollegePage({ id }) {
             }
           )}
         </script>
-          <script type="application/ld+json">
-              {JSON.stringify([
+        <script type="application/ld+json">
+          {JSON.stringify([
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
                 {
-                  "@context": "https://schema.org/",
-                  "@type": "BreadcrumbList",
-                  "itemListElement": [
-                    {
-                      "@type": "ListItem",
-                      "position": 1,
-                      "name": "Home",
-                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
-                    },
-                    {
-                      "@type": "ListItem",
-                      "position": 2,
-                      "name": "college",
-                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/college`
-                    },
-                    {
-                      "@type": "ListItem",
-                      "position": 3,
-                      "name": pagedata?.meta_title,
-                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/college/${pagedata?.id}/${pagedata?.slug}`
-                    },
-                    // {
-                    //   "@type": "ListItem",
-                    //   "position": 4,
-                    //   "name": pagedata?.name,
-                    //   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
-                    // }
-                  ]
-                }
-              ])}
-            </script>
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Colleges",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/colleges`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": pagedata?.meta_title,
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/college/${pagedata?.id}/${pagedata?.slug}`
+                },
+                // {
+                //   "@type": "ListItem",
+                //   "position": 4,
+                //   "name": pagedata?.name,
+                //   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                // }
+              ]
+            }
+          ])}
+        </script>
       </Head>
       {/* Show loader while loading */}
       {loading ? (
