@@ -9,7 +9,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import OrganizationSection from './Components/OrganizationalSec';
 import ExperTraineeSec from './Components/ExpertTrainneSec';
-import { CircularProgress, Box } from '@mui/material'; 
+import { CircularProgress, Box } from '@mui/material';
 
 function InnerExamPage({ id }) {
   const router = useRouter();
@@ -19,6 +19,7 @@ function InnerExamPage({ id }) {
   const getPagedata = useCallback(async () => {
     try {
       const response = await axios.get('api/website/examfindone/get/' + id);
+      console.log('Exam API Response:', response.data);
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -54,13 +55,76 @@ function InnerExamPage({ id }) {
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
         {formattedData?.length > 0 && (
+
           <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": formattedData,
-            })}
+
+            {JSON.stringify([
+
+
+
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": formattedData,
+              },
+
+              {
+
+                "@context": "https://schema.org/",
+
+                "@type": "BreadcrumbList",
+
+                "itemListElement": [
+
+                  {
+
+                    "@type": "ListItem",
+
+                    "position": 1,
+
+                    "name": "Home",
+
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+
+
+
+                  },
+
+                  {
+
+                    "@type": "ListItem",
+
+                    "position": 2,
+
+                    "name": "Exams",
+
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/exams`
+
+                  },
+
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": pagedata?.exam_title,
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/exam/${pagedata?.id}/${pagedata?.slug}`
+                  }
+
+                ]
+
+              }
+
+            ])}
+
           </script>
+          // <script type="application/ld+json">
+          //   {JSON.stringify({
+          //     "@context": "https://schema.org",
+          //     "@type": "FAQPage",
+          //     "mainEntity": formattedData,
+          //   })}
+          // </script>
+
+
         )}
       </Head>
       {/* {!loading && pagedata && <BannerSec data={pagedata} />} */}

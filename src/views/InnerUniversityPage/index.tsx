@@ -22,6 +22,8 @@ function InnerUniversityPage({ id }) {
   const gettestimonials = useCallback(async () => {
     try {
       const response = await axios.get('api/website/testimonial/filter/get?page=1&size=15&college_id=' + id);
+      console.log('Medical Edu Studio Page API Response:', response.data);
+
       if (isMountedRef.current) {
         setTestdata(response.data.data);
       }
@@ -34,6 +36,7 @@ function InnerUniversityPage({ id }) {
   const getPagedata = useCallback(async () => {
     try {
       const response = await axios.get('api/website/collegefindone/get/' + id);
+      // console.log('College API Response:', response.data);
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false); // Set loading to false once data is fetched
@@ -74,21 +77,61 @@ function InnerUniversityPage({ id }) {
             })}
           </script>
         )}
-        <script type="application/ld+json">
-          {JSON.stringify(
-            {
-              "@context": "https://schema.org/",
-              "@type": "CollegeOrUniversity",
-              "name": `${pagedata?.meta_title}`,
-              "logo": `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
-              "url": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`,
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": `${pagedata?.address}`
-              }
-            }
-          )}
-        </script>
+        {pagedata && (
+          <>
+            <script type="application/ld+json">
+              {JSON.stringify(
+                {
+                  "@context": "https://schema.org/",
+                  "@type": "CollegeOrUniversity",
+                  "name": `${pagedata?.meta_title}`,
+                  "logo": `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
+                  "url": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`,
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": `${pagedata?.address}`
+                  }
+                }
+              )}
+            </script>
+
+            <script type="application/ld+json">
+              {JSON.stringify([
+                {
+                  "@context": "https://schema.org/",
+                  "@type": "BreadcrumbList",
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Universities",
+                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/universities`
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": pagedata?.name,
+                      "item": `${process.env.NEXT_PUBLIC_WEB_URL}/university/${pagedata?.id}/${pagedata?.slug}`
+                    },
+                    // {
+                    //   "@type": "ListItem",
+                    //   "position": 4,
+                    //   "name": pagedata?.name,
+                    //   "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                    // }
+                  ]
+                }
+              ])}
+            </script>
+          </>
+        )}
+
       </Head>
 
       {/* Show loading spinner while fetching data */}

@@ -23,6 +23,7 @@ function InnerSchoolPage({ id }) {
   const getPagedata = useCallback(async () => {
     try {
       const response = await axios.get('api/website/schoolfindone/get/' + id);
+      console.log('School Page API Response:', response.data);
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -56,7 +57,7 @@ function InnerSchoolPage({ id }) {
         <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-        {formattedData?.length > 0 && (
+        {/* {formattedData?.length > 0 && (
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
@@ -64,7 +65,30 @@ function InnerSchoolPage({ id }) {
               "mainEntity": formattedData,
             })}
           </script>
-        )}
+        )} */}
+
+
+        
+  {/* ✅ FAQ Schema - fixed */}
+  {pagedata?.schfaqs?.length > 0 && (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: pagedata.schfaqs.map((item) => ({
+            '@type': 'Question',
+            name: item.questions,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: item.answers.replace(/<\/?[^>]+(>|$)/g, ''), // remove HTML tags
+            },
+          })),
+        }),
+      }}
+    />
+  )}
         <script type="application/ld+json">
           {JSON.stringify(
             {
@@ -80,6 +104,39 @@ function InnerSchoolPage({ id }) {
 
             }
           )}
+
+
+
+          
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify([
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Schools",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/schools`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": pagedata?.name,
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/school/${pagedata?.id}/${pagedata?.slug}`
+                },
+               
+              ]
+            }
+          ])}
         </script>
       </Head>
       <BannerSection data={pagedata} />

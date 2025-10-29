@@ -16,6 +16,15 @@ interface Pagedata {
   meta_description?: string;
   meta_keyword?: string;
   generalcoursefaqs?: { questions: string; answers: string }[];
+  // added fields used by BreadcrumbList and page rendering
+  name?: string;
+  short_name?: string;
+  streams?: {
+    id?: number;
+    name?: string;
+    slug?: string;
+    banner?: string;
+  } | null;
 }
 
 interface SubInnerCoursePageProps {
@@ -38,6 +47,7 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
       const id = Streamid;
 
       const response = await axios.get(`/api/website/general/stream/get/${slug}/${id}`);
+      console.log('Sub Inner Course Page API Response:', response.data);
 
       if (isMountedRef.current) {
         setPagedata(response.data.data);
@@ -114,6 +124,43 @@ const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Cours
               "@type": "FAQPage",
               "mainEntity": formattedData,
             })}
+          </script>
+        )}
+        {pagedata && (
+          <script type="application/ld+json">
+            {JSON.stringify([
+
+              {
+                "@context": "https://schema.org/",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Courses",
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/courses`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": pagedata?.streams?.name || null,
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": pagedata?.short_name || null,
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                  }
+                ]
+              }
+            ])}
           </script>
         )}
       </Head>

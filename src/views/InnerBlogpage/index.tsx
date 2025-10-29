@@ -79,6 +79,15 @@ function InnerBlogPage({ id }) {
         }
     }, [id, isMountedRef])
 
+    const formattedData = pagedata && pagedata?.blogfaqs && pagedata?.blogfaqs.map((item) => ({
+        "@type": "Question",
+        "name": item.questions,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.answers,
+        },
+    }));
+
     useEffect(() => {
         getPagedata();
         getNews();
@@ -91,6 +100,44 @@ function InnerBlogPage({ id }) {
                 <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
                 <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
                 <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
+                {formattedData?.length > 0 && (
+                    <script type="application/ld+json">
+                        {JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "FAQPage",
+                            "mainEntity": formattedData,
+                        })}
+                    </script>
+                )}
+                <script type="application/ld+json">
+                    {JSON.stringify([
+                        {
+                            "@context": "https://schema.org/",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                {
+                                    "@type": "ListItem",
+                                    "position": 1,
+                                    "name": "Home",
+                                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 2,
+                                    "name": "Blogs",
+                                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/blogs`
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 3,
+                                    "name": pagedata?.name,
+                                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/blog/${pagedata?.id}/${pagedata?.slug}`
+                                },
+
+                            ]
+                        }
+                    ])}
+                </script>
             </Head>
             <BannerSec data={pagedata} createdAt={createdAt} />
             {/* {!loading && pagedata && <BannerSec data={pagedata} createdAt={createdAt} />} */}

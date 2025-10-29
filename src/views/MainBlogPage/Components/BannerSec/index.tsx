@@ -82,7 +82,7 @@ const BannerSec = () => {
                                 <div className="align-content-center h-100">
                                     <h1 className='fw-bold text-white mb-4'>Educational Blogs</h1>
                                     <div className="row">
-                                    
+
                                         <div className="col-md-12 mb-3 mx-auto">
                                             <Autocomplete
                                                 open={open}
@@ -145,7 +145,7 @@ const BannerSec = () => {
             </section>
             <section className='bg-white'>
                 <div className='container py-2 linkFontSize'>
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>Blog</span>
+                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>Blogs</span>
                 </div>
             </section>
         </>

@@ -19,6 +19,7 @@ function InnerBoardPage({ id }) {
   const getPagedata = useCallback(async () => {
     try {
       const response = await axios.get('api/website/schoolboardfindone/get/' + id);
+      // console.log('Board Page API Response:', response.data);
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -140,9 +141,38 @@ function InnerBoardPage({ id }) {
             }
           )}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify([
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Boards",
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/boards`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": pagedata?.short_name,
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                },
+
+              ]
+            }
+          ])}
+        </script>
       </Head>
 
-      {loading  ? (
+      {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <CircularProgress />
         </Box>

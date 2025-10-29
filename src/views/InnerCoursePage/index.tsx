@@ -39,6 +39,7 @@ function InnerCoursePage({ id }) {
   const getPagedata = useCallback(async () => {
     try {
       const response = await axios.get('api/website/streamfindone/get/' + id);
+      console.log('Course Page API Response:', response.data);
       if (isMountedRef.current) {
         setPagedata(response.data.data);
         setLoading(false);
@@ -127,14 +128,75 @@ function InnerCoursePage({ id }) {
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
         {formattedData?.length > 0 && (
+
+
+
+
           <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": formattedData,
-            })}
+
+            {JSON.stringify([
+
+
+              {
+
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": formattedData,
+
+              },
+
+              {
+
+                "@context": "https://schema.org/",
+
+                "@type": "BreadcrumbList",
+
+                "itemListElement": [
+
+                  {
+
+                    "@type": "ListItem",
+
+                    "position": 1,
+
+                    "name": "Home",
+
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+
+
+
+                  },
+
+                  {
+
+                    "@type": "ListItem",
+
+                    "position": 2,
+
+                    "name": "Courses ",
+
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}/courses`
+
+                  },
+
+
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": pagedata?.short_name || pagedata?.name,
+                    "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+                  }
+
+                ]
+
+              }
+
+            ])}
+
           </script>
+
         )}
+
       </Head>
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>

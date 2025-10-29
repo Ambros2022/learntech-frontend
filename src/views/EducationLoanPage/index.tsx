@@ -6,11 +6,11 @@ import AboutSec from './Components/AboutSec'
 // import BankSec from './Components/BankSec'
 // import FaqSec from './Components/FaqSec'
 // import LoanCalculator from './Components/LoanCalculator'
-const LoanCalculator = dynamic(() => import('./Components/LoanCalculator'), {ssr: false,});
-const DetailSec = dynamic(() => import('./Components/DetailSec'), {ssr: false,});
-const StepSection = dynamic(() => import('./Components/StepsSection'), {ssr: false,});
-const BankSec = dynamic(() => import('./Components/BankSec'), {ssr: false,});
-const FaqSec = dynamic(() => import('./Components/FaqSec'), {ssr: false,});
+const LoanCalculator = dynamic(() => import('./Components/LoanCalculator'), { ssr: false, });
+const DetailSec = dynamic(() => import('./Components/DetailSec'), { ssr: false, });
+const StepSection = dynamic(() => import('./Components/StepsSection'), { ssr: false, });
+const BankSec = dynamic(() => import('./Components/BankSec'), { ssr: false, });
+const FaqSec = dynamic(() => import('./Components/FaqSec'), { ssr: false, });
 import { useRouter } from 'next/router'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
@@ -130,6 +130,57 @@ const EducationLoanPage = () => {
             }
           )}
         </script>
+        <script type="application/ld+json">
+
+          {JSON.stringify([
+
+
+
+
+            {
+
+              "@context": "https://schema.org/",
+
+              "@type": "BreadcrumbList",
+
+              "itemListElement": [
+
+                {
+
+                  "@type": "ListItem",
+
+                  "position": 1,
+
+                  "name": "Home",
+
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
+
+
+
+                },
+
+                {
+
+                  "@type": "ListItem",
+
+                  "position": 2,
+
+                  "name": "Education-Loan",
+
+                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+
+                },
+
+
+
+              ]
+
+            }
+
+          ])}
+
+        </script>
+        {/* </Head> */}
       </Head>
       <BannerSec />
       <AboutSec pagedata={pagedata} />
