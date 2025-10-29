@@ -1,5 +1,5 @@
 
-import { useState,useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import DialogActions from '@mui/material/DialogActions'
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import { useForm, Controller,useWatch  } from 'react-hook-form'
+import { useForm, Controller, useWatch } from 'react-hook-form'
 import axios1 from 'src/configs/adminaxios'
 import { yupResolver } from '@hookform/resolvers/yup'
 // ** Custom Component Import
@@ -101,7 +101,8 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
         overview: isAddMode ? '' : olddata.overview,
         status: isAddMode ? 'Published' : olddata.status,
         country_id: (isAddMode || !olddata) ? '' : olddata.country,
-        listing_order: isAddMode ? '' : olddata.listing_order,
+        // listing_order: isAddMode ? '' : olddata.listing_order,
+        listing_order: isAddMode ? 0 : olddata.listing_order || 0,
         is_trending: isAddMode ? 0 : olddata.is_trending ? olddata.is_trending : 0,
     }
 
@@ -269,7 +270,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
 
 
 
-    
+
 
     return (
         <>
@@ -449,7 +450,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode }) => {
                                 <>
                                     <QuillEditor placeholder='Start Writing...' intaialvalue={value}
                                         onChange={(value) => setValue("overview", value)} />
-                    
+
                                 </>
                             )}
                         />
