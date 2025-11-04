@@ -131,7 +131,9 @@ const App = (props: ExtendedAppProps) => {
   const setConfig = Component.setConfig ?? undefined;
   const authGuard = Component.authGuard ?? true;
   const guestGuard = Component.guestGuard ?? false;
+  const META_PIXEL_ID = '266407448911608';
 
+  
   return (
     <>
       <CacheProvider value={emotionCache}>
@@ -182,21 +184,8 @@ const App = (props: ExtendedAppProps) => {
             }}
           />
 
-          {/* Meta Pixel Code */}
-          <Script
-            id="meta-pixel"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{ __html: MetaPixelScript }}
-          />
 
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              style={{ display: "none" }}
-              src={`https://www.facebook.com/tr?id=266407448911608&ev=PageView&noscript=1`}
-            />
-          </noscript>
+
 
 
         </Head>
@@ -224,8 +213,21 @@ const App = (props: ExtendedAppProps) => {
           </AuthProvider>
         </SessionProvider>
       </CacheProvider>
-
-
+      {/* Meta Pixel Code */}
+      <Script
+        id="meta-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: MetaPixelScript }}
+      />
+      <noscript>
+        <img
+          height="1"
+          width="1"
+          style={{ display: 'none' }}
+          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          alt=""
+        />
+      </noscript>
       <Script
         id="gtm"
         strategy="afterInteractive"

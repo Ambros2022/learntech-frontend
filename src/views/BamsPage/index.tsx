@@ -166,7 +166,7 @@ const BamsPage = () => {
 
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
-    const [expanded, setExpanded] = useState(false);
+
 
     
     const navigate = (id, offset = 0) => {
@@ -177,7 +177,7 @@ const BamsPage = () => {
                 top: offsetTop - offset,
                 behavior: "smooth"
             });
-            setExpanded(false);
+         
         } else {
             console.error("Element not found:", id);
         }
@@ -206,7 +206,7 @@ const BamsPage = () => {
                     content=" Know all about the BAMS Counselling 2025-26 Process in India & Karnataka: BAMS Counselling Schedule, Required Documents, Top BAMS Colleges, and More. Apply Now!
 "
                 />
-                <link rel="stylesheet" href="/css/bamslandingpage.css" />
+                {/* <link rel="stylesheet" href="/css/bamslandingpage.css" /> */}
                  <link rel="canonical" href="https://learntechww.com/bams-counselling-process " />
             </Head>
 

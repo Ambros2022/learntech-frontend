@@ -36,14 +36,7 @@ function InnerSchoolPage({ id }) {
 
 
 
-  const formattedData = pagedata && pagedata.collegefaqs && pagedata.collegefaqs.map((item) => ({
-    "@type": "Question",
-    "name": item.questions,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.answers,
-    },
-  }));
+
 
 
   useEffect(() => {
@@ -57,15 +50,7 @@ function InnerSchoolPage({ id }) {
         <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-        {/* {formattedData?.length > 0 && (
-          <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": formattedData,
-            })}
-          </script>
-        )} */}
+
 
 
         

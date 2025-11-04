@@ -39,7 +39,7 @@ const OverviewSec = ({ data, newsData, blogsData }) => {
       {/* Preload the font that Lighthouse flagged for CLS */}
       <Head>
         <link
-          rel="preload"
+          rel="preconnect"
           href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5Q.woff2" // Replace with exact URL from Lighthouse report
           as="font"
           type="font/woff2"
