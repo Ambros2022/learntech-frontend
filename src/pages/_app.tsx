@@ -48,7 +48,6 @@ import { SessionProvider } from 'next-auth/react'; // Import SessionProvider
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
 
-import { MetaPixelScript } from "src/lib/fbpixel";
 // ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
@@ -131,7 +130,7 @@ const App = (props: ExtendedAppProps) => {
   const setConfig = Component.setConfig ?? undefined;
   const authGuard = Component.authGuard ?? true;
   const guestGuard = Component.guestGuard ?? false;
-  const META_PIXEL_ID = '266407448911608';
+
 
   
   return (
@@ -213,21 +212,7 @@ const App = (props: ExtendedAppProps) => {
           </AuthProvider>
         </SessionProvider>
       </CacheProvider>
-      {/* Meta Pixel Code */}
-      <Script
-        id="meta-pixel"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: MetaPixelScript }}
-      />
-      <noscript>
-        <img
-          height="1"
-          width="1"
-          style={{ display: 'none' }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-          alt=""
-        />
-      </noscript>
+   
       <Script
         id="gtm"
         strategy="afterInteractive"
