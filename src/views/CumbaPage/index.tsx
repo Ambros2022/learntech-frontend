@@ -9,13 +9,14 @@ import 'aos/dist/aos.css'
 import Modal from 'react-bootstrap/Modal'
 
 import { useRouter } from 'next/router'
-
+import dynamic from 'next/dynamic';
 import { Field, Form, Formik, ErrorMessage } from 'formik'
 import { toast } from 'react-hot-toast'
 import axios from 'src/configs/axios'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
-
+const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'));
+import MainCrosuel from "./MainCrosuel"
 // dqfqwfqw
 const whatsappc = '/images/bams/whatsappc.gif'
 const logos = [
@@ -48,56 +49,13 @@ const responsive = {
     items: 1
   }
 }
-const data = [
-  {
-    title: 'Strategic Decision-Making Mastery',
-    desc: `Online MBA Chandigarh University equips graduates with advanced analytical skills for
-                                    complex business decisions through data-driven case studies and simulations.​
-                                    Students learn to evaluate risks, and formulate strategies that drive organizational
-                                    success. Real-world projects enhance problem-solving abilities, enabling confident
-                                    leadership in high-stakes environments.​ Enrolling in a CU online MBA admission
-                                    prepares professionals to navigate uncertainties and seize growth opportunities
-                                    effectively.​`,
-    img: '/images/cumba/planning.webp'
-  },
-  {
-    title: 'Leadership and Managerial Proficiency',
-    desc: `Being one of the best online MBA in India the program develops essential leadership
-                                    qualities, including team motivation, ethical decision-making, and conflict
-                                    resolution.​ Interactive sessions and Harvard faculty modules build emotional
-                                    intelligence and visionary thinking for senior roles.​ CU online MBA graduates
-                                    emerge as influential managers capable of inspiring diverse teams toward shared
-                                    goals.​`,
-    img: '/images/cumba/closeup.webp'
-  },
-  {
-    title: 'Global Business Acumen',
-    desc: `Learners gain a comprehensive understanding of international markets, cross-cultural
-                                    dynamics, and globalization impacts.​ Chandigarh University online programs provide
-                                    exposure to global case studies and Harvard collaborations broadens perspectives for
-                                    multinational operations.​ Graduates are equipped to handle international trade,
-                                    supply chains, and diverse regulatory environments confidently.`,
-    img: '/images/cumba/chess.webp'
-  },
-  {
-    title: 'Career Advancement and Employability',
-    desc: `The curriculum aligns with industry demands, boosting employability through
-                                    specialized skills and placement support.​ Graduates from CU online MBA secure roles
-                                    in top firms like Deloitte, Amazon, and Infosys with higher salary potential and
-                                    promotions.​ Networking opportunities and certifications from Harvard enhance
-                                    professional profiles significantly.​ Strong ROI comes from rapid career growth,
-                                    leadership positions, and entrepreneurial readiness.​ Chandigarh University distance
-                                    MBA alumni achieve sustained success in management, finance, marketing, and
-                                    operations sectors.`,
-    img: '/images/cumba/businnespeople.webp'
-  }
-]
+
 
 const responsive2 = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 2, 
-    slidesToSlide: 1 
+    items: 2,
+    slidesToSlide: 1
   },
   tablet: {
     breakpoint: { max: 1024, min: 600 },
@@ -147,9 +105,9 @@ const BamsPage = () => {
       formData.append('SourceCampaign', 'CU Online MBA 2026-27')
 
       const response = await axios.post('api/website/landingpage/enquiry', formData)
-           console.log(response);
+      console.log(response)
       if (response.status === 200) {
-            console.log(response);
+        console.log(response)
         toast.dismiss()
         toast.success('Thank you. We will get back to you.')
         resetForm()
@@ -302,7 +260,7 @@ const BamsPage = () => {
         }}
       >
         <div className='container-fluid navbar-bams-top navbarmobilebams mx-md-5 px-md-5'>
-          <Link className='navbar-brand d-flex align-items-center px-md-5' href='/'>
+          <Link className='navbar-brand d-flex align-items-center px-md-5 no-click' href='#'>
             <Image src='/images/cumba/logo.svg' alt='Logo' width={195} height={50} priority />
           </Link>
 
@@ -323,8 +281,13 @@ const BamsPage = () => {
               <li className='nav-item   bams-navbar-tag'>
                 <a
                   className='nav-link'
-                  onClick={() => {
-                    document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })
+                //   onClick={() => {
+                //     document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })
+                //     closeNavbar()
+                //   }}
+                // >
+                       onClick={() => {
+                    navigate('home', 80)
                     closeNavbar()
                   }}
                 >
@@ -347,7 +310,7 @@ const BamsPage = () => {
                 <a
                   className='nav-link'
                   onClick={() => {
-                    navigate('Eligibility',100)
+                    navigate('Eligibility', 100)
                     closeNavbar()
                   }}
                 >
@@ -381,8 +344,7 @@ const BamsPage = () => {
               <li className='nav-item   bams-navbar-tag'>
                 <a
                   className='nav-link'
-                
-                     onClick={() => {
+                  onClick={() => {
                     navigate('FAQs', 100)
                     closeNavbar()
                   }}
@@ -408,15 +370,15 @@ const BamsPage = () => {
 
       {/* --homebannner--- */}
 
-      <section className='hero' id="home">
+      <section className='hero' id='home'>
         <div className='container'>
           <div className='row align-items-center g-4'>
             <div className='col-lg-7'>
               <div className='hero-card'>
-                <h1 className='mb-2' data-aos='fade-up' data-aos-duration='1000'>
+                <h1 className='mb-2' >
                   Empower Your Future with an Online MBA from <span>Chandigarh University</span>
                 </h1>
-                <p className='lead mb-5' data-aos='fade-up' data-aos-duration='2000'>
+                <p className='lead mb-5 pt-md-0 pt-3' >
                   {' '}
                   Discover industry-relevant skills, global exposure, and <br />
                   flexible learning with CU Online MBA.
@@ -424,8 +386,7 @@ const BamsPage = () => {
 
                 <div
                   className='d-flex flex-wrap align-items-center gap-3 mb-3 blur-wrapper'
-                  data-aos='fade-up'
-                  data-aos-duration='3000'
+                
                 >
                   <div className='d-none d-md-flex kpis gap-4 mb-3'>
                     <div className='kpi'>
@@ -445,7 +406,10 @@ const BamsPage = () => {
                   </div>
                   <div className='hero-badge mt-3 mb-3'>Admissions open- Online MBA Jan 2026 batch</div>
                   <br />
-                  <button className='btn request-btn p-2' onClick={handleShow}> Apply Now</button>
+                  <button className='btn request-btn p-2' onClick={handleShow}>
+                    {' '}
+                    Apply Now
+                  </button>
                   <div className='d-flex gap-2 '>
                     <button className='btn-brochure ' onClick={handleShow}>
                       <i className='bi bi-file-earmark-arrow-down-fill me-2' style={{ fontSize: '16px' }}></i>Download
@@ -457,7 +421,7 @@ const BamsPage = () => {
             </div>
 
             <div className='col-lg-5 col-md-5 mt-4 mt-lg-0'>
-              <div className=' p-4   searchForm  shadow-sm' data-aos='zoom-in' data-aos-duration='2000'>
+              <div className=' p-4   searchForm  shadow-sm' >
                 <h3 className='fw-bold text-center text-white  mb-4 fs24'>Enter Your Details to Get Started</h3>
                 <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                   {() => (
@@ -484,28 +448,60 @@ const BamsPage = () => {
                         />
                       </div>
 
-                      <div className='form-group mb-3'>
+                       <div className="mb-3 form-group  ">
+                          <PhoneInputField name="contact" />
+                          <ErrorMessage name="contact" component="div" className=" form-control bams-form-field py-3" />
+                        </div>
+                      <div className='form-group mb-3 select-wrapper'>
                         <Field
-                          type='number'
-                          id='contact'
-                          name='contact'
-                          placeholder='Enter Phone Number'
-                          required
-                          className='form-control'
-                        />
-                      </div>
-
-                      <div className='form-group mb-3'>
-                        <Field
-                          type='text'
+                          as='select'
                           id='location'
                           name='location'
-                          placeholder='Enter Location'
                           required
-                          className='form-control'
-                        />
-                      </div>
+                          className='browser-default custom-select form-control white-bg-black-text bams-form-field '
+                        >
+                         <option value=''>Select State</option>
+                    <option value='Andhra Pradesh'>Andhra Pradesh</option>
+                    <option value='Andaman & Nicobar'>Andaman & Nicobar</option>
 
+                    <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+                    <option value='Assam'>Assam</option>
+                    <option value='Bihar'>Bihar</option>
+                    <option value='Chhattisgarh'>Chhattisgarh</option>
+                    <option value='Chandigarh'>Chandigarh</option>
+                    <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+                    <option value='Daman & Diu'>Daman & Diu</option>
+                    <option value='Delhi'>Delhi</option>
+                    <option value='Goa'>Goa</option>
+                    <option value='Gujarat'>Gujarat</option>
+                    <option value='Haryana'>Haryana</option>
+                    <option value='Himachal Pradesh'>Himachal Pradesh</option>
+                    <option value='Jammu & Kashmir'>Jammu & Kashmir</option>
+                    <option value='Jharkhand'>Jharkhand</option>
+                    <option value='Karnataka'>Karnataka</option>
+                    <option value='Kerala'>Kerala</option>
+                    <option value='Lakshadweep'>Lakshadweep</option>
+
+                    <option value='Madhya Pradesh'>Madhya Pradesh</option>
+                    <option value='Maharashtra'>Maharashtra</option>
+                    <option value='Manipur'>Manipur</option>
+                    <option value='Meghalaya'>Meghalaya</option>
+                    <option value='Mizoram'>Mizoram</option>
+                    <option value='Nagaland'>Nagaland</option>
+                    <option value='Odisha'>Odisha</option>
+                    <option value='Punjab'>Punjab</option>
+                    <option value='Puducherry'>Puducherry</option>
+
+                    <option value='Rajasthan'>Rajasthan</option>
+                    <option value='Sikkim'>Sikkim</option>
+                    <option value='Tamil Nadu'>Tamil Nadu</option>
+                    <option value='Tripura'>Tripura</option>
+                    <option value='Telangana'>Telangana</option>
+                    <option value='Uttarakhand'>Uttarakhand</option>
+                    <option value='Uttar Pradesh'>Uttar Pradesh</option>
+                    <option value='West Bengal'>West Bengal</option>
+                        </Field>
+                      </div>
                       <div className='form-group mb-3'>
                         <Field
                           as='textarea'
@@ -541,7 +537,7 @@ const BamsPage = () => {
       </section>
 
       <section>
-        <div className='container text-center' data-aos='fade-up' id="About">
+        <div className='container text-center' data-aos='fade-up' id='About'>
           <h5>
             <b style={{ color: 'rgb(13, 27, 42)' }}>About</b>
           </h5>
@@ -608,54 +604,83 @@ const BamsPage = () => {
           <h2 className='spec-title text-black'>Specializations</h2>
 
           <div className='tag-cloud py-3'>
-            <div className='tag'>
-              <i className='bi bi-check-circle-fill'></i> Marketing
-            </div>
-            <div className='tag'>
-              <i className='bi bi-check-circle-fill'></i> Finance
-            </div>
-            <div className='tag'>
-              <i className='bi bi-check-circle-fill'></i> HRM
-            </div>
-            <div className='tag'>
-              <i className='bi bi-check-circle-fill'></i> Business Analytics
-            </div>
-            <div className='tag'>
-              <i className='bi bi-check-circle-fill'></i> Hospital Management
-            </div>
-            <div className='tag'>
+              <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Digital Marketing
             </div>
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Retail Management
             </div>
-            <div className='tag'>
+              <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Operations Management
             </div>
-            <div className='tag'>
-              <i className='bi bi-check-circle-fill'></i> Entrepreneurship
+              <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Finance
             </div>
-            <div className='tag'>
+             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> IT (Information Technology)
+            </div>
+             <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Marketing
             </div>
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Logistics & Supply Chain
             </div>
+              <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> HRM
+            </div>
+           
+          
+          
             <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Business Analytics
+            </div>
+             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Travel & Tourism
             </div>
             <div className='tag'>
-              <i className='bi bi-check-circle-fill'></i> Aviation Management
+              <i className='bi bi-check-circle-fill'></i> Hospital Management
             </div>
+              <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Fintech
+            </div>
+           <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Media Management
+            </div>
+          
             <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Entrepreneurship
+            </div>
+           
+               <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Banking & Insurance
+            </div>
+              <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Brand Management
             </div>
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Events Management
             </div>
+           
+            <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Aviation Management
+            </div>
+         
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Disaster Management
             </div>
+            {/* ------------ */}
+           
+            <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> Data Science & Artificial Intelligence
+            </div>
+            <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> International Relations
+            </div>
+          
+            <div className='tag'>
+              <i className='bi bi-check-circle-fill'></i> General Management
+            </div>
+          
           </div>
         </div>
       </section>
@@ -715,14 +740,19 @@ const BamsPage = () => {
         </div>
       </section>
 
-      <section  className='pt-5 bg-white' data-aos='fade-up' >
-        <div className='container' id="Curriculum">
-          <h2 className='section-title mb-5 text-center fs-2 text-black'>
+      <section className='pt-5 bg-white' data-aos='fade-up'>
+        <div className='container' id='Curriculum'>
+          {/* <h2 className='section-title mb-5 text-center fs-2 text-black'>
             <span style={{ color: '#e1473f' }}>Chandigarh University</span>
             <br />
             Online MBA Semester-wise Curriculum
-          </h2>
-
+          </h2> */}
+ <h2 className='section-title  fs-1  mb-4 text-black text-center'>
+          <span className='' style={{ color: '#e1473f' }}>
+            Chandigarh University
+          </span>{' '}   <br />
+           Online MBA Semester-wise Curriculum
+        </h2>
           <div className='accordion' id='curriculumAcc'>
             {/* <!-- Semester I (Open by default) --> */}
             <div className='accordion-item mb-3'>
@@ -896,7 +926,7 @@ const BamsPage = () => {
           </div>
         </div>
       </section>
-      <section className='outcomes-section'>
+      <section className='outcomes-section mt-5'>
         <div className='container'>
           <h2 className='section-title mb-5 text-center fs-2 text-black'>
             Program Outcomes of <br />
@@ -905,48 +935,23 @@ const BamsPage = () => {
             Online MBA
           </h2>
         </div>
-        <div className='outcomes-container  carousel-wrapper mba-feature-carousel'>
-          <Carousel
-            responsive={responsive2}
-            infinite
-            arrows
-            swipeable
-            draggable
-            autoPlay={false}
-            itemClass='carousel-item-padding'
-          >
-            {data.map((item, idx) => (
-              <div className='outcome-card' key={idx}>
-                {/* Background Layer */}
-                <div className='bg-layer' style={{ backgroundImage: `url(${item.img})` }}></div>
-
-                <div className='news-overlay'></div>
-
-                <div className='outcome-content'>
-                  <h3 className='outcome-title'>{item.title}</h3>
-                  <p>{item.desc}</p>
-
-                  <div className='hover-line'></div>
-                </div>
-              </div>
-            ))}
-          </Carousel>
-        </div>
+    
+        <MainCrosuel/>
       </section>
-      <section className='advantage-section py-1' data-aos='fade-up' >
-        <div className='container text-center' id='whyus'>
+      <section className='advantage-section pt-5' data-aos='fade-up'>
+        <div className='container text-center' id='whyus' style={{maxWidth:"100%"}}>
           {/* style="max-width: 100% !important;" */}
           <h2 className='section-title  fs-1 mt-5 pb-3 text-black'>
             Why Choose <span style={{ color: '#e1473f' }}>Chandigarh University </span>Online MBA
           </h2>
 
-          <div className='row g-3 justify-content-center mt-5 gap-lg-4'>
+          <div className='row g-3 justify-content-center mt-md-5 mt-2 gap-4'>
             {/* <!-- Card 1 --> */}
-            <div className='col-6 col-md-4 col-lg-2 '>
+            <div className='col-5 col-md-4 col-lg-2 advcardinsideodd'>
               <div className='adv-card' data-aos='fade-up' data-aos-duration='500'>
                 <div className='adv-icon'>
                   <svg width='76' height='75' viewBox='0 0 76 75' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#2f2c2c'></rect>
+                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#ffeccc'></rect>
                     <path
                       d='M25.8541 34.9317C33.1411 38.4849 41.6567 38.4849 48.9437 34.9317C49.1307 34.8425 49.2503 34.6512 49.2503 34.4446V25.9289L53.6625 24.4872C54.2192 24.3024 54.6041 23.7936 54.6302 23.2086C54.6585 22.6236 54.3214 22.0822 53.7865 21.8452L38.658 15.2607C37.8534 14.9127 36.9423 14.9127 36.1377 15.2628L21.0092 21.8473C20.4743 22.0844 20.1394 22.6258 20.1677 23.2108C20.196 23.7957 20.5808 24.3045 21.1375 24.4872L25.5475 25.929V34.4446C25.5475 34.6512 25.6671 34.8425 25.8541 34.9317ZM21.2527 23.1567C21.244 23.0218 21.3201 22.8957 21.4463 22.8435L36.5681 16.2613C37.0965 16.0308 37.6966 16.0308 38.2251 16.2591L53.3492 22.8413V22.8435C53.4731 22.8979 53.5492 23.024 53.5449 23.1588C53.5383 23.2937 53.4492 23.4111 53.3209 23.4546L46.7971 25.5856C46.5144 25.6813 46.36 25.9857 46.4513 26.2706C46.5448 26.5555 46.8514 26.7121 47.1363 26.6185L48.1628 26.2837V34.1012C41.3456 37.313 33.4518 37.313 26.6346 34.1012V26.2837L36.4267 29.4824C36.7398 29.5825 37.0682 29.6325 37.3966 29.6303C37.7293 29.6303 38.0598 29.5803 38.3773 29.4803L42.9438 27.9907V30.9655C42.9438 31.2656 43.1874 31.5091 43.4875 31.5091C43.7875 31.5091 44.0311 31.2656 44.0311 30.9655V25.7466C44.0289 24.0048 42.6176 22.5956 40.878 22.5934H37.3987C37.0986 22.5934 36.855 22.837 36.855 23.1371C36.855 23.4372 37.0986 23.6807 37.3987 23.6807H40.878C42.0174 23.6807 42.9416 24.6049 42.9438 25.7465V26.8469L38.0423 28.4452V28.4473C37.6248 28.5778 37.1768 28.5778 36.7593 28.4473L21.4789 23.4568C21.3462 23.4155 21.2549 23.2958 21.2527 23.1567Z'
                       fill='#e1473f'
@@ -966,11 +971,11 @@ const BamsPage = () => {
             </div>
 
             {/* <!-- Card 2 --> */}
-            <div className='col-6 col-md-4 col-lg-2'>
+            <div className='col-5 col-md-4 col-lg-2 advcardinsideeven'>
               <div className='adv-card' data-aos='fade-up' data-aos-duration='1000'>
                 <div className='adv-icon'>
                   <svg width='76' height='75' viewBox='0 0 76 75' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#2f2c2c'></rect>
+                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#ffeccc'></rect>
                     <path
                       fill-rule='evenodd'
                       clip-rule='evenodd'
@@ -982,17 +987,17 @@ const BamsPage = () => {
                 <h5 className='adv-title'>Harvard Business School Collaboration</h5>
                 <p className='adv-text'>
                   Partnered with Harvard Business School, the CU online MBA program includes teaching by global faculty
-                  for for students to earn international certifications alongside their MBA degree.​
+                   for students to earn international certifications alongside their MBA degree.​
                 </p>
               </div>
             </div>
 
             {/* <!-- Card 3 --> */}
-            <div className='col-6 col-md-4 col-lg-2'>
+            <div className='col-5 col-md-4 col-lg-2 advcardinsideodd'>
               <div className='adv-card' data-aos='fade-up' data-aos-duration='1500'>
                 <div className='adv-icon'>
                   <svg width='76' height='75' viewBox='0 0 76 75' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#2f2c2c'></rect>
+                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#ffeccc'></rect>
                     <path
                       fill-rule='evenodd'
                       clip-rule='evenodd'
@@ -1035,18 +1040,18 @@ const BamsPage = () => {
                 </div>
                 <h5 className='adv-title'>Industry-Relevant Curriculum</h5>
                 <p className='adv-text'>
-                  The CU online MBA programme curriculum spans 16 specializations focusing on real-world projects,
+                  The CU online MBA programme curriculum spans 22 specializations focusing on real-world projects,
                   simulations, and case studies, building decision-making and problem-solving abilities.
                 </p>
               </div>
             </div>
 
             {/* <!-- Card 4 --> */}
-            <div className='col-6 col-md-4 col-lg-2'>
+            <div className='col-5 col-md-4 col-lg-2 advcardinsideeven'>
               <div className='adv-card' data-aos='fade-up' data-aos-duration='2000'>
                 <div className='adv-icon'>
                   <svg width='76' height='75' viewBox='0 0 76 75' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#2f2c2c'></rect>
+                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#ffeccc'></rect>
                     <path
                       d='M17.0455 43.4348L21.7225 40.7832L22.5489 42.1886L28.1407 39.019V33.8288L28.2848 33.6555C29.2965 32.4323 30.7656 31.6261 32.3715 31.4423C29.9662 29.7082 29.6872 26.2697 31.8062 24.1912C33.7109 22.3209 36.7966 22.3209 38.7014 24.1912C40.8186 26.2701 40.5449 29.7068 38.1361 31.4423C39.7438 31.6244 41.211 32.4323 42.2228 33.6555C42.401 33.8677 42.3668 33.7757 42.3668 34.0427V38.7609C43.8683 39.2594 44.8063 40.7514 44.61 42.2734H46.5219L53.6799 38.2146C55.221 37.3431 57.1995 37.8646 58.0888 39.3743C58.9836 40.8946 58.3301 42.6393 56.9762 43.6593L47.5139 50.8046L29.664 50.8063L28.1283 51.6761L28.9295 53.0372L23.7049 56L16.5 43.746L17.0455 43.4348ZM21.2636 42.4679L18.2157 44.1967L24.1656 54.3134L27.2118 52.5845L27.0426 52.2946H27.0389L21.4632 42.8052L21.2636 42.4679ZM43.2347 42.604C43.737 41.3277 42.8008 39.8304 41.294 39.8304H29.2212L23.1759 43.2581L27.5002 50.6119L29.3347 49.5725H47.086L56.2027 42.6888C56.6816 42.3247 57.0272 41.8474 57.1677 41.3382C57.6033 39.7313 55.7544 38.4621 54.298 39.2877L46.8409 43.5143H44.1746C43.5823 44.5113 42.4931 45.1478 41.2905 45.1478L34.0874 45.1495V43.9121H41.2924C42.1583 43.9121 42.9269 43.38 43.2347 42.604ZM48.9436 20.4013C51.5325 20.4013 53.6335 22.4625 53.6335 25.0046C53.6335 27.5466 51.5344 29.6078 48.9436 29.6078C46.3566 29.6078 44.2555 27.5484 44.2555 25.0046C44.2555 22.4643 46.3565 20.4013 48.9436 20.4013ZM51.3686 22.6251C50.0328 21.3135 47.8598 21.3135 46.522 22.6251C45.1826 23.9403 45.1826 26.0705 46.522 27.3859C47.8578 28.7011 50.0308 28.7011 51.3686 27.3859C52.7081 26.0689 52.7081 23.9405 51.3686 22.6251ZM41.1048 38.4606V34.271C40.6656 33.7866 40.1291 33.3889 39.5313 33.1061C38.894 32.8091 38.1775 32.6394 37.4178 32.6394H33.0863C32.3283 32.6394 31.6118 32.8073 30.9727 33.1061C30.3732 33.3889 29.8385 33.7884 29.401 34.271V38.4606H41.1048ZM37.8085 25.0698C36.397 23.6839 34.1089 23.6839 32.6955 25.0698C31.284 26.4575 31.284 28.7042 32.6955 30.0939C34.1069 31.4798 36.3969 31.4798 37.8085 30.0939C39.2217 28.7062 39.2217 26.4576 37.8085 25.0698ZM48.9434 17C53.4729 17 57.142 20.6027 57.142 25.0503C57.142 28.0131 52.9364 34.6031 50.5329 38.4904C49.8056 39.6678 48.0845 39.6678 47.3572 38.4904C44.9538 34.6049 40.7482 28.0131 40.7482 25.0503C40.7464 20.6027 44.4157 17 48.9434 17ZM53.8494 20.2314C51.14 17.571 46.7491 17.571 44.0377 20.2314C42.7811 21.4653 42.007 23.1677 42.007 25.0501C42.007 27.4879 45.5932 33.2738 48.0109 37.177C48.0667 37.2689 48.0397 37.2247 48.0109 37.177L48.4304 37.8523C48.6626 38.2306 49.2261 38.2306 49.4584 37.8523L49.8778 37.177C49.8472 37.2247 49.8202 37.2689 49.8778 37.177C52.2975 33.2738 55.8817 27.488 55.8817 25.0501C55.8799 23.1693 55.1061 21.4651 53.8494 20.2314ZM49.8778 37.177C49.9354 37.0797 49.9048 37.1292 49.8778 37.177ZM48.0128 37.177C47.9804 37.1292 47.9516 37.0797 48.0128 37.177Z'
                       fill='#e1473f '
@@ -1062,11 +1067,11 @@ const BamsPage = () => {
             </div>
 
             {/* <!-- Card 5 --> */}
-            <div className='col-6 col-md-4 col-lg-2'>
+            <div className='col-5 col-md-4 col-lg-2 advcardinsideodd'>
               <div className='adv-card' data-aos='fade-up' data-aos-duration='2500'>
                 <div className='adv-icon'>
                   <svg width='76' height='75' viewBox='0 0 76 75' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#2f2c2c'></rect>
+                    <rect x='0.5' width='75' height='75' rx='37.5' fill='#ffeccc'></rect>
                     <path
                       d='M30.9456 43.7998C30.3153 42.8811 29.2801 41.7947 27.6965 40.3879C26.8834 39.6659 25.8362 39.2676 24.748 39.2676H24.1946C23.4054 39.2676 22.6264 39.4795 21.9448 39.8778C20.8806 40.5015 19.9479 41.2574 19.174 42.1235C19.1604 42.1388 19.1484 42.1557 19.1364 42.1727L17.734 44.3116C17.5222 44.6354 17.4504 45.0201 17.5341 45.3981C17.6178 45.7743 17.845 46.0964 18.1747 46.3014C18.8307 46.7116 19.7207 46.5116 20.1614 45.8557L21.2308 44.2608L21.5143 43.9794L21.3879 47.2014L20.8003 50.2625L18.5744 54.5946C18.3643 55.0031 18.337 55.4828 18.4958 55.9133C18.6564 56.3421 18.9929 56.6896 19.42 56.8641C19.6267 56.9489 19.8403 56.9895 20.0521 56.9895C20.6722 56.9895 21.2649 56.6421 21.5485 56.054L24.2937 50.3591L25.7713 51.854L26.9432 55.8845C27.0611 56.293 27.3481 56.6371 27.7307 56.8303C27.9511 56.9421 28.1954 56.9981 28.4396 56.9981C28.6173 56.9981 28.795 56.9675 28.9658 56.9082C29.7157 56.6404 30.1394 55.8591 29.9497 55.0896L28.8018 50.4339C28.7881 50.3814 28.7642 50.3305 28.7317 50.2864L27.0799 48.0678C26.7775 47.6627 26.6306 47.1627 26.6631 46.661L26.8236 44.1916L29.1383 45.9882C29.468 46.2441 29.89 46.3509 30.2948 46.2831C30.6911 46.2153 31.0277 45.9915 31.2446 45.6543C31.6324 45.0492 31.4974 44.2509 30.9457 43.8017L30.9456 43.7998ZM30.5425 45.2099C30.4536 45.3489 30.3153 45.4404 30.1547 45.4676C29.9804 45.4964 29.7977 45.4489 29.6525 45.3371L26.716 43.0574C26.5947 42.9625 26.4307 42.9439 26.2889 43.0049C26.1489 43.0676 26.0532 43.2032 26.0429 43.3557L25.8311 46.6065C25.785 47.3032 25.9917 47.9964 26.4102 48.5591L28.0126 50.7116L29.14 55.2879C29.2288 55.6455 29.0307 56.0082 28.6822 56.1319C28.4926 56.1997 28.2893 56.1862 28.1099 56.0963C27.9306 56.0048 27.8007 55.8489 27.7444 55.6574L26.5434 51.5269C26.5247 51.4608 26.4888 51.4015 26.4409 51.3523L24.473 49.3608C24.4662 49.3541 24.4594 49.349 24.4525 49.3439C24.4406 49.3337 24.4303 49.3236 24.4184 49.3151C24.4064 49.3066 24.3927 49.2998 24.3791 49.2914C24.3705 49.2863 24.3637 49.2812 24.3552 49.2778C24.3517 49.2761 24.3483 49.2761 24.3466 49.2744C24.3312 49.2676 24.3176 49.2625 24.3022 49.2591C24.2902 49.2558 24.28 49.2507 24.268 49.249C24.2544 49.2456 24.2407 49.2439 24.2253 49.2422C24.2134 49.2405 24.1997 49.2388 24.1878 49.2388C24.1741 49.2388 24.1604 49.2405 24.1468 49.2405C24.1348 49.2422 24.1211 49.2422 24.1092 49.2439C24.0955 49.2456 24.0801 49.2507 24.0665 49.2541C24.0545 49.2575 24.0443 49.2591 24.0323 49.2642C24.0186 49.2693 24.0067 49.2761 23.993 49.2829C23.9811 49.288 23.9708 49.293 23.9588 49.2998C23.9486 49.3066 23.9383 49.3151 23.9281 49.3219C23.9161 49.3303 23.9042 49.3388 23.8939 49.349C23.8922 49.3507 23.8888 49.3524 23.8854 49.3558C23.8786 49.3625 23.8734 49.371 23.8666 49.3778C23.8564 49.388 23.8478 49.3998 23.8393 49.4117C23.8307 49.4236 23.8222 49.4371 23.8154 49.4507C23.8102 49.4591 23.8051 49.4659 23.8017 49.4727L20.8003 55.7C20.6106 56.0915 20.146 56.2695 19.7411 56.1034C19.5259 56.0152 19.3619 55.8474 19.2816 55.6305C19.2013 55.4136 19.215 55.1796 19.3209 54.9746L21.5741 50.5901C21.5912 50.5545 21.6048 50.5172 21.6116 50.4799L22.2164 47.3308C22.2181 47.3206 22.2181 47.3104 22.2198 47.2986C22.2215 47.2884 22.2232 47.2799 22.2232 47.2698L22.3923 42.963C22.3992 42.7935 22.3001 42.6359 22.1429 42.5681C21.9858 42.5003 21.803 42.5342 21.6817 42.6545L20.6174 43.7104C20.5986 43.7291 20.5798 43.7511 20.5645 43.7732L19.4712 45.402C19.2799 45.6884 18.8989 45.7799 18.6222 45.607C18.4838 45.5206 18.3864 45.385 18.3523 45.2257C18.3164 45.0664 18.3472 44.9037 18.436 44.7664L19.8214 42.6528C20.5337 41.8613 21.3913 41.1681 22.3718 40.5935C22.9253 40.2698 23.5556 40.0986 24.198 40.0986H24.7514C25.6346 40.0986 26.4836 40.4206 27.1447 41.0071C28.7078 42.3952 29.7088 43.4461 30.2964 44.3172C30.3238 44.3579 30.3579 44.3935 30.3972 44.4206C30.6483 44.602 30.715 44.9495 30.5476 45.2105L30.5425 45.2099ZM24.748 38.5609C26.294 38.5609 27.553 37.3118 27.553 35.7779C27.553 34.244 26.294 32.9948 24.748 32.9948C23.2021 32.9948 21.9431 34.244 21.9431 35.7779C21.9431 37.3118 23.2021 38.5609 24.748 38.5609ZM24.748 33.8202C25.8362 33.8202 26.7211 34.6981 26.7211 35.7778C26.7211 36.8575 25.8362 37.7354 24.748 37.7354C23.6599 37.7354 22.775 36.8575 22.775 35.7778C22.775 34.6981 23.6599 33.8202 24.748 33.8202ZM58.5 50.6931C58.5 52.3846 57.7723 53.9727 56.4501 55.1661C55.1398 56.3475 53.3991 57 51.5508 57H32.5911C32.3605 57 32.1743 56.8153 32.1743 56.5864C32.1743 56.3576 32.3605 56.1729 32.5911 56.1729H51.5508C53.1925 56.1729 54.7333 55.5983 55.8898 54.5542C57.0361 53.5204 57.6664 52.1492 57.6664 50.6933C57.6664 47.673 54.923 45.2153 51.5493 45.2153H38.4827C34.6511 45.2153 31.5334 42.7103 31.5334 39.6307C31.5334 38.1205 32.2679 36.707 33.6038 35.651C34.9106 34.6155 36.6428 34.046 38.4825 34.046H45.6094C45.84 34.046 46.0262 34.2307 46.0262 34.4595C46.0262 34.6883 45.84 34.8731 45.6094 34.8731H38.4825C36.8306 34.8731 35.2829 35.3782 34.123 36.2968C32.9904 37.1934 32.3652 38.3764 32.3652 39.6306C32.3652 42.2544 35.1086 44.39 38.4806 44.39H51.5471C55.3788 44.39 58.4965 47.2188 58.4965 50.695L58.5 50.6931ZM48.3595 26.6965C48.2502 26.6965 48.146 26.7389 48.0691 26.8134L45.3103 29.4897C45.23 29.5677 45.1856 29.6744 45.1856 29.7846C45.1856 29.8965 45.23 30.0016 45.3103 30.0795L48.0691 32.7558C48.1477 32.8321 48.2519 32.8727 48.3595 32.8727H48.9233V34.9558C47.7053 35.3321 46.9349 36.1083 46.9349 36.9914C46.9349 38.2642 48.5167 39.2609 50.5359 39.2609C52.5551 39.2609 54.1369 38.2642 54.1369 36.9914C54.1369 36.1083 53.3665 35.3321 52.1485 34.9558V32.8727H54.8971C55.4437 32.8727 55.8879 32.4321 55.8879 31.8897V27.6745C55.8879 27.1321 55.4437 26.6915 54.8971 26.6915H52.1485V25.2135H52.7122C52.8216 25.2135 52.9258 25.1712 53.0026 25.0966L55.7615 22.4203C55.8418 22.3424 55.8862 22.2356 55.8862 22.1254C55.8862 22.0135 55.8418 21.9085 55.7615 21.8305L53.0026 19.1542C52.924 19.078 52.8198 19.0373 52.7122 19.0373H52.1485V17.4136C52.1485 17.1847 51.9623 17 51.7317 17H49.3401C49.1095 17 48.9233 17.1847 48.9233 17.4136V19.0373H46.1747C45.628 19.0373 45.1839 19.4779 45.1839 20.0203V24.2355C45.1839 24.7779 45.628 25.2186 46.1747 25.2186H48.9233V26.6965H48.3595ZM53.3051 36.9946C53.3051 37.6776 52.1674 38.4386 50.5361 38.4386C48.9047 38.4386 47.767 37.6776 47.767 36.9946C47.767 36.5505 48.2231 36.1081 48.9235 35.8335V36.6149C48.9235 37.0522 49.2822 37.4081 49.7229 37.4081H51.3492C51.7899 37.4081 52.1487 37.0522 52.1487 36.6149V35.8335C52.8491 36.1081 53.3051 36.5505 53.3051 36.9946ZM51.3167 35.2743V36.5827H49.7571V32.8759H51.3167V35.2743ZM55.0561 27.6793V31.8946C55.0561 31.981 54.9861 32.0505 54.8989 32.0505H48.5308L46.1973 29.7861L48.5308 27.5217H54.8989C54.9861 27.5217 55.0561 27.5912 55.0561 27.6776V27.6793ZM49.7572 17.8286H51.3168V19.0388H49.7572V17.8286ZM46.0178 24.2373V20.022C46.0178 19.9356 46.0878 19.8661 46.1749 19.8661H52.5431L54.8766 22.1305L52.5431 24.3949H46.1749C46.0878 24.3949 46.0178 24.3254 46.0178 24.239V24.2373ZM49.7572 25.2203H51.3168V26.6982H49.7572V25.2203Z'
                       fill='#e1473f '
@@ -1084,7 +1089,7 @@ const BamsPage = () => {
         </div>
       </section>
 
-      <section className='py-1 mt-5' data-aos='fade-up' id="FAQs">
+      <section className='py-1 mt-5' data-aos='fade-up' id='FAQs'>
         <div className='container'>
           <div className='row g-4 align-items-center'>
             <div className='col-lg-12'>
@@ -1212,7 +1217,7 @@ const BamsPage = () => {
 
       {/* <!-- ==========================================================Banner and footer section --> */}
 
-      <section className='mba-cta-section py-5 mt-5 mb-0' data-aos='fade-up' id='contactus'>
+      <section className='mba-cta-section py-5 mt-5 mb-0'  id='contactus'>
         <div className='container text-start'>
           <div className='cta-content p-3 p-md-5 rounded'>
             <h3 className='text-white mb-3 fw-normal'>Transform Your Career Today with an</h3>
@@ -1259,82 +1264,117 @@ const BamsPage = () => {
       <Modal show={show} onHide={handleClose}>
         <Modal.Body>
           <div className='heading-popup '>
-            <h4 className='text-center pop-up'>
-              Enter Your Details to Get Started
-            </h4>
+            <h3 className='text-center pop-up text-black'>Enter Your Details to Get Started</h3>
           </div>
-          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-            {() => (
-              <Form>
-                <div className='form-group mb-3'>
-                  <Field
-                    type='text'
-                    id='name'
-                    name='name'
-                    placeholder='Name*'
-                    required
-                    className='form-control bams-form-field py-3'
-                  />
-                </div>
+           <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                  {() => (
+                    <Form>
+                      <div className='form-group mb-3'>
+                        <Field
+                          type='text'
+                          id='name'
+                          name='name'
+                          placeholder='Enter Name'
+                          required
+                          className='form-control'
+                        />
+                      </div>
 
-                <div className='form-group mb-3'>
-                  <Field
-                    type='email'
-                    id='email'
-                    name='email'
-                    placeholder='Your Email*'
-                    required
-                    className='form-control bams-form-field py-3'
-                  />
-                </div>
+                      <div className='form-group mb-3'>
+                        <Field
+                          type='email'
+                          id='email'
+                          name='email'
+                          placeholder='Enter Email'
+                          required
+                          className='form-control'
+                        />
+                      </div>
 
-                <div className='form-group mb-3'>
-                  <Field
-                    type='number'
-                    id='contact'
-                    name='contact'
-                    placeholder='Enter Phone Number*'
-                    required
-                    className='form-control bams-form-field py-3'
-                  />
-                </div>
+                       <div className="mb-3 form-group  ">
+                          <PhoneInputField name="contact" />
+                          <ErrorMessage name="contact" component="div" className=" form-control bams-form-field py-3" />
+                        </div>
+                      <div className='form-group mb-3 select-wrapper'>
+                        <Field
+                          as='select'
+                          id='location'
+                          name='location'
+                          required
+                          className='browser-default custom-select form-control white-bg-black-text bams-form-field '
+                        >
+                         <option value=''>Select State</option>
+                    <option value='Andhra Pradesh'>Andhra Pradesh</option>
+                    <option value='Andaman & Nicobar'>Andaman & Nicobar</option>
 
-                <div className='form-group mb-3'>
-                  <Field
-                    type='text'
-                    id='location'
-                    name='location'
-                    placeholder='Enter Location'
-                    required
-                    className='form-control bams-form-field py-3'
-                  />
-                </div>
+                    <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+                    <option value='Assam'>Assam</option>
+                    <option value='Bihar'>Bihar</option>
+                    <option value='Chhattisgarh'>Chhattisgarh</option>
+                    <option value='Chandigarh'>Chandigarh</option>
+                    <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+                    <option value='Daman & Diu'>Daman & Diu</option>
+                    <option value='Delhi'>Delhi</option>
+                    <option value='Goa'>Goa</option>
+                    <option value='Gujarat'>Gujarat</option>
+                    <option value='Haryana'>Haryana</option>
+                    <option value='Himachal Pradesh'>Himachal Pradesh</option>
+                    <option value='Jammu & Kashmir'>Jammu & Kashmir</option>
+                    <option value='Jharkhand'>Jharkhand</option>
+                    <option value='Karnataka'>Karnataka</option>
+                    <option value='Kerala'>Kerala</option>
+                    <option value='Lakshadweep'>Lakshadweep</option>
 
-             
+                    <option value='Madhya Pradesh'>Madhya Pradesh</option>
+                    <option value='Maharashtra'>Maharashtra</option>
+                    <option value='Manipur'>Manipur</option>
+                    <option value='Meghalaya'>Meghalaya</option>
+                    <option value='Mizoram'>Mizoram</option>
+                    <option value='Nagaland'>Nagaland</option>
+                    <option value='Odisha'>Odisha</option>
+                    <option value='Punjab'>Punjab</option>
+                    <option value='Puducherry'>Puducherry</option>
 
-                <div className='form-group mb-3'>
-                  <Field
-                    as='textarea'
-                    id='description'
-                    name='description'
-                    placeholder='Message (Optional)'
-                    className='form-control bams-form-field py-3'
-                    rows={3}
-                  />
-                </div>
-
-                <div className='form-group text-center'>
-                  <button type='submit' id='about' name='submit' className='btn btn-primary  btn-model mt-2 py-3'>
-                    Submit
-                  </button>
-                </div>
-              </Form>
-            )}
-          </Formik>
+                    <option value='Rajasthan'>Rajasthan</option>
+                    <option value='Sikkim'>Sikkim</option>
+                    <option value='Tamil Nadu'>Tamil Nadu</option>
+                    <option value='Tripura'>Tripura</option>
+                    <option value='Telangana'>Telangana</option>
+                    <option value='Uttarakhand'>Uttarakhand</option>
+                    <option value='Uttar Pradesh'>Uttar Pradesh</option>
+                    <option value='West Bengal'>West Bengal</option>
+                        </Field>
+                      </div>
+                      <div className='form-group mb-3'>
+                        <Field
+                          as='textarea'
+                          id='description'
+                          name='description'
+                          placeholder='Message (Optional)'
+                          className='form-control'
+                          rows={2}
+                        />
+                      </div>
+                      <div className='mb-3 form-check text-white'>
+                        <Field type='checkbox' name='terms' className='form-check-input border-black' id='terms' />
+                        <label className='form-check-label' htmlFor='terms' style={{ fontSize: '16px',color:"black" }}>
+                          By Clicking this, I agree to the{' '}
+                          <Link href='/terms-and-conditions' className='textcolortenm'>
+                            Terms & Conditions
+                          </Link>
+                        </label>
+                        <ErrorMessage name='terms' component='div' className='error text-danger' />
+                      </div>
+                      <div className='form-group text-center '>
+                        <button type='submit' id='about' name='submit' className='sub-btn btn'>
+                          Submit
+                        </button>
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
         </Modal.Body>
       </Modal>
-
-    
 
       <a href='tel:09035654090' className='phone-iconphone'>
         <Image src='/images/icons/Phone-blue.svg' width={40} height={28} alt='phone-iconphone' className='red-filter' />
