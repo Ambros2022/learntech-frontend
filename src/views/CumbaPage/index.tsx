@@ -214,16 +214,15 @@ const BamsPage = () => {
         href='https://wa.me/+919035654090'
         style={{
           position: 'fixed',
-          width: 68,
-          height: 70,
+          width: 63,
+          height: 64,
           bottom: 8,
           right: 8,
           borderRadius: 50,
           textAlign: 'center',
-          fontSize: 44,
+          fontSize: 40,
           zIndex: 1059,
           backgroundColor: "#3adc3a"
-
 
 
 
@@ -232,7 +231,7 @@ const BamsPage = () => {
         }}
         target='_blank '
       >
-        <img src={whatsappc} alt='whtsplogo' style={{ width: '66px' }}></img>
+        <img src={whatsappc} alt='whtsplogo' style={{ width: '56px' }}></img>
       </a>
 
       <nav

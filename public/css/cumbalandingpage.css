@@ -10,11 +10,13 @@ body {
     font-weight: 500;
     background-color: white !important;
 }
-.bams-navbar-tag:hover{
+
+.bams-navbar-tag:hover {
     cursor: pointer !important;
     border-bottom: 2px solid #e1473f !important;
-  
+
 }
+
 .bams-main {
     background-color: white;
 }
@@ -366,7 +368,7 @@ body {
     justify-content: center; */
 
 
-            font-size: 13px;
+        font-size: 13px;
         padding: 8px 16px;
         flex: 0 0 calc(50% - 12px);
         text-align: center;
@@ -419,8 +421,7 @@ body {
             rgba(53, 47, 47, .2) 75%,
             rgba(53, 47, 47, 0.8) 85%,
             rgba(53, 47, 47, 0.99) 95%,
-            rgb(53, 47, 47) 100%
-        ),
+            rgb(53, 47, 47) 100%),
         url('/images/cumba/academic-caps-air-graduation-selective-focus.webp') center/cover no-repeat;
 
 
@@ -655,13 +656,13 @@ body {
         font-size: 22px;
     }
 
-   .advcardinsideodd .adv-card {
-    transform: translateY(0px) !important;
-}   
+    .advcardinsideodd .adv-card {
+        transform: translateY(0px) !important;
+    }
 
-.advcardinsideeven .adv-card {
-    transform: translateY(0px) !important;
-}
+    .advcardinsideeven .adv-card {
+        transform: translateY(0px) !important;
+    }
 
 }
 
@@ -761,14 +762,15 @@ body {
 
 
 
-.footer-right p , .f18footer{
-   font-size: 18px !important;
+.footer-right p,
+.f18footer {
+    font-size: 18px !important;
     color: black !important;
     font-family: "Poppins" !important;
 }
 
 .footerlogo {
-      width: 400px !important;
+    width: 400px !important;
     max-width: 500px;
     height: auto;
     object-fit: contain;
@@ -780,11 +782,13 @@ footer h6 {
     margin: 0;
     color: black;
 }
-.fs16{
-     font-size: 18px !important;
+
+.fs16 {
+    font-size: 18px !important;
     color: black !important;
     font-family: "Poppins" !important;
 }
+
 @media (max-width: 576px) {
 
     .footerlogo {
@@ -801,11 +805,12 @@ footer h6 {
         font-size: 16px !important;
         font-weight: 500;
     }
-    .fs16{
-     font-size: 16px !important;
-    color: black !important;
-    font-family: "Poppins" !important;
-}
+
+    .fs16 {
+        font-size: 16px !important;
+        color: black !important;
+        font-family: "Poppins" !important;
+    }
 }
 
 
@@ -813,67 +818,68 @@ footer h6 {
 
 
 .accredi-section {
-  padding: 10px 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .accredi-container {
-  width: 90%;
-  margin: auto;
+    width: 90%;
+    margin: auto;
 }
 
 .accredi-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
 }
 
 .accredi-item img {
-  max-width: 120px;
-  height: auto;
-  transition: transform 0.3s ease-in-out;
+    max-width: 120px;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
 }
 
 .accredi-item img:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .react-multiple-carousel__arrow {
-  background-color: #ff6f61 !important; 
+    background-color: #ff6f61 !important;
 }
 
 .react-multiple-carousel__arrow::before {
-  color: white !important;
+    color: white !important;
 }
 
 .react-multiple-carousel__arrow {
-  border-radius: 50% !important;
+    border-radius: 50% !important;
 }
+
 .react-multiple-carousel__arrow--left {
-  left: 4px !important;   
+    left: 4px !important;
 }
 
 .react-multiple-carousel__arrow--right {
-  right: 4px  !important; 
+    right: 4px !important;
 }
 
 .react-multiple-carousel__arrow {
-  width: 40px !important;
-  height: 40px !important;
-  background-color: #ff6f61 !important;
-  border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    background-color: #ff6f61 !important;
+    border-radius: 50% !important;
 }
 
 .react-multiple-carousel__arrow::before {
-  font-size: 18px !important;
-  color: #fff !important;
+    font-size: 18px !important;
+    color: #fff !important;
 }
 
-.react-multiple-carousel__arrow:hover{
- background-color: red !important;
+.react-multiple-carousel__arrow:hover {
+    background-color: red !important;
 }
 
 
@@ -884,7 +890,7 @@ footer h6 {
 
 
 .phone-iconphone {
-       background-color: #f84365 !important;
+    background-color: #f84365 !important;
     border-radius: 50% !important;
     padding: 14px 11px !important;
     border: none !important;
@@ -892,7 +898,7 @@ footer h6 {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.45) !important;
     position: fixed !important;
     z-index: 100 !important;
-    bottom: 9px !important;
+    bottom: 10px !important;
     left: 22px !important;
 }
 
@@ -908,7 +914,7 @@ footer h6 {
         bottom: 4px !important;
         left: 8px !important;
     }
-  
+
 }
 
 
@@ -917,10 +923,10 @@ footer h6 {
         background-image:
             /* linear-gradient(130deg, rgb(247, 247, 247), rgba(255, 255, 255, 0) 50%),
               url('/images/cumba/mobilebanner.webp'); */
-                  linear-gradient(116deg, #d2d2d2 0%, rgb(251 238 238 / 90%) 25%, rgb(171 171 171 / 50%) 60%, rgb(224 224 224 / 0%) 100%), url(/images/cumba/mobilebanner.webp);
+            linear-gradient(116deg, #d2d2d2 0%, rgb(251 238 238 / 90%) 25%, rgb(171 171 171 / 50%) 60%, rgb(224 224 224 / 0%) 100%), url(/images/cumba/mobilebanner.webp);
 
 
-    
+
 
         background-size: cover !important;
         background-position: center top;
@@ -934,6 +940,7 @@ footer h6 {
         clip-path: none;
     }
 }
+
 @media (max-width: 576px) {
     .hero-card {
         margin-top: -24px;
@@ -959,16 +966,16 @@ footer h6 {
 }
 
 @media (max-width: 575px) {
-    .hero-card p
-    {
+    .hero-card p {
         font-weight: 700;
     }
-    .hero-badge
-    {
-            background: #e3e3e3b3;
-            font-weight: 700;
-            text-align: center;
+
+    .hero-badge {
+        background: #e3e3e3b3;
+        font-weight: 700;
+        text-align: center;
     }
+
     .hero h1 {
         font-size: 1.6rem;
     }
@@ -987,26 +994,28 @@ footer h6 {
         width: 100%;
         text-align: center;
     }
-    .outcome-card{
+
+    .outcome-card {
         height: 100% !important;
     }
+
     .outcome-content {
-    position: relative;
-    z-index: 2;
-    max-width: 99%;
+        position: relative;
+        z-index: 2;
+        max-width: 99%;
+    }
+
+    .blur-wrapper {
+        justify-content: center;
+    }
 }
-.blur-wrapper{
-    justify-content: center;
-}
-}
 
 
 
 
 
 
-.form-control
-{
+.form-control {
     border-radius: 5px !important;
 }
 
@@ -1076,25 +1085,28 @@ form fieldset {
     font-family: 'Poppins' !important;
 }
 
-.white-bg-black-text{
-background-color: white !important;
-color:#212529 !important;
+.white-bg-black-text {
+    background-color: white !important;
+    color: #212529 !important;
 }
-.select-wrapper{
+
+.select-wrapper {
     position: relative;
 }
+
 .select-wrapper::after {
-  content: "\f282"; /* bootstrap 'chevron-down' */
-  font-family: "bootstrap-icons";
-  position: absolute;
+    content: "\f282";
+    /* bootstrap 'chevron-down' */
+    font-family: "bootstrap-icons";
+    position: absolute;
     right: 20px;
     top: 51%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #333;
-  pointer-events: none;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #333;
+    pointer-events: none;
 }
 
 .no-click {
-  pointer-events: none;
+    pointer-events: none;
 }
