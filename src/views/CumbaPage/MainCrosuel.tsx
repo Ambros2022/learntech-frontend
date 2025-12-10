@@ -8,43 +8,43 @@ const data = [
   {
     title: 'Strategic Decision-Making Mastery',
     desc: `Online MBA Chandigarh University equips graduates with advanced analytical skills for
-                                    complex business decisions through data-driven case studies and simulations.​
-                                    Students learn to evaluate risks, and formulate strategies that drive organizational
-                                    success. Real-world projects enhance problem-solving abilities, enabling confident
-                                    leadership in high-stakes environments.​ Enrolling in a CU online MBA admission
-                                    prepares professionals to navigate uncertainties and seize growth opportunities
-                                    effectively.​`,
+           complex business decisions through data-driven case studies and simulations.​
+           Students learn to evaluate risks, and formulate strategies that drive organizational
+           success. Real-world projects enhance problem-solving abilities, enabling confident
+           leadership in high-stakes environments.​ Enrolling in a CU online MBA admission
+           prepares professionals to navigate uncertainties and seize growth opportunities
+           effectively.​`,
     img: '/images/cumba/planning.webp'
   },
   {
     title: 'Leadership and Managerial Proficiency',
     desc: `Being one of the best online MBA in India the program develops essential leadership
-                                    qualities, including team motivation, ethical decision-making, and conflict
-                                    resolution.​ Interactive sessions and Harvard faculty modules build emotional
-                                    intelligence and visionary thinking for senior roles.​ CU online MBA graduates
-                                    emerge as influential managers capable of inspiring diverse teams toward shared
-                                    goals.​`,
+           qualities, including team motivation, ethical decision-making, and conflict
+           resolution.​ Interactive sessions and Harvard faculty modules build emotional
+           intelligence and visionary thinking for senior roles.​ CU online MBA graduates
+           emerge as influential managers capable of inspiring diverse teams toward shared
+           goals.​`,
     img: '/images/cumba/closeup.webp'
   },
   {
     title: 'Global Business Acumen',
     desc: `Learners gain a comprehensive understanding of international markets, cross-cultural
-                                    dynamics, and globalization impacts.​ Chandigarh University online programs provide
-                                    exposure to global case studies and Harvard collaborations broadens perspectives for
-                                    multinational operations.​ Graduates are equipped to handle international trade,
-                                    supply chains, and diverse regulatory environments confidently.`,
+           dynamics, and globalization impacts.​ Chandigarh University online programs provide
+           exposure to global case studies and Harvard collaborations broadens perspectives for
+           multinational operations.​ Graduates are equipped to handle international trade,
+           supply chains, and diverse regulatory environments confidently.`,
     img: '/images/cumba/chess.webp'
   },
   {
     title: 'Career Advancement and Employability',
     desc: `The curriculum aligns with industry demands, boosting employability through
-                                    specialized skills and placement support.​ Graduates from CU online MBA secure roles
-                                    in top firms like Deloitte, Amazon, and Infosys with higher salary potential and
-                                    promotions.​ Networking opportunities and certifications from Harvard enhance
-                                    professional profiles significantly.​ Strong ROI comes from rapid career growth,
-                                    leadership positions, and entrepreneurial readiness.​ Chandigarh University distance
-                                    MBA alumni achieve sustained success in management, finance, marketing, and
-                                    operations sectors.`,
+          specialized skills and placement support.​ Graduates from CU online MBA secure roles
+          in top firms like Deloitte, Amazon, and Infosys with higher salary potential and
+          promotions.​ Networking opportunities and certifications from Harvard enhance
+          professional profiles significantly.​ Strong ROI comes from rapid career growth,
+          leadership positions, and entrepreneurial readiness.​ Chandigarh University distance
+          MBA alumni achieve sustained success in management, finance, marketing, and
+          operations sectors.`,
     img: '/images/cumba/businnespeople.webp'
   }
 ]

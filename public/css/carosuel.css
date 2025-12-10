@@ -5,17 +5,32 @@
 
 .embla__container {
   display: flex;
-  gap: 20px;
+  gap: 10px;
+
 }
 
 .embla__slide {
-  flex: 0 0 calc(50% - 10px); /* 2 items per row (desktop) */
+  flex: 0 0 calc(50% - 10px);
+  /* 2 items per row (desktop) */
+
+
+}
+
+.embla__slide:last-child {
+  margin-right: 8px;
+}
+
+.embla__slide:first-child {
+  margin-left: 8px;
 }
 
 @media (max-width: 1024px) {
   .embla__slide {
-    flex: 0 0 100%; /* 1 item on tablet/mobile */
+    flex: 0 0 100%;
+    /* 1 item on tablet/mobile */
   }
+
+
 }
 
 /* ------- Your original card styles -------- */
@@ -24,6 +39,7 @@
   width: 90%;
   margin: auto;
   position: relative;
+
 }
 
 .outcome-card {
@@ -54,13 +70,11 @@
 .news-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.85) 35%,
-    rgba(0, 0, 0, 0.1) 80%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.85) 35%,
+      rgba(0, 0, 0, 0.1) 80%,
+      rgba(0, 0, 0, 0) 100%);
   transition: 0.4s ease;
   z-index: 1;
 }
@@ -98,12 +112,12 @@
   position: absolute;
   bottom: -60px;
   z-index: 50;
-  width: 55px;
-  height: 55px;
+  width: 42px;
+  height: 42px;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
   color: #e6453d;
-  font-size: 22px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,6 +129,7 @@
 .custom-left-arrow {
   right: 70px;
 }
+
 .custom-right-arrow {
   right: 0px;
 }
@@ -125,13 +140,18 @@
 
 @media (max-width: 768px) {
   .custom-left-arrow {
-      right: 70px;
+    right: 70px;
   }
+
   .custom-right-arrow {
- right: 0px;
+    right: 0px;
   }
-  .outcome-content{
+
+  .outcome-content {
     max-width: 100% !important;
   }
-}
 
+  .btn-brochure {
+    background-color: white !important;
+  }
+}
