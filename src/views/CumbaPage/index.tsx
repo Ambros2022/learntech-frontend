@@ -17,8 +17,7 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'));
 import MainCrosuel from "./MainCrosuel"
-// dqfqwfqw
-const whatsappc = '/images/bams/whatsappc.gif'
+const whatsappc = '/images/cumba/whatsicon.gif'
 const logos = [
   { src: '/images/cumba/ACCA.webp', alt: 'ACCA' },
   { src: '/images/cumba/BCI_1.webp', alt: 'BCI' },
@@ -51,23 +50,7 @@ const responsive = {
 }
 
 
-const responsive2 = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 2,
-    slidesToSlide: 1
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 600 },
-    items: 1,
-    slidesToSlide: 1
-  },
-  mobile: {
-    breakpoint: { max: 600, min: 0 },
-    items: 1,
-    slidesToSlide: 1
-  }
-}
+
 
 const BamsPage = () => {
   useEffect(() => {
@@ -102,6 +85,7 @@ const BamsPage = () => {
       formData.append('location', values.location)
       formData.append('current_url', window.location.href)
       formData.append('description', values.description)
+      formData.append('Source', 'Google Ads')
       formData.append('SourceCampaign', 'CU Online MBA 2026-27')
 
       const response = await axios.post('api/website/landingpage/enquiry', formData)
@@ -127,8 +111,6 @@ const BamsPage = () => {
 
   const [show1, setShow1] = useState(false)
 
-  const handleClose1 = () => setShow1(false)
-  const handleShow1 = () => setShow1(true)
   const [expanded, setExpanded] = useState(false)
 
   const navigate = (id, offset = 0) => {
@@ -232,14 +214,21 @@ const BamsPage = () => {
         href='https://wa.me/+919035654090'
         style={{
           position: 'fixed',
-          width: 63,
-          height: 64,
+          width: 68,
+          height: 70,
           bottom: 8,
           right: 8,
           borderRadius: 50,
           textAlign: 'center',
           fontSize: 44,
-          zIndex: 1059
+          zIndex: 1059,
+          backgroundColor: "#3adc3a"
+
+
+
+
+
+
         }}
         target='_blank '
       >
@@ -281,12 +270,8 @@ const BamsPage = () => {
               <li className='nav-item   bams-navbar-tag'>
                 <a
                   className='nav-link'
-                //   onClick={() => {
-                //     document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })
-                //     closeNavbar()
-                //   }}
-                // >
-                       onClick={() => {
+
+                  onClick={() => {
                     navigate('home', 80)
                     closeNavbar()
                   }}
@@ -386,7 +371,7 @@ const BamsPage = () => {
 
                 <div
                   className='d-flex flex-wrap align-items-center gap-3 mb-3 blur-wrapper'
-                
+
                 >
                   <div className='d-none d-md-flex kpis gap-4 mb-3'>
                     <div className='kpi'>
@@ -448,10 +433,10 @@ const BamsPage = () => {
                         />
                       </div>
 
-                       <div className="mb-3 form-group  ">
-                          <PhoneInputField name="contact" />
-                          <ErrorMessage name="contact" component="div" className=" form-control bams-form-field py-3" />
-                        </div>
+                      <div className="mb-3 form-group  ">
+                        <PhoneInputField name="contact" />
+                        <ErrorMessage name="contact" component="div" className=" form-control bams-form-field py-3" />
+                      </div>
                       <div className='form-group mb-3 select-wrapper'>
                         <Field
                           as='select'
@@ -460,46 +445,46 @@ const BamsPage = () => {
                           required
                           className='browser-default custom-select form-control white-bg-black-text bams-form-field '
                         >
-                         <option value=''>Select State</option>
-                    <option value='Andhra Pradesh'>Andhra Pradesh</option>
-                    <option value='Andaman & Nicobar'>Andaman & Nicobar</option>
+                          <option value=''>Select State</option>
+                          <option value='Andhra Pradesh'>Andhra Pradesh</option>
+                          <option value='Andaman & Nicobar'>Andaman & Nicobar</option>
 
-                    <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
-                    <option value='Assam'>Assam</option>
-                    <option value='Bihar'>Bihar</option>
-                    <option value='Chhattisgarh'>Chhattisgarh</option>
-                    <option value='Chandigarh'>Chandigarh</option>
-                    <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
-                    <option value='Daman & Diu'>Daman & Diu</option>
-                    <option value='Delhi'>Delhi</option>
-                    <option value='Goa'>Goa</option>
-                    <option value='Gujarat'>Gujarat</option>
-                    <option value='Haryana'>Haryana</option>
-                    <option value='Himachal Pradesh'>Himachal Pradesh</option>
-                    <option value='Jammu & Kashmir'>Jammu & Kashmir</option>
-                    <option value='Jharkhand'>Jharkhand</option>
-                    <option value='Karnataka'>Karnataka</option>
-                    <option value='Kerala'>Kerala</option>
-                    <option value='Lakshadweep'>Lakshadweep</option>
+                          <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+                          <option value='Assam'>Assam</option>
+                          <option value='Bihar'>Bihar</option>
+                          <option value='Chhattisgarh'>Chhattisgarh</option>
+                          <option value='Chandigarh'>Chandigarh</option>
+                          <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+                          <option value='Daman & Diu'>Daman & Diu</option>
+                          <option value='Delhi'>Delhi</option>
+                          <option value='Goa'>Goa</option>
+                          <option value='Gujarat'>Gujarat</option>
+                          <option value='Haryana'>Haryana</option>
+                          <option value='Himachal Pradesh'>Himachal Pradesh</option>
+                          <option value='Jammu & Kashmir'>Jammu & Kashmir</option>
+                          <option value='Jharkhand'>Jharkhand</option>
+                          <option value='Karnataka'>Karnataka</option>
+                          <option value='Kerala'>Kerala</option>
+                          <option value='Lakshadweep'>Lakshadweep</option>
 
-                    <option value='Madhya Pradesh'>Madhya Pradesh</option>
-                    <option value='Maharashtra'>Maharashtra</option>
-                    <option value='Manipur'>Manipur</option>
-                    <option value='Meghalaya'>Meghalaya</option>
-                    <option value='Mizoram'>Mizoram</option>
-                    <option value='Nagaland'>Nagaland</option>
-                    <option value='Odisha'>Odisha</option>
-                    <option value='Punjab'>Punjab</option>
-                    <option value='Puducherry'>Puducherry</option>
+                          <option value='Madhya Pradesh'>Madhya Pradesh</option>
+                          <option value='Maharashtra'>Maharashtra</option>
+                          <option value='Manipur'>Manipur</option>
+                          <option value='Meghalaya'>Meghalaya</option>
+                          <option value='Mizoram'>Mizoram</option>
+                          <option value='Nagaland'>Nagaland</option>
+                          <option value='Odisha'>Odisha</option>
+                          <option value='Punjab'>Punjab</option>
+                          <option value='Puducherry'>Puducherry</option>
 
-                    <option value='Rajasthan'>Rajasthan</option>
-                    <option value='Sikkim'>Sikkim</option>
-                    <option value='Tamil Nadu'>Tamil Nadu</option>
-                    <option value='Tripura'>Tripura</option>
-                    <option value='Telangana'>Telangana</option>
-                    <option value='Uttarakhand'>Uttarakhand</option>
-                    <option value='Uttar Pradesh'>Uttar Pradesh</option>
-                    <option value='West Bengal'>West Bengal</option>
+                          <option value='Rajasthan'>Rajasthan</option>
+                          <option value='Sikkim'>Sikkim</option>
+                          <option value='Tamil Nadu'>Tamil Nadu</option>
+                          <option value='Tripura'>Tripura</option>
+                          <option value='Telangana'>Telangana</option>
+                          <option value='Uttarakhand'>Uttarakhand</option>
+                          <option value='Uttar Pradesh'>Uttar Pradesh</option>
+                          <option value='West Bengal'>West Bengal</option>
                         </Field>
                       </div>
                       <div className='form-group mb-3'>
@@ -604,83 +589,83 @@ const BamsPage = () => {
           <h2 className='spec-title text-black'>Specializations</h2>
 
           <div className='tag-cloud py-3'>
-              <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Digital Marketing
             </div>
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Retail Management
             </div>
-              <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Operations Management
             </div>
-              <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Finance
             </div>
-             <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> IT (Information Technology)
             </div>
-             <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Marketing
             </div>
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Logistics & Supply Chain
             </div>
-              <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> HRM
             </div>
-           
-          
-          
+
+
+
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Business Analytics
             </div>
-             <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Travel & Tourism
             </div>
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Hospital Management
             </div>
-              <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Fintech
             </div>
-           <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Media Management
             </div>
-          
+
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Entrepreneurship
             </div>
-           
-               <div className='tag'>
+
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Banking & Insurance
             </div>
-              <div className='tag'>
+            <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Brand Management
             </div>
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Events Management
             </div>
-           
+
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Aviation Management
             </div>
-         
+
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Disaster Management
             </div>
             {/* ------------ */}
-           
+
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> Data Science & Artificial Intelligence
             </div>
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> International Relations
             </div>
-          
+
             <div className='tag'>
               <i className='bi bi-check-circle-fill'></i> General Management
             </div>
-          
+
           </div>
         </div>
       </section>
@@ -747,12 +732,12 @@ const BamsPage = () => {
             <br />
             Online MBA Semester-wise Curriculum
           </h2> */}
- <h2 className='section-title  fs-1  mb-4 text-black text-center'>
-          <span className='' style={{ color: '#e1473f' }}>
-            Chandigarh University
-          </span>{' '}   <br />
-           Online MBA Semester-wise Curriculum
-        </h2>
+          <h2 className='section-title  fs-1  mb-4 text-black text-center'>
+            <span className='' style={{ color: '#e1473f' }}>
+              Chandigarh University
+            </span>{' '}   <br />
+            Online MBA Semester-wise Curriculum
+          </h2>
           <div className='accordion' id='curriculumAcc'>
             {/* <!-- Semester I (Open by default) --> */}
             <div className='accordion-item mb-3'>
@@ -928,18 +913,18 @@ const BamsPage = () => {
       </section>
       <section className='outcomes-section mt-5'>
         <div className='container'>
-          <h2 className='section-title mb-5 text-center fs-2 text-black'>
+          <h2 className='section-title fs-1 mb-5 text-center  text-black'>
             Program Outcomes of <br />
             <span style={{ color: '#e1473f' }}>Chandigarh University </span>
             <br className='d-md-none d-block' />
             Online MBA
           </h2>
         </div>
-    
-        <MainCrosuel/>
+
+        <MainCrosuel />
       </section>
       <section className='advantage-section pt-5' data-aos='fade-up'>
-        <div className='container text-center' id='whyus' style={{maxWidth:"100%"}}>
+        <div className='container text-center' id='whyus' style={{ maxWidth: "100%" }}>
           {/* style="max-width: 100% !important;" */}
           <h2 className='section-title  fs-1 mt-5 pb-3 text-black'>
             Why Choose <span style={{ color: '#e1473f' }}>Chandigarh University </span>Online MBA
@@ -965,7 +950,7 @@ const BamsPage = () => {
                 <h5 className='adv-title'>Flexible and Affordable Learning</h5>
                 <p className='adv-text'>
                   Chandigarh University Online MBA offers unmatched flexibility for working professionals, allowing
-                  access to lectures anytime and an affordable semester-wise fee structure.​​ ​
+                  access to lectures anytime and an affordable semester-wise fee structure.
                 </p>
               </div>
             </div>
@@ -987,7 +972,7 @@ const BamsPage = () => {
                 <h5 className='adv-title'>Harvard Business School Collaboration</h5>
                 <p className='adv-text'>
                   Partnered with Harvard Business School, the CU online MBA program includes teaching by global faculty
-                   for students to earn international certifications alongside their MBA degree.​
+                  for students to earn international certifications alongside their MBA degree.
                 </p>
               </div>
             </div>
@@ -1061,7 +1046,7 @@ const BamsPage = () => {
                 <h5 className='adv-title'>Career Growth and Networking</h5>
                 <p className='adv-text'>
                   Students of the online MBA Chandigarh University develop leadership qualities through interactive
-                  sessions and global peer networking opportunities.​ ​​
+                  sessions and global peer networking opportunities.
                 </p>
               </div>
             </div>
@@ -1217,7 +1202,7 @@ const BamsPage = () => {
 
       {/* <!-- ==========================================================Banner and footer section --> */}
 
-      <section className='mba-cta-section py-5 mt-5 mb-0'  id='contactus'>
+      <section className='mba-cta-section py-5 mt-5 mb-0' id='contactus'>
         <div className='container text-start'>
           <div className='cta-content p-3 p-md-5 rounded'>
             <h3 className='text-white mb-3 fw-normal'>Transform Your Career Today with an</h3>
@@ -1266,44 +1251,44 @@ const BamsPage = () => {
           <div className='heading-popup '>
             <h3 className='text-center pop-up text-black'>Enter Your Details to Get Started</h3>
           </div>
-           <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                  {() => (
-                    <Form>
-                      <div className='form-group mb-3'>
-                        <Field
-                          type='text'
-                          id='name'
-                          name='name'
-                          placeholder='Enter Name'
-                          required
-                          className='form-control'
-                        />
-                      </div>
+          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            {() => (
+              <Form>
+                <div className='form-group mb-3'>
+                  <Field
+                    type='text'
+                    id='name'
+                    name='name'
+                    placeholder='Enter Name'
+                    required
+                    className='form-control'
+                  />
+                </div>
 
-                      <div className='form-group mb-3'>
-                        <Field
-                          type='email'
-                          id='email'
-                          name='email'
-                          placeholder='Enter Email'
-                          required
-                          className='form-control'
-                        />
-                      </div>
+                <div className='form-group mb-3'>
+                  <Field
+                    type='email'
+                    id='email'
+                    name='email'
+                    placeholder='Enter Email'
+                    required
+                    className='form-control'
+                  />
+                </div>
 
-                       <div className="mb-3 form-group  ">
-                          <PhoneInputField name="contact" />
-                          <ErrorMessage name="contact" component="div" className=" form-control bams-form-field py-3" />
-                        </div>
-                      <div className='form-group mb-3 select-wrapper'>
-                        <Field
-                          as='select'
-                          id='location'
-                          name='location'
-                          required
-                          className='browser-default custom-select form-control white-bg-black-text bams-form-field '
-                        >
-                         <option value=''>Select State</option>
+                <div className="mb-3 form-group  ">
+                  <PhoneInputField name="contact" />
+                  <ErrorMessage name="contact" component="div" className=" form-control bams-form-field py-3" />
+                </div>
+                <div className='form-group mb-3 select-wrapper'>
+                  <Field
+                    as='select'
+                    id='location'
+                    name='location'
+                    required
+                    className='browser-default custom-select form-control white-bg-black-text bams-form-field '
+                  >
+                    <option value=''>Select State</option>
                     <option value='Andhra Pradesh'>Andhra Pradesh</option>
                     <option value='Andaman & Nicobar'>Andaman & Nicobar</option>
 
@@ -1343,36 +1328,36 @@ const BamsPage = () => {
                     <option value='Uttarakhand'>Uttarakhand</option>
                     <option value='Uttar Pradesh'>Uttar Pradesh</option>
                     <option value='West Bengal'>West Bengal</option>
-                        </Field>
-                      </div>
-                      <div className='form-group mb-3'>
-                        <Field
-                          as='textarea'
-                          id='description'
-                          name='description'
-                          placeholder='Message (Optional)'
-                          className='form-control'
-                          rows={2}
-                        />
-                      </div>
-                      <div className='mb-3 form-check text-white'>
-                        <Field type='checkbox' name='terms' className='form-check-input border-black' id='terms' />
-                        <label className='form-check-label' htmlFor='terms' style={{ fontSize: '16px',color:"black" }}>
-                          By Clicking this, I agree to the{' '}
-                          <Link href='/terms-and-conditions' className='textcolortenm'>
-                            Terms & Conditions
-                          </Link>
-                        </label>
-                        <ErrorMessage name='terms' component='div' className='error text-danger' />
-                      </div>
-                      <div className='form-group text-center '>
-                        <button type='submit' id='about' name='submit' className='sub-btn btn'>
-                          Submit
-                        </button>
-                      </div>
-                    </Form>
-                  )}
-                </Formik>
+                  </Field>
+                </div>
+                <div className='form-group mb-3'>
+                  <Field
+                    as='textarea'
+                    id='description'
+                    name='description'
+                    placeholder='Message (Optional)'
+                    className='form-control'
+                    rows={2}
+                  />
+                </div>
+                <div className='mb-3 form-check text-white'>
+                  <Field type='checkbox' name='terms' className='form-check-input border-black' id='terms' />
+                  <label className='form-check-label' htmlFor='terms' style={{ fontSize: '16px', color: "black" }}>
+                    By Clicking this, I agree to the{' '}
+                    <Link href='/terms-and-conditions' className='textcolortenm'>
+                      Terms & Conditions
+                    </Link>
+                  </label>
+                  <ErrorMessage name='terms' component='div' className='error text-danger' />
+                </div>
+                <div className='form-group text-center '>
+                  <button type='submit' id='about' name='submit' className='sub-btn btn'>
+                    Submit
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </Modal.Body>
       </Modal>
 
