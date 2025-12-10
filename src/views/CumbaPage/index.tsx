@@ -1,5 +1,6 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -7,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import Modal from 'react-bootstrap/Modal'
-
+import useEmblaCarousel from "embla-carousel-react";
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic';
 import { Field, Form, Formik, ErrorMessage } from 'formik'
@@ -16,8 +17,48 @@ import axios from 'src/configs/axios'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'));
-import MainCrosuel from "./MainCrosuel"
-const whatsappc = '/images/cumba/whatsicon.gif'
+
+// Lazy loading component for background images
+const LazyBgImage = ({ src, alt }) => {
+  const [imageSrc, setImageSrc] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: '50px' }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      const img = document.createElement('img');
+      img.onload = () => setImageSrc(src);
+      img.src = src;
+    }
+  }, [isVisible, src]);
+
+  return (
+    <div
+      ref={ref}
+      className="bg-layer"
+      style={{
+        backgroundImage: imageSrc ? `url(${imageSrc})` : 'none',
+        backgroundColor: '#f0f0f0'
+      }}
+    ></div>
+  );
+};
+const whatsappc = '/images/bams/whatsappc.gif'
 const logos = [
   { src: '/images/cumba/ACCA.webp', alt: 'ACCA' },
   { src: '/images/cumba/BCI_1.webp', alt: 'BCI' },
@@ -29,6 +70,51 @@ const logos = [
   { src: '/images/cumba/WES.webp', alt: 'WES' },
   { src: '/images/cumba/WUR.webp', alt: 'WUR' },
   { src: '/images/cumba/NIRF.webp', alt: 'NIRF' }
+]
+
+const data = [
+  {
+    title: 'Strategic Decision-Making Mastery',
+    desc: `Online MBA Chandigarh University equips graduates with advanced analytical skills for
+           complex business decisions through data-driven case studies and simulations.​
+           Students learn to evaluate risks, and formulate strategies that drive organizational
+           success. Real-world projects enhance problem-solving abilities, enabling confident
+           leadership in high-stakes environments.​ Enrolling in a CU online MBA admission
+           prepares professionals to navigate uncertainties and seize growth opportunities
+           effectively.​`,
+    img: '/images/cumba/planning.webp'
+  },
+  {
+    title: 'Leadership and Managerial Proficiency',
+    desc: `Being one of the best online MBA in India the program develops essential leadership
+           qualities, including team motivation, ethical decision-making, and conflict
+           resolution.​ Interactive sessions and Harvard faculty modules build emotional
+           intelligence and visionary thinking for senior roles.​ CU online MBA graduates
+           emerge as influential managers capable of inspiring diverse teams toward shared
+           goals.​`,
+    img: '/images/cumba/closeup.webp'
+  },
+  {
+    title: 'Global Business Acumen',
+    desc: `Learners gain a comprehensive understanding of international markets, cross-cultural
+           dynamics, and globalization impacts.​ Chandigarh University online programs provide
+           exposure to global case studies and Harvard collaborations broadens perspectives for
+           multinational operations.​ Graduates are equipped to handle international trade,
+           supply chains, and diverse regulatory environments confidently.`,
+    img: '/images/cumba/chess.webp'
+  },
+  {
+    title: 'Career Advancement and Employability',
+    desc: `The curriculum aligns with industry demands, boosting employability through
+          specialized skills and placement support.​ Graduates from CU online MBA secure roles
+          in top firms like Deloitte, Amazon, and Infosys with higher salary potential and
+          promotions.​ Networking opportunities and certifications from Harvard enhance
+          professional profiles significantly.​ Strong ROI comes from rapid career growth,
+          leadership positions, and entrepreneurial readiness.​ Chandigarh University distance
+          MBA alumni achieve sustained success in management, finance, marketing, and
+          operations sectors.`,
+    img: '/images/cumba/businnespeople.webp'
+  }
 ]
 const responsive = {
   superLargeDesktop: {
@@ -126,7 +212,19 @@ const BamsPage = () => {
       console.error('Element not found:', id)
     }
   }
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+  });
 
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
   const closeNavbar = () => {
     const navbar = document.getElementById('navbarNav')
     if (navbar && navbar.classList.contains('show')) {
@@ -145,6 +243,21 @@ const BamsPage = () => {
         />
         <link rel='stylesheet' href='/css/cumbalandingpage.css' />
         <link rel='canonical' href='https://learntechww.com/cu-online-mba-admission ' />
+
+        <link
+          rel="preload"
+          as="image"
+          href="/images/cumba/herobanner3.webp"
+          media="(min-width: 769px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/cumba/mobilebanner.webp"
+          media="(max-width: 768px)"
+        />
+
+
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{
@@ -559,7 +672,8 @@ const BamsPage = () => {
             <Carousel responsive={responsive} infinite autoPlay autoPlaySpeed={2500} arrows swipeable draggable>
               {logos.map((item, idx) => (
                 <div className='accredi-item' key={idx}>
-                  <Image src={item.src} alt='logo' width={130} height={130} />
+                  <Image src={item.src} alt='logo' width={130} height={130} loading="lazy"
+                  />
                 </div>
               ))}
             </Carousel>
@@ -920,7 +1034,35 @@ const BamsPage = () => {
           </h2>
         </div>
 
-        <MainCrosuel />
+        <div className="mba-feature-carousel outcomes-container">
+          <div className="embla" ref={emblaRef}>
+            <div className="embla__container">
+              {data.map((item, i) => (
+                <div className="embla__slide" key={i}>
+                  <div className="outcome-card">
+                    <LazyBgImage src={item.img} alt={item.title} />
+                    <div className="news-overlay"></div>
+
+                    <div className="outcome-content">
+                      <h3 className="outcome-title">{item.title}</h3>
+                      <p>{item.desc}</p>
+                      <div className="hover-line"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CUSTOM ARROWS */}
+          <button className="custom-arrow custom-left-arrow" onClick={scrollPrev}>
+            ❮
+          </button>
+
+          <button className="custom-arrow custom-right-arrow" onClick={scrollNext}>
+            ❯
+          </button>
+        </div>
       </section>
       <section className='advantage-section pt-5' data-aos='fade-up'>
         <div className='container text-center' id='whyus' style={{ maxWidth: "100%" }}>
