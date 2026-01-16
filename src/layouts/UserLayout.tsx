@@ -8,7 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 // ** Layout Imports
 // !Do not remove this Layout import
 import Layout from 'src/@core/layouts/Layout'
-
+const Toster = dynamic(() => import('src/@core/components/popup/Toster'), { ssr: false })
 // ** Navigation Imports
 import VerticalNavItems from 'src/navigation/vertical'
 import HorizontalNavItems from 'src/navigation/horizontal'
@@ -22,6 +22,7 @@ import Box from '@mui/material/Box'
 
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
+import dynamic from 'next/dynamic'
 
 interface Props {
   children: ReactNode
@@ -95,7 +96,7 @@ const UserLayout = ({ children, contentHeightFixed }: Props) => {
       })}
     >
       {children}
-
+      <Toster />
     </Layout>
   )
 }

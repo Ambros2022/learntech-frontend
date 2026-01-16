@@ -15,11 +15,6 @@ const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/Globa
   ssr: false,
   loading: () => <button className='btn counsellingBtn'>Loading...</button>
 })
-// import Statedropdown from 'src/@core/layouts/components/Header/state-dropdown'
-// import Coursedropdown from 'src/@core/layouts/components/Header/course-dropdown'
-// import Examdropdown from 'src/@core/layouts/components/Header/exam-dropdown'
-// import Abroaddropdown from 'src/@core/layouts/components/Header/abroad-dropdown'
-// import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
 const EditorEnquiryForm = dynamic(() => import('src/@core/components/popup/Editor/EditorPopupEnquiry'), { ssr: false })
 const ConditionalModal = dynamic(() => import('./ConditionalModal'), { ssr: false })
 
