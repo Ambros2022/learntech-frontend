@@ -186,7 +186,7 @@ const BamsPage = () => {
 '
         />
         <link rel='stylesheet' href='/css/bamslandingpage.css' />
-        <link rel='canonical' href='https://learntechww.com/bams-counselling-process ' />
+        <link rel='canonical' href='https://learntechww.com/bams-counselling-process' />
       </Head>
 
       <div className='text-md-start'>

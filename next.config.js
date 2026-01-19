@@ -8,7 +8,7 @@ module.exports = {
   skipTrailingSlashRedirect: true, // REMOVE
 
   images: {
-    domains: ['api.learntechww.com', 'learntechww.com']
+    domains: ['localhost','api.learntechww.com', 'learntechww.com']
   },
   async redirects() {
     return [
