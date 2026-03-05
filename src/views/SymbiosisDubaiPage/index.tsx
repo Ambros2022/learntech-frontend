@@ -230,7 +230,8 @@ const SymbiosisDubaiPage = () => {
 
         // Bootstrap JS for navbar toggle
         if (typeof window !== 'undefined') {
-            import('bootstrap/dist/js/bootstrap.bundle.min.js').catch(() => { })
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            import('bootstrap/dist/js/bootstrap.bundle.min.js').catch(() => { /* intentionally empty */ })
         }
 
         return () => window.removeEventListener('scroll', handleScroll)
@@ -410,11 +411,13 @@ const SymbiosisDubaiPage = () => {
             <Head>
                 <title>Symbiosis International University Dubai | Admission 2026–27</title>
                 <meta name='description' content='Apply to Symbiosis International University Dubai for world-class UG & PG programs, industry-oriented curriculum, and global career opportunities. Enquire now!' />
+                {/* eslint-disable-next-line @next/next/no-css-tags */}
                 <link rel='stylesheet' href='/css/symbiosisdubailandingpage.css' />
                 <link rel='preconnect' href='https://fonts.googleapis.com' />
                 <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
+                {/* eslint-disable-next-line @next/next/no-page-custom-font */}
                 <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap' rel='stylesheet' />
-            
+
                 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css' />
                 <script
                     type='application/ld+json'

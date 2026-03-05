@@ -19,7 +19,7 @@ import 'react-multi-carousel/lib/styles.css'
 const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'));
 
 // Lazy loading component for background images
-const LazyBgImage = ({ src, alt }) => {
+const LazyBgImage = ({ src, alt: _alt }) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -195,9 +195,7 @@ const BamsPage = () => {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  const [show1, setShow1] = useState(false)
-
-  const [expanded, setExpanded] = useState(false)
+  const [, setExpanded] = useState(false)
 
   const navigate = (id, offset = 0) => {
     const elementToView = document.getElementById(id)
@@ -241,6 +239,7 @@ const BamsPage = () => {
           content='Apply for Chandigarh University (CU) Online MBA 2026–27. Check eligibility, fees, specializations, rankings, placements & admission process. Enquire Now!
 '
         />
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link rel='stylesheet' href='/css/cumbalandingpage.css' />
         <link rel='canonical' href='https://learntechww.com/cu-online-mba-admission ' />
 
