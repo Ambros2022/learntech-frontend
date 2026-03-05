@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect, useState, useCallback, useRef } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+
 import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AOS from 'aos'
@@ -16,7 +15,6 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 const PhoneInputField = dynamic(() => import('src/@core/components/popup/PhoneInput'))
 
-const whatsappGif = '/images/bams/whatsappc.gif'
 
 const accreditationLogos = [
     { src: '/images/symbiosis/ranking1.svg', alt: 'NAAC A++ Accredited', title: 'NAAC A++ Accredited', subtitle: 'Highest UGC Rating' },
