@@ -147,7 +147,7 @@ const campusFacilities = [
     { title: 'Cafeteria', img: '/images/symbiosis/cafeteria.webp' },
     { title: 'Computer Lab', img: '/images/symbiosis/lab2.webp' },
     { title: 'Indoor Sports', img: '/images/symbiosis/sports3.webp' },
-    { title: 'Library', img: '/images/symbiosis/library.webp' },
+    { title: 'Library', img: '/images/symbiosis/Library.webp' },
 ]
 
 const partnerLogos = [
@@ -168,7 +168,7 @@ const partnersResponsive = {
     superLargeDesktop: { breakpoint: { max: 4000, min: 1400 }, items: 5 },
     desktop: { breakpoint: { max: 1400, min: 1024 }, items: 4 },
     tablet: { breakpoint: { max: 1024, min: 600 }, items: 3 },
-    mobile: { breakpoint: { max: 600, min: 0 }, items: 2 },
+    mobile: { breakpoint: { max: 600, min: 0 }, items: 1 },
 }
 
 const ugSteps = [
@@ -340,7 +340,7 @@ const SymbiosisDubaiPage = () => {
                     </div>
                     <div className='form-group'>
                         <Field as='select' name='location' required className='sym-form-field'>
-                            <option value=''>State</option>
+                            <option value='' disabled selected>State</option>
                             <option value='Andhra Pradesh'>Andhra Pradesh</option>
                             <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
                             <option value='Assam'>Assam</option>
@@ -381,7 +381,7 @@ const SymbiosisDubaiPage = () => {
                     </div>
                     <div className='form-group'>
                         <Field as='select' name='course' className='sym-form-field'>
-                            <option value='' disabled>Select Course</option>
+                            <option value='' disabled selected>Select Course</option>
                             <option>Bachelor of Business Administration (BBA) (Hons)</option>
                             <option>Bachelor of Business Administration- Dual Degree</option>
                             <option>Bachelor of Computer Applications (BCA)</option>
@@ -512,7 +512,7 @@ const SymbiosisDubaiPage = () => {
                             </div>
                             <div className='col-lg-5'>
                                 <div className='sym-hero-form-card'>
-                                    <h3>Take The First Step Towards Your Future</h3>
+                                    <h3 className='text-center'>Take The First Step Towards Your Future</h3>
                                     <EnquiryForm />
                                 </div>
                             </div>
@@ -643,7 +643,7 @@ const SymbiosisDubaiPage = () => {
                             </div>
                         </div>
                     </div>
-                    <p className='text-center my-4' style={{ color: '#616888' }}>
+                    <p className='text-center my-4' style={{ color: 'black' }}>
                         The university isn’t all about academia though. Symbiosis University, Dubai boasts a central location in Dubai Knowledge Park which offers networking opportunities and unparalleled infrastructural support to help students become the best versions of themselves. Read on for a snapshot of the Symbiosis International University, Dubai campus stories.
                     </p>
                 </div>
@@ -802,7 +802,7 @@ const SymbiosisDubaiPage = () => {
                     <div className='row justify-content-center'>
                         <div className='col-lg-4'>
                             <div className='sym-section-tag'><i className='bi bi-question-circle-fill'></i> FAQ</div>
-                            <h2 className='sym-section-heading' >Frequently Asked <span>Questions</span></h2>
+                            <h2 className='sym-section-heading2' >Frequently Asked <span>Questions</span></h2>
                         </div>
                         <div className='col-lg-8'>
                             {faqs.map((faq, idx) => (
@@ -833,8 +833,8 @@ const SymbiosisDubaiPage = () => {
                 </div>
                 <div className='container'>
                     <div className='sym-cta-content sym-reveal'>
-                        <h2>Begin your global journey with <span>Symbiosis International University,</span> Dubai.</h2>
-                        <p>Join a university that blends international recognition, industry-focused learning, and the dynamic advantage of Dubai to shape your future without borders.</p>
+                        <h2 className='text-center'>Begin your global journey with <span>Symbiosis International University,</span> Dubai.</h2>
+                        <p className='text-center'>Join a university that blends international recognition, industry-focused learning, and the dynamic advantage of Dubai to shape your future without borders.</p>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', justifyContent: 'center' }}>
                             <button className='sym-btn-cta-primary' onClick={handleShow}>
                                 Start Your Application Now <i className='bi bi-arrow-right'></i>
@@ -848,15 +848,19 @@ const SymbiosisDubaiPage = () => {
                                 </a>
                             </div>
                             <div className='sym-cta-phones'>
-                                <div className='sym-cta-trust-item'>
-                                    <i className='bi bi-whatsapp' style={{ color: 'green' }}></i>
-                                    <i className='bi bi-telephone-fill'></i>
-                                    <a href='tel:+971504955123'>+971 50 495 5123</a>
+                                <div className='sym-cta-trust-item gap-3'>
+                                    <div>
+                                        <i className='bi bi-whatsapp mx-1' style={{ color: 'green' }}></i>
+                                        <i className='bi bi-telephone-fill mx-1'></i>
+                                        <a href='tel:+971504955123'>+971 50 495 5123</a>
+                                    </div>
 
-                                    <i className='bi bi-telephone-fill'></i>
-                                    {/* <p></p> */}
-                                    <a href="tel:+971502436552">Botim Number - +971 50 243 6552</a>
+                                    <div>
+                                        <i className='bi bi-telephone-fill mx-1'></i>
+                                        {/* <p></p> */}
+                                        <a href="tel:+971502436552">Botim Number - +971 50 243 6552</a>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -873,7 +877,7 @@ const SymbiosisDubaiPage = () => {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Body>
                     <div className='sym-modal-heading'>
-                        <h3>Take The First Step Towards Your Future</h3>
+                        <h3 className='text-center'>Take The First Step Towards Your Future</h3>
                     </div>
                     <EnquiryForm isModal={true} />
                 </Modal.Body>
