@@ -89,6 +89,19 @@
     font-weight: 700;
 }
 
+.symbiosis-main .sym-section-heading2 {
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--sym-secondary);
+    margin-bottom: 1rem;
+}
+
+.symbiosis-main .sym-section-heading2 span {
+    color: var(--sym-primary);
+    font-weight: 700;
+}
+
 .symbiosis-main .sym-section-sub {
     font-size: 1.02rem;
     color: black;
@@ -239,7 +252,7 @@
 /* ── HERO ──────────────────────────────── */
 .symbiosis-main .sym-hero {
     min-height: 100vh;
-    background: url('/images/symbiosis/banner.webp') center;
+    background: url('/images/symbiosis/banner.webp');
     position: relative;
     overflow: hidden;
     display: flex;
@@ -276,15 +289,8 @@
 }
 
 @keyframes symBlink {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: .25;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: .25; }
 }
 
 .symbiosis-main .sym-hero-badge span {
@@ -376,34 +382,20 @@
 
 @media (max-width: 768px) {
     .symbiosis-main .sym-hero-form-card {
-        background: rgba(255, 255, 255, 0.25);
+        background: #e0e0e0;
         backdrop-filter: blur(18px);
         border: 1px solid rgba(255, 255, 255, .15);
     }
 }
 
 @keyframes symFadeLeft {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes symFadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .symbiosis-main .sym-hero-form-card h3 {
@@ -428,7 +420,7 @@
 }
 
 .symbiosis-main .sym-form-field::placeholder {
-    color: rgba(0, 0, 0, 0.5);
+    color: black !important;
 }
 
 .symbiosis-main .sym-form-field:focus {
@@ -438,9 +430,8 @@
 
 .symbiosis-main .sym-form-field option {
     background: white;
-    color: black;
+    color: black !important;
 }
-
 
 .symbiosis-main select.sym-form-field {
     appearance: none;
@@ -454,8 +445,16 @@
     padding-right: 2.5rem;
     height: auto;
     cursor: pointer;
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: black !important;
     border: 1px solid rgba(0, 0, 0, .12) !important;
+}
+
+.symbiosis-main select.sym-form-field option {
+    color: black;
+}
+
+.symbiosis-main select.sym-form-field option[value=""] {
+    color: black;
 }
 
 /* Phone input field to match other form fields */
@@ -531,13 +530,8 @@
 }
 
 @keyframes symMarquee {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
 }
 
 .symbiosis-main .sym-marquee-item {
@@ -583,14 +577,16 @@
 
 /* ── ABOUT ─────────────────────────────── */
 .symbiosis-main .sym-about {
-    padding: 7rem 0 2rem;
+    padding: 5rem 0 2rem;
     background: var(--sym-white);
 }
 
 .symbiosis-main .sym-about-img-main {
     width: 100%;
-    height: 413px;
-    background: url('/images/symbiosis/aboutus.webp') center;
+    height: 480px;
+    background: url('/images/symbiosis/aboutus.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
     opacity: 0.7 !important;
     border-radius: 24px;
     position: relative;
@@ -656,7 +652,7 @@
 .symbiosis-main .sym-course-card {
     background: white;
     border-radius: var(--sym-radius-lg);
-    border: 1px solid var(--sym-border);
+    border: 2px solid var(--sym-border);
     overflow: hidden;
     transition: var(--sym-transition);
     display: flex;
@@ -738,7 +734,7 @@
 }
 
 .symbiosis-main .sym-course-desc {
-    font-size: .83rem;
+    font-size: 14px !important;
     color: var(--sym-text-muted);
     line-height: 1.7;
     margin-bottom: 1.25rem;
@@ -970,7 +966,7 @@
 }
 
 .symbiosis-main .sym-step-desc {
-    font-size: .82rem;
+    font-size: 14px !important;
     color: var(--sym-text-muted);
     line-height: 1.65;
     font-weight: 400;
@@ -1067,7 +1063,7 @@
     opacity: 1;
 }
 
-.symbiosis-main .sym-why-card>* {
+.symbiosis-main .sym-why-card > * {
     position: relative;
     z-index: 1;
 }
@@ -1331,9 +1327,7 @@
 }
 
 @keyframes symSlowSpin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
 .symbiosis-main .sym-cta-ring-1 {
@@ -1547,8 +1541,6 @@
     transition: transform 0.3s ease;
 }
 
-
-
 .symbiosis-main .sym-phone-float:hover {
     transform: scale(1.1);
 }
@@ -1559,33 +1551,78 @@
 }
 
 /* ══════════════════════════════════════════
-   MODAL — Complete Redesign (Image 2 style)
+   MODAL — Perfectly Centered + Internal Scroll
    ══════════════════════════════════════════ */
 
-/* Modal container & backdrop */
+/* Prevent body scroll when modal is open, no layout shift */
+body.modal-open {
+    overflow: hidden !important;
+    padding-right: 0 !important;
+}
+
+/* Backdrop blur */
 .modal-backdrop {
     backdrop-filter: blur(4px);
     background-color: rgba(0, 0, 0, 0.55) !important;
 }
 
-/* Modal dialog sizing */
-.modal-dialog {
-    max-width: 500px;
-    margin: 1.5rem auto;
+/* Modal overlay — flex center both axes */
+.modal {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-/* Modal content card */
+/* Dialog — auto margin, fill height for vertical centering */
+.modal-dialog {
+    max-width: 500px;
+    width: calc(100% - 2rem);
+    margin: auto !important;
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 2rem);
+    max-height: calc(100vh - 2rem);
+    pointer-events: none;
+}
+
+/* Content card — constrained height, internal scroll */
 .modal .modal-content {
     border-radius: 20px;
     border: none;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
     overflow: hidden;
     background: #ffffff;
+    max-height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: all;
 }
 
-/* Modal body padding */
+/* Modal body scrolls internally */
 .modal .modal-body {
     padding: 2.5rem 2.5rem 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+
+    /* Thin brand-coloured scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--sym-primary) #f0f0f0;
+}
+
+.modal .modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal .modal-body::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.modal .modal-body::-webkit-scrollbar-thumb {
+    background: var(--sym-primary);
+    border-radius: 10px;
 }
 
 /* Modal heading */
@@ -1603,9 +1640,7 @@
     margin: 0;
 }
 
-/* ── Modal form fields (Image 2 style) ── */
-
-/* All text/email/select/textarea inputs inside modal */
+/* ── Modal form fields ── */
 .modal .sym-form-field {
     width: 100%;
     border: none !important;
@@ -1636,7 +1671,7 @@
     background: #fff !important;
 }
 
-/* Select dropdown inside modal */
+/* Select inside modal */
 .modal select.sym-form-field {
     appearance: none;
     -webkit-appearance: none;
@@ -1657,7 +1692,7 @@
     resize: vertical;
 }
 
-/* Phone input (react-tel-input) inside modal */
+/* Phone input inside modal */
 .modal .react-tel-input {
     margin-bottom: 14px !important;
 }
@@ -1705,7 +1740,7 @@
     border-radius: 10px 0 0 10px;
 }
 
-/* ── Modal submit button (Image 2 style — full-width blue) ── */
+/* Modal submit button */
 .modal .sym-modal-submit,
 .modal button[type='submit'].sym-modal-submit {
     width: 100% !important;
@@ -1720,7 +1755,7 @@
     padding: 17px 1rem !important;
     cursor: pointer;
     transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease !important;
-    box-shadow: 0 6px 20px rgba(26, 110, 245, 0.30) !important;
+    box-shadow: 0 6px 20px rgba(193, 33, 18, 0.30) !important;
     margin-top: 6px;
     display: block;
 }
@@ -1759,7 +1794,7 @@
 }
 
 .symbiosis-main .sym-partners .react-multiple-carousel__arrow {
-    background: var(--sym-secondary);
+    background: var(--sym-primary);
 }
 
 .symbiosis-main .sym-partners .react-multiple-carousel__arrow:hover {
@@ -1782,11 +1817,6 @@
         gap: 1.5rem;
     }
 
-    .symbiosis-main .sym-float-badge-1,
-    .symbiosis-main .sym-float-badge-2 {
-        display: none;
-    }
-
     .symbiosis-main .sym-process-card {
         padding: 2rem 1.6rem;
     }
@@ -1801,12 +1831,27 @@
         font-size: 1.9rem;
     }
 
+    .symbiosis-main .sym-section-heading2 {
+        font-size: 1.9rem;
+    }
+
     .symbiosis-main .sym-cta {
         padding: 5rem 0;
     }
 
-    .symbiosis-main .modal .modal-body {
+    .modal .modal-body {
         padding: 2rem 1.5rem 1.5rem;
+    }
+
+    .modal-dialog {
+        width: calc(100% - 1.5rem);
+        margin: 0.75rem auto !important;
+        min-height: calc(100vh - 1.5rem);
+        max-height: calc(100vh - 1.5rem);
+    }
+
+    .modal .modal-content {
+        max-height: calc(100vh - 3rem);
     }
 }
 
@@ -1817,7 +1862,6 @@
     }
 
     .symbiosis-main .sym-course-card-top {
-
         height: auto !important;
     }
 
@@ -1827,5 +1871,36 @@
 
     .symbiosis-main .sym-partners .react-multiple-carousel__arrow--right {
         right: calc(0.5% + 0px);
+    }
+
+    .symbiosis-main .sym-hero-badge-dot {
+        width: 18px;
+        height: 12px;
+    }
+
+    .symbiosis-main .sym-cta-trust-item {
+        flex-direction: column;
+        text-align: start !important;
+        align-items: start !important;
+    }
+
+    .symbiosis-main .sym-cta-content {
+        text-align: start !important;
+    }
+
+    .symbiosis-main .sym-cta-trust {
+        align-items: start !important;
+    }
+
+    .symbiosis-main .sym-hero-stat-lbl {
+        color: black !important;
+    }
+
+    .symbiosis-main .sym-float-badge-1 {
+        right: -7px !important;
+    }
+
+    .symbiosis-main .sym-float-badge-2 {
+        left: -1px !important;
     }
 }
