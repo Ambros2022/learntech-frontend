@@ -255,7 +255,7 @@ const SymbiosisDubaiPage = () => {
                 const digits = value.replace(/[^0-9]/g, '').replace(/^971/, '')
                 return digits.length === 9
             }),
-        location: Yup.string().required('City is required'),
+        location: Yup.string().required('Location is required'),
         course: Yup.string().required('Please select a course'),
     })
 
@@ -356,7 +356,8 @@ const SymbiosisDubaiPage = () => {
                     </div>
                     <div className='form-group'>
 
-                        <Field type='location' name='location' placeholder='city' required className='sym-form-field' />
+                        <Field type='location' name='location' placeholder='Enter Location' required className='sym-form-field' />
+                        <ErrorMessage name='location' component='div' className='text-danger small' />
                     </div>
                     <div className='form-group'>
                         <Field as='select' name='course' className='sym-form-field'>
