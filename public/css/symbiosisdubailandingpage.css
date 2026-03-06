@@ -216,12 +216,19 @@
     font-size: 16px !important;
     font-weight: 600;
     transition: color .2s;
-    padding: .3rem .5rem !important;
+    padding: .3rem .8rem !important;
     cursor: pointer;
 }
 
 .symbiosis-main .sym-nav-link:hover {
     color: var(--sym-primary) !important;
+}
+
+.symbiosis-main .sym-nav-link:focus,
+.symbiosis-main .sym-nav-link:active,
+.symbiosis-main .sym-nav-link.active {
+    color: rgb(0, 0, 0) !important;
+    outline: none;
 }
 
 @media (max-width: 991px) {
@@ -242,10 +249,18 @@
         color: #111 !important;
         background: white !important;
         font-size: 18px !important;
+        padding: .5rem 1rem !important;
     }
 
     .symbiosis-main .sym-nav-link:hover {
         color: var(--sym-primary) !important;
+    }
+
+    .symbiosis-main .sym-nav-link:focus,
+    .symbiosis-main .sym-nav-link:active,
+    .symbiosis-main .sym-nav-link.active {
+        color: #111 !important;
+        outline: none;
     }
 }
 
@@ -289,8 +304,15 @@
 }
 
 @keyframes symBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: .25; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .25;
+    }
 }
 
 .symbiosis-main .sym-hero-badge span {
@@ -389,13 +411,27 @@
 }
 
 @keyframes symFadeLeft {
-    from { opacity: 0; transform: translateX(30px); }
-    to   { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes symFadeUp {
-    from { opacity: 0; transform: translateY(25px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .symbiosis-main .sym-hero-form-card h3 {
@@ -530,8 +566,13 @@
 }
 
 @keyframes symMarquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 .symbiosis-main .sym-marquee-item {
@@ -1063,7 +1104,7 @@
     opacity: 1;
 }
 
-.symbiosis-main .sym-why-card > * {
+.symbiosis-main .sym-why-card>* {
     position: relative;
     z-index: 1;
 }
@@ -1327,7 +1368,9 @@
 }
 
 @keyframes symSlowSpin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .symbiosis-main .sym-cta-ring-1 {
@@ -1785,20 +1828,30 @@ body.modal-open {
 }
 
 /* ── INDUSTRY PARTNERSHIPS ARROWS ─────── */
-.symbiosis-main .sym-partners .react-multiple-carousel__arrow--left {
-    left: calc(1% + 1px);
+.symbiosis-main .sym-partners .sym-reveal {
+    position: relative;
 }
 
-.symbiosis-main .sym-partners .react-multiple-carousel__arrow--right {
-    right: calc(1% + 1px);
+.symbiosis-main .sym-partners .react-multi-carousel-list {
+    overflow: hidden;
+    margin: 0 55px;
 }
 
 .symbiosis-main .sym-partners .react-multiple-carousel__arrow {
     background: var(--sym-primary);
+    z-index: 10;
 }
 
 .symbiosis-main .sym-partners .react-multiple-carousel__arrow:hover {
     background: var(--sym-primary);
+}
+
+.symbiosis-main .sym-partners .react-multiple-carousel__arrow--left {
+    left: 0;
+}
+
+.symbiosis-main .sym-partners .react-multiple-carousel__arrow--right {
+    right: 0;
 }
 
 /* ── RESPONSIVE ────────────────────────── */
@@ -1865,12 +1918,8 @@ body.modal-open {
         height: auto !important;
     }
 
-    .symbiosis-main .sym-partners .react-multiple-carousel__arrow--left {
-        left: calc(0.5% + 0px);
-    }
-
-    .symbiosis-main .sym-partners .react-multiple-carousel__arrow--right {
-        right: calc(0.5% + 0px);
+    .symbiosis-main .sym-partners .react-multi-carousel-list {
+        margin: 0 45px;
     }
 
     .symbiosis-main .sym-hero-badge-dot {
@@ -1902,5 +1951,9 @@ body.modal-open {
 
     .symbiosis-main .sym-float-badge-2 {
         left: -1px !important;
+    }
+
+    .symbiosis-main .sym-partner-logo img {
+        max-height: 95px !important;
     }
 }

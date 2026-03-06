@@ -2,7 +2,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { useField } from 'formik';
 
-const PhoneInputField = ({ name, ...props }: { name: string }) => {
+const PhoneInputField = ({ name, country: defaultCountry = 'in', ...props }: { name: string; country?: string }) => {
   const [field, , helpers] = useField({ name, ...props });
 
   const formatPhoneNumber = (phoneNumber: string, country: any) => {
@@ -27,7 +27,7 @@ const PhoneInputField = ({ name, ...props }: { name: string }) => {
     <PhoneInput
       {...field}
       {...props}
-      country={'in'}
+      country={defaultCountry}
       value={field.value}
       
       onChange={(value, country) => {
