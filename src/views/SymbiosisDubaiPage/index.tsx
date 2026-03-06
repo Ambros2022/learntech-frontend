@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { Field, Form, Formik, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 import { toast } from 'react-hot-toast'
 import axios from 'src/configs/axios'
 import Carousel from 'react-multi-carousel'
@@ -193,7 +194,6 @@ const SymbiosisDubaiPage = () => {
     const router = useRouter()
     const [show, setShow] = useState(false)
     const [scrolled, setScrolled] = useState(false)
-    const [showBackTop, setShowBackTop] = useState(false)
     const [openFaq, setOpenFaq] = useState<number | null>(null)
     const [campusIndex, setCampusIndex] = useState(0)
     const campusTrackRef = useRef<HTMLDivElement>(null)
@@ -206,7 +206,6 @@ const SymbiosisDubaiPage = () => {
 
         const handleScroll = () => {
             setScrolled(window.scrollY > 60)
-            setShowBackTop(window.scrollY > 400)
 
             // Reveal animations
             document.querySelectorAll('.sym-reveal,.sym-reveal-left,.sym-reveal-right').forEach((el) => {
@@ -246,6 +245,20 @@ const SymbiosisDubaiPage = () => {
         description: '',
     }
 
+    const validationSchema = Yup.object({
+        name: Yup.string().required('Name is required'),
+        email: Yup.string().email('Invalid email').required('Email is required'),
+        contact: Yup.string()
+            .required('Phone number is required')
+            .test('uae-phone', 'Phone number must be exactly 9 digits', (value) => {
+                if (!value) return false
+                const digits = value.replace(/[^0-9]/g, '').replace(/^971/, '')
+                return digits.length === 9
+            }),
+        location: Yup.string().required('City is required'),
+        course: Yup.string().required('Please select a course'),
+    })
+
     const handleSubmit = async (values: any, { resetForm }: any) => {
         try {
             toast.loading('Processing')
@@ -255,7 +268,8 @@ const SymbiosisDubaiPage = () => {
             formData.append('contact_number', values.contact)
             formData.append('location', values.location)
             formData.append('current_url', window.location.href)
-            formData.append('description', values.description || values.course || '')
+            formData.append('course_in_mind', values.course)
+            formData.append('description', values.description || '')
             formData.append('Source', 'Google Ads')
             formData.append('SourceCampaign', 'Symbiosis Dubai 2026-27')
 
@@ -325,59 +339,24 @@ const SymbiosisDubaiPage = () => {
 
     // Form component (reusable for hero + modal)
     const EnquiryForm = ({ isModal = false }: { isModal?: boolean }) => (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {() => (
                 <Form>
                     <div className='form-group'>
                         <Field type='text' name='name' placeholder='Full Name' required className='sym-form-field' />
+                        <ErrorMessage name='name' component='div' className='text-danger small' />
                     </div>
                     <div className='form-group'>
                         <Field type='email' name='email' placeholder='Email' required className='sym-form-field' />
+                        <ErrorMessage name='email' component='div' className='text-danger small' />
                     </div>
                     <div className='form-group mb-3'>
-                        <PhoneInputField name='contact' />
+                        <PhoneInputField name='contact' country='ae' />
                         <ErrorMessage name='contact' component='div' className='text-danger small' />
                     </div>
                     <div className='form-group'>
-                        <Field as='select' name='location' required className='sym-form-field'>
-                            <option value='' disabled selected>State</option>
-                            <option value='Andhra Pradesh'>Andhra Pradesh</option>
-                            <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
-                            <option value='Assam'>Assam</option>
-                            <option value='Bihar'>Bihar</option>
-                            <option value='Chhattisgarh'>Chhattisgarh</option>
-                            <option value='Goa'>Goa</option>
-                            <option value='Gujarat'>Gujarat</option>
-                            <option value='Haryana'>Haryana</option>
-                            <option value='Himachal Pradesh'>Himachal Pradesh</option>
-                            <option value='Jammu & Kashmir'>Jammu & Kashmir</option>
-                            <option value='Jharkhand'>Jharkhand</option>
-                            <option value='Karnataka'>Karnataka</option>
-                            <option value='Kerala'>Kerala</option>
-                            <option value='Madhya Pradesh'>Madhya Pradesh</option>
-                            <option value='Maharashtra'>Maharashtra</option>
-                            <option value='Manipur'>Manipur</option>
-                            <option value='Meghalaya'>Meghalaya</option>
-                            <option value='Mizoram'>Mizoram</option>
-                            <option value='Nagaland'>Nagaland</option>
-                            <option value='Odisha'>Odisha</option>
-                            <option value='Punjab'>Punjab</option>
-                            <option value='Rajasthan'>Rajasthan</option>
-                            <option value='Sikkim'>Sikkim</option>
-                            <option value='Tamil Nadu'>Tamil Nadu</option>
-                            <option value='Tripura'>Tripura</option>
-                            <option value='Telangana'>Telangana</option>
-                            <option value='Uttarakhand'>Uttarakhand</option>
-                            <option value='Uttar Pradesh'>Uttar Pradesh</option>
-                            <option value='West Bengal'>West Bengal</option>
-                            <option value='Andaman & Nicobar'>Andaman & Nicobar</option>
-                            <option value='Chandigarh'>Chandigarh</option>
-                            <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
-                            <option value='Daman & Diu'>Daman & Diu</option>
-                            <option value='Delhi'>Delhi</option>
-                            <option value='Lakshadweep'>Lakshadweep</option>
-                            <option value='Puducherry'>Puducherry</option>
-                        </Field>
+
+                        <Field type='location' name='location' placeholder='city' required className='sym-form-field' />
                     </div>
                     <div className='form-group'>
                         <Field as='select' name='course' className='sym-form-field'>
@@ -411,6 +390,7 @@ const SymbiosisDubaiPage = () => {
             <Head>
                 <title>Symbiosis International University Dubai | Admission 2026–27</title>
                 <meta name='description' content='Apply to Symbiosis International University Dubai for world-class UG & PG programs, industry-oriented curriculum, and global career opportunities. Enquire now!' />
+                <link rel='canonical' href='https://learntechww.com/symbiosis-international-university-dubai' />
                 {/* eslint-disable-next-line @next/next/no-css-tags */}
                 <link rel='stylesheet' href='/css/symbiosisdubailandingpage.css' />
                 <link rel='preconnect' href='https://fonts.googleapis.com' />
@@ -455,7 +435,7 @@ const SymbiosisDubaiPage = () => {
                         <span className='navbar-toggler-icon'></span>
                     </button>
                     <div className='collapse navbar-collapse justify-content-end gap-3' id='symNavMenu'>
-                        <ul className='navbar-nav align-items-lg-center gap-lg-1 mb-2 mb-lg-0 mt-3 mt-lg-0'>
+                        <ul className='navbar-nav align-items-lg-center gap-lg-2 mb-2 mb-lg-0 mt-3 mt-lg-0'>
                             <li className='nav-item '><a className='nav-link sym-nav-link' onClick={() => { navigate('sym-hero', 80); closeNavbar() }}>Home</a></li>
                             <li className='nav-item'><a className='nav-link sym-nav-link' onClick={() => { navigate('sym-about', 80); closeNavbar() }}>About</a></li>
                             <li className='nav-item'><a className='nav-link sym-nav-link' onClick={() => { navigate('sym-courses', 80); closeNavbar() }}>Courses</a></li>
@@ -485,7 +465,7 @@ const SymbiosisDubaiPage = () => {
                                 </div>
                                 <h1 className='sym-hero-title'>
                                     The World Comes to Dubai,
-                                    <span className='accent'>{" "}At Symbiosis,</span><br />
+                                    <span className='accent'>&nbsp;At Symbiosis,</span><br />
                                     We Show You The World.
                                 </h1>
                                 <p className='sym-hero-desc'>
@@ -868,10 +848,7 @@ const SymbiosisDubaiPage = () => {
                 </div>
             </section>
 
-            {/* ─── BACK TO TOP ─────────────────────── */}
-            <button className={`sym-back-top ${showBackTop ? 'show' : ''}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                <i className='bi bi-chevron-up'></i>
-            </button>
+
 
             {/* ─── MODAL ───────────────────────────── */}
             <Modal show={show} onHide={handleClose}>
