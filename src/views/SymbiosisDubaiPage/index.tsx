@@ -417,12 +417,12 @@ const SymbiosisDubaiPage = () => {
             </Head>
 
             {/* WhatsApp Float */}
-            <a href='https://wa.me/+971504955123' target='_blank' rel='noopener noreferrer' className='sym-whatsapp-float'>
+            <a href='https://wa.me/+971502436552' target='_blank' rel='noopener noreferrer' className='sym-whatsapp-float'>
                 <i className='bi bi-whatsapp'></i>
             </a>
 
             {/* Phone Float */}
-            <a href='tel:+971504955123' className='sym-phone-float'>
+            <a href='tel:+971502436552' className='sym-phone-float'>
                 <i className='bi bi-telephone-fill'></i>
             </a>
 
@@ -833,7 +833,7 @@ const SymbiosisDubaiPage = () => {
                                     <div>
                                         <i className='bi bi-whatsapp mx-1' style={{ color: 'green' }}></i>
                                         <i className='bi bi-telephone-fill mx-1'></i>
-                                        <a href='tel:+971504955123'>+971 50 495 5123</a>
+                                        <a href='tel:+971502436552'>+971 50 243 6552</a>
                                     </div>
 
                                     <div>
