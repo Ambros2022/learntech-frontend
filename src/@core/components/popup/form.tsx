@@ -39,7 +39,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
             oReq.onload = function () {
                 if (oReq.status === 200) {
                     const file = new Blob([oReq.response], { type: 'application/pdf' });
-                    saveAs(file, "Learntechww Brochure 2025.pdf");
+                    saveAs(file, "Learntechww Brochure 2026.pdf");
                 } else {
                     console.error(`Failed to download file: ${oReq.status} ${oReq.statusText}`);
                 }
