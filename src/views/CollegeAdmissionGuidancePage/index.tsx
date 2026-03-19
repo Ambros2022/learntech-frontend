@@ -62,6 +62,7 @@ const StarSvg = () => (
 const CollegeAdmissionGuidancePage = () => {
   const router = useRouter()
   const [navScrolled, setNavScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const [stackCur, setStackCur] = useState(0)
   const [ctaSubmitted, setCtaSubmitted] = useState(false)
   const [show, setShow] = useState(false)
@@ -69,16 +70,33 @@ const CollegeAdmissionGuidancePage = () => {
   const handleShow = () => setShow(true)
   const progressRef = useRef<HTMLDivElement>(null)
 
-  // ── NEW: track whether any testimonial video is currently playing ──
+  // ── track whether any testimonial video is currently playing ──
   const [videoPlaying, setVideoPlaying] = useState(false)
 
-  // College carousel
-  const [collegeEmblaRef, collegeEmblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1 })
+  // ── FIX 3: College carousel with proper loop options to prevent white gap ──
+  const [collegeEmblaRef, collegeEmblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'start',
+    slidesToScroll: 1,
+    // These options prevent the white gap / jump on loop
+    containScroll: false,
+    dragFree: false,
+  })
   const collegeScrollPrev = useCallback(() => collegeEmblaApi?.scrollPrev(), [collegeEmblaApi])
   const collegeScrollNext = useCallback(() => collegeEmblaApi?.scrollNext(), [collegeEmblaApi])
 
-  // Testimonial carousel
-  const [testiEmblaRef, testiEmblaApi] = useEmblaCarousel({ loop: true, align: 'start' })
+  // ── FIX 4: Testimonial carousel with proper loop config to prevent glitch ──
+  const [testiEmblaRef, testiEmblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'start',
+    // Prevent the double-flash on loop by using skipSnaps: false
+    skipSnaps: false,
+    // Ensure smooth loop without jump
+    containScroll: false,
+    dragFree: false,
+    // Slow down the loop transition slightly to prevent glitch
+    duration: 30,
+  })
   const [testiIdx, setTestiIdx] = useState(0)
   const testiScrollPrev = useCallback(() => testiEmblaApi?.scrollPrev(), [testiEmblaApi])
   const testiScrollNext = useCallback(() => testiEmblaApi?.scrollNext(), [testiEmblaApi])
@@ -91,7 +109,7 @@ const CollegeAdmissionGuidancePage = () => {
     return () => { testiEmblaApi.off('select', onSelect) }
   }, [testiEmblaApi])
 
-  // ── UPDATED: listen for YouTube postMessage events to detect play / pause ──
+  // ── Listen for YouTube postMessage events to detect play / pause ──
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       try {
@@ -112,14 +130,14 @@ const CollegeAdmissionGuidancePage = () => {
     return () => window.removeEventListener('message', handleMessage)
   }, [])
 
-  // ── UPDATED: auto-advance pauses while a video is playing ──
+  // ── Auto-advance pauses while a video is playing ──
   useEffect(() => {
     if (!testiEmblaApi || videoPlaying) return
     const interval = setInterval(() => testiEmblaApi.scrollNext(), 6000)
     return () => clearInterval(interval)
   }, [testiEmblaApi, videoPlaying])
 
-  // ── UPDATED: progress bar also pauses while a video is playing ──
+  // ── Progress bar also pauses while a video is playing ──
   useEffect(() => {
     // Reset bar width when video is playing
     if (videoPlaying) {
@@ -142,14 +160,14 @@ const CollegeAdmissionGuidancePage = () => {
     return () => cancelAnimationFrame(raf)
   }, [testiIdx, videoPlaying])
 
-  // Sticky nav scroll — unchanged
+  // Sticky nav scroll
   useEffect(() => {
     const handleScroll = () => setNavScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Reveal on scroll — unchanged
+  // Reveal on scroll
   useEffect(() => {
     const reveals = document.querySelectorAll('.cag-main .reveal')
     const obs = new IntersectionObserver(entries => {
@@ -161,16 +179,18 @@ const CollegeAdmissionGuidancePage = () => {
     return () => obs.disconnect()
   }, [])
 
-  // Card stack auto-advance — unchanged
+  // Card stack auto-advance
   useEffect(() => {
     const interval = setInterval(() => setStackCur(c => (c + 1) % 3), 4000)
     return () => clearInterval(interval)
   }, [])
 
-  // Auto college carousel — unchanged
+  // ── College carousel auto-scroll ──
   useEffect(() => {
     if (!collegeEmblaApi) return
-    const interval = setInterval(() => collegeEmblaApi.scrollNext(), 3000)
+    const interval = setInterval(() => {
+      collegeEmblaApi.scrollNext()
+    }, 3000)
     return () => clearInterval(interval)
   }, [collegeEmblaApi])
 
@@ -232,11 +252,7 @@ const CollegeAdmissionGuidancePage = () => {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    // Close mobile nav
-    const navbar = document.getElementById('cagNavMenu')
-    if (navbar?.classList.contains('show')) {
-      navbar.classList.remove('show')
-    }
+    setMobileOpen(false)
   }
 
   const getStackPos = (i: number) => ((i - stackCur + 3) % 3)
@@ -263,16 +279,26 @@ const CollegeAdmissionGuidancePage = () => {
         <Image src='/images/icons/Phone-blue.svg' width={40} height={28} alt='phone' className='red-filter' />
       </a>
 
-      {/* ══ NAVBAR ══ */}
+
       <nav className={`navbar navbar-expand-lg cag-navbar ${navScrolled ? 'scrolled' : ''}`}>
         <div className='container navbarmobile' style={{ maxWidth: '95%' }}>
           <Link className='navbar-brand' href='/college-admission-guidance' onClick={e => { e.preventDefault(); scrollTo('cag-hero') }}>
-            <img src='/images/collegeadmissions/logo.png' alt='LearnTech' style={{ height: 70, marginRight: '0.5rem' }} />
+            <img src='/images/collegeadmissions/logo.png' alt='LearnTech' className='navlinkimage' style={{ marginRight: '0.5rem' }} />
           </Link>
-          <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#cagNavMenu'>
+          <button
+            className='navbar-toggler'
+            type='button'
+            onClick={() => setMobileOpen(v => !v)}
+            aria-expanded={mobileOpen}
+            aria-label='Toggle navigation'
+          >
             <span className='navbar-toggler-icon'></span>
           </button>
-          <div className='collapse navbar-collapse' id='cagNavMenu'>
+
+          <div
+            className={`navbar-collapse bgwhitemobile${mobileOpen ? ' show' : ''}`}
+            id='cagNavMenu'
+          >
             <ul className='navbar-nav mx-auto gap-1'>
               <li className='nav-item'><a className='nav-link' onClick={() => scrollTo('cag-hero')}>Home</a></li>
               <li className='nav-item'><a className='nav-link' onClick={() => scrollTo('cag-who')}>Who We Are?</a></li>
@@ -281,35 +307,35 @@ const CollegeAdmissionGuidancePage = () => {
               <li className='nav-item'><a className='nav-link' onClick={() => scrollTo('cag-colleges')}>Institutions</a></li>
               <li className='nav-item'><a className='nav-link' onClick={() => scrollTo('cag-testi')}>Success Stories</a></li>
             </ul>
-            <a className='nav-link btn-nav-cta ms-2' onClick={handleShow}>Get Started</a>
+            <a className='nav-link btn-nav-cta ms-2 text-white' onClick={handleShow}>Get Started</a>
           </div>
         </div>
       </nav>
 
       {/* ══ HERO ══ */}
       <section id='cag-hero' className='cag-hero'>
-        <div className='container ' style={{ maxWidth: '95%' }}>
-          <div className='row align-items-center g-5'>
+        <div className='container  herbobennerconatiner'>
+          <div className='row align-items-center g-5 custom-row'>
             <div className='col-lg-6 mobilehomebanner'>
               <div className='eyebrow-glass-live'>
                 <span className='dot'></span>
                 <span className='text'>College Admissions Guidance</span>
               </div>
-              <h1 className='hero-headline'>You Don&apos;t Have<br />to Decide <em>Alone</em></h1>
-              <p className='hero-subhead'>1000+ Colleges. Multiple Rounds of Counselling.<br />Only One You. Not anymore.</p>
-              <p className='hero-body'>Every student deserves the right guidance when choosing their college and career path. Because every superhero needs a sidekick.</p>
+              <h1 className='hero-headline p20mobilw'>You Don&apos;t Have<br />to Decide <em>Alone</em></h1>
+              <p className='hero-subhead p20mobilw'>1000+ Colleges. Multiple Rounds of Counselling.<br />Only One You. Not anymore.</p>
+              <p className='hero-body p20mobilw'>Every student deserves the right guidance when choosing their college and career path. Because every superhero needs a sidekick.</p>
               <div className='hero-stats'>
-                <div className='stat-item'>
+                <div className='stat-item p20mobilw  '>
                   <div className='stat-num'>30<span>+</span></div>
                   <div className='stat-label'>Years of Consistent<br />Service</div>
                 </div>
                 <div className='stat-divider'></div>
-                <div className='stat-item'>
+                <div className='stat-item p20mobilw  '>
                   <div className='stat-num'>5,00,000<span>+</span></div>
                   <div className='stat-label'>Successful Admissions</div>
                 </div>
                 <div className='stat-divider'></div>
-                <div className='stat-item'>
+                <div className='stat-item p20mobilw  '>
                   <div className='stat-num'>1,000<span>+</span></div>
                   <div className='stat-label'>Partner Institutions</div>
                 </div>
@@ -465,7 +491,7 @@ const CollegeAdmissionGuidancePage = () => {
       <section id='cag-colleges' className='cag-section'>
         <div className='heading-wrap'>
           <div className='cag-eyebrow'>Institutions</div>
-          <h1 className='cag-h1'>Our <em>Partner</em> Colleges</h1>
+          <h2 className='cag-h1'>Our <em>Partner</em> Colleges</h2>
         </div>
         <div className='cag-college-carousel'>
           <button className='cag-carousel-arrow arrow-prev' onClick={collegeScrollPrev}><i className='bi bi-arrow-left'></i></button>
@@ -495,7 +521,7 @@ const CollegeAdmissionGuidancePage = () => {
       <section id='cag-testi' className='cag-section'>
         <div className='text-center'>
           <div className='cag-eyebrow'>Testimonials</div>
-          <h1 className='cag-h1'>Success <em>Stories</em></h1>
+          <h2 className='cag-h1'>Success <em>Stories</em></h2>
         </div>
         <div className='cag-testi-wrap'>
           <div className='cag-testi-viewport' ref={testiEmblaRef}>
@@ -594,7 +620,7 @@ const CollegeAdmissionGuidancePage = () => {
           <hr className='ft-rule' />
           <div className='ft-columns'>
             <div>
-              <div className='ft-brand'>
+              <div className='ft-brand mt-5 mt-md-0'>
                 <a href='#' onClick={e => { e.preventDefault(); scrollTo('cag-hero') }}>
                   <img src="/images/collegeadmissions/logo.png" alt='LearnTech' />
                 </a>
@@ -606,7 +632,7 @@ const CollegeAdmissionGuidancePage = () => {
               <nav className='ft-menu'>
                 <a href='#cag-who' onClick={e => { e.preventDefault(); scrollTo('cag-who') }}>Who We Are</a>
                 <a href='#cag-what' onClick={e => { e.preventDefault(); scrollTo('cag-what') }}>What We Do</a>
-                <Link href="#cag-services" onClick={e => { e.preventDefault(); scrollTo('cag-services') }}>Services</Link>
+                <Link href="https://learntechww.com/services" target='_blank'>Services</Link>
                 <a href='#cag-testi' onClick={e => { e.preventDefault(); scrollTo('cag-testi') }}>Success Stories</a>
               </nav>
             </div>
@@ -629,7 +655,7 @@ const CollegeAdmissionGuidancePage = () => {
             </div>
             <div>
               <div className='ft-heading'>Follow</div>
-              <div className='ft-socials'>
+              <div className='ft-socials mb-5'>
                 <a href='https://www.instagram.com/learntechedus' target='_blank' rel='noreferrer' aria-label='Instagram'><i className='bi bi-instagram'></i></a>
                 <a href='https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w' target='_blank' rel='noreferrer' aria-label='YouTube'><i className='bi bi-youtube'></i></a>
                 <a href='https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/' target='_blank' rel='noreferrer' aria-label='LinkedIn'><i className='bi bi-linkedin'></i></a>
@@ -639,9 +665,6 @@ const CollegeAdmissionGuidancePage = () => {
           </div>
         </div>
       </footer>
-
-      {/* Bootstrap JS for mobile toggle */}
-      <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js' async></script>
 
       {/* ══ ENQUIRY MODAL ══ */}
       <Modal show={show} onHide={handleClose} centered className='cag-modal'>

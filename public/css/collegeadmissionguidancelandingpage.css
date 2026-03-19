@@ -55,7 +55,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
-    color: black !important;
+    color: black;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 0.4rem 0.9rem !important;
@@ -86,7 +86,7 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     background: linear-gradient(140deg, var(--cag-gold) 0%, #162050eb 45%, var(--cag-accent) 100%);
-    color: var(--cag-cream) !important;
+    color: white !important;
     border-radius: 2px;
     padding: 0.5rem 1.3rem !important;
     transition: background 0.2s, transform 0.15s;
@@ -105,6 +105,16 @@
 
 .cag-main .navbar-toggler:focus {
     box-shadow: none;
+}
+
+/* ─── FIX 1: Mobile nav smooth slide animation + no top gap ─── */
+/* Override Bootstrap's collapse so it animates smoothly */
+
+
+/* Remove the gap that Bootstrap adds between toggler and collapse */
+.cag-main #cagNavMenu {
+    /* No extra top padding */
+    padding-top: 0 !important;
 }
 
 /* HERO */
@@ -319,18 +329,46 @@
     margin-bottom: 0.35rem;
 }
 
-.cag-main .form-card .form-control {
+/* ─── FIX 2: Increase height of ALL form fields ─── */
+.cag-main .form-card .form-control,
+.cag-main .form-card input.form-control,
+.cag-main .form-card select.form-control {
     background: var(--cag-cream);
     border: 1px solid var(--cag-border);
     border-radius: 2px;
     color: var(--cag-ink);
     font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
-    /* padding: 0.65rem 0.9rem; */
-
-    /* height: 43px !important;
-    padding-left: 41px !important; */
+    min-height: 50px !important;
+    height: 50px !important;
+    padding: 0.75rem 0.9rem !important;
     transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* PhoneInput wrapper — make its inner input also tall */
+
+.cag-main .form-card .PhoneInput input,
+.cag-main .form-card .PhoneInputInput {
+    min-height: 50px !important;
+    height: 50px !important;
+    padding: 0.75rem 0.9rem !important;
+    font-size: 0.9rem !important;
+}
+
+.cag-main .form-card .collegeadmisson input {
+    padding: 0.75rem 2.9rem !important;
+    min-height: 50px !important;
+    height: 50px !important;
+    font-size: 0.9rem !important;
+
+}
+
+
+/* PhoneInput flag + container */
+.cag-main .form-card .collegeadmisson .PhoneInput,
+.cag-main .form-card .PhoneInput {
+    min-height: 50px !important;
+    height: 50px !important;
 }
 
 .cag-main .form-card .form-control:focus {
@@ -345,9 +383,11 @@
     font-size: 0.88rem;
 }
 
+/* Textarea should be taller, not fixed height */
 .cag-main .form-card textarea.form-control {
     resize: vertical;
-    min-height: 80px;
+    min-height: 90px !important;
+    height: auto !important;
 }
 
 .cag-main .btn-submit {
@@ -818,6 +858,10 @@
     .cag-main .cag-services {
         padding: 2.2rem 1.2rem 1.8rem;
     }
+
+    .cag-main .btn-nav-cta {
+        margin-bottom: 20px !important;
+    }
 }
 
 @media(max-width:440px) {
@@ -872,12 +916,25 @@
     color: var(--cag-accent);
 }
 
+/* ─── FIX 3: College carousel — prevent white gap, smooth loop ─── */
 .cag-main .cag-college-carousel {
     position: relative;
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 3rem;
+    /* overflow is handled by the viewport, not here (keeps arrows visible) */
+}
+
+.cag-main .cag-college-viewport {
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    /* Prevent any white bleed from sub-pixel rendering */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .cag-main .cag-college-viewport:active {
@@ -886,14 +943,11 @@
 
 .cag-main .cag-college-track {
     display: flex;
-    gap: 1.2rem;
     padding: 1.2rem 0 2rem;
-}
-
-.cag-main .cag-college-viewport {
-    overflow: hidden;
-    cursor: grab;
-    user-select: none;
+    /* Prevent sub-pixel gaps between slides */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
 }
 
 .cag-main .cag-college-card {
@@ -904,13 +958,20 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 20px var(--cag-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* IMPORTANT: Do NOT transition 'transform' — Embla uses transform on slides for loop.
+       Use the individual CSS 'translate' property instead to avoid conflicts. */
+    transition: translate 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    margin-right: 1.2rem;
+    flex-shrink: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .cag-main .cag-college-card:hover {
-    transform: translateY(-10px);
+    /* Use CSS 'translate' property (separate from 'transform') so Embla's loop transform isn't affected */
+    translate: 0 -10px;
     box-shadow: 0 24px 56px rgba(26, 22, 18, 0.15);
 }
 
@@ -921,6 +982,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Prevent image bleed */
+    backface-visibility: hidden;
 }
 
 .cag-main .cag-college-card .card-img img {
@@ -1090,6 +1153,14 @@
     .cag-main .cag-college-viewport {
         margin: 0 1rem;
     }
+
+    .cag-main .cag-carousel-arrow.arrow-prev {
+        left: 0.5rem;
+    }
+
+    .cag-main .cag-carousel-arrow.arrow-next {
+        right: 0.5rem;
+    }
 }
 
 @media(max-width:420px) {
@@ -1100,6 +1171,8 @@
 }
 
 /* ═══ TESTIMONIALS ═══ */
+
+/* ─── FIX 4: Testimonial carousel — eliminate loop glitch ─── */
 .cag-main .cag-testi-wrap {
     max-width: 1360px;
     margin: 0 auto;
@@ -1110,11 +1183,18 @@
     overflow: hidden;
     border-radius: 16px;
     padding: 1.25rem;
+    /* GPU-accelerated rendering prevents flash on loop */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .cag-main .cag-testi-track {
     display: flex;
-    gap: 16px;
+    /* Use transform3d for smoother GPU rendering */
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .cag-main .tc-card {
@@ -1127,14 +1207,21 @@
     grid-template-columns: 1fr 1fr;
     min-height: 380px;
     opacity: .4;
-    transform: scale(.96);
-    transition: opacity .5s ease, transform .5s ease, box-shadow .5s ease;
+    /* IMPORTANT: Use CSS 'scale' property (separate from 'transform') — Embla uses
+       transform on slides for looping. Transitioning 'transform' would animate
+       Embla's internal repositioning, causing the visual glitch. */
+    scale: .96;
+    transition: opacity .4s ease, scale .4s ease, box-shadow .4s ease;
     position: relative;
+    margin-right: 16px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: opacity, scale;
 }
 
 .cag-main .tc-card.active {
     opacity: 1;
-    transform: scale(1);
+    scale: 1;
     box-shadow: 0 12px 60px rgba(26, 22, 18, 0.13);
 }
 
@@ -1147,7 +1234,7 @@
     height: 2px;
     background: linear-gradient(90deg, var(--cag-accent), var(--cag-gold));
     opacity: 0;
-    transition: opacity .5s ease;
+    transition: opacity .4s ease;
     z-index: 2;
 }
 
@@ -1159,6 +1246,10 @@
     position: relative;
     background: #000;
     overflow: hidden;
+    /* Prevent iframe flicker during loop transition */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .cag-main .tc-video iframe {
@@ -1523,7 +1614,7 @@
 }
 
 .cag-main .h-input::placeholder {
-    color: rgba(255, 255, 255, 0.575);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .cag-main .h-input:focus {
@@ -1578,7 +1669,7 @@
 }
 
 .cag-main .form-note {
-    font-size: 11px;
+    font-size: 11px !important;
     color: rgba(255, 255, 255, 0.38);
     margin-top: 12px;
     text-align: center;
@@ -1619,6 +1710,14 @@
         font-size: 14px;
         align-self: stretch;
         margin-top: 4px;
+    }
+
+    .bgwhitemobile {
+        background-color: white !important;
+    }
+
+    .bgwhitemobile .nav-item {
+        background-color: white !important;
     }
 }
 
@@ -1820,6 +1919,8 @@
 @media(max-width:991px) {
     .cag-main .form-card {
         margin-top: 3rem;
+        padding: 52px 17px 20px 17px !important;
+
     }
 
     .cag-main .hero-stats {
@@ -1868,25 +1969,28 @@
         bottom: 4px;
         left: 8px;
     }
+
+    .cag-main .eyebrow-glass-live .text {
+        font-size: 16px !important;
+    }
+
 }
 
-
+/* MODAL */
 .cag-modal.modal {
     display: flex !important;
     align-items: center;
     justify-content: center;
 }
 
-
 .cag-modal .modal-dialog {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Remove min-height: 100vh — that's what pushes it down */
     min-height: unset;
-    margin: 1rem auto;          /* equal top/bottom breathing room */
+    margin: 1rem auto;
     max-width: 480px;
-    width: calc(100% - 2rem);   /* proper side margins on mobile */
+    width: calc(100% - 2rem);
 }
 
 .cag-modal .modal-content {
@@ -1897,36 +2001,13 @@
     width: 100%;
 }
 
-/* Scroll INSIDE the modal body, not the page */
 .cag-modal .modal-body {
     padding: 2rem 2.2rem;
-    max-height: calc(100dvh - 6rem); /* leaves ~3rem top & bottom gap */
+    max-height: calc(100dvh - 6rem);
     overflow-y: auto;
     overflow-x: hidden;
     overscroll-behavior: contain;
 }
-
-/* .cag-modal .modal-dialog {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0 auto;
-    max-width: 480px;
-}
-
-.cag-modal .modal-content {
-    border-radius: 14px;
-    border: none;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
-}
-
-.cag-modal .modal-body {
-    padding: 2rem 2.2rem;
-    max-height: none;
-    overflow: visible;
-} */
 
 .cag-modal .modal-body .heading-popup {
     margin-bottom: 1.2rem;
@@ -1947,7 +2028,6 @@
     color: var(--cag-ink, #1a1612);
     font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
-    /* padding: 0.7rem 0.9rem; */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -1991,8 +2071,8 @@
 
 .cag-modal .btn-close {
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 7px;
+    right: 10px;
     z-index: 2;
     opacity: 0.6;
 }
@@ -2010,21 +2090,113 @@
 .cag-main .cag-section {
     scroll-margin-top: 80px;
 }
-@media only screen and (max-width:600px)
-{
 
-.mobilehomebanner{
+.navlinkimage {
+    height: 70px;
+}
 
+.herbobennerconatiner {
+    max-width: 95%;
+}
+
+@media only screen and (max-width:600px) {
+    .mobilehomebanner {
         background: rgba(255, 254, 249, 0.7);
-    max-width: 90% !important;
-    margin: 0 auto !important;
-    padding: 20px;
-    margin-top: 30px !important;
-    border-radius: 10px;
-}
-.navbarmobile
-{
+        max-width: 98% !important;
+        margin: 0 auto !important;
+        padding-top: 20px;
+
+        margin-top: 30px !important;
+        border-radius: 10px;
+    }
+
+    .p20mobilw {
+        padding: 20px !important;
+    }
+
+    .navbarmobile {
         max-width: 100% !important;
-    padding: 0px !important;
+        padding: 0px !important;
+    }
+
+    .cag-main .navbar-collapse {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    .cag-main .cag-hero {
+        /* background: linear-gradient(rgb(203 200 200), rgba(0, 0, 0, 0.241) 60%) !important; */
+         background: url('/images/collegeadmissions/banner2.jpg');
+    }
+
+    .navlinkimage {
+        height: 59px;
+    }
+
+    .cag-main .navbar-collapse.show {
+        max-height: 600px;
+        opacity: 1;
+    }
+
+    .cag-main .navbar-collapse .navbar-nav {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .cag-main .cag-college-card .card-body {
+        padding: 0px 0px 10px 10px !important;
+
+    }
+
+    .cag-modal .modal-body {
+        padding: 26px !important;
+    }
+
+    .cag-main .ft-slogan {
+        margin-left: 0px !important;
+    }
+
+    .herbobennerconatiner {
+        max-width: 100% !important;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .cag-main .eyebrow-glass-live {
+        padding: 10px 3px;
+
+        margin: 10px !important;
+        gap: 5px;
+    }
 }
+
+
+@media (max-width: 991px) {
+    .cag-main .cag-navbar .navbar-collapse {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .cag-main .cag-navbar .navbar-nav {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+
+
+}
+
+@media (max-width: 767px) {
+    .custom-row {
+        display: block !important;
+        --bs-gutter-x: 0 !important;
+        --bs-gutter-y: 0 !important;
+    }
+
+    .cag-main .btn-submit {
+        padding: 1rem 1.7rem !important;
+    }
 }
