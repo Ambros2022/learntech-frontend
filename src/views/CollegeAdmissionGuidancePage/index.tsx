@@ -266,9 +266,9 @@ const CollegeAdmissionGuidancePage = () => {
       {/* ══ NAVBAR ══ */}
       <nav className={`navbar navbar-expand-lg cag-navbar ${navScrolled ? 'scrolled' : ''}`}>
         <div className='container navbarmobile' style={{ maxWidth: '95%' }}>
-          <a className='navbar-brand' href='/college-admission-guidance' onClick={e => { e.preventDefault(); scrollTo('cag-hero') }}>
+          <Link className='navbar-brand' href='/college-admission-guidance' onClick={e => { e.preventDefault(); scrollTo('cag-hero') }}>
             <img src='/images/collegeadmissions/logo.png' alt='LearnTech' style={{ height: 70, marginRight: '0.5rem' }} />
-          </a>
+          </Link>
           <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#cagNavMenu'>
             <span className='navbar-toggler-icon'></span>
           </button>
