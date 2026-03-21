@@ -620,7 +620,7 @@ const CollegeAdmissionGuidancePage = () => {
           <hr className='ft-rule' />
           <div className='ft-columns'>
             <div>
-              <div className='ft-brand mt-5 mt-md-0'>
+              <div className='ft-brand mt-2 mt-md-0'>
                 <a href='#' onClick={e => { e.preventDefault(); scrollTo('cag-hero') }}>
                   <img src="/images/collegeadmissions/logo.png" alt='LearnTech' />
                 </a>
