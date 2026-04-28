@@ -300,7 +300,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                         {/* ✅ Terms & Conditions Checkbox */}
                         <div className="mb-3 form-check">
                           <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
-                          <label className="form-check-label" htmlFor="terms">
+                          <label className="form-check-label terms-label" htmlFor="terms">
                             By clicking submit, I agree to the terms & conditions and privacy policy and give my consent to receive updates through SMS/Email.
                           </label>
                           <ErrorMessage name="terms" component="div" className="error text-danger" />

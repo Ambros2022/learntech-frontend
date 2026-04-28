@@ -6641,3 +6641,13 @@
       min-height: 300px !important;
     }
   }
+
+  .terms-label {
+    font-size: 13px !important;
+  }
+
+  @media (max-width: 768px) {
+    .terms-label {
+      font-size: 11px !important;
+    }
+  }
