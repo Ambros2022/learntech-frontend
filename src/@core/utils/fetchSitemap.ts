@@ -3,9 +3,7 @@
 export async function fetchSitemapXML(type: string, res: any) {
   try {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URI}api/website/xmlgenerator/get?type=${type}`;
-    const response = await fetch(apiUrl, {
-      headers: { "Cache-Control": "no-cache" },
-    });
+    const response = await fetch(apiUrl)
 
     if (!response.ok) {
       throw new Error(`Failed to fetch sitemap [${type}]: ${response.statusText}`);

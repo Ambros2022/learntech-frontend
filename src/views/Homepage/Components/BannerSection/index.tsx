@@ -49,25 +49,25 @@ const validationSchema = Yup.object().shape({
   //       return true;
   //     }
   //   ),
-contact_number: Yup.string()
-  .required("Phone Number is required")
-  .test("is-valid-contact", "Invalid phone number", function (value) {
-    if (!value) return false;
+  contact_number: Yup.string()
+    .required("Phone Number is required")
+    .test("is-valid-contact", "Invalid phone number", function (value) {
+      if (!value) return false;
 
-    for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
-      if (new RegExp(prefixPattern).test(value)) {
-        return regex.test(value);
+      for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
+        if (new RegExp(prefixPattern).test(value)) {
+          return regex.test(value);
+        }
       }
-    }
 
-    return false;
-  }),
+      return false;
+    }),
 
 
   course: Yup.string().required('Course is required'),
   location: Yup.string().required('Location is required'),
   terms: Yup.boolean()
-  .oneOf([true], "You must accept the terms and conditions"),
+    .oneOf([true], "You must accept the terms and conditions"),
 });
 
 const BannerSection = ({ banners }: { banners: any[] }) => {
@@ -300,8 +300,8 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                         {/* ✅ Terms & Conditions Checkbox */}
                         <div className="mb-3 form-check">
                           <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
-                          <label className="form-check-label" htmlFor="terms">
-                            By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
+                          <label className="form-check-label terms-label" htmlFor="terms">
+                            By clicking submit, I agree to the terms & conditions and privacy policy and give my consent to receive updates through SMS/Email.
                           </label>
                           <ErrorMessage name="terms" component="div" className="error text-danger" />
                         </div>
