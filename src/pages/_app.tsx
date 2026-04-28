@@ -132,7 +132,7 @@ const App = (props: ExtendedAppProps) => {
   const guestGuard = Component.guestGuard ?? false;
 
 
-  
+
   return (
     <>
       <CacheProvider value={emotionCache}>
@@ -212,7 +212,7 @@ const App = (props: ExtendedAppProps) => {
           </AuthProvider>
         </SessionProvider>
       </CacheProvider>
-   
+
       <Script
         id="gtm"
         strategy="afterInteractive"
