@@ -4,7 +4,7 @@ module.exports = {
   skipTrailingSlashRedirect: true,
 
   images: {
-    domains: ['localhost', 'api.learntechww.com', 'learntechww.com'],
+    domains: ['localhost', 'api.learntechww.com','newapi.learntechww.com', 'learntechww.com'],
   },
 
   experimental: {
