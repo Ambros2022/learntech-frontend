@@ -142,8 +142,8 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
         <link
           rel="preload"
           as="image"
-          href="https://api.learntechww.com/banners/logo1734425264066.webp"
-          imageSrcSet="https://api.learntechww.com/banners/logo1734425264066.webp 1920w"
+          href={`${process.env.NEXT_PUBLIC_IMG_URL}/banners/logo1734425264066.webp`}
+          imageSrcSet={`${process.env.NEXT_PUBLIC_IMG_URL}/banners/logo1734425264066.webp 1920w`}
           imageSizes="100vw"
         />
       </Head>
