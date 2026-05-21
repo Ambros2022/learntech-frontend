@@ -282,7 +282,7 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
 
 
 
-      <ExpertSection />
+      <ExpertSection collegeName={pagedata?.college?.name} courseName={pagedata?.title} />
 
       {!loading && pagedata && <TopFeaturedColleges data={pagedata} />}
 
