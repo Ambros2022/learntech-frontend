@@ -146,7 +146,7 @@ function InnerCollegePage({ id }) {
           {testdata && testdata.length > 0 && <Testimonial testimonials={testdata} />}
           {!loading && pagedata && <LocationSection data={pagedata} />}
           <TopFeaturedColleges />
-          <ExpertSection />
+          <ExpertSection collegeName={pagedata?.name} />
         </>
       )}
 

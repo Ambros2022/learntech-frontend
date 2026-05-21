@@ -6,6 +6,8 @@ import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid'
 import axios1 from 'src/configs/adminaxios'
+import { Config } from 'src/configs/mainconfig'
+import Cookies from 'js-cookie'
 
 import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 import { Button, Grid, IconButton, MenuItem } from '@mui/material'
@@ -30,30 +32,12 @@ type SortType = 'asc' | 'desc' | undefined | null
 
 const RowOptions = ({ path }: { path: any | string; }) => {
 
-  const handledownloadfile = async () => {
+  const handledownloadfile = () => {
     try {
-      const response = await axios1.get('api/admin/backup/download/' + path, { responseType: 'blob' });
-
-      // Create a Blob object from the response data
-      const blob = new Blob([response.data], { type: 'application/sql' }); // Adjust the type as per your API response
-
-      // Create a temporary URL for the blob
-      const url = window.URL.createObjectURL(blob);
-
-      // Create a temporary anchor element
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'backup.sql'; // Specify the filename for the SQL file
-      document.body.appendChild(a);
-
-      // Programmatically trigger a click event on the anchor element
-      a.click();
-
-      // Cleanup: remove the temporary anchor element and URL object
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-
-      toast.success('SQL file downloaded successfully');
+      const token = Cookies.get('x-access-token');
+      const downloadUrl = `${Config.API_URL}api/admin/backup/download/${path}?token=${token}`;
+      window.open(downloadUrl, '_blank');
+      toast.success('SQL file download initiated');
     } catch (error) {
       console.error(error);
       toast.error('An error occurred while downloading the SQL file. Please try again.');
@@ -261,23 +245,26 @@ const SecondPage = () => {
 
     const handleRequestBackup = async () => {
       try {
-        window.location.reload();
+        setLoading(true);
+        const toastId = toast.loading("Generating backup, please wait...");
         // Make a GET request to your API endpoint
         const response = await axios1.get('api/admin/backup/request');
 
         // Handle the response
         if (response.data.status === 1) {
-          // Request was successful, display a success message or perform any other actions
-          toast.success(response.data.message);
-          setLoading(true);
+          // Request was successful, display a success message
+          toast.success(response.data.message, { id: toastId });
+          fetchTableData(orderby, searchtext, searchfrom, size, page, columnname);
         } else {
-          // Request failed, display an error message or perform error handling
-          toast.error(response.data.message);
+          // Request failed, display an error message
+          toast.error(response.data.message || "Failed to request backup.", { id: toastId });
+          setLoading(false);
         }
       } catch (error) {
         // Handle any errors that occur during the API call
         console.error(error);
         toast.error("An error occurred. Please try again.");
+        setLoading(false);
       }
     };
 
