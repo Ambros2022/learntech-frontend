@@ -69,8 +69,8 @@ function BannerSection({ data }) {
 
             </div>
             <div className="d-flex justify-content-center justify-content-md-end flex-md-row flex-wrap gap-1 gap-md-3 ps-md-0 ps-0">
-              <GlobalEnquiryForm pagename="Brochure" className='align-content-center btn downloadBtn' placeholder="Class" title="Download Brochure" />
-              <GlobalEnquiryForm className='align-content-center btn freeBtn' placeholder="Class" buttonText="Get Fee Structure" />
+              <GlobalEnquiryForm pagename="Brochure" className='align-content-center btn downloadBtn' placeholder="Class" title="Download Brochure" collegeName={data.name} />
+              <GlobalEnquiryForm className='align-content-center btn freeBtn' placeholder="Class" buttonText="Get Fee Structure" collegeName={data.name} />
             </div>
 
           </div>

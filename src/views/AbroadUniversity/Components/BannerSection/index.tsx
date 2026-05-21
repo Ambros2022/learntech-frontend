@@ -61,7 +61,7 @@ function BannerSection({ data }) {
             </div>
 
             <div className="d-flex justify-content-end flex-md-row flex-column gap-3 ps-md-0 ps-0 pt-3  pt-md-0">
-              <GlobalEnquiryForm className='btn-success btn ' buttonText="Talk to Experts" />
+              <GlobalEnquiryForm className='btn-success btn ' buttonText="Talk to Experts" collegeName={data.name} />
             </div>
           </div>
         </div>

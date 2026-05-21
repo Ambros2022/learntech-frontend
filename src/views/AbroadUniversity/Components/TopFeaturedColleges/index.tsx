@@ -48,7 +48,7 @@ function FeaturedCollegeSection({ data }) {
             <span className='card-text'>{college.address}</span>
           </p>
           <div className="d-flex justify-content-between">
-            <GlobalEnquiryForm className="applyNowButton btn" />
+            <GlobalEnquiryForm className="applyNowButton btn" collegeName={college.name} />
             <Link href={`/${data.slug}/${college.id}/${college.slug}`} className="btn">View More</Link>
           </div>
         </div>

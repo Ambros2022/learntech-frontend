@@ -84,7 +84,7 @@ function OverviewSection({ data, colleges, exams }) {
                   <span className='fw-bold'>Duration:</span> <span className='text-black'>{item.duration}</span>
                 </h5>
                 <div className='justify-content-center d-flex gap-3 flex-wrap'>
-                  <GlobalEnquiryForm buttonText={'Apply Now'} className={'btn viewMoreCollegeBtn'} />
+                  <GlobalEnquiryForm buttonText={'Apply Now'} className={'btn viewMoreCollegeBtn'} collegeName={item.name} />
                   <Link className='btn viewDetailBtn' href={`/course/${item.id}/${data.slug}/${item.slug}`}>View Detail</Link>
                 </div>
               </div>
