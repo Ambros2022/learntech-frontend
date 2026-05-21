@@ -146,7 +146,7 @@ function CollegeInfoSection({ data }) {
                       transform: 'translate(-50%, -50%)'
                     }}
                   >
-                    <GlobalPopupEnquiry className='viewMoreCollegeBtn btn-success2' />
+                    <GlobalPopupEnquiry className='viewMoreCollegeBtn btn-success2' collegeName={data.name} />
                   </div>
                 </div>
 

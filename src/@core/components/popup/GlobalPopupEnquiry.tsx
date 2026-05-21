@@ -10,11 +10,12 @@ interface Props {
     pagename?: any;
     buttonText?: any;
     placeholder?: any;
+    collegeName?: any;
 }
 
 
 
-const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, placeholder = '', }) => {
+const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText, placeholder = '', collegeName }) => {
     const [modalShow, setModalShow] = React.useState(false);
     function onChanges() {
 
@@ -27,7 +28,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
                 <div className="modal-content">
                     <div className="searchForm">
                         <h5 className="pb-3 fw-bold text-center text-blue">{props.title}</h5>
-                        <EnquiryForm onChanges={onChanges} page={props.pagename} placeholder={placeholder} />
+                        <EnquiryForm onChanges={onChanges} page={props.pagename} placeholder={placeholder} collegeName={props.collegeName} />
                     </div>
                 </div>
             </Modal>
@@ -76,6 +77,7 @@ const GlobalPopupEnquiry: FC<Props> = ({ className, title, pagename, buttonText,
             <MyVerticallyCenteredModal
                 title={title ? title : 'Let’s build a better future for you'}
                 pagename={pagename ? pagename : 'no'}
+                collegeName={collegeName}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
