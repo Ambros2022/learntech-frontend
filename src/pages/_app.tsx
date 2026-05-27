@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from 'react';
 
 // ** Next Imports
 import Head from 'next/head';
-import { Router, useRouter } from 'next/router';
+import { Router } from 'next/router';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
@@ -60,11 +60,6 @@ import '../../styles/globals.css';
 
 // ** Bootstrap css and js
 import 'bootstrap/dist/css/bootstrap.min.css';
-import dynamic from 'next/dynamic';
-const UserLayout = dynamic(() => import('src/layouts/UserLayout'), {
-  ssr: false,
-  loading: () => <Spinner />,
-});
 
 
 // ** Extend App Props with Emotion
@@ -114,18 +109,8 @@ const App = (props: ExtendedAppProps) => {
   }, []);
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false;
-  const router = useRouter();
 
-  const isAdminRoute = router.pathname.startsWith('/app/dashboard') || router.pathname.startsWith('/admin');
-
-  const getLayout =
-    Component.getLayout ??
-    (page =>
-      isAdminRoute
-        ? <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>
-        : <>{page}</>);
-  // const getLayout =
-  //   Component.getLayout ?? (page => <UserLayout contentHeightFixed={contentHeightFixed}>{page}</UserLayout>);
+  const getLayout = Component.getLayout ?? (page => <>{page}</>);
 
   const setConfig = Component.setConfig ?? undefined;
   const authGuard = Component.authGuard ?? true;
