@@ -262,6 +262,7 @@ const CollegeAdmissionGuidancePage = () => {
       <Head>
         <title>Learntech Edu | College Admission Guidance &amp; Counselling</title>
         <meta name='description' content='Get expert college admission guidance with Learntech Edu Solutions. 1000+ institutions, seat support, and personalised counselling to simplify your journey.' />
+        <meta name="robots" content="index, follow" />
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link rel='stylesheet' href='/css/collegeadmissionguidancelandingpage.css' />
         <link rel='canonical' href='https://learntechww.com/college-admission-guidance' />

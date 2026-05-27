@@ -239,6 +239,7 @@ const BamsPage = () => {
           content='Apply for Chandigarh University (CU) Online MBA 2026–27. Check eligibility, fees, specializations, rankings, placements & admission process. Enquire Now!
 '
         />
+        <meta name="robots" content="index, follow" />
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link rel='stylesheet' href='/css/cumbalandingpage.css' />
         <link rel='canonical' href='https://learntechww.com/cu-online-mba-admission ' />

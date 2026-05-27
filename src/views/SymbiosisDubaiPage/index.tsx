@@ -391,6 +391,7 @@ const SymbiosisDubaiPage = () => {
             <Head>
                 <title>Symbiosis International University Dubai | Admission 2026–27</title>
                 <meta name='description' content='Apply to Symbiosis International University Dubai for world-class UG & PG programs, industry-oriented curriculum, and global career opportunities. Enquire now!' />
+                <meta name="robots" content="index, follow" />
                 <link rel='canonical' href='https://learntechww.com/symbiosis-international-university-dubai' />
                 {/* eslint-disable-next-line @next/next/no-css-tags */}
                 <link rel='stylesheet' href='/css/symbiosisdubailandingpage.css' />
