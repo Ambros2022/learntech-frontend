@@ -51,6 +51,7 @@ const ExpertSec = ({ data }) => {
 
                 {/* Pinterest */}
                 <meta name="pinterest-rich-pin" content="true" />
+                <meta name="robots" content="index, follow" />
             </Head>
 
             <section className="bg-white py-3">

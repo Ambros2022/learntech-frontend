@@ -185,6 +185,7 @@ const BamsPage = () => {
           content=' Know all about the BAMS Counselling 2025-26 Process in India & Karnataka: BAMS Counselling Schedule, Required Documents, Top BAMS Colleges, and More. Apply Now!
 '
         />
+        <meta name="robots" content="index, follow" />
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link rel='stylesheet' href='/css/bamslandingpage.css' />
         <link rel='canonical' href='https://learntechww.com/bams-counselling-process' />
