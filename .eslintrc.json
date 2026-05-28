@@ -38,6 +38,9 @@
     ]
   },
   "settings": {
+    "next": {
+      "rootDir": "."
+    },
     "import/parsers": {
       "@typescript-eslint/parser": [
         ".ts",
