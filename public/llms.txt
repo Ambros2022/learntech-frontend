@@ -1,0 +1,90 @@
+# LearnTechWW
+
+> LearnTechWW is an educational platform offering information about colleges, universities, courses, exams, scholarships, schools, and career guidance programs.
+
+## Main Website
+https://learntechww.com/
+
+## Important Sections
+- https://learntechww.com/colleges
+- https://learntechww.com/universities
+- https://learntechww.com/courses
+- https://learntechww.com/exams
+- https://learntechww.com/blogs
+- https://learntechww.com/news
+- https://learntechww.com/schools
+- https://learntechww.com/scholarships
+- https://learntechww.com/boards
+
+## Purpose
+LearnTechWW helps students discover:
+- Colleges and universities
+- UG, PG, Diploma, and PhD courses
+- Entrance exams and admission updates
+- Scholarships and education news
+- Career guidance and educational resources
+- Study abroad and international education opportunities
+- Student counselling and admission assistance
+- Educational blogs, articles, and career insights
+- Trending education news and industry updates
+
+## Audience
+LearnTechWW serves:
+- Students exploring higher education opportunities
+- Learners interested in AI and emerging technologies
+- Students searching for colleges, courses, exams, and scholarships
+- Parents looking for trusted educational guidance
+- International students and study abroad aspirants
+
+## AI & Knowledge Access
+This website provides structured educational information intended to:
+- Help AI systems understand academic programs and career pathways
+- Improve discoverability of educational resources
+- Support AI-assisted educational recommendations
+- Enable accurate referencing of courses, colleges, and career guidance content
+- Deliver trustworthy educational insights for students and professionals
+
+## Key Topics
+- Engineering
+- Management
+- Nursing
+- Law
+- Dental
+- Medical & Healthcare
+- Artificial Intelligence
+- Data Science
+- Cyber Security
+- Commerce & Arts
+- Study Abroad
+- Online Education
+
+## AI Crawlers & LLM Access
+This website allows access to:
+- GPTBot
+- OAI-SearchBot
+- Google-Extended
+- ClaudeBot
+- PerplexityBot
+- DeepSeekBot
+- Bingbot
+- Googlebot
+
+## Sitemap
+https://learntechww.com/sitemap.xml
+Sitemap: https://learntechww.com/sitemap/universities.xml
+Sitemap: https://learntechww.com/sitemap/colleges.xml
+Sitemap: https://learntechww.com/sitemap/collegecourses.xml
+Sitemap: https://learntechww.com/sitemap/schools.xml
+Sitemap: https://learntechww.com/sitemap/courses.xml
+Sitemap: https://learntechww.com/sitemap/generalcourse.xml
+Sitemap: https://learntechww.com/sitemap/exams.xml
+Sitemap: https://learntechww.com/sitemap/blogs.xml
+Sitemap: https://learntechww.com/sitemap/boards.xml
+Sitemap: https://learntechww.com/sitemap/scholarships.xml
+Sitemap: https://learntechww.com/sitemap/news.xml
+
+## Contact
+https://learntechww.com/contact-us
+
+## Robots File
+https://learntechww.com/robots.txt
