@@ -299,6 +299,18 @@ export const getAbroadCountryPage = cache(async (country: string) => {
 })
 
 // ─────────────────────────────────────────────────────────────────────────────
+// CMS PAGES (privacy-policy, disclaimer, terms, etc.)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getPageData = cache(async (slug: string) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/pagefindone/get/${slug}`,
+    { tags: [`page-${slug}`] },
+  )
+  return json?.data ?? null
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
 // SITEMAP (bypasses cache — always fresh XML)
 // ─────────────────────────────────────────────────────────────────────────────
 

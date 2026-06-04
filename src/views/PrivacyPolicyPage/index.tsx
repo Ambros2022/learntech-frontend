@@ -41,29 +41,15 @@ const PrivacyPolicypage = () => {
         <script type="application/ld+json">
 
           {JSON.stringify([
-
-
-
-
             {
-
               "@context": "https://schema.org/",
-
               "@type": "BreadcrumbList",
-
               "itemListElement": [
-
                 {
-
                   "@type": "ListItem",
-
                   "position": 1,
-
                   "name": "Home",
-
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
-
-
 
                 },
 
