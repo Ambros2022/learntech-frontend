@@ -182,31 +182,31 @@ const Header = () => {
           <div className='row'>
             <div className='col-md-3 d-flex align-items-center socialIcon'>
               <a href='https://www.facebook.com/learntechedu' target='_blank'>
-                <Image className='mx-2' width={26} height={22} src='/images/icons/Facebook.svg' alt='facebook-img' />
+                <Image className='mx-2' width={26} height={26} style={{ height: 'auto' }} src='/images/icons/Facebook.svg' alt='facebook-img' />
               </a>
               <a href='https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/' target='_blank'>
-                <Image className='me-2' width={26} height={22} alt='linked-in-img' src='/images/icons/linked-in.svg' />
+                <Image className='me-2' width={26} height={26} style={{ height: 'auto' }} alt='linked-in-img' src='/images/icons/linked-in.svg' />
               </a>
               <a href='https://twitter.com/learntechww' target='_blank'>
-                <Image className='me-2' src='/images/icons/twitter-x.png' width={26} height={22} alt='twitter-img' />
+                <Image className='me-2' src='/images/icons/twitter-x.png' width={26} height={26} style={{ height: 'auto' }} alt='twitter-img' />
               </a>
               <a href='https://www.instagram.com/learntechedus' target='_blank'>
-                <Image className='me-2' src='/images/icons/instagram.svg' width={26} height={22} alt='instagram-img' />
+                <Image className='me-2' src='/images/icons/instagram.svg' width={26} height={26} style={{ height: 'auto' }} alt='instagram-img' />
               </a>
               <a href='https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w' target='_blank'>
-                <Image className='me-2' src='/images/icons/youtube.svg' width={26} height={22} alt='youtube-img' />
+                <Image className='me-2' src='/images/icons/youtube.svg' width={26} height={26} style={{ height: 'auto' }} alt='youtube-img' />
               </a>
             </div>
             <div className='col-md-9 d-flex align-items-center justify-content-end socialText'>
               <div>
                 <span className='telHover'>
-                  <Image className='m-0' src='/images/icons/Phone-blue.svg' width={26} height={22} alt='phone-icon' />
+                  <Image className='m-0' src='/images/icons/Phone-blue.svg' width={26} height={26} style={{ height: 'auto' }} alt='phone-icon' />
                   <a href='tel:18001208696' target='_blank' className='mx-2 ' style={{ color: '#274896' }}>
                     1800 120 8696
                   </a>
                 </span>
                 <span className='mailHover'>
-                  <Image className='ms-2' src='/images/icons/email-icon.svg' width={26} height={22} alt='email-icon' />
+                  <Image className='ms-2' src='/images/icons/email-icon.svg' width={26} height={26} style={{ height: 'auto' }} alt='email-icon' />
 
                   <a href='mailto:info@learntechww.com' className='mx-2' style={{ color: '#274896' }}>
                     info@learntechww.com

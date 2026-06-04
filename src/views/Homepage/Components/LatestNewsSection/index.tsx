@@ -100,26 +100,24 @@ function LatestNewsSection() {
     const carouselItems = useMemo(() => {
         return formattedItems.map((item) => (
             <div className="col-12 mb-1" style={{ margin: '0px 5px' }} key={item.id}>
-                <Link href={`/${activeTab}/${item.id}/${item.slug}`}>
-                    <div className="newsBlosCards">
-                        <div className="mb-5 mx-lg-3 mx-0">
-                            <div className="card h-100 hover-card responsive-card">
-                                <div className="card-body newsheight">
-                                    <h5 className="card-title fw-bold text-blue text-truncate">{item.name}</h5>
-                                    <h6 className="card-subtitle py-2 mb-2 text-body-secondary">{item.formattedDate}</h6>
-                                    <div className="row mb-3">
-                                        <div className="col-xl-8">
-                                            <p className="card-text">{item.meta_description}</p>
-                                        </div>
+                <div className="newsBlosCards">
+                    <div className="mb-5 mx-lg-3 mx-0">
+                        <div className="card h-100 hover-card responsive-card">
+                            <div className="card-body newsheight">
+                                <h5 className="card-title fw-bold text-blue text-truncate">{item.name}</h5>
+                                <h6 className="card-subtitle py-2 mb-2 text-body-secondary">{item.formattedDate}</h6>
+                                <div className="row mb-3">
+                                    <div className="col-xl-8">
+                                        <p className="card-text">{item.meta_description}</p>
                                     </div>
-                                    <Link href={`/${activeTab}/${item.id}/${item.slug}`} className="btn viewDetailBtn">
-                                        Read More
-                                    </Link>
                                 </div>
+                                <Link href={`/${activeTab}/${item.id}/${item.slug}`} className="btn viewDetailBtn">
+                                    Read More
+                                </Link>
                             </div>
                         </div>
                     </div>
-                </Link>
+                </div>
             </div>
         ));
     }, [formattedItems, activeTab]);

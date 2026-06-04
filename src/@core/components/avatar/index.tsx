@@ -4,7 +4,6 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'src/hooks/useCompatRouter';
 
 // ---------- Styled Components ----------
@@ -76,10 +75,9 @@ const AvatarDropdown: React.FC<AvatarDropdownProps> = ({ openModal }) => {
 }, []);
 
 // -----
-  const handleLogout = async () => {
+  const handleLogout = () => {
     localStorage.removeItem('UserData');
     setUserData(null);
-    await signOut({ redirect: false });
     router.push('/');
   };
 

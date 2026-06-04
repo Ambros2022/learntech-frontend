@@ -2,7 +2,6 @@
 
 import { ReactNode, Suspense } from 'react'
 import 'src/iconify-bundle/icons-bundle-react'
-import { SessionProvider } from 'next-auth/react'
 import { AuthProvider } from 'src/context/AuthContext'
 import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsContext'
 import ThemeComponent from 'src/@core/theme/ThemeComponent'
@@ -13,23 +12,21 @@ import BootstrapClient from './BootstrapClient'
 export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
     <EmotionRegistry>
-      <SessionProvider>
-        <Suspense fallback={null}>
-          <AuthProvider>
-            <SettingsProvider>
-              <SettingsConsumer>
-                {({ settings }) => (
-                  <ThemeComponent settings={settings}>
-                    <NProgressBar />
-                    <BootstrapClient />
-                    {children}
-                  </ThemeComponent>
-                )}
-              </SettingsConsumer>
-            </SettingsProvider>
-          </AuthProvider>
-        </Suspense>
-      </SessionProvider>
+      <Suspense fallback={null}>
+        <AuthProvider>
+          <SettingsProvider>
+            <SettingsConsumer>
+              {({ settings }) => (
+                <ThemeComponent settings={settings}>
+                  <NProgressBar />
+                  <BootstrapClient />
+                  {children}
+                </ThemeComponent>
+              )}
+            </SettingsConsumer>
+          </SettingsProvider>
+        </AuthProvider>
+      </Suspense>
     </EmotionRegistry>
   )
 }
