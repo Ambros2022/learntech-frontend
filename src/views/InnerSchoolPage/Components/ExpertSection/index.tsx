@@ -1,3 +1,4 @@
+﻿'use client'
 import dynamic from 'next/dynamic';
 import React from 'react';
 const ExpertEnquiryForm = dynamic(() => import('src/@core/components/popup/ExpertEnquiryFormSchool'), { ssr: false });

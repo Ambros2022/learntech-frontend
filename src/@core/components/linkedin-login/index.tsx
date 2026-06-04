@@ -1,3 +1,4 @@
+﻿'use client'
 // components/LinkedInLoginButton.tsx
 
 import React from 'react';

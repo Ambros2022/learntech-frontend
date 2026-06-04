@@ -1,10 +1,11 @@
+﻿'use client'
 
 import React, { useCallback, useEffect, useState } from 'react';
 import BannerSec from './Components/BannerSec'
 import BlogCards from './Components/BlogCards'
 import axios from 'src/configs/axios';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 

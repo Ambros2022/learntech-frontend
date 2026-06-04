@@ -1,8 +1,9 @@
+﻿'use client'
 // ** React Imports
 import { useEffect, Fragment } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 // ** MUI Imports
 import Chip from '@mui/material/Chip'

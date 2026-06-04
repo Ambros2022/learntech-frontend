@@ -1,6 +1,7 @@
+﻿'use client'
 import BannerSec from "./Components/BannerSec";
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 const Error404Page = () => {
   const router = useRouter()
   return (

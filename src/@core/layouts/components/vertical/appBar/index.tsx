@@ -1,3 +1,4 @@
+﻿'use client'
 // ** MUI Imports
 import { styled, Theme } from '@mui/material/styles'
 import MuiAppBar, { AppBarProps } from '@mui/material/AppBar'

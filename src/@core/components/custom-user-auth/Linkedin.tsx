@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react';
 
 // import { useLinkedIn } from 'react-linkedin-login-oauth2';

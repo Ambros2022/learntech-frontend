@@ -1,9 +1,10 @@
+﻿'use client'
 // ** React Imports
 import { ElementType } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 // ** MUI Imports
 import Chip from '@mui/material/Chip'

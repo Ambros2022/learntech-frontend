@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,9 +9,10 @@ import axios1 from 'src/configs/axios';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import Rating from 'react-rating-stars-component';
-import router from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 function DetailsFillSec() {
+  const router = useRouter()
   const [colleges, setColleges] = useState([]);
   const [schools, setSchools] = useState([]);
   const [boards, setBoards] = useState([]);

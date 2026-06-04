@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { format } from 'date-fns';
 import axios1 from 'src/configs/axios';

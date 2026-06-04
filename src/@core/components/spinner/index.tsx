@@ -1,3 +1,4 @@
+﻿'use client'
 // ** MUI Imports
 import Box, { BoxProps } from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'

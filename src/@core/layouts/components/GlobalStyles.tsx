@@ -1,3 +1,4 @@
+﻿'use client'
 import type { FC } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core';
 

@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import NewsList from '../newsList'
 import Link from 'next/link'

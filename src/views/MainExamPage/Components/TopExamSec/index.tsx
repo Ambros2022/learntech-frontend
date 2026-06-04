@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useState } from 'react';
 
 const TopExamSec = ({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) => {

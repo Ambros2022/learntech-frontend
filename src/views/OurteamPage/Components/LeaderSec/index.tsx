@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';

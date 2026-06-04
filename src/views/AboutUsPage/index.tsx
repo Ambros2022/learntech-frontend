@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import BannerSec from './Components/BannerSec'
 import Overview from './Components/Overview'
@@ -9,7 +10,7 @@ const OurPortalSec = dynamic(() => import("./Components/OurPortalsSec"), { ssr: 
 // import OurPortalSec from './Components/OurPortalsSec'
 // import ContactUsSec from './Components/ContactUsSec'
 const ContactUsSec = dynamic(() => import("./Components/ContactUsSec"), { ssr: false });
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head'

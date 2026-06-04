@@ -1,9 +1,10 @@
+﻿'use client'
 // ** React Imports
 import { ElementType, Fragment } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'

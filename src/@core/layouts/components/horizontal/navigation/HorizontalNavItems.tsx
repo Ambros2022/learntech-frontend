@@ -1,3 +1,4 @@
+﻿'use client'
 // ** Types
 import { NavLink, NavGroup, HorizontalNavItemsType } from 'src/@core/layouts/types'
 

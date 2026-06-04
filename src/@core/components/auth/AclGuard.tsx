@@ -1,8 +1,9 @@
+﻿'use client'
 // ** React Imports
 import { ReactNode, useEffect } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 // ** Types
 import type { ACLObj, AppAbility } from 'src/configs/acl'
@@ -14,7 +15,7 @@ import { AbilityContext } from 'src/layouts/components/acl/Can'
 import { buildAbilityFor } from 'src/configs/acl'
 
 // ** Component Import
-import NotAuthorized from 'src/pages/401'
+import NotAuthorized from 'src/views/Error401Page'
 import Spinner from 'src/@core/components/spinner'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 

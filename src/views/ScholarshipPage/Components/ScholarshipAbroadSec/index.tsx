@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react';
 import ContactForm from 'src/@core/components/popup/ContactForm';
 import axios1 from 'src/configs/axios';

@@ -1,3 +1,4 @@
+﻿'use client'
 import dynamic from 'next/dynamic';
 import React, { useCallback, useEffect, useState } from 'react'
 import MainCarousel from 'src/@core/components/main-carousel'

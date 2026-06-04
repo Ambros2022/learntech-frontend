@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 
 import Image from 'next/image'
@@ -9,7 +9,7 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import Modal from 'react-bootstrap/Modal'
 import useEmblaCarousel from "embla-carousel-react";
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 import dynamic from 'next/dynamic';
 import { Field, Form, Formik, ErrorMessage } from 'formik'
 import { toast } from 'react-hot-toast'

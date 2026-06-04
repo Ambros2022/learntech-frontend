@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import axios1 from 'src/configs/axios'
 import Link from 'next/link';

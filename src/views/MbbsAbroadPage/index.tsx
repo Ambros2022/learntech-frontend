@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import BannerSec from './Components/BannerSec'
 import MedicalSec from './Components/MedicalSec'
@@ -7,7 +8,7 @@ import ImportantSec from './Components/ImportantSec'
 import ExpertSec from './Components/ExpertSec'
 import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 import Head from 'next/head'
 
 const MbbsAbroadPage = () => {

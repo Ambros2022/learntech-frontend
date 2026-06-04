@@ -1,3 +1,4 @@
+﻿'use client'
 // CarouselComponent.jsx
 
 import React from 'react';

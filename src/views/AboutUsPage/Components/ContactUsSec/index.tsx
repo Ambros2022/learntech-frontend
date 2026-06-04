@@ -1,8 +1,9 @@
+﻿'use client'
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import axios from 'src/configs/axios';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';

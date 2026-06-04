@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react'
 import Carousel3 from 'src/@core/components/carousel3'
 import Link from 'next/link';

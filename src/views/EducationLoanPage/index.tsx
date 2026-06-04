@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import BannerSec from './Components/BannerSec'
 import AboutSec from './Components/AboutSec'
@@ -11,7 +12,7 @@ const DetailSec = dynamic(() => import('./Components/DetailSec'), { ssr: false, 
 const StepSection = dynamic(() => import('./Components/StepsSection'), { ssr: false, });
 const BankSec = dynamic(() => import('./Components/BankSec'), { ssr: false, });
 const FaqSec = dynamic(() => import('./Components/FaqSec'), { ssr: false, });
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head'

@@ -1,8 +1,9 @@
+﻿'use client'
 // ** React Imports
 import { useState, useEffect, ReactNode } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 interface Props {
   children: ReactNode

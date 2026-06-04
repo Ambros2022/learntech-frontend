@@ -1,3 +1,4 @@
+﻿'use client'
 import { Toaster } from 'react-hot-toast';
 import ReactHotToast from 'src/@core/styles/libs/react-hot-toast';
 

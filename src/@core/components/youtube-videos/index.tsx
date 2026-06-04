@@ -1,3 +1,4 @@
+﻿'use client'
 const YoutubeVideo = ({ videoId }) => {
     return (
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', background: '#000' }}>

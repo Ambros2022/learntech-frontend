@@ -1,3 +1,4 @@
+﻿'use client'
 // import React, { useEffect, useRef, ChangeEvent } from 'react';
 // import intlTelInput from 'intl-tel-input';
 // import 'intl-tel-input/build/css/intlTelInput.css';

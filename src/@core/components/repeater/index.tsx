@@ -1,3 +1,4 @@
+﻿'use client'
 // ** Types
 import { RepeaterProps } from './types'
 

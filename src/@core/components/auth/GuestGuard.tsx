@@ -1,8 +1,9 @@
+﻿'use client'
 // ** React Imports
 import { ReactNode, ReactElement, useEffect } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 
 interface GuestGuardProps {
@@ -24,7 +25,7 @@ const GuestGuard = (props: GuestGuardProps) => {
       router.replace('/')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.route])
+  }, [router.pathname])
 
 
   return <>{children}</>

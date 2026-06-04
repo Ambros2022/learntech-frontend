@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,7 +26,7 @@ const Sushrutha = '/images/bams/Sushrutha.webp'
 const Yenepoya = '/images/bams/Yenepoya.webp'
 const contactbanner = '/images/bams/contactbanner.webp'
 // import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 import { Field, Form, Formik } from 'formik'
 // ErrorMessage,

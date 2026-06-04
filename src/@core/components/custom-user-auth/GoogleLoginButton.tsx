@@ -1,7 +1,8 @@
+﻿'use client'
 import React, { useEffect } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 import axios1 from 'src/configs/axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 const GoogleLoginButton = () => {
   const { data: session, status } = useSession();

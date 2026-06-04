@@ -1,3 +1,4 @@
+﻿'use client'
 // components/TwitterLoginButton.tsx
 
 import React from 'react';

@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -6,7 +7,7 @@ import 'react-phone-input-2/lib/style.css';
 import toast from 'react-hot-toast'
 import Link from 'next/link';
 import axios1 from 'src/configs/axios'
-import router from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 interface FormValues {
   name: string;
@@ -18,6 +19,7 @@ interface FormValues {
 }
 
 const SignupForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
+  const router = useRouter()
   const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const phoneRegExp = /^(91\d{10}|(?!91)\d{3,})$/;
 

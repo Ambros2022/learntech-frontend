@@ -1,7 +1,8 @@
+﻿'use client'
 import Image from "next/image";
 import dynamic from 'next/dynamic'; 
 import { useEffect, useRef } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "src/hooks/useCompatRouter";
 const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false });
 const SignInForm = dynamic(() => import('src/@core/components/custom-user-auth/SignInForm'), { ssr: false });
 

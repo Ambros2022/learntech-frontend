@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Carousel from 'react-multi-carousel';

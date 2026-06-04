@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect } from "react";
 import dynamic from 'next/dynamic';
 import AOS from 'aos';
@@ -35,18 +36,17 @@ const Work: React.FC<WorkProps> = ({ banners }) => {
   return (
     <>
       <Head>
-        <meta
-          name='description'
-          content='Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad.'
-        />
-        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}`} />
+        <title>Study in India | Study Abroad | Learntech Edu Solutions</title>
+        <meta name="description" content="Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}/`} />
         <script type="application/ld+json">
           {JSON.stringify(
             {
               "@context": "https://schema.org/",
               "@type": "Person",
               "name": "Mansoor Ali",
-              "url": "",
+              "url": `${process.env.NEXT_PUBLIC_WEB_URL}/about-us`,
               "image": "https://learntechww.com/_next/image/?url=%2Fimages%2Ficons%2FMansoorAli.jpeg&w=640&q=75",
               "jobTitle": "Founder, Chairman and Managing Director",
               "worksFor": {
@@ -63,7 +63,7 @@ const Work: React.FC<WorkProps> = ({ banners }) => {
               "@type": "LocalBusiness",
               "name": "Learntech Edu Solutions Pvt. Ltd.",
               "image": "https://learntechww.com/_next/image/?url=%2Fimages%2Ficons%2Flearntech-logo.png&w=256&q=75",
-              "@id": "",
+              "@id": "https://learntechww.com/#organization",
               "url": "https://learntechww.com/",
               "telephone": "1800 120 8696",
               "address": {

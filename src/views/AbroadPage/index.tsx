@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react';
 import Head from 'next/head';
 import BannerSec from './Components/BannerSec'
@@ -6,7 +7,7 @@ import TopUniversity from './Components/TopUniversity'
 import FaqSec from './Components/FaqSec'
 import OrganizationSection from './Components/OrganizationalSec';
 import ExperTraineeSec from './Components/ExpertTrainneSec';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 function AbroadPage({ data }) {
   const router = useRouter();
 

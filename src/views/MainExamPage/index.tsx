@@ -1,3 +1,4 @@
+﻿'use client'
 import BannerSection from './Components/BannerSec'
 import TopExamSec from './Components/TopExamSec'
 // import BrowsebyCategorySec from './Components/BrowseByCategorySec'
@@ -5,7 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import axios1 from 'src/configs/axios'
 import dynamic from 'next/dynamic';
 const BrowsebyCategorySec = dynamic(() => import('./Components/BrowseByCategorySec'), { ssr: false, });

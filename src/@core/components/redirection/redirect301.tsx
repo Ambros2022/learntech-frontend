@@ -1,8 +1,9 @@
+﻿'use client'
 // ** React Imports
 import {  useEffect } from 'react'
 import axios from '../../../configs/axios'
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 const Redirect301 = ({ children }) => {
 

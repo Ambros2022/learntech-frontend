@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from 'next/link';

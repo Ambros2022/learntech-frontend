@@ -1,3 +1,4 @@
+﻿'use client'
 // ** Next Import
 import Link from 'next/link'
 

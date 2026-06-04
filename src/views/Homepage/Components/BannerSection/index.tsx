@@ -1,3 +1,4 @@
+﻿'use client'
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -5,7 +6,7 @@ import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import axios1 from 'axios';
 import ClearIcon from '@mui/icons-material/Clear';
 import Link from 'next/link';
@@ -122,7 +123,6 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
         streamSlug: entry?.streams?.slug,
         type: item.type,
       })));
-      console.log(suggestions, "suggestions");
       setSearchResults(suggestions);
       setOpen(true);
     } catch (error) {
@@ -138,15 +138,17 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
 
   return (
     <>
-      <Head>
-        <link
-          rel="preload"
-          as="image"
-          href={`${process.env.NEXT_PUBLIC_IMG_URL}/banners/logo1734425264066.webp`}
-          imageSrcSet={`${process.env.NEXT_PUBLIC_IMG_URL}/banners/logo1734425264066.webp 1920w`}
-          imageSizes="100vw"
-        />
-      </Head>
+      {banners?.[0]?.image && (
+        <Head>
+          <link
+            rel="preload"
+            as="image"
+            href={`${process.env.NEXT_PUBLIC_IMG_URL}/${banners[0].image}`}
+            imageSrcSet={`${process.env.NEXT_PUBLIC_IMG_URL}/${banners[0].image} 1920w`}
+            imageSizes="100vw"
+          />
+        </Head>
+      )}
 
       <section className="bannerCon bg-formClr" >
 
@@ -161,7 +163,7 @@ const BannerSection = ({ banners }: { banners: any[] }) => {
                 >
                   <Image
                     src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                    alt={`Banner ${index}`}
+                    alt={banner.alt || `Learntech education banner ${index + 1}`}
                     fill
                     priority={index === 0}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"

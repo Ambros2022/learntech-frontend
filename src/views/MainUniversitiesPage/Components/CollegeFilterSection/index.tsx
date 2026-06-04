@@ -1,7 +1,8 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import debounce from 'lodash.debounce';// Import debounce function from lodash library
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import axios1 from 'src/configs/axios'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';

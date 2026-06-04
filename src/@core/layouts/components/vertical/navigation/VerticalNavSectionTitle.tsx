@@ -1,3 +1,4 @@
+﻿'use client'
 // ** MUI Imports
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'

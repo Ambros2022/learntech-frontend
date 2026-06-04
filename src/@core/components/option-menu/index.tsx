@@ -1,3 +1,4 @@
+﻿'use client'
 // ** React Imports
 import { MouseEvent, useState, ReactNode } from 'react'
 

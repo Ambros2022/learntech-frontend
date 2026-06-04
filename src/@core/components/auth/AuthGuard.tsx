@@ -1,8 +1,9 @@
+﻿'use client'
 // ** React Imports
 import { ReactNode, ReactElement, useEffect } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 import authConfig from 'src/configs/auth'
 
 // ** Hooks Import
@@ -36,10 +37,7 @@ const AuthGuard = (props: AuthGuardProps) => {
 
       if (!storedToken  && router.route !== "/404") {
         if (router.asPath !== '/') {
-          router.replace({
-            pathname: '/admin/login',
-            query: { returnUrl: router.asPath }
-          })
+          router.replace(`/admin/login?returnUrl=${encodeURIComponent(router.asPath)}`)
         } else {
           router.replace('/admin/login')
         }

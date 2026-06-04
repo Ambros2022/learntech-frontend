@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react';
 import TALKExpertForm from 'src/@core/components/popup/TalkExpertEnqiirySchool';
 

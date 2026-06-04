@@ -1,9 +1,10 @@
+﻿'use client'
 import React, { FC } from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { toast } from 'react-hot-toast'
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 import Link from 'next/link';
 interface Props {
