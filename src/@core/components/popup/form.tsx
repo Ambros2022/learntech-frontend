@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { saveAs } from 'file-saver';
 import axios from 'src/configs/axios';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useRouter } from 'src/hooks/useCompatRouter';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 import Link from 'next/link';

@@ -12,7 +12,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useRouter } from 'src/hooks/useCompatRouter'
 import dynamic from 'next/dynamic';
 import { Field, Form, Formik, ErrorMessage } from 'formik'
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import axios from 'src/configs/axios'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'

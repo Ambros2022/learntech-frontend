@@ -1,107 +1,955 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+# Mission
 
-## Commands
+Build and maintain production-grade web platforms that prioritize:
 
-```bash
-npm run dev          # Start development server (Next.js on port 3000)
-npm run build        # Production build
-npm run start        # Start production server
-npm run lint         # ESLint with auto-fix across src/
-npm run format       # Prettier format across src/
-npm run analyze      # Bundle analysis (sets ANALYZE=true)
-```
+* SEO
+* Performance
+* Crawlability
+* Accessibility
+* Scalability
+* Security
+* Maintainability
 
-There are no automated tests in this project.
+Supported project types:
 
-## Architecture Overview
+* Lead Generation Websites
+* Education Portals
+* College/University Listing Platforms
+* Blogs
+* News Portals
+* Dynamic CMS Websites
+* Directory Platforms
 
-This is the **public-facing frontend** for Learntech Edu Solutions (learntechww.com) — an education consultancy for study-in-India and study-abroad. The admin panel was split into a separate `learntech-admin` repo; this repo contains only public pages.
+---
 
-### Page & Layout Pattern
+# Approved Stack
 
-Every page in `src/pages/` follows this pattern:
+Frontend
+
+* Next.js 16 App Router
+* React 18
+* TypeScript
+
+Backend
+
+* Node.js
+* Express.js
+* MySQL
+
+Deployment
+
+* Vercel / VPS / Coolify
+* DigitalOcean
+
+CDN
+
+* Cloudflare Free
+* Bunny Free Tier (if approved)
+
+---
+
+# Non-Negotiable Targets
+
+SEO
+
+* 100% crawlable
+* 100% indexable
+* Canonical correct
+* Zero duplicate URLs
+* Programmatic SEO ready
+
+Performance
+
+* Lighthouse ≥ 95
+* LCP < 2.0s
+* INP < 200ms
+* CLS < 0.1
+* TTFB < 300ms
+
+Accessibility
+
+* Proper heading hierarchy
+* Keyboard accessible
+* Alt text for images
+
+---
+
+# Core Engineering Rules
+
+1. Server First
+2. SEO First
+3. Performance First
+4. Simplicity Over Complexity
+5. Delete Before Adding
+6. Native Before Dependency
+7. Measure Before Optimizing
+
+---
+
+# Next.js Architecture Rules
+
+Default:
+
+* Server Components
+
+Use Client Components only when necessary.
+
+Allowed Client Components:
+
+* Forms
+* Filters
+* Search
+* Modals
+* Tabs
+* Sliders
+* Interactive Widgets
+
+Forbidden:
 
 ```tsx
-Page.getLayout = (page: ReactNode) => <FrontLayout>{page}</FrontLayout>
-Page.guestGuard = true   // all public pages use guestGuard
+"use client"
 ```
 
-`FrontLayout` (`src/@core/layouts/FrontLayout.tsx`) wraps content with the shared `<Header>` and `<Footer>`.
+at page level unless absolutely required.
 
-Pages themselves are thin shells — they read the route slug, pass it as a prop to a **view component**, and declare the layout. All UI and data-fetching logic lives in `src/views/<PageName>/`.
+---
 
-### View Component Pattern
+# Rendering Strategy
 
-Views in `src/views/` follow a consistent structure:
-- The view's `index.tsx` fetches data client-side via `useEffect`/`useCallback` using the axios instance from `src/configs/axios.ts`
-- Data is passed as `data` props into sub-components under `Components/`
-- SEO meta tags (`<title>`, `<meta>`, JSON-LD schema) are set inside the view's `<Head>` block using API-returned fields (`meta_title`, `meta_description`, `meta_keyword`)
-- On fetch error, pages redirect to `/404` via `router.push("/404")`
+## Static Content
 
-### API & Data Fetching
+Tag-based revalidation (preferred for ISR):
 
-- **`src/configs/axios.ts`** — public API client; `baseURL` is `NEXT_PUBLIC_API_URI`
-- **`src/configs/adminaxios.ts`** — admin API client (used by AuthContext for login/me endpoints)
-- All data fetching is **client-side** (no `getServerSideProps` / `getStaticProps`). This means SEO meta tags are rendered after JS loads, not server-side.
-- API base: `https://newapi.learntechww.com/`
-
-### Authentication
-
-`src/context/AuthContext.tsx` provides auth state globally. Auth token is stored as a cookie under the key `x-access-token` (set in `src/configs/auth.ts`). On init, the context hits `auth/me` to rehydrate the user.
-
-The `Guard` component in `_app.tsx` wraps every page:
-- `guestGuard: true` → renders via `GuestGuard` (no redirect for unauthenticated users — used by all public pages)
-- `authGuard: true` (default) → renders via `AuthGuard` (redirects to `/login` if unauthenticated)
-
-### Middleware
-
-`src/middleware.ts` runs on every non-asset request and does two things:
-1. **URL redirects** — fetches redirect rules from `${NEXT_PUBLIC_API_URI}redirecturls` and caches them in-memory for 24 hours (Map for O(1) lookups)
-2. **Trailing slash normalization** — strips trailing slashes with a 301 redirect
-
-### `src/@core/` Directory
-
-This is the UI framework layer (derived from a MUI admin template). It provides:
-- **Theme** (`src/@core/theme/`) — MUI theme with overrides, `ThemeComponent` wraps the app
-- **Layouts** — `FrontLayout`, `BlankLayout`, `VerticalLayout`, `HorizontalLayout`
-- **Reusable components** — carousels, auth forms, custom MUI wrappers under `src/@core/components/`
-- **Settings context** — `src/@core/context/settingsContext` manages theme mode/direction; `themeConfig.ts` sets defaults
-
-### Dynamic Routes
-
-Slug-based pages (e.g., `/university/[...slug]`, `/college/[...slug]`) extract `slug[0]` as the entity ID and pass it to the view. The slug array can contain an ID and a human-readable slug segment; only index 0 (the ID) is used for API calls.
-
-## Environment Variables
-
-```
-NEXT_PUBLIC_API_URI       # Backend API base URL (trailing slash required)
-NEXT_PUBLIC_IMG_URL       # CDN/image base URL
-NEXT_PUBLIC_WEB_URL       # Public site URL (used for canonical tags and schema)
-NEXTAUTH_SECRET           # NextAuth secret
-
+```ts
+const res = await fetch(API_URL, {
+  next: {
+    revalidate: 3600,
+    tags: ["entity-slug"]
+  }
+})
 ```
 
-Local development: uncomment the `# Local` block in `.env` to point at `localhost:5000`.
+Trigger on-demand revalidation via:
 
-## TypeScript & Linting Notes
+```ts
+revalidateTag("entity-slug")
+```
 
-- `noImplicitAny` is disabled; `@typescript-eslint/no-explicit-any` is off — `any` types are used freely throughout
-- Most strict TypeScript rules are turned off; only `unused-imports` warnings are enforced
-- Icon components (e.g., `FiChevronLeft` from react-icons) must be cast as `React.ElementType` when passed as props to MUI components
-- Path alias `src/` maps to the `src/` directory (set via `baseUrl: "."` in tsconfig)
+Examples:
 
+* Blogs
+* News
+* Course Pages
+* College Pages
+* University Pages
 
+Rendering:
 
-Priority	Action	Page(s)
-P0	Migrate dynamic page data to getServerSideProps	All inner pages (news, college, course, exam)
-P1	Replace <h6> with <p> in news list sidebar	newsList/index.tsx
-P1	Add OG + Twitter Card meta tags	All 4 inner page templates
-P1	Add NewsArticle schema to news pages	InnerNewsPage/index.tsx
-P1	Fix LCP: add priority to banner image	BannerSec/index.tsx
-P2	Add global fallback meta description + robots to _app.tsx	_app.tsx
-P2	Fix generic alt text on news images	newsList, BannerSec
-P2	Remove console.log from production	InnerNewsPage/index.tsx:24-27
-P3	Fix < meta space typo	DisclaimerPage, EducationLoanPage
-P3	Fix WebSite SearchAction schema	_app.tsx
+* SSG
+* ISR
+
+---
+
+## Real-Time Content
+
+```tsx
+fetch(url, {
+  cache: "no-store"
+})
+```
+
+Use only when necessary.
+
+---
+
+# Data Fetching Rules
+
+Always prefer:
+
+```ts
+const res = await fetch(API_URL, {
+  next: {
+    tags: ["entity-slug"]
+  }
+})
+```
+
+Avoid:
+
+```ts
+axios
+```
+
+inside Server Components.
+
+Never fetch SEO content in:
+
+```tsx
+useEffect()
+```
+
+---
+
+# Metadata Rules
+
+Every indexable page must include:
+
+* Title
+* Description
+* Canonical
+* Open Graph
+* Twitter Tags
+
+Use:
+
+```tsx
+generateMetadata()
+```
+
+Never use:
+
+```tsx
+next/head
+```
+
+in App Router.
+
+---
+
+# SEO Rules
+
+If Google should rank it:
+
+Render it on the server.
+
+Examples:
+
+* H1
+* H2
+* Content
+* Listings
+* Internal Links
+
+Never load ranking content via JavaScript.
+
+---
+
+# Structured Data Rules
+
+Use JSON-LD only.
+
+Supported:
+
+* Organization
+* Article
+* NewsArticle
+* FAQPage
+* Course
+* BreadcrumbList
+
+Rules:
+
+* Must match visible content
+* Must be server rendered
+* No fabricated data
+
+---
+
+# URL Rules
+
+Allowed:
+
+```text
+/college/123/aiims-delhi
+/course/mba
+/blog/seo-guide
+```
+
+Avoid:
+
+```text
+?page=1
+?id=123
+&type=blog
+```
+
+for primary content URLs.
+
+---
+
+# Internal Linking Rules
+
+All important links must exist in HTML.
+
+Examples:
+
+* Colleges
+* Courses
+* Universities
+* Blogs
+* Categories
+
+Avoid JS-generated navigation.
+
+---
+
+# Sitemap Rules
+
+Mandatory
+
+* Sitemap Index
+* Split Sitemaps
+* Max 50,000 URLs per sitemap
+
+Examples
+
+* sitemap-colleges.xml
+* sitemap-courses.xml
+* sitemap-blogs.xml
+* sitemap-news.xml
+
+---
+
+# Crawl Budget Rules
+
+Avoid
+
+* Infinite filters
+* Crawl traps
+* Duplicate routes
+* Query parameter URLs
+
+Prefer:
+
+* Clean URLs
+* Canonicals
+* Controlled pagination
+
+---
+
+# Image Rules
+
+Mandatory:
+
+```tsx
+next/image
+```
+
+Requirements:
+
+* width
+* height
+* sizes
+* lazy loading
+
+Avoid:
+
+```html
+<img />
+```
+
+unless absolutely necessary.
+
+---
+
+# CSS Load Order Rules
+
+In `src/app/layout.tsx` (root layout), imports must be in this exact order:
+
+```ts
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../../styles/globals.css'   // must be last — overrides Bootstrap variables
+```
+
+Rules:
+* `globals.css` always last so `:root` overrides (e.g. `--bs-body-font-family`) win over Bootstrap defaults
+* Never import Bootstrap CSS in nested layouts — only root layout
+* Poppins font applied via `--bs-body-font-family` CSS variable override in `globals.css`
+
+---
+
+# Font Rules
+
+Use:
+
+```tsx
+next/font
+```
+
+Requirements:
+
+* Self-hosted
+* font-display: swap
+
+Avoid:
+
+* Google font CDN requests
+
+---
+
+# Component Architecture
+
+Good
+
+Page (Server)
+├── Hero (Server)
+├── Content (Server)
+├── Listings (Server)
+├── Links (Server)
+└── Form (Client)
+
+Bad
+
+Page (Client)
+├── Fetch
+├── SEO Content
+├── Metadata
+└── Listings
+
+---
+
+# Lazy Loading Rules
+
+Lazy Load:
+
+* Testimonials
+* Sliders
+* Counters
+* Videos
+* Maps
+
+Do NOT Lazy Load:
+
+* Hero
+* H1
+* Content
+* Internal Links
+
+---
+
+# Dependency Governance Rules
+
+## Core Principle
+
+Every dependency adds:
+
+* JavaScript
+* Build time
+* Security risk
+* Maintenance cost
+* Technical debt
+
+Default answer:
+
+NO
+
+Dependency must justify its existence.
+
+---
+
+# Package Selection Hierarchy
+
+1. Native Browser APIs
+2. Next.js Features
+3. React Features
+4. Small Libraries
+5. Large Libraries
+
+---
+
+# Preferred Libraries
+
+Forms
+
+* react-hook-form
+* zod
+
+Validation
+
+* zod
+
+Carousel
+
+* embla-carousel
+
+Icons
+
+* lucide-react
+
+State
+
+* React Context
+
+Fetch
+
+* native fetch
+
+Animation
+
+* CSS
+* Framer Motion (only when required)
+
+Charts
+
+* Recharts
+
+Date
+
+* date-fns
+
+Notifications
+
+* sonner — always named import: `import { toast } from 'sonner'` (no default export)
+
+Images
+
+* next/image
+
+Fonts
+
+* next/font
+
+---
+
+# Avoid Heavy Libraries
+
+Avoid:
+
+* formik
+* yup
+* axios
+* moment
+* react-multi-carousel
+* react-spring
+* aos
+* swiper
+* slick-carousel
+* bootstrap javascript
+* large icon packs
+
+Use lighter alternatives whenever possible.
+
+---
+
+# Bundle Budget Rules
+
+Landing Pages
+
+* Target < 80KB
+
+Content Pages
+
+* Target < 50KB
+
+General Pages
+
+* Target < 100KB
+
+Warnings
+
+* > 150KB
+
+Failure
+
+* > 200KB
+
+---
+
+# Package Approval Checklist
+
+Before installing:
+
+* Can native APIs solve it?
+* Can React solve it?
+* Can Next.js solve it?
+* Is it SSR compatible?
+* Is it App Router compatible?
+* Is it tree-shakeable?
+* Is it actively maintained?
+
+If unclear:
+
+DO NOT INSTALL.
+
+---
+
+# Package Elimination Rule
+
+Whenever touching code:
+
+Evaluate:
+
+* Can dependency be removed?
+* Can native code replace it?
+* Can lighter library replace it?
+
+Goal:
+
+Reduce dependencies continuously.
+
+---
+
+# Backend Rules
+
+Use:
+
+* REST APIs
+* Typed responses
+* Validation on all inputs
+
+Avoid:
+
+* Over-fetching
+* Under-fetching
+
+---
+
+# Database Rules
+
+Mandatory indexes:
+
+* slug
+* status
+* foreign keys
+
+Avoid:
+
+```sql
+SELECT *
+```
+
+Avoid:
+
+* N+1 queries
+
+Use:
+
+* explicit columns
+* pagination
+* explain plans
+
+---
+
+# Caching Rules
+
+Priority
+
+1. CDN
+2. Next.js Cache
+3. ISR
+4. Revalidation Tags
+
+Preferred:
+
+```ts
+fetch(url, {
+  next: {
+    tags: ["entity"]
+  }
+})
+```
+
+---
+
+# Security Rules
+
+Mandatory:
+
+* Input Validation
+* SQL Injection Protection
+* Rate Limiting
+* CSP Headers
+* Secure Cookies
+* Secret Isolation
+
+Never expose:
+
+* Tokens
+* API Keys
+* Secrets
+
+---
+
+# Core Web Vitals Enforcement
+
+Build fails if:
+
+* LCP regresses
+* CLS regresses
+* INP regresses
+
+Performance monitoring required.
+
+---
+
+# AI Agent Rules
+
+Always:
+
+* Prefer Server Components
+* Prefer SEO-safe implementations
+* Prefer lower bundle size
+* Prefer deletion over abstraction
+
+Never:
+
+* Introduce hidden logic
+* Introduce SEO regressions
+* Introduce crawl traps
+* Introduce unnecessary dependencies
+
+---
+
+# Debug Checklist
+
+Disable JavaScript.
+
+Verify:
+
+* Content visible
+* Headings visible
+* Links visible
+* Metadata present
+
+If content disappears:
+
+Fix architecture.
+
+---
+
+# Pre-Merge Checklist
+
+[ ] Metadata exists
+[ ] Canonical exists
+[ ] JSON-LD exists
+[ ] Lighthouse > 95
+[ ] No hydration errors
+[ ] No console errors
+[ ] No duplicate URLs
+[ ] No unnecessary client components
+[ ] No SEO content rendered client-side
+[ ] Bundle size within budget
+[ ] Dependency review completed
+
+---
+
+# Final Law
+
+If a feature harms:
+
+* SEO
+* UI/UX
+* Performance
+* Crawlability
+* Accessibility
+* Core Web Vitals
+
+IT DOES NOT SHIP.
+
+---
+
+# Reference Architecture (from kerlastudy-Frontend)
+
+These patterns are proven in kerlastudy-Frontend and must be adopted here.
+
+---
+
+## ClientWrappers Pattern
+
+All heavy client components must be lazy-loaded from a single `ClientWrappers.tsx`:
+
+```tsx
+// src/components/ClientWrappers.tsx
+"use client";
+import dynamic from "next/dynamic";
+
+export const LazyEnquiryForm = dynamic(
+  () => import("@/components/EnquiryForm"),
+  { ssr: false, loading: () => <FormSkeleton /> }
+);
+
+export const LazyEmblaCarousel = dynamic(
+  () => import("@/components/Embla/EmblaCarousel"),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> }
+);
+```
+
+Rules:
+* All forms: `ssr: false`
+* All carousels/sliders: `ssr: false`
+* All modals/popups: `ssr: false`
+* Every wrapper must have a skeleton `loading` fallback to prevent CLS
+* Server components import from `ClientWrappers` — not directly
+
+---
+
+## ClientProviders Pattern
+
+Single `"use client"` boundary for all providers (`src/app/components/ClientProviders.tsx`):
+
+```tsx
+'use client'
+export default function ClientProviders({ children }: { children: ReactNode }) {
+  return (
+    <EmotionRegistry>       {/* MUI SSR — keep while any MUI component remains */}
+      <AuthProvider>
+        <NProgressBar />    {/* route transition bar — showSpinner: false */}
+        <BootstrapClient /> {/* Bootstrap JS init */}
+        {children}
+      </AuthProvider>
+    </EmotionRegistry>
+  )
+}
+```
+
+Rules:
+* Root layout imports only `ClientProviders` — never individual providers
+* `NProgressBar` must call `NProgress.configure({ showSpinner: false })` at module level to prevent the "N" spinner rendering
+* Remove `EmotionRegistry` only after all MUI components are eliminated
+
+---
+
+## AnimateOnScroll Pattern
+
+No AOS, no Framer Motion for scroll animations. Use the native `IntersectionObserver`:
+
+```tsx
+// src/components/AnimateOnScroll.tsx — "use client"
+// Variants: fade-up | fade-down | fade-left | fade-right | zoom-in | fade
+// Uses IntersectionObserver + inline styles, zero CSS dependency
+```
+
+Rules:
+* `once: true` by default — animate once, then done
+* `willChange: "opacity, transform"` for GPU compositing
+* Check `getBoundingClientRect` on mount to skip animation if already visible
+
+---
+
+## JsonLd Pattern
+
+XSS-safe JSON-LD serializer — never use raw `JSON.stringify`:
+
+```tsx
+// src/components/JsonLd.tsx — Server Component (no "use client")
+function serializeJsonLd(schema) {
+  return JSON.stringify(schema)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/ /g, "\\u2028")
+    .replace(/ /g, "\\u2029");
+}
+
+export default function JsonLd({ schema, id }) {
+  return (
+    <script
+      id={id}
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
+    />
+  );
+}
+```
+
+---
+
+## FetchClient Pattern
+
+Replace axios with a native `fetch`-based client (`src/utils/fetch.ts`):
+
+```ts
+// Axios-compatible interface over native fetch
+// Supports: interceptors, params, FormData, AbortError
+// baseURL from process.env.API_URL || NEXT_PUBLIC_API_URL
+const api = new FetchClient({ baseURL: process.env.API_URL });
+export default api;
+```
+
+Rules:
+* Use in Client Components and API routes only
+* Server Components use `fetch()` directly with `next.tags`
+* Never import axios
+
+---
+
+## SafeRouter Pattern
+
+```ts
+// src/utils/safeRouter.ts — "use client"
+export function useSafeRouter() {
+  try {
+    const router = useRouter();
+    return { push: (url) => router.push(url), isAvailable: true };
+  } catch {
+    return { push: (url) => (window.location.href = url), isAvailable: false };
+  }
+}
+```
+
+Use instead of `useRouter()` directly in any component that may render outside an App Router context.
+
+---
+
+## Nav Data Server Pattern
+
+All navigation data (states, courses, exams, countries, news) must be fetched server-side in `src/app/(main)/layout.tsx` and passed as props to Header. Zero client-side axios/useEffect calls for nav.
+
+```tsx
+// src/app/(main)/layout.tsx
+export default async function MainLayout({ children }) {
+  const [states, courses, exams, countries, news] = await Promise.all([
+    getStates(), getNavCourses(), getNavExams(), getNavCountries(), getNavNews(),
+  ])
+  return (
+    <>
+      <Header states={states} courses={courses} exams={exams} countries={countries} news={news} />
+      <main>{children}</main>
+      <Footer />
+    </>
+  )
+}
+```
+
+Each fetch uses `next: { tags: ['nav-states'] }` etc. for tag-based revalidation.
+
+---
+
+## Dropdown State Pattern
+
+Never use a single shared boolean for multiple dropdown items. Use a discriminated union:
+
+```tsx
+type DropdownKey = 'universities' | 'colleges' | 'courses' | 'exams' | 'abroad' | 'news'
+const [activeDropdown, setActiveDropdown] = useState<DropdownKey | null>(null)
+```
+
+A shared `isDropdownOpen: boolean` causes all menus to open simultaneously on hover.
+
+---
+
+## ApplyNowInjector Pattern
+
+CMS content may contain `<strong>Apply_Now</strong>` placeholders. Replace them with interactive buttons via `MutationObserver` in a single `"use client"` component (`src/app/components/ApplyNowInjector.tsx`).
+
+Rules:
+* Only one instance of `ApplyNowInjector` in the tree (inside `FooterActions`)
+* Iterate the live HTMLCollection **backwards** to avoid index shifting: `for (let i = elements.length - 1; i >= 0; i--)`
+* Use `{ childList: true, subtree: true }` on the observer
+
+---
+
+## Breadcrumb Pattern
+
+```tsx
+// src/components/Breadcrumb.tsx — Server Component, memo'd
+// Props: items: { label: string; href?: string }[]
+// Last item: no link, aria-current="page"
+// Icon: lucide-react ChevronRight (not a CSS pseudo-element)
+export const Breadcrumb = memo(({ items }) => { ... });
+```
+
+Always pair with `BreadcrumbList` JSON-LD structured data on the same page.

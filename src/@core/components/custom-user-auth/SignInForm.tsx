@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import axios1 from 'src/configs/axios';
 import { useRouter } from 'src/hooks/useCompatRouter';
 import ForgotPasswordForm from './ForgotPasswordForm';

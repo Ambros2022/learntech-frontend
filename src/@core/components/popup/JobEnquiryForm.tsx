@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 
 

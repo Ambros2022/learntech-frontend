@@ -3,7 +3,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useRouter } from 'src/hooks/useCompatRouter';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';

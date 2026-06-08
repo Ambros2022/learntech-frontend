@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useRouter } from 'src/hooks/useCompatRouter';
 import axios1 from 'axios';
 import ClearIcon from '@mui/icons-material/Clear';

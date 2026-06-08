@@ -4,6 +4,12 @@
     --bs-body-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   }
 
+  /* NProgress bar — override default red with brand blue */
+  #nprogress .bar {
+    background: #274896 !important;
+    height: 3px !important;
+  }
+
   html,
   body {
     min-height: 100%;

@@ -314,6 +314,54 @@ export const getPageData = cache(async (slug: string) => {
 // SITEMAP (bypasses cache — always fresh XML)
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ─────────────────────────────────────────────────────────────────────────────
+// NAVIGATION (header dropdowns — fetched server-side in (main)/layout.tsx)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getStates = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/states/get?page=1&size=500&country_id=204`,
+    { tags: ['nav-states'] },
+  )
+  return json?.data ?? []
+})
+
+export const getNavCourses = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/stream/get?page=1&size=100&orderby=asc&columnname=listing_order`,
+    { tags: ['nav-courses'] },
+  )
+  return json?.data ?? []
+})
+
+export const getNavExams = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/stream_exams/get?page=1&size=100`,
+    { tags: ['nav-exams'] },
+  )
+  return json?.data ?? []
+})
+
+export const getNavCountries = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/abroadpages/get?page=1&size=15`,
+    { tags: ['nav-countries'] },
+  )
+  return json?.data ?? []
+})
+
+export const getNavNews = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/news/get?page=1&size=4&country_id=204&columnname=created_at&orderby=desc`,
+    { tags: ['news'] },
+  )
+  return json?.data ?? []
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SITEMAP (bypasses cache — always fresh XML)
+// ─────────────────────────────────────────────────────────────────────────────
+
 export async function getSitemapXml(type: string): Promise<string | null> {
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), 30000)

@@ -3,9 +3,13 @@
 import { useEffect, Suspense } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+// Hide the spinner — we only want the thin bar at the top, not the rotating icon.
+NProgress.configure({ showSpinner: false })
 
 function NProgressInner() {
-  const pathname = usePathname()
+  const pathname     = usePathname()
   const searchParams = useSearchParams()
 
   useEffect(() => {

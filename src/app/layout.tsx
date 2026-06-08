@@ -2,7 +2,7 @@ import Script from 'next/script'
 import ClientProviders from './components/ClientProviders'
 import poppins from 'src/fonts'
 
-import 'react-perfect-scrollbar/dist/css/styles.css'
+// Load order matters: Bootstrap first, globals.css last so our overrides always win. 
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../styles/globals.css'
@@ -99,8 +99,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://newapi.learntechww.com" />
         <link rel="dns-prefetch" href="https://newapi.learntechww.com" />
 
-        {/* LCP hint for above-the-fold logo */}
-        <link rel="preload" as="image" href="/images/icons/Learntech160.webp" />
+        {/* LCP hint — must match the exact src used in Header/index.tsx */}
+        <link rel="preload" as="image" href="/images/Learntech160.webp" />
 
         {/* Structured data */}
         <script

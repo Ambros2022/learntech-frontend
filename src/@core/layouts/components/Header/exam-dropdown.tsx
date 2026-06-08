@@ -1,123 +1,108 @@
-﻿'use client'
+'use client'
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import React from "react";
-import { useAuth } from "src/hooks/useAuth";
+import { memo, useCallback, useEffect, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { useAuth } from 'src/hooks/useAuth'
 
-const DropdownMenu = React.memo(({ states, type, onClose }: any) => {
-  const [visibleStates, setVisibleStates] = useState(10);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+interface ExamStream { id: number; slug: string; exam_title: string }
+interface ExamItem   { id: number; name: string; examstr: { id: number; examstreams: ExamStream }[] }
 
+interface Props {
+  states:  ExamItem[]
+  type?:   string
+  onClose: () => void
+}
+
+const PAGE = 10
+
+const ExamDropdown = memo(function ExamDropdown({ states, onClose }: Props) {
+  const { setStreamId } = useAuth()
+  const [visible,     setVisible]     = useState(PAGE)
+  const [expanded,    setExpanded]    = useState(false)
+  const [openSubmenu, setOpenSubmenu] = useState<number | null>(null)
+  const [isMobile,    setIsMobile]    = useState(false)
+
+  // matchMedia fires only on breakpoint crossing — cheaper than resize listener.
   useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
+  const showMore = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation()
+    setVisible(prev => Math.min(prev + 5, states.length))
+    setExpanded(true)
+  }, [states.length])
 
-  const handleViewMore = (event: any) => {
-    event.stopPropagation();
-    setVisibleStates((prev) => Math.min(prev + 5, states.length));
-    setIsExpanded(true);
-  };
+  const showLess = useCallback(() => { setVisible(PAGE); setExpanded(false) }, [])
 
-  const handleShowLess = () => {
-    setVisibleStates(10);
-    setIsExpanded(false);
-  };
+  const toggleSubmenu = useCallback((e: React.MouseEvent, id: number) => {
+    e.preventDefault(); e.stopPropagation()
+    setOpenSubmenu(prev => (prev === id ? null : id))
+  }, [])
 
-  const toggleDropdownMobile = (event: any, id: number) => {
-    if (!isMobile) return; 
-    event.preventDefault();
-    event.stopPropagation();
-    setOpenDropdown((prev) => (prev === id ? null : id));
-  };
-
-  const { setStreamId } = useAuth();
+  if (!states.length) return null
 
   return (
-    <>
-      {states.length > 0 && (
-        <ul className="dropdown-menu menu-icon state-dropdwon-width">
-          <div className="text-center">
-            <p style={{ fontWeight: "bold", color: "#274896" }}>{type} by location</p>
+    <ul className='dropdown-menu menu-icon state-dropdwon-width'>
+      <div className='text-center'>
+        <p style={{ fontWeight: 'bold', color: '#274896' }}>Exams by Stream</p>
+      </div>
+
+      {states.slice(0, visible).map(item => (
+        <li key={item.id} className='position-relative'>
+          <div className='d-flex justify-content-between align-items-center'>
+            <Link
+              href='/exams'
+              className='dropdown-item'
+              onClick={() => { setStreamId(item.id); onClose() }}
+            >
+              {item.name}
+            </Link>
+
+            {item.examstr?.length > 0 && (
+              <Image
+                className={`ms-auto${isMobile && openSubmenu === item.id ? ' rotate-90' : ''}`}
+                src='/images/icons/right arrow.svg'
+                width={20}
+                height={25}
+                alt=''
+                aria-hidden='true'
+                onClick={isMobile ? e => toggleSubmenu(e, item.id) : undefined}
+                style={{ cursor: isMobile ? 'pointer' : 'default' }}
+              />
+            )}
           </div>
-          {states.slice(0, visibleStates).map((item) => (
-            <li key={item.id} className="position-relative">
-              <div className="d-flex justify-content-between align-items-center">
-                <Link
-                  href={{
-                    pathname: "/exams",
-                  }}
-                  className="dropdown-item"
-                  onClick={() => {
-                    setStreamId(item.id);
-                    onClose();
-                  }}
-                >
-                  {item.name}
-                </Link>
 
-              
-                {item?.examstr.length > 0 && (
-  <Image
-    className={`ms-auto ${isMobile && openDropdown === item.id ? "rotate-90" : ""}`}
-    src="/images/icons/right arrow.svg"
-    width={20}
-    height={25}
-    alt="arrow-img"
-    onClick={isMobile ? (event) => toggleDropdownMobile(event, item.id) : undefined} 
-    style={{ cursor: isMobile ? "pointer" : "default" }} 
-  />
-)}
-              </div>
+          {item.examstr?.length > 0 && (!isMobile || openSubmenu === item.id) && (
+            <ul className='dropdown-menu dropdown-submenu menu-icon'>
+              {item.examstr.map(entry => (
+                <li key={entry.examstreams?.id}>
+                  <Link
+                    href={`/exam/${entry.examstreams?.id}/${entry.examstreams?.slug}`}
+                    className='dropdown-item'
+                    onClick={() => { setStreamId(entry.id); onClose() }}
+                  >
+                    {entry.examstreams?.exam_title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
 
-              {item?.examstr.length  > 0 && (!isMobile || openDropdown === item.id) && (
-                <ul className="dropdown-menu dropdown-submenu menu-icon ">
-                  {item?.examstr.map((city) => (
-                    <li key={city?.examstreams?.id}>
-                      <Link
-                        className="dropdown-item "
-                        href={`/exam/${city?.examstreams?.id}/${city?.examstreams?.slug}`}
-                        onClick={() => {
-                            setStreamId(city.id);
-                          onClose();
-                        }}
-                      >
-                         {city?.examstreams?.exam_title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                
-              )}
-            </li>
-          ))}
-          <div className="text-center text-blue dropdownBtn">
-                                {visibleStates < states.length && (
-                          <button className="btn" onClick={handleViewMore}>
-                              View More
-                          </button>
-                      )}
-                      {isExpanded && (
-                          <button className="btn" onClick={handleShowLess}>
-                              Show Less
-                          </button>
-                      )}
-                  </div>
-        </ul>
-      )}
-    </>
-  );
-});
+      <div className='text-center text-blue dropdownBtn'>
+        {visible < states.length && <button className='btn' onClick={showMore}>View More</button>}
+        {expanded                && <button className='btn' onClick={showLess}>Show Less</button>}
+      </div>
+    </ul>
+  )
+})
 
-export default DropdownMenu;
-
-
+ExamDropdown.displayName = 'ExamDropdown'
+export default ExamDropdown

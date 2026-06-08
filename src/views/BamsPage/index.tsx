@@ -30,7 +30,7 @@ import { useRouter } from 'src/hooks/useCompatRouter'
 
 import { Field, Form, Formik } from 'formik'
 // ErrorMessage,
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import axios from 'src/configs/axios'
 
 const whatsappc = '/images/bams/whatsappc.gif'
