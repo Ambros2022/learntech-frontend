@@ -82,6 +82,34 @@ export const LazyPhoneInputField = dynamic(
   { ssr: false, loading: () => <PhoneInputSkeleton /> },
 )
 
+const FormSkeleton = () => (
+  <div style={{ minHeight: 320, background: '#f0f0f0', borderRadius: 4 }} />
+)
+
+export const LazySignupForm = dynamic(
+  () => import('src/@core/components/custom-user-auth/SignUpFrom'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazySignInForm = dynamic(
+  () => import('src/@core/components/custom-user-auth/SignInForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyConditionalModal = dynamic(
+  () => import('src/@core/layouts/components/Header/ConditionalModal'),
+  { ssr: false },
+)
+
+const AvatarSkeleton = () => (
+  <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#e0e0e0', margin: '0 8px' }} />
+)
+
+export const LazyAvatarDropdown = dynamic(
+  () => import('src/@core/components/avatar'),
+  { ssr: false, loading: () => <AvatarSkeleton /> },
+)
+
 // ─────────────────────────────────────────────────────────────────────────────
 // GLOBAL POPUPS / FORMS
 // ─────────────────────────────────────────────────────────────────────────────

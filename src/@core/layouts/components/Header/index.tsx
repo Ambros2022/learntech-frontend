@@ -11,10 +11,7 @@ const Coursedropdown = dynamic(() => import('./course-dropdown'), { ssr: false }
 const Examdropdown = dynamic(() => import('./exam-dropdown'), { ssr: false })
 const Abroaddropdown = dynamic(() => import('./abroad-dropdown'), { ssr: false })
 
-import {LazyGlobalEnquiryForm} from 'src/app/components/ClientWrappers' ;
-
-const ConditionalModal = dynamic(() => import('./ConditionalModal'), { ssr: false })
-const AvatarDropdown = dynamic(() => import('src/@core/components/avatar'), { ssr: false })
+import { LazyGlobalEnquiryForm, LazyConditionalModal as ConditionalModal, LazyAvatarDropdown as AvatarDropdown } from 'src/app/components/ClientWrappers'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface NavState { id: number; name: string; city?: any[] }

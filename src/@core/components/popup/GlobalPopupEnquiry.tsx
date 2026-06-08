@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import EnquiryForm from 'src/@core/components/popup/form'
 import Image from 'next/image'
+import styles from './GlobalPopupEnquiry.module.css'
 
 interface Props {
   className?: string
@@ -26,7 +27,7 @@ export default function GlobalPopupEnquiry({
 
   const trigger =
     pagename === 'Brochure' ? (
-      <a onClick={() => setModalShow(true)} className="DownloadBrchrBtn" style={{ cursor: 'pointer' }}>
+      <a onClick={() => setModalShow(true)} className={styles.downloadBrchrBtn} style={{ cursor: 'pointer' }}>
         <Image
           src="/images/icons/DownloadBrochure.webp"
           alt="Download Brochure Icon"
@@ -36,7 +37,7 @@ export default function GlobalPopupEnquiry({
         />
       </a>
     ) : (
-      <a onClick={() => setModalShow(true)} className={className || 'active btn'} style={{ cursor: 'pointer' }}>
+      <a onClick={() => setModalShow(true)} className={`${className || 'active btn'} ${styles.counsellingBtn}`} style={{ cursor: 'pointer' }}>
         {buttonText || 'Apply Now'}
       </a>
     )
@@ -52,7 +53,7 @@ export default function GlobalPopupEnquiry({
         centered
       >
         <div className="modal-content">
-          <div className="searchForm">
+          <div className={styles.searchForm}>
             <h5 className="pb-3 fw-bold text-center text-blue">{modalTitle}</h5>
             <EnquiryForm
               onChanges={() => setModalShow(false)}

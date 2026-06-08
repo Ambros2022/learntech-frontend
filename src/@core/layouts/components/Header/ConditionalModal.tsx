@@ -1,12 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-
-const SignupForm = dynamic(() => import('src/@core/components/custom-user-auth/SignUpFrom'), { ssr: false })
-const SignInForm = dynamic(() => import('src/@core/components/custom-user-auth/SignInForm'), { ssr: false })
+import { LazySignupForm as SignupForm, LazySignInForm as SignInForm } from 'src/app/components/ClientWrappers'
+import styles from './ConditionalModal.module.css'
 
 interface Props {
     showModal: boolean
@@ -42,23 +40,23 @@ export default function ConditionalModal({ showModal, closeModal }: Props) {
 
     return (
         <div
-            className='modal fadeModal show'
+            className={`modal ${styles.fadeModal} show`}
             id='exampleModal'
             aria-labelledby='exampleModalLabel'
             aria-modal='true'
             role='dialog'
             style={{ display: 'block' }}
         >
-            <div className='modal-dialog position-relative modal-dialog-centered modal-lg modal-md w-sm-form'>
+            <div className={`modal-dialog position-relative modal-dialog-centered modal-lg modal-md ${styles.wSmForm}`}>
                 <div className='modal-content' ref={modalRef}>
                     <h4 className='z-3 position-absolute text-white'>Please Sign In to write a review</h4>
                     <div className='row gx-0'>
-                        <div className='col-md-6 formImgCon d-none d-md-flex justify-content-center formImage px-0 mx-0 py-5'>
+                        <div className={`col-md-6 ${styles.formImgCon} ${styles.formImage} d-none d-md-flex justify-content-center px-0 mx-0 py-5`}>
                             <div className='align-content-center'>
                                 <Image src='/images/icons/form-img.png' width={300} height={200} alt='Sign in illustration' />
                             </div>
                         </div>
-                        <div className='col-md-6 signForm'>
+                        <div className={`col-md-6 ${styles.signForm}`}>
                             <div className='text-end pt-3 pe-3'>
                                 <button type='button' className='btn-close' aria-label='Close' onClick={closeModal} />
                             </div>

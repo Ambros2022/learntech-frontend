@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 import { useRouter } from 'src/hooks/useCompatRouter'
 import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
 import Link from 'next/link'
+import styles from './EnquiryForm.module.css'
 
 const PHONE_RULES: [RegExp, RegExp][] = [
   [/^\+91-/, /^\+91-\d{10}$/],
@@ -167,7 +168,7 @@ export default function EnquiryForm({ page, onChanges, placeholder, collegeName 
         {errors.terms && <div className="error text-danger">{errors.terms.message}</div>}
       </div>
       <div className="d-grid">
-        <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">
+        <button type="submit" className={`btn btn-xl btn-block ${styles.submitBtn}`}>
           {page === 'Brochure' ? 'Download Brochure' : 'Submit'}
         </button>
       </div>
