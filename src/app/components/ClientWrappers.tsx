@@ -107,7 +107,7 @@ const AvatarSkeleton = () => (
 
 export const LazyAvatarDropdown = dynamic(
   () => import('src/@core/components/avatar'),
-  { ssr: false, loading: () => <AvatarSkeleton /> },
+  { loading: () => <AvatarSkeleton /> },
 )
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -116,13 +116,12 @@ export const LazyAvatarDropdown = dynamic(
 
 export const LazyGlobalEnquiryForm = dynamic(
   () => import('src/@core/components/popup/GlobalPopupEnquiry'),
-  { ssr: false, loading: () => <button className='btn counsellingBtn'>Loading...</button> },
+  { loading: () => <button className='btn counsellingBtn'>Get Counselling</button> },
 )
 
 export const LazyGlobalEnquiryFormBrochure = dynamic(
   () => import('src/@core/components/popup/GlobalPopupEnquiry'),
   {
-    ssr: false,
     loading: () => (
       <a className='DownloadBrchrBtn' style={{ cursor: 'pointer' }}>
         <img
