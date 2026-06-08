@@ -1,193 +1,176 @@
-﻿'use client'
-import React, { FC } from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import { saveAs } from 'file-saver';
-import axios from 'src/configs/axios';
-import { toast } from 'sonner';
-import { useRouter } from 'src/hooks/useCompatRouter';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import Link from 'next/link';
+'use client'
+import { useMemo } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { toast } from 'sonner'
+import { useRouter } from 'src/hooks/useCompatRouter'
+import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
+import Link from 'next/link'
 
-interface Props {
-    page?: any;
-    onChanges?: any;
-    placeholder?: string;
-    collegeName?: string;
+const PHONE_RULES: [RegExp, RegExp][] = [
+  [/^\+91-/, /^\+91-\d{10}$/],
+  [/^\+966-/, /^\+966-\d{9}$/],
+  [/^\+971-/, /^\+971-\d{9}$/],
+  [/^\+974-/, /^\+974-\d{8}$/],
+  [/^\+968-/, /^\+968-\d{8}$/],
+  [/^\+965-/, /^\+965-\d{8}$/],
+  [/^\+973-/, /^\+973-\d{8}$/],
+  [/^\+977-/, /^\+977-\d{10}$/],
+]
+
+const isValidPhone = (val: string) => {
+  const rule = PHONE_RULES.find(([prefix]) => prefix.test(val))
+  return rule ? rule[1].test(val) : false
 }
 
-const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, collegeName }) => {
-    const router = useRouter();
-    const phoneRules: Record<string, RegExp> = {
-    "^\\+91-": /^\+91-\d{10}$/,  // India → 10 digits
-    "^\\+966-": /^\+966-\d{9}$/, // Saudi Arabia → 9 digits
-    "^\\+971-": /^\+971-\d{9}$/, // UAE → 9 digits
-    "^\\+974-": /^\+974-\d{8}$/, // Qatar → 8 digits
-    "^\\+968-": /^\+968-\d{8}$/, // Oman → 8 digits
-    "^\\+965-": /^\+965-\d{8}$/, // Kuwait → 8 digits
-    "^\\+973-": /^\+973-\d{8}$/, // Bahrain → 8 digits
-    "^\\+977-": /^\+977-\d{10}$/ // Nepal → 10 digits
-};
+const downloadPDF = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}storage/brochure/learntech.pdf`)
+    if (!res.ok) return
+    const blob = await res.blob()
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = 'Learntechww Brochure 2026.pdf'
+    a.click()
+    URL.revokeObjectURL(a.href)
+  } catch {}
+}
 
+interface Props {
+  page?: string
+  onChanges?: () => void
+  placeholder?: string
+  collegeName?: string
+}
 
-    const downloadPDF = async (): Promise<void> => {
-        try {
-            const oReq = new XMLHttpRequest();
-            const URLToPDF = `${process.env.NEXT_PUBLIC_API_URI}storage/brochure/learntech.pdf`;
+export default function EnquiryForm({ page, onChanges, placeholder, collegeName }: Props) {
+  const router = useRouter()
 
-            oReq.open("GET", URLToPDF, true);
-            oReq.responseType = "blob";
+  const schema = useMemo(
+    () =>
+      z.object({
+        name: z.string().trim().min(1, 'Name is required'),
+        email: z.string().trim().email('Email is not valid'),
+        contact_number: z.string().refine(isValidPhone, 'Enter a valid phone number'),
+        course: z.string().trim().min(1, `${placeholder || 'Course'} is required`),
+        location: z.string().trim().min(1, 'Location is required'),
+        message: z.string(),
+        college_name: z.string(),
+        terms: z.boolean().refine(v => v === true, 'You must accept the terms and conditions'),
+      }),
+    [placeholder]
+  )
 
-            oReq.onload = function () {
-                if (oReq.status === 200) {
-                    const file = new Blob([oReq.response], { type: 'application/pdf' });
-                    saveAs(file, "Learntechww Brochure 2026.pdf");
-                } else {
-                    console.error(`Failed to download file: ${oReq.status} ${oReq.statusText}`);
-                }
-            };
+  type FormValues = z.infer<typeof schema>
 
-            oReq.onerror = function () {
-                console.error("Request failed");
-            };
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: '',
+      email: '',
+      contact_number: '',
+      course: '',
+      location: '',
+      message: '',
+      college_name: collegeName ?? '',
+      terms: false,
+    },
+  })
 
-            oReq.send();
-        } catch (error) {
-            console.error("An error occurred while downloading the PDF:", error);
-        }
-    };
+  const onSubmit = async (values: FormValues) => {
+    try {
+      toast.loading('Processing')
+      const body = new FormData()
+      body.append('name', values.name)
+      body.append('email', values.email)
+      body.append('contact_number', values.contact_number)
+      body.append('location', values.location)
+      body.append('course_in_mind', values.course)
+      body.append('current_url', window.location.href)
+      body.append('description', values.message)
+      body.append('college_name', values.college_name)
 
-    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}api/website/enquiry`, {
+        method: 'POST',
+        body,
+      })
+      toast.dismiss()
 
-    const validationSchema = Yup.object().shape({
-        name: Yup.string().required('Name is required').trim(),
-        email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        // contact_number: Yup.string()
-        //     .required("Phone Number is required")
-        //     .test(
-        //         "is-valid-contact",
-        //         "Enter valid 10 digits Number",
-        //         function (value) {
-        //             if (!value) return false;
-        //             if (value.startsWith("+91-")) {
-        //                 return /^\+91-\d{10}$/.test(value);
-        //             }
-        //             return true; 
-        //         }
-        //     ),
+      if (res.ok) {
+        toast.success('Thank you. We will get back to you.')
+        reset()
+        onChanges?.()
+        if (page === 'Brochure') downloadPDF()
+        router.push('/thank-you')
+      } else {
+        toast.error('Try again later!')
+      }
+    } catch {
+      toast.error('Try again later!')
+    }
+  }
 
-                contact_number: Yup.string()
-                        .required("Phone Number is required")
-                        .test("is-valid-contact", "Enter a valid phone number", function (value) {
-                            if (!value) return false;
-            
-                            // Iterate through all phone rules
-                            for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
-                                if (new RegExp(prefixPattern).test(value)) {
-                                    return regex.test(value); // ✅ Valid if it matches the country's rule
-                                }
-                            }
-            
-                            return false; // ❌ Not matching any supported country
-                        }),
-            
-        course: Yup.string().required(`${placeholder || 'Course'} is required`).trim(),
-        location: Yup.string().required('Location is required').trim(),
-        terms: Yup.boolean()
-            .oneOf([true], "You must accept the terms and conditions"),
-        // message: Yup.string().required('Message is required'),
-    });
-
-    const handleSubmit = async (values, { resetForm }) => {
-        try {
-            toast.loading('Processing');
-            const formData = new FormData();
-            formData.append('name', values.name);
-            formData.append('email', values.email);
-            formData.append('contact_number', values.contact_number);
-            formData.append('location', values.location);
-            formData.append('course_in_mind', values.course);
-            formData.append('current_url', window.location.href);
-            formData.append('description', values.message);
-            formData.append('college_name', values.college_name || '');
-            const response = await axios.post('api/website/enquiry', formData);
-
-            if (response.status === 200) {
-                toast.dismiss();
-                toast.success('Thank you. We will get back to you.');
-                resetForm();
-                onChanges();
-
-                if (page && page == "Brochure") {
-                    downloadPDF();
-                }
-
-                router.push('/thank-you');
-            }
-        } catch (error) {
-            toast.error('try again later!');
-            console.error('Error submitting form:', error);
-        }
-    };
-
-    return (
-        <Formik
-            enableReinitialize={true}
-            initialValues={{
-                name: '',
-                email: '',
-                contact_number: '',
-                course: '',
-                location: '',
-                message: '',
-                college_name: collegeName || '',
-                terms: false,
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-        >
-            <Form>
-                <Field type="hidden" name="college_name" />
-                <div className="mb-3">
-                    <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
-                    <ErrorMessage name="name" component="div" className="error text-danger" />
-                </div>
-                <div className="mb-3">
-                    <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                    <ErrorMessage name="email" component="div" className="error text-danger" />
-                </div>
-                <div className="mb-3">
-                    <PhoneInputField name="contact_number" />
-                    <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                </div>
-                <div className="mb-3">
-                    <Field type="text" name="course" placeholder={placeholder ? (`Enter ${placeholder}`) : ("Enter Course")} className="form-control" />
-                    <ErrorMessage name="course" component="div" className="error text-danger" />
-                </div>
-                <div className="mb-3">
-                    <Field type="text" name="location" placeholder="Enter Location" className="form-control" />
-                    <ErrorMessage name="location" component="div" className="error text-danger" />
-                </div>
-                <div className="mb-3">
-                    <Field as="textarea" name="message" placeholder="Enter Message" className="form-control" />
-                    <ErrorMessage name="message" component="div" className="error text-danger" />
-                </div>
-                {/* ✅ Terms & Conditions Checkbox */}
-                <div className="mb-3 form-check">
-                    <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
-                    <label className="form-check-label" htmlFor="terms">
-                        By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
-                    </label>
-                    <ErrorMessage name="terms" component="div" className="error text-danger" />
-                </div>
-                <div className="d-grid">
-                    <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">
-                        {page && page == "Brochure" ? "Download Brochure" : "Submit"}
-                    </button>
-                </div>
-            </Form>
-        </Formik>
-    );
-};
-
-export default EnquiryForm;
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input type="hidden" {...register('college_name')} />
+      <div className="mb-3">
+        <input type="text" placeholder="Enter Name" className="form-control" {...register('name')} />
+        {errors.name && <div className="error text-danger">{errors.name.message}</div>}
+      </div>
+      <div className="mb-3">
+        <input type="email" placeholder="Enter Email" className="form-control" {...register('email')} />
+        {errors.email && <div className="error text-danger">{errors.email.message}</div>}
+      </div>
+      <div className="mb-3">
+        <Controller
+          name="contact_number"
+          control={control}
+          render={({ field }) => <PhoneInputField field={field} />}
+        />
+        {errors.contact_number && <div className="error text-danger">{errors.contact_number.message}</div>}
+      </div>
+      <div className="mb-3">
+        <input
+          type="text"
+          placeholder={placeholder ? `Enter ${placeholder}` : 'Enter Course'}
+          className="form-control"
+          {...register('course')}
+        />
+        {errors.course && <div className="error text-danger">{errors.course.message}</div>}
+      </div>
+      <div className="mb-3">
+        <input type="text" placeholder="Enter Location" className="form-control" {...register('location')} />
+        {errors.location && <div className="error text-danger">{errors.location.message}</div>}
+      </div>
+      <div className="mb-3">
+        <textarea placeholder="Enter Message" className="form-control" {...register('message')} />
+        {errors.message && <div className="error text-danger">{errors.message.message}</div>}
+      </div>
+      <div className="mb-3 form-check">
+        <input
+          type="checkbox"
+          className="form-check-input border-black"
+          id="terms"
+          {...register('terms')}
+        />
+        <label className="form-check-label" htmlFor="terms">
+          By Clicking this, I agree to the{' '}
+          <Link href="/terms-and-conditions">Terms & Conditions</Link>
+        </label>
+        {errors.terms && <div className="error text-danger">{errors.terms.message}</div>}
+      </div>
+      <div className="d-grid">
+        <button type="submit" className="submitBtn btn-xl btn-block btn submitBtn">
+          {page === 'Brochure' ? 'Download Brochure' : 'Submit'}
+        </button>
+      </div>
+    </form>
+  )
+}

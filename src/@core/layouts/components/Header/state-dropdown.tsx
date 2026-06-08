@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useAuth } from 'src/hooks/useAuth'
 
 interface City  { id: number; name: string }
-interface State { id: number; name: string; city: City[] }
+interface State { id: number; name: string; city?: City[] }
 
 interface Props {
   states:  State[]
@@ -66,7 +66,7 @@ const StateDropdown = memo(function StateDropdown({ states, type, onClose }: Pro
               {item.name}
             </Link>
 
-            {item.city.length > 0 && (
+            {(item.city?.length ?? 0) > 0 && (
               <Image
                 className={`ms-auto${isMobile && openSubmenu === item.id ? ' rotate-90' : ''}`}
                 src='/images/icons/right arrow.svg'
@@ -80,9 +80,9 @@ const StateDropdown = memo(function StateDropdown({ states, type, onClose }: Pro
             )}
           </div>
 
-          {item.city.length > 0 && (!isMobile || openSubmenu === item.id) && (
+          {(item.city?.length ?? 0) > 0 && (!isMobile || openSubmenu === item.id) && (
             <ul className='dropdown-menu dropdown-submenu menu-icon'>
-              {item.city.map(city => (
+              {item.city!.map(city => (
                 <li key={city.id}>
                   <Link
                     href={basePath}

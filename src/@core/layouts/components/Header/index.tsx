@@ -6,30 +6,29 @@ import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
-const Statedropdown  = dynamic(() => import('./state-dropdown'),  { ssr: false })
+const Statedropdown = dynamic(() => import('./state-dropdown'), { ssr: false })
 const Coursedropdown = dynamic(() => import('./course-dropdown'), { ssr: false })
-const Examdropdown   = dynamic(() => import('./exam-dropdown'),   { ssr: false })
+const Examdropdown = dynamic(() => import('./exam-dropdown'), { ssr: false })
 const Abroaddropdown = dynamic(() => import('./abroad-dropdown'), { ssr: false })
-const GlobalEnquiryForm = dynamic(
-  () => import('src/@core/components/popup/GlobalPopupEnquiry'),
-  { ssr: false, loading: () => <button className='btn counsellingBtn'>Loading...</button> },
-)
+
+import {LazyGlobalEnquiryForm} from 'src/app/components/ClientWrappers' ;
+
 const ConditionalModal = dynamic(() => import('./ConditionalModal'), { ssr: false })
-const AvatarDropdown   = dynamic(() => import('src/@core/components/avatar'), { ssr: false })
+const AvatarDropdown = dynamic(() => import('src/@core/components/avatar'), { ssr: false })
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-interface NavState   { id: number; name: string; city?: any[] }
-interface NavCourse  { id: number; slug: string; name?: string }
-interface NavExam    { id: number; [key: string]: any }
+interface NavState { id: number; name: string; city?: any[] }
+interface NavCourse { id: number; slug: string; name?: string }
+interface NavExam { id: number; name: string; examstr: string;[key: string]: any }
 interface NavCountry { id: number; name?: string; slug: string; country?: { name: string }; backgroundimage?: string }
-interface NavNews    { id: number; slug: string; banner_image: string; meta_description: string }
+interface NavNews { id: number; slug: string; banner_image: string; meta_description: string }
 
 interface HeaderProps {
-  states:    NavState[]
-  courses:   NavCourse[]
-  exams:     NavExam[]
+  states: NavState[]
+  courses: NavCourse[]
+  exams: NavExam[]
   countries: NavCountry[]
-  news:      NavNews[]
+  news: NavNews[]
 }
 
 type DropdownKey = 'universities' | 'colleges' | 'courses' | 'exams' | 'abroad' | 'news'
@@ -37,24 +36,24 @@ type DropdownKey = 'universities' | 'colleges' | 'courses' | 'exams' | 'abroad' 
 // ─── Static data (module-level — not re-created on each render) ───────────────
 
 const SOCIAL_LINKS = [
-  { href: 'https://www.facebook.com/learntechedu',                             src: '/images/icons/Facebook.svg',  label: 'Facebook'    },
-  { href: 'https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/', src: '/images/icons/linked-in.svg', label: 'LinkedIn'    },
-  { href: 'https://twitter.com/learntechww',                                   src: '/images/icons/twitter-x.png', label: 'Twitter / X' },
-  { href: 'https://www.instagram.com/learntechedus',                           src: '/images/icons/instagram.svg', label: 'Instagram'   },
-  { href: 'https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w',         src: '/images/icons/youtube.svg',   label: 'YouTube'     },
+  { href: 'https://www.facebook.com/learntechedu', src: '/images/icons/Facebook.svg', label: 'Facebook' },
+  { href: 'https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/', src: '/images/icons/linked-in.svg', label: 'LinkedIn' },
+  { href: 'https://twitter.com/learntechww', src: '/images/icons/twitter-x.png', label: 'Twitter / X' },
+  { href: 'https://www.instagram.com/learntechedus', src: '/images/icons/instagram.svg', label: 'Instagram' },
+  { href: 'https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w', src: '/images/icons/youtube.svg', label: 'YouTube' },
 ] as const
 
 const MORE_LINKS: [string, string][] = [
-  ['/about-us',       'About Us'],
-  ['/our-team',       'Our Team'],
-  ['/services',       'Services'],
-  ['/blogs',          'Blogs'],
-  ['/boards',         'Boards'],
-  ['/schools',        'Schools'],
-  ['/nri-quota',      'NRI Quota'],
-  ['/scholarships',   'Scholarships'],
-  ['/mbbs-abroad',    'MBBS Abroad'],
-  ['/meds',           'Medical Edu Studio'],
+  ['/about-us', 'About Us'],
+  ['/our-team', 'Our Team'],
+  ['/services', 'Services'],
+  ['/blogs', 'Blogs'],
+  ['/boards', 'Boards'],
+  ['/schools', 'Schools'],
+  ['/nri-quota', 'NRI Quota'],
+  ['/scholarships', 'Scholarships'],
+  ['/mbbs-abroad', 'MBBS Abroad'],
+  ['/meds', 'Medical Edu Studio'],
   ['/education-loan', 'Education Loan'],
 ]
 
@@ -62,17 +61,17 @@ const MORE_LINKS: [string, string][] = [
 
 export default function Header({ states, courses, exams, countries, news }: HeaderProps) {
   const pathname = usePathname()
-  const [mobileOpen,     setMobileOpen]     = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<DropdownKey | null>(null)
-  const [showModal,      setShowModal]      = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
-  const openDrop   = (key: DropdownKey) => setActiveDropdown(key)
-  const closeDrop  = ()                  => setActiveDropdown(null)
+  const openDrop = (key: DropdownKey) => setActiveDropdown(key)
+  const closeDrop = () => setActiveDropdown(null)
   const toggleDrop = (key: DropdownKey) => setActiveDropdown(prev => prev === key ? null : key)
-  const closeAll   = () => { setActiveDropdown(null); setMobileOpen(false) }
+  const closeAll = () => { setActiveDropdown(null); setMobileOpen(false) }
 
   const isActive = (href: string) => pathname === href
-  const isOpen   = (key: DropdownKey) => activeDropdown === key
+  const isOpen = (key: DropdownKey) => activeDropdown === key
 
   return (
     <>
@@ -261,7 +260,7 @@ export default function Header({ states, courses, exams, countries, news }: Head
               </li>
 
               <li className='hideBtnTxt nav-cons'>
-                <GlobalEnquiryForm buttonText='Get Counselling' className='btn counsellingBtn' />
+                <LazyGlobalEnquiryForm buttonText='Get Counselling' className='btn counsellingBtn' />
               </li>
 
               {/* Mobile-only extra links */}

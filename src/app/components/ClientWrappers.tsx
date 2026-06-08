@@ -31,9 +31,7 @@ const CardGridSkeleton = ({ count = 4 }: { count?: number }) => (
   </div>
 )
 
-const FormSkeleton = () => (
-  <div style={{ minHeight: 500, background: '#f0f0f0', borderRadius: 4 }} />
-)
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // HOMEPAGE SECTIONS
@@ -69,6 +67,19 @@ export const LazyLatestNewsSection = dynamic(
 export const LazyExpertSection = dynamic(
   () => import('src/views/Homepage/Components/ExpertSection'),
   { ssr: false, loading: () => <SectionSkeleton height='300px' /> },
+)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SHARED FORM COMPONENTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+const PhoneInputSkeleton = () => (
+  <div style={{ height: 42, background: '#f0f0f0', borderRadius: 4 }} />
+)
+
+export const LazyPhoneInputField = dynamic(
+  () => import('src/@core/components/popup/PhoneInput'),
+  { ssr: false, loading: () => <PhoneInputSkeleton /> },
 )
 
 // ─────────────────────────────────────────────────────────────────────────────
