@@ -1,5 +1,13 @@
 import Homepage from 'src/views/Homepage'
-import { getHeroBanners, getNewsList, getColleges, getAbroadCountries } from 'src/lib/api/common'
+import {
+  getHeroBanners,
+  getNewsList,
+  getColleges,
+  getAbroadCountries,
+  getLatestNewsList,
+  getNewsSectionBanner,
+  getStreams,
+} from 'src/lib/api/common'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
 
@@ -37,12 +45,18 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const [banners, news, { data: colleges }, abroadCountries] = await Promise.all([
-    getHeroBanners(),
-    getNewsList({ size: 10, columnname: 'created_at' }),
-    getColleges({ size: 10, type: 'college' }),
-    getAbroadCountries(),
-  ])
+  const [banners, news, { data: colleges }, abroadCountries, latestNewsItems, newsBanner, rawStreams] =
+    await Promise.all([
+      getHeroBanners(),
+      getNewsList({ size: 10, columnname: 'created_at' }),
+      getColleges({ size: 10, type: 'college' }),
+      getAbroadCountries(),
+      getLatestNewsList(8),
+      getNewsSectionBanner(),
+      getStreams({ size: 100 }),
+    ])
+
+  const expertStreams = (rawStreams ?? []).map((s: any) => ({ id: s.id as number, name: s.name as string }))
 
   const abroadCountryId = abroadCountries[0]?.id ?? null
   const { data: abroadColleges } = abroadCountryId
@@ -55,6 +69,8 @@ export default async function Page() {
       news={news}
       colleges={colleges}
       studyAbroad={{ countries: abroadCountries, colleges: abroadColleges, countryId: abroadCountryId }}
+      latestNews={{ news: latestNewsItems, banner: newsBanner }}
+      expertStreams={expertStreams}
     />
   )
 }

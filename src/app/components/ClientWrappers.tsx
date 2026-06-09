@@ -59,14 +59,14 @@ export const LazyExploreSection = dynamic(
   { ssr: false, loading: () => <SectionSkeleton height='280px' /> },
 )
 
-export const LazyLatestNewsSection = dynamic(
-  () => import('src/views/Homepage/Components/LatestNewsSection'),
+export const LazyLatestNewsClient = dynamic(
+  () => import('src/views/Homepage/Components/LatestNewsSection/LatestNewsClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={3} /> },
 )
 
-export const LazyExpertSection = dynamic(
-  () => import('src/views/Homepage/Components/ExpertSection'),
-  { ssr: false, loading: () => <SectionSkeleton height='300px' /> },
+export const LazyExpertEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/ExpertEnquiryForm'),
+  { ssr: false, loading: () => <SectionSkeleton height='80px' /> },
 )
 
 // ─────────────────────────────────────────────────────────────────────────────

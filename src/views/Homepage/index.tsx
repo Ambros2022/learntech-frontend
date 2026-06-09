@@ -3,14 +3,16 @@ import AnalysisSection from './Components/AnalysisSection'
 import BannerSection from './Components/BannerSection'
 import FeaturedCollegeSection from './Components/FeaturedCollegeSection'
 import StudyAbroadSection from './Components/StudyAbroadSection'
+import LatestNewsSection from './Components/LatestNewsSection'
 import JsonLd from 'src/app/components/JsonLd'
 import AnimateOnScroll from 'src/app/components/AnimateOnScroll'
+import ExpertSection from './Components/ExpertSection'
 import {
   LazyExploreSection,
-  LazyLatestNewsSection,
-  LazyExpertSection,
 } from 'src/app/components/ClientWrappers'
 import type { CollegeItem } from 'src/components/colleges/CollegeCarouselClient'
+import type { NewsOrBlogItem } from './Components/LatestNewsSection'
+import type { Stream } from 'src/@core/components/popup/ExpertEnquiryForm'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
 const IMG_URL = process.env.NEXT_PUBLIC_IMG_URL || ''
@@ -74,14 +76,21 @@ interface StudyAbroadData {
   countryId: number | null
 }
 
+interface LatestNewsData {
+  news: NewsOrBlogItem[]
+  banner: { image: string } | null
+}
+
 interface HomepageProps {
   banners: Banner[]
   news: NewsItem[]
   colleges: CollegeItem[]
   studyAbroad: StudyAbroadData
+  latestNews: LatestNewsData
+  expertStreams: Stream[]
 }
 
-export default function Homepage({ banners, news, colleges, studyAbroad }: HomepageProps) {
+export default function Homepage({ banners, news, colleges, studyAbroad, latestNews, expertStreams }: HomepageProps) {
   return (
     <>
 
@@ -112,12 +121,12 @@ export default function Homepage({ banners, news, colleges, studyAbroad }: Homep
 
 
       <AnimateOnScroll variant='fade-up' delay={0.05}>
-        <LazyLatestNewsSection />
+        <LatestNewsSection initialNews={latestNews.news} banner={latestNews.banner} />
       </AnimateOnScroll>
-      {/*
+
       <AnimateOnScroll variant='fade-up' delay={0.05}>
-        <LazyExpertSection />
-      </AnimateOnScroll> */}
+        <ExpertSection streams={expertStreams} />
+      </AnimateOnScroll>
     </>
   )
 }

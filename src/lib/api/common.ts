@@ -319,6 +319,27 @@ export const getPageData = cache(async (slug: string) => {
 })
 
 // ─────────────────────────────────────────────────────────────────────────────
+// LATEST NEWS & BLOGS (homepage section)
+// newsandblogs/get returns { news: { data: [...] } } or { blogs: { data: [...] } }
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getLatestNewsList = cache(async (size = 8) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/newsandblogs/get?page=1&size=${size}&type=news&orderby=desc&columnname=created_at`,
+    { tags: ['latest-news'] },
+  )
+  return json?.news?.data ?? []
+})
+
+export const getNewsSectionBanner = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=Home_news_page&page=1&size=1`,
+    { tags: ['news-section-banner'] },
+  )
+  return (json?.data?.[0] ?? null) as { image: string } | null
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
 // SITEMAP (bypasses cache — always fresh XML)
 // ─────────────────────────────────────────────────────────────────────────────
 

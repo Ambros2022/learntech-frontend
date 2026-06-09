@@ -1,179 +1,164 @@
-﻿'use client'
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
-import * as Yup from 'yup';
-import axios from 'src/configs/axios';
-import { toast } from 'sonner';
-import { useRouter } from 'src/hooks/useCompatRouter';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios1 from 'src/configs/axios';
+'use client'
 
-interface Props {
-    page?: any;
-    onChanges?: any;
-    placeholder?: string;
-    collegeName?: string;
+import { useEffect, useState, useRef } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { toast } from 'sonner'
+import { useRouter } from 'src/hooks/useCompatRouter'
+import PhoneInputField from 'src/@core/components/popup/PhoneInput'
+
+// ── Phone validation: prefix → exact digit-count rule ─────────────────────
+const PHONE_PATTERNS: [RegExp, RegExp][] = [
+  [/^\+91-/, /^\+91-\d{10}$/],
+  [/^\+966-/, /^\+966-\d{9}$/],
+  [/^\+971-/, /^\+971-\d{9}$/],
+  [/^\+974-/, /^\+974-\d{8}$/],
+  [/^\+968-/, /^\+968-\d{8}$/],
+  [/^\+965-/, /^\+965-\d{8}$/],
+  [/^\+973-/, /^\+973-\d{8}$/],
+  [/^\+977-/, /^\+977-\d{10}$/],
+]
+
+const schema = z.object({
+  name: z.string().min(1, 'Name is required').trim(),
+  email: z.string().email('Email is not valid'),
+  contact_number: z.string().refine(val => {
+    for (const [prefix, pattern] of PHONE_PATTERNS) {
+      if (prefix.test(val)) return pattern.test(val)
+    }
+    return false
+  }, 'Invalid phone number'),
+  course: z.string().min(1, 'Stream is required'),
+})
+
+type FormValues = z.infer<typeof schema>
+
+export interface Stream {
+  id: number
+  name: string
 }
 
-const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', collegeName }) => {
-    const router = useRouter();
-    const isMountedRef = useIsMountedRef();
-    const [streams, setStreams] = useState<any[]>([]);
-    const phoneRules: Record<string, RegExp> = {
-  "^\\+91-": /^\+91-\d{10}$/,  // India → 10 digits after +91-
-  "^\\+966-": /^\+966-\d{9}$/, // Saudi Arabia → 9 digits after +966-
-  "^\\+971-": /^\+971-\d{9}$/, // UAE → 9 digits after +971-
-  "^\\+974-": /^\+974-\d{8}$/, // Qatar → 8 digits after +974-
-  "^\\+968-": /^\+968-\d{8}$/, // Oman → 8 digits after +968-
-  "^\\+965-": /^\+965-\d{8}$/, // Kuwait → 8 digits after +965-
-  "^\\+973-": /^\+973-\d{8}$/, // Bahrain → 8 digits after +973-
-  "^\\+977-": /^\+977-\d{10}$/ // Nepal → 10 digits after +977-
-};
+interface Props {
+  placeholder?: string
+  collegeName?: string
+  /** Pre-fetched by the parent server component. Falls back to client fetch when omitted. */
+  streams?: Stream[]
+}
 
+const API_BASE = (process.env.NEXT_PUBLIC_API_URI || '').replace(/\/+$/, '')
 
-    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export default function ExpertEnquiryForm({ placeholder = 'Stream', collegeName, streams: streamsProp }: Props) {
+  const router = useRouter()
+  const [streams, setStreams] = useState<Stream[]>(streamsProp ?? [])
+  const abortRef = useRef<AbortController | null>(null)
 
-    const validationSchema = Yup.object().shape({
-        name: Yup.string().required('Name is required').trim(),
-        email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        // contact_number: Yup.string()
-        //     .required("Phone Number is required")
-        //     .test(
-        //         "is-valid-contact",
-        //         "Enter valid 10 digits Number",
-        //         function (value) {
-        //             if (!value) return false;
-        //             if (value.startsWith("+91-")) {
-        //                 return /^\+91-\d{10}$/.test(value);
-        //             }
-        //             return true; 
-        //         }
-        //     ),
-            contact_number: Yup.string()
-              .required("Phone Number is required")
-              .test("is-valid-contact", "Invalid phone number", function (value) {
-                if (!value) return false;
-            
-                for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
-                  if (new RegExp(prefixPattern).test(value)) {
-                    return regex.test(value);
-                  }
-                }
-            
-                return false;
-              }),
-            
-        course: Yup.string().required('Stream is required').trim(),
+  // Only fetch client-side if the parent server component didn't pre-fetch streams
+  useEffect(() => {
+    if (streamsProp && streamsProp.length > 0) return
+    abortRef.current?.abort()
+    const controller = new AbortController()
+    abortRef.current = controller
+    fetch(`${API_BASE}/api/website/stream/get?size=100`, { signal: controller.signal })
+      .then(r => r.json())
+      .then(json => setStreams((json?.data ?? []).map((s: any) => ({ id: s.id, name: s.name }))))
+      .catch(err => { if (err?.name !== 'AbortError') console.error('[ExpertForm] stream fetch failed', err) })
+    return () => abortRef.current?.abort()
+  }, [streamsProp])
 
-    });
+  // Keep in sync if parent re-renders with new streams
+  useEffect(() => {
+    if (streamsProp) setStreams(streamsProp)
+  }, [streamsProp])
 
-    const handleSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
-        try {
-            toast.loading('Processing');
-            console.log('Form values:', values);
-            const formData = new FormData();
-            formData.append('name', values.name);
-            formData.append('email', values.email);
-            formData.append('contact_number', values.contact_number);
-            formData.append('location', values.location);
-            formData.append('course_in_mind', values.course);
-            formData.append('college_name', collegeName || '');
-            formData.append('current_url', window.location.href);
-            const response = await axios.post('/api/website/enquiry', formData);
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: '', email: '', contact_number: '', course: '' },
+  })
 
-            if (response.status === 200) {
-                toast.dismiss();
-                toast.success('Thank you. We will get back to you.');
-                resetForm();
-                router.push('/thank-you');
-            } else {
-                console.error('Failed to submit form:', response);
-                toast.error('Failed to submit form. Please try again.');
-            }
-        } catch (error) {
-            toast.dismiss();
-            toast.error('Error submitting form. Please try again later!');
-            console.error('Error submitting form:', error);
-        }
-    };
+  const onSubmit = async (values: FormValues) => {
+    try {
+      toast.loading('Processing')
+      const body = new FormData()
+      body.append('name', values.name)
+      body.append('email', values.email)
+      body.append('contact_number', values.contact_number)
+      body.append('course_in_mind', values.course)
+      body.append('college_name', collegeName || '')
+      body.append('current_url', window.location.href)
 
-    const getStreamData = useCallback(async (size = 10000) => {
-        try {
-            const response = await axios1.get(`/api/website/stream/get?size=${size}`);
-            if (response.data.status === 1) {
-                const streamData = response.data.data.map((stream: any) => ({
-                    label: stream.name,
-                    value: stream.name
-                }));
-                if (isMountedRef.current) {
-                    setStreams(streamData);
-                }
-            } else {
-                console.error('Failed to fetch streams');
-            }
-        } catch (error) {
-            console.error('Error fetching streams:', error);
-        }
-    }, [isMountedRef]);
+      const res = await fetch(`${API_BASE}/api/website/enquiry`, { method: 'POST', body })
+      toast.dismiss()
 
+      if (res.ok) {
+        toast.success('Thank you. We will get back to you.')
+        reset()
+        router.push('/thank-you')
+      } else {
+        toast.error('Failed to submit form. Please try again.')
+      }
+    } catch {
+      toast.dismiss()
+      toast.error('Error submitting form. Please try again later!')
+    }
+  }
 
-    useEffect(() => {
-        getStreamData();
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="container expertInquirySec">
+      <div className="row mb-3">
+        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
+          <input
+            {...register('name')}
+            type="text"
+            placeholder="Enter Name"
+            className="form-control text-black"
+          />
+          {errors.name && <div className="error text-danger">{errors.name.message}</div>}
+        </div>
 
-    }, [getStreamData]);
+        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
+          <Controller
+            control={control}
+            name="contact_number"
+            render={({ field }) => <PhoneInputField field={field} />}
+          />
+          {errors.contact_number && (
+            <div className="error text-danger">{errors.contact_number.message}</div>
+          )}
+        </div>
 
-    return (
-        <Formik
-            initialValues={{
-                name: '',
-                email: '',
-                contact_number: '',
-                course: '',
+        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
+          <input
+            {...register('email')}
+            type="email"
+            placeholder="Enter Email"
+            className="form-control"
+          />
+          {errors.email && <div className="error text-danger">{errors.email.message}</div>}
+        </div>
 
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-        >
-            {({ }) => (
-                <Form className="container expertInquirySec">
-                    <div className='row mb-3'>
-                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-                            <Field type="text" name="name" placeholder="Enter Name" className="form-control text-black" />
-                            <ErrorMessage name="name" component="div" className="error text-danger" />
-                        </div>
-                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-                            <PhoneInputField name="contact_number" />
-                            <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                        </div>
-                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-                            <Field type="email" name="email" placeholder="Enter Email" className="form-control" />
-                            <ErrorMessage name="email" component="div" className="error text-danger" />
-                        </div>
-                        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-                            <Field
-                                as="select"
-                                name="course"
-                                className="form-control custom-select-bold-arrow"
-                            >
-                                <option value="">Select {placeholder}</option>
-                                {streams.map((item) => (
-                                    <option key={item.value} value={item.value}>{item.label}</option>
-                                ))}
-                            </Field>
-                            <ErrorMessage name="course" component="div" className="error text-danger" />
-                        </div>
+        <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
+          <select {...register('course')} className="form-control custom-select-bold-arrow">
+            <option value="">Select {placeholder}</option>
+            {streams.map(s => (
+              <option key={s.id} value={s.name}>{s.name}</option>
+            ))}
+          </select>
+          {errors.course && <div className="error text-danger">{errors.course.message}</div>}
+        </div>
+      </div>
 
-                    </div>
-                    <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
-                        <button type="submit" className="btn reqBtn">Request for a Call Back</button>
-                    </div>
-                </Form>
-            )}
-        </Formik>
-    );
-};
-
-export default EnquiryForm;
-
-
+      <div className="text-center px-xl-4 px-lg-3 px-md-3 px-1">
+        <button type="submit" disabled={isSubmitting} className="btn reqBtn">
+          Request for a Call Back
+        </button>
+      </div>
+    </form>
+  )
+}
