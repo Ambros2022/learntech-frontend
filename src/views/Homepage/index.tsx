@@ -1,15 +1,16 @@
 import NewsLinkSection from './Components/NewsLinkSection'
 import AnalysisSection from './Components/AnalysisSection'
 import BannerSection from './Components/BannerSection'
+import FeaturedCollegeSection from './Components/FeaturedCollegeSection'
 import JsonLd from 'src/app/components/JsonLd'
 import AnimateOnScroll from 'src/app/components/AnimateOnScroll'
 import {
-  LazyFeaturedCollegeSection,
   LazyExploreSection,
   LazyStudyAbroadSection,
   LazyLatestNewsSection,
   LazyExpertSection,
 } from 'src/app/components/ClientWrappers'
+import type { CollegeItem } from 'src/components/colleges/CollegeCarouselClient'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
 const IMG_URL = process.env.NEXT_PUBLIC_IMG_URL || ''
@@ -70,9 +71,10 @@ interface NewsItem {
 interface HomepageProps {
   banners: Banner[]
   news: NewsItem[]
+  colleges: CollegeItem[]
 }
 
-export default function Homepage({ banners, news }: HomepageProps) {
+export default function Homepage({ banners, news, colleges }: HomepageProps) {
   return (
     <>
 
@@ -86,15 +88,15 @@ export default function Homepage({ banners, news }: HomepageProps) {
       </AnimateOnScroll>
 
       {/* ── Below the fold — fully lazy, off the critical path ── */}
-      {/* <AnimateOnScroll variant='fade-up'>
-        <LazyFeaturedCollegeSection />
+      <AnimateOnScroll variant='fade-up'>
+        <FeaturedCollegeSection colleges={colleges} />
       </AnimateOnScroll>
 
       <AnimateOnScroll variant='fade-up' delay={0.05}>
         <LazyExploreSection />
       </AnimateOnScroll>
 
-      <AnimateOnScroll variant='fade-up' delay={0.05}>
+      {/*  <AnimateOnScroll variant='fade-up' delay={0.05}>
         <LazyStudyAbroadSection />
       </AnimateOnScroll>
 

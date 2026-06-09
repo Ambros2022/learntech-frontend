@@ -49,8 +49,8 @@ export const LazyBannerCarousel = dynamic(
   { ssr: false, loading: () => null },
 )
 
-export const LazyFeaturedCollegeSection = dynamic(
-  () => import('src/views/Homepage/Components/FeaturedCollegeSection'),
+export const LazyCollegeCarousel = dynamic(
+  () => import('src/components/colleges/CollegeCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
 )
 
@@ -118,6 +118,11 @@ export const LazyAvatarDropdown = dynamic(
 // ─────────────────────────────────────────────────────────────────────────────
 // GLOBAL POPUPS / FORMS
 // ─────────────────────────────────────────────────────────────────────────────
+
+export const GlobalEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupEnquiry'),
+  { loading: () => <button className='applyNowButton'>Apply Now</button> },
+)
 
 export const LazyGlobalEnquiryForm = dynamic(
   () => import('src/@core/components/popup/GlobalPopupEnquiry'),

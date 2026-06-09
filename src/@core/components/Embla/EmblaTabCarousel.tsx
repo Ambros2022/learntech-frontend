@@ -64,6 +64,11 @@ export default function EmblaCarousel({
     return () => window.removeEventListener("resize", updateSlides);
   }, [slidesToShowDesktop, slidesToShowTablet, slidesToShowMobile]);
 
+  /* ---------- RE-MEASURE WHEN SLIDE COUNT CHANGES ---------- */
+  useEffect(() => {
+    emblaApi?.reInit();
+  }, [emblaApi, slidesToShow]);
+
   /* ---------- ARROWS STATE ---------- */
   useEffect(() => {
     if (!emblaApi) return;

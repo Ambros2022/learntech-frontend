@@ -1,51 +1,21 @@
-﻿'use client'
-import React, { useCallback, useEffect, useState } from 'react'
-import axios1 from 'src/configs/axios'
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
-const CollegeCard = dynamic(() => import('src/@core/components/college-card-next'), { ssr: false });
-function FeaturedCollegeSection() {
-  const [colleges, setColleges] = useState<any[]>([]);
+import Link from 'next/link'
+import { LazyCollegeCarousel } from 'src/app/components/ClientWrappers'
+import type { CollegeItem } from 'src/components/colleges/CollegeCarouselClient'
 
-  //get all banners
-  const getcolleges = useCallback(async () => {
-    try {
-      const roleparams: any = {};
-      roleparams['page'] = 1;
-      roleparams['size'] = 10;
-      roleparams['type'] = 'college';
-      const response = await axios1.get('api/website/colleges/get', { params: roleparams });
+interface Props {
+  colleges: CollegeItem[]
+}
 
-      setColleges(response.data.data);
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
-  console.log("colleges", colleges)
-
-  useEffect(() => {
-
-    getcolleges();
-
-  }, [getcolleges]);
-
-
-
+export default function FeaturedCollegeSection({ colleges }: Props) {
   return (
     <section className="FeaturedClgCon bg-white">
-      <div className="container pt-4 pt-md-5  position-relative">
+      <div className="container pt-4 pt-md-5 position-relative">
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">Featured Colleges</h2>
-        <MainCarousel items={colleges.map(college => (
-          <CollegeCard key={college.id} college={college} />
-        ))} />
-        <div className="d-flex justify-content-center pb-5">
-          <Link href='/colleges' className='btn viewMoreClgBtn'>Load More</Link>
+        <LazyCollegeCarousel colleges={colleges} />
+        <div className="d-flex justify-content-center py-4">
+          <Link href="/colleges" className="btn viewMoreClgBtn">Load More</Link>
         </div>
       </div>
     </section>
   )
 }
-
-export default FeaturedCollegeSection

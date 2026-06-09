@@ -12,7 +12,9 @@
 }
 
 .embla__slide {
-  padding-right: 12px;
+  /* min-width:0 lets flex-basis win over non-wrapping content (prevents oversized slides) */
+  min-width: 0;
+  padding: 0 8px;
 }
 
 /* ---------- TABS ARROW LAYOUT ---------- */
@@ -41,17 +43,17 @@
   font-size: 30px;
   font-weight: bold;
   /* color: #f97316; */
-  color:var(--brand-navy) !important;
- 
+  color: var(--brand-navy, #254692) !important;
+
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .sideArrow:hover {
 
-  background: var(--brand-navy);
+  background: var(--brand-navy, #254692);
   color: #ffffff !important;
-  border-color: var(--brand-navy);
+  border-color: var(--brand-navy, #254692);
 }
 
 .left {

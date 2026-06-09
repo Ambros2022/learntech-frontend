@@ -5,7 +5,7 @@
 Build and maintain production-grade web platforms that prioritize:
 
 * SEO
-* Performance
+* Performance + core webvitals green
 * Crawlability
 * Accessibility
 * Scalability
@@ -125,7 +125,6 @@ Tag-based revalidation (preferred for ISR):
 ```ts
 const res = await fetch(API_URL, {
   next: {
-    revalidate: 3600,
     tags: ["entity-slug"]
   }
 })
@@ -413,7 +412,7 @@ Page (Client)
 
 # Lazy Loading Rules
 
-Lazy Load:
+Lazy Load: below fold
 
 * Testimonials
 * Sliders
@@ -607,31 +606,7 @@ Avoid:
 
 ---
 
-# Database Rules
 
-Mandatory indexes:
-
-* slug
-* status
-* foreign keys
-
-Avoid:
-
-```sql
-SELECT *
-```
-
-Avoid:
-
-* N+1 queries
-
-Use:
-
-* explicit columns
-* pagination
-* explain plans
-
----
 
 # Caching Rules
 
@@ -893,54 +868,10 @@ export function useSafeRouter() {
 Use instead of `useRouter()` directly in any component that may render outside an App Router context.
 
 ---
+also many apis are at common palace
+(src/lib/api/common.ts)
 
-## Nav Data Server Pattern
 
-All navigation data (states, courses, exams, countries, news) must be fetched server-side in `src/app/(main)/layout.tsx` and passed as props to Header. Zero client-side axios/useEffect calls for nav.
-
-```tsx
-// src/app/(main)/layout.tsx
-export default async function MainLayout({ children }) {
-  const [states, courses, exams, countries, news] = await Promise.all([
-    getStates(), getNavCourses(), getNavExams(), getNavCountries(), getNavNews(),
-  ])
-  return (
-    <>
-      <Header states={states} courses={courses} exams={exams} countries={countries} news={news} />
-      <main>{children}</main>
-      <Footer />
-    </>
-  )
-}
-```
-
-Each fetch uses `next: { tags: ['nav-states'] }` etc. for tag-based revalidation.
-
----
-
-## Dropdown State Pattern
-
-Never use a single shared boolean for multiple dropdown items. Use a discriminated union:
-
-```tsx
-type DropdownKey = 'universities' | 'colleges' | 'courses' | 'exams' | 'abroad' | 'news'
-const [activeDropdown, setActiveDropdown] = useState<DropdownKey | null>(null)
-```
-
-A shared `isDropdownOpen: boolean` causes all menus to open simultaneously on hover.
-
----
-
-## ApplyNowInjector Pattern
-
-CMS content may contain `<strong>Apply_Now</strong>` placeholders. Replace them with interactive buttons via `MutationObserver` in a single `"use client"` component (`src/app/components/ApplyNowInjector.tsx`).
-
-Rules:
-* Only one instance of `ApplyNowInjector` in the tree (inside `FooterActions`)
-* Iterate the live HTMLCollection **backwards** to avoid index shifting: `for (let i = elements.length - 1; i >= 0; i--)`
-* Use `{ childList: true, subtree: true }` on the observer
-
----
 
 ## Breadcrumb Pattern
 
