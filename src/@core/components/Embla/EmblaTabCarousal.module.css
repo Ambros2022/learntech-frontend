@@ -1,0 +1,74 @@
+.embla {
+  position: relative;
+  width: 100%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  padding-right: 12px;
+}
+
+/* ---------- TABS ARROW LAYOUT ---------- */
+.tabsWrapper {
+  padding: 0 48px;
+}
+
+/* ---------- SIDE ARROWS ---------- */
+.sideArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+  font-weight: bold;
+  /* color: #f97316; */
+  color:var(--brand-navy) !important;
+ 
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sideArrow:hover {
+
+  background: var(--brand-navy);
+  color: #ffffff !important;
+  border-color: var(--brand-navy);
+}
+
+.left {
+  left: -45px;
+}
+
+.right {
+  right: -35px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .left {
+    left: -10px;
+  }
+
+  .right {
+    right: -5px;
+  }
+}

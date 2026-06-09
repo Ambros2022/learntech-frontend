@@ -1,0 +1,82 @@
+.embla {
+  position: relative;
+  width: 100%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  padding: 10px;
+}
+
+/* ARROWS */
+.embla__prev,
+.embla__next {
+  position: absolute;
+  top: 40%;
+
+  font-size: 60px;
+      border: none;
+    /* color: #fff;
+     background: linear-gradient(90deg, #fd9b28, #f1652a); */
+    color: var(--brand-navy);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+}
+
+/* .embla__prev:hover,
+.embla__next:hover {
+      background: #fff;
+    color: #fd9b28;
+    
+    border: 2px solid #f1652a;
+} */
+
+.embla__prev {
+  left: -60px;
+}
+
+.embla__next {
+  right: -60px;
+}
+
+@media (max-width: 768px) {
+  .embla__prev {
+    left: -17px;
+  }
+  .embla__next {
+    right: -17px;
+  }
+}
+
+.embla__dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  gap: 10px;
+}
+
+.embla__dot {
+  width: 16px;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.embla__dot.isSelected {
+  background: #fff;
+  border: 2px solid #00a3f4;
+}

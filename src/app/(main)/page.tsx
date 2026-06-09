@@ -1,5 +1,5 @@
 import Homepage from 'src/views/Homepage'
-import { getHeroBanners } from 'src/lib/api/common'
+import { getHeroBanners, getNewsList } from 'src/lib/api/common'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
 
@@ -37,6 +37,9 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const banners = await getHeroBanners()
-  return <Homepage banners={banners} />
+  const [banners, news] = await Promise.all([
+    getHeroBanners(),
+    getNewsList({ size: 10, columnname: 'created_at' }),
+  ])
+  return <Homepage banners={banners} news={news} />
 }

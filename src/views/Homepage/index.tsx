@@ -12,7 +12,7 @@ import {
 } from 'src/app/components/ClientWrappers'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
-const IMG_URL  = process.env.NEXT_PUBLIC_IMG_URL  || ''
+const IMG_URL = process.env.NEXT_PUBLIC_IMG_URL || ''
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
@@ -61,23 +61,29 @@ interface Banner {
   alt?: string
 }
 
-interface HomepageProps {
-  banners: Banner[]
+interface NewsItem {
+  id: number
+  slug: string
+  name: string
 }
 
-export default function Homepage({ banners }: HomepageProps) {
+interface HomepageProps {
+  banners: Banner[]
+  news: NewsItem[]
+}
+
+export default function Homepage({ banners, news }: HomepageProps) {
   return (
     <>
 
       <JsonLd schema={localBusinessSchema} id='local-business' />
       <JsonLd schema={founderSchema} id='founder' />
       <BannerSection banners={banners} />
+      <NewsLinkSection items={news} />
 
-      <NewsLinkSection />
-
-      {/* <AnimateOnScroll variant='fade-up'>
+      <AnimateOnScroll variant='fade-up'>
         <AnalysisSection />
-      </AnimateOnScroll> */}
+      </AnimateOnScroll>
 
       {/* ── Below the fold — fully lazy, off the critical path ── */}
       {/* <AnimateOnScroll variant='fade-up'>
