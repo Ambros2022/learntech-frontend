@@ -1,6 +1,6 @@
 'use client'
 
-import EmblaCarousel from 'src/@core/components/Embla/EmblaTabCarousel'
+import EmblaCarousel from 'src/components/ui/Embla/EmblaTabCarousel'
 import CollegeCard, { type CollegeItem } from './CollegeCard'
 
 export type { CollegeItem }

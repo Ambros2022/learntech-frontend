@@ -59,11 +59,6 @@ export const LazyExploreSection = dynamic(
   { ssr: false, loading: () => <SectionSkeleton height='280px' /> },
 )
 
-export const LazyStudyAbroadSection = dynamic(
-  () => import('src/views/Homepage/Components/StudyAbroadSection'),
-  { ssr: false, loading: () => <SectionSkeleton height='280px' /> },
-)
-
 export const LazyLatestNewsSection = dynamic(
   () => import('src/views/Homepage/Components/LatestNewsSection'),
   { ssr: false, loading: () => <CardGridSkeleton count={3} /> },

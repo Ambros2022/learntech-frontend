@@ -1,5 +1,5 @@
 import Homepage from 'src/views/Homepage'
-import { getHeroBanners, getNewsList, getColleges } from 'src/lib/api/common'
+import { getHeroBanners, getNewsList, getColleges, getAbroadCountries } from 'src/lib/api/common'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
 
@@ -37,10 +37,24 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const [banners, news, { data: colleges }] = await Promise.all([
+  const [banners, news, { data: colleges }, abroadCountries] = await Promise.all([
     getHeroBanners(),
     getNewsList({ size: 10, columnname: 'created_at' }),
     getColleges({ size: 10, type: 'college' }),
+    getAbroadCountries(),
   ])
-  return <Homepage banners={banners} news={news} colleges={colleges} />
+
+  const abroadCountryId = abroadCountries[0]?.id ?? null
+  const { data: abroadColleges } = abroadCountryId
+    ? await getColleges({ country_id: abroadCountryId, size: 10 })
+    : { data: [] }
+
+  return (
+    <Homepage
+      banners={banners}
+      news={news}
+      colleges={colleges}
+      studyAbroad={{ countries: abroadCountries, colleges: abroadColleges, countryId: abroadCountryId }}
+    />
+  )
 }

@@ -2,11 +2,11 @@ import NewsLinkSection from './Components/NewsLinkSection'
 import AnalysisSection from './Components/AnalysisSection'
 import BannerSection from './Components/BannerSection'
 import FeaturedCollegeSection from './Components/FeaturedCollegeSection'
+import StudyAbroadSection from './Components/StudyAbroadSection'
 import JsonLd from 'src/app/components/JsonLd'
 import AnimateOnScroll from 'src/app/components/AnimateOnScroll'
 import {
   LazyExploreSection,
-  LazyStudyAbroadSection,
   LazyLatestNewsSection,
   LazyExpertSection,
 } from 'src/app/components/ClientWrappers'
@@ -68,13 +68,20 @@ interface NewsItem {
   name: string
 }
 
+interface StudyAbroadData {
+  countries: { id: number; name: string }[]
+  colleges: CollegeItem[]
+  countryId: number | null
+}
+
 interface HomepageProps {
   banners: Banner[]
   news: NewsItem[]
   colleges: CollegeItem[]
+  studyAbroad: StudyAbroadData
 }
 
-export default function Homepage({ banners, news, colleges }: HomepageProps) {
+export default function Homepage({ banners, news, colleges, studyAbroad }: HomepageProps) {
   return (
     <>
 
@@ -95,15 +102,19 @@ export default function Homepage({ banners, news, colleges }: HomepageProps) {
       <AnimateOnScroll variant='fade-up' delay={0.05}>
         <LazyExploreSection />
       </AnimateOnScroll>
-
-      {/*  <AnimateOnScroll variant='fade-up' delay={0.05}>
-        <LazyStudyAbroadSection />
+      <AnimateOnScroll variant='fade-up' delay={0.05}>
+        <StudyAbroadSection
+          countries={studyAbroad.countries}
+          initialColleges={studyAbroad.colleges}
+          initialCountryId={studyAbroad.countryId}
+        />
       </AnimateOnScroll>
+
 
       <AnimateOnScroll variant='fade-up' delay={0.05}>
         <LazyLatestNewsSection />
       </AnimateOnScroll>
-
+      {/*
       <AnimateOnScroll variant='fade-up' delay={0.05}>
         <LazyExpertSection />
       </AnimateOnScroll> */}

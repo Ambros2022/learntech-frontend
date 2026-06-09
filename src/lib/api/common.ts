@@ -298,6 +298,14 @@ export const getAbroadCountryPage = cache(async (country: string) => {
   return json?.data ?? null
 })
 
+export const getAbroadCountries = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/country/get?page=1&size=10&india=false`,
+    { tags: ['abroad-countries'] },
+  )
+  return json?.data ?? []
+})
+
 // ─────────────────────────────────────────────────────────────────────────────
 // CMS PAGES (privacy-policy, disclaimer, terms, etc.)
 // ─────────────────────────────────────────────────────────────────────────────
