@@ -39,9 +39,9 @@ const CardGridSkeleton = ({ count = 4 }: { count?: number }) => (
 // the critical-path HTML lean and prevent hydration mismatches.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const LazyBannerSection = dynamic(
-  () => import('src/views/Homepage/Components/BannerSection'),
-  { ssr: false, loading: () => <SectionSkeleton height='520px' /> },
+export const LazyBannerCarousel = dynamic(
+  () => import('src/views/Homepage/Components/BannerSection/BannerCarouselClient'),
+  { ssr: false, loading: () => null },
 )
 
 export const LazyFeaturedCollegeSection = dynamic(

@@ -12,10 +12,6 @@ module.exports = {
     ],
   },
 
-  experimental: {
-    optimizeCss: true,
-  },
-
   async headers() {
     return [
       {

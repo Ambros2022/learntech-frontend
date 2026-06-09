@@ -1,9 +1,9 @@
 import NewsLinkSection from './Components/NewsLinkSection'
 import AnalysisSection from './Components/AnalysisSection'
+import BannerSection from './Components/BannerSection'
 import JsonLd from 'src/app/components/JsonLd'
 import AnimateOnScroll from 'src/app/components/AnimateOnScroll'
 import {
-  LazyBannerSection,
   LazyFeaturedCollegeSection,
   LazyExploreSection,
   LazyStudyAbroadSection,
@@ -68,22 +68,19 @@ interface HomepageProps {
 export default function Homepage({ banners }: HomepageProps) {
   return (
     <>
-      {/* Page-specific structured data (XSS-safe serialization) */}
+
       <JsonLd schema={localBusinessSchema} id='local-business' />
       <JsonLd schema={founderSchema} id='founder' />
+      <BannerSection banners={banners} />
 
-      {/* ── Above the fold — lazy-loaded but critical, so skeleton prevents CLS ── */}
-      <LazyBannerSection banners={banners} />
-
-      {/* ── Server-rendered sections (no interactivity needed) ── */}
       <NewsLinkSection />
 
-      <AnimateOnScroll variant='fade-up'>
+      {/* <AnimateOnScroll variant='fade-up'>
         <AnalysisSection />
-      </AnimateOnScroll>
+      </AnimateOnScroll> */}
 
       {/* ── Below the fold — fully lazy, off the critical path ── */}
-      <AnimateOnScroll variant='fade-up'>
+      {/* <AnimateOnScroll variant='fade-up'>
         <LazyFeaturedCollegeSection />
       </AnimateOnScroll>
 
@@ -101,7 +98,7 @@ export default function Homepage({ banners }: HomepageProps) {
 
       <AnimateOnScroll variant='fade-up' delay={0.05}>
         <LazyExpertSection />
-      </AnimateOnScroll>
+      </AnimateOnScroll> */}
     </>
   )
 }
