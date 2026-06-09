@@ -39,6 +39,11 @@ const CardGridSkeleton = ({ count = 4 }: { count?: number }) => (
 // the critical-path HTML lean and prevent hydration mismatches.
 // ─────────────────────────────────────────────────────────────────────────────
 
+export const LazyAnimatedCounter = dynamic(
+  () => import('src/views/Homepage/Components/AnimatedCounters/AnimatedCounter'),
+  { ssr: false, loading: () => <span>0</span> },
+)
+
 export const LazyBannerCarousel = dynamic(
   () => import('src/views/Homepage/Components/BannerSection/BannerCarouselClient'),
   { ssr: false, loading: () => null },
