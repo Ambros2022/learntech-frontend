@@ -4,9 +4,11 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { LazyGlobalEnquiryForm } from 'src/app/components/ClientWrappers'
+import styles from './footer.module.css'
 
 const Toster = dynamic(() => import('src/@core/components/popup/Toster'), { ssr: false })
 import ApplyNowInjector from 'src/app/components/ApplyNowInjector'
+
 export default function FooterActions() {
   const [showScrollTop, setShowScrollTop] = useState(false)
 
@@ -22,7 +24,7 @@ export default function FooterActions() {
       <div className='row container-fluid'>
         {/* Floating phone CTA */}
         <div className='text-md-start'>
-          <a href='tel:18001208696' className='phone-icon' aria-label='Call us'>
+          <a href='tel:18001208696' className={styles.phoneIcon} aria-label='Call us'>
             <Image src='/images/icons/Phone-blue.svg' width={35} height={35} alt='' aria-hidden='true' className='red-filter' />
           </a>
         </div>
@@ -36,19 +38,19 @@ export default function FooterActions() {
         <div className='text-md-end'>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className={`arrowIcon ${showScrollTop ? 'show' : 'hide'}`}
+            className={`${styles.arrowIcon} ${showScrollTop ? 'show' : 'hide'}`}
             aria-label='Scroll to top'
           >
-            <Image width={30} height={30} className='footer-arrow' src='/images/icons/left arrow.svg' alt='' aria-hidden='true' />
+            <Image width={30} height={30} className={styles.footerArrow} src='/images/icons/left arrow.svg' alt='' aria-hidden='true' />
           </button>
           <a
             href='https://wa.me/+919036020076'
             target='_blank'
             rel='noopener noreferrer'
-            className='whatsappIcon'
+            className={styles.whatsappIcon}
             aria-label='Chat on WhatsApp'
           >
-            <Image width={35} height={35} className='footer-arrow' src='/images/icons/whatsapp.svg' alt='WhatsApp' />
+            <Image width={35} height={35} className={styles.footerArrow} src='/images/icons/whatsapp.svg' alt='WhatsApp' />
           </a>
         </div>
       </div>

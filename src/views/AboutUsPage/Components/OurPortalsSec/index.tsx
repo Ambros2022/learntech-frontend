@@ -1,40 +1,46 @@
-﻿'use client'
+import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+
+const portals = [
+  {
+    href: 'https://bangalorestudy.com/',
+    logo: '/images/icons/Logo_Bangalore_Study.png',
+    alt: 'Bangalore Study',
+  },
+  {
+    href: 'https://www.keralastudy.com/',
+    logo: '/images/icons/Logo_Kerala_Study.png',
+    alt: 'Kerala Study',
+  },
+  {
+    href: 'https://topmbastudy.com/',
+    logo: '/images/icons/Logo_MBA_Study.png',
+    alt: 'Top MBA Study',
+  },
+  {
+    href: 'https://coimbatorestudy.com/',
+    logo: '/images/icons/Logo_Coimbatore_Study.png',
+    alt: 'Coimbatore Study',
+  },
+]
 
 const OurPortalSec = () => {
-    return (
-        <>
-            <section className='bg-white py-5 pt-md-2'>
-                <div className="container">
-                    <h2 className='fw-bold text-blue text-center'>Our Portals</h2>
-                    <div className="d-flex gap-5 mt-4 flex-wrap justify-content-center">
-                        <div className='bg-skyBlue rounded hover-card'>
-                            <Link href='https://bangalorestudy.com/'>
-                                <img src='/images/icons/Logo_Bangalore_Study.png' width={200} height={200} alt='bangalorestudy-logo' className='img-fluid' loading="lazy" />
-                            </Link>
-                        </div>
-                        <div className='bg-skyBlue rounded hover-card'>
-                            <Link href='https://www.keralastudy.com/'>
-                                <img src='/images/icons/Logo_Kerala_Study.png' width={200} height={200} alt='kerala_study-logo' className='img-fluid' loading="lazy" />
-                            </Link>
-                        </div>
-
-                        <div className='bg-skyBlue rounded hover-card'>
-                            <Link href='https://topmbastudy.com/'>
-                                <img src='/images/icons/Logo_MBA_Study.png' width={200} height={200} alt='top_mba-logo' className='img-fluid' loading="lazy" />
-                            </Link>
-                        </div>
-                        <div className='bg-skyBlue rounded hover-card'>
-                            <Link href='https://coimbatorestudy.com/'>
-                                <img src='/images/icons/Logo_Coimbatore_Study.png' width={200} height={200} alt='coimbatore_study-logo' className='img-fluid' loading="lazy" />
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </>
-    )
+  return (
+    <section className="bg-white py-5 pt-md-2">
+      <div className="container">
+        <h2 className="fw-bold text-blue text-center">Our Portals</h2>
+        <div className="d-flex gap-5 mt-4 flex-wrap justify-content-center">
+          {portals.map((portal) => (
+            <div className="bg-skyBlue rounded hover-card" key={portal.href}>
+              <Link href={portal.href} target="_blank" rel="noopener noreferrer" aria-label={portal.alt}>
+                <Image src={portal.logo} width={200} height={200} alt={`${portal.alt} logo`} className="img-fluid" />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }
 
 export default OurPortalSec

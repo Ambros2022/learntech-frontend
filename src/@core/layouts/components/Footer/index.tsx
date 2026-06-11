@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import FooterActions from './FooterActions'
+import styles from './footer.module.css'
 
 // ─── Link lists (defined once at module level, not recreated per render) ──────
 
@@ -43,7 +44,7 @@ const SOCIAL_LINKS = [
 export default function Footer() {
   return (
     <>
-      <section className='footerCon'>
+      <section className={styles.footerCon}>
         <div className='container pt-3'>
 
           {/* Logo */}
@@ -51,7 +52,7 @@ export default function Footer() {
             <div className='col-xl-3 col-lg-4 col-md-4 col-8'>
               <Link href='/'>
                 <Image
-                  className='footer-logo'
+                  className={styles.footerLogo}
                   src='/images/Learntech325.webp'
                   width={325}
                   height={100}
@@ -73,7 +74,7 @@ export default function Footer() {
                 is the Bridge that Connects You<br />
                 to a Brighter Future.
               </p>
-              <span className='footerIcon'>
+              <span className={styles.footerIcon}>
                 <div className='mb-3'>
                   <a href='tel:18001208696' className='d-inline-block'>
                     <i className='bi bi-telephone-fill fs-5 me-2' aria-hidden='true' />
@@ -155,14 +156,14 @@ export default function Footer() {
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  <Image className='mb-1 mb-md-3 boxShadow' width={150} height={50} alt='App Store' src='/images/icons/app-store.webp' />
+                  <Image className={`mb-1 mb-md-3 ${styles.boxShadow}`} width={150} height={50} alt='App Store' src='/images/icons/app-store.webp' />
                 </a>
                 <a
                   href='https://play.google.com/store/apps/details?id=com.ilearntech.app'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  <Image className='boxShadow' width={150} height={50} alt='Google Play' src='/images/icons/google-play.webp' />
+                  <Image className={styles.boxShadow} width={150} height={50} alt='Google Play' src='/images/icons/google-play.webp' />
                 </a>
               </div>
             </div>
@@ -175,7 +176,7 @@ export default function Footer() {
       </section>
 
       {/* Bottom bar */}
-      <footer className='mainFooter'>
+      <footer className={styles.mainFooter}>
         <div className='container text-white pt-3'>
           <div className='row'>
             <div className='col-md-6 text-sm-center order-2 order-md-1'>

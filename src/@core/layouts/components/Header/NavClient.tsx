@@ -9,6 +9,7 @@ import {
   LazyConditionalModal as ConditionalModal,
   LazyAvatarDropdown as AvatarDropdown,
 } from 'src/app/components/ClientWrappers'
+import styles from './nav.module.css'
 
 const Statedropdown = dynamic(() => import('./state-dropdown'), { ssr: false })
 const Coursedropdown = dynamic(() => import('./course-dropdown'), { ssr: false })
@@ -68,7 +69,7 @@ export default function NavClient({ states = [], courses = [], exams = [], count
     <>
       <nav className='navbar navbar-expand-lg bg-white' style={{ zIndex: 100 }}>
 
-        <Link className='navbar-brand hlogo' href='/'>
+        <Link className={`navbar-brand ${styles.hlogo}`} href='/'>
           <div className='ps-md-5 ps-0' style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
             <Image
               src='/images/Learntech160.webp'
@@ -94,7 +95,7 @@ export default function NavClient({ states = [], courses = [], exams = [], count
         </button>
 
         <div
-          className={`collapse navbar-collapse collapseNavHeight${mobileOpen ? ' show' : ''}`}
+          className={`collapse navbar-collapse ${styles.collapseNav}${mobileOpen ? ' show' : ''}`}
           id='navbarSupportedContent'
         >
           {/* Mobile guest panel */}
@@ -109,7 +110,7 @@ export default function NavClient({ states = [], courses = [], exams = [], count
             </div>
           </div>
 
-          <span className='top-nav ps-5'>
+          <span className={`${styles.topNav} ps-5`}>
             <ul className='navbar-nav ps-0 ps-md-5'>
 
               <li className='nav-item'>
@@ -117,64 +118,64 @@ export default function NavClient({ states = [], courses = [], exams = [], count
               </li>
 
               {/* Universities */}
-              <li className='nav-item dropdown maintain' onMouseEnter={() => openDrop('universities')} onMouseLeave={closeDrop} onClick={() => toggleDrop('universities')}>
-                <Link className={`nav-link dropdown-toggle no-arrow${isActive('/universities') ? ' active' : ''}`} href='/universities' role='button' aria-expanded={isOpen('universities')} onClick={() => setMobileOpen(false)}>Universities</Link>
-                <span className={`dropdown-icon d-md-none${isOpen('universities') ? ' rotate' : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('universities') }}>&gt;</span>
-                <div className={`dropdown-menu custom-dropdown${isOpen('universities') ? ' show' : ''}`}>
+              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('universities')} onMouseLeave={closeDrop} onClick={() => toggleDrop('universities')}>
+                <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/universities') ? ' active' : ''}`} href='/universities' role='button' aria-expanded={isOpen('universities')} onClick={() => setMobileOpen(false)}>Universities</Link>
+                <span className={`${styles.dropdownIcon} d-md-none${isOpen('universities') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('universities') }}>&gt;</span>
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('universities') ? ' show' : ''}`}>
                   {isOpen('universities') && <Statedropdown states={states} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Colleges */}
-              <li className='nav-item dropdown maintain' onMouseEnter={() => openDrop('colleges')} onMouseLeave={closeDrop} onClick={() => toggleDrop('colleges')}>
-                <Link className={`nav-link dropdown-toggle no-arrow${isActive('/colleges') ? ' active' : ''}`} href='/colleges' role='button' aria-expanded={isOpen('colleges')} onClick={() => setMobileOpen(false)}>Colleges</Link>
-                <span className={`dropdown-icon d-md-none${isOpen('colleges') ? ' rotate' : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('colleges') }}>&gt;</span>
-                <div className={`dropdown-menu custom-dropdown${isOpen('colleges') ? ' show' : ''}`}>
+              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('colleges')} onMouseLeave={closeDrop} onClick={() => toggleDrop('colleges')}>
+                <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/colleges') ? ' active' : ''}`} href='/colleges' role='button' aria-expanded={isOpen('colleges')} onClick={() => setMobileOpen(false)}>Colleges</Link>
+                <span className={`${styles.dropdownIcon} d-md-none${isOpen('colleges') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('colleges') }}>&gt;</span>
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('colleges') ? ' show' : ''}`}>
                   {isOpen('colleges') && <Statedropdown states={states} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Courses */}
-              <li className='nav-item dropdown maintain' onMouseEnter={() => openDrop('courses')} onMouseLeave={closeDrop} onClick={() => toggleDrop('courses')}>
-                <Link className={`nav-link dropdown-toggle no-arrow${isActive('/courses') ? ' active' : ''}`} href='/courses' role='button' aria-expanded={isOpen('courses')} onClick={() => setMobileOpen(false)}>Courses</Link>
-                <span className={`dropdown-icon d-md-none${isOpen('courses') ? ' rotate' : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('courses') }}>&gt;</span>
-                <div className={`dropdown-menu custom-dropdown${isOpen('courses') ? ' show' : ''}`}>
+              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('courses')} onMouseLeave={closeDrop} onClick={() => toggleDrop('courses')}>
+                <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/courses') ? ' active' : ''}`} href='/courses' role='button' aria-expanded={isOpen('courses')} onClick={() => setMobileOpen(false)}>Courses</Link>
+                <span className={`${styles.dropdownIcon} d-md-none${isOpen('courses') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('courses') }}>&gt;</span>
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('courses') ? ' show' : ''}`}>
                   {isOpen('courses') && <Coursedropdown states={courses} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Exams */}
-              <li className='nav-item dropdown maintain' onMouseEnter={() => openDrop('exams')} onMouseLeave={closeDrop} onClick={() => toggleDrop('exams')}>
-                <Link className={`nav-link dropdown-toggle no-arrow${isActive('/exams') ? ' active' : ''}`} href='/exams' role='button' aria-expanded={isOpen('exams')} onClick={() => setMobileOpen(false)}>Exams</Link>
-                <span className={`dropdown-icon d-md-none${isOpen('exams') ? ' rotate' : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('exams') }}>&gt;</span>
-                <div className={`dropdown-menu custom-dropdown${isOpen('exams') ? ' show' : ''}`}>
+              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('exams')} onMouseLeave={closeDrop} onClick={() => toggleDrop('exams')}>
+                <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/exams') ? ' active' : ''}`} href='/exams' role='button' aria-expanded={isOpen('exams')} onClick={() => setMobileOpen(false)}>Exams</Link>
+                <span className={`${styles.dropdownIcon} d-md-none${isOpen('exams') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('exams') }}>&gt;</span>
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('exams') ? ' show' : ''}`}>
                   {isOpen('exams') && <Examdropdown states={exams} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Study Abroad */}
-              <li className='nav-item dropdown maintain' onMouseEnter={() => openDrop('abroad')} onMouseLeave={closeDrop} onClick={() => toggleDrop('abroad')}>
-                <a className='nav-link dropdown-toggle no-arrow' role='button' aria-expanded={isOpen('abroad')} onClick={() => setMobileOpen(false)}>Study Abroad</a>
-                <span className={`dropdown-icon d-md-none${isOpen('abroad') ? ' rotate' : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('abroad') }}>&gt;</span>
-                <div className={`dropdown-menu custom-dropdown${isOpen('abroad') ? ' show' : ''}`}>
+              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('abroad')} onMouseLeave={closeDrop} onClick={() => toggleDrop('abroad')}>
+                <a className={`nav-link dropdown-toggle ${styles.noArrow}`} role='button' aria-expanded={isOpen('abroad')} onClick={() => setMobileOpen(false)}>Study Abroad</a>
+                <span className={`${styles.dropdownIcon} d-md-none${isOpen('abroad') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('abroad') }}>&gt;</span>
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('abroad') ? ' show' : ''}`}>
                   {isOpen('abroad') && <Abroaddropdown states={countries} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Latest News */}
-              <li className='nav-item dropdown latest-static maintain' onMouseEnter={() => openDrop('news')} onMouseLeave={closeDrop} onClick={() => toggleDrop('news')}>
-                <Link className={`nav-link dropdown-toggle no-arrow${isActive('/news') ? ' activeDrpDwn' : ''}`} href='/news' role='button' aria-expanded={isOpen('news')} onClick={() => setMobileOpen(false)}>Latest News</Link>
-                <span className={`dropdown-icon d-md-none${isOpen('news') ? ' rotate' : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('news') }}>&gt;</span>
+              <li className={`nav-item dropdown ${styles.latestStatic} ${styles.maintain}`} onMouseEnter={() => openDrop('news')} onMouseLeave={closeDrop} onClick={() => toggleDrop('news')}>
+                <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/news') ? ` ${styles.activeDrpDwn}` : ''}`} href='/news' role='button' aria-expanded={isOpen('news')} onClick={() => setMobileOpen(false)}>Latest News</Link>
+                <span className={`${styles.dropdownIcon} d-md-none${isOpen('news') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('news') }}>&gt;</span>
                 {isOpen('news') && (
                   <div className='container-fluid'>
-                    <ul className='newsDrpDwn newsHide dropdown-menu' style={{ textAlign: 'center', left: 0, right: 0, width: '80%', margin: '0 auto' }}>
+                    <ul className={`newsDrpDwn ${styles.newsHide} dropdown-menu`} style={{ textAlign: 'center', left: 0, right: 0, width: '80%', margin: '0 auto' }}>
                       <div className='dropdown-row-news dropdown-row p-2'>
                         <div className='row'>
                           {news.slice(0, 4).map(item => (
                             <li key={item.id} className='news-item mb-1 col-md-3'>
                               <Link href={`/news/${item.id}/${item.slug}`} onClick={closeAll}>
                                 <div className='card-news hover-card bg-skyBlue card'>
-                                  <div className='cardImgNewsheight'>
+                                  <div className={styles.cardImgNewsHeight}>
                                     <img
                                       height={200} width={200}
                                       src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.banner_image}`}
@@ -210,11 +211,11 @@ export default function NavClient({ states = [], courses = [], exams = [], count
                 </ul>
               </li>
 
-              <li className='nav-avt'>
+              <li className={styles.navAvt}>
                 <AvatarDropdown openModal={() => setShowModal(true)} />
               </li>
 
-              <li className='hideBtnTxt nav-cons'>
+              <li className={`hideBtnTxt ${styles.navCons}`}>
                 <LazyGlobalEnquiryForm buttonText='Get Counselling' className='btn counsellingBtn' />
               </li>
 

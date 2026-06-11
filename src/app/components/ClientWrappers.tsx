@@ -145,3 +145,17 @@ export const LazyGlobalEnquiryFormBrochure = dynamic(
     ),
   },
 )
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EMBLA CAROUSELS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyEmblaCarousel = dynamic(
+  () => import('src/components/ui/Embla/EmblaCarousel'),
+  { ssr: false, loading: () => <SectionSkeleton height='240px' /> },
+)
+
+export const LazyEmblaTabCarousel = dynamic(
+  () => import('src/components/ui/Embla/EmblaTabCarousel'),
+  { ssr: false, loading: () => <SectionSkeleton height='240px' /> },
+)

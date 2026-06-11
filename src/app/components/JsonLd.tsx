@@ -9,10 +9,13 @@ type JsonLdProps = {
   id?: string
 }
 
-// Escape </ so it cannot prematurely close the <script> tag.
-// This is the only injection vector for JSON embedded in HTML.
 function serializeJsonLd(schema: JsonLdValue): string {
-  return JSON.stringify(schema).replace(/<\//g, '<\\/')
+  return JSON.stringify(schema)
+    .replace(/</g, '<')
+    .replace(/>/g, '>')
+    .replace(/&/g, '&')
+    .replace(new RegExp(' ', 'g'), ' ')
+    .replace(new RegExp(' ', 'g'), ' ')
 }
 
 export default function JsonLd({ schema, id }: JsonLdProps) {

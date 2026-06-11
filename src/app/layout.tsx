@@ -1,8 +1,9 @@
 import Script from 'next/script'
 import ClientProviders from './components/ClientProviders'
+import JsonLd from './components/JsonLd'
 import poppins from 'src/fonts'
 
-// Load order matters: Bootstrap first, globals.css last so our overrides always win. 
+// Load order matters: Bootstrap first, globals.css last so our overrides always win.
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../styles/globals.css'
@@ -17,7 +18,10 @@ const organizationSchema = {
   name: 'Learntech Edu Solutions Pvt. Ltd.',
   alternateName: 'Learntech Edu Solutions',
   url: BASE_URL,
-  logo: `${BASE_URL}/images/icons/learntech-logo.png`,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${BASE_URL}/images/icons/learntech-logo.png`,
+  },
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '1800 120 8696',
@@ -93,7 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isProd = process.env.NODE_ENV === 'production'
 
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={poppins.className}>
+    <html lang="en" className={poppins.className}>
       <head>
         {/* Performance: early connection to API/image CDN */}
         <link rel="preconnect" href="https://newapi.learntechww.com" />
@@ -103,14 +107,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" as="image" href="/images/Learntech160.webp" />
 
         {/* Structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
+        <JsonLd id="schema-org" schema={organizationSchema} />
+        <JsonLd id="schema-website" schema={websiteSchema} />
       </head>
       <body>
         {/* GTM noscript fallback — production only */}

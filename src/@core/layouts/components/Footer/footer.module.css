@@ -1,0 +1,192 @@
+/* ── Footer section ─────────────────────────────────────────── */
+
+.footerCon {
+  background-color: rgba(21, 41, 88, 1);
+  font-size: 15px !important;
+  font-weight: 300 !important;
+}
+
+.footerCon a {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+.footerCon a:hover {
+  color: #0077b5 !important;
+}
+
+.footerLogo {
+  width: 95% !important;
+  height: 100% !important;
+  margin-left: -20px !important;
+}
+
+.footerIcon img {
+  width: 28px !important;
+}
+
+.mainFooter {
+  background-color: rgba(39, 72, 150, 1) !important;
+}
+
+.mainFooter img {
+  width: 28px !important;
+}
+
+.boxShadow {
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── FooterActions ──────────────────────────────────────────── */
+
+.phoneIcon {
+  background-color: rgb(248, 67, 101) !important;
+  border-radius: 50% !important;
+  padding: 14px 12px !important;
+  border: none !important;
+  width: 67px !important;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
+  position: fixed !important;
+  z-index: 100 !important;
+  bottom: 45px !important;
+  left: 20px !important;
+}
+
+.phoneIcon img {
+  width: 100%;
+}
+
+.footerArrow {
+  transform: rotate(90deg) !important;
+}
+
+.arrowIcon:global(.show) {
+  opacity: 1;
+}
+
+.arrowIcon:global(.hide) {
+  opacity: 0;
+}
+
+.arrowIcon {
+  background-color: rgb(234, 240, 252) !important;
+  border-radius: 50% !important;
+  padding: 9px !important;
+  border: none !important;
+  width: 57px !important;
+  box-shadow: #00000073 0px 0px 15px !important;
+  position: fixed !important;
+  bottom: 150px !important;
+  right: 29px !important;
+  z-index: 100 !important;
+}
+
+.whatsappIcon {
+  background-color: white !important;
+  border-radius: 50% !important;
+  border: 20px solid green !important;
+  box-shadow: #00000073 0px 0px 15px !important;
+  position: fixed !important;
+  z-index: 100 !important;
+  bottom: 45px !important;
+  right: 20px !important;
+  transform: rotate(270deg) !important;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .footerCon {
+    font-size: 16px !important;
+  }
+
+  .footerIcon img {
+    width: 20px !important;
+  }
+
+  .phoneIcon {
+    padding: 11px 13px !important;
+    width: 50px !important;
+  }
+
+  .arrowIcon {
+    background-color: white !important;
+    padding: 5px !important;
+    width: 44px !important;
+    right: 24px !important;
+    bottom: 120px !important;
+  }
+
+  .whatsappIcon {
+    border: 10px solid green !important;
+    transform: rotate(270deg) !important;
+  }
+
+  .mainFooter {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .footerLogo {
+    width: 95% !important;
+    height: 100% !important;
+    margin-left: -14px !important;
+  }
+
+  .footerIcon img {
+    width: 20px !important;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .footerLogo {
+    width: 100% !important;
+    height: 100% !important;
+    margin-left: -10px !important;
+  }
+
+  .footerCon :global(.img-fluid) {
+    width: 100px !important;
+  }
+
+  .footerCon :global(.address) {
+    font-size: 16px !important;
+  }
+
+  .footerCon h6 {
+    font-weight: 500 !important;
+    font-size: 15px !important;
+  }
+
+  .footerIcon img {
+    width: 20px !important;
+  }
+
+  .phoneIcon {
+    padding: 10px !important;
+    width: 53px !important;
+    bottom: 12px !important;
+    left: 12px !important;
+  }
+
+  .arrowIcon {
+    padding: 7px !important;
+    width: 45px !important;
+    right: 12px !important;
+    bottom: 85px !important;
+  }
+
+  .whatsappIcon {
+    border: 10px solid green !important;
+    bottom: 12px !important;
+    right: 12px !important;
+  }
+}
+
+/* ── Misc ────────────────────────────────────────────────────── */
+
+.footerCon :global(.bi-chevron-double-right) {
+  font-size: 10px;
+  padding-right: 6px;
+}

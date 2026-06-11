@@ -286,6 +286,23 @@ export const getHeroBanners = cache(async () => {
   return json?.data ?? []
 })
 
+export const getAboutPageBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_about_page&page=1&size=10000`,
+    { tags: ['about-banners'] },
+  )
+  return json?.data ?? []
+})
+
+export const getAboutVideoTestimonials = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/allvideotestimonials/get?type=About_us_page`,
+    { tags: ['about-video-testimonials'] },
+  )
+  const data = json?.data ?? []
+  return data.filter((item: any) => item?.type === 'About_us_page')
+})
+
 // ─────────────────────────────────────────────────────────────────────────────
 // ABROAD PAGES (study-in-xxx)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -386,6 +403,17 @@ export const getNavNews = cache(async () => {
   )
   return json?.data ?? []
 })
+
+export async function getNavData() {
+  const [states, courses, exams, countries, news] = await Promise.all([
+    getStates(),
+    getNavCourses(),
+    getNavExams(),
+    getNavCountries(),
+    getNavNews(),
+  ])
+  return { states, courses, exams, countries, news }
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SITEMAP (bypasses cache — always fresh XML)
