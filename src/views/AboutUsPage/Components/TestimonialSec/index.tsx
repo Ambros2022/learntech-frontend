@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import axios from 'src/configs/axios';
 
 // Define the interface for a testimonial
@@ -47,10 +47,10 @@ const ButtonGroup = ({
 }) => (
     <div className={`carousel-button-group d-flex justify-content-between ${showButtons ? '' : 'd-none'}`}>
         <span className="carousel-btn fi-left" onClick={previous}>
-            <FiChevronLeft size={30} />
+            <ChevronLeft size={30} />
         </span>
         <span className="carousel-btn fi-right" onClick={next}>
-            <FiChevronRight size={30} />
+            <ChevronRight size={30} />
         </span>
     </div>
 );

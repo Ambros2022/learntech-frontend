@@ -9,7 +9,7 @@ interface Props {
   className?: string
   title?: string
   pagename?: string
-  buttonText?: string
+  buttonText?: React.ReactNode
   placeholder?: string
   collegeName?: string
 }

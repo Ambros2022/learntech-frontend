@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
@@ -40,10 +40,10 @@ const TabCarousel = ({ activeTab, onTabClick }) => {
     const ButtonGroup = ({ next, previous }) => (
         <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
             <span className='fi-left' onClick={previous}>
-                <FiChevronLeft />
+                <ChevronLeft />
             </span>
             <span className='fi-right' onClick={next}>
-                <FiChevronRight />
+                <ChevronRight />
             </span>
         </div>
     );

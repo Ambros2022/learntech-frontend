@@ -1,2 +1,5 @@
-import WriteReviewPage from 'src/views/WriteReviewPage'
-export default function Page() { return <WriteReviewPage /> }
+import { LazyWriteReviewPage } from 'src/app/components/ClientWrappers'
+
+export default function Page() {
+  return <LazyWriteReviewPage />
+}

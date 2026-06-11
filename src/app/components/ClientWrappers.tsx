@@ -110,6 +110,11 @@ export const LazyAvatarDropdown = dynamic(
   { loading: () => <AvatarSkeleton /> },
 )
 
+export const LazyWriteReviewPage = dynamic(
+  () => import('src/views/WriteReviewPage'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
 // ─────────────────────────────────────────────────────────────────────────────
 // GLOBAL POPUPS / FORMS
 // ─────────────────────────────────────────────────────────────────────────────

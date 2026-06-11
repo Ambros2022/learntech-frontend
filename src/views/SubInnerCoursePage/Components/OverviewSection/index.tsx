@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import 'react-multi-carousel/lib/styles.css';
 
 const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
@@ -20,10 +20,10 @@ const responsive = {
 const ButtonGroup = ({ next, previous }) => (
   <div className="carousel-button-group d-flex justify-content-between gap-5 fs-2">
     <span className='fi-left' onClick={previous}>
-      <FiChevronLeft />
+      <ChevronLeft />
     </span>
     <span className='fi-right' onClick={next}>
-      <FiChevronRight />
+      <ChevronRight />
     </span>
   </div>
 );

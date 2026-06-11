@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const responsive = {
     superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 4 },
@@ -15,10 +15,10 @@ const ButtonGroup = ({ next, previous }) => {
     return (
         <div className="carousel-button-group d-flex justify-content-between position-absolute w-100" style={{ top: '50%', transform: 'translateY(-50%)' }}>
             <button className="btn btn-link text-decoration-none" onClick={previous}>
-                <FiChevronLeft size={24} />
+                <ChevronLeft size={24} />
             </button>
             <button className="btn btn-link text-decoration-none" onClick={next}>
-                <FiChevronRight size={24} />
+                <ChevronRight size={24} />
             </button>
         </div>
     );

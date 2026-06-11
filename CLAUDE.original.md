@@ -2,7 +2,7 @@
 
 # Mission
 
-Build/maintain production-grade web platforms prioritizing:
+Build and maintain production-grade web platforms that prioritize:
 
 * SEO
 * Performance + core webvitals green
@@ -90,7 +90,11 @@ Accessibility
 
 # Next.js Architecture Rules
 
-Default: Server Components. Client Components only when necessary.
+Default:
+
+* Server Components
+
+Use Client Components only when necessary.
 
 Allowed Client Components:
 
@@ -126,15 +130,24 @@ const res = await fetch(API_URL, {
 })
 ```
 
-Trigger on-demand revalidation:
+Trigger on-demand revalidation via:
 
 ```ts
 revalidateTag("entity-slug")
 ```
 
-Examples: Blogs, News, Course Pages, College Pages, University Pages
+Examples:
 
-Rendering: SSG, ISR
+* Blogs
+* News
+* Course Pages
+* College Pages
+* University Pages
+
+Rendering:
+
+* SSG
+* ISR
 
 ---
 
@@ -146,13 +159,13 @@ fetch(url, {
 })
 ```
 
-Only when necessary.
+Use only when necessary.
 
 ---
 
 # Data Fetching Rules
 
-Prefer:
+Always prefer:
 
 ```ts
 const res = await fetch(API_URL, {
@@ -180,7 +193,13 @@ useEffect()
 
 # Metadata Rules
 
-Every indexable page must have: Title, Description, Canonical, Open Graph, Twitter Tags.
+Every indexable page must include:
+
+* Title
+* Description
+* Canonical
+* Open Graph
+* Twitter Tags
 
 Use:
 
@@ -200,9 +219,17 @@ in App Router.
 
 # SEO Rules
 
-If Google should rank it → render server-side.
+If Google should rank it:
 
-Examples: H1, H2, Content, Listings, Internal Links
+Render it on the server.
+
+Examples:
+
+* H1
+* H2
+* Content
+* Listings
+* Internal Links
 
 Never load ranking content via JavaScript.
 
@@ -210,11 +237,19 @@ Never load ranking content via JavaScript.
 
 # Structured Data Rules
 
-JSON-LD only.
+Use JSON-LD only.
 
-Supported: Organization, Article, NewsArticle, FAQPage, Course, BreadcrumbList
+Supported:
+
+* Organization
+* Article
+* NewsArticle
+* FAQPage
+* Course
+* BreadcrumbList
 
 Rules:
+
 * Must match visible content
 * Must be server rendered
 * No fabricated data
@@ -247,7 +282,13 @@ for primary content URLs.
 
 All important links must exist in HTML.
 
-Examples: Colleges, Courses, Universities, Blogs, Categories
+Examples:
+
+* Colleges
+* Courses
+* Universities
+* Blogs
+* Categories
 
 Avoid JS-generated navigation.
 
@@ -255,17 +296,35 @@ Avoid JS-generated navigation.
 
 # Sitemap Rules
 
-Mandatory: Sitemap Index, Split Sitemaps, Max 50,000 URLs per sitemap
+Mandatory
 
-Examples: sitemap-colleges.xml, sitemap-courses.xml, sitemap-blogs.xml, sitemap-news.xml
+* Sitemap Index
+* Split Sitemaps
+* Max 50,000 URLs per sitemap
+
+Examples
+
+* sitemap-colleges.xml
+* sitemap-courses.xml
+* sitemap-blogs.xml
+* sitemap-news.xml
 
 ---
 
 # Crawl Budget Rules
 
-Avoid: Infinite filters, Crawl traps, Duplicate routes, Query parameter URLs
+Avoid
 
-Prefer: Clean URLs, Canonicals, Controlled pagination
+* Infinite filters
+* Crawl traps
+* Duplicate routes
+* Query parameter URLs
+
+Prefer:
+
+* Clean URLs
+* Canonicals
+* Controlled pagination
 
 ---
 
@@ -277,7 +336,12 @@ Mandatory:
 next/image
 ```
 
-Requirements: width, height, sizes, lazy loading
+Requirements:
+
+* width
+* height
+* sizes
+* lazy loading
 
 Avoid:
 
@@ -314,9 +378,14 @@ Use:
 next/font
 ```
 
-Requirements: Self-hosted, font-display: swap
+Requirements:
 
-Avoid: Google font CDN requests
+* Self-hosted
+* font-display: swap
+
+Avoid:
+
+* Google font CDN requests
 
 ---
 
@@ -343,9 +412,20 @@ Page (Client)
 
 # Lazy Loading Rules
 
-Lazy Load (below fold): Testimonials, Sliders, Counters, Videos, Maps
+Lazy Load: below fold
 
-Do NOT Lazy Load: Hero, H1, Content, Internal Links
+* Testimonials
+* Sliders
+* Counters
+* Videos
+* Maps
+
+Do NOT Lazy Load:
+
+* Hero
+* H1
+* Content
+* Internal Links
 
 ---
 
@@ -353,9 +433,19 @@ Do NOT Lazy Load: Hero, H1, Content, Internal Links
 
 ## Core Principle
 
-Every dependency adds: JavaScript, Build time, Security risk, Maintenance cost, Technical debt
+Every dependency adds:
 
-Default answer: NO. Dependency must justify existence.
+* JavaScript
+* Build time
+* Security risk
+* Maintenance cost
+* Technical debt
+
+Default answer:
+
+NO
+
+Dependency must justify its existence.
 
 ---
 
@@ -371,70 +461,148 @@ Default answer: NO. Dependency must justify existence.
 
 # Preferred Libraries
 
-Forms: react-hook-form, zod
-Validation: zod
-Carousel: embla-carousel
-Icons: lucide-react
-State: React Context
-Fetch: native fetch
-Animation: CSS, Framer Motion (only when required)
-Charts: Recharts
-Date: date-fns
-Notifications: sonner — always named import: `import { toast } from 'sonner'` (no default export)
-Images: next/image
-Fonts: next/font
+Forms
+
+* react-hook-form
+* zod
+
+Validation
+
+* zod
+
+Carousel
+
+* embla-carousel
+
+Icons
+
+* lucide-react
+
+State
+
+* React Context
+
+Fetch
+
+* native fetch
+
+Animation
+
+* CSS
+* Framer Motion (only when required)
+
+Charts
+
+* Recharts
+
+Date
+
+* date-fns
+
+Notifications
+
+* sonner — always named import: `import { toast } from 'sonner'` (no default export)
+
+Images
+
+* next/image
+
+Fonts
+
+* next/font
 
 ---
 
 # Avoid Heavy Libraries
 
-Avoid: formik, yup, axios, moment, react-multi-carousel, react-spring, aos, swiper, slick-carousel, bootstrap javascript, large icon packs
+Avoid:
 
-Use lighter alternatives.
+* formik
+* yup
+* axios
+* moment
+* react-multi-carousel
+* react-spring
+* aos
+* swiper
+* slick-carousel
+* bootstrap javascript
+* large icon packs
+
+Use lighter alternatives whenever possible.
 
 ---
 
 # Bundle Budget Rules
 
-Landing Pages: Target < 80KB
-Content Pages: Target < 50KB
-General Pages: Target < 100KB
-Warnings: > 150KB
-Failure: > 200KB
+Landing Pages
+
+* Target < 80KB
+
+Content Pages
+
+* Target < 50KB
+
+General Pages
+
+* Target < 100KB
+
+Warnings
+
+* > 150KB
+
+Failure
+
+* > 200KB
 
 ---
 
 # Package Approval Checklist
 
 Before installing:
+
 * Can native APIs solve it?
 * Can React solve it?
 * Can Next.js solve it?
-* SSR compatible?
-* App Router compatible?
-* Tree-shakeable?
-* Actively maintained?
+* Is it SSR compatible?
+* Is it App Router compatible?
+* Is it tree-shakeable?
+* Is it actively maintained?
 
-If unclear: DO NOT INSTALL.
+If unclear:
+
+DO NOT INSTALL.
 
 ---
 
 # Package Elimination Rule
 
-When touching code, evaluate:
+Whenever touching code:
+
+Evaluate:
+
 * Can dependency be removed?
 * Can native code replace it?
 * Can lighter library replace it?
 
-Goal: Reduce dependencies continuously.
+Goal:
+
+Reduce dependencies continuously.
 
 ---
 
 # Backend Rules
 
-Use: REST APIs, Typed responses, Validation on all inputs
+Use:
 
-Avoid: Over-fetching, Under-fetching
+* REST APIs
+* Typed responses
+* Validation on all inputs
+
+Avoid:
+
+* Over-fetching
+* Under-fetching
 
 ---
 
@@ -442,7 +610,12 @@ Avoid: Over-fetching, Under-fetching
 
 # Caching Rules
 
-Priority: 1. CDN 2. Next.js Cache 3. ISR 4. Revalidation Tags
+Priority
+
+1. CDN
+2. Next.js Cache
+3. ISR
+4. Revalidation Tags
 
 Preferred:
 
@@ -458,15 +631,30 @@ fetch(url, {
 
 # Security Rules
 
-Mandatory: Input Validation, SQL Injection Protection, Rate Limiting, CSP Headers, Secure Cookies, Secret Isolation
+Mandatory:
 
-Never expose: Tokens, API Keys, Secrets
+* Input Validation
+* SQL Injection Protection
+* Rate Limiting
+* CSP Headers
+* Secure Cookies
+* Secret Isolation
+
+Never expose:
+
+* Tokens
+* API Keys
+* Secrets
 
 ---
 
 # Core Web Vitals Enforcement
 
-Build fails if: LCP regresses, CLS regresses, INP regresses
+Build fails if:
+
+* LCP regresses
+* CLS regresses
+* INP regresses
 
 Performance monitoring required.
 
@@ -475,12 +663,14 @@ Performance monitoring required.
 # AI Agent Rules
 
 Always:
+
 * Prefer Server Components
 * Prefer SEO-safe implementations
 * Prefer lower bundle size
 * Prefer deletion over abstraction
 
 Never:
+
 * Introduce hidden logic
 * Introduce SEO regressions
 * Introduce crawl traps
@@ -490,9 +680,18 @@ Never:
 
 # Debug Checklist
 
-Disable JavaScript. Verify: Content visible, Headings visible, Links visible, Metadata present
+Disable JavaScript.
 
-If content disappears → fix architecture.
+Verify:
+
+* Content visible
+* Headings visible
+* Links visible
+* Metadata present
+
+If content disappears:
+
+Fix architecture.
 
 ---
 
@@ -514,7 +713,14 @@ If content disappears → fix architecture.
 
 # Final Law
 
-If feature harms: SEO, UI/UX, Performance, Crawlability, Accessibility, Core Web Vitals
+If a feature harms:
+
+* SEO
+* UI/UX
+* Performance
+* Crawlability
+* Accessibility
+* Core Web Vitals
 
 IT DOES NOT SHIP.
 
@@ -522,13 +728,13 @@ IT DOES NOT SHIP.
 
 # Reference Architecture (from kerlastudy-Frontend)
 
-Proven patterns from kerlastudy-Frontend. Must adopt here.
+These patterns are proven in kerlastudy-Frontend and must be adopted here.
 
 ---
 
 ## ClientWrappers Pattern
 
-Heavy client components lazy-loaded from single `ClientWrappers.tsx`:
+All heavy client components must be lazy-loaded from a single `ClientWrappers.tsx`:
 
 ```tsx
 // src/components/ClientWrappers.tsx
@@ -550,7 +756,7 @@ Rules:
 * All forms: `ssr: false`
 * All carousels/sliders: `ssr: false`
 * All modals/popups: `ssr: false`
-* Every wrapper must have skeleton `loading` fallback to prevent CLS
+* Every wrapper must have a skeleton `loading` fallback to prevent CLS
 * Server components import from `ClientWrappers` — not directly
 
 ---
@@ -576,14 +782,14 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
 
 Rules:
 * Root layout imports only `ClientProviders` — never individual providers
-* `NProgressBar` must call `NProgress.configure({ showSpinner: false })` at module level to prevent "N" spinner rendering
-* Remove `EmotionRegistry` only after all MUI components eliminated
+* `NProgressBar` must call `NProgress.configure({ showSpinner: false })` at module level to prevent the "N" spinner rendering
+* Remove `EmotionRegistry` only after all MUI components are eliminated
 
 ---
 
 ## AnimateOnScroll Pattern
 
-No AOS, no Framer Motion for scroll animations. Use native `IntersectionObserver`:
+No AOS, no Framer Motion for scroll animations. Use the native `IntersectionObserver`:
 
 ```tsx
 // src/components/AnimateOnScroll.tsx — "use client"
@@ -592,7 +798,7 @@ No AOS, no Framer Motion for scroll animations. Use native `IntersectionObserver
 ```
 
 Rules:
-* `once: true` default — animate once, done
+* `once: true` by default — animate once, then done
 * `willChange: "opacity, transform"` for GPU compositing
 * Check `getBoundingClientRect` on mount to skip animation if already visible
 
@@ -628,7 +834,7 @@ export default function JsonLd({ schema, id }) {
 
 ## FetchClient Pattern
 
-Replace axios with native `fetch`-based client (`src/utils/fetch.ts`):
+Replace axios with a native `fetch`-based client (`src/utils/fetch.ts`):
 
 ```ts
 // Axios-compatible interface over native fetch
@@ -639,7 +845,7 @@ export default api;
 ```
 
 Rules:
-* Client Components and API routes only
+* Use in Client Components and API routes only
 * Server Components use `fetch()` directly with `next.tags`
 * Never import axios
 
@@ -648,7 +854,8 @@ Rules:
 
 
 ---
-Many APIs at common location: `src/lib/api/common.ts`
+also many apis are at common palace
+(src/lib/api/common.ts)
 
 
 
@@ -662,4 +869,4 @@ Many APIs at common location: `src/lib/api/common.ts`
 export const Breadcrumb = memo(({ items }) => { ... });
 ```
 
-Always pair with `BreadcrumbList` JSON-LD structured data on same page.
+Always pair with `BreadcrumbList` JSON-LD structured data on the same page.
