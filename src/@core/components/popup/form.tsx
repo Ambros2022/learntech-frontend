@@ -12,9 +12,10 @@ interface Props {
     page?: any;
     onChanges?: any;
     placeholder?: string;
+    collegeName?: string;
 }
 
-const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
+const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, collegeName }) => {
     const router = useRouter();
     const phoneRules: Record<string, RegExp> = {
     "^\\+91-": /^\+91-\d{10}$/,  // India → 10 digits
@@ -39,7 +40,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
             oReq.onload = function () {
                 if (oReq.status === 200) {
                     const file = new Blob([oReq.response], { type: 'application/pdf' });
-                    saveAs(file, "Learntechww Brochure 2025.pdf");
+                    saveAs(file, "Learntechww Brochure 2026.pdf");
                 } else {
                     console.error(`Failed to download file: ${oReq.status} ${oReq.statusText}`);
                 }
@@ -107,6 +108,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
             formData.append('course_in_mind', values.course);
             formData.append('current_url', window.location.href);
             formData.append('description', values.message);
+            formData.append('college_name', values.college_name || '');
             const response = await axios.post('api/website/enquiry', formData);
 
             if (response.status === 200) {
@@ -129,6 +131,7 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
 
     return (
         <Formik
+            enableReinitialize={true}
             initialValues={{
                 name: '',
                 email: '',
@@ -136,12 +139,14 @@ const EnquiryForm: FC<Props> = ({ page, onChanges, placeholder, }) => {
                 course: '',
                 location: '',
                 message: '',
+                college_name: collegeName || '',
                 terms: false,
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
             <Form>
+                <Field type="hidden" name="college_name" />
                 <div className="mb-3">
                     <Field type="text" name="name" placeholder="Enter Name" className="form-control" />
                     <ErrorMessage name="name" component="div" className="error text-danger" />

@@ -27,8 +27,7 @@ const Work: React.FC<WorkProps> = ({ banners }) => {
     AOS.init({
       once: true,
       offset: 200,
-      easing: 'ease-in-sine',
-      delay: 100,
+      delay: 0,
       duration: 1000,
     })
   }, []);

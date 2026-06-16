@@ -12,9 +12,10 @@ interface Props {
     page?: any;
     onChanges?: any;
     placeholder?: string;
+    collegeName?: string;
 }
 
-const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', }) => {
+const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', collegeName }) => {
     const router = useRouter();
     const isMountedRef = useIsMountedRef();
     const [streams, setStreams] = useState<any[]>([]);
@@ -76,6 +77,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', }) => {
             formData.append('contact_number', values.contact_number);
             formData.append('location', values.location);
             formData.append('course_in_mind', values.course);
+            formData.append('college_name', collegeName || '');
             formData.append('current_url', window.location.href);
             const response = await axios.post('/api/website/enquiry', formData);
 

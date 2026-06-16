@@ -1,7 +1,7 @@
 import React from 'react';
 import TALKExpertForm from 'src/@core/components/popup/TalkExpertEnqiiry';
 
-function ExpertSection() {
+function ExpertSection({ collegeName, courseName }: { collegeName?: string; courseName?: string }) {
   return (
     <section className='collegeExpertSection bg-blue py-3 py-md-5 minehightinnercourse'>
       <div className="row">
@@ -17,7 +17,7 @@ function ExpertSection() {
         </div>
         <div className="col-md-7 bg-blue py-3 g-0">
           <h2 className='fw-bold text-center text-white pb-2'>Talk to our Expert</h2>
-          <TALKExpertForm />
+          <TALKExpertForm defaultCollegeName={collegeName} defaultCourseName={courseName} />
         </div>
       </div>
     </section>

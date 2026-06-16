@@ -20,7 +20,7 @@ function BannerSection({ data }) {
                 </div>
                 <div className="row pt-3">
                   <div className="col-12 text-center">
-                    <GlobalEnquiryForm className='btn btn-success' />
+                    <GlobalEnquiryForm className='btn btn-success' collegeName={data.college.name} />
                   </div>
                 </div>
               </div>

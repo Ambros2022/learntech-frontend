@@ -9,9 +9,11 @@ interface Props {
   page?: any;
   onChanges?: any;
   type?: any;
+  defaultCollegeName?: string;
+  defaultCourseName?: string;
 }
 
-const EnquiryForm: FC<Props> = ({ type, }) => {
+const EnquiryForm: FC<Props> = ({ type, defaultCollegeName, defaultCourseName }) => {
   const router = useRouter();
 
 
@@ -34,7 +36,7 @@ const EnquiryForm: FC<Props> = ({ type, }) => {
         }
       ),
     course: Yup.string().required('Course is required').trim(),
-    location: Yup.string().required('Location is required').trim(),
+    location: Yup.string().notRequired().trim(),
   });
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -69,12 +71,13 @@ const EnquiryForm: FC<Props> = ({ type, }) => {
 
   return (
     <Formik
+      enableReinitialize
       initialValues={{
         name: '',
         email: '',
         contact_number: '',
-        course: '',
-        college_name: '',
+        course: defaultCourseName || '',
+        college_name: defaultCollegeName || '',
         location: '',
       }}
       validationSchema={validationSchema}

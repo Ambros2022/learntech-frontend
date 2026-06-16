@@ -33,7 +33,7 @@ const EnquiryForm: FC<Props> = ({ type, }) => {
         }
       ),
     course: Yup.string().required('Grade is required').trim(),
-    location: Yup.string().required('Location is required').trim(),
+    location: Yup.string().notRequired().trim(),
   });
 
   const handleSubmit = async (values, { resetForm }) => {

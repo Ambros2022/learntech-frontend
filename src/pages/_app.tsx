@@ -48,7 +48,6 @@ import { SessionProvider } from 'next-auth/react'; // Import SessionProvider
 // ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
 
-
 // ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
@@ -132,6 +131,8 @@ const App = (props: ExtendedAppProps) => {
   const authGuard = Component.authGuard ?? true;
   const guestGuard = Component.guestGuard ?? false;
 
+
+
   return (
     <>
       <CacheProvider value={emotionCache}>
@@ -186,7 +187,6 @@ const App = (props: ExtendedAppProps) => {
 
 
 
-
         </Head>
 
         <SessionProvider session={pageProps.session}> {/* Wrap with SessionProvider */}
@@ -212,7 +212,6 @@ const App = (props: ExtendedAppProps) => {
           </AuthProvider>
         </SessionProvider>
       </CacheProvider>
-
 
       <Script
         id="gtm"

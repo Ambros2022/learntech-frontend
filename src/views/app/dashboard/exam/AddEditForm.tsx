@@ -1,5 +1,5 @@
 
-import {  useState,  useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import CustomInput from 'src/@core/components/pickersCoustomInput/index'
 import DialogActions from '@mui/material/DialogActions'
 import Card from '@mui/material/Card'
@@ -22,7 +22,7 @@ import { FaTrash } from 'react-icons/fa';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import type { FC, SyntheticEvent } from 'react';
-import {  CardContent, FormControlLabel, FormHelperText, FormLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
+import { CardContent, FormControlLabel, FormHelperText, FormLabel, MenuItem, RadioGroup, Tab, Typography, useTheme } from '@mui/material'
 import FileUpload from 'src/@core/components/dropzone/FileUpload';
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import TabContext from '@mui/lab/TabContext'
@@ -127,18 +127,18 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
 
 
     })
-    console.log(olddata)
 
+    const normalizeEmpty = (value) => value ?? "";
     const defaultValues = {
         exam_title: isAddMode ? '' : olddata.exam_title,
         slug: isAddMode ? '' : olddata.slug,
-        upcoming_date: isAddMode ? null : new Date(olddata.upcoming_date),
+        upcoming_date: isAddMode ? null : olddata.upcoming_date == "null" ?  null :new Date(olddata.upcoming_date),
         // exam_dates: isAddMode ? null : new Date(olddata.exam_dates),
         exam_short_name: isAddMode ? '' : olddata.exam_short_name,
         college_type: isAddMode ? '' : olddata.college_type,
         overview: isAddMode ? '' : olddata.overview,
-        level_of_study: isAddMode ? '' : olddata.level_of_study,
-        types_of_exams: isAddMode ? '' : olddata.types_of_exams,
+        level_of_study: isAddMode ? "" : normalizeEmpty(olddata.level_of_study),
+        types_of_exams: isAddMode ? "" : normalizeEmpty(olddata.types_of_exams),
         country_id: (isAddMode || !olddata) ? '' : olddata.country,
         // exam_dates: isAddMode ? '' : olddata.exam_dates,
         meta_title: isAddMode ? '' : olddata.meta_title,
@@ -323,7 +323,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
             formData.append('status', data.status);
             if (selectedphoto == '') {
 
-                toast.error('Please Upload Photo', {
+                toast.error('Please Upload cover_image', {
                     duration: 2000
                 })
                 setLoading(false);
@@ -760,7 +760,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
                                             >
                                                 <MenuItem value="UG">UG</MenuItem>
                                                 <MenuItem value="PG">PG</MenuItem>
-                                                <MenuItem value="professional">Professional</MenuItem>
+                                                <MenuItem value="ProfessionalEd">Professional</MenuItem>
                                             </CustomSelectField>
                                         )}
                                     />
@@ -786,6 +786,7 @@ const AddEditForm: FC<Authordata> = ({ olddata, isAddMode, }) => {
                                                 <MenuItem value="Language_Proficiency">Language Proficiency</MenuItem>
                                                 <MenuItem value="Aptitiude_Test">Aptitude Test</MenuItem>
                                                 <MenuItem value="Streams">Streams</MenuItem>
+
                                             </CustomSelectField>
                                         )}
                                     />

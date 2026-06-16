@@ -121,6 +121,7 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
         <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
 
         <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
+        <meta name="robots" content="index, follow" />
 
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
 
@@ -282,7 +283,7 @@ function InnerCourseCollegePage({ Collegeid, Courseslug }) {
 
 
 
-      <ExpertSection />
+      <ExpertSection collegeName={pagedata?.college?.name} courseName={pagedata?.title} />
 
       {!loading && pagedata && <TopFeaturedColleges data={pagedata} />}
 

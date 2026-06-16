@@ -19,7 +19,7 @@ function CollegeCard({ college }) {
                     </span>
                 </p>
                 <div className="d-flex justify-content-between">
-                    <GlobalEnquiryForm className="applyNowButton btn" />
+                    <GlobalEnquiryForm className="applyNowButton btn" collegeName={college.name} />
                     <Link href={`/college/${college.id}/${college.slug}`} className="btn">View More</Link>
                 </div>
             </div>

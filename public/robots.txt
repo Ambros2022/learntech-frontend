@@ -1,10 +1,68 @@
-User-agent: * 
+# Global rules for all standard search engines
+User-agent: *
+Allow: /
 Disallow: /admin/
 Disallow: /dashboard/
-Disallow: /index.php/
+Disallow: /search/
 
+# Google Search Bot
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Bing Search Bot
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# OpenAI Search Bot
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# OpenAI GPTBot
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Google AI Training Bot
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Anthropic Claude Bot
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# DeepSeek Bot
+User-agent: DeepSeekBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Sitemap
 Sitemap: https://learntechww.com/sitemap.xml
-
 Sitemap: https://learntechww.com/sitemap/universities.xml
 Sitemap: https://learntechww.com/sitemap/colleges.xml
 Sitemap: https://learntechww.com/sitemap/collegecourses.xml

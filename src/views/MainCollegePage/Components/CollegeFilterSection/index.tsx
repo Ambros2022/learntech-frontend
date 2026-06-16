@@ -65,7 +65,7 @@ const CollegeCard = ({ id, slug, name, type, rating, location,  established, ima
                                     ) : ''}
                                 </div>
                                 <div className="mt-lg-0 col-md-10 col-xl-3 col-lg-12 text-xl-end text-end flex-md-row flex-column d-flex flex-lg-row flex-xl-column justify-content-xl-around gap-xl-0 gap-3">
-                                    <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" />
+                                    <GlobalEnquiryForm className="activeBtn  btn d-flex justify-content-center" collegeName={name} />
 
                                     <Link href={`/college/${id}/${slug}`} className=" viewMoreBtn btn d-flex justify-content-center"><span className='align-content-center'>View More</span></Link>
                                 </div>
