@@ -51,7 +51,7 @@ const MainNewsPage = () => {
 
       }))
       setNewsItems(newsData)
-
+z
     } catch (error) {
       console.error('Failed to fetch news data:', error)
       setLoading(true)
