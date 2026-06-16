@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useState } from 'react'; // Import useState
 import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap Modal
 

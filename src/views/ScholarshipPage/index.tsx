@@ -1,3 +1,4 @@
+﻿'use client'
 
 import React, { useCallback, useEffect, useState } from 'react';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
@@ -6,7 +7,7 @@ import Head from 'next/head';
 import BannerSec from './Components/BannerSec'
 import ScholarshipAbroadSec from './Components/ScholarshipAbroadSec'
 import FilterSec from './Components/FilterSec'
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 const ScholarshipPage = () => {
     const router = useRouter()

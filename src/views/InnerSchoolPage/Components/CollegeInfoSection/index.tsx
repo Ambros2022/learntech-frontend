@@ -1,8 +1,9 @@
+﻿'use client'
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Carousel from 'react-multi-carousel';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import 'react-multi-carousel/lib/styles.css';
 import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry';
 
@@ -86,10 +87,10 @@ function CollegeInfoSection({ data }) {
   const ButtonGroup = ({ next, previous }) => (
     <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
       <span className='fi-left' onClick={previous}>
-        <FiChevronLeft />
+        <ChevronLeft />
       </span>
       <span className='fi-right' onClick={next}>
-        <FiChevronRight />
+        <ChevronRight />
       </span>
     </div>
   );

@@ -1,3 +1,4 @@
+﻿'use client'
 import BannerSec from './Components/BannerSec'
 import BestSec from './Components/BestSec'
 import BoardsSec from './Components/BoardsSec'
@@ -6,7 +7,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 const MainBoardPage = () => {
   const router = useRouter()

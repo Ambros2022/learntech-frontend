@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import NewsList from '../newsList'
 import Link from 'next/link'
@@ -6,7 +7,7 @@ import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
 import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface NewsItem {
     slug: any
@@ -110,10 +111,10 @@ const BrowseNewsSec = ({ collegeData,categories, activeTab, setActiveTab }) => {
         return (
             <div className="carousel-button-group d-flex justify-content-between gap-5 fs-2">
                 <span className='fi-left' onClick={previous}>
-                    <FiChevronLeft />
+                    <ChevronLeft />
                 </span>
                 <span className='fi-right' onClick={next}>
-                    <FiChevronRight />
+                    <ChevronRight />
                 </span>
             </div>
         )

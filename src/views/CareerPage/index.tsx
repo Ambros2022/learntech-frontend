@@ -1,3 +1,4 @@
+﻿'use client'
 
 import React, { useCallback, useEffect, useState } from 'react';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
@@ -9,7 +10,7 @@ import CurrentOpeningSec from './Components/CurrentOpeningSec'
 import ContactCareerSec from './Components/ContactCareerSec'
 import DisclaimerSec from './Components/DisclaimerSec'
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 const CareerPage = () => {
     const router = useRouter()

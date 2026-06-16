@@ -1,8 +1,10 @@
+﻿'use client'
 // ** React Imports
 import { createContext, useEffect, useState, ReactNode } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import axios1 from 'src/configs/adminaxios'
 
@@ -72,6 +74,7 @@ const AuthProvider = ({ children }: Props) => {
 
   // ** Hooks
   const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
@@ -109,7 +112,7 @@ const AuthProvider = ({ children }: Props) => {
           .catch(() => {
             setUser(null)
             setLoading(false)
-            if (authConfig.onTokenExpiration === 'logout' && !router.pathname.includes('login')) {
+            if (authConfig.onTokenExpiration === 'logout' && !pathname.includes('login')) {
               router.replace('/login')
             }
           })
@@ -155,7 +158,8 @@ const AuthProvider = ({ children }: Props) => {
         // console.log(data, "data");
 
         setUser(data)
-        const returnUrl = router.query.returnUrl
+        const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
+        const returnUrl = params.get('returnUrl')
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
         setisAuthenticated(true);
 

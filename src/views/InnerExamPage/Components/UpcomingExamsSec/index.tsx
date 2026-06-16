@@ -1,3 +1,4 @@
+﻿'use client'
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react'
 import Carousel3 from 'src/@core/components/carousel3';

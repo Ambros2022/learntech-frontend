@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react';
 import NewsList from '../newsList';
 import axios from 'src/configs/axios';
@@ -9,7 +10,7 @@ import {
     WhatsappShareButton,
 } from 'next-share';
 import { RWebShare } from 'react-web-share';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 const InfoSec = ({ data }) => {
     const [newsData, setNewsData] = useState([]);

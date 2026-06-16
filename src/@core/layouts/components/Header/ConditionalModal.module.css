@@ -1,0 +1,56 @@
+.fadeModal {
+  background: rgba(21, 41, 88, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.formImgCon {
+  background-color: rgba(39, 72, 150, 0.2);
+}
+
+.formImage img {
+  width: auto;
+  height: auto;
+}
+
+.signForm :global(.nav-link) {
+  font-weight: normal;
+  text-decoration: none;
+  color: black;
+  font-size: 20px !important;
+}
+
+.signForm :global(.nav-link.active) {
+  font-weight: bold;
+  color: #254692;
+  border-bottom: 3px solid #254692;
+  padding-bottom: 5px;
+}
+
+.signForm label {
+  font-weight: 500;
+}
+
+.signForm :global(.form-check-label) {
+  font-weight: 500 !important;
+  font-size: 13px !important;
+}
+
+.signForm input[type='text'],
+.signForm input[type='tel'] {
+  background-color: white !important;
+  width: 100%;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .formImage img {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .wSmForm {
+    width: 90% !important;
+    margin: 10px auto !important;
+  }
+}

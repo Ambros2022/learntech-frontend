@@ -1,0 +1,167 @@
+/* ─────────────────────────────────────────────────────────────────
+   Tab buttons  (replaces global newsBtn / blgBtn)
+   ───────────────────────────────────────────────────────────────── */
+.tabBtn {
+  min-width: 110px;
+  border-radius: 6px !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1.5px solid #254692 !important;
+  color: #254692 !important;
+  background-color: #ffffff !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tabBtn.activeTab {
+  background-color: #254692 !important;
+  color: #ffffff !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Slide wrapper  (inside Embla — replaces col-12 mb-1 inline style)
+   ───────────────────────────────────────────────────────────────── */
+.slide {
+  min-width: 0;         /* prevent embla overflow */
+  padding: 0 4px;
+  margin-bottom: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Outer link makes the whole card clickable
+   ───────────────────────────────────────────────────────────────── */
+.cardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardLink:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   newsBlosCards equivalent
+   ───────────────────────────────────────────────────────────────── */
+.cardSlide {
+  margin-right: 10px;
+}
+
+@media (max-width: 767px) {
+  .cardSlide {
+    margin: 0 10px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Inner spacing — mb-5 mx-lg-3 mx-0 equivalent
+   ───────────────────────────────────────────────────────────────── */
+.cardInner {
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 992px) {
+  .cardInner {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Card  (replaces hover-card + responsive-card globals)
+   ───────────────────────────────────────────────────────────────── */
+.card {
+  background: url('/images/icons/Card.webp') no-repeat center !important;
+  background-size: cover !important;
+  height: auto !important;
+  min-height: 200px;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    background-size: contain !important;
+    background-position: bottom !important;
+    min-height: 309px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Card body  (replaces newsheight)
+   ───────────────────────────────────────────────────────────────── */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Typography  (replaces text-blue + Bootstrap card-title/subtitle)
+   ───────────────────────────────────────────────────────────────── */
+.cardTitle {
+  font-size: 1rem !important;
+  font-weight: 700;
+  color: #254692 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+.cardDate {
+  font-size: 0.82rem;
+  color: #6c757d;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+/* description row */
+.cardDescRow {
+  flex: 1;
+}
+
+.cardText {
+  font-size: 0.9rem;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 63px;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Read More  (replaces viewDetailBtn global)
+   ───────────────────────────────────────────────────────────────── */
+.readMoreBtn {
+  display: inline-block;
+  background-color: transparent !important;
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  padding: 0.375rem 0.75rem;
+  margin-top: auto;
+  align-self: flex-start;
+  transition: box-shadow 0.2s ease;
+}
+
+.readMoreBtn:hover {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 12px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Empty / loading state
+   ───────────────────────────────────────────────────────────────── */
+.emptyState {
+  text-align: center;
+  color: #fff;
+  padding: 2.5rem 0;
+  margin: 0;
+}

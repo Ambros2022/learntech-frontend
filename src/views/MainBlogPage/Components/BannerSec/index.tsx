@@ -1,3 +1,4 @@
+﻿'use client'
 import axios from 'src/configs/axios';
 import Autocomplete from 'src/@core/components/mui/autocomplete';
 import React, { useState } from 'react';

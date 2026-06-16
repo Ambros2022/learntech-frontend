@@ -1,3 +1,4 @@
+﻿'use client'
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import axios1 from 'axios';
 import axios from 'src/configs/axios';

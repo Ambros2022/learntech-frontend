@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react'
 import EducationLoanPage from 'src/@core/components/popup/EducationloanForm'
 

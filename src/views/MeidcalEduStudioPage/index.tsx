@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import BannerSec from './Components/BannerSec'
 import AchieverSec from './Components/AchieversSec'
@@ -11,7 +12,7 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import axios from 'src/configs/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import Head from 'next/head'
 
 const MedicalEduStudioPage = () => {

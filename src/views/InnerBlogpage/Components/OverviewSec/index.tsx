@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useMemo } from 'react';
 import Head from 'next/head';
 import { Roboto } from 'next/font/google';

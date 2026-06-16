@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import BannerSection from './Components/BannerSection'
 import CollegeInfoSection from './Components/CollegeInfoSection'
@@ -7,7 +8,7 @@ import TopFeaturedColleges from './Components/TopFeaturedColleges'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import Testimonial from './Components/TestimonialSec'
 
 function AbroadUniversityPage({ id, Countrydata }) {

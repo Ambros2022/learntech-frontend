@@ -1,7 +1,8 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'src/configs/axios';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import BannerSec from './Components/BannerSec'
 import TermsText from './Components/TermsText'
@@ -40,29 +41,15 @@ const PrivacyPolicypage = () => {
         <script type="application/ld+json">
 
           {JSON.stringify([
-
-
-
-
             {
-
               "@context": "https://schema.org/",
-
               "@type": "BreadcrumbList",
-
               "itemListElement": [
-
                 {
-
                   "@type": "ListItem",
-
                   "position": 1,
-
                   "name": "Home",
-
                   "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
-
-
 
                 },
 

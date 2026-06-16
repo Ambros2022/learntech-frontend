@@ -1,3 +1,4 @@
+﻿'use client'
 import Link from 'next/link'
 import React from 'react'
 import { Roboto } from "next/font/google";

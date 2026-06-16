@@ -1,3 +1,4 @@
+﻿'use client'
 const BestCollegeSec = () => {
     return (
         <section className="bg-white py-5">

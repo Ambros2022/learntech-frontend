@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 const CategoryCarousel = dynamic(() => import('./CategoryCarousel'), { ssr: false, });
@@ -12,7 +13,7 @@ const SideContactUsForm = dynamic(() => import('src/@core/components/popup/SideC
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Link from 'next/link';
 import { useAuth } from 'src/hooks/useAuth';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 
 const BrowsebyCategorySec = ({ countryData, streams }) => {

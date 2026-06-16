@@ -1,9 +1,10 @@
+﻿'use client'
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import axios1 from 'src/configs/axios';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const MainCarousel = ({ items }) => {
 
@@ -31,10 +32,10 @@ const MainCarousel = ({ items }) => {
     return (
       <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
         <span className='fi-left' onClick={previous} >
-          <FiChevronLeft style={{ cursor: 'pointer' }} />
+          <ChevronLeft style={{ cursor: 'pointer' }} />
         </span>
         <span className='fi-right' style={{ cursor: 'pointer' }} onClick={next}>
-          <FiChevronRight />
+          <ChevronRight />
         </span>
       </div>
     );

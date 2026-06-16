@@ -1,9 +1,10 @@
+﻿'use client'
 import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
-import { toast } from 'react-hot-toast'
-import { useRouter } from 'next/router';
+import { toast } from 'sonner'
+import { useRouter } from 'src/hooks/useCompatRouter';
 import PhoneInputField from 'src/@core/components/popup/PhoneInput';
 
 const EnquiryFormMed = ({ heading }: { heading: string }) => {

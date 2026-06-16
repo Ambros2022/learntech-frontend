@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": "src",
     "target": "es6",
     "lib": [
       "dom",
@@ -15,10 +14,10 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     // "paths": {
     //   "apexcharts": [
@@ -29,11 +28,19 @@
     //   ],
     // },
     "noImplicitAny": false, // Suppress noImplicitAny errors
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
+    "declaration.d.ts",
     "src",
-    "declaration.d.ts"
-, "src/middleware.ts"  ],
+    "src/proxy.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,5 +1,6 @@
+﻿'use client'
 import React, { useEffect, useState } from 'react';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -30,10 +31,10 @@ const ButtonGroup = ({
 }) => (
     <div className={`carousel-button-group d-flex justify-content-between ${showButtons ? '' : 'd-none'}`}>
         <span className="carousel-btn fi-left" onClick={previous}>
-            <FiChevronLeft size={30} />
+            <ChevronLeft size={30} />
         </span>
         <span className="carousel-btn fi-right" onClick={next}>
-            <FiChevronRight size={30} />
+            <ChevronRight size={30} />
         </span>
     </div>
 );

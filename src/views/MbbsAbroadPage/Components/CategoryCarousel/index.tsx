@@ -1,7 +1,8 @@
+﻿'use client'
 import React, { useState } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
     const isMobileView = () => {
@@ -34,10 +35,10 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
         return (
             <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2" style={{ zIndex: '1 !important' }} >
                 <span className='fi-left' onClick={previous}>
-                    <FiChevronLeft />
+                    <ChevronLeft />
                 </span>
                 <span className='fi-right' onClick={next}>
-                    <FiChevronRight />
+                    <ChevronRight />
                 </span>
             </div>
         );

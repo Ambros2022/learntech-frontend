@@ -1,0 +1,23 @@
+.topBar {
+  background-color: rgba(39, 72, 150, 0.1) !important;
+}
+
+.socialIcon img {
+  width: 22px;
+}
+
+.socialText {
+  font-size: 16px !important;
+}
+
+.socialText img {
+  width: 18px;
+}
+
+.telHover a:hover {
+  color: blue !important;
+}
+
+.mailHover a:hover {
+  color: blue !important;
+}

@@ -1,3 +1,4 @@
+﻿'use client'
 import dynamic from 'next/dynamic';
 import React from 'react'
 const NewsLetterEnquiry = dynamic(() => import('src/@core/components/popup/NewsLetterEnquiry'), { ssr: false });

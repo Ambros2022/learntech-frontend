@@ -4,11 +4,12 @@ module.exports = {
   skipTrailingSlashRedirect: true,
 
   images: {
-    domains: ['localhost', 'api.learntechww.com','newapi.learntechww.com', 'learntechww.com'],
-  },
-
-  experimental: {
-    optimizeCss: true,
+    remotePatterns: [
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'https', hostname: 'api.learntechww.com' },
+      { protocol: 'https', hostname: 'newapi.learntechww.com' },
+      { protocol: 'https', hostname: 'learntechww.com' },
+    ],
   },
 
   async headers() {

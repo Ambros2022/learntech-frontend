@@ -1,3 +1,4 @@
+﻿'use client'
 import Link from 'next/link';
 import React from 'react';
 import NewsCarousel from 'src/views/Homepage/Components/NewsCarousel';

@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react';
 import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry';
 

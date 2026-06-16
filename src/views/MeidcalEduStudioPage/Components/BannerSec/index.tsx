@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react';
 import EnquiryFormMed from 'src/@core/components/popup/EnquiryFormMed';
 

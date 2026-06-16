@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import BannerSec from './Components/BannerSec'
 import OverviewSec from './Components/OverviewSec'
@@ -5,7 +6,7 @@ import ExpertSec from './Components/ExpertSec'
 import FeaturedCollegeSection from './Components/FeaturedCollegeSection'
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import axios from 'src/configs/axios';
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 import Head from 'next/head'
 
 

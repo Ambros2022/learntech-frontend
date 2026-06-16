@@ -1,3 +1,4 @@
+﻿'use client'
 import React from 'react';
 import {
     FacebookShareButton,
@@ -8,7 +9,7 @@ import {
 } from 'next-share';
 import { RWebShare } from 'react-web-share';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
 const ExpertSec = ({ data }) => {
     const router = useRouter();
