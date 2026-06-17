@@ -182,6 +182,14 @@ export const getBlogs = cache(async (params?: Record<string, string | number>) =
   return { blogs: json?.data ?? [], totalCount: json?.total ?? 0 }
 })
 
+export const getBlogsListing = cache(async (page = 1, size = 8) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/blog/get?orderby=desc&page=${page}&size=${size}`,
+    { tags: ['blogs-listing'] },
+  )
+  return { blogs: json?.data ?? [], totalPages: json?.totalPages ?? 1 }
+})
+
 // ─────────────────────────────────────────────────────────────────────────────
 // SCHOOLS
 // ─────────────────────────────────────────────────────────────────────────────

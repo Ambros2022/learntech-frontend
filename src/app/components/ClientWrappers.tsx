@@ -96,6 +96,26 @@ export const LazyFaqSec = dynamic(
   { ssr: false, loading: () => <SectionSkeleton height='200px' /> },
 )
 
+const SearchBarSkeleton = () => (
+  <div
+    style={{
+      height: 56,
+      background: 'rgba(255,255,255,0.92)',
+      borderRadius: 4,
+    }}
+  />
+)
+
+export const LazyBlogSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/BlogSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyGlobalPopupShare = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupShare'),
+  { ssr: false, loading: () => null },
+)
+
 export const LazyContactUsForm = dynamic(
   () => import('src/@core/components/popup/ContactUsForm'),
   { ssr: false, loading: () => <FormSkeleton /> },
