@@ -21,5 +21,6 @@ export default async function Page({ params }: Props) {
   const { collegeId, courseSlug } = await params
   const pagedata = await getCollegeCourse(courseSlug, collegeId)
   if (!pagedata) notFound()
+  // @ts-expect-error async server component
   return <InnerCourseCollegePage pagedata={pagedata} Collegeid={collegeId} />
 }

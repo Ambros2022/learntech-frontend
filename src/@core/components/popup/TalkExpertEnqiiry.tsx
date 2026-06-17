@@ -74,7 +74,7 @@ export default function TalkExpertEnquiry({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="container w-75 m-auto">
+    <form onSubmit={handleSubmit(onSubmit)} className="container w-78 m-auto">
       <div className="row mb-3">
         <div className="col-lg-6 col-md-12 mb-3 px-xl-4 px-lg-3 px-md-5">
           <input type="text" placeholder="Enter Name" className="form-control" {...register('name')} />

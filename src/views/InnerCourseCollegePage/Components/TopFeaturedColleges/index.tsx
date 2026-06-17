@@ -1,57 +1,37 @@
-﻿'use client'
-import React, { useCallback, useEffect, useState } from 'react'
-import axios1 from 'src/configs/axios'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
+import { getColleges } from 'src/lib/api/common'
+import { LazyCollegeCarousel } from 'src/app/components/ClientWrappers'
 
-const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
-const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
+interface Props {
+  streamId?: number | null
+  shortName?: string
+}
 
-function FeaturedCollegeSection({ data }) {
-  const [colleges, setColleges] = useState<any[]>([]);
+const clipRect = { position: 'absolute' as const, width: 1, height: 1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' as const }
 
-  const getcolleges = useCallback(async () => {
-    try {
-      const roleparams: any = {
-        page: 1,
-        size: 10,
-        type: 'college',
-        stream_id: [data?.generalcourse?.stream_id]
-      };
-      const response = await axios1.get('api/website/colleges/get', { params: roleparams });
-      setColleges(response.data.data);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [data?.generalcourse?.stream_id]);
-
-  useEffect(() => {
-    getcolleges();
-  }, [getcolleges]);
-
-  if (!colleges || colleges.length === 0) {
-    return null; // Don't render anything if there are no colleges
-  }
+export default async function TopFeaturedColleges({ streamId, shortName }: Props) {
+  const params: Record<string, string | number> = { size: 10, type: 'college' }
+  if (streamId) params.stream_id = streamId
+  const result = await getColleges(params)
+  const colleges = result?.data ?? []
+  if (!colleges.length) return null
 
   return (
-    <section className="FeaturedClgCon bg-white innercourse_height" id="animation5" data-aos="fade-up">
-      <div className="container pt-5 position-relative">
-        <h2 className="fw-bold text-blue text-center mb-5">
-          Top {data.short_name} Featured Colleges
+    <section className="FeaturedClgCon bg-white">
+      <div className="container pt-4 pt-md-5 position-relative">
+        <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">
+          Top {shortName} Featured Colleges
         </h2>
-        <MainCarousel items={colleges.map(college => (
-          <CollegeCard key={college.id} college={college} />
-        ))} />
-        <div className="d-flex justify-content-center pb-5">
-          <Link href={{
-            pathname: "/colleges",
-            // query: { stream_id: data.generalcourse.stream_id }
-          }}
-            className='btn viewMoreClgBtn'>View More</Link>
+        <ul aria-hidden="true" style={clipRect}>
+          {colleges.map((c: any) => (
+            <li key={c.id}><a href={`/college/${c.id}/${c.slug}`}>{c.name}</a></li>
+          ))}
+        </ul>
+        <LazyCollegeCarousel colleges={colleges} />
+        <div className="d-flex justify-content-center py-4">
+          <Link href="/colleges" className="btn viewMoreClgBtn">View More</Link>
         </div>
       </div>
     </section>
-  );
+  )
 }
-
-export default FeaturedCollegeSection
