@@ -45,11 +45,10 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const [banners, news, { data: colleges }, abroadCountries, latestNewsItems, newsBanner, rawStreams] =
+  const [banners, news, abroadCountries, latestNewsItems, newsBanner, rawStreams] =
     await Promise.all([
       getHeroBanners(),
       getNewsList({ size: 10, columnname: 'created_at' }),
-      getColleges({ size: 10, type: 'college' }),
       getAbroadCountries(),
       getLatestNewsList(8),
       getNewsSectionBanner(),
@@ -67,7 +66,6 @@ export default async function Page() {
     <Homepage
       banners={banners}
       news={news}
-      colleges={colleges}
       studyAbroad={{ countries: abroadCountries, colleges: abroadColleges, countryId: abroadCountryId }}
       latestNews={{ news: latestNewsItems, banner: newsBanner }}
       expertStreams={expertStreams}

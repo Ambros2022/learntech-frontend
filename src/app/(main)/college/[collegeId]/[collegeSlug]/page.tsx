@@ -1,6 +1,6 @@
 ﻿import { notFound } from 'next/navigation'
 import InnerCollegePage from 'src/views/InnerCollegePage'
-import { getCollegeById, getTestimonialsByCollege } from 'src/lib/api/common'
+import { getCollegeById } from 'src/lib/api/common'
 
 type Props = { params: Promise<{ collegeId: string; collegeSlug: string }> }
 
@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Page({ params }: Props) {
   const { collegeId } = await params
-  const [pagedata, testdata] = await Promise.all([getCollegeById(collegeId), getTestimonialsByCollege(collegeId)])
+  const pagedata = await getCollegeById(collegeId)
   if (!pagedata) notFound()
-  return <InnerCollegePage pagedata={pagedata} testdata={testdata} />
+  // @ts-expect-error async server component
+  return <InnerCollegePage pagedata={pagedata} />
 }

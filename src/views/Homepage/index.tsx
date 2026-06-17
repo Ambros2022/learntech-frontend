@@ -84,13 +84,12 @@ interface LatestNewsData {
 interface HomepageProps {
   banners: Banner[]
   news: NewsItem[]
-  colleges: CollegeItem[]
   studyAbroad: StudyAbroadData
   latestNews: LatestNewsData
   expertStreams: Stream[]
 }
 
-export default function Homepage({ banners, news, colleges, studyAbroad, latestNews, expertStreams }: HomepageProps) {
+export default function Homepage({ banners, news, studyAbroad, latestNews, expertStreams }: HomepageProps) {
   return (
     <>
 
@@ -105,7 +104,8 @@ export default function Homepage({ banners, news, colleges, studyAbroad, latestN
 
       {/* ── Below the fold — fully lazy, off the critical path ── */}
       <AnimateOnScroll variant='fade-up'>
-        <FeaturedCollegeSection colleges={colleges} />
+        {/* @ts-expect-error async server component */}
+        <FeaturedCollegeSection />
       </AnimateOnScroll>
 
       <AnimateOnScroll variant='fade-up' delay={0.05}>

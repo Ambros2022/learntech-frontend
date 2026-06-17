@@ -979,3 +979,109 @@ const updates = await getNewsList({ category_id: 8, size: 10, columnname: 'creat
 // WRONG — updates will be undefined
 const { data: updates } = await getNewsList(...)
 ```
+
+---
+
+## getColleges / getSchools API Notes
+
+`getColleges` and `getSchools` in `src/lib/api/common.ts`:
+* Return `{ data: [], totalItems: N }` — MUST destructure `.data`
+
+```ts
+// CORRECT
+const result = await getColleges({ size: 10 })
+const colleges = result?.data ?? []
+
+// WRONG — colleges is { data, totalItems }, not array
+const colleges = await getColleges({ size: 10 })
+colleges.map(...)  // ❌ TypeError
+```
+
+---
+
+## Async Server Component TypeScript Fix
+
+TypeScript doesn't understand async server components used as JSX in non-async parents.
+
+```tsx
+// Fix — suppress the type error:
+{/* @ts-expect-error async server component */}
+<FeaturedCollegeSection />
+
+// Or in page.tsx return:
+// @ts-expect-error async server component
+return <InnerCollegePage pagedata={pagedata} />
+```
+
+Rules:
+* Never `async` a page-level server component unnecessarily to avoid cascading ts-errors
+* Prefer making the view component async, suppress at call site
+
+---
+
+## Self-Fetching Server Component Pattern
+
+Components that always show same data can own their fetch instead of receiving props.
+
+```tsx
+// FeaturedCollegeSection/index.tsx — async server component
+export default async function FeaturedCollegeSection({ heading = 'Featured Colleges' }: { heading?: string }) {
+  const result = await getColleges({ size: 10 })
+  const colleges = result?.data ?? []
+  if (!colleges.length) return null
+  return (
+    <section>
+      <h2>{heading}</h2>
+      <LazyCollegeCarousel colleges={colleges} />
+    </section>
+  )
+}
+```
+
+Rules:
+* Use when: data is always the same regardless of page context (featured colleges, latest news)
+* Avoid when: data depends on page params (college ID, slug, filters)
+* Accept optional `heading` prop to reuse across pages with different titles
+* Caller doesn't need to fetch or pass props — zero prop drilling
+* React `cache()` deduplicates if same API called elsewhere on same request
+
+---
+
+## CollegeInfoSection Tab Pattern (Server/Client Split)
+
+Tabs need client state, but the data preparation is server-side.
+
+```
+CollegeInfoSection (server — no 'use client')
+└── CollegeInfoTabsClient ('use client')
+    ├── ScrollTabs — reusable tab nav component
+    └── Tab content rendered per activeTab
+        ├── HTML tabs — dangerouslySetInnerHTML (from server props)
+        ├── Gallery — next/image
+        ├── Review — LazyReviewSec (mounts only when tab active)
+        └── FAQ — LazyBoardFaqSec (mounts only when tab active)
+```
+
+Server component prepares `CollegeTabData[]` — serializable (HTML strings, arrays, not JSX).
+Client renders appropriate content per `activeTab`.
+Lazy components (`LazyReviewSec`, `LazyFaqSec`) only mount when their tab is activated — avoids unnecessary API calls.
+
+```tsx
+// Server (index.tsx)
+export default function CollegeInfoSection({ data }) {
+  const tabs: CollegeTabData[] = [...].filter(t => hasContent(t))
+  return <section><CollegeInfoTabsClient tabs={tabs} collegeName={data.name} collegeId={data.id} /></section>
+}
+
+// Client (CollegeInfoTabsClient.tsx)
+'use client'
+export default function CollegeInfoTabsClient({ tabs, collegeName, collegeId }) {
+  const [activeTab, setActiveTab] = useState(tabs[0]?.id)
+  return (
+    <>
+      <ScrollTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      {/* render content for activeTab only */}
+    </>
+  )
+}
+```
