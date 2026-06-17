@@ -1,32 +1,24 @@
-﻿'use client'
-import React from 'react';
-
-import Link from 'next/link'
+import Image from 'next/image'
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
 
 const BannerSec = () => {
-
-    return (
-        <>
-            <section className='AdvertiseBanner'>
-                <img
-                    // src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                    src="/images/icons/handshake.webp"
-                    // priority={true}
-                    alt={`Banner advertisement`}
-                    height={300}
-                    width={1400}
-                    className='img-fluid'
-                />
-
-
-            </section >
-            <section className='bg-white'>
-                <div className="container linkFontSize py-3">
-                    <Link className='text-black' href='/'>Home <i className='bi bi-chevron-right me-2'></i></Link><span className='text-blue'>Advertise With Us </span>
-                </div>
-            </section>
-        </>
-    )
+  return (
+    <>
+      <section className="AdvertiseBanner">
+        <Image
+          src="/images/icons/handshake.webp"
+          alt="Advertise with Learntech Edu Solutions"
+          width={1400}
+          height={300}
+          priority
+          sizes="100vw"
+          className="img-fluid"
+          style={{ width: '100%', height: 'auto' }}
+        />
+      </section>
+      <Breadcrumb items={[{ label: 'Advertise With Us' }]} />
+    </>
+  )
 }
 
 export default BannerSec

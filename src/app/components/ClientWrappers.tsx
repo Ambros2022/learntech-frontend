@@ -86,6 +86,21 @@ const FormSkeleton = () => (
   <div style={{ minHeight: 320, background: '#f0f0f0', borderRadius: 4 }} />
 )
 
+export const LazyEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/form'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyFaqSec = dynamic(
+  () => import('src/@core/components/blog-faq/index'),
+  { ssr: false, loading: () => <SectionSkeleton height='200px' /> },
+)
+
+export const LazyContactUsForm = dynamic(
+  () => import('src/@core/components/popup/ContactUsForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
 export const LazySignupForm = dynamic(
   () => import('src/@core/components/custom-user-auth/SignUpFrom'),
   { ssr: false, loading: () => <FormSkeleton /> },

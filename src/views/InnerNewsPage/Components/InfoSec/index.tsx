@@ -2,14 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import NewsList from '../newsList';
 import axios from 'src/configs/axios';
-import {
-    FacebookShareButton,
-    TwitterShareButton,
-    LinkedinShareButton,
-    PinterestShareButton,
-    WhatsappShareButton,
-} from 'next-share';
-import { RWebShare } from 'react-web-share';
+import ShareButtons from 'src/components/ui/ShareButtons';
 import { useRouter } from 'src/hooks/useCompatRouter';
 
 const InfoSec = ({ data }) => {
@@ -92,44 +85,7 @@ const InfoSec = ({ data }) => {
                 </div>
                 <section className="bg-white py-2">
                     <div className="container">
-                        <div className="d-flex justify-content-md-start justify-content-center gap-3 flex-wrap mb-3">
-                            <LinkedinShareButton url={location}>
-                                <button className="btn btn-primary">
-                                    <i className="bi me-2 bi-linkedin"></i>Share
-                                </button>
-                            </LinkedinShareButton>
-                            <TwitterShareButton url={location} title={data?.meta_title}>
-                                <button className="btn btn-dark me-2 text-white">
-                                    <i className="bi me-2 bi-twitter-x"></i>Tweet
-                                </button>
-                            </TwitterShareButton>
-                            <FacebookShareButton url={location} quote={data?.meta_title} hashtag={data?.meta_title}>
-                                <button className="btn btn-primary text-white">
-                                    <i className="bi me-2 bi-facebook"></i>Share
-                                </button>
-                            </FacebookShareButton>
-                            <PinterestShareButton url={location} media={data?.meta_title}>
-                                <button className="btn btn-danger text-white">
-                                    <i className="bi me-2 bi-pinterest"></i>Pin
-                                </button>
-                            </PinterestShareButton>
-                            <WhatsappShareButton url={location} title={data?.meta_title}>
-                                <button className="btn btn-success text-white">
-                                    <i className="bi me-2 bi-whatsapp"></i>Share
-                                </button>
-                            </WhatsappShareButton>
-                            <RWebShare
-                                data={{
-                                    text: `${data?.meta_title}`,
-                                    url: `${location}`,
-                                    title: `${data?.meta_title}`,
-                                }}
-                            >
-                                <button className="btn btn-dark text-white">
-                                    <i className="bi me-2 bi-share-fill"></i>Share
-                                </button>
-                            </RWebShare>
-                        </div>
+                        <ShareButtons url={location} title={data?.meta_title || data?.name} />
                     </div>
                 </section>
                 <div className='pt-0'>

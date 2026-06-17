@@ -294,6 +294,22 @@ export const getAboutPageBanners = cache(async () => {
   return json?.data ?? []
 })
 
+export const getAdvertisePageBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=Advertise_page&page=1&size=10000`,
+    { tags: ['advertise-banners'] },
+  )
+  return json?.data ?? []
+})
+
+export const getAssociatedColleges = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/colleges/get?is_associated=1&page=1&size=10`,
+    { tags: ['associated-colleges'] },
+  )
+  return json?.data ?? []
+})
+
 export const getAboutVideoTestimonials = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/allvideotestimonials/get?type=About_us_page`,
