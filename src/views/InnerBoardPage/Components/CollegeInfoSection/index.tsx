@@ -1,160 +1,58 @@
-﻿'use client'
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import Carousel from 'react-multi-carousel';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import 'react-multi-carousel/lib/styles.css';
-import ReviewSec from '../ReviewSec';
-import ContactForm from 'src/@core/components/popup/ContactForm';
+'use client'
+import { useMemo, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import ScrollTabs from 'src/components/ui/ScrollTabs'
+import { LazyBoardFaqSec, LazyReviewSec, LazyContactForm } from 'src/app/components/ClientWrappers'
 
-const FaqSec = dynamic(() => import('src/@core/components/cutom-faq/index'), { ssr: false });
+const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
 
-const isMobileView = () => {
-  if (typeof window !== 'undefined') {
-    return window.innerWidth >= 320 && window.innerWidth <= 767;
-  }
-  return false;
-};
+const EMPTY_CONTENT_VALUES = new Set(['', 'null', '<p>null</p>', '<p><br></p>'])
 
-const responsive = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 1024 },
-    items: 5
-  },
-  desktop: {
-    breakpoint: { max: 1024, min: 768 },
-    items: 4
-  },
-  tablet: {
-    breakpoint: { max: 767, min: 425 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 424, min: 0 },
-    items: 2
-  }
-};
+function isValidContent(v: any): boolean {
+  if (!v) return false
+  if (typeof v === 'string') return !EMPTY_CONTENT_VALUES.has(v.trim())
+  return true
+}
 
-const ButtonGroup = ({ next, previous }) => (
-  <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
-    <span className='fi-left' onClick={previous}>
-      <ChevronLeft />
-    </span>
-    <span className='fi-right' onClick={next}>
-      <ChevronRight />
-    </span>
-  </div>
-);
+const CollegeInfoSection = ({ data, exams }: { data: any; exams: any[] }) => {
+  const [activeTab, setActiveTab] = useState('info')
 
-const CollegeInfoSection = ({ data, exams }) => {
-  const [isMobile, setIsMobile] = useState(isMobileView());
-  const [activeTab, setActiveTab] = useState('info');
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(isMobileView());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
-  };
-
-  const renderTabs = () => {
-    const tabs = [
+  const tabs = useMemo(() => {
+    const all = [
       { id: 'info', label: 'Info', content: data.info },
       { id: 'time_table', label: 'Time Table', content: data.time_table },
       { id: 'reg_form', label: 'Registration Form', content: data.reg_form },
       { id: 'syllabus', label: 'Syllabus', content: data.syllabus },
       { id: 'results', label: 'Results', content: data.results },
-      { id: 'sample_paper', label: 'Sample Papers', content: data.sample_paper && data.sample_paper > 0 ? data.sample_paper : '' },
+      {
+        id: 'sample_paper',
+        label: 'Sample Papers',
+        content: data.sample_paper && data.sample_paper > 0 ? data.sample_paper : null,
+      },
       { id: 'hostel', label: 'Infrastructure', content: data.hostel },
       { id: 'gallery', label: 'Gallery', content: data.clggallery },
-      { id: 'review', label: 'Reviews', content: <ReviewSec data={data} /> },
-      { id: 'schoolboardfaqs', label: 'FAQ', content: <FaqSec data={data.schoolboardfaqs} /> }
-    ];
-
-    return tabs
-      .filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>')
-      .map((tab) => (
-        <button
-          key={tab.id}
-          className={`btn ${activeTab === tab.id ? 'active' : ''}`}
-          onClick={() => handleTabClick(tab.id)}
-        >
-          {tab.label}
-        </button>
-      ));
-  };
-
-  const renderTabContent = () => {
-    const tabs = [
-      { id: 'info', content: data.info },
-      { id: 'time_table', content: data.time_table },
-      { id: 'reg_form', content: data.reg_form },
-      { id: 'syllabus', content: data.syllabus },
-      { id: 'results', content: data.results },
-      { id: 'sample_paper', content: data.sample_paper },
-      { id: 'hostel', content: data.hostel },
-      { id: 'gallery', content: data.clggallery },
-      { id: 'review', content: <ReviewSec data={data} /> },
-      { id: 'schoolboardfaqs', content: data.schoolboardfaqs && data.schoolboardfaqs !== '' ? (<FaqSec data={data.schoolboardfaqs} />) : '' }
-    ];
-
-    return tabs
-      .filter(tab => tab.content && tab.content !== '' && tab.content !== 'null' && tab.content !== '<p>null</p>' && tab.content !== '<p><br></p>')
-      .map((tab) => (
-        <div
-          key={tab.id}
-          className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
-        >
-          {typeof tab.content === 'string' ? (
-            <div dangerouslySetInnerHTML={{ __html: tab.content }} />
-          ) : (
-            tab.content
-          )}
-        </div>
-      ));
-  };
+      { id: 'review', label: 'Reviews', content: <LazyReviewSec entityId={data.id} entityName={data.name} /> },
+      {
+        id: 'schoolboardfaqs',
+        label: 'FAQ',
+        content: data.schoolboardfaqs?.length
+          ? <LazyBoardFaqSec data={data.schoolboardfaqs} />
+          : null,
+      },
+    ]
+    return all.filter((tab) => isValidContent(tab.content))
+  }, [data])
 
   return (
     <>
-      <section className='clgInfoSec bg-white'>
-        <section className="container InnerCollegeNavigationLink linkFontSize py-3">
-          <p className='mb-3'>
-            <Link href="/">Home <i className='bi bi-chevron-right'></i></Link>
-            <Link href={"/boards"}> Boards <i className='bi bi-chevron-right'></i></Link>
-            <span className='text-blue' style={{ cursor: 'pointer' }}> {data.short_name}</span>
-          </p>
-        </section>
+      <section className="clgInfoSec bg-white">
         <div className="container bg-white position-relative innerClgCarousel">
-          {isMobile ? (
-            <Carousel
-              swipeable
-              draggable
-              showDots={false}
-              arrows={false}
-              infinite
-              autoPlay={false}
-              autoPlaySpeed={2000}
-              ssr
-              renderButtonGroupOutside
-              customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
-              responsive={responsive}
-              className="infoBtn gap-3  text-center"
-
-            >
-              {renderTabs()}
-            </Carousel>
-          ) : (
-            <div className="pt-3 text-center justify-content-start d-flex flex-fill flex-wrap infoBtn gap-3" id="nav-tab" role="tablist">
-              {renderTabs()}
-            </div>
-          )}
+          <ScrollTabs
+            tabs={tabs.map((t) => ({ id: t.id, label: t.label }))}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
         </div>
       </section>
 
@@ -164,35 +62,74 @@ const CollegeInfoSection = ({ data, exams }) => {
             {activeTab === 'info' ? (
               <>
                 <div className="col-xl-8 col-lg-8 col-md-7 col-12 mx-auto">
-                  <div className="tab-content pt-3" id="nav-tabContent">
-                    {renderTabContent()}
-                  </div>
-                </div>
-                <div className="col-xl-4 col-lg-4 col-md-5 col-12 mx-auto py-5">
-                  <ContactForm heading={'Contact Us'} />
-                  <h2 className='fw-bold text-blue pt-3 mb-3 text-center mt-5'>Upcoming Exams</h2>
-                  <div className="col-12 cardConBrdr p-3 overflow-y-auto bg-skyBlue my-3" style={{ maxHeight: 'calc(7 * 90px)' }}>
-                    {exams.map((exam, index) => (
-                      <Link href={`/exam/${exam.id}/${exam.slug}`} key={index}>
-                        <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
-                          <div className="row">
-                            <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
-                              <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${exam.logo}`} width={100} height={100} className='align-self-center innerBoardImg' alt='clg-img' />
-                            </div>
-                            <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
-                              <h6 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>{exam.exam_title} Exam</h6>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
+                  <div className="tab-content pt-3">
+                    {tabs.map((tab) => (
+                      <div
+                        key={tab.id}
+                        className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
+                      >
+                        {typeof tab.content === 'string' ? (
+                          <div dangerouslySetInnerHTML={{ __html: tab.content }} />
+                        ) : (
+                          tab.content
+                        )}
+                      </div>
                     ))}
                   </div>
+                </div>
+
+                <div className="col-xl-4 col-lg-4 col-md-5 col-12 mx-auto py-5">
+                  <LazyContactForm heading="Contact Us" />
+                  {exams.length > 0 && (
+                    <>
+                      <h2 className="fw-bold text-blue pt-3 mb-3 text-center mt-5">Upcoming Exams</h2>
+                      <div
+                        className="col-12 cardConBrdr p-3 overflow-y-auto bg-skyBlue my-3"
+                        style={{ maxHeight: 'calc(7 * 90px)' }}
+                      >
+                        {exams.map((exam, index) => (
+                          <Link href={`/exam/${exam.id}/${exam.slug}`} key={index}>
+                            <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
+                              <div className="row">
+                                <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
+                                  <Image
+                                    src={`${IMG_URL}/${exam.logo}`}
+                                    alt={exam.exam_title || 'exam'}
+                                    width={100}
+                                    height={100}
+                                    loading="lazy"
+                                    className="align-self-center innerBoardImg"
+                                  />
+                                </div>
+                                <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
+                                  <h6 className="m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0">
+                                    {exam.exam_title} Exam
+                                  </h6>
+                                </div>
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               </>
             ) : (
               <div className="col-12">
-                <div className="tab-content pt-5" id="nav-tabContent">
-                  {renderTabContent()}
+                <div className="tab-content pt-5">
+                  {tabs.map((tab) => (
+                    <div
+                      key={tab.id}
+                      className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
+                    >
+                      {typeof tab.content === 'string' ? (
+                        <div dangerouslySetInnerHTML={{ __html: tab.content }} />
+                      ) : (
+                        tab.content
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -200,7 +137,7 @@ const CollegeInfoSection = ({ data, exams }) => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default CollegeInfoSection;
+export default CollegeInfoSection

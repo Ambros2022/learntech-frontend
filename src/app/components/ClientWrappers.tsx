@@ -116,9 +116,34 @@ export const LazyGlobalPopupShare = dynamic(
   { ssr: false, loading: () => null },
 )
 
+export const LazyBoardFaqSec = dynamic(
+  () => import('src/@core/components/cutom-faq/index'),
+  { ssr: false, loading: () => <SectionSkeleton height='200px' /> },
+)
+
+export const LazySchoolsCarousel = dynamic(
+  () => import('src/views/InnerBoardPage/Components/TopFeaturedColleges/SchoolsCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
+export const LazyReviewSec = dynamic(
+  () => import('src/views/InnerBoardPage/Components/ReviewSec'),
+  { ssr: false, loading: () => <SectionSkeleton height='400px' /> },
+)
+
 export const LazyContactUsForm = dynamic(
   () => import('src/@core/components/popup/ContactUsForm'),
   { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyContactForm = dynamic(
+  () => import('src/@core/components/popup/ContactForm'),
+  { ssr: false, loading: () => (
+    <div className="bg-skyBlue px-lg-5 px-3 rounded">
+      <div style={{ height: 36, background: '#d0d8e8', borderRadius: 4, margin: '16px 0 12px' }} />
+      <FormSkeleton />
+    </div>
+  )},
 )
 
 export const LazySignupForm = dynamic(

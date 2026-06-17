@@ -663,3 +663,153 @@ export const Breadcrumb = memo(({ items }) => { ... });
 ```
 
 Always pair with `BreadcrumbList` JSON-LD structured data on same page.
+
+---
+
+## Reusable Generic Components
+
+**Before building a new component, check these first.**
+
+### SearchBar — `src/components/ui/SearchBar/index.tsx`
+
+Generic autocomplete search. Bootstrap-only, no MUI.
+
+```tsx
+// Props
+interface Props {
+  placeholder?: string
+  onSearch: (query: string, signal?: AbortSignal) => Promise<SearchItem[]>
+  className?: string
+}
+export interface SearchItem { id: string | number; label: string; href: string }
+```
+
+Usage: wrap with a page-specific fetch function, lazy-load via ClientWrappers.
+
+Example — `src/components/ui/SearchBar/BlogSearchBar.tsx`:
+```tsx
+async function fetchBlogResults(query, signal) { /* fetch + map to SearchItem[] */ }
+export default function BlogSearchBar() {
+  return <SearchBar placeholder="Search for Blogs" onSearch={fetchBlogResults} />
+}
+```
+
+Rules:
+* `AbortController` ref cancels in-flight requests on new keystroke
+* Full-bar focus ring via `focused` state on container (not native input focus ring)
+* Idle right: `bi-chevron-down`; text entered: `×` clear button
+* Register lazy export in `ClientWrappers.tsx` as `LazyXxxSearchBar`
+
+---
+
+### ScrollTabs — `src/components/ui/ScrollTabs/index.tsx`
+
+Mobile-responsive tab navigation. No carousel dependency.
+
+```tsx
+export interface TabItem { id: string; label: string }
+interface Props {
+  tabs: TabItem[]
+  activeTab: string
+  onTabChange: (id: string) => void
+  className?: string
+}
+```
+
+Rules:
+* Desktop: scrollable flex row
+* Mobile: `< >` arrow buttons (`d-md-none`) + overflow scroll
+* Mobile shows **2 tabs per page** via CSS module `width: calc(50% - 0.5rem)`
+* Active tab auto-scrolls into view via `scrollIntoView`
+* Do NOT use `infoBtn` class on scroll container — conflicts with globals `width: 90% !important`
+* Active state: `.tabBtn:global(.active)` in CSS module (not `.tabBtn.active`)
+* `Breadcrumb` must live in parent server component, not inside `ScrollTabs`
+
+---
+
+### CollegeCard — `src/components/colleges/CollegeCard.tsx`
+
+```tsx
+export interface CollegeItem {
+  id: number; slug: string; name: string; address: string; banner_image: string
+}
+```
+
+Link: `/college/{id}/{slug}` — Embla carousel via `LazyCollegeCarousel`.
+
+---
+
+### SchoolCard — `src/components/schools/SchoolCard.tsx`
+
+Same shape as CollegeCard. Link: `/school/{id}/{slug}` — Embla carousel via `LazySchoolsCarousel`.
+
+```tsx
+export interface SchoolItem {
+  id: number; slug: string; name: string; address: string; banner_image: string
+}
+```
+
+---
+
+### Card CSS Module Pattern — `CollegeCard.module.css` / `SchoolCard.module.css`
+
+Standard card structure:
+* `.card` — border, border-radius, hover lift + shadow
+* `.imageWrap` — fixed height 190px, `position: relative` for `next/image fill`
+* `.image` — `object-fit: cover`, hover scale
+* `.body` — flex column, `flex: 1 1 auto`, `min-width: 0`
+* `.title` — truncate via `text-overflow: ellipsis`
+* `.location` — icon + text, icon `flex-shrink: 0`, text truncate
+* `.actions` — flex row, both buttons `flex: 1 1 0 !important` equal width
+
+New entity card (university, exam, etc.) → copy pattern, change link prefix only.
+
+---
+
+### ReviewSec — `src/views/InnerBoardPage/Components/ReviewSec/index.tsx`
+
+Reusable review + rating component. Props decouple from any specific entity.
+
+```tsx
+interface Props {
+  entityId: number | string   // college_id / school_id / board_id
+  entityName: string          // shown in heading
+}
+```
+
+Rules:
+* Single `useEffect` + `Promise.all` for 3 parallel fetches + `AbortController` cleanup
+* Native `fetch` only — no axios
+* Registered as `LazyReviewSec` in ClientWrappers (`ssr: false`)
+* Dislike API: send `dislike: 1`, not `dislike: 0`
+
+---
+
+### GlobalPopupEnquiry className Rule
+
+```tsx
+// CORRECT — caller's className replaces default, not augments it
+<a className={className ?? `active btn ${styles.counsellingBtn}`}>
+
+// WRONG — always appends counsellingBtn, overrides custom green/etc
+<a className={`${className || 'active btn'} ${styles.counsellingBtn}`}>
+```
+
+Use `??` (nullish coalescing) not `||` so caller controls full class string.
+
+---
+
+## CSS Module vs globals.css
+
+| Use CSS Module | Use globals.css |
+|---|---|
+| Component-specific styles | Site-wide utility classes |
+| Page section (BannerSection, etc.) | Shared state classes (`.text-blue`, `.bg-skyBlue`) |
+| Overriding Bootstrap for one component | Bootstrap variable overrides |
+| Button variants tied to one component | Global button classes (`.freeBtn`, `.writeReviewBtn`) |
+
+Rules:
+* `globals.css` `!important` beats CSS module without `!important` — use `!important` in module to win
+* CSS module `.class.active` → does NOT match global `active` string — use `.class:global(.active)`
+* `100vw` in globals causes overflow (includes scrollbar) → use `100%` instead
+* Prefer CSS modules for new component work; migrate globals progressively
