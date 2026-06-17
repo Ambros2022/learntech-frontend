@@ -655,7 +655,7 @@ Many APIs at common location: `src/lib/api/common.ts`
 ## Breadcrumb Pattern
 
 ```tsx
-// src/components/Breadcrumb.tsx — Server Component, memo'd
+// src/app/components/Breadcrumb.tsx — memo'd
 // Props: items: { label: string; href?: string }[]
 // Last item: no link, aria-current="page"
 // Icon: lucide-react ChevronRight (not a CSS pseudo-element)

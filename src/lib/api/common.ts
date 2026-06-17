@@ -440,6 +440,26 @@ export async function getNavData() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// CAREER
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getJobPositions = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/jobposition/get`,
+    { tags: ['job-positions'] },
+  )
+  return json?.data ?? []
+})
+
+export const getJobLocations = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/alljoblocation/get`,
+    { tags: ['job-locations'] },
+  )
+  return json?.data ?? []
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
 // SITEMAP (bypasses cache — always fresh XML)
 // ─────────────────────────────────────────────────────────────────────────────
 
