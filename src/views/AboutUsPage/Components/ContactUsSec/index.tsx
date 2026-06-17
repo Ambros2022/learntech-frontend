@@ -1,6 +1,5 @@
 ﻿'use client'
 
-import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -9,27 +8,12 @@ import { useRouter } from 'src/hooks/useCompatRouter'
 import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
 import Link from 'next/link'
 import Image from 'next/image'
-
-const PHONE_RULES: [RegExp, RegExp][] = [
-  [/^\+91-/, /^\+91-\d{10}$/],
-  [/^\+966-/, /^\+966-\d{9}$/],
-  [/^\+971-/, /^\+971-\d{9}$/],
-  [/^\+974-/, /^\+974-\d{8}$/],
-  [/^\+968-/, /^\+968-\d{8}$/],
-  [/^\+965-/, /^\+965-\d{8}$/],
-  [/^\+973-/, /^\+973-\d{8}$/],
-  [/^\+977-/, /^\+977-\d{10}$/],
-]
-
-const isValidPhone = (val: string) => {
-  const rule = PHONE_RULES.find(([prefix]) => prefix.test(val))
-  return rule ? rule[1].test(val) : false
-}
+import { phoneSchema, submitEnquiry } from 'src/@core/components/popup/formUtils'
 
 const schema = z.object({
   fullName: z.string().trim().min(1, 'Full Name is required'),
   email: z.string().trim().email('Email is not valid'),
-  mobileNumber: z.string().refine(isValidPhone, 'Enter a valid phone number'),
+  mobileNumber: phoneSchema,
   courseInMind: z.string().trim().min(1, 'Course In Mind is required'),
   location: z.string().trim().min(1, 'Location is required'),
   message: z.string().trim().optional().default(''),
@@ -62,22 +46,16 @@ export default function ContactUsSec() {
   const onSubmit = async (values: FormValues) => {
     try {
       toast.loading('Processing')
-      const body = new FormData()
-      body.append('name', values.fullName)
-      body.append('email', values.email)
-      body.append('contact_number', values.mobileNumber)
-      body.append('course_in_mind', values.courseInMind)
-      body.append('current_url', window.location.href)
-      body.append('message', values.message || '')
-      body.append('location', values.location)
-
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}api/website/enquiry`, {
-        method: 'POST',
-        body,
+      const ok = await submitEnquiry({
+        name: values.fullName,
+        email: values.email,
+        contact_number: values.mobileNumber,
+        course_in_mind: values.courseInMind,
+        location: values.location,
+        message: values.message || '',
       })
       toast.dismiss()
-
-      if (res.ok) {
+      if (ok) {
         toast.success('Thank you. We will get back to you.')
         reset()
         router.push('/thank-you')
@@ -85,6 +63,7 @@ export default function ContactUsSec() {
         toast.error('Please try again later!')
       }
     } catch {
+      toast.dismiss()
       toast.error('Please try again later!')
     }
   }

@@ -49,6 +49,8 @@ export const LazyBannerCarousel = dynamic(
   { ssr: false, loading: () => null },
 )
 
+
+
 export const LazyCollegeCarousel = dynamic(
   () => import('src/components/colleges/CollegeCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
@@ -111,6 +113,11 @@ export const LazyBlogSearchBar = dynamic(
   { ssr: false, loading: () => <SearchBarSkeleton /> },
 )
 
+export const LazyBoardSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/BoardSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
 export const LazyGlobalPopupShare = dynamic(
   () => import('src/@core/components/popup/GlobalPopupShare'),
   { ssr: false, loading: () => null },
@@ -122,7 +129,7 @@ export const LazyBoardFaqSec = dynamic(
 )
 
 export const LazySchoolsCarousel = dynamic(
-  () => import('src/views/InnerBoardPage/Components/TopFeaturedColleges/SchoolsCarouselClient'),
+  () => import('src/components/schools/SchoolsCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
 )
 
@@ -134,6 +141,61 @@ export const LazyReviewSec = dynamic(
 export const LazyContactUsForm = dynamic(
   () => import('src/@core/components/popup/ContactUsForm'),
   { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyContactForm404 = dynamic(
+  () => import('src/views/Error404Page/Components/BannerSec/ContactForm404'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyEditorEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/Editor/Editorform'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyAbroadEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/AbroadEnquiryForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyContactPageUsForm = dynamic(
+  () => import('src/@core/components/popup/ContactPageUsForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyEducationLoanForm = dynamic(
+  () => import('src/@core/components/popup/EducationloanForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyEnquiryFormMed = dynamic(
+  () => import('src/@core/components/popup/EnquiryFormMed'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyJobEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/JobEnquiryForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyTalkExpertEnquiry = dynamic(
+  () => import('src/@core/components/popup/TalkExpertEnqiiry'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyTalkExpertEnquirySchool = dynamic(
+  () => import('src/@core/components/popup/TalkExpertEnqiirySchool'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyExpertEnquiryFormSchool = dynamic(
+  () => import('src/@core/components/popup/ExpertEnquiryFormSchool'),
+  { ssr: false, loading: () => <SectionSkeleton height="80px" /> },
+)
+
+export const LazyNewsLetterEnquiry = dynamic(
+  () => import('src/@core/components/popup/NewsLetterEnquiry'),
+  { ssr: false, loading: () => <SectionSkeleton height="80px" /> },
 )
 
 export const LazyContactForm = dynamic(

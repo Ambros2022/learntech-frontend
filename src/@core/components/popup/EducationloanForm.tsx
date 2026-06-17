@@ -1,22 +1,63 @@
 ﻿'use client'
-import React, { FC } from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import axios from 'src/configs/axios';
+
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { toast } from 'sonner'
-import { useRouter } from 'src/hooks/useCompatRouter';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import Link from 'next/link';
+import { useRouter } from 'src/hooks/useCompatRouter'
+import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
+import Link from 'next/link'
+import { phoneSchema, submitEnquiry } from './formUtils'
 
 
-interface Props {
-    page?: any;
-    onChanges?: any;
-}
+const schema = z.object({
+  fullName: z.string().trim().min(1, 'Full Name is required'),
+  email: z.string().trim().email('Invalid email address'),
+  contact_number: phoneSchema,
+  course: z.string().min(1, 'Course selection is required'),
+  city: z.string().min(1, 'City selection is required'),
+  bank: z.string().min(1, 'Bank selection is required'),
+  notes: z.string().trim().min(1, 'Notes is required').max(500, 'Notes must be 500 characters or less'),
+  terms: z.boolean().refine(v => v, 'You must accept the terms and conditions'),
+})
 
-const EducationLoanPage: FC<Props> = ({ }) => {
-    const router = useRouter();
+type FormValues = z.infer<typeof schema>
 
+export default function EducationLoanPage() {
+  const router = useRouter()
+  const {
+    register, control, handleSubmit, reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { fullName: '', email: '', contact_number: '', course: '', city: '', bank: '', notes: '', terms: false },
+  })
+
+  const onSubmit = async (values: FormValues) => {
+    try {
+      toast.loading('Processing')
+      const ok = await submitEnquiry({
+        name: values.fullName,
+        email: values.email,
+        contact_number: values.contact_number,
+        location: values.city,
+        course_in_mind: values.course,
+        bank_name: values.bank,
+        description: values.notes,
+      })
+      toast.dismiss()
+      if (ok) {
+        toast.success('Thank you. We will get back to you.')
+        reset()
+        router.push('/thank-you')
+      } else {
+        toast.error('Please try again later!')
+      }
+    } catch {
+      toast.dismiss()
+      toast.error('Please try again later!')
+    }
+  }
 
 
     const courses = [
@@ -964,237 +1005,132 @@ const EducationLoanPage: FC<Props> = ({ }) => {
 
 
     ]
-    const phoneRules: Record<string, RegExp> = {
-  "^\\+91-": /^\+91-\d{10}$/,  // India → 10 digits after +91-
-  "^\\+966-": /^\+966-\d{9}$/, // Saudi Arabia → 9 digits after +966-
-  "^\\+971-": /^\+971-\d{9}$/, // UAE → 9 digits after +971-
-  "^\\+974-": /^\+974-\d{8}$/, // Qatar → 8 digits after +974-
-  "^\\+968-": /^\+968-\d{8}$/, // Oman → 8 digits after +968-
-  "^\\+965-": /^\+965-\d{8}$/, // Kuwait → 8 digits after +965-
-  "^\\+973-": /^\+973-\d{8}$/, // Bahrain → 8 digits after +973-
-  "^\\+977-": /^\+977-\d{10}$/ // Nepal → 10 digits after +977-
-};
-
-
-    const validationSchema = Yup.object({
-        fullName: Yup.string().required('Full Name is required'),
-        email: Yup.string().email('Invalid email address').required('Email is required'),
-        // contact_number: Yup.string().required('Mobile Number is required'),
-          contact_number: Yup.string()
-                      .required("Phone Number is required")
-                      .test("is-valid-contact", "Invalid phone number", function (value) {
-                        if (!value) return false;
-                    
-                        for (const [prefixPattern, regex] of Object.entries(phoneRules)) {
-                          if (new RegExp(prefixPattern).test(value)) {
-                            return regex.test(value);
-                          }
-                        }
-                    
-                        return false;
-                      }),
-                    
-        course: Yup.string().required('Course selection is required'),
-        city: Yup.string().required('City selection is required'),
-        bank: Yup.string().required('Bank selection is required'),
-        notes: Yup.string().max(500, 'Notes must be 500 characters or less').required('Notes is required'),
-        terms: Yup.boolean()
-            .oneOf([true], "You must accept the terms and conditions"),
-    });
-
-
-
-    const handleSubmit = async (values, { resetForm }) => {
-        try {
-            toast.loading('Processing');
-            const formData = new FormData();
-            formData.append('name', values.fullName);
-            formData.append('email', values.email);
-            formData.append('contact_number', values.contact_number);
-            formData.append('location', values.city);
-            formData.append('course_in_mind', values.course);
-            formData.append('bank_name', values.bank);
-            formData.append('description', values.notes);
-            formData.append('current_url', window.location.href);
-
-            const response = await axios.post('api/website/enquiry', formData);
-
-            if (response.status === 200) {
-                toast.dismiss();
-                toast.success('Thank you. We will get back to you.');
-                resetForm();
-                router.push('/thank-you');
-            }
-        } catch (error) {
-            toast.error('Please try again later!');
-            console.error('Error submitting form:', error);
-        }
-    };
-
-    return (
-        <Formik
-            initialValues={{
-                fullName: '',
-                email: '',
-                contact_number: '',
-                course: '',
-                city: '',
-                bank: '',
-                notes: '',
-                terms: false,
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-        >
-            {({ isSubmitting }) => (
-                <Form>
-                    <div className="row">
-                        <div className="col-12 mb-3">
-                            <Field type="text" name="fullName" className='form-control' placeholder='Your Full Name' />
-                            <ErrorMessage name="fullName" component="div" className="text-danger" />
-                        </div>
-                        <div className="col-12 mb-3">
-                            <Field type="email" name="email" className='form-control' placeholder='Your Email Id' />
-                            <ErrorMessage name="email" component="div" className="text-danger" />
-                        </div>
-                        <div className="col-12 mb-3">
-                            {/* <Field type="text" name="contact_number" className='form-control' placeholder='Your Mobile Number' /> */}
-                            <PhoneInputField name="contact_number" />
-                            <ErrorMessage name="contact_number" component="div" className="error text-danger" />
-                        </div>
-                        <div className="col-12 mb-3">
-                            <div style={{ position: 'relative' }}>
-                                <Field as="select" name="course" className="form-control">
-                                    <option value="" disabled>
-                                        Select a Course
-                                    </option>
-                                    {courses.map((group) => (
-                                        <optgroup key={group.group} label={group.group}>
-                                            {group.options.map((course, index) => (
-                                                <option key={index} value={course.name}>
-                                                    {course.name}
-                                                </option>
-                                            ))}
-                                        </optgroup>
-                                    ))}
-                                </Field>
-                                <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) ' }}>
-                                    <i className="bi bi-caret-down-fill caret-down"></i>
-                                </div>
-                                <ErrorMessage name="course" component="div" className="text-danger" />
-                            </div>
-                        </div>
-                        <div className="col-12 mb-3">
-                            <div style={{ position: 'relative' }}>
-                                {/* <Field as="select" name="city" className='form-control'>
-                                    <option value="" disabled>Select your City</option>
-                                    {cities.map((city: any) => (
-                                        <option key={city.id} value={city.name}>
-                                            {city.name}
-                                        </option>
-                                    ))}
-                                </Field> */}
-                                <Field as="select" name="city" className="form-control">
-                                    <option value="" disabled>
-                                        Select a city
-                                    </option>
-                                    {cities2.map((group) => (
-                                        <optgroup key={group.group} label={group.group}>
-                                            {group.options.map((val, index) => (
-                                                <option key={index} value={val.name}>
-                                                    {val.name}
-                                                </option>
-                                            ))}
-                                        </optgroup>
-                                    ))}
-                                </Field>
-
-                                <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) ' }}>
-                                    <i className="bi bi-caret-down-fill caret-down"></i>
-                                </div>
-                                <ErrorMessage name="city" component="div" className="text-danger" />
-                            </div>
-                        </div>
-                        <div className="col-12 mb-3">
-                            <div style={{ position: 'relative' }}>
-                                <Field as="select" name="bank" className='form-control'>
-                                    <option value="" disabled>Select a Bank</option>
-                                    <option value="Prodigy Finance">Prodigy Finance</option>
-                                    <option value="SBI">SBI</option>
-                                    <option value="PNB">PNB</option>
-                                    <option value="HDFC">HDFC</option>
-                                    <option value="Axis">Axis</option>
-                                    <option value="ICICI">ICICI</option>
-                                    <option value="Canara">Canara</option>
-                                    <option value="Bank of Baroda">Bank of Baroda</option>
-                                    <option value="Allahabad Bank">Allahabad Bank</option>
-                                    <option value="Indian Bank">Indian Bank</option>
-                                    <option value="IDBI">IDBI</option>
-                                    <option value="Karnataka Bank">Karnataka Bank</option>
-                                    <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
-                                    <option value="Oriental Bank of Commerce">Oriental Bank of Commerce</option>
-                                    <option value="Syndicate bank">Syndicate bank</option>
-                                    <option value="Saraswat Bank">Saraswat Bank</option>
-                                    <option value="UCO Bank">UCO Bank</option>
-                                    <option value="Union Bank of Indi">Union Bank of India</option>
-                                    <option value="Vijaya Bank">Vijaya Bank</option>
-                                    <option value="Bank of Maharashtra">Bank of Maharashtra</option>
-                                    <option value="Central Bank of India">Central Bank of India</option>
-                                    <option value="Dena Bank">Dena Bank</option>
-                                    <option value="Dhanlaxmi Bank">Dhanlaxmi Bank</option>
-                                    <option value="Bank of India">Bank of India</option>
-                                    <option value="RBL Bank">RBL Bank</option>
-                                    <option value="Dombivli Nagari Sahakari Bank Ltd.">Dombivli Nagari Sahakari Bank Ltd.</option>
-                                    <option value="Federal Bank">Federal Bank</option>
-                                    <option value="Corporation Bank">Corporation Bank</option>
-                                    <option value="Indian Overseas Bank">Indian Overseas Bank</option>
-                                    <option value="Abhyudaya Bank">Abhyudaya Bank</option>
-                                    <option value="South Indian Bank">South Indian Bank</option>
-                                    <option value="GP Parsik Sahakari Bank">GP Parsik Sahakari Bank</option>
-                                    <option value="Pragathi Krishna Gramin Bank">Pragathi Krishna Gramin Bank</option>
-                                    <option value="Karur Vysya Bank">Karur Vysya Bank</option>
-                                    <option value="New India Co-Operative Bank">New India Co-Operative Bank</option>
-                                    <option value="Andhra Bank">Andhra Bank</option>
-                                    <option value="Punjab and Sind Bank">Punjab and Sind Bank</option>
-                                    <option value="Tamilnad Mercantile Bank">Tamilnad Mercantile Bank</option>
-                                    <option value="Jammu and Kashmir Bank">Jammu and Kashmir Bank</option>
-                                    <option value="United Bank of India">United Bank of India</option>
-                                    <option value="InCred">InCred</option>
-                                    <option value="Auxilo">Auxilo</option>
-                                    <option value="Avanse">Avanse</option>
-                                    <option value="Bajaj Finance Limited">Bajaj Finance Limited</option>
-                                    <option value="Tata Capital Finance Limited">Tata Capital Finance Limited</option>
-                                    <option value="Fullerton India Credit Company Limited">Fullerton India Credit Company Limited</option>
-                                    <option value="MPower Financing">MPower Financing</option>
-                                    <option value="Propelld">Propelld</option>
-                                </Field>
-                                <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) ' }}>
-                                    <i className="bi bi-caret-down-fill caret-down"></i>
-                                </div>
-                                <ErrorMessage name="bank_name" component="div" className="text-danger" />
-                            </div>
-
-                        </div>
-                        <div className="col-lg-12 mb-3">
-                            <Field as="textarea" name="notes" className='form-control' placeholder='Notes' />
-                            <ErrorMessage name="notes" component="div" className="text-danger" />
-                        </div>
-                        <div className="mb-3 form-check">
-                            <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
-                            <label className="form-check-label" htmlFor="terms">
-                                By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
-                            </label>
-                            <ErrorMessage name="terms" component="div" className="error text-danger" />
-                        </div>
-                        <div className='text-center'>
-                            <button type="submit" className='btn submitBtn' disabled={isSubmitting}>Submit</button>
-                        </div>
-                    </div>
-                </Form>
-            )}
-        </Formik>
-
-    );
-};
-
-export default EducationLoanPage;
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="row">
+        <div className="col-12 mb-3">
+          <input type="text" className="form-control" placeholder="Your Full Name" {...register('fullName')} />
+          {errors.fullName && <div className="text-danger">{errors.fullName.message}</div>}
+        </div>
+        <div className="col-12 mb-3">
+          <input type="email" className="form-control" placeholder="Your Email Id" {...register('email')} />
+          {errors.email && <div className="text-danger">{errors.email.message}</div>}
+        </div>
+        <div className="col-12 mb-3">
+          <Controller name="contact_number" control={control} render={({ field }) => <PhoneInputField field={field} />} />
+          {errors.contact_number && <div className="error text-danger">{errors.contact_number.message}</div>}
+        </div>
+        <div className="col-12 mb-3">
+          <div style={{ position: 'relative' }}>
+            <select className="form-control" {...register('course')}>
+              <option value="">Select a Course</option>
+              {courses.map((group) => (
+                <optgroup key={group.group} label={group.group}>
+                  {group.options.map((course, index) => (
+                    <option key={index} value={course.name}>{course.name}</option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+            <div style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)' }}>
+              <i className="bi bi-caret-down-fill caret-down" />
+            </div>
+            {errors.course && <div className="text-danger">{errors.course.message}</div>}
+          </div>
+        </div>
+        <div className="col-12 mb-3">
+          <div style={{ position: 'relative' }}>
+            <select className="form-control" {...register('city')}>
+              <option value="">Select a city</option>
+              {cities2.map((group) => (
+                <optgroup key={group.group} label={group.group}>
+                  {group.options.map((val, index) => (
+                    <option key={index} value={val.name}>{val.name}</option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+            <div style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)' }}>
+              <i className="bi bi-caret-down-fill caret-down" />
+            </div>
+            {errors.city && <div className="text-danger">{errors.city.message}</div>}
+          </div>
+        </div>
+        <div className="col-12 mb-3">
+          <div style={{ position: 'relative' }}>
+            <select className="form-control" {...register('bank')}>
+              <option value="">Select a Bank</option>
+              <option value="Prodigy Finance">Prodigy Finance</option>
+              <option value="SBI">SBI</option>
+              <option value="PNB">PNB</option>
+              <option value="HDFC">HDFC</option>
+              <option value="Axis">Axis</option>
+              <option value="ICICI">ICICI</option>
+              <option value="Canara">Canara</option>
+              <option value="Bank of Baroda">Bank of Baroda</option>
+              <option value="Allahabad Bank">Allahabad Bank</option>
+              <option value="Indian Bank">Indian Bank</option>
+              <option value="IDBI">IDBI</option>
+              <option value="Karnataka Bank">Karnataka Bank</option>
+              <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+              <option value="Oriental Bank of Commerce">Oriental Bank of Commerce</option>
+              <option value="Syndicate bank">Syndicate bank</option>
+              <option value="Saraswat Bank">Saraswat Bank</option>
+              <option value="UCO Bank">UCO Bank</option>
+              <option value="Union Bank of India">Union Bank of India</option>
+              <option value="Vijaya Bank">Vijaya Bank</option>
+              <option value="Bank of Maharashtra">Bank of Maharashtra</option>
+              <option value="Central Bank of India">Central Bank of India</option>
+              <option value="Dena Bank">Dena Bank</option>
+              <option value="Dhanlaxmi Bank">Dhanlaxmi Bank</option>
+              <option value="Bank of India">Bank of India</option>
+              <option value="RBL Bank">RBL Bank</option>
+              <option value="Dombivli Nagari Sahakari Bank Ltd.">Dombivli Nagari Sahakari Bank Ltd.</option>
+              <option value="Federal Bank">Federal Bank</option>
+              <option value="Corporation Bank">Corporation Bank</option>
+              <option value="Indian Overseas Bank">Indian Overseas Bank</option>
+              <option value="Abhyudaya Bank">Abhyudaya Bank</option>
+              <option value="South Indian Bank">South Indian Bank</option>
+              <option value="GP Parsik Sahakari Bank">GP Parsik Sahakari Bank</option>
+              <option value="Pragathi Krishna Gramin Bank">Pragathi Krishna Gramin Bank</option>
+              <option value="Karur Vysya Bank">Karur Vysya Bank</option>
+              <option value="New India Co-Operative Bank">New India Co-Operative Bank</option>
+              <option value="Andhra Bank">Andhra Bank</option>
+              <option value="Punjab and Sind Bank">Punjab and Sind Bank</option>
+              <option value="Tamilnad Mercantile Bank">Tamilnad Mercantile Bank</option>
+              <option value="Jammu and Kashmir Bank">Jammu and Kashmir Bank</option>
+              <option value="United Bank of India">United Bank of India</option>
+              <option value="InCred">InCred</option>
+              <option value="Auxilo">Auxilo</option>
+              <option value="Avanse">Avanse</option>
+              <option value="Bajaj Finance Limited">Bajaj Finance Limited</option>
+              <option value="Tata Capital Finance Limited">Tata Capital Finance Limited</option>
+              <option value="Fullerton India Credit Company Limited">Fullerton India Credit Company Limited</option>
+              <option value="MPower Financing">MPower Financing</option>
+              <option value="Propelld">Propelld</option>
+            </select>
+            <div style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)' }}>
+              <i className="bi bi-caret-down-fill caret-down" />
+            </div>
+            {errors.bank && <div className="text-danger">{errors.bank.message}</div>}
+          </div>
+        </div>
+        <div className="col-lg-12 mb-3">
+          <textarea className="form-control" placeholder="Notes" {...register('notes')} />
+          {errors.notes && <div className="text-danger">{errors.notes.message}</div>}
+        </div>
+        <div className="mb-3 form-check">
+          <input type="checkbox" className="form-check-input border-black" id="terms-loan" {...register('terms')} />
+          <label className="form-check-label" htmlFor="terms-loan">
+            By Clicking this, I agree to the{' '}
+            <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+          </label>
+          {errors.terms && <div className="error text-danger">{errors.terms.message}</div>}
+        </div>
+        <div className="text-center">
+          <button type="submit" disabled={isSubmitting} className="btn submitBtn">Submit</button>
+        </div>
+      </div>
+    </form>
+  )
+}

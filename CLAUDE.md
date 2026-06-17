@@ -813,3 +813,169 @@ Rules:
 * CSS module `.class.active` → does NOT match global `active` string — use `.class:global(.active)`
 * `100vw` in globals causes overflow (includes scrollbar) → use `100%` instead
 * Prefer CSS modules for new component work; migrate globals progressively
+
+---
+
+## formUtils Pattern
+
+Single source of truth for all form utilities — `src/@core/components/popup/formUtils.ts`:
+
+```ts
+export const PHONE_RULES: [RegExp, string][] = [...]
+export const isValidPhone = (val: string) => PHONE_RULES.every(([re]) => re.test(val))
+export const phoneSchema = z.string().refine(isValidPhone, { message: 'Invalid phone number' })
+
+export async function submitEnquiry(fields: Record<string, string>) {
+  const fd = new FormData()
+  Object.entries(fields).forEach(([k, v]) => fd.append(k, v))
+  fd.append('current_url', window.location.href)
+  return fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/website/enquiry/post`, { method: 'POST', body: fd })
+}
+```
+
+Rules:
+* Never duplicate `PHONE_RULES`, `isValidPhone`, or phone zod schema in individual form files
+* All forms import `phoneSchema` and `submitEnquiry` from `formUtils`
+* `contact_number: phoneSchema` in every form zod schema
+* `submitEnquiry` auto-appends `current_url` — do not append manually
+
+---
+
+## Form Migration Pattern
+
+All forms: react-hook-form + zod + native fetch. No Formik, Yup, or axios.
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { phoneSchema, submitEnquiry } from 'src/@core/components/popup/formUtils'
+import { toast } from 'sonner'
+
+const schema = z.object({
+  name: z.string().min(1),
+  contact_number: phoneSchema,
+  email: z.string().email(),
+})
+
+const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
+  resolver: zodResolver(schema),
+})
+
+const onSubmit = async (data) => {
+  await submitEnquiry({ name: data.name, contact_number: data.contact_number, email: data.email })
+  toast.success('Submitted!')
+  reset()
+}
+```
+
+Phone input → always use `LazyPhoneInputField` from ClientWrappers via `Controller`.
+
+---
+
+## BannerImage Component
+
+Reusable wrapper for the repeated BannerBG.webp banner pattern — `src/components/ui/BannerImage.tsx`:
+
+```tsx
+// Props: alt (required), src, width, height, priority, className
+// Defaults: src='/images/icons/BannerBG.webp', width=1400, height=300, priority=true, className='w-100'
+import BannerImage from 'src/components/ui/BannerImage'
+
+<BannerImage alt="Boards Banner" />
+<BannerImage alt="Custom" src="/images/icons/Other.webp" className="w-100 custom" />
+```
+
+Rules:
+* Replace every raw `<img src="/images/icons/BannerBG.webp">` with `<BannerImage alt="..." />`
+* Never use `<img>` for banner — always `next/image` via this wrapper
+
+---
+
+## EntityCarouselClient Pattern
+
+Generic carousel for college/school entities — `src/components/EntityCarouselClient.tsx`:
+
+```tsx
+export interface EntityItem { id: number; slug: string; name: string; address: string; banner_image: string }
+export type EntityType = 'college' | 'school'
+
+// Usage — thin wrapper per entity type:
+// CollegeCarouselClient: <EntityCarouselClient type="college" items={colleges} />
+// SchoolsCarouselClient: <EntityCarouselClient type="school" items={schools} />
+```
+
+Rules:
+* Always includes hidden `<ul aria-hidden="true">` with all entity links for SEO (Googlebot crawls all links)
+* Thin wrappers (`CollegeCarouselClient`, `SchoolsCarouselClient`) re-export `EntityItem` as entity-specific type
+* Register as `LazyEntityCarousel` in ClientWrappers
+
+---
+
+## Server/Client SEO Split Pattern for Carousels
+
+Heading + links in server HTML. Carousel JS only for interaction. Used in LatestUpdateSec, EntityCarouselClient.
+
+```tsx
+// Server component (index.tsx) — no 'use client'
+export default function LatestUpdateSec({ updates }) {
+  return (
+    <section>
+      <h2>...</h2>                               {/* SSR — Googlebot indexes */}
+      <ul aria-hidden="true" style={clipRect}>   {/* SSR — all links crawlable */}
+        {updates.map(u => <li><a href={...}>{u.name}</a></li>)}
+      </ul>
+      <CarouselClient updates={updates} />        {/* client boundary — interaction only */}
+    </section>
+  )
+}
+
+// Client component (CarouselClient.tsx) — 'use client'
+// Only EmblaCarousel + card rendering. No heading. No links list.
+```
+
+clipRect style: `{ position:'absolute', width:1, height:1, overflow:'hidden', clip:'rect(0,0,0,0)', whiteSpace:'nowrap' }`
+
+Rules:
+* `H1`, `H2`, all entity links → server rendered
+* Never put headings inside `'use client'` carousel components
+* Use direct `EmblaCarousel` import (not `LazyEmblaCarousel`) when component already has `'use client'`
+* `LazyEmblaCarousel` only from server components via ClientWrappers
+
+---
+
+## InnerHeader Pattern
+
+Existing generic banner for page-level headers — `src/views/SimplePage/InnerHeader.tsx`:
+
+```tsx
+// Props: title, description, imageSrc, imageAlt, children (search bar slot)
+// Already handles: next/image, BannerBG default, responsive layout
+// Use for any page with a banner + heading + optional search
+import InnerHeader from 'src/views/SimplePage/InnerHeader'
+
+<InnerHeader title="Boards" description="...">
+  <LazyBoardSearchBar />
+</InnerHeader>
+```
+
+Rules:
+* Prefer `InnerHeader` over custom BannerSec — it's already optimized
+* Add new search bars as children, not hardcoded inside InnerHeader
+
+---
+
+## getNewsList API Notes
+
+`getNewsList` in `src/lib/api/common.ts`:
+* Returns array directly — NOT `{ data, totalItems }`. Do not destructure `.data`
+* Default `columnname: 'news_date'` may fail if column doesn't exist — always pass `columnname: 'created_at'` explicitly
+* Filter by category: pass `{ category_id: N, columnname: 'created_at', size: 10 }`
+
+```ts
+// CORRECT
+const updates = await getNewsList({ category_id: 8, size: 10, columnname: 'created_at' })
+
+// WRONG — updates will be undefined
+const { data: updates } = await getNewsList(...)
+```

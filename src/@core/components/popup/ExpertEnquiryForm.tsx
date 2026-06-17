@@ -6,29 +6,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { toast } from 'sonner'
 import { useRouter } from 'src/hooks/useCompatRouter'
-import PhoneInputField from 'src/@core/components/popup/PhoneInput'
+import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
 
-// ── Phone validation: prefix → exact digit-count rule ─────────────────────
-const PHONE_PATTERNS: [RegExp, RegExp][] = [
-  [/^\+91-/, /^\+91-\d{10}$/],
-  [/^\+966-/, /^\+966-\d{9}$/],
-  [/^\+971-/, /^\+971-\d{9}$/],
-  [/^\+974-/, /^\+974-\d{8}$/],
-  [/^\+968-/, /^\+968-\d{8}$/],
-  [/^\+965-/, /^\+965-\d{8}$/],
-  [/^\+973-/, /^\+973-\d{8}$/],
-  [/^\+977-/, /^\+977-\d{10}$/],
-]
+import { phoneSchema } from './formUtils'
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required').trim(),
   email: z.string().email('Email is not valid'),
-  contact_number: z.string().refine(val => {
-    for (const [prefix, pattern] of PHONE_PATTERNS) {
-      if (prefix.test(val)) return pattern.test(val)
-    }
-    return false
-  }, 'Invalid phone number'),
+  contact_number: phoneSchema,
   course: z.string().min(1, 'Stream is required'),
 })
 

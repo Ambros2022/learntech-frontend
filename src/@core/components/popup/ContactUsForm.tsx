@@ -7,26 +7,12 @@ import { useRouter } from 'src/hooks/useCompatRouter'
 import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
 import Link from 'next/link'
 
-const PHONE_RULES: [RegExp, RegExp][] = [
-  [/^\+91-/, /^\+91-\d{10}$/],
-  [/^\+966-/, /^\+966-\d{9}$/],
-  [/^\+971-/, /^\+971-\d{9}$/],
-  [/^\+974-/, /^\+974-\d{8}$/],
-  [/^\+968-/, /^\+968-\d{8}$/],
-  [/^\+965-/, /^\+965-\d{8}$/],
-  [/^\+973-/, /^\+973-\d{8}$/],
-  [/^\+977-/, /^\+977-\d{10}$/],
-]
-
-const isValidPhone = (val: string) => {
-  const rule = PHONE_RULES.find(([prefix]) => prefix.test(val))
-  return rule ? rule[1].test(val) : false
-}
+import { phoneSchema, submitEnquiry } from './formUtils'
 
 const schema = z.object({
   name: z.string().trim().min(1, 'Name is required'),
   email: z.string().trim().email('Email is not valid'),
-  contact_number: z.string().refine(isValidPhone, 'Enter a valid phone number'),
+  contact_number: phoneSchema,
   location: z.string().trim().min(1, 'Location is required'),
   message: z.string(),
   terms: z.boolean().refine(v => v === true, 'You must accept the terms and conditions'),
@@ -63,21 +49,15 @@ export default function ContactUsForm({ onChanges }: Props) {
   const onSubmit = async (values: FormValues) => {
     try {
       toast.loading('Processing')
-      const body = new FormData()
-      body.append('name', values.name)
-      body.append('email', values.email)
-      body.append('contact_number', values.contact_number)
-      body.append('location', values.location)
-      body.append('message', values.message)
-      body.append('current_url', window.location.href)
-
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}api/website/enquiry`, {
-        method: 'POST',
-        body,
+      const ok = await submitEnquiry({
+        name: values.name,
+        email: values.email,
+        contact_number: values.contact_number,
+        location: values.location,
+        message: values.message,
       })
       toast.dismiss()
-
-      if (res.ok) {
+      if (ok) {
         toast.success('Thank you. We will get back to you.')
         reset()
         onChanges?.()
@@ -86,6 +66,7 @@ export default function ContactUsForm({ onChanges }: Props) {
         toast.error('Try again later!')
       }
     } catch {
+      toast.dismiss()
       toast.error('Try again later!')
     }
   }
