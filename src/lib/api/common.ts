@@ -339,6 +339,22 @@ export const getAbroadCountryPage = cache(async (country: string) => {
   return json?.data ?? null
 })
 
+export const getOrganizationPage = cache(async (category: string) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/organizationpage/get?size=1000&categories=${category}`,
+    { tags: [`organization-${category}`] },
+  )
+  return json?.data?.[0] ?? null
+})
+
+export const getCounsellorTeams = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/counsellorteams/get?orderby=asc&columnname=listing_order`,
+    { tags: ['counsellors'] },
+  )
+  return json?.data ?? []
+})
+
 export const getAbroadCountries = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/country/get?page=1&size=10&india=false`,

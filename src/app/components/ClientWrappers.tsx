@@ -138,6 +138,11 @@ export const LazyAbroadCarousel = dynamic(
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
 )
 
+export const LazyAbroadSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/AbroadSearchBar'),
+  { ssr: false },
+)
+
 export const LazyBlogCarousel = dynamic(
   () => import('src/components/blogs/BlogCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },

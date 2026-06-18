@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation'
 import AbroadUniversity from 'src/views/AbroadUniversity'
 import { getAbroadCountryPage, getCollegeById, getTestimonialsByCollege } from 'src/lib/api/common'
