@@ -1263,3 +1263,144 @@ Rules:
 * Each search bar owns its fetch + href construction
 * Register as `LazyXxxSearchBar` in ClientWrappers (`ssr: false`)
 * Props flow through `dynamic()` transparent to caller — server component passes props directly to lazy wrapper
+
+---
+
+## getTestimonialsByGeneralCourse API
+
+```ts
+// Returns array directly — NOT { data, totalItems }
+const testimonials = await getTestimonialsByGeneralCourse(courseSlug)
+// Pass gcId (general course id or slug) — uses general_course_id filter
+```
+
+Contrast: `getTestimonialsByStream(streamId)` → `stream_id` filter. `getTestimonialsByCollege(collegeId)` → `college_id` filter.
+
+---
+
+## getAllGeneralCourses API
+
+```ts
+// Returns all general courses (no trending filter)
+const courses = await getAllGeneralCourses()
+// Shape: { id, short_name, slug, streams: { id, slug, logo } }[]
+// Link: /course/${c.streams.id}/${c.streams.slug}/${c.slug}
+```
+
+Contrast: `getTrendingCourses()` → adds `is_trending=1` filter.
+
+---
+
+## PopularCourses Self-Fetching Pattern
+
+`PopularCourses` (used in SubInnerCoursePage) is async self-fetching — invariant data (same on every sub-course page):
+
+```tsx
+// src/views/SubInnerCoursePage/Components/PopularCourses/index.tsx
+export default async function PopularCourses() {
+  const courses = await getAllGeneralCourses()
+  if (!courses.length) return null
+  return (
+    <section>
+      <h2>Popular Degree Courses</h2>
+      <ul aria-hidden="true" style={clipRect}>  {/* SSR links — Googlebot crawls */}
+        {courses.map(c => <li key={c.id}><a href={...}>{c.short_name}</a></li>)}
+      </ul>
+      <div className={`px-5 position-relative ${styles.wrap}`}>
+        <LazyPopularCoursesCarousel courses={courses} />
+      </div>
+    </section>
+  )
+}
+```
+
+Client (`PopularCoursesCarouselClient`): `EmblaTabCarousel`, `slidesToShowDesktop={6}`, uses `streams.logo` as image.
+
+---
+
+## EmblaTabCarousel Arrow CSS Override (Page-Specific)
+
+`EmblaTabCarousal.module.css` mobile defaults (`left: -10px`, `right: -5px`) cause arrows to overlap slides when parent has `px-5` (48px) padding. Fix with page-scoped CSS module using `button[aria-label]` selector:
+
+```css
+/* OtherCourses.module.css */
+.wrap :global(button[aria-label="Previous"]) { left: -45px; }
+.wrap :global(button[aria-label="Next"])     { right: -45px; }
+
+@media (max-width: 768px) {
+  .wrap :global(button[aria-label="Previous"]) { left: -42px; }
+  .wrap :global(button[aria-label="Next"])     { right: -42px; }
+}
+```
+
+Apply `styles.wrap` to the carousel container div in the server component.
+
+Rules:
+* Arrow must be fully outside `.embla`: `abs(left) ≥ arrow-width (40px)`
+* Arrow must be within parent padding: `abs(left) ≤ parent-padding (48px for px-5)`
+* Target `button[aria-label]` — CSS module class names are hashed, not targetable from outside
+* Used in: `OtherCourses.module.css` → imported by `OtherCourses/index.tsx` + `PopularCourses/index.tsx`
+
+---
+
+## BreadcrumbList JSON-LD — Always Include `item` URL
+
+Last breadcrumb entry must include `item` URL to avoid TypeScript union error (`item?: undefined` conflicts with `JsonLdValue` index signature):
+
+```tsx
+// WRONG — last entry without item causes TS error
+{ '@type': 'ListItem', position: 4, name: pagedata?.short_name }
+
+// CORRECT — always provide item URL for all entries
+{ '@type': 'ListItem', position: 4, name: pagedata?.short_name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}/${pagedata?.slug}` }
+```
+
+---
+
+## SubInnerCoursePage Pattern (Sub-Course Detail Page)
+
+Page: `/course/[streamId]/[streamSlug]/[courseSlug]` — same architecture as `InnerCoursePage` (stream detail).
+
+```
+page.tsx (server)
+ └── SubInnerCoursePage (server — JsonLd, Breadcrumb)
+     ├── BannerSection (server)
+     ├── Breadcrumb (server)
+     ├── OverviewSection (server — RSC children slot)
+     │   └── SubCourseInfoTabsClient ('use client' — ScrollTabs)
+     │       └── [children] sidebar (server-rendered)
+     ├── PopularCourses (async server — self-fetching via getAllGeneralCourses())
+     ├── TestimonialSec (server — data from page.tsx via getTestimonialsByGeneralCourse)
+     ├── OrganizationSection (async server — self-fetching via getOrganizationPage('Courses'))
+     ├── ExpertTraineeSec (async server — self-fetching via getCounsellorTeams())
+     └── ExpertSection (server)
+```
+
+`page.tsx` parallel fetches:
+```ts
+const [pagedata, colleges, exams, testimonials] = await Promise.all([
+  getGeneralCourseBySlug(courseSlug, streamId),
+  getColleges({ size: 8, type: 'college', stream_id: streamId }),
+  getExams({ size: 8, stream_id: streamId }),
+  getTestimonialsByGeneralCourse(courseSlug),
+])
+```
+
+`SubCourseTabData` — tabs built server-side, `html` fields for HTML content, `courses` for sub-course cards (with pre-computed `href`), `faqData` for FAQ:
+```ts
+export interface SubCourseTabData {
+  id: string; label: string
+  html?: string
+  courses?: { id: number; name: string; short_name: string; duration: string; slug: string; href: string }[]
+  faqData?: { questions: string; answers: string }[]
+}
+```
+
+`top_college` field can be string HTML or array of sub-course objects — handled in server component:
+```ts
+Array.isArray(data.top_college)
+  ? { id: 'top-colleges', label: 'Top Colleges', courses: data.top_college.map(item => ({ ...item, href: `/course/${item.id}/${data.slug}/${item.slug}` })) }
+  : { id: 'top-colleges', label: 'Top Colleges', html: data.top_college }
+```
+
+`TestimonialSec` uses `card.courseTestimonials` (not `streamTestimonials`) — requires separate `SubCourseTestimonialCarouselClient`.
