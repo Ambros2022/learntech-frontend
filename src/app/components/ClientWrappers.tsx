@@ -40,7 +40,7 @@ const CardGridSkeleton = ({ count = 4 }: { count?: number }) => (
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const LazyAnimatedCounter = dynamic(
-  () => import('src/views/Homepage/Components/AnimatedCounters/AnimatedCounter'),
+  () => import('src/views/Homepage/Components/AnimatedCounters/animatedCounter'),
   { ssr: false, loading: () => <span>0</span> },
 )
 
