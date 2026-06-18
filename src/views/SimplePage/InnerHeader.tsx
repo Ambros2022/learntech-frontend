@@ -29,17 +29,19 @@ export default function InnerHeader({
 
   return (
     <section
-      className={`position-relative overflow-hidden d-flex align-items-center ${className}`}
+      className={`position-relative d-flex align-items-center ${className}`}
       style={{ minHeight }}
     >
-      {/* Background image — always shown; provides its own dark background */}
-      <Image
-        src={backgroundImage}
-        alt={title}
-        fill
-        priority
-        style={{ objectFit: 'cover', objectPosition: 'center' }}
-      />
+      {/* Background image — clipped by own wrapper so dropdown children aren't cut */}
+      <div className="position-absolute top-0 start-0 w-100 h-100 overflow-hidden" style={{ zIndex: 0 }}>
+        <Image
+          src={backgroundImage}
+          alt={title}
+          fill
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
+      </div>
 
       {/* Optional gradient overlay — only rendered when explicitly passed */}
       {bgGradient && (

@@ -141,16 +141,24 @@ export default function SearchBar({ placeholder = 'Search...', onSearch, classNa
 
       {open && results.length > 0 && (
         <ul
-          className="list-group position-absolute w-100 shadow"
-          style={{ top: '100%', zIndex: 1050, maxHeight: 300, overflowY: 'auto' }}
+          className="list-unstyled position-absolute w-100 bg-white shadow-sm border rounded"
+          style={{ top: 'calc(100% + 4px)', zIndex: 9999, maxHeight: 280, overflowY: 'auto', margin: 0, padding: 0 }}
           role="listbox"
           aria-label="Search results"
         >
-          {results.map((item) => (
-            <li key={item.id} role="option" aria-selected="false" className="list-group-item p-0">
+          {results.map((item, idx) => (
+            <li
+              key={item.id}
+              role="option"
+              aria-selected="false"
+              style={{ borderBottom: idx < results.length - 1 ? '1px solid #f0f0f0' : 'none' }}
+            >
               <Link
                 href={item.href}
-                className="d-block px-3 py-2 text-dark text-decoration-none"
+                className="d-block px-3 py-2 text-dark text-decoration-none text-start"
+                style={{ fontSize: '0.875rem', lineHeight: 1.5, transition: 'background 0.1s' }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#f5f7ff')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                 onClick={() => setOpen(false)}
               >
                 {item.label}
