@@ -1,115 +1,33 @@
-﻿'use client'
-import React, { useCallback, useEffect, useState } from 'react';
-import BannerSection from './Components/BannerSection';
-import TopCollegesSection from './Components/TopCollegesSection';
-// import ExpertSection from './Components/ExpertSection';
-// import TopFeaturedColleges from './Components/TopFeaturedColleges';
-// import CollegeFilterSection from './Components/CollegeFilterSection';
-import axios from 'src/configs/axios';
-import Head from 'next/head';
-import { useRouter } from 'src/hooks/useCompatRouter';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import dynamic from 'next/dynamic';
-const TopFeaturedColleges = dynamic(() => import('./Components/TopFeaturedColleges'), { ssr: false });
-const ExpertSection = dynamic(() => import('./Components/ExpertSection'), { ssr: false });
-const CollegeFilterSection = dynamic(() => import('./Components/CollegeFilterSection'), { ssr: false });
+import JsonLd from 'src/app/components/JsonLd'
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
+import BannerSection from './Components/BannerSection'
+import TopCollegesSection from './Components/TopCollegesSection'
+import CollegeFilterSection from './Components/CollegeFilterSection'
+import ExpertSection from './Components/ExpertSection'
+import FeaturedCollegeSection from 'src/views/Homepage/Components/FeaturedCollegeSection'
 
-function MainCollegePage() {
-  const router = useRouter()
-  const isMountedRef = useIsMountedRef();
-  const [pagedata, setPagedata] = useState<any>();
+const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || ''
 
-  const getPagedata = useCallback(async () => {
-    try {
-      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
-      console.log('Main College Page API Response:', response.data);
-      if (isMountedRef.current) {
+export default function MainCollegePage({ pagedata }: { pagedata: any }) {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org/',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Colleges', item: `${BASE_URL}/colleges` },
+    ],
+  }
 
-        setPagedata(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
-
-
-
-
-
-
-
-
-  useEffect(() => {
-    getPagedata();
-
-  }, [getPagedata,]);
   return (
     <>
-      <Head>
-        <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
-        <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-        <script type="application/ld+json">
-
-          {JSON.stringify([
-
-
-
-
-            {
-
-              "@context": "https://schema.org/",
-
-              "@type": "BreadcrumbList",
-
-              "itemListElement": [
-
-                {
-
-                  "@type": "ListItem",
-
-                  "position": 1,
-
-                  "name": "Home",
-
-                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
-
-
-
-                },
-
-                {
-
-                  "@type": "ListItem",
-
-                  "position": 2,
-
-                  "name": "Colleges",
-
-                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
-
-                },
-
-
-
-              ]
-
-            }
-
-          ])}
-
-        </script>
-      </Head>
+      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
       <BannerSection />
+      <Breadcrumb items={[{ label: 'Colleges' }]} />
       <TopCollegesSection data={pagedata} />
       <CollegeFilterSection />
-      {/* <BestCollegeSec /> */}
       <ExpertSection />
-      <TopFeaturedColleges />
+      {/* @ts-expect-error async server component */}
+      <FeaturedCollegeSection />
     </>
   )
 }
-
-export default MainCollegePage;

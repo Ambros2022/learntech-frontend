@@ -118,6 +118,11 @@ export const LazyBoardSearchBar = dynamic(
   { ssr: false, loading: () => <SearchBarSkeleton /> },
 )
 
+export const LazyCollegeSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/CollegeSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
 export const LazyGlobalPopupShare = dynamic(
   () => import('src/@core/components/popup/GlobalPopupShare'),
   { ssr: false, loading: () => null },
