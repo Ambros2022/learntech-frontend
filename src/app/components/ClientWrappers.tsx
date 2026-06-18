@@ -133,6 +133,11 @@ export const LazyUniversityCarousel = dynamic(
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
 )
 
+export const LazyAbroadCarousel = dynamic(
+  () => import('src/components/colleges/AbroadCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
 export const LazyBlogCarousel = dynamic(
   () => import('src/components/blogs/BlogCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },

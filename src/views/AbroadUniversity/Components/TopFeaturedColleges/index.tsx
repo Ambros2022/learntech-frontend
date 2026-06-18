@@ -1,79 +1,35 @@
-﻿'use client'
-import React, { useCallback, useEffect, useState } from 'react'
-import axios1 from 'src/configs/axios'
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-const GlobalEnquiryForm = dynamic(() => import('src/@core/components/popup/GlobalPopupEnquiry'), { ssr: false });
-const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
-// const CollegeCard = dynamic(() => import('src/@core/components/college-card'), { ssr: false });
-function FeaturedCollegeSection({ data }) {
-  const [colleges, setColleges] = useState<any[]>([]);
+import { getColleges } from 'src/lib/api/common'
+import { LazyAbroadCarousel } from 'src/app/components/ClientWrappers'
 
-
-  //get all banners
-  const getcolleges = useCallback(async () => {
-    try {
-      const roleparams: any = {};
-      roleparams['page'] = 1;
-      roleparams['size'] = 10;
-      roleparams['type'] = "university";
-      roleparams['country_id'] = [data?.country_id];
-      const response = await axios1.get('api/website/colleges/get', { params: roleparams });
-
-      setColleges(response.data.data);
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
-
-
-  useEffect(() => {
-
-    getcolleges();
-
-  }, [getcolleges]);
-
-
-  function CollegeCard({ college }) {
-    // alert(JSON.stringify(college))
-    return (
-      <div className="mx-xl-4 mx-lg-2 mx-md-2 mx-5 card featuredClgCard mb-4">
-        <div className='card-image'>
-          <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${college.banner_image}`} width={200} height={200} className="card-Image-top" alt="featured-college" />
-        </div>
-        <div className="card-body">
-          <h5 className="card-title text-blue text-truncate">{college.name}</h5>
-          <p className="text-truncate">
-            <i className='bi bi-geo-alt-fill text-danger fs-5 me-1'></i>
-            <span className='card-text'>{college.address}</span>
-          </p>
-          <div className="d-flex justify-content-between">
-            <GlobalEnquiryForm className="applyNowButton btn" collegeName={college.name} />
-            <Link href={`/${data.slug}/${college.id}/${college.slug}`} className="btn">View More</Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  return (
-    <>
-      {colleges && colleges.length > 0 ? (
-        <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
-          <div className="container pt-5 position-relative">
-            <h2 className="fw-bold text-blue text-center mb-5">Top Universities to Study in {data?.country?.name}</h2>
-            <MainCarousel items={colleges.map(college => (
-              <CollegeCard key={college.id} college={college} />
-            ))} />
-            {/* <div className="d-flex justify-content-center pb-5">
-          <Link href='/colleges' className='btn viewMoreClgBtn'>View More</Link>
-          </div> */}
-          </div>
-        </section>
-      ) : ''}
-
-    </>
-  )
+const clipRect = {
+  position: 'absolute' as const, width: 1, height: 1,
+  overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' as const,
 }
 
-export default FeaturedCollegeSection
+interface Props {
+  countryId: number
+  countrySlug: string
+  countryName?: string
+}
+
+export default async function TopFeaturedColleges({ countryId, countrySlug, countryName }: Props) {
+  const result = await getColleges({ size: 10, type: 'university', country_id: countryId })
+  const colleges = result?.data ?? []
+  if (!colleges.length) return null
+
+  return (
+    <section className="FeaturedClgCon bg-white mb-4">
+      <div className="container pt-4 pt-md-5 position-relative">
+        <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">
+          Top Universities to Study in {countryName}
+        </h2>
+        <ul aria-hidden="true" style={clipRect}>
+          {colleges.map((c: any) => (
+            <li key={c.id}><a href={`/${countrySlug}/${c.id}/${c.slug}`}>{c.name}</a></li>
+          ))}
+        </ul>
+        <LazyAbroadCarousel colleges={colleges} countrySlug={countrySlug} />
+      </div>
+    </section>
+  )
+}
