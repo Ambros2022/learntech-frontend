@@ -133,6 +133,16 @@ export const LazyUniversityCarousel = dynamic(
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
 )
 
+export const LazyBlogCarousel = dynamic(
+  () => import('src/components/blogs/BlogCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
+export const LazySchoolSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/SchoolSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
 export const LazyGlobalPopupShare = dynamic(
   () => import('src/@core/components/popup/GlobalPopupShare'),
   { ssr: false, loading: () => null },
