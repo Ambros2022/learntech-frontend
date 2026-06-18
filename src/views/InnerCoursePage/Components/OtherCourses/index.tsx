@@ -1,53 +1,31 @@
-﻿'use client'
-import Link from 'next/link';
-import React from 'react'
-import MainCarousel2 from './CoursesCarousel';
+import { LazyOtherCoursesCarousel } from 'src/app/components/ClientWrappers'
+import styles from './OtherCourses.module.css'
 
-function OtherCourses({ streamdata }) {
+const clipRect = {
+  position: 'absolute' as const,
+  width: 1,
+  height: 1,
+  overflow: 'hidden' as const,
+  clip: 'rect(0,0,0,0)' as const,
+  whiteSpace: 'nowrap' as const,
+}
 
-  // Function to create card components
-  function createCards() {
-    return streamdata.map(card => (
-      <Link href={`/course/${card.id}/${card.slug}`}>
-        <CardComponent
-          key={card.id}
-          title={card.name}
-          imageSrc={`${process.env.NEXT_PUBLIC_IMG_URL}/${card.logo}`}
-        />
-      </Link>
-    ));
-  }
-
-  // CardComponent function
-  function CardComponent({ title, imageSrc }) {
-    return (
-      <div className='courseConCarousel'>
-        <div className="card hover-card text-center d-flex mx-2">
-          <div className="row flex-fill">
-            <div className="col-12">
-              <img width={70} height={70} src={imageSrc} className="p-2 img-fluid mx-auto mt-3" alt={`${title}-logo`} />
-            </div>
-            <div className="col-12 text-center text-start px-0">
-              <div className="card-body d-flex text-center justify-content-center">
-                <h6 className="card-title flex-fill text-truncate">{title}</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+export default function OtherCourses({ streams }: { streams: any[] }) {
+  if (!streams?.length) return null
 
   return (
     <section className='bg-white pb-5'>
       <section className='container bg-skyBlue rounded'>
         <h3 className='fw-bold text-blue pt-5 ps-0 ps-md-5 text-center text-md-start'>Other Courses</h3>
-        <div className="carouselCardsCon px-5 pt-4 pb-5 position-relative" style={{zIndex:'2'}}>
-          <MainCarousel2 items={createCards()} />
+        <ul aria-hidden="true" style={clipRect}>
+          {streams.map(s => (
+            <li key={s.id}><a href={`/course/${s.id}/${s.slug}`}>{s.name}</a></li>
+          ))}
+        </ul>
+        <div className={`carouselCardsCon px-5 pt-4 pb-5 position-relative ${styles.wrap}`} style={{ zIndex: 2 }}>
+          <LazyOtherCoursesCarousel streams={streams} />
         </div>
       </section>
     </section>
   )
 }
-
-export default OtherCourses;

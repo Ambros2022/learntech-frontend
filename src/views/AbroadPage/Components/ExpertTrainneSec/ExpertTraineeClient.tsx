@@ -16,11 +16,6 @@ interface Trainer {
   info: string
 }
 
-interface Props {
-  trainers: Trainer[]
-  countryName?: string
-}
-
 function TrainerCard({ trainer, onViewProfile }: { trainer: Trainer; onViewProfile: () => void }) {
   return (
     <div className="card py-3 hover-card h-100 justify-content-around" style={{ border: '1px solid #274896' }}>
@@ -51,7 +46,7 @@ function TrainerCard({ trainer, onViewProfile }: { trainer: Trainer; onViewProfi
   )
 }
 
-export default function ExpertTraineeClient({ trainers, countryName }: Props) {
+export default function ExpertTraineeClient({ trainers }: { trainers: Trainer[] }) {
   const [selected, setSelected] = useState<Trainer | null>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
 
@@ -60,27 +55,17 @@ export default function ExpertTraineeClient({ trainers, countryName }: Props) {
     dialogRef.current?.showModal()
   }
 
-  const handleClose = () => {
-    dialogRef.current?.close()
-  }
+  const handleClose = () => dialogRef.current?.close()
 
   return (
-    <section className='bg-light py-md-5 py-3'>
-      <div className="container">
-        <h2 className='text-center fw-bold text-blue pb-3'>
-          We have Educational Experts to Provide Guidance for Study in {countryName}
-        </h2>
-        <p className="text-black">
-          The counselors at Learntech Edu Solutions Pvt. Ltd. spark inspiration, helping students navigate their academic paths with clarity and confidence. They are experts in creating strategies based on student&apos;s preferences and interests to provide guidance for smooth admission process to colleges/ universities in India or abroad.
-        </p>
-        <div className='py-3'>
-          <div className="row d-flex flex-wrap g-2 align-items-stretch">
-            {trainers.map(trainer => (
-              <div className="col-12 col-md-4 col-lg-4 col-xl-3" key={trainer.id}>
-                <TrainerCard trainer={trainer} onViewProfile={() => handleView(trainer)} />
-              </div>
-            ))}
-          </div>
+    <>
+      <div className='py-3'>
+        <div className="row d-flex flex-wrap g-2 align-items-stretch">
+          {trainers.map(trainer => (
+            <div className="col-12 col-md-4 col-lg-4 col-xl-3" key={trainer.id}>
+              <TrainerCard trainer={trainer} onViewProfile={() => handleView(trainer)} />
+            </div>
+          ))}
         </div>
       </div>
 
@@ -97,11 +82,7 @@ export default function ExpertTraineeClient({ trainers, countryName }: Props) {
           boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
         }}
       >
-        <button
-          className="btn-close position-absolute top-0 end-0 m-3"
-          aria-label="Close"
-          onClick={handleClose}
-        />
+        <button className="btn-close position-absolute top-0 end-0 m-3" aria-label="Close" onClick={handleClose} />
         {selected && (
           <div className="d-flex flex-column align-items-center text-center">
             <Image
@@ -110,6 +91,7 @@ export default function ExpertTraineeClient({ trainers, countryName }: Props) {
               height={120}
               alt={selected.name}
               className="rounded-circle mb-3"
+              loading="lazy"
             />
             <h2 className='fw-bold text-blue mb-3'>{selected.name}</h2>
             <div className='text-black text-start w-100' dangerouslySetInnerHTML={{ __html: selected.info }} />
@@ -117,6 +99,6 @@ export default function ExpertTraineeClient({ trainers, countryName }: Props) {
           </div>
         )}
       </dialog>
-    </section>
+    </>
   )
 }

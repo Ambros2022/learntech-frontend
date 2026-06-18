@@ -76,6 +76,14 @@ export const getCollegeCourse = cache(async (courseSlug: string, collegeId: stri
 // STREAMS / COURSES (general)
 // ─────────────────────────────────────────────────────────────────────────────
 
+export const getAllGeneralCourses = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/generalcourse/get?page=1&size=1000`,
+    { tags: ['all-general-courses'] },
+  )
+  return json?.data ?? []
+})
+
 export const getTrendingCourses = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/generalcourse/get?page=1&size=1000&is_trending=1`,
@@ -302,6 +310,14 @@ export const getTestimonialsByStream = cache(async (streamId: string | number, s
   const json = await safeFetch<any>(
     `${API_URL}/api/website/testimonial/filter/get?page=1&size=${size}&stream_id=${streamId}`,
     { tags: [`testimonials-stream-${streamId}`] },
+  )
+  return json?.data ?? []
+})
+
+export const getTestimonialsByGeneralCourse = cache(async (gcId: string | number, size = 15) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/testimonial/filter/get?page=1&size=${size}&general_course_id=${gcId}`,
+    { tags: [`testimonials-gc-${gcId}`] },
   )
   return json?.data ?? []
 })

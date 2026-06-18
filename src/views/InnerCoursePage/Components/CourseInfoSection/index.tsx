@@ -1,9 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { GlobalEnquiryForm } from 'src/app/components/ClientWrappers'
-import SubCourseInfoTabsClient, { SubCourseTabData } from './SubCourseInfoTabsClient'
+import CourseInfoTabsClient, { type CourseTabData } from './CourseInfoTabsClient'
 
-const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL ?? '').replace(/\/+$/, '')
+const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
+
+const isEmpty = (val: any) =>
+  !val || val === '' || val === 'null' || val === '<p>null</p>' || val === '<p><br></p>'
 
 interface Props {
   data: any
@@ -11,64 +14,53 @@ interface Props {
   exams: any[]
 }
 
-export default function OverviewSection({ data, colleges, exams }: Props) {
-  const tabs: SubCourseTabData[] = ([
-    data?.description
-      ? { id: 'overview', label: 'Overview', html: data.description }
-      : null,
-    (() => {
-      if (!data?.top_college) return null
-      if (Array.isArray(data.top_college) && data.top_college.length > 0)
-        return {
-          id: 'top-colleges',
-          label: 'Top Colleges',
-          courses: data.top_college.map((item: any) => ({
-            ...item,
-            href: `/course/${item.id}/${data.slug}/${item.slug}`,
-          })),
-        }
-      if (typeof data.top_college === 'string' && data.top_college)
-        return { id: 'top-colleges', label: 'Top Colleges', html: data.top_college }
-      return null
-    })(),
-    data?.admissions ? { id: 'admissions', label: 'Admissions', html: data.admissions } : null,
-    data?.syllabus ? { id: 'syllabus', label: 'Syllabus', html: data.syllabus } : null,
-    data?.career_opportunities ? { id: 'career', label: 'Career Opportunities', html: data.career_opportunities } : null,
-    data?.generalcoursefaqs?.length > 0
-      ? { id: 'faq', label: 'FAQ', faqData: data.generalcoursefaqs }
-      : null,
-  ] as (SubCourseTabData | null)[]).filter((t): t is SubCourseTabData => !!t)
+export default function CourseInfoSection({ data, colleges, exams }: Props) {
+  const tabs: CourseTabData[] = [
+    { id: 'overview', label: 'Overview', html: data.description },
+    { id: 'ug', label: 'UG', courses: (data.general_courses ?? []).filter((c: any) => c.course_type === 'UG') },
+    { id: 'pg', label: 'PG', courses: (data.general_courses ?? []).filter((c: any) => c.course_type === 'PG') },
+    { id: 'doctorate', label: 'Doctorate', courses: (data.general_courses ?? []).filter((c: any) => c.course_type === 'Doctorate') },
+    { id: 'diploma', label: 'Diploma', courses: (data.general_courses ?? []).filter((c: any) => c.course_type === 'Diploma') },
+    { id: 'top', label: 'Top Colleges', html: data.top_college },
+    { id: 'faq', label: 'FAQ', faqData: data.streamfaqs },
+  ].filter(t =>
+    (t.faqData && t.faqData.length > 0) ||
+    (t.courses && t.courses.length > 0) ||
+    (!t.faqData && !t.courses && !isEmpty(t.html))
+  )
 
   return (
-    <section className='clgInfoSec innerClgCarousel bg-white subinner'>
-      <SubCourseInfoTabsClient tabs={tabs}>
-        {/* Sidebar — server-rendered (zero hydration cost, SEO-crawlable) */}
+    <section className='clgInfoSec innerClgCarousel bg-white'>
+      <CourseInfoTabsClient tabs={tabs} streamId={data.id} streamSlug={data.slug}>
+
+        {/* Sidebar — server-rendered: no JS, crawlable, zero hydration cost */}
         <div className="col-md-4 col-lg-3 mb-md-5 mx-auto px-0">
           <div className="row imgCardConCrs mb-3">
-            {data?.streams?.banner && (
+
+            {data.banner && (
               <div className="col-12 mb-5 px-0">
-                <div className='dental-crs-img flex-column d-flex justify-content-center pb-2'>
+                <div className='dental-crs-img flex-column d-flex justify-content-center pb-3'>
                   <Image
-                    src={`${IMG_URL}/${data.streams.banner}`}
+                    src={`${IMG_URL}/${data.banner}`}
                     width={600}
                     height={600}
-                    alt={`${data?.name ?? 'course'} image`}
-                    className='img-fluid'
+                    alt={`${data.name} course`}
+                    className="img-fluid"
                   />
                   <h6 className='text-center mb-3'>Are you interested in this course?</h6>
-                  <GlobalEnquiryForm className="mb-3 btn chkEligBtn" buttonText="Check Eligibility" />
+                  <GlobalEnquiryForm className="mb-3 chkEligBtn" buttonText="Check Eligibility" />
                 </div>
               </div>
             )}
 
-            {colleges?.length > 0 && (
+            {colleges.length > 0 && (
               <>
-                <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data?.streams?.name} Colleges</h4>
+                <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Colleges</h4>
                 <div
                   className="col-12 cardConBrdr p-3 mb-5 text-center overflow-y-auto bg-skyBlue"
                   style={{ maxHeight: 'calc(6 * 150px)' }}
                 >
-                  {colleges.map((val: any) => (
+                  {colleges.map(val => (
                     <Link key={val.id} href={`/college/${val.id}/${val.slug}`}>
                       <div className="card p-3 mb-3 d-flex flex-row bg-skyBlue hover-card">
                         <div className="row d-flex">
@@ -79,10 +71,11 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
                               height={500}
                               alt={val.name}
                               className='img-fluid rounded'
+                              loading="lazy"
                             />
                           </div>
-                          <div className="align-content-center justify-content-md-start justify-content-center col-md-7 col-xl-7 col-lg-7">
-                            <h6 className='align-content-center text-md-start text-center text-black fw-bold'>{val.name}</h6>
+                          <div className="align-content-center col-md-7 col-xl-7 col-lg-7">
+                            <h6 className='text-start text-black fw-bold'>{val.name}</h6>
                           </div>
                         </div>
                       </div>
@@ -92,15 +85,15 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
               </>
             )}
 
-            {exams?.length > 0 && (
+            {exams.length > 0 && (
               <>
-                <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data?.streams?.name} Exams</h4>
+                <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Exams</h4>
                 <div
-                  className="col-12 cardConBrdr p-3 mb-5 overflow-y-auto text-center bg-skyBlue"
+                  className="col-12 cardConBrdr p-3 mb-3 overflow-y-auto text-center bg-skyBlue"
                   style={{ maxHeight: 'calc(6 * 150px)' }}
                 >
-                  {exams.map((exam: any) => (
-                    <Link key={exam.id} href={`/exam/${exam.id}/${exam.slug}`}>
+                  {exams.map(exam => (
+                    <Link href={`/exam/${exam.id}/${exam.slug}`} key={exam.id}>
                       <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
                         <div className="row">
                           <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
@@ -108,8 +101,9 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
                               src={`${IMG_URL}/${exam.logo}`}
                               width={200}
                               height={200}
-                              alt={exam.exam_title ?? 'exam'}
+                              alt={exam.exam_title}
                               className='align-self-center innerBoardImg'
+                              loading="lazy"
                             />
                           </div>
                           <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
@@ -126,7 +120,8 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
             )}
           </div>
         </div>
-      </SubCourseInfoTabsClient>
+
+      </CourseInfoTabsClient>
     </section>
   )
 }

@@ -1,84 +1,65 @@
-﻿'use client'
-import React from 'react'
+import JsonLd from 'src/app/components/JsonLd'
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
 import BannerSection from './Components/BannerSection'
 import OverviewSection from './Components/OverviewSection'
 import PopularCourses from './Components/PopularCourses'
-import ExpertSection from './Components/ExpertSection'
+import TestimonialSec from './Components/TestimonialSec'
 import OrganizationSection from './Components/OrganizationalSec'
-import ExperTraineeSec from './Components/ExpertTrainneSec'
-import Testimonial from './Components/TestimonialSec'
-import Head from 'next/head'
-import { useRouter } from 'src/hooks/useCompatRouter'
+import ExpertTraineeSec from './Components/ExpertTrainneSec'
+import ExpertSection from './Components/ExpertSection'
 
-const SubInnerCoursePage = ({ pagedata, colleges, exams, Streamid }) => {
-  const router = useRouter()
-  const canonicalPath = router.asPath.split('?')[0]
+interface Props {
+  pagedata: any
+  colleges: any[]
+  exams: any[]
+  testimonials: any[]
+}
 
-  const formattedData = pagedata?.generalcoursefaqs?.map((item) => ({
-    '@type': 'Question',
-    name: item.questions,
-    acceptedAnswer: { '@type': 'Answer', text: item.answers },
-  })) || []
+export default function SubInnerCoursePage({ pagedata, colleges, exams, testimonials }: Props) {
+  const webUrl = process.env.NEXT_PUBLIC_WEB_URL ?? ''
 
-  const title = pagedata?.meta_title || 'Study in India | Study Abroad | Learntech Edu Solutions'
-  const description = pagedata?.meta_description || 'Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad.'
-  const canonicalUrl = `${process.env.NEXT_PUBLIC_WEB_URL}${canonicalPath}`
-  const ogImage = `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.streams?.banner}` || `${process.env.NEXT_PUBLIC_WEB_URL}/images/icons/learntech-logo.png`
+  const faqSchema = pagedata?.generalcoursefaqs?.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: pagedata.generalcoursefaqs.map((item: any) => ({
+          '@type': 'Question',
+          name: item.questions,
+          acceptedAnswer: { '@type': 'Answer', text: item.answers },
+        })),
+      }
+    : null
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${webUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Courses', item: `${webUrl}/courses` },
+      { '@type': 'ListItem', position: 3, name: pagedata?.streams?.name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}` },
+      { '@type': 'ListItem', position: 4, name: pagedata?.short_name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}/${pagedata?.slug}` },
+    ],
+  }
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="keywords" content={pagedata?.meta_keyword || 'Learntechweb'} />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={canonicalUrl} />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:site_name" content="Learntech Edu Solutions" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@learntechww" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={ogImage} />
-
-        {formattedData.length > 0 && (
-          <script type="application/ld+json">
-            {JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              mainEntity: formattedData,
-            })}
-          </script>
-        )}
-        <script type="application/ld+json">
-          {JSON.stringify([{
-            '@context': 'https://schema.org/',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: `${process.env.NEXT_PUBLIC_WEB_URL}/` },
-              { '@type': 'ListItem', position: 2, name: 'Courses', item: `${process.env.NEXT_PUBLIC_WEB_URL}/courses` },
-              { '@type': 'ListItem', position: 3, name: pagedata?.streams?.name, item: `${process.env.NEXT_PUBLIC_WEB_URL}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}` },
-              { '@type': 'ListItem', position: 4, name: pagedata?.short_name, item: canonicalUrl },
-            ],
-          }])}
-        </script>
-      </Head>
-
+      {faqSchema && <JsonLd schema={faqSchema} id="faq-schema" />}
+      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
       <BannerSection data={pagedata} />
+      <Breadcrumb items={[
+        { label: 'Courses', href: '/courses' },
+        { label: pagedata?.streams?.name, href: `/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}` },
+        { label: pagedata?.short_name },
+      ]} />
       <OverviewSection data={pagedata} colleges={colleges} exams={exams} />
+      {/* @ts-expect-error async server component */}
       <PopularCourses />
-      {pagedata && <Testimonial data={pagedata} />}
-      <OrganizationSection data={pagedata} />
-      <ExperTraineeSec data={pagedata} />
+      <TestimonialSec testimonials={testimonials} />
+      {/* @ts-expect-error async server component */}
+      <OrganizationSection courseName={pagedata?.short_name} />
+      {/* @ts-expect-error async server component */}
+      <ExpertTraineeSec courseName={pagedata?.short_name} />
       <ExpertSection />
     </>
   )
 }
-
-export default SubInnerCoursePage

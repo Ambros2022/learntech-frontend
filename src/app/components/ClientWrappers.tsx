@@ -158,6 +158,31 @@ export const LazyCourseSearchBar = dynamic(
   { ssr: false, loading: () => <SearchBarSkeleton /> },
 )
 
+export const LazyOtherCoursesCarousel = dynamic(
+  () => import('src/views/InnerCoursePage/Components/OtherCourses/OtherCoursesCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={5} /> },
+)
+
+export const LazyTestimonialCarousel = dynamic(
+  () => import('src/views/InnerCoursePage/Components/TestimonialSec/TestimonialCarouselClient'),
+  { ssr: false, loading: () => <SectionSkeleton height='280px' /> },
+)
+
+export const LazyExpertTraineeClient = dynamic(
+  () => import('src/views/AbroadPage/Components/ExpertTrainneSec/ExpertTraineeClient'),
+  { ssr: false, loading: () => <SectionSkeleton height='300px' /> },
+)
+
+export const LazyPopularCoursesCarousel = dynamic(
+  () => import('src/views/SubInnerCoursePage/Components/PopularCourses/PopularCoursesCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={6} /> },
+)
+
+export const LazySubCourseTestimonialCarousel = dynamic(
+  () => import('src/views/SubInnerCoursePage/Components/TestimonialSec/SubCourseTestimonialCarouselClient'),
+  { ssr: false, loading: () => <SectionSkeleton height='280px' /> },
+)
+
 export const LazyGlobalPopupShare = dynamic(
   () => import('src/@core/components/popup/GlobalPopupShare'),
   { ssr: false, loading: () => null },

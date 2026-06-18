@@ -1085,3 +1085,181 @@ export default function CollegeInfoTabsClient({ tabs, collegeName, collegeId }) 
   )
 }
 ```
+
+---
+
+## RSC Children Slot Pattern (Server Sidebar in Client Tab Layout)
+
+When a client component needs a layout column that is purely static (no JS), pass it as `children` from the server component. Next.js serializes server-rendered children as static HTML — zero hydration cost, fully crawlable.
+
+```tsx
+// Server (CourseInfoSection/index.tsx) — no 'use client'
+export default function CourseInfoSection({ data, colleges, exams }: Props) {
+  return (
+    <section>
+      <CourseInfoTabsClient tabs={tabs} streamId={data.id} streamSlug={data.slug}>
+        {/* sidebar — server-rendered: no JS, crawlable */}
+        <div className="col-md-4">
+          <Image src={...} ... />
+          <GlobalEnquiryForm ... />
+          {colleges.map(val => <Link href={`/college/${val.id}/${val.slug}`}>...</Link>)}
+        </div>
+      </CourseInfoTabsClient>
+    </section>
+  )
+}
+
+// Client (CourseInfoTabsClient.tsx) — 'use client'
+export default function CourseInfoTabsClient({ tabs, streamId, streamSlug, children }) {
+  const [activeTab, setActiveTab] = useState(tabs[0]?.id)
+  return (
+    <div className="container">
+      <ScrollTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      <div className="row">
+        <div className="col-md-8">
+          {/* tab content */}
+        </div>
+        {children}  {/* server-rendered sidebar slotted in */}
+      </div>
+    </div>
+  )
+}
+```
+
+Rules:
+* Use when: sidebar/column has static server data (links, images) alongside client state (tabs)
+* Server passes `children` — client places via `{children}` in the row
+* Never duplicate static content inside `'use client'` — keep it in parent server component
+* Used in: `CourseInfoSection` (sidebar = colleges + exams + course image)
+
+---
+
+## ExpertTraineeClient Pattern
+
+Counsellor cards + profile dialog. H2 heading is context-specific (country vs stream) — must be server-rendered.
+
+```
+ExpertTrainneSec (server — async, self-fetches getCounsellorTeams())
+├── <h2>Context-specific heading</h2>          ← SSR — SEO
+├── <p>Description paragraph</p>               ← SSR
+└── <LazyExpertTraineeClient trainers={...} />  ← client, ssr:false
+    ├── Trainer cards grid
+    └── <dialog> modal — native HTML, no MUI
+```
+
+```tsx
+// Server wrapper (any page's ExpertTrainneSec/index.tsx)
+export default async function ExpertTrainneSec({ streamName }: { streamName: string }) {
+  const trainers = await getCounsellorTeams()
+  if (!trainers?.length) return null
+  return (
+    <section className='bg-light py-md-5 py-3'>
+      <div className="container">
+        <h2>We have Educational Experts to Provide Guidance for {streamName} Courses</h2>
+        <p>The counselors at Learntech...</p>
+        <LazyExpertTraineeClient trainers={trainers} />
+      </div>
+    </section>
+  )
+}
+
+// Client: src/views/AbroadPage/Components/ExpertTrainneSec/ExpertTraineeClient.tsx
+// Props: { trainers: Trainer[] } — NO countryName, NO heading, NO section wrapper
+// Renders: cards grid + <dialog ref> modal (native HTML, no MUI)
+```
+
+Rules:
+* `ExpertTraineeClient` = cards + dialog ONLY — no `<section>`, no `<h2>`, no `<p>`
+* Heading always server-rendered in the wrapper, using page context (country/stream name)
+* Modal: native `<dialog>` + `.showModal()` / `.close()` — never MUI Modal/Fade/Box
+* `getCounsellorTeams()` is `cache()`-wrapped — safe to call from multiple server components per request
+* Registered as `LazyExpertTraineeClient` in ClientWrappers (`ssr: false`)
+
+---
+
+## EmblaCarousel vs EmblaTabCarousel
+
+Two carousel implementations — choose based on arrow style needed:
+
+| | `EmblaCarousel` | `EmblaTabCarousel` |
+|---|---|---|
+| Arrows | Plain `‹ ›` text, absolute at `-60px` | Circle button, white bg + navy border, hover fills navy |
+| Dots | Yes (default) | No dots |
+| Use for | General content carousels | Entity carousels, course carousels, testimonials |
+
+```tsx
+// EmblaCarousel — src/components/ui/Embla/EmblaCarousel.tsx
+<EmblaCarousel
+  slidesToShowDesktop={4}   // default 4
+  slidesToShowTablet={3}    // default 3
+  slidesToShowMobile={1}    // default 1
+  showDots={true}           // default true
+  showArrows={true}         // default true
+  loop={true}               // default true
+  autoplay={true}           // default true
+  autoplayDelay={3000}
+>
+
+// EmblaTabCarousel — src/components/ui/Embla/EmblaTabCarousel.tsx
+// Same props + variant="tabs" for ScrollTabs mode
+// Arrows: only shown when canScrollPrev/canScrollNext (smart visibility)
+<EmblaTabCarousel
+  slidesToShowDesktop={7}
+  slidesToShowTablet={4}
+  slidesToShowMobile={2}
+  showDots={false}
+  loop
+  autoplay
+  autoplayDelay={1500}
+>
+```
+
+Rules:
+* Both components: slide width = `flex: 0 0 calc(100% / slidesToShow)` — CSS not needed
+* `EmblaTabCarousel` preferred for all new carousels — better arrow UX
+* `variant="tabs"` adds `padding: 0 48px` for tab nav arrow space — do NOT use for card carousels
+* Never pass `options={{ loop }}` — pass `loop` directly as prop
+
+---
+
+## getSchools API Return Shape
+
+`getSchools` returns array directly — NOT `{ data, totalItems }`:
+
+```ts
+// CORRECT
+const schools = await getSchools({ size: 10 })
+// schools is School[]
+
+// WRONG
+const result = await getSchools({ size: 10 })
+const schools = result?.data ?? []  // ❌ undefined — getSchools already returns array
+```
+
+Contrast with `getColleges` which returns `{ data: [], totalItems: N }`.
+
+---
+
+## AbroadSearchBar / CourseSearchBar Pattern
+
+Context-specific search bars wrapping the generic `SearchBar`:
+
+```tsx
+// src/components/ui/SearchBar/CourseSearchBar.tsx — 'use client'
+async function fetchCourseResults(query, signal): Promise<SearchItem[]> {
+  // hits /api/website/courses/get, maps nested general_courses
+  // returns: [{ id, label, href: '/course/streamId/streamSlug/gcSlug' }]
+}
+export default function CourseSearchBar() {
+  return <SearchBar placeholder="Search for course..." onSearch={fetchCourseResults} />
+}
+
+// src/components/ui/SearchBar/AbroadSearchBar.tsx — 'use client'
+// Props: { countryId, countrySlug } — forwarded through dynamic import
+// href: /${countrySlug}/${id}/${slug}
+```
+
+Rules:
+* Each search bar owns its fetch + href construction
+* Register as `LazyXxxSearchBar` in ClientWrappers (`ssr: false`)
+* Props flow through `dynamic()` transparent to caller — server component passes props directly to lazy wrapper

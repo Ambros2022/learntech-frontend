@@ -1,0 +1,21 @@
+/* Override EmblaTabCarousel arrow positions for OtherCourses only.
+   The shared CSS has mobile: left:-10px / right:-5px which overlaps
+   the slide card (30px intrusion). Here we push arrows fully outside. */
+
+.wrap :global(button[aria-label="Previous"]) {
+  left: -45px;
+}
+
+.wrap :global(button[aria-label="Next"]) {
+  right: -45px;
+}
+
+@media (max-width: 768px) {
+  .wrap :global(button[aria-label="Previous"]) {
+    left: -42px;
+  }
+
+  .wrap :global(button[aria-label="Next"]) {
+    right: -42px;
+  }
+}
