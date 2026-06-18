@@ -1,0 +1,891 @@
+/* BamsPage.module.css — converted from public/css/bamslandingpage.css */
+
+.bamsMain {
+    background-color: white;
+}
+
+.bamsNavbarTag {
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+}
+
+.bamsimage {
+    min-height: 843px;
+    width: 100%;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+.bgblacksvyasa {
+    background: #00000069 !important;
+    border-radius: 11px;
+}
+
+.h1svyasa {
+    margin: 0;
+    font-size: 32px !important;
+    font-weight: 700;
+    color: #ffffff !important;
+    letter-spacing: 1px;
+    line-height: 45px;
+}
+
+.h3syyasa {
+    font-size: 18px !important;
+    font-weight: 500;
+    color: #ffffff !important;
+    letter-spacing: 1px;
+}
+
+.bamsBlue {
+    margin: 0;
+    font-size: 30px !important;
+    font-weight: 700;
+    color: #22ff2b !important;
+    letter-spacing: 1px;
+    line-height: 45px;
+}
+
+.bamsPhomepage {
+    color: white;
+    font-size: 21px !important;
+    font-weight: 500;
+}
+
+@media only screen and (max-width: 600px) {
+    .h1svyasa {
+        font-size: 24px !important;
+        line-height: 36px !important;
+    }
+
+    .bamsBlue {
+        font-size: 24px !important;
+        line-height: 36px !important;
+    }
+
+    .bamsPhomepage {
+        font-size: 16px !important;
+        padding-top: 20px !important;
+        padding: 10px !important;
+        line-height: 26px !important;
+    }
+}
+
+.bamsFont20 {
+    font-size: 20px !important;
+}
+
+.h3syyasa span {
+    font-weight: 600;
+}
+
+.h1svyasa span {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.colorBtnAddApply {
+    background-color: #F84365 !important;
+}
+
+.formBoxamb {
+    max-width: 425px;
+    margin: auto;
+    padding: 25px;
+    background: #00000069;
+    border-radius: 11px;
+}
+
+.whiteBgBlackText {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    appearance: none;
+}
+
+@media only screen and (min-width: 700px) {
+    .bamsHomePadding {
+        padding-top: 130px !important;
+    }
+}
+
+/* Navbar mobile dropdown */
+@media (max-width: 991.98px) {
+    .navbarBamsTop :global(#navbarNav) {
+        background-color: white;
+        width: 100%;
+        padding: 1rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 999;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbarBamsTop :global(.navbar-nav .nav-link) {
+        color: #000;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0.75rem 1rem;
+    }
+
+    .navbarBamsTop :global(.navbar-nav) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbarBamsTop :global(.navbar-nav .nav-item) {
+        background-color: white;
+    }
+}
+
+/* Why Us Section */
+.whyUsSection {
+    background-color: white;
+}
+
+.whyUsCard {
+    background-color: #1b2e4b;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whyUsCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.iconWrapper {
+    filter: brightness(0) invert(1);
+}
+
+/* Section heading */
+.f3mountSvayauni {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #004080;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+    padding-bottom: 6px;
+}
+
+@media only screen and (max-width: 600px) {
+    .f3mountSvayauni {
+        color: #004080;
+        font-weight: 700;
+        font-size: 31px !important;
+        border-bottom: 2px solid #007bff;
+        display: inline-block;
+        padding-bottom: 6px;
+    }
+}
+
+/* Counselling info cards */
+.counsellingSection {
+    background: linear-gradient(135deg, #eaf6ff, #f9fbff);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: blue !important;
+    position: relative;
+}
+
+.sectionTitle::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: 10px auto 0;
+    background: #007bff;
+}
+
+.infoCard {
+    background: linear-gradient(to right, #90cbf6, #ffffff);
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.infoCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.logoBox {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    min-width: 140px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.counsellingHeading {
+    font-size: 1.75rem;
+    color: #0d47a1;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+@media (max-width: 768px) {
+    .infoCard {
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .counsellingHeading {
+        font-size: 1.5rem;
+    }
+
+    .logoBox {
+        margin-bottom: 1rem;
+    }
+}
+
+/* NEET Counselling section */
+.neetCounsellingSection {
+    background: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    color: #1a1a1a;
+}
+
+.neetList {
+    list-style: disc;
+    padding-left: 1.25rem;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.neetList li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    font-size: 18px !important;
+    font-family: 'Poppins', sans-serif !important;
+    color: black !important;
+}
+
+.neetRounds1 {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.neetRounds1 li {
+    margin-bottom: 8px;
+    font-size: 18px !important;
+    font-family: 'Poppins', sans-serif !important;
+    color: black !important;
+}
+
+.paragaphFont18 {
+    font-size: 18px !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.note {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+}
+
+/* Tables */
+.tableWrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    overflow-x: auto;
+}
+
+.table2heightfixed {
+    width: 100%;
+    max-width: 1330px !important;
+    margin-top: 0px !important;
+}
+
+.customTable {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    background: white;
+    text-align: center;
+}
+
+.customTable th {
+    padding: 24px 20px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 22px !important;
+    color: #1e3a8a;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #cce1ed;
+    font-weight: 600;
+}
+
+.customTable td {
+    padding: 24px 20px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 17px;
+    color: #1e3a8a;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.sizebams {
+    font-size: 19px !important;
+    width: 280px !important;
+}
+
+.highlightRow {
+    word-break: break-word;
+    white-space: normal !important;
+}
+
+.customTable tr:nth-child(even) td {
+    background-color: #cce1ed;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.customTable tr:last-child td {
+    border-bottom: none;
+}
+
+.customTable ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* Scrollbar for mobile */
+.tableWrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .customTable th,
+    .customTable td {
+        font-size: 1.05rem;
+        padding: 18px 14px;
+    }
+
+    .customTable ul {
+        font-size: 1.05rem;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .customTable td,
+    .customTable th {
+        word-break: break-word;
+        white-space: normal;
+    }
+}
+
+/* Custom table 1 (fee payment) */
+.customTable1 {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    background: white;
+    text-align: center;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.customTable1 th,
+.customTable1 td {
+    padding: 24px 20px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.2rem;
+    color: #1e3a8a;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.customTable1 th {
+    background-color: #cce1ed;
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: center;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.trDesign {
+    background-color: #cce1ed;
+}
+
+.bdrMainatin {
+    border-right: 4px solid #fff;
+}
+
+.customTable1 ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* Documents section */
+.bamsContainer {
+    max-width: 1070px !important;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+    .bamsContainer {
+        max-width: 90% !important;
+        margin: 0 auto 40px auto !important;
+    }
+
+    .bamsGrid {
+        gap: 0px !important;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.bamsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.bamsColumn li {
+    margin-bottom: 10px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: white;
+    list-style-type: disc;
+    text-align: left;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+@media (max-width: 768px) {
+    .bamsGrid {
+        flex-direction: column;
+    }
+
+    .bamsColumn {
+        flex: 1 1 100%;
+    }
+}
+
+/* Predictor */
+.predictorBox {
+    background-color: #edf0f2;
+    border-radius: 12px;
+    padding: 30px 20px;
+    max-width: 850px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.predictorTitle {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: #004080;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.predictorLink {
+    font-size: 1rem;
+    color: #004080;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.predictorLink:hover {
+    text-decoration: underline;
+}
+
+.predictorInputs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.predictorInputs input {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 6px;
+    min-width: 248px;
+    font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.predictorButton {
+    background-color: #0d6efd;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.predictorButton:hover {
+    background-color: #0b5ed7;
+}
+
+.predictorNote {
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.predictorNote strong {
+    font-weight: 600;
+}
+
+.predictorBox1 {
+    background-color: #edf0f2;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+}
+
+.maxWidthbams {
+    max-width: 850px !important;
+    margin: 0 auto;
+    gap: 20px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .predictorBox {
+        max-width: 90% !important;
+    }
+
+    .maxWidthbams {
+        flex-wrap: wrap;
+    }
+
+    .predictorBox1 {
+        max-width: 90% !important;
+        margin: 0 auto;
+    }
+}
+
+/* College cards */
+.bamsConatiner {
+    max-width: 1118px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .bamsConatiner {
+        max-width: 100% !important;
+    }
+}
+
+.cardTitlebams {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.bamsHeightCollege {
+    min-height: 100px !important;
+}
+
+.bamsHeight {
+    min-height: 60px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .bamsHeightCollege {
+        min-height: auto !important;
+    }
+
+    .bamsHeight {
+        min-height: auto !important;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .bamsConatiner {
+        max-width: 1118px !important;
+    }
+}
+
+.imgcontain {
+    object-fit: contain !important;
+}
+
+.mds :global(.card) {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .07), 0 2px 4px rgba(0, 0, 0, .07), 0 4px 8px rgba(0, 0, 0, .07), 0 8px 16px rgba(0, 0, 0, .07), 0 16px 32px rgba(0, 0, 0, .07), 0 32px 64px rgba(0, 0, 0, .07);
+}
+
+.bdscollegeimage img {
+    height: 173px;
+    width: 251px;
+}
+
+.manyFaq {
+    font-size: 27px !important;
+}
+
+/* Footer */
+.imgfooter {
+    width: 325px !important;
+    height: 100px !important;
+}
+
+.bgfooter {
+    background-color: #152958 !important;
+    padding: 2rem 0px;
+}
+
+.fontWhite23 {
+    font-size: 21px !important;
+    color: #fff;
+}
+
+.enquiebtn {
+    background: #00a3f4 !important;
+}
+
+/* Navbar hover */
+.bamsnavbar a:hover,
+.bamsnavbar li:hover > a {
+    color: #fff;
+    background: #00a3f4;
+    border-radius: 5px;
+    color: white !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .bamsnavbar li {
+        display: block;
+        width: 100%;
+    }
+}
+
+/* Phone icon */
+.phoneIconphone {
+    background-color: #f84365 !important;
+    border-radius: 50% !important;
+    padding: 16px 11px !important;
+    border: none !important;
+    width: 63px !important;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.45) !important;
+    position: fixed !important;
+    z-index: 100 !important;
+    bottom: 9px !important;
+    left: 10px !important;
+}
+
+.phoneIconphone i {
+    font-size: 29px;
+    padding-left: 10px;
+    color: white;
+}
+
+@media only screen and (max-width: 500px) {
+    .phoneIconphone {
+        bottom: 4px !important;
+        left: 8px !important;
+    }
+
+    .paddingMobilebams {
+        max-width: 90% !important;
+        margin: 0 auto;
+    }
+
+    .navbarmobilebams {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+
+/* Blinking text animation */
+.blinkingText {
+    animation: blink-decrease 1s infinite;
+}
+
+@keyframes blink-decrease {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Slide-in animations */
+.slideIn {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slideIn2 {
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Modal / popup */
+.popUp {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.bamsFormField {
+    width: 100%;
+    border-radius: 6px;
+    padding: 17px 30px;
+    margin-top: 15px;
+    border: none;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 10%);
+    background: #fff;
+    outline: none;
+    color: #525151;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.btnModel {
+    width: 100% !important;
+}
+
+/* number input spinner hide */
+.bamsFormField[type='number']::-webkit-outer-spin-button,
+.bamsFormField[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.twitterWidth {
+    width: 19px !important;
+    height: 19px !important;
+}
+
+.listNone {
+    list-style: none;
+}
+
+@media only screen and (min-width: 700px) {
+    .font25bams {
+        font-size: 25px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .font25bams {
+        font-size: 21px !important;
+    }
+
+    .bamsNavbarTag {
+        background-color: white !important;
+    }
+}
+
+/* Red filter for phone icon image */
+.redFilter {
+    filter: brightness(0) invert(1);
+}
+
+/* Dialog styles for modals */
+.dialogModal {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    max-width: 550px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.dialogModal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialogBody {
+    padding: 24px;
+    position: relative;
+}
+
+.dialogClose {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    z-index: 1;
+    line-height: 1;
+}
+
+.dialogClose:hover {
+    color: #000;
+}
+
+/* Heading popup */
+.headingPopup {
+    margin-bottom: 16px;
+}
+
+/* Shadow box for info cards */
+.shadowBox {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Form error message */
+.errorMessage {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+}

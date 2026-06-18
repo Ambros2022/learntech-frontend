@@ -1,7 +1,6 @@
-﻿'use client'
+'use client'
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 
-import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -388,34 +387,7 @@ const SymbiosisDubaiPage = () => {
 
     return (
         <section className='symbiosis-main'>
-            <Head>
-                <title>Symbiosis International University Dubai | Admission 2026–27</title>
-                <meta name='description' content='Apply to Symbiosis International University Dubai for world-class UG & PG programs, industry-oriented curriculum, and global career opportunities. Enquire now!' />
-                <meta name="robots" content="index, follow" />
-                <link rel='canonical' href='https://learntechww.com/symbiosis-international-university-dubai' />
-                {/* eslint-disable-next-line @next/next/no-css-tags */}
-                <link rel='stylesheet' href='/css/symbiosisdubailandingpage.css' />
-                <link rel='preconnect' href='https://fonts.googleapis.com' />
-                <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
-                {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-                <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap' rel='stylesheet' />
 
-                <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css' />
-                <script
-                    type='application/ld+json'
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            '@context': 'https://schema.org',
-                            '@type': 'FAQPage',
-                            mainEntity: faqs.map(f => ({
-                                '@type': 'Question',
-                                name: f.q,
-                                acceptedAnswer: { '@type': 'Answer', text: f.a },
-                            })),
-                        }),
-                    }}
-                />
-            </Head>
 
             {/* WhatsApp Float */}
             <a href='https://wa.me/+971502436552' target='_blank' rel='noopener noreferrer' className='sym-whatsapp-float'>
