@@ -76,6 +76,30 @@ export const getCollegeCourse = cache(async (courseSlug: string, collegeId: stri
 // STREAMS / COURSES (general)
 // ─────────────────────────────────────────────────────────────────────────────
 
+export const getTrendingCourses = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/generalcourse/get?page=1&size=1000&is_trending=1`,
+    { tags: ['trending-courses'] },
+  )
+  return json?.data ?? []
+})
+
+export const getCoursePageBanner = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_courses_page`,
+    { tags: ['course-page-banner'] },
+  )
+  return json?.data?.[0] ?? null
+})
+
+export const getStreamCourses = cache(async (page = 1, size = 12) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/stream/general/get?page=${page}&size=${size}`,
+    { tags: ['stream-courses'] },
+  )
+  return { courses: json?.data ?? [], totalItems: json?.totalItems ?? 0 }
+})
+
 export const getStreamById = cache(async (id: string | number) => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/streamfindone/get/${id}`,
