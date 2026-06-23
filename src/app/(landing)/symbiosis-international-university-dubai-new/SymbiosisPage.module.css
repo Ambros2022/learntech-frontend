@@ -1,0 +1,1668 @@
+/* ============================================
+   Symbiosis International University Dubai
+   Page CSS Module — scoped styles
+   ============================================ */
+
+/* ── CSS VARS (scoped to .symMain) ─────── */
+.symMain {
+  --sym-primary: #c12112;
+  --sym-primary-dark: #8f160d;
+  --sym-primary-light: #e8352a;
+  --sym-primary-glow: rgba(193, 33, 18, 0.25);
+  --sym-secondary: #141b47;
+  --sym-secondary-soft: #1c2459;
+  --sym-secondary-muted: #2a3470;
+  --sym-white: #ffffff;
+  --sym-off-white: #f8f9fc;
+  --sym-border: #e4e7f2;
+  --sym-text-muted: #616888;
+  --sym-gold: #d4aa50;
+  --sym-font: 'Poppins', sans-serif;
+  --sym-radius-sm: 8px;
+  --sym-radius-md: 14px;
+  --sym-radius-lg: 22px;
+  --sym-shadow-sm: 0 2px 12px rgba(20, 27, 71, 0.07);
+  --sym-shadow-md: 0 8px 30px rgba(20, 27, 71, 0.11);
+  --sym-shadow-lg: 0 20px 60px rgba(20, 27, 71, 0.15);
+  --sym-transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  font-family: var(--sym-font);
+  color: var(--sym-secondary);
+  background: var(--sym-white);
+  overflow-x: hidden;
+}
+
+.symMain *,
+.symMain *::before,
+.symMain *::after {
+  box-sizing: border-box;
+}
+
+.symMain a {
+  text-decoration: none;
+}
+
+/* ── SECTION TAG ────────────────────────── */
+.symSectionTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--sym-primary);
+  margin-bottom: 0.85rem;
+}
+
+.symSectionHeading {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--sym-secondary);
+  margin-bottom: 1rem;
+}
+
+.symSectionHeading span {
+  color: var(--sym-primary);
+  font-weight: 700;
+}
+
+.symSectionHeading2 {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--sym-secondary);
+  margin-bottom: 1rem;
+}
+
+.symSectionHeading2 span {
+  color: var(--sym-primary);
+  font-weight: 700;
+}
+
+.symSectionSub {
+  font-size: 1.02rem;
+  color: black;
+  line-height: 1.8;
+}
+
+/* ── NAVBAR ─────────────────────────────── */
+.symNavbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(0px);
+  transition: background 0.4s, backdrop-filter 0.4s, padding 0.3s, box-shadow 0.4s;
+  height: 81px !important;
+}
+
+.symNavbarScrolled {
+  background: rgb(255, 255, 255) !important;
+  backdrop-filter: blur(14px) !important;
+  padding: 0.65rem 0 !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+.symNavLink {
+  color: rgb(0, 0, 0) !important;
+  font-size: 16px !important;
+  font-weight: 600;
+  transition: color 0.2s;
+  padding: 0.3rem 0.8rem !important;
+  cursor: pointer;
+}
+
+.symNavLink:hover {
+  color: var(--sym-primary) !important;
+}
+
+.symNavLink:focus,
+.symNavLink:active {
+  color: rgb(0, 0, 0) !important;
+  outline: none;
+}
+
+@media (max-width: 991px) {
+  .symNavbar {
+    background: rgb(255, 255, 255) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25) !important;
+    padding: 0px !important;
+  }
+
+  .symNavCollapse {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .symNavLink {
+    color: #111 !important;
+    background: white !important;
+    font-size: 18px !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+/* ── BUTTONS ────────────────────────────── */
+.symBtnRed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--sym-primary);
+  color: var(--sym-white);
+  padding: 0.78rem 2rem;
+  border-radius: var(--sym-radius-sm);
+  font-weight: 700;
+  font-size: 0.92rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--sym-transition);
+  letter-spacing: 0.3px;
+  text-decoration: none;
+}
+
+.symBtnRed:hover {
+  background: var(--sym-primary-light);
+  color: var(--sym-white);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--sym-primary-glow);
+}
+
+.symBtnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--sym-secondary);
+  padding: 0.78rem 2rem;
+  border-radius: var(--sym-radius-sm);
+  font-weight: 600;
+  font-size: 0.92rem;
+  border: 2px solid var(--sym-secondary);
+  cursor: pointer;
+  transition: var(--sym-transition);
+}
+
+.symBtnOutline:hover {
+  border-color: var(--sym-secondary-muted);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--sym-secondary-soft);
+  transform: translateY(-2px);
+}
+
+/* ── HERO ───────────────────────────────── */
+.symHero {
+  min-height: 100vh;
+  background: url('/images/symbiosis/banner.webp');
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding-top: 90px;
+}
+
+.symHeroContent {
+  position: relative;
+  z-index: 2;
+  padding: 1rem 0 4rem;
+  margin-top: 30px;
+}
+
+.symHeroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(255, 225, 57, 0.575);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(193, 33, 18, 0.3);
+  border-radius: 50px;
+  padding: 0.4rem 1.1rem;
+  margin-bottom: 1.5rem;
+  animation: symFadeUp 0.7s ease both;
+}
+
+.symHeroBadgeDot {
+  width: 7px;
+  height: 7px;
+  background: var(--sym-primary);
+  border-radius: 50%;
+  animation: symBlink 1.6s ease-in-out infinite;
+}
+
+@keyframes symBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.symHeroBadge span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.7);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.symHeroTitle {
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 800;
+  color: var(--sym-secondary);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  animation: symFadeUp 0.7s ease 0.1s both;
+}
+
+.symHeroTitle .accent {
+  color: var(--sym-primary);
+  position: relative;
+  display: inline-block;
+}
+
+.symHeroTitle .accent::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--sym-primary);
+  opacity: 0.35;
+  border-radius: 3px;
+}
+
+.symHeroDesc {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.78);
+  line-height: 1.82;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+  animation: symFadeUp 0.7s ease 0.2s both;
+}
+
+.symHeroActions {
+  animation: symFadeUp 0.7s ease 0.3s both;
+}
+
+.symHeroStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 3rem;
+  animation: symFadeUp 0.7s ease 0.4s both;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
+}
+
+.symHeroStatNum {
+  font-family: var(--sym-font);
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--sym-secondary);
+  line-height: 1;
+}
+
+.symHeroStatNum span {
+  color: var(--sym-primary);
+}
+
+.symHeroStatLbl {
+  font-size: 0.75rem;
+  color: rgba(41, 41, 41, 0.45);
+  margin-top: 0.25rem;
+  letter-spacing: 0.5px;
+}
+
+.symHeroFormCard {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--sym-radius-lg);
+  padding: 2rem;
+  animation: symFadeLeft 0.8s ease 0.25s both;
+}
+
+@media (max-width: 768px) {
+  .symHeroFormCard {
+    background: #e0e0e0;
+  }
+}
+
+.symHeroFormCard h3 {
+  font-size: 1.3rem;
+  color: var(--sym-secondary);
+  margin-bottom: 0.85rem;
+  font-weight: 700;
+}
+
+@keyframes symFadeLeft {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes symFadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── FORM FIELDS ────────────────────────── */
+.symFormField {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--sym-radius-sm);
+  padding: 0.65rem 1.1rem;
+  color: black !important;
+  font-family: var(--sym-font);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s;
+  margin-bottom: 0.9rem;
+}
+
+.symFormField::placeholder {
+  color: black !important;
+}
+
+.symFormField:focus {
+  border-color: var(--sym-primary);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.symFormSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='rgba(0,0,0,0.5)' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  padding-right: 2.5rem;
+  height: auto;
+  cursor: pointer;
+  color: black !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+.symFormSelect option {
+  background: white;
+  color: black;
+}
+
+.symFormSubmit {
+  width: 100%;
+  background: var(--sym-primary);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: var(--sym-radius-sm);
+  font-family: var(--sym-font);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--sym-transition);
+  letter-spacing: 0.4px;
+}
+
+.symFormSubmit:hover {
+  background: var(--sym-primary-light);
+  box-shadow: 0 10px 30px var(--sym-primary-glow);
+  transform: translateY(-2px);
+}
+
+.symFormSubmit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── MARQUEE ─────────────────────────────── */
+.symMarqueeSection {
+  background: rgb(255, 255, 255);
+  padding: 1.2rem 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.symMarqueeSection h2 {
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--sym-secondary);
+}
+
+.symMarqueeSection h2 span {
+  color: var(--sym-primary);
+}
+
+.symMarqueeTrack {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: symMarquee 30s linear infinite;
+}
+
+.symMarqueeTrack:hover {
+  animation-play-state: paused;
+}
+
+@keyframes symMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.symMarqueeItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.577);
+  white-space: nowrap;
+}
+
+.symMarqueeIcon {
+  width: 250px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.symMarqueeIcon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.symMarqueeItem:hover .symMarqueeIcon img {
+  transform: scale(1.05);
+}
+
+.symMarqueeText strong {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}
+
+.symMarqueeText span {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* ── ABOUT ──────────────────────────────── */
+.symAbout {
+  padding: 5rem 0 2rem;
+  background: var(--sym-white);
+}
+
+.symAboutImgMain {
+  width: 100%;
+  height: 480px;
+  background: url('/images/symbiosis/aboutus.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.7;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.symAboutVisual {
+  position: relative;
+}
+
+.symFloatBadge {
+  position: absolute;
+  z-index: 5;
+  padding: 1.2rem 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.symFloatBadge1 {
+  background: var(--sym-primary);
+  bottom: -25px;
+  right: -25px;
+  color: white;
+}
+
+.symFloatBadge2 {
+  background: white;
+  top: -25px;
+  left: -25px;
+}
+
+.symFloatBadgeNum {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sym-primary);
+  line-height: 1;
+}
+
+.symFloatBadge1 .symFloatBadgeNum {
+  color: #fff;
+}
+
+/* ── COURSES ─────────────────────────────── */
+.symCourses {
+  padding: 6rem 0 1rem;
+}
+
+.symCoursesHeader {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.symCourseCard {
+  background: white;
+  border-radius: var(--sym-radius-lg);
+  border: 2px solid var(--sym-border);
+  overflow: hidden;
+  transition: var(--sym-transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.symCourseCard:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--sym-shadow-lg);
+  border-color: rgba(193, 33, 18, 0.2);
+}
+
+.symCourseCardTop {
+  padding: 1.75rem;
+  background: linear-gradient(145deg, var(--sym-secondary) 0%, var(--sym-secondary-soft) 100%);
+  position: relative;
+  overflow: hidden;
+  height: 125px !important;
+}
+
+.symCourseCardTop::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+}
+
+.symCourseBadge {
+  display: inline-block;
+  background: rgba(193, 33, 18, 0.22);
+  color: #ff9f99;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.symCourseTitle {
+  font-family: var(--sym-font);
+  font-size: 1.25rem;
+  color: white;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.symCourseBody {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.symCourseMetaRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.symCourseMetaPill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--sym-text-muted);
+}
+
+.symCourseMetaPill i {
+  font-size: 0.8rem;
+  color: var(--sym-primary);
+}
+
+.symCourseDesc {
+  font-size: 14px !important;
+  color: var(--sym-text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.symCourseChecks {
+  margin-bottom: 0.5rem;
+  flex: 1;
+}
+
+.symCourseCheck {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--sym-secondary);
+  margin-bottom: 0.4rem;
+  font-size: 16px !important;
+}
+
+.symCourseCheck i {
+  color: var(--sym-primary);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  padding-left: 5px;
+}
+
+.symCourseFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--sym-border);
+  margin-top: auto;
+}
+
+.symCourseFee {
+  font-family: var(--sym-font);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--sym-secondary);
+}
+
+.symCourseFee small {
+  font-size: 0.68rem;
+  color: var(--sym-text-muted);
+  display: block;
+  font-weight: 400;
+}
+
+.symMbaCard .symCourseCardTop {
+  background: linear-gradient(135deg, #141b47, #701c3e);
+}
+
+.symBtnApply {
+  background: var(--sym-primary);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.3rem;
+  border-radius: 6px;
+  font-family: var(--sym-font);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--sym-transition);
+}
+
+.symBtnApply:hover {
+  background: var(--sym-primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--sym-primary-glow);
+}
+
+/* ── ADMISSION PROCESS ─────────────────── */
+.symAdmissionSection {
+  background: linear-gradient(to top, #141b47, #141b4700, white);
+  padding: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.symAdmissionSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 0% 20%, rgba(193, 33, 18, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 100% 80%, rgba(193, 33, 18, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.symProcessGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .symProcessGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.symProcessCard {
+  background: var(--sym-white);
+  border-radius: 24px;
+  padding: 2.8rem 2.4rem;
+  border: 1px solid var(--sym-border);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.symProcessCard:hover {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.09);
+  transform: translateY(-4px);
+}
+
+.symProcessCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sym-primary), var(--sym-primary-dark));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.symProcessCard:global(.in-view)::before {
+  transform: scaleX(1);
+}
+
+.symCardTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(193, 33, 18, 0.08);
+  color: var(--sym-primary);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 1.4rem;
+}
+
+.symCardTag svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.symCardTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2.4rem;
+  line-height: 1.2;
+  color: var(--sym-secondary);
+}
+
+.symSteps {
+  display: flex;
+  flex-direction: column;
+}
+
+.symStep {
+  display: flex;
+  gap: 1.2rem;
+  position: relative;
+}
+
+.symStepTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.symStepCircle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--sym-border);
+  background: var(--sym-white);
+  color: var(--sym-text-muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 2;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+}
+
+.symStepLine {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(to bottom, var(--sym-border), transparent);
+  min-height: 28px;
+}
+
+.symStep:last-child .symStepLine {
+  display: none;
+}
+
+.symStepBody {
+  padding-bottom: 0.6rem;
+  flex: 1;
+}
+
+.symStep:last-child .symStepBody {
+  padding-bottom: 0;
+}
+
+.symStepTitle {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--sym-secondary);
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+}
+
+.symStepDesc {
+  font-size: 14px !important;
+  color: var(--sym-text-muted);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* Step lit state is toggled via JS adding .lit class globally */
+:global(.sym-step.lit) .symStepCircle {
+  background: var(--sym-primary) !important;
+  border-color: var(--sym-primary) !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 5px rgba(193, 33, 18, 0.12) !important;
+}
+
+/* ── PARTNERS ────────────────────────────── */
+.symPartnersSection {
+  padding: 4rem 0 1rem;
+  background: var(--sym-off-white);
+}
+
+.symPartnersHeader {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.symPartnerLogo {
+  min-width: 160px;
+  height: 80px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.symPartnerLogo img {
+  max-height: 70px;
+  max-width: 150px;
+  object-fit: contain;
+  filter: grayscale(30%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.symPartnerLogo:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.08);
+}
+
+/* Simple partner marquee (no JS dependency) */
+.symPartnerTrack {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: symMarquee 25s linear infinite;
+}
+
+.symPartnerTrack:hover {
+  animation-play-state: paused;
+}
+
+/* ── WHY CHOOSE ──────────────────────────── */
+.symWhy {
+  padding: 4rem 0;
+  background: white;
+}
+
+.symWhyHeader {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.symWhyCard {
+  background: var(--sym-off-white);
+  border-radius: var(--sym-radius-lg);
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--sym-border);
+  text-align: center;
+  height: 100%;
+  transition: var(--sym-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.symWhyCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, var(--sym-primary), var(--sym-primary-dark));
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.symWhyCard:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--sym-shadow-lg);
+  border-color: transparent;
+}
+
+.symWhyCard:hover::before {
+  opacity: 1;
+}
+
+.symWhyCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.symWhyIcon {
+  width: 70px;
+  height: 70px;
+  border-radius: var(--sym-radius-md);
+  background: rgba(193, 33, 18, 0.08);
+  border: 1px solid rgba(193, 33, 18, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+  margin: 0 auto 1.5rem;
+  transition: var(--sym-transition);
+}
+
+.symWhyCard:hover .symWhyIcon {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.symWhyCard h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--sym-secondary);
+  margin-bottom: 0.75rem;
+  transition: color 0.35s;
+}
+
+.symWhyCard p {
+  font-size: 0.95rem;
+  color: var(--sym-text-muted);
+  line-height: 1.75;
+  transition: color 0.35s;
+}
+
+.symWhyCard:hover h5,
+.symWhyCard:hover p {
+  color: white;
+}
+
+.symWhyCard:hover .symWhyIcon i {
+  filter: brightness(100);
+}
+
+/* ── CAMPUS ──────────────────────────────── */
+.symCampus {
+  padding: 3rem 0;
+  background: #f9fafc;
+}
+
+.symCampusHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.symCampusHeader h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+}
+
+.symCampusHeader h2 span {
+  color: var(--sym-primary);
+}
+
+.symCampusWrapper {
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.symCampusTrack {
+  display: flex;
+  gap: 25px;
+  transition: transform 0.6s ease;
+}
+
+.symCampusSlide {
+  min-width: calc(33.333% - 16px);
+  flex-shrink: 0;
+}
+
+@media (max-width: 992px) {
+  .symCampusSlide {
+    min-width: calc(50% - 12px);
+  }
+}
+
+@media (max-width: 600px) {
+  .symCampusSlide {
+    min-width: 100%;
+  }
+}
+
+.symCampusCard {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.175);
+}
+
+.symCampusCard:hover {
+  transform: translateY(-5px);
+}
+
+.symCampusCard img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.symCampusCardContent {
+  padding: 15px;
+  text-align: center;
+}
+
+.symCampusCardContent h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.symCarouselControls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 5px;
+}
+
+.symCarouselControls button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--sym-primary);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.symCarouselControls button:hover {
+  transform: scale(1.1);
+}
+
+/* ── FAQ ─────────────────────────────────── */
+.symFaq {
+  padding: 4rem 0;
+  background: var(--sym-off-white);
+}
+
+.symFaqItem {
+  background: white;
+  border-radius: var(--sym-radius-md);
+  border: 1px solid var(--sym-border);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: var(--sym-transition);
+}
+
+.symFaqItem:global(.open) {
+  border-color: rgba(193, 33, 18, 0.25);
+  box-shadow: var(--sym-shadow-sm);
+}
+
+.symFaqQ {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  gap: 1rem;
+}
+
+.symFaqQ h6 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--sym-secondary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.symFaqToggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--sym-primary-light);
+  border: 1px solid var(--sym-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  color: white;
+  transition: var(--sym-transition);
+}
+
+.symFaqItem:global(.open) .symFaqToggle {
+  background: var(--sym-primary);
+  border-color: var(--sym-primary);
+  transform: rotate(90deg);
+}
+
+.symFaqA {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.symFaqAInner {
+  padding: 0 1.75rem 1.5rem;
+  font-size: 0.9rem;
+  color: black;
+  line-height: 1.8;
+}
+
+/* ── CTA ─────────────────────────────────── */
+.symCta {
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0;
+  background: linear-gradient(145deg, #0a0f2e 0%, var(--sym-secondary) 100%);
+}
+
+.symCtaBgPattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 60% 50%, rgba(193, 33, 18, 0.28) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(193, 33, 18, 0.12) 0%, transparent 50%);
+}
+
+.symCtaGridLines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.symCtaRings {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.symCtaRing {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(193, 33, 18, 0.15);
+  animation: symSlowSpin 30s linear infinite;
+}
+
+@keyframes symSlowSpin {
+  to { transform: rotate(360deg); }
+}
+
+.symCtaRing1 {
+  width: 700px;
+  height: 700px;
+  bottom: -200px;
+  right: -150px;
+}
+
+.symCtaRing2 {
+  width: 450px;
+  height: 450px;
+  bottom: -100px;
+  right: 50px;
+  animation-direction: reverse;
+  animation-duration: 20s;
+}
+
+.symCtaContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.symCtaContent h2 {
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  color: white;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+.symCtaContent h2 span {
+  color: var(--sym-primary);
+}
+
+.symCtaContent p {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.symBtnCtaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--sym-primary);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: var(--sym-radius-sm);
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--sym-transition);
+  letter-spacing: 0.3px;
+  box-shadow: 0 10px 35px var(--sym-primary-glow);
+}
+
+.symBtnCtaPrimary:hover {
+  background: var(--sym-primary-light);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 18px 50px rgba(193, 33, 18, 0.4);
+}
+
+.symCtaTrust {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+
+.symCtaAddress {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+  font-size: 18px;
+}
+
+.symCtaAddress i {
+  color: var(--sym-gold);
+  font-size: 18px;
+}
+
+.symCtaAddress a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.symCtaPhones {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.symCtaTrustItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 16px;
+}
+
+.symCtaTrustItem i {
+  color: var(--sym-gold);
+  font-size: 16px;
+}
+
+.symCtaTrustItem a {
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .symCtaPhones {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .symBtnCtaPrimary {
+    font-size: 0.9rem;
+    padding: 0.85rem 2rem;
+  }
+}
+
+/* ── FLOAT BUTTONS ───────────────────────── */
+.symWhatsappFloat {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 36px;
+  z-index: 1059;
+  background-color: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.symWhatsappFloat:hover {
+  transform: scale(1.1);
+}
+
+.symWhatsappFloat i {
+  color: white;
+  font-size: 32px;
+}
+
+.symPhoneFloat {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1059;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--sym-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px var(--sym-primary-glow);
+  transition: transform 0.3s ease;
+}
+
+.symPhoneFloat:hover {
+  transform: scale(1.1);
+}
+
+.symPhoneFloat i {
+  color: white;
+  font-size: 25px;
+}
+
+/* ── MODAL DIALOG ────────────────────────── */
+.symDialog {
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  max-width: 500px;
+  width: calc(100% - 2rem);
+  max-height: calc(100vh - 4rem);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+.symDialog::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.symDialogBody {
+  padding: 2.5rem 2.5rem 2rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 6rem);
+  scrollbar-width: thin;
+  scrollbar-color: var(--sym-primary) #f0f0f0;
+}
+
+.symDialogBody::-webkit-scrollbar {
+  width: 5px;
+}
+
+.symDialogBody::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.symDialogBody::-webkit-scrollbar-thumb {
+  background: var(--sym-primary);
+  border-radius: 10px;
+}
+
+.symDialogClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--sym-text-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  z-index: 10;
+}
+
+.symDialogClose:hover {
+  color: var(--sym-primary);
+}
+
+.symModalHeading {
+  text-align: center;
+  margin-bottom: 1.6rem;
+}
+
+.symModalHeading h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--sym-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Modal form fields */
+.symDialog .symFormField {
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.10) !important;
+  padding: 16px 20px !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333 !important;
+  background: #ffffff !important;
+  margin-bottom: 14px !important;
+  min-height: 54px;
+}
+
+.symDialog .symFormField::placeholder {
+  color: #aab0c0;
+}
+
+.symDialog .symFormField:focus {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13), 0 0 0 2.5px rgba(193, 33, 18, 0.18) !important;
+}
+
+.symDialog .symFormSelect {
+  background-color: #ffffff !important;
+  color: #333 !important;
+}
+
+.symModalSubmit {
+  width: 100% !important;
+  background: var(--sym-primary);
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px;
+  padding: 17px 1rem !important;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease !important;
+  box-shadow: 0 6px 20px rgba(193, 33, 18, 0.30) !important;
+  margin-top: 6px;
+  display: block;
+}
+
+.symModalSubmit:hover {
+  background: var(--sym-primary-light);
+  box-shadow: 0 10px 30px var(--sym-primary-glow);
+  transform: translateY(-2px);
+}
+
+.symModalSubmit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── REVEAL ANIMATIONS (global, used via JS) ── */
+:global(.sym-reveal) {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+:global(.sym-reveal.visible) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+:global(.sym-reveal-left) {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+:global(.sym-reveal-left.visible) {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+:global(.sym-reveal-right) {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+:global(.sym-reveal-right.visible) {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 991px) {
+  .symHeroFormCard {
+    margin-top: 3rem;
+  }
+
+  .symAboutImgMain {
+    height: 340px;
+  }
+}
+
+@media (max-width: 767px) {
+  .symHeroStats {
+    gap: 1.5rem;
+  }
+
+  .symProcessCard {
+    padding: 2rem 1.6rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .symHeroTitle {
+    font-size: 2rem;
+  }
+
+  .symSectionHeading {
+    font-size: 1.9rem;
+  }
+
+  .symSectionHeading2 {
+    font-size: 1.9rem;
+  }
+
+  .symCta {
+    padding: 5rem 0;
+  }
+
+  .symDialogBody {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .symCampusCardTop {
+    height: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .symHero {
+    padding-top: 70px;
+    min-height: auto;
+  }
+
+  .symCourseCardTop {
+    height: auto !important;
+  }
+
+  .symCtaTrustItem {
+    flex-direction: column;
+    text-align: start !important;
+    align-items: start !important;
+  }
+
+  .symCtaContent {
+    text-align: start !important;
+  }
+
+  .symCtaTrust {
+    align-items: start !important;
+  }
+
+  .symHeroStatLbl {
+    color: black !important;
+  }
+
+  .symFloatBadge1 {
+    right: -7px !important;
+  }
+
+  .symFloatBadge2 {
+    left: -1px !important;
+  }
+}
