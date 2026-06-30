@@ -3,8 +3,10 @@
    Page CSS Module — scoped styles
    ============================================ */
 
-/* ── CSS VARS (scoped to .symMain) ─────── */
-.symMain {
+/* ── CSS VARS (scoped to .symMain, .symDialog and .symNavbar) ─────── */
+.symMain,
+.symDialog,
+.symNavbar {
   --sym-primary: #c12112;
   --sym-primary-dark: #8f160d;
   --sym-primary-light: #e8352a;
@@ -25,7 +27,9 @@
   --sym-shadow-md: 0 8px 30px rgba(20, 27, 71, 0.11);
   --sym-shadow-lg: 0 20px 60px rgba(20, 27, 71, 0.15);
   --sym-transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+.symMain {
   font-family: var(--sym-font);
   color: var(--sym-secondary);
   background: var(--sym-white);
