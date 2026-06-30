@@ -5,12 +5,12 @@ import Link from 'next/link'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import Modal from 'react-bootstrap/Modal'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useRouter } from 'src/hooks/useCompatRouter'
 import dynamic from 'next/dynamic'
 import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'sonner'
+import axios from 'src/configs/axios'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import styles from './SIUDubaiPage.module.css'
@@ -154,7 +154,6 @@ const SIUDubaiPage = () => {
     register,
     handleSubmit,
     reset,
-    setValue,
     control,
     formState: { isSubmitting },
   } = useForm<FormValues>({
@@ -174,13 +173,10 @@ const SIUDubaiPage = () => {
       formData.append('Source', 'Google Ads')
       formData.append('SourceCampaign', 'CU Online MBA 2026-27')
 
-      const response = await fetch('/api/website/landingpage/enquiry', {
-        method: 'POST',
-        body: formData,
-      })
-
+      const response = await axios.post('api/website/landingpage/enquiry', formData)
+      
       toast.dismiss()
-      if (response.ok) {
+      if (response.status === 200) {
         toast.success('Thank you. We will get back to you.')
         reset()
         router.push('/thank-you')
@@ -249,12 +245,12 @@ const SIUDubaiPage = () => {
         >
           <option value=''>Select State</option>
           {[
-            'Andhra Pradesh','Andaman & Nicobar','Arunachal Pradesh','Assam','Bihar',
-            'Chhattisgarh','Chandigarh','Dadra and Nagar Haveli','Daman & Diu','Delhi',
-            'Goa','Gujarat','Haryana','Himachal Pradesh','Jammu & Kashmir','Jharkhand',
-            'Karnataka','Kerala','Lakshadweep','Madhya Pradesh','Maharashtra','Manipur',
-            'Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Puducherry','Rajasthan',
-            'Sikkim','Tamil Nadu','Tripura','Telangana','Uttarakhand','Uttar Pradesh',
+            'Andhra Pradesh', 'Andaman & Nicobar', 'Arunachal Pradesh', 'Assam', 'Bihar',
+            'Chhattisgarh', 'Chandigarh', 'Dadra and Nagar Haveli', 'Daman & Diu', 'Delhi',
+            'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu & Kashmir', 'Jharkhand',
+            'Karnataka', 'Kerala', 'Lakshadweep', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
+            'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Puducherry', 'Rajasthan',
+            'Sikkim', 'Tamil Nadu', 'Tripura', 'Telangana', 'Uttarakhand', 'Uttar Pradesh',
             'West Bengal',
           ].map(state => (
             <option key={state} value={state}>{state}</option>
@@ -419,36 +415,18 @@ const SIUDubaiPage = () => {
                   flexible learning with CU Online MBA.
                 </p>
 
-                <div className='d-flex flex-wrap align-items-center gap-3 mb-3'>
+                <div className={`d-flex flex-wrap align-items-center gap-3 mb-3 ${styles.heroCtaContainer}`}>
                   <div className='d-none d-md-flex gap-4 mb-3' style={{ display: 'flex' }}>
-                    <div className={styles.kpis} style={{ display: 'flex', gap: '1rem' }}>
-                      <div className='kpi' style={{
-                        background: 'rgba(0,58,115,0.12)',
-                        borderRadius: '12px',
-                        padding: '12px 14px',
-                        display: 'flex',
-                        gap: '10px',
-                        alignItems: 'center',
-                        border: '2px solid #003a73',
-                        color: '#000',
-                      }}>
-                        <i className='bi bi-mortarboard-fill' style={{ color: '#003a73', fontSize: '24px' }}></i>
+                    <div className={styles.kpis}>
+                      <div className={styles.kpi}>
+                        <i className='bi bi-mortarboard-fill' style={{ color: '#e1473f', fontSize: '24px' }}></i>
                         <div className='ms-2'>
                           <div className='text-dark'>Duration</div>
                           <strong>2 Years</strong>
                         </div>
                       </div>
-                      <div className='kpi' style={{
-                        background: 'rgba(0,58,115,0.12)',
-                        borderRadius: '12px',
-                        padding: '12px 14px',
-                        display: 'flex',
-                        gap: '10px',
-                        alignItems: 'center',
-                        border: '2px solid #003a73',
-                        color: '#000',
-                      }}>
-                        <i className='bi bi-briefcase-fill' style={{ color: '#003a73', fontSize: '20px' }}></i>
+                      <div className={styles.kpi}>
+                        <i className='bi bi-briefcase-fill' style={{ color: '#e1473f', fontSize: '20px' }}></i>
                         <div className='ms-2'>
                           <div className='text-dark'>Degree Level</div>
                           <strong>Postgraduate</strong>
@@ -458,11 +436,10 @@ const SIUDubaiPage = () => {
                   </div>
 
                   <div className={styles.heroBadge}>Admissions open- Online MBA Jan 2026 batch</div>
-                  <br />
-                  <button className={`btn ${styles.requestBtn} p-2`} onClick={handleShow}>
-                    Apply Now
-                  </button>
-                  <div className='d-flex gap-2'>
+                  <div className={styles.heroCtaWrapper}>
+                    <button className={`btn p-2 ${styles.requestBtn}`} onClick={handleShow}>
+                      Apply Now
+                    </button>
                     <button className={styles.btnBrochure} onClick={handleShow}>
                       <i className='bi bi-file-earmark-arrow-down-fill me-2' style={{ fontSize: '16px' }}></i>
                       Download Brochure
@@ -1013,8 +990,8 @@ const SIUDubaiPage = () => {
         <div className='container text-start'>
           <div className={`${styles.ctaContent} p-3 p-md-5 rounded`}>
             <h3 className='text-white mb-3 fw-normal'>Transform Your Career Today with an</h3>
-            <h2 className='text-white mb-5 fw-bold'>MBA from Chandigarh University</h2>
-            <button type='button' className={`btn ${styles.btnMain} fw-semibold fs-5`} onClick={handleShow}>
+            <h2 className='text-white mb-5 fw-bold'>Online MBA from Chandigarh University</h2>
+            <button type='button' className={`btn ${styles.btnmain} fw-semibold fs-5`} onClick={handleShow}>
               Apply Now!
             </button>
           </div>
@@ -1055,17 +1032,21 @@ const SIUDubaiPage = () => {
         </div>
       </footer>
 
-      {/* ══════════════ ENQUIRY MODAL ══════════════ */}
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Body>
-          <div className='heading-popup'>
-            <h3 className={`text-center ${styles.popUp} text-black`}>Enter Your Details to Get Started</h3>
+      {show && (
+        <div className={styles.modalOverlay} onClick={handleClose}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeBtn} onClick={handleClose} aria-label='Close'>
+              &times;
+            </button>
+            <div className='heading-popup'>
+              <h3 className={`text-center ${styles.popUp} text-black`}>Enter Your Details to Get Started</h3>
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <EnquiryFormFields isModal={true} />
+            </form>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <EnquiryFormFields isModal={true} />
-          </form>
-        </Modal.Body>
-      </Modal>
+        </div>
+      )}
 
       {/* ── Phone Float (bottom) ── */}
       <a href='tel:+919035654090' className={styles.phoneIcon}>

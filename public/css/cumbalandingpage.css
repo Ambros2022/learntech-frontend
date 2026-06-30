@@ -678,7 +678,7 @@ body {
     position: relative;
     padding-top: 60px;
     padding-bottom: 60px;
-    background-image: linear-gradient(to right, rgb(0, 0, 0), 40%, rgba(255, 255, 255, 0) 100%), url('/images/cumba/happygraduate.webp');
+    background-image: linear-gradient(to right, rgb(0, 0, 0), 40%, rgba(255, 255, 255, 0) 100%), url(/images/cumba/happygraduate.webp);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

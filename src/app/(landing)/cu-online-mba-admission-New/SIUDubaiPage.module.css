@@ -57,9 +57,12 @@
   position: relative;
   z-index: 1;
   margin-bottom: 40px;
-  background-image:
+
+  /* background-image:
     linear-gradient(90deg, rgb(255, 255, 255) 20%, rgba(255, 0, 0, 0) 60%),
-    url('/images/cumba/herobanner3.webp');
+    url('/images/cumba/herobanner3.webp'); */
+  background-image: linear-gradient(90deg, rgb(255, 255, 255) 20%, rgba(255, 0, 0, 0) 60%), url(/images/cumba/herobanner3.webp);
+
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -111,8 +114,13 @@
 }
 
 /* ---------- KPIs ---------- */
+.kpis {
+  display: flex;
+  gap: 1rem;
+}
+
 .kpis .kpi {
-  background: rgba(0, 58, 115, 0.12);
+  background: rgba(216, 0, 0, 0.223);
   border-radius: 12px;
   padding: 12px 14px;
   box-shadow: 0 6px 18px rgba(10, 30, 60, 0.05);
@@ -132,7 +140,7 @@
   border-radius: 50px;
   position: relative;
   display: inline-block;
-  background: rgba(0, 58, 115, 0.12);
+  background: #003a734f;
   z-index: 2;
   animation: softPulse 2.2s ease-in-out infinite;
   border: 2px solid #e1473f;
@@ -143,10 +151,12 @@
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(0, 58, 115, 0.8);
   }
+
   50% {
     transform: scale(1.05);
     box-shadow: 0 0 15px 4px rgba(0, 58, 115, 0.25);
   }
+
   100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(0, 58, 115, 0.3);
@@ -173,6 +183,7 @@
   0% {
     background-position: 0% 0%;
   }
+
   100% {
     background-position: 200% 200%;
   }
@@ -185,6 +196,7 @@
   background: #e1473f !important;
   transition: 0.3s !important;
   font-weight: 500 !important;
+  transition: all .4s ease !important;
 }
 
 .requestBtn:hover {
@@ -229,9 +241,18 @@
   outline: none;
 }
 
+
+
+.heroCtaWrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
 /* ---------- Search Form ---------- */
 .searchForm {
-  background-color: rgba(0, 28, 60, 0.85) !important;
+  background-color: #221e1ea9 !important;
   border-bottom-left-radius: 50px !important;
   border-top-right-radius: 50px !important;
 }
@@ -263,6 +284,37 @@
   letter-spacing: 3px !important;
 }
 
+/* Global wrappers for form elements inside landing page and modals */
+:global(.select-wrapper) {
+  position: relative;
+}
+
+:global(.select-wrapper)::after {
+  content: "\f282" !important;
+  font-family: "bootstrap-icons" !important;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #333;
+  pointer-events: none;
+  z-index: 10;
+}
+
+:global(.select-wrapper select.form-control) {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  padding-right: 40px !important;
+  background-color: white !important;
+  color: #212529 !important;
+}
+
+:global(.select-wrapper select.form-control::-ms-expand) {
+  display: none !important;
+}
+
 /* ---------- Section Titles ---------- */
 .sectionTitle {
   font-size: 2.2rem;
@@ -285,7 +337,7 @@
 }
 
 .tag:hover :global(i) {
-  color: #ffffff !important;
+  color: #000000 !important;
 }
 
 .specializationsWrap {
@@ -342,6 +394,7 @@
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -389,19 +442,7 @@
 }
 
 .eligibility {
-  background:
-    linear-gradient(
-      to right,
-      rgb(0, 28, 60) 0%,
-      rgba(0, 28, 60, 0.99) 30%,
-      rgba(0, 28, 60, 0.9) 50%,
-      rgba(0, 28, 60, 0.6) 60%,
-      rgba(0, 28, 60, 0.2) 75%,
-      rgba(0, 28, 60, 0.8) 85%,
-      rgba(0, 28, 60, 0.99) 95%,
-      rgb(0, 28, 60) 100%
-    ),
-    url('/images/cumba/academic-caps-air-graduation-selective-focus.webp') center/cover no-repeat;
+  background: linear-gradient(to right, rgb(53, 47, 47) 0%, rgba(53, 47, 47, 0.99) 30%, rgba(53, 47, 47, 0.9) 50%, rgba(53, 47, 47, 0.6) 60%, rgba(53, 47, 47, .2) 75%, rgba(53, 47, 47, 0.8) 85%, rgba(53, 47, 47, 0.99) 95%, rgb(53, 47, 47) 100%), url(/images/cumba/academic-caps-air-graduation-selective-focus.webp) center / cover no-repeat;
   padding: 30px 20px;
   border-radius: 20px;
   color: #fff;
@@ -409,8 +450,18 @@
 
 @media (max-width: 768px) {
   .eligibility {
-    background: rgb(0, 28, 60);
+    background: rgb(53, 47, 47) !important;
     border-radius: 0px !important;
+  }
+
+  .eligibility h4 {
+    margin-left: 0 !important;
+    text-align: center !important;
+  }
+
+  .eligibility :global(.mx-4) {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
   }
 
   .eligibilityBtn {
@@ -421,7 +472,7 @@
 .eligibility h4 {
   font-size: clamp(1.8rem, 5vw, 3rem);
   margin-left: 92px !important;
-  color: #f0c040 !important;
+  color: #e1473f !important;
   font-weight: 600;
 }
 
@@ -441,7 +492,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #f0c040;
+  border: 2px solid #fc3939;
   border-radius: 50%;
   animation: pulseIcon 1.6s ease-in-out infinite;
   flex-shrink: 0;
@@ -452,10 +503,12 @@
     transform: scale(1);
     box-shadow: 0 0 0 0 #f0c040;
   }
+
   50% {
     transform: scale(1.12);
     box-shadow: 0 0 12px 3px rgba(240, 192, 64, 0.5);
   }
+
   100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 #f0c040;
@@ -531,8 +584,9 @@
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.siuMain :global(.accordion-button:focus) {
-  box-shadow: none;
+:global(.accordion-button:focus) {
+  border-color: #86b7fe !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
 }
 
 .siuMain :global(.card) {
@@ -626,12 +680,10 @@
   position: relative;
   padding-top: 60px;
   padding-bottom: 60px;
-  background-image: linear-gradient(
-      to right,
-      rgb(0, 20, 50),
+  background-image: linear-gradient(to right,
+      rgb(0, 0, 0),
       40%,
-      rgba(0, 20, 50, 0) 100%
-    ),
+      rgba(255, 255, 255, 0) 100%),
     url('/images/cumba/happygraduate.webp');
   background-size: cover;
   background-position: center;
@@ -678,43 +730,39 @@
   }
 }
 
-.btnMain {
+.btnmain {
   position: relative;
   overflow: hidden;
-  border-radius: 50px;
-  padding: 9px 24px;
+  border-radius: 8px;
+  padding: 8px 14px;
   font-size: 0.92rem;
   font-weight: 700;
   color: #fff !important;
   background: #e1473f !important;
   border: 2px solid #e1473f !important;
-  transition: transform 0.18s ease;
+  transition: transform .18s ease;
 }
 
-.btnMain::before {
-  content: '';
+
+.btnmain::before {
+  content: "";
   position: absolute;
   top: 0;
   left: -120%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.28),
-    rgba(255, 255, 255, 0.05)
-  );
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.05));
   transform: skewX(-18deg);
-  transition: all 0.6s cubic-bezier(0.2, 0.9, 0.25, 1);
+  transition: all 0.6s cubic-bezier(.2, .9, .25, 1);
   pointer-events: none;
 }
 
-.btnMain:hover::before {
+.btnmain:hover::before {
   left: 140%;
 }
 
-.btnMain:active {
-  transform: scale(0.985);
+.btnmain:active {
+  transform: scale(.985);
 }
 
 /* ---------- Footer ---------- */
@@ -907,13 +955,11 @@
 .newsOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.85) 35%,
-    rgba(0, 0, 0, 0.1) 80%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.85) 35%,
+      rgba(0, 0, 0, 0.1) 80%,
+      rgba(0, 0, 0, 0) 100%);
   transition: 0.4s ease;
   z-index: 1;
 }
@@ -989,8 +1035,43 @@
     max-width: 100% !important;
   }
 
+  .heroCtaContainer {
+    justify-content: center !important;
+  }
+
+  .heroCtaWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1.5rem;
+    gap: 15px;
+  }
+
+
+
   .btnBrochure {
-    background-color: white !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2.5px solid #e1473f !important;
+    width: auto !important;
+    padding: 0.6rem 1.2rem;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btnBrochure::after {
+    display: none !important;
+  }
+
+  .btnBrochure i {
+    color: #000000 !important;
+    font-size: 18px !important;
   }
 }
 
@@ -998,13 +1079,11 @@
 @media (max-width: 768px) {
   .hero {
     background-image:
-      linear-gradient(
-        116deg,
+      linear-gradient(116deg,
         #d2d2d2 0%,
         rgba(251, 238, 238, 0.9) 25%,
         rgba(171, 171, 171, 0.5) 60%,
-        rgba(224, 224, 224, 0) 100%
-      ),
+        rgba(224, 224, 224, 0) 100%),
       url('/images/cumba/mobilebanner.webp');
     background-size: cover !important;
     background-position: center top;
@@ -1060,11 +1139,7 @@
     font-size: 18px;
   }
 
-  .btnBrochure,
-  .requestBtn {
-    width: 100%;
-    text-align: center;
-  }
+  /* Centering handled by wrapper */
 
   .outcomeCard {
     height: 100% !important;
@@ -1167,4 +1242,56 @@
   width: 90%;
   margin: auto;
   position: relative;
+}
+
+/* ---------- Custom Modal ---------- */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeInModal 0.2s ease-out;
+}
+
+.modalContent {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: slideDownModal 0.2s ease-out;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: #e1473f;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDownModal {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
