@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { getColleges } from 'src/lib/api/common'
 import { LazyUniversityCarousel } from 'src/app/components/ClientWrappers'
 
