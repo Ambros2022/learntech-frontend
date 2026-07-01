@@ -1,7 +1,7 @@
 ﻿'use client'
-import React, { useState } from 'react';
+import { useState } from 'react'
 
-const StudentsText = ({  }) => {
+const StudentsText = () => {
     const [activeTab, setActiveTab] = useState('students');
 
     return (

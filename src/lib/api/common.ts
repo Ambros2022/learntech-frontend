@@ -350,6 +350,14 @@ export const getAdvertisePageBanners = cache(async () => {
   return json?.data ?? []
 })
 
+export const getServicesBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=Services_Page&page=1&size=10000`,
+    { tags: ['services-banners'] },
+  )
+  return json?.data ?? []
+})
+
 export const getAssociatedColleges = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/colleges/get?is_associated=1&page=1&size=10`,

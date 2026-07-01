@@ -16,6 +16,7 @@
     font-size: 14px;
     transition: top 0.2s;
   }
+
   .skip-to-content:focus {
     top: 0;
   }
@@ -4492,16 +4493,6 @@
   }
 
 
-
-  .ServiceBanner {
-    height: 400px !important;
-  }
-
-  .ServiceBanner img {
-    height: 400px !important;
-    width: 100% !important;
-    object-fit: cover !important;
-  }
 
   .servicesImg {
     width: 100%;

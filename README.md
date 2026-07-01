@@ -1,3 +1,9 @@
+mbbs-abroad
+
+meds
+
+
+
 SEO Audit — learntechww.com
 Audited against codebase: June 2026 | Next.js 15 | Priority pages: College, University, Course, News
 

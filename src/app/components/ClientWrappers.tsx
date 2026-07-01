@@ -208,6 +208,11 @@ export const LazyContactUsForm = dynamic(
   { ssr: false, loading: () => <FormSkeleton /> },
 )
 
+export const LazySideContactUsForm = dynamic(
+  () => import('src/@core/components/popup/SideContactUsForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
 export const LazyContactForm404 = dynamic(
   () => import('src/views/Error404Page/Components/BannerSec/ContactForm404'),
   { ssr: false, loading: () => <FormSkeleton /> },
