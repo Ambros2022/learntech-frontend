@@ -1,6 +1,18 @@
 mbbs-abroad
-
 meds
+contact-us
+education-loan
+exam-details
+exams
+news-details
+news
+nri-quota
+our-team
+scholarships
+sitemap
+students-speak
+thank-you
+write-review
 
 
 
