@@ -1,6 +1,5 @@
-﻿'use client'
+'use client'
 import React, { useEffect, useState, useCallback, useRef } from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -259,16 +258,7 @@ const CollegeAdmissionGuidancePage = () => {
 
   return (
     <section className='cag-main'>
-      <Head>
-        <title>Learntech Edu | College Admission Guidance &amp; Counselling</title>
-        <meta name='description' content='Get expert college admission guidance with Learntech Edu Solutions. 1000+ institutions, seat support, and personalised counselling to simplify your journey.' />
-        <meta name="robots" content="index, follow" />
-        {/* eslint-disable-next-line @next/next/no-css-tags */}
-        <link rel='stylesheet' href='/css/collegeadmissionguidancelandingpage.css' />
-        <link rel='canonical' href='https://learntechww.com/college-admission-guidance' />
-        <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap' rel='stylesheet' />
-        <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css' rel='stylesheet' />
-      </Head>
+
 
       {/* WhatsApp Float */}
       <a href='https://wa.me/+919606949066' className='cag-whatsapp-float' target='_blank' rel='noreferrer'>
