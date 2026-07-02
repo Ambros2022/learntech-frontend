@@ -1,11 +1,11 @@
-﻿'use client'
+'use client'
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'src/configs/axios';
 import { toast } from 'sonner';
 import { useRouter } from 'src/hooks/useCompatRouter';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers';
 import Link from 'next/link';
 
 const validationSchema = Yup.object().shape({
@@ -70,13 +70,13 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
         if (!data.top_description) return null;
 
         if (data.top_description.length <= maxLength || isExpanded) {
-            return <div dangerouslySetInnerHTML={{ __html: data.top_description }} />;
+            return <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: data.top_description }} />;
         }
 
         const truncatedText = data.top_description.slice(0, maxLength) + '...';
         return (
             <>
-                <div dangerouslySetInnerHTML={{ __html: truncatedText }} />
+                <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: truncatedText }} />
                 <div className='text-center'>
                     <button onClick={toggleReadMore} className="btn viewMoreClgBtn">Read More</button>
                 </div>

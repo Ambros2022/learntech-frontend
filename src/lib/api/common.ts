@@ -1,4 +1,4 @@
-﻿import { cache } from 'react'
+import { cache } from 'react'
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URI || '').replace(/\/+$/, '')
 
@@ -407,6 +407,14 @@ export const getAbroadCountries = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/country/get?page=1&size=10&india=false`,
     { tags: ['abroad-countries'] },
+  )
+  return json?.data ?? []
+})
+
+export const getAbroadPages = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/abroadpages/get?page=1&size=1000`,
+    { tags: ['abroad-pages'] },
   )
   return json?.data ?? []
 })

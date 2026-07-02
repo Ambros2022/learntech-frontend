@@ -5,6 +5,7 @@ import styles from './SymbiosisPage.module.css'
 import SymEnquiryTriggerClient from './SymEnquiryTriggerClient'
 import SymEnquiryFormClient from './SymEnquiryFormClient'
 import SymScrollEffectsClient from './SymScrollEffectsClient'
+import SymPartnersCarouselClient from './SymPartnersCarouselClient'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
 const PAGE_PATH = '/symbiosis-international-university-dubai'
@@ -291,8 +292,8 @@ export default function Page() {
                       <span>Admissions Open Symbiosis International University, Dubai</span>
                     </div>
                     <h1 className={styles.symHeroTitle}>
-                      The World Comes to Dubai,
-                      <span className='accent'>&nbsp;At Symbiosis,</span><br />
+                      The World Comes to Dubai,{' '}
+                      <span className={styles.accent}>At Symbiosis,</span><br />
                       We Show You The World.
                     </h1>
                     <p className={styles.symHeroDesc}>
@@ -340,7 +341,7 @@ export default function Page() {
                 <div className={styles.symMarqueeItem} key={idx}>
                   <div className={styles.symMarqueeIcon}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={item.src} alt={item.alt} width={200} height={80} loading='lazy' />
+                    <img src={item.src} alt={item.alt}  loading='lazy' />
                   </div>
                   <div className={styles.symMarqueeText}>
                     <strong>{item.title}</strong>
@@ -558,15 +559,8 @@ export default function Page() {
                   To provide students with the best opportunities after graduation, the university has partnered with various organisations that add extra-curricular value to the education obtained. This is just one of the many reasons the Symbiosis International University, Dubai ranking has been consistently high.
                 </p>
               </div>
-              <div className='sym-reveal' style={{ overflow: 'hidden' }}>
-                <div className={styles.symPartnerTrack}>
-                  {[...partnerLogos, ...partnerLogos].map((item, idx) => (
-                    <div className={styles.symPartnerLogo} key={idx}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={item.src} alt={item.alt} width={150} height={70} loading='lazy' />
-                    </div>
-                  ))}
-                </div>
+              <div className='sym-reveal'>
+                <SymPartnersCarouselClient logos={partnerLogos} />
               </div>
               {/* Hidden list for SEO — all partner names crawlable */}
               <ul aria-hidden='true' style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' }}>

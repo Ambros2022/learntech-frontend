@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import styles from './SymbiosisPage.module.css'
+import PhoneInputField from 'src/@core/components/popup/PhoneInput'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URI || ''
 
@@ -27,10 +28,16 @@ export default function SymEnquiryFormClient({ isModal = false }: Props) {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [phone, setPhone] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (isSubmitting) return
+
+    if (!phone.trim()) {
+      toast.error('Phone number is required')
+      return
+    }
 
     const form = formRef.current
     if (!form) return
@@ -41,7 +48,10 @@ export default function SymEnquiryFormClient({ isModal = false }: Props) {
     formData.append('SourceCampaign', 'Symbiosis Dubai 2026-27')
 
     // Rename contact → contact_number for API
-    const contact = formData.get('contact') as string
+    let contact = phone
+    if (contact && !contact.startsWith('+')) {
+      contact = `+${contact}`
+    }
     formData.delete('contact')
     formData.append('contact_number', contact)
 
@@ -92,13 +102,15 @@ export default function SymEnquiryFormClient({ isModal = false }: Props) {
         />
       </div>
       <div className='form-group mb-3'>
-        <input
-          type='tel'
-          name='contact'
-          placeholder='Phone'
-          required
-          className={styles.symFormField}
-        />
+        <div className={styles.symPhoneInputContainer}>
+          <PhoneInputField
+            country='ae'
+            field={{
+              value: phone,
+              onChange: (v: string) => setPhone(v),
+            }}
+          />
+        </div>
       </div>
       <div className='form-group'>
         <input

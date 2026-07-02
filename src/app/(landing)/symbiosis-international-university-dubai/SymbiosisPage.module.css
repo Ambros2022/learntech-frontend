@@ -240,8 +240,15 @@
 }
 
 @keyframes symBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.25; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.25;
+  }
 }
 
 .symHeroBadge span {
@@ -275,7 +282,7 @@
   right: 0;
   height: 4px;
   background: var(--sym-primary);
-  opacity: 0.35;
+  opacity: .35;
   border-radius: 3px;
 }
 
@@ -344,13 +351,27 @@
 }
 
 @keyframes symFadeLeft {
-  from { opacity: 0; transform: translateX(30px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes symFadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── FORM FIELDS ────────────────────────── */
@@ -376,6 +397,80 @@
   border-color: var(--sym-primary);
   background: rgba(255, 255, 255, 0.3);
 }
+
+.symPhoneInputContainer {
+  position: relative;
+  width: 100% !important;
+  font-family: var(--sym-font) !important;
+  margin-bottom: 0.9rem;
+}
+
+.symPhoneInputContainer :global(.react-tel-input) {
+  width: 100% !important;
+}
+
+.symPhoneInputContainer :global(.form-control) {
+  width: 100% !important;
+  height: 42px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-radius: var(--sym-radius-sm) !important;
+  padding: 0.65rem 1.1rem 0.65rem 58px !important;
+  color: black !important;
+  font-family: var(--sym-font) !important;
+  font-size: 0.9rem !important;
+  outline: none !important;
+  transition: border-color 0.25s, background 0.25s !important;
+}
+
+.symPhoneInputContainer :global(.form-control:focus) {
+  border-color: var(--sym-primary) !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: none !important;
+}
+
+.symPhoneInputContainer :global(.form-control::placeholder) {
+  color: black !important;
+  opacity: 1 !important;
+}
+
+.symPhoneInputContainer :global(.flag-dropdown) {
+  background: transparent !important;
+  border: none !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-radius: var(--sym-radius-sm) 0 0 var(--sym-radius-sm) !important;
+  width: 48px !important;
+  height: calc(100% - 2px) !important;
+  top: 1px !important;
+  left: 1px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.symPhoneInputContainer :global(.flag-dropdown:hover),
+.symPhoneInputContainer :global(.flag-dropdown:focus),
+.symPhoneInputContainer :global(.flag-dropdown.open) {
+  background: white !important;
+}
+
+.symPhoneInputContainer :global(.country-list) {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  margin: 5px 0 0 0 !important;
+  z-index: 1000 !important;
+  background: white !important;
+  color: black !important;
+  font-family: var(--sym-font) !important;
+  border-radius: var(--sym-radius-sm) !important;
+  box-shadow: var(--sym-shadow-md) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  text-align: left !important;
+}
+
+
 
 .symFormSelect {
   appearance: none;
@@ -457,8 +552,13 @@
 }
 
 @keyframes symMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .symMarqueeItem {
@@ -929,16 +1029,86 @@
   transform: scale(1.08);
 }
 
-/* Simple partner marquee (no JS dependency) */
-.symPartnerTrack {
-  display: flex;
-  gap: 2rem;
-  width: max-content;
-  animation: symMarquee 25s linear infinite;
+/* Embla Carousel for Partners */
+.symPartnersEmbla {
+  position: relative;
+  width: 100%;
+  padding: 0 3.5rem;
 }
 
-.symPartnerTrack:hover {
-  animation-play-state: paused;
+.symPartnersViewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.symPartnersContainer {
+  display: flex;
+}
+
+.symPartnersSlide {
+  flex: 0 0 25%;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .symPartnersSlide {
+    flex: 0 0 33.333%;
+  }
+}
+
+@media (max-width: 768px) {
+  .symPartnersSlide {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .symPartnersSlide {
+    flex: 0 0 100%;
+  }
+}
+
+.symPartnersArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--sym-primary) !important;
+  border: none !important;
+  color: white !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(193, 33, 18, 0.15);
+}
+
+.symPartnersArrow:hover {
+  background: var(--sym-primary-dark) !important;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.symPartnersArrowPrev {
+  left: 0;
+}
+
+.symPartnersArrowNext {
+  right: 0;
+}
+
+.symPartnersArrow i {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* ── WHY CHOOSE ──────────────────────────── */
@@ -983,7 +1153,7 @@
   opacity: 1;
 }
 
-.symWhyCard > * {
+.symWhyCard>* {
   position: relative;
   z-index: 1;
 }
@@ -1240,7 +1410,9 @@
 }
 
 @keyframes symSlowSpin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .symCtaRing1 {
@@ -1668,5 +1840,10 @@
 
   .symFloatBadge2 {
     left: -1px !important;
+  }
+
+  .symHeroBadgeDot {
+    width: 18px;
+    height: 12px;
   }
 }
