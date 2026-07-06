@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import styles from './CollegeAdmissionPage.module.css'
 

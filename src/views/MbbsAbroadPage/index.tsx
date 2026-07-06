@@ -1,6 +1,5 @@
 import BannerSec from './Components/BannerSec'
-import MedicalSec from './Components/MedicalSec'
-import TopCountrySec from './Components/TopCountrySec'
+import { LazyMedicalSec as MedicalSec, LazyTopCountrySec as TopCountrySec } from 'src/app/components/ClientWrappers'
 import FaqSec from '../EducationLoanPage/Components/FaqSec'
 import ImportantSec from './Components/ImportantSec'
 import ExpertSec from './Components/ExpertSec'

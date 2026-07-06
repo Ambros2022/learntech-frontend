@@ -358,6 +358,15 @@ export const getServicesBanners = cache(async () => {
   return json?.data ?? []
 })
 
+export const getNriPageBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=Nri_page&page=1&size=10000`,
+    { tags: ['nri-banners'] },
+  )
+  return json?.data ?? []
+})
+
+
 export const getAssociatedColleges = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/colleges/get?is_associated=1&page=1&size=10`,

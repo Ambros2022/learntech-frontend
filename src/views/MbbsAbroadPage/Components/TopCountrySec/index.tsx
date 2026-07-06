@@ -1,8 +1,46 @@
-﻿'use client'
-import React, { useState } from 'react'
-import CategoryCarousel from '../CategoryCarousel'; 
+'use client'
+import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
+import EmblaCarousel from 'src/components/ui/Embla/EmblaCarousel' 
+
+const MapEmbed = ({ src, isActive }: { src: string; isActive: boolean }) => {
+    const [hasLoaded, setHasLoaded] = useState(false)
+
+    useEffect(() => {
+        if (isActive) {
+            setHasLoaded(true)
+        }
+    }, [isActive])
+
+    if (!hasLoaded) {
+        return (
+            <div 
+                className='rounded' 
+                style={{ 
+                    minHeight: '220px', 
+                    height: '100%', 
+                    backgroundColor: '#e3ebf6'
+                }}
+            />
+        )
+    }
+
+    return (
+        <iframe
+            src={src}
+            width='100%'
+            height='100%'
+            className='p-1 bg-blue rounded'
+            loading='lazy'
+            referrerPolicy='no-referrer-when-downgrade'
+            style={{ border: 0, minHeight: '220px' }}
+        ></iframe>
+    )
+}
 
 const TopCountrySec = () => {
+    const [activeTab, setActiveTab] = useState('Armenia')
+
     const countries = [
         {
             name: 'Armenia',
@@ -11,14 +49,7 @@ const TopCountrySec = () => {
                 <div className='container bg-skyBlue rounded p-3 mt-3'>
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
-                            <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6100.645896291943!2d44.51859604184559!3d40.13508948845406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abbe6e9f27fef%3A0xddc0db39386c308c!2sArmenian%20Medical%20Institute!5e0!3m2!1sen!2sin!4v1720163224650!5m2!1sen!2sin'
-                                width='100%'
-                                height='100%'
-                                className=' p-1 bg-blue rounded'
-                                loading='lazy'
-                                referrerPolicy='no-referrer-when-downgrade'
-                            ></iframe>
+                            <MapEmbed src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6100.645896291943!2d44.51859604184559!3d40.13508948845406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abbe6e9f27fef%3A0xddc0db39386c308c!2sArmenian%20Medical%20Institute!5e0!3m2!1sen!2sin!4v1720163224650!5m2!1sen!2sin" isActive={activeTab === 'Armenia'} />
                         </div>
                         <div className='col-xl-8 col-lg-8 col-md-7'>
                             <h3 className='text-black'></h3>
@@ -79,14 +110,7 @@ const TopCountrySec = () => {
                 <div className='container bg-skyBlue rounded p-3 mt-3'>
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
-                            <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2977.711175023735!2d44.75477629999999!3d41.7267509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4044731c13a9f3b3%3A0xac94c53b52ac8277!2sTbilisi%20State%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163486732!5m2!1sen!2sin'
-                                width='100%'
-                                height='100%'
-                                className=' p-1 bg-blue rounded'
-                                loading='lazy'
-                                referrerPolicy='no-referrer-when-downgrade'
-                            ></iframe>
+                            <MapEmbed src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2977.711175023735!2d44.75477629999999!3d41.7267509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4044731c13a9f3b3%3A0xac94c53b52ac8277!2sTbilisi%20State%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163486732!5m2!1sen!2sin" isActive={activeTab === 'Georgia'} />
                         </div>
                         <div className='col-xl-8 col-lg-8 col-md-7'>
                             <h3 className='text-black'></h3>
@@ -199,14 +223,7 @@ const TopCountrySec = () => {
                 <div className='container bg-skyBlue rounded p-3 mt-3'>
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
-                            <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.346451118551!2d125.60698579999999!3d7.0857759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f96d088796b397%3A0xd09a123f2ba20380!2sDavao%20Medical%20School%20Foundation%20Inc!5e0!3m2!1sen!2sin!4v1720163546042!5m2!1sen!2sin'
-                                width='100%'
-                                height='100%'
-                                className=' p-1 bg-blue rounded'
-                                loading='lazy'
-                                referrerPolicy='no-referrer-when-downgrade'
-                            ></iframe>
+                            <MapEmbed src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.346451118551!2d125.60698579999999!3d7.0857759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f96d088796b397%3A0xd09a123f2ba20380!2sDavao%20Medical%20School%20Foundation%20Inc!5e0!3m2!1sen!2sin!4v1720163546042!5m2!1sen!2sin" isActive={activeTab === 'Philippines'} />
                         </div>
                         <div className='col-xl-8 col-lg-8 col-md-7'>
                             <h3 className='text-black'></h3>
@@ -254,14 +271,7 @@ const TopCountrySec = () => {
                 <div className='container bg-skyBlue rounded p-3 mt-3'>
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
-                            <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2181.1466851934956!2d35.8995532!3d56.8605795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b68655d3066527%3A0xf22def0dcc228da8!2sTver%20State%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163585357!5m2!1sen!2sin'
-                                width='100%'
-                                height='100%'
-                                className=' p-1 bg-blue rounded'
-                                loading='lazy'
-                                referrerPolicy='no-referrer-when-downgrade'
-                            ></iframe>
+                            <MapEmbed src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2181.1466851934956!2d35.8995532!3d56.8605795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b68655d3066527%3A0xf22def0dcc228da8!2sTver%20State%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163585357!5m2!1sen!2sin" isActive={activeTab === 'Russia'} />
                         </div>
                         <div className='col-xl-8 col-lg-8 col-md-7'>
                             <h3 className='text-black'></h3>
@@ -312,14 +322,7 @@ const TopCountrySec = () => {
                 <div className='container bg-skyBlue rounded p-3 mt-3'>
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
-                            <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2605.5597040751563!2d28.446470799999997!3d49.2278767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472d5c7f91a0a895%3A0x9e3cb2d36b6d7bbe!2sVinnytsia%20National%20Pirogov%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163770252!5m2!1sen!2sin'
-                                width='100%'
-                                height='100%'
-                                className=' p-1 bg-blue rounded'
-                                loading='lazy'
-                                referrerPolicy='no-referrer-when-downgrade'
-                            ></iframe>
+                            <MapEmbed src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2605.5597040751563!2d28.446470799999997!3d49.2278767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472d5c7f91a0a895%3A0x9e3cb2d36b6d7bbe!2sVinnytsia%20National%20Pirogov%20Medical%20University!5e0!3m2!1sen!2sin!4v1720163770252!5m2!1sen!2sin" isActive={activeTab === 'Ukraine'} />
                         </div>
                         <div className='col-xl-8 col-lg-8 col-md-7'>
                             <h3 className='text-black'></h3>
@@ -432,14 +435,7 @@ const TopCountrySec = () => {
                 <div className='container bg-skyBlue rounded p-3 mt-3'>
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
-                            <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.313994042445!2d28.817648300000002!3d47.0340691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97dc7f48e142d%3A0xccecb7104ac4ea09!2sNicolae%20Testemi%C8%9Banu%20State%20University%20of%20Medicine%20and%20Pharmacy!5e0!3m2!1sen!2sin!4v1720164144676!5m2!1sen!2sin'
-                                width='100%'
-                                height='100%'
-                                className=' p-1 bg-blue rounded'
-                                loading='lazy'
-                                referrerPolicy='no-referrer-when-downgrade'
-                            ></iframe>
+                            <MapEmbed src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.313994042445!2d28.817648300000002!3d47.0340691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97dc7f48e142d%3A0xccecb7104ac4ea09!2sNicolae%20Testemi%C8%9Banu%20State%20University%20of%20Medicine%20and%20Pharmacy!5e0!3m2!1sen!2sin!4v1720164144676!5m2!1sen!2sin" isActive={activeTab === 'Moldova'} />
                         </div>
                         <div className='col-xl-8 col-lg-8 col-md-7'>
                             <h3 className='text-black'></h3>
@@ -488,14 +484,7 @@ const TopCountrySec = () => {
                 <div className='container bg-skyBlue rounded p-3 mt-3'>
                     <div className='row'>
                         <div className='col-xl-4 col-lg-4 col-md-5'>
-                            <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.766994664738!2d69.176029!3d41.357417999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8e9253333259%3A0x8a4d58aed9f6807f!2sTashkent%20Medical%20Academy!5e0!3m2!1sen!2sin!4v1720164195296!5m2!1sen!2sin'
-                                width='100%'
-                                height='100%'
-                                className=' p-1 bg-blue rounded'
-                                loading='lazy'
-                                referrerPolicy='no-referrer-when-downgrade'
-                            ></iframe>
+                            <MapEmbed src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.766994664738!2d69.176029!3d41.357417999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8e9253333259%3A0x8a4d58aed9f6807f!2sTashkent%20Medical%20Academy!5e0!3m2!1sen!2sin!4v1720164195296!5m2!1sen!2sin" isActive={activeTab === 'Uzbekistan'} />
                         </div>
                         <div className='col-xl-8 col-lg-8 col-md-7'>
                             <h3 className='text-black'></h3>
@@ -535,8 +524,6 @@ const TopCountrySec = () => {
         }
     ]
 
-    const [activeTab, setActiveTab] = useState(countries[0].name)
-
     const handleTabClick = name => {
         setActiveTab(name)
     }
@@ -547,29 +534,37 @@ const TopCountrySec = () => {
                 <h2 className='text-blue text-center py-3 fw-bold mb-3'>Top 7 Countries to Study MBBS Abroad</h2>
                 <div className="row ">
                     <div className="col-12 mbbs px-2">
-                        <CategoryCarousel items={countries} handleTabClick={handleTabClick} activeTab={activeTab} />
+                        <EmblaCarousel
+                            showDots={false}
+                            showArrows={false}
+                            loop={true}
+                            autoplay={true}
+                            autoplayDelay={2000}
+                            slidesToShowDesktop={7}
+                            slidesToShowTablet={4}
+                            slidesToShowMobile={2}
+                        >
+                            {countries.map((country, idx) => (
+                                <div key={idx} className="examSecItems d-flex justify-content-center text-center mx-2 mb-3">
+                                    <button
+                                        className={`nav-link ${country.name === activeTab ? 'active' : ''}`}
+                                        id={`pills-${country.name}-tab`}
+                                        data-bs-toggle='pill'
+                                        data-bs-target={`#pills-${country.name}`}
+                                        type='button'
+                                        role='tab'
+                                        aria-controls={`pills-${country.name}`}
+                                        aria-selected={country.name === activeTab ? 'true' : 'false'}
+                                        onClick={() => handleTabClick(country.name)}
+                                    >
+                                        <Image src={country.flag} width={30} height={30} alt={`${country.name}-flag`} className='me-2 rounded' style={{ objectFit: 'cover' }} />
+                                        {country.name}
+                                    </button>
+                                </div>
+                            ))}
+                        </EmblaCarousel>
                     </div>
                 </div>
-                {/* <ul className='nav nav-pills d-flex gap-3 flex-wrap flex-md-row flex-column' id='pills-tab' role='tablist'>
-                    {countries.map((country, index) => (
-                        <li className='nav-item rounded' key={index}>
-                            <button
-                                className={` d-flex nav-link ${country.name === activeTab ? 'active' : ''}`}
-                                id={`pills-${country.name}-tab`}
-                                data-bs-toggle='pill'
-                                data-bs-target={`#pills-${country.name}`}
-                                type='button'
-                                role='tab'
-                                aria-controls={`pills-${country.name}`}
-                                aria-selected={country.name === activeTab ? 'true' : 'false'}
-                                onClick={() => handleTabClick(country.name)}
-                            >
-                                <img src={country.flag} width={30} height={30} alt={`${country.name}-flag`} className='me-2 rounded' />
-                                {country.name}
-                            </button>
-                        </li>
-                    ))}
-                </ul> */}
                 <div className='tab-content' id='pills-tabContent'>
                     {countries.map((country, index) => (
                         <div

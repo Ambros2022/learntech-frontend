@@ -351,3 +351,34 @@ export const LazyEmblaTabCarousel = dynamic(
   () => import('src/components/ui/Embla/EmblaTabCarousel'),
   { ssr: false, loading: () => <SectionSkeleton height='240px' /> },
 )
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MBBS ABROAD PAGE SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyMedicalSec = dynamic(
+  () => import('src/views/MbbsAbroadPage/Components/MedicalSec'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyTopCountrySec = dynamic(
+  () => import('src/views/MbbsAbroadPage/Components/TopCountrySec'),
+  { ssr: false, loading: () => <SectionSkeleton height='400px' /> },
+)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NRI QUOTA PAGE SPECIFIC SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyNriQuotaBannerEnquiry = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupEnquiry'),
+  { ssr: false, loading: () => <button className="btn btn-success">Apply Now</button> },
+)
+
+export const LazyExpertEnquiryPopup = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupEnquiry'),
+  { ssr: false, loading: () => <button className="btn reqBtn">Request a Call Back</button> },
+)
+
+
+

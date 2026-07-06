@@ -6211,3 +6211,41 @@
       font-size: 11px !important;
     }
   }
+
+  /* Spacing and style for Featured Colleges carousel arrows and slides on mobile screens */
+  @media (max-width: 768px) {
+    .FeaturedClgCon .container {
+      padding-left: 48px !important;
+      padding-right: 48px !important;
+    }
+    .FeaturedClgCon button[aria-label="Previous"],
+    .FeaturedClgCon button[aria-label="Next"] {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: transparent !important;
+    }
+    .FeaturedClgCon button[aria-label="Previous"] {
+      left: -44px !important;
+    }
+    .FeaturedClgCon button[aria-label="Previous"]::before {
+      content: "<";
+      color: #555555 !important;
+      font-size: 26px !important;
+      font-weight: 400 !important;
+      font-family: Arial, sans-serif !important;
+    }
+    .FeaturedClgCon button[aria-label="Next"] {
+      right: -44px !important;
+    }
+    .FeaturedClgCon button[aria-label="Next"]::before {
+      content: ">";
+      color: #555555 !important;
+      font-size: 26px !important;
+      font-weight: 400 !important;
+      font-family: Arial, sans-serif !important;
+    }
+  }

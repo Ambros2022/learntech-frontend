@@ -137,9 +137,18 @@
 
 /* ---------- MOBILE ---------- */
 @media (max-width: 576px) {
-  .imageWrap { height: 200px; }
-  .title { font-size: 1.1rem; }
-  .location { font-size: 0.92rem; }
+  .imageWrap {
+    height: 200px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .location {
+    font-size: 0.92rem;
+  }
+
   .actions .applyBtn,
   .actions .viewBtn {
     height: 40px !important;
