@@ -294,6 +294,58 @@ export const getScholarships = cache(async (params?: Record<string, string | num
   return json?.data ?? []
 })
 
+export const getScholarshipsList = cache(async (params?: Record<string, string | number>) => {
+  const sp = new URLSearchParams({
+    page: '1', size: '10',
+    ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
+  })
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/scholarships/get?${sp}`,
+    { tags: ['scholarships'] },
+  )
+  return {
+    data: json?.data ?? [],
+    totalItems: json?.totalItems ?? 0,
+  }
+})
+
+export const getScholarshipLevels = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/allscholarlevel/get`,
+    { tags: ['scholarship-levels'] },
+  )
+  return json?.data ?? []
+})
+
+export const getScholarshipTypes = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/allscholartype/get`,
+    { tags: ['scholarship-types'] },
+  )
+  return json?.data ?? []
+})
+
+export const getCountries = cache(async (params?: Record<string, string | number>) => {
+  const sp = new URLSearchParams({
+    page: '1', size: '500',
+    ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
+  })
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/country/get?${sp}`,
+    { tags: ['countries'] },
+  )
+  return json?.data ?? []
+})
+
+export const getScholarshipBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_Scholarship_page`,
+    { tags: ['scholarship-banners'] },
+  )
+  return json?.data ?? []
+})
+
+
 // ─────────────────────────────────────────────────────────────────────────────
 // TESTIMONIALS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -521,6 +573,26 @@ export async function getNavData() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// NEWS PAGE
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getNewsCategories = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/newscategory/get`,
+    { tags: ['news-categories'] },
+  )
+  return json?.data ?? []
+})
+
+export const getLandingPages = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/langingpage/get?page=1&size=10000&orderby=asc&columnname=listing_order`,
+    { tags: ['landing-pages'] },
+  )
+  return json?.data ?? []
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
 // CAREER
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -536,6 +608,26 @@ export const getJobLocations = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/alljoblocation/get`,
     { tags: ['job-locations'] },
+  )
+  return json?.data ?? []
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// OUR TEAM
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getOurTeamBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_our_teams&page=1&size=10000`,
+    { tags: ['our-team-banners'] },
+  )
+  return json?.data ?? []
+})
+
+export const getOurTeams = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/ourteams/get`,
+    { tags: ['ourteams'] },
   )
   return json?.data ?? []
 })
@@ -560,3 +652,11 @@ export async function getSitemapXml(type: string): Promise<string | null> {
     clearTimeout(timeoutId)
   }
 }
+
+export const getSitemapData = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/sitemap/get?page=1&size=10000`,
+    { tags: ['sitemap-data'] },
+  )
+  return json?.data ?? null
+})

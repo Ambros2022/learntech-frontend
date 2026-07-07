@@ -1,57 +1,39 @@
-﻿'use client'
-import React from 'react'
-import Carousel3 from 'src/@core/components/carousel3'
-import Link from 'next/link';
+import Link from 'next/link'
+import { LazyTrendingNewsCarousel } from 'src/app/components/ClientWrappers'
 
+const clipRect = { position: 'absolute' as const, width: 1, height: 1, overflow: 'hidden' as const, clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' as const }
 
+interface NewsItem {
+  id: number
+  title: string
+  slug: string
+  description: string
+  imageUrl: string
+}
 
-const TopTrendingNews = ({ newsItems, loading }) => {
+const TopTrendingNews = ({ newsItems }: { newsItems: NewsItem[] }) => {
+  if (!newsItems?.length) return null
 
-    const newsCards = newsItems.map(news => (
+  return (
+    <section className='topnewsSec bg-white py-5'>
+      <div className="container">
+        <h2 className='text-blue fw-bold text-center mb-5'>Trending News</h2>
 
-        <Link className='text-blue' href={`/news/${news.id}/${news.slug}`}>
-        {/* <Link className='text-blue' href={`/news/${news.id}/${encodeURIComponent(news.title)}`}> */}
-            <div key={news.id} className="col-8 col-md-10 mx-auto mb-1">
-                <div className="card h-100 topNewsImg d-flex flex-fill  hover-card   ">
-                    <img
-                        src={news.imageUrl}
-                        width={400}
-                        height={300}
-                        // layout="responsive"
-                        // quality={75}
-                        className="card-img-top"
-                        alt={news.title}
-                    />
-                    <div className="card-body bg-skyBlue">
+        {/* Hidden links for SEO — Googlebot crawls all links */}
+        <ul aria-hidden="true" style={clipRect}>
+          {newsItems.map(news => (
+            <li key={news.id}>
+              <a href={`/news/${news.id}/${news.slug}`}>{news.title}</a>
+            </li>
+          ))}
+        </ul>
 
-                        <h6 className="card-title text-blue fw-bold text-truncate">{news.title}</h6>
-
-                        <p className="card-text">{news.description}</p>
-                    </div>
-                </div>
-            </div>
-        </Link>
-    ));
-
-    return (
-        <>
-            <section className='topnewsSec bg-white py-5'>
-                <div className="container">
-                    <h2 className='text-blue fw-bold text-center mb-5'>Trending News</h2>
-                    {loading ? (
-
-                        <div className='text-center'> Loading....</div>
-
-                    ) : (
-                        <div className='newsCardCarousel position-relative'>
-                            <Carousel3 items={newsCards} />
-                        </div>
-
-                    )}
-                </div>
-            </section>
-        </>
-    )
+        <div className='newsCardCarousel position-relative'>
+          <LazyTrendingNewsCarousel newsItems={newsItems} />
+        </div>
+      </div>
+    </section>
+  )
 }
 
 export default TopTrendingNews

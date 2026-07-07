@@ -158,6 +158,16 @@ export const LazyCourseSearchBar = dynamic(
   { ssr: false, loading: () => <SearchBarSkeleton /> },
 )
 
+export const LazyNewsSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/NewsSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyTrendingNewsCarousel = dynamic<any>(
+  () => import('../../views/MainNewsPage/Components/TopTrendingNewsSec/TrendingNewsCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
 export const LazyOtherCoursesCarousel = dynamic(
   () => import('src/views/InnerCoursePage/Components/OtherCourses/OtherCoursesCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={5} /> },
