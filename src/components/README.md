@@ -3,7 +3,7 @@
 Home for **new, clean, reusable components** going forward. Organized by role:
 
 | Folder | Purpose | Examples |
-|---|---|---|
+|---|---|---|g
 | `ui/` | Framework-agnostic UI primitives — reusable across any domain | `ui/Embla` (carousel) |
 | `colleges/` | College domain components | `CollegeCard`, `CollegeCarouselClient` |
 

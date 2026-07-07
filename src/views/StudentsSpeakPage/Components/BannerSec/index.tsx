@@ -1,9 +1,10 @@
-﻿'use client'
+'use client'
 import React, { useState } from 'react';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-import Link from 'next/link';
+import BannerImage from 'src/components/ui/BannerImage';
+import { Breadcrumb } from 'src/app/components/Breadcrumb';
 
 const BannerSec = ({ handleSearchQuery }) => {
     const [searchText, setSearchText] = useState('');
@@ -44,7 +45,13 @@ const BannerSec = ({ handleSearchQuery }) => {
             <section className='newsBannerSec'>
                 <div className='position-relative'>
                     <div>
-                        <img src='/images/icons/BannerBG.webp   ' width={1400} height={300} alt='banner-img' className='position-relative w-100' />
+                        <BannerImage
+                            alt='banner-img'
+                            src='/images/icons/BannerBG.webp'
+                            width={1400}
+                            height={300}
+                            className='position-relative w-100'
+                        />
                     </div>
                     <div className='position-absolute w-100 h-100' style={{ top: '1px' }}>
                         <div className="container h-100">
@@ -95,14 +102,11 @@ const BannerSec = ({ handleSearchQuery }) => {
                 </div>
             </section>
 
-            <section className='bg-skyBlue'>
-                <div className='container py-2 linkFontSize'>
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><span className='text-blue'> Students' Speak</span>
-                </div>
-            </section>
+            <Breadcrumb items={[{ label: "Students' Speak" }]} />
         </>
 
     );
 };
 
 export default BannerSec;
+

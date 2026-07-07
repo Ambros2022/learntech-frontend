@@ -1,29 +1,24 @@
-﻿'use client'
+'use client'
 import React from 'react';
 
-const VideoSec = ({ cards, totalPages, getScholarshipData, setCurrentPage, currentPage }) => {
+const VideoSec = ({ cards, totalPages, setCurrentPage, currentPage }) => {
 
   // Filter cards to only include those with type "Testimonial_page"
   const filteredCards = cards.filter(card => card.type === 'Testimonial_page');
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    getScholarshipData(pageNumber);
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      const newPage = currentPage - 1;
-      setCurrentPage(newPage);
-      getScholarshipData(newPage);
+      setCurrentPage(currentPage - 1);
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      const newPage = currentPage + 1;
-      setCurrentPage(newPage);
-      getScholarshipData(newPage);
+      setCurrentPage(currentPage + 1);
     }
   };
 

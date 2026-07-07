@@ -436,6 +436,22 @@ export const getAboutVideoTestimonials = cache(async () => {
   return data.filter((item: any) => item?.type === 'About_us_page')
 })
 
+export const getVideoTestimonials = cache(async (params?: Record<string, string | number>) => {
+  const sp = new URLSearchParams({
+    page: '1', size: '6', searchfrom: 'name', searchtext: '',
+    ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
+  })
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/allvideotestimonials/get?${sp}`,
+    { tags: ['video-testimonials'] },
+  )
+  return {
+    data: json?.data ?? [],
+    totalPages: json?.totalPages ?? 1,
+  }
+})
+
+
 // ─────────────────────────────────────────────────────────────────────────────
 // ABROAD PAGES (study-in-xxx)
 // ─────────────────────────────────────────────────────────────────────────────
