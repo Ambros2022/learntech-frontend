@@ -12,7 +12,7 @@ const BannerSec = () => {
                             <div className="align-content-center">
                                 <h1 className='text-center fw-bold text-white mb-3'>Know All About NRI Quota Seats in India</h1>
                                 <div className='text-center'>
-                                    <LazyNriQuotaBannerEnquiry />
+                                    <LazyNriQuotaBannerEnquiry className='btn btn-success' />
                                 </div>
                             </div>
                         </div>

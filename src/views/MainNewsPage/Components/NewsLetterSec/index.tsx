@@ -3,8 +3,8 @@ import { LazyNewsLetterEnquiry } from 'src/app/components/ClientWrappers'
 const NewsLetterSec = () => {
     return (
         <>
-            <section className='py-md-5 py-5'>
-                <div className="container bg-skyBlue rounded">
+            <section className='py-md-5 py-5 bg-skyBlue'>
+                <div className="container  rounded">
                     <h2 className='fw-bold text-blue text-md-start text-center mb-3'>Subscribe to our Newsletter
                     </h2>
                     <p className="text-black  text-md-start text-center mb-5">

@@ -1,15 +1,11 @@
-mbbs-abroad
-meds
+mbbs-abroad- read more button fix,crousel
 contact-us
 education-loan
 exam-details
 exams
 news-details
-news
-nri-quota
-our-team
-scholarships
-sitemap
+our-team- bearcum -form
+scholarships- search bar,remove heavy lib,mui
 students-speak
 thank-you
 write-review
