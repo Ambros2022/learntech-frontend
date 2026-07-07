@@ -4,8 +4,8 @@ education-loan
 exam-details
 exams
 news-details
-our-team- bearcum -form
-scholarships- search bar,remove heavy lib,mui
+our-team- bearcum -form reusable
+scholarships- search bar,remove heavy lib,mui,autocomplete
 students-speak
 thank-you
 write-review

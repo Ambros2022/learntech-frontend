@@ -81,7 +81,7 @@ const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_descripti
             <div className="container">
                 <div className="row">
                     <div className="col-md-7 col-lg-8 col-xl-8 minehightinnercourse">
-                        <ReadMoreContent html={data.top_description || ''} />
+                        <ReadMoreContent html={data.top_description || ''} collapsedHeight={700} />
                     </div>
                     <div className="col-md-5 col-lg-4 col-xl-4 pt-3 pt-md-0">
                         <form onSubmit={handleSubmit(onSubmit)} className='bg-skyBlue mbbsAbroad rounded p-3'>

@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import EmblaCarousel from 'src/components/ui/Embla/EmblaCarousel' 
+import EmblaCarousel from 'src/components/ui/Embla/EmblaCarousel'
 
 const MapEmbed = ({ src, isActive }: { src: string; isActive: boolean }) => {
     const [hasLoaded, setHasLoaded] = useState(false)
@@ -14,11 +14,11 @@ const MapEmbed = ({ src, isActive }: { src: string; isActive: boolean }) => {
 
     if (!hasLoaded) {
         return (
-            <div 
-                className='rounded' 
-                style={{ 
-                    minHeight: '220px', 
-                    height: '100%', 
+            <div
+                className='rounded'
+                style={{
+                    minHeight: '220px',
+                    height: '100%',
                     backgroundColor: '#e3ebf6'
                 }}
             />
@@ -363,7 +363,7 @@ const TopCountrySec = () => {
                         </div>
                         <h3 className='text-blue mt-3 fw-bold'>Lviv National Medical University :</h3>
                         <p className='text-black'>
-                        Lviv National Medical University was founded in 1784. It is ranked among the top 3 universities in the country and has around 22 scientific schools actively functioning. Its library is well known as it has more than 5,30,000 books along with online resources.
+                            Lviv National Medical University was founded in 1784. It is ranked among the top 3 universities in the country and has around 22 scientific schools actively functioning. Its library is well known as it has more than 5,30,000 books along with online resources.
                         </p>
                         <table
                             className='table table-bordered text-center table-responsive overflow-scroll'
@@ -394,7 +394,7 @@ const TopCountrySec = () => {
                         </table>
                         <h3 className='text-blue mt-3 fw-bold'>Vinnitsa National Medical University :</h3>
                         <p className='text-black'>
-                        Vinnitsa National Medical University was established in 1921. It was awarded the Order of the Badge of Honour in 1984. It acquired the status of University in 1994, after which it equipped itself with modern teaching facilities. The university has been in the leading position since the past few years, according to the Ministry of Health of Ukraine.
+                            Vinnitsa National Medical University was established in 1921. It was awarded the Order of the Badge of Honour in 1984. It acquired the status of University in 1994, after which it equipped itself with modern teaching facilities. The university has been in the leading position since the past few years, according to the Ministry of Health of Ukraine.
                         </p>
                         <table
                             className='table table-bordered text-center table-responsive overflow-scroll'
