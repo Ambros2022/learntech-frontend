@@ -72,16 +72,16 @@ const StudyAbroadSection = () => {
 
   const renderButtons = () => {
     return countries.map((country) => (
-      <a
+      <button
         key={country.id}
         className={`${getLinkClass(country.id)} d-flex mx-md-2 align-self-center btn btn-primary mb-3 text-truncate text-center justify-content-center`}
         id={country.id.toString()}
         type="button"
-        aria-selected={activeCountry === country.id}
+        aria-pressed={activeCountry === country.id}
         onClick={() => handleNavItemClick(country.id)}
       >
         {country.name}
-      </a>
+      </button>
     ));
   };
 

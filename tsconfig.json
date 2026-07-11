@@ -15,10 +15,10 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     // "paths": {
     //   "apexcharts": [
@@ -28,12 +28,13 @@
     //     "./node_modules/apexcharts-clevision/*"
     //   ],
     // },
-    "noImplicitAny": false, // Suppress noImplicitAny errors
+    "noImplicitAny": false // Suppress noImplicitAny errors
   },
   "include": [
     "src",
-    "declaration.d.ts"
-, "src/middleware.ts"  ],
+    "declaration.d.ts",
+    "src/middleware.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

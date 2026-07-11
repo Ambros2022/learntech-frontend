@@ -154,6 +154,7 @@ const EnquiryForm: FC<Props> = ({ placeholder = 'Stream', collegeName }) => {
                                 as="select"
                                 name="course"
                                 className="form-control custom-select-bold-arrow"
+                                aria-label={`Select ${placeholder || 'Stream'}`}
                             >
                                 <option value="">Select {placeholder}</option>
                                 {streams.map((item) => (

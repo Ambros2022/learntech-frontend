@@ -108,6 +108,7 @@ const EnquiryForm: FC<Props> = ({ }) => {
                         </div>
                         <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
                             <Field as="select" name="course" className="form-control custom-select-bold-arrow"
+                                aria-label="Select Grade"
                             >
                                 <option value="">Select Grade</option>
                                 {grades.map((item) => (

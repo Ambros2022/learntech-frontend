@@ -614,7 +614,8 @@
 
 
 
-  .studyAbroadNav a {
+  .studyAbroadNav a,
+  .studyAbroadNav button {
     border-radius: 10px !important;
     width: 130px;
     color: #254692 !important;
@@ -627,7 +628,8 @@
     font-size: 15px !important;
   }
 
-  .studyAbroadNav a:hover {
+  .studyAbroadNav a:hover,
+  .studyAbroadNav button:hover {
     font-weight: bold !important;
     color: white !important;
     background-color: #254692 !important;
@@ -1463,7 +1465,8 @@
       border: 1px solid #254692 !important;
     }
 
-    .studyAbroadNav a {
+    .studyAbroadNav a,
+    .studyAbroadNav button {
       width: 220px !important;
     }
 
@@ -1636,7 +1639,8 @@
       width: 120px !important;
     }
 
-    .studyAbroadNav a {
+    .studyAbroadNav a,
+    .studyAbroadNav button {
       font-size: 17px !important;
     }
 
@@ -1691,7 +1695,8 @@
   }
 
   @media (min-width: 320px) and (max-width: 424px) {
-    .studyAbroadNav a {
+    .studyAbroadNav a,
+    .studyAbroadNav button {
       font-size: 15px !important;
       margin: 0px 3px !important;
 
@@ -6651,3 +6656,12 @@
       font-size: 11px !important;
     }
   }
+
+/* Fix accessibility for hidden slides in react-multi-carousel */
+.react-multi-carousel-item[aria-hidden="true"] a,
+.react-multi-carousel-item[aria-hidden="true"] button,
+.react-multi-carousel-item[aria-hidden="true"] input,
+.react-multi-carousel-item[aria-hidden="true"] select,
+.react-multi-carousel-item[aria-hidden="true"] textarea {
+  visibility: hidden !important;
+}

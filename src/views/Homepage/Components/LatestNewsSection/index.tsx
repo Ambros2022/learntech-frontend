@@ -131,12 +131,16 @@ function LatestNewsSection() {
                     <button
                         className={`btn px-4 newsBtn ${activeTab === 'news' ? 'active' : ''}`}
                         onClick={(e) => handleTabClick('news', e)}
+                        role="tab"
+                        aria-selected={activeTab === 'news'}
                     >
                         News
                     </button>
                     <button
                         className={`btn px-4 blgBtn ${activeTab === 'blog' ? 'active' : ''}`}
                         onClick={(e) => handleTabClick('blog', e)}
+                        role="tab"
+                        aria-selected={activeTab === 'blog'}
                     >
                         Blogs
                     </button>

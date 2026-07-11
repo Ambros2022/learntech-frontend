@@ -3,18 +3,18 @@
 > LearnTechWW is an educational platform offering information about colleges, universities, courses, exams, scholarships, schools, and career guidance programs.
 
 ## Main Website
-https://learntechww.com/
+- [LearnTechWW Homepage](https://learntechww.com/)
 
 ## Important Sections
-- https://learntechww.com/colleges
-- https://learntechww.com/universities
-- https://learntechww.com/courses
-- https://learntechww.com/exams
-- https://learntechww.com/blogs
-- https://learntechww.com/news
-- https://learntechww.com/schools
-- https://learntechww.com/scholarships
-- https://learntechww.com/boards
+- [Colleges](https://learntechww.com/colleges)
+- [Universities](https://learntechww.com/universities)
+- [Courses](https://learntechww.com/courses)
+- [Exams](https://learntechww.com/exams)
+- [Blogs](https://learntechww.com/blogs)
+- [News](https://learntechww.com/news)
+- [Schools](https://learntechww.com/schools)
+- [Scholarships](https://learntechww.com/scholarships)
+- [Boards](https://learntechww.com/boards)
 
 ## Purpose
 LearnTechWW helps students discover:
@@ -70,21 +70,21 @@ This website allows access to:
 - Googlebot
 
 ## Sitemap
-https://learntechww.com/sitemap.xml
-Sitemap: https://learntechww.com/sitemap/universities.xml
-Sitemap: https://learntechww.com/sitemap/colleges.xml
-Sitemap: https://learntechww.com/sitemap/collegecourses.xml
-Sitemap: https://learntechww.com/sitemap/schools.xml
-Sitemap: https://learntechww.com/sitemap/courses.xml
-Sitemap: https://learntechww.com/sitemap/generalcourse.xml
-Sitemap: https://learntechww.com/sitemap/exams.xml
-Sitemap: https://learntechww.com/sitemap/blogs.xml
-Sitemap: https://learntechww.com/sitemap/boards.xml
-Sitemap: https://learntechww.com/sitemap/scholarships.xml
-Sitemap: https://learntechww.com/sitemap/news.xml
+- [Main Sitemap](https://learntechww.com/sitemap.xml)
+- [Universities Sitemap](https://learntechww.com/sitemap/universities.xml)
+- [Colleges Sitemap](https://learntechww.com/sitemap/colleges.xml)
+- [College Courses Sitemap](https://learntechww.com/sitemap/collegecourses.xml)
+- [Schools Sitemap](https://learntechww.com/sitemap/schools.xml)
+- [Courses Sitemap](https://learntechww.com/sitemap/courses.xml)
+- [General Course Sitemap](https://learntechww.com/sitemap/generalcourse.xml)
+- [Exams Sitemap](https://learntechww.com/sitemap/exams.xml)
+- [Blogs Sitemap](https://learntechww.com/sitemap/blogs.xml)
+- [Boards Sitemap](https://learntechww.com/sitemap/boards.xml)
+- [Scholarships Sitemap](https://learntechww.com/sitemap/scholarships.xml)
+- [News Sitemap](https://learntechww.com/sitemap/news.xml)
 
 ## Contact
-https://learntechww.com/contact-us
+- [Contact Us](https://learntechww.com/contact-us)
 
 ## Robots File
-https://learntechww.com/robots.txt
+- [Robots.txt](https://learntechww.com/robots.txt)
