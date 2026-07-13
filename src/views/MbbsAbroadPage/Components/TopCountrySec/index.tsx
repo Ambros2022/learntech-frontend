@@ -538,17 +538,17 @@ const TopCountrySec = () => {
                             showDots={false}
                             showArrows={false}
                             loop={true}
-                            autoplay={true}
+                            autoplay={false}
                             autoplayDelay={2000}
                             slidesToShowDesktop={7}
                             slidesToShowTablet={4}
                             slidesToShowMobile={2}
                         >
-                            {countries.map((country, idx) => (
-                                <div key={idx} className="examSecItems d-flex justify-content-center text-center mx-2 mb-3">
+                            {[...countries, ...countries, ...countries].map((country, idx) => (
+                                <div key={idx} className="examSecItems d-flex justify-content-center text-center mx-0 mb-3">
                                     <button
                                         className={`nav-link ${country.name === activeTab ? 'active' : ''}`}
-                                        id={`pills-${country.name}-tab`}
+                                        id={`pills-${country.name}-tab-${idx}`}
                                         data-bs-toggle='pill'
                                         data-bs-target={`#pills-${country.name}`}
                                         type='button'

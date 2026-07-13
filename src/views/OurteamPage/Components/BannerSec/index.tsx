@@ -1,5 +1,4 @@
-import Link from 'next/link'
-
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
 
 const BannerSec = ({ banners = [] }: { banners?: any[] }) => {
   return (
@@ -16,14 +15,7 @@ const BannerSec = ({ banners = [] }: { banners?: any[] }) => {
           />
         ))}
       </section>
-      <section className='linkFontSize bg-white py-2'>
-        <div className="container">
-          <Link href='/' className='text-black'>
-            Home <i className='bi bi-chevron-right'></i>
-          </Link>
-          <span className='text-blue'> Our Team</span>
-        </div>
-      </section>
+      <Breadcrumb items={[{ label: 'Our Team' }]} />
     </>
   )
 }

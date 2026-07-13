@@ -2546,6 +2546,8 @@
     background-color: #f6f8fb !important;
     border: 1px solid #274896 !important;
     color: #274896 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
   .topCountryLinks .nav-link img {
@@ -2624,13 +2626,19 @@
   }
 
   .topCountryLinks .nav-link:hover {
-    background-color: #274896 !important;
-    color: white !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    background-color: #254692 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
   .topCountryLinks .nav-link.active {
-    background-color: #274896 !important;
-    color: white !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    background-color: #254692 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
 
@@ -3378,7 +3386,7 @@
     border: 1px solid rgba(212, 218, 234, 1) !important;
     padding: 10px 12px !important;
     border-radius: 5px !important;
-    width: 200px !important;
+    width: 160px !important;
   }
 
 
@@ -6249,8 +6257,3 @@
     .FeaturedClgCon button[aria-label="Next"]::before {
       content: ">";
       color: #555555 !important;
-      font-size: 26px !important;
-      font-weight: 400 !important;
-      font-family: Arial, sans-serif !important;
-    }
-  }

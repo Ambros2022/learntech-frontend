@@ -163,6 +163,11 @@ export const LazyNewsSearchBar = dynamic(
   { ssr: false, loading: () => <SearchBarSkeleton /> },
 )
 
+export const LazyScholarshipSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/ScholarshipSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
 export const LazyTrendingNewsCarousel = dynamic<any>(
   () => import('../../views/MainNewsPage/Components/TopTrendingNewsSec/TrendingNewsCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
@@ -221,6 +226,11 @@ export const LazyContactUsForm = dynamic(
 export const LazySideContactUsForm = dynamic(
   () => import('src/@core/components/popup/SideContactUsForm'),
   { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyTalkToExpertsSection = dynamic(
+  () => import('src/app/components/TalkToExpertsSection'),
+  { loading: () => <FormSkeleton /> },
 )
 
 export const LazyContactForm404 = dynamic(
@@ -390,5 +400,20 @@ export const LazyExpertEnquiryPopup = dynamic(
   { ssr: false, loading: () => <button className="btn reqBtn">Request a Call Back</button> },
 )
 
+// ─────────────────────────────────────────────────────────────────────────────
+// CONTACT US PAGE SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
 
+export const LazyBranchesMapClient = dynamic(
+  () => import('src/views/ContactUsPage/BranchesSec/BranchesMapClient'),
+  { ssr: false, loading: () => <SectionSkeleton height='420px' /> },
+)
 
+// ─────────────────────────────────────────────────────────────────────────────
+// EDUCATION LOAN PAGE SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyLoanCalculator = dynamic(
+  () => import('src/views/EducationLoanPage/Components/LoanCalculator'),
+  { ssr: false, loading: () => <SectionSkeleton height='400px' /> },
+)

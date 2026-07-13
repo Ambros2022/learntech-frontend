@@ -1,7 +1,6 @@
 import React from 'react'
 import { Breadcrumb } from 'src/app/components/Breadcrumb'
-import { GlobalEnquiryForm } from 'src/app/components/ClientWrappers'
-import ScholarshipSearch from './ScholarshipSearch'
+import { GlobalEnquiryForm, LazyScholarshipSearchBar as ScholarshipSearch } from 'src/app/components/ClientWrappers'
 
 const BannerSec = () => {
   const buttonText = (

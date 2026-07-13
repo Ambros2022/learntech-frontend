@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -59,8 +59,7 @@ export default function EducationLoanPage() {
     }
   }
 
-
-    const courses = [
+  const courses = [
         {
             group: "Popular Courses",
             options: [
@@ -1005,6 +1004,7 @@ export default function EducationLoanPage() {
 
 
     ]
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
@@ -1042,8 +1042,8 @@ export default function EducationLoanPage() {
           <div style={{ position: 'relative' }}>
             <select className="form-control" {...register('city')}>
               <option value="">Select a city</option>
-              {cities2.map((group) => (
-                <optgroup key={group.group} label={group.group}>
+              {cities2.map((group, groupIndex) => (
+                <optgroup key={groupIndex} label={group.group}>
                   {group.options.map((val, index) => (
                     <option key={index} value={val.name}>{val.name}</option>
                   ))}
@@ -1119,12 +1119,14 @@ export default function EducationLoanPage() {
           <textarea className="form-control" placeholder="Notes" {...register('notes')} />
           {errors.notes && <div className="text-danger">{errors.notes.message}</div>}
         </div>
-        <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input border-black" id="terms-loan" {...register('terms')} />
-          <label className="form-check-label" htmlFor="terms-loan">
-            By Clicking this, I agree to the{' '}
-            <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
-          </label>
+        <div className="col-12 mb-3">
+          <div className="form-check">
+            <input type="checkbox" className="form-check-input border-black" id="terms-loan" {...register('terms')} />
+            <label className="form-check-label" htmlFor="terms-loan">
+              By Clicking this, I agree to the{' '}
+              <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+            </label>
+          </div>
           {errors.terms && <div className="error text-danger">{errors.terms.message}</div>}
         </div>
         <div className="text-center">

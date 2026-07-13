@@ -2,17 +2,7 @@
 
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
-import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
-import ClearIcon from '@mui/icons-material/Clear'
-import Autocomplete from 'src/@core/components/mui/autocomplete'
-import { LazyEmblaTabCarousel, LazyGlobalEnquiryForm as GlobalEnquiryForm } from 'src/app/components/ClientWrappers'
-
-interface SearchResult {
-  id: number
-  name: string
-  slug: string
-}
+import { LazyEmblaTabCarousel, LazyGlobalEnquiryForm, LazyScholarshipSearchBar } from 'src/app/components/ClientWrappers'
 
 interface FilterSecProps {
   abroadData: any[]
@@ -47,12 +37,6 @@ const FilterSec = ({
     nationality: '',
     deadline: '',
   })
-
-  const [open, setOpen] = useState(false)
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
-  const [loading, setLoading] = useState(false)
-  
-  const abortSearchRef = useRef<AbortController | null>(null)
   const abortScholarshipRef = useRef<AbortController | null>(null)
 
   const handleClearAll = () => {
@@ -138,58 +122,7 @@ const FilterSec = ({
     </ul>
   )
 
-  const handleSearch = async (value: string) => {
-    if (value.length < 2) {
-      setSearchResults([])
-      setOpen(false)
-      return
-    }
 
-    try {
-      setLoading(true)
-      abortSearchRef.current?.abort()
-      abortSearchRef.current = new AbortController()
-
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URI || ''}/api/website/scholarships/get?searchfrom=name&searchtext=${encodeURIComponent(value)}`,
-        { signal: abortSearchRef.current.signal }
-      )
-      if (!res.ok) return
-      const json = await res.json()
-
-      const suggestions = (json?.data ?? []).map((item: { id: number; name: string; slug: string }) => ({
-        name: item.name,
-        slug: item.slug,
-        id: item.id,
-      }))
-
-      setSearchResults(suggestions)
-      setOpen(true)
-    } catch (error: any) {
-      if (error.name !== 'AbortError') {
-        console.error('Error fetching data:', error)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleInputChange = (event: any, value: string) => {
-    handleSearch(value)
-  }
-
-  const handleClearInput = (params: any) => {
-    setSearchResults([])
-    setOpen(false)
-    if (params.inputProps.onChange) {
-      const event = {
-        target: {
-          value: '',
-        },
-      } as React.ChangeEvent<HTMLInputElement>
-      params.inputProps.onChange(event)
-    }
-  }
 
   const handleTabClick = (tab: any) => {
     setActiveTab(tab.id)
@@ -232,7 +165,7 @@ const FilterSec = ({
                 Read More {'>>'}
               </Link>
               <div className="d-flex gap-3 flex-fill scholarshipBtn flex-md-row flex-column">
-                <GlobalEnquiryForm buttonText="Apply Now" className="btn applyNowButton" />
+                <LazyGlobalEnquiryForm buttonText="Apply Now" className="btn applyNowButton" />
                 <Link href={`/scholarship/${scholarship.id}/${scholarship.slug}`}>
                   <button className="btn viewDetailBtn">Get Alert</button>
                 </Link>
@@ -478,51 +411,7 @@ const FilterSec = ({
             <h5 className="fw-bold text-black mb-3">{totalScholarships} Scholarships Found</h5>
           </div>
           <div className="col-md-5 col-lg-4 order-1 order-md-2 mb-md-0 mb-5">
-            <Autocomplete
-              open={open}
-              onClose={() => setOpen(false)}
-              onInputChange={handleInputChange}
-              options={searchResults}
-              getOptionLabel={(option: SearchResult) => option.name}
-              renderOption={(props, option: SearchResult) => (
-                <li {...props} key={option.id}>
-                  <Link
-                    href={`/scholarship/${option.id}/${option.slug}`}
-                    style={{ color: '#000', textDecoration: 'none', display: 'block', width: '100%', height: '100%' }}
-                  >
-                    {option.name}
-                  </Link>
-                </li>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  placeholder="Search for Scholarship"
-                  className="form-control"
-                  InputProps={{
-                    ...params.InputProps,
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                    endAdornment: (
-                      <>
-                        {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                        {params.inputProps.value ? (
-                          <InputAdornment position="end">
-                            <IconButton onClick={() => handleClearInput(params)}>
-                              <ClearIcon />
-                            </IconButton>
-                          </InputAdornment>
-                        ) : null}
-                        {params.InputProps.endAdornment}
-                      </>
-                    ),
-                  }}
-                />
-              )}
-            />
+            <LazyScholarshipSearchBar />
           </div>
         </div>
 
@@ -571,8 +460,8 @@ const FilterSec = ({
                 height={300}
               />
               <div className="d-flex justify-content-center gap-3 flex-wrap">
-                <GlobalEnquiryForm buttonText="Talk To Experts" className="btn applyNowButton" />
-                <GlobalEnquiryForm buttonText="Get More Info" className="btn viewDetailBtn" />
+                <LazyGlobalEnquiryForm buttonText="Talk To Experts" className="btn applyNowButton" />
+                <LazyGlobalEnquiryForm buttonText="Get More Info" className="btn viewDetailBtn" />
               </div>
             </div>
             <h2 className="text-blue fw-bold text-center mb-3">Most Popular Links</h2>

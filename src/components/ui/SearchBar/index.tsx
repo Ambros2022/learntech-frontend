@@ -1,6 +1,7 @@
 'use client'
 import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { Search, X, ChevronDown } from 'lucide-react'
 
 export interface SearchItem {
   id: string | number
@@ -88,7 +89,7 @@ export default function SearchBar({ placeholder = 'Search...', onSearch, classNa
               aria-label="Loading"
             />
           ) : (
-            <i className="bi bi-search text-secondary" />
+            <Search size={18} className="text-secondary" />
           )}
         </span>
 
@@ -131,10 +132,10 @@ export default function SearchBar({ placeholder = 'Search...', onSearch, classNa
                 alignItems: 'center',
               }}
             >
-              <i className="bi bi-x-lg text-secondary" />
+              <X size={18} className="text-secondary" />
             </button>
           ) : (
-            <i className="bi bi-chevron-down text-secondary" style={{ fontSize: '0.75rem' }} />
+            <ChevronDown size={14} className="text-secondary" />
           )}
         </span>
       </div>

@@ -88,7 +88,18 @@ export default function ContactPageUsForm() {
       </div>
       <div className="mb-3 form-check">
         <input type="checkbox" className="form-check-input border-black" id="terms-contact-page" {...register('terms')} />
-        <label className="form-check-label" htmlFor="terms-contact-page">
+        <label
+          className="form-check-label"
+          htmlFor="terms-contact-page"
+          style={{
+            fontFamily: "'Poppins', sans-serif",
+            fontWeight: 400,
+            color: 'rgba(47, 43, 61, 0.78)',
+            fontSize: '15px',
+            lineHeight: '22px',
+            fontStyle: 'normal'
+          }}
+        >
           By clicking submit, I agree to the terms &amp; conditions and privacy policy and give my
           consent to receive updates through SMS/Email.
         </label>

@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { LazyTrendingNewsCarousel } from 'src/app/components/ClientWrappers'
 
 const clipRect = { position: 'absolute' as const, width: 1, height: 1, overflow: 'hidden' as const, clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' as const }
