@@ -327,8 +327,8 @@ export const LazyAvatarDropdown = dynamic(
   { loading: () => <AvatarSkeleton /> },
 )
 
-export const LazyWriteReviewPage = dynamic(
-  () => import('src/views/WriteReviewPage'),
+export const LazyWriteReviewForm = dynamic(
+  () => import('src/views/WriteReviewPage/Components/DetailsFillSec'),
   { ssr: false, loading: () => <FormSkeleton /> },
 )
 

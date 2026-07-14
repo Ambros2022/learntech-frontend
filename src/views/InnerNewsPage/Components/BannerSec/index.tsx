@@ -1,26 +1,32 @@
-﻿'use client'
-import Link from 'next/link'
-import React from 'react'
+import Image from 'next/image'
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
 
-const BannerSec = ({ data }) => {
-    return (
-        <>
-            <section className='newsBannerSec'>
-                <div className='position-relative'>
-                    <div>
-                        <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${data.banner_image}`} width={1400} height={400} alt='banner-img' className='position-relative ' />
-                    </div>
-                    
-                </div>
-            </section>
-            <section className='bg-white'>
-                <div className='container py-2 linkFontSize'>
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link><Link href="/news" className='text-black'> News <i className='bi bi-chevron-right'></i></Link>   <span className='text-blue'>{data.name}</span>
-                </div>
-            </section>
-        </>
+const IMG_URL = process.env.NEXT_PUBLIC_IMG_URL || ''
 
-    )
+const BannerSec = ({ data }: { data: any }) => {
+  return (
+    <>
+      <section className="newsBannerSec">
+        <div className="position-relative">
+          <Image
+            src={`${IMG_URL}/${data.banner_image}`}
+            width={1400}
+            height={400}
+            alt={data?.name || 'news-banner'}
+            className="position-relative w-100"
+            priority
+          />
+        </div>
+      </section>
+
+      <Breadcrumb
+        items={[
+          { label: 'News', href: '/news' },
+          { label: data?.name },
+        ]}
+      />
+    </>
+  )
 }
 
 export default BannerSec
