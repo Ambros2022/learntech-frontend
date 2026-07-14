@@ -1,70 +1,81 @@
-﻿'use client'
-import React from 'react';
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+'use client'
+import React, { useCallback } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const CategoryCarousel = ({ items, handleTabClick, activeTab }) => {
-    const responsive = {
-        superLargeDesktop: {
-            breakpoint: { max: 4000, min: 1023 },
-            items: 6
-        },
-        desktop: {
-            breakpoint: { max: 1024, min: 1024 },
-            items: 5
-        },
-        tablet: {
-            breakpoint: { max: 1023, min: 768 },
-            items: 4
-        },
-        mobile: {
-            breakpoint: { max: 767, min: 0 },
-            items: 2
-        }
-    };
+const arrowStyle = {
+    stroke: '#254692',
+    border: '1px solid rgba(39, 72, 150, .2)',
+    padding: '5px',
+    borderRadius: '5px',
+    boxSizing: 'content-box' as const,
+    display: 'inline-block'
+};
 
-    const ButtonGroup = ({ next, previous }) => {
-        return (
-            <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2" style={{ zIndex: '1 !important' }} >
-                <span className='fi-left' onClick={previous}>
-                    <ChevronLeft />
-                </span>
-                <span className='fi-right' onClick={next}>
-                    <ChevronRight />
-                </span>
-            </div>
-        );
-    };
+interface Item {
+    id: string | number;
+    title: string;
+}
+
+interface Props {
+    items: Item[];
+    handleTabClick: (id: string | number) => void;
+    activeTab: string | number;
+}
+
+const CategoryCarousel = ({ items, handleTabClick, activeTab }: Props) => {
+    const [emblaRef, emblaApi] = useEmblaCarousel({
+        align: 'start',
+        dragFree: true,
+        loop: false,
+    });
+
+
+    const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+    const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
     return (
-        <Carousel
-            swipeable
-            draggable
-            showDots={false}
-            arrows={false}
-            infinite
-            ssr  // SSR true for server-side rendering
-            responsive={responsive}
-            renderButtonGroupOutside
-            customButtonGroup={<ButtonGroup next={undefined} previous={undefined} />}
-            containerClass='carousel-containerCategory mx-auto'
-        >
-            {items.map((item) => (
-                <div className="examSecItems d-flex justify-content-center text-center mx-2 mb-3">
-                    <button
-                        className={`text-truncate categoryTextHide btn nav-link ${activeTab === item.id ? 'active' : ''}`}
-                        id={`pills-${item}-tab`}
-                        type="button"
-                        onClick={() => handleTabClick(item.id)}
-                        key={item.id}
-                        style={{ zIndex: '20', fontSize: '14px' }}
-                    >
-                        {item.title}
-                    </button>
+        <div className="category-carousel-container d-flex align-items-center gap-3">
+            {/* LEFT ARROW */}
+            <span className='fi-left' onClick={scrollPrev} style={{ cursor: 'pointer', flexShrink: 0 }}>
+                <ChevronLeft style={arrowStyle} />
+            </span>
+
+            {/* EMBLA VIEWPORT */}
+            <div style={{ overflow: 'hidden', flex: 1, padding: '4px 0' }} ref={emblaRef}>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    {items.map((item) => (
+                        <div
+                            key={item.id}
+                            className="exam-tab-slide examSecItems d-flex justify-content-center text-center"
+                            style={{ flex: '0 0 auto' }}
+                        >
+                            <button
+                                className={`text-truncate categoryTextHide btn nav-link ${activeTab === item.id ? 'active' : ''}`}
+                                id={`pills-${item.id}-tab`}
+                                type="button"
+                                onClick={() => handleTabClick(item.id)}
+                                style={{
+                                    color: '#7d91c0',
+                                    border: '1px solid #d4daea',
+                                    padding: '10px 12px',
+                                    borderRadius: '5px',
+                                    fontSize: '14px',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                {item.title}
+                            </button>
+                        </div>
+                    ))}
                 </div>
-            ))}
-        </Carousel>
+            </div>
+
+            {/* RIGHT ARROW */}
+            <span className='fi-right' onClick={scrollNext} style={{ cursor: 'pointer', flexShrink: 0 }}>
+                <ChevronRight style={arrowStyle} />
+            </span>
+        </div>
     );
 };
 

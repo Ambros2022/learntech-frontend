@@ -168,6 +168,11 @@ export const LazyScholarshipSearchBar = dynamic(
   { ssr: false, loading: () => <SearchBarSkeleton /> },
 )
 
+export const LazyExamSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/ExamSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
 export const LazyTrendingNewsCarousel = dynamic<any>(
   () => import('../../views/MainNewsPage/Components/TopTrendingNewsSec/TrendingNewsCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
@@ -416,4 +421,23 @@ export const LazyBranchesMapClient = dynamic(
 export const LazyLoanCalculator = dynamic(
   () => import('src/views/EducationLoanPage/Components/LoanCalculator'),
   { ssr: false, loading: () => <SectionSkeleton height='400px' /> },
+)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INNER EXAM PAGE SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyExamAlertButton = dynamic(
+  () => import('src/views/InnerExamPage/Components/BannerSec/ExamAlertButton'),
+  { ssr: false, loading: () => <button className="btn alertExamBtn">Get Alert</button> },
+)
+
+export const LazyNewsLinkCarouselClient = dynamic(
+  () => import('src/views/InnerExamPage/Components/NewsLinkSection/NewsLinkCarouselClient'),
+  { ssr: false, loading: () => <div style={{ height: 88 }} /> },
+)
+
+export const LazyUpcomingExams = dynamic(
+  () => import('src/views/MainExamPage/Components/UpcomingExamsSec'),
+  { ssr: false, loading: () => <p>Loading…</p> },
 )

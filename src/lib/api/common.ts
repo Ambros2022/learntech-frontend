@@ -160,6 +160,22 @@ export const getExams = cache(async (params?: Record<string, string | number>) =
   return json?.data ?? []
 })
 
+export const getExamPageBanner = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_Exam_page`,
+    { tags: ['exam-page-banner'] },
+  )
+  return json?.data ?? []
+})
+
+export const getExamNewsLinks = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/news/get?category_id=4&page=1&size=1000&orderby=Desc&columnname=created_at`,
+    { tags: ['exam-news-links'] },
+  )
+  return json?.data ?? []
+})
+
 // ─────────────────────────────────────────────────────────────────────────────
 // NEWS
 // ─────────────────────────────────────────────────────────────────────────────

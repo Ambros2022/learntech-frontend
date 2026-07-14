@@ -831,7 +831,7 @@
   }
 
   .newsLinkSec2 .fi-right {
-    margin-right: 100px !important;
+    margin-right: -50px !important;
   }
 
   .StudyAbroadCon .carousel-button-group {
@@ -3103,7 +3103,7 @@
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 50px !important;
+      margin-right: -40px !important;
     }
 
     .errCon h1 {
@@ -3156,7 +3156,7 @@
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 35px !important;
+      margin-right: -40px !important;
     }
 
     .errCon h1 {
@@ -3220,7 +3220,7 @@
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 15px !important;
+      margin-right: -10px !important;
     }
 
     .disclaimerCon h1 {
@@ -3389,6 +3389,40 @@
     width: 160px !important;
   }
 
+  /* Override width only for MainExamPage category carousel — MbbsAbroadPage keeps 160px */
+  .categorySecCarousel .examSecItems .nav-link {
+    width: auto !important;
+  }
+
+  @media (min-width: 768px) {
+    /* Desktop only: disable truncation to show full tab text */
+    .categorySecCarousel .examSecItems .nav-link {
+      overflow: visible !important;
+      text-overflow: unset !important;
+      white-space: nowrap !important;
+    }
+  }
+
+@media (max-width: 767px) {
+  .categorySecCarousel .category-carousel-container {
+    gap: 15px !important;
+  }
+
+  .categorySecCarousel .category-carousel-container .fi-left,
+  .categorySecCarousel .category-carousel-container .fi-right {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Mobile: show exactly 2 tabs at a time filling the embla viewport */
+  .categorySecCarousel .exam-tab-slide {
+    flex: 0 0 calc(50% - 5px) !important;
+  }
+
+  .categorySecCarousel .exam-tab-slide .nav-link {
+    width: 100% !important;
+  }
+}
 
   .news-item .card-text {
     display: -webkit-box !important;
@@ -3670,7 +3704,6 @@
 
     .categoryTextHide {
       text-overflow: ellipsis !important;
-      width: 60% !important;
     }
 
     .categorySecCarousel .fi-left {
