@@ -32,7 +32,7 @@ export default function BamsHeroFormClient() {
 
     const formData = new FormData(form)
     formData.append('current_url', window.location.href)
-    formData.append('SourceCampaign', 'BAMS Counselling 2025-26')
+    formData.append('SourceCampaign', 'BAMS Counselling 2026-27')
 
     // Rename 'contact' to 'contact_number' for API
     const contact = formData.get('contact') as string
@@ -66,63 +66,47 @@ export default function BamsHeroFormClient() {
   }
 
   return (
-    <div className={`${styles.formBoxamb} p-md-4 ${styles.slideIn2}`}>
-      <h3 className={`f700 pb-2 ${styles.bamsFont20}`} style={{ color: 'white', textAlign: 'center' }}>
-        Fill Out the Form to Get Assistance in Securing Your BAMS Seat for A.Y. 2025-26
-      </h3>
+    <div className={styles.leadCard}>
+      <h3>Fill Out the Form to Get Assistance in Securing Your BAMS Seat for A.Y. 2026-27</h3>
 
       <form ref={formRef} onSubmit={handleSubmit}>
-        <div className='form-group mb-3'>
+        <div className={styles.field}>
           <input
             type='text'
-            id='hero-name'
             name='name'
-            placeholder='Name'
+            placeholder='Full Name:'
             required
-            className='form-control'
           />
         </div>
 
-        <div className='form-group mb-3'>
+        <div className={styles.field}>
           <input
             type='email'
-            id='hero-email'
             name='email'
-            placeholder='Your Email'
+            placeholder='Email Address:'
             required
-            className='form-control'
           />
         </div>
 
-        <div className='form-group mb-3'>
+        <div className={styles.field}>
           <input
-            type='number'
-            id='hero-contact'
+            type='tel'
             name='contact'
-            placeholder='Contact No.'
+            placeholder='Phone No:'
             required
-            className='form-control'
           />
         </div>
 
-        <div className='form-group mb-3'>
+        <div className={styles.field}>
           <input
             type='number'
-            id='hero-neetrank'
             name='neetrank'
-            placeholder='NEET Score'
-            required
-            className='form-control'
+            placeholder='NEET Score:'
           />
         </div>
 
-        <div className='form-group mb-3'>
-          <select
-            id='hero-location'
-            name='location'
-            required
-            className={`browser-default custom-select form-control ${styles.whiteBgBlackText}`}
-          >
+        <div className={styles.field}>
+          <select name='location' required>
             <option value=''>State</option>
             {STATES.map(state => (
               <option key={state} value={state}>{state}</option>
@@ -130,25 +114,21 @@ export default function BamsHeroFormClient() {
           </select>
         </div>
 
-        <div className='form-group mb-3'>
+        <div className={styles.field}>
           <textarea
-            id='hero-description'
             name='description'
-            placeholder='Message (Optional)'
-            className='form-control'
+            placeholder='Your Message (Optional):'
             rows={3}
           />
         </div>
 
-        <div className='form-group text-center'>
-          <button
-            type='submit'
-            disabled={isSubmitting}
-            className={`btn btn-success btn-bds-add-svyasa-apply ${styles.colorBtnAddApply} p-3 px-5`}
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
-          </button>
-        </div>
+        <button
+          type='submit'
+          disabled={isSubmitting}
+          className={styles.formSubmit}
+        >
+          {isSubmitting ? 'Submitting...' : 'Submit Enquiry'}
+        </button>
       </form>
     </div>
   )
