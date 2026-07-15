@@ -1,4 +1,5 @@
 import NewsCarouselClient from './NewsCarouselClient'
+import styles from './NewsLinkSection.module.css'
 
 interface NewsItem {
   id: number
@@ -10,7 +11,7 @@ export default function NewsLinkSection({ items }: { items: NewsItem[] }) {
   if (!items?.length) return null
 
   return (
-    <section className="newsLinkSec py-2">
+    <section className={`${styles.newsLinkSec} py-2`}>
       <div className="container text-center">
         <NewsCarouselClient items={items} />
       </div>

@@ -1,3 +1,9 @@
+.newsLinkSec {
+  background-color: #274896;
+  color: white;
+  min-height: 58px;
+}
+
 .wrap {
   position: relative;
   padding: 0 36px;
@@ -29,7 +35,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 16px;
+  color: #fff;
+  transition: color 0.2s ease-in-out;
+}
+
+.link:hover h6 {
+  color: rgb(230, 230, 230);
 }
 
 .prevBtn,

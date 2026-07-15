@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
-import styles from './NewsCarousel.module.css'
+import styles from './NewsLinkSection.module.css'
 
 interface NewsItem {
   id: number
@@ -13,7 +13,7 @@ interface NewsItem {
 }
 
 export default function NewsCarouselClient({ items }: { items: NewsItem[] }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [
     Autoplay({ delay: 2500, stopOnInteraction: false }),
   ])
 
@@ -33,7 +33,7 @@ export default function NewsCarouselClient({ items }: { items: NewsItem[] }) {
           {items.map(item => (
             <div key={item.id} className={styles.emblaSlide}>
               <Link href={`/news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                <h6 className="py-2 newsLinkClr text-white text-center">{item.name}</h6>
+                <h6 className="py-2 text-center">{item.name}</h6>
               </Link>
             </div>
           ))}

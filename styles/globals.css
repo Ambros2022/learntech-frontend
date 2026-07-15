@@ -652,16 +652,7 @@
     margin-right: 10px !important;
   }
 
-  .newsLinkSec {
-    background-color: #274896;
-    color: white;
-    min-height: 58px;
-  }
 
-  .newsLinkSec li {
-    display: flex !important;
-    justify-content: center !important;
-  }
 
 
   .StudyAbroadCard .card-text img {
@@ -695,9 +686,7 @@
 
 
 
-  .newsLinkSec .carousel-button-group {
-    margin: -50px 0px 0px 0px !important;
-  }
+
 
   .newsLinkSec2 .carousel-button-group {
     position: absolute !important;
@@ -788,13 +777,7 @@
     cursor: pointer !important;
   }
 
-  .newsLinkSec .fi-left {
-    margin-left: -50px !important;
-  }
 
-  .newsLinkSec .fi-right {
-    margin-right: -50px !important;
-  }
 
   .newsLinkSec2 .fi-left {
     margin-left: -50px !important;
@@ -818,13 +801,7 @@
     width: 100%;
   }
 
-  .newsLinkSec .fi-left {
-    margin-left: -50px !important;
-  }
 
-  .newsLinkSec .fi-right {
-    margin-right: -50px !important;
-  }
 
   .newsLinkSec2 .fi-left {
     margin-left: -50px !important;
@@ -1256,10 +1233,7 @@
       position: relative !important;
     }
 
-    .newsLinkSec .react-multi-carousel-list {
-      width: 240px;
-      margin: auto;
-    }
+
 
     .newsLinkSec2 .react-multi-carousel-list {
       width: 240px;
@@ -3090,13 +3064,7 @@
       height: 100%;
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -40px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -40px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -40px !important;
@@ -3143,13 +3111,7 @@
       cursor: pointer;
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -35px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -35px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -40px !important;
@@ -3207,13 +3169,7 @@
 
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -10px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -10px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -10px !important;
@@ -3485,9 +3441,7 @@
     object-fit: contain !important;
   }
 
-  .newsLinkSec h6.newsLinkClr:hover {
-    color: rgb(230, 230, 230) !important;
-  }
+
 
   .categorySecCarousel .carousel-button-group {
     position: absolute !important;
