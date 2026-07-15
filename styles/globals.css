@@ -617,30 +617,7 @@
     height: auto;
   }
 
-  .featuredClgCard>img {
-    width: 100%;
-    height: 100%;
-  }
 
-  .featuredClgCard .card-text img {
-    filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
-  }
-
-  .featuredClgCard .card-text {
-    filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
-  }
-
-
-  .featuredClgCard .card-text i {
-    color: red !important;
-  }
-
-  .featuredClgCard a {
-    background-color: white;
-    font-size: 12px !important;
-    color: rgb(37, 70, 146);
-    border: 1px solid #254692 !important;
-  }
 
   .applyNowButton {
     background-color: #254692 !important;
@@ -648,9 +625,7 @@
     box-shadow: rgba(21, 41, 88, 0.493) 0px 0px 15px !important;
   }
 
-  .featuredClgCard {
-    margin-right: 10px !important;
-  }
+
 
 
 
@@ -754,17 +729,9 @@
     z-index: 50 !important;
   }
 
-  .FeaturedClgCon .carousel-button-group {
-    position: absolute !important;
-    top: 220px !important;
-    width: 100%;
 
-  }
 
-  .FeaturedClgCon .fi-left {
-    margin-left: -25px !important;
-    cursor: pointer !important;
-  }
+
 
   .text-truncate1 {
     overflow: hidden !important;
@@ -772,10 +739,7 @@
     white-space: nowrap !important;
   }
 
-  .FeaturedClgCon .fi-right {
-    margin-right: -10px !important;
-    cursor: pointer !important;
-  }
+
 
 
 
@@ -914,9 +878,7 @@
       max-height: 128px !important;
     }
 
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
+
 
     .newsLinkSec2 .carousel-button-group {
 
@@ -934,9 +896,7 @@
       font-size: 10px !important;
     }
 
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
+
 
     .bannerCon .carousel-control-prev {
       left: -50px;
@@ -1090,17 +1050,7 @@
       font-size: 12px !important;
     }
 
-    .featuredClgCard .card-title {
-      font-size: 18px !important;
-    }
 
-    .featuredClgCard .card-text {
-      font-size: 12px !important;
-    }
-
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
 
     .bannerCon .carousel-control-prev {
       left: -35px;
@@ -1177,12 +1127,7 @@
       overflow-y: scroll !important;
     } */
 
-    .featuredClgCard a {
-      background-color: white;
-      font-size: 15px !important;
-      color: #254692;
-      border: 1px solid #254692 !important;
-    }
+
 
     .studyAbroadNav a {
       width: 100% !important;
@@ -1294,9 +1239,7 @@
       font-size: 17px !important;
     }
 
-    .featuredClgCard {
-      margin-right: 0px !important;
-    }
+
 
     .StudyAbroadCard {
       margin-right: 0px !important;
@@ -1345,21 +1288,7 @@
   }
 
   @media (max-width: 575px) {
-    .FeaturedClgCon .carousel-button-group {
-      top: 220px !important;
-    }
 
-    .FeaturedClgCon .fi-left {
-      margin-left: 8px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .FeaturedClgCon .fi-right {
-      margin-right: 32px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
 
     .AssociatedClg .fi-left {
       margin-left: 8px !important;
@@ -1425,9 +1354,7 @@
   }
 
   @media (min-width: 320px) and (max-width: 374px) {
-    .FeaturedClgCon .carousel-button-group {
-      top: 220px !important;
-    }
+
 
     .AssociatedClg .carousel-button-group {
       top: 280px !important;
@@ -6206,43 +6133,4 @@
       font-size: 11px !important;
     }
   }
-
-  /* Spacing and style for Featured Colleges carousel arrows and slides on mobile screens */
-  @media (max-width: 768px) {
-    .FeaturedClgCon .container {
-      padding-left: 48px !important;
-      padding-right: 48px !important;
-    }
-
-    .FeaturedClgCon button[aria-label="Previous"],
-    .FeaturedClgCon button[aria-label="Next"] {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      color: transparent !important;
-    }
-
-    .FeaturedClgCon button[aria-label="Previous"] {
-      left: -44px !important;
-    }
-
-    .FeaturedClgCon button[aria-label="Previous"]::before {
-      content: "<";
-      color: #555555 !important;
-      font-size: 26px !important;
-      font-weight: 400 !important;
-      font-family: Arial, sans-serif !important;
-    }
-
-    .FeaturedClgCon button[aria-label="Next"] {
-      right: -44px !important;
-    }
-
-    .FeaturedClgCon button[aria-label="Next"]::before {
-      content: ">";
-      color: #555555 !important;
-    }
-  }
+

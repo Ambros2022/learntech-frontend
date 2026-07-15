@@ -21,6 +21,7 @@ export default function AbroadCarouselClient({ colleges, countrySlug }: Props) {
       showDots={false}
       showArrows
       loop
+      slidePadding={20}
     >
       {colleges.map(college => (
         <CollegeCard key={college.id} college={college} linkPrefix={countrySlug} />

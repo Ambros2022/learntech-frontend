@@ -17,7 +17,7 @@ export default async function TopFeaturedColleges({ streamId, shortName }: Props
   if (!colleges.length) return null
 
   return (
-    <section className="FeaturedClgCon bg-white">
+    <section className=" bg-white">
       <div className="container pt-4 pt-md-5 position-relative">
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">
           Top {shortName} Featured Colleges

@@ -19,6 +19,7 @@ interface EmblaCarouselProps {
   autoplay?: boolean;
   autoplayDelay?: number;
   loop?: boolean;
+  slidePadding?: number;
 }
 
 export default function EmblaCarousel({
@@ -35,6 +36,7 @@ export default function EmblaCarousel({
   autoplay = true,
   autoplayDelay = 3000,
   loop = true,
+  slidePadding,
 }: EmblaCarouselProps) {
   const isTabs = variant === "tabs";
 
@@ -107,7 +109,10 @@ export default function EmblaCarousel({
             <div
               key={idx}
               className={styles.embla__slide}
-              style={{ flex: `0 0 ${100 / slidesToShow}%` }}
+              style={{
+                flex: `0 0 ${100 / slidesToShow}%`,
+                ...(slidePadding !== undefined ? { padding: `0 ${slidePadding}px` } : {}),
+              }}
             >
               {child}
             </div>

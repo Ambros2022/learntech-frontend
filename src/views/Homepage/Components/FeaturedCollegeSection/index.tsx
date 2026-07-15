@@ -8,7 +8,7 @@ export default async function FeaturedCollegeSection({ heading = 'Featured Colle
   if (!colleges.length) return null
 
   return (
-    <section className="FeaturedClgCon bg-white">
+    <section className=" bg-white">
       <div className="container pt-4 pt-md-5 position-relative">
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">{heading}</h2>
         <ul aria-hidden="true" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' }}>

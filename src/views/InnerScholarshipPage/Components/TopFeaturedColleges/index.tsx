@@ -33,7 +33,7 @@ function FeaturedCollegeSection() {
 
 
   return (
-    <section className="FeaturedClgCon bg-white">
+    <section className=" bg-white">
       <div className="container pt-5 position-relative">
         <h2 className="fw-bold text-blue text-center mb-5">Top Featured Colleges</h2>
         <MainCarousel items={colleges.map(college => (

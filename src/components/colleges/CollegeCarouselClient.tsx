@@ -18,6 +18,7 @@ export default function CollegeCarouselClient({ colleges }: { colleges: CollegeI
       showDots={false}
       showArrows
       loop
+      slidePadding={20}
     >
       {colleges.map(college => (
         <CollegeCard key={college.id} college={college} />

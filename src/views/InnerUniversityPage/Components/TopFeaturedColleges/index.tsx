@@ -13,7 +13,7 @@ export default async function FeaturedUniversitySection() {
   if (!universities.length) return null
 
   return (
-    <section className="FeaturedClgCon bg-white">
+    <section className=" bg-white">
       <div className="container pt-4 pt-md-5 position-relative">
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">Top Featured Universities</h2>
         <ul aria-hidden="true" style={clipRect}>

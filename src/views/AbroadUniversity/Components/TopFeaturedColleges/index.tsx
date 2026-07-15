@@ -18,7 +18,7 @@ export default async function TopFeaturedColleges({ countryId, countrySlug, coun
   if (!colleges.length) return null
 
   return (
-    <section className="FeaturedClgCon bg-white mb-4">
+    <section className="bg-white mb-4">
       <div className="container pt-4 pt-md-5 position-relative">
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">
           Top Universities to Study in {countryName}

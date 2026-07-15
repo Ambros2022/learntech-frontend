@@ -16,6 +16,7 @@ export default function SchoolsCarouselClient({ schools }: { schools: SchoolItem
       showDots={false}
       showArrows
       loop
+      slidePadding={20}
     >
       {schools.map((school) => (
         <SchoolCard key={school.id} school={school} />
