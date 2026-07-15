@@ -159,7 +159,7 @@ export default function BamsEnquiryModalClient({ open, onClose }: Props) {
               required
               className={`browser-default custom-select form-control ${styles.whiteBgBlackText} ${styles.bamsFormField} py-3`}
             >
-              <option value=''>State</option>
+              <option value=''>Select State</option>
               {STATES.map(state => (
                 <option key={state} value={state}>{state}</option>
               ))}

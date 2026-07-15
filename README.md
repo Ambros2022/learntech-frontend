@@ -1,5 +1,4 @@
-exam-details -arrow in slider 
-write-review
+Aos (animation remove from landing pages)-
 
 
 

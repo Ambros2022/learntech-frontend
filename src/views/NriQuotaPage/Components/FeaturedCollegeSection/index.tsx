@@ -6,7 +6,7 @@ function FeaturedCollegeSection({ colleges = [] }: { colleges?: any[] }) {
   if (!colleges.length) return null;
 
   return (
-    <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
+    <section className="FeaturedClgCon bg-white" >
       <div className="container pt-0 position-relative">
         <h2 className="fw-bold text-blue text-center mb-5">Top Colleges</h2>
         <LazyCollegeCarousel colleges={colleges} />
