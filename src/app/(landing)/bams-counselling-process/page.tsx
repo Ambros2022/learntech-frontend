@@ -388,7 +388,23 @@ export default function BamsCounsellingProcessPage() {
             <section className={styles.miniCta}>
               <div className={styles.miniCtaContent}>
                 <div className={styles.miniCtaIcon}>
-                  <i className="bi bi-flower1" style={{ color: 'var(--gold-light)' }} />
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ color: 'var(--gold-light)' }}
+                  >
+                    <path
+                      d="M1.5 4.42 C0.14 4.9 1.21 9.08 2.67 10.83 C4.13 12.58 8.79 12.98 10.25 14.92 C11.71 16.86 11.03 22.99 11.42 22.5 C11.81 22.01 12.68 14.43 12.58 12.0 C12.48 9.57 12.68 9.18 10.83 7.92 C8.98 6.66 2.86 3.94 1.5 4.42 Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M20.75 1.5 C20.07 0.53 17.54 1.5 16.08 2.08 C14.62 2.66 12.39 3.44 12.0 5.0 C11.61 6.56 12.88 10.45 13.75 11.42 C14.62 12.39 16.18 11.41 17.25 10.83 C18.32 10.25 19.59 9.48 20.17 7.92 C20.75 6.36 21.43 2.47 20.75 1.5 Z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </div>
                 <div className={styles.miniCtaText}>
                   <h2><span style={{ fontWeight: 400, fontSize: 25 }}>From NEET UG to BAMS,</span><br />We&apos;re With You Every Step.</h2>
