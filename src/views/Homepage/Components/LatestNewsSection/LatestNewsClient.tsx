@@ -121,6 +121,7 @@ export default function LatestNewsClient({ initialNews }: Props) {
             slidesToShowMobile={1}
             autoplay={false}
             loop={false}
+            slidePadding={0}
           >
             {items.map(item => (
               <NewsCard key={item.id} item={item} type={activeTab} />
