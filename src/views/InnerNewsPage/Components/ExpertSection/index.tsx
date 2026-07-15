@@ -2,7 +2,7 @@ import { LazyNewsLetterEnquiry } from 'src/app/components/ClientWrappers'
 
 function ExpertSection() {
   return (
-    <section className="ExpertCon" id="animation15">
+    <section className="ExpertCon bg-light" id="animation15">
       <div className="container py-3 py-md-5">
         <h3 className="fw-bold text-md-start text-center text-blue mb-3">
           Subscribe to our Newsletter

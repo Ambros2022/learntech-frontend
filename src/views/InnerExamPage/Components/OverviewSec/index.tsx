@@ -86,7 +86,7 @@ export default function OverviewSec({ data, promoBanners, upcomingExams }: Props
 
   return (
     <section className='clgInfoSec bg-white'>
-      <div className="container">
+      <div className="container pt-4">
         {/* Client boundary — only tab switching + form are interactive */}
         <OverviewTabsClient items={items} upcomingExams={formattedExams} />
 

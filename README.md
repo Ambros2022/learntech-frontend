@@ -1,13 +1,4 @@
-mbbs-abroad- read more button fix,crousel
-contact-us
-education-loan
-exam-details
-exams
-news-details
-our-team- bearcum -form reusable
-scholarships- search bar,remove heavy lib,mui,autocomplete
-students-speak
-thank-you
+exam-details -arrow in slider 
 write-review
 
 
