@@ -3,951 +3,678 @@ import JsonLd from 'src/app/components/JsonLd'
 import styles from './BamsPage.module.css'
 
 import BamsNavbarClient from './BamsNavbarClient'
+import BamsMarqueeClient from './BamsMarqueeClient'
 import BamsHeroFormClient from './BamsHeroFormClient'
 import BamsPredictorClient from './BamsPredictorClient'
 import BamsEnquiryTriggerClient from './BamsEnquiryTriggerClient'
+import BamsInteractiveClient from './BamsInteractiveClient'
 
-const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
-const PAGE_PATH = '/bams-counselling-process'
-
-/* ─── Image constants ─── */
-const backgroundImageUrl = '/images/bams/Home-Banner.webp'
-const whyimg1 = '/images/bams/whyimg1.webp'
-const whyimg2 = '/images/bams/whyimg2.webp'
-const whyimg3 = '/images/bams/whyimg3.webp'
-const whyimg4 = '/images/bams/whyimg4.webp'
-const AACCC = '/images/bams/AACCC.webp'
-const KEA = '/images/bams/KEA.webp'
-const Amrutha = '/images/bams/Amrutha.webp'
-const Ashwini = '/images/bams/Ashwini.webp'
-const Atreya = '/images/bams/Atreya.webp'
-const JSS = '/images/bams/JSS.webp'
-const Kankanawadi = '/images/bams/Kankanawadi.webp'
-const Indian = '/images/bams/old-Indian.webp'
-const SDM = '/images/bams/SDM.webp'
-const Sharada = '/images/bams/Sharada.webp'
-const Shri = '/images/bams/Shri.webp'
-const Sri = '/images/bams/Sri.webp'
-const Sushrutha = '/images/bams/Sushrutha.webp'
-const Yenepoya = '/images/bams/Yenepoya.webp'
-const contactbanner = '/images/bams/contactbanner.webp'
-const whatsappc = '/images/bams/whatsappc.gif'
-
-/* ─── Static data ─── */
-const scheduleData = [
-  {
-    process: 'Registration',
-    round1: 'Aug 28 - Sept 3, 2024\n(Till 5:00 PM)',
-    round2: 'Sept 18 - Sept 23, 2024\n(Till 2:00 PM)',
-    round3: 'Oct 9 - Oct 14, 2024\n(Till 2:00 PM)',
-    stray: 'Oct 28 - Oct 31, 2024\n(Till 2:00 PM)'
-  },
-  {
-    process: 'Payment',
-    round1: 'Aug 28 -Sept 3, 2024\n(Till 8:00 PM)',
-    round2: 'Sept 18 - Sept 23, 2024\n(Till 5:00 PM)',
-    round3: 'Oct 9 - Oct 14, 2024\n(Till 5:00 PM)',
-    stray: 'Oct 28 - Oct 31, 2024\n(Till 5:00 PM)'
-  },
-  {
-    process: 'Choice-Filling',
-    round1: 'Aug 29 - Sept 3, 2024\n(Till 11:55 PM)',
-    round2: 'Sept 19 - Sept 23, 2024\n(Till 11:55 PM)',
-    round3: 'Oct 10 - Oct 14, 2024\n(Till 11:55 PM)',
-    stray: 'Oct 29 - Oct 31, 2024\n(Till 11:55 PM)'
-  },
-  {
-    process: 'Choice-Locking',
-    round1: 'Sept 3, 2024\n(6:00 PM to 11:55 PM)',
-    round2: 'Sept 23, 2024\n(2:00 PM to 11:55 PM)',
-    round3: 'Oct 14, 2024\n(2:00 PM to 11:55 PM)',
-    stray: 'Oct 31, 2024\n(2:00 PM to 11:55 PM)'
-  },
-  {
-    process: 'Seat Allotment Processing',
-    round1: 'Sept 4, 2024',
-    round2: 'Sept 24 - Sept 25, 2024',
-    round3: 'Oct 15 - Oct 16, 2024',
-    stray: 'November 1, 2024'
-  },
-  {
-    process: 'Result',
-    round1: '<strong>September 5, 2024</strong>',
-    round2: '<strong>September 26, 2024</strong>',
-    round3: '<strong>October 17, 2024</strong>',
-    stray: '<strong>November 2, 2024</strong>'
-  },
-  {
-    process: 'Reporting',
-    round1: 'Sept 6 - Sept 11, 2024',
-    round2: 'Sept 27 - Oct 3, 2024',
-    round3: 'Oct 18 - Oct 22, 2024',
-    stray: 'Nov 3 - Nov 7, 2024'
-  },
-  {
-    process: "Candidates' Data Verification by Institutes",
-    round1: 'Sept 12 - Sept 13, 2024',
-    round2: 'Oct 4 - Oct 5, 2024',
-    round3: 'Oct 23 - Oct 24, 2024',
-    stray: 'Nov 8 - Nov 9, 2024'
-  }
-]
-
-const whyUsItems = [
-  {
-    title: 'Team of Experts',
-    desc: 'Our team of qualified experts with decades of experience in the All-India BAMS Counselling and the BAMS state Counselling processes help students navigate their dreams with ease.',
-    icon: whyimg1
-  },
-  {
-    title: 'Personalised Sessions',
-    desc: 'Aspirants get 1-1 admission guidance, enabling them to smoothly glide through the complicated NEET BAMS Counselling process. Sessions are customised as per the student\'s rank, preferences and budget.',
-    icon: whyimg2
-  },
-  {
-    title: 'No-Time Wasted',
-    desc: 'Preparations for the All India Medical Counselling/ Karnataka BAMS Counselling can be time-consuming. This is where the insight of our experts comes into play, as they can help in preparing you for the counselling process within a short period.',
-    icon: whyimg3
-  },
-  {
-    title: 'Post-Admission Support',
-    desc: 'The experts will continue to assist you with activities even after seat allotment.This includes help with document collection, college reporting, and ensuring a smooth transition to campus life.',
-    icon: whyimg4
-  }
-]
-
-const colleges = [
-  { img: Kankanawadi, name: "KAHER's Shri BM Kankanawadi Ayurveda Mahavidyalaya Post Graduate Studies and Research Centre", city: 'Belagavi', heightClass: 'bamsHeightCollege' },
-  { img: Yenepoya, name: 'Yenepoya Ayurveda Medical College and Hospital', city: 'Mangalore', heightClass: 'bamsHeightCollege' },
-  { img: Amrutha, name: 'Amrutha Ayurvedic Medical College (AAMC)', city: 'Chitradurga', heightClass: 'bamsHeightCollege' },
-  { img: Sri, name: 'Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital and Research Centre (SKAMCH & RC)', city: 'Bangalore', heightClass: 'bamsHeightCollege' },
-  { img: Sharada, name: 'Sharada Ayurveda Medical College and Hospital (SAMCH)', city: 'Mangalore', heightClass: 'bamsHeight' },
-  { img: Sushrutha, name: 'Sushrutha Ayurvedic Medical College & Hospital', city: 'Bangalore', heightClass: 'bamsHeight' },
-  { img: Ashwini, name: 'Ashwini Ayurvedic Medical College & Research Centre', city: 'Tumkur', heightClass: 'bamsHeight' },
-  { img: SDM, name: 'SDM College of Ayurveda & Hospital', city: 'Udupi', heightClass: 'bamsHeight' },
-  { img: Atreya, name: 'Atreya Ayurvedic Medical College Hospital & Research Centre', city: 'Bangalore', heightClass: 'bamsHeight' },
-  { img: Shri, name: 'Shri Kalidas Ayurvedic Medical College and Hospital', city: 'Badami', heightClass: 'bamsHeight' },
-  { img: Indian, name: 'Indian Institute of Ayurvedic Medicine & Research', city: 'Bangalore', heightClass: 'bamsHeight' },
-  { img: JSS, name: 'JSS Ayurveda Medical College', city: 'Mysore', heightClass: 'bamsHeight' },
-]
-
-/* ─── Metadata (server-side) ─── */
-export async function generateMetadata() {
-  const title = 'BAMS Counselling Process 2025-26 | NEET-UG BAMS Admission Guidance'
-  const description = 'Navigate through the NEET-UG 2025 BAMS Counselling Process. Get expert guidance for All-India AACCC and Karnataka KEA BAMS counselling. Secure your BAMS seat today.'
-  const canonicalUrl = `${BASE_URL}${PAGE_PATH}`
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      siteName: 'Learntech Edu Solutions',
-      locale: 'en_IN',
-      type: 'website',
-      images: [
-        {
-          url: `${BASE_URL}/images/bams/Home-Banner.webp`,
-          width: 1200,
-          height: 630,
-          alt: 'BAMS Counselling Process 2025-26',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
+/* ─── SEO ─── */
+export const metadata = {
+  title: 'NEET-UG BAMS Counselling 2025 | Expert Guidance | LearnTech',
+  description:
+    'Get expert guidance for NEET-UG 2025 BAMS counselling. Navigate AACCC & KEA counselling with personalised support. Top Ayurvedic colleges in Karnataka.',
+  keywords:
+    'BAMS Counselling 2025, NEET UG BAMS, AACCC Counselling, KEA AYUSH Counselling, BAMS Admission, Ayurvedic Medical College Karnataka',
+  openGraph: {
+    title: 'NEET-UG BAMS Counselling 2025 | LearnTech',
+    description: 'Expert BAMS counselling guidance for NEET-UG 2025. AACCC & KEA counselling support.',
+    type: 'website',
+    url: 'https://learntechww.com/bams-counselling-process'
   }
 }
 
-/* ─── Page (Server Component) ─── */
-export default function Page() {
-  /* JSON-LD Schemas */
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'BAMS Counselling Process', item: `${BASE_URL}${PAGE_PATH}` },
-    ],
-  }
+/* ─── DATA ─── */
+const DOCUMENTS = [
+  'Class 10 Marks Card or Certificate',
+  'Class 12 Marks Card or Equivalent Qualifying Examination Certificate',
+  'NEET UG 2026 Admit Card',
+  'NEET UG 2026 Scorecard',
+  'NEET UG 2026 Rank Letter',
+  'NEET UG 2026 Application Form Confirmation Page',
+  'Provisional Seat Allotment Letter',
+  <>
+    Valid Government Issued Photo Identity Proof{' '}
+    <em>
+      (Aadhaar Card, PAN Card, Passport,
+      <br />
+      Voter ID, or Driving Licence)
+    </em>
+  </>,
+  'Recent Passport Size Photographs',
+  'Transfer Certificate (TC)',
+  'Character Certificate',
+  'Migration Certificate',
+  'Medical Fitness Certificate',
+  'Domicile Certificate',
+  'Caste Certificate',
+  'Income Certificate',
+  'Economically Weaker Section (EWS) Certificate',
+  'Persons with Benchmark Disabilities (PwBD) Certificate',
+  'Non Creamy Layer (NCL) Certificate for OBC Candidates'
+]
 
-  const webPageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'BAMS Counselling Process 2025-26',
-    description: 'Navigate through the NEET-UG 2025 BAMS Counselling Process with expert guidance.',
-    url: `${BASE_URL}${PAGE_PATH}`,
-    publisher: {
-      '@type': 'Organization',
-      name: 'Learntech Edu Solutions',
-      url: BASE_URL,
-    },
-  }
+const COLLEGES = [
+  { name: "KAHER's Shri BM Kankanawadi Ayurveda Mahavidyalaya, PG Studies & Research Centre", city: 'Belagavi', img: "/images/bams/college-logos/KAHER’s Shri BM Kankanawadi Ayurveda Mahavidyalaya Post Graduate Studies and Research Centre.webp" },
+  { name: 'Yenepoya Ayurveda Medical College and Hospital', city: 'Mangalore', img: '/images/bams/college-logos/Yenepoya Ayurveda Medical College and Hospital.webp' },
+  { name: 'Amrutha Ayurvedic Medical College (AAMC)', city: 'Chitradurga', img: '/images/bams/college-logos/Amrutha Ayurvedic Medical College (AAMC).webp' },
+  { name: 'Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital & Research Centre', city: 'Bangalore', img: '/images/bams/college-logos/Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital and Research Centre (SKAMCH & RC).webp' },
+  { name: 'Sharada Ayurveda Medical College and Hospital (SAMCH)', city: 'Mangalore', img: '/images/bams/college-logos/Sharada Ayurveda Medical College and Hospital (SAMCH).webp' },
+  { name: 'Sushrutha Ayurvedic Medical College & Hospital', city: 'Bangalore', img: '/images/bams/college-logos/Sushrutha Ayurvedic Medical College & Hospital.webp' },
+  { name: 'Ashwini Ayurvedic Medical College & Research Centre', city: 'Tumkur', img: '/images/bams/college-logos/Ashwini Ayurvedic Medical College & Research Centre.webp' },
+  { name: 'SDM College of Ayurveda & Hospital', city: 'Udupi', img: '/images/bams/college-logos/SDM College of Ayurveda & Hospital.webp' },
+  { name: 'Atreya Ayurvedic Medical College, Hospital & Research Centre', city: 'Bangalore', img: '/images/bams/college-logos/Atreya Ayurvedic Medical College Hospital & Research Centre.webp' },
+  { name: 'Shri Kalidas Ayurvedic Medical College and Hospital', city: 'Badami', img: '/images/bams/college-logos/Shri Kalidas Ayurvedic Medical College and Hospital.webp' },
+  { name: 'Indian Institute of Ayurvedic Medicine & Research', city: 'Bangalore', img: '/images/bams/college-logos/Indian Institute of Ayurvedic Medicine & Research.webp' },
+  { name: 'JSS Ayurveda Medical College', city: 'Mysore', img: '/images/bams/college-logos/JSS Ayurveda Medical College.webp' },
+  { name: 'Sri Sri College of Ayurvedic Science & Research, Bangalore', city: 'Mysore', img: '/images/bams/college-logos/sscasrh-logo.png' }
+]
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What is the AACCC BAMS Counselling 2025?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'The AIQ BAMS counselling is conducted by the Ayush Admissions Central Counselling Committee (AACCC) for All-India quota seats in Ayurvedic colleges, deemed universities, central universities, and private institutes. It consists of 4 rounds: Round 1, Round 2, Round 3, and Stray Vacancy Round.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'What are the stages of BAMS counselling?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'The BAMS counselling consists of 7 stages: Registration, Fee Payment, Choice-Filling, Choice-Locking, Seat Allotment Process, Result Announcement, and Reporting to College & Document Verification.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'What documents are required for BAMS counselling?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Required documents include: 10th, 11th and 12th Marksheets, NEET-UG Application Form, NEET-UG Admit Card, NEET-UG Scorecard, NEET-UG Rank Letter, Valid Government-issued ID Proof, Passport Size Photographs, Transfer Certificate, Medical Fitness Certificate, and Provisional Allotment Letter issued by AACCC.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'How does the KEA BAMS Counselling 2025 work?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'The Karnataka Examinations Authority (KEA) conducts BAMS counselling in Karnataka for government quota, private quota, management quota, and NRI quota seats. It consists of 4 rounds: Round 1, Round 2, Mop-Up Round, and Stray Vacancy Round.'
-        }
-      }
-    ]
-  }
+const FAQS = [
+  { q: 'Is qualifying NEET UG 2026 mandatory for BAMS admissions?', a: 'Yes, qualifying NEET UG 2026 is mandatory for admission to the Bachelor of Ayurvedic Medicine and Surgery (BAMS) course across India. Candidates must also fulfil the eligibility criteria prescribed by the respective counselling authority and institution.' },
+  { q: 'What is the difference between AACCC and KEA BAMS counselling?', a: 'The Ayush Admissions Central Counselling Committee (AACCC) conducts the All India counselling for AYUSH courses, including BAMS, covering All India Quota seats, Central Universities, National Institutes, and Deemed Universities. The Karnataka Examinations Authority (KEA) conducts the State AYUSH counselling for Government, Private, Management, and NRI quota seats offered by AYUSH colleges in Karnataka.' },
+  { q: 'Can I participate in both AACCC and KEA BAMS counselling?', a: 'Yes, candidates who meet the eligibility requirements can participate in both AACCC and KEA counselling by completing separate registrations and following the respective counselling schedules. Participating in both counselling processes can increase your chances of securing a BAMS seat.' },
+  { q: 'How do I choose the right BAMS college?', a: 'While filling your choices, consider factors such as your NEET UG rank, previous years\' closing ranks, college recognition, hospital facilities, internship opportunities, tuition fees, location, and your preferred quota. Listing colleges strategically in the order of your preference can improve your chances of securing a suitable seat.' },
+  { q: 'What support do I receive through personalised BAMS counselling 2026?', a: 'Personalised BAMS counselling 2026 typically includes guidance on college selection, choice filling strategy, quota selection, counselling registration, document preparation, seat allotment decisions, and post allotment admission formalities. The guidance is tailored to your NEET UG rank, preferences, budget, and admission goals.' }
+]
+
+/* ─── SVG Icons ─── */
+const LocationSvg = () => (
+  <svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" /></svg>
+)
+
+const CheckSvg = () => (
+  <svg viewBox="0 0 24 24">
+    <circle className={styles.checkCircle} cx="12" cy="12" r="10" pathLength={1} />
+    <path className={styles.checkMark} d="M7 12.5l3 3 7-7" pathLength={1} />
+  </svg>
+)
+
+const InfoSvg = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10" /><path d="M12 8v5M12 16h.01" />
+  </svg>
+)
+
+const WarningSvg = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: 'var(--rust)' }}>
+    <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
+const ChevronDownSvg = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6" /></svg>
+)
+
+const PhoneSvg = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.32 1.6.59 2.36a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.72-1.16a2 2 0 0 1 2.11-.45c.76.27 1.55.47 2.36.59A2 2 0 0 1 22 16.92z" />
+  </svg>
+)
+
+/* ─── JSON-LD ─── */
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a }
+  }))
+}
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'LearnTech Edu Solutions Pvt Ltd',
+  url: 'https://learntechww.com',
+  telephone: '+918022454991'
+}
+
+/* ─── PAGE ─── */
+export default function BamsCounsellingProcessPage() {
+  const heroBg = `/images/bams/media/ChatGPT Image Jul 4, 2026, 11_07_13 AM.png`
+  const contactBg = `/images/bams/contactbanner.webp`
 
   return (
     <>
-      <JsonLd id='bams-breadcrumb-schema' schema={breadcrumbSchema} />
-      <JsonLd id='bams-webpage-schema' schema={webPageSchema} />
-      <JsonLd id='bams-faq-schema' schema={faqSchema} />
+      <JsonLd schema={faqSchema} id="faq-schema" />
+      <JsonLd schema={orgSchema} id="org-schema" />
 
-      <BamsEnquiryTriggerClient>
-          <section className={styles.bamsMain}>
+      <div className={styles.bamsRoot}>
+        <BamsNavbarClient />
 
-            {/* ─── Floating Phone Icon ─── */}
-            <div className='text-md-start'>
-              <a href='tel:09036020076' className={styles.phoneIconphone}>
-                <Image
-                  src='/images/icons/Phone-blue.svg'
-                  width={40}
-                  height={28}
-                  alt='Call us'
-                  className={styles.redFilter}
-                />
-              </a>
-            </div>
+        <BamsEnquiryTriggerClient>
+          <BamsInteractiveClient>
 
-            {/* ─── Floating WhatsApp ─── */}
-            <a
-              href='https://wa.me/+919036020076'
+            {/* ─── HERO ─── */}
+            <section
+              className={styles.hero}
+              id="home"
               style={{
-                position: 'fixed',
-                width: 63,
-                height: 64,
-                bottom: 8,
-                right: 8,
-                borderRadius: 50,
-                textAlign: 'center',
-                fontSize: 44,
-                zIndex: 1059
+                background: `linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0)), url("${heroBg}") center center / cover no-repeat`
               }}
-              target='_blank'
-              rel='noopener noreferrer'
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={whatsappc} alt='WhatsApp' style={{ width: '66px' }} />
-            </a>
-
-            {/* ─── Navbar (Client) ─── */}
-            <BamsNavbarClient />
-
-            {/* ─── Hero Section ─── */}
-            <section className='d-flex align-items-center pb-0 px-0' id='home'>
-              <div
-                className={`container-fluid ${styles.bamsimage}`}
-                style={{
-                  background: `linear-gradient(341deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 0%)), url(${backgroundImageUrl})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                <div className='container-fluid p-md-2 p-4'>
-                  <div className={`row gap-md-0 gap-4 ${styles.bamsHomePadding} mt-md-5 mt-0`}>
-                    <div className='col-xl-7 col-lg-7 col-md-7 text-center pt-4 pt-md-0'>
-                      <div className={`${styles.bgblacksvyasa} ${styles.slideIn} px-md-0 px-2 mt-5 mt-md-0`}>
-                        <h1 className={`text-center ${styles.h1svyasa} pt-4 pt-md-5`}>
-                          Navigate through the NEET-UG 2025 BAMS Counselling Process
-                        </h1>
-                        <h2 className={`text-center ${styles.bamsBlue} pt-4 ${styles.blinkingText} pb-md-0 pb-2`}>
-                          Begin Your Journey in Ayurvedic Medicine Today!
-                        </h2>
-
-                        <p className={`${styles.bamsPhomepage} pt-md-4`}>
-                          Get into the Best Ayurvedic Colleges in Karnataka and Other Indian States through the NEET All-India
-                          Counselling and the KEA Counselling with the Help of Expert Counsellors.
-                        </p>
-                        <div className='form-group text-center mt-md-4 pb-md-4 mt-4 pb-3'>
-                          <button
-                            data-enquiry-trigger
-                            className={`btn btn-success btn-bds-add-svyasa-apply ${styles.colorBtnAddApply} p-3 px-4 mb-md-0 mb-3`}
-                          >
-                            Talk to an Expert Now!
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className='col-xl-5 col-lg-5 col-md-5'>
-                      <BamsHeroFormClient />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* ─── Why Us Section ─── */}
-            <section>
-              <div className='col-lg-12 text-center pb-3 bg-white' id='whyus'>
-                <h3 className={`${styles.f3mountSvayauni} pt-md-2 pt-4 mt-md-4 mb-md-4`}>Why Us?</h3>
-              </div>
-
-              <section className={`${styles.whyUsSection} text-white`}>
-                <div className='container'>
-                  <div className='row text-center'>
-                    {whyUsItems.map((item, i) => (
-                      <div key={i} className='col-12 col-sm-6 col-lg-3 mb-4'>
-                        <div className={`${styles.whyUsCard} p-4 h-100 text-center`}>
-                          <div
-                            className={`${styles.iconWrapper} mb-3`}
-                            style={{
-                              backgroundImage: `url(${item.icon})`,
-                              backgroundSize: 'contain',
-                              backgroundRepeat: 'no-repeat',
-                              backgroundPosition: 'center',
-                              width: '60px',
-                              height: '60px',
-                              margin: '0 auto'
-                            }}
-                          />
-                          <h5 className='fw-bold'>{item.title}</h5>
-                          <p className='small'>{item.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
-            </section>
-
-            {/* ─── All About NEET-UG BAMS Counselling 2025 ─── */}
-            <section id='counceling'>
-              <div className='col-lg-12 text-center pb-3 bg-white'>
-                <h3 className={`${styles.f3mountSvayauni} pt-md-2 pt-4 mt-md-4 mb-md-4`}>All About NEET-UG BAMS Counselling 2025</h3>
-              </div>
-              <section className={styles.neetCounsellingSection}>
-                <div className='container'>
-                  <div className={`${styles.infoCard} d-flex flex-column flex-md-row align-items-center gap-4 p-4 p-md-4 mb-5 ${styles.shadowBox}`}>
-                    <div className={`${styles.logoBox} text-center bg-white shadow-sm`}>
-                      <Image src={AACCC} alt='AACCC Logo' width={120} height={120} priority />
-                    </div>
-                    <div className='text-box text-center text-md-start'>
-                      <h2 className={`${styles.counsellingHeading} m-0 fw-bold`}>All India BAMS Counselling 2025</h2>
-                    </div>
-                  </div>
-
-                  <ul className={`${styles.neetList} mb-4`}>
-                    <li>The AIQ BAMS counselling is conducted by the Ayush Admissions Central Counselling Committee (AACCC).</li>
-                    <li>To participate in the All-India counselling, students must first clear the NEET-UG entrance exam.</li>
-                    <li>AACCC conducts counselling for the All-India quota seats in Ayurvedic colleges, as well as seats in deemed universities, central universities, and private institutes offering Ayurveda programs.</li>
-                    <li>The BAMS counselling procedure will consist of 4 rounds, namely</li>
-                  </ul>
-
-                  <ol className={`${styles.neetRounds1} mb-4`}>
-                    <li>Round 1</li>
-                    <li>Round 2</li>
-                    <li>Round 3</li>
-                    <li>Stray Vacancy Round</li>
-                  </ol>
-
-                  <div className='col-lg-12 container pt-md-3 pt-2 px-0'>
-                    <p className={`${styles.paragaphFont18} pb-3`}>
-                      However, the Stray Vacancy Round (SVR) will be held only if there are any vacant seats (empty, forfeited, declined) in government, government-aided, deemed, central universities, and national institutes after the completion of the first 3 counselling rounds. The SVR round for All India Quota (AIQ) seats in government, government-aided, central universities, and national institutes will be conducted online in two phases: SVR-I and SVR-II. A separate stray vacancy round, known as Stray Vacancy Round-Deemed Universities (SVR-DU), will be held for admission to seats in deemed universities. This is because seats at deemed universities are unreserved, i.e., the central government&apos;s reservation policy does not apply to them.
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </section>
-
-            {/* ─── All-India NEET-UG BAMS Counselling 2025 Stages ─── */}
-            <section>
-              <div className='col-lg-12 text-center pb-3 bg-white'>
-                <h3 className={`${styles.f3mountSvayauni} pt-md-2 pt-0 mt-md-0 mb-md-0 ${styles.paddingMobilebams}`}>
-                  All-India NEET-UG BAMS Counselling 2025 Stages
-                </h3>
-              </div>
-              <section className={`${styles.neetCounsellingSection} py-md-4 py-3`}>
-                <div className='container'>
-                  <div>
-                    <p className={`${styles.paragaphFont18} text-center`}>
-                      Each of the AACCC BAMS counselling rounds has various stages. These stages will remain the same for most of the rounds. The AACCC releases the BAMS counselling seat matrix before the commencement of each round.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 1: Registration for BAMS Counselling</h3>
-                    <p className={styles.paragaphFont18}>
-                      This is the first stage of the All-India BAMS counselling process, wherein interested aspirants are required to register for the respective round by visiting the AACCC official website and providing the necessary details. This stage applies to all the rounds of the counselling process except the Stray Vacancy Round Phase-2 (SVR-2). I.e. Candidates who had registered for SVR-1, but have not procured a seat, can participate in SVR-2 without the need to manually register for the round, provided they have met the eligibility criteria.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 2: Fee Payment</h3>
-                    <p className={styles.paragaphFont18}>
-                      There are two types of fees that a student has to pay at the time of registration. They are:
-                    </p>
-                    <ul>
-                      <li className={styles.paragaphFont18}>Non-refundable BAMS counselling registration fees</li>
-                      <li className={styles.paragaphFont18}>Refundable Security Deposit</li>
-                    </ul>
-                  </div>
-
-                  {/* Fee Payment Table */}
-                  <div className={styles.tableWrapper}>
-                    <table className={styles.customTable1}>
-                      <thead>
-                        <tr>
-                          <th className={styles.bdrMainatin}>Selection of Counselling Type</th>
-                          <th className={styles.bdrMainatin}>Candidate Category</th>
-                          <th className={styles.bdrMainatin}>Registration Fee</th>
-                          <th>Security Deposit</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td rowSpan={2}>
-                            <ul>
-                              <li className={styles.listNone}>AIQ - Government College</li>
-                              <li className={styles.listNone}>AIQ - Government Aided College</li>
-                              <li className={styles.listNone}> Central University / National Institute </li>
-                            </ul>
-                          </td>
-                          <td>UR / EWS / OBC-NCL</td>
-                          <td>Rs. 1,000</td>
-                          <td rowSpan={2}> Rs. 20,000</td>
-                        </tr>
-                        <tr>
-                          <td>SC / ST / PwBD</td>
-                          <td>Rs. 500</td>
-                        </tr>
-                        <tr className={styles.trDesign}>
-                          <td className={styles.bdrMainatin}> Deemed University</td>
-                          <td className={styles.bdrMainatin}>All Categories</td>
-                          <td className={styles.bdrMainatin}>Rs. 5,000</td>
-                          <td>Rs. 50,000</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div>
-                    <p className={styles.paragaphFont18}>
-                      <span className={styles.note}> Note:</span> Candidates willing to apply for both the counselling categories have to pay the higher amount, i.e., the fee for Deemed University (Rs 5,000 for registration + Rs 50,000 for security amount)
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 3: Choice-Filling</h3>
-                    <p className={styles.paragaphFont18}>
-                      This is the third stage of the counselling process, wherein the candidates must opt for the BAMS course and the desired colleges in order of their preferences. These choices can be edited or rearranged till the choice-filling window is open. This stage will reset for each of the counselling rounds. This means that the choices filled during Round 1 will not be considered for Round 2. Similarly, the choices submitted in Rounds 1 and 2 will not be considered for Round 3, and the choices filled in Rounds 1, 2 and 3 will be considered null and void in SVR-1. However, this stage does not apply to SVR-2, as the choices filled in SVR-1 are carried forward for the particular round. Additionally, it does not apply to SVR-DU as well. Therefore, eligible candidates must approach the respective deemed universities for seat allotment in the online SVR-DU round.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 4: Choice-Locking</h3>
-                    <p className={styles.paragaphFont18}>
-                      The next step is choice locking, during which candidates are required to finalise their selected choices. It is important to note that once the choices are locked, they cannot be changed for the respective round. The organising body will auto-lock the choices for those candidates who do not lock their choices within the given time frame. Similar to stage 3, this stage is also not applicable for SVR-2 and SVR-DU.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 5: Seat Allotment Process:</h3>
-                    <p className={styles.paragaphFont18}>
-                      In this stage, the organising body, Ayush Admissions Central Counselling Committee, assigns the course and the college to the students. However, the allotment process depends on various factors, such as:
-                    </p>
-                    <ul>
-                      <li className={styles.paragaphFont18}>Candidates&apos; NEET score</li>
-                      <li className={styles.paragaphFont18}>Availability of seats in the preferred choices.</li>
-                      <li className={styles.paragaphFont18}>Candidate Category </li>
-                    </ul>
-                    <p className={styles.paragaphFont18}>
-                      Candidates who have not been allotted a seat in the current round are eligible to apply for the next round.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 6: Result Announcement</h3>
-                    <p className={styles.paragaphFont18}>
-                      In this stage, the AACCC publishes the final result of the respective counselling round. However, before the final results, a mock seat allotment result list is released by the conducting body to help students estimate their chances of admission to the desired college.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 7: Reporting to College &amp; Document Verification</h3>
-                    <p className={styles.paragaphFont18}>
-                      This is the final part of the BAMS counselling process. In this stage, candidates are required to report to the designated college in person and complete the admission formalities. This includes submission of the required documents and paying the admission fees. Once the documents are submitted, the authoritative body will verify them to confirm the candidates&apos; seat. The seats of those candidates who have not reported to the college within the stipulated time will be considered vacant for the next round.
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </section>
-
-            {/* ─── AACCC BAMS 2024 Counselling Dates ─── */}
-            <section className='bg-white'>
-              <div className='col-lg-12 text-center pb-3 bg-white'>
-                <h3 className={`${styles.f3mountSvayauni} pt-md-0 pt-0 mt-md-0 mb-md-0`}>AACCC BAMS 2024 Counselling Dates</h3>
-              </div>
-
-              <div className={`${styles.tableWrapper} mx-auto ${styles.table2heightfixed} bg-white`}>
-                <table className={styles.customTable}>
-                  <thead>
-                    <tr>
-                      <th className={styles.bdrMainatin}>Process</th>
-                      <th className={styles.bdrMainatin}>Round 1</th>
-                      <th className={styles.bdrMainatin}>Round 2 </th>
-                      <th className={styles.bdrMainatin}>Round 3</th>
-                      <th>Stray Vacancy Round 1</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {scheduleData.map((item, idx) => (
-                      <tr key={idx}>
-                        <td
-                          className={`fw-medium ${styles.bdrMainatin} ${styles.sizebams} ${item.process === "Candidates' Data Verification by Institutes" ? styles.highlightRow : ''}`}
-                        >
-                          {item.process}
-                        </td>
-                        <td className={styles.bdrMainatin} dangerouslySetInnerHTML={{ __html: item.round1.replace(/\n/g, '<br/>') }} />
-                        <td className={styles.bdrMainatin} dangerouslySetInnerHTML={{ __html: item.round2.replace(/\n/g, '<br/>') }} />
-                        <td className={styles.bdrMainatin} dangerouslySetInnerHTML={{ __html: item.round3.replace(/\n/g, '<br/>') }} />
-                        <td className={styles.bdrMainatin} dangerouslySetInnerHTML={{ __html: item.stray.replace(/\n/g, '<br/>') }} />
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* KEA Card */}
-              <div className='container'>
-                <div className={`${styles.infoCard} d-flex flex-column flex-md-row align-items-center gap-4 p-4 p-md-4 mb-5 ${styles.shadowBox}`}>
-                  <div className={`${styles.logoBox} text-center bg-white shadow-sm`}>
-                    <Image src={KEA} alt='KEA Logo' width={120} height={120} priority />
-                  </div>
-                  <div className='text-box text-center text-md-start'>
-                    <h2 className={`${styles.counsellingHeading} m-0 fw-bold`}>Karnataka AYUSH Counselling 2025 Process</h2>
-                  </div>
-                </div>
-
-                <ul className={`${styles.neetList} mb-4`}>
-                  <li>The KEA NEET-UG counselling will begin once the NEET-UG results are declared.</li>
-                  <li>The Karnataka Examinations Authority (KEA) conducts the BAMS counselling in Karnataka for government quota, private quota, management quota, and NRI quota seats that are available in all the government and private Ayurveda colleges across the state.</li>
-                  <li>Students must complete the Karnataka BAMS counselling registration on the Karnataka BAMS counselling official website (KEA) to be eligible for the KEA NEET-UG counselling process.</li>
-                  <li>The KEA BAMS counselling 2025 process will be conducted in 4 rounds, namely</li>
-                </ul>
-
-                <ol className={`${styles.neetRounds1} mb-4`}>
-                  <li>Round 1</li>
-                  <li>Round 2</li>
-                  <li>Mop-Up Round</li>
-                  <li>Stray Vacancy Round</li>
-                </ol>
-
-                <ul className={`${styles.neetList} mb-4`}>
-                  <li>The KEA conducts the Mop-Up Round only if seats remain unfilled after the first 2 rounds. Additionally, Stray Vacancy Rounds may be conducted by the KEA if the seats remain unfilled even after the Mop-Up Round in order to complete the BAMS 2025 counselling process.</li>
-                </ul>
-              </div>
-            </section>
-
-            {/* ─── KEA NEET-UG BAMS Counselling 2025 Stages ─── */}
-            <section>
-              <div className='col-lg-12 text-center pb-3 bg-white'>
-                <h3 className={`${styles.f3mountSvayauni} pt-md-2 pt-3 mt-md-0 mb-md-0`}>KEA NEET-UG BAMS Counselling 2025 Stages</h3>
-              </div>
-              <section className={`${styles.neetCounsellingSection} py-3`}>
-                <div className='container'>
-                  <div>
-                    <p className={`${styles.paragaphFont18} text-center`}>
-                      The KEA NEET-UG BAMS counselling takes place in various rounds. Each round has multiple stages, which are explained below.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 1: Online Registration &amp; Fee Payment</h3>
-                    <p className={styles.paragaphFont18}>
-                      The first stage of the KEA BAMS counselling is online registration. Interested and eligible candidates must register through the Karnataka Ayush counselling website (KEA) within the stipulated time. Students are not required to send any documents or printouts of the application form to KEA to prove their eligibility during the registration process. The candidature of those students who are found ineligible at any stage by the KEA/ University will be cancelled with immediate effect. The registration stage is deemed to be complete once the candidates have paid the Karnataka BAMS counselling registration fees through the payment gateway using a credit card or a debit card.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 2: Document Verification</h3>
-                    <p className={styles.paragaphFont18}>
-                      In this stage, students must get their documents verified by the concerned authorities within the stipulated time. Once the verification is complete, eligible students must download the verification slip. The eligible rank holders must note that the organising body will not send any message/ reminder regarding the date and time of the verification process. The candidates who fail to verify the documents within the given time frame will not be eligible to exercise their options as part of the next stage. I.e., option entry.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 3: Option Entry</h3>
-                    <p className={styles.paragaphFont18}>
-                      Candidates who have cleared the document verification stage will be considered eligible for option entry. In this stage, the eligible candidates must enter their most preferred college as their first preference and must continue to enter their options in the order of their preferences. There is no limit to the number of colleges that can be added as options. Candidates must be careful about the order of the choices they make in this stage, as the selected options will remain the same for the current and subsequent rounds. However, they are allowed to delete or reorder their choices in the next round. Additionally, if any new colleges/ seats are added to the Karnataka BAMS seat matrix after the completion of the current round, candidates will be allowed to choose them as part of their option entry in the upcoming round.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 4: Mock Seat Allotment:</h3>
-                    <p className={styles.paragaphFont18}>
-                      KEA publishes mock seat allotment results based on the candidate&apos;s current preference. This list is curated to inform candidates about the seats they might be eligible for. Moreover, the list helps aspirants understand their chances of admission to their preferred college and re-order their preferences. Candidates can view the mock results by entering their CET number on the KEA website. Aspirants must note that the final results may vary from what is shown in the mock seat allotment.
-                    </p>
-
-                    <h3 className='fw-semibold mt-4' style={{ color: '#003366' }}>Stage 5: Seat Allotment and Results:</h3>
-                    <p className={styles.paragaphFont18}>
-                      In this stage, the seats are allotted primarily based on the students&apos; rank/ merit, their preferences, and the reservation rules that are set by the government. The seat allotment process remains the same for all rounds of the counselling process, and each of the rounds consists of 3 phases. These are as follows:
-                    </p>
-
-                    <h3 className={`fw-semibold mt-4 ${styles.font25bams}`} style={{ color: '#003366' }}>Phase 1:</h3>
-                    <p className={styles.paragaphFont18}>
-                      In this phase, all the candidates are eligible. However, the order of seat allotment will depend on the category of candidates. Phase 1 of the BAMS Round 1 counselling process will commence with the allotment of a certain number of seats, known as Special Category Seats, to candidates of Karnataka in the order given below:
-                    </p>
-                    <ul className={`${styles.neetList} mb-4`}>
-                      <li>People with Disabilities (PwD)</li>
-                      <li>NCC Candidates</li>
-                      <li>Sports Candidates</li>
-                    </ul>
-                    <p className={styles.paragaphFont18}>
-                      After the successful completion of Special Category seats, all candidates, regardless of their category, will be first considered for General Merit (GM) seats. After this, candidates who have not been allotted a GM seat will be considered for a seat in their respective category based on their rank and preferences. The same allotment order will continue until all candidates&apos; allotments stay the same.
-                    </p>
-
-                    <h3 className={`fw-semibold mt-4 ${styles.font25bams}`} style={{ color: '#003366' }}>Phase 2:</h3>
-                    <p className={styles.paragaphFont18}>
-                      There are 5 distinct points that a candidate must know before participating in the second phase of the respective KEA BAMS counselling rounds.
-                    </p>
-                    <ol className={`${styles.neetRounds1} mb-4`}>
-                      <li>Phase 2 is only applicable to candidates from reserved categories. </li>
-                      <li>In this phase, the unfilled seats in the rural and Kannada medium quota of the reservation categories will be converted to general seats within the respective reserved category. Moreover, these converted seats, along with other remaining seats, can only be secured by candidates of the same reserved category.</li>
-                      <li>The seat allotment process commences with the allotment of Special Category seats. As mentioned earlier, these seats are allotted to candidates of the Reserved category in the order given below:</li>
-                      <ul className={`${styles.neetList} mb-4`}>
-                        <li>People with Disabilities (PwD)</li>
-                        <li>NCC Candidates</li>
-                        <li>Sports Candidates</li>
-                      </ul>
-                      <li>After the successful allotment of Special Category seats, the rest of the reserved category candidates are considered for the remaining seats in the respective reserved category.</li>
-                      <li>Phase 2 will follow the same allotment order repeatedly until there is no change in the allotment of any candidate.</li>
-                    </ol>
-
-                    <h3 className={`fw-semibold mt-4 ${styles.font25bams}`} style={{ color: '#003366' }}>Phase 3:</h3>
-                    <p className={styles.paragaphFont18}>
-                      Candidates must be aware of the following points before participating in this phase of the BAMS counselling rounds.
-                    </p>
-                    <ol className={`${styles.neetRounds1} mb-4`}>
-                      <li>All the candidates are eligible to participate in the third phase of round 1 counselling. </li>
-                      <li>In this phase, the seats of reserved general categories and the special category seats that remain unfilled in Phase 2 will be converted to general merit seats. However, in case there are no general category seats, the rural and Kannada medium quota seats, if remaining unfilled, will be converted to general seats of the respective reserved categories.</li>
-                      <li>The converted general merit seats are offered to all the general merit candidates as well as all the other reserved category candidates. Whereas, the general seats of the respective reserved categories are allotted to candidates who are of the same reserved category</li>
-                      <li>Similar to the previous two phases, the seat allotment process commences with the allotment of Special Category seats. These seats are allotted to candidates in the order given below:</li>
-                      <ul className={`${styles.neetList} mb-4`}>
-                        <li>People with Disabilities (PwD)</li>
-                        <li>NCC Candidates</li>
-                        <li>Sports Candidates</li>
-                      </ul>
-                      <li>Once the Special Category seats are allotted, the rest of the seats will be offered to the remaining candidates (regardless of their category) in the order of their rank and preferences.</li>
-                      <li>In the 3rd phase of allotment, any unfilled reserved category seats are automatically converted to General Merit (GM) and are re-offered to all eligible candidates based on their rank and preferences. This process is repeated until no reserved seats remain and no further changes occur in the allotment.</li>
-                    </ol>
-
-                    <p className={styles.paragaphFont18}>
-                      The seat allotment results are published by the end of each round. Students who have been allotted a seat in phase 1 or phase 2 must wait until the entire round is completed to take a decision for the post seat allotment procedure.
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </section>
-
-            {/* ─── Documents Required ─── */}
-            <div className='col-lg-12 text-center pb-3 bg-white'>
-              <h3 className={`${styles.f3mountSvayauni} pt-md-2 pt-0 mt-md-0 mb-md-0`}>
-                BAMS Counselling Documents Required for A.Y. 2025-26
-              </h3>
-            </div>
-
-            <div className={`${styles.whyUsCard} p-4 h-100 text-center container ${styles.bamsContainer}`}>
-              <div className={styles.bamsGrid}>
-                <div className={styles.bamsColumn}>
-                  <ul>
-                    <li>10th, 11th and 12th Marksheets</li>
-                    <li>Graduation Marksheets (If Any)</li>
-                    <li>NEET-UG Application Form</li>
-                    <li>NEET-UG Admit Card</li>
-                    <li>NEET-UG Scorecard</li>
-                    <li>PwD Certificate (If Applicable)</li>
-                    <li>Domicile Certificate (If Applicable)</li>
-                    <li>NEET-UG Rank Letter</li>
-                    <li>Valid Government-issued ID Proof</li>
-                  </ul>
-                </div>
-                <div className={styles.bamsColumn}>
-                  <ul>
-                    <li>Recent Passport Size Photographs</li>
-                    <li>Transfer Certificate</li>
-                    <li>Medical Fitness Certificate (Issued by Registered Medical Practitioner)</li>
-                    <li>Migration Certificate (If Applicable)</li>
-                    <li>Caste Certificate (If Applicable)</li>
-                    <li>Income Certificate (If Applicable)</li>
-                    <li>Provisional Allotment Letter issued by AACCC</li>
-                    <li>Character Certificate</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* ─── Rank Predictor Description ─── */}
-            <section className='container'>
-              <p className={`${styles.paragaphFont18} text-center text-black`}>
-                The BAMS NEET-UG rank predictor tool will help you assess your chances of participating in the Ayush Admissions Central Counselling Committee counselling process.
-              </p>
-            </section>
-
-            {/* ─── NEET Rank Predictor (Client) ─── */}
-            <BamsPredictorClient />
-
-            {/* ─── Predictor Info Boxes ─── */}
-            <div className={`d-flex ${styles.maxWidthbams}`}>
-              <div className={styles.predictorBox1}>
-                <p className={styles.paragaphFont18}>
-                  The BAMS NEET-UG 2025 Rank Predictor assesses your performance in NEET-UG and predicts the rank you might secure. This helps aspirants understand which colleges they may be eligible for and are likely to gain admission into.
-                </p>
-              </div>
-              <div className={styles.predictorBox1}>
-                <p className={styles.paragaphFont18}>
-                  The NEET-UG Rank Prediction gives you a head start during the option entry stage of the All-India Quota BAMS counselling 2025. It helps in strategising your choices to improve your chances of securing admission to your dream college!
-                </p>
-              </div>
-            </div>
-
-            {/* ─── Best BAMS Colleges in Karnataka ─── */}
-            <section className={`container-fluid p-0 pb-0 ${styles.bamsConatiner}`} id='topcollege'>
-              <div className='container'>
-                <div className='col-lg-12 text-center pb-3 bg-white'>
-                  <h3 className={`${styles.f3mountSvayauni} pt-md-2 pt-4 mt-md-4 mb-md-4 mb-4`}>Best BAMS Colleges in Karnataka</h3>
-                  <p className={`${styles.paragaphFont18} text-center`}>
-                    Below is a list of some of the top AYUSH counselling-participating colleges in Karnataka.
+              <div className={`${styles.wrap} ${styles.heroGrid}`}>
+                <div className={styles.heroCopy}>
+                  <p className={styles.heroOverline}>
+                    Your Path to Ayurvedic Medicine Starts Here!
                   </p>
+                  <h1>Navigate NEET UG 2026 BAMS <span>Counselling</span> with <span>Confidence</span></h1>
+                  <p className={styles.lede}>
+                    Receive expert guidance at every stage of the NEET UG 2026 BAMS counselling process.
+                    Explore top Ayurvedic colleges in Karnataka and across India through All India and KEA counselling
+                    with personalized admission support.
+                  </p>
+                  <div style={{ marginTop: '1.5rem' }}>
+                    <a href="tel:08022454991" className={styles.heroBtn}>
+                      <PhoneSvg />
+                      <span>Connect with Our Experts</span>
+                      <span className={styles.heroBtnArrow}>→</span>
+                    </a>
+                  </div>
                 </div>
-                <div className='col-lg-12 text-center'>
-                  <div className={`row row-cols-1 row-cols-md-4 g-4 ${styles.mds} ${styles.bdscollegeimage}`}>
-                    {colleges.map((college, i) => (
-                      <div key={i} className='col'>
-                        <div className='card justify-content-center align-items-center'>
+                <BamsHeroFormClient />
+              </div>
+            </section>
+
+            {/* ─── MARQUEE ─── */}
+            <BamsMarqueeClient />
+
+            {/* ─── WHY US ─── */}
+            <section className={`${styles.bamsSection} ${styles.whyUs}`} id="why-us">
+              <div className={styles.wrap}>
+                <div className={`${styles.sectionHead} ${styles.sectionHeadCenter}`}>
+                  <h2>Your BAMS Admission Journey Starts Here</h2>
+                </div>
+                <div className="row g-4">
+                  {[
+                    { icon: '/images/bams/icons/Icon_01.svg', title: 'Personalized Counselling', desc: 'Receive one-on-one guidance tailored to your NEET rank, preferred colleges, budget, and career goals. Our experts help you make informed decisions at every stage of the counselling process.' },
+                    { icon: '/images/bams/icons/Icon_02.svg', title: 'Experienced Admission Experts', desc: 'Navigate the BAMS admission process with confidence under the guidance of seasoned counsellors who have extensive experience with All India and Karnataka (KEA) counselling.' },
+                    { icon: '/images/bams/icons/Icon_04.svg', title: 'End-to-End Admission Support', desc: "Our assistance doesn't end with seat allotment. We help with document verification, reporting to the allotted college, and other admission formalities for a hassle-free transition." },
+                    { icon: '/images/bams/icons/Icon_03.svg', title: 'Save Time, Avoid Mistakes', desc: 'Counselling can be complex and time-sensitive. Our experts streamline the process, helping you complete every step accurately and efficiently while avoiding common errors.' }
+                  ].map((card, i) => (
+                    <div key={i} className={`col-md-3 col-sm-6 ${styles.animateOnScroll} ${i > 0 ? styles[`delay${i}` as keyof typeof styles] : ''}`}>
+                      <div className={styles.whyCard}>
+                        <div className={styles.whyIcon}>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            className={`card-img-top ${styles.imgcontain}`}
-                            src={college.img}
-                            alt={college.name}
-                            loading='lazy'
-                          />
-                          <div className='card-body'>
-                            <h5 className={`${styles.cardTitlebams} ${styles[college.heightClass]}`}>
-                              {college.name}
-                            </h5>
-                            <p className={`card-text ${styles.paragaphFont18}`}>
-                              <i className='bi bi-geo-alt-fill fs-6' style={{ color: 'red' }} />
-                              &nbsp; {college.city}
-                            </p>
-                            <button
-                              className='btn btn-success m-2 btnbdscolour viewMoreCollegeBtn py-3 px-4'
-                              data-enquiry-trigger
-                            >
-                              Enquire Now
-                            </button>
+                          <img src={card.icon} alt={card.title} style={{ width: 60 }} />
+                        </div>
+                        <h3 className="mb-4">{card.title}</h3>
+                        <p>{card.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* ─── AACCC COUNSELLING ─── */}
+            <section className={`${styles.bamsSection} ${styles.aacccSection}`} id="counselling">
+              <div className={`${styles.sectionHead} ${styles.sectionHeadCenter}`}>
+                <h2>All About NEET UG BAMS Counselling 2026</h2>
+              </div>
+              <div className={`${styles.wrap} ${styles.aacccWrap}`}>
+                <h2 className={`${styles.aacccTitle} ${styles.animateOnScroll}`}>All India BAMS Counselling 2026</h2>
+                <p className={`${styles.aacccLead} ${styles.animateOnScroll}`}>
+                  The All India BAMS counselling process is conducted by the Ayush Admissions Central Counselling
+                  Committee (AACCC), Ministry of AYUSH. Candidates must qualify NEET UG 2026
+                  to participate in AACCC counselling.
+                </p>
+
+                <div className={`${styles.aacccSummaryRow} ${styles.animateOnScroll}`}>
+                  <div className={styles.aacccSummaryCard}>
+                    <span className={styles.aacccSummaryLabel}>Conducted by</span>
+                    <span className={styles.aacccSummaryValue}>AACCC, Ministry of AYUSH</span>
+                  </div>
+                  <div className={styles.aacccSummaryCard}>
+                    <span className={styles.aacccSummaryLabel}>Eligibility</span>
+                    <span className={styles.aacccSummaryValue}>NEET UG 2026 Qualified</span>
+                  </div>
+                </div>
+
+                <p className={`${styles.aacccSubhead} ${styles.animateOnScroll}`}>AACCC Conducts Counselling For</p>
+                <div className={`${styles.aacccScopeGrid} ${styles.animateOnScroll}`}>
+                  <div className={styles.aacccScopeCard}>
+                    <div className={`${styles.aacccScopeIcon} ${styles.aacccScopeIconGreen}`}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" /></svg>
+                    </div>
+                    <div className={styles.aacccScopeLabel}>All India Quota (AIQ) seats in Government and Government-aided AYUSH colleges</div>
+                  </div>
+                  <div className={styles.aacccScopeCard}>
+                    <div className={`${styles.aacccScopeIcon} ${styles.aacccScopeIconGold}`}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3l9 4.5-9 4.5-9-4.5L12 3z" /><path d="M7 10.5V16c0 1.5 2.5 3 5 3s5-1.5 5-3v-5.5" /></svg>
+                    </div>
+                    <div className={styles.aacccScopeLabel}>Central Universities</div>
+                  </div>
+                  <div className={styles.aacccScopeCard}>
+                    <div className={`${styles.aacccScopeIcon} ${styles.aacccScopeIconRust}`}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="10" width="16" height="10" rx="1" /><path d="M9 20v-5h6v5M4 10l8-6 8 6" /></svg>
+                    </div>
+                    <div className={styles.aacccScopeLabel}>National Institutes</div>
+                  </div>
+                  <div className={styles.aacccScopeCard}>
+                    <div className={`${styles.aacccScopeIcon} ${styles.aacccScopeIconForest}`}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6" /></svg>
+                    </div>
+                    <div className={styles.aacccScopeLabel}>Deemed Universities</div>
+                  </div>
+                </div>
+
+                <div className={`${styles.aacccCallout} ${styles.animateOnScroll}`}>
+                  <InfoSvg />
+                  <span>Private colleges (except deemed universities) are generally counselled by the respective State/UT authorities — see the Karnataka (KEA) process further down this page.</span>
+                </div>
+
+                <p className={`${styles.aacccSubhead} ${styles.animateOnScroll}`}>Counselling Process</p>
+                <div data-aaccc-timeline-wrap className={styles.animateOnScroll}>
+                  <ul className={styles.aacccTimeline}>
+                    {['Round 1', 'Round 2', 'Round 3'].map((name, i) => (
+                      <li key={i} className={styles.aacccRound}>
+                        <div className={styles.aacccRoundIndex}>{i + 1}</div>
+                        <div className={styles.aacccRoundName}>{name}</div>
+                      </li>
+                    ))}
+                    <li className={`${styles.aacccRound} ${styles.aacccRoundSvr}`} role="button" tabIndex={0} aria-expanded="false" data-aaccc-svr>
+                      <div className={`${styles.aacccRoundIndex} ${styles.aacccRoundIndexActive}`}>
+                        <ChevronDownSvg />
+                      </div>
+                      <div className={styles.aacccRoundName}>Stray Vacancy Round</div>
+                    </li>
+                  </ul>
+                  <div className={styles.aacccAccordion} data-aaccc-panel>
+                    <div className={styles.aacccAccordionInner}>
+                      <div className={styles.aacccSvrCard}>
+                        <h4>The Stray Vacancy Round is conducted to fill seats that remain vacant after Round 3. For government, government-aided colleges, central universities, and national institutes, the online Stray Vacancy Round is held in two allotment phases - SVR-I and SVR-II. Admissions to deemed universities are conducted separately through the Stray Vacancy Round for Deemed Universities (SVR-DU). Seats in deemed universities are unreserved, and the central government reservation policy does not apply to them.</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* ─── AIQ STAGES ─── */}
+            <section className={`${styles.bamsSection} ${styles.stagesSection}`}>
+              <div className={styles.wrap}>
+                <div className={`${styles.sectionHead} ${styles.sectionHeadCenter} ${styles.animateOnScroll} ${styles.stagesHeading}`} id="stages-heading">
+                  <h2>All India NEET UG BAMS Counselling 2026 Stages</h2>
+                  <p> The All India BAMS counselling process conducted by the Ayush Admissions Central Counselling Committee (AACCC) consists of multiple stages. While the counselling schedule varies for each round, the overall process generally remains the same. Before the commencement of every counselling round, AACCC publishes the seat matrix, schedule, and other important notifications on its official website.</p>
+                </div>
+                <div className={styles.stageList}>
+                  {[
+                    { num: 1, title: 'Stage 1: Registration', summary: 'Candidates who wish to participate in the All India BAMS counselling process must register online through the official AACCC portal during the registration window of the respective counselling round.', body: 'Fresh registration is generally required for each eligible counselling phase except where AACCC specifically carries forward registrations, such as certain phases of the Stray Vacancy Round, subject to the counselling guidelines issued for that admission year.' },
+                    { num: 2, title: 'Stage 2: Payment of Counselling Fees', summary: 'After completing registration, candidates must pay the prescribed counselling fee online.', body: 'fee-table' },
+                    { num: 3, title: 'Stage 3: Choice Filling', summary: 'Registered candidates must select their preferred BAMS colleges and arrange them in the order of preference. Candidates may add, modify, delete, or rearrange their choices until the choice filling window closes.', body: 'Choice filling is conducted separately for every counselling round. Choices submitted in one round are generally not carried forward to the subsequent rounds unless specifically notified by AACCC.' },
+                    { num: 4, title: 'Stage 4: Choice Locking', summary: 'Once the preferred colleges have been selected, candidates must lock their choices before the deadline. After locking, the selected choices cannot be modified for that counselling round.', body: 'If a candidate does not manually lock the choices before the deadline, AACCC may automatically lock the last saved choices.' },
+                    { num: 5, title: 'Stage 5: Seat Allotment', summary: 'Candidates who are not allotted a seat in one round may participate in subsequent counselling rounds, subject to AACCC eligibility rules.', body: 'seat-factors' },
+                    { num: 6, title: 'Stage 6: Seat Allotment Result', summary: 'AACCC publishes the seat allotment results on its official website after completing the allotment process. Candidates can download their allotment letter and proceed with the next admission formalities if a seat has been allotted.', body: 'Note: AACCC may publish a provisional result before releasing the final seat allotment result whenever required.' },
+                    { num: 7, title: 'Stage 7: Reporting to the Allotted College', summary: 'Candidates allotted a seat must report to the respective college within the prescribed reporting period. Candidates who fail to report within the stipulated deadline may forfeit their allotted seat.', body: 'reporting-list' }
+                  ].map((stage, i) => (
+                    <div key={stage.num} className={`${styles.stageItem} ${styles.animateOnScroll} ${i > 0 ? styles[`delay${Math.min(i, 4)}` as keyof typeof styles] || '' : ''}`}>
+                      <div className={styles.stageNode}>{stage.num}</div>
+                      <div className={styles.stageCard} data-stage>
+                        <div className={styles.stageTop}>
+                          <h4>{stage.title}</h4>
+                        </div>
+                        <p className={styles.stageSummary}>{stage.summary}</p>
+                        <div className={styles.stageBody}>
+                          {stage.body === 'fee-table' ? (
+                            <>
+                              <div className={styles.feeBox}>
+                                <p>The counselling fee consists of:</p>
+                                <ul className={styles.feeList}>
+                                  <li><i className="fas fa-check-circle" /> Non-Refundable Registration Fee</li>
+                                  <li><i className="fas fa-check-circle" /> Refundable Security Deposit</li>
+                                </ul>
+                              </div>
+                              <div className={styles.stageBodyInner}>
+                                <div className={styles.tableWrap}>
+                                  <table>
+                                    <thead>
+                                      <tr>
+                                        <th>Counselling Category</th>
+                                        <th>Category</th>
+                                        <th>Registration Fee</th>
+                                        <th>Refundable Security Deposit</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>AIQ Government Colleges, Government Aided Colleges, Central Universities &amp; National Institutes</td>
+                                        <td>UR EWS OBC NCL</td>
+                                        <td>Rs. 1,000</td>
+                                        <td>Rs. 20,000</td>
+                                      </tr>
+                                      <tr>
+                                        <td>AIQ Government Colleges, Government Aided Colleges, Central Universities &amp; National Institutes</td>
+                                        <td>SC ST PwBD</td>
+                                        <td>Rs. 500</td>
+                                        <td>Rs. 20,000</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Deemed Universities</td>
+                                        <td>All Categories</td>
+                                        <td>Rs. 5,000</td>
+                                        <td>Rs. 50,000</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <p style={{ marginTop: 10, fontSize: 16 }}><strong>Note:</strong> Candidates opting for both Government and Deemed University counselling must pay the higher applicable fee.</p>
+                              </div>
+                            </>
+                          ) : stage.body === 'seat-factors' ? (
+                            <div className={styles.stageBodyInner}>
+                              <strong>AACCC processes seat allotment based on multiple factors, including:</strong>
+                              <ul><li>NEET UG 2026 Rank</li><li>Candidate Category</li><li>Reservation Policy</li><li>Availability of Seats</li><li>Order of College Preferences</li></ul>
+                            </div>
+                          ) : stage.body === 'reporting-list' ? (
+                            <div className={styles.stageBodyInner}>
+                              <strong>The admission process generally includes:</strong>
+                              <ul><li>Document Verification</li><li>Submission of Original Documents</li><li>Payment of Admission Fees</li><li>Completion of College Admission Formalities</li></ul>
+                            </div>
+                          ) : (
+                            <div className={styles.stageBodyInner}>{stage.body}</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* ─── MINI CTA ─── */}
+            <section className={styles.miniCta}>
+              <div className={styles.miniCtaContent}>
+                <div className={styles.miniCtaIcon}>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ color: 'var(--gold-light)' }}
+                  >
+                    <path
+                      d="M1.5 4.42 C0.14 4.9 1.21 9.08 2.67 10.83 C4.13 12.58 8.79 12.98 10.25 14.92 C11.71 16.86 11.03 22.99 11.42 22.5 C11.81 22.01 12.68 14.43 12.58 12.0 C12.48 9.57 12.68 9.18 10.83 7.92 C8.98 6.66 2.86 3.94 1.5 4.42 Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M20.75 1.5 C20.07 0.53 17.54 1.5 16.08 2.08 C14.62 2.66 12.39 3.44 12.0 5.0 C11.61 6.56 12.88 10.45 13.75 11.42 C14.62 12.39 16.18 11.41 17.25 10.83 C18.32 10.25 19.59 9.48 20.17 7.92 C20.75 6.36 21.43 2.47 20.75 1.5 Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div className={styles.miniCtaText}>
+                  <h2><span style={{ fontWeight: 400, fontSize: 25 }}>From NEET UG to BAMS,</span><br />We&apos;re With You Every Step.</h2>
+                </div>
+                <a href="tel:08022454991" className={styles.miniCtaBtn} data-enquiry-trigger>
+                  <i className="bi bi-telephone-fill" />
+                  Enquire Now
+                </a>
+              </div>
+            </section>
+
+            {/* ─── KEA COUNSELLING ─── */}
+            <section className={`${styles.bamsSection} ${styles.keaSection}`} id="kea-counselling">
+              <div className={`${styles.wrap} ${styles.keaWrap}`}>
+                <h2 className={`${styles.keaTitle} ${styles.animateOnScroll}`}>Karnataka AYUSH Counselling 2026 Process</h2>
+                <p className={`${styles.keaLead} ${styles.animateOnScroll}`}>
+                  The Karnataka AYUSH counselling process is conducted by the Karnataka Examinations Authority
+                  (KEA) for admission to AYUSH courses across the state. Candidates must qualify
+                  NEET UG 2026 and complete the KEA counselling registration to participate.
+                </p>
+
+                <div className={`${styles.keaSummaryRow} ${styles.animateOnScroll}`}>
+                  <div className={styles.keaSummaryCard}>
+                    <span className={styles.keaSummaryLabel}>Conducted by</span>
+                    <span className={styles.keaSummaryValue}>KEA, Government of Karnataka</span>
+                  </div>
+                  <div className={styles.keaSummaryCard}>
+                    <span className={styles.keaSummaryLabel}>Eligibility</span>
+                    <span className={styles.keaSummaryValue}>NEET UG 2026 + KEA Registration</span>
+                  </div>
+                </div>
+
+                <p className={`${styles.keaSubhead} ${styles.animateOnScroll}`}>KEA Conducts Counselling For</p>
+                <div className={`${styles.keaScopeGrid} ${styles.animateOnScroll}`}>
+                  {[
+                    { cls: styles.keaScopeIconInk, label: 'Government Quota seats in Government AYUSH colleges', path: <path d="M3 10l9-6 9 6M5 10v9M19 10v9M9 10v9M15 10v9M3 21h18" /> },
+                    { cls: styles.keaScopeIconGold, label: 'Private Quota seats in Private AYUSH colleges', path: <><path d="M3 21h7V9l-3.5-2L3 9v12z" /><path d="M10 21h11V6l-4-3-4 3v15z" /></> },
+                    { cls: styles.keaScopeIconRust, label: 'Management Quota seats in Private AYUSH colleges', path: <><rect x="3" y="8" width="18" height="12" rx="2" /><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><path d="M3 13h18" /></> },
+                    { cls: styles.keaScopeIconInk, label: 'NRI Quota seats in Private AYUSH colleges', path: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z" /></> }
+                  ].map((item, i) => (
+                    <div key={i} className={styles.keaScopeCard}>
+                      <div className={`${styles.keaScopeIcon} ${item.cls}`}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">{item.path}</svg>
+                      </div>
+                      <div className={styles.keaScopeLabel}>{item.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className={`${styles.keaCallout} ${styles.animateOnScroll}`}>
+                  <InfoSvg />
+                  <span>Candidates must register through the official KEA counselling portal and complete the prescribed admission formalities within the notified schedule to become eligible for seat allotment.</span>
+                </div>
+
+                <p className={`${styles.keaSubhead} ${styles.animateOnScroll}`}>Counselling Process</p>
+                <div data-kea-timeline-wrap className={styles.animateOnScroll}>
+                  <ul className={styles.keaTimeline}>
+                    {['Round 1', 'Round 2', 'Mop Up Round'].map((name, i) => (
+                      <li key={i} className={styles.keaRound}>
+                        <div className={styles.keaRoundIndex}>{i + 1}</div>
+                        <div className={styles.keaRoundName}>{name}</div>
+                      </li>
+                    ))}
+                    <li className={`${styles.keaRound} ${styles.keaRoundSvr}`} role="button" tabIndex={0} aria-expanded="false" data-kea-svr>
+                      <div className={`${styles.keaRoundIndex} ${styles.keaRoundIndexActive}`}>
+                        <ChevronDownSvg />
+                      </div>
+                      <div className={styles.keaRoundName}>Stray Vacancy Round</div>
+                    </li>
+                  </ul>
+                  <div className={styles.keaAccordion} data-kea-panel>
+                    <div className={styles.keaAccordionInner}>
+                      <div className={styles.keaSvrCard}>
+                        <h4><strong>Note: </strong>The Mop Up Round is conducted if seats remain vacant after Round 2. If vacancies still exist after the Mop Up Round, KEA may conduct one or more Stray Vacancy Rounds in accordance with the counselling schedule and seat availability.</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* ─── KEA STAGES ─── */}
+            <section className={`${styles.bamsSection} ${styles.keaSectionTwo}`}>
+              <div className={styles.wrap}>
+                <div className={`${styles.sectionHead} ${styles.sectionHeadCenter} ${styles.animateOnScroll}`}>
+                  <h2>KEA NEET UG AYUSH Counselling 2026 Stages</h2>
+                  <p>The Karnataka Examinations Authority (KEA) conducts the AYUSH counselling process through multiple stages. Candidates must complete each stage within the prescribed timeline to remain eligible for seat allotment.</p>
+                </div>
+                <div className={styles.stageList}>
+                  {[
+                    { num: 1, title: 'Stage 1: Online Registration', summary: 'The counselling process begins with online registration on the official KEA website. Registration is considered complete only after the successful submission of the application and payment of the counselling fee.', bodyTitle: 'Candidates must:', items: ['Register using the prescribed application form.', 'Enter the required personal, academic, and NEET UG details.', 'Upload the necessary documents, if applicable.', 'Pay the prescribed counselling fee within the specified deadline.'] },
+                    { num: 2, title: 'Stage 2: Document Verification', summary: 'After registration, eligible candidates must complete document verification as per the schedule announced by KEA. During this stage, the authorities verify the candidate\'s eligibility, reservation claims, and supporting documents.', bodyText: 'Candidates who successfully complete the verification process receive a verification acknowledgement, enabling them to participate in the subsequent counselling stages.' },
+                    { num: 3, title: 'Stage 3: Option Entry', summary: 'Verified candidates can participate in the option entry process. The order of preferences plays an important role in determining seat allotment.', bodyTitle: 'During this stage, candidates must:', items: ['Select their preferred AYUSH colleges and courses.', 'Arrange the selected options in the order of preference.', 'Modify, add, or delete choices within the option entry period.'] },
+                    { num: 4, title: 'Stage 4: Mock Seat Allotment', summary: 'Before the final allotment, KEA generally publishes a mock seat allotment based on the options entered by candidates.', bodyTitle: 'The mock allotment enables candidates to:', items: ['Understand their probable allotment.', 'Analyse their admission chances.', 'Revise their option entry before the final seat allotment.'], bodyNote: 'The mock allotment is indicative in nature and does not guarantee the final allotment.' },
+                    { num: 5, title: 'Stage 5: Final Seat Allotment', summary: 'Following the option entry period, KEA publishes the final seat allotment results. Candidates can download their allotment letter through the KEA portal.', bodyTitle: 'Seat allotment is based on factors such as:', items: ['NEET UG Rank', 'Candidate Category', 'Reservation Policy', 'Availability of Seats', 'Order of Preferences'] },
+                    { num: 6, title: 'Stage 6: Post Allotment Process', summary: 'Candidates allotted a seat must complete the admission formalities within the prescribed deadline. Failure to complete the required formalities within the specified timeline may result in cancellation of the allotted seat.', bodyTitle: 'The process in this stage includes:', items: ['Selecting the appropriate admission option as notified by KEA.', 'Payment of the prescribed fees.', 'Reporting to the allotted college.', 'Completion of document verification and admission formalities at the institute.'], bodyNote: 'Note: KEA follows a structured seat allotment methodology based on merit, reservation policies, category wise seat availability, and candidate preferences.' }
+                  ].map((stage, i) => (
+                    <div key={stage.num} className={`${styles.stageItem} ${styles.animateOnScroll} ${i > 0 ? styles[`delay${Math.min(i, 4)}` as keyof typeof styles] || '' : ''}`}>
+                      <div className={`${styles.stageNode} ${styles.stageNodeGold}`}>{stage.num}</div>
+                      <div className={styles.stageCard} data-stage>
+                        <div className={styles.stageTop}><h4>{stage.title}</h4></div>
+                        <p className={styles.stageSummary}>{stage.summary}</p>
+                        <div className={styles.stageBody}>
+                          <div className={styles.stageBodyInner}>
+                            {'bodyText' in stage && stage.bodyText ? (
+                              <>{stage.bodyText}</>
+                            ) : (
+                              <>
+                                {'bodyTitle' in stage && <p><strong>{stage.bodyTitle}</strong></p>}
+                                {stage.items && <ul>{stage.items.map((item, j) => <li key={j}>{item}</li>)}</ul>}
+                                {'bodyNote' in stage && stage.bodyNote && <p><strong>{stage.bodyNote}</strong></p>}
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* ─── DOCUMENTS ─── */}
+            <section className={`${styles.bamsSection} ${styles.docsSection}`}>
+              <div className="container">
+                <h2 className={styles.docsTitle}>BAMS Counselling Documents Required for 2026</h2>
+                <p className="text-center">Candidates participating in the BAMS counselling process should keep the following original documents and a few sets of self attested photocopies ready for verification and admission.</p>
+                <div className={styles.docsGrid} id="docsGrid">
+                  {DOCUMENTS.map((doc, i) => (
+                    <div key={i} className={styles.docItem} style={{ '--i': i } as React.CSSProperties} data-doc-item>
+                      <span className={styles.docCheck}><CheckSvg /></span>
+                      <span className={styles.docText}>{doc}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className={styles.docsNote} role="alert">
+                  <WarningSvg />
+                  <p><strong>Note:</strong> The list of required documents may vary depending on the counselling authority (AACCC or State Counselling Authority), the allotted institution, and the candidate&apos;s reservation category. Candidates are advised to refer to the latest official counselling notification before reporting for admission.</p>
+                </div>
+              </div>
+            </section>
+
+            {/* ─── RANK PREDICTOR ─── */}
+            <section className={`${styles.bamsSection} ${styles.predictorSection}`} id="predictor">
+              <div className={styles.wrap}>
+                <BamsPredictorClient />
+              </div>
+            </section>
+
+            {/* ─── TOP COLLEGES ─── */}
+            <section className={styles.ccSection} id="colleges">
+              <div className={styles.ccContainer}>
+                <div className={`${styles.sectionHead} ${styles.sectionHeadCenter}`}>
+                  <h2>Top BAMS Colleges in Karnataka</h2>
+                  <p>Below is a list of some of the top NEET AYUSH counselling-participating colleges in Karnataka.</p>
+                </div>
+                <div className={styles.ccGrid}>
+                  {COLLEGES.map((college, i) => (
+                    <div key={i} className={styles.ccCard}>
+                      <div className={styles.ccLogo}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={college.img} alt={`${college.name} logo`} width={76} height={76} />
+                      </div>
+                      <h3 className={styles.ccName}>{college.name}</h3>
+                      <p className={styles.ccLocation}><LocationSvg />{college.city}</p>
+                      <button className={styles.ccBtn} data-enquiry-trigger>Enquire Now</button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* ─── FAQ ─── */}
+            <section className={`${styles.bamsSection} ${styles.faqSection}`} id="faqs">
+              <div className="container">
+                <div className="row align-items-start g-5">
+                  <div className="col-lg-4">
+                    <div className={styles.faqHeading}>
+                      <h2>Frequently Asked Questions</h2>
+                      <p>Find answers to the most common questions about BAMS Counselling 2026.</p>
+                    </div>
+                  </div>
+                  <div className="col-lg-8">
+                    <div className={`accordion ${styles.faqAccordion}`} id="faqAccordion">
+                      {FAQS.map((faq, i) => (
+                        <div key={i} className="accordion-item">
+                          <h2 className="accordion-header">
+                            <button className={`accordion-button ${i > 0 ? 'collapsed' : ''}`} type="button" data-bs-toggle="collapse" data-bs-target={`#faq${i}`}>
+                              {faq.q}
+                            </button>
+                          </h2>
+                          <div id={`faq${i}`} className={`accordion-collapse collapse ${i === 0 ? 'show' : ''}`} data-bs-parent="#faqAccordion">
+                            <div className="accordion-body">{faq.a}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <div className={`col-lg-12 text-center p-3 f700 ${styles.manyFaq}`} id='FAQs'>
-                  &amp; Many More!
+              </div>
+            </section>
+
+            {/* ─── FINAL CTA ─── */}
+            <section
+              className={styles.finalCta}
+              id="contact"
+              style={{
+                background: `linear-gradient(rgba(255,255,255,0), rgba(18,32,70,0.598), rgba(18,32,70,.68)), url("${contactBg}") center/cover`
+              }}
+            >
+              <div className={styles.ctaContent}>
+                <h2>Secure Your BAMS Seat With Expert NEET UG Counselling</h2>
+                <div className={styles.finalActions}>
+                  <a href="tel:08022454991" className={styles.finalActionsBtn} data-enquiry-trigger>Enquire Now</a>
                 </div>
               </div>
             </section>
 
-            {/* ─── Contact CTA Banner ─── */}
-            <section className='container-fluid d-flex align-items-center pt-3 pb-0 px-0' id='contactus'>
-              <div
-                className='container-fluid bgimage text-center d-flex justify-content-center align-items imgh'
-                style={{ background: `linear-gradient(341deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 0%)) , url(${contactbanner})` }}
-              >
-                <div className='ddAmb pe-md-5 me-md-5 mt-5'>
-                  <h2
-                    className='text-white p-3 headings-font mt-5'
-                    style={{
-                      background: 'rgb(0 2 62 / 48%)',
-                      borderRadius: '11px'
-                    }}
-                  >
-                    Secure Your BAMS Seat Today for A.Y. 2025-26 <br className='d-block d-md-block' />
-                    With Personalised BAMS NEET Counselling
-                  </h2>
-                  <button
-                    className={`btn btn-success mb-4 m-3 m-md-5 ${styles.fontWhite23} btnbdscolour btn ${styles.enquiebtn} rounded py-3 px-4`}
-                    data-enquiry-trigger
-                  >
-                    Enquire Now!
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            {/* ─── Footer ─── */}
-            <footer className={`pb-3 ${styles.bgfooter}`}>
-              {/* Desktop Footer */}
-              <div className='container-fluid align-item-start justify-content-between d-none d-md-flex flex-wrap'>
-                <div className='footer-left col-md-7 d-flex ps-5'>
-                  <div className='col-md-8'>
-                    <div className='ft-left mb-3 px-5' style={{ marginBottom: 20 }}>
+            {/* ─── FOOTER ─── */}
+            <footer className={styles.footer}>
+              <div className={styles.wrap}>
+                <div className={styles.footerWrapper}>
+                  <div className={styles.footerLeft}>
+                    <a href="#home" className={styles.footerLogo}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src='/images/footer650.webp' className={styles.imgfooter} alt='Learntech' />
-                    </div>
+                      <img src="/images/footer650.webp" alt="LearnTech" />
+                    </a>
+                    <p className={styles.footerTagline}>
+                      Dream. Apply. Achieve. Our Expert Admission Guidance is the Bridge that Connects You to a Brighter Future.
+                    </p>
                   </div>
-                </div>
-                <div className='footer-right col-md-5 offeset-md-1 d-flex'>
-                  <div className='social-unit col-md-5 w-100 px-5 justify-content-end'>
-                    <div>
-                      <p className={styles.fontWhite23} style={{ marginBottom: 10 }}>
-                        Connect with us
-                      </p>
-                      <a href='tel:08022454991' style={{ color: 'white', fontSize: 14, fontWeight: 400 }}>
-                        <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} /> 080-22454991
-                      </a>{' '}
-                      ,{' '}
-                      <a href='tel:08026631169' style={{ color: 'white', fontSize: 14, fontWeight: 400 }}>
-                        <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} /> 080-26631169
+                  <div className={styles.footerRight}>
+                    <h4>Connect with us</h4>
+                    <div className={styles.footerPhone}>
+                      <a href="tel:08022454991"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> 080-22454991</a>
+                      <a href="tel:08026631169"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> 080-26631169</a>
+                    </div>
+                    <div className={styles.footerPhone}>
+                      <a href="tel:09036020076"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> +91 9036020076</a>
+                      <a href="tel:18001208696"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> 1800 120 8696 (Toll Free)</a>
+                    </div>
+                    <div className={styles.footerPhone}>
+                      <a href="tel:+971502436552"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> +971 585672211 (Dubai)</a>
+                    </div>
+                    <div className={styles.footerSocial}>
+                      <a href="https://www.facebook.com/learntechedu" target="_blank" rel="noopener noreferrer"><i className="bi bi-facebook" /></a>
+                      <a href="https://x.com/learntechww" target="_blank" rel="noopener noreferrer">
+                        <Image width={20} height={20} src="/images/icons/twitter-x.png" alt="Twitter" style={{ filter: 'brightness(0) invert(1)' }} />
                       </a>
-                      <br />
-                      <div className='bs-phone' style={{ display: 'contents' }}>
-                        <a href='tel:09036020076' style={{ color: 'white', fontSize: 14, fontWeight: 400 }}>
-                          <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} /> +91 9036020076 ,
-                        </a>{' '}
-                        <a href='tel:18001208696' style={{ color: 'white', fontWeight: 400, fontSize: 14 }}>
-                          <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} /> 1800 120 8696 (Toll Free)
-                        </a>
-                      </div>
-                      <p>
-                        <a href='tel:971502436552' style={{ color: 'white', fontSize: 14, fontWeight: 400 }}>
-                          <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} /> +971 502436552 (Dubai)
-                        </a>
-                      </p>
-                    </div>
-                    <div className='text-center'>
-                      <p style={{ marginTop: 10, marginBottom: 14 }} className='d-block pe-5 d-flex'>
-                        <a target='_blank' rel='noopener noreferrer' href='https://www.facebook.com/learntechedu'>
-                          <i className='bi bi-facebook' style={{ color: 'white' }} />
-                          &nbsp;&nbsp;&nbsp;
-                        </a>
-                        <a target='_blank' rel='noopener noreferrer' href='https://x.com/learntechww'>
-                          <Image
-                            width={20}
-                            height={20}
-                            className={`icon-white me-3 ${styles.twitterWidth}`}
-                            src='/images/icons/twitter-x.png'
-                            alt='twitter-icon'
-                          />
-                        </a>
-                        <a target='_blank' rel='noopener noreferrer' href='https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w'>
-                          <i className='bi bi-youtube' style={{ color: 'white' }} />
-                          &nbsp;&nbsp;&nbsp;
-                        </a>
-                        <a target='_blank' rel='noopener noreferrer' href='https://www.instagram.com/learntechedus/'>
-                          <i className='bi bi-instagram' style={{ color: 'white' }} />
-                          &nbsp;&nbsp;&nbsp;
-                        </a>
-                        <a target='_blank' rel='noopener noreferrer' href='https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/'>
-                          <i className='bi bi-linkedin' style={{ color: 'white' }} />
-                          &nbsp;&nbsp;&nbsp;
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Mobile Footer */}
-              <div className='container align-item-start justify-content-between d-md-none'>
-                <div className='footer-left pt-4 col-md-7 text-center'>
-                  <div className='ft-left mb-3' style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src='/images/Learntech325.webp' className={styles.imgfooter} alt='Learntech' />
-                  </div>
-                </div>
-                <div className='footer-right col-md-5 offeset-md-1 py-t d-flex pt-0 mt-0'>
-                  <div className='app-unit col-md-7 col-md-5' />
-                  <div className='social-unit col-md-5 mt-4 pb-5'>
-                    <div>
-                      <p className={styles.fontWhite23}>Connect with us</p>
-                      <a href='tel:08022454991' style={{ color: 'white', fontSize: 14, fontWeight: 400 }}>
-                        <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} /> 080-224549911 ,
-                      </a>{' '}
-                      ,{' '}
-                      <a href='tel:08026631169' style={{ color: 'white', fontSize: 14, fontWeight: 400 }}>
-                        <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} />
-                        080-26631169
-                      </a>
-                      <div className='bs-phone' style={{ display: 'contents' }}>
-                        <br />
-                        <a href='tel:09036020076' style={{ color: 'white', fontSize: 14, fontWeight: 400 }}>
-                          <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} /> +91 9036020076 ,
-                        </a>{' '}
-                        <a href='tel:18001208696' style={{ color: 'white', fontWeight: 400, fontSize: 14 }}>
-                          <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} />
-                          1800 120 8696 (Toll Free)
-                        </a>
-                      </div>
-                      <p>
-                        <a href='tel:970502436552' style={{ color: 'white', fontSize: 14, fontWeight: 400 }}>
-                          <i className='bi bi-telephone-fill' style={{ fontSize: 13 }} /> +971 502436552 (Dubai)
-                        </a>
-                      </p>
-                    </div>
-                    <div className='text-center'>
-                      <p style={{ marginTop: 10, marginBottom: 14 }} className='d-block pe-5 d-flex'>
-                        <a target='_blank' rel='noopener noreferrer' href='https://www.facebook.com/learntechedu'>
-                          <i className='bi bi-facebook' style={{ color: 'white' }} />
-                          &nbsp;&nbsp;&nbsp;
-                        </a>
-                        <a target='_blank' rel='noopener noreferrer' href='https://x.com/learntechww'>
-                          <Image
-                            width={20}
-                            height={20}
-                            className={`icon-white me-3 ${styles.twitterWidth}`}
-                            src='/images/icons/twitter-x.png'
-                            alt='twitter-icon'
-                          />
-                        </a>
-                        <a target='_blank' rel='noopener noreferrer' href='https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w'>
-                          <i className='bi bi-youtube' style={{ color: 'white' }} />
-                          &nbsp;&nbsp;&nbsp;
-                        </a>
-                        <a target='_blank' rel='noopener noreferrer' href='https://www.instagram.com/learntechedus/'>
-                          <i className='bi bi-instagram' style={{ color: 'white' }} />
-                          &nbsp;&nbsp;&nbsp;
-                        </a>
-                        <a target='_blank' rel='noopener noreferrer' href='https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/'>
-                          <i className='bi bi-linkedin' style={{ color: 'white' }} />
-                          &nbsp;&nbsp;&nbsp;
-                        </a>
-                      </p>
+                      <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target="_blank" rel="noopener noreferrer"><i className="bi bi-youtube" /></a>
+                      <a href="https://www.instagram.com/learntechedus/" target="_blank" rel="noopener noreferrer"><i className="bi bi-instagram" /></a>
+                      <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target="_blank" rel="noopener noreferrer"><i className="bi bi-linkedin" /></a>
                     </div>
                   </div>
                 </div>
               </div>
             </footer>
-          </section>
-      </BamsEnquiryTriggerClient>
+
+          </BamsInteractiveClient>
+        </BamsEnquiryTriggerClient>
+
+        {/* ─── FLOATING ICONS ─── */}
+        <a href="tel:08022454991" className={styles.phoneFloat}>
+          <i className="bi bi-telephone-fill" style={{ fontSize: 29, color: 'white' }} />
+        </a>
+        <a href="https://api.whatsapp.com/send?phone=919036020076" target="_blank" rel="noopener noreferrer" className={styles.whatsappFloat}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/bams/whatsappc.gif" alt="WhatsApp" width={63} height={64} />
+        </a>
+      </div>
     </>
   )
 }

@@ -178,7 +178,7 @@ export default function BamsPredictorModalClient({ open, onClose }: Props) {
             <button
               type='submit'
               disabled={isSubmitting}
-              className={`btn btn-primary ${styles.btnModel} mt-2 py-3`}
+              className={`${styles.formSubmit} ${styles.btnModel} mt-2 py-3`}
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
