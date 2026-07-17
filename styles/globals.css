@@ -4368,11 +4368,11 @@
   }
 
   .linkFontSize {
-    font-size: 17px !important;
+    font-size: 16px !important;
   }
 
   .linkFontSize a:hover {
-    font-size: 17px !important;
+    font-size: 16px !important;
     color: rgb(39, 72, 150) !important;
     font-weight: bold !important;
   }
