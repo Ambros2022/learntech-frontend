@@ -692,3 +692,26 @@ export const getSitemapData = cache(async () => {
   )
   return json?.data ?? null
 })
+
+// ─────────────────────────────────────────────────────────────────────────────
+// UPCOMING EXAMS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface UpcomingExam {
+  id: number
+  exam_title: string
+  slug: string
+  upcoming_date: string
+}
+
+export const getUpcomingExams = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/exams/get?orderby=desc&columnname=upcoming_date`,
+    { tags: ['upcoming-exams'] },
+  )
+  if (!json || json.status !== 1) return []
+  const now = new Date()
+  return (json.data as UpcomingExam[])
+    .filter(e => new Date(e.upcoming_date) >= now)
+    .sort((a, b) => new Date(a.upcoming_date).getTime() - new Date(b.upcoming_date).getTime())
+})

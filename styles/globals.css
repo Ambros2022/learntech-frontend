@@ -1345,15 +1345,6 @@
   }
 
 
-  .collegeBannerCon {
-    height: 300px !important;
-  }
-
-  .collegeBannerCon>.position-relative img {
-    object-fit: cover !important;
-    width: 100% !important;
-    height: 300px !important;
-  }
 
   .bg-skyBlue {
     background-color: #f6f8fb !important;
@@ -3082,18 +3073,13 @@
   }
 
   .examBannerCon {
-    height: 500px !important;
   }
 
   .examBannerCon .popularcourse {
     height: 150px !important;
   }
 
-  .examBannerCon img {
-    object-fit: cover !important;
-    height: 500px !important;
-    width: 100% !important;
-  }
+
 
   .examsBannerCon {
     height: 200px !important;

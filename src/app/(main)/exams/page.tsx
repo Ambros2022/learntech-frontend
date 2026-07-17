@@ -1,4 +1,4 @@
-import { getPageData, getCountries, getStreams, getNewsList } from 'src/lib/api/common'
+import { getPageData, getCountries, getStreams, getNewsList, getUpcomingExams, type UpcomingExam } from 'src/lib/api/common'
 import JsonLd from 'src/app/components/JsonLd'
 import MainExamPage from 'src/views/MainExamPage'
 
@@ -99,7 +99,8 @@ export default async function Page() {
     newsData,
     newsDataAbroad,
     examsRes,
-    abroadExamsRes
+    abroadExamsRes,
+    upcomingExams,
   ] = await Promise.all([
     getPageData('exams'),
     getCountries({ india: 'false' }),
@@ -107,8 +108,8 @@ export default async function Page() {
     getNewsList({ page: 1, size: 15, orderby: 'desc', columnname: 'created_at', country_id: 204, includeIndia: 'true' }),
     getNewsList({ page: 1, size: 15, orderby: 'desc', columnname: 'created_at', includeIndia: 'false' }),
     fetchExamsWithPagination({ page: 1, size: 9, isIndia: 'true' }),
-    // Abroad exams (Scholarships) - fetch page 1 size 9 first
     fetchExamsWithPagination({ page: 1, size: 9, isIndia: 'false' }),
+    getUpcomingExams(),
   ])
 
   const breadcrumbSchema = {
@@ -144,6 +145,7 @@ export default async function Page() {
         initialAbroadExams={abroadExamsRes?.data ?? []}
         initialAbroadExamsTotalPages={abroadExamsRes?.totalPages ?? 1}
         initialAbroadExamsTotalItems={abroadExamsRes?.totalItems ?? 0}
+        upcomingExams={upcomingExams ?? []}
       />
     </>
   )

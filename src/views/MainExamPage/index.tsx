@@ -1,3 +1,4 @@
+import { type UpcomingExam } from 'src/lib/api/common'
 import BannerSection from './Components/BannerSec'
 import TopExamSec from './Components/TopExamSec'
 import BrowsebyCategorySec from './Components/BrowseByCategorySec'
@@ -13,6 +14,7 @@ interface Props {
   initialAbroadExams: any[]
   initialAbroadExamsTotalPages: number
   initialAbroadExamsTotalItems: number
+  upcomingExams: UpcomingExam[]
 }
 
 // Server Component — no 'use client' or React lifecycle hooks.
@@ -28,10 +30,11 @@ export default function MainExamPage({
   initialAbroadExams,
   initialAbroadExamsTotalPages,
   initialAbroadExamsTotalItems,
+  upcomingExams,
 }: Props) {
   return (
     <>
-      <BannerSection />
+      <BannerSection upcomingExams={upcomingExams} />
       <TopExamSec data={pagedata} />
       <BrowsebyCategorySec
         countryData={countryData}
