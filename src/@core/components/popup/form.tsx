@@ -102,11 +102,11 @@ export default function EnquiryForm({ page, onChanges, placeholder, collegeName 
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" {...register('college_name')} />
       <div className="mb-3">
-        <input type="text" placeholder="Enter Name" className="form-control" {...register('name')} />
+        <input type="text" placeholder="Full Name*" className="form-control" {...register('name')} />
         {errors.name && <div className="error text-danger">{errors.name.message}</div>}
       </div>
       <div className="mb-3">
-        <input type="email" placeholder="Enter Email" className="form-control" {...register('email')} />
+        <input type="email" placeholder="Email ID*" className="form-control" {...register('email')} />
         {errors.email && <div className="error text-danger">{errors.email.message}</div>}
       </div>
       <div className="mb-3">
@@ -120,18 +120,18 @@ export default function EnquiryForm({ page, onChanges, placeholder, collegeName 
       <div className="mb-3">
         <input
           type="text"
-          placeholder={placeholder ? `Enter ${placeholder}` : 'Enter Course'}
+          placeholder={placeholder ? `Enter ${placeholder}` : 'Interested Course*'}
           className="form-control"
           {...register('course')}
         />
         {errors.course && <div className="error text-danger">{errors.course.message}</div>}
       </div>
       <div className="mb-3">
-        <input type="text" placeholder="Enter Location" className="form-control" {...register('location')} />
+        <input type="text" placeholder="Location*" className="form-control" {...register('location')} />
         {errors.location && <div className="error text-danger">{errors.location.message}</div>}
       </div>
       <div className="mb-3">
-        <textarea placeholder="Enter Message" className="form-control" {...register('message')} />
+        <textarea placeholder="Type your message" className="form-control" {...register('message')} />
         {errors.message && <div className="error text-danger">{errors.message.message}</div>}
       </div>
       <div className="mb-3 form-check">

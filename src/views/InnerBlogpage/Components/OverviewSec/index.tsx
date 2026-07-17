@@ -1,13 +1,13 @@
-import { Roboto } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import NewsList from '../newsList'
 import BlogList from '../blogsList'
 import ContactForm from 'src/@core/components/popup/ContactForm'
 import { LazyFaqSec as FaqSec } from 'src/app/components/ClientWrappers'
 
 // Self-hosted at build by next/font (no CDN request)
-const roboto = Roboto({
+const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 })
 
@@ -28,7 +28,7 @@ const OverviewSec = ({ data, newsData, blogsData }: any) => {
   const processedHTML = fixImages(data?.overview)
 
   return (
-    <section className={`innerBlogSec bg-white pt-3 ${roboto.className}`}>
+    <section className={`innerBlogSec bg-white pt-3 ${poppins.className}`}>
       <div className="container">
         <div className="row">
           {/* Left Column */}
