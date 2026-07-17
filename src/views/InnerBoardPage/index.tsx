@@ -4,6 +4,7 @@ import LocationSection from './Components/LocateSection'
 import TopFeaturedColleges from './Components/TopFeaturedColleges'
 import { Breadcrumb } from 'src/app/components/Breadcrumb'
 
+
 function formatDate(dateString: string): string {
   const date = new Date(dateString)
   const day = date.getDate()
@@ -36,14 +37,12 @@ export default function InnerBoardPage({ pagedata, exams, schools }: Props) {
   return (
     <>
       <BannerSection data={pagedata} />
-      <div className="container InnerCollegeNavigationLink linkFontSize py-3">
         <Breadcrumb
           items={[
             { label: 'Boards', href: '/boards' },
             { label: pagedata.short_name },
           ]}
         />
-      </div>
       <CollegeInfoSection data={pagedata} exams={upcomingExams} />
       <LocationSection data={pagedata} />
       <TopFeaturedColleges schools={schools} />

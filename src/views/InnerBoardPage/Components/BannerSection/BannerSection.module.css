@@ -99,6 +99,11 @@
 }
 
 .enquireBtn {
+      background-color: #059905 !important;
+    color: #fff !important;
+    width: 200px !important;
+    height: 50px !important;
+
   background-color: #059905;
   color: #fff;
   border: 0;
