@@ -1,0 +1,35 @@
+.analysisSection {
+  background-color: rgba(39, 72, 150, 0.04) !important;
+}
+
+.analysisSection h4 {
+  color: #254692;
+}
+
+.analysisSection h6 {
+  color: black;
+  font-weight: bold;
+}
+
+.analysisSection img {
+  width: 60%;
+  height: auto;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .analysisSection h6 {
+    font-size: 0.8rem;
+  }
+
+  .analysisSection img {
+    width: 80%;
+    height: auto;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .analysisSection img {
+    width: 70%;
+    height: auto;
+  }
+}

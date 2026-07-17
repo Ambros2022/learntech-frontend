@@ -383,18 +383,7 @@
     border-radius: 100%;
   }
 
-  .Analysis-Section {
-    background-color: rgba(39, 72, 150, 0.04) !important;
-  }
 
-  .Analysis-Section h4 {
-    color: #254692;
-  }
-
-  .Analysis-Section h6 {
-    color: black;
-    font-weight: bold;
-  }
 
   .latestNewsCon {
     background-color: rgba(39, 72, 150, 0.04) !important;
@@ -552,36 +541,7 @@
     font-size: 15px !important;
   }
 
-  .studyAbroadNav a {
-    border-radius: 10px !important;
-    width: 130px;
-    color: #254692 !important;
-    text-decoration: none !important;
-    border: 1px solid #254692 !important;
-    text-align: center !important;
-    background-color: #f6f8fb;
-    margin: 0 auto !important;
-    padding: 5px !important;
-    font-size: 15px !important;
-  }
 
-  .studyAbroadNav a:hover {
-    font-weight: bold !important;
-    color: white !important;
-    background-color: #254692 !important;
-  }
-
-  .studyAbroadNav .active-country {
-    font-weight: bold !important;
-    color: white !important;
-    background-color: #254692 !important;
-  }
-
-  .studyAbroadNav .active:hover {
-    font-weight: bold !important;
-    color: white !important;
-    background-color: #254692 !important;
-  }
 
   .btn-success2 {
     background-color: #198754 !important;
@@ -612,10 +572,7 @@
     filter: brightness(0) invert(1);
   }
 
-  .Analysis-Section img {
-    width: 60%;
-    height: auto;
-  }
+
 
 
 
@@ -775,19 +732,7 @@
     margin-right: -50px !important;
   }
 
-  .StudyAbroadCon .carousel-button-group {
-    position: absolute !important;
-    top: 135px !important;
-    width: 100%;
-  }
 
-  .StudyAbroadCon .fi-left {
-    margin-left: -35px !important;
-  }
-
-  .StudyAbroadCon .fi-right {
-    margin-right: -10px !important;
-  }
 
   .card-con {
     position: relative !important;
@@ -1004,14 +949,7 @@
     }
 
 
-    .Analysis-Section h6 {
-      font-size: 0.8rem;
-    }
 
-    .Analysis-Section img {
-      width: 80%;
-      height: auto;
-    }
 
     .dropdownBtn .btn {
       font-size: 12px !important;
@@ -1129,9 +1067,7 @@
 
 
 
-    .studyAbroadNav a {
-      width: 100% !important;
-    }
+
 
     .card-con {
       margin: 25px 0px !important;
@@ -1139,10 +1075,7 @@
 
 
 
-    .Analysis-Section img {
-      width: 70%;
-      height: auto;
-    }
+
 
     .carousel-indicators {
       display: none !important;
@@ -1245,9 +1178,7 @@
       margin-right: 0px !important;
     }
 
-    .StudyAbroadCon .carousel-button-group {
-      top: 135px !important;
-    }
+
 
     #exploreCardCon .mt-3 {
       margin: 1rem 0 !important;
@@ -1270,14 +1201,9 @@
 
   }
 
+
+
   @media (min-width: 320px) and (max-width: 424px) {
-    .studyAbroadNav a {
-      font-size: 15px !important;
-      margin: 0px 3px !important;
-
-
-    }
-
     .bannerCon .carousel-control-prev {
       left: 0px;
     }
@@ -1308,21 +1234,7 @@
     }
 
 
-    .StudyAbroadCon .fi-left {
-      margin-left: 8px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
 
-    .StudyAbroadCon .fi-right {
-      margin-right: 10px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .StudyAbroadCon .carousel-button-group {
-      top: 140px !important;
-    }
 
     .card-con .fi-left {
       margin-left: 0px !important;
@@ -3529,7 +3441,7 @@
 
     .latestNewsCon .card-text {
 
-      min-height: 88px !important;
+      min-height: 143px !important;
     }
 
     .examsBannerCon {
@@ -6133,4 +6045,4 @@
       font-size: 11px !important;
     }
   }
-
+

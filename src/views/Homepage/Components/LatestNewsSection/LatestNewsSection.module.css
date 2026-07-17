@@ -71,22 +71,28 @@
    Card  (replaces hover-card + responsive-card globals)
    ───────────────────────────────────────────────────────────────── */
 .card {
-  background: url('/images/icons/Card.webp') no-repeat center !important;
+  background-color: #ffffff !important;
+  background-image: url('/images/icons/Card.webp') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
   background-size: cover !important;
   height: auto !important;
   min-height: 200px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
   transition: box-shadow 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
 }
 
 @media (max-width: 768px) {
   .card {
+    background-color: #ffffff !important;
     background-size: contain !important;
     background-position: bottom !important;
     min-height: 309px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
   }
 }
 
@@ -174,5 +180,50 @@
   .cardText {
     font-size: 14px;
     min-height: 63px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Carousel custom arrow styles (outline-white cards for dark bg)
+   ───────────────────────────────────────────────────────────────── */
+.carouselContainer :global(.embla-side-arrow) {
+  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  width: 32px !important;
+  height: 52px !important;
+  font-size: 24px !important;
+  color: #ffffff !important;
+}
+
+.carouselContainer :global(.embla-side-arrow):hover {
+  border-color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .carouselContainer :global(.embla-carousel-root) {
+    padding: 55px 0 0 0 !important;
+  }
+
+  .carouselContainer :global(.embla-side-arrow) {
+    top: 15px !important;
+    bottom: auto !important;
+    transform: none !important;
+    height: 32px !important;
+    font-size: 20px !important;
+    border-radius: 6px !important;
+    z-index: 10 !important;
+  }
+
+  .carouselContainer :global(.left-arrow) {
+    left: auto !important;
+    right: calc(50% + 8px) !important;
+  }
+
+  .carouselContainer :global(.right-arrow) {
+    right: auto !important;
+    left: calc(50% + 8px) !important;
   }
 }

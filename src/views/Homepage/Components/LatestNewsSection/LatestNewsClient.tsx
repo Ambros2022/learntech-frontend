@@ -109,7 +109,7 @@ export default function LatestNewsClient({ initialNews }: Props) {
         </button>
       </div>
 
-      <div className="pt-4">
+      <div className={`pt-4 ${styles.carouselContainer}`}>
         {loading ? (
           <p className={styles.emptyState}>Loading…</p>
         ) : items.length > 0 ? (

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import EmblaCarousel from 'src/components/ui/Embla/EmblaTabCarousel'
 import CollegeCarouselClient from 'src/components/colleges/CollegeCarouselClient'
 import type { CollegeItem } from 'src/components/colleges/CollegeCard'
+import styles from './StudyAbroadSection.module.css'
 
 interface Country {
   id: number
@@ -60,7 +61,7 @@ export default function StudyAbroadClient({ countries, initialColleges, initialC
 
   return (
     <>
-      <div className="studyAbroadNav position-relative py-4 px-md-5 rounded" style={{ zIndex: 2 }}>
+      <div className={`${styles.navContainer} position-relative py-4 px-md-5 rounded`} style={{ zIndex: 2 }}>
         <EmblaCarousel
           variant="tabs"
           showDots={false}
@@ -78,7 +79,7 @@ export default function StudyAbroadClient({ countries, initialColleges, initialC
               aria-selected={activeCountry === country.id}
               onClick={() => selectCountry(country.id)}
               style={{ cursor: 'pointer' }}
-              className={`${activeCountry === country.id ? 'active-country' : ''} d-flex w-100 align-self-center btn btn-primary text-truncate text-center justify-content-center`}
+              className={`${activeCountry === country.id ? styles.activeCountry : ''} ${styles.navLink} text-truncate text-center`}
             >
               {country.name}
             </a>

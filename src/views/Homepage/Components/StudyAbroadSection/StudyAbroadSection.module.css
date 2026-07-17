@@ -1,0 +1,45 @@
+.navContainer {
+  /* container styles */
+}
+
+.navLink {
+  border-radius: 10px !important;
+  width: 130px;
+  color: #254692 !important;
+  text-decoration: none !important;
+  border: 1px solid #254692 !important;
+  text-align: center !important;
+  background-color: #f6f8fb;
+  margin: 0 auto !important;
+  padding: 5px !important;
+  font-size: 15px !important;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.navLink:hover {
+  font-weight: bold !important;
+  color: white !important;
+  background-color: #254692 !important;
+}
+
+.activeCountry {
+  font-weight: bold !important;
+  color: white !important;
+  background-color: #254692 !important;
+}
+
+@media (max-width: 768px) {
+  .navLink {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 424px) {
+  .navLink {
+    font-size: 15px !important;
+    margin: 0px 3px !important;
+  }
+}
