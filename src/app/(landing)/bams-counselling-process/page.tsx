@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import JsonLd from 'src/app/components/JsonLd'
 import styles from './BamsPage.module.css'
 
@@ -307,7 +306,7 @@ export default function BamsCounsellingProcessPage() {
                     { num: 3, title: 'Stage 3: Choice Filling', summary: 'Registered candidates must select their preferred BAMS colleges and arrange them in the order of preference. Candidates may add, modify, delete, or rearrange their choices until the choice filling window closes.', body: 'Choice filling is conducted separately for every counselling round. Choices submitted in one round are generally not carried forward to the subsequent rounds unless specifically notified by AACCC.' },
                     { num: 4, title: 'Stage 4: Choice Locking', summary: 'Once the preferred colleges have been selected, candidates must lock their choices before the deadline. After locking, the selected choices cannot be modified for that counselling round.', body: 'If a candidate does not manually lock the choices before the deadline, AACCC may automatically lock the last saved choices.' },
                     { num: 5, title: 'Stage 5: Seat Allotment', summary: 'Candidates who are not allotted a seat in one round may participate in subsequent counselling rounds, subject to AACCC eligibility rules.', body: 'seat-factors' },
-                    { num: 6, title: 'Stage 6: Seat Allotment Result', summary: 'AACCC publishes the seat allotment results on its official website after completing the allotment process. Candidates can download their allotment letter and proceed with the next admission formalities if a seat has been allotted.', body: 'Note: AACCC may publish a provisional result before releasing the final seat allotment result whenever required.' },
+                    { num: 6, title: 'Stage 6: Seat Allotment Result', summary: 'AACCC publishes the seat allotment results on its official website after completing the allotment process. Candidates can download their allotment letter and proceed with the next admission formalities if a seat has been allotted.', body: <><strong>Note:</strong> AACCC may publish a provisional result before releasing the final seat allotment result whenever required.</> },
                     { num: 7, title: 'Stage 7: Reporting to the Allotted College', summary: 'Candidates allotted a seat must report to the respective college within the prescribed reporting period. Candidates who fail to report within the stipulated deadline may forfeit their allotted seat.', body: 'reporting-list' }
                   ].map((stage, i) => (
                     <div key={stage.num} className={`${styles.stageItem} ${styles.animateOnScroll} ${i > 0 ? styles[`delay${Math.min(i, 4)}` as keyof typeof styles] || '' : ''}`}>
@@ -650,13 +649,21 @@ export default function BamsCounsellingProcessPage() {
                       <a href="tel:+971502436552"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> +971 585672211 (Dubai)</a>
                     </div>
                     <div className={styles.footerSocial}>
-                      <a href="https://www.facebook.com/learntechedu" target="_blank" rel="noopener noreferrer"><i className="bi bi-facebook" /></a>
-                      <a href="https://x.com/learntechww" target="_blank" rel="noopener noreferrer">
-                        <Image width={20} height={20} src="/images/icons/twitter-x.png" alt="Twitter" className={styles.twitterXIcon} />
+                      <a href="https://www.facebook.com/learntechedu" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="bi bi-facebook" /></a>
+                      <a href="https://x.com/learntechww" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.6.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" />
+                        </svg>
                       </a>
-                      <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target="_blank" rel="noopener noreferrer"><i className="bi bi-youtube" /></a>
-                      <a href="https://www.instagram.com/learntechedus/" target="_blank" rel="noopener noreferrer"><i className="bi bi-instagram" /></a>
-                      <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target="_blank" rel="noopener noreferrer"><i className="bi bi-linkedin" /></a>
+                      <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i className="bi bi-youtube" /></a>
+                      <a href="https://www.instagram.com/learntechedus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="bi bi-instagram" /></a>
+                      <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="bi bi-linkedin" /></a>
                     </div>
                   </div>
                 </div>
