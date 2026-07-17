@@ -30,7 +30,7 @@
 }
 
 .title {
-  font-size: 2.25rem;
+  font-size: 28px;
   font-weight: 700;
   color: #fff;
   margin-bottom: 1rem;
@@ -98,6 +98,24 @@
   color: #fff;
 }
 
+.enquireBtn {
+  background-color: #059905;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.enquireBtn:hover {
+  background-color: #047a04;
+  color: #fff;
+}
+
 /* ===== Tablet ===== */
 @media (max-width: 991.98px) {
   .title {
@@ -125,7 +143,8 @@
     padding-top: 1rem;
     padding-bottom: 1.5rem;
   }
-  .resultBtn {
+  .resultBtn,
+  .enquireBtn {
     width: 260px;
     margin-top: 0.5rem;
     text-align: center;

@@ -86,7 +86,7 @@ export default function BannerSection({ data }: { data: any }) {
               <i className="me-2 bi bi-alarm-fill" />
               Result Date: {formatDate(data.result_date)}
             </button>
-            <GlobalEnquiryForm className="align-content-center btn freeBtn" buttonText="Enquire Now" />
+            <GlobalEnquiryForm className={`align-content-center btn ${styles.enquireBtn}`} buttonText="Enquire Now" />
           </div>
         </div>
       </div>
