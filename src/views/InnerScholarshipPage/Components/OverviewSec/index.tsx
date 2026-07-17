@@ -1,35 +1,28 @@
-import React from 'react'
+import { LazyContactForm } from 'src/app/components/ClientWrappers'
+import ScholarshipList from '../ScholarshipList'
 
-import ContactForm from 'src/@core/components/popup/ContactForm';
-import ScholarshipList from '../ScholarshipList/index';
-
-
-const OverviewSec = ({ data, scholarship }) => {
-
-
-    return (
-        <section className='innerBlogSec bg-white py-3'>
-            <div className="container">
-                <h2 className='fw-bold text-blue mb-3'>{data.name}</h2>
-  
-
-                <div className="row mt-3">
-                    <div className="col-md-8">
-                        <p className='text-black'>  <div dangerouslySetInnerHTML={{ __html: data.overview }} /></p>
-
-
-                    </div>
-                    <div className="col-md-4 scholarh2">
-                        <div className='mb-5'>
-                            <ContactForm heading={'Contact Us'} />
-                        </div>
-
-                           <ScholarshipList newsItems={scholarship} />
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
+interface Props {
+  data: any
+  scholarships: any[]
 }
 
-export default OverviewSec
+export default function OverviewSec({ data, scholarships }: Props) {
+  return (
+    <section className='innerBlogSec bg-white py-3'>
+      <div className="container">
+        <h2 className='fw-bold text-blue mb-3'>{data.name}</h2>
+        <div className="row mt-3">
+          <div className="col-md-8">
+            <div dangerouslySetInnerHTML={{ __html: data.overview }} />
+          </div>
+          <div className="col-md-4 ">
+            <div className='mb-5'>
+              <LazyContactForm heading='Contact Us' />
+            </div>
+            <ScholarshipList newsItems={scholarships} />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

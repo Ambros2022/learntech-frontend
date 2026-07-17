@@ -1,38 +1,21 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path')
-
 /** @type {import('next').NextConfig} */
 module.exports = {
-
-  trailingSlash: false, // REMOVE
-  skipTrailingSlashRedirect: true, // REMOVE
+  trailingSlash: false,
+  skipTrailingSlashRedirect: true,
 
   images: {
-    domains: ['api.learntechww.com', 'learntechww.com']
+    remotePatterns: [
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'https', hostname: 'api.learntechww.com' },
+      { protocol: 'https', hostname: 'newapi.learntechww.com' },
+      { protocol: 'https', hostname: 'learntechww.com' },
+    ],
   },
-  async redirects() {
-    return [
-      {
-        source: '/:path((?!.*\\/).+)',
-        has: [
-          {
-            type: 'header',
-            key: 'x-vercel-id'
-          }
-        ],
-        permanent: true, // 🔁 This forces a 301 instead of 308
-        destination: '/:path/'
-      }
-    ]
-  },
-  swcMinify: true,
-  experimental: {
-    optimizeCss: true
-  },
+
   async headers() {
     return [
       {
-        source: "/api/:path*",
+        source: '/api/:path*',
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
           { key: 'Access-Control-Allow-Origin', value: '*' },
@@ -40,10 +23,10 @@ module.exports = {
           {
             key: 'Access-Control-Allow-Headers',
             value:
-              'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-          }
-        ]
-      }
-    ];
+              'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+          },
+        ],
+      },
+    ]
   },
 }

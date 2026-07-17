@@ -1,45 +1,27 @@
-import Link from 'next/link'
-import axios1 from 'src/configs/axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image'
 
-const BannerSec = () => {
-    const [banners, setBanners] = useState<any[]>([]);
+const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL ?? '').replace(/\/+$/, '')
 
-    const getbanner = useCallback(async () => {
-        try {
-            const roleparams: any = { page: 1, size: 10000 };
-            const response = await axios1.get('api/website/banner/get?promo_banner=Services_Page', { params: roleparams });
-            setBanners(response.data.data);
-        } catch (err) {
-            console.error(err);
-        } 
-    }, []);
-
-    useEffect(() => {
-        getbanner();
-    }, [getbanner]);
+export default function BannerSec({ banners }: { banners: any[] }) {
+    if (!banners?.length) return null
     return (
-        <>
-            <section className='ServiceBanner bg-white'>
-                {banners?.map((banner, index) => (
-               
-                        <img
-                            width={1400}
-                            height={300}
-                            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${banner.image}`}
-                            // priority={true}
-                            alt={`Banner ${index}`}
-                        />
-                  
-                ))}
-            </section>
-            <section className='bg-white'>
-                <div className="container linkFontSize py-2">
-                    <Link href='/' className='text-black'>Home <i className='bi bi-chevron-right'></i></Link> <span className='text-blue'>Services</span>
+        <section className='bg-white overflow-hidden'>
+            {banners.map((banner, index) => (
+                <div
+                    key={banner.id ?? index}
+                    className='position-relative w-100 overflow-hidden'
+                    style={{ minHeight: 300 }}
+                >
+                    <Image
+                        src={`${IMG_URL}/${banner.image}`}
+                        fill
+                        sizes='100vw'
+                        priority={index === 0}
+                        alt={banner.alt_text ?? 'Services banner'}
+                        style={{ objectFit: 'cover' }}
+                    />
                 </div>
-            </section>
-        </>
+            ))}
+        </section>
     )
 }
-
-export default BannerSec

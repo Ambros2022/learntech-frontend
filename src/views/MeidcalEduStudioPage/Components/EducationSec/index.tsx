@@ -1,10 +1,14 @@
-import React from 'react'
+'use client'
+import Image from 'next/image'
 
-interface EducationSecProps {
-    scrollToExamSec: () => void;
-}
+const EducationSec = () => {
+    const handleScrollToExam = () => {
+        const el = document.getElementById('exam-services')
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' })
+        }
+    }
 
-const EducationSec: React.FC<EducationSecProps> = ({ scrollToExamSec }) => {
     return (
         <section className='py-5 EduSec bg-skyBlue'>
             <div className="container">
@@ -14,7 +18,7 @@ const EducationSec: React.FC<EducationSecProps> = ({ scrollToExamSec }) => {
                     <div className="col-12">
                         <div className="education-img-wrap position-relative">
                             <div className="education-img-2 text-center">
-                                <img src='/images/icons/goodHappy.png' width={700} height={700} style={{zIndex:1}} alt="good-logo" className='img-fluid' />
+                                <Image src='/images/icons/goodHappy.png' width={700} height={700} style={{ zIndex: 1 }} alt="good-logo" className='img-fluid' />
                             </div>
                         </div>
                     </div>
@@ -54,7 +58,7 @@ const EducationSec: React.FC<EducationSecProps> = ({ scrollToExamSec }) => {
                     </div>
                 </div>
                 <div className="mb-3">
-                    <button className='btn viewMoreCollegeBtn p-3' onClick={scrollToExamSec}>View Detailed Services <i className='bi bi-chevron-double-right'></i></button>
+                    <button className='btn viewMoreCollegeBtn p-3' onClick={handleScrollToExam}>View Detailed Services <i className='bi bi-chevron-double-right'></i></button>
                 </div>
             </div>
         </section>

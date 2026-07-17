@@ -1,0 +1,76 @@
+.searchForm {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  min-height: 430px;
+}
+
+.searchForm h2 {
+  font-size: 20px !important;
+}
+
+.counsellingBtn {
+  background-color: #274896 !important;
+  color: white !important;
+  padding: 10px !important;
+  font-size: 17px !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  min-width: 160px;
+}
+
+.counsellingBtn:hover {
+  color: white !important;
+  background-color: darkblue !important;
+}
+
+.downloadBrchrBtn {
+  border-radius: 10px !important;
+  border: none !important;
+  width: 200px !important;
+}
+
+.downloadBrchrBtn > img {
+  width: 200px !important;
+  height: 50px !important;
+  box-shadow: rgb(0 0 0 / 50%) 0 0 13px !important;
+  border-radius: 10px !important;
+}
+
+@media (max-width: 1024px) {
+  .searchForm h2 {
+    font-size: 19px !important;
+  }
+
+  .searchForm {
+    padding: 20px 30px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .downloadBrchrBtn {
+    border-radius: 10px !important;
+    border: none !important;
+  }
+
+  .downloadBrchrBtn img {
+    width: 200px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+  .counsellingBtn {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .downloadBrchrBtn {
+    width: 100%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .downloadBrchrBtn img {
+    width: 200px !important;
+  }
+}

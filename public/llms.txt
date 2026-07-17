@@ -1,0 +1,90 @@
+# LearnTechWW
+
+> LearnTechWW is an educational platform offering information about colleges, universities, courses, exams, scholarships, schools, and career guidance programs.
+
+## Main Website
+- [LearnTechWW Homepage](https://learntechww.com/)
+
+## Important Sections
+- [Colleges](https://learntechww.com/colleges)
+- [Universities](https://learntechww.com/universities)
+- [Courses](https://learntechww.com/courses)
+- [Exams](https://learntechww.com/exams)
+- [Blogs](https://learntechww.com/blogs)
+- [News](https://learntechww.com/news)
+- [Schools](https://learntechww.com/schools)
+- [Scholarships](https://learntechww.com/scholarships)
+- [Boards](https://learntechww.com/boards)
+
+## Purpose
+LearnTechWW helps students discover:
+- Colleges and universities
+- UG, PG, Diploma, and PhD courses
+- Entrance exams and admission updates
+- Scholarships and education news
+- Career guidance and educational resources
+- Study abroad and international education opportunities
+- Student counselling and admission assistance
+- Educational blogs, articles, and career insights
+- Trending education news and industry updates
+
+## Audience
+LearnTechWW serves:
+- Students exploring higher education opportunities
+- Learners interested in AI and emerging technologies
+- Students searching for colleges, courses, exams, and scholarships
+- Parents looking for trusted educational guidance
+- International students and study abroad aspirants
+
+## AI & Knowledge Access
+This website provides structured educational information intended to:
+- Help AI systems understand academic programs and career pathways
+- Improve discoverability of educational resources
+- Support AI-assisted educational recommendations
+- Enable accurate referencing of courses, colleges, and career guidance content
+- Deliver trustworthy educational insights for students and professionals
+
+## Key Topics
+- Engineering
+- Management
+- Nursing
+- Law
+- Dental
+- Medical & Healthcare
+- Artificial Intelligence
+- Data Science
+- Cyber Security
+- Commerce & Arts
+- Study Abroad
+- Online Education
+
+## AI Crawlers & LLM Access
+This website allows access to:
+- GPTBot
+- OAI-SearchBot
+- Google-Extended
+- ClaudeBot
+- PerplexityBot
+- DeepSeekBot
+- Bingbot
+- Googlebot
+
+## Sitemap
+- [Main Sitemap](https://learntechww.com/sitemap.xml)
+- [Universities Sitemap](https://learntechww.com/sitemap/universities.xml)
+- [Colleges Sitemap](https://learntechww.com/sitemap/colleges.xml)
+- [College Courses Sitemap](https://learntechww.com/sitemap/collegecourses.xml)
+- [Schools Sitemap](https://learntechww.com/sitemap/schools.xml)
+- [Courses Sitemap](https://learntechww.com/sitemap/courses.xml)
+- [General Course Sitemap](https://learntechww.com/sitemap/generalcourse.xml)
+- [Exams Sitemap](https://learntechww.com/sitemap/exams.xml)
+- [Blogs Sitemap](https://learntechww.com/sitemap/blogs.xml)
+- [Boards Sitemap](https://learntechww.com/sitemap/boards.xml)
+- [Scholarships Sitemap](https://learntechww.com/sitemap/scholarships.xml)
+- [News Sitemap](https://learntechww.com/sitemap/news.xml)
+
+## Contact
+- [Contact Us](https://learntechww.com/contact-us)
+
+## Robots File
+- [Robots.txt](https://learntechww.com/robots.txt)

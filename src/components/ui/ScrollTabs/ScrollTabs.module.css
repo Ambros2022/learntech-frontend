@@ -1,0 +1,36 @@
+.tabBtn {
+  border: 1px solid rgba(212, 218, 234, 1) !important;
+  border-radius: 10px !important;
+  color: #254692 !important;
+  background-color: #f6f8fb !important;
+}
+
+.tabBtn:hover,
+.tabBtn:focus,
+.tabBtn:active {
+  background-color: #254692 !important;
+  color: white !important;
+}
+
+.tabBtn:global(.active) {
+  background-color: #254692 !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.tabBtn:global(.active):hover,
+.tabBtn:global(.active):focus {
+  background-color: #254692 !important;
+  color: white !important;
+}
+
+@media (max-width: 767.98px) {
+  .tabBtn {
+    width: calc(50% - 0.5rem) !important;
+    max-width: calc(50% - 0.5rem) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    text-align: center;
+  }
+}

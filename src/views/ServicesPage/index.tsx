@@ -1,47 +1,32 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import axios from 'src/configs/axios';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import JsonLd from 'src/app/components/JsonLd'
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
 import BannerSec from './Components/BannerSec'
 import StudentsText from './Components/StudentsText'
 import ServicesSec from './Components/ServicesSec'
 
-const ServicesPage = () => {
-  const router = useRouter()
-  const isMountedRef = useIsMountedRef();
-  const [pagedata, setPagedata] = useState<any>();
+interface Props {
+  banners: any[]
+}
 
-  const getPagedata = useCallback(async () => {
-    try {
-      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
-      if (isMountedRef.current) {
+export default function ServicesPage({ banners }: Props) {
+  const webUrl = process.env.NEXT_PUBLIC_WEB_URL ?? ''
 
-        setPagedata(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${webUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${webUrl}/services` },
+    ],
+  }
 
-
-  useEffect(() => {
-    getPagedata();
-
-  }, []);
   return (
     <>
-      <Head>
-        <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
-        <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
-        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-      </Head>
-      <BannerSec />
-      <StudentsText  />
+      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+      <BannerSec banners={banners} />
+      <Breadcrumb items={[{ label: 'Services' }]} />
+      <StudentsText />
       <ServicesSec />
     </>
   )
 }
-
-export default ServicesPage

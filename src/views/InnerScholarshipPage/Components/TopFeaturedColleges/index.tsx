@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import axios1 from 'src/configs/axios'
 import Link from 'next/link';
@@ -32,7 +33,7 @@ function FeaturedCollegeSection() {
 
 
   return (
-    <section className="FeaturedClgCon bg-white" id="animation5" data-aos="fade-up">
+    <section className=" bg-white">
       <div className="container pt-5 position-relative">
         <h2 className="fw-bold text-blue text-center mb-5">Top Featured Colleges</h2>
         <MainCarousel items={colleges.map(college => (

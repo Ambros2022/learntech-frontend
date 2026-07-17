@@ -1,5 +1,4 @@
-import React from 'react';
-import Link from 'next/link';
+import Link from 'next/link'
 
 // NewsItem component
 const NewsItem = ({ banner_image, title, link }) => (
@@ -19,7 +18,7 @@ const NewsItem = ({ banner_image, title, link }) => (
             </div>
         </Link>
     </div>
-);
+)
 
 // NewsList component
 const NewsList = ({ newsItems }) => (
@@ -33,7 +32,7 @@ const NewsList = ({ newsItems }) => (
                     <div className="row">
                         {newsItems.map((item, index) => (
                             <NewsItem
-                                key={item.id || index} // Prefer a unique ID if available
+                                key={item.id || index}
                                 banner_image={item.logo}
                                 title={item.name}
                                 link={item.link}
@@ -44,7 +43,6 @@ const NewsList = ({ newsItems }) => (
             </>
         )}
     </>
+)
 
-);
-
-export default NewsList;
+export default NewsList

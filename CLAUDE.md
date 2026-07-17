@@ -1,0 +1,1406 @@
+# CLAUDE.md
+
+# Mission
+
+Build/maintain production-grade web platforms prioritizing:
+
+* SEO
+* Performance + core webvitals green
+* Crawlability
+* Accessibility
+* Scalability
+* Security
+* Maintainability
+
+Supported project types:
+
+* Lead Generation Websites
+* Education Portals
+* College/University Listing Platforms
+* Blogs
+* News Portals
+* Dynamic CMS Websites
+* Directory Platforms
+
+---
+
+# Approved Stack
+
+Frontend
+
+* Next.js 16 App Router
+* React 18
+* TypeScript
+
+Backend
+
+* Node.js
+* Express.js
+* MySQL
+
+Deployment
+
+* Vercel / VPS / Coolify
+* DigitalOcean
+
+CDN
+
+* Cloudflare Free
+* Bunny Free Tier (if approved)
+
+---
+
+# Non-Negotiable Targets
+
+SEO
+
+* 100% crawlable
+* 100% indexable
+* Canonical correct
+* Zero duplicate URLs
+* Programmatic SEO ready
+
+Performance
+
+* Lighthouse ≥ 95
+* LCP < 2.0s
+* INP < 200ms
+* CLS < 0.1
+* TTFB < 300ms
+
+Accessibility
+
+* Proper heading hierarchy
+* Keyboard accessible
+* Alt text for images
+
+---
+
+# Core Engineering Rules
+
+1. Server First
+2. SEO First
+3. Performance First
+4. Simplicity Over Complexity
+5. Delete Before Adding
+6. Native Before Dependency
+7. Measure Before Optimizing
+
+---
+
+# Next.js Architecture Rules
+
+Default: Server Components. Client Components only when necessary.
+
+Allowed Client Components:
+
+* Forms
+* Filters
+* Search
+* Modals
+* Tabs
+* Sliders
+* Interactive Widgets
+
+Forbidden:
+
+```tsx
+"use client"
+```
+
+at page level unless absolutely required.
+
+---
+
+# Rendering Strategy
+
+## Static Content
+
+Tag-based revalidation (preferred for ISR):
+
+```ts
+const res = await fetch(API_URL, {
+  next: {
+    tags: ["entity-slug"]
+  }
+})
+```
+
+Trigger on-demand revalidation:
+
+```ts
+revalidateTag("entity-slug")
+```
+
+Examples: Blogs, News, Course Pages, College Pages, University Pages
+
+Rendering: SSG, ISR
+
+---
+
+## Real-Time Content
+
+```tsx
+fetch(url, {
+  cache: "no-store"
+})
+```
+
+Only when necessary.
+
+---
+
+# Data Fetching Rules
+
+Prefer:
+
+```ts
+const res = await fetch(API_URL, {
+  next: {
+    tags: ["entity-slug"]
+  }
+})
+```
+
+Avoid:
+
+```ts
+axios
+```
+
+inside Server Components.
+
+Never fetch SEO content in:
+
+```tsx
+useEffect()
+```
+
+---
+
+# Metadata Rules
+
+Every indexable page must have: Title, Description, Canonical, Open Graph, Twitter Tags.
+
+Use:
+
+```tsx
+generateMetadata()
+```
+
+Never use:
+
+```tsx
+next/head
+```
+
+in App Router.
+
+---
+
+# SEO Rules
+
+If Google should rank it → render server-side.
+
+Examples: H1, H2, Content, Listings, Internal Links
+
+Never load ranking content via JavaScript.
+
+---
+
+# Structured Data Rules
+
+JSON-LD only.
+
+Supported: Organization, Article, NewsArticle, FAQPage, Course, BreadcrumbList
+
+Rules:
+* Must match visible content
+* Must be server rendered
+* No fabricated data
+
+---
+
+# URL Rules
+
+Allowed:
+
+```text
+/college/123/aiims-delhi
+/course/mba
+/blog/seo-guide
+```
+
+Avoid:
+
+```text
+?page=1
+?id=123
+&type=blog
+```
+
+for primary content URLs.
+
+---
+
+# Internal Linking Rules
+
+All important links must exist in HTML.
+
+Examples: Colleges, Courses, Universities, Blogs, Categories
+
+Avoid JS-generated navigation.
+
+---
+
+# Sitemap Rules
+
+Mandatory: Sitemap Index, Split Sitemaps, Max 50,000 URLs per sitemap
+
+Examples: sitemap-colleges.xml, sitemap-courses.xml, sitemap-blogs.xml, sitemap-news.xml
+
+---
+
+# Crawl Budget Rules
+
+Avoid: Infinite filters, Crawl traps, Duplicate routes, Query parameter URLs
+
+Prefer: Clean URLs, Canonicals, Controlled pagination
+
+---
+
+# Image Rules
+
+Mandatory:
+
+```tsx
+next/image
+```
+
+Requirements: width, height, sizes, lazy loading
+
+Avoid:
+
+```html
+<img />
+```
+
+unless absolutely necessary.
+
+---
+
+# CSS Load Order Rules
+
+In `src/app/layout.tsx` (root layout), imports must be in this exact order:
+
+```ts
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../../styles/globals.css'   // must be last — overrides Bootstrap variables
+```
+
+Rules:
+* `globals.css` always last so `:root` overrides (e.g. `--bs-body-font-family`) win over Bootstrap defaults
+* Never import Bootstrap CSS in nested layouts — only root layout
+* Poppins font applied via `--bs-body-font-family` CSS variable override in `globals.css`
+
+---
+
+# Font Rules
+
+Use:
+
+```tsx
+next/font
+```
+
+Requirements: Self-hosted, font-display: swap
+
+Avoid: Google font CDN requests
+
+---
+
+# Component Architecture
+
+Good
+
+Page (Server)
+├── Hero (Server)
+├── Content (Server)
+├── Listings (Server)
+├── Links (Server)
+└── Form (Client)
+
+Bad
+
+Page (Client)
+├── Fetch
+├── SEO Content
+├── Metadata
+└── Listings
+
+---
+
+# Lazy Loading Rules
+
+Lazy Load (below fold): Testimonials, Sliders, Counters, Videos, Maps
+
+Do NOT Lazy Load: Hero, H1, Content, Internal Links
+
+---
+
+# Dependency Governance Rules
+
+## Core Principle
+
+Every dependency adds: JavaScript, Build time, Security risk, Maintenance cost, Technical debt
+
+Default answer: NO. Dependency must justify existence.
+
+---
+
+# Package Selection Hierarchy
+
+1. Native Browser APIs
+2. Next.js Features
+3. React Features
+4. Small Libraries
+5. Large Libraries
+
+---
+
+# Preferred Libraries
+
+Forms: react-hook-form, zod
+Validation: zod
+Carousel: embla-carousel
+Icons: lucide-react
+State: React Context
+Fetch: native fetch
+Animation: CSS, Framer Motion (only when required)
+Charts: Recharts
+Date: date-fns
+Notifications: sonner — always named import: `import { toast } from 'sonner'` (no default export)
+Images: next/image
+Fonts: next/font
+
+---
+
+# Avoid Heavy Libraries
+
+Avoid: formik, yup, axios, moment, react-multi-carousel, react-spring, aos, swiper, slick-carousel, bootstrap javascript, large icon packs
+
+Use lighter alternatives.
+
+---
+
+# Bundle Budget Rules
+
+Landing Pages: Target < 80KB
+Content Pages: Target < 50KB
+General Pages: Target < 100KB
+Warnings: > 150KB
+Failure: > 200KB
+
+---
+
+# Package Approval Checklist
+
+Before installing:
+* Can native APIs solve it?
+* Can React solve it?
+* Can Next.js solve it?
+* SSR compatible?
+* App Router compatible?
+* Tree-shakeable?
+* Actively maintained?
+
+If unclear: DO NOT INSTALL.
+
+---
+
+# Package Elimination Rule
+
+When touching code, evaluate:
+* Can dependency be removed?
+* Can native code replace it?
+* Can lighter library replace it?
+
+Goal: Reduce dependencies continuously.
+
+---
+
+# Backend Rules
+
+Use: REST APIs, Typed responses, Validation on all inputs
+
+Avoid: Over-fetching, Under-fetching
+
+---
+
+
+
+# Caching Rules
+
+Priority: 1. CDN 2. Next.js Cache 3. ISR 4. Revalidation Tags
+
+Preferred:
+
+```ts
+fetch(url, {
+  next: {
+    tags: ["entity"]
+  }
+})
+```
+
+---
+
+# Security Rules
+
+Mandatory: Input Validation, SQL Injection Protection, Rate Limiting, CSP Headers, Secure Cookies, Secret Isolation
+
+Never expose: Tokens, API Keys, Secrets
+
+---
+
+# Core Web Vitals Enforcement
+
+Build fails if: LCP regresses, CLS regresses, INP regresses
+
+Performance monitoring required.
+
+---
+
+# AI Agent Rules
+
+Always:
+* Prefer Server Components
+* Prefer SEO-safe implementations
+* Prefer lower bundle size
+* Prefer deletion over abstraction
+
+Never:
+* Introduce hidden logic
+* Introduce SEO regressions
+* Introduce crawl traps
+* Introduce unnecessary dependencies
+
+---
+
+# Debug Checklist
+
+Disable JavaScript. Verify: Content visible, Headings visible, Links visible, Metadata present
+
+If content disappears → fix architecture.
+
+---
+
+# Pre-Merge Checklist
+
+[ ] Metadata exists
+[ ] Canonical exists
+[ ] JSON-LD exists
+[ ] Lighthouse > 95
+[ ] No hydration errors
+[ ] No console errors
+[ ] No duplicate URLs
+[ ] No unnecessary client components
+[ ] No SEO content rendered client-side
+[ ] Bundle size within budget
+[ ] Dependency review completed
+
+---
+
+# Final Law
+
+If feature harms: SEO, UI/UX, Performance, Crawlability, Accessibility, Core Web Vitals
+
+IT DOES NOT SHIP.
+
+---
+
+# Reference Architecture (from kerlastudy-Frontend)
+
+Proven patterns from kerlastudy-Frontend. Must adopt here.
+
+---
+
+## ClientWrappers Pattern
+
+Heavy client components lazy-loaded from single `ClientWrappers.tsx`:
+
+```tsx
+// src/components/ClientWrappers.tsx
+"use client";
+import dynamic from "next/dynamic";
+
+export const LazyEnquiryForm = dynamic(
+  () => import("@/components/EnquiryForm"),
+  { ssr: false, loading: () => <FormSkeleton /> }
+);
+
+export const LazyEmblaCarousel = dynamic(
+  () => import("@/components/Embla/EmblaCarousel"),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> }
+);
+```
+
+Rules:
+* All forms: `ssr: false`
+* All carousels/sliders: `ssr: false`
+* All modals/popups: `ssr: false`
+* Every wrapper must have skeleton `loading` fallback to prevent CLS
+* Server components import from `ClientWrappers` — not directly
+
+---
+
+## ClientProviders Pattern
+
+Single `"use client"` boundary for all providers (`src/app/components/ClientProviders.tsx`):
+
+```tsx
+'use client'
+export default function ClientProviders({ children }: { children: ReactNode }) {
+  return (
+    <EmotionRegistry>       {/* MUI SSR — keep while any MUI component remains */}
+      <AuthProvider>
+        <NProgressBar />    {/* route transition bar — showSpinner: false */}
+        <BootstrapClient /> {/* Bootstrap JS init */}
+        {children}
+      </AuthProvider>
+    </EmotionRegistry>
+  )
+}
+```
+
+Rules:
+* Root layout imports only `ClientProviders` — never individual providers
+* `NProgressBar` must call `NProgress.configure({ showSpinner: false })` at module level to prevent "N" spinner rendering
+* Remove `EmotionRegistry` only after all MUI components eliminated
+
+---
+
+## AnimateOnScroll Pattern
+
+No AOS, no Framer Motion for scroll animations. Use native `IntersectionObserver`:
+
+```tsx
+// src/components/AnimateOnScroll.tsx — "use client"
+// Variants: fade-up | fade-down | fade-left | fade-right | zoom-in | fade
+// Uses IntersectionObserver + inline styles, zero CSS dependency
+```
+
+Rules:
+* `once: true` default — animate once, done
+* `willChange: "opacity, transform"` for GPU compositing
+* Check `getBoundingClientRect` on mount to skip animation if already visible
+
+---
+
+## JsonLd Pattern
+
+XSS-safe JSON-LD serializer — never use raw `JSON.stringify`:
+
+```tsx
+// src/components/JsonLd.tsx — Server Component (no "use client")
+function serializeJsonLd(schema) {
+  return JSON.stringify(schema)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(//g, "\\u2028")
+    .replace(//g, "\\u2029");
+}
+
+export default function JsonLd({ schema, id }) {
+  return (
+    <script
+      id={id}
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
+    />
+  );
+}
+```
+
+---
+
+## FetchClient Pattern
+
+Replace axios with native `fetch`-based client (`src/utils/fetch.ts`):
+
+```ts
+// Axios-compatible interface over native fetch
+// Supports: interceptors, params, FormData, AbortError
+// baseURL from process.env.API_URL || NEXT_PUBLIC_API_URL
+const api = new FetchClient({ baseURL: process.env.API_URL });
+export default api;
+```
+
+Rules:
+* Client Components and API routes only
+* Server Components use `fetch()` directly with `next.tags`
+* Never import axios
+
+---
+
+
+
+---
+Many APIs at common location: `src/lib/api/common.ts`
+
+
+
+## Breadcrumb Pattern
+
+```tsx
+// src/app/components/Breadcrumb.tsx — memo'd
+// Props: items: { label: string; href?: string }[]
+// Last item: no link, aria-current="page"
+// Icon: lucide-react ChevronRight (not a CSS pseudo-element)
+export const Breadcrumb = memo(({ items }) => { ... });
+```
+
+Always pair with `BreadcrumbList` JSON-LD structured data on same page.
+
+---
+
+## Reusable Generic Components
+
+**Before building a new component, check these first.**
+
+### SearchBar — `src/components/ui/SearchBar/index.tsx`
+
+Generic autocomplete search. Bootstrap-only, no MUI.
+
+```tsx
+// Props
+interface Props {
+  placeholder?: string
+  onSearch: (query: string, signal?: AbortSignal) => Promise<SearchItem[]>
+  className?: string
+}
+export interface SearchItem { id: string | number; label: string; href: string }
+```
+
+Usage: wrap with a page-specific fetch function, lazy-load via ClientWrappers.
+
+Example — `src/components/ui/SearchBar/BlogSearchBar.tsx`:
+```tsx
+async function fetchBlogResults(query, signal) { /* fetch + map to SearchItem[] */ }
+export default function BlogSearchBar() {
+  return <SearchBar placeholder="Search for Blogs" onSearch={fetchBlogResults} />
+}
+```
+
+Rules:
+* `AbortController` ref cancels in-flight requests on new keystroke
+* Full-bar focus ring via `focused` state on container (not native input focus ring)
+* Idle right: `bi-chevron-down`; text entered: `×` clear button
+* Register lazy export in `ClientWrappers.tsx` as `LazyXxxSearchBar`
+
+---
+
+### ScrollTabs — `src/components/ui/ScrollTabs/index.tsx`
+
+Mobile-responsive tab navigation. No carousel dependency.
+
+```tsx
+export interface TabItem { id: string; label: string }
+interface Props {
+  tabs: TabItem[]
+  activeTab: string
+  onTabChange: (id: string) => void
+  className?: string
+}
+```
+
+Rules:
+* Desktop: scrollable flex row
+* Mobile: `< >` arrow buttons (`d-md-none`) + overflow scroll
+* Mobile shows **2 tabs per page** via CSS module `width: calc(50% - 0.5rem)`
+* Active tab auto-scrolls into view via `scrollIntoView`
+* Do NOT use `infoBtn` class on scroll container — conflicts with globals `width: 90% !important`
+* Active state: `.tabBtn:global(.active)` in CSS module (not `.tabBtn.active`)
+* `Breadcrumb` must live in parent server component, not inside `ScrollTabs`
+
+---
+
+### CollegeCard — `src/components/colleges/CollegeCard.tsx`
+
+```tsx
+export interface CollegeItem {
+  id: number; slug: string; name: string; address: string; banner_image: string
+}
+```
+
+Link: `/college/{id}/{slug}` — Embla carousel via `LazyCollegeCarousel`.
+
+---
+
+### SchoolCard — `src/components/schools/SchoolCard.tsx`
+
+Same shape as CollegeCard. Link: `/school/{id}/{slug}` — Embla carousel via `LazySchoolsCarousel`.
+
+```tsx
+export interface SchoolItem {
+  id: number; slug: string; name: string; address: string; banner_image: string
+}
+```
+
+---
+
+### Card CSS Module Pattern — `CollegeCard.module.css` / `SchoolCard.module.css`
+
+Standard card structure:
+* `.card` — border, border-radius, hover lift + shadow
+* `.imageWrap` — fixed height 190px, `position: relative` for `next/image fill`
+* `.image` — `object-fit: cover`, hover scale
+* `.body` — flex column, `flex: 1 1 auto`, `min-width: 0`
+* `.title` — truncate via `text-overflow: ellipsis`
+* `.location` — icon + text, icon `flex-shrink: 0`, text truncate
+* `.actions` — flex row, both buttons `flex: 1 1 0 !important` equal width
+
+New entity card (university, exam, etc.) → copy pattern, change link prefix only.
+
+---
+
+### ReviewSec — `src/views/InnerBoardPage/Components/ReviewSec/index.tsx`
+
+Reusable review + rating component. Props decouple from any specific entity.
+
+```tsx
+interface Props {
+  entityId: number | string   // college_id / school_id / board_id
+  entityName: string          // shown in heading
+}
+```
+
+Rules:
+* Single `useEffect` + `Promise.all` for 3 parallel fetches + `AbortController` cleanup
+* Native `fetch` only — no axios
+* Registered as `LazyReviewSec` in ClientWrappers (`ssr: false`)
+* Dislike API: send `dislike: 1`, not `dislike: 0`
+
+---
+
+### GlobalPopupEnquiry className Rule
+
+```tsx
+// CORRECT — caller's className replaces default, not augments it
+<a className={className ?? `active btn ${styles.counsellingBtn}`}>
+
+// WRONG — always appends counsellingBtn, overrides custom green/etc
+<a className={`${className || 'active btn'} ${styles.counsellingBtn}`}>
+```
+
+Use `??` (nullish coalescing) not `||` so caller controls full class string.
+
+---
+
+## CSS Module vs globals.css
+
+| Use CSS Module | Use globals.css |
+|---|---|
+| Component-specific styles | Site-wide utility classes |
+| Page section (BannerSection, etc.) | Shared state classes (`.text-blue`, `.bg-skyBlue`) |
+| Overriding Bootstrap for one component | Bootstrap variable overrides |
+| Button variants tied to one component | Global button classes (`.freeBtn`, `.writeReviewBtn`) |
+
+Rules:
+* `globals.css` `!important` beats CSS module without `!important` — use `!important` in module to win
+* CSS module `.class.active` → does NOT match global `active` string — use `.class:global(.active)`
+* `100vw` in globals causes overflow (includes scrollbar) → use `100%` instead
+* Prefer CSS modules for new component work; migrate globals progressively
+
+---
+
+## formUtils Pattern
+
+Single source of truth for all form utilities — `src/@core/components/popup/formUtils.ts`:
+
+```ts
+export const PHONE_RULES: [RegExp, string][] = [...]
+export const isValidPhone = (val: string) => PHONE_RULES.every(([re]) => re.test(val))
+export const phoneSchema = z.string().refine(isValidPhone, { message: 'Invalid phone number' })
+
+export async function submitEnquiry(fields: Record<string, string>) {
+  const fd = new FormData()
+  Object.entries(fields).forEach(([k, v]) => fd.append(k, v))
+  fd.append('current_url', window.location.href)
+  return fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/website/enquiry/post`, { method: 'POST', body: fd })
+}
+```
+
+Rules:
+* Never duplicate `PHONE_RULES`, `isValidPhone`, or phone zod schema in individual form files
+* All forms import `phoneSchema` and `submitEnquiry` from `formUtils`
+* `contact_number: phoneSchema` in every form zod schema
+* `submitEnquiry` auto-appends `current_url` — do not append manually
+
+---
+
+## Form Migration Pattern
+
+All forms: react-hook-form + zod + native fetch. No Formik, Yup, or axios.
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { phoneSchema, submitEnquiry } from 'src/@core/components/popup/formUtils'
+import { toast } from 'sonner'
+
+const schema = z.object({
+  name: z.string().min(1),
+  contact_number: phoneSchema,
+  email: z.string().email(),
+})
+
+const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
+  resolver: zodResolver(schema),
+})
+
+const onSubmit = async (data) => {
+  await submitEnquiry({ name: data.name, contact_number: data.contact_number, email: data.email })
+  toast.success('Submitted!')
+  reset()
+}
+```
+
+Phone input → always use `LazyPhoneInputField` from ClientWrappers via `Controller`.
+
+---
+
+## BannerImage Component
+
+Reusable wrapper for the repeated BannerBG.webp banner pattern — `src/components/ui/BannerImage.tsx`:
+
+```tsx
+// Props: alt (required), src, width, height, priority, className
+// Defaults: src='/images/icons/BannerBG.webp', width=1400, height=300, priority=true, className='w-100'
+import BannerImage from 'src/components/ui/BannerImage'
+
+<BannerImage alt="Boards Banner" />
+<BannerImage alt="Custom" src="/images/icons/Other.webp" className="w-100 custom" />
+```
+
+Rules:
+* Replace every raw `<img src="/images/icons/BannerBG.webp">` with `<BannerImage alt="..." />`
+* Never use `<img>` for banner — always `next/image` via this wrapper
+
+---
+
+## EntityCarouselClient Pattern
+
+Generic carousel for college/school entities — `src/components/EntityCarouselClient.tsx`:
+
+```tsx
+export interface EntityItem { id: number; slug: string; name: string; address: string; banner_image: string }
+export type EntityType = 'college' | 'school'
+
+// Usage — thin wrapper per entity type:
+// CollegeCarouselClient: <EntityCarouselClient type="college" items={colleges} />
+// SchoolsCarouselClient: <EntityCarouselClient type="school" items={schools} />
+```
+
+Rules:
+* Always includes hidden `<ul aria-hidden="true">` with all entity links for SEO (Googlebot crawls all links)
+* Thin wrappers (`CollegeCarouselClient`, `SchoolsCarouselClient`) re-export `EntityItem` as entity-specific type
+* Register as `LazyEntityCarousel` in ClientWrappers
+
+---
+
+## Server/Client SEO Split Pattern for Carousels
+
+Heading + links in server HTML. Carousel JS only for interaction. Used in LatestUpdateSec, EntityCarouselClient.
+
+```tsx
+// Server component (index.tsx) — no 'use client'
+export default function LatestUpdateSec({ updates }) {
+  return (
+    <section>
+      <h2>...</h2>                               {/* SSR — Googlebot indexes */}
+      <ul aria-hidden="true" style={clipRect}>   {/* SSR — all links crawlable */}
+        {updates.map(u => <li><a href={...}>{u.name}</a></li>)}
+      </ul>
+      <CarouselClient updates={updates} />        {/* client boundary — interaction only */}
+    </section>
+  )
+}
+
+// Client component (CarouselClient.tsx) — 'use client'
+// Only EmblaCarousel + card rendering. No heading. No links list.
+```
+
+clipRect style: `{ position:'absolute', width:1, height:1, overflow:'hidden', clip:'rect(0,0,0,0)', whiteSpace:'nowrap' }`
+
+Rules:
+* `H1`, `H2`, all entity links → server rendered
+* Never put headings inside `'use client'` carousel components
+* Use direct `EmblaCarousel` import (not `LazyEmblaCarousel`) when component already has `'use client'`
+* `LazyEmblaCarousel` only from server components via ClientWrappers
+
+---
+
+## InnerHeader Pattern
+
+Existing generic banner for page-level headers — `src/views/SimplePage/InnerHeader.tsx`:
+
+```tsx
+// Props: title, description, imageSrc, imageAlt, children (search bar slot)
+// Already handles: next/image, BannerBG default, responsive layout
+// Use for any page with a banner + heading + optional search
+import InnerHeader from 'src/views/SimplePage/InnerHeader'
+
+<InnerHeader title="Boards" description="...">
+  <LazyBoardSearchBar />
+</InnerHeader>
+```
+
+Rules:
+* Prefer `InnerHeader` over custom BannerSec — it's already optimized
+* Add new search bars as children, not hardcoded inside InnerHeader
+
+---
+
+## getNewsList API Notes
+
+`getNewsList` in `src/lib/api/common.ts`:
+* Returns array directly — NOT `{ data, totalItems }`. Do not destructure `.data`
+* Default `columnname: 'news_date'` may fail if column doesn't exist — always pass `columnname: 'created_at'` explicitly
+* Filter by category: pass `{ category_id: N, columnname: 'created_at', size: 10 }`
+
+```ts
+// CORRECT
+const updates = await getNewsList({ category_id: 8, size: 10, columnname: 'created_at' })
+
+// WRONG — updates will be undefined
+const { data: updates } = await getNewsList(...)
+```
+
+---
+
+## getColleges / getSchools API Notes
+
+`getColleges` and `getSchools` in `src/lib/api/common.ts`:
+* Return `{ data: [], totalItems: N }` — MUST destructure `.data`
+
+```ts
+// CORRECT
+const result = await getColleges({ size: 10 })
+const colleges = result?.data ?? []
+
+// WRONG — colleges is { data, totalItems }, not array
+const colleges = await getColleges({ size: 10 })
+colleges.map(...)  // ❌ TypeError
+```
+
+---
+
+## Async Server Component TypeScript Fix
+
+TypeScript doesn't understand async server components used as JSX in non-async parents.
+
+```tsx
+// Fix — suppress the type error:
+{/* @ts-expect-error async server component */}
+<FeaturedCollegeSection />
+
+// Or in page.tsx return:
+// @ts-expect-error async server component
+return <InnerCollegePage pagedata={pagedata} />
+```
+
+Rules:
+* Never `async` a page-level server component unnecessarily to avoid cascading ts-errors
+* Prefer making the view component async, suppress at call site
+
+---
+
+## Self-Fetching Server Component Pattern
+
+Components that always show same data can own their fetch instead of receiving props.
+
+```tsx
+// FeaturedCollegeSection/index.tsx — async server component
+export default async function FeaturedCollegeSection({ heading = 'Featured Colleges' }: { heading?: string }) {
+  const result = await getColleges({ size: 10 })
+  const colleges = result?.data ?? []
+  if (!colleges.length) return null
+  return (
+    <section>
+      <h2>{heading}</h2>
+      <LazyCollegeCarousel colleges={colleges} />
+    </section>
+  )
+}
+```
+
+Rules:
+* Use when: data is always the same regardless of page context (featured colleges, latest news)
+* Avoid when: data depends on page params (college ID, slug, filters)
+* Accept optional `heading` prop to reuse across pages with different titles
+* Caller doesn't need to fetch or pass props — zero prop drilling
+* React `cache()` deduplicates if same API called elsewhere on same request
+
+---
+
+## CollegeInfoSection Tab Pattern (Server/Client Split)
+
+Tabs need client state, but the data preparation is server-side.
+
+```
+CollegeInfoSection (server — no 'use client')
+└── CollegeInfoTabsClient ('use client')
+    ├── ScrollTabs — reusable tab nav component
+    └── Tab content rendered per activeTab
+        ├── HTML tabs — dangerouslySetInnerHTML (from server props)
+        ├── Gallery — next/image
+        ├── Review — LazyReviewSec (mounts only when tab active)
+        └── FAQ — LazyBoardFaqSec (mounts only when tab active)
+```
+
+Server component prepares `CollegeTabData[]` — serializable (HTML strings, arrays, not JSX).
+Client renders appropriate content per `activeTab`.
+Lazy components (`LazyReviewSec`, `LazyFaqSec`) only mount when their tab is activated — avoids unnecessary API calls.
+
+```tsx
+// Server (index.tsx)
+export default function CollegeInfoSection({ data }) {
+  const tabs: CollegeTabData[] = [...].filter(t => hasContent(t))
+  return <section><CollegeInfoTabsClient tabs={tabs} collegeName={data.name} collegeId={data.id} /></section>
+}
+
+// Client (CollegeInfoTabsClient.tsx)
+'use client'
+export default function CollegeInfoTabsClient({ tabs, collegeName, collegeId }) {
+  const [activeTab, setActiveTab] = useState(tabs[0]?.id)
+  return (
+    <>
+      <ScrollTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      {/* render content for activeTab only */}
+    </>
+  )
+}
+```
+
+---
+
+## RSC Children Slot Pattern (Server Sidebar in Client Tab Layout)
+
+When a client component needs a layout column that is purely static (no JS), pass it as `children` from the server component. Next.js serializes server-rendered children as static HTML — zero hydration cost, fully crawlable.
+
+```tsx
+// Server (CourseInfoSection/index.tsx) — no 'use client'
+export default function CourseInfoSection({ data, colleges, exams }: Props) {
+  return (
+    <section>
+      <CourseInfoTabsClient tabs={tabs} streamId={data.id} streamSlug={data.slug}>
+        {/* sidebar — server-rendered: no JS, crawlable */}
+        <div className="col-md-4">
+          <Image src={...} ... />
+          <GlobalEnquiryForm ... />
+          {colleges.map(val => <Link href={`/college/${val.id}/${val.slug}`}>...</Link>)}
+        </div>
+      </CourseInfoTabsClient>
+    </section>
+  )
+}
+
+// Client (CourseInfoTabsClient.tsx) — 'use client'
+export default function CourseInfoTabsClient({ tabs, streamId, streamSlug, children }) {
+  const [activeTab, setActiveTab] = useState(tabs[0]?.id)
+  return (
+    <div className="container">
+      <ScrollTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      <div className="row">
+        <div className="col-md-8">
+          {/* tab content */}
+        </div>
+        {children}  {/* server-rendered sidebar slotted in */}
+      </div>
+    </div>
+  )
+}
+```
+
+Rules:
+* Use when: sidebar/column has static server data (links, images) alongside client state (tabs)
+* Server passes `children` — client places via `{children}` in the row
+* Never duplicate static content inside `'use client'` — keep it in parent server component
+* Used in: `CourseInfoSection` (sidebar = colleges + exams + course image)
+
+---
+
+## ExpertTraineeClient Pattern
+
+Counsellor cards + profile dialog. H2 heading is context-specific (country vs stream) — must be server-rendered.
+
+```
+ExpertTrainneSec (server — async, self-fetches getCounsellorTeams())
+├── <h2>Context-specific heading</h2>          ← SSR — SEO
+├── <p>Description paragraph</p>               ← SSR
+└── <LazyExpertTraineeClient trainers={...} />  ← client, ssr:false
+    ├── Trainer cards grid
+    └── <dialog> modal — native HTML, no MUI
+```
+
+```tsx
+// Server wrapper (any page's ExpertTrainneSec/index.tsx)
+export default async function ExpertTrainneSec({ streamName }: { streamName: string }) {
+  const trainers = await getCounsellorTeams()
+  if (!trainers?.length) return null
+  return (
+    <section className='bg-light py-md-5 py-3'>
+      <div className="container">
+        <h2>We have Educational Experts to Provide Guidance for {streamName} Courses</h2>
+        <p>The counselors at Learntech...</p>
+        <LazyExpertTraineeClient trainers={trainers} />
+      </div>
+    </section>
+  )
+}
+
+// Client: src/views/AbroadPage/Components/ExpertTrainneSec/ExpertTraineeClient.tsx
+// Props: { trainers: Trainer[] } — NO countryName, NO heading, NO section wrapper
+// Renders: cards grid + <dialog ref> modal (native HTML, no MUI)
+```
+
+Rules:
+* `ExpertTraineeClient` = cards + dialog ONLY — no `<section>`, no `<h2>`, no `<p>`
+* Heading always server-rendered in the wrapper, using page context (country/stream name)
+* Modal: native `<dialog>` + `.showModal()` / `.close()` — never MUI Modal/Fade/Box
+* `getCounsellorTeams()` is `cache()`-wrapped — safe to call from multiple server components per request
+* Registered as `LazyExpertTraineeClient` in ClientWrappers (`ssr: false`)
+
+---
+
+## EmblaCarousel vs EmblaTabCarousel
+
+Two carousel implementations — choose based on arrow style needed:
+
+| | `EmblaCarousel` | `EmblaTabCarousel` |
+|---|---|---|
+| Arrows | Plain `‹ ›` text, absolute at `-60px` | Circle button, white bg + navy border, hover fills navy |
+| Dots | Yes (default) | No dots |
+| Use for | General content carousels | Entity carousels, course carousels, testimonials |
+
+```tsx
+// EmblaCarousel — src/components/ui/Embla/EmblaCarousel.tsx
+<EmblaCarousel
+  slidesToShowDesktop={4}   // default 4
+  slidesToShowTablet={3}    // default 3
+  slidesToShowMobile={1}    // default 1
+  showDots={true}           // default true
+  showArrows={true}         // default true
+  loop={true}               // default true
+  autoplay={true}           // default true
+  autoplayDelay={3000}
+>
+
+// EmblaTabCarousel — src/components/ui/Embla/EmblaTabCarousel.tsx
+// Same props + variant="tabs" for ScrollTabs mode
+// Arrows: only shown when canScrollPrev/canScrollNext (smart visibility)
+<EmblaTabCarousel
+  slidesToShowDesktop={7}
+  slidesToShowTablet={4}
+  slidesToShowMobile={2}
+  showDots={false}
+  loop
+  autoplay
+  autoplayDelay={1500}
+>
+```
+
+Rules:
+* Both components: slide width = `flex: 0 0 calc(100% / slidesToShow)` — CSS not needed
+* `EmblaTabCarousel` preferred for all new carousels — better arrow UX
+* `variant="tabs"` adds `padding: 0 48px` for tab nav arrow space — do NOT use for card carousels
+* Never pass `options={{ loop }}` — pass `loop` directly as prop
+
+---
+
+## getSchools API Return Shape
+
+`getSchools` returns array directly — NOT `{ data, totalItems }`:
+
+```ts
+// CORRECT
+const schools = await getSchools({ size: 10 })
+// schools is School[]
+
+// WRONG
+const result = await getSchools({ size: 10 })
+const schools = result?.data ?? []  // ❌ undefined — getSchools already returns array
+```
+
+Contrast with `getColleges` which returns `{ data: [], totalItems: N }`.
+
+---
+
+## AbroadSearchBar / CourseSearchBar Pattern
+
+Context-specific search bars wrapping the generic `SearchBar`:
+
+```tsx
+// src/components/ui/SearchBar/CourseSearchBar.tsx — 'use client'
+async function fetchCourseResults(query, signal): Promise<SearchItem[]> {
+  // hits /api/website/courses/get, maps nested general_courses
+  // returns: [{ id, label, href: '/course/streamId/streamSlug/gcSlug' }]
+}
+export default function CourseSearchBar() {
+  return <SearchBar placeholder="Search for course..." onSearch={fetchCourseResults} />
+}
+
+// src/components/ui/SearchBar/AbroadSearchBar.tsx — 'use client'
+// Props: { countryId, countrySlug } — forwarded through dynamic import
+// href: /${countrySlug}/${id}/${slug}
+```
+
+Rules:
+* Each search bar owns its fetch + href construction
+* Register as `LazyXxxSearchBar` in ClientWrappers (`ssr: false`)
+* Props flow through `dynamic()` transparent to caller — server component passes props directly to lazy wrapper
+
+---
+
+## getTestimonialsByGeneralCourse API
+
+```ts
+// Returns array directly — NOT { data, totalItems }
+const testimonials = await getTestimonialsByGeneralCourse(courseSlug)
+// Pass gcId (general course id or slug) — uses general_course_id filter
+```
+
+Contrast: `getTestimonialsByStream(streamId)` → `stream_id` filter. `getTestimonialsByCollege(collegeId)` → `college_id` filter.
+
+---
+
+## getAllGeneralCourses API
+
+```ts
+// Returns all general courses (no trending filter)
+const courses = await getAllGeneralCourses()
+// Shape: { id, short_name, slug, streams: { id, slug, logo } }[]
+// Link: /course/${c.streams.id}/${c.streams.slug}/${c.slug}
+```
+
+Contrast: `getTrendingCourses()` → adds `is_trending=1` filter.
+
+---
+
+## PopularCourses Self-Fetching Pattern
+
+`PopularCourses` (used in SubInnerCoursePage) is async self-fetching — invariant data (same on every sub-course page):
+
+```tsx
+// src/views/SubInnerCoursePage/Components/PopularCourses/index.tsx
+export default async function PopularCourses() {
+  const courses = await getAllGeneralCourses()
+  if (!courses.length) return null
+  return (
+    <section>
+      <h2>Popular Degree Courses</h2>
+      <ul aria-hidden="true" style={clipRect}>  {/* SSR links — Googlebot crawls */}
+        {courses.map(c => <li key={c.id}><a href={...}>{c.short_name}</a></li>)}
+      </ul>
+      <div className={`px-5 position-relative ${styles.wrap}`}>
+        <LazyPopularCoursesCarousel courses={courses} />
+      </div>
+    </section>
+  )
+}
+```
+
+Client (`PopularCoursesCarouselClient`): `EmblaTabCarousel`, `slidesToShowDesktop={6}`, uses `streams.logo` as image.
+
+---
+
+## EmblaTabCarousel Arrow CSS Override (Page-Specific)
+
+`EmblaTabCarousal.module.css` mobile defaults (`left: -10px`, `right: -5px`) cause arrows to overlap slides when parent has `px-5` (48px) padding. Fix with page-scoped CSS module using `button[aria-label]` selector:
+
+```css
+/* OtherCourses.module.css */
+.wrap :global(button[aria-label="Previous"]) { left: -45px; }
+.wrap :global(button[aria-label="Next"])     { right: -45px; }
+
+@media (max-width: 768px) {
+  .wrap :global(button[aria-label="Previous"]) { left: -42px; }
+  .wrap :global(button[aria-label="Next"])     { right: -42px; }
+}
+```
+
+Apply `styles.wrap` to the carousel container div in the server component.
+
+Rules:
+* Arrow must be fully outside `.embla`: `abs(left) ≥ arrow-width (40px)`
+* Arrow must be within parent padding: `abs(left) ≤ parent-padding (48px for px-5)`
+* Target `button[aria-label]` — CSS module class names are hashed, not targetable from outside
+* Used in: `OtherCourses.module.css` → imported by `OtherCourses/index.tsx` + `PopularCourses/index.tsx`
+
+---
+
+## BreadcrumbList JSON-LD — Always Include `item` URL
+
+Last breadcrumb entry must include `item` URL to avoid TypeScript union error (`item?: undefined` conflicts with `JsonLdValue` index signature):
+
+```tsx
+// WRONG — last entry without item causes TS error
+{ '@type': 'ListItem', position: 4, name: pagedata?.short_name }
+
+// CORRECT — always provide item URL for all entries
+{ '@type': 'ListItem', position: 4, name: pagedata?.short_name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}/${pagedata?.slug}` }
+```
+
+---
+
+## SubInnerCoursePage Pattern (Sub-Course Detail Page)
+
+Page: `/course/[streamId]/[streamSlug]/[courseSlug]` — same architecture as `InnerCoursePage` (stream detail).
+
+```
+page.tsx (server)
+ └── SubInnerCoursePage (server — JsonLd, Breadcrumb)
+     ├── BannerSection (server)
+     ├── Breadcrumb (server)
+     ├── OverviewSection (server — RSC children slot)
+     │   └── SubCourseInfoTabsClient ('use client' — ScrollTabs)
+     │       └── [children] sidebar (server-rendered)
+     ├── PopularCourses (async server — self-fetching via getAllGeneralCourses())
+     ├── TestimonialSec (server — data from page.tsx via getTestimonialsByGeneralCourse)
+     ├── OrganizationSection (async server — self-fetching via getOrganizationPage('Courses'))
+     ├── ExpertTraineeSec (async server — self-fetching via getCounsellorTeams())
+     └── ExpertSection (server)
+```
+
+`page.tsx` parallel fetches:
+```ts
+const [pagedata, colleges, exams, testimonials] = await Promise.all([
+  getGeneralCourseBySlug(courseSlug, streamId),
+  getColleges({ size: 8, type: 'college', stream_id: streamId }),
+  getExams({ size: 8, stream_id: streamId }),
+  getTestimonialsByGeneralCourse(courseSlug),
+])
+```
+
+`SubCourseTabData` — tabs built server-side, `html` fields for HTML content, `courses` for sub-course cards (with pre-computed `href`), `faqData` for FAQ:
+```ts
+export interface SubCourseTabData {
+  id: string; label: string
+  html?: string
+  courses?: { id: number; name: string; short_name: string; duration: string; slug: string; href: string }[]
+  faqData?: { questions: string; answers: string }[]
+}
+```
+
+`top_college` field can be string HTML or array of sub-course objects — handled in server component:
+```ts
+Array.isArray(data.top_college)
+  ? { id: 'top-colleges', label: 'Top Colleges', courses: data.top_college.map(item => ({ ...item, href: `/course/${item.id}/${data.slug}/${item.slug}` })) }
+  : { id: 'top-colleges', label: 'Top Colleges', html: data.top_college }
+```
+
+`TestimonialSec` uses `card.courseTestimonials` (not `streamTestimonials`) — requires separate `SubCourseTestimonialCarouselClient`.

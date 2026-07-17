@@ -1,50 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import axios1 from 'src/configs/axios'
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-const MainCarousel = dynamic(() => import('src/@core/components/main-carousel'), { ssr: false });
-const CollegeCard = dynamic(() => import('src/@core/components/college-card-next'), { ssr: false });
-function FeaturedCollegeSection() {
-  const [colleges, setColleges] = useState<any[]>([]);
+import Link from 'next/link'
+import { getColleges } from 'src/lib/api/common'
+import { LazyCollegeCarousel } from 'src/app/components/ClientWrappers'
 
-  //get all banners
-  const getcolleges = useCallback(async () => {
-    try {
-      const roleparams: any = {};
-      roleparams['page'] = 1;
-      roleparams['size'] = 10;
-      roleparams['type'] = 'college';
-      const response = await axios1.get('api/website/colleges/get', { params: roleparams });
-
-      setColleges(response.data.data);
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
-  console.log("colleges", colleges)
-
-  useEffect(() => {
-
-    getcolleges();
-
-  }, [getcolleges]);
-
-
+export default async function FeaturedCollegeSection({ heading = 'Featured Colleges' }: { heading?: string }) {
+  const result = await getColleges({ size: 10, type: 'college' })
+  const colleges = result?.data ?? []
+  if (!colleges.length) return null
 
   return (
-    <section className="FeaturedClgCon bg-white">
-      <div className="container pt-4 pt-md-5  position-relative">
-        <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">Featured Colleges</h2>
-        <MainCarousel items={colleges.map(college => (
-          <CollegeCard key={college.id} college={college} />
-        ))} />
-        <div className="d-flex justify-content-center pb-5">
-          <Link href='/colleges' className='btn viewMoreClgBtn'>Load More</Link>
+    <section className=" bg-white">
+      <div className="container pt-4 pt-md-5 position-relative">
+        <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">{heading}</h2>
+        <ul aria-hidden="true" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' }}>
+          {colleges.map((c: any) => (
+            <li key={c.id}><a href={`/college/${c.id}/${c.slug}`}>{c.name}</a></li>
+          ))}
+        </ul>
+        <LazyCollegeCarousel colleges={colleges} />
+        <div className="d-flex justify-content-center py-4">
+          <Link href="/colleges" className="btn viewMoreClgBtn">Load More</Link>
         </div>
       </div>
     </section>
   )
 }
-
-export default FeaturedCollegeSection

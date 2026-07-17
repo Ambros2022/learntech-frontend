@@ -1,83 +1,49 @@
 import BannerSection from './Components/BannerSec'
 import TopExamSec from './Components/TopExamSec'
-// import BrowsebyCategorySec from './Components/BrowseByCategorySec'
-import React, { useCallback, useEffect, useState } from 'react';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios from 'src/configs/axios';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import axios1 from 'src/configs/axios'
-import dynamic from 'next/dynamic';
-const BrowsebyCategorySec = dynamic(() => import('./Components/BrowseByCategorySec'), { ssr: false, });
-const MainExamPage = () => {
-  const router = useRouter()
-  const isMountedRef = useIsMountedRef();
-  const [pagedata, setPagedata] = useState<any>();
-  const [countryData, setCountryData] = useState([]);
-  const [streams, setStreams] = useState([]);
+import BrowsebyCategorySec from './Components/BrowseByCategorySec'
 
-  const getPagedata = useCallback(async () => {
-    try {
-      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
-      if (isMountedRef.current) {
+interface Props {
+  pagedata: any
+  countryData: any[]
+  streams: any[]
+  newsData: any[]
+  newsDataAbroad: any[]
+  initialExams: any[]
+  initialExamsTotalPages: number
+  initialAbroadExams: any[]
+  initialAbroadExamsTotalPages: number
+  initialAbroadExamsTotalItems: number
+}
 
-        setPagedata(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
-
-
-
-  const getCountry = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/country/get?india=false');
-      if (isMountedRef.current) {
-        setCountryData(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch data:', error);
-    }
-  }, [isMountedRef]); // Dependency array ensures function reference stability
-
-
-  const getStreams = useCallback(async () => {
-    try {
-      const roleparams: any = {};
-      roleparams['size'] = 10000;
-      const response = await axios1.get('api/website/stream/get', { params: roleparams });
-
-      setStreams(response.data.data);
-
-    } catch (err) {
-      console.error(err);
-    }
-  }, [isMountedRef]);
-
-
-
-  useEffect(() => {
-    getPagedata();
-    getCountry();
-    getStreams();
-  }, []);
-
-
-
+// Server Component — no 'use client' or React lifecycle hooks.
+// All initial data fetches have been moved to the page.tsx file.
+export default function MainExamPage({
+  pagedata,
+  countryData,
+  streams,
+  newsData,
+  newsDataAbroad,
+  initialExams,
+  initialExamsTotalPages,
+  initialAbroadExams,
+  initialAbroadExamsTotalPages,
+  initialAbroadExamsTotalItems,
+}: Props) {
   return (
     <>
-      <Head>
-        <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
-        <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
-        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-      </Head>
       <BannerSection />
       <TopExamSec data={pagedata} />
-      <BrowsebyCategorySec countryData={countryData} streams={streams} />
+      <BrowsebyCategorySec
+        countryData={countryData}
+        streams={streams}
+        newsData={newsData}
+        newsDataAbroad={newsDataAbroad}
+        initialExams={initialExams}
+        initialExamsTotalPages={initialExamsTotalPages}
+        initialAbroadExams={initialAbroadExams}
+        initialAbroadExamsTotalPages={initialAbroadExamsTotalPages}
+        initialAbroadExamsTotalItems={initialAbroadExamsTotalItems}
+      />
     </>
   )
 }
-
-export default MainExamPage

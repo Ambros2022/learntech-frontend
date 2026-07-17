@@ -1,131 +1,65 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import BannerSection from './Components/BannerSection';
-import OverviewSection from './Components/OverviewSection';
-import PopularCourses from './Components/PopularCourses';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios from 'src/configs/axios';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import ExpertSection from './Components/ExpertSection';
-import OrganizationSection from './Components/OrganizationalSec';
-import ExperTraineeSec from './Components/ExpertTrainneSec';
-import Testimonial from './Components/TestimonialSec'
+import JsonLd from 'src/app/components/JsonLd'
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
+import BannerSection from './Components/BannerSection'
+import OverviewSection from './Components/OverviewSection'
+import PopularCourses from './Components/PopularCourses'
+import TestimonialSec from './Components/TestimonialSec'
+import OrganizationSection from './Components/OrganizationalSec'
+import ExpertTraineeSec from './Components/ExpertTrainneSec'
+import ExpertSection from './Components/ExpertSection'
 
-interface Pagedata {
-  meta_title?: string;
-  meta_description?: string;
-  meta_keyword?: string;
-  generalcoursefaqs?: { questions: string; answers: string }[];
+interface Props {
+  pagedata: any
+  colleges: any[]
+  exams: any[]
+  testimonials: any[]
 }
 
-interface SubInnerCoursePageProps {
-  Streamid: string;
-  Courseslug: string;
-}
+export default function SubInnerCoursePage({ pagedata, colleges, exams, testimonials }: Props) {
+  const webUrl = process.env.NEXT_PUBLIC_WEB_URL ?? ''
 
-const SubInnerCoursePage: React.FC<SubInnerCoursePageProps> = ({ Streamid, Courseslug }) => {
-  const router = useRouter();
-  const isMountedRef = useIsMountedRef();
-  const [pagedata, setPagedata] = useState<Pagedata | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [colleges, setColleges] = useState<any[]>([]);
-  const [exams, setExams] = useState<any[]>([]);
-
-
-  const getPagedata = useCallback(async () => {
-    try {
-      const slug = Courseslug;
-      const id = Streamid;
-
-      const response = await axios.get(`/api/website/general/stream/get/${slug}/${id}`);
-
-      if (isMountedRef.current) {
-        setPagedata(response.data.data);
-        setLoading(false);
+  const faqSchema = pagedata?.generalcoursefaqs?.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: pagedata.generalcoursefaqs.map((item: any) => ({
+          '@type': 'Question',
+          name: item.questions,
+          acceptedAnswer: { '@type': 'Answer', text: item.answers },
+        })),
       }
-    } catch (error) {
-      router.push("/404");
-      console.error('Failed to fetch page data:', error);
-    }
-  }, [Streamid, Courseslug, isMountedRef, router]);
+    : null
 
-  const getColleges = useCallback(async () => {
-    try {
-      const response = await axios.get('/api/website/colleges/get', {
-        params: {
-          page: 1,
-          size: 8,
-          type: 'college',
-          stream_id: [Streamid]
-        }
-      });
-      if (isMountedRef.current) {
-        setColleges(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch colleges:', error);
-    }
-  }, [Streamid, isMountedRef]);
-
-  const getExams = useCallback(async () => {
-    try {
-      const response = await axios.get('/api/website/exams/get', {
-        params: {
-          page: 1,
-          size: 8,
-          stream_id: Streamid
-        }
-      });
-      if (isMountedRef.current) {
-        setExams(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch exams:', error);
-    }
-  }, [Streamid, isMountedRef]);
-
-  const formattedData = pagedata?.generalcoursefaqs?.map((item) => ({
-    "@type": "Question",
-    "name": item.questions,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.answers,
-    },
-  })) || [];
-
-  useEffect(() => {
-    getPagedata();
-    getColleges();
-    getExams();
-
-  }, [getPagedata, getColleges, getExams]);
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${webUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Courses', item: `${webUrl}/courses` },
+      { '@type': 'ListItem', position: 3, name: pagedata?.streams?.name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}` },
+      { '@type': 'ListItem', position: 4, name: pagedata?.short_name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}/${pagedata?.slug}` },
+    ],
+  }
 
   return (
     <>
-      <Head>
-        <title>{pagedata?.meta_title || "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata?.meta_description || "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
-        <meta name="keywords" content={pagedata?.meta_keyword || "Learntechweb"} />
-        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-        {formattedData?.length > 0 && (
-          <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": formattedData,
-            })}
-          </script>
-        )}
-      </Head>
-      {!loading && pagedata && <BannerSection data={pagedata} />}
-      {!loading && pagedata && <OverviewSection data={pagedata} colleges={colleges} exams={exams} />}
+      {faqSchema && <JsonLd schema={faqSchema} id="faq-schema" />}
+      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+      <BannerSection data={pagedata} />
+      <Breadcrumb items={[
+        { label: 'Courses', href: '/courses' },
+        { label: pagedata?.streams?.name, href: `/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}` },
+        { label: pagedata?.short_name },
+      ]} />
+      <OverviewSection data={pagedata} colleges={colleges} exams={exams} />
+      {/* @ts-expect-error async server component */}
       <PopularCourses />
-      {!loading && pagedata && <Testimonial data={pagedata} />}
-      <OrganizationSection data={pagedata} />
-      <ExperTraineeSec data={pagedata} />
+      <TestimonialSec testimonials={testimonials} />
+      {/* @ts-expect-error async server component */}
+      <OrganizationSection courseName={pagedata?.short_name} />
+      {/* @ts-expect-error async server component */}
+      <ExpertTraineeSec courseName={pagedata?.short_name} />
       <ExpertSection />
     </>
-  );
+  )
 }
-
-export default SubInnerCoursePage;

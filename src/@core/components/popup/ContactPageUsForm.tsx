@@ -1,127 +1,113 @@
-import React, { FC } from 'react';
-import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import axios from 'src/configs/axios';
-import { toast } from 'react-hot-toast'
-import { useRouter } from 'next/router';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import Link from 'next/link';
-interface Props {
-    page?: any;
-    onChanges?: any;
-}
+'use client'
 
-const contact_numberPageUsForm: FC<Props> = ({ }) => {
-    const router = useRouter();
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { toast } from 'sonner'
+import { useRouter } from 'src/hooks/useCompatRouter'
+import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
+import { phoneSchema, submitEnquiry } from './formUtils'
 
+const schema = z.object({
+  name: z.string().trim().min(1, 'Full Name is required'),
+  email: z.string().trim().email('Invalid email address'),
+  contact_number: phoneSchema,
+  location: z.string().trim().min(1, 'Location is required'),
+  course: z.string().trim().min(1, 'Preferred course is required'),
+  college: z.string().trim(),
+  message: z.string().trim(),
+  terms: z.boolean().refine(v => v, 'You must accept the terms and conditions'),
+})
 
-    const validationSchema = Yup.object().shape({
-        name: Yup.string().required('Full Name is required'),
-        contact_number: Yup.string().required('contact_number Number is required'),
-        email: Yup.string().email('Invalid email address').required('Email is required'),
-        location: Yup.string().required('Location is required'),
-        course: Yup.string().required('Preferred course is required'),
-        college: Yup.string().notRequired(), // College is optional
-        message: Yup.string().notRequired(), // Message is optional
-        terms: Yup.boolean()
-            .oneOf([true], "You must accept the terms and conditions"),
-    });
+type FormValues = z.infer<typeof schema>
 
+export default function ContactPageUsForm() {
+  const router = useRouter()
+  const {
+    register, control, handleSubmit, reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: '', email: '', contact_number: '', location: '', course: '', college: '', message: '', terms: false },
+  })
 
-    const initialValues = {
-        name: '',
-        contact_number: '',
-        email: '',
-        location: '',
-        course: '',
-        college: '',
-        message: '',
-        terms: false,
-    };
+  const onSubmit = async (values: FormValues) => {
+    try {
+      toast.loading('Processing')
+      const ok = await submitEnquiry({
+        name: values.name,
+        email: values.email,
+        contact_number: values.contact_number,
+        location: values.location,
+        course_in_mind: values.course,
+        college_name: values.college,
+        description: values.message,
+      })
+      toast.dismiss()
+      if (ok) {
+        toast.success('Thank you. We will get back to you.')
+        reset()
+        router.push('/thank-you')
+      } else {
+        toast.error('Please try again later!')
+      }
+    } catch {
+      toast.dismiss()
+      toast.error('Please try again later!')
+    }
+  }
 
-    const handleSubmit = async (values, { resetForm }) => {
-        try {
-            toast.loading('Processing');
-            const formData = new FormData();
-            formData.append('name', values.name);
-            formData.append('email', values.email);
-            formData.append('contact_number', values.contact_number);
-            formData.append('location', values.location);
-            formData.append('course_in_mind', values.course);
-            formData.append('college_name', values.college);
-            formData.append('description', values.message || '');
-            formData.append('current_url', window.location.href);
-
-            const response = await axios.post('api/website/enquiry', formData);
-
-            if (response.status === 200) {
-                toast.dismiss();
-                toast.success('Thank you. We will get back to you.');
-                resetForm();
-                router.push('/thank-you');
-            }
-        } catch (error) {
-            toast.error('Please try again later!');
-            console.error('Error submitting form:', error);
-        }
-    };
-
-    return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-skyBlue mbbsAbroad rounded p-3">
+      <h2 className="text-blue fw-bold text-center mb-3">Contact for Personalized Support!</h2>
+      <div className="mb-3">
+        <input type="text" className="form-control" placeholder="Full Name*" {...register('name')} />
+        {errors.name && <div className="text-danger">{errors.name.message}</div>}
+      </div>
+      <div className="mb-3">
+        <input type="email" className="form-control" placeholder="Email ID*" {...register('email')} />
+        {errors.email && <div className="text-danger">{errors.email.message}</div>}
+      </div>
+      <div className="mb-3">
+        <Controller name="contact_number" control={control} render={({ field }) => <PhoneInputField field={field} />} />
+        {errors.contact_number && <div className="text-danger">{errors.contact_number.message}</div>}
+      </div>
+      <div className="mb-3">
+        <input type="text" className="form-control" placeholder="Location*" {...register('location')} />
+        {errors.location && <div className="text-danger">{errors.location.message}</div>}
+      </div>
+      <div className="mb-3">
+        <input type="text" className="form-control" placeholder="Preferred Course*" {...register('course')} />
+        {errors.course && <div className="text-danger">{errors.course.message}</div>}
+      </div>
+      <div className="mb-3">
+        <input type="text" className="form-control" placeholder="Preferred College" {...register('college')} />
+      </div>
+      <div className="mb-3">
+        <textarea className="form-control" placeholder="Type your message" {...register('message')} />
+      </div>
+      <div className="mb-3 form-check">
+        <input type="checkbox" className="form-check-input border-black" id="terms-contact-page" {...register('terms')} />
+        <label
+          className="form-check-label"
+          htmlFor="terms-contact-page"
+          style={{
+            fontFamily: "'Poppins', sans-serif",
+            fontWeight: 400,
+            color: 'rgba(47, 43, 61, 0.78)',
+            fontSize: '15px',
+            lineHeight: '22px',
+            fontStyle: 'normal'
+          }}
         >
-            {({ errors, touched }) => (
-                <Form className='bg-skyBlue mbbsAbroad rounded p-3'>
-                    <h2 className='text-blue fw-bold text-center mb-3'>Contact for Personalized Support!
-                    </h2>
-                    <div className="mb-3">
-                        <Field type="text" className='form-control' name='name' placeholder='Full Name*' />
-                        {errors.name && touched.name ? <div className="text-danger">{errors.name}</div> : null}
-                    </div>
-                    <div className="mb-3">
-                        <Field type="email" className='form-control' name='email' placeholder='Email ID*' />
-                        {errors.email && touched.email ? <div className="text-danger">{errors.email}</div> : null}
-                    </div>
-                    <div className="mb-3">
-                        <PhoneInputField name='contact_number' />
-                        {/* <Field type="text" className='form-control' name='contact_number' placeholder='contact_number Number*' /> */}
-                        {errors.contact_number && touched.contact_number ? <div className="text-danger">{errors.contact_number}</div> : null}
-                    </div>
-                    <div className="mb-3">
-                        <Field type="text" className='form-control' name='location' placeholder='Location*' />
-                        {errors.location && touched.location ? <div className="text-danger">{errors.location}</div> : null}
-                    </div>
-                    <div className="mb-3">
-                        <Field type="text" className='form-control' name='course' placeholder='Preferred Course*'>
-                        </Field>
-                        {errors.course && touched.course ? <div className="text-danger">{errors.course}</div> : null}
-                    </div>
-                    <div className="mb-3">
-                        <Field type="text" className='form-control' name='college' placeholder='Preferred College'>
-                        </Field>
-                        {errors.college && touched.college ? <div className="text-danger">{errors.college}</div> : null}
-                    </div>
-                    <div className="mb-3">
-                        <Field as="textarea" className='form-control' name='message' placeholder='Type your message' />
-                        {errors.message && touched.message ? <div className="text-danger">{errors.message}</div> : null}
-                    </div>
-                    <div className="mb-3 form-check">
-                        <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
-                        <label className="form-check-label" htmlFor="terms">
-                            By Clicking this, I agree to the <Link href="/terms-and-conditions"  >Terms & Conditions</Link>
-                        </label>
-                        {errors.terms && touched.terms ? <div className="text-danger">{errors.terms}</div> : null}
-                    </div>
-                    <div className="mb-3 text-center">
-                        <button type="submit" className='btn submitBtn'>Submit</button>
-                    </div>
-                </Form>
-            )}
-        </Formik>
-
-    );
-};
-
-export default contact_numberPageUsForm;
+          By clicking submit, I agree to the terms &amp; conditions and privacy policy and give my
+          consent to receive updates through SMS/Email.
+        </label>
+        {errors.terms && <div className="text-danger">{errors.terms.message}</div>}
+      </div>
+      <div className="mb-3 text-center">
+        <button type="submit" disabled={isSubmitting} className="btn submitBtn">Submit</button>
+      </div>
+    </form>
+  )
+}

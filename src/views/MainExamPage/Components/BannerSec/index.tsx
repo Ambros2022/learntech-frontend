@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react'
 import dynamic from 'next/dynamic';
 // import PopularCourses from '../UpcomingExamsSec'
@@ -10,8 +11,7 @@ import Link from 'next/link';
 import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import axios1 from 'axios';
 import axios from 'src/configs/axios';
-import SearchIcon from '@mui/icons-material/Search';
-import ClearIcon from '@mui/icons-material/Clear';
+import { Search, X } from 'lucide-react';
 import Autocomplete from 'src/@core/components/mui/autocomplete';
 
 
@@ -131,11 +131,22 @@ function BannerSection() {
                           {...params}
                           placeholder="Search for Entrance Exam"
                           className='form-control'
+                          sx={{
+                            '& .MuiOutlinedInput-notchedOutline': {
+                              border: 'none !important',
+                            },
+                            '&:hover .MuiOutlinedInput-notchedOutline': {
+                              border: 'none !important',
+                            },
+                            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                              border: 'none !important',
+                            },
+                          }}
                           InputProps={{
                             ...params.InputProps,
                             startAdornment: (
                               <InputAdornment position="start">
-                                <SearchIcon />
+                                <Search size={20} />
                               </InputAdornment>
                             ),
 
@@ -145,7 +156,7 @@ function BannerSection() {
                                 {params.inputProps.value ? (
                                   <InputAdornment position="end">
                                     <IconButton onClick={() => handleClearInput(params)}>
-                                      <ClearIcon />
+                                      <X size={20} />
                                     </IconButton>
                                   </InputAdornment>
                                 ) : null}

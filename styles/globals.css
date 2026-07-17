@@ -1,10 +1,40 @@
   /* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
 
+  :root {
+    --bs-body-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  }
+
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    z-index: 9999;
+    padding: 8px 16px;
+    background: #274896;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: top 0.2s;
+  }
+
+  .skip-to-content:focus {
+    top: 0;
+  }
+
+  /* NProgress bar — override default red with brand blue */
+  #nprogress .bar {
+    background: #274896 !important;
+    height: 3px !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   html,
   body {
     min-height: 100%;
-    /* font-family: 'Poppins' !important; */
-
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   }
 
   p {
@@ -61,16 +91,6 @@
     min-width: auto;
   }
 
-  .navbar .hlogo {
-    display: inline-block;
-    width: 256px;
-    /* width: 350px; */
-    height: 50px;
-  }
-
-  .collapseNavHeight {
-    background-color: white !important;
-  }
 
   .HomebannerLink {
     display: block;
@@ -124,27 +144,14 @@
     min-height: 350px !important;
   }
 
-  .bg-header {
-    background-color: rgba(39, 72, 150, 0.1) !important;
-  }
-
   a {
     text-decoration: none !important;
   }
-
-  .socialIcon img {
-    width: 22px;
-  }
-
 
   .icon-white {
     filter: invert(100%) sepia(100%) saturate(38%) hue-rotate(254deg) brightness(110%) contrast(110%) !important;
   }
 
-
-  .socialText img {
-    width: 18px;
-  }
 
   .reviewBtn {
     border: 1px solid #274896 !important;
@@ -163,24 +170,6 @@
   .counsellingBtn:hover {
     color: white !important;
     background-color: darkblue !important;
-  }
-
-  .top-nav .dropdown-menu .dropdown-item:hover,
-  .top-nav .dropdown-menu .dropdown-item:focus {
-    border-left: 3px solid #254692 !important;
-    color: black !important;
-    background-color: rgba(39, 72, 150, 0.04) !important;
-  }
-
-  .top-nav .dropdown-menu .btn:hover,
-  .top-nav .dropdown-menu .btn:focus {
-    font-weight: bold !important;
-  }
-
-
-
-  .top-nav .dropdown-menu .btn {
-    color: #254692 !important;
   }
 
   .dropdown-menu li {
@@ -227,29 +216,8 @@
     pointer-events: none;
   }
 
-  .top-nav .active,
-  .top-nav .active :focus,
-  .top-nav .active :hover {
-    color: #254692 !important;
-    font-weight: bold !important;
-    padding-bottom: 15px !important;
-    border-bottom-style: solid !important;
-    border-bottom-width: 3.1px !important;
-    width: fit-content !important;
-  }
-
-  .activeDrpDwn {
-    color: #254692 !important;
-    font-weight: bold !important;
-  }
-
-
   nav a {
     color: black !important;
-  }
-
-  .socialText {
-    font-size: 16px !important;
   }
 
   .sbtBtn {
@@ -310,10 +278,11 @@
     cursor: pointer;
   }
 
-  .searchnewh3{
-     font-size: 18px !important;
+  .searchnewh3 {
+    font-size: 18px !important;
     cursor: pointer;
   }
+
   .searchSec .form-control {
     color: white !important;
   }
@@ -583,17 +552,6 @@
     font-size: 15px !important;
   }
 
-  .nav-avt {
-    min-width: 50px !important;
-  }
-
-  .nav-cons {
-    min-width: 160px !important;
-
-  }
-
-
-
   .studyAbroadNav a {
     border-radius: 10px !important;
     width: 130px;
@@ -625,13 +583,6 @@
     background-color: #254692 !important;
   }
 
-  .footerCon {
-    background-color: rgba(21, 41, 88, 1);
-    font-size: 15px !important;
-    font-weight: 300 !important;
-  }
-
-
   .btn-success2 {
     background-color: #198754 !important;
     border-radius: 25px !important;
@@ -644,21 +595,6 @@
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px !important;
   }
 
-  .footerIcon img {
-    width: 28px !important;
-  }
-
-  .footer-logo {
-    width: 95% !important;
-    height: 100% !important;
-    margin-left: -20px !important;
-  }
-
-  .footerCon a {
-    text-decoration: none !important;
-    color: white !important;
-  }
-
   .download-img {
     width: 190px !important;
   }
@@ -666,22 +602,6 @@
   .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
-  }
-
-  .top-nav .nav-item a:hover {
-    color: #254692 !important;
-  }
-
-  .footerCon a:hover {
-    color: #0077b5 !important;
-  }
-
-  footer {
-    background-color: rgba(39, 72, 150, 1) !important;
-  }
-
-  footer img {
-    width: 28px !important;
   }
 
   .icon-white {
@@ -692,78 +612,12 @@
     filter: brightness(0) invert(1);
   }
 
-  .phone-icon {
-    background-color: rgb(248, 67, 101) !important;
-    border-radius: 50% !important;
-    padding: 14px 12px !important;
-    border: none !important;
-    width: 67px !important;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
-    position: fixed !important;
-    z-index: 100 !important;
-    bottom: 45px !important;
-    left: 20px !important;
-  }
-
-
-  .footer-arrow {
-    transform: rotate(90deg) !important;
-  }
-
-  .arrowIcon {
-    background-color: rgb(234, 240, 252) !important;
-    border-radius: 50% !important;
-    padding: 9px !important;
-    border: none !important;
-    width: 57px !important;
-    box-shadow: #00000073 0px 0px 15px !important;
-    position: fixed !important;
-    bottom: 150px !important;
-    right: 29px !important;
-    z-index: 100 !important;
-  }
-
-  .whatsappIcon {
-    background-color: white !important;
-    border-radius: 50% !important;
-    border: 20px solid green !important;
-    box-shadow: #00000073 0px 0px 15px !important;
-    position: fixed !important;
-    z-index: 100 !important;
-    bottom: 45px !important;
-    right: 20px !important;
-    transform: rotate(270deg) !important;
-  }
-
   .Analysis-Section img {
     width: 60%;
     height: auto;
   }
 
-  .featuredClgCard>img {
-    width: 100%;
-    height: 100%;
-  }
 
-  .featuredClgCard .card-text img {
-    filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
-  }
-
-  .featuredClgCard .card-text {
-    filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
-  }
-
-
-  .featuredClgCard .card-text i {
-    color: red !important;
-  }
-
-  .featuredClgCard a {
-    background-color: white;
-    font-size: 12px !important;
-    color: rgb(37, 70, 146);
-    border: 1px solid #254692 !important;
-  }
 
   .applyNowButton {
     background-color: #254692 !important;
@@ -771,20 +625,9 @@
     box-shadow: rgba(21, 41, 88, 0.493) 0px 0px 15px !important;
   }
 
-  .featuredClgCard {
-    margin-right: 10px !important;
-  }
 
-  .newsLinkSec {
-    background-color: #274896;
-    color: white;
-    min-height: 58px;
-  }
 
-  .newsLinkSec li {
-    display: flex !important;
-    justify-content: center !important;
-  }
+
 
 
   .StudyAbroadCard .card-text img {
@@ -818,9 +661,7 @@
 
 
 
-  .newsLinkSec .carousel-button-group {
-    margin: -50px 0px 0px 0px !important;
-  }
+
 
   .newsLinkSec2 .carousel-button-group {
     position: absolute !important;
@@ -888,17 +729,9 @@
     z-index: 50 !important;
   }
 
-  .FeaturedClgCon .carousel-button-group {
-    position: absolute !important;
-    top: 220px !important;
-    width: 100%;
 
-  }
 
-  .FeaturedClgCon .fi-left {
-    margin-left: -25px !important;
-    cursor: pointer !important;
-  }
+
 
   .text-truncate1 {
     overflow: hidden !important;
@@ -906,18 +739,9 @@
     white-space: nowrap !important;
   }
 
-  .FeaturedClgCon .fi-right {
-    margin-right: -10px !important;
-    cursor: pointer !important;
-  }
 
-  .newsLinkSec .fi-left {
-    margin-left: -50px !important;
-  }
 
-  .newsLinkSec .fi-right {
-    margin-right: -50px !important;
-  }
+
 
   .newsLinkSec2 .fi-left {
     margin-left: -50px !important;
@@ -941,20 +765,14 @@
     width: 100%;
   }
 
-  .newsLinkSec .fi-left {
-    margin-left: -50px !important;
-  }
 
-  .newsLinkSec .fi-right {
-    margin-right: -50px !important;
-  }
 
   .newsLinkSec2 .fi-left {
     margin-left: -50px !important;
   }
 
   .newsLinkSec2 .fi-right {
-    margin-right: 100px !important;
+    margin-right: -50px !important;
   }
 
   .StudyAbroadCon .carousel-button-group {
@@ -1014,14 +832,6 @@
     border-radius: 5px;
   }
 
-  .arrowIcon.show {
-    opacity: 1;
-  }
-
-  .arrowIcon.hide {
-    opacity: 0;
-  }
-
   .cardArrow {
     display: none !important;
   }
@@ -1029,14 +839,6 @@
   #exploreCardCon .cardArrow span a img {
     filter: invert(68%) sepia(0%) saturate(0%) hue-rotate(143deg) brightness(95%) contrast(90%);
     background-color: none !important;
-  }
-
-  .telHover a:hover {
-    color: blue !important;
-  }
-
-  .mailHover a:hover {
-    color: blue !important;
   }
 
   .reviewBtn:hover {
@@ -1052,12 +854,6 @@
 
   .newsBlosCards {
     margin-right: 10px !important;
-  }
-
-  .top-nav .nav-link {
-    font-size: 17px !important;
-    padding-left: 5px;
-    color: #000000 !important;
   }
 
   .card-image {
@@ -1082,13 +878,7 @@
       max-height: 128px !important;
     }
 
-    .top-nav .nav-link {
-      font-size: 14px !important;
-    }
 
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
 
     .newsLinkSec2 .carousel-button-group {
 
@@ -1106,9 +896,7 @@
       font-size: 10px !important;
     }
 
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
+
 
     .bannerCon .carousel-control-prev {
       left: -50px;
@@ -1125,14 +913,6 @@
 
 
   @media (max-width: 1024px) {
-    .footerCon {
-      font-size: 16px !important;
-    }
-
-    .top-nav {
-      font-size: 12px !important;
-    }
-
     .searchForm h2 {
       font-size: 19px !important;
     }
@@ -1208,12 +988,6 @@
       overflow-y: scroll !important;
     } */
 
-    .footer-logo {
-      width: 95% !important;
-      height: 100% !important;
-      margin-left: -14px !important;
-    }
-
     .bannerCon .carousel-item img {
       object-fit: cover;
     }
@@ -1222,13 +996,13 @@
       font-size: 1rem !important;
       cursor: pointer;
     }
-    
 
-    .searchnewh3{
+
+    .searchnewh3 {
       font-size: 1rem !important;
       cursor: pointer;
     }
-    
+
 
     .Analysis-Section h6 {
       font-size: 0.8rem;
@@ -1237,10 +1011,6 @@
     .Analysis-Section img {
       width: 80%;
       height: auto;
-    }
-
-    .top-nav .dropdown-menu img {
-      width: 15px !important;
     }
 
     .dropdownBtn .btn {
@@ -1261,30 +1031,8 @@
       font-size: 16px !important;
     }
 
-    .footerCon {
-      font-size: 16px !important;
-    }
-
-    .footerIcon img {
-      width: 20px !important;
-    }
-
-    .footerCon h6 {
-      font-weight: 500 !important;
-      font-size: 15px !important;
-    }
-
     .searchForm h2 {
       font-size: 21px !important;
-    }
-
-    .phone-icon {
-      background-color: rgb(248, 67, 101) !important;
-      border-radius: 50% !important;
-      padding: 11px 13px !important;
-      border: none !important;
-      width: 50px !important;
-      box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
     }
 
     .DownloadBrchrBtn {
@@ -1296,52 +1044,13 @@
       width: 200px !important;
     }
 
-    .footer-arrow {
-      transform: rotate(90deg) !important;
-    }
-
-    .arrowIcon {
-      background-color: white !important;
-      border-radius: 50% !important;
-      padding: 5px !important;
-      border: none !important;
-      width: 44px !important;
-      right: 24px !important;
-      bottom: 120px !important;
-      box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
-    }
-
-    .whatsappIcon {
-      background-color: white !important;
-      border-radius: 50% !important;
-      border: 10px solid green !important;
-      box-shadow: #00000073 0px 0px 15px !important;
-      position: fixed !important;
-      z-index: 100 !important;
-      transform: rotate(270deg) !important;
-    }
-
-    .mainFooter {
-      font-size: 12px !important;
-    }
-
     .reviewBtn {
       border: 1px solid #274896 !important;
       color: #274896 !important;
       font-size: 12px !important;
     }
 
-    .featuredClgCard .card-title {
-      font-size: 18px !important;
-    }
 
-    .featuredClgCard .card-text {
-      font-size: 12px !important;
-    }
-
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
 
     .bannerCon .carousel-control-prev {
       left: -35px;
@@ -1351,24 +1060,6 @@
       right: -35px;
     }
 
-    .phone-icon img {
-      width: 100%;
-    }
-
-    .top-nav .active,
-    .top-nav .active :focus,
-    .top-nav .active :hover {
-      color: #254692 !important;
-      font-weight: bold !important;
-      border-bottom: 0 !important;
-      padding-bottom: 0 !important;
-    }
-  }
-
-  @media (min-width:320px) and (max-width:992px) {
-    .newsHide {
-      display: none !important;
-    }
   }
 
   @media (min-width: 320px) and (max-width: 767px) {
@@ -1436,21 +1127,10 @@
       overflow-y: scroll !important;
     } */
 
-    .featuredClgCard a {
-      background-color: white;
-      font-size: 15px !important;
-      color: #254692;
-      border: 1px solid #254692 !important;
-    }
+
 
     .studyAbroadNav a {
-      width: 220px !important;
-    }
-
-    .footer-logo {
       width: 100% !important;
-      height: 100% !important;
-      margin-left: -10px !important;
     }
 
     .card-con {
@@ -1458,14 +1138,6 @@
     }
 
 
-
-    .top-nav .active,
-    .top-nav .active :focus,
-    .top-nav .active :hover {
-      color: #254692 !important;
-      font-weight: bold !important;
-      border-bottom: 0 !important;
-    }
 
     .Analysis-Section img {
       width: 70%;
@@ -1484,13 +1156,10 @@
       font-size: 0.9rem !important;
       cursor: pointer;
     }
+
     .searchnewh3 {
       font-size: 0.9rem !important;
       cursor: pointer;
-    }
-
-    .top-nav .dropdown-menu img {
-      width: 15px !important;
     }
 
     .dropdownBtn .btn {
@@ -1509,10 +1178,7 @@
       position: relative !important;
     }
 
-    .newsLinkSec .react-multi-carousel-list {
-      width: 240px;
-      margin: auto;
-    }
+
 
     .newsLinkSec2 .react-multi-carousel-list {
       width: 240px;
@@ -1554,57 +1220,11 @@
       display: none !important;
     }
 
-    .whatsappIcon {
-      background-color: white !important;
-      border-radius: 50% !important;
-      border: 10px solid green !important;
-      box-shadow: #00000073 0px 0px 15px !important;
-      position: fixed !important;
-      z-index: 100 !important;
-      bottom: 12px !important;
-      right: 12px !important;
-      transform: rotate(270deg) !important;
-    }
-
-
-
     .banner {
       background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/icons/Banner Image.jpg') !important;
       background-repeat: no-repeat !important;
       background-size: cover !important;
       height: 850px !important;
-    }
-
-    .footerCon .img-fluid {
-      width: 100px !important;
-    }
-
-    .footerCon {
-      font-size: 16px !important;
-    }
-
-    .footerCon .address {
-      font-size: 16px !important;
-    }
-
-    .footerIcon img {
-      width: 20px !important;
-    }
-
-    .footerCon h6 {
-      font-weight: 500 !important;
-      font-size: 15px !important;
-    }
-
-    .phone-icon {
-      background-color: rgb(248, 67, 101) !important;
-      border-radius: 50% !important;
-      padding: 10px !important;
-      border: none !important;
-      width: 53px !important;
-      box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
-      bottom: 12px !important;
-      left: 12px !important;
     }
 
     .newsBlosCards {
@@ -1619,23 +1239,7 @@
       font-size: 17px !important;
     }
 
-    .arrowIcon {
-      background-color: white !important;
-      border-radius: 50% !important;
-      padding: 7px !important;
-      border: none !important;
-      width: 45px !important;
-      right: 12px !important;
-      box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px !important;
-    }
 
-    footer {
-      font-size: 12px !important;
-    }
-
-    .featuredClgCard {
-      margin-right: 0px !important;
-    }
 
     .StudyAbroadCard {
       margin-right: 0px !important;
@@ -1664,9 +1268,6 @@
       padding: 0.7rem 0px 0px 0px !important;
     }
 
-    .phone-icon img {
-      width: 90%;
-    }
   }
 
   @media (min-width: 320px) and (max-width: 424px) {
@@ -1687,21 +1288,7 @@
   }
 
   @media (max-width: 575px) {
-    .FeaturedClgCon .carousel-button-group {
-      top: 220px !important;
-    }
 
-    .FeaturedClgCon .fi-left {
-      margin-left: 8px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .FeaturedClgCon .fi-right {
-      margin-right: 32px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
 
     .AssociatedClg .fi-left {
       margin-left: 8px !important;
@@ -1767,9 +1354,7 @@
   }
 
   @media (min-width: 320px) and (max-width: 374px) {
-    .FeaturedClgCon .carousel-button-group {
-      top: 220px !important;
-    }
+
 
     .AssociatedClg .carousel-button-group {
       top: 280px !important;
@@ -1870,10 +1455,6 @@
     background-color: #f6f8fb !important;
   }
 
-  .footerCon .bi-chevron-double-right {
-    font-size: 10px;
-    padding-right: 6px;
-  }
 
   .icon-rtl {
     padding-right: 25px !important;
@@ -2210,7 +1791,7 @@
 
   @media (min-width: 320px) and (max-width: 767px) {
     .collegeDetailCard {
-      width: 100vw !important;
+      width: 100% !important;
       height: auto !important;
     }
 
@@ -2236,10 +1817,6 @@
     .freeBtn {
       width: 260px !important;
       padding: 12px 0 !important;
-    }
-
-    .arrowIcon {
-      bottom: 85px !important;
     }
 
     .infoBtn .btn {
@@ -2561,6 +2138,7 @@
       font-size: 15px !important;
       cursor: pointer;
     }
+
     .searchnewh3 {
       font-size: 15px !important;
       cursor: pointer;
@@ -2853,7 +2431,7 @@
     color: white !important;
   }
 
-  .careerLink  .section1 a:hover {
+  .careerLink .section1 a:hover {
     color: rgb(159, 224, 250) !important;
   }
 
@@ -2869,6 +2447,8 @@
     background-color: #f6f8fb !important;
     border: 1px solid #274896 !important;
     color: #274896 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
   .topCountryLinks .nav-link img {
@@ -2947,13 +2527,19 @@
   }
 
   .topCountryLinks .nav-link:hover {
-    background-color: #274896 !important;
-    color: white !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    background-color: #254692 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
   .topCountryLinks .nav-link.active {
-    background-color: #274896 !important;
-    color: white !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    background-color: #254692 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
 
@@ -3405,20 +2991,14 @@
       height: 100%;
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -40px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -40px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -40px !important;
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 50px !important;
+      margin-right: -40px !important;
     }
 
     .errCon h1 {
@@ -3452,25 +3032,20 @@
       font-size: 15px !important;
       cursor: pointer;
     }
+
     .searchnewh3 {
       font-size: 15px !important;
       cursor: pointer;
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -35px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -35px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -40px !important;
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 35px !important;
+      margin-right: -40px !important;
     }
 
     .errCon h1 {
@@ -3521,20 +3096,14 @@
 
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -10px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -10px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -10px !important;
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 15px !important;
+      margin-right: -10px !important;
     }
 
     .disclaimerCon h1 {
@@ -3700,9 +3269,43 @@
     border: 1px solid rgba(212, 218, 234, 1) !important;
     padding: 10px 12px !important;
     border-radius: 5px !important;
-    width: 200px !important;
+    width: 160px !important;
   }
 
+  /* Override width only for MainExamPage category carousel — MbbsAbroadPage keeps 160px */
+  .categorySecCarousel .examSecItems .nav-link {
+    width: auto !important;
+  }
+
+  @media (min-width: 768px) {
+    /* Desktop only: disable truncation to show full tab text */
+    .categorySecCarousel .examSecItems .nav-link {
+      overflow: visible !important;
+      text-overflow: unset !important;
+      white-space: nowrap !important;
+    }
+  }
+
+@media (max-width: 767px) {
+  .categorySecCarousel .category-carousel-container {
+    gap: 15px !important;
+  }
+
+  .categorySecCarousel .category-carousel-container .fi-left,
+  .categorySecCarousel .category-carousel-container .fi-right {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Mobile: show exactly 2 tabs at a time filling the embla viewport */
+  .categorySecCarousel .exam-tab-slide {
+    flex: 0 0 calc(50% - 5px) !important;
+  }
+
+  .categorySecCarousel .exam-tab-slide .nav-link {
+    width: 100% !important;
+  }
+}
 
   .news-item .card-text {
     display: -webkit-box !important;
@@ -3765,9 +3368,7 @@
     object-fit: contain !important;
   }
 
-  .newsLinkSec h6.newsLinkClr:hover {
-    color: rgb(230, 230, 230) !important;
-  }
+
 
   .categorySecCarousel .carousel-button-group {
     position: absolute !important;
@@ -3984,7 +3585,6 @@
 
     .categoryTextHide {
       text-overflow: ellipsis !important;
-      width: 60% !important;
     }
 
     .categorySecCarousel .fi-left {
@@ -4443,24 +4043,8 @@
   }
 
   @media (min-width:992px) and (max-width:1024px) {
-    .top-nav .nav-link {
-      font-size: 12px !important;
-    }
-
     .counsellingBtn {
       font-size: 14px !important;
-    }
-  }
-
-  @media(max-width:1023px) {
-
-
-    .nav-avt {
-      display: none;
-    }
-
-    .nav-cons {
-      display: none;
     }
   }
 
@@ -4830,25 +4414,7 @@
     width: 100% !important;
   }
 
-  .AdvertiseBanner {
-    height: 400px;
-  }
 
-  .AdvertiseBanner img {
-    height: 400px;
-    width: 100%;
-    object-fit: cover;
-  }
-
-  .ServiceBanner {
-    height: 400px !important;
-  }
-
-  .ServiceBanner img {
-    height: 400px !important;
-    width: 100% !important;
-    object-fit: cover !important;
-  }
 
   .servicesImg {
     width: 100%;
@@ -4962,15 +4528,6 @@
     object-fit: cover;
   }
 
-  .aboutUsPageSec {
-    height: 400px;
-    background-color: #E8E8E8;
-  }
-
-  .aboutUsPageSec img {
-    height: 400px !important;
-    object-fit: cover !important;
-  }
 
   .scholarShipBtn {
     background-color: white !important;
@@ -5126,27 +4683,12 @@
     height: 100% !important;
   }
 
-  .aboutUsSec .nav-link {
-    color: black !important;
-    text-align: start !important;
-    background-color: #f6f8fb !important;
-    border: 1px solid #254692;
-  }
 
-  .aboutUsSec .nav-link:hover {
-    color: white !important;
-    text-align: start !important;
-    background-color: #254692 !important;
-  }
 
   .clr-black {
     filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(284deg) brightness(107%) contrast(107%);
   }
 
-  .aboutUsSec .nav-link.active {
-    background-color: #254692 !important;
-    color: white !important;
-  }
 
   .testimonalImg {
     width: 70px;
@@ -5198,9 +4740,6 @@
     animation: zoomInOut 2s infinite;
   }
 
-  .text-blue {
-    color: #0073b1;
-  }
 
   .fsize-1 {
     font-size: 2rem;
@@ -5759,15 +5298,7 @@
       max-width: 100px !important;
     }
 
-    .AdvertiseBanner {
-      height: 200px;
-    }
 
-    .AdvertiseBanner img {
-      height: 200px;
-      width: 100%;
-      object-fit: cover;
-    }
 
 
     .teamworksec {
@@ -5909,18 +5440,7 @@
       object-fit: cover;
     }
 
-    .aboutUsPageSec {
-      height: 200px;
-    }
 
-    .aboutUsPageSec h1 {
-      font-size: 20px;
-    }
-
-    .aboutUsPageSec img {
-      height: 200px !important;
-      object-fit: cover;
-    }
 
 
   }
@@ -6179,13 +5699,6 @@
       aspect-ratio: 16 / 6;
     }
 
-    .navbar .hlogo {
-      display: inline-block;
-      width: 160px;
-      height: 50px;
-      margin-left: 8px !important;
-    }
-
     .navbar-toggler {
       margin-right: 8px !important;
     }
@@ -6202,18 +5715,13 @@
     }
   }
 
-  .journey-video {
-    height: 400px !important;
-    width: 75%;
-  }
+
 
   .contactuspage p {
     font-size: 22px !important;
   }
 
-  .scholarh2 {
-    font-size: 22px !important;
-  }
+
 
   @media (min-width:320px) and (max-width:767px) {
     .f20 {
@@ -6250,10 +5758,7 @@
       font-size: 16px !important;
     }
 
-    .journey-video {
-      height: 200px !important;
-      width: 100%;
-    }
+
 
   }
 
@@ -6316,7 +5821,6 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    font-weight: bold;
     position: relative;
     padding-right: 2rem;
     background: white;
@@ -6545,7 +6049,8 @@
   }
 
   .state-dropdwon-width {
-    width: 230px !important;
+    min-width: 230px !important;
+    width: auto !important;
   }
 
   .height-fix-blogs {
@@ -6554,6 +6059,13 @@
   }
 
 
+  .minehightcoursesneew {
+    min-height: 300px !important;
+  }
+
+  .heightparanew {
+    min-height: 500px !important;
+  }
 
   /* ----bams landing page--- */
 
@@ -6568,17 +6080,57 @@
 
 
   }
-  .is-invalid {
-  border: 2px solid red !important;
-}
 
-.h2sizeadded{
-  font-size: 2rem !important;
-}
+  .is-invalid {
+    border: 2px solid red !important;
+  }
+
+  .h2sizeadded {
+    font-size: 2rem !important;
+  }
+
+
+
+
   @media (max-width: 768px) {
-   .h2sizeadded{
-  font-size: 1.5rem !important;
-}
+    .h2sizeadded {
+      font-size: 1.5rem !important;
+    }
 
 
   }
+
+  .minehightnriquto {
+    min-height: 280px !important;
+  }
+
+  .innercourse_height {
+    min-height: 150px !important;
+
+  }
+
+  .minehightinnercourse {
+    min-height: 250px !important;
+  }
+
+  .minhrighth1 {
+    min-height: 50px !important;
+  }
+
+
+  @media only screen and (max-width:600px) {
+    .minheight200mobile {
+      min-height: 300px !important;
+    }
+  }
+
+  .terms-label {
+    font-size: 13px !important;
+  }
+
+  @media (max-width: 768px) {
+    .terms-label {
+      font-size: 11px !important;
+    }
+  }
+

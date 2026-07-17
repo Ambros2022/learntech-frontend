@@ -1,30 +1,75 @@
-import React, { useCallback, useEffect, useState } from 'react';
+'use client'
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
-const CategoryCarousel = dynamic(() => import('./CategoryCarousel'), { ssr: false, });
-// import CategoryCarousel from './CategoryCarousel'; // Adjust the import path as necessary
-const NewsList = dynamic(() => import('../newsList'), { ssr: false, });
-// import NewsList from '../newsList';
-// import NewsListAbroad from '../newsListAbroad';
-const NewsListAbroad = dynamic(() => import('../newsListAbroad'), { ssr: false, });
-const ExamCard = dynamic(() => import('../ExamCardList'), { ssr: false, });
-import axios from 'src/configs/axios';
-const SideContactUsForm = dynamic(() => import('src/@core/components/popup/SideContactUsForm'), { ssr: false, });
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import Link from 'next/link';
 import { useAuth } from 'src/hooks/useAuth';
-import { useRouter } from 'next/router';
+import { useRouter } from 'src/hooks/useCompatRouter';
 
+const CategoryCarousel = dynamic(() => import('./CategoryCarousel'), { ssr: false });
+const NewsList = dynamic(() => import('../newsList'), { ssr: false });
+const NewsListAbroad = dynamic(() => import('../newsListAbroad'), { ssr: false });
+const ExamCard = dynamic(() => import('../ExamCardList'), { ssr: false });
+const SideContactUsForm = dynamic(() => import('src/@core/components/popup/SideContactUsForm'), { ssr: false });
 
-const BrowsebyCategorySec = ({ countryData, streams }) => {
+interface Props {
+    countryData: any[];
+    streams: any[];
+    newsData: any[];
+    newsDataAbroad: any[];
+    initialExams: any[];
+    initialExamsTotalPages: number;
+    initialAbroadExams: any[];
+    initialAbroadExamsTotalPages: number;
+    initialAbroadExamsTotalItems: number;
+}
+
+const BrowsebyCategorySec = ({
+    countryData = [],
+    streams = [],
+    newsData: initialNews = [],
+    newsDataAbroad: initialNewsAbroad = [],
+    initialExams = [],
+    initialExamsTotalPages = 1,
+    initialAbroadExams = [],
+    initialAbroadExamsTotalPages = 1,
+    initialAbroadExamsTotalItems = 0,
+}: Props) => {
     const { streamId, setStreamId } = useAuth();
-    const [scholarshipsData, setScholarshipsData] = useState<any>([]);  // Use any type for tabs
-    const [scholarshipData, setScholarshipData] = useState<any>([]);  // Use any type for tabs
-    const [items, setItems] = useState<{ id: string; title: string }[]>([]);
-    const [examsData, setExamsData] = useState({});
-    const [newsData, setNewsData] = useState([]);
-    const [newsDataAbroad, setNewsDataAbroad] = useState([]);
-    const isMountedRef = useIsMountedRef();
-    const [searchText, setSearchText] = useState('');
+    const router = useRouter();
+
+    const API_URL = (process.env.NEXT_PUBLIC_API_URI || '').replace(/\/+$/, '');
+
+    // Initialize items (categories list)
+    const initialCategories = streams.map(category => ({
+        id: category.id,
+        title: category.name
+    }));
+    const [items] = useState<{ id: string; title: string }[]>([
+        { id: 'all', title: 'All Exams' },
+        ...initialCategories
+    ]);
+
+    // Initialize examsData
+    const [examsData, setExamsData] = useState<any>({
+        all: initialExams
+    });
+
+    // Initialize scholarshipsData (visible page 1 of abroad exams)
+    const [scholarshipsData, setScholarshipsData] = useState<any>(initialAbroadExams);
+
+    // Initialize scholarshipData (used to check if we have any abroad exams)
+    const [scholarshipData, setScholarshipData] = useState<any>(
+        initialAbroadExamsTotalItems > 0 ? initialAbroadExams : []
+    );
+
+    const [newsData] = useState(initialNews);
+    const [newsDataAbroad] = useState(initialNewsAbroad);
+
+    const [activeTab, setActiveTab] = useState('all');
+    const [isLoading, setIsLoading] = useState(false);
+    const firstRender = useRef(true);
+
+    const [searchText] = useState('');
     const [formData, setFormData] = useState({
         level_of_study: '',
         types_of_exam: '',
@@ -32,28 +77,16 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         country_id: '',
         deadline: ''
     });
-    const perPage = 9; // Number of items per page
-
-    const router = useRouter();
-
-
- 
-
-    const [activeTab, setActiveTab] = useState('all');
-    const [currentPage, setCurrentPage] = useState(1);
-    const [isLoading, setIsLoading] = useState(true);
-
 
     // Exam pagination state
     const [currentExamPage, setCurrentExamPage] = useState(1);
-    const [totalExamPages, setTotalExamPages] = useState(1);
+    const [totalExamPages, setTotalExamPages] = useState(initialExamsTotalPages);
     const examsPerPage = 9;
 
     // Scholarship pagination state
     const [currentScholarshipPage, setCurrentScholarshipPage] = useState(1);
-    const [totalScholarshipPages, setTotalScholarshipPages] = useState(1);
+    const [totalScholarshipPages, setTotalScholarshipPages] = useState(initialAbroadExamsTotalPages);
     const scholarshipsPerPage = 9;
-
 
     const handleClearAll = () => {
         setFormData({
@@ -66,7 +99,6 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
     };
 
     const handleSelectChange = (e) => {
-        setSearchText("");
         const { id, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
@@ -74,150 +106,86 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         }));
     };
 
-
     const getScholarship = useCallback(async (country_id, level_of_study, types_of_exam, stream_id) => {
         setIsLoading(true);
         try {
-            const params = {
-                country_id: country_id !== '' ? country_id : undefined,
-                level_of_study: level_of_study !== '' ? level_of_study : undefined,
-                types_of_exam: types_of_exam !== '' ? types_of_exam : undefined,
-                stream_id: stream_id !== '' ? stream_id : undefined,
+            const query: Record<string, string> = {
                 searchfrom: 'name',
                 searchtext: searchText,
-                page: currentScholarshipPage,
-                size: scholarshipsPerPage,
+                page: String(currentScholarshipPage),
+                size: String(scholarshipsPerPage),
                 isIndia: 'false'
             };
+            if (country_id) query.country_id = String(country_id);
+            if (level_of_study) query.level_of_study = String(level_of_study);
+            if (types_of_exam) query.types_of_exam = String(types_of_exam);
+            if (stream_id) query.stream_id = String(stream_id);
 
-            let url = 'api/website/exams/get';
-
-            const response = await axios.get(url, { params });
-            setScholarshipsData(response.data.data);
-
-            setTotalScholarshipPages(Math.ceil(response.data.totalItems / scholarshipsPerPage));
+            const sp = new URLSearchParams(query);
+            const response = await fetch(`${API_URL}/api/website/exams/get?${sp}`);
+            if (response.ok) {
+                const resData = await response.json();
+                setScholarshipsData(resData.data ?? []);
+                setTotalScholarshipPages(Math.ceil((resData.totalItems ?? 0) / scholarshipsPerPage));
+            }
         } catch (error) {
             console.error('Error fetching scholarships:', error);
         } finally {
             setIsLoading(false);
         }
-    }, [isMountedRef, formData, searchText, scholarshipsPerPage, currentScholarshipPage]);
-
-
-    const getScholarships = useCallback(async () => {
-        setIsLoading(true);
-        try {
-            const params = {
-                size: 1000,
-                page: 1,
-                isIndia: 'false'
-            };
-
-            let url = 'api/website/exams/get';
-
-            const response = await axios.get(url, { params });
-            setScholarshipData(response.data.data);
-        } catch (error) {
-            console.error('Error fetching scholarships:', error);
-        } finally {
-            setIsLoading(false);
-        }
-    }, [isMountedRef]);
-
-
+    }, [searchText, currentScholarshipPage, scholarshipsPerPage, API_URL]);
 
     useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
         getScholarship(formData.country_id, formData.level_of_study, formData.types_of_exam, formData.stream_id);
     }, [formData, getScholarship, currentScholarshipPage]);
 
-
-    const getCategoriesData = useCallback(async () => {
-        try {
-            const response = await axios.get('api/website/stream/get?page=1&size=50');
-            if (response.data.status === 1) {
-                const categories = response.data.data.map(category => ({
-                    id: category.id,
-                    title: category.name
-                }));
-                // Add "All" category
-                setItems([{ id: 'all', title: 'All Exams' }, ...categories]);
-            } else {
-                console.error('Failed to fetch categories');
-            }
-        } catch (error) {
-            console.error('Error fetching categories:', error);
-        }
-    }, [isMountedRef]);
-
     const getExamsData = useCallback(async (id, page = 1) => {
         try {
-            const roleparams = { page, size: examsPerPage, isIndia: 'true' };
-            const url = id === 'all' ? 'api/website/exams/get' : `api/website/exams/get?stream_id=${id}`;
-            const response = await axios.get(url, { params: roleparams });
-
-            if (response.data.status === 1) {
+            const query: Record<string, string> = {
+                page: String(page),
+                size: String(examsPerPage),
+                isIndia: 'true'
+            };
+            if (id !== 'all') {
+                query.stream_id = String(id);
+            }
+            const sp = new URLSearchParams(query);
+            const response = await fetch(`${API_URL}/api/website/exams/get?${sp}`);
+            if (response.ok) {
+                const resData = await response.json();
                 setExamsData(prevState => ({
                     ...prevState,
-                    [id]: response.data.data
+                    [id]: resData.data ?? []
                 }));
-                setTotalExamPages(response.data.totalPages);
-            } else {
-                console.error('Failed to fetch exams');
+                setTotalExamPages(resData.totalPages ?? 1);
             }
         } catch (error) {
             console.error('Error fetching exams:', error);
         }
-    }, [examsPerPage]);
-
-    const getnews = useCallback(async () => {
-        try {
-            const roleparams = { page: 1, size: 15, orderby: 'desc', columnname: 'created_at', country_id: 204., includeIndia: true };
-            const response = await axios.get('/api/website/news/get', { params: roleparams });
-            setNewsData(response.data.data);
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
-
-    const getabroadnews = useCallback(async () => {
-        try {
-            const roleparams = { page: 1, size: 15, orderby: 'desc', columnname: 'created_at', includeIndia: false };
-            const response = await axios.get('/api/website/news/get', { params: roleparams });
-            setNewsDataAbroad(response.data.data);
-        } catch (err) {
-            console.error(err);
-        }
-    }, [isMountedRef]);
+    }, [examsPerPage, API_URL]);
 
     useEffect(() => {
-        getCategoriesData();
-        getnews();
-        getScholarships();
-        getabroadnews();
-    }, [getCategoriesData, getabroadnews, getnews, getScholarships]);
-    useEffect(() => {
-
         if (streamId) {
-
-            setActiveTab(streamId)
-            setStreamId(null)
+            setActiveTab(streamId);
+            setStreamId(null);
         }
-
-
-    }, [router, router.isReady]);
+    }, [streamId, setStreamId]);
 
     useEffect(() => {
-        if (activeTab) {
-            getExamsData(activeTab, currentPage);
+        if (activeTab === 'all' && currentExamPage === 1 && examsData['all']) {
+            return; // Already initialized from server props!
         }
-    }, [activeTab, currentPage, getExamsData]);
+        getExamsData(activeTab, currentExamPage);
+    }, [activeTab, currentExamPage, getExamsData]);
 
     const handleTabClick = (id) => {
         setActiveTab(id);
-        setCurrentPage(1);
+        setCurrentExamPage(1);
     };
-
-
 
     const handleExamPreviousPage = () => {
         setCurrentExamPage(prevPage => {
@@ -253,12 +221,8 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         setCurrentScholarshipPage(page);
     };
 
-
     const ScholarshipCards = ({ data }) => {
-        const startIndex = (currentPage - 1) * perPage;
-        const paginatedScholarships = data.slice(startIndex, startIndex + perPage);
-
-        if (paginatedScholarships.length === 0) {
+        if (!data || data.length === 0) {
             return (
                 <div className="col-12 text-center">
                     <p className="fw-bold text-muted">No exams found. Try adjusting the filter settings.</p>
@@ -268,7 +232,7 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
 
         return (
             <div className="row d-flex flex-fill px-md-0 px-3">
-                {paginatedScholarships.map((scholarship) => (
+                {data.map((scholarship) => (
                     <div className="col-md-4 mb-3" key={scholarship.id}>
                         <Link href={`/exam/${scholarship.id}/${scholarship.slug}`}>
                             <div className="card hover-card examsCardRow">
@@ -284,40 +248,21 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
         );
     };
 
-
-
-
-    useEffect(() => {
-        if (activeTab) {
-            getExamsData(activeTab, currentExamPage);
-        }
-    }, [activeTab, currentExamPage, getExamsData]);
-
-
-    // const currentExams = examsData[activeTab]?.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage) || [];
-
     const currentExams = examsData[activeTab] || [];
-
-
 
     return (
         <section className='bg-white'>
             <div className="container categorySecCarousel position-relative px-md-5 px-0 pt-2 pb-5">
                 <div className='w-100 text-center'>
-                    {/* <h2 className='fw-bold text-white mb-5 text-center bg-blue mx-auto p-3' style={{ display: 'inline-block', }}>List of Entrance Exams in India
-                    </h2> */}
                     <h2 className='fw-bold text-black mb-5 text-center p-3 heading-with-styled-lines'>
                         List of Entrance Exams in India
                     </h2>
-
                 </div>
-                {/* <div className='examSecItems'> */}
                 <div className="row">
-                    <div className="col-lg-7 col-xl-8 exam-car px-5 ">
+                    <div className="col-lg-7 col-xl-8 exam-car px-3 px-md-5 ">
                         <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
                     </div>
                 </div>
-                {/* </div> */}
                 <div className="tab-content" id="pills-tabContent">
                     {items.map((item) => (
                         <div
@@ -339,27 +284,29 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                                 <div className="text-center mb-5">No data</div>
                                             )}
                                         </div>
-                                        <div className='d-flex justify-content-center'>
-                                            <nav aria-label="Exams Page navigation">
-                                                <ul className="pagination d-flex gap-3">
-                                                    <li className={`page-item ${currentExamPage === 1 ? 'disabled' : ''}`}>
-                                                        <button className="page-link" onClick={handleExamPreviousPage} aria-label="Previous">
-                                                            <span aria-hidden="true">{'<'}</span>
-                                                        </button>
-                                                    </li>
-                                                    {Array.from({ length: totalExamPages }, (_, index) => (
-                                                        <li key={index} className={`page-item ${currentExamPage === index + 1 ? 'active' : ''}`}>
-                                                            <button className="page-link" onClick={() => handleExamPageClick(index + 1)}>{index + 1}</button>
+                                        {currentExams.length > 0 && (
+                                            <div className='d-flex justify-content-center'>
+                                                <nav aria-label="Exams Page navigation">
+                                                    <ul className="pagination d-flex gap-3">
+                                                        <li className={`page-item ${currentExamPage === 1 ? 'disabled' : ''}`}>
+                                                            <button className="page-link" onClick={handleExamPreviousPage} aria-label="Previous">
+                                                                <span aria-hidden="true">{'<'}</span>
+                                                            </button>
                                                         </li>
-                                                    ))}
-                                                    <li className={`page-item ${currentExamPage === totalExamPages ? 'disabled' : ''}`}>
-                                                        <button className="page-link" onClick={handleExamNextPage} aria-label="Next">
-                                                            <span aria-hidden="true">{'>'}</span>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
+                                                        {Array.from({ length: totalExamPages }, (_, index) => (
+                                                            <li key={index} className={`page-item ${currentExamPage === index + 1 ? 'active' : ''}`}>
+                                                                <button className="page-link" onClick={() => handleExamPageClick(index + 1)}>{index + 1}</button>
+                                                            </li>
+                                                        ))}
+                                                        <li className={`page-item ${currentExamPage === totalExamPages ? 'disabled' : ''}`}>
+                                                            <button className="page-link" onClick={handleExamNextPage} aria-label="Next">
+                                                                <span aria-hidden="true">{'>'}</span>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        )}
                                         <div className="mb-3 rounded p-3 mt-5">
                                             {scholarshipData && scholarshipData.length > 0 ? (
                                                 <>
@@ -372,84 +319,84 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                                         <div className="align-self-center flex-grow-1">
                                                             <label htmlFor="country_id" className='text-black fw-bold mb-2'>Select Country</label>
                                                             <div className="position-relative w-100">
-                                                                <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
+                                                                <select className="form-control text-black w-100 pe-5"
                                                                     id="country_id"
                                                                     value={formData.country_id}
                                                                     onChange={handleSelectChange}
                                                                     style={{
-                                                                        appearance: 'none', // Hide the default arrow
+                                                                        appearance: 'none',
                                                                         WebkitAppearance: 'none',
                                                                         MozAppearance: 'none',
-                                                                        background: 'transparent', // Ensure background is transparent for icon positioning
-                                                                        paddingRight: '2.5rem', // Add space for the icon
+                                                                        background: 'transparent',
+                                                                        paddingRight: '2.5rem',
                                                                     }}>
                                                                     <option value="">Select</option>
                                                                     {countryData.map(option => (
                                                                         <option key={option.id} value={option.id}>{option.name}</option>
                                                                     ))}
                                                                 </select>
-                                                                <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                                                <i className="bi bi-caret-down-fill position-absolute"
                                                                     style={{
-                                                                        right: '1rem', // Adjust based on padding
+                                                                        right: '1rem',
                                                                         top: '50%',
                                                                         transform: 'translateY(-50%)',
-                                                                        pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                                                        pointerEvents: 'none',
                                                                     }}></i>
                                                             </div>
                                                         </div>
                                                         <div className="align-self-center flex-grow-1">
                                                             <label htmlFor="level_of_study" className='text-black fw-bold mb-2'>Level of study</label>
                                                             <div className="position-relative w-100">
-                                                                <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
+                                                                <select className="form-control text-black w-100 pe-5"
                                                                     id="level_of_study"
                                                                     value={formData.level_of_study}
                                                                     onChange={handleSelectChange}
                                                                     style={{
-                                                                        appearance: 'none', // Hide the default arrow
+                                                                        appearance: 'none',
                                                                         WebkitAppearance: 'none',
                                                                         MozAppearance: 'none',
-                                                                        background: 'transparent', // Ensure background is transparent for icon positioning
-                                                                        paddingRight: '2.5rem', // Add space for the icon
+                                                                        background: 'transparent',
+                                                                        paddingRight: '2.5rem',
                                                                     }}>
                                                                     <option value="">select</option>
                                                                     <option value="UG">UG</option>
                                                                     <option value="PG">PG</option>
                                                                     <option value="professional">Professional</option>
                                                                 </select>
-                                                                <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                                                <i className="bi bi-caret-down-fill position-absolute"
                                                                     style={{
-                                                                        right: '1rem', // Adjust based on padding
+                                                                        right: '1rem',
                                                                         top: '50%',
                                                                         transform: 'translateY(-50%)',
-                                                                        pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                                                        pointerEvents: 'none',
                                                                     }}></i>
                                                             </div>
                                                         </div>
                                                         <div className="align-self-center flex-grow-1">
                                                             <label htmlFor="types_of_exam" className='text-black fw-bold mb-2'>Type of exam</label>
                                                             <div className="position-relative w-100">
-                                                                <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
+                                                                <select className="form-control text-black w-100 pe-5"
                                                                     id="types_of_exam"
                                                                     value={formData.types_of_exam}
                                                                     onChange={handleSelectChange}
                                                                     style={{
-                                                                        appearance: 'none', // Hide the default arrow
+                                                                        appearance: 'none',
                                                                         WebkitAppearance: 'none',
                                                                         MozAppearance: 'none',
-                                                                        background: 'transparent', // Ensure background is transparent for icon positioning
-                                                                        paddingRight: '2.5rem', // Add space for the icon
+                                                                        background: 'transparent',
+                                                                        paddingRight: '2.5rem',
                                                                     }}>
                                                                     <option value="">select</option>
                                                                     <option value="Language_Proficiency">Language Proficiency</option>
                                                                     <option value="Aptitiude_Test">Aptitiude Test</option>
                                                                     <option value="Streams">Streams</option>
                                                                 </select>
-                                                                <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                                                <i className="bi bi-caret-down-fill position-absolute"
                                                                     style={{
-                                                                        right: '1rem', // Adjust based on padding
+                                                                        right: '1rem',
                                                                         top: '50%',
                                                                         transform: 'translateY(-50%)',
-                                                                        pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                                                        pointerEvents: 'none',
                                                                     }}></i>
                                                             </div>
                                                         </div>
@@ -458,28 +405,28 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                                                 <div className="align-self-center">
                                                                     <label htmlFor="stream_id" className='text-black fw-bold mb-2'>Select Stream</label>
                                                                     <div className="position-relative w-100">
-                                                                        <select className="form-control text-black w-100 pe-5" // Use 'pe-5' for padding-right
+                                                                        <select className="form-control text-black w-100 pe-5"
                                                                             id="stream_id"
                                                                             value={formData.stream_id}
                                                                             onChange={handleSelectChange}
                                                                             style={{
-                                                                                appearance: 'none', // Hide the default arrow
+                                                                                appearance: 'none',
                                                                                 WebkitAppearance: 'none',
                                                                                 MozAppearance: 'none',
-                                                                                background: 'transparent', // Ensure background is transparent for icon positioning
-                                                                                paddingRight: '2.5rem', // Add space for the icon
+                                                                                background: 'transparent',
+                                                                                paddingRight: '2.5rem',
                                                                             }}>
                                                                             <option value="">Select</option>
                                                                             {streams.map(option => (
                                                                                 <option key={option.id} value={option.id}>{option.name}</option>
                                                                             ))}
                                                                         </select>
-                                                                        <i className="bi bi-caret-down-fill position-absolute" // Bootstrap icon class for the caret
+                                                                        <i className="bi bi-caret-down-fill position-absolute"
                                                                             style={{
-                                                                                right: '1rem', // Adjust based on padding
+                                                                                right: '1rem',
                                                                                 top: '50%',
                                                                                 transform: 'translateY(-50%)',
-                                                                                pointerEvents: 'none', // Ensures icon does not interfere with click events
+                                                                                pointerEvents: 'none',
                                                                             }}></i>
                                                                     </div>
                                                                 </div>) : ''
@@ -502,7 +449,6 @@ const BrowsebyCategorySec = ({ countryData, streams }) => {
                                                 ) : (
                                                     <>
                                                         <ScholarshipCards data={scholarshipsData} />
-                                                        {/* Pagination */}
                                                         {scholarshipsData.length > 0 && (
                                                             <div className="row col-md-12 blogCardspage">
                                                                 <div className='d-flex justify-content-center'>
