@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  output: process.env.VERCEL ? undefined : 'standalone',
   trailingSlash: false,
   skipTrailingSlashRedirect: true,
 
