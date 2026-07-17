@@ -118,7 +118,7 @@ export default function BamsHeroFormClient() {
           <textarea
             name='description'
             placeholder='Your Message (Optional):'
-            rows={3}
+            rows={2}
           />
         </div>
 

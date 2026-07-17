@@ -78,6 +78,14 @@
     font-size: clamp(28px, 3.6vw, 42px);
     line-height: 1.22;
 }
+.sectionHead h2.f32 {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    font-size: 32px !important;
+    line-height: 1.22;
+}
 
 .sectionHead p {
     color: var(--muted);
@@ -733,7 +741,7 @@
 }
 
 .aacccSubhead {
-    font-size: 20px;
+    font-size: 20px !important;
     font-weight: 600;
     color: var(--ink);
     margin: 0 0 16px;
@@ -1085,7 +1093,7 @@
     white-space: normal;
 }
 
-.stageBodyInner table tr:first-child {
+.stageBodyInner table thead tr {
     background: var(--cream-2);
     font-weight: 600;
 }
@@ -1124,15 +1132,11 @@
 }
 
 .feeList li i {
-    width: 8px;
-    height: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(54, 64, 139, 0);
-    color: #36408bc9;
-    border-radius: 50%;
-    font-size: 0.75rem;
+    color: #36408b;
+    font-size: 1.1rem;
     flex-shrink: 0;
 }
 
@@ -2204,6 +2208,15 @@
     transform: translateY(-4px);
 }
 
+.twitterXIcon {
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+.footerSocial a:hover .twitterXIcon {
+    filter: invert(15%) sepia(50%) saturate(2200%) hue-rotate(205deg) brightness(85%) contrast(95%);
+}
+
 
 /* ===================== FLOATING ICONS ===================== */
 .phoneFloat {
@@ -2305,6 +2318,24 @@
     font-family: 'Poppins', sans-serif !important;
 }
 
+select.bamsFormField {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23666'%3E%3Cpath d='M5.5 7.5l4.5 5 4.5-5z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 24px center !important;
+    background-size: 14px !important;
+    cursor: pointer;
+    color: #525151 !important;
+    background-color: #fff !important;
+}
+
+select.bamsFormField option {
+    color: #525151 !important;
+    background-color: #fff !important;
+}
+
 .btnModel {
     width: 100% !important;
 }
@@ -2386,6 +2417,7 @@
 
     .footerTagline {
         max-width: 100%;
+        margin-left: 0;
     }
 
     .footerPhone {
@@ -2488,6 +2520,19 @@
         padding: 0 16px;
     }
 
+    .predictorSection .wrap {
+        padding-left: 0;
+        padding-right: 0;
+        max-width: 100%;
+    }
+
+    .predictorPanel {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        padding: 30px 16px;
+    }
+
     .aacccWrap,
     .keaWrap {
         padding: 24px 16px;
@@ -2555,6 +2600,19 @@
         font-size: 11.5px;
     }
 
+    .stagesSection .wrap,
+    .keaSectionTwo .wrap {
+        max-width: 100%;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .stagesHeading,
+    .keaSectionTwo .sectionHead {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
     .stageItem {
         gap: 10px;
     }
@@ -2566,7 +2624,7 @@
     }
 
     .stageCard {
-        padding: 18px 20px;
+        padding: 12px 14px;
     }
 
     .stageTop h4 {
@@ -2665,6 +2723,7 @@
 
     .footerSocial {
         gap: 12px;
+        padding-bottom: 56px;
     }
 
     .footerSocial a {

@@ -11,9 +11,9 @@ import BamsInteractiveClient from './BamsInteractiveClient'
 
 /* ─── SEO ─── */
 export const metadata = {
-  title: 'NEET-UG BAMS Counselling 2025 | Expert Guidance | LearnTech',
+  title: 'BAMS Counselling 2026-27 | NEET UG Admission Guidance',
   description:
-    'Get expert guidance for NEET-UG 2025 BAMS counselling. Navigate AACCC & KEA counselling with personalised support. Top Ayurvedic colleges in Karnataka.',
+    'Looking for BAMS counselling? Get expert guidance for NEET UG 2026-27 admissions, AACCC & KEA counselling, top Ayurvedic colleges, and seat allotment support.',
   keywords:
     'BAMS Counselling 2025, NEET UG BAMS, AACCC Counselling, KEA AYUSH Counselling, BAMS Admission, Ayurvedic Medical College Karnataka',
   openGraph: {
@@ -297,7 +297,7 @@ export default function BamsCounsellingProcessPage() {
             <section className={`${styles.bamsSection} ${styles.stagesSection}`}>
               <div className={styles.wrap}>
                 <div className={`${styles.sectionHead} ${styles.sectionHeadCenter} ${styles.animateOnScroll} ${styles.stagesHeading}`} id="stages-heading">
-                  <h2>All India NEET UG BAMS Counselling 2026 Stages</h2>
+                  <h2 className={styles.f32}>All India NEET UG BAMS Counselling 2026 Stages</h2>
                   <p> The All India BAMS counselling process conducted by the Ayush Admissions Central Counselling Committee (AACCC) consists of multiple stages. While the counselling schedule varies for each round, the overall process generally remains the same. Before the commencement of every counselling round, AACCC publishes the seat matrix, schedule, and other important notifications on its official website.</p>
                 </div>
                 <div className={styles.stageList}>
@@ -323,8 +323,8 @@ export default function BamsCounsellingProcessPage() {
                               <div className={styles.feeBox}>
                                 <p>The counselling fee consists of:</p>
                                 <ul className={styles.feeList}>
-                                  <li><i className="fas fa-check-circle" /> Non-Refundable Registration Fee</li>
-                                  <li><i className="fas fa-check-circle" /> Refundable Security Deposit</li>
+                                  <li><i className="bi bi-check-circle-fill" /> Non-Refundable Registration Fee</li>
+                                  <li><i className="bi bi-check-circle-fill" /> Refundable Security Deposit</li>
                                 </ul>
                               </div>
                               <div className={styles.stageBodyInner}>
@@ -490,7 +490,7 @@ export default function BamsCounsellingProcessPage() {
             <section className={`${styles.bamsSection} ${styles.keaSectionTwo}`}>
               <div className={styles.wrap}>
                 <div className={`${styles.sectionHead} ${styles.sectionHeadCenter} ${styles.animateOnScroll}`}>
-                  <h2>KEA NEET UG AYUSH Counselling 2026 Stages</h2>
+                  <h2 className={styles.f32}>KEA NEET UG AYUSH Counselling 2026 Stages</h2>
                   <p>The Karnataka Examinations Authority (KEA) conducts the AYUSH counselling process through multiple stages. Candidates must complete each stage within the prescribed timeline to remain eligible for seat allotment.</p>
                 </div>
                 <div className={styles.stageList}>
@@ -515,7 +515,7 @@ export default function BamsCounsellingProcessPage() {
                               <>
                                 {'bodyTitle' in stage && <p><strong>{stage.bodyTitle}</strong></p>}
                                 {stage.items && <ul>{stage.items.map((item, j) => <li key={j}>{item}</li>)}</ul>}
-                                {'bodyNote' in stage && stage.bodyNote && <p><strong>{stage.bodyNote}</strong></p>}
+                                {'bodyNote' in stage && stage.bodyNote && <p>{stage.bodyNote}</p>}
                               </>
                             )}
                           </div>
@@ -643,7 +643,7 @@ export default function BamsCounsellingProcessPage() {
                       <a href="tel:08026631169"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> 080-26631169</a>
                     </div>
                     <div className={styles.footerPhone}>
-                      <a href="tel:09036020076"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> +91 9036020076</a>
+                      <a href="tel:09606949066"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> +91 9606949066</a>
                       <a href="tel:18001208696"><i className="bi bi-telephone-fill" style={{ fontSize: 13, color: '#FFD54A' }} /> 1800 120 8696 (Toll Free)</a>
                     </div>
                     <div className={styles.footerPhone}>
@@ -652,7 +652,7 @@ export default function BamsCounsellingProcessPage() {
                     <div className={styles.footerSocial}>
                       <a href="https://www.facebook.com/learntechedu" target="_blank" rel="noopener noreferrer"><i className="bi bi-facebook" /></a>
                       <a href="https://x.com/learntechww" target="_blank" rel="noopener noreferrer">
-                        <Image width={20} height={20} src="/images/icons/twitter-x.png" alt="Twitter" style={{ filter: 'brightness(0) invert(1)' }} />
+                        <Image width={20} height={20} src="/images/icons/twitter-x.png" alt="Twitter" className={styles.twitterXIcon} />
                       </a>
                       <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target="_blank" rel="noopener noreferrer"><i className="bi bi-youtube" /></a>
                       <a href="https://www.instagram.com/learntechedus/" target="_blank" rel="noopener noreferrer"><i className="bi bi-instagram" /></a>
@@ -667,10 +667,10 @@ export default function BamsCounsellingProcessPage() {
         </BamsEnquiryTriggerClient>
 
         {/* ─── FLOATING ICONS ─── */}
-        <a href="tel:08022454991" className={styles.phoneFloat}>
+        <a href="tel:9606949066" className={styles.phoneFloat}>
           <i className="bi bi-telephone-fill" style={{ fontSize: 29, color: 'white' }} />
         </a>
-        <a href="https://api.whatsapp.com/send?phone=919036020076" target="_blank" rel="noopener noreferrer" className={styles.whatsappFloat}>
+        <a href="https://api.whatsapp.com/send?phone=919606949066" target="_blank" rel="noopener noreferrer" className={styles.whatsappFloat}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/bams/whatsappc.gif" alt="WhatsApp" width={63} height={64} />
         </a>

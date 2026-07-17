@@ -37,7 +37,7 @@ export default function BamsNavbarClient() {
     >
       <div className={styles.navInner}>
         <a href="#home" className={styles.brand} onClick={(e) => { e.preventDefault(); scrollTo('home') }}>
-          <Image src="/images/bams/logo.webp" alt="LearnTech" width={209} height={58} priority />
+          <Image src="/images/bams/logo.webp" alt="LearnTech" width={240} height={60} priority />
         </a>
 
         <nav

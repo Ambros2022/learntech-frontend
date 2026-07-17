@@ -156,7 +156,7 @@ export default function BamsPredictorModalClient({ open, onClose }: Props) {
             <select
               name='location'
               required
-              className={`browser-default custom-select form-control ${styles.whiteBgBlackText} ${styles.bamsFormField} py-3`}
+              className={`form-control ${styles.bamsFormField} py-3`}
             >
               <option value=''>State</option>
               {STATES.map(state => (

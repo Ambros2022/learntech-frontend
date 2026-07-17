@@ -107,8 +107,7 @@ export default function BamsEnquiryModalClient({ open, onClose }: Props) {
 
         <div className={styles.headingPopup}>
           <h4 className={`text-center ${styles.popUp}`}>
-            Fill in the Details to Get in Touch with our Experts for <br />
-            the BAMS Counselling Process 2025-26.
+           Fill Out the Form to Get Assistance in Securing Your BAMS Seat for A.Y. 2026-27
           </h4>
         </div>
 
@@ -157,7 +156,7 @@ export default function BamsEnquiryModalClient({ open, onClose }: Props) {
             <select
               name='location'
               required
-              className={`browser-default custom-select form-control ${styles.whiteBgBlackText} ${styles.bamsFormField} py-3`}
+              className={`form-control ${styles.bamsFormField} py-3`}
             >
               <option value=''>Select State</option>
               {STATES.map(state => (

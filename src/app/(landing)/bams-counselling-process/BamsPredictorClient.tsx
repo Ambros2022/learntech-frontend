@@ -89,10 +89,11 @@ export default function BamsPredictorClient() {
                   <select required>
                     <option value=''>Select category</option>
                     <option value='General'>General</option>
-                    <option value='OBC'>OBC</option>
+                    <option value='EWS'>EWS</option>
+                    <option value='OBC-NCL'>OBC-NCL</option>
                     <option value='SC'>SC</option>
                     <option value='ST'>ST</option>
-                    <option value='EWS'>EWS</option>
+                    <option value='PWD'>PWD</option>
                   </select>
                 </div>
               </div>
