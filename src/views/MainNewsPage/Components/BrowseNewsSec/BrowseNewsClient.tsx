@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { TabItem } from 'src/components/ui/ScrollTabs'
@@ -32,6 +32,8 @@ export default function BrowseNewsClient({ categories, initialNews, initialTotal
   const [newsItems, setNewsItems] = useState<NewsItem[]>(initialNews)
   const [loading, setLoading] = useState(false)
   const newsPerPage = 8
+  const sectionRef = useRef<HTMLElement>(null)
+  const hasMounted = useRef(false)
 
   const fetchNews = useCallback(async (categoryId: string, page: number) => {
     setLoading(true)
@@ -59,35 +61,38 @@ export default function BrowseNewsClient({ categories, initialNews, initialTotal
     }
   }, [])
 
-  // Fetch when tab or page changes (skip initial "all" page 1 since we have SSR data)
+  // Skip the very first render (page 1 + first tab) since SSR data is already loaded.
+  // After that, always fetch so going back to page 1 re-loads correctly.
   useEffect(() => {
-    const isInitial = activeTab === (categories[0]?.id ?? 'all') && currentPage === 1
-    if (!isInitial) {
-      fetchNews(activeTab, currentPage)
+    if (!hasMounted.current) {
+      hasMounted.current = true
+      return
     }
-  }, [activeTab, currentPage, fetchNews, categories])
+    fetchNews(activeTab, currentPage)
+  }, [activeTab, currentPage, fetchNews])
 
   const handleTabChange = (id: string) => {
     setActiveTab(id)
     setCurrentPage(1)
   }
 
+  const scrollToSection = () => {
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   const handlePreviousPage = () => {
-    setCurrentPage(prev => {
-      const newPage = Math.max(prev - 1, 1)
-      return newPage
-    })
+    setCurrentPage(prev => Math.max(prev - 1, 1))
+    scrollToSection()
   }
 
   const handleNextPage = () => {
-    setCurrentPage(prev => {
-      const newPage = Math.min(prev + 1, totalPages)
-      return newPage
-    })
+    setCurrentPage(prev => Math.min(prev + 1, totalPages))
+    scrollToSection()
   }
 
   const handlePageClick = (page: number) => {
     setCurrentPage(page)
+    scrollToSection()
   }
 
   const getPageNumbers = () => {
@@ -131,7 +136,7 @@ export default function BrowseNewsClient({ categories, initialNews, initialTotal
   }
 
   return (
-    <section className='py-5 pb-3 pb-md-5 bg-white browseNews'>
+    <section ref={sectionRef} className='py-5 pb-3 pb-md-5 bg-white browseNews'>
       <div className='container'>
         <h2 className='fw-bold text-blue text-center mb-3'>Browse News By Category</h2>
 
