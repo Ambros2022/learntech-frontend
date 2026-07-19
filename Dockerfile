@@ -6,7 +6,10 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-RUN npm ci --prefer-offline --legacy-peer-deps
+# Force development so devDependencies (typescript, @types/node, etc.) are installed.
+# NODE_ENV=production (injected by Coolify) skips devDeps and breaks the build.
+ENV NODE_ENV=development
+RUN npm ci --legacy-peer-deps
 
 
 # ── Stage 2: Build the app ──
