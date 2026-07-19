@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,11 +16,11 @@ const schema = z.object({
   mobileNumber: phoneSchema,
   courseInMind: z.string().trim().min(1, 'Course In Mind is required'),
   location: z.string().trim().min(1, 'Location is required'),
-  message: z.string().trim().optional().default(''),
+  message: z.string().trim(),
   terms: z.boolean().refine(v => v === true, 'You must accept the terms and conditions'),
 })
 
-type FormValues = z.infer<typeof schema>
+type FormValues = z.output<typeof schema>
 
 export default function ContactUsSec() {
   const router = useRouter()
