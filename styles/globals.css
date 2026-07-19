@@ -580,6 +580,15 @@
     background-color: #254692 !important;
     color: white !important;
     box-shadow: rgba(21, 41, 88, 0.493) 0px 0px 15px !important;
+    white-space: nowrap !important;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+  }
+
+  .applyNowButton:hover {
+    background-color: #1a3370 !important;
+    box-shadow: rgba(21, 41, 88, 0.7) 0px 4px 20px !important;
+    transform: translateY(-1px) !important;
+    color: white !important;
   }
 
 
@@ -6032,3 +6041,106 @@
     }
   }
 
+/* ══════════════════════════════════════════════════════════════
+   .bs-editor-text — Styles for Jodit editor dynamic content
+   Used across: InnerExam, InnerCollege, InnerBlog, InnerNews,
+   InnerCourse, InnerSchool, InnerBoard, CollegeCourse, etc.
+   ══════════════════════════════════════════════════════════════ */
+
+.bs-editor-text {
+  width: 100%;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* ── Paragraphs ── */
+.bs-editor-text p {
+  line-height: 28px;
+}
+
+/* ── Images — prevent overflow ── */
+.bs-editor-text img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Span wrapper (used as dangerouslySetInnerHTML container) ── */
+.bs-editor-text>span {
+  display: block;
+  width: 100%;
+}
+
+/* ── Tables — respect Jodit editor size on desktop ── */
+.bs-editor-text table {
+  max-width: 100%;
+  border-collapse: collapse !important;
+  table-layout: auto !important;
+  margin-bottom: 1rem;
+  box-sizing: border-box !important;
+  font-size: 14px;
+}
+
+.bs-editor-text table th,
+.bs-editor-text table td {
+  border: 1px solid #dee2e6 !important;
+  padding: 10px 16px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  color: #212529;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Override Jodit inline styles on elements inside cells,
+   but keep them inline so links/bold/spans don't break */
+.bs-editor-text table td *,
+.bs-editor-text table th * {
+  text-align: center !important;
+}
+
+.bs-editor-text table th {
+  font-weight: 700 !important;
+  background-color: #f8f9fa !important;
+}
+
+.bs-editor-text table tr:nth-child(even) td {
+  background-color: #fafafa;
+}
+
+/* ── Lists from Jodit ── */
+.bs-editor-text ul,
+.bs-editor-text ol {
+  padding-left: 20px;
+  margin-bottom: 1rem;
+}
+
+.bs-editor-text li {
+  line-height: 28px;
+}
+
+/* ── Mobile: horizontal-scroll tables ── */
+@media (max-width: 768px) {
+  .bs-editor-text {
+    overflow-x: hidden;
+  }
+
+  .bs-editor-text table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    height: 100% !important;
+    width: 100% !important;
+    margin: 0 0 1rem 0 !important;
+    white-space: nowrap;
+  }
+
+  .bs-editor-text table th,
+  .bs-editor-text table td {
+    /* white-space: nowrap; */
+    min-width: 120px;
+  }
+}

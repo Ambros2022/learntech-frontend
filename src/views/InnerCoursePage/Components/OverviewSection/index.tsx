@@ -71,7 +71,7 @@ function OverviewSection({ data, collegedata, examdata }) {
   const renderTabContent = () => tabs.map((tab) => (
     <div
       key={tab.id}
-      className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
+      className={`tab-pane bs-editor-text fade ${activeTab === tab.id ? 'show active' : ''}`}
     >
       {tab.id === 'FAQ' ? (
         <FaqSec data={data.streamfaqs} />

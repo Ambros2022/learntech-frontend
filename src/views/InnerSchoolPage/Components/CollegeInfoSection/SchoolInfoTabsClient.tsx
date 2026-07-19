@@ -34,11 +34,11 @@ export default function SchoolInfoTabsClient({ tabs, schoolName, schoolId }: Pro
     <div className="container position-relative innerClgCarousel">
       <ScrollTabs tabs={tabItems} activeTab={activeTab} onTabChange={setActiveTab} />
 
-      <div className="tab-content pt-5">
+      <div className="tab-content pt-5 bs-editor-text">
         {/* Info */}
         {activeTab === 'info' && active?.html && (
           <div className="row">
-            <div className="col-md-7 col-lg-8">
+            <div className="col-md-7 col-lg-8 bs-editor-text">
               <div dangerouslySetInnerHTML={{ __html: active.html }} />
             </div>
             <div className="col-md-5 col-lg-4">

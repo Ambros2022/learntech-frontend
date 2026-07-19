@@ -85,7 +85,7 @@ export default function CurrentOpeningSec({ jobData }: { jobData: Job[] }) {
                 <h5 className="modal-title text-blue">{selectedJob.name}</h5>
                 <button type="button" className="btn-close" onClick={handleClose} aria-label="Close" />
               </div>
-              <div className="modal-body">
+              <div className="modal-body bs-editor-text">
                 <div className="text-black" dangerouslySetInnerHTML={{ __html: selectedJob.job_description }} />
                 <button className="btn viewMoreClgBtn mt-3" onClick={handleApply}>Apply Now</button>
               </div>

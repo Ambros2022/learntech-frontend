@@ -16,7 +16,7 @@ export default function CourseDetailTabsClient({ tabs }: { tabs: CourseTabData[]
       <ScrollTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       <div className="tab-content pt-5">
         {tabs.map(tab => (
-          <div key={tab.id} className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}>
+          <div key={tab.id} className={`tab-pane bs-editor-text fade ${activeTab === tab.id ? 'show active' : ''}`}>
             <div dangerouslySetInnerHTML={{ __html: tab.html ?? '' }} />
           </div>
         ))}

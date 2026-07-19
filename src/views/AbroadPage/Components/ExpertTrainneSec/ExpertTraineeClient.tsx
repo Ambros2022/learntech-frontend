@@ -84,7 +84,7 @@ export default function ExpertTraineeClient({ trainers }: { trainers: Trainer[] 
       >
         <button className="btn-close position-absolute top-0 end-0 m-3" aria-label="Close" onClick={handleClose} />
         {selected && (
-          <div className="d-flex flex-column align-items-center text-center">
+          <div className="d-flex flex-column align-items-center text-center bs-editor-text">
             <Image
               src={`${IMG_BASE}/${selected.image}`}
               width={120}
@@ -94,7 +94,7 @@ export default function ExpertTraineeClient({ trainers }: { trainers: Trainer[] 
               loading="lazy"
             />
             <h2 className='fw-bold text-blue mb-3'>{selected.name}</h2>
-            <div className='text-black text-start w-100' dangerouslySetInnerHTML={{ __html: selected.info }} />
+            <div className='text-black text-start w-100 ' dangerouslySetInnerHTML={{ __html: selected.info }} />
             <button className="btn btn-primary mt-3" onClick={handleClose}>Close</button>
           </div>
         )}

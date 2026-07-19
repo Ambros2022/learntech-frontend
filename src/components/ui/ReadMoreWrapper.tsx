@@ -44,6 +44,7 @@ export default function ReadMoreContent({
               }
             : undefined
         }
+        className='bs-editor-text'
         dangerouslySetInnerHTML={{ __html: displayHtml }}
       />
 

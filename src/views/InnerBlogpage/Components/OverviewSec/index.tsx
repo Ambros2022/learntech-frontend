@@ -32,7 +32,7 @@ const OverviewSec = ({ data, newsData, blogsData }: any) => {
       <div className="container">
         <div className="row">
           {/* Left Column */}
-          <div className="col-md-8">
+          <div className="col-md-8 bs-editor-text">
             <div
               className="text-black"
               style={{ minHeight: '500px' }}

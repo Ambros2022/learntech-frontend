@@ -9,7 +9,7 @@ export default async function OrganizationSection({ streamName }: { streamName: 
 
   return (
     <section className='bg-white pt-3'>
-      <div className="container">
+      <div className="container bs-editor-text">
         <h2 className='text-center fw-bold text-blue mb-3'>
           {organizationPage.title} {streamName} Courses
         </h2>

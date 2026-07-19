@@ -56,7 +56,7 @@ export default function OverviewTabsClient({ items, upcomingExams }: Props) {
           {active?.isFaq && active.faqData?.length ? (
             <LazyBoardFaqSec data={active.faqData} />
           ) : active?.content ? (
-            <div className="text-black pt-3">
+            <div className="text-black pt-3 bs-editor-text">
               <div dangerouslySetInnerHTML={{ __html: active.content }} />
             </div>
           ) : null}

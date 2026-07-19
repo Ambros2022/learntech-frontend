@@ -38,7 +38,7 @@ export default function CollegeInfoTabsClient({ tabs, collegeName, collegeId }: 
         {/* Info */}
         {activeTab === 'info' && active?.html && (
           <div className="row">
-            <div className="col-md-7 col-lg-8">
+            <div className="col-md-7 col-lg-8 bs-editor-text">
               <div dangerouslySetInnerHTML={{ __html: active.html }} />
             </div>
             <div className="col-md-5 col-lg-4">

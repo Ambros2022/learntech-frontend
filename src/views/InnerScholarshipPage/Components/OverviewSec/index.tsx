@@ -12,7 +12,7 @@ export default function OverviewSec({ data, scholarships }: Props) {
       <div className="container">
         <h2 className='fw-bold text-blue mb-3'>{data.name}</h2>
         <div className="row mt-3">
-          <div className="col-md-8">
+          <div className="col-md-8 bs-editor-text">
             <div dangerouslySetInnerHTML={{ __html: data.overview }} />
           </div>
           <div className="col-md-4 ">
