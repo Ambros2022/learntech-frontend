@@ -30,7 +30,7 @@ export default async function Page({ params }: Props) {
   const [pagedata, colleges, exams, testimonials] = await Promise.all([
     getGeneralCourseBySlug(courseSlug, streamId),
     getColleges({ size: 8, type: 'college', stream_id: streamId }),
-    getExams({ size: 8, stream_id: streamId }),
+    getExams({ size: 10, stream_id: streamId }),
     getTestimonialsByGeneralCourse(courseSlug),
   ])
   if (!pagedata) notFound()

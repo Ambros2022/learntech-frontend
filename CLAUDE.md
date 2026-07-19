@@ -1404,3 +1404,67 @@ Array.isArray(data.top_college)
 ```
 
 `TestimonialSec` uses `card.courseTestimonials` (not `streamTestimonials`) — requires separate `SubCourseTestimonialCarouselClient`.
+
+## Cache Tag Mapping & Optimization
+
+| Function Name | Reference Count | Cache Tags | Optimization Notes |
+| :--- | :--- | :--- | :--- |
+| `getPageData` | 71 | `page-${slug}` | Backend: revalidates on CMS page create, update, delete |
+| `getColleges` | 22 | `colleges`, `country-${countryId}`, `stream-${streamId}`, `college-${collegeId}` | Backend: revalidates specific stream/country/college tags on College create, update, delete |
+| `getAbroadCountryPage` | 45 | `abroad-${country}`, `abroad-pages` | Backend: revalidates on abroad page create, update, delete |
+| `getAbroadPages` | - | `abroad-pages` | Backend: revalidates on abroad page create, update, delete |
+| `getCollegeById` | 33 | `college-${id}` | Backend: revalidates on college create, update, delete, and faq/gallery updates |
+| `getCollegeCourse` | - | `course-${collegeId}-${courseSlug}` | Backend: revalidates on college course create, update, delete, and all sub-entity updates |
+| `getGeneralCourseBySlug` | - | `general-course-${streamId}-${courseSlug}` | Backend: revalidates on general course create, update, delete, and faq updates |
+| `getTestimonialsByCollege` | 20 | `testimonials-college-${collegeId}`, `video-testimonials`, `about-video-testimonials` | Backend: revalidates on video testimonial create, update, delete |
+| `getTestimonialsByStream` | 2 | `testimonials-stream-${streamId}` | Backend: revalidates on video testimonial create, update, delete |
+| `getTestimonialsByGeneralCourse` | 2 | `testimonials-gc-${gcId}` | Backend: revalidates on video testimonial create, update, delete |
+| `getNewsList` | 13 | `news`, `news-${id}` | Backend: revalidates on news create, update, delete |
+| `getLatestNewsList` | 2 | `latest-news` | Backend: revalidates on news create, update, delete |
+| `getNewsById` | 3 | `news-${id}` | Backend: revalidates on news create, update, delete |
+| `getExamNewsLinks` | 3 | `exam-news-links` | Backend: revalidates on news create, update, delete if category_id is 4 |
+| `getBlogs` | 13 | `blogs` | Backend: revalidates on blog create, update, delete, and faq updates |
+| `getBlogsListing` | 1 | `blogs-listing` | Backend: revalidates on blog create, update, delete, and faq updates |
+| `getBlogById` | 3 | `blog-${id}` | Backend: revalidates on blog create, update, delete, and faq updates |
+| `getOrganizationPage` | 10 | `organization-${category}` | Backend: revalidates on organization page and step create, update, delete |
+| `getCounsellorTeams` | 9 | `counsellors` | Backend: revalidates on counsellor team create, update, delete |
+| `getStreams` | 8 | `streams`, `nav-courses` | Backend: revalidates on stream create, update, delete, and faq updates |
+| `getStreamById` | 3 | `stream-${id}` | Backend: revalidates on stream create, update, delete, and faq updates |
+| `getExams` | 8 | `exams`, `nav-exams` | Backend: revalidates on exam create, update, delete, and all sub-entity updates |
+| `getExamById` | 3 | `exam-${id}` | Backend: revalidates on exam create, update, delete, and all sub-entity updates |
+| `getCountries` | - | `countries`, `nav-countries`, `abroad-countries` | Backend: revalidates on country create, update, delete |
+| `getSchools` | - | `schools` | Backend: revalidates on school create, update, delete, and faq/gallery updates |
+| `getSchoolById` | - | `school-${id}` | Backend: revalidates on school create, update, delete, and faq/gallery updates |
+| `getNavData` | - | `nav-states`, `nav-courses`, `nav-exams`, `nav-countries`, `news` | Aggregate — calls the 5 nav sub-caches below via `Promise.all` |
+| `getStates` | 500 (via getNavData) | `nav-states` | Backend: revalidates on state create, update, delete (`state.controller.js`) |
+| `getNavCourses` | 100 (via getNavData) | `nav-courses` | Backend: revalidates on stream create, update, delete (`stream.controller.js`) |
+| `getNavExams` | 100 (via getNavData) | `nav-exams` | Backend: revalidates on exam create, update, delete (`exam.controller.js`) |
+| `getNavCountries` | 15 (via getNavData) | `nav-countries` | Backend: revalidates on country create, update, delete (`countries.controller.js`) |
+| `getNavNews` | 4 (via getNavData) | `news` | Backend: revalidates on news create, update, delete (`newsandevents.controller.js`) |
+| `getBoardById` | 3 | `board-${id}` | Backend: revalidates on school board create, update, delete, and faq updates |
+| `getBoards` | - | `boards` | Backend: revalidates on school board create, update, delete, and faq updates |
+| `getScholarshipById` | 3 | `scholarship-${id}` | Backend: revalidates on scholarship create, update, delete |
+| `getScholarships` | - | `scholarships` | Backend: revalidates on scholarship create, update, delete |
+| `getAllGeneralCourses` | 2 | `all-general-courses` | Backend: revalidates on general course create, update, delete, faq updates |
+| `getTrendingCourses` | 2 | `trending-courses` | Backend: revalidates on general course mutations when `is_trending=true` |
+| `getCoursePageBanner` | 2 | `course-page-banner` | Backend: revalidates when banner with `promo_banner=All_courses_page` is created/updated/deleted |
+| `getExamPageBanner` | - | `exam-page-banner` | Backend: revalidates when banner with `promo_banner=All_Exam_page` is mutated |
+| `getScholarshipBanners` | - | `scholarship-banners` | Backend: revalidates when banner with `promo_banner=All_Scholarship_page` is mutated |
+| `getHeroBanners` | 2 | `banners` | Backend: revalidates when banner with `promo_banner=Draft` is mutated |
+| `getAboutPageBanners` | 2 | `about-banners` | Backend: revalidates when banner with `promo_banner=All_about_page` is mutated |
+| `getAdvertisePageBanners` | 2 | `advertise-banners` | Backend: revalidates when banner with `promo_banner=Advertise_page` is mutated |
+| `getServicesBanners` | 2 | `services-banners` | Backend: revalidates when banner with `promo_banner=Services_Page` is mutated |
+| `getNriPageBanners` | 2 | `nri-banners` | Backend: revalidates when banner with `promo_banner=Nri_page` is mutated |
+| `getNewsSectionBanner` | 2 | `news-section-banner` | Backend: revalidates when banner with `promo_banner=Home_news_page` is mutated |
+| `getOurTeamBanners` | 2 | `our-team-banners` | Backend: revalidates when banner with `promo_banner=All_our_teams` is mutated |
+| `getScholarshipLevels` | 2 | `scholarship-levels` | Backend: revalidates on scholar level create, update, delete |
+| `getScholarshipTypes` | 2 | `scholarship-types` | Backend: revalidates on scholar type create, update, delete |
+| `getAssociatedColleges` | 2 | `associated-colleges` | Backend: revalidates on college create, update, delete if is_associated is mutated |
+| `getAboutVideoTestimonials` | 2 | `about-video-testimonials` | Backend: revalidates on video testimonial create, update, delete |
+| `getVideoTestimonials` | 2 | `video-testimonials` | Backend: revalidates on video testimonial create, update, delete |
+| `getAbroadCountries` | 2 | `abroad-countries` | Backend: revalidates on country create, update, delete |
+| `getNewsCategories` | 2 | `news-categories` | Backend: revalidates on news category create, update, delete |
+| `getLandingPages` | 2 | `landing-pages` | Backend: revalidates on landing page create, update, delete |
+| `getJobPositions` | 2 | `job-positions` | Backend: revalidates on job position create, update, delete |
+| `getJobLocations` | 2 | `job-locations` | Backend: revalidates on job location create, update, delete |
+| `getOurTeams` | 2 | `ourteams` | Backend: revalidates on team create, update, delete |

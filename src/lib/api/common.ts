@@ -50,12 +50,24 @@ export const getCollegeById = cache(async (id: string | number) => {
 
 export const getColleges = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '1000',
+    page: '1', size: '20',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
+
+  const tags = ['colleges']
+  if (params?.country_id) {
+    tags.push(`country-${params.country_id}`)
+  }
+  if (params?.stream_id) {
+    tags.push(`stream-${params.stream_id}`)
+  }
+  if (params?.id) {
+    tags.push(`college-${params.id}`)
+  }
+
   const json = await safeFetch<any>(
     `${API_URL}/api/website/colleges/get?${sp}`,
-    { tags: ['colleges'] },
+    { tags },
   )
   return { data: json?.data ?? [], totalItems: json?.totalItems ?? 0 }
 })
@@ -78,7 +90,7 @@ export const getCollegeCourse = cache(async (courseSlug: string, collegeId: stri
 
 export const getAllGeneralCourses = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/generalcourse/get?page=1&size=1000`,
+    `${API_URL}/api/website/generalcourse/get?page=1&size=20`,
     { tags: ['all-general-courses'] },
   )
   return json?.data ?? []
@@ -86,7 +98,7 @@ export const getAllGeneralCourses = cache(async () => {
 
 export const getTrendingCourses = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/generalcourse/get?page=1&size=1000&is_trending=1`,
+    `${API_URL}/api/website/generalcourse/get?page=1&size=20&is_trending=1`,
     { tags: ['trending-courses'] },
   )
   return json?.data ?? []
@@ -118,7 +130,7 @@ export const getStreamById = cache(async (id: string | number) => {
 
 export const getStreams = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '1000',
+    page: '1', size: '50',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
   const json = await safeFetch<any>(
@@ -150,7 +162,7 @@ export const getExamById = cache(async (id: string | number) => {
 
 export const getExams = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '1000',
+    page: '1', size: '10',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
   const json = await safeFetch<any>(
@@ -252,7 +264,7 @@ export const getSchoolById = cache(async (id: string | number) => {
 
 export const getSchools = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '1000',
+    page: '1', size: '20',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
   const json = await safeFetch<any>(
@@ -343,7 +355,7 @@ export const getScholarshipTypes = cache(async () => {
 
 export const getCountries = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '500',
+    page: '1', size: '50',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
   const json = await safeFetch<any>(
@@ -396,7 +408,7 @@ export const getTestimonialsByGeneralCourse = cache(async (gcId: string | number
 
 export const getHeroBanners = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=Draft&page=1&size=10000`,
+    `${API_URL}/api/website/banner/get?promo_banner=Draft&page=1&size=2`,
     { tags: ['banners'] },
   )
   return json?.data ?? []
@@ -404,7 +416,7 @@ export const getHeroBanners = cache(async () => {
 
 export const getAboutPageBanners = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=All_about_page&page=1&size=10000`,
+    `${API_URL}/api/website/banner/get?promo_banner=All_about_page&page=1&size=2`,
     { tags: ['about-banners'] },
   )
   return json?.data ?? []
@@ -412,7 +424,7 @@ export const getAboutPageBanners = cache(async () => {
 
 export const getAdvertisePageBanners = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=Advertise_page&page=1&size=10000`,
+    `${API_URL}/api/website/banner/get?promo_banner=Advertise_page&page=1&size=2`,
     { tags: ['advertise-banners'] },
   )
   return json?.data ?? []
@@ -420,7 +432,7 @@ export const getAdvertisePageBanners = cache(async () => {
 
 export const getServicesBanners = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=Services_Page&page=1&size=10000`,
+    `${API_URL}/api/website/banner/get?promo_banner=Services_Page&page=1&size=2`,
     { tags: ['services-banners'] },
   )
   return json?.data ?? []
@@ -428,7 +440,7 @@ export const getServicesBanners = cache(async () => {
 
 export const getNriPageBanners = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=Nri_page&page=1&size=10000`,
+    `${API_URL}/api/website/banner/get?promo_banner=Nri_page&page=1&size=2`,
     { tags: ['nri-banners'] },
   )
   return json?.data ?? []
@@ -437,7 +449,7 @@ export const getNriPageBanners = cache(async () => {
 
 export const getAssociatedColleges = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/colleges/get?is_associated=1&page=1&size=10`,
+    `${API_URL}/api/website/colleges/get?is_associated=1&page=1&size=2`,
     { tags: ['associated-colleges'] },
   )
   return json?.data ?? []
@@ -445,7 +457,7 @@ export const getAssociatedColleges = cache(async () => {
 
 export const getAboutVideoTestimonials = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/allvideotestimonials/get?type=About_us_page`,
+    `${API_URL}/api/website/allvideotestimonials/get?type=About_us_page&page=1&size=2`,
     { tags: ['about-video-testimonials'] },
   )
   const data = json?.data ?? []
@@ -454,7 +466,7 @@ export const getAboutVideoTestimonials = cache(async () => {
 
 export const getVideoTestimonials = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '6', searchfrom: 'name', searchtext: '',
+    page: '1', size: '2', searchfrom: 'name', searchtext: '',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
   const json = await safeFetch<any>(
@@ -498,7 +510,7 @@ export const getCounsellorTeams = cache(async () => {
 
 export const getAbroadCountries = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/country/get?page=1&size=10&india=false`,
+    `${API_URL}/api/website/country/get?page=1&size=20&india=false`,
     { tags: ['abroad-countries'] },
   )
   return json?.data ?? []
@@ -506,7 +518,7 @@ export const getAbroadCountries = cache(async () => {
 
 export const getAbroadPages = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/abroadpages/get?page=1&size=1000`,
+    `${API_URL}/api/website/abroadpages/get?page=1&size=20`,
     { tags: ['abroad-pages'] },
   )
   return json?.data ?? []
@@ -539,7 +551,7 @@ export const getLatestNewsList = cache(async (size = 8) => {
 
 export const getNewsSectionBanner = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=Home_news_page&page=1&size=1`,
+    `${API_URL}/api/website/banner/get?promo_banner=Home_news_page&page=1&size=2`,
     { tags: ['news-section-banner'] },
   )
   return (json?.data?.[0] ?? null) as { image: string } | null
@@ -618,7 +630,7 @@ export const getNewsCategories = cache(async () => {
 
 export const getLandingPages = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/langingpage/get?page=1&size=10000&orderby=asc&columnname=listing_order`,
+    `${API_URL}/api/website/langingpage/get?page=1&size=100&orderby=asc&columnname=listing_order`,
     { tags: ['landing-pages'] },
   )
   return json?.data ?? []
@@ -650,7 +662,7 @@ export const getJobLocations = cache(async () => {
 
 export const getOurTeamBanners = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=All_our_teams&page=1&size=10000`,
+    `${API_URL}/api/website/banner/get?promo_banner=All_our_teams&page=1&size=2`,
     { tags: ['our-team-banners'] },
   )
   return json?.data ?? []
@@ -668,22 +680,7 @@ export const getOurTeams = cache(async () => {
 // SITEMAP (bypasses cache — always fresh XML)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export async function getSitemapXml(type: string): Promise<string | null> {
-  const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 30000)
-  try {
-    const res = await fetch(
-      `${API_URL}/api/website/xmlgenerator/get?type=${type}`,
-      { signal: controller.signal, cache: 'no-store' },
-    )
-    if (!res.ok) return null
-    return await res.text()
-  } catch {
-    return null
-  } finally {
-    clearTimeout(timeoutId)
-  }
-}
+
 
 export const getSitemapData = cache(async () => {
   const json = await safeFetch<any>(

@@ -71,7 +71,7 @@ export default async function Page() {
     getAbroadPages(),
     getScholarshipLevels(),
     getScholarshipTypes(),
-    getCountries({ page: 1, size: 500 }), // for Nationality dropdown
+    getCountries({ page: 1, size: 50 }), // for Nationality dropdown
     getCountries({ page: 1, size: 50 }),  // for selective Country Tabs
     getScholarshipBanners(),
     getScholarshipsList({ page: 1, size: 9 }),

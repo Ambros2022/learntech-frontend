@@ -52,7 +52,7 @@ export default async function Page() {
       getAbroadCountries(),
       getLatestNewsList(8),
       getNewsSectionBanner(),
-      getStreams({ size: 100 }),
+      getStreams({ size: 50 }),
     ])
 
   const expertStreams = (rawStreams ?? []).map((s: any) => ({ id: s.id as number, name: s.name as string }))

@@ -36,7 +36,7 @@ export async function generateMetadata() {
 export default async function BlogsPage() {
   const [{ blogs, totalPages }, { data: colleges }] = await Promise.all([
     getBlogsListing(1, 8),
-    getColleges({ page: '1', size: '10000', type: 'college' }),
+    getColleges({ page: '1', size: '10', type: 'college' }),
   ])
 
   const breadcrumbSchema = {

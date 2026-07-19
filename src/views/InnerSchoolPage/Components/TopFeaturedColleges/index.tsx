@@ -8,7 +8,7 @@ const clipRect = {
 }
 
 export default async function FeaturedSchoolSection() {
-  const schools = await getSchools({ size: 10 })
+  const schools = await getSchools({ size: 20 })
   if (!schools?.length) return null
 
   return (

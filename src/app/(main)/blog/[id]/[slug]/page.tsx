@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function Page({ params }: Props) {
   const { id, slug } = await params
   const imgUrl = IMG_URL
-  const [pagedata, newsRaw, blogsRaw] = await Promise.all([getBlogById(id), getNewsList({ size: 30 }), getBlogs({ size: 30 })])
+  const [pagedata, newsRaw, blogsRaw] = await Promise.all([getBlogById(id), getNewsList({ size: 30 }), getBlogs({ size: 20 })])
   if (!pagedata) notFound()
   // Canonical slug guard — redirect mismatched slug to avoid duplicate URLs
   if (pagedata.slug && pagedata.slug !== slug) redirect(`/blog/${pagedata.id}/${pagedata.slug}`)

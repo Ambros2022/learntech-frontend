@@ -1,7 +1,8 @@
 Aos (animation remove from landing pages)-
 main exam
 
-
+getSitemapXml	2	(Fresh XML)
+getSitemapData	2	sitemap-data
 
 SEO Audit — learntechww.com
 Audited against codebase: June 2026 | Next.js 15 | Priority pages: College, University, Course, News

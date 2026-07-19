@@ -13,6 +13,15 @@ module.exports = {
     ],
   },
 
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap/:path.xml',
+        destination: '/sitemap/:path/sitemap.xml',
+      },
+    ]
+  },
+
   async headers() {
     return [
       {

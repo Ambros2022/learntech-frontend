@@ -104,7 +104,7 @@ export default async function Page() {
   ] = await Promise.all([
     getPageData('exams'),
     getCountries({ india: 'false' }),
-    getStreams({ size: 100 }),
+    getStreams({ size: 50 }),
     getNewsList({ page: 1, size: 15, orderby: 'desc', columnname: 'created_at', country_id: 204, includeIndia: 'true' }),
     getNewsList({ page: 1, size: 15, orderby: 'desc', columnname: 'created_at', includeIndia: 'false' }),
     fetchExamsWithPagination({ page: 1, size: 9, isIndia: 'true' }),
