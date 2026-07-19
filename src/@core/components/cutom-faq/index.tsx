@@ -27,7 +27,7 @@ const FaqSec = ({ data }) => {
                                         className="accordion-collapse collapse"
                                         data-bs-parent="#accordionExample"
                                     >
-                                        <div className="accordion-body">
+                                        <div className="accordion-body bs-editor-text">
                                             <div dangerouslySetInnerHTML={{ __html: item.answers }} />
                                         </div>
                                     </div>

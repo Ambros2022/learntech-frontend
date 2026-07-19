@@ -3,7 +3,7 @@ import { LazyUniversitySearchBar, LazyGlobalEnquiryForm } from 'src/app/componen
 
 export default function BannerSection() {
   return (
-    <InnerHeader title="Know all About Top Universities, Placements, Admissions and Fee Structures" className="collegeBannerCon" titleClassName="fs-4 fw-bold">
+    <InnerHeader title="Know all About Top Universities, Placements, Admissions and Fee Structures" className="collegeBannerCon" titleClassName="fs-4 fw-bold text-md-center text-start">
       <div className="row g-3">
         <div className="col-md-7">
           <LazyUniversitySearchBar />

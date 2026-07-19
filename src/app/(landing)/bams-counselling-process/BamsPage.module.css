@@ -2208,14 +2208,6 @@
     transform: translateY(-4px);
 }
 
-.twitterXIcon {
-    filter: brightness(0) invert(1);
-    transition: filter 0.3s ease;
-}
-
-.footerSocial a:hover .twitterXIcon {
-    filter: invert(15%) sepia(50%) saturate(2200%) hue-rotate(205deg) brightness(85%) contrast(95%);
-}
 
 
 /* ===================== FLOATING ICONS ===================== */
@@ -2517,7 +2509,7 @@ select.bamsFormField option {
 
 @media (max-width: 760px) {
     .wrap {
-        padding: 0 16px;
+        padding: 0 5px;
     }
 
     .predictorSection .wrap {
@@ -2710,11 +2702,13 @@ select.bamsFormField option {
     .footerTagline {
         font-size: 15px;
         line-height: 1.7;
+        padding-left: 11px;
     }
 
     .footerRight h4 {
         font-size: 20px;
         margin-bottom: 18px;
+        margin-left: 11px;
     }
 
     .footerPhone a {

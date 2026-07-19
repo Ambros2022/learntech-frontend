@@ -42,7 +42,7 @@ const CategoryCarousel = ({ items, handleTabClick, activeTab }: Props) => {
             </span>
 
             {/* EMBLA VIEWPORT */}
-            <div style={{ overflow: 'hidden', flex: 1, padding: '4px 0' }} ref={emblaRef}>
+            <div style={{ overflow: 'hidden', flex: 1, padding: '4px 0', minWidth: 0 }} ref={emblaRef}>
                 <div style={{ display: 'flex', gap: '10px' }}>
                     {items.map((item) => (
                         <div

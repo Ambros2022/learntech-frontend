@@ -14,7 +14,7 @@ export default function OrganizationSection({ data, organizationPage }: Props) {
 
   return (
     <section className='bg-white pt-5'>
-      <div className="container">
+      <div className="container bs-editor-text">
         <h2 className='text-center fw-bold text-blue mb-3'>
           {organizationPage.title} {data?.exam_short_name} Exam
         </h2>

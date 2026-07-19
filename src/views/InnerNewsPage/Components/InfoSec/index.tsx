@@ -39,7 +39,7 @@ const InfoSec = ({ data, relatedNews, newsUrl }: InfoSecProps) => {
 
         <div className="pt-0">
           <div className="row">
-            <div className="col-md-8 text-black overflow-auto" style={{ maxWidth: '100%' }}>
+            <div className="col-md-8 text-black overflow-auto bs-editor-text" style={{ maxWidth: '100%' }}>
               <div dangerouslySetInnerHTML={{ __html: data?.overview || '' }} />
             </div>
             <div className="col-md-4">

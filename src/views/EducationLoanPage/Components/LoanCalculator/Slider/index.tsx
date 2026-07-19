@@ -29,12 +29,26 @@ const DiscreteSliderLabel = (props: DiscreteSliderLabelProps) => {
                 value={props.value}
                 onChange={(e) => props.onChange(e, Number(e.target.value))}
                 className="form-range w-100"
-                style={{ accentColor: '#1e3a8a' }}
+                style={{ accentColor: '#254692' }}
             />
-            {/* Min / Max labels */}
-            <div className="d-flex justify-content-between" style={{ fontSize: '0.7rem', color: '#555' }}>
-                <span>{props.marks[0]?.label ?? props.min}</span>
-                <span>{props.marks[props.marks.length - 1]?.label ?? props.max}</span>
+            {/* Scale marks and labels */}
+            <div className="position-relative mt-2" style={{ height: '20px', fontSize: '0.75rem', color: '#555869' }}>
+                {props.marks.map((mark) => {
+                    const pct = ((mark.value - props.min) / (props.max - props.min)) * 100;
+                    return (
+                        <span
+                            key={mark.value}
+                            className="position-absolute"
+                            style={{
+                                left: `${pct}%`,
+                                transform: 'translateX(-50%)',
+                                whiteSpace: 'nowrap'
+                            }}
+                        >
+                            {mark.label}
+                        </span>
+                    );
+                })}
             </div>
         </div>
     );

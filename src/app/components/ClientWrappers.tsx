@@ -441,3 +441,15 @@ export const LazyUpcomingExams = dynamic(
   () => import('src/views/MainExamPage/Components/UpcomingExamsSec'),
   { ssr: false, loading: () => <p>Loading…</p> },
 )
+
+export const LazyGlobalEnquiryFormExams = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupEnquiry'),
+  {
+    ssr: false,
+    loading: () => (
+      <a className="btn alertExamBtn" style={{ cursor: 'pointer' }}>
+        Get Exams Alert
+      </a>
+    ),
+  }
+)

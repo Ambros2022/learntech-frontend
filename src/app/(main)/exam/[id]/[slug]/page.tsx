@@ -63,7 +63,7 @@ export default async function Page({ params }: Props) {
       getCounsellorTeams(),
       getExamPageBanner(),
       getExamNewsLinks(),
-      getExams({ page: 1, size: 10000 }),
+      getExams({ page: 1, size: 10 }),
     ])
 
   if (!pagedata) notFound()

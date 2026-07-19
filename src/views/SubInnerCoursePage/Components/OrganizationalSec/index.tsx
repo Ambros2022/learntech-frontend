@@ -9,7 +9,7 @@ export default async function OrganizationSection({ courseName }: { courseName?:
 
   return (
     <section className='bg-white pt-3'>
-      <div className="container minehightinnercourse">
+      <div className="container minehightinnercourse bs-editor-text">
         <h2 className='text-center fw-bold text-blue mb-3'>
           Learntech&apos;s Approach for {courseName} Course
         </h2>

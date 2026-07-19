@@ -1,4 +1,4 @@
-﻿import { notFound } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import InnerCoursePage from 'src/views/InnerCoursePage'
 import { getStreamById, getColleges, getExams, getStreams, getTestimonialsByStream } from 'src/lib/api/common'
 
@@ -21,7 +21,7 @@ export default async function Page({ params }: Props) {
   const { streamId } = await params
   const [pagedata, colleges, exams, streams, testdata] = await Promise.all([
     getStreamById(streamId),
-    getColleges({ type: 'college', stream_id: streamId }),
+    getColleges({ type: 'college', stream_id: streamId, size: 20 }),
     getExams({ stream_id: streamId }),
     getStreams({ not_stream_id: streamId }),
     getTestimonialsByStream(streamId),

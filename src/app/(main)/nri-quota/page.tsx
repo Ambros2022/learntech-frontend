@@ -53,7 +53,7 @@ export default async function Page() {
   const [pagedata, banners, courses, collegeRes] = await Promise.all([
     getPageData('nri-quota'),
     getNriPageBanners(),
-    getStreams({ orderBy: 'asc', columnname: 'listing_order', size: 100 }),
+    getStreams({ orderBy: 'asc', columnname: 'listing_order', size: 50 }),
     getColleges({ page: 1, size: 10, type: 'college' }),
   ])
 

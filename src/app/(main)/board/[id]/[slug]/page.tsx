@@ -39,8 +39,8 @@ export default async function Page({ params }: Props) {
   const { id, slug } = await params
   const [pagedata, exams, schools] = await Promise.all([
     getBoardById(id),
-    getExams({ size: 1000 }),
-    getSchools({ page: '1', size: '10' }),
+    getExams({ size: 10 }),
+    getSchools({ page: '1', size: '20' }),
   ])
   if (!pagedata) notFound()
   if (pagedata.slug && pagedata.slug !== slug) redirect(`/board/${pagedata.id}/${pagedata.slug}`)

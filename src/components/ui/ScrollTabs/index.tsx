@@ -12,9 +12,10 @@ interface Props {
   activeTab: string
   onTabChange: (id: string) => void
   className?: string
+  alwaysShowArrows?: boolean
 }
 
-export default function ScrollTabs({ tabs, activeTab, onTabChange, className }: Props) {
+export default function ScrollTabs({ tabs, activeTab, onTabChange, className, alwaysShowArrows }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const activeRef = useRef<HTMLButtonElement>(null)
 
@@ -31,7 +32,7 @@ export default function ScrollTabs({ tabs, activeTab, onTabChange, className }: 
   return (
     <div className={`d-flex align-items-center gap-1 pt-3 ${className ?? ''}`}>
       <button
-        className="btn btn-sm d-md-none flex-shrink-0 p-1"
+        className={`btn btn-sm flex-shrink-0 p-1 ${alwaysShowArrows ? '' : 'd-md-none'}`}
         onClick={() => scroll('left')}
         aria-label="Scroll tabs left"
         style={{ lineHeight: 1 }}
@@ -42,7 +43,13 @@ export default function ScrollTabs({ tabs, activeTab, onTabChange, className }: 
       <div
         ref={scrollRef}
         className="d-flex gap-3 flex-grow-1"
-        style={{ overflowX: 'auto', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+        style={{
+          overflowX: 'auto',
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
+          scrollSnapType: 'x mandatory',
+          paddingBottom: 2,
+        } as React.CSSProperties}
       >
         {tabs.map((tab) => (
           <button
@@ -57,7 +64,7 @@ export default function ScrollTabs({ tabs, activeTab, onTabChange, className }: 
       </div>
 
       <button
-        className="btn btn-sm d-md-none flex-shrink-0 p-1"
+        className={`btn btn-sm flex-shrink-0 p-1 ${alwaysShowArrows ? '' : 'd-md-none'}`}
         onClick={() => scroll('right')}
         aria-label="Scroll tabs right"
         style={{ lineHeight: 1 }}

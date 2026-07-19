@@ -10,7 +10,7 @@ export default function BannerSec({ banners }: { banners: any[] }) {
                 <div
                     key={banner.id ?? index}
                     className='position-relative w-100 overflow-hidden'
-                    style={{ minHeight: 300 }}
+                    style={{ minHeight: 400 }}
                 >
                     <Image
                         src={`${IMG_URL}/${banner.image}`}

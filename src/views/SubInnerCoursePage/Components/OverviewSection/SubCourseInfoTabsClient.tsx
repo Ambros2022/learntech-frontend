@@ -26,8 +26,8 @@ export default function SubCourseInfoTabsClient({ tabs, children }: Props) {
   return (
     <div className="container position-relative">
       <ScrollTabs tabs={tabItems} activeTab={activeTab} onTabChange={setActiveTab} />
-      <div className="row">
-        <div className="col-md-8 col-lg-9 pe-md-5 minehightinnercourse">
+      <div className="row pt-3">
+        <div className="col-md-8 col-lg-9 pe-md-5 minehightinnercourse bs-editor-text">
           {active?.html && activeTab !== 'faq' && (
             <div className="minehightcoursesneew" dangerouslySetInnerHTML={{ __html: active.html }} />
           )}

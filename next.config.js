@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  output: process.env.VERCEL ? undefined : 'standalone',
   trailingSlash: false,
   skipTrailingSlashRedirect: true,
 
@@ -10,6 +11,15 @@ module.exports = {
       { protocol: 'https', hostname: 'newapi.learntechww.com' },
       { protocol: 'https', hostname: 'learntechww.com' },
     ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap/:path.xml',
+        destination: '/sitemap/:path/sitemap.xml',
+      },
+    ]
   },
 
   async headers() {

@@ -62,7 +62,7 @@ const CollegeInfoSection = ({ data, exams }: { data: any; exams: any[] }) => {
             {activeTab === 'info' ? (
               <>
                 <div className="col-xl-8 col-lg-8 col-md-7 col-12 mx-auto">
-                  <div className="tab-content pt-3">
+                  <div className="tab-content pt-3 bs-editor-text">
                     {tabs.map((tab) => (
                       <div
                         key={tab.id}
@@ -117,7 +117,7 @@ const CollegeInfoSection = ({ data, exams }: { data: any; exams: any[] }) => {
               </>
             ) : (
               <div className="col-12">
-                <div className="tab-content pt-5">
+                <div className="tab-content pt-5 bs-editor-text">
                   {tabs.map((tab) => (
                     <div
                       key={tab.id}

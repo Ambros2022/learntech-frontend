@@ -3,6 +3,7 @@
   border-radius: 10px !important;
   color: #254692 !important;
   background-color: #f6f8fb !important;
+  scroll-snap-align: start;
 }
 
 .tabBtn:hover,
@@ -26,8 +27,8 @@
 
 @media (max-width: 767.98px) {
   .tabBtn {
-    width: calc(50% - 0.5rem) !important;
-    max-width: calc(50% - 0.5rem) !important;
+    min-width: 80px;
+    max-width: calc(50% - 0.5rem);
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;

@@ -7,7 +7,9 @@ interface SitemapData {
   scholarships: { id: number; slug: string; name: string }[]
   schoolboards: { id: number; slug: string; name: string }[]
   generalcourse: { id: number; slug: string; name: string }[]
-  stream: { id: number; name: string }[]
+  stream: {
+    slug: any; id: number; name: string 
+}[]
   exam: { id: number; slug: string; exam_title: string }[]
   blog: { id: number; slug: string; name: string }[]
   newsandevents: { id: number; slug: string; name: string }[]
@@ -167,7 +169,7 @@ export default function LinkSec({ data }: Props) {
                 <div key={stream.id} className='col-md-3'>
                   <ul>
                     <li>
-                      <Link href={`/course/${stream.id}`} className='text-black'>
+                      <Link href={`/course/${stream.id}/${stream.slug}`} className='text-black'>
                         {stream.name}
                       </Link>
                     </li>

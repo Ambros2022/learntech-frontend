@@ -258,8 +258,8 @@ const BrowsebyCategorySec = ({
                         List of Entrance Exams in India
                     </h2>
                 </div>
-                <div className="row">
-                    <div className="col-lg-7 col-xl-8 exam-car px-3 px-md-5 ">
+                <div className="row mx-0">
+                    <div className="col-xl-9 exam-car px-3 px-md-0 ">
                         <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
                     </div>
                 </div>
@@ -273,7 +273,7 @@ const BrowsebyCategorySec = ({
                             aria-labelledby={`pills-${item.id}-tab`}
                         >
                             <div className='topCourseConCarousel pt-5'>
-                                <div className="row">
+                                <div className="row mx-0">
                                     <div className="col-lg-7 col-xl-8">
                                         <div className="row px-md-0 px-3">
                                             {currentExams.length > 0 ? (

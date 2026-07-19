@@ -37,7 +37,7 @@ export default function FaqSec({ data }: { data: any }) {
                     </button>
                   </h2>
                   <div id={`col${index}`} className="accordion-collapse collapse" data-bs-parent="#accordionAbroadFaq">
-                    <div className="accordion-body">
+                    <div className="accordion-body bs-editor-text">
                       <div dangerouslySetInnerHTML={{ __html: item.answers }} />
                     </div>
                   </div>

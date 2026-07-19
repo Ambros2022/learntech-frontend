@@ -17,7 +17,7 @@ export default async function FeaturedCollegeSection({ heading = 'Featured Colle
           ))}
         </ul>
         <LazyCollegeCarousel colleges={colleges} />
-        <div className="d-flex justify-content-center py-4">
+        <div className="d-flex justify-content-center py-4 pb-5">
           <Link href="/colleges" className="btn viewMoreClgBtn">Load More</Link>
         </div>
       </div>

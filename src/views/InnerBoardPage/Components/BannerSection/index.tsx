@@ -24,11 +24,11 @@ export default function BannerSection({ data }: { data: any }) {
 
   return (
     <section className={styles.banner}>
-      <div className="container">
+      <div className="container-fluid ">
         <div className={`card ${styles.card}`}>
           <div className="row g-0">
             <div className="col-12 col-md-2 col-lg-2 col-xl-1 d-flex justify-content-between align-items-start">
-              <div className={`mt-md-3 ${styles.logo}`}>
+              <div className={`${styles.logo}`}>
                 <Image
                   src={`${IMG_URL}/${data.logo}`}
                   alt={data.name || 'board logo'}
@@ -86,7 +86,7 @@ export default function BannerSection({ data }: { data: any }) {
               <i className="me-2 bi bi-alarm-fill" />
               Result Date: {formatDate(data.result_date)}
             </button>
-            <GlobalEnquiryForm className="align-content-center btn freeBtn" buttonText="Enquire Now" />
+            <GlobalEnquiryForm className={`align-content-center btn ${styles.enquireBtn}`} buttonText="Enquire Now" />
           </div>
         </div>
       </div>

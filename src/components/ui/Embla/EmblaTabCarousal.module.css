@@ -5,6 +5,8 @@
 
 .embla__viewport {
   overflow: hidden;
+  padding: 15px 0;
+  margin: -15px 0;
 }
 
 .embla__container {
@@ -32,28 +34,23 @@
   width: 40px;
   height: 40px;
 
-  border-radius: 9999px;
-  border: 1px solid #cbd5e1;
-  background: #ffffff;
+  border: none;
+  background: transparent;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 30px;
+  font-size: 32px;
   font-weight: bold;
-  /* color: #f97316; */
-  color: var(--brand-navy, #254692) !important;
+  color: #555869 !important;
 
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .sideArrow:hover {
-
-  background: var(--brand-navy, #254692);
-  color: #ffffff !important;
-  border-color: var(--brand-navy, #254692);
+  color: var(--brand-navy, #254692) !important;
 }
 
 .left {
@@ -61,16 +58,26 @@
 }
 
 .right {
-  right: -35px;
+  right: -45px;
 }
 
 
 @media only screen and (max-width: 768px) {
+  .embla {
+    padding: 0 35px;
+  }
+
+  .sideArrow {
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+  }
+
   .left {
-    left: -10px;
+    left: 1px;
   }
 
   .right {
-    right: -5px;
+    right: 1px;
   }
 }

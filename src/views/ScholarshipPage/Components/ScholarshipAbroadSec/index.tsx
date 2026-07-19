@@ -20,7 +20,7 @@ const ScholarshipAbroadSec = ({ data = {}, banners = [] }: ScholarshipAbroadSecP
               <ReadMoreContent
                 html={data.top_description}
                 collapsedHeight={750}
-                buttonClassName="btn viewMoreClgBtn"
+                buttonClassName="btn viewMoreClgBtn mb-5"
               />
             )}
           </div>
