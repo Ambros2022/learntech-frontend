@@ -7,7 +7,6 @@ const FaqSec = ({ data }) => {
       <style>{`
         .faqSec {
           background-color: #fff !important;
-          font-family: 'Inter', sans-serif;
         }
 
         .faqSec .accordion-item {

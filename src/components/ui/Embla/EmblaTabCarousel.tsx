@@ -20,6 +20,9 @@ interface EmblaCarouselProps {
   autoplayDelay?: number;
   loop?: boolean;
   slidePadding?: number;
+  leftArrowIcon?: React.ReactNode;
+  rightArrowIcon?: React.ReactNode;
+  arrowClassName?: string;
 }
 
 export default function EmblaCarousel({
@@ -37,6 +40,9 @@ export default function EmblaCarousel({
   autoplayDelay = 3000,
   loop = true,
   slidePadding,
+  leftArrowIcon = "❮",
+  rightArrowIcon = "❯",
+  arrowClassName = "",
 }: EmblaCarouselProps) {
   const isTabs = variant === "tabs";
 
@@ -95,11 +101,11 @@ export default function EmblaCarousel({
       {/* LEFT ARROW */}
       {showArrows && canScrollPrev && (
         <button
-          className={`${styles.sideArrow} ${styles.left} embla-side-arrow left-arrow`}
+          className={`${styles.sideArrow} ${styles.left} ${arrowClassName} embla-side-arrow left-arrow`}
           onClick={() => emblaApi?.scrollPrev()}
           aria-label="Previous"
         >
-          ❮
+          {leftArrowIcon}
         </button>
       )}
 
@@ -123,11 +129,11 @@ export default function EmblaCarousel({
       {/* RIGHT ARROW */}
       {showArrows && canScrollNext && (
         <button
-          className={`${styles.sideArrow} ${styles.right} embla-side-arrow right-arrow`}
+          className={`${styles.sideArrow} ${styles.right} ${arrowClassName} embla-side-arrow right-arrow`}
           onClick={() => emblaApi?.scrollNext()}
           aria-label="Next"
         >
-          ❯
+          {rightArrowIcon}
         </button>
       )}
     </div>

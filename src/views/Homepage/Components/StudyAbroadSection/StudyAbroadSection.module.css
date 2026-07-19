@@ -43,3 +43,20 @@
     margin: 0px 3px !important;
   }
 }
+
+.countryArrow {
+
+  border-radius: 0px !important;
+  background-color: transparent !important;
+  color: #254692 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+}
+
+.countryArrow:hover {
+
+  color: #ffffff !important;
+}
+

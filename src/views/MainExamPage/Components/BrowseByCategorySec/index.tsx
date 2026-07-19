@@ -259,7 +259,7 @@ const BrowsebyCategorySec = ({
                     </h2>
                 </div>
                 <div className="row mx-0">
-                    <div className="col-lg-7 col-xl-8 exam-car px-3 px-md-0 ">
+                    <div className="col-xl-9 exam-car px-3 px-md-0 ">
                         <CategoryCarousel items={items} handleTabClick={handleTabClick} activeTab={activeTab} />
                     </div>
                 </div>

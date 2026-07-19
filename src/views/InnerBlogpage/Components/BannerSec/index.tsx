@@ -9,7 +9,7 @@ const BannerSec = ({ data, createdAt }: any) => {
           className={`container d-flex h-100 w-100 justify-content-center flex-column align-content-center text-center position-relative`}
           style={{ minHeight: "300px" }}
         >
-          <h1 className="fw-bold text-white mb-3" style={{ minHeight: "3rem",fontWeight:600 }}>
+          <h1 className="text-white mb-3" style={{ minHeight: "3rem",fontWeight:600 }}>
             {data?.name}
           </h1>
           <p
