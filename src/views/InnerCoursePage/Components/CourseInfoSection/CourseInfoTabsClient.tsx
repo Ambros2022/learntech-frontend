@@ -33,7 +33,7 @@ export default function CourseInfoTabsClient({ tabs, streamId, streamSlug, child
       <ScrollTabs tabs={tabItems} activeTab={activeTab} onTabChange={setActiveTab} />
 
       <div className="row">
-        <div className="col-md-8 col-lg-9 pe-md-5">
+        <div className="col-12 pe-md-5">
           <div className="tab-content pt-3 bs-editor-text">
 
             {/* HTML tabs: overview, top colleges */}

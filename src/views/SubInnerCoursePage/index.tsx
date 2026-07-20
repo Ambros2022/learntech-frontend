@@ -20,14 +20,14 @@ export default function SubInnerCoursePage({ pagedata, colleges, exams, testimon
 
   const faqSchema = pagedata?.generalcoursefaqs?.length > 0
     ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: pagedata.generalcoursefaqs.map((item: any) => ({
-          '@type': 'Question',
-          name: item.questions,
-          acceptedAnswer: { '@type': 'Answer', text: item.answers },
-        })),
-      }
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: pagedata.generalcoursefaqs.map((item: any) => ({
+        '@type': 'Question',
+        name: item.questions,
+        acceptedAnswer: { '@type': 'Answer', text: item.answers },
+      })),
+    }
     : null
 
   const breadcrumbSchema = {

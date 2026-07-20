@@ -34,12 +34,12 @@ export default function CourseInfoSection({ data, colleges, exams }: Props) {
       <CourseInfoTabsClient tabs={tabs} streamId={data.id} streamSlug={data.slug}>
 
         {/* Sidebar — server-rendered: no JS, crawlable, zero hydration cost */}
-        <div className="col-md-4 col-lg-3 mb-md-5 mx-auto px-0">
+        <div className="col-12 mb-md-5 mx-auto px-0">
           <div className="row imgCardConCrs mb-3">
 
             {data.banner && (
-              <div className="col-12 mb-5 px-0">
-                <div className='dental-crs-img flex-column d-flex justify-content-center pb-3'>
+              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
+                <div className='dental-crs-img flex-column d-flex justify-content-center pb-3 h-100'>
                   <Image
                     src={`${IMG_URL}/${data.banner}`}
                     width={600}
@@ -54,11 +54,11 @@ export default function CourseInfoSection({ data, colleges, exams }: Props) {
             )}
 
             {colleges.length > 0 && (
-              <>
+              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
                 <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Colleges</h4>
                 <div
-                  className="col-12 cardConBrdr p-3 mb-5 text-center overflow-y-auto bg-skyBlue"
-                  style={{ maxHeight: 'calc(6 * 150px)' }}
+                  className="cardConBrdr p-3 text-center overflow-y-auto bg-skyBlue"
+                  style={{ maxHeight: '450px' }}
                 >
                   {colleges.map(val => (
                     <Link key={val.id} href={`/college/${val.id}/${val.slug}`}>
@@ -82,15 +82,15 @@ export default function CourseInfoSection({ data, colleges, exams }: Props) {
                     </Link>
                   ))}
                 </div>
-              </>
+              </div>
             )}
 
             {exams.length > 0 && (
-              <>
+              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
                 <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Exams</h4>
                 <div
-                  className="col-12 cardConBrdr p-3 mb-3 overflow-y-auto text-center bg-skyBlue"
-                  style={{ maxHeight: 'calc(6 * 150px)' }}
+                  className="cardConBrdr p-3 overflow-y-auto text-center bg-skyBlue"
+                  style={{ maxHeight: '450px' }}
                 >
                   {exams.map(exam => (
                     <Link href={`/exam/${exam.id}/${exam.slug}`} key={exam.id}>
@@ -116,7 +116,7 @@ export default function CourseInfoSection({ data, colleges, exams }: Props) {
                     </Link>
                   ))}
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>

@@ -43,11 +43,11 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
     <section className='clgInfoSec innerClgCarousel bg-white subinner'>
       <SubCourseInfoTabsClient tabs={tabs}>
         {/* Sidebar — server-rendered (zero hydration cost, SEO-crawlable) */}
-        <div className="col-md-4 col-lg-3 mb-md-5 mx-auto px-0">
+        <div className="col-12 mb-md-5 mx-auto px-0">
           <div className="row imgCardConCrs mb-3">
             {data?.streams?.banner && (
-              <div className="col-12 mb-5 px-0">
-                <div className='dental-crs-img flex-column d-flex justify-content-center pb-2'>
+              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
+                <div className='dental-crs-img flex-column d-flex justify-content-center pb-2 h-100'>
                   <Image
                     src={`${IMG_URL}/${data.streams.banner}`}
                     width={600}
@@ -62,11 +62,11 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
             )}
 
             {colleges?.length > 0 && (
-              <>
+              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
                 <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data?.streams?.name} Colleges</h4>
                 <div
-                  className="col-12 cardConBrdr p-3 mb-5 text-center overflow-y-auto bg-skyBlue"
-                  style={{ maxHeight: 'calc(6 * 150px)' }}
+                  className="cardConBrdr p-3 text-center overflow-y-auto bg-skyBlue"
+                  style={{ maxHeight: '450px' }}
                 >
                   {colleges.map((val: any) => (
                     <Link key={val.id} href={`/college/${val.id}/${val.slug}`}>
@@ -89,15 +89,15 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
                     </Link>
                   ))}
                 </div>
-              </>
+              </div>
             )}
 
             {exams?.length > 0 && (
-              <>
+              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
                 <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data?.streams?.name} Exams</h4>
                 <div
-                  className="col-12 cardConBrdr p-3 mb-5 overflow-y-auto text-center bg-skyBlue"
-                  style={{ maxHeight: 'calc(6 * 150px)' }}
+                  className="cardConBrdr p-3 overflow-y-auto text-center bg-skyBlue"
+                  style={{ maxHeight: '450px' }}
                 >
                   {exams.map((exam: any) => (
                     <Link key={exam.id} href={`/exam/${exam.id}/${exam.slug}`}>
@@ -122,7 +122,7 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
                     </Link>
                   ))}
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>

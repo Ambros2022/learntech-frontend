@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import OverviewTabsClient, { type ExamTabItem } from './OverviewTabsClient'
+import OverviewTabsClient from './OverviewTabsClient'
 
 const IMG_BASE = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
 
