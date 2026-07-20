@@ -14,9 +14,14 @@ function NProgressInner() {
 
   useEffect(() => {
     NProgress.done()
+    window.scrollTo(0, 0)
   }, [pathname, searchParams])
 
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
     const handleClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement).closest('a')
       if (!anchor) return

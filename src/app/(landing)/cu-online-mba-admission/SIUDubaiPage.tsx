@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -10,7 +9,6 @@ import { useRouter } from 'src/hooks/useCompatRouter'
 import dynamic from 'next/dynamic'
 import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'sonner'
-import axios from 'src/configs/axios'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import styles from './SIUDubaiPage.module.css'
@@ -173,10 +171,14 @@ const SIUDubaiPage = () => {
       formData.append('Source', 'Google Ads')
       formData.append('SourceCampaign', 'CU Online MBA 2026-27')
 
-      const response = await axios.post('api/website/landingpage/enquiry', formData)
+      const API_URL = process.env.NEXT_PUBLIC_API_URI || ''
+      const response = await fetch(`${API_URL}/api/website/landingpage/enquiry`, {
+        method: 'POST',
+        body: formData,
+      })
       
       toast.dismiss()
-      if (response.status === 200) {
+      if (response.ok) {
         toast.success('Thank you. We will get back to you.')
         reset()
         router.push('/thank-you')
