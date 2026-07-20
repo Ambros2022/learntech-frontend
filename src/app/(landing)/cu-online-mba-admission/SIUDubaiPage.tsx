@@ -2,8 +2,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useRouter } from 'src/hooks/useCompatRouter'
 import dynamic from 'next/dynamic'
@@ -145,7 +143,27 @@ const SIUDubaiPage = () => {
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
   useEffect(() => {
-    AOS.init({ once: true, offset: 200, easing: 'ease-in-sine', delay: 100, duration: 1000 })
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement
+            const duration = el.getAttribute('data-aos-duration')
+            if (duration) {
+              el.style.transitionDuration = `${duration}ms`
+            }
+            el.classList.add('aos-animate')
+            observer.unobserve(el)
+          }
+        })
+      },
+      { threshold: 0.05, rootMargin: '0px 0px -50px 0px' }
+    )
+
+    const elements = document.querySelectorAll('[data-aos]')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => observer.disconnect()
   }, [])
 
   const {
