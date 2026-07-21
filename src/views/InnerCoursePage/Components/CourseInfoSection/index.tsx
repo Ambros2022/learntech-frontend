@@ -30,95 +30,96 @@ export default function CourseInfoSection({ data, colleges, exams }: Props) {
   )
 
   return (
-    <section className='clgInfoSec innerClgCarousel bg-white'>
+    <section className='clgInfoSec innerClgCarousel bg-white py-4'>
       <CourseInfoTabsClient tabs={tabs} streamId={data.id} streamSlug={data.slug}>
 
         {/* Sidebar — server-rendered: no JS, crawlable, zero hydration cost */}
-        <div className="col-12 mb-md-5 mx-auto px-0">
-          <div className="row imgCardConCrs mb-3">
+        <div className="row imgCardConCrs">
 
-            {data.banner && (
-              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
-                <div className='dental-crs-img flex-column d-flex justify-content-center pb-3 h-100'>
-                  <Image
-                    src={`${IMG_URL}/${data.banner}`}
-                    width={600}
-                    height={600}
-                    alt={`${data.name} course`}
-                    className="img-fluid"
-                  />
-                  <h6 className='text-center mb-3'>Are you interested in this course?</h6>
-                  <GlobalEnquiryForm className="mb-3 chkEligBtn" buttonText="Check Eligibility" />
-                </div>
+          {data.banner && (
+            <div className="col-12 col-md-6 col-lg-12 mb-4">
+              <div className='dental-crs-img flex-column d-flex justify-content-center align-items-center p-3 border rounded bg-white text-center h-100'>
+                <Image
+                  src={`${IMG_URL}/${data.banner}`}
+                  width={600}
+                  height={600}
+                  alt={`${data.name} course`}
+                  className="img-fluid mb-3"
+                  style={{ maxHeight: '220px', objectFit: 'contain' }}
+                />
+                <h6 className='text-center fw-bold mb-3'>Are you interested in this course?</h6>
+                <GlobalEnquiryForm className="mb-2 chkEligBtn w-100" buttonText="Check Eligibility" />
               </div>
-            )}
+            </div>
+          )}
 
-            {colleges.length > 0 && (
-              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
-                <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Colleges</h4>
-                <div
-                  className="cardConBrdr p-3 text-center overflow-y-auto bg-skyBlue"
-                  style={{ maxHeight: '450px' }}
-                >
-                  {colleges.map(val => (
-                    <Link key={val.id} href={`/college/${val.id}/${val.slug}`}>
-                      <div className="card p-3 mb-3 d-flex flex-row bg-skyBlue hover-card">
-                        <div className="row d-flex">
-                          <div className="align-content-center col-md-5 col-xl-5 mb-md-0 mb-3 col-lg-5 topCollegeImg">
-                            <Image
-                              src={`${IMG_URL}/${val.banner_image}`}
-                              width={500}
-                              height={500}
-                              alt={val.name}
-                              className='img-fluid rounded'
-                              loading="lazy"
-                            />
-                          </div>
-                          <div className="align-content-center col-md-7 col-xl-7 col-lg-7">
-                            <h6 className='text-start text-black fw-bold'>{val.name}</h6>
-                          </div>
+          {colleges.length > 0 && (
+            <div className="col-12 col-md-6 col-lg-12 mb-4">
+              <h4 className='fw-bold text-blue text-center mb-3'>Top {data.name} Colleges</h4>
+              <div
+                className="cardConBrdr p-3 text-center overflow-y-auto bg-skyBlue rounded"
+                style={{ maxHeight: '450px' }}
+              >
+                {colleges.map(val => (
+                  <Link key={val.id} href={`/college/${val.id}/${val.slug}`}>
+                    <div className="card p-3 mb-3 d-flex flex-row bg-skyBlue hover-card">
+                      <div className="row align-items-center w-100 m-0">
+                        <div className="col-4 p-0">
+                          <Image
+                            src={`${IMG_URL}/${val.banner_image}`}
+                            width={120}
+                            height={80}
+                            alt={val.name}
+                            className='img-fluid rounded'
+                            style={{ width: '100%', height: '65px', objectFit: 'cover', borderRadius: '6px' }}
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="col-8 ps-2 text-start">
+                          <h6 className='text-start text-black fw-bold mb-0 small'>{val.name}</h6>
                         </div>
                       </div>
-                    </Link>
-                  ))}
-                </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            )}
+            </div>
+          )}
 
-            {exams.length > 0 && (
-              <div className="col-12 col-md-4 mb-5 px-0 px-md-3">
-                <h4 className='fw-bold text-blue text-center pt-3 mb-3'>Top {data.name} Exams</h4>
-                <div
-                  className="cardConBrdr p-3 overflow-y-auto text-center bg-skyBlue"
-                  style={{ maxHeight: '450px' }}
-                >
-                  {exams.map(exam => (
-                    <Link href={`/exam/${exam.id}/${exam.slug}`} key={exam.id}>
-                      <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
-                        <div className="row">
-                          <div className="col-xl-5 col-lg-5 col-md-5 mx-auto text-md-start text-center">
-                            <Image
-                              src={`${IMG_URL}/${exam.logo}`}
-                              width={200}
-                              height={200}
-                              alt={exam.exam_title}
-                              className='align-self-center innerBoardImg'
-                              loading="lazy"
-                            />
-                          </div>
-                          <div className="col-xl-7 col-lg-7 col-md-7 d-flex pt-md-0 pt-3 justify-content-md-start justify-content-center">
-                            <h5 className='m-0 align-self-center text-md-start text-center fw-bold text-black ms-2 mb-0'>
-                              {exam.exam_title}
-                            </h5>
-                          </div>
+          {exams.length > 0 && (
+            <div className="col-12 col-md-6 col-lg-12 mb-4">
+              <h4 className='fw-bold text-blue text-center mb-3'>Top {data.name} Exams</h4>
+              <div
+                className="cardConBrdr p-3 overflow-y-auto text-center bg-skyBlue rounded"
+                style={{ maxHeight: '450px' }}
+              >
+                {exams.map(exam => (
+                  <Link href={`/exam/${exam.id}/${exam.slug}`} key={exam.id}>
+                    <div className="card bg-skyBlue hover-card p-2 d-flex mb-3">
+                      <div className="row align-items-center w-100 m-0">
+                        <div className="col-4 p-0 text-center">
+                          <Image
+                            src={`${IMG_URL}/${exam.logo}`}
+                            width={120}
+                            height={80}
+                            alt={exam.exam_title}
+                            className='img-fluid'
+                            style={{ width: '100%', height: '55px', objectFit: 'contain' }}
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="col-8 ps-2 text-start">
+                          <h6 className='m-0 text-start fw-bold text-black small'>
+                            {exam.exam_title}
+                          </h6>
                         </div>
                       </div>
-                    </Link>
-                  ))}
-                </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
       </CourseInfoTabsClient>

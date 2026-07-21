@@ -9,8 +9,33 @@ export const metadata = {
   title: 'CU Online MBA Admission 2026–27 | Chandigarh University',
   description:
     'Apply for Chandigarh University (CU) Online MBA 2026–27. Check eligibility, fees, specializations, rankings, placements & admission process. Enquire Now!',
+  keywords: 'CU Online MBA, Chandigarh University Online MBA, MBA Admission 2026, Online MBA India',
   alternates: {
     canonical: CANONICAL,
+  },
+  openGraph: {
+    title: 'CU Online MBA Admission 2026–27 | Chandigarh University',
+    description:
+      'Apply for Chandigarh University (CU) Online MBA 2026–27. Check eligibility, fees, specializations, rankings, placements & admission process.',
+    url: CANONICAL,
+    siteName: 'Learntech Edu Solutions',
+    locale: 'en_IN',
+    type: 'website',
+    images: [
+      {
+        url: `${BASE_URL}/images/cumba/herobanner3.webp`,
+        width: 1200,
+        height: 630,
+        alt: 'CU Online MBA Admission 2026-27 | Chandigarh University',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CU Online MBA Admission 2026–27 | Chandigarh University',
+    description:
+      'Apply for Chandigarh University Online MBA 2026–27. Eligibility, fees, specializations & admission process.',
+    images: [`${BASE_URL}/images/cumba/herobanner3.webp`],
   },
   robots: {
     index: true,

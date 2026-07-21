@@ -34,17 +34,17 @@ export default function SchoolInfoTabsClient({ tabs, schoolName, schoolId }: Pro
     <div className="container position-relative innerClgCarousel">
       <ScrollTabs tabs={tabItems} activeTab={activeTab} onTabChange={setActiveTab} />
 
-      <div className="tab-content pt-5 bs-editor-text">
+      <div className="tab-content pt-5">
         {/* Info */}
         {activeTab === 'info' && active?.html && (
-          <div className="row">
-            <div className="col-md-7 col-lg-8 bs-editor-text">
-              <div dangerouslySetInnerHTML={{ __html: active.html }} />
+          <div className="row align-items-start">
+            <div className="col-12 col-lg-8 pe-lg-4">
+              <div className="bs-editor-text" dangerouslySetInnerHTML={{ __html: active.html }} />
             </div>
-            <div className="col-md-5 col-lg-4">
+            <div className="col-12 col-lg-4 ps-lg-3 mt-4 mt-lg-0">
               {active.imageUrl && (
                 <div className="position-relative innerClgImg2 mb-md-5 mb-3">
-                  <Image src={`${IMG_BASE}/${active.imageUrl}`} alt={schoolName} width={700} height={700} loading="lazy" className="rounded img-fluid" />
+                  <Image src={`${IMG_BASE}/${active.imageUrl}`} alt={schoolName} width={700} height={700} loading="lazy" className="rounded img-fluid w-100" style={{ objectFit: 'cover' }} />
                   <div className="position-absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                     <LazyGlobalEnquiryForm className="viewMoreCollegeBtn btn-success2" placeholder="Class" collegeName={schoolName} />
                   </div>

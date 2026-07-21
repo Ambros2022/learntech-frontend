@@ -11,12 +11,12 @@ export default function OverviewSec({ data, scholarships }: Props) {
     <section className='innerBlogSec bg-white py-3'>
       <div className="container">
         <h2 className='fw-bold text-blue mb-3'>{data.name}</h2>
-        <div className="row mt-3">
-          <div className="col-md-8 bs-editor-text">
-            <div dangerouslySetInnerHTML={{ __html: data.overview }} />
+        <div className="row align-items-start mt-3">
+          <div className="col-12 col-lg-8 pe-lg-4 mb-4 mb-lg-0">
+            <div className="bs-editor-text" dangerouslySetInnerHTML={{ __html: data.overview }} />
           </div>
-          <div className="col-md-4 ">
-            <div className='mb-5'>
+          <div className="col-12 col-lg-4 ps-lg-3">
+            <div className='mb-4'>
               <LazyContactForm heading='Contact Us' />
             </div>
             <ScholarshipList newsItems={scholarships} />

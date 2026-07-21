@@ -38,11 +38,11 @@ const InfoSec = ({ data, relatedNews, newsUrl }: InfoSecProps) => {
         </section>
 
         <div className="pt-0">
-          <div className="row">
-            <div className="col-md-8 text-black overflow-auto bs-editor-text" style={{ maxWidth: '100%' }}>
-              <div dangerouslySetInnerHTML={{ __html: data?.overview || '' }} />
+          <div className="row align-items-start">
+            <div className="col-12 col-lg-8 text-black mb-4 mb-lg-0 pe-lg-4">
+              <div className="bs-editor-text" dangerouslySetInnerHTML={{ __html: data?.overview || '' }} />
             </div>
-            <div className="col-md-4">
+            <div className="col-12 col-lg-4 ps-lg-3">
               <NewsList newsItems={relatedNews} />
             </div>
           </div>

@@ -26,36 +26,43 @@ export default function SubCourseInfoTabsClient({ tabs, children }: Props) {
   return (
     <div className="container position-relative">
       <ScrollTabs tabs={tabItems} activeTab={activeTab} onTabChange={setActiveTab} />
-      <div className="row pt-3">
-        <div className="col-12 pe-md-5 minehightinnercourse bs-editor-text">
-          {active?.html && activeTab !== 'faq' && (
-            <div className="minehightcoursesneew" dangerouslySetInnerHTML={{ __html: active.html }} />
-          )}
-          {active?.courses && active.courses.length > 0 && (
-            <div className="row">
-              {active.courses.map((item, i) => (
-                <div key={item.id ?? i} className="col-md-6 mb-3">
-                  <div className="card bg-skyBlue hover-card p-3">
-                    <h5 className='fw-bold text-blue text-center mb-3'>{item.name}</h5>
-                    <h5 className='fw-bold text-blue text-center mb-3'>{item.short_name}</h5>
-                    <h5 className='text-blue text-center mb-3'>
-                      <span className='fw-bold'>Duration:</span>{' '}
-                      <span className='text-black'>{item.duration}</span>
-                    </h5>
-                    <div className='justify-content-center d-flex gap-3 flex-wrap'>
-                      <GlobalEnquiryForm buttonText='Apply Now' className='btn viewMoreCollegeBtn' collegeName={item.name} />
-                      <Link className='btn viewDetailBtn' href={item.href}>View Detail</Link>
+      <div className="row align-items-start pt-3">
+        {/* Main Tab Content Column */}
+        <div className="col-12 col-lg-8 pe-lg-4">
+          <div className="tab-content pt-3 bs-editor-text minehightinnercourse">
+            {active?.html && activeTab !== 'faq' && (
+              <div className="minehightcoursesneew" dangerouslySetInnerHTML={{ __html: active.html }} />
+            )}
+            {active?.courses && active.courses.length > 0 && (
+              <div className="row">
+                {active.courses.map((item, i) => (
+                  <div key={item.id ?? i} className="col-md-6 mb-3">
+                    <div className="card bg-skyBlue hover-card p-3">
+                      <h5 className='fw-bold text-blue text-center mb-3'>{item.name}</h5>
+                      <h5 className='fw-bold text-blue text-center mb-3'>{item.short_name}</h5>
+                      <h5 className='text-blue text-center mb-3'>
+                        <span className='fw-bold'>Duration:</span>{' '}
+                        <span className='text-black'>{item.duration}</span>
+                      </h5>
+                      <div className='justify-content-center d-flex gap-3 flex-wrap'>
+                        <GlobalEnquiryForm buttonText='Apply Now' className='btn viewMoreCollegeBtn' collegeName={item.name} />
+                        <Link className='btn viewDetailBtn' href={item.href}>View Detail</Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-          {activeTab === 'faq' && active?.faqData && (
-            <LazyBoardFaqSec data={active.faqData} />
-          )}
+                ))}
+              </div>
+            )}
+            {activeTab === 'faq' && active?.faqData && (
+              <LazyBoardFaqSec data={active.faqData} />
+            )}
+          </div>
         </div>
-        {children}
+
+        {/* Sidebar Column */}
+        <div className="col-12 col-lg-4 ps-lg-3 mt-4 mt-lg-0">
+          {children}
+        </div>
       </div>
     </div>
   )

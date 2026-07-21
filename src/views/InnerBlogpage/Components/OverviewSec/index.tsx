@@ -30,11 +30,11 @@ const OverviewSec = ({ data, newsData, blogsData }: any) => {
   return (
     <section className={`innerBlogSec bg-white pt-3 ${poppins.className}`}>
       <div className="container">
-        <div className="row">
+        <div className="row align-items-start">
           {/* Left Column */}
-          <div className="col-md-8 bs-editor-text">
+          <div className="col-12 col-lg-8 pe-lg-4 mb-4 mb-lg-0">
             <div
-              className="text-black"
+              className="bs-editor-text text-black"
               style={{ minHeight: '500px' }}
               dangerouslySetInnerHTML={{ __html: processedHTML }}
             />
@@ -48,17 +48,17 @@ const OverviewSec = ({ data, newsData, blogsData }: any) => {
           </div>
 
           {/* Right Column */}
-          <div className="col-md-4">
-            <div className="mb-3" style={{ minHeight: '200px' }}>
+          <div className="col-12 col-lg-4 ps-lg-3">
+            <div className="mb-3">
               <ContactForm heading={'Get More Details'} />
             </div>
             {blogsData?.length > 0 && (
-              <div style={{ minHeight: '300px' }}>
+              <div>
                 <BlogList blogItems={blogsData} heading={'Latest Blogs'} />
               </div>
             )}
             {newsData?.length > 0 && (
-              <div style={{ minHeight: '300px' }}>
+              <div>
                 <NewsList newsItems={newsData} heading={'Latest News'} />
               </div>
             )}

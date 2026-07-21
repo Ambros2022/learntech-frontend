@@ -32,8 +32,9 @@ export default function CourseInfoTabsClient({ tabs, streamId, streamSlug, child
     <div className="container position-relative">
       <ScrollTabs tabs={tabItems} activeTab={activeTab} onTabChange={setActiveTab} />
 
-      <div className="row">
-        <div className="col-12 pe-md-5">
+      <div className="row pt-3">
+        {/* Main Tab Content Column (Desktop: 8 cols / Mobile: 12 cols) */}
+        <div className="col-12 col-lg-8 pe-lg-4">
           <div className="tab-content pt-3 bs-editor-text">
 
             {/* HTML tabs: overview, top colleges */}
@@ -69,8 +70,10 @@ export default function CourseInfoTabsClient({ tabs, streamId, streamSlug, child
           </div>
         </div>
 
-        {/* Sidebar slot — server-rendered by parent */}
-        {children}
+        {/* Sidebar Column (Desktop: 4 cols / Mobile: 12 cols stacked below) */}
+        <div className="col-12 col-lg-4 ps-lg-3 mt-4 mt-lg-0">
+          {children}
+        </div>
       </div>
     </div>
   )

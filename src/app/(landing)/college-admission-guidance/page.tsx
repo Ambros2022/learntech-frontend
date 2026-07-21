@@ -12,7 +12,7 @@ import CollegeAdmissionClientWrapper, {
 
 /* ─── Constants ─────────────────────────────────────────────── */
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
-const PAGE_PATH = '/bams-counselling-process'
+const PAGE_PATH = '/college-admission-guidance'
 const CANONICAL = `${BASE_URL}${PAGE_PATH}`
 
 /* ─── Static Data ────────────────────────────────────────────── */
@@ -254,6 +254,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'BAMS Counselling Process | Learntech Edu Solutions',
     description: 'Expert BAMS admission guidance. 30+ years of experience, 5,00,000+ successful admissions.',
+    images: [`${BASE_URL}/images/collegeadmissions/Img-BG.webp`],
   },
   robots: { index: true, follow: true },
 }

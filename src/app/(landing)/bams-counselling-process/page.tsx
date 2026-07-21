@@ -9,18 +9,47 @@ import BamsEnquiryTriggerClient from './BamsEnquiryTriggerClient'
 import BamsInteractiveClient from './BamsInteractiveClient'
 
 /* ─── SEO ─── */
+const BASE_URL = 'https://learntechww.com'
+const PAGE_PATH = '/bams-counselling-process'
+const CANONICAL_URL = `${BASE_URL}${PAGE_PATH}`
+
 export const metadata = {
   title: 'BAMS Counselling 2026-27 | NEET UG Admission Guidance',
   description:
     'Looking for BAMS counselling? Get expert guidance for NEET UG 2026-27 admissions, AACCC & KEA counselling, top Ayurvedic colleges, and seat allotment support.',
   keywords:
     'BAMS Counselling 2025, NEET UG BAMS, AACCC Counselling, KEA AYUSH Counselling, BAMS Admission, Ayurvedic Medical College Karnataka',
+  alternates: {
+    canonical: CANONICAL_URL,
+  },
   openGraph: {
-    title: 'NEET-UG BAMS Counselling 2025 | LearnTech',
-    description: 'Expert BAMS counselling guidance for NEET-UG 2025. AACCC & KEA counselling support.',
+    title: 'NEET-UG BAMS Counselling 2026-27 | LearnTech Edu Solutions',
+    description:
+      'Expert BAMS counselling guidance for NEET-UG 2026-27. AACCC & KEA counselling support for top Ayurvedic colleges in Karnataka.',
     type: 'website',
-    url: 'https://learntechww.com/bams-counselling-process'
-  }
+    url: CANONICAL_URL,
+    siteName: 'Learntech Edu Solutions',
+    locale: 'en_IN',
+    images: [
+      {
+        url: `${BASE_URL}/images/icons/learntech-logo.png`,
+        width: 1200,
+        height: 630,
+        alt: 'BAMS Counselling 2026-27 | Learntech Edu Solutions',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BAMS Counselling 2026-27 | NEET UG Admission Guidance',
+    description:
+      'Expert BAMS counselling for NEET-UG 2026-27. AACCC & KEA counselling support, top Ayurvedic colleges, seat allotment guidance.',
+    images: [`${BASE_URL}/images/icons/learntech-logo.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 /* ─── DATA ─── */
@@ -127,7 +156,16 @@ const orgSchema = {
   '@type': 'EducationalOrganization',
   name: 'LearnTech Edu Solutions Pvt Ltd',
   url: 'https://learntechww.com',
-  telephone: '+918022454991'
+  telephone: '+919606949066'
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://learntechww.com/' },
+    { '@type': 'ListItem', position: 2, name: 'BAMS Counselling 2026-27', item: CANONICAL_URL },
+  ],
 }
 
 /* ─── PAGE ─── */
@@ -139,6 +177,7 @@ export default function BamsCounsellingProcessPage() {
     <>
       <JsonLd schema={faqSchema} id="faq-schema" />
       <JsonLd schema={orgSchema} id="org-schema" />
+      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
 
       <div className={styles.bamsRoot}>
         <BamsNavbarClient />
@@ -166,7 +205,7 @@ export default function BamsCounsellingProcessPage() {
                     with personalized admission support.
                   </p>
                   <div style={{ marginTop: '1.5rem' }}>
-                    <a href="tel:08022454991" className={styles.heroBtn}>
+                    <a href="tel:9606949066" className={styles.heroBtn}>
                       <PhoneSvg />
                       <span>Connect with Our Experts</span>
                       <span className={styles.heroBtnArrow}>→</span>
@@ -199,7 +238,7 @@ export default function BamsCounsellingProcessPage() {
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={card.icon} alt={card.title} style={{ width: 60 }} />
                         </div>
-                        <h3 className="mb-4">{card.title}</h3>
+                        <h3>{card.title}</h3>
                         <p>{card.desc}</p>
                       </div>
                     </div>
@@ -307,7 +346,7 @@ export default function BamsCounsellingProcessPage() {
                     { num: 4, title: 'Stage 4: Choice Locking', summary: 'Once the preferred colleges have been selected, candidates must lock their choices before the deadline. After locking, the selected choices cannot be modified for that counselling round.', body: 'If a candidate does not manually lock the choices before the deadline, AACCC may automatically lock the last saved choices.' },
                     { num: 5, title: 'Stage 5: Seat Allotment', summary: 'Candidates who are not allotted a seat in one round may participate in subsequent counselling rounds, subject to AACCC eligibility rules.', body: 'seat-factors' },
                     { num: 6, title: 'Stage 6: Seat Allotment Result', summary: 'AACCC publishes the seat allotment results on its official website after completing the allotment process. Candidates can download their allotment letter and proceed with the next admission formalities if a seat has been allotted.', body: <><strong>Note:</strong> AACCC may publish a provisional result before releasing the final seat allotment result whenever required.</> },
-                    { num: 7, title: 'Stage 7: Reporting to the Allotted College', summary: 'Candidates allotted a seat must report to the respective college within the prescribed reporting period. Candidates who fail to report within the stipulated deadline may forfeit their allotted seat.', body: 'reporting-list' }
+                    { num: 7, title: 'Stage 7: Reporting to the Allotted College', summary: 'Candidates allotted a seat must report to the respective college within the prescribed reporting period. Candidates who fail to report within the stipulated deadline may forfeit their allotted seat in accordance with the applicable counselling guidelines.', body: 'reporting-list' }
                   ].map((stage, i) => (
                     <div key={stage.num} className={`${styles.stageItem} ${styles.animateOnScroll} ${i > 0 ? styles[`delay${Math.min(i, 4)}` as keyof typeof styles] || '' : ''}`}>
                       <div className={styles.stageNode}>{stage.num}</div>
@@ -408,7 +447,7 @@ export default function BamsCounsellingProcessPage() {
                 <div className={styles.miniCtaText}>
                   <h2><span style={{ fontWeight: 400, fontSize: 25 }}>From NEET UG to BAMS,</span><br />We&apos;re With You Every Step.</h2>
                 </div>
-                <a href="tel:08022454991" className={styles.miniCtaBtn} data-enquiry-trigger>
+                <a href="tel:9606949066" className={styles.miniCtaBtn} data-enquiry-trigger>
                   <i className="bi bi-telephone-fill" />
                   Enquire Now
                 </a>
@@ -499,7 +538,7 @@ export default function BamsCounsellingProcessPage() {
                     { num: 3, title: 'Stage 3: Option Entry', summary: 'Verified candidates can participate in the option entry process. The order of preferences plays an important role in determining seat allotment.', bodyTitle: 'During this stage, candidates must:', items: ['Select their preferred AYUSH colleges and courses.', 'Arrange the selected options in the order of preference.', 'Modify, add, or delete choices within the option entry period.'] },
                     { num: 4, title: 'Stage 4: Mock Seat Allotment', summary: 'Before the final allotment, KEA generally publishes a mock seat allotment based on the options entered by candidates.', bodyTitle: 'The mock allotment enables candidates to:', items: ['Understand their probable allotment.', 'Analyse their admission chances.', 'Revise their option entry before the final seat allotment.'], bodyNote: 'The mock allotment is indicative in nature and does not guarantee the final allotment.' },
                     { num: 5, title: 'Stage 5: Final Seat Allotment', summary: 'Following the option entry period, KEA publishes the final seat allotment results. Candidates can download their allotment letter through the KEA portal.', bodyTitle: 'Seat allotment is based on factors such as:', items: ['NEET UG Rank', 'Candidate Category', 'Reservation Policy', 'Availability of Seats', 'Order of Preferences'] },
-                    { num: 6, title: 'Stage 6: Post Allotment Process', summary: 'Candidates allotted a seat must complete the admission formalities within the prescribed deadline. Failure to complete the required formalities within the specified timeline may result in cancellation of the allotted seat.', bodyTitle: 'The process in this stage includes:', items: ['Selecting the appropriate admission option as notified by KEA.', 'Payment of the prescribed fees.', 'Reporting to the allotted college.', 'Completion of document verification and admission formalities at the institute.'], bodyNote: 'Note: KEA follows a structured seat allotment methodology based on merit, reservation policies, category wise seat availability, and candidate preferences.' }
+                    { num: 6, title: 'Stage 6: Post Allotment Process', summary: 'Candidates allotted a seat must complete the admission formalities within the prescribed deadline. Failure to complete the required formalities within the specified timeline may result in cancellation of the allotted seat.', bodyTitle: 'The process in this stage includes:', items: ['Selecting the appropriate admission option as notified by KEA.', 'Payment of the prescribed fees.', 'Reporting to the allotted college.', 'Completion of document verification and admission formalities at the institute.'], bodyNote: 'Note:  KEA follows a structured seat allotment methodology based on merit, reservation policies, category wise seat availability, and candidate preferences. The detailed allotment procedure is published in the official UGNEET Information Bulletin for the respective admission year.' }
                   ].map((stage, i) => (
                     <div key={stage.num} className={`${styles.stageItem} ${styles.animateOnScroll} ${i > 0 ? styles[`delay${Math.min(i, 4)}` as keyof typeof styles] || '' : ''}`}>
                       <div className={`${styles.stageNode} ${styles.stageNodeGold}`}>{stage.num}</div>
@@ -530,7 +569,7 @@ export default function BamsCounsellingProcessPage() {
             <section className={`${styles.bamsSection} ${styles.docsSection}`}>
               <div className="container">
                 <h2 className={styles.docsTitle}>BAMS Counselling Documents Required for 2026</h2>
-                <p className="text-center">Candidates participating in the BAMS counselling process should keep the following original documents and a few sets of self attested photocopies ready for verification and admission.</p>
+                <p className="text-left text-md-center">Candidates participating in the BAMS counselling process should keep the following original documents and a few sets of self attested photocopies ready for verification and admission.</p>
                 <div className={styles.docsGrid} id="docsGrid">
                   {DOCUMENTS.map((doc, i) => (
                     <div key={i} className={styles.docItem} style={{ '--i': i } as React.CSSProperties} data-doc-item>
@@ -617,7 +656,7 @@ export default function BamsCounsellingProcessPage() {
               <div className={styles.ctaContent}>
                 <h2>Secure Your BAMS Seat With Expert NEET UG Counselling</h2>
                 <div className={styles.finalActions}>
-                  <a href="tel:08022454991" className={styles.finalActionsBtn} data-enquiry-trigger>Enquire Now</a>
+                  <a href="tel:9606949066" className={styles.finalActionsBtn} data-enquiry-trigger>Enquire Now</a>
                 </div>
               </div>
             </section>
