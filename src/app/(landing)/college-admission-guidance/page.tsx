@@ -263,14 +263,7 @@ export const metadata = {
 /* ─── Page (Server Component) ────────────────────────────────── */
 export default function Page() {
   /* JSON-LD Schemas */
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'BAMS Counselling Process', item: CANONICAL },
-    ],
-  }
+
 
   const organizationSchema = {
     '@context': 'https://schema.org',
@@ -329,7 +322,7 @@ export default function Page() {
   return (
     <>
       {/* JSON-LD — server rendered, XSS safe */}
-      <JsonLd id='bams-breadcrumb-schema' schema={breadcrumbSchema} />
+
       <JsonLd id='bams-org-schema' schema={organizationSchema} />
       <JsonLd id='bams-faq-schema' schema={faqSchema} />
 

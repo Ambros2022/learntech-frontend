@@ -159,14 +159,7 @@ const orgSchema = {
   telephone: '+919606949066'
 }
 
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://learntechww.com/' },
-    { '@type': 'ListItem', position: 2, name: 'BAMS Counselling 2026-27', item: CANONICAL_URL },
-  ],
-}
+
 
 /* ─── PAGE ─── */
 export default function BamsCounsellingProcessPage() {
@@ -177,7 +170,7 @@ export default function BamsCounsellingProcessPage() {
     <>
       <JsonLd schema={faqSchema} id="faq-schema" />
       <JsonLd schema={orgSchema} id="org-schema" />
-      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+
 
       <div className={styles.bamsRoot}>
         <BamsNavbarClient />

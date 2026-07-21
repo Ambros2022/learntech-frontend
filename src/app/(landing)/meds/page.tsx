@@ -52,28 +52,11 @@ export async function generateMetadata() {
 export default async function Page() {
   const pagedata = await getPageData('meds')
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org/',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: `${BASE_URL}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Medical Edu Studio',
-        item: `${BASE_URL}${PAGE_PATH}`,
-      },
-    ],
-  }
+
 
   return (
     <>
-      <JsonLd id="meds-breadcrumb-schema" schema={breadcrumbSchema} />
+
       <MedicalEduStudioPage pagedata={pagedata} />
     </>
   )

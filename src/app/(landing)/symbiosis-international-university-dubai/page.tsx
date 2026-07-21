@@ -222,15 +222,6 @@ export async function generateMetadata() {
 
 /* ─── Page (Server Component) ─── */
 export default function Page() {
-  /* JSON-LD Schemas */
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Symbiosis International University Dubai', item: `${BASE_URL}${PAGE_PATH}` },
-    ],
-  }
 
   const universitySchema = {
     '@context': 'https://schema.org',
@@ -260,7 +251,7 @@ export default function Page() {
 
   return (
     <>
-      <JsonLd id='sym-breadcrumb-schema' schema={breadcrumbSchema} />
+
       <JsonLd id='sym-university-schema' schema={universitySchema} />
       <JsonLd id='sym-faq-schema' schema={faqSchema} />
 
