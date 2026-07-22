@@ -109,7 +109,15 @@ export default function Homepage({ banners, news, studyAbroad, latestNews, exper
       </AnimateOnScroll>
 
       <AnimateOnScroll variant='fade-up' delay={0.05}>
-        <LazyExploreSection />
+        {/* H1 is server-rendered for SEO; interactive tabs/cards are client-lazy */}
+        <section className='exploreCon'>
+          <div className='container py-4 py-md-5'>
+            <h1 className='fw-bold text-blue text-center mb-4 h2sizeadded'>
+              Discover Colleges, Courses and Exams that Matches with Your Aspirations
+            </h1>
+            <LazyExploreSection />
+          </div>
+        </section>
       </AnimateOnScroll>
       <AnimateOnScroll variant='fade-up' delay={0.05}>
         <StudyAbroadSection
