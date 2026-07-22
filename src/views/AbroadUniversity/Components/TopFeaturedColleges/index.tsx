@@ -25,7 +25,7 @@ export default async function TopFeaturedColleges({ countryId, countrySlug, coun
         </h2>
         <ul aria-hidden="true" style={clipRect}>
           {colleges.map((c: any) => (
-            <li key={c.id}><a href={`/${countrySlug}/${c.id}/${c.slug}`}>{c.name}</a></li>
+            <li key={c.id}><a href={`/${countrySlug}/${c.id}/${c.slug}`} tabIndex={-1}>{c.name}</a></li>
           ))}
         </ul>
         <LazyAbroadCarousel colleges={colleges} countrySlug={countrySlug} />

@@ -77,7 +77,7 @@ export default function ExpertEnquiryFormSchool({ collegeName }: Props) {
           {errors.email && <div className="error text-danger">{errors.email.message}</div>}
         </div>
         <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-          <select {...register('course')} className="form-control custom-select-bold-arrow">
+          <select {...register('course')} aria-label="Select Grade" className="form-control custom-select-bold-arrow">
             <option value="">Select Grade</option>
             {GRADES.map(g => <option key={g} value={g}>{g}</option>)}
           </select>

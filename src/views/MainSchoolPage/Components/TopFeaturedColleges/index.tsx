@@ -18,7 +18,7 @@ export default async function FeaturedBlogSection() {
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">Related Blogs</h2>
         <ul aria-hidden="true" style={clipRect}>
           {blogs.map((b: any) => (
-            <li key={b.id}><a href={`/blog/${b.id}/${b.slug}`}>{b.name}</a></li>
+            <li key={b.id}><a href={`/blog/${b.id}/${b.slug}`} tabIndex={-1}>{b.name}</a></li>
           ))}
         </ul>
         <LazyBlogCarousel blogs={blogs} />

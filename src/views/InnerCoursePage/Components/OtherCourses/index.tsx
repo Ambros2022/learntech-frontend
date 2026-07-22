@@ -19,7 +19,7 @@ export default function OtherCourses({ streams }: { streams: any[] }) {
         <h3 className='fw-bold text-blue pt-5 ps-0 ps-md-5 text-center text-md-start'>Other Courses</h3>
         <ul aria-hidden="true" style={clipRect}>
           {streams.map(s => (
-            <li key={s.id}><a href={`/course/${s.id}/${s.slug}`}>{s.name}</a></li>
+            <li key={s.id}><a href={`/course/${s.id}/${s.slug}`} tabIndex={-1}>{s.name}</a></li>
           ))}
         </ul>
         <div className={`carouselCardsCon px-5 pt-4 pb-5 position-relative ${styles.wrap}`} style={{ zIndex: 2 }}>

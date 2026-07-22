@@ -1,7 +1,6 @@
 'use client'
 
-// Native range input replacing @material-ui/core/Slider
-// MUI v4 uses findDOMNode which was removed in React 18 — native APIs only per CLAUDE.md
+
 
 interface DiscreteSliderLabelProps {
     ariaLabel: string;

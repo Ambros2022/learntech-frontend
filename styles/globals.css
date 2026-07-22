@@ -4,22 +4,7 @@
     --bs-body-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   }
 
-  .skip-to-content {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    z-index: 9999;
-    padding: 8px 16px;
-    background: #274896;
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    transition: top 0.2s;
-  }
-
-  .skip-to-content:focus {
-    top: 0;
-  }
+  
 
   /* NProgress bar — override default red with brand blue */
   #nprogress .bar {
@@ -63,25 +48,10 @@
     padding: 0;
   }
 
-  .css-z0juvp-MuiTablePagination-root .MuiTablePagination-selectLabel {
-    display: block;
-    margin-bottom: 0px !important;
-  }
-
-  .MuiToolbar-root .MuiToolbar-gutters .MuiToolbar-regular .MuiTablePagination-toolbar .css-1iu2446-MuiToolbar-root-MuiTablePagination-toolbar p {
-    margin-bottom: 0px !important;
-    margin-top: 0px !important;
-  }
-
-  .css-lrt3ob-MuiDataGrid-footerContainer .MuiTablePagination-displayedRows,
-  .css-lrt3ob-MuiDataGrid-footerContainer .MuiTablePagination-selectLabel {
-    color: rgba(47, 43, 61, 0.78);
-    margin-bottom: 0px !important;
-  }
 
   .bannerFormSec .col-md-5 {
     min-height: 400px;
-    /* Or based on your design */
+  
   }
 
   .navbar {
@@ -212,9 +182,7 @@
     filter: invert(21%) sepia(99%) saturate(6299%) hue-rotate(2deg) brightness(117%) contrast(129%);
   }
 
-  .modal-open .page-content {
-    pointer-events: none;
-  }
+
 
   nav a {
     color: black !important;
@@ -238,12 +206,6 @@
     position: relative !important;
   }
 
-  /* 
-  .carousel-item {
-    width: 100%;
-    height: 600px;
-    overflow: hidden;
-  } */
 
   .bg-formClr {
     background-color: rgba(0, 0, 0, 0.8) !important;

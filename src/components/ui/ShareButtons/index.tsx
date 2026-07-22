@@ -22,7 +22,7 @@ type Props = {
   className?: string
 }
 
-export function buildShareLinks(url: string, title?: string) {
+function buildShareLinks(url: string, title?: string) {
   const u = encodeURIComponent(url)
   const t = encodeURIComponent(title || '')
   return [

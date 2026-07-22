@@ -21,7 +21,7 @@ export default async function TopUniversity({ data }: { data: any }) {
       <div className='position-relative topUniCardCon container pb-5'>
         <ul aria-hidden="true" style={clipRect}>
           {colleges.map((c: any) => (
-            <li key={c.id}><a href={`/${data?.slug}/${c.id}/${c.slug}`}>{c.name}</a></li>
+            <li key={c.id}><a href={`/${data?.slug}/${c.id}/${c.slug}`} tabIndex={-1}>{c.name}</a></li>
           ))}
         </ul>
         <LazyAbroadCarousel colleges={colleges} countrySlug={data?.slug} />

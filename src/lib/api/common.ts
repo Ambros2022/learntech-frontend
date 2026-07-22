@@ -565,7 +565,7 @@ export const getNewsSectionBanner = cache(async () => {
 // NAVIGATION (header dropdowns — fetched server-side in (main)/layout.tsx)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const getStates = cache(async () => {
+const getStates = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/states/get?page=1&size=500&country_id=204`,
     { tags: ['nav-states'] },
@@ -573,7 +573,7 @@ export const getStates = cache(async () => {
   return json?.data ?? []
 })
 
-export const getNavCourses = cache(async () => {
+const getNavCourses = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/stream/get?page=1&size=100&orderby=asc&columnname=listing_order`,
     { tags: ['nav-courses'] },
@@ -581,7 +581,7 @@ export const getNavCourses = cache(async () => {
   return json?.data ?? []
 })
 
-export const getNavExams = cache(async () => {
+const getNavExams = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/stream_exams/get?page=1&size=100`,
     { tags: ['nav-exams'] },
@@ -589,7 +589,7 @@ export const getNavExams = cache(async () => {
   return json?.data ?? []
 })
 
-export const getNavCountries = cache(async () => {
+const getNavCountries = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/abroadpages/get?page=1&size=15`,
     { tags: ['nav-countries'] },
@@ -597,7 +597,7 @@ export const getNavCountries = cache(async () => {
   return json?.data ?? []
 })
 
-export const getNavNews = cache(async () => {
+const getNavNews = cache(async () => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/news/get?page=1&size=4&country_id=204&columnname=created_at&orderby=desc`,
     { tags: ['news'] },
