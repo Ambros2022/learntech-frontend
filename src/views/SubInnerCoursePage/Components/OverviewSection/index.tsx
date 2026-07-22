@@ -84,7 +84,7 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
                           />
                         </div>
                         <div className="col-8 ps-2 text-start">
-                          <h6 className='text-start text-black fw-bold mb-0 small'>{val.name}</h6>
+                          <h6 className='text-start text-black fw-bold mb-0 '>{val.name}</h6>
                         </div>
                       </div>
                     </div>
@@ -117,7 +117,7 @@ export default function OverviewSection({ data, colleges, exams }: Props) {
                           />
                         </div>
                         <div className="col-8 ps-2 text-start">
-                          <h6 className='m-0 text-start fw-bold text-black small'>
+                          <h6 className='m-0 text-start fw-bold text-black '>
                             {exam.exam_title}
                           </h6>
                         </div>
