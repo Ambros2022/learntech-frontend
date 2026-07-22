@@ -243,10 +243,6 @@ export const LazyContactForm404 = dynamic(
   { ssr: false, loading: () => <FormSkeleton /> },
 )
 
-export const LazyEditorEnquiryForm = dynamic(
-  () => import('src/@core/components/popup/Editor/Editorform'),
-  { ssr: false, loading: () => <FormSkeleton /> },
-)
 
 export const LazyAbroadEnquiryForm = dynamic(
   () => import('src/@core/components/popup/AbroadEnquiryForm'),
@@ -367,10 +363,6 @@ export const LazyGlobalEnquiryFormBrochure = dynamic(
 // EMBLA CAROUSELS
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const LazyEmblaCarousel = dynamic(
-  () => import('src/components/ui/Embla/EmblaCarousel'),
-  { ssr: false, loading: () => <SectionSkeleton height='240px' /> },
-)
 
 export const LazyEmblaTabCarousel = dynamic(
   () => import('src/components/ui/Embla/EmblaTabCarousel'),
@@ -432,10 +424,6 @@ export const LazyExamAlertButton = dynamic(
   { ssr: false, loading: () => <button className="btn alertExamBtn">Get Alert</button> },
 )
 
-export const LazyNewsLinkCarouselClient = dynamic(
-  () => import('src/views/InnerExamPage/Components/NewsLinkSection/NewsLinkCarouselClient'),
-  { ssr: false, loading: () => <div style={{ height: 88 }} /> },
-)
 
 export const LazyUpcomingExams = dynamic(
   () => import('src/views/MainExamPage/Components/UpcomingExamsSec'),

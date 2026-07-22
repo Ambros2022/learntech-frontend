@@ -19,7 +19,7 @@ export type handelhandelResetPasswordParams = {
   newPassword: string
 }
 
-export type UserDataType = {
+type UserDataType = {
   token(arg0: string, token: any, arg2: { expires: number }): unknown
   id: number
   role: string

@@ -22,7 +22,7 @@ export default async function PopularCourses() {
         <ul aria-hidden="true" style={clipRect}>
           {courses.map((c: any) => (
             <li key={c.id}>
-              <a href={`/course/${c.streams?.id}/${c.streams?.slug}/${c.slug}`}>{c.short_name}</a>
+              <a href={`/course/${c.streams?.id}/${c.streams?.slug}/${c.slug}`} tabIndex={-1}>{c.short_name}</a>
             </li>
           ))}
         </ul>

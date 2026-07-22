@@ -23,6 +23,7 @@ interface EmblaCarouselProps {
   leftArrowIcon?: React.ReactNode;
   rightArrowIcon?: React.ReactNode;
   arrowClassName?: string;
+  containerRole?: string;
 }
 
 export default function EmblaCarousel({
@@ -43,6 +44,7 @@ export default function EmblaCarousel({
   leftArrowIcon = "❮",
   rightArrowIcon = "❯",
   arrowClassName = "",
+  containerRole,
 }: EmblaCarouselProps) {
   const isTabs = variant === "tabs";
 
@@ -110,7 +112,7 @@ export default function EmblaCarousel({
       )}
 
       <div className={styles.embla__viewport} ref={emblaRef}>
-        <div className={styles.embla__container}>
+        <div className={styles.embla__container} role={containerRole}>
           {children.map((child, idx) => (
             <div
               key={idx}
@@ -119,6 +121,7 @@ export default function EmblaCarousel({
                 flex: `0 0 ${100 / slidesToShow}%`,
                 ...(slidePadding !== undefined ? { padding: `0 ${slidePadding}px` } : {}),
               }}
+              role={containerRole === 'tablist' ? 'presentation' : undefined}
             >
               {child}
             </div>

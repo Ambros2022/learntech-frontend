@@ -129,7 +129,7 @@ export default function ExpertEnquiryForm({ placeholder = 'Stream', collegeName,
         </div>
 
         <div className="col-lg-3 col-md-6 mb-3 px-xl-4 px-lg-3 px-md-5">
-          <select {...register('course')} className="form-control custom-select-bold-arrow">
+          <select {...register('course')} aria-label={`Select ${placeholder}`} className="form-control custom-select-bold-arrow">
             <option value="">Select {placeholder}</option>
             {streams.map(s => (
               <option key={s.id} value={s.name}>{s.name}</option>

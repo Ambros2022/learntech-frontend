@@ -17,7 +17,7 @@ export default async function FeaturedSchoolSection() {
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">Top Featured Schools</h2>
         <ul aria-hidden="true" style={clipRect}>
           {schools.map((s: any) => (
-            <li key={s.id}><a href={`/school/${s.id}/${s.slug}`}>{s.name}</a></li>
+            <li key={s.id}><a href={`/school/${s.id}/${s.slug}`} tabIndex={-1}>{s.name}</a></li>
           ))}
         </ul>
         <LazySchoolsCarousel schools={schools} />

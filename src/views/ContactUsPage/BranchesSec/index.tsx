@@ -40,7 +40,7 @@ const BranchesSec = () => {
         <ul className="visually-hidden" aria-hidden="true">
           {branchData.map((branch, i) => (
             <li key={i}>
-              <a href={branch.addressUrl} target="_blank" rel="noreferrer">
+              <a href={branch.addressUrl} target="_blank" rel="noreferrer" tabIndex={-1}>
                 {branch.name} — {branch.address}
               </a>
             </li>

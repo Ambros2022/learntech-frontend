@@ -11,7 +11,7 @@ export function setDefaultHeader(key: string, value: string) {
   defaultHeaders[key] = value;
 }
 
-export function removeDefaultHeader(key: string) {
+function removeDefaultHeader(key: string) {
   delete defaultHeaders[key];
 }
 
