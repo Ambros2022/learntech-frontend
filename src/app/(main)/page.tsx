@@ -12,16 +12,16 @@ import {
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
 
 export const metadata = {
-  title: 'Learntech Edu Solutions | Best Education Consultancy in Bangalore',
+  title: 'Learntech Edu Solutions | Admissions Across India & Abroad',
   description:
-    'Discover top colleges, courses and career opportunities across India. Get expert admission guidance from Learntech Edu Solutions — trusted education consultants in Bangalore.',
+    'Learntech Edu Solutions helps students find the right universities, colleges, and courses across Karnataka, India, and abroad through expert, free admission counselling.',
   alternates: {
     canonical: `${BASE_URL}/`,
   },
   openGraph: {
-    title: 'Learntech Edu Solutions | Best Education Consultancy in Bangalore',
+    title: 'Learntech Edu Solutions | Admissions Across India & Abroad',
     description:
-      'Discover top colleges, courses and career opportunities across India. Get expert admission guidance from Learntech Edu Solutions.',
+      'Learntech Edu Solutions helps students find the right universities, colleges, and courses across Karnataka, India, and abroad through expert, free admission counselling.',
     url: `${BASE_URL}/`,
     siteName: 'Learntech Edu Solutions',
     images: [
@@ -37,9 +37,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Learntech Edu Solutions | Best Education Consultancy in Bangalore',
+    title: 'Learntech Edu Solutions | Admissions Across India & Abroad',
     description:
-      'Discover top colleges, courses and career opportunities across India.',
+      'Learntech Edu Solutions helps students find the right universities, colleges, and courses across Karnataka, India, and abroad through expert, free admission counselling.',
     images: [`${BASE_URL}/images/icons/learntech-logo.png`],
   },
 }
