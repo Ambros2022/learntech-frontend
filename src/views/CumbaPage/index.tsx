@@ -3,16 +3,15 @@ import React, { useEffect, useState, useCallback, useRef } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import Modal from 'react-bootstrap/Modal'
 import useEmblaCarousel from "embla-carousel-react";
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 import dynamic from 'next/dynamic';
 import { Field, Form, Formik, ErrorMessage } from 'formik'
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import axios from 'src/configs/axios'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
@@ -232,84 +231,7 @@ const BamsPage = () => {
 
   return (
     <section className='bams-main '>
-      <Head>
-        <title>CU Online MBA Admission 2026–27 | Chandigarh University</title>
-        <meta
-          name='description'
-          content='Apply for Chandigarh University (CU) Online MBA 2026–27. Check eligibility, fees, specializations, rankings, placements & admission process. Enquire Now!
-'
-        />
-        <meta name="robots" content="index, follow" />
-        {/* eslint-disable-next-line @next/next/no-css-tags */}
-        <link rel='stylesheet' href='/css/cumbalandingpage.css' />
-        <link rel='canonical' href='https://learntechww.com/cu-online-mba-admission ' />
 
-        <link
-          rel="preload"
-          as="image"
-          href="/images/cumba/herobanner3.webp"
-          media="(min-width: 769px)"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/cumba/mobilebanner.webp"
-          media="(max-width: 768px)"
-        />
-
-
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              mainEntity: [
-                {
-                  '@type': 'Question',
-                  name: 'Which colleges offer the best online MBA in India?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Top universities such as Chandigarh University offer an online MBA programme that provides world-class business education and helps students stay ahead of the competition.'
-                  }
-                },
-                {
-                  '@type': 'Question',
-                  name: 'What is the required academic qualification to pursue MBA online at Chandigarh University?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'To be eligible, you must have a bachelor’s degree with at least 50% marks. Graduates of recognized professional programmes like CA or ICWA are also eligible to apply.'
-                  }
-                },
-                {
-                  '@type': 'Question',
-                  name: 'Is an entrance exam compulsory for Chandigarh University Online courses MBA?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'No entrance exam is required for CU Online MBA.'
-                  }
-                },
-                {
-                  '@type': 'Question',
-                  name: 'What is Chandigarh University online MBA ranking and NAAC accreditation?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Chandigarh University is NAAC A+ accredited, UGC-approved, and ranked by NIRF and QS, ensuring top-tier academic credibility.'
-                  }
-                },
-                {
-                  '@type': 'Question',
-                  name: 'Is work experience mandatory for pursuing online MBA Chandigarh University?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Chandigarh University online MBA can be pursued by both freshers and experienced professionals.'
-                  }
-                }
-              ]
-            })
-          }}
-        />
-      </Head>
 
       <div className='text-md-start'>
         <a href='tel:09035654090' className='phone-iconphone'>

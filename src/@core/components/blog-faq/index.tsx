@@ -1,3 +1,4 @@
+﻿'use client'
 import React from "react";
 
 const FaqSec = ({ data }) => {
@@ -6,7 +7,6 @@ const FaqSec = ({ data }) => {
       <style>{`
         .faqSec {
           background-color: #fff !important;
-          font-family: 'Inter', sans-serif;
         }
 
         .faqSec .accordion-item {
@@ -77,7 +77,7 @@ const FaqSec = ({ data }) => {
                 className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
                 data-bs-parent="#faqAccordion"
               >
-                <div className="accordion-body">
+                <div className="accordion-body bs-editor-text">
                   <div dangerouslySetInnerHTML={{ __html: item.answers }} />
                 </div>
               </div>

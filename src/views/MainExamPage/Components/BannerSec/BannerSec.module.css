@@ -1,0 +1,7 @@
+/* Override the global fixed-height rules for collegeBannerCon and examBannerCon
+   so the banner shrinks naturally when the upcoming exams carousel is absent. */
+
+.bannerSection {
+  height: auto !important;
+  min-height: unset !important;
+}

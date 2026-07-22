@@ -1,220 +1,181 @@
-import React, { FC, useState } from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import axios from 'src/configs/axios';
-import { toast } from 'react-hot-toast';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
+'use client'
 
+import { useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { toast } from 'sonner'
+import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
+import { phoneSchema } from './formUtils'
 
+const API = (process.env.NEXT_PUBLIC_API_URI || '').replace(/\/+$/, '')
 
+const schema = z.object({
+  fullName: z.string().trim().min(1, 'Full Name is required'),
+  email: z.string().trim().email('Email is not valid'),
+  phone: phoneSchema,
+  d_o_b: z.string().trim().min(1, 'Date of Birth is required'),
+  jobs_position_id: z.string().min(1, 'Post Applied is required'),
+  job_location_id: z.string().min(1, 'Job Location is required'),
+  currentLocation: z.string().trim().min(1, 'Current Location is required'),
+  total_exp: z.string().trim().min(1, 'Total Experience is required'),
+})
+
+type FormValues = z.infer<typeof schema>
 
 interface Props {
-    locations: any[];
-    data: any[];
+  locations: { id: number; name: string }[]
+  data: { id: number; name: string }[]
 }
 
-const JobEnquiryForm: FC<Props> = ({ locations, data }) => {
-    const [resumeFileName, setResumeFileName] = useState('');
-    const [showPhoneInput, setShowPhoneInput] = useState(true);
+export default function JobEnquiryForm({ locations, data }: Props) {
+  const [resumeFile, setResumeFile] = useState<File | null>(null)
+  const [showPhone, setShowPhone] = useState(true)
 
-    const initialValues = {
-        fullName: '',
-        email: '',
-        phone: '',
-        d_o_b: '',
-        jobs_position_id: '',
-        job_location_id: '',
-        currentLocation: '',
-        total_exp: '',
-        resume: null,
-    };
+  const {
+    register, control, handleSubmit, reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      fullName: '', email: '', phone: '', d_o_b: '',
+      jobs_position_id: '', job_location_id: '', currentLocation: '', total_exp: '',
+    },
+  })
 
-    const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const onSubmit = async (values: FormValues) => {
+    if (!resumeFile) {
+      toast.error('Please upload resume.')
+      return
+    }
+    try {
+      toast.loading('Processing', { duration: 3000 })
+      const body = new FormData()
+      body.append('name', values.fullName)
+      body.append('email', values.email)
+      body.append('phone', values.phone)
+      body.append('d_o_b', values.d_o_b)
+      body.append('current_location', values.currentLocation)
+      body.append('total_exp', values.total_exp)
+      body.append('jobs_position_id', values.jobs_position_id)
+      body.append('job_location_id', values.job_location_id)
+      body.append('current_url', window.location.href)
+      body.append('resume', resumeFile)
 
-    const validationSchema = Yup.object().shape({
-        fullName: Yup.string().required('Full Name is required').trim(),
-        email: Yup.string().matches(emailRegExp, 'Email is not valid').required('Email is required').trim(),
-        phone: Yup.string().required('Phone Number is required'),
-        d_o_b: Yup.string().required('Date Of Birth is required').trim(),
-        jobs_position_id: Yup.string().required('Post Applied is required').trim(),
-        job_location_id: Yup.string().required('Job Location is required').trim(),
-        currentLocation: Yup.string().required('Current Location is required').trim(),
-        total_exp: Yup.string().required('Total Experience is required').trim(),
+      const res = await fetch(`${API}/api/website/addjobsenquires/get`, { method: 'POST', body })
+      toast.dismiss()
+      if (res.ok) {
+        toast.success('Thank you for submitting your details.', { duration: 5000 })
+        reset()
+        setResumeFile(null)
+        setShowPhone(false)
+        setTimeout(() => setShowPhone(true), 0)
+      } else {
+        toast.error('Error submitting form. Please try again later.')
+      }
+    } catch {
+      toast.dismiss()
+      toast.error('Error submitting form. Please try again later.')
+    }
+  }
 
-    });
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-3">
+      <div className="row mb-md-3 careerContact">
+        <div className="col-md-6">
+          <div className="mb-3">
+            <input type="text" className="form-control" placeholder="Full Name*" {...register('fullName')} />
+            {errors.fullName && <div className="text-danger">{errors.fullName.message}</div>}
+          </div>
+        </div>
+        <div className="col-md-6 careerContact">
+          <div className="mb-3">
+            <input type="email" className="form-control" placeholder="Email Id" {...register('email')} />
+            {errors.email && <div className="text-danger">{errors.email.message}</div>}
+          </div>
+        </div>
+      </div>
 
-    const handleSubmit = async (values, { resetForm }) => {
-
-        // return
-        try {
-            toast.loading('Processing', {
-                duration: 3000, // Duration in milliseconds
-            });
-            const formData = new FormData();
-            formData.append('name', values.fullName);
-            formData.append('email', values.email);
-            formData.append('phone', values.phone);
-            formData.append('d_o_b', values.d_o_b);
-            formData.append('current_location', values.currentLocation);
-            formData.append('total_exp', values.total_exp);
-            formData.append('jobs_position_id', values.jobs_position_id);
-            formData.append('job_location_id', values.job_location_id);
-            formData.append('current_url', window.location.href);
-
-            if (!values.resume) {
-                toast.dismiss();
-                toast.error('Please upload resume.');
-
-                return
-            }
-            if (values.resume) {
-                formData.append('resume', values.resume);
-            }
-            const response = await axios.post('api/website/addjobsenquires/get', formData);
-            if (response.status === 200) {
-
-                toast.success('Thank you for submitting your details.', {
-                    duration: 5000, // Duration in milliseconds
-                });
-
-                resetForm();
-                setResumeFileName('');
-                setShowPhoneInput(false);
-                setTimeout(() => setShowPhoneInput(true), 0);
-
-            }
-        } catch (error) {
-            toast.error('Error submitting form. Please try again later.');
-            console.error('Error submitting form:', error);
-        }
-    };
-
-
-    return (
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {({ setFieldValue }) => (
-                <Form className='mt-3'>
-                    <div className='row mb-md-3 careerContact'>
-                        <div className='col-md-6'>
-                            <div className='mb-3'>
-                                <Field type='text' name='fullName' className='form-control' placeholder='Full Name*' />
-                                <ErrorMessage name='fullName' component='div' className='text-danger' />
-                            </div>
-                        </div>
-                        <div className='col-md-6 careerContact'>
-                            <div className='mb-3'>
-                                <Field type='email' name='email' className='form-control' placeholder='Email Id' />
-                                <ErrorMessage name='email' component='div' className='text-danger' />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='row mb-md-3 careerContact'>
-                        <div className='col-md-6'>
-                            <div className='mb-3 Jobenquiryphoneinput'>
-                                {showPhoneInput && <PhoneInputField name="phone" />}
-                                <ErrorMessage name='phone' component='div' className='text-danger' />
-                            </div>
-                        </div>
-                        <div className='col-md-6 careerContact'>
-                            <div className='mb-3'>
-                                <Field type='text' name='d_o_b' className='form-control' placeholder='DOB: DD/MM/YY' />
-                                <ErrorMessage name='d_o_b' component='div' className='text-danger' />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='row mb-md-3 careerContact'>
-                        <div className='col-md-6'>
-                            <div style={{ position: 'relative' }}>
-                                <div className='mb-3 color-joenquiry'>
-                                    <Field as='select' name='jobs_position_id' className='form-control' placeholder='Post Applied'>
-                                        <option value=''>Position Applied</option>
-                                        {data.map(item => (
-                                            <option key={item.id} value={item.id}>{item.name}</option>
-                                        ))}
-
-                                    </Field>
-                                    <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) ' }}>
-                                        <i className="bi bi-caret-down-fill caret-down"></i>
-                                    </div>
-
-                                    <ErrorMessage name='jobs_position_id' component='div' className='text-danger' />
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-md-6'>
-                            <div style={{ position: 'relative' }}>
-                                <div className=' mb-3 color-joenquiry'>
-                                    <Field as='select' name='job_location_id' className='form-control' placeholder='Select Job Location'>
-                                        <option value=''>Job Location</option>
-                                        {locations.map(item => (
-                                            <option key={item.id} value={item.id}>{item.name}</option>
-                                        ))}
-                                    </Field>
-                                    <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) ' }}>
-                                        <i className="bi bi-caret-down-fill caret-down"></i>
-                                    </div>
-                                    <ErrorMessage name='job_location_id' component='div' className='text-danger' />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='row mb-md-3 careerContact'>
-                        <div className='col-md-6'>
-                            <div className='mb-3'>
-                                <Field
-                                    type='text'
-                                    name='currentLocation'
-                                    className='form-control'
-                                    placeholder='Current Location'
-                                />
-                                <ErrorMessage name='currentLocation' component='div' className='text-danger' />
-                            </div>
-                        </div>
-                        <div className='col-md-6'>
-                            <div className='mb-3'>
-                                <Field
-                                    type='text'
-                                    name='total_exp'
-                                    className='form-control'
-                                    placeholder='Total Experience in Years'
-                                />
-                                <ErrorMessage name='total_exp' component='div' className='text-danger' />
-                            </div>
-                        </div>
-                        <div className='col-md-12'>
-                            <div className='mb-3 jobFile'>
-                                <input
-                                    type='file'
-                                    name='resume'
-                                    accept='.pdf,.docx'
-                                    className='form-control jobFileInput'
-                                    onChange={(event) => {
-                                        const file = event.currentTarget.files ? event.currentTarget.files[0] : null;
-                                        console.log('Selected file:', file);
-                                        setFieldValue('resume', file);
-                                        setResumeFileName(file ? file.name : '');
-                                    }}
-                                />
-                                <ErrorMessage name='resume' component='div' className='text-danger' />
-                                {/* Conditional rendering of file name or placeholder */}
-                                {resumeFileName ? (
-                                    <div className='file-name'>{resumeFileName}</div>
-                                ) : (
-                                    <div className='placeholder-text'>Please Upload a valid .Pdf or .Docx File</div>
-                                )}
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className='text-center'>
-                        <button type='submit' className='btn submitBtn'>
-                            Submit
-                        </button>
-                    </div>
-                </Form>
+      <div className="row mb-md-3 careerContact">
+        <div className="col-md-6">
+          <div className="mb-3 Jobenquiryphoneinput">
+            {showPhone && (
+              <Controller name="phone" control={control} render={({ field }) => <PhoneInputField field={field} />} />
             )}
-        </Formik>
-    );
-};
+            {errors.phone && <div className="text-danger">{errors.phone.message}</div>}
+          </div>
+        </div>
+        <div className="col-md-6 careerContact">
+          <div className="mb-3">
+            <input type="text" className="form-control" placeholder="DOB: DD/MM/YY" {...register('d_o_b')} />
+            {errors.d_o_b && <div className="text-danger">{errors.d_o_b.message}</div>}
+          </div>
+        </div>
+      </div>
 
-export default JobEnquiryForm;
+      <div className="row mb-md-3 careerContact">
+        <div className="col-md-6">
+          <div style={{ position: 'relative' }}>
+            <div className="mb-3 color-joenquiry">
+              <select className="form-control" {...register('jobs_position_id')}>
+                <option value="">Position Applied</option>
+                {data.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
+              </select>
+              <div style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)' }}>
+                <i className="bi bi-caret-down-fill caret-down" />
+              </div>
+              {errors.jobs_position_id && <div className="text-danger">{errors.jobs_position_id.message}</div>}
+            </div>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div style={{ position: 'relative' }}>
+            <div className="mb-3 color-joenquiry">
+              <select className="form-control" {...register('job_location_id')}>
+                <option value="">Job Location</option>
+                {locations.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
+              </select>
+              <div style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)' }}>
+                <i className="bi bi-caret-down-fill caret-down" />
+              </div>
+              {errors.job_location_id && <div className="text-danger">{errors.job_location_id.message}</div>}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row mb-md-3 careerContact">
+        <div className="col-md-6">
+          <div className="mb-3">
+            <input type="text" className="form-control" placeholder="Current Location" {...register('currentLocation')} />
+            {errors.currentLocation && <div className="text-danger">{errors.currentLocation.message}</div>}
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="mb-3">
+            <input type="text" className="form-control" placeholder="Total Experience in Years" {...register('total_exp')} />
+            {errors.total_exp && <div className="text-danger">{errors.total_exp.message}</div>}
+          </div>
+        </div>
+        <div className="col-md-12">
+          <div className="mb-3 jobFile">
+            <input
+              type="file"
+              accept=".pdf,.docx"
+              className="form-control jobFileInput"
+              onChange={e => setResumeFile(e.currentTarget.files?.[0] ?? null)}
+            />
+            {resumeFile
+              ? <div className="file-name">{resumeFile.name}</div>
+              : <div className="placeholder-text">Please Upload a valid .Pdf or .Docx File</div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div className="text-center">
+        <button type="submit" disabled={isSubmitting} className="btn submitBtn">Submit</button>
+      </div>
+    </form>
+  )
+}

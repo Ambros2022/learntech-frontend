@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css'
+
+
+import '../../../public/css/bamslandingpage.css'
 const backgroundImageUrl = '/images/bams/Home-Banner.webp'
 const whyimg1 = '/images/bams/whyimg1.webp'
 const whyimg2 = '/images/bams/whyimg2.webp'
@@ -26,11 +28,11 @@ const Sushrutha = '/images/bams/Sushrutha.webp'
 const Yenepoya = '/images/bams/Yenepoya.webp'
 const contactbanner = '/images/bams/contactbanner.webp'
 // import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router'
+import { useRouter } from 'src/hooks/useCompatRouter'
 
 import { Field, Form, Formik } from 'formik'
 // ErrorMessage,
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import axios from 'src/configs/axios'
 
 const whatsappc = '/images/bams/whatsappc.gif'
@@ -178,18 +180,6 @@ const BamsPage = () => {
   }, [backgroundImageUrl])
   return (
     <section className='bams-main '>
-      <Head>
-        <title> BAMS Counselling 2025-26: Complete Guide for India & Karnataka</title>
-        <meta
-          name='description'
-          content=' Know all about the BAMS Counselling 2025-26 Process in India & Karnataka: BAMS Counselling Schedule, Required Documents, Top BAMS Colleges, and More. Apply Now!
-'
-        />
-        <meta name="robots" content="index, follow" />
-        {/* eslint-disable-next-line @next/next/no-css-tags */}
-        <link rel='stylesheet' href='/css/bamslandingpage.css' />
-        <link rel='canonical' href='https://learntechww.com/bams-counselling-process' />
-      </Head>
 
       <div className='text-md-start'>
         <a href='tel:09036020076' className='phone-iconphone'>

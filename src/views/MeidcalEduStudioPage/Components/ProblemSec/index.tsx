@@ -1,4 +1,4 @@
-import React from 'react'
+import Image from 'next/image'
 
 const ProblemSec = () => {
     return (
@@ -10,25 +10,25 @@ const ProblemSec = () => {
                     <div className="row">
                         <div className="col-lg-3 col-sm-6">
                             <div className='card p-3 border-0 rounded  card-hover-effect'>
-                                <img src='/images/icons/confusion.svg' className='mx-auto' alt='confusion-logo' width={150} height={150} />
+                                <Image src='/images/icons/confusion.svg' className='mx-auto' alt='confusion-logo' width={150} height={150} />
                                 <h4 className='text-center pt-2 fw-bold text-blue'>Confusion</h4>
                             </div>
                         </div>
                         <div className="col-lg-3 col-sm-6">
                             <div className='card p-3 border-0 rounded  card-hover-effect'>
-                                <img src='/images/icons/scared.svg' className='mx-auto' alt='scared-logo' width={150} height={150} />
+                                <Image src='/images/icons/scared.svg' className='mx-auto' alt='scared-logo' width={150} height={150} />
                                 <h4 className='text-center pt-2 fw-bold text-blue'>Exam Fear</h4>
                             </div>
                         </div>
                         <div className="col-lg-3 col-sm-6">
                             <div className='card p-3 border-0 rounded  card-hover-effect'>
-                                <img src='/images/icons/bullying.svg' className='mx-auto' alt='bullying-logo' width={150} height={150} />
+                                <Image src='/images/icons/bullying.svg' className='mx-auto' alt='bullying-logo' width={150} height={150} />
                                 <h4 className='text-center pt-2 fw-bold text-blue'>Lack of Guidance</h4>
                             </div>
                         </div>
                         <div className="col-lg-3 col-sm-6">
                             <div className='card p-3 border-0 rounded  card-hover-effect'>
-                                <img src='/images/icons/stress.svg' className='mx-auto' alt='scared-logo' width={150} height={150} />
+                                <Image src='/images/icons/stress.svg' className='mx-auto' alt='scared-logo' width={150} height={150} />
                                 <h4 className='text-center pt-2 fw-bold text-blue'>Stress</h4>
                             </div>
                         </div>

@@ -1,5 +1,4 @@
-import React from 'react';
-import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry';
+import { GlobalEnquiryForm } from 'src/app/components/ClientWrappers';
 
 const ExpertSec = () => {
     return (
@@ -10,7 +9,7 @@ const ExpertSec = () => {
                     <p className='text-blue rounded p-2 mb-3' style={{ display: 'inline-block', backgroundColor: 'white' }}>
                         Connect with our experts to avail admission assistance for MBBS Abroad
                     </p><br />
-                    <GlobalPopupEnquiry className='btn reqBtn btn-success2' buttonText='Request a Call Back' />
+                    <GlobalEnquiryForm className='btn reqBtn btn-success2' buttonText='Request a Call Back' />
                 </div>
             </section>
         </>

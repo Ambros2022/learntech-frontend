@@ -1,3 +1,4 @@
+﻿'use client'
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import axios from 'src/configs/axios';
@@ -37,11 +38,13 @@ const ReviewSec = ({ data }) => {
                         size: 8,
                     }
                 });
-                const { avgRating, totalReviews } = response.data.totalLikesDislikes[0];
-                const ratingCounts = response.data.ratingCounts[data.id]?.ratings;
-                setAvgRating(parseFloat(avgRating));
-                setTotalReviews(totalReviews);
-                setRatingCounts(ratingCounts);
+                const likesData = response.data.totalLikesDislikes?.[0];
+                const ratingCounts = response.data.ratingCounts?.[data.id]?.ratings;
+                if (likesData) {
+                    setAvgRating(parseFloat(likesData.avgRating));
+                    setTotalReviews(likesData.totalReviews);
+                }
+                setRatingCounts(ratingCounts ?? {});
             } catch (error) {
                 console.error('Failed to fetch page data:', error);
             }

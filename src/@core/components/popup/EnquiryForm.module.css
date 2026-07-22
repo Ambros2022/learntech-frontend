@@ -1,0 +1,11 @@
+.submitBtn {
+  background-color: #254692 !important;
+  color: white !important;
+  border-radius: 6px !important;
+}
+
+.submitBtn:hover {
+  color: #ffffff !important;
+  background-color: darkblue !important;
+  border-radius: 6px !important;
+}

@@ -1,29 +1,9 @@
-// ** React Imports
-import { ReactNode, useContext } from 'react'
+import { ReactNode } from 'react'
+import type { NavSectionTitle } from 'src/@core/layouts/types'
 
-// ** Component Imports
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-
-// ** Types
-import { NavSectionTitle } from 'src/@core/layouts/types'
-
-interface Props {
-  children: ReactNode
-  navTitle?: NavSectionTitle
-}
-
-const CanViewNavSectionTitle = (props: Props) => {
-  // ** Props
-  const { children, navTitle } = props
-
-  // ** Hook
-  const ability = useContext(AbilityContext)
-
-  if (navTitle && navTitle.auth === false) {
-    return <>{children}</>
-  } else {
-    return ability && ability.can(navTitle?.action, navTitle?.subject) ? <>{children}</> : null
-  }
-}
+// Pass-through — this site has no role-based nav gating
+const CanViewNavSectionTitle = ({ children }: { navSectionTitle: NavSectionTitle; children: ReactNode }) => (
+  <>{children}</>
+)
 
 export default CanViewNavSectionTitle

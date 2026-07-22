@@ -1,4 +1,5 @@
-import React from 'react';
+﻿import styles from "src/views/AboutUsPage/aboutUsPage.module.css";
+
 
 const Overview = () => {
     return (
@@ -6,7 +7,7 @@ const Overview = () => {
             <section className='bg-white pt-3 pb-5'>
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-4 col-xl-2 col-lg-3 d-flex flex-column aboutUsSec">
+                        <div className={`col-md-4 col-xl-2 col-lg-3 d-flex flex-column ${styles.aboutUsSec}`}>
                             <div className="d-flex align-items-start">
                                 <div className="nav flex-column gap-3 nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <button className="nav-link active" id="v-pills-who-we-are-tab" data-bs-toggle="pill" data-bs-target="#v-pills-who-we-are" type="button" role="tab" aria-controls="v-pills-who-we-are" aria-selected="true">Who We Are</button>

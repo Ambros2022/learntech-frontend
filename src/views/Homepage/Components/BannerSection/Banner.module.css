@@ -1,0 +1,263 @@
+/* Section: on desktop the images are absolute so section needs explicit min-height */
+.section {
+  min-height: 600px;
+}
+
+/* imageArea: contains the absolute-positioned images.
+   Desktop → absolute, fills section.
+   Mobile  → relative with explicit height, so bannerFormSec flows after it. */
+.imageArea {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Static first image: fills imageArea */
+.imgLink {
+  position: absolute !important;
+  inset: 0;
+  display: block;
+  height: 100% !important;
+}
+
+/* Embla carousel: overlays the static image inside imageArea */
+.embla {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.emblaContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.emblaSlide {
+  flex: 0 0 100%;
+  min-width: 0;
+  position: relative;
+  height: 600px;
+}
+
+/* ── Search input wrapper ────────────────────────────────────────────────── */
+/* Avoids globals.css: .searchSec .form-control { color:white !important }   */
+/* and: input[type='search'] { background:transparent; border:1px solid white } */
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.searchWrapper:focus-within {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  padding: 0 6px 0 12px;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #111;
+  background: transparent;
+  min-width: 0;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+@media (max-width: 767px) {
+  .searchInput {
+    font-size: 0.875rem;
+  }
+  .searchInput::placeholder {
+    font-size: 0.8125rem;
+  }
+}
+
+.clearBtn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 18px;
+  line-height: 1;
+  transition: color 0.1s;
+}
+
+.clearBtn:hover {
+  color: #333;
+}
+
+.loader {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 12px;
+  border: 2px solid #e0e0e0;
+  border-top-color: #254692;
+  border-radius: 50%;
+  animation: searchSpin 0.6s linear infinite;
+}
+
+@keyframes searchSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Search results dropdown ─────────────────────────────────────────────── */
+.searchDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  max-height: 320px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.searchDropdownItem a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212529;
+  text-decoration: none;
+  transition: background 0.1s;
+  border-bottom: 1px solid #f5f5f5;
+  gap: 8px;
+}
+
+.searchDropdownItem:last-child a {
+  border-bottom: none;
+}
+
+.searchDropdownItem a:hover {
+  background-color: #f0f4ff;
+  color: #254692;
+}
+
+.searchDropdownItem a:hover .itemArrow {
+  color: #254692;
+}
+
+.itemName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemType {
+  flex-shrink: 0;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #f0f0f0;
+  color: #666;
+  text-transform: capitalize;
+}
+
+.itemArrow {
+  flex-shrink: 0;
+  color: #aaa;
+  transition: color 0.1s;
+}
+
+.searchNoResults {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Dot indicators */
+.dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s;
+}
+
+.dotActive {
+  background: #fff;
+}
+
+/* Mobile: imageArea becomes relative (gives flow height), section shrinks to fit content.
+   :global overrides the globals.css top:-15% that was designed for the old absolute layout. */
+@media (min-width: 650px) and (max-width: 767px) {
+  .section    { min-height: 0; }
+  .imageArea  { position: relative; height: 800px; }
+  .emblaSlide { height: 800px; }
+  :global(.bannerFormSec) { top: 0 !important; }
+}
+
+@media (min-width: 426px) and (max-width: 649px) {
+  .section    { min-height: 0; }
+  .imageArea  { position: relative; height: 750px; }
+  .emblaSlide { height: 750px; }
+  :global(.bannerFormSec) { top: 0 !important; }
+}
+
+@media (max-width: 425px) {
+  .section    { min-height: 0; }
+  .imageArea  { position: relative; height: 160px; }
+  .emblaSlide { height: 160px; }
+  :global(.bannerFormSec) { top: 0 !important; }
+}

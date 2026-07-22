@@ -1,10 +1,10 @@
-import React from 'react'
+﻿import React from 'react'
 
 const TermsText = ({ data }) => {
     return (
         <>
             <section className='bg-white pt-2 pb-5'>
-                <div className="container text-center">
+                <div className="container text-center bs-editor-text">
                     <h2 className='text-blue fw-bold w-100 mt-2'>Disclaimer
                     </h2>
                     {/* <div className="d-flex justify-content-center w-100"> */}

@@ -1,85 +1,56 @@
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
-import { useField } from 'formik';
+'use client'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
-const PhoneInputField = ({ name, country: defaultCountry = 'in', ...props }: { name: string; country?: string }) => {
-  const [field, , helpers] = useField({ name, ...props });
+interface RHFProps {
+  field: { value: string; onChange: (v: string) => void }
+  name?: never
+  country?: string
+}
 
-  const formatPhoneNumber = (phoneNumber: string, country: any) => {
-    const dialCode = country.dialCode;
-    const numberWithoutDialCode = phoneNumber.replace(new RegExp("^" + dialCode), "");
+interface FormikProps {
+  name: string
+  field?: never
+  country?: string
+}
 
-    if (!numberWithoutDialCode || numberWithoutDialCode.trim() === "") {
-      return ""; // Empty → let Yup required() handle it
-    }
+type Props = RHFProps | FormikProps
 
-    // Special formatting for India
-    if (dialCode === "91") {
-      const formattedNumber = numberWithoutDialCode.replace(/^(\d{3})(\d{3})(\d{4})$/, "$1$2$3");
-      return `+${dialCode}-${formattedNumber}`;
-    }
+const format = (phone: string, meta: { dialCode: string }) => {
+  const digits = phone.replace(new RegExp('^' + meta.dialCode), '')
+  if (!digits.trim()) return ''
+  return `+${meta.dialCode}-${digits}`
+}
 
-    // Default: return as +<dialCode><digits>
-    return `+${dialCode}-${numberWithoutDialCode}`;
-  };
+const PhoneInputField = (props: Props) => {
+  if (props.field) {
+    const { field, country = 'in' } = props
+    return (
+      <PhoneInput
+        country={country}
+        value={field.value}
+        onChange={(value, meta) => field.onChange(format(value, meta as { dialCode: string }))}
+      />
+    )
+  }
+
+  // Formik path — lazy import to avoid bundling formik in RHF consumers
+  return <FormikPhoneInput name={props.name} country={props.country} />
+}
+
+// Separate component so useField only runs when inside a Formik context
+const FormikPhoneInput = ({ name, country = 'in' }: { name: string; country?: string }) => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { useField } = require('formik') as typeof import('formik')
+  const [field, , helpers] = useField({ name })
 
   return (
     <PhoneInput
-      {...field}
-      {...props}
-      country={defaultCountry}
+      country={country}
       value={field.value}
-      
-      onChange={(value, country) => {
-        const formattedPhoneNumber = formatPhoneNumber(value, country);
-        console.log(formattedPhoneNumber,"formattedPhoneNumber");
-        helpers.setValue(formattedPhoneNumber); 
-      }}
-
+      onChange={(value, meta) => helpers.setValue(format(value, meta as { dialCode: string }))}
     />
-  );
-};
+  )
+}
 
-export default PhoneInputField;
-
-
-// import PhoneInput from 'react-phone-input-2';
-// import 'react-phone-input-2/lib/style.css';
-// import { useField } from 'formik';
-
-// const PhoneInputField = ({ name, ...props }: { name: string }) => {
-//   const [field, , helpers] = useField({ name, ...props });
-
-
-//   const formatPhoneNumber = (phoneNumber: string, country: any) => {
-  
-    
-//     if (country.dialCode === "91") {
-//       const numberWithoutDialCode = phoneNumber.replace(/^91/, ""); // Remove leading "91" if present
-//       const formattedNumber = numberWithoutDialCode.replace(/^(\d{3})(\d{3})(\d{4})$/, "$1$2$3"); // Ensure only digits remain
-//       return "+" + country.dialCode + "-" + formattedNumber;
-//     } else {
-//       return "+" + phoneNumber;
-      
-//     }
-//   };
-
-//   return (
-//     <PhoneInput
-//       {...field}
-//       {...props}
-//       country={'in'}
-//       value={field.value}
-//       onChange={(value, country) => {
-//         const formattedPhoneNumber = formatPhoneNumber(value, country);
-//         console.log(formattedPhoneNumber,"formattedPhoneNumber");
-//         helpers.setValue(formattedPhoneNumber); 
-//       }}
-
-//     />
-//   );
-// };
-
-// export default PhoneInputField;
-
-
+export default PhoneInputField

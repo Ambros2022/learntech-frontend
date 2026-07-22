@@ -1,3 +1,4 @@
+﻿'use client'
 import React, { FC } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import EnquiryForm from 'src/@core/components/popup/Editor/Editorform';

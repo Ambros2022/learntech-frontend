@@ -1,0 +1,23 @@
+.btnSignUp {
+  background-color: #254692 !important;
+  color: white !important;
+}
+
+.btnSignUp:hover {
+  background-color: darkblue !important;
+  color: white !important;
+}
+
+.passwordInput input[type='text'],
+.passwordInput input[type='password'] {
+  border-right: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.eyeBtn {
+  border-left: 0 !important;
+  border-bottom: 1px solid #dee2e6 !important;
+  border-top: 1px solid #dee2e6 !important;
+  border-right: 1px solid #dee2e6 !important;
+}

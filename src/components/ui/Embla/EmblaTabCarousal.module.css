@@ -1,0 +1,83 @@
+.embla {
+  position: relative;
+  width: 100%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  padding: 15px 0;
+  margin: -15px 0;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  /* min-width:0 lets flex-basis win over non-wrapping content (prevents oversized slides) */
+  min-width: 0;
+  padding: 0 8px;
+}
+
+/* ---------- TABS ARROW LAYOUT ---------- */
+.tabsWrapper {
+  padding: 0 48px;
+}
+
+/* ---------- SIDE ARROWS ---------- */
+.sideArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 32px;
+  font-weight: bold;
+  color: #555869 !important;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sideArrow:hover {
+  color: var(--brand-navy, #254692) !important;
+}
+
+.left {
+  left: -45px;
+}
+
+.right {
+  right: -45px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .embla {
+    padding: 0 35px;
+  }
+
+  .sideArrow {
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+  }
+
+  .left {
+    left: 1px;
+  }
+
+  .right {
+    right: 1px;
+  }
+}

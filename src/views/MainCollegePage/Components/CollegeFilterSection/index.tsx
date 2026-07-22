@@ -1,11 +1,28 @@
-import React, { useCallback, useEffect,  useState } from 'react'
-import debounce from 'lodash.debounce'; // Import debounce function from lodash library
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import axios1 from 'src/configs/axios'
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
-import { useAuth } from 'src/hooks/useAuth';
+'use client'
+import React, { useCallback, useEffect, useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'src/hooks/useCompatRouter'
+import useIsMountedRef from 'src/hooks/useIsMountedRef'
+import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
+import { useAuth } from 'src/hooks/useAuth'
+
+// Native fetch helper — replaces axios. Joins base + path like axios baseURL.
+const API_BASE = (process.env.NEXT_PUBLIC_API_URI || '').replace(/\/+$/, '')
+const apiGet = async (path: string) => {
+    const res = await fetch(`${API_BASE}/${path.replace(/^\/+/, '')}`)
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    return res.json()
+}
+
+// Native debounce — replaces lodash.debounce. Trailing call after `wait` ms.
+function debounce<T extends (...args: any[]) => void>(fn: T, wait: number) {
+    let timer: ReturnType<typeof setTimeout> | null = null
+    return (...args: Parameters<T>) => {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => fn(...args), wait)
+    }
+}
 
 
 
@@ -23,14 +40,14 @@ interface College {
 
 }
 
-const CollegeCard = ({ id, slug, name, type, rating, location,  established, imageUrl }: any) => {
+const CollegeCard = ({ id, slug, name, type, rating, location, established, imageUrl }: any) => {
     return (
         <div className='col-md-10 col-lg-12 mx-auto mb-3 filtercollge-card'>
             <div className="mx-2 filterCardBorder hover-card bg-skyBlue">
                 <div className="p-2">
                     <div className="row d-flex">
                         <div className="align-content-start col-md-12 col-lg-4 col-xl-3 clgCardImg">
-                            <img width={500} height={500} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid rounded card-Image-top me-auto" alt="College Logo" style={{ objectFit: 'cover' }} />
+                            <Image width={500} height={500} src={`${process.env.NEXT_PUBLIC_IMG_URL}/${imageUrl}`} className="img-fluid rounded card-Image-top me-auto" alt="College Logo" style={{ objectFit: 'cover' }} loading='lazy' />
                         </div>
                         <div className="col-md-12 col-lg-8 col-xl-9">
                             <div className="row">
@@ -40,14 +57,16 @@ const CollegeCard = ({ id, slug, name, type, rating, location,  established, ima
                                     </div>
                                     <div className="card-text text-black">
                                         <p className="mb-3 text-truncate"><i className='bi bi-geo-alt-fill text-danger me-1 fs-5'></i>{`${location}`}</p>
-                                        <p className="mb-3">
+                                        <div className="mb-3">
                                             <div className='d-flex justify-content-md-start justify-content-start flex-md-row flex-row'>
-                                                <span className='align-self-center me-auto'><img src='/images/icons/calendor-filled.png' width={20} height={20} className='me-1' alt='calendor Icon' />
+                                                <span className='align-self-center me-auto'><Image src='/images/icons/calendor-filled.png' width={20} height={20} className='me-1'
+                                                    loading='lazy'
+                                                    alt='calendor Icon' />
                                                     Est. Year {established}</span><span className='me-auto align-self-center'>
                                                     <button className='ms-2 mt-md-0 mt-0 mt-md-3 btn typeBtn'>{type}</button>
-                                                </span>
+                                                  </span>
                                             </div>
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="pt-2 col-md-12 col-xl-3 mb-lg-3 mb-3 mb-md-0 col-lg-12 text-end">
@@ -168,10 +187,10 @@ function CollegeFilterSection() {
 
     const getPromobanner = useCallback(async () => {
         try {
-            const response = await axios1.get('api/website/banner/get?promo_banner=All_college_page');
+            const json = await apiGet('api/website/banner/get?promo_banner=All_college_page');
             if (isMountedRef.current) {
 
-                setPromoban(response.data.data);
+                setPromoban(json.data);
             }
         } catch (error) {
             console.error('Failed to fetch trending courses:', error);
@@ -180,12 +199,9 @@ function CollegeFilterSection() {
 
     const getstreamdata = useCallback(async () => {
         try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get(`/api/website/stream/get?size=${roleparams['size']}`);
-            if (response.data.status === 1) {
-                const streamData = response.data.data.map((stream: any) => ({
+            const json = await apiGet('api/website/stream/get?size=10000');
+            if (json.status === 1) {
+                const streamData = json.data.map((stream: any) => ({
                     label: stream.name,
                     value: stream.id.toString()
                 }));
@@ -201,12 +217,9 @@ function CollegeFilterSection() {
 
     const getcoursesdata = useCallback(async () => {
         try {
-            const roleparams: any = {};
-            roleparams['page'] = 1;
-            roleparams['size'] = 10000;
-            const response = await axios1.get('api/website/generalcourse/get');
-            if (response.data.status === 1) {
-                const courseData = response.data.data.map((course: any) => ({
+            const json = await apiGet('api/website/generalcourse/get');
+            if (json.status === 1) {
+                const courseData = json.data.map((course: any) => ({
                     label: course.short_name,
                     value: course.id.toString()
                 }));
@@ -222,10 +235,10 @@ function CollegeFilterSection() {
 
     const fetchStatesData = useCallback(async () => {
         try {
-            const response = await axios1.get('api/website/states/get?page=1&size=50&country_id=204');
-            if (response.data.status === 1) {
+            const json = await apiGet('api/website/states/get?page=1&size=50&country_id=204');
+            if (json.status === 1) {
                 const arrcity: any = [];
-                const statesData = response.data.data.map((state: any) => ({
+                const statesData = json.data.map((state: any) => ({
                     label: state.name,
                     value: state.id.toString(),
                     cities: state.city.map((city: any) => {
@@ -252,24 +265,24 @@ function CollegeFilterSection() {
 
     const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[], cityIds?: string[]) => {
         try {
-            const params: any = {
-                page: 1,
-                size: 10000,
-                country_id: 204,
+            const sp = new URLSearchParams({
+                page: '1',
+                size: '10000',
+                country_id: '204',
                 type: 'college',
+                orderby: 'asc',
+                columnname: 'listing_order',
+            });
 
-            };
-
-
-            if (stateIds && stateIds.length > 0) params['state_id'] = `[${stateIds.join(',')}]`;
-            if (cityIds && cityIds.length > 0) params['city_id'] = `[${cityIds.join(',')}]`;
-            if (courseIds && courseIds.length > 0) params['general_course_id'] = `[${courseIds.join(',')}]`;
-            if (streamIds && streamIds.length > 0) params['stream_id'] = `[${streamIds.join(',')}]`;
-            if (ownership) params['college_type'] = ownership;
-            if (courseType && courseType.length > 0) params['course_type'] = JSON.stringify(courseType);
-            const response = await axios1.get('api/website/colleges/get?orderby=asc&columnname=listing_order', { params });
-            setColleges(response.data.data);
-            setTotal(response.data.totalItems);
+            if (stateIds && stateIds.length > 0) sp.set('state_id', `[${stateIds.join(',')}]`);
+            if (cityIds && cityIds.length > 0) sp.set('city_id', `[${cityIds.join(',')}]`);
+            if (courseIds && courseIds.length > 0) sp.set('general_course_id', `[${courseIds.join(',')}]`);
+            if (streamIds && streamIds.length > 0) sp.set('stream_id', `[${streamIds.join(',')}]`);
+            if (ownership) ownership.forEach(v => sp.append('college_type[]', v));
+            if (courseType && courseType.length > 0) sp.set('course_type', JSON.stringify(courseType));
+            const json = await apiGet(`api/website/colleges/get?${sp.toString()}`);
+            setColleges(json.data);
+            setTotal(json.totalItems);
         } catch (err) {
             console.error(err);
         }
@@ -351,7 +364,6 @@ function CollegeFilterSection() {
     // Define a debounced version of handleCheckboxChange
     const debouncedHandleCheckboxChange = debounce((groupId: string, value: any, isChecked: boolean) => {
 
-        console.log("debounce", groupId, value, isChecked);
         const collegeFiltersSection = document.getElementById('collegeFiltersSection');
         if (collegeFiltersSection) {
             collegeFiltersSection.scrollIntoView({ behavior: 'smooth' });
@@ -392,7 +404,6 @@ function CollegeFilterSection() {
 
     const handleCheckboxChange = (groupId, value, isChecked) => {
 
-        console.log("handleCheckboxChange", groupId, value, isChecked);
         debouncedHandleCheckboxChange(groupId, value, isChecked);
         setCheckboxState(prevState => ({
             ...prevState,
@@ -449,7 +460,6 @@ function CollegeFilterSection() {
     }, [router, router.isReady]);
 
     const removeSelectedCheckbox = (groupId: string, value: string) => {
-        console.log("removeSelectedCheckbox", groupId, value)
         debouncedHandleCheckboxChange(groupId, value, false);
         setCheckboxState(prevState => ({
             ...prevState,
@@ -541,13 +551,11 @@ function CollegeFilterSection() {
         selectedCheckboxes: Record<string, string[]>;
 
     }> =
-        ({ options,  selectedCheckboxes }) => {
+        ({ options, selectedCheckboxes }) => {
 
 
 
             const handleStateButtonClick = (state: string) => {
-
-                console.log("handleStateButtonClick", state);
 
                 debouncedHandleCheckboxChange("state", state, true);
                 window.scrollTo({ top: 650, behavior: 'smooth' });
@@ -681,7 +689,7 @@ function CollegeFilterSection() {
                                         <button
                                             className="btn"
                                             onClick={() => removeSelectedCheckbox(groupId, value)}
-                                        ><img src="/images/icons/close-icon-white.png" width={18} height={18} alt='close-white' /></button>
+                                        ><Image src="/images/icons/close-icon-white.png" width={18} height={18} alt='close-white' loading='lazy' /></button>
                                     </div>
                                 ))
                             ))}
@@ -718,7 +726,8 @@ function CollegeFilterSection() {
                         <div className="card">
                             <div className="row g-0">
                                 <div className="col-md-4 addImgClg position-relative">
-                                    <img src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200} className="img-fluid rounded-start" alt="clg-img" />
+                                    <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${url}`} width={200} height={200}
+                                        className="img-fluid rounded-start" alt="clg-img" loading='lazy' />
                                     <div className="position-absolute iconsPosition">
                                     </div>
                                     <h2 className='position-absolute text-white' style={{ backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px', zIndex: '3000', top: '50%', left: '50%', color: "white" }}>Ad</h2>

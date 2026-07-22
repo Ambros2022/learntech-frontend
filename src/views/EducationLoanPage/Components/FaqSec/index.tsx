@@ -1,7 +1,7 @@
-import React from 'react';
+
+import Image from 'next/image';
 
 function FaqSec({ data }) {
- 
   return (
     <section className='bg-white faqSec pb-3'>
       <div className="container">
@@ -9,7 +9,7 @@ function FaqSec({ data }) {
         <div className="row faqImgCon">
           <div className="col-md-6 faqImgSec mb-3 rounded">
             <div className='faqImageWrapper h-100 w-100 rounded text-center'>
-              <img
+              <Image
                 src="/images/icons/FAQ-Banner.webp"
                 width={500}
                 height={500}
@@ -41,8 +41,8 @@ function FaqSec({ data }) {
                       className="accordion-collapse collapse"
                       data-bs-parent="#accordionExample"
                     >
-                      <div className="accordion-body">
-                        <div dangerouslySetInnerHTML={{ __html: item.answers }} />
+                      <div className="accordion-body bs-editor-text">
+                        <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: item.answers }} />
                       </div>
                     </div>
                   </div>

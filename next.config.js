@@ -1,14 +1,25 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  output: process.env.VERCEL ? undefined : 'standalone',
   trailingSlash: false,
   skipTrailingSlashRedirect: true,
 
   images: {
-    domains: ['localhost', 'api.learntechww.com','newapi.learntechww.com', 'learntechww.com'],
+    remotePatterns: [
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'https', hostname: 'api.learntechww.com' },
+      { protocol: 'https', hostname: 'newapi.learntechww.com' },
+      { protocol: 'https', hostname: 'learntechww.com' },
+    ],
   },
 
-  experimental: {
-    optimizeCss: true,
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap/:path.xml',
+        destination: '/sitemap/:path/sitemap.xml',
+      },
+    ]
   },
 
   async headers() {

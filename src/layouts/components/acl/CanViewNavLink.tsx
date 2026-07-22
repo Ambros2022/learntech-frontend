@@ -1,29 +1,9 @@
-// ** React Imports
-import { ReactNode, useContext } from 'react'
+import { ReactNode } from 'react'
+import type { NavLink } from 'src/@core/layouts/types'
 
-// ** Component Imports
-import { AbilityContext } from 'src/layouts/components/acl/Can'
-
-// ** Types
-import { NavLink } from 'src/@core/layouts/types'
-
-interface Props {
-  navLink?: NavLink
-  children: ReactNode
-}
-
-const CanViewNavLink = (props: Props) => {
-  // ** Props
-  const { children, navLink } = props
-
-  // ** Hook
-  const ability = useContext(AbilityContext)
-
-  if (navLink && navLink.auth === false) {
-    return <>{children}</>
-  } else {
-    return ability && ability.can(navLink?.action, navLink?.subject) ? <>{children}</> : null
-  }
-}
+// Pass-through — this site has no role-based nav gating
+const CanViewNavLink = ({ children }: { navLink: NavLink; children: ReactNode }) => (
+  <>{children}</>
+)
 
 export default CanViewNavLink

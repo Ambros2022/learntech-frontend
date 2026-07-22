@@ -1,154 +1,138 @@
-import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import axios from 'src/configs/axios';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
-import PhoneInputField from 'src/@core/components/popup/PhoneInput';
-import Link from 'next/link';
+'use client'
+import React from 'react'
+import ReadMoreContent from 'src/components/ui/ReadMoreWrapper'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { toast } from 'sonner'
+import { useRouter } from 'src/hooks/useCompatRouter'
+import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
+import Link from 'next/link'
+import { phoneSchema, submitEnquiry } from 'src/@core/components/popup/formUtils'
 
-const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Full Name is required').trim(),
-    contact: Yup.string().required('Contact Number is required').trim(),
-    email: Yup.string().email('Invalid email address').required('Email is required').trim(),
-    location: Yup.string().required('Location is required').trim(),
-    country: Yup.string().required('Preferred Country is required').trim(),
-    college: Yup.string().notRequired().trim(),
-    message: Yup.string().notRequired().trim(),
-    terms: Yup.boolean()
-        .oneOf([true], "You must accept the terms and conditions"),
-});
+const validationSchema = z.object({
+    name: z.string().trim().min(1, 'Full Name is required'),
+    contact: phoneSchema,
+    email: z.string().trim().email('Invalid email address').min(1, 'Email is required'),
+    location: z.string().trim().min(1, 'Location is required'),
+    country: z.string().trim().min(1, 'Preferred Country is required'),
+    college: z.string().trim().optional(),
+    message: z.string().trim().optional(),
+    terms: z.boolean().refine(v => v === true, 'You must accept the terms and conditions'),
+})
+
+type FormValues = z.infer<typeof validationSchema>
 
 const MedicalSec = ({ data = {} }: { data?: { meta_title?: string, top_description?: string } }) => {
-    const router = useRouter();
-    const [isExpanded, setIsExpanded] = useState(false);
-    const maxLength = 20000;
+    const router = useRouter()
 
-    const initialValues = {
-        name: '',
-        contact: '',
-        email: '',
-        location: '',
-        country: '',
-        college: '',
-        message: '',
-        terms: false,
-    };
+    const {
+        register,
+        control,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<FormValues>({
+        resolver: zodResolver(validationSchema),
+        defaultValues: {
+            name: '',
+            contact: '',
+            email: '',
+            location: '',
+            country: '',
+            college: '',
+            message: '',
+            terms: false,
+        },
+    })
 
-    const handleSubmit = async (values, { resetForm }) => {
+    const onSubmit = async (values: FormValues) => {
         try {
-            toast.loading('Processing');
-            const formData = new FormData();
-            formData.append('name', values.name);
-            formData.append('contact_number', values.contact);
-            formData.append('email', values.email);
-            formData.append('location', values.location);
-            formData.append('country', values.country);
-            formData.append('college_name', values.college || '');
-            formData.append('message', values.message || '');
-            formData.append('current_url', window.location.href);
-            const response = await axios.post('api/website/enquiry', formData);
+            toast.loading('Processing')
+            const ok = await submitEnquiry({
+                name: values.name,
+                contact_number: values.contact,
+                email: values.email,
+                location: values.location,
+                country: values.country,
+                college_name: values.college || '',
+                message: values.message || '',
+            })
 
-            if (response.status === 200) {
-                toast.dismiss();
-                toast.success('Thank you. We will get back to you.');
-                resetForm();
-                router.push('/thank-you');
+            toast.dismiss()
+            if (ok) {
+                toast.success('Thank you. We will get back to you.')
+                reset()
+                router.push('/thank-you')
+            } else {
+                toast.error('Please try again later!')
             }
         } catch (error) {
-            toast.error('Please try again later!');
-            console.error('Error submitting form:', error);
+            toast.dismiss()
+            toast.error('Please try again later!')
+            console.error('Error submitting form:', error)
         }
-    };
+    }
 
-    const toggleReadMore = () => {
-        setIsExpanded(!isExpanded);
-    };
 
-    const renderDescription = () => {
-        if (!data.top_description) return null;
-
-        if (data.top_description.length <= maxLength || isExpanded) {
-            return <div dangerouslySetInnerHTML={{ __html: data.top_description }} />;
-        }
-
-        const truncatedText = data.top_description.slice(0, maxLength) + '...';
-        return (
-            <>
-                <div dangerouslySetInnerHTML={{ __html: truncatedText }} />
-                <div className='text-center'>
-                    <button onClick={toggleReadMore} className="btn viewMoreClgBtn">Read More</button>
-                </div>
-            </>
-        );
-    };
 
     return (
         <section className='py-3 bg-white'>
             <div className="container">
                 <div className="row">
                     <div className="col-md-7 col-lg-8 col-xl-8 minehightinnercourse">
-                        {renderDescription()}
-                        {isExpanded && (
-                            <div className='text-center'>
-                                <button onClick={toggleReadMore} className="btn viewMoreClgBtn">Read Less</button>
-                            </div>
-                        )}
+                        <ReadMoreContent html={data.top_description || ''} collapsedHeight={700} />
                     </div>
                     <div className="col-md-5 col-lg-4 col-xl-4 pt-3 pt-md-0">
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                        >
-                            {() => (
-                                <Form className='bg-skyBlue mbbsAbroad rounded p-3'>
-                                    <h2 className='text-blue fw-bold text-center mb-3'>Start Your Medical Journey</h2>
-                                    <p className='text-black fw-bold text-center mb-3'>Fill This & Help Us Book a Flight for Your Successful Medical Career</p>
-                                    <div className="mb-3">
-                                        <Field type="text" className='form-control' name='name' placeholder='Full Name*' />
-                                        <ErrorMessage name="name" component="div" className="text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <PhoneInputField name='contact' />
-                                        <ErrorMessage name="contact" component="div" className="text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field type="email" className='form-control' name='email' placeholder='Email ID*' />
-                                        <ErrorMessage name="email" component="div" className="text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field type="text" className='form-control' name='location' placeholder='Location*' />
-                                        <ErrorMessage name="location" component="div" className="text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field type="text" className='form-control' name='country' placeholder='Preferred Country*' />
-                                        <ErrorMessage name="country" component="div" className="text-danger" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field type="text" className='form-control' name='college' placeholder='Preferred College' />
-                                    </div>
-                                    <div className="mb-3">
-                                        <Field as="textarea" className='form-control' name='message' placeholder='Type your message' />
-                                    </div>
-                                    <div className="mb-3 form-check">
-                                        <Field type="checkbox" name="terms" className="form-check-input border-black" id="terms" />
-                                        <label className="form-check-label" htmlFor="terms">
-                                            By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
-                                        </label>
-                                        <ErrorMessage name="terms" component="div" className="error text-danger" />
-                                    </div>
-                                    <div className="mb-3 text-center">
-                                        <button type="submit" className='btn submitBtn'>Make me a Doctor!</button>
-                                    </div>
-                                </Form>
-                            )}
-                        </Formik>
+                        <form onSubmit={handleSubmit(onSubmit)} className='bg-skyBlue mbbsAbroad rounded p-3'>
+                            <h2 className='text-blue fw-bold text-center mb-3'>Start Your Medical Journey</h2>
+                            <p className='text-black fw-bold text-center mb-3'>Fill This & Help Us Book a Flight for Your Successful Medical Career</p>
+                            <div className="mb-3">
+                                <input type="text" className='form-control' placeholder='Full Name*' {...register('name')} />
+                                {errors.name && <div className="text-danger">{errors.name.message}</div>}
+                            </div>
+                            <div className="mb-3">
+                                <Controller
+                                    name='contact'
+                                    control={control}
+                                    render={({ field }) => <PhoneInputField field={field} />}
+                                />
+                                {errors.contact && <div className="text-danger">{errors.contact.message}</div>}
+                            </div>
+                            <div className="mb-3">
+                                <input type="email" className='form-control' placeholder='Email ID*' {...register('email')} />
+                                {errors.email && <div className="text-danger">{errors.email.message}</div>}
+                            </div>
+                            <div className="mb-3">
+                                <input type="text" className='form-control' placeholder='Location*' {...register('location')} />
+                                {errors.location && <div className="text-danger">{errors.location.message}</div>}
+                            </div>
+                            <div className="mb-3">
+                                <input type="text" className='form-control' placeholder='Preferred Country*' {...register('country')} />
+                                {errors.country && <div className="text-danger">{errors.country.message}</div>}
+                            </div>
+                            <div className="mb-3">
+                                <input type="text" className='form-control' placeholder='Preferred College' {...register('college')} />
+                            </div>
+                            <div className="mb-3">
+                                <textarea className='form-control' placeholder='Type your message' {...register('message')} />
+                            </div>
+                            <div className="mb-3 form-check">
+                                <input type="checkbox" className="form-check-input border-black" id="terms" {...register('terms')} />
+                                <label className="form-check-label" htmlFor="terms">
+                                    By Clicking this, I agree to the <Link href="/terms-and-conditions" >Terms & Conditions</Link>
+                                </label>
+                                {errors.terms && <div className="error text-danger">{errors.terms.message}</div>}
+                            </div>
+                            <div className="mb-3 text-center">
+                                <button type="submit" className='btn submitBtn'>Make me a Doctor!</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default MedicalSec;
+export default MedicalSec

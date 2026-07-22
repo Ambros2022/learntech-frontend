@@ -1,0 +1,229 @@
+/* ─────────────────────────────────────────────────────────────────
+   Tab buttons  (replaces global newsBtn / blgBtn)
+   ───────────────────────────────────────────────────────────────── */
+.tabBtn {
+  min-width: 110px;
+  border-radius: 6px !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1.5px solid #254692 !important;
+  color: #254692 !important;
+  background-color: #ffffff !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tabBtn.activeTab {
+  background-color: #254692 !important;
+  color: #ffffff !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Slide wrapper  (inside Embla — replaces col-12 mb-1 inline style)
+   ───────────────────────────────────────────────────────────────── */
+.slide {
+  min-width: 0;         /* prevent embla overflow */
+  padding: 0 4px;
+  margin-bottom: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Outer link makes the whole card clickable
+   ───────────────────────────────────────────────────────────────── */
+.cardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardLink:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   newsBlosCards equivalent
+   ───────────────────────────────────────────────────────────────── */
+.cardSlide {
+  margin-right: 10px;
+}
+
+@media (max-width: 767px) {
+  .cardSlide {
+    margin: 0 10px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Inner spacing — mb-5 mx-lg-3 mx-0 equivalent
+   ───────────────────────────────────────────────────────────────── */
+.cardInner {
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 992px) {
+  .cardInner {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Card  (replaces hover-card + responsive-card globals)
+   ───────────────────────────────────────────────────────────────── */
+.card {
+  background-color: #ffffff !important;
+  background-image: url('/images/icons/Card.webp') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
+  height: auto !important;
+  min-height: 200px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+}
+
+@media (max-width: 768px) {
+  .card {
+    background-color: #ffffff !important;
+    background-size: contain !important;
+    background-position: bottom !important;
+    min-height: 309px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Card body  (replaces newsheight)
+   ───────────────────────────────────────────────────────────────── */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Typography  (replaces text-blue + Bootstrap card-title/subtitle)
+   ───────────────────────────────────────────────────────────────── */
+.cardTitle {
+  font-size: 20px !important;
+  font-weight: 700;
+  color: #254692 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 6px !important;
+}
+
+.cardDate {
+  font-size: 0.82rem;
+  color: #6c757d;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* description row */
+.cardDescRow {
+  flex: 1;
+}
+
+.cardText {
+  font-size: 16px;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 72px;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Read More  (replaces viewDetailBtn global)
+   ───────────────────────────────────────────────────────────────── */
+.readMoreBtn {
+  display: inline-block;
+  background-color: transparent !important;
+  color: #254692 !important;
+  border: 1px solid #254692 !important;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  padding: 0.375rem 0.75rem;
+  margin-top: auto;
+  align-self: flex-start;
+  transition: box-shadow 0.2s ease;
+}
+
+.readMoreBtn:hover {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 12px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Empty / loading state
+   ───────────────────────────────────────────────────────────────── */
+.emptyState {
+  text-align: center;
+  color: #fff;
+  padding: 2.5rem 0;
+  margin: 0;
+}
+
+@media (max-width: 576px) {
+  .cardTitle {
+    font-size: 18px !important;
+  }
+  .cardText {
+    font-size: 14px;
+    min-height: 63px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Carousel custom arrow styles (outline-white cards for dark bg)
+   ───────────────────────────────────────────────────────────────── */
+.carouselContainer :global(.embla-side-arrow) {
+  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  width: 32px !important;
+  height: 52px !important;
+  font-size: 24px !important;
+  color: #ffffff !important;
+}
+
+.carouselContainer :global(.embla-side-arrow):hover {
+  border-color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .carouselContainer :global(.embla-carousel-root) {
+    padding: 55px 0 0 0 !important;
+  }
+
+  .carouselContainer :global(.embla-side-arrow) {
+    top: 15px !important;
+    bottom: auto !important;
+    transform: none !important;
+    height: 32px !important;
+    font-size: 20px !important;
+    border-radius: 6px !important;
+    z-index: 10 !important;
+  }
+
+  .carouselContainer :global(.left-arrow) {
+    left: auto !important;
+    right: calc(50% + 8px) !important;
+  }
+
+  .carouselContainer :global(.right-arrow) {
+    right: auto !important;
+    left: calc(50% + 8px) !important;
+  }
+}

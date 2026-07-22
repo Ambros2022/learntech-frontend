@@ -1,0 +1,22 @@
+.card {
+  padding: 10px 6px;
+  border: none !important;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: rgba(51, 51, 51, 0.361) 0px 0px 15px !important;
+}
+
+.logoContainer {
+  position: relative;
+  width: 90px;
+  height: 40px;
+}
+
+@media (max-width: 768px) {
+  .logoContainer {
+    width: 105px;
+    height: 48px;
+  }
+}

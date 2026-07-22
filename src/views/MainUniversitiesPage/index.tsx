@@ -1,110 +1,37 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import BannerSection from './Components/BannerSection';
-import TopCollegesSection from './Components/TopCollegesSection';
-import ExpertSection from './Components/ExpertSection';
-import TopFeaturedColleges from './Components/TopFeaturedColleges';
-import CollegeFilterSection from './Components/CollegeFilterSection';
-import axios from 'src/configs/axios';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import BannerSection from './Components/BannerSection'
+import TopUniversitiesSection from './Components/TopCollegesSection'
+import ExpertSection from './Components/ExpertSection'
+import FeaturedUniversitySection from './Components/TopFeaturedColleges'
+import UniversityFilterSection from './Components/CollegeFilterSection'
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
+import JsonLd from 'src/app/components/JsonLd'
 
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '')
 
-function MainUniversitiesPage() {
-  const router = useRouter()
-  const isMountedRef = useIsMountedRef();
-  const [pagedata, setPagedata] = useState<any>();
+interface Props {
+  pagedata?: any
+}
 
-  const getPagedata = useCallback(async () => {
-    try {
-      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
-      if (isMountedRef.current) {
+export default function MainUniversitiesPage({ pagedata }: Props) {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org/',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Universities', item: `${BASE_URL}/universities` },
+    ],
+  }
 
-        setPagedata(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
-
-
-
-
-
-
-
-
-  useEffect(() => {
-    getPagedata();
-
-  }, [getPagedata,]);
   return (
     <>
-      <Head>
-        <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
-        <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-        <script type="application/ld+json">
-
-          {JSON.stringify([
-
-
-
-
-            {
-
-              "@context": "https://schema.org/",
-
-              "@type": "BreadcrumbList",
-
-              "itemListElement": [
-
-                {
-
-                  "@type": "ListItem",
-
-                  "position": 1,
-
-                  "name": "Home",
-
-                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
-
-
-
-                },
-
-                {
-
-                  "@type": "ListItem",
-
-                  "position": 2,
-
-                  "name": "Universities",
-
-                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
-
-                },
-
-
-
-              ]
-
-            }
-
-          ])}
-
-        </script>
-      </Head>
+      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
       <BannerSection />
-      <TopCollegesSection data={pagedata} />
-      <CollegeFilterSection />
-      {/* <BestCollegeSec /> */}
+      <Breadcrumb items={[{ label: 'Universities' }]} />
+      <TopUniversitiesSection data={pagedata} />
+      <UniversityFilterSection />
       <ExpertSection />
-      <TopFeaturedColleges />
+      {/* @ts-expect-error async server component */}
+      <FeaturedUniversitySection />
     </>
   )
 }
-
-export default MainUniversitiesPage;

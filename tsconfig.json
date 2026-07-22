@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": "src",
     "target": "es6",
     "lib": [
       "dom",
@@ -18,7 +17,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     // "paths": {
     //   "apexcharts": [
@@ -28,12 +27,19 @@
     //     "./node_modules/apexcharts-clevision/*"
     //   ],
     // },
-    "noImplicitAny": false // Suppress noImplicitAny errors
+    "noImplicitAny": false, // Suppress noImplicitAny errors
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
-    "src",
     "declaration.d.ts",
-    "src/middleware.ts"
+    "src",
+    "src/proxy.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

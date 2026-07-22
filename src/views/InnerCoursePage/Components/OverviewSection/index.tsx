@@ -1,6 +1,7 @@
+﻿'use client'
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import 'react-multi-carousel/lib/styles.css';
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry';
 import Link from 'next/link';
@@ -20,10 +21,10 @@ const responsive = {
 const ButtonGroup = ({ next, previous }) => (
   <div className="carousel-button-group d-flex justify-content-between gap-5 fs-2">
     <span className="fi-left" onClick={previous}>
-      <FiChevronLeft />
+      <ChevronLeft />
     </span>
     <span className="fi-right" onClick={next}>
-      <FiChevronRight />
+      <ChevronRight />
     </span>
   </div>
 );
@@ -70,7 +71,7 @@ function OverviewSection({ data, collegedata, examdata }) {
   const renderTabContent = () => tabs.map((tab) => (
     <div
       key={tab.id}
-      className={`tab-pane fade ${activeTab === tab.id ? 'show active' : ''}`}
+      className={`tab-pane bs-editor-text fade ${activeTab === tab.id ? 'show active' : ''}`}
     >
       {tab.id === 'FAQ' ? (
         <FaqSec data={data.streamfaqs} />

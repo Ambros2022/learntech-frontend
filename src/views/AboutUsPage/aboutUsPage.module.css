@@ -1,0 +1,75 @@
+  .aboutUsPageSec {
+    height: 400px;
+    background-color: #E8E8E8;
+  }
+
+  .aboutUsPageSec img {
+    height: 400px !important;
+    object-fit: cover !important;
+  }
+
+  .AdvertiseBanner {
+    height: 400px;
+  }
+
+  .AdvertiseBanner img {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .journeyVideo {
+    height: 400px !important;
+    width: 75%;
+  }
+
+  .aboutUsSec :global(.nav-link) {
+    color: black !important;
+    text-align: start !important;
+    background-color: #f6f8fb !important;
+    border: 1px solid #254692;
+  }
+
+  .aboutUsSec :global(.nav-link:hover) {
+    color: white !important;
+    background-color: #254692 !important;
+  }
+
+  .aboutUsSec :global(.nav-link.active) {
+    background-color: #254692 !important;
+    color: white !important;
+  }
+
+
+  @media (min-width:320px) and (max-width:767px) {
+
+
+    .journeyVideo {
+      height: 200px !important;
+      width: 100%;
+    }
+
+    .aboutUsPageSec {
+      height: 200px;
+    }
+
+    .aboutUsPageSec h1 {
+      font-size: 20px;
+    }
+
+    .aboutUsPageSec img {
+      height: 200px !important;
+      object-fit: cover;
+    }
+
+    .AdvertiseBanner {
+      height: 200px;
+    }
+
+    .AdvertiseBanner img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+  }
