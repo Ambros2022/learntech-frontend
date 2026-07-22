@@ -7,7 +7,7 @@ import useIsMountedRef from 'src/hooks/useIsMountedRef'
 import GlobalEnquiryForm from 'src/@core/components/popup/GlobalPopupEnquiry'
 import { useAuth } from 'src/hooks/useAuth'
 
-// Native fetch helper — replaces axios. Joins base + path like axios baseURL.
+
 const API_BASE = (process.env.NEXT_PUBLIC_API_URI || '').replace(/\/+$/, '')
 const apiGet = async (path: string) => {
     const res = await fetch(`${API_BASE}/${path.replace(/^\/+/, '')}`)

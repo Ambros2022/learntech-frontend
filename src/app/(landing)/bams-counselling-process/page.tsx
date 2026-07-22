@@ -83,18 +83,18 @@ const DOCUMENTS = [
 ]
 
 const COLLEGES = [
-  { name: "KAHER's Shri BM Kankanawadi Ayurveda Mahavidyalaya, PG Studies & Research Centre", city: 'Belagavi', img: "/images/bams/college-logos/KAHER’s Shri BM Kankanawadi Ayurveda Mahavidyalaya Post Graduate Studies and Research Centre.webp" },
-  { name: 'Yenepoya Ayurveda Medical College and Hospital', city: 'Mangalore', img: '/images/bams/college-logos/Yenepoya Ayurveda Medical College and Hospital.webp' },
-  { name: 'Amrutha Ayurvedic Medical College (AAMC)', city: 'Chitradurga', img: '/images/bams/college-logos/Amrutha Ayurvedic Medical College (AAMC).webp' },
-  { name: 'Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital & Research Centre', city: 'Bangalore', img: '/images/bams/college-logos/Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital and Research Centre (SKAMCH & RC).webp' },
-  { name: 'Sharada Ayurveda Medical College and Hospital (SAMCH)', city: 'Mangalore', img: '/images/bams/college-logos/Sharada Ayurveda Medical College and Hospital (SAMCH).webp' },
-  { name: 'Sushrutha Ayurvedic Medical College & Hospital', city: 'Bangalore', img: '/images/bams/college-logos/Sushrutha Ayurvedic Medical College & Hospital.webp' },
-  { name: 'Ashwini Ayurvedic Medical College & Research Centre', city: 'Tumkur', img: '/images/bams/college-logos/Ashwini Ayurvedic Medical College & Research Centre.webp' },
-  { name: 'SDM College of Ayurveda & Hospital', city: 'Udupi', img: '/images/bams/college-logos/SDM College of Ayurveda & Hospital.webp' },
-  { name: 'Atreya Ayurvedic Medical College, Hospital & Research Centre', city: 'Bangalore', img: '/images/bams/college-logos/Atreya Ayurvedic Medical College Hospital & Research Centre.webp' },
-  { name: 'Shri Kalidas Ayurvedic Medical College and Hospital', city: 'Badami', img: '/images/bams/college-logos/Shri Kalidas Ayurvedic Medical College and Hospital.webp' },
-  { name: 'Indian Institute of Ayurvedic Medicine & Research', city: 'Bangalore', img: '/images/bams/college-logos/Indian Institute of Ayurvedic Medicine & Research.webp' },
-  { name: 'JSS Ayurveda Medical College', city: 'Mysore', img: '/images/bams/college-logos/JSS Ayurveda Medical College.webp' },
+  { name: "KAHER's Shri BM Kankanawadi Ayurveda Mahavidyalaya, PG Studies & Research Centre", city: 'Belagavi', img: '/images/bams/college-logos/kaher-shri-bm.webp' },
+  { name: 'Yenepoya Ayurveda Medical College and Hospital', city: 'Mangalore', img: '/images/bams/college-logos/yenepoya.webp' },
+  { name: 'Amrutha Ayurvedic Medical College (AAMC)', city: 'Chitradurga', img: '/images/bams/college-logos/amrutha.webp' },
+  { name: 'Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Hospital & Research Centre', city: 'Bangalore', img: '/images/bams/college-logos/sri-kalabyraveshwara.webp' },
+  { name: 'Sharada Ayurveda Medical College and Hospital (SAMCH)', city: 'Mangalore', img: '/images/bams/college-logos/sharada.webp' },
+  { name: 'Sushrutha Ayurvedic Medical College & Hospital', city: 'Bangalore', img: '/images/bams/college-logos/sushrutha.webp' },
+  { name: 'Ashwini Ayurvedic Medical College & Research Centre', city: 'Tumkur', img: '/images/bams/college-logos/ashwini.webp' },
+  { name: 'SDM College of Ayurveda & Hospital', city: 'Udupi', img: '/images/bams/college-logos/sdm-college.webp' },
+  { name: 'Atreya Ayurvedic Medical College, Hospital & Research Centre', city: 'Bangalore', img: '/images/bams/college-logos/atreya.webp' },
+  { name: 'Shri Kalidas Ayurvedic Medical College and Hospital', city: 'Badami', img: '/images/bams/college-logos/shri-kalidas.webp' },
+  { name: 'Indian Institute of Ayurvedic Medicine & Research', city: 'Bangalore', img: '/images/bams/college-logos/indian-institute.webp' },
+  { name: 'JSS Ayurveda Medical College', city: 'Mysore', img: '/images/bams/college-logos/jss.webp' },
   { name: 'Sri Sri College of Ayurvedic Science & Research, Bangalore', city: 'Mysore', img: '/images/bams/college-logos/sscasrh-logo.png' }
 ]
 
@@ -159,14 +159,7 @@ const orgSchema = {
   telephone: '+919606949066'
 }
 
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://learntechww.com/' },
-    { '@type': 'ListItem', position: 2, name: 'BAMS Counselling 2026-27', item: CANONICAL_URL },
-  ],
-}
+
 
 /* ─── PAGE ─── */
 export default function BamsCounsellingProcessPage() {
@@ -177,7 +170,7 @@ export default function BamsCounsellingProcessPage() {
     <>
       <JsonLd schema={faqSchema} id="faq-schema" />
       <JsonLd schema={orgSchema} id="org-schema" />
-      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+
 
       <div className={styles.bamsRoot}>
         <BamsNavbarClient />

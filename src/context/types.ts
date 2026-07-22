@@ -19,7 +19,7 @@ export type handelhandelResetPasswordParams = {
   newPassword: string
 }
 
-export type UserDataType = {
+type UserDataType = {
   token(arg0: string, token: any, arg2: { expires: number }): unknown
   id: number
   role: string
@@ -32,8 +32,8 @@ export type UserDataType = {
 
 export type AuthValuesType = {
   // isAuthenticated<T>(isAuthenticated: any): [any, any]
-  VerifyemailOtp: (params: handelVerifyemailOtpParams, errorCallback?: ErrCallbackType) => Promise<void>
-  ResetPassword: (params: handelhandelResetPasswordParams, errorCallback?: ErrCallbackType) => Promise<void>
+  VerifyemailOtp: (params: handelVerifyemailOtpParams, errorCallback?: ErrCallbackType) => Promise<any>
+  ResetPassword: (params: handelhandelResetPasswordParams, errorCallback?: ErrCallbackType) => Promise<any>
   loading: boolean
   logout: () => void
   permission: any
@@ -42,7 +42,7 @@ export type AuthValuesType = {
   setLoading: (value: boolean) => void
   setUser: (value: UserDataType | null) => void
   login: (params: LoginParams, errorCallback?: ErrCallbackType) => void
-  ForgotPassword: (params: ForgotPasswordParams, errorCallback?: ErrCallbackType) => Promise<void>
+  ForgotPassword: (params: ForgotPasswordParams, errorCallback?: ErrCallbackType) => Promise<any>
   stateId: string | null
   setStateId: any
   cityId: string | null

@@ -17,12 +17,12 @@ const Examdropdown = dynamic(() => import('./exam-dropdown'), { ssr: false })
 const Abroaddropdown = dynamic(() => import('./abroad-dropdown'), { ssr: false })
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-export interface NavState { id: number; name: string; city?: any[] }
-export interface NavCourse { id: number; slug: string; name?: string }
+interface NavState { id: number; name: string; city?: any[] }
+interface NavCourse { id: number; slug: string; name?: string }
 interface ExamStream { id: number; slug: string; exam_title: string }
-export interface NavExam { id: number; name: string; examstr: { id: number; examstreams: ExamStream }[] }
-export interface NavCountry { id: number; name?: string; slug: string; country?: { name: string }; backgroundimage?: string }
-export interface NavNews { id: number; slug: string; banner_image: string; meta_description: string }
+interface NavExam { id: number; name: string; examstr: { id: number; examstreams: ExamStream }[] }
+interface NavCountry { id: number; name?: string; slug: string; country?: { name: string }; backgroundimage?: string }
+interface NavNews { id: number; slug: string; banner_image: string; meta_description: string }
 
 export interface HeaderProps {
   states?: NavState[]

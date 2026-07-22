@@ -7,7 +7,7 @@ export default async function MainLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      {/* <a href="#main-content" className="skip-to-content">Skip to main content</a> */}
+      
       <Header {...navData} />
       <main id="main-content">{children}</main>
       <Footer />

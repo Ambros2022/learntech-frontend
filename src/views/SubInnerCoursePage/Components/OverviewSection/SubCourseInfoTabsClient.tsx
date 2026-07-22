@@ -29,7 +29,7 @@ export default function SubCourseInfoTabsClient({ tabs, children }: Props) {
       <div className="row align-items-start pt-3">
         {/* Main Tab Content Column */}
         <div className="col-12 col-lg-8 pe-lg-4">
-          <div className="tab-content pt-3 bs-editor-text minehightinnercourse">
+          <div className="tab-content pt-3  minehightinnercourse">
             {active?.html && activeTab !== 'faq' && (
               <div className="minehightcoursesneew" dangerouslySetInnerHTML={{ __html: active.html }} />
             )}

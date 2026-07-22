@@ -88,8 +88,8 @@ export default function StudyAbroadClient({ countries, initialColleges, initialC
           {countries.map(country => (
             <a
               key={country.id}
-              role="tab"
-              aria-selected={activeCountry === country.id}
+              role="button"
+              aria-pressed={activeCountry === country.id}
               onClick={() => selectCountry(country.id)}
               style={{ cursor: 'pointer' }}
               className={`${activeCountry === country.id ? styles.activeCountry : ''} ${styles.navLink} text-truncate text-center`}

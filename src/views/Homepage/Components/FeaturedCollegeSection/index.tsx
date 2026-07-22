@@ -13,7 +13,7 @@ export default async function FeaturedCollegeSection({ heading = 'Featured Colle
         <h2 className="fw-bold text-blue text-center mb-4 mb-md-5">{heading}</h2>
         <ul aria-hidden="true" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' }}>
           {colleges.map((c: any) => (
-            <li key={c.id}><a href={`/college/${c.id}/${c.slug}`}>{c.name}</a></li>
+            <li key={c.id}><a href={`/college/${c.id}/${c.slug}`} tabIndex={-1}>{c.name}</a></li>
           ))}
         </ul>
         <LazyCollegeCarousel colleges={colleges} />

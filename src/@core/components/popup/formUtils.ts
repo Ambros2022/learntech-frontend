@@ -13,7 +13,7 @@ const PHONE_RULES: [RegExp, RegExp][] = [
   [/^\+977-/, /^\+977-\d{10}$/],
 ]
 
-export const isValidPhone = (val: string) => {
+const isValidPhone = (val: string) => {
   const rule = PHONE_RULES.find(([prefix]) => prefix.test(val))
   return rule ? rule[1].test(val) : false
 }

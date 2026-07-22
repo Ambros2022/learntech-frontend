@@ -9,7 +9,7 @@ import styles from './OverviewTabsClient.module.css'
 
 // ── types ──────────────────────────────────────────────────────────────────
 
-export interface ExamTabItem {
+interface ExamTabItem {
   id: string
   label: string
   content: string | null
@@ -17,7 +17,7 @@ export interface ExamTabItem {
   faqData?: { questions: string; answers: string }[]
 }
 
-export interface UpcomingExamItem {
+interface UpcomingExamItem {
   id: number
   slug: string
   title: string

@@ -19,6 +19,7 @@ interface EmblaCarouselProps {
   autoplayDelay?: number;
 
   loop?: boolean;
+  containerRole?: string;
 }
 
 export default function EmblaCarousel({
@@ -34,6 +35,7 @@ export default function EmblaCarousel({
   autoplayDelay = 3000,
 
   loop = true,
+  containerRole,
 }: EmblaCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop, align: "start" },
@@ -97,7 +99,7 @@ useEffect(() => {
   return (
     <div className={styles.embla}>
       <div className={styles.embla__viewport} ref={emblaRef}>
-        <div className={styles.embla__container}>
+        <div className={styles.embla__container} role={containerRole}>
           {children.map((child, idx) => (
             <div
               key={idx}
@@ -105,6 +107,7 @@ useEffect(() => {
               style={{
                 flex: `0 0 calc(${100 / slidesToShow}%)`,
               }}
+              role={containerRole === 'tablist' ? 'presentation' : undefined}
             >
               {child}
             </div>

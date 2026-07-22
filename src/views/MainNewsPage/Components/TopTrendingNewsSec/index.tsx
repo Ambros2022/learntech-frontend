@@ -22,7 +22,7 @@ const TopTrendingNews = ({ newsItems }: { newsItems: NewsItem[] }) => {
         <ul aria-hidden="true" style={clipRect}>
           {newsItems.map(news => (
             <li key={news.id}>
-              <a href={`/news/${news.id}/${news.slug}`}>{news.title}</a>
+              <a href={`/news/${news.id}/${news.slug}`} tabIndex={-1}>{news.title}</a>
             </li>
           ))}
         </ul>

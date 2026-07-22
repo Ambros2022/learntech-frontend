@@ -10,7 +10,7 @@
 
 import { useRouter as useNextRouter, usePathname } from 'next/navigation'
 
-export type NextRouter = ReturnType<typeof useRouter>
+type NextRouter = ReturnType<typeof useRouter>
 
 export function useRouter() {
   const router = useNextRouter()

@@ -43,24 +43,7 @@ export const metadata = {
   },
 }
 
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: `${BASE_URL}/`,
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'CU Online MBA Admission',
-      item: CANONICAL,
-    },
-  ],
-}
+
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -125,7 +108,7 @@ export default function Page() {
         href='/images/cumba/mobilebanner.webp'
         media='(max-width: 768px)'
       />
-      <JsonLd id='cumba-breadcrumb-schema' schema={breadcrumbSchema} />
+
       <JsonLd id='cumba-faq-schema' schema={faqSchema} />
       <SIUDubaiPage />
     </>

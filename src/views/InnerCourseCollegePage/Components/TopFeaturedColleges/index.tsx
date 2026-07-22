@@ -24,7 +24,7 @@ export default async function TopFeaturedColleges({ streamId, shortName }: Props
         </h2>
         <ul aria-hidden="true" style={clipRect}>
           {colleges.map((c: any) => (
-            <li key={c.id}><a href={`/college/${c.id}/${c.slug}`}>{c.name}</a></li>
+            <li key={c.id}><a href={`/college/${c.id}/${c.slug}`} tabIndex={-1}>{c.name}</a></li>
           ))}
         </ul>
         <LazyCollegeCarousel colleges={colleges} />

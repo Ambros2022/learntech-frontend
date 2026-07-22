@@ -179,7 +179,7 @@ interface ModalProps {
   onClose: () => void
 }
 
-export const BamsEnquiryModal = memo(function BamsEnquiryModal({ open, onClose }: ModalProps) {
+const BamsEnquiryModal = memo(function BamsEnquiryModal({ open, onClose }: ModalProps) {
   if (!open) return null
 
   return (
@@ -559,7 +559,7 @@ export function BamsTestimonialCarousel({ testimonials }: TestimonialCarouselPro
 /* ══════════════════════════════════════════════════════════════
    SCROLL REVEAL — IntersectionObserver, no AOS
 ══════════════════════════════════════════════════════════════ */
-export function BamsScrollReveal() {
+function BamsScrollReveal() {
   useEffect(() => {
     const reveals = document.querySelectorAll('.bams-reveal')
     const obs = new IntersectionObserver(
