@@ -1,5 +1,4 @@
 import { getPageData } from 'src/lib/api/common'
-import JsonLd from 'src/app/components/JsonLd'
 import MedicalEduStudioPage from 'src/views/MeidcalEduStudioPage'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'

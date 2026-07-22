@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 // ** React Imports
 import { createContext, useEffect, useState, ReactNode } from 'react'
 
@@ -6,11 +6,10 @@ import { createContext, useEffect, useState, ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 
-import axios1 from 'src/configs/adminaxios'
+import apiFetch, { setDefaultHeader } from 'src/configs/adminaxios'
 
 // ** Config
 import authConfig from 'src/configs/auth'
-
 
 // ** Cookies
 import Cookies from 'js-cookie';
@@ -59,10 +58,10 @@ const AuthProvider = ({ children }: Props) => {
   const [cityId, setCityId] = useState(null);
   const [streamId, setStreamId] = useState(null);
   const [permission] = useState<any>(null);
+
   const setAuthToken = (token: string) => {
     Cookies.set(authConfig.storageTokenKeyName, token, { expires: 1 });
   }
-
 
   const getAuthToken = () => {
     return Cookies.get(authConfig.storageTokenKeyName);
@@ -78,218 +77,126 @@ const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
-      // console.log("initAuth", user);
       setLoading(false)
 
       const storedToken = getAuthToken()!
       setLoading(false);
       setisAuthenticated(true);
 
-      // setUser(response.data.data)
-
-
       if (storedToken) {
         setLoading(true)
-        await axios1
-          .post(authConfig.meEndpoint, {}, {
-            headers: {
-              "x-access-token": storedToken
-            }
-          })
-          .then(async response => {
-            setLoading(false);
-            setisAuthenticated(true);
-            setUser(response.data.data);
+        try {
+          const response = await apiFetch.post(authConfig.meEndpoint, {}, {
+            headers: { 'x-access-token': storedToken }
+          });
 
-            // const privileges = response.data.privileges;
-            // setPermission(privileges);
+          setLoading(false);
+          setisAuthenticated(true);
+          setUser((response.data as any).data);
 
-
-            axios1.defaults.headers.common["x-access-token"] = storedToken;
-
-
-          })
-          .catch(() => {
-            setUser(null)
-            setLoading(false)
-            if (authConfig.onTokenExpiration === 'logout' && !pathname.includes('login')) {
-              router.replace('/login')
-            }
-          })
+          setDefaultHeader('x-access-token', storedToken);
+        } catch {
+          setUser(null)
+          setLoading(false)
+          if (authConfig.onTokenExpiration === 'logout' && !pathname.includes('login')) {
+            router.replace('/login')
+          }
+        }
       } else {
         setLoading(false)
       }
     }
-    //
+
     initAuth()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
   }, [])
 
   const handleLogin = async (params: LoginParams, errorCallback?: ErrCallbackType) => {
-
     try {
-
       const { email, password } = params;
 
-      // console.log("login", email, password)
-      const response = await axios1.post('/api/auth/signinadmin', { email, password });
+      const response = await apiFetch.post('/api/auth/signinadmin', { email, password });
 
-      // console.log(response.data.data.accessToken, "response")
-      // return
-      if (response && response.status == 200) {
-        const data = response.data.data;
-        const accessToken = response.data.data.accessToken;
+      if (response && response.status === 200) {
+        const data = (response.data as any).data;
+        const accessToken = data.accessToken;
 
+        setAuthToken(accessToken);
 
-        setAuthToken(response.data.data.accessToken);
-
-        // window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
         if (accessToken) {
-          // alert(accessToken);
-          axios1.defaults.headers.common["x-access-token"] = accessToken;
-          if (axios1.defaults.headers.common["x-access-token"]) {
-            // console.log("x-access-token header is set:", axios1.defaults.headers.common["x-access-token"]);
-          } else {
-            console.log("x-access-token header is not set.");
-          }
+          setDefaultHeader('x-access-token', accessToken);
         }
 
-        // console.log(data, "data");
-
         setUser(data)
-        const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
-        const returnUrl = params.get('returnUrl')
+        const searchParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
+        const returnUrl = searchParams.get('returnUrl')
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
         setisAuthenticated(true);
 
-        // const privileges = response.data.privileges;
-        // setPermission(privileges);
         router.replace(redirectURL as string)
-
       }
-
-
-
     }
     catch (err: any) {
-
       if (errorCallback) errorCallback(err)
     }
-
-    // axios
-    //   .post(authConfig.loginEndpoint, params)
-    //   .then(async response => {
-    //     params.rememberMe
-    //       ? window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
-    //       : null
-    //     const returnUrl = router.query.returnUrl
-
-    //     setUser({ ...response.data.userData })
-    //     params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data.userData)) : null
-
-    //     const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
-    //     setisAuthenticated(true);
-    //     router.replace(redirectURL as string)
-    //   })
-
-    //   .catch(err => {
-    //     if (errorCallback) errorCallback(err)
-    //   })
   }
-  const handelforgotpassword = async (params: ForgotPasswordParams, errorCallback?: ErrCallbackType) => {
 
+  const handelforgotpassword = async (params: ForgotPasswordParams, errorCallback?: ErrCallbackType) => {
     try {
       const { email } = params;
-      const response = await axios1.post('/api/auth/user/forgotPassword', { email });
+      const response = await apiFetch.post('/api/auth/user/forgotPassword', { email });
 
       if (response && response.status === 200) {
-        const data = response.data;
-
-        // console.log(data, "`sdfv`");
-        return data;
+        return response.data;
       }
-
     }
     catch (err: any) {
-
       if (errorCallback) errorCallback(err)
     }
-
   }
+
   const handelVerifyemailOtp = async (params: handelVerifyemailOtpParams, errorCallback?: ErrCallbackType) => {
-
     try {
-
       const { email, otp } = params;
 
-
-      const response = await axios1.post('api/auth/user/newPassword', { email, otp });
+      const response = await apiFetch.post('api/auth/user/newPassword', { email, otp });
 
       if (response && response.status === 200) {
-        const data = response.data;
-
-
-        return data;
+        return response.data;
       }
-
-
-
     }
     catch (err: any) {
-
       if (errorCallback) errorCallback(err)
     }
-
   }
+
   const handelResetPassword = async (params: handelhandelResetPasswordParams, errorCallback?: ErrCallbackType) => {
-
     try {
-
       const { email, otp, newPassword } = params;
 
-      const response = await axios1.post('/api/auth/reset-password', { email, otp, newPassword });
+      const response = await apiFetch.post('/api/auth/reset-password', { email, otp, newPassword });
 
       if (response && response.status === 200) {
-        const data = response.data;
-
-
-        return data;
+        return response.data;
       }
-
-
-
     }
     catch (err: any) {
-
       if (errorCallback) errorCallback(err)
     }
-
   }
 
   const handleLogout = async () => {
-
     try {
-
-      const response = await axios1.post('/api/auth/user/signout');
+      const response = await apiFetch.post('/api/auth/user/signout');
 
       if (response && response.status === 200) {
-      
-
         setUser(null)
         setisAuthenticated(false);
         removeAuthToken();
-
-        // return data;
-        // console.log("logout",data);
       }
-
-
-
     }
     catch (err: any) {
       console.log(err);
-
     }
     router.push('/login')
   }
