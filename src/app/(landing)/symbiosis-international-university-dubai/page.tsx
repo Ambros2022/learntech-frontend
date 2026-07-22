@@ -182,10 +182,12 @@ export async function generateMetadata() {
   const title = 'Symbiosis International University Dubai | Admission 2026–27'
   const description = 'Apply to Symbiosis International University Dubai for world-class UG & PG programs, industry-oriented curriculum, and global career opportunities. Enquire now!'
   const canonicalUrl = `${BASE_URL}${PAGE_PATH}`
+  const ogImage = `${BASE_URL}/images/symbiosis/banner.webp`
 
   return {
     title,
     description,
+    keywords: 'Symbiosis International University Dubai, SIU Dubai, BBA Dubai, MBA Dubai, Study in Dubai, Indian University Dubai',
     alternates: {
       canonical: canonicalUrl,
     },
@@ -198,7 +200,7 @@ export async function generateMetadata() {
       type: 'website',
       images: [
         {
-          url: `${BASE_URL}/images/symbiosis/banner.webp`,
+          url: ogImage,
           width: 1200,
           height: 630,
           alt: 'Symbiosis International University Dubai Admissions 2026-27',
@@ -209,6 +211,7 @@ export async function generateMetadata() {
       card: 'summary_large_image',
       title,
       description,
+      images: [ogImage],
     },
     robots: {
       index: true,

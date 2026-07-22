@@ -645,8 +645,12 @@
     font-weight: 600;
     color: var(--ink);
     letter-spacing: -0.01em;
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 16px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .whyCard p {
@@ -2110,7 +2114,7 @@
 
 .footerWrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 70px;
 }
@@ -2125,6 +2129,8 @@
 .footerLogo {
     display: block;
     margin-bottom: 18px;
+    margin-top: -25px;
+    margin-left: -12px;
 }
 
 .footerLogo img {
@@ -2135,7 +2141,7 @@
 }
 
 .footerTagline {
-    margin-left: 20px;
+    margin-left: 10px;
     max-width: 620px;
     color: rgba(255, 255, 255, .78);
     font-size: 16px;
@@ -2401,6 +2407,11 @@ select.bamsFormField option {
     .footerRight {
         flex: 100%;
         width: 100%;
+    }
+
+    .footerLogo {
+        margin-top: 0;
+        margin-left: -15px;
     }
 
     .footerLogo img {
@@ -2702,7 +2713,7 @@ select.bamsFormField option {
     .footerTagline {
         font-size: 15px;
         line-height: 1.7;
-        padding-left: 11px;
+        /* padding-left: 11px; */
     }
 
     .footerRight h4 {

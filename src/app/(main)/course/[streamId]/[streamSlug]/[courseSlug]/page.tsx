@@ -27,12 +27,27 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Page({ params }: Props) {
   const { streamId, courseSlug } = await params
-  const [pagedata, colleges, exams, testimonials] = await Promise.all([
-    getGeneralCourseBySlug(courseSlug, streamId),
-    getColleges({ size: 8, type: 'college', stream_id: streamId }),
-    getExams({ size: 10, stream_id: streamId }),
-    getTestimonialsByGeneralCourse(courseSlug),
-  ])
+  
+  let pagedata: any = null
+  let colleges: any = null
+  let exams: any = null
+  let testimonials: any = null
+
+  try {
+    const results = await Promise.all([
+      getGeneralCourseBySlug(courseSlug, streamId),
+      getColleges({ size: 8, type: 'college', stream_id: streamId }),
+      getExams({ size: 10, stream_id: streamId }),
+      getTestimonialsByGeneralCourse(courseSlug),
+    ])
+    pagedata = results[0]
+    colleges = results[1]
+    exams = results[2]
+    testimonials = results[3]
+  } catch (err: any) {
+    console.error('Error fetching course page data:', err)
+  }
+
   if (!pagedata) notFound()
   return (
     <SubInnerCoursePage
@@ -43,3 +58,5 @@ export default async function Page({ params }: Props) {
     />
   )
 }
+
+

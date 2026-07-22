@@ -1,4 +1,4 @@
-import { getPageData, getCountries, getStreams, getNewsList, getUpcomingExams, type UpcomingExam } from 'src/lib/api/common'
+import { getPageData, getCountries, getStreams, getNewsList, getUpcomingExams } from 'src/lib/api/common'
 import JsonLd from 'src/app/components/JsonLd'
 import MainExamPage from 'src/views/MainExamPage'
 

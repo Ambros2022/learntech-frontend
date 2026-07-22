@@ -97,7 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isProd = process.env.NODE_ENV === 'production'
 
   return (
-    <html lang="en" className={poppins.className}>
+      <html lang="en" className={poppins.className} data-scroll-behavior="smooth">  
       <head>
         {/* Performance: early connection to API/image CDN */}
         <link rel="preconnect" href="https://newapi.learntechww.com" />

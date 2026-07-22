@@ -1,17 +1,65 @@
 import JsonLd from 'src/app/components/JsonLd'
 import SIUDubaiPage from './SIUDubaiPage'
 
+const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
+const PAGE_PATH = '/cu-online-mba-admission'
+const CANONICAL = `${BASE_URL}${PAGE_PATH}`
+
 export const metadata = {
   title: 'CU Online MBA Admission 2026–27 | Chandigarh University',
   description:
     'Apply for Chandigarh University (CU) Online MBA 2026–27. Check eligibility, fees, specializations, rankings, placements & admission process. Enquire Now!',
+  keywords: 'CU Online MBA, Chandigarh University Online MBA, MBA Admission 2026, Online MBA India',
   alternates: {
-    canonical: 'https://learntechww.com/cu-online-mba-admission',
+    canonical: CANONICAL,
+  },
+  openGraph: {
+    title: 'CU Online MBA Admission 2026–27 | Chandigarh University',
+    description:
+      'Apply for Chandigarh University (CU) Online MBA 2026–27. Check eligibility, fees, specializations, rankings, placements & admission process.',
+    url: CANONICAL,
+    siteName: 'Learntech Edu Solutions',
+    locale: 'en_IN',
+    type: 'website',
+    images: [
+      {
+        url: `${BASE_URL}/images/cumba/herobanner3.webp`,
+        width: 1200,
+        height: 630,
+        alt: 'CU Online MBA Admission 2026-27 | Chandigarh University',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CU Online MBA Admission 2026–27 | Chandigarh University',
+    description:
+      'Apply for Chandigarh University Online MBA 2026–27. Eligibility, fees, specializations & admission process.',
+    images: [`${BASE_URL}/images/cumba/herobanner3.webp`],
   },
   robots: {
     index: true,
     follow: true,
   },
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${BASE_URL}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'CU Online MBA Admission',
+      item: CANONICAL,
+    },
+  ],
 }
 
 const faqSchema = {
@@ -77,6 +125,7 @@ export default function Page() {
         href='/images/cumba/mobilebanner.webp'
         media='(max-width: 768px)'
       />
+      <JsonLd id='cumba-breadcrumb-schema' schema={breadcrumbSchema} />
       <JsonLd id='cumba-faq-schema' schema={faqSchema} />
       <SIUDubaiPage />
     </>

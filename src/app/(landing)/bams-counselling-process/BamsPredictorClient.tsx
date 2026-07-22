@@ -63,7 +63,7 @@ export default function BamsPredictorClient() {
             </h4>
             <form onSubmit={handleSubmit}>
               <div className={styles.predRow}>
-                <div className={`${styles.predictorField} ${styles.field}`}>
+                <div className={`${styles.predictorField} `}>
                   <label>Questions Attempted <span className={styles.req}>*</span></label>
                   <input
                     type='number'
@@ -72,7 +72,7 @@ export default function BamsPredictorClient() {
                     required
                   />
                 </div>
-                <div className={`${styles.predictorField} ${styles.field}`}>
+                <div className={`${styles.predictorField} `}>
                   <label>Correct Answers <span className={styles.req}>*</span></label>
                   <input
                     type='number'
