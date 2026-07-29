@@ -168,6 +168,35 @@ const breadcrumbSchema = {
   ],
 }
 
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'BAMS Counselling 2026-27 | NEET UG Admission Guidance',
+  description:
+    'Looking for BAMS counselling? Get expert guidance for NEET UG 2026-27 admissions, AACCC & KEA counselling, top Ayurvedic colleges, and seat allotment support.',
+  url: CANONICAL_URL,
+  publisher: {
+    '@type': 'EducationalOrganization',
+    name: 'LearnTech Edu Solutions Pvt Ltd',
+    url: BASE_URL,
+  },
+}
+
+const programSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOccupationalProgram',
+  name: 'BAMS Counselling & NEET UG Admission Guidance 2026-27',
+  description:
+    'Comprehensive counselling support and guidance for NEET UG qualified students seeking BAMS (Bachelor of Ayurvedic Medicine and Surgery) admissions across AACCC and KEA participating colleges.',
+  educationalProgramMode: 'Full-time',
+  occupationalCategory: 'Ayurvedic Medical Doctor',
+  provider: {
+    '@type': 'EducationalOrganization',
+    name: 'LearnTech Edu Solutions Pvt Ltd',
+    url: BASE_URL,
+  },
+}
+
 /* ─── PAGE ─── */
 export default function BamsCounsellingProcessPage() {
   const heroBg = `/images/bams/media/ChatGPT Image Jul 4, 2026, 11_07_13 AM.png`
@@ -175,9 +204,12 @@ export default function BamsCounsellingProcessPage() {
 
   return (
     <>
+      <link rel="preload" as="image" href={heroBg} />
       <JsonLd schema={faqSchema} id="faq-schema" />
       <JsonLd schema={orgSchema} id="org-schema" />
       <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+      <JsonLd schema={webPageSchema} id="webpage-schema" />
+      <JsonLd schema={programSchema} id="program-schema" />
 
       <div className={styles.bamsRoot}>
         <BamsNavbarClient />

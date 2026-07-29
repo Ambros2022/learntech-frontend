@@ -38,7 +38,14 @@ const TestimonialSec = ({ testimonials }: { testimonials: Testimonial[] }) => {
                 <div className="row d-flex">
                   <div className="col-md-3 col-lg-2 col-xl-2 align-content-center">
                     <div className="testimonalImg">
-                      <Image src="/images/icons/userImage.webp" className="mx-auto" width={50} height={50} alt="" />
+                      <Image
+                        src="/images/icons/userImage.webp"
+                        className="mx-auto"
+                        width={50}
+                        height={50}
+                        alt={`Testimonial author ${testimonial.name}`}
+                        loading="lazy"
+                      />
                     </div>
                   </div>
                   <div className="col-md-9 col-lg-10 col-xl-10 align-content-center">

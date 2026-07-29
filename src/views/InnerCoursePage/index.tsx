@@ -8,7 +8,7 @@ import OrganizationSection from './Components/OrganizationalSec'
 import ExpertTrainneSec from './Components/ExpertTrainneSec'
 import ExpertSection from './Components/ExpertSection'
 
-const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || ''
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '') || 'https://www.learntech.com'
 
 interface Props {
   pagedata: any
@@ -39,10 +39,24 @@ export default function InnerCoursePage({ pagedata, colleges, exams, streams, te
     ],
   }
 
+  const courseSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: pagedata?.name || pagedata?.short_name,
+    description: pagedata?.meta_description || pagedata?.overview || `Comprehensive guide and admission info for ${pagedata?.name || 'courses'} at Learntech Edu Solutions.`,
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'Learntech Edu Solutions',
+      sameAs: BASE_URL,
+    },
+    url: `${BASE_URL}/course/${pagedata?.id}/${pagedata?.slug}`,
+  }
+
   return (
     <>
       {faqSchema && <JsonLd schema={faqSchema} id="faq-schema" />}
       <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+      <JsonLd schema={courseSchema} id="course-schema" />
       <BannerSection data={pagedata} />
       <Breadcrumb items={[{ label: 'Courses', href: '/courses' }, { label: pagedata?.name }]} />
       <CourseInfoSection data={pagedata} colleges={colleges} exams={exams} />

@@ -258,11 +258,48 @@ export default function Page() {
     })),
   }
 
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Symbiosis International University Dubai | Admission 2026–27',
+    description:
+      'Apply to Symbiosis International University Dubai for world-class UG & PG programs, industry-oriented curriculum, and global career opportunities.',
+    url: `${BASE_URL}${PAGE_PATH}`,
+    publisher: {
+      '@type': 'EducationalOrganization',
+      name: 'Learntech Edu Solutions',
+      url: BASE_URL,
+    },
+  }
+
+  const allCoursesList = [...courses, mbaCourse]
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Academic Programmes at Symbiosis International University Dubai',
+    itemListElement: allCoursesList.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Course',
+        name: c.title,
+        description: c.desc,
+        provider: {
+          '@type': 'CollegeOrUniversity',
+          name: 'Symbiosis International University Dubai',
+        },
+      },
+    })),
+  }
+
   return (
     <>
+      <link rel='preload' as='image' href='/images/symbiosis/banner.webp' />
       <JsonLd id='sym-breadcrumb-schema' schema={breadcrumbSchema} />
       <JsonLd id='sym-university-schema' schema={universitySchema} />
       <JsonLd id='sym-faq-schema' schema={faqSchema} />
+      <JsonLd id='sym-webpage-schema' schema={webPageSchema} />
+      <JsonLd id='sym-itemlist-schema' schema={itemListSchema} />
 
       <SymEnquiryTriggerClient>
         <section className={styles.symMain}>

@@ -1,4 +1,5 @@
 import styles from "src/views/AboutUsPage/aboutUsPage.module.css";
+import YouTubePlayerFacade from "src/components/ui/YouTubePlayerFacade";
 
 const JourneySec = () => {
   return (
@@ -8,14 +9,9 @@ const JourneySec = () => {
           The Journey of Learntech Edu Solutions
         </h2>
         <div className={styles.journeyVideo + ' bg-blue rounded p-2 mx-auto'}>
-          <iframe
-            src="https://www.youtube.com/embed/ubcwVybnL4Q?si=osGRhTdono9EcJxK"
+          <YouTubePlayerFacade
+            videoId="ubcwVybnL4Q"
             title="The Journey of Learntech Edu Solutions"
-            frameBorder="0"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
             className="h-100 rounded w-100"
           />
         </div>
@@ -25,3 +21,4 @@ const JourneySec = () => {
 }
 
 export default JourneySec
+

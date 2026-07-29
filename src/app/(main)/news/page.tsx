@@ -2,7 +2,7 @@ import { getPageData, getNewsList, getNewsCategories, getLandingPages } from 'sr
 import JsonLd from 'src/app/components/JsonLd'
 import MainNewsPage from 'src/views/MainNewsPage'
 
-const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com').replace(/\/+$/, '')
 const IMG_URL = process.env.NEXT_PUBLIC_IMG_URL || ''
 const PAGE_PATH = '/news'
 const DEFAULT_TITLE = 'Latest Educational News | Learntech Edu Solutions'
@@ -62,7 +62,8 @@ export async function generateMetadata() {
 export default async function Page() {
   const [pagedata, trendingNews, rawCategories, collegeData, initialNewsData] = await Promise.all([
     getPageData('news'),
-    getNewsList({ is_trending: '1', orderby: 'Asc', columnname: 'listing_order', size: 10000 }),
+    // Reduced from 10000 → 50: the hero carousel renders at most a handful of items
+    getNewsList({ is_trending: '1', orderby: 'Asc', columnname: 'listing_order', size: 50 }),
     getNewsCategories(),
     getLandingPages(),
     // Fetch initial "All" news for first page SSR
@@ -122,9 +123,25 @@ export default async function Page() {
     ],
   }
 
+  // ItemList JSON-LD — lets Google surface individual articles in rich results
+  const itemListSchema = initialNewsData.data.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: DEFAULT_TITLE,
+    url: `${BASE_URL}${PAGE_PATH}`,
+    numberOfItems: initialNewsData.data.length,
+    itemListElement: (initialNewsData.data as any[]).map((item: any, i: number) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      url: `${BASE_URL}/news/${item.id}/${item.slug}`,
+    })),
+  } : null
+
   return (
     <>
       <JsonLd id="news-breadcrumb-schema" schema={breadcrumbSchema} />
+      {itemListSchema && <JsonLd id="news-itemlist-schema" schema={itemListSchema} />}
       <MainNewsPage
         newsItems={newsItems}
         categories={categories}

@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function SubInnerCoursePage({ pagedata, colleges, exams, testimonials }: Props) {
-  const webUrl = process.env.NEXT_PUBLIC_WEB_URL ?? ''
+  const webUrl = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '') || 'https://www.learntech.com'
 
   const faqSchema = pagedata?.generalcoursefaqs?.length > 0
     ? {
@@ -37,14 +37,28 @@ export default function SubInnerCoursePage({ pagedata, colleges, exams, testimon
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${webUrl}/` },
       { '@type': 'ListItem', position: 2, name: 'Courses', item: `${webUrl}/courses` },
       { '@type': 'ListItem', position: 3, name: pagedata?.streams?.name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}` },
-      { '@type': 'ListItem', position: 4, name: pagedata?.short_name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}/${pagedata?.slug}` },
+      { '@type': 'ListItem', position: 4, name: pagedata?.short_name || pagedata?.name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}/${pagedata?.slug}` },
     ],
+  }
+
+  const courseSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: pagedata?.name || pagedata?.short_name,
+    description: pagedata?.meta_description || pagedata?.course_overview || `Detailed information about ${pagedata?.name || pagedata?.short_name} course, eligibility, top colleges, and admission guide.`,
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'Learntech Edu Solutions',
+      sameAs: webUrl,
+    },
+    url: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}/${pagedata?.slug}`,
   }
 
   return (
     <>
       {faqSchema && <JsonLd schema={faqSchema} id="faq-schema" />}
       <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+      <JsonLd schema={courseSchema} id="course-schema" />
       <BannerSection data={pagedata} />
       <Breadcrumb items={[
         { label: 'Courses', href: '/courses' },
