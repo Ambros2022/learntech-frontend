@@ -1,115 +1,35 @@
-﻿'use client'
-import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
-import axios1 from 'src/configs/axios';
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-const MainCarousel = ({ items }) => {
-
-
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 4
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4
-    },
-    tablet: {
-      breakpoint: { max: 1023, min: 768 },
-      items: 3
-    },
-    mobile: {
-      breakpoint: { max: 767, min: 0 },
-      items: 1
-    }
-  };
-
-  const ButtonGroup = ({ next, previous }: any) => {
-    return (
-      <div className="carousel-button-group justify-content-between d-flex gap-5 fs-2">
-        <span className='fi-left' onClick={previous} >
-          <ChevronLeft style={{ cursor: 'pointer' }} />
-        </span>
-        <span className='fi-right' style={{ cursor: 'pointer' }} onClick={next}>
-          <ChevronRight />
-        </span>
-      </div>
-    );
-  };
-
-  return (
-    <Carousel
-      swipeable
-      draggable
-      showDots={false}
-      arrows={false}
-      infinite
-      autoPlay={true}
-      autoPlaySpeed={2000}
-      ssr  // SSR true for server-side rendering
-      responsive={responsive}
-      renderButtonGroupOutside
-      customButtonGroup={<ButtonGroup />}
-    >
-      {items.map((item, index) => (
-        <div key={index}>{item}</div>
-      ))}
-    </Carousel>
-  );
-};
-
+import dynamic from 'next/dynamic'
 
 interface NewsItem {
-  id: number;
-  slug: string;
-  name: string;
+  id: number
+  slug: string
+  name: string
 }
 
-const NewsLinkSection: React.FC = React.memo(() => {
-  const [linkSectionItems, setLinkSectionItems] = useState<JSX.Element[]>([]);
+interface Props {
+  newsLinks: NewsItem[]
+}
 
-  const fetchNews = useCallback(async () => {
-    try {
-      const response = await axios1.get('api/website/news/get?category_id=4', {
-        params: {
-          page: 1,
-          size: 10000,
-          orderby: 'Desc', 
-          columnname: 'created_at'
-        }
-      });
-      const newsData: NewsItem[] = response.data.data;
+const NewsLinkCarouselClient = dynamic(
+  () => import('./NewsLinkCarouselClient'),
+  { loading: () => <div style={{ height: 88 }} /> }
+)
 
-      const newsItems = newsData.map((item) => (
-        <Link key={item.id} href={`/news/${item.id}/${item.slug}`} target="_blank" rel="noopener noreferrer">
-          <div className="card mx-2 cardHeight">
-            <h6 className="py-2 mx-auto newsLink2Clr bg-white text-blue rounded text-center" style={{ maxWidth: '200px', zIndex: '40' }}>
-              {item.name}
-            </h6>
-          </div>
-        </Link>
-      ));
-      setLinkSectionItems(newsItems);
-    } catch (error) {
-      console.error('Error fetching news:', error);
-    }
-  }, []);
+// Server Component — data pre-fetched in page.tsx via getExamNewsLinks().
+// Lazily loaded with SSR enabled to preserve SEO.
+export default function NewsLinkSection({ newsLinks }: Props) {
+  if (!newsLinks?.length) return null
 
-  useEffect(() => {
-    fetchNews();
-  }, [fetchNews]);
+  const items = newsLinks.map((n) => ({ id: n.id, slug: n.slug, name: n.name }))
 
   return (
-    <section className="newsLinkSec2 bg-blue py-3 position-relative " style={{ zIndex: '2' }}>
+    <section
+      className="newsLinkSec2 bg-blue py-3 position-relative"
+      style={{ zIndex: 2 }}
+    >
       <div className="container text-center py-3 newsLink2Container rounded">
-        <MainCarousel items={linkSectionItems} />
+        <NewsLinkCarouselClient items={items} />
       </div>
     </section>
-  );
-});
-
-export default NewsLinkSection;
+  )
+}

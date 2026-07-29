@@ -8,22 +8,7 @@ import { useRouter } from 'src/hooks/useCompatRouter'
 import { LazyPhoneInputField as PhoneInputField } from 'src/app/components/ClientWrappers'
 import Link from 'next/link'
 import styles from './EnquiryForm.module.css'
-
-const PHONE_RULES: [RegExp, RegExp][] = [
-  [/^\+91-/, /^\+91-\d{10}$/],
-  [/^\+966-/, /^\+966-\d{9}$/],
-  [/^\+971-/, /^\+971-\d{9}$/],
-  [/^\+974-/, /^\+974-\d{8}$/],
-  [/^\+968-/, /^\+968-\d{8}$/],
-  [/^\+965-/, /^\+965-\d{8}$/],
-  [/^\+973-/, /^\+973-\d{8}$/],
-  [/^\+977-/, /^\+977-\d{10}$/],
-]
-
-const isValidPhone = (val: string) => {
-  const rule = PHONE_RULES.find(([prefix]) => prefix.test(val))
-  return rule ? rule[1].test(val) : false
-}
+import { phoneSchema, submitEnquiry } from './formUtils'
 
 const downloadPDF = async () => {
   try {
@@ -53,7 +38,7 @@ export default function EnquiryForm({ page, onChanges, placeholder, collegeName 
       z.object({
         name: z.string().trim().min(1, 'Name is required'),
         email: z.string().trim().email('Email is not valid'),
-        contact_number: z.string().refine(isValidPhone, 'Enter a valid phone number'),
+        contact_number: phoneSchema,
         course: z.string().trim().min(1, `${placeholder || 'Course'} is required`),
         location: z.string().trim().min(1, 'Location is required'),
         message: z.string(),
@@ -88,23 +73,17 @@ export default function EnquiryForm({ page, onChanges, placeholder, collegeName 
   const onSubmit = async (values: FormValues) => {
     try {
       toast.loading('Processing')
-      const body = new FormData()
-      body.append('name', values.name)
-      body.append('email', values.email)
-      body.append('contact_number', values.contact_number)
-      body.append('location', values.location)
-      body.append('course_in_mind', values.course)
-      body.append('current_url', window.location.href)
-      body.append('description', values.message)
-      body.append('college_name', values.college_name)
-
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}api/website/enquiry`, {
-        method: 'POST',
-        body,
+      const ok = await submitEnquiry({
+        name: values.name,
+        email: values.email,
+        contact_number: values.contact_number,
+        location: values.location,
+        course_in_mind: values.course,
+        description: values.message,
+        college_name: values.college_name,
       })
       toast.dismiss()
-
-      if (res.ok) {
+      if (ok) {
         toast.success('Thank you. We will get back to you.')
         reset()
         onChanges?.()
@@ -114,6 +93,7 @@ export default function EnquiryForm({ page, onChanges, placeholder, collegeName 
         toast.error('Try again later!')
       }
     } catch {
+      toast.dismiss()
       toast.error('Try again later!')
     }
   }
@@ -122,11 +102,11 @@ export default function EnquiryForm({ page, onChanges, placeholder, collegeName 
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" {...register('college_name')} />
       <div className="mb-3">
-        <input type="text" placeholder="Enter Name" className="form-control" {...register('name')} />
+        <input type="text" placeholder="Full Name*" className="form-control" {...register('name')} />
         {errors.name && <div className="error text-danger">{errors.name.message}</div>}
       </div>
       <div className="mb-3">
-        <input type="email" placeholder="Enter Email" className="form-control" {...register('email')} />
+        <input type="email" placeholder="Email ID*" className="form-control" {...register('email')} />
         {errors.email && <div className="error text-danger">{errors.email.message}</div>}
       </div>
       <div className="mb-3">
@@ -140,18 +120,18 @@ export default function EnquiryForm({ page, onChanges, placeholder, collegeName 
       <div className="mb-3">
         <input
           type="text"
-          placeholder={placeholder ? `Enter ${placeholder}` : 'Enter Course'}
+          placeholder={placeholder ? `Enter ${placeholder}` : 'Interested Course*'}
           className="form-control"
           {...register('course')}
         />
         {errors.course && <div className="error text-danger">{errors.course.message}</div>}
       </div>
       <div className="mb-3">
-        <input type="text" placeholder="Enter Location" className="form-control" {...register('location')} />
+        <input type="text" placeholder="Location*" className="form-control" {...register('location')} />
         {errors.location && <div className="error text-danger">{errors.location.message}</div>}
       </div>
       <div className="mb-3">
-        <textarea placeholder="Enter Message" className="form-control" {...register('message')} />
+        <textarea placeholder="Type your message" className="form-control" {...register('message')} />
         {errors.message && <div className="error text-danger">{errors.message.message}</div>}
       </div>
       <div className="mb-3 form-check">

@@ -1,15 +1,31 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  output: process.env.VERCEL ? undefined : 'standalone',
   trailingSlash: false,
   skipTrailingSlashRedirect: true,
+  compress: true,
 
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
+    deviceSizes: [320, 420, 640, 750, 828, 1080, 1200, 1920],
     remotePatterns: [
       { protocol: 'http', hostname: 'localhost' },
       { protocol: 'https', hostname: 'api.learntechww.com' },
       { protocol: 'https', hostname: 'newapi.learntechww.com' },
       { protocol: 'https', hostname: 'learntechww.com' },
+      { protocol: 'https', hostname: 'i.ytimg.com' },
+      { protocol: 'https', hostname: 'img.youtube.com' },
     ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap/:path.xml',
+        destination: '/sitemap/:path/sitemap.xml',
+      },
+    ]
   },
 
   async headers() {
@@ -27,6 +43,16 @@ module.exports = {
           },
         ],
       },
+      {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ]
   },
 }
+

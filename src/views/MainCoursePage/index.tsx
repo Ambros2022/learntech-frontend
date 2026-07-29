@@ -1,123 +1,50 @@
-﻿'use client'
-import React, { useCallback, useEffect, useState } from 'react';
-import BannerSec from './Components/BannerSec';
-import BestCoursesSec from './Components/BestCoursesSec';
-// import CoursesCard from './Components/CoursesCard';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import axios from 'src/configs/axios';
-import Head from 'next/head';
-import { useRouter } from 'src/hooks/useCompatRouter';
-import dynamic from 'next/dynamic';
-const CoursesCard = dynamic(() => import('./Components/CoursesCard'), { ssr: false });
+import JsonLd from 'src/app/components/JsonLd'
+import { Breadcrumb } from 'src/app/components/Breadcrumb'
+import BannerSec from './Components/BannerSec'
+import BestCoursesSec from './Components/BestCoursesSec'
+import CoursesContainer from './Components/CoursesCard'
 
-function MainCoursePage() {
-  const router = useRouter()
-  const isMountedRef = useIsMountedRef();
-  const [pagedata, setPagedata] = useState<any>();
-  const [trendingCourses, setTrendingCourses] = useState([]);
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '') || 'https://www.learntech.com'
 
-  const getPagedata = useCallback(async () => {
-    try {
-      const response = await axios.get(`api/website/pagefindone/get${router.asPath}`);
-      if (isMountedRef.current) {
+interface Props {
+  trendingCourses: any[]
+  initialCourses: any[]
+  totalItems: number
+  promoban: any | null
+}
 
-        setPagedata(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
+export default function MainCoursePage({ trendingCourses, initialCourses, totalItems, promoban }: Props) {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Courses', item: `${BASE_URL}/courses` },
+    ],
+  }
 
-  const getTrendingCourses = useCallback(async () => {
-    try {
-      const response = await axios.get('api/website/generalcourse/get', {
-        params: {
-          page: 1,
-          size: 1000,
-          is_trending: 1
-        }
-      });
-      if (isMountedRef.current) {
-        setTrendingCourses(response.data.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch trending courses:', error);
-    }
-  }, [isMountedRef]);
-
-
-
-  useEffect(() => {
-    getPagedata();
-    getTrendingCourses();
-
-
-  }, []);
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Top Courses & Streams',
+    description: 'Explore degree programs and streams in India',
+    numberOfItems: initialCourses?.length || 0,
+    itemListElement: (initialCourses || []).map((course: any, index: number) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: course.name,
+      url: `${BASE_URL}/course/${course.id}/${course.slug}`,
+    })),
+  }
 
   return (
     <>
-      <Head>
-        <title>{pagedata && pagedata?.meta_title ? pagedata?.meta_title : "Study in India | Study Abroad | Learntech Edu Solutions"}</title>
-        <meta name="description" content={pagedata && pagedata?.meta_description ? pagedata?.meta_description : "Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad."} />
-        <meta name="keywords" content={pagedata && pagedata?.meta_keyword ? pagedata?.meta_keyword : "Learntechweb"} />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`} />
-        <script type="application/ld+json">
-
-          {JSON.stringify([
-
-
-
-
-            {
-
-              "@context": "https://schema.org/",
-
-              "@type": "BreadcrumbList",
-
-              "itemListElement": [
-
-                {
-
-                  "@type": "ListItem",
-
-                  "position": 1,
-
-                  "name": "Home",
-
-                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}/`
-
-
-
-                },
-
-                {
-
-                  "@type": "ListItem",
-
-                  "position": 2,
-
-                  "name": "Courses",
-
-                  "item": `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
-
-                },
-
-
-
-              ]
-
-            }
-
-          ])}
-
-        </script>
-      </Head>
-      <BannerSec data={trendingCourses} />
+      <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+      <JsonLd schema={itemListSchema} id="courses-itemlist-schema" />
+      <BannerSec trendingCourses={trendingCourses} />
+      <Breadcrumb items={[{ label: 'Courses' }]} />
       <BestCoursesSec />
-      <CoursesCard />
+      <CoursesContainer initialCourses={initialCourses} totalItems={totalItems} promoban={promoban} />
     </>
-  );
+  )
 }
-
-export default MainCoursePage;

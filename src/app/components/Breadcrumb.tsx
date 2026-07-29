@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { memo } from 'react'
 
@@ -19,6 +17,7 @@ export const Breadcrumb = memo(({ items }: BreadcrumbProps) => {
         <Link href="/" className="text-black text-decoration-none">
           Home
         </Link>
+        
 
         {items.map((item, index) =>
           !item.href || index === items.length - 1 ? (

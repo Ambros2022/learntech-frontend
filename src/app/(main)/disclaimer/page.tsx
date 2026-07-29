@@ -1,6 +1,5 @@
 import { getPageData } from 'src/lib/api/common'
 import JsonLd from 'src/app/components/JsonLd'
-import AnimateOnScroll from 'src/app/components/AnimateOnScroll'
 import InnerHeader from 'src/views/SimplePage/InnerHeader'
 import Breadcrumbs from 'src/views/SimplePage/Breadcrumb'
 import DisclaimerText from 'src/views/DisclaimerPage/Components/DisclaimerText'
@@ -16,6 +15,7 @@ export async function generateMetadata() {
       data?.meta_description ||
       'Read the disclaimer of Learntech Edu Solutions Pvt. Ltd. for important information about the use of our website and services.',
     keywords: data?.meta_keyword || '',
+    robots: 'index, follow',
     alternates: {
       canonical: `${BASE_URL}/disclaimer`,
     },
@@ -46,6 +46,8 @@ export async function generateMetadata() {
 }
 
 export default async function DisclaimerPage() {
+  // React.cache() in getPageData deduplicates this call with the one in
+  // generateMetadata — only one network request is made per server render.
   const data = await getPageData('disclaimer')
 
   const breadcrumbSchema = {
@@ -67,21 +69,57 @@ export default async function DisclaimerPage() {
     ],
   }
 
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: data?.meta_title || 'Disclaimer | Learntech Edu Solutions',
+    description:
+      data?.meta_description ||
+      'Read the disclaimer of Learntech Edu Solutions Pvt. Ltd. for important information about the use of our website and services.',
+    url: `${BASE_URL}/disclaimer`,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Learntech Edu Solutions',
+      url: BASE_URL,
+    },
+    inLanguage: 'en-IN',
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Disclaimer', item: `${BASE_URL}/disclaimer` },
+      ],
+    },
+  }
+
   return (
     <>
-      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      {/* Preload hero banner — tells browser to fetch BannerBG.webp immediately,
+          reducing LCP. Next.js hoists <link> tags from Server Components into <head>. */}
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+      <link rel="preload" as="image" href="/images/icons/BannerBG.webp" />
 
+      {/* Structured data — rendered in <head> by Next.js, zero client JS */}
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="webpage-schema" schema={webPageSchema} />
+
+
+      {/* Hero banner — next/image with priority ensures early fetch */}
       <InnerHeader
         title="Learntech Edu Solutions Pvt. Ltd."
-        // description="Stay up-to-date with Top Colleges, Universities, Exam updates."
         align="center"
       />
 
       <Breadcrumbs link="Disclaimer" />
 
-      <AnimateOnScroll variant="fade-up" duration={0.7}>
+      {/*
+        CSS-only fade-up animation replaces <AnimateOnScroll> Client Component.
+        Visually identical — uses the ltFadeUp @keyframes defined in globals.css.
+        Zero JavaScript shipped to browser, zero hydration cost.
+      */}
+      <div className="animate-fade-up">
         <DisclaimerText data={data} />
-      </AnimateOnScroll>
+      </div>
     </>
   )
 }

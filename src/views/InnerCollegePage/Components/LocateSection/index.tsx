@@ -1,5 +1,4 @@
-﻿'use client'
-
+﻿
 
 function LocationSection({ data }) {
   return (

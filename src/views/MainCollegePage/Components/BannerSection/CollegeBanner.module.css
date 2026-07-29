@@ -1,0 +1,12 @@
+.titleClass {
+  font-size: 33px !important;
+  font-weight: 700 !important;
+  text-align: left !important;
+}
+
+@media (max-width: 768px) {
+  .titleClass {
+    font-size: 22px !important;
+    text-align: left !important;
+  }
+}

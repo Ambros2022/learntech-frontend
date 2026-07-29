@@ -49,6 +49,8 @@ export const LazyBannerCarousel = dynamic(
   { ssr: false, loading: () => null },
 )
 
+
+
 export const LazyCollegeCarousel = dynamic(
   () => import('src/components/colleges/CollegeCarouselClient'),
   { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
@@ -86,6 +88,221 @@ const FormSkeleton = () => (
   <div style={{ minHeight: 320, background: '#f0f0f0', borderRadius: 4 }} />
 )
 
+export const LazyEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/form'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyFaqSec = dynamic(
+  () => import('src/@core/components/blog-faq/index'),
+  { ssr: false, loading: () => <SectionSkeleton height='200px' /> },
+)
+
+const SearchBarSkeleton = () => (
+  <div
+    style={{
+      height: 56,
+      background: 'rgba(255,255,255,0.92)',
+      borderRadius: 4,
+    }}
+  />
+)
+
+export const LazyBlogSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/BlogSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyBoardSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/BoardSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyCollegeSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/CollegeSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyUniversitySearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/UniversitySearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyUniversityCarousel = dynamic(
+  () => import('src/components/universities/UniversityCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
+export const LazyAbroadCarousel = dynamic(
+  () => import('src/components/colleges/AbroadCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
+export const LazyAbroadSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/AbroadSearchBar'),
+  { ssr: false },
+)
+
+export const LazyBlogCarousel = dynamic(
+  () => import('src/components/blogs/BlogCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
+export const LazySchoolSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/SchoolSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyCourseSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/CourseSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyNewsSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/NewsSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyScholarshipSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/ScholarshipSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyExamSearchBar = dynamic(
+  () => import('src/components/ui/SearchBar/ExamSearchBar'),
+  { ssr: false, loading: () => <SearchBarSkeleton /> },
+)
+
+export const LazyTrendingNewsCarousel = dynamic<any>(
+  () => import('../../views/MainNewsPage/Components/TopTrendingNewsSec/TrendingNewsCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
+export const LazyOtherCoursesCarousel = dynamic(
+  () => import('src/views/InnerCoursePage/Components/OtherCourses/OtherCoursesCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={5} /> },
+)
+
+export const LazyTestimonialCarousel = dynamic(
+  () => import('src/views/InnerCoursePage/Components/TestimonialSec/TestimonialCarouselClient'),
+  { ssr: false, loading: () => <SectionSkeleton height='280px' /> },
+)
+
+export const LazyExpertTraineeClient = dynamic(
+  () => import('src/views/AbroadPage/Components/ExpertTrainneSec/ExpertTraineeClient'),
+  { ssr: false, loading: () => <SectionSkeleton height='300px' /> },
+)
+
+export const LazyPopularCoursesCarousel = dynamic(
+  () => import('src/views/SubInnerCoursePage/Components/PopularCourses/PopularCoursesCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={6} /> },
+)
+
+export const LazySubCourseTestimonialCarousel = dynamic(
+  () => import('src/views/SubInnerCoursePage/Components/TestimonialSec/SubCourseTestimonialCarouselClient'),
+  { ssr: false, loading: () => <SectionSkeleton height='280px' /> },
+)
+
+export const LazyGlobalPopupShare = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupShare'),
+  { ssr: false, loading: () => null },
+)
+
+export const LazyBoardFaqSec = dynamic(
+  () => import('src/@core/components/cutom-faq/index'),
+  { ssr: false, loading: () => <SectionSkeleton height='200px' /> },
+)
+
+export const LazySchoolsCarousel = dynamic(
+  () => import('src/components/schools/SchoolsCarouselClient'),
+  { ssr: false, loading: () => <CardGridSkeleton count={4} /> },
+)
+
+export const LazyReviewSec = dynamic(
+  () => import('src/views/InnerBoardPage/Components/ReviewSec'),
+  { ssr: false, loading: () => <SectionSkeleton height='400px' /> },
+)
+
+export const LazyContactUsForm = dynamic(
+  () => import('src/@core/components/popup/ContactUsForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazySideContactUsForm = dynamic(
+  () => import('src/@core/components/popup/SideContactUsForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyTalkToExpertsSection = dynamic(
+  () => import('src/app/components/TalkToExpertsSection'),
+  { loading: () => <FormSkeleton /> },
+)
+
+export const LazyContactForm404 = dynamic(
+  () => import('src/views/Error404Page/Components/BannerSec/ContactForm404'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyEditorEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/Editor/Editorform'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyAbroadEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/AbroadEnquiryForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyContactPageUsForm = dynamic(
+  () => import('src/@core/components/popup/ContactPageUsForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyEducationLoanForm = dynamic(
+  () => import('src/@core/components/popup/EducationloanForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyEnquiryFormMed = dynamic(
+  () => import('src/@core/components/popup/EnquiryFormMed'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyJobEnquiryForm = dynamic(
+  () => import('src/@core/components/popup/JobEnquiryForm'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyTalkExpertEnquiry = dynamic(
+  () => import('src/@core/components/popup/TalkExpertEnqiiry'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyTalkExpertEnquirySchool = dynamic(
+  () => import('src/@core/components/popup/TalkExpertEnqiirySchool'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyExpertEnquiryFormSchool = dynamic(
+  () => import('src/@core/components/popup/ExpertEnquiryFormSchool'),
+  { ssr: false, loading: () => <SectionSkeleton height="80px" /> },
+)
+
+export const LazyNewsLetterEnquiry = dynamic(
+  () => import('src/@core/components/popup/NewsLetterEnquiry'),
+  { ssr: false, loading: () => <SectionSkeleton height="80px" /> },
+)
+
+export const LazyContactForm = dynamic(
+  () => import('src/@core/components/popup/ContactForm'),
+  { ssr: false, loading: () => (
+    <div className="bg-skyBlue px-lg-5 px-3 rounded">
+      <div style={{ height: 36, background: '#d0d8e8', borderRadius: 4, margin: '16px 0 12px' }} />
+      <FormSkeleton />
+    </div>
+  )},
+)
+
 export const LazySignupForm = dynamic(
   () => import('src/@core/components/custom-user-auth/SignUpFrom'),
   { ssr: false, loading: () => <FormSkeleton /> },
@@ -110,8 +327,8 @@ export const LazyAvatarDropdown = dynamic(
   { loading: () => <AvatarSkeleton /> },
 )
 
-export const LazyWriteReviewPage = dynamic(
-  () => import('src/views/WriteReviewPage'),
+export const LazyWriteReviewForm = dynamic(
+  () => import('src/views/WriteReviewPage/Components/DetailsFillSec'),
   { ssr: false, loading: () => <FormSkeleton /> },
 )
 
@@ -158,4 +375,81 @@ export const LazyEmblaCarousel = dynamic(
 export const LazyEmblaTabCarousel = dynamic(
   () => import('src/components/ui/Embla/EmblaTabCarousel'),
   { ssr: false, loading: () => <SectionSkeleton height='240px' /> },
+)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MBBS ABROAD PAGE SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyMedicalSec = dynamic(
+  () => import('src/views/MbbsAbroadPage/Components/MedicalSec'),
+  { ssr: false, loading: () => <FormSkeleton /> },
+)
+
+export const LazyTopCountrySec = dynamic(
+  () => import('src/views/MbbsAbroadPage/Components/TopCountrySec'),
+  { ssr: false, loading: () => <SectionSkeleton height='400px' /> },
+)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NRI QUOTA PAGE SPECIFIC SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyNriQuotaBannerEnquiry = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupEnquiry'),
+  { ssr: false, loading: () => <button className="btn btn-success">Apply Now</button> },
+)
+
+export const LazyExpertEnquiryPopup = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupEnquiry'),
+  { ssr: false, loading: () => <button className="btn reqBtn">Request a Call Back</button> },
+)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONTACT US PAGE SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyBranchesMapClient = dynamic(
+  () => import('src/views/ContactUsPage/BranchesSec/BranchesMapClient'),
+  { ssr: false, loading: () => <SectionSkeleton height='420px' /> },
+)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EDUCATION LOAN PAGE SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyLoanCalculator = dynamic(
+  () => import('src/views/EducationLoanPage/Components/LoanCalculator'),
+  { ssr: false, loading: () => <SectionSkeleton height='400px' /> },
+)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INNER EXAM PAGE SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const LazyExamAlertButton = dynamic(
+  () => import('src/views/InnerExamPage/Components/BannerSec/ExamAlertButton'),
+  { ssr: false, loading: () => <button className="btn alertExamBtn">Get Alert</button> },
+)
+
+export const LazyNewsLinkCarouselClient = dynamic(
+  () => import('src/views/InnerExamPage/Components/NewsLinkSection/NewsLinkCarouselClient'),
+  { ssr: false, loading: () => <div style={{ height: 88 }} /> },
+)
+
+export const LazyUpcomingExams = dynamic(
+  () => import('src/views/MainExamPage/Components/UpcomingExamsSec'),
+  { ssr: false, loading: () => <p>Loading…</p> },
+)
+
+export const LazyGlobalEnquiryFormExams = dynamic(
+  () => import('src/@core/components/popup/GlobalPopupEnquiry'),
+  {
+    ssr: false,
+    loading: () => (
+      <a className="btn alertExamBtn" style={{ cursor: 'pointer' }}>
+        Get Exams Alert
+      </a>
+    ),
+  }
 )

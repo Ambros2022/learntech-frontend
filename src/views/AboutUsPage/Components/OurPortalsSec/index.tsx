@@ -33,7 +33,15 @@ const OurPortalSec = () => {
           {portals.map((portal) => (
             <div className="bg-skyBlue rounded hover-card" key={portal.href}>
               <Link href={portal.href} target="_blank" rel="noopener noreferrer" aria-label={portal.alt}>
-                <Image src={portal.logo} width={200} height={200} alt={`${portal.alt} logo`} className="img-fluid" />
+                <Image
+                  src={portal.logo}
+                  width={200}
+                  height={200}
+                  alt={`${portal.alt} logo`}
+                  className="img-fluid"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 150px, 200px"
+                />
               </Link>
             </div>
           ))}

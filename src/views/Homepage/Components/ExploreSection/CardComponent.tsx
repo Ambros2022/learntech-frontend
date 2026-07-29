@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAuth } from 'src/hooks/useAuth'
+import styles from './ExploreSection.module.css'
 
 interface Props {
   title: string
@@ -28,16 +29,16 @@ const CardComponent: React.FC<Props> = ({ title, imageSrc, count, activeTab, ite
 
   return (
     <div className="col-md-4 col-lg-2 mb-3">
-      <div className="card text-center exploreCardHover">
+      <div className={`card text-center ${styles.card}`}>
         <Link href={getUrl(activeTab, itemId, slug)} onClick={handleClick}>
-          <div className="row">
-            <div className="col-md-12 col-4 col-sm-3">
-              <div style={{ position: 'relative', width: 70, height: 30, margin: '12px auto 0' }}>
+          <div className="row align-items-center">
+            <div className="col-md-12 col-4 col-sm-3 d-flex align-items-center justify-content-center">
+              <div className={`${styles.logoContainer} mt-md-3 mt-0`}>
                 <Image
                   src={imageSrc}
                   alt={`${title} logo`}
                   fill
-                  sizes="70px"
+                  sizes="(max-width: 768px) 105px, 90px"
                   style={{ objectFit: 'contain' }}
                   loading="lazy"
                 />

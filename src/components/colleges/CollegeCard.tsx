@@ -15,7 +15,7 @@ export interface CollegeItem {
 
 const IMG_BASE = process.env.NEXT_PUBLIC_IMG_URL || ''
 
-export default function CollegeCard({ college }: { college: CollegeItem }) {
+export default function CollegeCard({ college, linkPrefix = 'college' }: { college: CollegeItem; linkPrefix?: string }) {
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
@@ -38,7 +38,7 @@ export default function CollegeCard({ college }: { college: CollegeItem }) {
 
         <div className={styles.actions}>
           <GlobalEnquiryForm className={styles.applyBtn} collegeName={college.name} />
-          <Link href={`/college/${college.id}/${college.slug}`} className={styles.viewBtn}>
+          <Link href={`/${linkPrefix}/${college.id}/${college.slug}`} className={styles.viewBtn}>
             View More
           </Link>
         </div>

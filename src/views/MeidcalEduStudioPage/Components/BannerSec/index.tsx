@@ -1,12 +1,9 @@
-﻿'use client'
-import React from 'react';
-import EnquiryFormMed from 'src/@core/components/popup/EnquiryFormMed';
+import { LazyEnquiryFormMed } from 'src/app/components/ClientWrappers'
 
-const BannerSec = (refview) => {
-    console.log("refview",refview);
+const BannerSec = () => {
     return (
         <section className='medSec position-relative'>
-            <video src="/videos/bannerMeds.webm" muted autoPlay loop></video>
+            <video src="/videos/bannerMeds.webm" muted autoPlay loop playsInline preload="metadata"></video>
             <div className="position-absolute h-100 w-100" style={{ top: '0', backgroundColor: "rgb(0,0,0,0.4)" }}>
                 <div className="container h-100">
                     <div className="row d-flex h-100">
@@ -28,14 +25,14 @@ const BannerSec = (refview) => {
                             </h5>
                         </div>
                         <div className="col-lg-4 col-md-5 col-10 mx-auto align-self-center bg-skyBlue rounded p-3">
-                            <h4 className='fw-bold text-blue text-center mb-3' ref={refview?.refview}></h4>
-                            <EnquiryFormMed heading='Grab Your Opportunity!' />
+                            <h4 id="banner-form" className='fw-bold text-blue text-center mb-3'></h4>
+                            <LazyEnquiryFormMed heading='Grab Your Opportunity!' />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default BannerSec;
+export default BannerSec

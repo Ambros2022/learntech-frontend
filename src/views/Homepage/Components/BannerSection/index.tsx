@@ -12,18 +12,29 @@ interface Banner {
 
 export default function BannerSection({ banners }: { banners: Banner[] }) {
   const firstBanner = banners?.[0]
+  const firstBannerImg = firstBanner?.image
+    ? `${process.env.NEXT_PUBLIC_IMG_URL}/${firstBanner.image}`
+    : null
 
   return (
     <section className={`bannerCon bg-formClr ${styles.section}`}>
+      {/* Preload dynamic hero banner image hint in <head> for fast LCP */}
+      {firstBannerImg && (
+        <link
+          rel="preload"
+          as="image"
+          href={firstBannerImg}
+        />
+      )}
 
       {/* imageArea: relative on mobile (gives flow height), absolute on desktop */}
       <div className={styles.imageArea}>
         {/* Server-rendered first image — in HTML immediately, drives LCP score */}
-        {firstBanner?.image && (
-          <a href={firstBanner.link || '#'} className={`HomebannerLink ${styles.imgLink}`}>
+        {firstBannerImg && (
+          <a href={firstBanner?.link || '#'} className={`HomebannerLink ${styles.imgLink}`}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_IMG_URL}/${firstBanner.image}`}
-              alt={firstBanner.alt || 'Learntech education banner'}
+              src={firstBannerImg}
+              alt={firstBanner?.alt || 'Learntech education banner'}
               fill
               priority
               fetchPriority="high"

@@ -37,7 +37,7 @@ export default function GlobalPopupEnquiry({
         />
       </a>
     ) : (
-      <a onClick={() => setModalShow(true)} className={`${className || 'active btn'} ${styles.counsellingBtn}`} style={{ cursor: 'pointer' }}>
+      <a onClick={() => setModalShow(true)} className={className ?? `active btn ${styles.counsellingBtn}`} style={{ cursor: 'pointer' }}>
         {buttonText || 'Apply Now'}
       </a>
     )

@@ -1,4 +1,4 @@
-﻿import { cache } from 'react'
+import { cache } from 'react'
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URI || '').replace(/\/+$/, '')
 
@@ -50,12 +50,24 @@ export const getCollegeById = cache(async (id: string | number) => {
 
 export const getColleges = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '1000',
+    page: '1', size: '20',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
+
+  const tags = ['colleges']
+  if (params?.country_id) {
+    tags.push(`country-${params.country_id}`)
+  }
+  if (params?.stream_id) {
+    tags.push(`stream-${params.stream_id}`)
+  }
+  if (params?.id) {
+    tags.push(`college-${params.id}`)
+  }
+
   const json = await safeFetch<any>(
     `${API_URL}/api/website/colleges/get?${sp}`,
-    { tags: ['colleges'] },
+    { tags },
   )
   return { data: json?.data ?? [], totalItems: json?.totalItems ?? 0 }
 })
@@ -76,6 +88,38 @@ export const getCollegeCourse = cache(async (courseSlug: string, collegeId: stri
 // STREAMS / COURSES (general)
 // ─────────────────────────────────────────────────────────────────────────────
 
+export const getAllGeneralCourses = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/generalcourse/get?page=1&size=20`,
+    { tags: ['all-general-courses'] },
+  )
+  return json?.data ?? []
+})
+
+export const getTrendingCourses = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/generalcourse/get?page=1&size=20&is_trending=1`,
+    { tags: ['trending-courses'] },
+  )
+  return json?.data ?? []
+})
+
+export const getCoursePageBanner = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_courses_page`,
+    { tags: ['course-page-banner'] },
+  )
+  return json?.data?.[0] ?? null
+})
+
+export const getStreamCourses = cache(async (page = 1, size = 12) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/stream/general/get?page=${page}&size=${size}`,
+    { tags: ['stream-courses'] },
+  )
+  return { courses: json?.data ?? [], totalItems: json?.totalItems ?? 0 }
+})
+
 export const getStreamById = cache(async (id: string | number) => {
   const json = await safeFetch<any>(
     `${API_URL}/api/website/streamfindone/get/${id}`,
@@ -86,7 +130,7 @@ export const getStreamById = cache(async (id: string | number) => {
 
 export const getStreams = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '1000',
+    page: '1', size: '50',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
   const json = await safeFetch<any>(
@@ -118,12 +162,28 @@ export const getExamById = cache(async (id: string | number) => {
 
 export const getExams = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '1000',
+    page: '1', size: '10',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
   const json = await safeFetch<any>(
     `${API_URL}/api/website/exams/get?${sp}`,
     { tags: ['exams'] },
+  )
+  return json?.data ?? []
+})
+
+export const getExamPageBanner = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_Exam_page`,
+    { tags: ['exam-page-banner'] },
+  )
+  return json?.data ?? []
+})
+
+export const getExamNewsLinks = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/news/get?category_id=4&page=1&size=1000&orderby=Desc&columnname=created_at`,
+    { tags: ['exam-news-links'] },
   )
   return json?.data ?? []
 })
@@ -182,6 +242,14 @@ export const getBlogs = cache(async (params?: Record<string, string | number>) =
   return { blogs: json?.data ?? [], totalCount: json?.total ?? 0 }
 })
 
+export const getBlogsListing = cache(async (page = 1, size = 8) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/blog/get?orderby=desc&page=${page}&size=${size}`,
+    { tags: ['blogs-listing'] },
+  )
+  return { blogs: json?.data ?? [], totalPages: json?.totalPages ?? 1 }
+})
+
 // ─────────────────────────────────────────────────────────────────────────────
 // SCHOOLS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -196,7 +264,7 @@ export const getSchoolById = cache(async (id: string | number) => {
 
 export const getSchools = cache(async (params?: Record<string, string | number>) => {
   const sp = new URLSearchParams({
-    page: '1', size: '1000',
+    page: '1', size: '20',
     ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
   })
   const json = await safeFetch<any>(
@@ -254,6 +322,58 @@ export const getScholarships = cache(async (params?: Record<string, string | num
   return json?.data ?? []
 })
 
+export const getScholarshipsList = cache(async (params?: Record<string, string | number>) => {
+  const sp = new URLSearchParams({
+    page: '1', size: '10',
+    ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
+  })
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/scholarships/get?${sp}`,
+    { tags: ['scholarships'] },
+  )
+  return {
+    data: json?.data ?? [],
+    totalItems: json?.totalItems ?? 0,
+  }
+})
+
+export const getScholarshipLevels = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/allscholarlevel/get`,
+    { tags: ['scholarship-levels'] },
+  )
+  return json?.data ?? []
+})
+
+export const getScholarshipTypes = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/allscholartype/get`,
+    { tags: ['scholarship-types'] },
+  )
+  return json?.data ?? []
+})
+
+export const getCountries = cache(async (params?: Record<string, string | number>) => {
+  const sp = new URLSearchParams({
+    page: '1', size: '50',
+    ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
+  })
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/country/get?${sp}`,
+    { tags: ['countries'] },
+  )
+  return json?.data ?? []
+})
+
+export const getScholarshipBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_Scholarship_page`,
+    { tags: ['scholarship-banners'] },
+  )
+  return json?.data ?? []
+})
+
+
 // ─────────────────────────────────────────────────────────────────────────────
 // TESTIMONIALS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -274,13 +394,21 @@ export const getTestimonialsByStream = cache(async (streamId: string | number, s
   return json?.data ?? []
 })
 
+export const getTestimonialsByGeneralCourse = cache(async (gcId: string | number, size = 15) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/testimonial/filter/get?page=1&size=${size}&general_course_id=${gcId}`,
+    { tags: [`testimonials-gc-${gcId}`] },
+  )
+  return json?.data ?? []
+})
+
 // ─────────────────────────────────────────────────────────────────────────────
 // BANNERS (homepage hero)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const getHeroBanners = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=Draft&page=1&size=10000`,
+    `${API_URL}/api/website/banner/get?promo_banner=Draft&page=1&size=2`,
     { tags: ['banners'] },
   )
   return json?.data ?? []
@@ -288,20 +416,69 @@ export const getHeroBanners = cache(async () => {
 
 export const getAboutPageBanners = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=All_about_page&page=1&size=10000`,
+    `${API_URL}/api/website/banner/get?promo_banner=All_about_page&page=1&size=2`,
     { tags: ['about-banners'] },
+  )
+  return json?.data ?? []
+})
+
+export const getAdvertisePageBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=Advertise_page&page=1&size=2`,
+    { tags: ['advertise-banners'] },
+  )
+  return json?.data ?? []
+})
+
+export const getServicesBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=Services_Page&page=1&size=2`,
+    { tags: ['services-banners'] },
+  )
+  return json?.data ?? []
+})
+
+export const getNriPageBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=Nri_page&page=1&size=2`,
+    { tags: ['nri-banners'] },
+  )
+  return json?.data ?? []
+})
+
+
+export const getAssociatedColleges = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/colleges/get?is_associated=1&page=1&size=2`,
+    { tags: ['associated-colleges'] },
   )
   return json?.data ?? []
 })
 
 export const getAboutVideoTestimonials = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/allvideotestimonials/get?type=About_us_page`,
+    `${API_URL}/api/website/allvideotestimonials/get?type=About_us_page&page=1&size=2`,
     { tags: ['about-video-testimonials'] },
   )
   const data = json?.data ?? []
   return data.filter((item: any) => item?.type === 'About_us_page')
 })
+
+export const getVideoTestimonials = cache(async (params?: Record<string, string | number>) => {
+  const sp = new URLSearchParams({
+    page: '1', size: '2', searchfrom: 'name', searchtext: '',
+    ...Object.fromEntries(Object.entries(params ?? {}).map(([k, v]) => [k, String(v)])),
+  })
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/allvideotestimonials/get?${sp}`,
+    { tags: ['video-testimonials'] },
+  )
+  return {
+    data: json?.data ?? [],
+    totalPages: json?.totalPages ?? 1,
+  }
+})
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ABROAD PAGES (study-in-xxx)
@@ -315,10 +492,34 @@ export const getAbroadCountryPage = cache(async (country: string) => {
   return json?.data ?? null
 })
 
+export const getOrganizationPage = cache(async (category: string) => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/organizationpage/get?size=1000&categories=${category}`,
+    { tags: [`organization-${category}`] },
+  )
+  return json?.data?.[0] ?? null
+})
+
+export const getCounsellorTeams = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/counsellorteams/get?orderby=asc&columnname=listing_order`,
+    { tags: ['counsellors'] },
+  )
+  return json?.data ?? []
+})
+
 export const getAbroadCountries = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/country/get?page=1&size=10&india=false`,
+    `${API_URL}/api/website/country/get?page=1&size=20&india=false`,
     { tags: ['abroad-countries'] },
+  )
+  return json?.data ?? []
+})
+
+export const getAbroadPages = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/abroadpages/get?page=1&size=20`,
+    { tags: ['abroad-pages'] },
   )
   return json?.data ?? []
 })
@@ -350,7 +551,7 @@ export const getLatestNewsList = cache(async (size = 8) => {
 
 export const getNewsSectionBanner = cache(async () => {
   const json = await safeFetch<any>(
-    `${API_URL}/api/website/banner/get?promo_banner=Home_news_page&page=1&size=1`,
+    `${API_URL}/api/website/banner/get?promo_banner=Home_news_page&page=1&size=2`,
     { tags: ['news-section-banner'] },
   )
   return (json?.data?.[0] ?? null) as { image: string } | null
@@ -416,22 +617,98 @@ export async function getNavData() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// NEWS PAGE
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getNewsCategories = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/newscategory/get`,
+    { tags: ['news-categories'] },
+  )
+  return json?.data ?? []
+})
+
+export const getLandingPages = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/langingpage/get?page=1&size=100&orderby=asc&columnname=listing_order`,
+    { tags: ['landing-pages'] },
+  )
+  return json?.data ?? []
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CAREER
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getJobPositions = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/jobposition/get`,
+    { tags: ['job-positions'] },
+  )
+  return json?.data ?? []
+})
+
+export const getJobLocations = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/alljoblocation/get`,
+    { tags: ['job-locations'] },
+  )
+  return json?.data ?? []
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// OUR TEAM
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getOurTeamBanners = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/banner/get?promo_banner=All_our_teams&page=1&size=2`,
+    { tags: ['our-team-banners'] },
+  )
+  return json?.data ?? []
+})
+
+export const getOurTeams = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/ourteams/get`,
+    { tags: ['ourteams'] },
+  )
+  return json?.data ?? []
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
 // SITEMAP (bypasses cache — always fresh XML)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export async function getSitemapXml(type: string): Promise<string | null> {
-  const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 30000)
-  try {
-    const res = await fetch(
-      `${API_URL}/api/website/xmlgenerator/get?type=${type}`,
-      { signal: controller.signal, cache: 'no-store' },
-    )
-    if (!res.ok) return null
-    return await res.text()
-  } catch {
-    return null
-  } finally {
-    clearTimeout(timeoutId)
-  }
+
+
+export const getSitemapData = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/sitemap/get?page=1&size=10000`,
+    { tags: ['sitemap-data'] },
+  )
+  return json?.data ?? null
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// UPCOMING EXAMS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface UpcomingExam {
+  id: number
+  exam_title: string
+  slug: string
+  upcoming_date: string
 }
+
+export const getUpcomingExams = cache(async () => {
+  const json = await safeFetch<any>(
+    `${API_URL}/api/website/exams/get?orderby=desc&columnname=upcoming_date`,
+    { tags: ['upcoming-exams'] },
+  )
+  if (!json || json.status !== 1) return []
+  const now = new Date()
+  return (json.data as UpcomingExam[])
+    .filter(e => new Date(e.upcoming_date) >= now)
+    .sort((a, b) => new Date(a.upcoming_date).getTime() - new Date(b.upcoming_date).getTime())
+})

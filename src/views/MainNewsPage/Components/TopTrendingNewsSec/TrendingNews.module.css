@@ -1,0 +1,45 @@
+.arrowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 40px;
+  height: 40px;
+
+  background: #fff;
+  border: 1.5px solid rgba(212, 218, 234, 1);
+  border-radius: 8px;
+
+  color: #254692;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.arrowBtn:hover {
+  background: #254692;
+  border-color: #254692;
+  color: #fff;
+}
+
+.left {
+  left: -48px;
+}
+
+.right {
+  right: -48px;
+}
+
+@media (max-width: 768px) {
+  .left {
+    left: 2px;
+  }
+
+  .right {
+    right: 2px;
+  }
+}

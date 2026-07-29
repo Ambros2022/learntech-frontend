@@ -1,0 +1,27 @@
+/* Exam Overview tabs section */
+
+.wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Arrow buttons in ScrollTabs — exam page only, no background */
+.wrapper :global(.btn-sm) {
+  color: var(--brand-navy, #254692);
+  background: none;
+  border: none;
+  padding: 4px 6px;
+  transition: color 0.2s;
+}
+
+.wrapper :global(.btn-sm):hover {
+  background: none;
+  color: #1a3570;
+}
+
+/* Sidebar fixed column — stays in view on long tab content */
+.sidebar {
+  position: sticky;
+  top: 80px;
+  align-self: flex-start;
+}

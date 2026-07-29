@@ -655,7 +655,7 @@ Many APIs at common location: `src/lib/api/common.ts`
 ## Breadcrumb Pattern
 
 ```tsx
-// src/components/Breadcrumb.tsx — Server Component, memo'd
+// src/app/components/Breadcrumb.tsx — memo'd
 // Props: items: { label: string; href?: string }[]
 // Last item: no link, aria-current="page"
 // Icon: lucide-react ChevronRight (not a CSS pseudo-element)
@@ -663,3 +663,808 @@ export const Breadcrumb = memo(({ items }) => { ... });
 ```
 
 Always pair with `BreadcrumbList` JSON-LD structured data on same page.
+
+---
+
+## Reusable Generic Components
+
+**Before building a new component, check these first.**
+
+### SearchBar — `src/components/ui/SearchBar/index.tsx`
+
+Generic autocomplete search. Bootstrap-only, no MUI.
+
+```tsx
+// Props
+interface Props {
+  placeholder?: string
+  onSearch: (query: string, signal?: AbortSignal) => Promise<SearchItem[]>
+  className?: string
+}
+export interface SearchItem { id: string | number; label: string; href: string }
+```
+
+Usage: wrap with a page-specific fetch function, lazy-load via ClientWrappers.
+
+Example — `src/components/ui/SearchBar/BlogSearchBar.tsx`:
+```tsx
+async function fetchBlogResults(query, signal) { /* fetch + map to SearchItem[] */ }
+export default function BlogSearchBar() {
+  return <SearchBar placeholder="Search for Blogs" onSearch={fetchBlogResults} />
+}
+```
+
+Rules:
+* `AbortController` ref cancels in-flight requests on new keystroke
+* Full-bar focus ring via `focused` state on container (not native input focus ring)
+* Idle right: `bi-chevron-down`; text entered: `×` clear button
+* Register lazy export in `ClientWrappers.tsx` as `LazyXxxSearchBar`
+
+---
+
+### ScrollTabs — `src/components/ui/ScrollTabs/index.tsx`
+
+Mobile-responsive tab navigation. No carousel dependency.
+
+```tsx
+export interface TabItem { id: string; label: string }
+interface Props {
+  tabs: TabItem[]
+  activeTab: string
+  onTabChange: (id: string) => void
+  className?: string
+}
+```
+
+Rules:
+* Desktop: scrollable flex row
+* Mobile: `< >` arrow buttons (`d-md-none`) + overflow scroll
+* Mobile shows **2 tabs per page** via CSS module `width: calc(50% - 0.5rem)`
+* Active tab auto-scrolls into view via `scrollIntoView`
+* Do NOT use `infoBtn` class on scroll container — conflicts with globals `width: 90% !important`
+* Active state: `.tabBtn:global(.active)` in CSS module (not `.tabBtn.active`)
+* `Breadcrumb` must live in parent server component, not inside `ScrollTabs`
+
+---
+
+### CollegeCard — `src/components/colleges/CollegeCard.tsx`
+
+```tsx
+export interface CollegeItem {
+  id: number; slug: string; name: string; address: string; banner_image: string
+}
+```
+
+Link: `/college/{id}/{slug}` — Embla carousel via `LazyCollegeCarousel`.
+
+---
+
+### SchoolCard — `src/components/schools/SchoolCard.tsx`
+
+Same shape as CollegeCard. Link: `/school/{id}/{slug}` — Embla carousel via `LazySchoolsCarousel`.
+
+```tsx
+export interface SchoolItem {
+  id: number; slug: string; name: string; address: string; banner_image: string
+}
+```
+
+---
+
+### Card CSS Module Pattern — `CollegeCard.module.css` / `SchoolCard.module.css`
+
+Standard card structure:
+* `.card` — border, border-radius, hover lift + shadow
+* `.imageWrap` — fixed height 190px, `position: relative` for `next/image fill`
+* `.image` — `object-fit: cover`, hover scale
+* `.body` — flex column, `flex: 1 1 auto`, `min-width: 0`
+* `.title` — truncate via `text-overflow: ellipsis`
+* `.location` — icon + text, icon `flex-shrink: 0`, text truncate
+* `.actions` — flex row, both buttons `flex: 1 1 0 !important` equal width
+
+New entity card (university, exam, etc.) → copy pattern, change link prefix only.
+
+---
+
+### ReviewSec — `src/views/InnerBoardPage/Components/ReviewSec/index.tsx`
+
+Reusable review + rating component. Props decouple from any specific entity.
+
+```tsx
+interface Props {
+  entityId: number | string   // college_id / school_id / board_id
+  entityName: string          // shown in heading
+}
+```
+
+Rules:
+* Single `useEffect` + `Promise.all` for 3 parallel fetches + `AbortController` cleanup
+* Native `fetch` only — no axios
+* Registered as `LazyReviewSec` in ClientWrappers (`ssr: false`)
+* Dislike API: send `dislike: 1`, not `dislike: 0`
+
+---
+
+### GlobalPopupEnquiry className Rule
+
+```tsx
+// CORRECT — caller's className replaces default, not augments it
+<a className={className ?? `active btn ${styles.counsellingBtn}`}>
+
+// WRONG — always appends counsellingBtn, overrides custom green/etc
+<a className={`${className || 'active btn'} ${styles.counsellingBtn}`}>
+```
+
+Use `??` (nullish coalescing) not `||` so caller controls full class string.
+
+---
+
+## CSS Module vs globals.css
+
+| Use CSS Module | Use globals.css |
+|---|---|
+| Component-specific styles | Site-wide utility classes |
+| Page section (BannerSection, etc.) | Shared state classes (`.text-blue`, `.bg-skyBlue`) |
+| Overriding Bootstrap for one component | Bootstrap variable overrides |
+| Button variants tied to one component | Global button classes (`.freeBtn`, `.writeReviewBtn`) |
+
+Rules:
+* `globals.css` `!important` beats CSS module without `!important` — use `!important` in module to win
+* CSS module `.class.active` → does NOT match global `active` string — use `.class:global(.active)`
+* `100vw` in globals causes overflow (includes scrollbar) → use `100%` instead
+* Prefer CSS modules for new component work; migrate globals progressively
+
+---
+
+## formUtils Pattern
+
+Single source of truth for all form utilities — `src/@core/components/popup/formUtils.ts`:
+
+```ts
+export const PHONE_RULES: [RegExp, string][] = [...]
+export const isValidPhone = (val: string) => PHONE_RULES.every(([re]) => re.test(val))
+export const phoneSchema = z.string().refine(isValidPhone, { message: 'Invalid phone number' })
+
+export async function submitEnquiry(fields: Record<string, string>) {
+  const fd = new FormData()
+  Object.entries(fields).forEach(([k, v]) => fd.append(k, v))
+  fd.append('current_url', window.location.href)
+  return fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/website/enquiry/post`, { method: 'POST', body: fd })
+}
+```
+
+Rules:
+* Never duplicate `PHONE_RULES`, `isValidPhone`, or phone zod schema in individual form files
+* All forms import `phoneSchema` and `submitEnquiry` from `formUtils`
+* `contact_number: phoneSchema` in every form zod schema
+* `submitEnquiry` auto-appends `current_url` — do not append manually
+
+---
+
+## Form Migration Pattern
+
+All forms: react-hook-form + zod + native fetch. No Formik, Yup, or axios.
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { phoneSchema, submitEnquiry } from 'src/@core/components/popup/formUtils'
+import { toast } from 'sonner'
+
+const schema = z.object({
+  name: z.string().min(1),
+  contact_number: phoneSchema,
+  email: z.string().email(),
+})
+
+const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
+  resolver: zodResolver(schema),
+})
+
+const onSubmit = async (data) => {
+  await submitEnquiry({ name: data.name, contact_number: data.contact_number, email: data.email })
+  toast.success('Submitted!')
+  reset()
+}
+```
+
+Phone input → always use `LazyPhoneInputField` from ClientWrappers via `Controller`.
+
+---
+
+## BannerImage Component
+
+Reusable wrapper for the repeated BannerBG.webp banner pattern — `src/components/ui/BannerImage.tsx`:
+
+```tsx
+// Props: alt (required), src, width, height, priority, className
+// Defaults: src='/images/icons/BannerBG.webp', width=1400, height=300, priority=true, className='w-100'
+import BannerImage from 'src/components/ui/BannerImage'
+
+<BannerImage alt="Boards Banner" />
+<BannerImage alt="Custom" src="/images/icons/Other.webp" className="w-100 custom" />
+```
+
+Rules:
+* Replace every raw `<img src="/images/icons/BannerBG.webp">` with `<BannerImage alt="..." />`
+* Never use `<img>` for banner — always `next/image` via this wrapper
+
+---
+
+## EntityCarouselClient Pattern
+
+Generic carousel for college/school entities — `src/components/EntityCarouselClient.tsx`:
+
+```tsx
+export interface EntityItem { id: number; slug: string; name: string; address: string; banner_image: string }
+export type EntityType = 'college' | 'school'
+
+// Usage — thin wrapper per entity type:
+// CollegeCarouselClient: <EntityCarouselClient type="college" items={colleges} />
+// SchoolsCarouselClient: <EntityCarouselClient type="school" items={schools} />
+```
+
+Rules:
+* Always includes hidden `<ul aria-hidden="true">` with all entity links for SEO (Googlebot crawls all links)
+* Thin wrappers (`CollegeCarouselClient`, `SchoolsCarouselClient`) re-export `EntityItem` as entity-specific type
+* Register as `LazyEntityCarousel` in ClientWrappers
+
+---
+
+## Server/Client SEO Split Pattern for Carousels
+
+Heading + links in server HTML. Carousel JS only for interaction. Used in LatestUpdateSec, EntityCarouselClient.
+
+```tsx
+// Server component (index.tsx) — no 'use client'
+export default function LatestUpdateSec({ updates }) {
+  return (
+    <section>
+      <h2>...</h2>                               {/* SSR — Googlebot indexes */}
+      <ul aria-hidden="true" style={clipRect}>   {/* SSR — all links crawlable */}
+        {updates.map(u => <li><a href={...}>{u.name}</a></li>)}
+      </ul>
+      <CarouselClient updates={updates} />        {/* client boundary — interaction only */}
+    </section>
+  )
+}
+
+// Client component (CarouselClient.tsx) — 'use client'
+// Only EmblaCarousel + card rendering. No heading. No links list.
+```
+
+clipRect style: `{ position:'absolute', width:1, height:1, overflow:'hidden', clip:'rect(0,0,0,0)', whiteSpace:'nowrap' }`
+
+Rules:
+* `H1`, `H2`, all entity links → server rendered
+* Never put headings inside `'use client'` carousel components
+* Use direct `EmblaCarousel` import (not `LazyEmblaCarousel`) when component already has `'use client'`
+* `LazyEmblaCarousel` only from server components via ClientWrappers
+
+---
+
+## InnerHeader Pattern
+
+Existing generic banner for page-level headers — `src/views/SimplePage/InnerHeader.tsx`:
+
+```tsx
+// Props: title, description, imageSrc, imageAlt, children (search bar slot)
+// Already handles: next/image, BannerBG default, responsive layout
+// Use for any page with a banner + heading + optional search
+import InnerHeader from 'src/views/SimplePage/InnerHeader'
+
+<InnerHeader title="Boards" description="...">
+  <LazyBoardSearchBar />
+</InnerHeader>
+```
+
+Rules:
+* Prefer `InnerHeader` over custom BannerSec — it's already optimized
+* Add new search bars as children, not hardcoded inside InnerHeader
+
+---
+
+## getNewsList API Notes
+
+`getNewsList` in `src/lib/api/common.ts`:
+* Returns array directly — NOT `{ data, totalItems }`. Do not destructure `.data`
+* Default `columnname: 'news_date'` may fail if column doesn't exist — always pass `columnname: 'created_at'` explicitly
+* Filter by category: pass `{ category_id: N, columnname: 'created_at', size: 10 }`
+
+```ts
+// CORRECT
+const updates = await getNewsList({ category_id: 8, size: 10, columnname: 'created_at' })
+
+// WRONG — updates will be undefined
+const { data: updates } = await getNewsList(...)
+```
+
+---
+
+## getColleges / getSchools API Notes
+
+`getColleges` and `getSchools` in `src/lib/api/common.ts`:
+* Return `{ data: [], totalItems: N }` — MUST destructure `.data`
+
+```ts
+// CORRECT
+const result = await getColleges({ size: 10 })
+const colleges = result?.data ?? []
+
+// WRONG — colleges is { data, totalItems }, not array
+const colleges = await getColleges({ size: 10 })
+colleges.map(...)  // ❌ TypeError
+```
+
+---
+
+## Async Server Component TypeScript Fix
+
+TypeScript doesn't understand async server components used as JSX in non-async parents.
+
+```tsx
+// Fix — suppress the type error:
+{/* @ts-expect-error async server component */}
+<FeaturedCollegeSection />
+
+// Or in page.tsx return:
+// @ts-expect-error async server component
+return <InnerCollegePage pagedata={pagedata} />
+```
+
+Rules:
+* Never `async` a page-level server component unnecessarily to avoid cascading ts-errors
+* Prefer making the view component async, suppress at call site
+
+---
+
+## Self-Fetching Server Component Pattern
+
+Components that always show same data can own their fetch instead of receiving props.
+
+```tsx
+// FeaturedCollegeSection/index.tsx — async server component
+export default async function FeaturedCollegeSection({ heading = 'Featured Colleges' }: { heading?: string }) {
+  const result = await getColleges({ size: 10 })
+  const colleges = result?.data ?? []
+  if (!colleges.length) return null
+  return (
+    <section>
+      <h2>{heading}</h2>
+      <LazyCollegeCarousel colleges={colleges} />
+    </section>
+  )
+}
+```
+
+Rules:
+* Use when: data is always the same regardless of page context (featured colleges, latest news)
+* Avoid when: data depends on page params (college ID, slug, filters)
+* Accept optional `heading` prop to reuse across pages with different titles
+* Caller doesn't need to fetch or pass props — zero prop drilling
+* React `cache()` deduplicates if same API called elsewhere on same request
+
+---
+
+## CollegeInfoSection Tab Pattern (Server/Client Split)
+
+Tabs need client state, but the data preparation is server-side.
+
+```
+CollegeInfoSection (server — no 'use client')
+└── CollegeInfoTabsClient ('use client')
+    ├── ScrollTabs — reusable tab nav component
+    └── Tab content rendered per activeTab
+        ├── HTML tabs — dangerouslySetInnerHTML (from server props)
+        ├── Gallery — next/image
+        ├── Review — LazyReviewSec (mounts only when tab active)
+        └── FAQ — LazyBoardFaqSec (mounts only when tab active)
+```
+
+Server component prepares `CollegeTabData[]` — serializable (HTML strings, arrays, not JSX).
+Client renders appropriate content per `activeTab`.
+Lazy components (`LazyReviewSec`, `LazyFaqSec`) only mount when their tab is activated — avoids unnecessary API calls.
+
+```tsx
+// Server (index.tsx)
+export default function CollegeInfoSection({ data }) {
+  const tabs: CollegeTabData[] = [...].filter(t => hasContent(t))
+  return <section><CollegeInfoTabsClient tabs={tabs} collegeName={data.name} collegeId={data.id} /></section>
+}
+
+// Client (CollegeInfoTabsClient.tsx)
+'use client'
+export default function CollegeInfoTabsClient({ tabs, collegeName, collegeId }) {
+  const [activeTab, setActiveTab] = useState(tabs[0]?.id)
+  return (
+    <>
+      <ScrollTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      {/* render content for activeTab only */}
+    </>
+  )
+}
+```
+
+---
+
+## RSC Children Slot Pattern (Server Sidebar in Client Tab Layout)
+
+When a client component needs a layout column that is purely static (no JS), pass it as `children` from the server component. Next.js serializes server-rendered children as static HTML — zero hydration cost, fully crawlable.
+
+```tsx
+// Server (CourseInfoSection/index.tsx) — no 'use client'
+export default function CourseInfoSection({ data, colleges, exams }: Props) {
+  return (
+    <section>
+      <CourseInfoTabsClient tabs={tabs} streamId={data.id} streamSlug={data.slug}>
+        {/* sidebar — server-rendered: no JS, crawlable */}
+        <div className="col-md-4">
+          <Image src={...} ... />
+          <GlobalEnquiryForm ... />
+          {colleges.map(val => <Link href={`/college/${val.id}/${val.slug}`}>...</Link>)}
+        </div>
+      </CourseInfoTabsClient>
+    </section>
+  )
+}
+
+// Client (CourseInfoTabsClient.tsx) — 'use client'
+export default function CourseInfoTabsClient({ tabs, streamId, streamSlug, children }) {
+  const [activeTab, setActiveTab] = useState(tabs[0]?.id)
+  return (
+    <div className="container">
+      <ScrollTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      <div className="row">
+        <div className="col-md-8">
+          {/* tab content */}
+        </div>
+        {children}  {/* server-rendered sidebar slotted in */}
+      </div>
+    </div>
+  )
+}
+```
+
+Rules:
+* Use when: sidebar/column has static server data (links, images) alongside client state (tabs)
+* Server passes `children` — client places via `{children}` in the row
+* Never duplicate static content inside `'use client'` — keep it in parent server component
+* Used in: `CourseInfoSection` (sidebar = colleges + exams + course image)
+
+---
+
+## ExpertTraineeClient Pattern
+
+Counsellor cards + profile dialog. H2 heading is context-specific (country vs stream) — must be server-rendered.
+
+```
+ExpertTrainneSec (server — async, self-fetches getCounsellorTeams())
+├── <h2>Context-specific heading</h2>          ← SSR — SEO
+├── <p>Description paragraph</p>               ← SSR
+└── <LazyExpertTraineeClient trainers={...} />  ← client, ssr:false
+    ├── Trainer cards grid
+    └── <dialog> modal — native HTML, no MUI
+```
+
+```tsx
+// Server wrapper (any page's ExpertTrainneSec/index.tsx)
+export default async function ExpertTrainneSec({ streamName }: { streamName: string }) {
+  const trainers = await getCounsellorTeams()
+  if (!trainers?.length) return null
+  return (
+    <section className='bg-light py-md-5 py-3'>
+      <div className="container">
+        <h2>We have Educational Experts to Provide Guidance for {streamName} Courses</h2>
+        <p>The counselors at Learntech...</p>
+        <LazyExpertTraineeClient trainers={trainers} />
+      </div>
+    </section>
+  )
+}
+
+// Client: src/views/AbroadPage/Components/ExpertTrainneSec/ExpertTraineeClient.tsx
+// Props: { trainers: Trainer[] } — NO countryName, NO heading, NO section wrapper
+// Renders: cards grid + <dialog ref> modal (native HTML, no MUI)
+```
+
+Rules:
+* `ExpertTraineeClient` = cards + dialog ONLY — no `<section>`, no `<h2>`, no `<p>`
+* Heading always server-rendered in the wrapper, using page context (country/stream name)
+* Modal: native `<dialog>` + `.showModal()` / `.close()` — never MUI Modal/Fade/Box
+* `getCounsellorTeams()` is `cache()`-wrapped — safe to call from multiple server components per request
+* Registered as `LazyExpertTraineeClient` in ClientWrappers (`ssr: false`)
+
+---
+
+## EmblaCarousel vs EmblaTabCarousel
+
+Two carousel implementations — choose based on arrow style needed:
+
+| | `EmblaCarousel` | `EmblaTabCarousel` |
+|---|---|---|
+| Arrows | Plain `‹ ›` text, absolute at `-60px` | Circle button, white bg + navy border, hover fills navy |
+| Dots | Yes (default) | No dots |
+| Use for | General content carousels | Entity carousels, course carousels, testimonials |
+
+```tsx
+// EmblaCarousel — src/components/ui/Embla/EmblaCarousel.tsx
+<EmblaCarousel
+  slidesToShowDesktop={4}   // default 4
+  slidesToShowTablet={3}    // default 3
+  slidesToShowMobile={1}    // default 1
+  showDots={true}           // default true
+  showArrows={true}         // default true
+  loop={true}               // default true
+  autoplay={true}           // default true
+  autoplayDelay={3000}
+>
+
+// EmblaTabCarousel — src/components/ui/Embla/EmblaTabCarousel.tsx
+// Same props + variant="tabs" for ScrollTabs mode
+// Arrows: only shown when canScrollPrev/canScrollNext (smart visibility)
+<EmblaTabCarousel
+  slidesToShowDesktop={7}
+  slidesToShowTablet={4}
+  slidesToShowMobile={2}
+  showDots={false}
+  loop
+  autoplay
+  autoplayDelay={1500}
+>
+```
+
+Rules:
+* Both components: slide width = `flex: 0 0 calc(100% / slidesToShow)` — CSS not needed
+* `EmblaTabCarousel` preferred for all new carousels — better arrow UX
+* `variant="tabs"` adds `padding: 0 48px` for tab nav arrow space — do NOT use for card carousels
+* Never pass `options={{ loop }}` — pass `loop` directly as prop
+
+---
+
+## getSchools API Return Shape
+
+`getSchools` returns array directly — NOT `{ data, totalItems }`:
+
+```ts
+// CORRECT
+const schools = await getSchools({ size: 10 })
+// schools is School[]
+
+// WRONG
+const result = await getSchools({ size: 10 })
+const schools = result?.data ?? []  // ❌ undefined — getSchools already returns array
+```
+
+Contrast with `getColleges` which returns `{ data: [], totalItems: N }`.
+
+---
+
+## AbroadSearchBar / CourseSearchBar Pattern
+
+Context-specific search bars wrapping the generic `SearchBar`:
+
+```tsx
+// src/components/ui/SearchBar/CourseSearchBar.tsx — 'use client'
+async function fetchCourseResults(query, signal): Promise<SearchItem[]> {
+  // hits /api/website/courses/get, maps nested general_courses
+  // returns: [{ id, label, href: '/course/streamId/streamSlug/gcSlug' }]
+}
+export default function CourseSearchBar() {
+  return <SearchBar placeholder="Search for course..." onSearch={fetchCourseResults} />
+}
+
+// src/components/ui/SearchBar/AbroadSearchBar.tsx — 'use client'
+// Props: { countryId, countrySlug } — forwarded through dynamic import
+// href: /${countrySlug}/${id}/${slug}
+```
+
+Rules:
+* Each search bar owns its fetch + href construction
+* Register as `LazyXxxSearchBar` in ClientWrappers (`ssr: false`)
+* Props flow through `dynamic()` transparent to caller — server component passes props directly to lazy wrapper
+
+---
+
+## getTestimonialsByGeneralCourse API
+
+```ts
+// Returns array directly — NOT { data, totalItems }
+const testimonials = await getTestimonialsByGeneralCourse(courseSlug)
+// Pass gcId (general course id or slug) — uses general_course_id filter
+```
+
+Contrast: `getTestimonialsByStream(streamId)` → `stream_id` filter. `getTestimonialsByCollege(collegeId)` → `college_id` filter.
+
+---
+
+## getAllGeneralCourses API
+
+```ts
+// Returns all general courses (no trending filter)
+const courses = await getAllGeneralCourses()
+// Shape: { id, short_name, slug, streams: { id, slug, logo } }[]
+// Link: /course/${c.streams.id}/${c.streams.slug}/${c.slug}
+```
+
+Contrast: `getTrendingCourses()` → adds `is_trending=1` filter.
+
+---
+
+## PopularCourses Self-Fetching Pattern
+
+`PopularCourses` (used in SubInnerCoursePage) is async self-fetching — invariant data (same on every sub-course page):
+
+```tsx
+// src/views/SubInnerCoursePage/Components/PopularCourses/index.tsx
+export default async function PopularCourses() {
+  const courses = await getAllGeneralCourses()
+  if (!courses.length) return null
+  return (
+    <section>
+      <h2>Popular Degree Courses</h2>
+      <ul aria-hidden="true" style={clipRect}>  {/* SSR links — Googlebot crawls */}
+        {courses.map(c => <li key={c.id}><a href={...}>{c.short_name}</a></li>)}
+      </ul>
+      <div className={`px-5 position-relative ${styles.wrap}`}>
+        <LazyPopularCoursesCarousel courses={courses} />
+      </div>
+    </section>
+  )
+}
+```
+
+Client (`PopularCoursesCarouselClient`): `EmblaTabCarousel`, `slidesToShowDesktop={6}`, uses `streams.logo` as image.
+
+---
+
+## EmblaTabCarousel Arrow CSS Override (Page-Specific)
+
+`EmblaTabCarousal.module.css` mobile defaults (`left: -10px`, `right: -5px`) cause arrows to overlap slides when parent has `px-5` (48px) padding. Fix with page-scoped CSS module using `button[aria-label]` selector:
+
+```css
+/* OtherCourses.module.css */
+.wrap :global(button[aria-label="Previous"]) { left: -45px; }
+.wrap :global(button[aria-label="Next"])     { right: -45px; }
+
+@media (max-width: 768px) {
+  .wrap :global(button[aria-label="Previous"]) { left: -42px; }
+  .wrap :global(button[aria-label="Next"])     { right: -42px; }
+}
+```
+
+Apply `styles.wrap` to the carousel container div in the server component.
+
+Rules:
+* Arrow must be fully outside `.embla`: `abs(left) ≥ arrow-width (40px)`
+* Arrow must be within parent padding: `abs(left) ≤ parent-padding (48px for px-5)`
+* Target `button[aria-label]` — CSS module class names are hashed, not targetable from outside
+* Used in: `OtherCourses.module.css` → imported by `OtherCourses/index.tsx` + `PopularCourses/index.tsx`
+
+---
+
+## BreadcrumbList JSON-LD — Always Include `item` URL
+
+Last breadcrumb entry must include `item` URL to avoid TypeScript union error (`item?: undefined` conflicts with `JsonLdValue` index signature):
+
+```tsx
+// WRONG — last entry without item causes TS error
+{ '@type': 'ListItem', position: 4, name: pagedata?.short_name }
+
+// CORRECT — always provide item URL for all entries
+{ '@type': 'ListItem', position: 4, name: pagedata?.short_name, item: `${webUrl}/course/${pagedata?.streams?.id}/${pagedata?.streams?.slug}/${pagedata?.slug}` }
+```
+
+---
+
+## SubInnerCoursePage Pattern (Sub-Course Detail Page)
+
+Page: `/course/[streamId]/[streamSlug]/[courseSlug]` — same architecture as `InnerCoursePage` (stream detail).
+
+```
+page.tsx (server)
+ └── SubInnerCoursePage (server — JsonLd, Breadcrumb)
+     ├── BannerSection (server)
+     ├── Breadcrumb (server)
+     ├── OverviewSection (server — RSC children slot)
+     │   └── SubCourseInfoTabsClient ('use client' — ScrollTabs)
+     │       └── [children] sidebar (server-rendered)
+     ├── PopularCourses (async server — self-fetching via getAllGeneralCourses())
+     ├── TestimonialSec (server — data from page.tsx via getTestimonialsByGeneralCourse)
+     ├── OrganizationSection (async server — self-fetching via getOrganizationPage('Courses'))
+     ├── ExpertTraineeSec (async server — self-fetching via getCounsellorTeams())
+     └── ExpertSection (server)
+```
+
+`page.tsx` parallel fetches:
+```ts
+const [pagedata, colleges, exams, testimonials] = await Promise.all([
+  getGeneralCourseBySlug(courseSlug, streamId),
+  getColleges({ size: 8, type: 'college', stream_id: streamId }),
+  getExams({ size: 8, stream_id: streamId }),
+  getTestimonialsByGeneralCourse(courseSlug),
+])
+```
+
+`SubCourseTabData` — tabs built server-side, `html` fields for HTML content, `courses` for sub-course cards (with pre-computed `href`), `faqData` for FAQ:
+```ts
+export interface SubCourseTabData {
+  id: string; label: string
+  html?: string
+  courses?: { id: number; name: string; short_name: string; duration: string; slug: string; href: string }[]
+  faqData?: { questions: string; answers: string }[]
+}
+```
+
+`top_college` field can be string HTML or array of sub-course objects — handled in server component:
+```ts
+Array.isArray(data.top_college)
+  ? { id: 'top-colleges', label: 'Top Colleges', courses: data.top_college.map(item => ({ ...item, href: `/course/${item.id}/${data.slug}/${item.slug}` })) }
+  : { id: 'top-colleges', label: 'Top Colleges', html: data.top_college }
+```
+
+`TestimonialSec` uses `card.courseTestimonials` (not `streamTestimonials`) — requires separate `SubCourseTestimonialCarouselClient`.
+
+## Cache Tag Mapping & Optimization
+
+| Function Name | Reference Count | Cache Tags | Optimization Notes |
+| :--- | :--- | :--- | :--- |
+| `getPageData` | 71 | `page-${slug}` | Backend: revalidates on CMS page create, update, delete |
+| `getColleges` | 22 | `colleges`, `country-${countryId}`, `stream-${streamId}`, `college-${collegeId}` | Backend: revalidates specific stream/country/college tags on College create, update, delete |
+| `getAbroadCountryPage` | 45 | `abroad-${country}`, `abroad-pages` | Backend: revalidates on abroad page create, update, delete |
+| `getAbroadPages` | - | `abroad-pages` | Backend: revalidates on abroad page create, update, delete |
+| `getCollegeById` | 33 | `college-${id}` | Backend: revalidates on college create, update, delete, and faq/gallery updates |
+| `getCollegeCourse` | - | `course-${collegeId}-${courseSlug}` | Backend: revalidates on college course create, update, delete, and all sub-entity updates |
+| `getGeneralCourseBySlug` | - | `general-course-${streamId}-${courseSlug}` | Backend: revalidates on general course create, update, delete, and faq updates |
+| `getTestimonialsByCollege` | 20 | `testimonials-college-${collegeId}`, `video-testimonials`, `about-video-testimonials` | Backend: revalidates on video testimonial create, update, delete |
+| `getTestimonialsByStream` | 2 | `testimonials-stream-${streamId}` | Backend: revalidates on video testimonial create, update, delete |
+| `getTestimonialsByGeneralCourse` | 2 | `testimonials-gc-${gcId}` | Backend: revalidates on video testimonial create, update, delete |
+| `getNewsList` | 13 | `news`, `news-${id}` | Backend: revalidates on news create, update, delete |
+| `getLatestNewsList` | 2 | `latest-news` | Backend: revalidates on news create, update, delete |
+| `getNewsById` | 3 | `news-${id}` | Backend: revalidates on news create, update, delete |
+| `getExamNewsLinks` | 3 | `exam-news-links` | Backend: revalidates on news create, update, delete if category_id is 4 |
+| `getBlogs` | 13 | `blogs` | Backend: revalidates on blog create, update, delete, and faq updates |
+| `getBlogsListing` | 1 | `blogs-listing` | Backend: revalidates on blog create, update, delete, and faq updates |
+| `getBlogById` | 3 | `blog-${id}` | Backend: revalidates on blog create, update, delete, and faq updates |
+| `getOrganizationPage` | 10 | `organization-${category}` | Backend: revalidates on organization page and step create, update, delete |
+| `getCounsellorTeams` | 9 | `counsellors` | Backend: revalidates on counsellor team create, update, delete |
+| `getStreams` | 8 | `streams`, `nav-courses` | Backend: revalidates on stream create, update, delete, and faq updates |
+| `getStreamById` | 3 | `stream-${id}` | Backend: revalidates on stream create, update, delete, and faq updates |
+| `getExams` | 8 | `exams`, `nav-exams` | Backend: revalidates on exam create, update, delete, and all sub-entity updates |
+| `getExamById` | 3 | `exam-${id}` | Backend: revalidates on exam create, update, delete, and all sub-entity updates |
+| `getCountries` | - | `countries`, `nav-countries`, `abroad-countries` | Backend: revalidates on country create, update, delete |
+| `getSchools` | - | `schools` | Backend: revalidates on school create, update, delete, and faq/gallery updates |
+| `getSchoolById` | - | `school-${id}` | Backend: revalidates on school create, update, delete, and faq/gallery updates |
+| `getNavData` | - | `nav-states`, `nav-courses`, `nav-exams`, `nav-countries`, `news` | Aggregate — calls the 5 nav sub-caches below via `Promise.all` |
+| `getStates` | 500 (via getNavData) | `nav-states` | Backend: revalidates on state create, update, delete (`state.controller.js`) |
+| `getNavCourses` | 100 (via getNavData) | `nav-courses` | Backend: revalidates on stream create, update, delete (`stream.controller.js`) |
+| `getNavExams` | 100 (via getNavData) | `nav-exams` | Backend: revalidates on exam create, update, delete (`exam.controller.js`) |
+| `getNavCountries` | 15 (via getNavData) | `nav-countries` | Backend: revalidates on country create, update, delete (`countries.controller.js`) |
+| `getNavNews` | 4 (via getNavData) | `news` | Backend: revalidates on news create, update, delete (`newsandevents.controller.js`) |
+| `getBoardById` | 3 | `board-${id}` | Backend: revalidates on school board create, update, delete, and faq updates |
+| `getBoards` | - | `boards` | Backend: revalidates on school board create, update, delete, and faq updates |
+| `getScholarshipById` | 3 | `scholarship-${id}` | Backend: revalidates on scholarship create, update, delete |
+| `getScholarships` | - | `scholarships` | Backend: revalidates on scholarship create, update, delete |
+| `getAllGeneralCourses` | 2 | `all-general-courses` | Backend: revalidates on general course create, update, delete, faq updates |
+| `getTrendingCourses` | 2 | `trending-courses` | Backend: revalidates on general course mutations when `is_trending=true` |
+| `getCoursePageBanner` | 2 | `course-page-banner` | Backend: revalidates when banner with `promo_banner=All_courses_page` is created/updated/deleted |
+| `getExamPageBanner` | - | `exam-page-banner` | Backend: revalidates when banner with `promo_banner=All_Exam_page` is mutated |
+| `getScholarshipBanners` | - | `scholarship-banners` | Backend: revalidates when banner with `promo_banner=All_Scholarship_page` is mutated |
+| `getHeroBanners` | 2 | `banners` | Backend: revalidates when banner with `promo_banner=Draft` is mutated |
+| `getAboutPageBanners` | 2 | `about-banners` | Backend: revalidates when banner with `promo_banner=All_about_page` is mutated |
+| `getAdvertisePageBanners` | 2 | `advertise-banners` | Backend: revalidates when banner with `promo_banner=Advertise_page` is mutated |
+| `getServicesBanners` | 2 | `services-banners` | Backend: revalidates when banner with `promo_banner=Services_Page` is mutated |
+| `getNriPageBanners` | 2 | `nri-banners` | Backend: revalidates when banner with `promo_banner=Nri_page` is mutated |
+| `getNewsSectionBanner` | 2 | `news-section-banner` | Backend: revalidates when banner with `promo_banner=Home_news_page` is mutated |
+| `getOurTeamBanners` | 2 | `our-team-banners` | Backend: revalidates when banner with `promo_banner=All_our_teams` is mutated |
+| `getScholarshipLevels` | 2 | `scholarship-levels` | Backend: revalidates on scholar level create, update, delete |
+| `getScholarshipTypes` | 2 | `scholarship-types` | Backend: revalidates on scholar type create, update, delete |
+| `getAssociatedColleges` | 2 | `associated-colleges` | Backend: revalidates on college create, update, delete if is_associated is mutated |
+| `getAboutVideoTestimonials` | 2 | `about-video-testimonials` | Backend: revalidates on video testimonial create, update, delete |
+| `getVideoTestimonials` | 2 | `video-testimonials` | Backend: revalidates on video testimonial create, update, delete |
+| `getAbroadCountries` | 2 | `abroad-countries` | Backend: revalidates on country create, update, delete |
+| `getNewsCategories` | 2 | `news-categories` | Backend: revalidates on news category create, update, delete |
+| `getLandingPages` | 2 | `landing-pages` | Backend: revalidates on landing page create, update, delete |
+| `getJobPositions` | 2 | `job-positions` | Backend: revalidates on job position create, update, delete |
+| `getJobLocations` | 2 | `job-locations` | Backend: revalidates on job location create, update, delete |
+| `getOurTeams` | 2 | `ourteams` | Backend: revalidates on team create, update, delete |

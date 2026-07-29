@@ -5,6 +5,7 @@ import Link from 'next/link'
 import EmblaCarousel from 'src/components/ui/Embla/EmblaTabCarousel'
 import CollegeCarouselClient from 'src/components/colleges/CollegeCarouselClient'
 import type { CollegeItem } from 'src/components/colleges/CollegeCard'
+import styles from './StudyAbroadSection.module.css'
 
 interface Country {
   id: number
@@ -60,7 +61,7 @@ export default function StudyAbroadClient({ countries, initialColleges, initialC
 
   return (
     <>
-      <div className="studyAbroadNav position-relative py-4 px-md-5 rounded" style={{ zIndex: 2 }}>
+      <div className={`${styles.navContainer} position-relative py-4 px-md-5 rounded`} style={{ zIndex: 2 }}>
         <EmblaCarousel
           variant="tabs"
           showDots={false}
@@ -70,6 +71,19 @@ export default function StudyAbroadClient({ countries, initialColleges, initialC
           slidesToShowMobile={2}
           autoplay={false}
           loop={false}
+          leftArrowIcon={
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          }
+          rightArrowIcon={
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          }
+          arrowClassName={styles.countryArrow}
         >
           {countries.map(country => (
             <a
@@ -78,7 +92,7 @@ export default function StudyAbroadClient({ countries, initialColleges, initialC
               aria-selected={activeCountry === country.id}
               onClick={() => selectCountry(country.id)}
               style={{ cursor: 'pointer' }}
-              className={`${activeCountry === country.id ? 'active-country' : ''} d-flex w-100 align-self-center btn btn-primary text-truncate text-center justify-content-center`}
+              className={`${activeCountry === country.id ? styles.activeCountry : ''} ${styles.navLink} text-truncate text-center`}
             >
               {country.name}
             </a>

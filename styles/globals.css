@@ -4,6 +4,32 @@
     --bs-body-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   }
 
+  /* ─── CSS-only scroll animation — zero JS, zero hydration cost ─────────────
+     Used on pages where AnimateOnScroll would add an unnecessary Client
+     Component boundary (e.g. disclaimer, privacy-policy, terms-and-conditions).
+     Visual output is identical to AnimateOnScroll variant="fade-up" duration=0.7
+  ──────────────────────────────────────────────────────────────────────────── */
+  @keyframes ltFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: ltFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up {
+      animation: none;
+    }
+  }
+
   .skip-to-content {
     position: absolute;
     top: -40px;
@@ -16,6 +42,7 @@
     font-size: 14px;
     transition: top 0.2s;
   }
+
   .skip-to-content:focus {
     top: 0;
   }
@@ -382,18 +409,7 @@
     border-radius: 100%;
   }
 
-  .Analysis-Section {
-    background-color: rgba(39, 72, 150, 0.04) !important;
-  }
 
-  .Analysis-Section h4 {
-    color: #254692;
-  }
-
-  .Analysis-Section h6 {
-    color: black;
-    font-weight: bold;
-  }
 
   .latestNewsCon {
     background-color: rgba(39, 72, 150, 0.04) !important;
@@ -551,36 +567,7 @@
     font-size: 15px !important;
   }
 
-  .studyAbroadNav a {
-    border-radius: 10px !important;
-    width: 130px;
-    color: #254692 !important;
-    text-decoration: none !important;
-    border: 1px solid #254692 !important;
-    text-align: center !important;
-    background-color: #f6f8fb;
-    margin: 0 auto !important;
-    padding: 5px !important;
-    font-size: 15px !important;
-  }
 
-  .studyAbroadNav a:hover {
-    font-weight: bold !important;
-    color: white !important;
-    background-color: #254692 !important;
-  }
-
-  .studyAbroadNav .active-country {
-    font-weight: bold !important;
-    color: white !important;
-    background-color: #254692 !important;
-  }
-
-  .studyAbroadNav .active:hover {
-    font-weight: bold !important;
-    color: white !important;
-    background-color: #254692 !important;
-  }
 
   .btn-success2 {
     background-color: #198754 !important;
@@ -611,56 +598,28 @@
     filter: brightness(0) invert(1);
   }
 
-  .Analysis-Section img {
-    width: 60%;
-    height: auto;
-  }
-
-  .featuredClgCard>img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .featuredClgCard .card-text img {
-    filter: invert(20%) sepia(35%) saturate(3748%) hue-rotate(210deg) brightness(93%) contrast(86%) !important;
-  }
-
-  .featuredClgCard .card-text {
-    filter: invert(63%) sepia(0%) saturate(14%) hue-rotate(92deg) brightness(92%) contrast(92%);
-  }
 
 
-  .featuredClgCard .card-text i {
-    color: red !important;
-  }
 
-  .featuredClgCard a {
-    background-color: white;
-    font-size: 12px !important;
-    color: rgb(37, 70, 146);
-    border: 1px solid #254692 !important;
-  }
 
   .applyNowButton {
     background-color: #254692 !important;
     color: white !important;
     box-shadow: rgba(21, 41, 88, 0.493) 0px 0px 15px !important;
+    white-space: nowrap !important;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
   }
 
-  .featuredClgCard {
-    margin-right: 10px !important;
+  .applyNowButton:hover {
+    background-color: #1a3370 !important;
+    box-shadow: rgba(21, 41, 88, 0.7) 0px 4px 20px !important;
+    transform: translateY(-1px) !important;
+    color: white !important;
   }
 
-  .newsLinkSec {
-    background-color: #274896;
-    color: white;
-    min-height: 58px;
-  }
 
-  .newsLinkSec li {
-    display: flex !important;
-    justify-content: center !important;
-  }
+
+
 
 
   .StudyAbroadCard .card-text img {
@@ -694,9 +653,7 @@
 
 
 
-  .newsLinkSec .carousel-button-group {
-    margin: -50px 0px 0px 0px !important;
-  }
+
 
   .newsLinkSec2 .carousel-button-group {
     position: absolute !important;
@@ -764,17 +721,9 @@
     z-index: 50 !important;
   }
 
-  .FeaturedClgCon .carousel-button-group {
-    position: absolute !important;
-    top: 220px !important;
-    width: 100%;
 
-  }
 
-  .FeaturedClgCon .fi-left {
-    margin-left: -25px !important;
-    cursor: pointer !important;
-  }
+
 
   .text-truncate1 {
     overflow: hidden !important;
@@ -782,18 +731,9 @@
     white-space: nowrap !important;
   }
 
-  .FeaturedClgCon .fi-right {
-    margin-right: -10px !important;
-    cursor: pointer !important;
-  }
 
-  .newsLinkSec .fi-left {
-    margin-left: -50px !important;
-  }
 
-  .newsLinkSec .fi-right {
-    margin-right: -50px !important;
-  }
+
 
   .newsLinkSec2 .fi-left {
     margin-left: -50px !important;
@@ -817,35 +757,17 @@
     width: 100%;
   }
 
-  .newsLinkSec .fi-left {
-    margin-left: -50px !important;
-  }
 
-  .newsLinkSec .fi-right {
-    margin-right: -50px !important;
-  }
 
   .newsLinkSec2 .fi-left {
     margin-left: -50px !important;
   }
 
   .newsLinkSec2 .fi-right {
-    margin-right: 100px !important;
+    margin-right: -50px !important;
   }
 
-  .StudyAbroadCon .carousel-button-group {
-    position: absolute !important;
-    top: 135px !important;
-    width: 100%;
-  }
 
-  .StudyAbroadCon .fi-left {
-    margin-left: -35px !important;
-  }
-
-  .StudyAbroadCon .fi-right {
-    margin-right: -10px !important;
-  }
 
   .card-con {
     position: relative !important;
@@ -936,9 +858,7 @@
       max-height: 128px !important;
     }
 
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
+
 
     .newsLinkSec2 .carousel-button-group {
 
@@ -956,9 +876,7 @@
       font-size: 10px !important;
     }
 
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
+
 
     .bannerCon .carousel-control-prev {
       left: -50px;
@@ -1066,14 +984,7 @@
     }
 
 
-    .Analysis-Section h6 {
-      font-size: 0.8rem;
-    }
 
-    .Analysis-Section img {
-      width: 80%;
-      height: auto;
-    }
 
     .dropdownBtn .btn {
       font-size: 12px !important;
@@ -1112,17 +1023,7 @@
       font-size: 12px !important;
     }
 
-    .featuredClgCard .card-title {
-      font-size: 18px !important;
-    }
 
-    .featuredClgCard .card-text {
-      font-size: 12px !important;
-    }
-
-    .featuredClgCard a {
-      font-size: 15px !important;
-    }
 
     .bannerCon .carousel-control-prev {
       left: -35px;
@@ -1199,16 +1100,9 @@
       overflow-y: scroll !important;
     } */
 
-    .featuredClgCard a {
-      background-color: white;
-      font-size: 15px !important;
-      color: #254692;
-      border: 1px solid #254692 !important;
-    }
 
-    .studyAbroadNav a {
-      width: 100% !important;
-    }
+
+
 
     .card-con {
       margin: 25px 0px !important;
@@ -1216,10 +1110,7 @@
 
 
 
-    .Analysis-Section img {
-      width: 70%;
-      height: auto;
-    }
+
 
     .carousel-indicators {
       display: none !important;
@@ -1255,10 +1146,7 @@
       position: relative !important;
     }
 
-    .newsLinkSec .react-multi-carousel-list {
-      width: 240px;
-      margin: auto;
-    }
+
 
     .newsLinkSec2 .react-multi-carousel-list {
       width: 240px;
@@ -1319,17 +1207,13 @@
       font-size: 17px !important;
     }
 
-    .featuredClgCard {
-      margin-right: 0px !important;
-    }
+
 
     .StudyAbroadCard {
       margin-right: 0px !important;
     }
 
-    .StudyAbroadCon .carousel-button-group {
-      top: 135px !important;
-    }
+
 
     #exploreCardCon .mt-3 {
       margin: 1rem 0 !important;
@@ -1352,14 +1236,9 @@
 
   }
 
+
+
   @media (min-width: 320px) and (max-width: 424px) {
-    .studyAbroadNav a {
-      font-size: 15px !important;
-      margin: 0px 3px !important;
-
-
-    }
-
     .bannerCon .carousel-control-prev {
       left: 0px;
     }
@@ -1370,21 +1249,7 @@
   }
 
   @media (max-width: 575px) {
-    .FeaturedClgCon .carousel-button-group {
-      top: 220px !important;
-    }
 
-    .FeaturedClgCon .fi-left {
-      margin-left: 8px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .FeaturedClgCon .fi-right {
-      margin-right: 32px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
 
     .AssociatedClg .fi-left {
       margin-left: 8px !important;
@@ -1404,21 +1269,7 @@
     }
 
 
-    .StudyAbroadCon .fi-left {
-      margin-left: 8px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
 
-    .StudyAbroadCon .fi-right {
-      margin-right: 10px !important;
-      border-radius: 25px;
-      padding: 2px 8px;
-    }
-
-    .StudyAbroadCon .carousel-button-group {
-      top: 140px !important;
-    }
 
     .card-con .fi-left {
       margin-left: 0px !important;
@@ -1450,9 +1301,7 @@
   }
 
   @media (min-width: 320px) and (max-width: 374px) {
-    .FeaturedClgCon .carousel-button-group {
-      top: 220px !important;
-    }
+
 
     .AssociatedClg .carousel-button-group {
       top: 280px !important;
@@ -1531,15 +1380,6 @@
   }
 
 
-  .collegeBannerCon {
-    height: 300px !important;
-  }
-
-  .collegeBannerCon>.position-relative img {
-    object-fit: cover !important;
-    width: 100% !important;
-    height: 300px !important;
-  }
 
   .bg-skyBlue {
     background-color: #f6f8fb !important;
@@ -1889,7 +1729,7 @@
 
   @media (min-width: 320px) and (max-width: 767px) {
     .collegeDetailCard {
-      width: 100vw !important;
+      width: 100% !important;
       height: auto !important;
     }
 
@@ -2545,6 +2385,8 @@
     background-color: #f6f8fb !important;
     border: 1px solid #274896 !important;
     color: #274896 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
   .topCountryLinks .nav-link img {
@@ -2623,13 +2465,19 @@
   }
 
   .topCountryLinks .nav-link:hover {
-    background-color: #274896 !important;
-    color: white !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    background-color: #254692 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
   .topCountryLinks .nav-link.active {
-    background-color: #274896 !important;
-    color: white !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    background-color: #254692 !important;
+    padding: 10px 12px !important;
+    border-radius: 5px !important;
   }
 
 
@@ -2978,7 +2826,7 @@
     background-color: #274896 !important;
     border: 2px solid white !important;
     color: white !important;
-    border-radius: 20px !important;
+    border-radius: 0.375rem !important;
     text-align: center !important;
   }
 
@@ -3081,20 +2929,14 @@
       height: 100%;
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -40px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -40px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -40px !important;
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 50px !important;
+      margin-right: -40px !important;
     }
 
     .errCon h1 {
@@ -3134,20 +2976,14 @@
       cursor: pointer;
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -35px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -35px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -40px !important;
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 35px !important;
+      margin-right: -40px !important;
     }
 
     .errCon h1 {
@@ -3198,20 +3034,14 @@
 
     }
 
-    .newsLinkSec .fi-left {
-      margin-left: -10px !important;
-    }
 
-    .newsLinkSec .fi-right {
-      margin-right: -10px !important;
-    }
 
     .newsLinkSec2 .fi-left {
       margin-left: -10px !important;
     }
 
     .newsLinkSec2 .fi-right {
-      margin-right: 15px !important;
+      margin-right: -10px !important;
     }
 
     .disclaimerCon h1 {
@@ -3278,18 +3108,13 @@
   }
 
   .examBannerCon {
-    height: 500px !important;
   }
 
   .examBannerCon .popularcourse {
     height: 150px !important;
   }
 
-  .examBannerCon img {
-    object-fit: cover !important;
-    height: 500px !important;
-    width: 100% !important;
-  }
+
 
   .examsBannerCon {
     height: 200px !important;
@@ -3377,9 +3202,43 @@
     border: 1px solid rgba(212, 218, 234, 1) !important;
     padding: 10px 12px !important;
     border-radius: 5px !important;
-    width: 200px !important;
+    width: 160px !important;
   }
 
+  /* Override width only for MainExamPage category carousel — MbbsAbroadPage keeps 160px */
+  .categorySecCarousel .examSecItems .nav-link {
+    width: auto !important;
+  }
+
+  @media (min-width: 768px) {
+    /* Desktop only: disable truncation to show full tab text */
+    .categorySecCarousel .examSecItems .nav-link {
+      overflow: visible !important;
+      text-overflow: unset !important;
+      white-space: nowrap !important;
+    }
+  }
+
+@media (max-width: 767px) {
+  .categorySecCarousel .category-carousel-container {
+    gap: 15px !important;
+  }
+
+  .categorySecCarousel .category-carousel-container .fi-left,
+  .categorySecCarousel .category-carousel-container .fi-right {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Mobile: show exactly 2 tabs at a time filling the embla viewport */
+  .categorySecCarousel .exam-tab-slide {
+    flex: 0 0 calc(50% - 5px) !important;
+  }
+
+  .categorySecCarousel .exam-tab-slide .nav-link {
+    width: 100% !important;
+  }
+}
 
   .news-item .card-text {
     display: -webkit-box !important;
@@ -3442,9 +3301,7 @@
     object-fit: contain !important;
   }
 
-  .newsLinkSec h6.newsLinkClr:hover {
-    color: rgb(230, 230, 230) !important;
-  }
+
 
   .categorySecCarousel .carousel-button-group {
     position: absolute !important;
@@ -3605,7 +3462,7 @@
 
     .latestNewsCon .card-text {
 
-      min-height: 88px !important;
+      min-height: 143px !important;
     }
 
     .examsBannerCon {
@@ -3661,7 +3518,6 @@
 
     .categoryTextHide {
       text-overflow: ellipsis !important;
-      width: 60% !important;
     }
 
     .categorySecCarousel .fi-left {
@@ -4493,16 +4349,6 @@
 
 
 
-  .ServiceBanner {
-    height: 400px !important;
-  }
-
-  .ServiceBanner img {
-    height: 400px !important;
-    width: 100% !important;
-    object-fit: cover !important;
-  }
-
   .servicesImg {
     width: 100%;
     height: 100%;
@@ -4543,11 +4389,11 @@
   }
 
   .linkFontSize {
-    font-size: 17px !important;
+    font-size: 16px !important;
   }
 
   .linkFontSize a:hover {
-    font-size: 17px !important;
+    font-size: 16px !important;
     color: rgb(39, 72, 150) !important;
     font-weight: bold !important;
   }
@@ -5808,9 +5654,7 @@
     font-size: 22px !important;
   }
 
-  .scholarh2 {
-    font-size: 22px !important;
-  }
+
 
   @media (min-width:320px) and (max-width:767px) {
     .f20 {
@@ -5910,7 +5754,6 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    font-weight: bold;
     position: relative;
     padding-right: 2rem;
     background: white;
@@ -6139,7 +5982,8 @@
   }
 
   .state-dropdwon-width {
-    width: 230px !important;
+    min-width: 230px !important;
+    width: auto !important;
   }
 
   .height-fix-blogs {
@@ -6222,3 +6066,107 @@
       font-size: 11px !important;
     }
   }
+
+/* ══════════════════════════════════════════════════════════════
+   .bs-editor-text — Styles for Jodit editor dynamic content
+   Used across: InnerExam, InnerCollege, InnerBlog, InnerNews,
+   InnerCourse, InnerSchool, InnerBoard, CollegeCourse, etc.
+   ══════════════════════════════════════════════════════════════ */
+
+.bs-editor-text {
+  width: 100%;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* ── Paragraphs ── */
+.bs-editor-text p {
+  line-height: 28px;
+}
+
+/* ── Images — prevent overflow ── */
+.bs-editor-text img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Span wrapper (used as dangerouslySetInnerHTML container) ── */
+.bs-editor-text>span {
+  display: block;
+  width: 100%;
+}
+
+/* ── Tables — respect Jodit editor size on desktop ── */
+.bs-editor-text table {
+  max-width: 100%;
+  border-collapse: collapse !important;
+  table-layout: auto !important;
+  margin-bottom: 1rem;
+  box-sizing: border-box !important;
+  font-size: 14px;
+}
+
+.bs-editor-text table th,
+.bs-editor-text table td {
+  border: 1px solid #dee2e6 !important;
+  padding: 10px 16px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  color: #212529;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Override Jodit inline styles on elements inside cells,
+   but keep them inline so links/bold/spans don't break */
+.bs-editor-text table td *,
+.bs-editor-text table th * {
+  text-align: center !important;
+}
+
+.bs-editor-text table th {
+  font-weight: 700 !important;
+  background-color: #f8f9fa !important;
+}
+
+.bs-editor-text table tr:nth-child(even) td {
+  background-color: #fafafa;
+}
+
+/* ── Lists from Jodit ── */
+.bs-editor-text ul,
+.bs-editor-text ol {
+  padding-left: 20px;
+  margin-bottom: 1rem;
+}
+
+.bs-editor-text li {
+  line-height: 28px;
+}
+
+/* ── Mobile: horizontal-scroll tables ── */
+@media (max-width: 768px) {
+  .bs-editor-text {
+    overflow-x: hidden;
+  }
+
+  .bs-editor-text table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    height: 100% !important;
+    width: 100% !important;
+    margin: 0 0 1rem 0 !important;
+    white-space: nowrap;
+  }
+
+  .bs-editor-text table th,
+  .bs-editor-text table td {
+    /* white-space: nowrap; */
+    min-width: 120px;
+  }
+}

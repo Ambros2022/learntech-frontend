@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { LazyAnimatedCounter } from 'src/app/components/ClientWrappers'
+import styles from './AnalysisSection.module.css'
 
 const stats = [
   {
@@ -24,7 +25,7 @@ const stats = [
 
 export default function AnalysisSection() {
   return (
-    <div className="Analysis-Section">
+    <div className={styles.analysisSection}>
       <div className="container pt-5">
         <div className="row d-flex justify-content-center">
           {stats.map(({ icon, alt, target, label }) => (
