@@ -10,6 +10,15 @@ const branchData = [
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.827772809437!2d77.59573057356702!3d12.918788516036988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15064e759943%3A0x60dcac77858f6b5e!2sLearntech%20Edu%20Solutions%20Pvt%20Ltd%20-%20Study%20Abroad%20Counselor!5e0!3m2!1sen!2sin!4v1718369620720!5m2!1sen!2sin',
   },
   {
+    name: 'Kerala',
+    address:
+      'Office No. 2423, 4th Floor, HiLITE Business Park Phase 2 - Tower 2, Kozhikode, Kerala 673014',
+    phone: '+91 9895149750, +91 9036020005',
+    addressUrl: 'https://maps.app.goo.gl/L4e3ceDtH1Dyx62W7',
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.0645638101416!2d75.830901!3d11.2474788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba65b2adf0f23a7%3A0xeaa072a82e5d541e!2sHiLITE%20Business%20Park%20Phase%202%20-%20Tower%202!5e0!3m2!1sen!2sin!4v1718369620720!5m2!1sen!2sin',
+  },
+  {
     name: 'Dubai',
     address:
       '3rd Floor, Office no 15, Room no 3, Al Itihaad road, Al Mamzar centre, Hor Al Anz, Dubai, UAE',
