@@ -319,12 +319,63 @@ export default function Page() {
     ],
   }
 
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'BAMS Counselling Process | Learntech Edu Solutions',
+    description:
+      'Get expert BAMS admission counselling with Learntech Edu Solutions. 1000+ Ayurveda colleges, seat support, and personalised guidance to simplify your BAMS admission journey.',
+    url: CANONICAL,
+    publisher: {
+      '@type': 'EducationalOrganization',
+      name: 'Learntech Edu Solutions',
+      url: BASE_URL,
+    },
+  }
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'College Admission Guidance & BAMS Counselling Services',
+    serviceType: 'Educational Consulting',
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'Learntech Edu Solutions',
+      url: BASE_URL,
+    },
+    description:
+      'Personalized higher education admission guidance, college shortlisting, quota compliance, and seat reservation services for BAMS and medical aspirants.',
+  }
+
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Featured Partner Colleges & Universities',
+    itemListElement: colleges.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'EducationalOrganization',
+        name: c.name,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: c.loc,
+          addressCountry: 'IN',
+        },
+      },
+    })),
+  }
+
   return (
     <>
+      <link rel='preload' as='image' href='/images/collegeadmissions/Img-BG.webp' />
       {/* JSON-LD — server rendered, XSS safe */}
 
       <JsonLd id='bams-org-schema' schema={organizationSchema} />
       <JsonLd id='bams-faq-schema' schema={faqSchema} />
+      <JsonLd id='bams-webpage-schema' schema={webPageSchema} />
+      <JsonLd id='bams-service-schema' schema={serviceSchema} />
+      <JsonLd id='bams-itemlist-schema' schema={itemListSchema} />
 
       {/*
         CollegeAdmissionClientWrapper:

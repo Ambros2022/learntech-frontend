@@ -3,7 +3,7 @@ import { LazyEnquiryFormMed } from 'src/app/components/ClientWrappers'
 const BannerSec = () => {
     return (
         <section className='medSec position-relative'>
-            <video src="/videos/bannerMeds.webm" muted autoPlay loop></video>
+            <video src="/videos/bannerMeds.webm" muted autoPlay loop playsInline preload="metadata"></video>
             <div className="position-absolute h-100 w-100" style={{ top: '0', backgroundColor: "rgb(0,0,0,0.4)" }}>
                 <div className="container h-100">
                     <div className="row d-flex h-100">

@@ -8,7 +8,8 @@ import TestimonialSec from './Components/TestimonialSec'
 import { Breadcrumb } from 'src/app/components/Breadcrumb'
 import JsonLd from 'src/app/components/JsonLd'
 
-const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '')
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '') || 'https://www.learntech.com'
+const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
 
 interface Props {
   pagedata: any
@@ -26,13 +27,19 @@ export default function InnerUniversityPage({ pagedata, testdata }: Props) {
     })),
   } : null
 
-  const uniSchema = {
+  const uniSchema: Record<string, any> = {
     '@context': 'https://schema.org/',
     '@type': 'CollegeOrUniversity',
-    name: pagedata?.meta_title,
-    logo: `${process.env.NEXT_PUBLIC_IMG_URL}/${pagedata?.icon}`,
+    name: pagedata?.name || pagedata?.meta_title || 'University',
+    description: pagedata?.meta_description || `Learn about ${pagedata?.name || 'university'} admissions, courses, fees, and rankings.`,
     url: `${BASE_URL}/university/${pagedata?.id}/${pagedata?.slug}`,
-    address: { '@type': 'PostalAddress', streetAddress: pagedata?.address },
+  }
+
+  if (pagedata?.icon || pagedata?.logo) {
+    uniSchema.logo = `${IMG_URL}/${pagedata?.icon || pagedata?.logo}`
+  }
+  if (pagedata?.address) {
+    uniSchema.address = { '@type': 'PostalAddress', streetAddress: pagedata.address }
   }
 
   const breadcrumbSchema = {

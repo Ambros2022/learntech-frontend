@@ -5,20 +5,23 @@ import CourseDetailSec from './Components/CourseDetailSec'
 import ExpertSection from './Components/ExpertSection'
 import TopFeaturedColleges from './Components/TopFeaturedColleges'
 
-const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || ''
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '') || 'https://www.learntech.com'
 
 export default async function InnerCourseCollegePage({ pagedata, Collegeid }: { pagedata: any; Collegeid: string }) {
   const collegeUrl = `${BASE_URL}/college/${Collegeid}/${pagedata?.college?.slug}`
   const courseUrl = `${collegeUrl}/${pagedata?.slug}`
 
+  const courseName = pagedata?.title || pagedata?.course_short_name || pagedata?.name || 'Course'
+  const collegeName = pagedata?.college?.name || 'College'
+
   const courseSchema = {
     '@context': 'https://schema.org',
     '@type': 'Course',
-    name: pagedata?.title,
-    description: pagedata?.meta_description,
+    name: courseName,
+    description: pagedata?.meta_description || `Learn about ${courseName} course offered by ${collegeName}.`,
     provider: {
       '@type': 'CollegeOrUniversity',
-      name: pagedata?.college?.name,
+      name: collegeName,
       url: collegeUrl,
     },
   }

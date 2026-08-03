@@ -4,7 +4,48 @@
     --bs-body-font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   }
 
-  
+  /* ─── CSS-only scroll animation — zero JS, zero hydration cost ─────────────
+     Used on pages where AnimateOnScroll would add an unnecessary Client
+     Component boundary (e.g. disclaimer, privacy-policy, terms-and-conditions).
+     Visual output is identical to AnimateOnScroll variant="fade-up" duration=0.7
+  ──────────────────────────────────────────────────────────────────────────── */
+  @keyframes ltFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: ltFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up {
+      animation: none;
+    }
+  }
+
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    z-index: 9999;
+    padding: 8px 16px;
+    background: #274896;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: top 0.2s;
+  }
+
+  .skip-to-content:focus {
+    top: 0;
+  }
 
   /* NProgress bar — override default red with brand blue */
   #nprogress .bar {
