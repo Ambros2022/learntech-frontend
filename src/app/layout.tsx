@@ -67,7 +67,10 @@ export const metadata = {
   description:
     'Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to the students who look admission in India & Abroad.',
   robots: 'index, follow',
-  verification: { google: 'aiQptX_T_B2qlVcsMutbgRfaKWPDPPLANQi297oo8dA' },
+  verification: {
+    google: '0FPYjVHuQ90pli3TNhTPqNrn8qeGsTmjdlJ6ihiV1BA',
+    other: { 'facebook-domain-verification': ['4gc08bbhb4sf78dx8kyhfq8lwi96kh'] },
+  },
   icons: {
     icon: '/images/fav-icon.webp',
     shortcut: '/images/fav-icon.webp',

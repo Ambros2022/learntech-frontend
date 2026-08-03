@@ -6,7 +6,7 @@ import UniversityFilterSection from './Components/CollegeFilterSection'
 import { Breadcrumb } from 'src/app/components/Breadcrumb'
 import JsonLd from 'src/app/components/JsonLd'
 
-const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '')
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '') || 'https://www.learntech.com'
 
 interface Props {
   pagedata?: any
@@ -22,9 +22,18 @@ export default function MainUniversitiesPage({ pagedata }: Props) {
     ],
   }
 
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Top Universities in India',
+    description: 'Find top universities in India with expert admission guidance from Learntech Edu Solutions.',
+    url: `${BASE_URL}/universities`,
+  }
+
   return (
     <>
       <JsonLd schema={breadcrumbSchema} id="breadcrumb-schema" />
+      <JsonLd schema={itemListSchema} id="itemlist-schema" />
       <BannerSection />
       <Breadcrumb items={[{ label: 'Universities' }]} />
       <TopUniversitiesSection data={pagedata} />

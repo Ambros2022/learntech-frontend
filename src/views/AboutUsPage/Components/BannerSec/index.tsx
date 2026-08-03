@@ -23,6 +23,7 @@ const BannerSec = ({ banners }: BannerSecProps) => {
               width={1700}
               height={300}
               priority={index === 0}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
               sizes="100vw"
               style={{ width: '100%', height: 'auto', maxHeight: 400, objectFit: 'cover' }}
             />

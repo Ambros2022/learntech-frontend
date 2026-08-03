@@ -37,13 +37,18 @@ export default function BranchesMapClient({ branches }: BranchesMapClientProps) 
             </div>
             <div className="row ">
               <div className="col-lg-10 ms-auto">
-                <h6 className="d-flex align-items-center ms-lg-2">
-                  <i className="bi bi-geo-alt-fill text-blue me-1"></i>
-                  <a target="_blank" href={branch.addressUrl || '#'} className="ms-1" rel="noreferrer">
+                <h6 className="d-flex align-items-start ms-lg-2">
+                  <i className="bi bi-geo-alt-fill text-blue me-1" style={{ marginTop: '2px' }}></i>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedBranch(branch)}
+                    className="ms-1 btn btn-link p-0 text-start text-decoration-none"
+                    style={{ color: 'inherit', fontSize: 'inherit', fontFamily: 'inherit' }}
+                  >
                     <span className="fw-bold">Address: </span> {branch.address}
-                  </a>
+                  </button>
                 </h6>
-                <h6 className='ms-lg-2'>
+                <h6 className='d-flex align-items-center ms-lg-2'>
                   <i className='bi bi-telephone-fill text-blue me-1'></i>
                   <a href={`tel:${branch.phone.replace(/ /g, '')}`}>
                     {branch.phone}

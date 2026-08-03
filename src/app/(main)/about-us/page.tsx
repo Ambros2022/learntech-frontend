@@ -74,9 +74,26 @@ export default async function Page() {
     ],
   }
 
+  const aboutPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About Learntech Edu Solutions',
+    url: `${BASE_URL}${PAGE_PATH}`,
+    description: DEFAULT_DESCRIPTION,
+    mainEntity: {
+      '@type': 'EducationalOrganization',
+      name: 'Learntech Edu Solutions',
+      url: BASE_URL,
+      logo: `${BASE_URL}/images/icons/learntech-logo.png`,
+      foundingDate: '1994',
+      description: DEFAULT_DESCRIPTION,
+    },
+  }
+
   return (
     <>
       <JsonLd id="about-breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="about-page-schema" schema={aboutPageSchema} />
       <AboutUsPage banners={banners} testimonials={testimonials} />
     </>
   )

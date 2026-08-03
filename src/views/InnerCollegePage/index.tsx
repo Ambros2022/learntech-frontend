@@ -7,11 +7,11 @@ import LocationSection from './Components/LocateSection'
 import FeaturedCollegeSection from 'src/views/Homepage/Components/FeaturedCollegeSection'
 import ExpertSection from './Components/ExpertSection'
 
-const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || ''
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '') || 'https://www.learntech.com'
 const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
 
 export default async function InnerCollegePage({ pagedata }: { pagedata: any }) {
-  const collegeUrl = `${BASE_URL}/college/${pagedata.id}/${pagedata.slug}`
+  const collegeUrl = `${BASE_URL}/college/${pagedata?.id}/${pagedata?.slug}`
 
   const faqSchema = pagedata?.collegefaqs?.length > 0 ? {
     '@context': 'https://schema.org',
@@ -23,13 +23,19 @@ export default async function InnerCollegePage({ pagedata }: { pagedata: any }) 
     })),
   } : null
 
-  const collegeSchema = {
+  const collegeSchema: Record<string, any> = {
     '@context': 'https://schema.org/',
     '@type': 'CollegeOrUniversity',
-    name: pagedata?.meta_title,
-    logo: `${IMG_URL}/${pagedata?.icon}`,
+    name: pagedata?.name || pagedata?.meta_title || 'College',
+    description: pagedata?.meta_description || `Learn about ${pagedata?.name || 'college'} admissions, courses, fees, and rankings.`,
     url: collegeUrl,
-    address: { '@type': 'PostalAddress', streetAddress: pagedata?.address },
+  }
+
+  if (pagedata?.icon || pagedata?.logo) {
+    collegeSchema.logo = `${IMG_URL}/${pagedata?.icon || pagedata?.logo}`
+  }
+  if (pagedata?.address) {
+    collegeSchema.address = { '@type': 'PostalAddress', streetAddress: pagedata.address }
   }
 
   const breadcrumbSchema = {

@@ -69,6 +69,25 @@ export default async function Page({ params }: Props) {
   if (!pagedata) notFound()
 
   const examUrl = `${BASE_URL}/exam/${pagedata.id}/${pagedata.slug}`
+  const logoUrl = `${BASE_URL}/images/icons/learntech-logo.png`
+
+  // ── JSON-LD: Article (exam content page) ─────────────────────────────────
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: pagedata.meta_title?.trim() || `${pagedata.exam_title} Exam | Learntech Edu Solutions`,
+    description: pagedata.meta_description?.trim() || '',
+    url: examUrl,
+    datePublished: pagedata.created_at || new Date().toISOString(),
+    dateModified: pagedata.updated_at || pagedata.created_at || new Date().toISOString(),
+    author: { '@type': 'Organization', name: 'Learntech Edu Solutions', url: BASE_URL },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Learntech Edu Solutions',
+      logo: { '@type': 'ImageObject', url: logoUrl },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': examUrl },
+  }
 
   // ── JSON-LD: FAQPage ──────────────────────────────────────────────────────
   const faqSchema =
@@ -114,6 +133,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <JsonLd id="exam-article-schema" schema={articleSchema} />
       {faqSchema && <JsonLd id="exam-faq-schema" schema={faqSchema} />}
       <JsonLd id="exam-breadcrumb-schema" schema={breadcrumbSchema} />
       <InnerExamPage

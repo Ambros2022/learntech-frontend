@@ -1,0 +1,381 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>PageSpeed Scores</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+<meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>
+</head>
+<body>
+  <h2>LearnTech PageSpeed Scorecard</h2>
+  <table style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;">
+    <thead>
+      <tr style="background-color: #1b365d; color: white; text-align: left;">
+        <th style="border: 1px solid #ddd; padding: 10px;">Category Heading</th>
+        <th style="border: 1px solid #ddd; padding: 10px;">Route</th>
+        <th style="border: 1px solid #ddd; padding: 10px;">PageSpeed Link</th>
+        <th style="border: 1px solid #ddd; padding: 10px;">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Core Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/colleges</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcolleges">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/universities</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Funiversities">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/courses</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcourses">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/exams</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fexams">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/schools</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fschools">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/boards</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fboards">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/scholarships</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fscholarships">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/blogs</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fblogs">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Listing Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/news</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fnews">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/college/[collegeId]/[collegeSlug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcollege%2F%5BcollegeId%5D%2F%5BcollegeSlug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/college/[collegeId]/[collegeSlug]/[courseSlug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcollege%2F%5BcollegeId%5D%2F%5BcollegeSlug%5D%2F%5BcourseSlug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/university/[universityId]/[universitySlug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Funiversity%2F%5BuniversityId%5D%2F%5BuniversitySlug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/course/[streamId]/[streamSlug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcourse%2F%5BstreamId%5D%2F%5BstreamSlug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/course/[streamId]/[streamSlug]/[courseSlug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcourse%2F%5BstreamId%5D%2F%5BstreamSlug%5D%2F%5BcourseSlug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/exam/[id]/[slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fexam%2F%5Bid%5D%2F%5Bslug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/school/[id]/[slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fschool%2F%5Bid%5D%2F%5Bslug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/board/[id]/[slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fboard%2F%5Bid%5D%2F%5Bslug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/scholarship/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fscholarship%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/blog/[id]/[slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fblog%2F%5Bid%5D%2F%5Bslug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Dynamic Route Pattern</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/news/[id]/[slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fnews%2F%5Bid%5D%2F%5Bslug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-australia</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-australia">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-australia/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-australia%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-canada</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-canada">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-canada/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-canada%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-france</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-france">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-france/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-france%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-germany</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-germany">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-germany/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-germany%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-ireland</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-ireland">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-ireland/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-ireland%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-new-zealand</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-new-zealand">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-new-zealand/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-new-zealand%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-singapore</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-singapore">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-singapore/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-singapore%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-uk</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-uk">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-uk/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-uk%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-usa</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-usa">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/study-in-usa/[...slug]</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudy-in-usa%2F%5B...slug%5D">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Study Abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/mbbs-abroad</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fmbbs-abroad">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/nri-quota</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fnri-quota">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/education-loan</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Feducation-loan">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/services</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fservices">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/students-speak</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fstudents-speak">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/bams-counselling-process</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fbams-counselling-process">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/college-admission-guidance</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcollege-admission-guidance">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/cu-online-mba-admission</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcu-online-mba-admission">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/meds</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fmeds">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/symbiosis-international-university-dubai</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fsymbiosis-international-university-dubai">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/write-review</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fwrite-review">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Feature / Special Page</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/thank-you</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fthank-you">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Corporate / Info</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/about-us</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fabout-us">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Corporate / Info</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/contact-us</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcontact-us">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Corporate / Info</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/our-team</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Four-team">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Corporate / Info</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/career</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fcareer">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Corporate / Info</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/advertise-with-us</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fadvertise-with-us">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Corporate / Info</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/sitemap</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fsitemap">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Legal</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/privacy-policy</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fprivacy-policy">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Legal</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/terms-and-conditions</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fterms-and-conditions">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+<tr>
+    <td style="border: 1px solid #ddd; padding: 8px;">Legal</td>
+    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">/disclaimer</td>
+    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flearntechww.com%2Fdisclaimer">Test PageSpeed</a></td>
+    <td style="border: 1px solid #ddd; padding: 8px;"></td>
+  </tr>
+    </tbody>
+  </table>
+</body>
+</html>

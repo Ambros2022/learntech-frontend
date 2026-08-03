@@ -60,11 +60,12 @@ export default async function ThankYouPage() {
                 <div className="container py-5">
                     <div className="d-flex justify-content-center">
                         <div className="text-center align-content-center">
-                            <img
+                            <Image
                                 src="/images/icons/thankyou-ing.png"
                                 alt="Thank You - Learntech Edu Solutions"
                                 width={70}
                                 height={70}
+                                priority
                             />
                             <h1 className="text-blue fw-bold">Thank you!</h1>
                             <h6 className="fw-bold text-black mb-3">

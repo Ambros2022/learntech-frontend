@@ -136,7 +136,7 @@ function UniversityFilterSection() {
 
   const getstreamdata = useCallback(async () => {
     try {
-      const json = await apiGet('api/website/stream/get?size=10000')
+      const json = await apiGet('api/website/stream/get?size=100')
       if (json.status === 1) {
         setStreams(json.data.map((s: any) => ({ label: s.name, value: s.id.toString() })))
       }
@@ -181,8 +181,9 @@ function UniversityFilterSection() {
 
   const getuniversitydata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[], cityIds?: string[]) => {
     try {
+      const hasFilters = (stateIds?.length || 0) > 0 || (cityIds?.length || 0) > 0 || (courseIds?.length || 0) > 0 || (streamIds?.length || 0) > 0 || (ownership?.length || 0) > 0 || (courseType?.length || 0) > 0
       const sp = new URLSearchParams({
-        page: '1', size: '10000', country_id: '204', type: 'university',
+        page: '1', size: hasFilters ? '100' : '20', country_id: '204', type: 'university',
         orderby: 'asc', columnname: 'listing_order',
       })
       if (stateIds?.length) sp.set('state_id', `[${stateIds.join(',')}]`)
