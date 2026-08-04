@@ -131,9 +131,25 @@ export default async function Page() {
     ]
   }
 
+  // ItemList schema — surfaces individual exams as rich results
+  const itemListSchema = (examsRes?.data ?? []).length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: DEFAULT_TITLE,
+    url: `${BASE_URL}${PAGE_PATH}`,
+    numberOfItems: (examsRes?.data ?? []).length,
+    itemListElement: (examsRes?.data ?? []).map((e: any, i: number) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: e.exam_title,
+      url: `${BASE_URL}/exam/${e.id}/${e.slug}`,
+    })),
+  } : null
+
   return (
     <>
       <JsonLd id="exams-breadcrumb-schema" schema={breadcrumbSchema} />
+      {itemListSchema && <JsonLd id="exams-itemlist-schema" schema={itemListSchema} />}
       <MainExamPage
         pagedata={pagedata}
         countryData={countryData}

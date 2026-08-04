@@ -53,9 +53,36 @@ export default async function Page() {
 
 
 
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: `${BASE_URL}${PAGE_PATH}`,
+    publisher: {
+      '@type': 'EducationalOrganization',
+      name: 'Learntech Edu Solutions',
+      url: BASE_URL,
+    },
+  }
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Medical Edu Studio Counselling & Student Assistance',
+    serviceType: 'Medical Education Consulting',
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'Learntech Edu Solutions',
+      url: BASE_URL,
+    },
+    areaServed: ['India', 'UAE', 'Bahrain'],
+    description:
+      'Comprehensive medical admission counselling, course selection, and post-admission support for medical aspirants in India and abroad.',
+  }
+
   return (
     <>
-
       <MedicalEduStudioPage pagedata={pagedata} />
     </>
   )

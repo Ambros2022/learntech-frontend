@@ -79,6 +79,8 @@ export default function ContactUsSec() {
             alt="Learntech admission counsellors"
             className="w-100 h-100"
             style={{ objectFit: 'cover' }}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="col-md-6 position-relative">
@@ -93,6 +95,7 @@ export default function ContactUsSec() {
                       type="text"
                       className="form-control"
                       placeholder="Full Name"
+                      aria-label="Full Name"
                       {...register('fullName')}
                     />
                     {errors.fullName && <div className="text-danger">{errors.fullName.message}</div>}
@@ -103,6 +106,7 @@ export default function ContactUsSec() {
                       type="email"
                       className="form-control"
                       placeholder="Email Id"
+                      aria-label="Email Id"
                       {...register('email')}
                     />
                     {errors.email && <div className="text-danger">{errors.email.message}</div>}
@@ -122,6 +126,7 @@ export default function ContactUsSec() {
                       type="text"
                       className="form-control"
                       placeholder="Course In Mind"
+                      aria-label="Course In Mind"
                       {...register('courseInMind')}
                     />
                     {errors.courseInMind && <div className="text-danger">{errors.courseInMind.message}</div>}
@@ -132,6 +137,7 @@ export default function ContactUsSec() {
                       type="text"
                       className="form-control"
                       placeholder="Location"
+                      aria-label="Location"
                       {...register('location')}
                     />
                     {errors.location && <div className="text-danger">{errors.location.message}</div>}
@@ -141,6 +147,7 @@ export default function ContactUsSec() {
                     <textarea
                       className="form-control"
                       placeholder="Type your message"
+                      aria-label="Type your message"
                       {...register('message')}
                     />
                     {errors.message && <div className="text-danger">{errors.message.message}</div>}

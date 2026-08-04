@@ -58,6 +58,34 @@ const founderSchema = {
   worksFor: { '@type': 'Organization', name: 'Learntech Edu Solutions Pvt. Ltd.' },
 }
 
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${BASE_URL}/`,
+    },
+  ],
+}
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Learntech Core Educational Hubs',
+  description: 'Top educational pathways, courses, colleges, and news hubs on Learntech Edu Solutions',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Colleges', url: `${BASE_URL}/colleges` },
+    { '@type': 'ListItem', position: 2, name: 'Courses', url: `${BASE_URL}/courses` },
+    { '@type': 'ListItem', position: 3, name: 'Exams', url: `${BASE_URL}/exams` },
+    { '@type': 'ListItem', position: 4, name: 'MBBS Abroad', url: `${BASE_URL}/mbbs-abroad` },
+    { '@type': 'ListItem', position: 5, name: 'Scholarships', url: `${BASE_URL}/scholarships` },
+    { '@type': 'ListItem', position: 6, name: 'News & Updates', url: `${BASE_URL}/news` },
+  ],
+}
+
 interface Banner {
   image: string
   link: string
@@ -95,6 +123,8 @@ export default function Homepage({ banners, news, studyAbroad, latestNews, exper
 
       <JsonLd schema={localBusinessSchema} id='local-business' />
       <JsonLd schema={founderSchema} id='founder' />
+      <JsonLd schema={breadcrumbSchema} id='homepage-breadcrumb' />
+      <JsonLd schema={itemListSchema} id='homepage-itemlist' />
       <BannerSection banners={banners} />
       <NewsLinkSection items={news} />
 

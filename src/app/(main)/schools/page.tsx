@@ -1,23 +1,55 @@
 import { getPageData } from 'src/lib/api/common'
 import MainSchoolPage from 'src/views/MainSchoolPage'
+import JsonLd from 'src/app/components/JsonLd'
 
-const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || ''
+const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '')
+const DEFAULT_TITLE = 'Best Schools in India | Learntech Edu Solutions'
+const DEFAULT_DESCRIPTION = 'Find the best schools in India with expert guidance from Learntech Edu Solutions.'
 
 export async function generateMetadata() {
   const pagedata = await getPageData('schools')
+  const title = pagedata?.meta_title || DEFAULT_TITLE
+  const description = pagedata?.meta_description || DEFAULT_DESCRIPTION
   const url = `${BASE_URL}/schools`
   return {
-    title: pagedata?.meta_title || 'Best Schools in India | Learntech Edu Solutions',
-    description: pagedata?.meta_description || 'Find the best schools in India with expert guidance from Learntech Edu Solutions.',
+    title,
+    description,
     keywords: pagedata?.meta_keyword,
-    robots: 'index, follow',
+    robots: { index: true, follow: true },
     alternates: { canonical: url },
-    openGraph: { title: pagedata?.meta_title, description: pagedata?.meta_description, url },
-    twitter: { card: 'summary_large_image', title: pagedata?.meta_title, description: pagedata?.meta_description },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'Learntech Edu Solutions',
+      locale: 'en_IN',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      site: '@learntechww',
+    },
   }
 }
 
 export default async function Page() {
   const pagedata = await getPageData('schools')
-  return <MainSchoolPage pagedata={pagedata} />
+
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: 'Learntech Edu Solutions – Schools',
+    url: `${BASE_URL}/schools`,
+    description: DEFAULT_DESCRIPTION,
+    sameAs: ['https://learntechww.com/schools'],
+  }
+
+  return (
+    <>
+      <JsonLd id="schools-org-schema" schema={orgSchema} />
+      <MainSchoolPage pagedata={pagedata} />
+    </>
+  )
 }

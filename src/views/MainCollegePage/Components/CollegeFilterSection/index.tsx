@@ -199,7 +199,7 @@ function CollegeFilterSection() {
 
     const getstreamdata = useCallback(async () => {
         try {
-            const json = await apiGet('api/website/stream/get?size=10000');
+            const json = await apiGet('api/website/stream/get?size=100');
             if (json.status === 1) {
                 const streamData = json.data.map((stream: any) => ({
                     label: stream.name,
@@ -265,9 +265,10 @@ function CollegeFilterSection() {
 
     const getcollegedata = useCallback(async (stateIds?: string[], courseIds?: string[], streamIds?: string[], ownership?: string[], courseType?: string[], cityIds?: string[]) => {
         try {
+            const hasFilters = (stateIds && stateIds.length > 0) || (cityIds && cityIds.length > 0) || (courseIds && courseIds.length > 0) || (streamIds && streamIds.length > 0) || (ownership && ownership.length > 0) || (courseType && courseType.length > 0);
             const sp = new URLSearchParams({
                 page: '1',
-                size: '10000',
+                size: hasFilters ? '100' : '20',
                 country_id: '204',
                 type: 'college',
                 orderby: 'asc',

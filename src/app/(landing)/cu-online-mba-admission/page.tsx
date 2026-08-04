@@ -92,6 +92,39 @@ const faqSchema = {
   ],
 }
 
+const courseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: 'Chandigarh University Online MBA (Master of Business Administration)',
+  description:
+    'UGC-approved and NAAC A+ accredited Online MBA program from Chandigarh University offering flexible learning, industry-relevant specializations, and placement assistance.',
+  provider: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Chandigarh University',
+    sameAs: 'https://www.cuchd.in',
+  },
+  educationalCredentialAwarded: 'Master of Business Administration (MBA)',
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: 'Online',
+    courseWorkload: 'P2Y',
+  },
+}
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'CU Online MBA Admission 2026–27 | Chandigarh University',
+  description:
+    'Apply for Chandigarh University (CU) Online MBA 2026–27. Check eligibility, fees, specializations, rankings, placements & admission process.',
+  url: CANONICAL,
+  publisher: {
+    '@type': 'EducationalOrganization',
+    name: 'Learntech Edu Solutions',
+    url: BASE_URL,
+  },
+}
+
 export default function Page() {
   return (
     <>
@@ -110,6 +143,8 @@ export default function Page() {
       />
 
       <JsonLd id='cumba-faq-schema' schema={faqSchema} />
+      <JsonLd id='cumba-course-schema' schema={courseSchema} />
+      <JsonLd id='cumba-webpage-schema' schema={webPageSchema} />
       <SIUDubaiPage />
     </>
   )

@@ -3,21 +3,39 @@ import InnerNewsPage from 'src/views/InnerNewsPage'
 import JsonLd from 'src/app/components/JsonLd'
 import { getNewsById, getNewsList } from 'src/lib/api/common'
 
-const IMG_URL = process.env.NEXT_PUBLIC_IMG_URL || ''
-const WEB_URL = process.env.NEXT_PUBLIC_WEB_URL || ''
+const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
+const WEB_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '')
 
 type Props = { params: Promise<{ id: string; slug: string }> }
 
 export async function generateMetadata({ params }: Props) {
   const { id } = await params
   const news = await getNewsById(id)
-  if (!news) return { title: 'News Not Found', robots: 'noindex' }
+  if (!news) return { title: 'News Not Found', robots: { index: false, follow: false } }
+
   const url = `${WEB_URL}/news/${news.id}/${news.slug}`
+  const ogImage = news.banner_image
+    ? `${IMG_URL}/${news.banner_image}`
+    : `${WEB_URL}/images/icons/learntech-logo.png`
+  const DEFAULT_TITLE = `${news.name} | Learntech Edu Solutions`
+  const title = news.meta_title?.trim() || DEFAULT_TITLE
+  const description = news.meta_description?.trim() || news.name
+
   return {
-    title: news.meta_title, description: news.meta_description, keywords: news.meta_keyword,
-    robots: 'index, follow', alternates: { canonical: url },
-    openGraph: { type: 'article', title: news.meta_title, description: news.meta_description, url, images: [news.imageUrl] },
-    twitter: { card: 'summary_large_image', title: news.meta_title, description: news.meta_description, images: [news.imageUrl] },
+    title,
+    description,
+    keywords: news.meta_keyword,
+    robots: { index: true, follow: true },
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url,
+      siteName: 'Learntech Edu Solutions',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: news.name }],
+    },
+    twitter: { card: 'summary_large_image', title, description, images: [ogImage] },
   }
 }
 
