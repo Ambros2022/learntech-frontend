@@ -15,11 +15,11 @@ const BASE_URL = (process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com').
 type Props = { params: Promise<{ id: string; slug: string }> }
 
 export async function generateMetadata({ params }: Props) {
-  const { id } = await params
+  const { id, slug } = await params
   const exam = await getExamById(id)
   if (!exam) return { title: 'Exam Not Found', robots: { index: false, follow: false } }
 
-  const url = `${BASE_URL}/exam/${exam.id}/${exam.slug}`
+  const url = `${BASE_URL}/exam/${exam.id}/${exam.slug || slug}`
   const title = exam.meta_title || `${exam.exam_title} Exam | Learntech Edu Solutions`
   const description = exam.meta_description || 'Are you looking for Admission at Top College? Learntech Edu Solutions provides admission guidance to students in India & Abroad.'
 
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function Page({ params }: Props) {
-  const { id } = await params
+  const { id, slug } = await params
 
   const [pagedata, organizationPage, trainers, promoBanners, newsLinks, allExams] =
     await Promise.all([
@@ -68,7 +68,7 @@ export default async function Page({ params }: Props) {
 
   if (!pagedata) notFound()
 
-  const examUrl = `${BASE_URL}/exam/${pagedata.id}/${pagedata.slug}`
+  const examUrl = `${BASE_URL}/exam/${pagedata.id}/${pagedata.slug || slug}`
   const logoUrl = `${BASE_URL}/images/icons/learntech-logo.png`
 
   // ── JSON-LD: Article (exam content page) ─────────────────────────────────

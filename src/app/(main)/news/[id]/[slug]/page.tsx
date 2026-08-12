@@ -9,11 +9,11 @@ const WEB_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '')
 type Props = { params: Promise<{ id: string; slug: string }> }
 
 export async function generateMetadata({ params }: Props) {
-  const { id } = await params
+  const { id, slug } = await params
   const news = await getNewsById(id)
   if (!news) return { title: 'News Not Found', robots: { index: false, follow: false } }
 
-  const url = `${WEB_URL}/news/${news.id}/${news.slug}`
+  const url = `${WEB_URL}/news/${news.id}/${news.slug || slug}`
   const ogImage = news.banner_image
     ? `${IMG_URL}/${news.banner_image}`
     : `${WEB_URL}/images/icons/learntech-logo.png`
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function Page({ params }: Props) {
-  const { id } = await params
+  const { id, slug } = await params
 
   const [pagedata, allNews] = await Promise.all([
     getNewsById(id),
@@ -49,7 +49,7 @@ export default async function Page({ params }: Props) {
 
   if (!pagedata) return notFound()
 
-  const newsUrl = `${WEB_URL}/news/${pagedata.id}/${pagedata.slug}`
+  const newsUrl = `${WEB_URL}/news/${pagedata.id}/${pagedata.slug || slug}`
   const ogImage = pagedata.banner_image
     ? `${IMG_URL}/${pagedata.banner_image}`
     : `${WEB_URL}/images/icons/learntech-logo.png`

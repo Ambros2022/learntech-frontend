@@ -9,10 +9,10 @@ const WEB_URL = (process.env.NEXT_PUBLIC_WEB_URL || '').replace(/\/+$/, '')
 const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
 
 export async function generateMetadata({ params }: Props) {
-  const { id } = await params
+  const { id, slug } = await params
   const blog = await getBlogById(id)
   if (!blog) return { title: 'Blog Not Found', robots: { index: false, follow: false } }
-  const url = `${WEB_URL}/blog/${blog.id}/${blog.slug}`
+  const url = `${WEB_URL}/blog/${blog.id}/${blog.slug || slug}`
   const image = blog.banner_image
     ? `${IMG_URL}/${blog.banner_image}`
     : `${WEB_URL}/images/icons/learntech-logo.png`
@@ -49,7 +49,7 @@ export default async function Page({ params }: Props) {
   const newsData = (newsRaw ?? []).map((item: any) => ({ imageSrc: `${imgUrl}/${item.banner_image}`, name: item.name || '', id: item.id, slug: item?.slug }))
   const blogsData = (blogsRaw.blogs ?? []).map((item: any) => ({ imageSrc: `${imgUrl}/${item.banner_image}`, name: item.name || '', id: item.id, slug: item?.slug }))
 
-  const blogUrl = `${WEB_URL}/blog/${pagedata.id}/${pagedata.slug}`
+  const blogUrl = `${WEB_URL}/blog/${pagedata.id}/${pagedata.slug || slug}`
   const ogImage = pagedata.banner_image
     ? `${IMG_URL}/${pagedata.banner_image}`
     : `${WEB_URL}/images/icons/learntech-logo.png`
