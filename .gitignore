@@ -36,3 +36,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# reference
+Learntech_Hero-Section_Design-main/
