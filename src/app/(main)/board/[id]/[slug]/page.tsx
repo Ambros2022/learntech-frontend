@@ -9,10 +9,10 @@ const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
 type Props = { params: Promise<{ id: string; slug: string }> }
 
 export async function generateMetadata({ params }: Props) {
-  const { id } = await params
+  const { id, slug } = await params
   const board = await getBoardById(id)
   if (!board) return { title: 'Board Not Found', robots: { index: false, follow: false } }
-  const url = `${WEB_URL}/board/${board.id}/${board.slug}`
+  const url = `${WEB_URL}/board/${board.id}/${board.slug || slug}`
   const ogImage = board.icon ? `${IMG_URL}/${board.icon}` : undefined
   return {
     title: board.meta_title,
@@ -45,7 +45,7 @@ export default async function Page({ params }: Props) {
   if (!pagedata) notFound()
   if (pagedata.slug && pagedata.slug !== slug) redirect(`/board/${pagedata.id}/${pagedata.slug}`)
 
-  const canonicalUrl = `${WEB_URL}/board/${pagedata.id}/${pagedata.slug}`
+  const canonicalUrl = `${WEB_URL}/board/${pagedata.id}/${pagedata.slug || slug}`
 
   const faqEntities: any[] = (pagedata.schoolboardfaqs ?? []).map((item: any) => ({
     '@type': 'Question',

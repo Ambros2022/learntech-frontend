@@ -10,6 +10,7 @@ function InnerBlogPage({ pagedata, newsData, blogsData }: any) {
     ? new Date(pagedata.created_at).toLocaleString('en-US', {
         year: 'numeric', month: 'long', day: 'numeric',
         hour: 'numeric', minute: 'numeric', second: 'numeric',
+        timeZone: 'Asia/Kolkata',
         timeZoneName: 'short',
       })
     : ''

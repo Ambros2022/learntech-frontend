@@ -9,11 +9,11 @@ const IMG_URL = (process.env.NEXT_PUBLIC_IMG_URL || '').replace(/\/+$/, '')
 type Props = { params: Promise<{ id: string; slug: string }> }
 
 export async function generateMetadata({ params }: Props) {
-  const { id } = await params
+  const { id, slug } = await params
   const school = await getSchoolById(id)
   if (!school) return { title: 'School Not Found', robots: { index: false, follow: false } }
 
-  const url = `${WEB_URL}/school/${school.id}/${school.slug}`
+  const url = `${WEB_URL}/school/${school.id}/${school.slug || slug}`
   const ogImage = school.icon ? `${IMG_URL}/${school.icon}` : undefined
 
   // Guard against empty strings returned by the API
@@ -44,11 +44,11 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function Page({ params }: Props) {
-  const { id } = await params
+  const { id, slug } = await params
   const pagedata = await getSchoolById(id)
   if (!pagedata) notFound()
 
-  const canonicalUrl = `${WEB_URL}/school/${pagedata.id}/${pagedata.slug}`
+  const canonicalUrl = `${WEB_URL}/school/${pagedata.id}/${pagedata.slug || slug}`
   const ogImage = pagedata.icon ? `${IMG_URL}/${pagedata.icon}` : undefined
 
   const schoolSchema: Record<string, any> = {
