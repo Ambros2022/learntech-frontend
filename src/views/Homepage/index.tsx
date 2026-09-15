@@ -87,9 +87,12 @@ const itemListSchema = {
 }
 
 interface Banner {
+  id?: number
+  title?: string
   image: string
-  link: string
+  link?: string
   alt?: string
+  description?: string
 }
 
 interface NewsItem {
