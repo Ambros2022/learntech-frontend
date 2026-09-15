@@ -3,9 +3,12 @@ import BannerCarouselClient from './BannerCarouselClient'
 import styles from './Banner.module.css'
 
 interface Banner {
+  id?: number
+  title?: string
   image: string
   link?: string
   alt?: string
+  description?: string
 }
 
 export default function BannerSection({ banners }: { banners?: Banner[] }) {
