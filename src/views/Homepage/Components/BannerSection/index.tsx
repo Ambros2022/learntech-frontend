@@ -1,85 +1,70 @@
-import Image from 'next/image'
-import BannerSearchClient from './BannerSearchClient'
-import BannerEnquiryFormClient from './BannerEnquiryFormClient'
-import { LazyBannerCarousel } from 'src/app/components/ClientWrappers'
+import GlobalPopupEnquiry from 'src/@core/components/popup/GlobalPopupEnquiry'
+import BannerCarouselClient from './BannerCarouselClient'
 import styles from './Banner.module.css'
 
 interface Banner {
+  id?: number
+  title?: string
   image: string
-  link: string
+  link?: string
   alt?: string
+  description?: string
 }
 
-export default function BannerSection({ banners }: { banners: Banner[] }) {
+export default function BannerSection({ banners }: { banners?: Banner[] }) {
   const firstBanner = banners?.[0]
   const firstBannerImg = firstBanner?.image
-    ? `${process.env.NEXT_PUBLIC_IMG_URL}/${firstBanner.image}`
+    ? firstBanner.image.startsWith('http') || firstBanner.image.startsWith('/')
+      ? firstBanner.image
+      : `${process.env.NEXT_PUBLIC_IMG_URL}/${firstBanner.image}`
     : null
 
   return (
-    <section className={`bannerCon bg-formClr ${styles.section}`}>
-      {/* Preload dynamic hero banner image hint in <head> for fast LCP */}
-      {firstBannerImg && (
-        <link
-          rel="preload"
-          as="image"
-          href={firstBannerImg}
-        />
-      )}
+    <section className={styles.hero}>
+      {/* Preload hero banner image for fast LCP */}
+      {firstBannerImg && <link rel="preload" as="image" href={firstBannerImg} />}
 
-      {/* imageArea: relative on mobile (gives flow height), absolute on desktop */}
-      <div className={styles.imageArea}>
-        {/* Server-rendered first image — in HTML immediately, drives LCP score */}
-        {firstBannerImg && (
-          <a href={firstBanner?.link || '#'} className={`HomebannerLink ${styles.imgLink}`}>
-            <Image
-              src={firstBannerImg}
-              alt={firstBanner?.alt || 'Learntech education banner'}
-              fill
-              priority
-              fetchPriority="high"
-              loading="eager"
-              sizes="100vw"
-              style={{ objectFit: 'cover' }}
-            />
-          </a>
-        )}
-
-        {/* Client carousel mounts after hydration, seamlessly replaces static image */}
-        <LazyBannerCarousel banners={banners} />
+      {/* Background blur decorative orbs */}
+      <div className={styles.heroDecor} aria-hidden="true">
+        <span className={styles.c1} />
+        <span className={styles.c2} />
       </div>
 
-      {/* Overlay: search section (left) + enquiry form (right) */}
-      <div className="bannerFormSec">
-        <div className="container-fluid">
-          <div className="container">
-            <div className="row">
+      <div className={`container ${styles.heroContent}`}>
+        <div className="row align-items-center g-4 g-lg-5">
+          {/* Left: Heading, Subtitle & CTA */}
+          <div className={`col-lg-6 ${styles.leftCol}`}>
+            <h3 className={styles.heroHeading}>
+              Confused which <span className={styles.accent}>College</span> is right for you?{' '}
+              We&apos;ll help you <span className={styles.accent}>Decide.</span>
+            </h3>
 
-              <div className="col-md-6 col-lg-6 mb-5 d-flex">
-                <div className="searchSec align-content-center" style={{ zIndex: 50 }}>
-                  <div className="outlineSec">
-                    <h3 className="fw-bold text-blue mb-3 searchnewh3">
-                      Unlock a World of Academic Opportunities
-                    </h3>
-                    <BannerSearchClient />
-                  </div>
-                </div>
+            <h4 className={styles.heroSubtext}>
+              Personal counselling on admissions, courses and study abroad, from a team that has
+              guided students into 500+ colleges across India.
+            </h4>
+
+            <GlobalPopupEnquiry
+              className={styles.btnOutlineCounselling}
+              buttonText={
+                <h4>
+                  Find Your College Now <i className="bi bi-arrow-right" />
+                </h4>
+              }
+            />
+          </div>
+
+          {/* Right: Carousel visual frame */}
+          <div className="col-lg-6">
+            <div className={styles.heroVisual}>
+              <div className={styles.accentDot} aria-hidden="true" />
+              <div className={styles.carouselWrap}>
+                <BannerCarouselClient banners={banners} />
               </div>
-
-              <div className="col-md-5 col-lg-5 ps-xl-5 ps-lg-5 ms-auto mb-5" style={{ zIndex: 40 }}>
-                <div className="searchForm">
-                  <h2 className="pb-3 fw-bold text-center text-blue">
-                    Start Your Journey with Expert Guidance!
-                  </h2>
-                  <BannerEnquiryFormClient />
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
       </div>
-
     </section>
   )
 }

@@ -1,263 +1,410 @@
-/* Section: on desktop the images are absolute so section needs explicit min-height */
-.section {
-  min-height: 600px;
-}
-
-/* imageArea: contains the absolute-positioned images.
-   Desktop → absolute, fills section.
-   Mobile  → relative with explicit height, so bannerFormSec flows after it. */
-.imageArea {
-  position: absolute;
-  inset: 0;
+/* Hero section root */
+.hero {
+  position: relative;
   overflow: hidden;
+  padding: 4.5rem 0 6rem;
+  background: #ffffff;
 }
 
-/* Static first image: fills imageArea */
-.imgLink {
-  position: absolute !important;
-  inset: 0;
-  display: block;
-  height: 100% !important;
-}
-
-/* Embla carousel: overlays the static image inside imageArea */
-.embla {
+/* Background decorative blur shapes */
+.heroDecor {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.heroDecor span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+}
+
+.c1 {
+  width: 420px;
+  height: 420px;
+  background: #c9d4ff;
+  top: -140px;
+  right: -120px;
+}
+
+.c2 {
+  width: 320px;
+  height: 320px;
+  background: #ffd9dd;
+  bottom: -100px;
+  right: 22%;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+}
+
+.leftCol {
+  margin: 0;
+}
+
+/* Heading */
+.heroHeading {
+  font-size: clamp(2.35rem, 3.8vw, 3.25rem);
+  font-weight: 600;
+  color: #274896;
+  line-height: 1.15;
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+.accent {
+  color: #e93c45;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  text-shadow: 3px 3px 0 rgba(233, 60, 69, 0.249);
+}
+
+/* Subtext */
+.heroSubtext {
+  color: #374084;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 34rem;
+  margin-bottom: 2rem;
+}
+
+/* CTA Button */
+.btnOutlineCounselling {
+  background: #274896;
+  color: #ffffff !important;
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 5px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(39, 72, 150, 0.15);
+}
+
+.btnOutlineCounselling:hover {
+  background: #274896;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(39, 72, 150, 0.25);
+}
+
+.btnOutlineCounselling h4 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+  line-height: inherit;
+}
+
+.btnOutlineCounselling i {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.btnOutlineCounselling:hover i {
+  transform: translateX(3px);
+}
+
+/* ── Hero visual (carousel + abstract background accents) ── */
+.heroVisual {
+  position: relative;
+  isolation: isolate;
+}
+
+.heroVisual::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  right: -22px;
+  width: 130px;
+  height: 130px;
+  background-image: radial-gradient(#274896 1.6px, transparent 1.6px);
+  background-size: 14px 14px;
+  opacity: 0.7;
+  z-index: 0;
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.heroVisual::after {
+  content: "";
+  position: absolute;
+  bottom: -22px;
+  left: -22px;
+  width: 130px;
+  height: 130px;
+  background-image: radial-gradient(#274896 1.6px, transparent 1.6px);
+  background-size: 14px 14px;
+  opacity: 0.7;
+  z-index: 0;
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.accentDot {
+  position: absolute;
+  top: -18px;
+  right: 14%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #e63946;
+  opacity: 0.22;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.carouselWrap {
+  position: relative;
+  border-radius: 24px 0 24px 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(39, 72, 150, 0.22);
+  z-index: 1;
+  background: #ffffff;
+  border: 1px solid #e2e8f4;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+}
+
+/* Embla Carousel */
+.embla {
+  position: relative;
+  width: 100%;
   overflow: hidden;
 }
 
 .emblaContainer {
   display: flex;
   width: 100%;
-  height: 100%;
+  touch-action: pan-y pinch-zoom;
 }
 
 .emblaSlide {
   flex: 0 0 100%;
   min-width: 0;
   position: relative;
-  height: 600px;
 }
 
-/* ── Search input wrapper ────────────────────────────────────────────────── */
-/* Avoids globals.css: .searchSec .form-control { color:white !important }   */
-/* and: input[type='search'] { background:transparent; border:1px solid white } */
-
-.searchWrapper {
+.slideCard {
   display: flex;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #ced4da;
-  border-radius: 0.375rem;
+  flex-direction: column;
+  width: 100%;
+  background: #ffffff;
+}
+
+.slideImgLink {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 2.3;
   overflow: hidden;
-  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.searchWrapper:focus-within {
-  border-color: #86b7fe;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+.slideImg {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 2.3;
+  overflow: hidden;
 }
 
-.searchIcon {
-  flex-shrink: 0;
-  padding: 0 6px 0 12px;
-  color: #9ca3af;
+.slideImg img {
+  transition: transform 0.35s ease;
+}
+
+.slideImgLink:hover .slideImg img {
+  transform: scale(1.02);
+}
+
+/* Slide Footer with College Name */
+.slideFooter {
   display: flex;
   align-items: center;
-  pointer-events: none;
+  justify-content: flex-start;
+  padding: 0.8rem 1.1rem;
+  background: #ffffff;
+  border-top: 1px solid #edf1f7;
+  min-height: 48px;
 }
 
-.searchInput {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 0.5rem 0.5rem 0.5rem 0;
+.collegeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #274896;
+  text-decoration: none !important;
   font-size: 1rem;
-  line-height: 1.5;
-  color: #111;
-  background: transparent;
-  min-width: 0;
+  font-weight: 600;
+  max-width: calc(100% - 60px);
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.searchInput::placeholder {
-  color: #9ca3af;
-  font-weight: 400;
+.collegeLink:hover {
+  color: #e93c45;
 }
 
-@media (max-width: 767px) {
-  .searchInput {
-    font-size: 0.875rem;
-  }
-  .searchInput::placeholder {
-    font-size: 0.8125rem;
-  }
-}
-
-.clearBtn {
+.collegeLink i:first-child {
+  font-size: 1.1rem;
+  color: #e93c45;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 12px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #6c757d;
-  font-size: 18px;
-  line-height: 1;
-  transition: color 0.1s;
 }
 
-.clearBtn:hover {
-  color: #333;
-}
-
-.loader {
+.collegeLink i:last-child {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  transition: transform 0.2s ease, opacity 0.2s ease;
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  margin-right: 12px;
-  border: 2px solid #e0e0e0;
-  border-top-color: #254692;
-  border-radius: 50%;
-  animation: searchSpin 0.6s linear infinite;
 }
 
-@keyframes searchSpin {
-  to { transform: rotate(360deg); }
+.collegeLink:hover i:last-child {
+  transform: translate(2px, -2px);
+  opacity: 1;
 }
 
-/* ── Search results dropdown ─────────────────────────────────────────────── */
-.searchDropdown {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background: #fff;
-  border: 1px solid #d0d0d0;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  max-height: 320px;
-  overflow-y: auto;
-  list-style: none;
-  margin: 0;
-  padding: 4px 0;
-}
-
-.searchDropdownItem a {
-  display: flex;
+.collegeInfo {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #212529;
-  text-decoration: none;
-  transition: background 0.1s;
-  border-bottom: 1px solid #f5f5f5;
-  gap: 8px;
+  gap: 0.5rem;
+  color: #274896;
+  font-size: 1rem;
+  font-weight: 600;
+  max-width: calc(100% - 60px);
 }
 
-.searchDropdownItem:last-child a {
-  border-bottom: none;
+.collegeInfo i {
+  font-size: 1.1rem;
+  color: #e93c45;
+  flex-shrink: 0;
 }
 
-.searchDropdownItem a:hover {
-  background-color: #f0f4ff;
-  color: #254692;
-}
-
-.searchDropdownItem a:hover .itemArrow {
-  color: #254692;
-}
-
-.itemName {
-  flex: 1;
-  min-width: 0;
+.collegeName {
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
-.itemType {
-  flex-shrink: 0;
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: #f0f0f0;
-  color: #666;
-  text-transform: capitalize;
-}
-
-.itemArrow {
-  flex-shrink: 0;
-  color: #aaa;
-  transition: color 0.1s;
-}
-
-.searchNoResults {
+/* Indicators */
+.carouselIndicators {
   position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background: #fff;
-  border: 1px solid #d0d0d0;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  padding: 16px;
-  text-align: center;
-  font-size: 14px;
-  color: #6c757d;
-}
-
-/* Dot indicators */
-.dots {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0.95rem;
+  right: 1.1rem;
   display: flex;
-  gap: 8px;
-  z-index: 5;
+  align-items: center;
+  gap: 0.35rem;
+  z-index: 3;
 }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  cursor: pointer;
+.indicatorBtn {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: #c5d0e6;
+  border: none;
   padding: 0;
-  transition: background 0.2s;
+  cursor: pointer;
+  transition: width 0.22s ease, background 0.22s ease;
 }
 
-.dotActive {
-  background: #fff;
+.indicatorBtnActive {
+  width: 20px;
+  background: #274896;
 }
 
-/* Mobile: imageArea becomes relative (gives flow height), section shrinks to fit content.
-   :global overrides the globals.css top:-15% that was designed for the old absolute layout. */
-@media (min-width: 650px) and (max-width: 767px) {
-  .section    { min-height: 0; }
-  .imageArea  { position: relative; height: 800px; }
-  .emblaSlide { height: 800px; }
-  :global(.bannerFormSec) { top: 0 !important; }
+/* ── Responsive rules ── */
+@media (max-width: 991.98px) {
+  .hero {
+    padding: 3rem 0 4.5rem;
+  }
+  .heroVisual {
+    margin-top: 2rem;
+  }
+  .heroVisual::before {
+    width: 76%;
+    height: 76%;
+    top: -24px;
+    right: -24px;
+  }
 }
 
-@media (min-width: 426px) and (max-width: 649px) {
-  .section    { min-height: 0; }
-  .imageArea  { position: relative; height: 750px; }
-  .emblaSlide { height: 750px; }
-  :global(.bannerFormSec) { top: 0 !important; }
-}
-
-@media (max-width: 425px) {
-  .section    { min-height: 0; }
-  .imageArea  { position: relative; height: 160px; }
-  .emblaSlide { height: 160px; }
-  :global(.bannerFormSec) { top: 0 !important; }
+@media (max-width: 767.98px) {
+  .hero {
+    padding: 2.25rem 0 3.25rem;
+  }
+  .heroHeading {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+  }
+  .accent {
+    font-size: 2rem;
+  }
+  .heroSubtext {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  .carouselWrap {
+    border-radius: 16px;
+  }
+  .slideImgLink,
+  .slideImg {
+    aspect-ratio: 4 / 2.6;
+  }
+  .slideFooter {
+    padding: 0.65rem 0.85rem;
+  }
+  .collegeLink,
+  .collegeInfo {
+    font-size: 0.92rem;
+  }
+  .carouselIndicators {
+    bottom: 0.8rem;
+    right: 0.85rem;
+  }
+  .heroVisual {
+    margin-top: 1.75rem;
+  }
+  .heroVisual::before {
+    width: 68%;
+    height: 68%;
+    top: -16px;
+    right: -16px;
+  }
+  .heroVisual::after {
+    width: 88px;
+    height: 88px;
+    bottom: -12px;
+    left: -12px;
+    background-size: 11px 11px;
+  }
+  .accentDot {
+    width: 16px;
+    height: 16px;
+    top: -10px;
+  }
+  .btnOutlineCounselling {
+    font-size: 1.05rem;
+    padding: 0.65rem 1.1rem;
+    width: 100%;
+    justify-content: center;
+  }
 }
