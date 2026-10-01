@@ -6,7 +6,7 @@ const stats = [
   {
     icon: '/images/icons/applications-filled.svg',
     alt: 'Admission success icon',
-    target: 500000,
+    target: 100000,
     label: 'Admission Success',
   },
   {
@@ -18,7 +18,7 @@ const stats = [
   {
     icon: '/images/icons/expert-counsellor.svg',
     alt: 'Expert counsellor icon',
-    target: 100000,
+    target: 20000,
     label: 'Faster Admission Process',
   },
 ]
