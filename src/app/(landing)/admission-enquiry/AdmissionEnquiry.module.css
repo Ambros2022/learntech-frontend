@@ -132,6 +132,12 @@
   }
 }
 
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @keyframes spinAngle {
   to {
     --angle: 360deg;
@@ -326,6 +332,7 @@
   background: conic-gradient(from var(--angle), transparent 0deg, transparent 220deg, #e93c47 300deg, #fff 330deg, transparent 360deg);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   opacity: 0;
   pointer-events: none;

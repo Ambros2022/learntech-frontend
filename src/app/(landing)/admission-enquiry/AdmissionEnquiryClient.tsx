@@ -6,6 +6,19 @@ import { useRouter } from 'src/hooks/useCompatRouter'
 import { submitEnquiry } from 'src/@core/components/popup/formUtils'
 import styles from './AdmissionEnquiry.module.css'
 
+if (typeof window !== 'undefined' && typeof CSS !== 'undefined' && 'registerProperty' in CSS) {
+  try {
+    CSS.registerProperty({
+      name: '--angle',
+      syntax: '<angle>',
+      inherits: false,
+      initialValue: '0deg',
+    })
+  } catch {
+    // already registered or unsupported
+  }
+}
+
 interface CountryData {
   iso: string
   name: string
