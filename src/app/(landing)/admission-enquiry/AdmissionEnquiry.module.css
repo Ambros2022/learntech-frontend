@@ -577,7 +577,7 @@
   width: 100%;
   padding: .82rem 1rem;
   font-family: 'Poppins', sans-serif !important;
-  font-size: .82rem !important;
+  font-size: 0.9rem !important;
   font-weight: 400;
   color: #17264c;
   background: #ffffff !important;
@@ -739,7 +739,7 @@
   border-radius: 0 12px 12px 0 !important;
   padding: .82rem 1rem;
   font-family: 'Poppins', sans-serif !important;
-  font-size: .82rem !important;
+  font-size: 0.9rem !important;
   color: #17264c;
   outline: none;
 }
@@ -755,7 +755,7 @@
   flex: 0 0 auto;
   padding: 0 .65rem 0 .8rem;
   font-family: 'Poppins', sans-serif !important;
-  font-size: .82rem !important;
+  font-size: 0.9rem !important;
   color: #17264c;
   background: transparent;
   border: 0;
