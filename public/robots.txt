@@ -1,3 +1,7 @@
+# Common Crawl Bot
+User-agent: CCBot
+Disallow: /
+
 # Global rules for all standard search engines
 User-agent: *
 Allow: /
@@ -56,6 +60,118 @@ Disallow: /search/
 
 # DeepSeek Bot
 User-agent: DeepSeekBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Brave Search Bot
+User-agent: Bravebot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# DuckDuckGo Search Bot
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# DuckDuckGo AI Assist Bot
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Yahoo Search Bot
+User-agent: Slurp
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Apple Search (Siri/Spotlight)
+User-agent: Applebot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Yandex Search
+User-agent: Yandex
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Baidu Search
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Naver Search
+User-agent: Yeti
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Amazon Bot (Alexa)
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Anthropic Claude Search Bot
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Anthropic Claude User Bot
+User-agent: Claude-User
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Perplexity User Bot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# You.com Search
+User-agent: YouBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# LinkedIn Link Preview
+User-agent: LinkedInBot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# Facebook Link Preview
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /search/
+
+# X/Twitter Link Preview
+User-agent: Twitterbot
 Allow: /
 Disallow: /admin/
 Disallow: /dashboard/

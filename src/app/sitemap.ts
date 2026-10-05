@@ -44,6 +44,7 @@ const staticPages: SitemapEntry[] = [
   { path: '/advertise-with-us',      freq: 'monthly', priority: 0.5 },
   { path: '/about-us',               freq: 'monthly', priority: 0.5 },
   { path: '/contact-us',             freq: 'monthly', priority: 0.5 },
+  { path: '/admission-enquiry',      freq: 'weekly',  priority: 0.8 },
   { path: '/our-team',               freq: 'monthly', priority: 0.5 },
   { path: '/career',                 freq: 'monthly', priority: 0.5 },
   { path: '/sitemap',                freq: 'monthly', priority: 0.3 },
