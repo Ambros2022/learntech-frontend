@@ -642,14 +642,32 @@
   -moz-appearance: none;
   padding-right: 2.6rem;
   cursor: pointer;
-  color: #17264c;
+  color: #17264c !important;
   background-color: #ffffff !important;
   color-scheme: light !important;
+  border: 1px solid rgb(0, 28, 55);
+}
+
+.selectWrapper select:hover {
+  border-color: #274896 !important;
+  background-color: #ffffff !important;
+}
+
+.selectWrapper select:focus,
+.selectWrapper select:focus-visible {
+  border-color: #274896 !important;
+  background-color: #ffffff !important;
+  color: #17264c !important;
+  box-shadow: 0 1px 0 1px rgba(0, 23, 49, 0.986);
 }
 
 .selectPlaceholder,
 .selectWrapper select.selectPlaceholder,
 .selectWrapper select:invalid {
+  color: #98a2b3 !important;
+}
+
+.selectWrapper select.selectPlaceholder:focus {
   color: #98a2b3 !important;
 }
 
