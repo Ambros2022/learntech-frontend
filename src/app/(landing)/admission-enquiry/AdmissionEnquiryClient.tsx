@@ -499,7 +499,7 @@ export default function AdmissionEnquiryClient() {
                     srcSet={`https://flagcdn.com/w80/${selectedCountry.iso.toLowerCase()}.png 2x`}
                     width={22}
                     height={16}
-                    alt=""
+                    alt={`${selectedCountry.name} flag`}
                   />
                   <span className={styles.dial}>+{selectedCountry.dial}</span>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -560,7 +560,7 @@ export default function AdmissionEnquiryClient() {
                               srcSet={`https://flagcdn.com/w80/${c.iso.toLowerCase()}.png 2x`}
                               width={22}
                               height={16}
-                              alt=""
+                              alt={`${c.name} flag`}
                               loading="lazy"
                             />
                             <span className={styles.name}>{c.name}</span>

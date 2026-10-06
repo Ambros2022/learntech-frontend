@@ -65,25 +65,6 @@ export default function AdmissionEnquiryPage() {
     },
   }
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: BASE_URL,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Admission Enquiry',
-        item: CANONICAL,
-      },
-    ],
-  }
-
   return (
     <>
       {/* FontAwesome for stats and timeline icons matching reference design */}
@@ -98,7 +79,6 @@ export default function AdmissionEnquiryPage() {
 
       {/* Structured data */}
       <JsonLd id="admission-contact-schema" schema={contactPageSchema} />
-      <JsonLd id="admission-breadcrumb-schema" schema={breadcrumbSchema} />
 
       <AdmissionEnquiryClient />
     </>
