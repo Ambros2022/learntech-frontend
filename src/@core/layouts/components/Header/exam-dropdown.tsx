@@ -25,7 +25,7 @@ const ExamDropdown = memo(function ExamDropdown({ states, onClose }: Props) {
 
   // matchMedia fires only on breakpoint crossing — cheaper than resize listener.
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)')
+    const mq = window.matchMedia('(max-width: 991.98px)')
     setIsMobile(mq.matches)
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
     mq.addEventListener('change', handler)
