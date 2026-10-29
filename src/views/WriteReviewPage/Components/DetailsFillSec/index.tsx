@@ -310,8 +310,11 @@ function DetailsFillSec() {
     }
   }
 
-  // Years 2000–2024
-  const years = Array.from({ length: 25 }, (_, i) => 2000 + i)
+  // Years 1990 to current + 5
+  const currentYear = new Date().getFullYear()
+  const startYear = 1990
+  const endYear = Math.max(2030, currentYear + 5)
+  const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i)
 
   return (
     <div className='container detailsFillSec'>

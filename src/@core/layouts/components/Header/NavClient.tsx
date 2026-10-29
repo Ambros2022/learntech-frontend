@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   LazyGlobalEnquiryForm,
   LazyConditionalModal as ConditionalModal,
@@ -35,6 +35,9 @@ export interface HeaderProps {
 type DropdownKey = 'universities' | 'colleges' | 'courses' | 'exams' | 'abroad' | 'news'
 
 // ─── Static data (module-level — not re-created on each render) ───────────────
+// Matches Bootstrap's navbar-expand-lg collapse breakpoint
+const MOBILE_MQ = '(max-width: 991.98px)'
+
 const MORE_LINKS: [string, string][] = [
   ['/about-us', 'About Us'],
   ['/our-team', 'Our Team'],
@@ -65,9 +68,55 @@ export default function NavClient({ states = [], courses = [], exams = [], count
   const isActive = (href: string) => pathname === href
   const isOpen = (key: DropdownKey) => activeDropdown === key
 
+  // Hover opens dropdowns for mouse only — on touch, emulated mouseenter + click
+  // would open then immediately toggle closed.
+  const hoverProps = (key: DropdownKey) => ({
+    onPointerEnter: (e: React.PointerEvent) => { if (e.pointerType === 'mouse') openDrop(key) },
+    onPointerLeave: (e: React.PointerEvent) => { if (e.pointerType === 'mouse') closeDrop() },
+  })
+
+  const chevron = (key: DropdownKey, label: string) => (
+    <button
+      type='button'
+      className={`${styles.dropdownIcon}${isOpen(key) ? ` ${styles.rotate}` : ''}`}
+      aria-label={`${isOpen(key) ? 'Hide' : 'Show'} ${label} menu`}
+      aria-expanded={isOpen(key)}
+      onClick={e => { e.stopPropagation(); toggleDrop(key) }}
+    >
+      <i className='bi bi-chevron-down' aria-hidden='true' />
+    </button>
+  )
+
+  // Mobile menu: pin panel below navbar, lock page scroll, close on Escape / desktop resize
+  const navRef = useRef<HTMLElement>(null)
+  useEffect(() => {
+    if (!mobileOpen) return
+    const mq = window.matchMedia(MOBILE_MQ)
+    if (!mq.matches) return
+
+    const nav = navRef.current
+    if (nav) {
+      if (nav.getBoundingClientRect().top < 0) nav.scrollIntoView({ block: 'start' })
+      nav.style.setProperty('--nav-bottom', `${Math.max(0, nav.getBoundingClientRect().bottom)}px`)
+    }
+
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false) }
+    const onMq = (e: MediaQueryListEvent) => { if (!e.matches) setMobileOpen(false) }
+    document.addEventListener('keydown', onKey)
+    mq.addEventListener('change', onMq)
+
+    return () => {
+      document.body.style.overflow = prevOverflow
+      document.removeEventListener('keydown', onKey)
+      mq.removeEventListener('change', onMq)
+    }
+  }, [mobileOpen])
+
   return (
     <>
-      <nav className='navbar navbar-expand-lg bg-white' style={{ zIndex: 100 }}>
+      <nav ref={navRef} className='navbar navbar-expand-lg bg-white' style={{ zIndex: 100 }}>
 
         <Link className={`navbar-brand ${styles.hlogo}`} href='/'>
           <div className='ps-md-5 ps-0' style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -84,32 +133,20 @@ export default function NavClient({ states = [], courses = [], exams = [], count
         </Link>
 
         <button
-          className='navbar-toggler'
+          className={`navbar-toggler ${styles.toggler}`}
           type='button'
           onClick={() => setMobileOpen(prev => !prev)}
           aria-controls='navbarSupportedContent'
           aria-expanded={mobileOpen}
-          aria-label='Toggle navigation'
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
-          <span className='navbar-toggler-icon' />
+          <i className={`bi ${mobileOpen ? 'bi-x-lg' : 'bi-list'}`} aria-hidden='true' />
         </button>
 
         <div
           className={`collapse navbar-collapse ${styles.collapseNav}${mobileOpen ? ' show' : ''}`}
           id='navbarSupportedContent'
         >
-          {/* Mobile guest panel */}
-          <div className='d-lg-none text-center py-3'>
-            <div style={{ width: 60, height: 60, backgroundColor: '#f0f0f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px' }}>
-              <i className='bi bi-person' style={{ fontSize: 30 }} aria-hidden='true' />
-            </div>
-            <p>Welcome Guest!</p>
-            <div className='d-flex justify-content-center gap-2'>
-              <button className='submitBtn btn-xl btn-block applyNowButton btn' onClick={() => setShowModal(true)} style={{ fontSize: 14 }}>WRITE A REVIEW</button>
-              <button className='submitBtn btn-xl btn-block applyNowButton btn' onClick={() => setShowModal(true)} style={{ fontSize: 14 }}>LOGIN / REGISTER</button>
-            </div>
-          </div>
-
           <span className={`${styles.topNav} ps-5`}>
             <ul className='navbar-nav ps-0 ps-md-5'>
 
@@ -118,54 +155,53 @@ export default function NavClient({ states = [], courses = [], exams = [], count
               </li>
 
               {/* Universities */}
-              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('universities')} onMouseLeave={closeDrop} onClick={() => toggleDrop('universities')}>
+              <li className={`nav-item dropdown ${styles.maintain}`} {...hoverProps('universities')} onClick={() => toggleDrop('universities')}>
                 <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/universities') ? ' active' : ''}`} href='/universities' role='button' aria-expanded={isOpen('universities')} onClick={() => setMobileOpen(false)}>Universities</Link>
-                <span className={`${styles.dropdownIcon} d-md-none${isOpen('universities') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('universities') }}>&gt;</span>
-                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('universities') ? ' show' : ''}`}>
+                {chevron('universities', 'Universities')}
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('universities') ? ' show' : ''}`} onClick={e => e.stopPropagation()}>
                   {isOpen('universities') && <Statedropdown states={states} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Colleges */}
-              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('colleges')} onMouseLeave={closeDrop} onClick={() => toggleDrop('colleges')}>
+              <li className={`nav-item dropdown ${styles.maintain}`} {...hoverProps('colleges')} onClick={() => toggleDrop('colleges')}>
                 <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/colleges') ? ' active' : ''}`} href='/colleges' role='button' aria-expanded={isOpen('colleges')} onClick={() => setMobileOpen(false)}>Colleges</Link>
-                <span className={`${styles.dropdownIcon} d-md-none${isOpen('colleges') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('colleges') }}>&gt;</span>
-                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('colleges') ? ' show' : ''}`}>
+                {chevron('colleges', 'Colleges')}
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('colleges') ? ' show' : ''}`} onClick={e => e.stopPropagation()}>
                   {isOpen('colleges') && <Statedropdown states={states} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Courses */}
-              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('courses')} onMouseLeave={closeDrop} onClick={() => toggleDrop('courses')}>
+              <li className={`nav-item dropdown ${styles.maintain}`} {...hoverProps('courses')} onClick={() => toggleDrop('courses')}>
                 <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/courses') ? ' active' : ''}`} href='/courses' role='button' aria-expanded={isOpen('courses')} onClick={() => setMobileOpen(false)}>Courses</Link>
-                <span className={`${styles.dropdownIcon} d-md-none${isOpen('courses') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('courses') }}>&gt;</span>
-                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('courses') ? ' show' : ''}`}>
+                {chevron('courses', 'Courses')}
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('courses') ? ' show' : ''}`} onClick={e => e.stopPropagation()}>
                   {isOpen('courses') && <Coursedropdown states={courses} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Exams */}
-              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('exams')} onMouseLeave={closeDrop} onClick={() => toggleDrop('exams')}>
+              <li className={`nav-item dropdown ${styles.maintain}`} {...hoverProps('exams')} onClick={() => toggleDrop('exams')}>
                 <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/exams') ? ' active' : ''}`} href='/exams' role='button' aria-expanded={isOpen('exams')} onClick={() => setMobileOpen(false)}>Exams</Link>
-                <span className={`${styles.dropdownIcon} d-md-none${isOpen('exams') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('exams') }}>&gt;</span>
-                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('exams') ? ' show' : ''}`}>
+                {chevron('exams', 'Exams')}
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('exams') ? ' show' : ''}`} onClick={e => e.stopPropagation()}>
                   {isOpen('exams') && <Examdropdown states={exams} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Study Abroad */}
-              <li className={`nav-item dropdown ${styles.maintain}`} onMouseEnter={() => openDrop('abroad')} onMouseLeave={closeDrop} onClick={() => toggleDrop('abroad')}>
-                <a className={`nav-link dropdown-toggle ${styles.noArrow}`} role='button' aria-expanded={isOpen('abroad')} onClick={() => setMobileOpen(false)}>Study Abroad</a>
-                <span className={`${styles.dropdownIcon} d-md-none${isOpen('abroad') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('abroad') }}>&gt;</span>
-                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('abroad') ? ' show' : ''}`}>
+              <li className={`nav-item dropdown ${styles.maintain}`} {...hoverProps('abroad')} onClick={() => toggleDrop('abroad')}>
+                <a className={`nav-link dropdown-toggle ${styles.noArrow}`} role='button' aria-expanded={isOpen('abroad')}>Study Abroad</a>
+                {chevron('abroad', 'Study Abroad')}
+                <div className={`dropdown-menu ${styles.customDropdown}${isOpen('abroad') ? ' show' : ''}`} onClick={e => e.stopPropagation()}>
                   {isOpen('abroad') && <Abroaddropdown states={countries} type='Colleges' onClose={closeAll} />}
                 </div>
               </li>
 
               {/* Latest News */}
-              <li className={`nav-item dropdown ${styles.latestStatic} ${styles.maintain}`} onMouseEnter={() => openDrop('news')} onMouseLeave={closeDrop} onClick={() => toggleDrop('news')}>
+              <li className={`nav-item dropdown ${styles.latestStatic} ${styles.maintain}`} {...hoverProps('news')} onClick={() => toggleDrop('news')}>
                 <Link className={`nav-link dropdown-toggle ${styles.noArrow}${isActive('/news') ? ` ${styles.activeDrpDwn}` : ''}`} href='/news' role='button' aria-expanded={isOpen('news')} onClick={() => setMobileOpen(false)}>Latest News</Link>
-                <span className={`${styles.dropdownIcon} d-md-none${isOpen('news') ? ` ${styles.rotate}` : ''}`} onClick={e => { e.stopPropagation(); toggleDrop('news') }}>&gt;</span>
                 {isOpen('news') && (
                   <div className='container-fluid'>
                     <ul className={`newsDrpDwn ${styles.newsHide} dropdown-menu`} style={{ textAlign: 'center', left: 0, right: 0, width: '80%', margin: '0 auto' }}>
@@ -220,6 +256,7 @@ export default function NavClient({ states = [], courses = [], exams = [], count
               </li>
 
               {/* Mobile-only extra links */}
+              <li className={`d-lg-none ${styles.mobileLabel}`} role='presentation'>More</li>
               {MORE_LINKS.map(([href, label]) => (
                 <li key={`m-${href}`} className='nav-item dropdown d-lg-none d-md-inline-block'>
                   <Link className={`nav-link${isActive(href) ? ' active' : ''}`} href={href} onClick={closeAll}>{label}</Link>
@@ -228,6 +265,20 @@ export default function NavClient({ states = [], courses = [], exams = [], count
 
             </ul>
           </span>
+
+          {/* Mobile guest panel */}
+          <div className={`d-lg-none ${styles.guestPanel}`}>
+            <div className={styles.guestInfo}>
+              <span className={styles.guestAvatar}>
+                <i className='bi bi-person' aria-hidden='true' />
+              </span>
+              <p className='m-0'>Welcome Guest!</p>
+            </div>
+            <div className={styles.guestActions}>
+              <button type='button' className={`btn ${styles.guestBtn} ${styles.guestBtnOutline}`} onClick={() => setShowModal(true)}>Write a Review</button>
+              <button type='button' className={`btn ${styles.guestBtn}`} onClick={() => setShowModal(true)}>Login / Register</button>
+            </div>
+          </div>
         </div>
       </nav>
 
