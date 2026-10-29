@@ -69,21 +69,38 @@
   font-weight: bold !important;
 }
 
-/* Mobile chevron toggle */
+/* Mobile chevron toggle (hidden ≥992px) */
 .dropdownIcon {
-  display: inline-block;
-  margin-left: auto;
-  transition: transform 0.3s ease-in-out;
   position: absolute;
-  right: 15px;
+  top: 4px;
+  right: 8px;
   z-index: 10;
-  pointer-events: auto;
-  top: 10px;
-  font-size: 17px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #254692;
+  font-size: 16px;
+  transition: transform 0.25s ease, background-color 0.2s ease;
+}
+
+.dropdownIcon:hover,
+.dropdownIcon:focus-visible {
+  background-color: rgba(39, 72, 150, 0.08);
+}
+
+.dropdownIcon:focus-visible {
+  outline: 2px solid #254692;
+  outline-offset: -2px;
 }
 
 .dropdownIcon.rotate {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
 }
 
 /* ── Nav utility items ──────────────────────────────────────── */
@@ -136,8 +153,9 @@
   }
 }
 
-@media (min-width: 775px) {
-  .dropdownIcon {
+@media (min-width: 992px) {
+  .dropdownIcon,
+  .mobileLabel {
     display: none;
   }
 }
@@ -148,7 +166,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991.98px) {
   .noArrow::after {
     display: none !important;
   }
@@ -203,5 +221,246 @@
 @media (min-width: 992px) and (max-width: 1024px) {
   .topNav :global(.nav-link) {
     font-size: 12px !important;
+  }
+}
+
+/* ── Mobile menu (<992px, collapsed navbar only — desktop untouched) ── */
+
+.toggler {
+  width: 44px;
+  height: 44px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0 !important;
+  border-radius: 8px !important;
+  color: #254692 !important;
+  font-size: 28px;
+  line-height: 1;
+  box-shadow: none !important;
+}
+
+.toggler:hover {
+  background-color: rgba(39, 72, 150, 0.08);
+}
+
+.toggler:focus-visible {
+  outline: 2px solid #254692;
+  outline-offset: 2px;
+}
+
+@media (max-width: 991.98px) {
+  /* Panel pinned under navbar; scrolls internally while page scroll is locked */
+  .collapseNav {
+    position: fixed;
+    top: var(--nav-bottom, 70px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1030;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    border-top: 1px solid #e6eaf2;
+    padding-bottom: 24px;
+  }
+
+  /* Guest card */
+  .guestPanel {
+    margin: 12px 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: rgba(39, 72, 150, 0.06);
+  }
+
+  .guestInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2a44;
+  }
+
+  .guestAvatar {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #254692;
+    font-size: 22px;
+  }
+
+  .guestActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .guestBtn {
+    min-height: 44px;
+    padding: 8px 10px !important;
+    border: 1px solid #254692 !important;
+    border-radius: 8px !important;
+    background-color: #254692 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    white-space: nowrap;
+  }
+
+  .guestBtnOutline {
+    background-color: #fff !important;
+    color: #254692 !important;
+  }
+
+  /* Rows */
+  .topNav {
+    display: block;
+    padding-left: 0 !important;
+  }
+
+  .topNav :global(.navbar-nav) {
+    padding: 0 !important;
+  }
+
+  .topNav :global(.navbar-nav) > li {
+    position: relative;
+    background-color: #fff !important;
+    border-bottom: 1px solid #eef1f6;
+  }
+
+  .topNav :global(.nav-link),
+  .topNav :global(.nav-link.active) {
+    display: flex !important;
+    align-items: center;
+    width: 100% !important;
+    min-height: 52px;
+    padding: 12px 16px !important;
+    border-bottom: 0 !important;
+    font-size: 16px !important;
+    font-weight: 500;
+  }
+
+  /* Dropdown rows: link covers the label, rest of row + chevron toggle submenu */
+  .maintain > :global(.nav-link),
+  .maintain > :global(.nav-link.active) {
+    display: inline-flex !important;
+    width: auto !important;
+    max-width: calc(100% - 60px) !important;
+  }
+
+  .topNav :global(.nav-link.active) {
+    color: #254692 !important;
+    font-weight: 700 !important;
+  }
+
+  .topNav :global(.navbar-nav) > li:has(> :global(.nav-link.active)) {
+    box-shadow: inset 3px 0 0 #254692;
+    background-color: rgba(39, 72, 150, 0.04) !important;
+  }
+
+  .mobileLabel {
+    padding: 18px 16px 8px;
+    border-bottom: 1px solid #eef1f6;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b7590;
+  }
+
+  /* Submenu panel */
+  .customDropdown:not(:global(.show)) {
+    display: none !important;
+  }
+
+  .topNav .customDropdown {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .customDropdown > :global(.dropdown-menu) {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 8px 0 !important;
+    border: 0 !important;
+    border-top: 1px solid #eef1f6 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background-color: #f7f9fc !important;
+    font-size: 15px !important;
+  }
+
+  .customDropdown > :global(.dropdown-menu) > :global(.text-center):first-child {
+    text-align: left !important;
+  }
+
+  .customDropdown > :global(.dropdown-menu) > :global(.text-center):first-child p {
+    margin: 4px 0 6px;
+    padding: 0 16px 0 28px;
+    font-size: 12px !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .customDropdown :global(.dropdown-item) {
+    padding: 10px 16px 10px 28px;
+    white-space: normal;
+  }
+
+  /* Study Abroad flags */
+  .topNav .customDropdown :global(.dropdown-item) img {
+    width: 26px !important;
+    height: auto;
+  }
+
+  /* City / exam-stream arrow: bigger tap target */
+  .customDropdown :global(.dropdown-menu) li > div > img {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 10px;
+    margin-right: 6px;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+  }
+
+  .customDropdown :global(.dropdown-menu) li > div > img:global(.rotate-90) {
+    transform: rotate(90deg);
+  }
+
+  /* Nested submenu (cities / exam streams) — rendered only when toggled */
+  .customDropdown :global(.dropdown-submenu) {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 !important;
+    padding: 4px 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background-color: #eef2f9 !important;
+  }
+
+  .customDropdown :global(.dropdown-submenu) :global(.dropdown-item) {
+    padding-left: 44px;
+  }
+
+  .customDropdown :global(.dropdownBtn) :global(.btn) {
+    font-size: 14px !important;
+    font-weight: 600;
+    color: #254692 !important;
   }
 }
