@@ -15,6 +15,9 @@ function NProgressInner() {
   useEffect(() => {
     NProgress.done()
 
+    // Deep link to a section (/page#faq) — let the page scroll to its anchor
+    if (window.location.hash) return
+
     // 1. Scroll immediately
     window.scrollTo(0, 0)
 
