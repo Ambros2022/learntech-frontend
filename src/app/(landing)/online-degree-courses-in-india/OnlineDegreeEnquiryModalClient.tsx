@@ -72,8 +72,10 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
       document.body.classList.add('enq-open')
       document.body.style.overflow = 'hidden'
       setTimeout(() => {
-        const input = document.getElementById('modalFullName')
-        input?.focus()
+        if (window.innerWidth > 768) {
+          const input = document.getElementById('modalFullName')
+          input?.focus({ preventScroll: true })
+        }
       }, 100)
     } else {
       document.body.classList.remove('enq-open')
