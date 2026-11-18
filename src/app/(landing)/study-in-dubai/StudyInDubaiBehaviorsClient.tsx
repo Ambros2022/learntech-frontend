@@ -205,7 +205,7 @@ export default function StudyInDubaiBehaviorsClient() {
       carouselControl = setupCarousel(courseTrack, prevBtn, nextBtn)
 
       // Filter state
-      const state = { college: 'sym', level: 'all' }
+      const state = { college: 'all', level: 'all' }
 
       const applyFilters = () => {
         const cards = courseTrack.querySelectorAll<HTMLElement>('.pc')

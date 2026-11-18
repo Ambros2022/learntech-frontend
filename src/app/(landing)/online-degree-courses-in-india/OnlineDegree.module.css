@@ -5770,15 +5770,15 @@
     max-width: 32ch
 }
 
-:where(.onlineDegreeRoot) :global(dialog.enq[open] .enq__ov) > :global(*) {
+:where(.onlineDegreeRoot) :global(dialog.enq[open] .enq__ov > *) {
   animation: enqRise .8s cubic-bezier(.22, 1, .36, 1) both
 }
 
-:where(.onlineDegreeRoot) :global(dialog.enq[open] .enq__ov) > :global(*:nth-child(2)) {
+:where(.onlineDegreeRoot) :global(dialog.enq[open] .enq__ov > *:nth-child(2)) {
   animation-delay: .15s
 }
 
-:where(.onlineDegreeRoot) :global(dialog.enq[open] .enq__ov) > :global(*:nth-child(3)) {
+:where(.onlineDegreeRoot) :global(dialog.enq[open] .enq__ov > *:nth-child(3)) {
   animation-delay: .3s
 }
 

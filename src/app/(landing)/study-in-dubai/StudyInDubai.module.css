@@ -2,7 +2,7 @@
 
 /* globals.css forces `p { font-size: 16px !important }`; restore inheritance so the design's
    own font sizes (made !important by the generator) apply */
-:where(.studyInDubaiRoot) :global(p) {
+.studyInDubaiRoot :global(p) {
   font-size: inherit !important;
 }
 
@@ -29,9 +29,9 @@
             --nav: 72px
 }
 
-:where(.studyInDubaiRoot) :global(*),
-:where(.studyInDubaiRoot) :global(*)::before,
-:where(.studyInDubaiRoot) :global(*)::after {
+.studyInDubaiRoot :global(*),
+.studyInDubaiRoot :global(*)::before,
+.studyInDubaiRoot :global(*)::after {
   box-sizing: border-box;
             margin: 0;
             padding: 0
@@ -52,21 +52,27 @@
             overflow-x: hidden
 }
 
-:where(.studyInDubaiRoot) :global(img) {
+/* Ensure font-family cascades through all descendants, overriding Bootstrap's
+   --bs-body-font-family and globals.css system-ui fallbacks */
+.studyInDubaiRoot :global(*) {
+  font-family: inherit;
+}
+
+.studyInDubaiRoot :global(img) {
   display: block;
             max-width: 100%
 }
 
-:where(.studyInDubaiRoot) :global(a) {
+.studyInDubaiRoot :global(a) {
   color: inherit;
             text-decoration: none
 }
 
-:where(.studyInDubaiRoot) :global(ul) {
+.studyInDubaiRoot :global(ul) {
   list-style: none
 }
 
-:where(.studyInDubaiRoot) :global(button) {
+.studyInDubaiRoot :global(button) {
   font: inherit;
             color: inherit;
             border: 0;
@@ -74,26 +80,26 @@
             cursor: pointer
 }
 
-:where(.studyInDubaiRoot) :global(:focus-visible) {
+.studyInDubaiRoot :global(:focus-visible) {
   outline: 2px solid var(--blue);
             outline-offset: 3px
 }
 
-:where(.studyInDubaiRoot) :global(.container) {
+.studyInDubaiRoot :global(.container) {
   max-width: 1440px;
             margin: 0 auto;
             padding: 0 var(--gutter)
 }
 
-:where(.studyInDubaiRoot) :global(.section) {
+.studyInDubaiRoot :global(.section) {
   padding: 50px 0px !important;
 }
 
-:where(.studyInDubaiRoot) :global(.section--soft) {
+.studyInDubaiRoot :global(.section--soft) {
   background: linear-gradient(180deg, #f6eceb, white);
 }
 
-:where(.studyInDubaiRoot) :global(.eyebrow) {
+.studyInDubaiRoot :global(.eyebrow) {
   display: inline-block;
             font-size: .78rem !important;
             font-weight: 500;
@@ -104,37 +110,37 @@
             margin-bottom: 18px
 }
 
-:where(.studyInDubaiRoot) :global(.title) {
+.studyInDubaiRoot :global(.title) {
   font-size: clamp(1.9rem, 3.8vw, 2.3rem) !important;
             font-weight: 500;
             letter-spacing: -.03em;
             line-height: 1.15;
 }
 
-:where(.studyInDubaiRoot) :global(.lead) {
+.studyInDubaiRoot :global(.lead) {
   font-size: 0.9rem !important;
             font-weight: 400;
             color: #464646;
             margin-top: 14px
 }
 
-:where(.studyInDubaiRoot) :global(.section__head) {
+.studyInDubaiRoot :global(.section__head) {
   margin-bottom: clamp(32px, 4vw, 52px)
 }
 
-:where(.studyInDubaiRoot) :global(.note) {
+.studyInDubaiRoot :global(.note) {
   margin-top: 20px;
             font-size: .78rem !important;
             font-weight: 300;
             color: var(--ink-3)
 }
 
-:where(.studyInDubaiRoot) :global(.note a) {
+.studyInDubaiRoot :global(.note a) {
   color: var(--blue);
             font-weight: 500
 }
 
-:where(.studyInDubaiRoot) :global(.btn) {
+.studyInDubaiRoot :global(.btn) {
   display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -149,53 +155,53 @@
             transition: transform .4s var(--ease), box-shadow .4s var(--ease), background .3s
 }
 
-:where(.studyInDubaiRoot) :global(.btn:hover) {
+.studyInDubaiRoot :global(.btn:hover) {
   transform: translateY(-2px);
             box-shadow: 0 14px 28px -12px rgba(39, 72, 150, .6);
             background: var(--blue-dark)
 }
 
-:where(.studyInDubaiRoot) :global(.btn--red) {
+.studyInDubaiRoot :global(.btn--red) {
   background: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(.btn--red:hover) {
+.studyInDubaiRoot :global(.btn--red:hover) {
   background: #d22f3a;
             box-shadow: 0 14px 28px -12px rgba(233, 60, 71, .6)
 }
 
-:where(.studyInDubaiRoot) :global(.btn--light) {
+.studyInDubaiRoot :global(.btn--light) {
   background: var(--blue);
             color: #fff;
             border: 1px solid transparent;
 }
 
-:where(.studyInDubaiRoot) :global(.btn--light:hover) {
+.studyInDubaiRoot :global(.btn--light:hover) {
   background: #fff;
             color: var(--blue-dark);
             border-color: var(--blue-dark);
             box-shadow: 0 14px 28px -12px rgba(0, 0, 0, .4)
 }
 
-:where(.studyInDubaiRoot) :global(.btn--glass) {
+.studyInDubaiRoot :global(.btn--glass) {
   background: rgba(16, 2, 2, 0.431);
             border: 1px solid rgb(255, 255, 255);
             color: #fff;
             backdrop-filter: blur(6px)
 }
 
-:where(.studyInDubaiRoot) :global(.btn--glass:hover) {
+.studyInDubaiRoot :global(.btn--glass:hover) {
   background: rgba(255, 255, 255, .24);
             box-shadow: none
 }
 
-:where(.studyInDubaiRoot) :global(.btn--sm) {
+.studyInDubaiRoot :global(.btn--sm) {
   height: 42px;
             padding: 0 20px;
             font-size: .84rem !important
 }
 
-:where(.studyInDubaiRoot) :global(.link) {
+.studyInDubaiRoot :global(.link) {
   display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -205,11 +211,11 @@
             transition: gap .3s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.link:hover) {
+.studyInDubaiRoot :global(.link:hover) {
   gap: 14px
 }
 
-:where(.studyInDubaiRoot) :global(.header) {
+.studyInDubaiRoot :global(.header) {
   position: fixed;
             inset: 0 0 auto;
             z-index: 50;
@@ -219,7 +225,7 @@
             border-bottom: 1px solid var(--line)
 }
 
-:where(.studyInDubaiRoot) :global(.header__inner) {
+.studyInDubaiRoot :global(.header__inner) {
   height: var(--nav);
             display: flex;
             align-items: center;
@@ -227,7 +233,7 @@
             gap: 24px
 }
 
-:where(.studyInDubaiRoot) :global(.brand) {
+.studyInDubaiRoot :global(.brand) {
   display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -237,18 +243,18 @@
             color: var(--blue)
 }
 
-:where(.studyInDubaiRoot) :global(.brand svg) {
+.studyInDubaiRoot :global(.brand svg) {
   width: 34px;
             height: 34px
 }
 
-:where(.studyInDubaiRoot) :global(.nav__links) {
+.studyInDubaiRoot :global(.nav__links) {
   display: flex;
             align-items: center;
             gap: 26px
 }
 
-:where(.studyInDubaiRoot) :global(.nav__links a:not(.btn)) {
+.studyInDubaiRoot :global(.nav__links a:not(.btn)) {
   font-size: 0.96rem !important;
             font-weight: 400;
             color: var(--ink) !important;
@@ -256,11 +262,11 @@
             white-space: nowrap
 }
 
-:where(.studyInDubaiRoot) :global(.nav__links a:not(.btn):hover) {
+.studyInDubaiRoot :global(.nav__links a:not(.btn):hover) {
   color: var(--blue) !important
 }
 
-:where(.studyInDubaiRoot) :global(.hero) {
+.studyInDubaiRoot :global(.hero) {
   position: relative;
             display: flex;
             align-items: center;
@@ -270,22 +276,22 @@
             background: url("/images/study-in-dubai/media/hero-banner.jpeg") right center/cover no-repeat
 }
 
-:where(.studyInDubaiRoot) :global(.hero .container) {
+.studyInDubaiRoot :global(.hero .container) {
   width: 100%
 }
 
-:where(.studyInDubaiRoot) :global(.hero__content) {
+.studyInDubaiRoot :global(.hero__content) {
   max-width: 800px
 }
 
-:where(.studyInDubaiRoot) :global(.hero .eyebrow) {
+.studyInDubaiRoot :global(.hero .eyebrow) {
   background: rgba(254, 225, 225, 0.8);
             border: 1px solid var(--red);
             color: var(--navy);
             backdrop-filter: blur(6px)
 }
 
-:where(.studyInDubaiRoot) :global(.hero__title) {
+.studyInDubaiRoot :global(.hero__title) {
   font-size: clamp(2.9rem, 4.4vw, 3.5rem) !important;
             color: var(--blue-dark);
             font-weight: 500;
@@ -294,13 +300,13 @@
             max-width: 660px;
 }
 
-:where(.studyInDubaiRoot) :global(.hero__title em) {
+.studyInDubaiRoot :global(.hero__title em) {
   font-style: normal;
             font-weight: 400;
             color: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(.hero__text) {
+.studyInDubaiRoot :global(.hero__text) {
   font-size: 1.02rem !important;
             font-weight: 300;
             color: var(--navy);
@@ -308,22 +314,22 @@
             margin: 22px 0 32px
 }
 
-:where(.studyInDubaiRoot) :global(.hero__cta) {
+.studyInDubaiRoot :global(.hero__cta) {
   display: flex;
             flex-wrap: wrap;
             gap: 12px
 }
 
-:where(.studyInDubaiRoot) :global(.grid) {
+.studyInDubaiRoot :global(.grid) {
   display: grid;
             gap: 20px
 }
 
-:where(.studyInDubaiRoot) :global(.grid--4) {
+.studyInDubaiRoot :global(.grid--4) {
   grid-template-columns: repeat(4, minmax(0, 1fr))
 }
 
-:where(.studyInDubaiRoot) :global(.feature) {
+.studyInDubaiRoot :global(.feature) {
   display: flex;
             flex-direction: column;
             padding: 26px;
@@ -335,12 +341,12 @@
             transition: transform .5s var(--ease), box-shadow .5s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.feature:hover) {
+.studyInDubaiRoot :global(.feature:hover) {
   transform: translateY(-4px);
             box-shadow: var(--shadow-up);
 }
 
-:where(.studyInDubaiRoot) :global(.feature__icon) {
+.studyInDubaiRoot :global(.feature__icon) {
   display: grid;
             place-items: center;
             width: 46px;
@@ -351,16 +357,16 @@
             margin-bottom: 18px
 }
 
-:where(.studyInDubaiRoot) :global(.feature__icon svg) {
+.studyInDubaiRoot :global(.feature__icon svg) {
   width: 46px;
             height: 46px
 }
 
-:where(.studyInDubaiRoot) :global(.feature__icon img) {
+.studyInDubaiRoot :global(.feature__icon img) {
   object-fit: contain
 }
 
-:where(.studyInDubaiRoot) :global(.feature__title) {
+.studyInDubaiRoot :global(.feature__title) {
   font-size: 1.2rem !important;
             text-transform: capitalize;
             color: rgb(98, 14, 14);
@@ -369,13 +375,13 @@
             margin-bottom: 8px
 }
 
-:where(.studyInDubaiRoot) :global(.feature__text) {
+.studyInDubaiRoot :global(.feature__text) {
   font-size: .88rem !important;
             font-weight: 400;
             color: rgb(44, 43, 43);
 }
 
-:where(.studyInDubaiRoot) :global(.feature .k) {
+.studyInDubaiRoot :global(.feature .k) {
   display: block;
             margin: 16px 0 4px;
             font-size: .9rem !important;
@@ -383,18 +389,18 @@
             color: var(--ink)
 }
 
-:where(.studyInDubaiRoot) :global(.feature .pr) {
+.studyInDubaiRoot :global(.feature .pr) {
   font-size: .86rem !important;
             font-weight: 500
 }
 
-:where(.studyInDubaiRoot) :global(.feature .rt) {
+.studyInDubaiRoot :global(.feature .rt) {
   font-size: .84rem !important;
             font-weight: 400;
             color: var(--ink)
 }
 
-:where(.studyInDubaiRoot) :global(.tg) {
+.studyInDubaiRoot :global(.tg) {
   display: flex;
             flex-wrap: wrap;
             gap: 6px;
@@ -402,7 +408,7 @@
             padding-top: 16px
 }
 
-:where(.studyInDubaiRoot) :global(.tg span) {
+.studyInDubaiRoot :global(.tg span) {
   padding: 3px 10px;
             border-radius: 99px;
             font-size: .7rem !important;
@@ -411,25 +417,25 @@
             background: #EAF0FD
 }
 
-:where(.studyInDubaiRoot) :global(.tg span.b) {
+.studyInDubaiRoot :global(.tg span.b) {
   color: var(--red);
             background: #FDECEE
 }
 
-:where(.studyInDubaiRoot) :global(.filters) {
+.studyInDubaiRoot :global(.filters) {
   display: flex;
             flex-wrap: wrap;
             gap: 16px 32px;
             margin-bottom: 32px
 }
 
-:where(.studyInDubaiRoot) :global(.pills) {
+.studyInDubaiRoot :global(.pills) {
   display: flex;
             flex-wrap: wrap;
             gap: 8px
 }
 
-:where(.studyInDubaiRoot) :global(.pill) {
+.studyInDubaiRoot :global(.pill) {
   padding: 9px 18px;
             border-radius: 15px;
             border: 1px solid var(--line);
@@ -439,18 +445,18 @@
             transition: all .3s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.pill:hover) {
+.studyInDubaiRoot :global(.pill:hover) {
   border-color: var(--blue);
             color: var(--blue)
 }
 
-:where(.studyInDubaiRoot) :global(.pill[aria-pressed=true]) {
+.studyInDubaiRoot :global(.pill[aria-pressed=true]) {
   background: var(--blue);
             border-color: #fff;
             color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.track) {
+.studyInDubaiRoot :global(.track) {
   display: flex;
             gap: 20px;
             overflow-x: auto;
@@ -462,23 +468,23 @@
             cursor: grab
 }
 
-:where(.studyInDubaiRoot) :global(.track)::-webkit-scrollbar {
+.studyInDubaiRoot :global(.track)::-webkit-scrollbar {
   display: none
 }
 
-:where(.studyInDubaiRoot) :global(.track.drag) {
+.studyInDubaiRoot :global(.track.drag) {
   cursor: grabbing;
             scroll-snap-type: none;
             scroll-behavior: auto;
             user-select: none
 }
 
-:where(.studyInDubaiRoot) :global(.track a),
-:where(.studyInDubaiRoot) :global(.track img) {
+.studyInDubaiRoot :global(.track a),
+.studyInDubaiRoot :global(.track img) {
   -webkit-user-drag: none
 }
 
-:where(.studyInDubaiRoot) :global(.empty) {
+.studyInDubaiRoot :global(.empty) {
   flex: 1;
             border: 1px dashed var(--line);
             border-radius: var(--r);
@@ -487,24 +493,24 @@
             color: var(--ink-2)
 }
 
-:where(.studyInDubaiRoot) :global(.ctl) {
+.studyInDubaiRoot :global(.ctl) {
   display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 16px
 }
 
-:where(.studyInDubaiRoot) :global(.cnt) {
+.studyInDubaiRoot :global(.cnt) {
   font-size: .84rem !important;
             color: #fff;
 }
 
-:where(.studyInDubaiRoot) :global(.arrs) {
+.studyInDubaiRoot :global(.arrs) {
   display: flex;
             gap: 10px
 }
 
-:where(.studyInDubaiRoot) :global(.arr) {
+.studyInDubaiRoot :global(.arr) {
   display: grid;
             place-items: center;
             width: 46px;
@@ -515,28 +521,28 @@
             transition: all .3s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.arr svg) {
+.studyInDubaiRoot :global(.arr svg) {
   width: 18px;
             height: 18px
 }
 
-:where(.studyInDubaiRoot) :global(.arr:hover) {
+.studyInDubaiRoot :global(.arr:hover) {
   background: var(--blue);
             border-color: var(--blue);
             color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.arr:disabled) {
+.studyInDubaiRoot :global(.arr:disabled) {
   opacity: .35;
             pointer-events: none
 }
 
-:where(.studyInDubaiRoot) :global(.grid--2) {
+.studyInDubaiRoot :global(.grid--2) {
   grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 24px;
 }
 
-:where(.studyInDubaiRoot) :global(.college) {
+.studyInDubaiRoot :global(.college) {
   --college-accent: #274896;
             position: relative;
             display: flex;
@@ -549,29 +555,29 @@
             transition: transform .4s var(--ease), box-shadow .4s var(--ease);
 }
 
-:where(.studyInDubaiRoot) :global(.college[data-college=bits]) {
+.studyInDubaiRoot :global(.college[data-college=bits]) {
   --college-accent: #E93C47;
             background: #fff8f8;
             border-color: #f3e2e5;
 }
 
-:where(.studyInDubaiRoot) :global(.college:hover) {
+.studyInDubaiRoot :global(.college:hover) {
   transform: translateY(-5px);
             box-shadow: 0 8px 8px rgba(4, 21, 52, 0.297);
 }
 
-:where(.studyInDubaiRoot) :global(.college__img) {
+.studyInDubaiRoot :global(.college__img) {
   position: relative;
             aspect-ratio: 22 / 8;
             overflow: hidden;
             background: linear-gradient(135deg, #274896, #101e43);
 }
 
-:where(.studyInDubaiRoot) :global(.college[data-college=bits] .college__img) {
+.studyInDubaiRoot :global(.college[data-college=bits] .college__img) {
   background: linear-gradient(135deg, #e93c47, #45243e);
 }
 
-:where(.studyInDubaiRoot) :global(.college__img img) {
+.studyInDubaiRoot :global(.college__img img) {
   display: block;
             width: 100%;
             height: 100%;
@@ -579,11 +585,11 @@
             transition: transform .8s var(--ease);
 }
 
-:where(.studyInDubaiRoot) :global(.college:hover .college__img img) {
+.studyInDubaiRoot :global(.college:hover .college__img img) {
   transform: scale(1.05);
 }
 
-:where(.studyInDubaiRoot) :global(.college__img)::after {
+.studyInDubaiRoot :global(.college__img)::after {
   content: "";
             position: absolute;
             inset: 0;
@@ -593,14 +599,14 @@
             pointer-events: none;
 }
 
-:where(.studyInDubaiRoot) :global(.college__body) {
+.studyInDubaiRoot :global(.college__body) {
   display: flex;
             flex-direction: column;
             flex: 1;
             padding: clamp(12px, 3vw, 22px);
 }
 
-:where(.studyInDubaiRoot) :global(.college__loc) {
+.studyInDubaiRoot :global(.college__loc) {
   width: fit-content;
             margin: 0 0 13px;
             padding: 6px 11px;
@@ -612,11 +618,11 @@
             letter-spacing: .02em;
 }
 
-:where(.studyInDubaiRoot) :global(.college[data-college=bits] .college__loc) {
+.studyInDubaiRoot :global(.college[data-college=bits] .college__loc) {
   background: rgba(233, 60, 71, .08);
 }
 
-:where(.studyInDubaiRoot) :global(.college__name) {
+.studyInDubaiRoot :global(.college__name) {
   margin: 0 0 12px;
             color: #192d56;
             font-size: clamp(1.4rem, 2.2vw, 1.7rem) !important;
@@ -625,7 +631,7 @@
             line-height: 1.25;
 }
 
-:where(.studyInDubaiRoot) :global(.college__text) {
+.studyInDubaiRoot :global(.college__text) {
   margin: 0 0 20px;
             color: #3d485a;
             font-weight: 400;
@@ -633,7 +639,7 @@
             line-height: 1.75;
 }
 
-:where(.studyInDubaiRoot) :global(.facts) {
+.studyInDubaiRoot :global(.facts) {
   display: grid;
             gap: 12px;
             margin: 0 0 22px;
@@ -642,7 +648,7 @@
             background: transparent;
 }
 
-:where(.studyInDubaiRoot) :global(.facts div) {
+.studyInDubaiRoot :global(.facts div) {
   position: relative;
             padding: 12px 14px 12px 38px;
             border: 1px solid rgba(39, 72, 150, .1);
@@ -650,7 +656,7 @@
             background: rgba(255, 255, 255, .8);
 }
 
-:where(.studyInDubaiRoot) :global(.facts div)::before {
+.studyInDubaiRoot :global(.facts div)::before {
   content: "";
             position: absolute;
             left: 15px;
@@ -662,44 +668,44 @@
             box-shadow: 0 0 0 4px color-mix(in srgb, var(--college-accent) 14%, transparent);
 }
 
-:where(.studyInDubaiRoot) :global(.facts dt) {
+.studyInDubaiRoot :global(.facts dt) {
   color: #333641;
             font-size: .86rem !important;
             font-weight: 600;
 }
 
-:where(.studyInDubaiRoot) :global(.facts dd) {
+.studyInDubaiRoot :global(.facts dd) {
   margin: 3px 0 0;
             color: var(--college-accent);
             font-size: 1rem !important;
             font-weight: 500;
 }
 
-:where(.studyInDubaiRoot) :global(.college .btn) {
+.studyInDubaiRoot :global(.college .btn) {
   align-self: flex-start;
             margin-top: auto;
 }
 
 @media (max-width: 640px) {
-:where(.studyInDubaiRoot) :global(.grid--2) {
+.studyInDubaiRoot :global(.grid--2) {
   grid-template-columns: 1fr;
                 gap: 18px;
 }
 
-:where(.studyInDubaiRoot) :global(.college__img) {
+.studyInDubaiRoot :global(.college__img) {
   aspect-ratio: 16 / 7;
 }
 
-:where(.studyInDubaiRoot) :global(.college__body) {
+.studyInDubaiRoot :global(.college__body) {
   padding: 22px;
 }
 }
 
-:where(.studyInDubaiRoot) :global(.band) {
+.studyInDubaiRoot :global(.band) {
   padding: clamp(28px, 4vw, 48px) 0
 }
 
-:where(.studyInDubaiRoot) :global(.band__box) {
+.studyInDubaiRoot :global(.band__box) {
   display: flex;
             justify-content: space-between;
             align-items: center;
@@ -712,7 +718,7 @@
             box-shadow: var(--shadow-up)
 }
 
-:where(.studyInDubaiRoot) :global(.band__box h2) {
+.studyInDubaiRoot :global(.band__box h2) {
   font-size: clamp(1.5rem, 2.8vw, 2.1rem) !important;
             font-weight: 500;
             letter-spacing: -.03em;
@@ -721,44 +727,44 @@
             max-width: 30ch
 }
 
-:where(.studyInDubaiRoot) :global(.band__box h2 em) {
+.studyInDubaiRoot :global(.band__box h2 em) {
   font-style: normal;
             font-weight: 300;
             color: #FF8A92
 }
 
-:where(.studyInDubaiRoot) :global(.band__box p) {
+.studyInDubaiRoot :global(.band__box p) {
   font-size: .92rem !important;
             font-weight: 300;
             color: rgba(255, 255, 255, 0.916);
             max-width: 66ch
 }
 
-:where(.studyInDubaiRoot) :global(.band__cta) {
+.studyInDubaiRoot :global(.band__cta) {
   display: flex;
             flex-wrap: wrap;
             gap: 12px
 }
 
-:where(.studyInDubaiRoot) :global(.faq) {
+.studyInDubaiRoot :global(.faq) {
   max-width: 1120px;
             margin: 0 auto;
             display: grid;
             gap: 12px
 }
 
-:where(.studyInDubaiRoot) :global(.faq__item) {
+.studyInDubaiRoot :global(.faq__item) {
   background: #f5f7ff;
             border-bottom: 2px solid rgba(0, 50, 91, 0.497);
             border-radius: var(--r);
             transition: box-shadow .4s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.faq__item[open]) {
+.studyInDubaiRoot :global(.faq__item[open]) {
   box-shadow: var(--shadow)
 }
 
-:where(.studyInDubaiRoot) :global(.faq__q) {
+.studyInDubaiRoot :global(.faq__q) {
   display: flex;
             justify-content: space-between;
             align-items: center;
@@ -770,11 +776,11 @@
             list-style: none
 }
 
-:where(.studyInDubaiRoot) :global(.faq__q)::-webkit-details-marker {
+.studyInDubaiRoot :global(.faq__q)::-webkit-details-marker {
   display: none
 }
 
-:where(.studyInDubaiRoot) :global(.faq__q)::after {
+.studyInDubaiRoot :global(.faq__q)::after {
   content: "+";
             flex: none;
             display: grid;
@@ -789,38 +795,38 @@
             transition: transform .4s var(--ease), background .3s
 }
 
-:where(.studyInDubaiRoot) :global(.faq__item[open] .faq__q)::after {
+.studyInDubaiRoot :global(.faq__item[open] .faq__q)::after {
   transform: rotate(45deg);
             background: #FDECEE;
             color: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(.faq__a) {
+.studyInDubaiRoot :global(.faq__a) {
   padding: 0 26px 24px;
             font-size: .94rem !important;
             font-weight: 400;
             color: rgb(35, 35, 35);
 }
 
-:where(.studyInDubaiRoot) :global(.js .reveal) {
+.studyInDubaiRoot :global(.js .reveal) {
   opacity: 0;
             transform: translateY(24px);
             transition: opacity .9s var(--ease), transform .9s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.js .reveal.is-in) {
+.studyInDubaiRoot :global(.js .reveal.is-in) {
   opacity: 1;
             transform: none
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy) {
+.studyInDubaiRoot :global(.sec-navy) {
   position: relative;
             overflow: hidden;
             color: #fff;
             background: radial-gradient(640px 380px at 95% 0, rgba(233, 60, 71, .30), transparent 70%), radial-gradient(760px 480px at 0 100%, rgba(70, 110, 215, .45), transparent 70%), linear-gradient(160deg, #0C1836 0%, #14275a 55%, #1A3266 100%)
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy)::before {
+.studyInDubaiRoot :global(.sec-navy)::before {
   content: "";
             position: absolute;
             inset: 0;
@@ -830,69 +836,69 @@
             mask-image: linear-gradient(180deg, #000, transparent 70%)
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .container) {
+.studyInDubaiRoot :global(.sec-navy .container) {
   position: relative
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .eyebrow) {
+.studyInDubaiRoot :global(.sec-navy .eyebrow) {
   background: rgba(255, 255, 255, .12);
             color: #fff;
             border: 1px solid rgba(255, 255, 255, .2)
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .title) {
+.studyInDubaiRoot :global(.sec-navy .title) {
   color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .lead) {
+.studyInDubaiRoot :global(.sec-navy .lead) {
   color: rgba(255, 255, 255, .78)
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .pill) {
+.studyInDubaiRoot :global(.sec-navy .pill) {
   background: rgba(255, 255, 255, .08);
             border-color: rgba(255, 255, 255, .28);
             color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .pill:hover) {
+.studyInDubaiRoot :global(.sec-navy .pill:hover) {
   background: rgba(255, 255, 255, .18);
             border-color: #fff;
             color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .pill[aria-pressed=true]) {
+.studyInDubaiRoot :global(.sec-navy .pill[aria-pressed=true]) {
   background: #fff;
             border-color: #fff;
             color: var(--blue-dark);
             font-weight: 500
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .arr) {
+.studyInDubaiRoot :global(.sec-navy .arr) {
   background: #00000036;
             border-color: rgba(255, 255, 255, .4);
             color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .arr:hover) {
+.studyInDubaiRoot :global(.sec-navy .arr:hover) {
   background: #fff;
             border-color: #fff;
             color: var(--navy)
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .cnt) {
+.studyInDubaiRoot :global(.sec-navy .cnt) {
   color: rgba(255, 255, 255, .8)
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .track) {
+.studyInDubaiRoot :global(.sec-navy .track) {
   padding-top: 14px
 }
 
-:where(.studyInDubaiRoot) :global(.sec-navy .empty) {
+.studyInDubaiRoot :global(.sec-navy .empty) {
   color: #fff;
             border-color: rgba(255, 255, 255, .3)
 }
 
-:where(.studyInDubaiRoot) :global(.pc) {
+.studyInDubaiRoot :global(.pc) {
   --c1: #274896;
             --c2: #1A3266;
             --tint: #EAF0FD;
@@ -910,13 +916,13 @@
             transition: transform .5s var(--ease), box-shadow .5s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.pc[data-college=bits]) {
+.studyInDubaiRoot :global(.pc[data-college=bits]) {
   --c1: #E93C47;
             --c2: #9b1f3b;
             --tint: #FDECEE
 }
 
-:where(.studyInDubaiRoot) :global(.pc)::after {
+.studyInDubaiRoot :global(.pc)::after {
   content: "";
             position: absolute;
             right: -50px;
@@ -929,23 +935,23 @@
             pointer-events: none
 }
 
-:where(.studyInDubaiRoot) :global(.pc:hover) {
+.studyInDubaiRoot :global(.pc:hover) {
   transform: scale(0.98);
 }
 
-:where(.studyInDubaiRoot) :global(.pc>*) {
+.studyInDubaiRoot :global(.pc>*) {
   position: relative;
             z-index: 1
 }
 
-:where(.studyInDubaiRoot) :global(.pc__top) {
+.studyInDubaiRoot :global(.pc__top) {
   display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 12px
 }
 
-:where(.studyInDubaiRoot) :global(.pc__ico) {
+.studyInDubaiRoot :global(.pc__ico) {
   display: grid;
             place-items: center;
             width: 52px;
@@ -956,12 +962,12 @@
             box-shadow: 0 10px 20px -8px var(--c1)
 }
 
-:where(.studyInDubaiRoot) :global(.pc__ico svg) {
+.studyInDubaiRoot :global(.pc__ico svg) {
   width: 23px;
             height: 23px
 }
 
-:where(.studyInDubaiRoot) :global(.pc__lv) {
+.studyInDubaiRoot :global(.pc__lv) {
   padding: 5px 14px;
             border-radius: 99px;
             background: #fff;
@@ -970,7 +976,7 @@
             font-weight: 500
 }
 
-:where(.studyInDubaiRoot) :global(.pc__title) {
+.studyInDubaiRoot :global(.pc__title) {
   margin-top: 22px;
             font-size: 1.3rem !important;
             font-weight: 500;
@@ -979,21 +985,21 @@
             color: var(--ink)
 }
 
-:where(.studyInDubaiRoot) :global(.pc__degree) {
+.studyInDubaiRoot :global(.pc__degree) {
   margin-top: 4px;
             font-size: .84rem !important;
             font-weight: 400;
             color: var(--ink-2)
 }
 
-:where(.studyInDubaiRoot) :global(.pc__facts) {
+.studyInDubaiRoot :global(.pc__facts) {
   display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
             margin: 0px 0 0px
 }
 
-:where(.studyInDubaiRoot) :global(.pc__fact) {
+.studyInDubaiRoot :global(.pc__fact) {
   display: flex;
             flex-direction: column;
             gap: 2px;
@@ -1002,11 +1008,11 @@
             background: #f3f5fa
 }
 
-:where(.studyInDubaiRoot) :global(.pc__fact:last-child) {
+.studyInDubaiRoot :global(.pc__fact:last-child) {
   grid-column: 1 / -1
 }
 
-:where(.studyInDubaiRoot) :global(.pc__fact dt) {
+.studyInDubaiRoot :global(.pc__fact dt) {
   display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -1015,20 +1021,20 @@
             color: var(--ink-2)
 }
 
-:where(.studyInDubaiRoot) :global(.pc__fact dt svg) {
+.studyInDubaiRoot :global(.pc__fact dt svg) {
   width: 13px;
             height: 13px;
             color: var(--c1)
 }
 
-:where(.studyInDubaiRoot) :global(.pc__fact dd) {
+.studyInDubaiRoot :global(.pc__fact dd) {
   font-size: .92rem !important;
             font-weight: 600;
             line-height: 1.3;
             color: var(--c2)
 }
 
-:where(.studyInDubaiRoot) :global(.pc__cta) {
+.studyInDubaiRoot :global(.pc__cta) {
   display: flex;
             align-items: center;
             justify-content: center;
@@ -1043,32 +1049,32 @@
             transition: background .3s, gap .3s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.pc__cta svg) {
+.studyInDubaiRoot :global(.pc__cta svg) {
   width: 18px;
             height: 18px
 }
 
-:where(.studyInDubaiRoot) :global(.pc__cta:hover) {
+.studyInDubaiRoot :global(.pc__cta:hover) {
   gap: 16px;
             background: var(--c2)
 }
 
-:where(.studyInDubaiRoot) :global(.stories) {
+.studyInDubaiRoot :global(.stories) {
   display: grid;
             grid-template-columns: minmax(0, .8fr) minmax(0, 1.5fr);
             gap: clamp(28px, 5vw, 72px);
             align-items: center
 }
 
-:where(.studyInDubaiRoot) :global(.stories__intro .arrs) {
+.studyInDubaiRoot :global(.stories__intro .arrs) {
   margin-top: 32px
 }
 
-:where(.studyInDubaiRoot) :global(.tv-wrap) {
+.studyInDubaiRoot :global(.tv-wrap) {
   min-width: 0
 }
 
-:where(.studyInDubaiRoot) :global(.tv) {
+.studyInDubaiRoot :global(.tv) {
   display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1077,24 +1083,24 @@
             transition: opacity .25s, transform .25s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.tv.out) {
+.studyInDubaiRoot :global(.tv.out) {
   opacity: 0;
             transform: translateY(10px)
 }
 
-:where(.studyInDubaiRoot) :global(.tv__mark) {
+.studyInDubaiRoot :global(.tv__mark) {
   width: 44px;
             height: 44px;
             color: rgba(255, 255, 255, .35)
 }
 
-:where(.studyInDubaiRoot) :global(.tv__mark svg) {
+.studyInDubaiRoot :global(.tv__mark svg) {
   width: 100%;
             height: 100%;
             stroke-width: 1.4
 }
 
-:where(.studyInDubaiRoot) :global(.tv blockquote) {
+.studyInDubaiRoot :global(.tv blockquote) {
   max-width: 30em;
             font-size: clamp(1.25rem, 2.3vw, 1.85rem) !important;
             font-weight: 300;
@@ -1103,19 +1109,19 @@
             color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.tv__sample) {
+.studyInDubaiRoot :global(.tv__sample) {
   font-size: .74rem !important;
             font-weight: 400;
             color: #ffd9a0
 }
 
-:where(.studyInDubaiRoot) :global(.tv__who) {
+.studyInDubaiRoot :global(.tv__who) {
   display: flex;
             align-items: center;
             gap: 14px
 }
 
-:where(.studyInDubaiRoot) :global(.tv__av) {
+.studyInDubaiRoot :global(.tv__av) {
   flex: none;
             display: grid;
             place-items: center;
@@ -1129,34 +1135,34 @@
             font-weight: 500
 }
 
-:where(.studyInDubaiRoot) :global(.tv__av img) {
+.studyInDubaiRoot :global(.tv__av img) {
   width: 100%;
             height: 100%;
             object-fit: cover
 }
 
-:where(.studyInDubaiRoot) :global(.tv__who b) {
+.studyInDubaiRoot :global(.tv__who b) {
   display: block;
             font-size: 1rem !important;
             font-weight: 500;
             line-height: 1.3
 }
 
-:where(.studyInDubaiRoot) :global(.tv__who small) {
+.studyInDubaiRoot :global(.tv__who small) {
   display: block;
             font-size: .82rem !important;
             font-weight: 300;
             color: rgba(255, 255, 255, .7)
 }
 
-:where(.studyInDubaiRoot) :global(.tv__tabs) {
+.studyInDubaiRoot :global(.tv__tabs) {
   display: flex;
             align-items: center;
             gap: 8px;
             margin-top: 36px
 }
 
-:where(.studyInDubaiRoot) :global(.tt) {
+.studyInDubaiRoot :global(.tt) {
   width: 10px;
             height: 10px;
             padding: 0;
@@ -1165,23 +1171,23 @@
             transition: width .4s var(--ease), background .3s
 }
 
-:where(.studyInDubaiRoot) :global(.tt:hover) {
+.studyInDubaiRoot :global(.tt:hover) {
   background: rgba(255, 255, 255, .6)
 }
 
-:where(.studyInDubaiRoot) :global(.tt[aria-selected=true]) {
+.studyInDubaiRoot :global(.tt[aria-selected=true]) {
   width: 32px;
             background: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.ts-idx) {
+.studyInDubaiRoot :global(.ts-idx) {
   margin-top: 26px;
             font-size: .84rem !important;
             font-weight: 300;
             color: rgba(255, 255, 255, .75)
 }
 
-:where(.studyInDubaiRoot) :global(.ts-idx b) {
+.studyInDubaiRoot :global(.ts-idx b) {
   font-size: 1.6rem !important;
             font-weight: 500;
             color: #fff;
@@ -1189,17 +1195,17 @@
 }
 
 @media(max-width:1023px) {
-:where(.studyInDubaiRoot) :global(.apply),
-:where(.studyInDubaiRoot) :global(.apply--check),
-:where(.studyInDubaiRoot) :global(.stories) {
+.studyInDubaiRoot :global(.apply),
+.studyInDubaiRoot :global(.apply--check),
+.studyInDubaiRoot :global(.stories) {
   grid-template-columns: 1fr
 }
 
-:where(.studyInDubaiRoot) :global(.grid--4) {
+.studyInDubaiRoot :global(.grid--4) {
   grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
-:where(.studyInDubaiRoot) :global(.pc) {
+.studyInDubaiRoot :global(.pc) {
   flex-basis: clamp(280px, 46%, 380px)
 }
 }
@@ -1209,7 +1215,7 @@
   --nav: 64px
 }
 
-:where(.studyInDubaiRoot) :global(.header__inner) {
+.studyInDubaiRoot :global(.header__inner) {
   flex-wrap: wrap;
                 height: auto;
                 padding-top: 10px;
@@ -1217,27 +1223,27 @@
                 gap: 8px
 }
 
-:where(.studyInDubaiRoot) :global(.brand) {
+.studyInDubaiRoot :global(.brand) {
   font-size: 1.15rem !important
 }
 
-:where(.studyInDubaiRoot) :global(.nav) {
+.studyInDubaiRoot :global(.nav) {
   order: 3;
                 width: 100%
 }
 
-:where(.studyInDubaiRoot) :global(.nav__links) {
+.studyInDubaiRoot :global(.nav__links) {
   gap: 22px;
                 overflow-x: auto;
                 scrollbar-width: none;
                 padding: 6px 0
 }
 
-:where(.studyInDubaiRoot) :global(.nav__links)::-webkit-scrollbar {
+.studyInDubaiRoot :global(.nav__links)::-webkit-scrollbar {
   display: none
 }
 
-:where(.studyInDubaiRoot) :global(.nav__links a) {
+.studyInDubaiRoot :global(.nav__links a) {
   white-space: nowrap
 }
 
@@ -1245,42 +1251,42 @@
   scroll-padding-top: 120px
 }
 
-:where(.studyInDubaiRoot) :global(.hero) {
+.studyInDubaiRoot :global(.hero) {
   padding-top: 100px;
                 min-height: auto
 }
 
-:where(.studyInDubaiRoot) :global(.hero__title br) {
+.studyInDubaiRoot :global(.hero__title br) {
   display: none
 }
 
-:where(.studyInDubaiRoot) :global(.grid--4),
-:where(.studyInDubaiRoot) :global(.grid--2) {
+.studyInDubaiRoot :global(.grid--4),
+.studyInDubaiRoot :global(.grid--2) {
   grid-template-columns: 1fr
 }
 
-:where(.studyInDubaiRoot) :global(.marks__row) {
+.studyInDubaiRoot :global(.marks__row) {
   grid-template-columns: 1fr 1fr
 }
 
-:where(.studyInDubaiRoot) :global(.marks__level) {
+.studyInDubaiRoot :global(.marks__level) {
   grid-column: 1/-1
 }
 
-:where(.studyInDubaiRoot) :global(.hero .btn),
-:where(.studyInDubaiRoot) :global(.band__cta .btn) {
+.studyInDubaiRoot :global(.hero .btn),
+.studyInDubaiRoot :global(.band__cta .btn) {
   width: 100%
 }
 
-:where(.studyInDubaiRoot) :global(.band__cta) {
+.studyInDubaiRoot :global(.band__cta) {
   width: 100%
 }
 
-:where(.studyInDubaiRoot) :global(.pc) {
+.studyInDubaiRoot :global(.pc) {
   flex-basis: 100%
 }
 
-:where(.studyInDubaiRoot) :global(.mbar) {
+.studyInDubaiRoot :global(.mbar) {
   display: block;
                 position: fixed;
                 inset: auto 0 0;
@@ -1291,7 +1297,7 @@
                 border-top: 1px solid var(--line)
 }
 
-:where(.studyInDubaiRoot) :global(.mbar .btn) {
+.studyInDubaiRoot :global(.mbar .btn) {
   width: 100%
 }
 
@@ -1299,29 +1305,29 @@
   padding-bottom: 76px
 }
 
-:where(.studyInDubaiRoot) :global(.hero) {
+.studyInDubaiRoot :global(.hero) {
   background: none;
 }
 }
 
 @media(prefers-reduced-motion:reduce) {
-:where(.studyInDubaiRoot) :global(*),
-:where(.studyInDubaiRoot) :global(*)::before,
-:where(.studyInDubaiRoot) :global(*)::after {
+.studyInDubaiRoot :global(*),
+.studyInDubaiRoot :global(*)::before,
+.studyInDubaiRoot :global(*)::after {
   transition: none !important;
                 animation: none !important;
                 scroll-behavior: auto !important
 }
 }
 
-:where(.studyInDubaiRoot) :global(.why) {
+.studyInDubaiRoot :global(.why) {
   display: grid;
             grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
             gap: clamp(28px, 4vw, 56px);
             align-items: stretch
 }
 
-:where(.studyInDubaiRoot) :global(.why__img) {
+.studyInDubaiRoot :global(.why__img) {
   position: relative;
             border-radius: var(--r-lg);
             overflow: hidden;
@@ -1330,7 +1336,7 @@
             box-shadow: var(--shadow-up)
 }
 
-:where(.studyInDubaiRoot) :global(.why__img img) {
+.studyInDubaiRoot :global(.why__img img) {
   position: absolute;
             inset: 0;
             width: 100%;
@@ -1338,7 +1344,7 @@
             object-fit: cover
 }
 
-:where(.studyInDubaiRoot) :global(.why__badge) {
+.studyInDubaiRoot :global(.why__badge) {
   position: absolute;
             left: 16px;
             bottom: 16px;
@@ -1353,90 +1359,90 @@
             box-shadow: var(--shadow)
 }
 
-:where(.studyInDubaiRoot) :global(.why__badge svg) {
+.studyInDubaiRoot :global(.why__badge svg) {
   width: 16px;
             height: 16px;
             color: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(.grid--features) {
+.studyInDubaiRoot :global(.grid--features) {
   grid-template-columns: 1fr;
             grid-auto-rows: 1fr
 }
 
-:where(.studyInDubaiRoot) :global(.grid--features .feature) {
+.studyInDubaiRoot :global(.grid--features .feature) {
   flex-direction: row;
             align-items: center;
             gap: 22px;
             padding: 10px 16px
 }
 
-:where(.studyInDubaiRoot) :global(.grid--features .feature__icon) {
+.studyInDubaiRoot :global(.grid--features .feature__icon) {
   flex: none;
             width: 56px;
             height: 56px;
             margin-bottom: 0
 }
 
-:where(.studyInDubaiRoot) :global(.grid--features .feature__icon svg) {
+.studyInDubaiRoot :global(.grid--features .feature__icon svg) {
   width: 26px;
             height: 26px
 }
 
-:where(.studyInDubaiRoot) :global(.grid--features .feature__title) {
+.studyInDubaiRoot :global(.grid--features .feature__title) {
   margin-bottom: 4px
 }
 
-:where(.studyInDubaiRoot) :global(.college__loc) {
+.studyInDubaiRoot :global(.college__loc) {
   display: inline-flex;
             align-items: center;
             gap: 6px
 }
 
-:where(.studyInDubaiRoot) :global(.college__loc svg) {
+.studyInDubaiRoot :global(.college__loc svg) {
   width: 15px;
             height: 15px
 }
 
-:where(.studyInDubaiRoot) :global(.panel__tag) {
+.studyInDubaiRoot :global(.panel__tag) {
   display: inline-flex;
             align-items: center;
             gap: 6px
 }
 
-:where(.studyInDubaiRoot) :global(.panel__tag svg) {
+.studyInDubaiRoot :global(.panel__tag svg) {
   width: 14px;
             height: 14px
 }
 
 @media(max-width:1023px) {
-:where(.studyInDubaiRoot) :global(.why) {
+.studyInDubaiRoot :global(.why) {
   grid-template-columns: 1fr
 }
 
-:where(.studyInDubaiRoot) :global(.why__img) {
+.studyInDubaiRoot :global(.why__img) {
   min-height: 280px
 }
 }
 
 @media(max-width:767px) {
-:where(.studyInDubaiRoot) :global(.grid--features) {
+.studyInDubaiRoot :global(.grid--features) {
   grid-template-columns: 1fr
 }
 }
 
-:where(.studyInDubaiRoot) :global(.brand img) {
+.studyInDubaiRoot :global(.brand img) {
   height: 35px;
             width: auto;
             display: block
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle) {
+.studyInDubaiRoot :global(.nav-toggle) {
   display: none
 }
 
 @media (max-width: 767px) {
-:where(.studyInDubaiRoot) :global(.pill) {
+.studyInDubaiRoot :global(.pill) {
   font-size: 0.9rem !important;
 }
 
@@ -1444,7 +1450,7 @@
   scroll-padding-top: 80px
 }
 
-:where(.studyInDubaiRoot) :global(.header__inner) {
+.studyInDubaiRoot :global(.header__inner) {
   flex-wrap: nowrap;
                 height: var(--nav);
                 padding-top: 0;
@@ -1452,11 +1458,11 @@
                 gap: 10px
 }
 
-:where(.studyInDubaiRoot) :global(.brand img) {
+.studyInDubaiRoot :global(.brand img) {
   height: 34px
 }
 
-:where(.studyInDubaiRoot) :global(.header__inner>.btn) {
+.studyInDubaiRoot :global(.header__inner>.btn) {
   display: none;
                 margin-left: auto;
                 height: 38px;
@@ -1464,7 +1470,7 @@
                 font-size: .78rem !important
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle) {
+.studyInDubaiRoot :global(.nav-toggle) {
   display: block;
                 position: relative;
                 flex: none;
@@ -1475,7 +1481,7 @@
                 background: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle span) {
+.studyInDubaiRoot :global(.nav-toggle span) {
   position: absolute;
                 left: 12px;
                 right: 12px;
@@ -1485,33 +1491,33 @@
                 transition: transform .4s var(--ease), top .4s var(--ease), opacity .25s
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle span:nth-child(1)) {
+.studyInDubaiRoot :global(.nav-toggle span:nth-child(1)) {
   top: 14px
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle span:nth-child(2)) {
+.studyInDubaiRoot :global(.nav-toggle span:nth-child(2)) {
   top: 21px
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle span:nth-child(3)) {
+.studyInDubaiRoot :global(.nav-toggle span:nth-child(3)) {
   top: 28px
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle[aria-expanded=true] span:nth-child(1)) {
+.studyInDubaiRoot :global(.nav-toggle[aria-expanded=true] span:nth-child(1)) {
   top: 21px;
                 transform: rotate(45deg)
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle[aria-expanded=true] span:nth-child(2)) {
+.studyInDubaiRoot :global(.nav-toggle[aria-expanded=true] span:nth-child(2)) {
   opacity: 0
 }
 
-:where(.studyInDubaiRoot) :global(.nav-toggle[aria-expanded=true] span:nth-child(3)) {
+.studyInDubaiRoot :global(.nav-toggle[aria-expanded=true] span:nth-child(3)) {
   top: 21px;
                 transform: rotate(-45deg)
 }
 
-:where(.studyInDubaiRoot) :global(.nav) {
+.studyInDubaiRoot :global(.nav) {
   position: absolute;
                 top: 100%;
                 left: 0;
@@ -1527,14 +1533,14 @@
                 transition: max-height .5s var(--ease), visibility 0s .5s
 }
 
-:where(.studyInDubaiRoot) :global(.nav.open) {
+.studyInDubaiRoot :global(.nav.open) {
   max-height: calc(100vh - var(--nav));
                 overflow-y: auto;
                 visibility: visible;
                 transition: max-height .5s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.nav__links) {
+.studyInDubaiRoot :global(.nav__links) {
   flex-direction: column;
                 align-items: stretch;
                 gap: 0;
@@ -1542,7 +1548,7 @@
                 padding: 6px var(--gutter) 16px
 }
 
-:where(.studyInDubaiRoot) :global(.nav__links a:not(.btn)) {
+.studyInDubaiRoot :global(.nav__links a:not(.btn)) {
   display: block;
                 padding: 14px 0;
                 border-bottom: 1px solid var(--line);
@@ -1550,7 +1556,7 @@
 }
 }
 
-:where(.studyInDubaiRoot) :global(.tv) {
+.studyInDubaiRoot :global(.tv) {
   background: #fff;
             color: var(--ink);
             padding: clamp(24px, 4vw, 24px);
@@ -1559,32 +1565,32 @@
             box-shadow: 0 24px 48px -24px rgba(0, 0, 0, .5)
 }
 
-:where(.studyInDubaiRoot) :global(.tv__mark) {
+.studyInDubaiRoot :global(.tv__mark) {
   color: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(.tv blockquote) {
+.studyInDubaiRoot :global(.tv blockquote) {
   color: var(--ink);
             font-size: clamp(1.05rem, 1.8vw, 1.35rem) !important;
             font-weight: 400
 }
 
-:where(.studyInDubaiRoot) :global(.tv__who) {
+.studyInDubaiRoot :global(.tv__who) {
   padding-top: 20px;
             border-top: 1px solid var(--line)
 }
 
-:where(.studyInDubaiRoot) :global(.tv__av) {
+.studyInDubaiRoot :global(.tv__av) {
   background: linear-gradient(135deg, var(--blue), var(--blue-dark));
             color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(.tv__who small) {
+.studyInDubaiRoot :global(.tv__who small) {
   color: var(--ink-2)
 }
 
 @media (max-width:767px) {
-:where(.studyInDubaiRoot) :global(.hero) {
+.studyInDubaiRoot :global(.hero) {
   min-height: 100vh;
                 
                 min-height: 100svh;
@@ -1598,7 +1604,7 @@
 }
 }
 
-:where(.studyInDubaiRoot) :global(.lm) {
+.studyInDubaiRoot :global(.lm) {
   position: fixed;
             inset: 0;
             z-index: 100;
@@ -1613,13 +1619,13 @@
             transition: opacity .35s var(--ease), visibility 0s .35s
 }
 
-:where(.studyInDubaiRoot) :global(.lm.open) {
+.studyInDubaiRoot :global(.lm.open) {
   opacity: 1;
             visibility: visible;
             transition: opacity .35s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__box) {
+.studyInDubaiRoot :global(.lm__box) {
   position: relative;
             display: grid;
             grid-template-columns: minmax(0, .88fr) minmax(0, 1fr);
@@ -1633,11 +1639,11 @@
             transition: transform .5s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.lm.open .lm__box) {
+.studyInDubaiRoot :global(.lm.open .lm__box) {
   transform: none
 }
 
-:where(.studyInDubaiRoot) :global(.lm__x) {
+.studyInDubaiRoot :global(.lm__x) {
   position: absolute;
             top: 14px;
             right: 14px;
@@ -1653,19 +1659,19 @@
             transition: background .3s, color .3s, transform .4s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__x:hover) {
+.studyInDubaiRoot :global(.lm__x:hover) {
   background: var(--red);
             color: #fff;
             border-color: var(--red);
             transform: rotate(90deg)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__x svg) {
+.studyInDubaiRoot :global(.lm__x svg) {
   width: 14px;
             height: 14px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__side) {
+.studyInDubaiRoot :global(.lm__side) {
   position: relative;
             display: flex;
             flex-direction: column;
@@ -1679,7 +1685,7 @@
             background: linear-gradient(160deg, #0C1836 0%, #14275a 55%, #1A3266 100%)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__img) {
+.studyInDubaiRoot :global(.lm__img) {
   position: absolute;
             inset: 0;
             width: 100%;
@@ -1687,7 +1693,7 @@
             object-fit: cover;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__side)::after {
+.studyInDubaiRoot :global(.lm__side)::after {
   content: "";
             position: absolute;
             inset: 0;
@@ -1695,7 +1701,7 @@
             background: linear-gradient(180deg, rgba(12, 24, 54, .1) 0%, rgba(12, 24, 54, .3) 38%, rgba(12, 24, 54, .93) 100%)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__tag) {
+.studyInDubaiRoot :global(.lm__tag) {
   position: absolute;
             top: 20px;
             left: 20px;
@@ -1708,47 +1714,47 @@
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
             font-size: .68rem !important;
-            font-weight: 900;
+            font-weight: 700;
             letter-spacing: .08em;
             text-transform: uppercase;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__c) {
+.studyInDubaiRoot :global(.lm__c) {
   position: relative;
             z-index: 1;
             display: grid;
             gap: 10px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__c h2) {
+.studyInDubaiRoot :global(.lm__c h2) {
   font-size: clamp(1.7rem, 3vw, 2.15rem) !important;
             font-weight: 500;
             letter-spacing: -.03em;
             line-height: 1.12
 }
 
-:where(.studyInDubaiRoot) :global(.lm__sub) {
+.studyInDubaiRoot :global(.lm__sub) {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem) !important;
             font-weight: 500;
             letter-spacing: -.01em;
             color: #7cc4ff
 }
 
-:where(.studyInDubaiRoot) :global(.lm__txt) {
+.studyInDubaiRoot :global(.lm__txt) {
   font-size: .84rem !important;
             font-weight: 300;
             line-height: 1.6;
             color: rgba(255, 255, 255, .9)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__chips) {
+.studyInDubaiRoot :global(.lm__chips) {
   display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-top: 4px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__chips span) {
+.studyInDubaiRoot :global(.lm__chips span) {
   padding: 7px 14px;
             border-radius: 8px;
             background: rgba(255, 255, 255, .1);
@@ -1757,18 +1763,18 @@
             font-weight: 400
 }
 
-:where(.studyInDubaiRoot) :global(.lm__main) {
+.studyInDubaiRoot :global(.lm__main) {
   min-width: 0;
             overflow-y: auto;
             padding: clamp(24px, 3.5vw, 34px);
             -webkit-overflow-scrolling: touch
 }
 
-:where(.studyInDubaiRoot) :global(.lm__head) {
+.studyInDubaiRoot :global(.lm__head) {
   margin: 0 40px 20px 0
 }
 
-:where(.studyInDubaiRoot) :global(.lm__head h3) {
+.studyInDubaiRoot :global(.lm__head h3) {
   font-size: clamp(1.4rem, 2.4vw, 1.45rem) !important;
             font-weight: 500;
             letter-spacing: -.025em;
@@ -1776,7 +1782,7 @@
             color: var(--blue)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__head p) {
+.studyInDubaiRoot :global(.lm__head p) {
   margin-top: 6px;
             font-size: .82rem !important;
             font-weight: 400;
@@ -1784,29 +1790,29 @@
             color: var(--ink-2)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__form) {
+.studyInDubaiRoot :global(.lm__form) {
   display: grid;
             gap: 14px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f) {
+.studyInDubaiRoot :global(.lm__f) {
   display: grid;
             gap: 6px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f label) {
+.studyInDubaiRoot :global(.lm__f label) {
   font-size: .78rem !important;
             font-weight: 500;
             color: var(--ink)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f label i) {
+.studyInDubaiRoot :global(.lm__f label i) {
   font-style: normal;
             color: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f input),
-:where(.studyInDubaiRoot) :global(.lm__f select) {
+.studyInDubaiRoot :global(.lm__f input),
+.studyInDubaiRoot :global(.lm__f select) {
   width: 100%;
             height: 46px;
             padding: 0 14px;
@@ -1819,11 +1825,11 @@
             transition: border-color .3s, box-shadow .3s, background-color .3s
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f input)::placeholder {
+.studyInDubaiRoot :global(.lm__f input)::placeholder {
   color: var(--ink-3)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f select) {
+.studyInDubaiRoot :global(.lm__f select) {
   appearance: none;
             -webkit-appearance: none;
             padding-right: 40px;
@@ -1834,37 +1840,37 @@
             background-size: 16px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f select:required:invalid) {
+.studyInDubaiRoot :global(.lm__f select:required:invalid) {
   color: var(--ink-3)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f select option) {
+.studyInDubaiRoot :global(.lm__f select option) {
   color: var(--ink)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f input:focus),
-:where(.studyInDubaiRoot) :global(.lm__f select:focus) {
+.studyInDubaiRoot :global(.lm__f input:focus),
+.studyInDubaiRoot :global(.lm__f select:focus) {
   outline: 0;
             border-color: var(--blue);
             background-color: #fff;
             box-shadow: 0 0 0 4px rgba(39, 72, 150, .12)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f [aria-invalid=true]) {
+.studyInDubaiRoot :global(.lm__f [aria-invalid=true]) {
   border-color: var(--red);
             box-shadow: 0 0 0 4px rgba(233, 60, 71, .1)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__err) {
+.studyInDubaiRoot :global(.lm__err) {
   font-size: .74rem !important;
             color: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__err:empty) {
+.studyInDubaiRoot :global(.lm__err:empty) {
   display: none
 }
 
-:where(.studyInDubaiRoot) :global(.lm__go) {
+.studyInDubaiRoot :global(.lm__go) {
   display: flex;
             align-items: center;
             justify-content: center;
@@ -1881,17 +1887,17 @@
             transition: background .3s, transform .4s var(--ease), box-shadow .4s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__go:hover) {
+.studyInDubaiRoot :global(.lm__go:hover) {
   background: var(--blue-dark);
             transform: translateY(-2px)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__go:disabled) {
+.studyInDubaiRoot :global(.lm__go:disabled) {
   opacity: .6;
             pointer-events: none
 }
 
-:where(.studyInDubaiRoot) :global(.lm__fine) {
+.studyInDubaiRoot :global(.lm__fine) {
   font-size: .7rem !important;
             font-weight: 400;
             line-height: 1.55;
@@ -1899,13 +1905,13 @@
             color: var(--ink-3)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__fail) {
+.studyInDubaiRoot :global(.lm__fail) {
   font-size: .8rem !important;
             text-align: center;
             color: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__ok) {
+.studyInDubaiRoot :global(.lm__ok) {
   display: none;
             flex-direction: column;
             align-items: center;
@@ -1915,187 +1921,187 @@
             text-align: center
 }
 
-:where(.studyInDubaiRoot) :global(.lm__ok svg) {
+.studyInDubaiRoot :global(.lm__ok svg) {
   width: 64px;
             height: 64px;
             color: var(--blue)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__ok h3) {
+.studyInDubaiRoot :global(.lm__ok h3) {
   font-size: 1.4rem !important;
             font-weight: 600;
             color: var(--blue-dark)
 }
 
-:where(.studyInDubaiRoot) :global(.lm__ok p) {
+.studyInDubaiRoot :global(.lm__ok p) {
   max-width: 34ch;
             font-size: .9rem !important;
             color: var(--ink-2)
 }
 
-:where(.studyInDubaiRoot) :global(.lm.done .lm__form),
-:where(.studyInDubaiRoot) :global(.lm.done .lm__head) {
+.studyInDubaiRoot :global(.lm.done .lm__form),
+.studyInDubaiRoot :global(.lm.done .lm__head) {
   display: none
 }
 
-:where(.studyInDubaiRoot) :global(.lm.done .lm__ok) {
+.studyInDubaiRoot :global(.lm.done .lm__ok) {
   display: flex
 }
 
 @media (max-width:767px) {
-:where(.studyInDubaiRoot) :global(.lm) {
+.studyInDubaiRoot :global(.lm) {
   padding: 10px;
                 align-items: end
 }
 
-:where(.studyInDubaiRoot) :global(.lm__box) {
+.studyInDubaiRoot :global(.lm__box) {
   grid-template-columns: 1fr;
                 grid-template-rows: auto minmax(0, 1fr);
                 max-height: calc(100dvh - 20px);
                 border-radius: 22px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__side) {
+.studyInDubaiRoot :global(.lm__side) {
   min-height: 150px;
                 padding: 16px 64px 16px 18px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__tag) {
+.studyInDubaiRoot :global(.lm__tag) {
   top: 14px;
                 left: 18px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__sub),
-:where(.studyInDubaiRoot) :global(.lm__txt),
-:where(.studyInDubaiRoot) :global(.lm__chips) {
+.studyInDubaiRoot :global(.lm__sub),
+.studyInDubaiRoot :global(.lm__txt),
+.studyInDubaiRoot :global(.lm__chips) {
   display: none
 }
 
-:where(.studyInDubaiRoot) :global(.lm__c) {
+.studyInDubaiRoot :global(.lm__c) {
   padding-top: 40px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__c h2) {
+.studyInDubaiRoot :global(.lm__c h2) {
   font-size: 1.35rem !important
 }
 
-:where(.studyInDubaiRoot) :global(.lm__main) {
+.studyInDubaiRoot :global(.lm__main) {
   padding: 18px 18px calc(18px + env(safe-area-inset-bottom))
 }
 
-:where(.studyInDubaiRoot) :global(.lm__head) {
+.studyInDubaiRoot :global(.lm__head) {
   margin-right: 0
 }
 
-:where(.studyInDubaiRoot) :global(.lm__form) {
+.studyInDubaiRoot :global(.lm__form) {
   gap: 12px
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f input),
-:where(.studyInDubaiRoot) :global(.lm__f select) {
+.studyInDubaiRoot :global(.lm__f input),
+.studyInDubaiRoot :global(.lm__f select) {
   font-size: 16px !important
 }
 }
 
 @media (prefers-reduced-motion:reduce) {
-:where(.studyInDubaiRoot) :global(.lm),
-:where(.studyInDubaiRoot) :global(.lm__box) {
+.studyInDubaiRoot :global(.lm),
+.studyInDubaiRoot :global(.lm__box) {
   transition: none !important
 }
 }
 
 @media (min-width: 768px) {
-:where(.studyInDubaiRoot) :global(.lm__main) {
+.studyInDubaiRoot :global(.lm__main) {
   padding: 22px 30px 18px;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__main)::-webkit-scrollbar {
+.studyInDubaiRoot :global(.lm__main)::-webkit-scrollbar {
   display: none;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__head) {
+.studyInDubaiRoot :global(.lm__head) {
   margin: 0 40px 12px 0;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__head h3) {
+.studyInDubaiRoot :global(.lm__head h3) {
   font-size: 1.3rem !important;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__head p) {
+.studyInDubaiRoot :global(.lm__head p) {
   font-size: .78rem !important;
                 line-height: 1.45;
                 margin-top: 4px;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__form) {
+.studyInDubaiRoot :global(.lm__form) {
   grid-template-columns: 1fr;
                 gap: 10px;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f) {
+.studyInDubaiRoot :global(.lm__f) {
   gap: 4px;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f label) {
+.studyInDubaiRoot :global(.lm__f label) {
   font-size: .74rem !important;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f),
-:where(.studyInDubaiRoot) :global(.lm__f:nth-child(4)),
-:where(.studyInDubaiRoot) :global(.lm__f:nth-child(5)),
-:where(.studyInDubaiRoot) :global(.lm__go),
-:where(.studyInDubaiRoot) :global(.lm__fail),
-:where(.studyInDubaiRoot) :global(.lm__fine) {
+.studyInDubaiRoot :global(.lm__f),
+.studyInDubaiRoot :global(.lm__f:nth-child(4)),
+.studyInDubaiRoot :global(.lm__f:nth-child(5)),
+.studyInDubaiRoot :global(.lm__go),
+.studyInDubaiRoot :global(.lm__fail),
+.studyInDubaiRoot :global(.lm__fine) {
   grid-column: auto;
                 order: 0;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f input),
-:where(.studyInDubaiRoot) :global(.lm__f select) {
+.studyInDubaiRoot :global(.lm__f input),
+.studyInDubaiRoot :global(.lm__f select) {
   height: 40px;
                 font-size: .86rem !important;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__go) {
+.studyInDubaiRoot :global(.lm__go) {
   height: 44px;
                 margin-top: 2px;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__fine) {
+.studyInDubaiRoot :global(.lm__fine) {
   font-size: .66rem !important;
                 line-height: 1.4;
 }
 }
 
 @media (min-width: 768px) and (max-height: 720px) {
-:where(.studyInDubaiRoot) :global(.lm__head p) {
+.studyInDubaiRoot :global(.lm__head p) {
   display: none;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__f input),
-:where(.studyInDubaiRoot) :global(.lm__f select) {
+.studyInDubaiRoot :global(.lm__f input),
+.studyInDubaiRoot :global(.lm__f select) {
   height: 38px;
 }
 
-:where(.studyInDubaiRoot) :global(.lm__form) {
+.studyInDubaiRoot :global(.lm__form) {
   gap: 8px;
 }
 }
 
-:where(.studyInDubaiRoot) :global(#careers .grid .feature) {
+.studyInDubaiRoot :global(#careers .grid .feature) {
   border: 1px solid rgba(255, 0, 0, 0.486);
                             border-radius: 20px;
 }
 
-:where(.studyInDubaiRoot) :global(#careers .grid .feature .feature__title) {
+.studyInDubaiRoot :global(#careers .grid .feature .feature__title) {
   font-size: 25px !important;
                             font-weight: 600;
                             line-height: 2rem;
 }
 
-:where(.studyInDubaiRoot) :global(.band__box) {
+.studyInDubaiRoot :global(.band__box) {
   background: linear-gradient(115deg, rgb(38, 61, 112) 0%, rgba(70, 85, 139, 0) 45%, rgba(169, 79, 107, 0.513) 100%), url("/images/study-in-dubai/media/24487.jpg") center / cover no-repeat;
                             border-radius: 24px;
                             overflow: hidden;
@@ -2103,16 +2109,16 @@
 }
 
 @media (max-width: 768px) {
-:where(.studyInDubaiRoot) :global(.band__box) {
+.studyInDubaiRoot :global(.band__box) {
   background: linear-gradient(115deg, rgba(15, 24, 45, 0.88) 0%, rgba(24, 31, 57, 0.459) 55%, rgba(62, 33, 54, 0.78) 100%), url("/images/study-in-dubai/media/24487.jpg") center / cover no-repeat;
 }
 
-:where(.studyInDubaiRoot) :global(.band__box p) {
+.studyInDubaiRoot :global(.band__box p) {
   color: white;
 }
 }
 
-:where(.studyInDubaiRoot) :global(.fl) {
+.studyInDubaiRoot :global(.fl) {
   list-style: none;
                 position: relative;
                 display: grid;
@@ -2120,7 +2126,7 @@
                 gap: 32px
 }
 
-:where(.studyInDubaiRoot) :global(.fl)::before {
+.studyInDubaiRoot :global(.fl)::before {
   content: "";
                 position: absolute;
                 left: 58px;
@@ -2130,7 +2136,7 @@
                 background: repeating-linear-gradient(180deg, rgba(39, 72, 150, .5) 0 8px, transparent 8px 16px)
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step) {
+.studyInDubaiRoot :global(.fl__step) {
   position: relative;
                 display: grid;
                 grid-template-columns: 116px minmax(0, 1fr);
@@ -2138,14 +2144,14 @@
                 column-gap: 8px
 }
 
-:where(.studyInDubaiRoot) :global(.fl__node-cell) {
+.studyInDubaiRoot :global(.fl__node-cell) {
   grid-column: 1;
                 grid-row: 1;
                 display: flex;
                 justify-content: center
 }
 
-:where(.studyInDubaiRoot) :global(.fl__text-cell) {
+.studyInDubaiRoot :global(.fl__text-cell) {
   grid-column: 2;
                 grid-row: 1;
                 padding: 18px 20px;
@@ -2155,7 +2161,7 @@
                 box-shadow: var(--shadow)
 }
 
-:where(.studyInDubaiRoot) :global(.fl__num) {
+.studyInDubaiRoot :global(.fl__num) {
   grid-column: 1;
                 grid-row: 1;
                 z-index: 2;
@@ -2174,7 +2180,7 @@
                 letter-spacing: .02em
 }
 
-:where(.studyInDubaiRoot) :global(.fl__node) {
+.studyInDubaiRoot :global(.fl__node) {
   position: relative;
                 display: grid;
                 place-items: center;
@@ -2188,13 +2194,13 @@
                 transition: transform .5s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.fl__node img) {
+.studyInDubaiRoot :global(.fl__node img) {
   width: 55px;
                 height: 55px;
                 object-fit: cover
 }
 
-:where(.studyInDubaiRoot) :global(.fl__node)::before {
+.studyInDubaiRoot :global(.fl__node)::before {
   content: "";
                 position: absolute;
                 inset: -9px;
@@ -2205,7 +2211,7 @@
                 animation: fl-spin 8s linear infinite
 }
 
-:where(.studyInDubaiRoot) :global(.fl__node)::after {
+.studyInDubaiRoot :global(.fl__node)::after {
   content: "";
                 position: absolute;
                 inset: -17px;
@@ -2214,21 +2220,21 @@
                 animation: fl-spin 26s linear infinite reverse
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step:last-child .fl__node) {
+.studyInDubaiRoot :global(.fl__step:last-child .fl__node) {
   background: linear-gradient(150deg, #f0535d, var(--red));
                 box-shadow: 0 14px 28px -10px rgba(233, 60, 71, .6)
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step:last-child .fl__node)::before {
+.studyInDubaiRoot :global(.fl__step:last-child .fl__node)::before {
   border-top-color: var(--blue);
                 border-right-color: var(--blue)
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step:hover .fl__node) {
+.studyInDubaiRoot :global(.fl__step:hover .fl__node) {
   transform: scale(1.07)
 }
 
-:where(.studyInDubaiRoot) :global(.fl__title) {
+.studyInDubaiRoot :global(.fl__title) {
   font-size: 1.02rem !important;
                 font-weight: 600;
                 line-height: 1.3;
@@ -2236,7 +2242,7 @@
                 margin-bottom: 6px
 }
 
-:where(.studyInDubaiRoot) :global(.fl__text) {
+.studyInDubaiRoot :global(.fl__text) {
   font-size: .86rem !important;
                 font-weight: 300;
                 color: var(--ink)
@@ -2249,12 +2255,12 @@ to {
 }
 
 @media(min-width:1200px) {
-:where(.studyInDubaiRoot) :global(.fl) {
+.studyInDubaiRoot :global(.fl) {
   grid-template-columns: repeat(7, minmax(0, 1fr));
                     gap: 0
 }
 
-:where(.studyInDubaiRoot) :global(.fl)::before {
+.studyInDubaiRoot :global(.fl)::before {
   left: 3.5%;
                     right: 3.5%;
                     top: 50%;
@@ -2265,7 +2271,7 @@ to {
                     background: repeating-linear-gradient(90deg, rgba(39, 72, 150, .5) 0 8px, transparent 8px 16px)
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step) {
+.studyInDubaiRoot :global(.fl__step) {
   grid-template-columns: 1fr;
                     grid-template-rows: 1fr 40px 1fr;
                     justify-items: center;
@@ -2273,7 +2279,7 @@ to {
                     padding: 0 8px
 }
 
-:where(.studyInDubaiRoot) :global(.fl__num) {
+.studyInDubaiRoot :global(.fl__num) {
   grid-column: 1;
                     grid-row: 2;
                     justify-self: center;
@@ -2284,8 +2290,8 @@ to {
                     box-shadow: 0 0 0 6px #e9eefe
 }
 
-:where(.studyInDubaiRoot) :global(.fl__node-cell),
-:where(.studyInDubaiRoot) :global(.fl__text-cell) {
+.studyInDubaiRoot :global(.fl__node-cell),
+.studyInDubaiRoot :global(.fl__text-cell) {
   grid-column: 1;
                     width: 100%;
                     flex-direction: column;
@@ -2293,17 +2299,17 @@ to {
                     justify-content: flex-end
 }
 
-:where(.studyInDubaiRoot) :global(.fl__node-cell) {
+.studyInDubaiRoot :global(.fl__node-cell) {
   display: flex
 }
 
-:where(.studyInDubaiRoot) :global(.fl__node-cell)::after {
+.studyInDubaiRoot :global(.fl__node-cell)::after {
   content: "";
                     height: 20px;
                     border-left: 2px dashed rgba(39, 72, 150, .45)
 }
 
-:where(.studyInDubaiRoot) :global(.fl__text-cell) {
+.studyInDubaiRoot :global(.fl__text-cell) {
   display: flex;
                     text-align: center;
                     padding: 0;
@@ -2312,54 +2318,54 @@ to {
                     box-shadow: none
 }
 
-:where(.studyInDubaiRoot) :global(.fl__text-cell>div) {
+.studyInDubaiRoot :global(.fl__text-cell>div) {
   max-width: 170px
 }
 
-:where(.studyInDubaiRoot) :global(.fl__text) {
+.studyInDubaiRoot :global(.fl__text) {
   font-size: .78rem !important
 }
 
-:where(.studyInDubaiRoot) :global(.fl__title) {
+.studyInDubaiRoot :global(.fl__title) {
   font-size: .95rem !important
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step:nth-child(odd) .fl__text-cell) {
+.studyInDubaiRoot :global(.fl__step:nth-child(odd) .fl__text-cell) {
   grid-row: 1;
                     padding-bottom: 22px
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step:nth-child(odd) .fl__node-cell) {
+.studyInDubaiRoot :global(.fl__step:nth-child(odd) .fl__node-cell) {
   grid-row: 3;
                     flex-direction: column-reverse
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step:nth-child(even) .fl__node-cell) {
+.studyInDubaiRoot :global(.fl__step:nth-child(even) .fl__node-cell) {
   grid-row: 1;
                     flex-direction: column
 }
 
-:where(.studyInDubaiRoot) :global(.fl__step:nth-child(even) .fl__text-cell) {
+.studyInDubaiRoot :global(.fl__step:nth-child(even) .fl__text-cell) {
   grid-row: 3;
                     justify-content: flex-start;
                     padding-top: 22px
 }
 }
 
-:where(.studyInDubaiRoot) :global(.lw) {
+.studyInDubaiRoot :global(.lw) {
   display: grid;
                         grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
                         gap: 24px;
                         align-items: stretch
 }
 
-:where(.studyInDubaiRoot) :global(.lw__side) {
+.studyInDubaiRoot :global(.lw__side) {
   display: grid;
                         grid-template-columns: repeat(2, minmax(0, 1fr));
                         gap: 16px
 }
 
-:where(.studyInDubaiRoot) :global(.lw__item) {
+.studyInDubaiRoot :global(.lw__item) {
   display: flex;
                         flex-direction: column;
                         align-items: center;
@@ -2371,13 +2377,13 @@ to {
                         transition: transform .5s var(--ease), box-shadow .5s var(--ease), background .3s
 }
 
-:where(.studyInDubaiRoot) :global(.lw__item:hover) {
+.studyInDubaiRoot :global(.lw__item:hover) {
   transform: translateY(-4px);
                         background: #fff;
                         box-shadow: 0px 10px 15px rgba(184, 207, 252, 0.701);
 }
 
-:where(.studyInDubaiRoot) :global(.lw__icon) {
+.studyInDubaiRoot :global(.lw__icon) {
   display: block;
                         width: 90px;
                         height: 90px;
@@ -2385,21 +2391,21 @@ to {
                         flex: 0 0 90px
 }
 
-:where(.studyInDubaiRoot) :global(.lw__icon img) {
+.studyInDubaiRoot :global(.lw__icon img) {
   display: block;
                         width: 100%;
                         height: 100%;
                         object-fit: cover
 }
 
-:where(.studyInDubaiRoot) :global(.lw__item span:last-child) {
+.studyInDubaiRoot :global(.lw__item span:last-child) {
   font-size: .9rem !important;
                         font-weight: 500;
                         line-height: 1.4;
                         color: var(--ink)
 }
 
-:where(.studyInDubaiRoot) :global(.lw__center) {
+.studyInDubaiRoot :global(.lw__center) {
   display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -2413,70 +2419,70 @@ to {
                         box-shadow: var(--shadow-up)
 }
 
-:where(.studyInDubaiRoot) :global(.lw__center h3) {
+.studyInDubaiRoot :global(.lw__center h3) {
   font-size: clamp(1.4rem, 2.2vw, 1.73rem) !important;
                         font-weight: 500;
                         letter-spacing: -.03em;
                         line-height: 1.2
 }
 
-:where(.studyInDubaiRoot) :global(.lw__center h3 em) {
+.studyInDubaiRoot :global(.lw__center h3 em) {
   font-style: normal;
                         font-weight: 400;
                         color: #FF8A92
 }
 
-:where(.studyInDubaiRoot) :global(.lw__center p) {
+.studyInDubaiRoot :global(.lw__center p) {
   font-size: 0.96rem !important;
                         font-weight: 400;
                         color: rgba(255, 255, 255)
 }
 
-:where(.studyInDubaiRoot) :global(.lw__center .btn) {
+.studyInDubaiRoot :global(.lw__center .btn) {
   margin-top: 8px
 }
 
 @media(max-width:1023px) {
-:where(.studyInDubaiRoot) :global(.lw) {
+.studyInDubaiRoot :global(.lw) {
   grid-template-columns: 1fr
 }
 
-:where(.studyInDubaiRoot) :global(.lw__center) {
+.studyInDubaiRoot :global(.lw__center) {
   order: -1
 }
 
-:where(.studyInDubaiRoot) :global(.lw__side) {
+.studyInDubaiRoot :global(.lw__side) {
   grid-template-columns: repeat(4, minmax(0, 1fr))
 }
 }
 
 @media(max-width:600px) {
-:where(.studyInDubaiRoot) :global(.lw__side) {
+.studyInDubaiRoot :global(.lw__side) {
   grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
-:where(.studyInDubaiRoot) :global(.lw__center .btn) {
+.studyInDubaiRoot :global(.lw__center .btn) {
   width: 100%
 }
 
-:where(.studyInDubaiRoot) :global(.lw__center) {
+.studyInDubaiRoot :global(.lw__center) {
   padding: 15px;
 }
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-sub) {
+.studyInDubaiRoot :global(#apply .dc-sub) {
   margin: 0 0 20px
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-sub--c) {
+.studyInDubaiRoot :global(#apply .dc-sub--c) {
   text-align: center
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-sub--2) {
+.studyInDubaiRoot :global(#apply .dc-sub--2) {
   margin-top: clamp(40px, 5vw, 64px)
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-sub h3) {
+.studyInDubaiRoot :global(#apply .dc-sub h3) {
   font-size: 1.6rem !important;
                     font-weight: 500;
                     letter-spacing: -.025em;
@@ -2485,30 +2491,30 @@ to {
                     text-align: left
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-sub p) {
+.studyInDubaiRoot :global(#apply .dc-sub p) {
   font-size: 1rem !important;
                     font-weight: 500;
                     color: var(--blue-dark)
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-wide),
-:where(.studyInDubaiRoot) :global(#apply .dc-block) {
+.studyInDubaiRoot :global(#apply .dc-wide),
+.studyInDubaiRoot :global(#apply .dc-block) {
   padding: clamp(20px, 2.6vw, 32px);
                     border-radius: var(--r);
                     background: #f1f4fb
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-wide) {
+.studyInDubaiRoot :global(#apply .dc-wide) {
   display: block
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-grid) {
+.studyInDubaiRoot :global(#apply .dc-grid) {
   display: grid;
                     grid-template-columns: repeat(2, minmax(0, 1fr));
                     gap: 20px
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-block__title) {
+.studyInDubaiRoot :global(#apply .dc-block__title) {
   margin-bottom: 20px;
                     font-size: 1.2rem !important;
                     font-weight: 600;
@@ -2517,35 +2523,35 @@ to {
                     color: var(--navy)
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-block__title span) {
+.studyInDubaiRoot :global(#apply .dc-block__title span) {
   color: var(--blue)
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-block--red .dc-block__title span) {
+.studyInDubaiRoot :global(#apply .dc-block--red .dc-block__title span) {
   color: var(--red)
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-rows) {
+.studyInDubaiRoot :global(#apply .dc-rows) {
   --acc: #8fb0ff;
                     display: grid;
                     gap: 8px
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-rows--red) {
+.studyInDubaiRoot :global(#apply .dc-rows--red) {
   --acc: #FF8A92
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-rows--2) {
+.studyInDubaiRoot :global(#apply .dc-rows--2) {
   grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-rows--2 li:last-child:nth-child(odd)) {
+.studyInDubaiRoot :global(#apply .dc-rows--2 li:last-child:nth-child(odd)) {
   grid-column: 1 / -1;
                     justify-self: center;
                     width: calc(50% - 4px)
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-rows li) {
+.studyInDubaiRoot :global(#apply .dc-rows li) {
   display: flex;
                     align-items: flex-start;
                     gap: 14px;
@@ -2559,7 +2565,7 @@ to {
                     color: #fff
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-rows svg) {
+.studyInDubaiRoot :global(#apply .dc-rows svg) {
   flex: none;
                     width: 16px;
                     height: 16px;
@@ -2568,25 +2574,25 @@ to {
 }
 
 @media(max-width:767px) {
-:where(.studyInDubaiRoot) :global(#apply .dc-grid),
-:where(.studyInDubaiRoot) :global(#apply .dc-rows--2) {
+.studyInDubaiRoot :global(#apply .dc-grid),
+.studyInDubaiRoot :global(#apply .dc-rows--2) {
   grid-template-columns: 1fr
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-rows--2 li:last-child:nth-child(odd)) {
+.studyInDubaiRoot :global(#apply .dc-rows--2 li:last-child:nth-child(odd)) {
   width: auto
 }
 
-:where(.studyInDubaiRoot) :global(#apply .dc-rows li) {
+.studyInDubaiRoot :global(#apply .dc-rows li) {
   padding: 13px 14px
 }
 }
 
-:where(.studyInDubaiRoot) :global(#enquire) {
+.studyInDubaiRoot :global(#enquire) {
   padding-top: clamp(150px, 15vw, 30px)
 }
 
-:where(.studyInDubaiRoot) :global(.cta2) {
+.studyInDubaiRoot :global(.cta2) {
   --pop: 150px;
                 position: relative;
                 display: grid;
@@ -2600,7 +2606,7 @@ to {
                 box-shadow: var(--shadow-up)
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__bg) {
+.studyInDubaiRoot :global(.cta2__bg) {
   position: absolute;
                 inset: 0;
                 border-radius: inherit;
@@ -2608,7 +2614,7 @@ to {
                 pointer-events: none
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__bg)::before {
+.studyInDubaiRoot :global(.cta2__bg)::before {
   content: "";
                 position: absolute;
                 inset: 0;
@@ -2617,14 +2623,14 @@ to {
                 mask-image: linear-gradient(90deg, transparent 30%, #000 75%)
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__bg svg) {
+.studyInDubaiRoot :global(.cta2__bg svg) {
   position: absolute;
                 inset: 0;
                 width: 100%;
                 height: 100%
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__bg path) {
+.studyInDubaiRoot :global(.cta2__bg path) {
   fill: none;
                 stroke: rgba(255, 255, 255, .28);
                 stroke-width: 1.5;
@@ -2638,7 +2644,7 @@ to {
                 }
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__img) {
+.studyInDubaiRoot :global(.cta2__img) {
   position: absolute;
                 left: 0;
                 bottom: 0;
@@ -2651,7 +2657,7 @@ to {
                 clip-path: inset(-400px -400px 0 0 round 0 0 0 var(--r-lg))
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__img img) {
+.studyInDubaiRoot :global(.cta2__img img) {
   display: block;
                 height: 100%;
                 width: auto;
@@ -2660,7 +2666,7 @@ to {
                 object-position: left bottom
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__body) {
+.studyInDubaiRoot :global(.cta2__body) {
   grid-column: 2;
                 position: relative;
                 z-index: 1;
@@ -2671,7 +2677,7 @@ to {
                 max-width: 560px
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__tag) {
+.studyInDubaiRoot :global(.cta2__tag) {
   display: inline-flex;
                 align-items: center;
                 gap: 8px;
@@ -2683,33 +2689,33 @@ to {
                 font-weight: 500
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__tag svg) {
+.studyInDubaiRoot :global(.cta2__tag svg) {
   width: 14px;
                 height: 14px
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__title) {
+.studyInDubaiRoot :global(.cta2__title) {
   font-size: clamp(1.9rem, 3.6vw, 3rem) !important;
                 font-weight: 500;
                 letter-spacing: -.035em;
                 line-height: 1.12
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__title em) {
+.studyInDubaiRoot :global(.cta2__title em) {
   font-style: normal;
                 font-weight: 600;
                 letter-spacing: 0.02;
                 color: #f4b0ac;
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__text) {
+.studyInDubaiRoot :global(.cta2__text) {
   font-size: 1rem !important;
                 font-weight: 300;
                 color: rgba(255, 255, 255, .85);
                 max-width: 46ch
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__actions) {
+.studyInDubaiRoot :global(.cta2__actions) {
   display: flex;
                 flex-wrap: wrap;
                 align-items: center;
@@ -2717,7 +2723,7 @@ to {
                 margin-top: 6px
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__btn) {
+.studyInDubaiRoot :global(.cta2__btn) {
   display: inline-flex;
                 align-items: center;
                 gap: 10px;
@@ -2731,19 +2737,19 @@ to {
                 transition: transform .4s var(--ease), box-shadow .4s var(--ease), background .3s, color .3s
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__btn svg) {
+.studyInDubaiRoot :global(.cta2__btn svg) {
   width: 18px;
                 height: 18px
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__btn:hover) {
+.studyInDubaiRoot :global(.cta2__btn:hover) {
   transform: translateY(-3px);
                 background: var(--red);
                 color: #fff;
                 box-shadow: 0 16px 30px -12px rgba(233, 60, 71, .7)
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__social) {
+.studyInDubaiRoot :global(.cta2__social) {
   display: flex;
                 align-items: center;
                 gap: 6px;
@@ -2755,14 +2761,14 @@ to {
                 -webkit-backdrop-filter: blur(8px)
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__social small) {
+.studyInDubaiRoot :global(.cta2__social small) {
   padding: 0 10px 0 14px;
                 font-size: .74rem !important;
                 font-weight: 400;
                 color: rgba(255, 255, 255, .8)
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__soc) {
+.studyInDubaiRoot :global(.cta2__soc) {
   display: grid;
                 place-items: center;
                 width: 42px;
@@ -2772,23 +2778,23 @@ to {
                 transition: background .3s, color .3s, transform .4s var(--ease)
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__soc svg) {
+.studyInDubaiRoot :global(.cta2__soc svg) {
   width: 19px;
                 height: 19px
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__soc:hover) {
+.studyInDubaiRoot :global(.cta2__soc:hover) {
   background: #fff;
                 color: var(--blue);
                 transform: translateY(-3px)
 }
 
 @media(max-width:900px) {
-:where(.studyInDubaiRoot) :global(#enquire) {
+.studyInDubaiRoot :global(#enquire) {
   padding-top: 150px
 }
 
-:where(.studyInDubaiRoot) :global(.cta2) {
+.studyInDubaiRoot :global(.cta2) {
   display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -2797,7 +2803,7 @@ to {
                     text-align: center
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__img) {
+.studyInDubaiRoot :global(.cta2__img) {
   position: relative;
                     order: -1;
                     width: min(300px, 78%);
@@ -2809,22 +2815,22 @@ to {
                     mask-image: linear-gradient(#000 78%, transparent)
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__img img) {
+.studyInDubaiRoot :global(.cta2__img img) {
   object-position: center bottom
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__body) {
+.studyInDubaiRoot :global(.cta2__body) {
   align-items: center;
                     margin-top: 4px
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__actions) {
+.studyInDubaiRoot :global(.cta2__actions) {
   justify-content: center;
                     flex-direction: column;
                     width: 100%
 }
 
-:where(.studyInDubaiRoot) :global(.cta2__btn) {
+.studyInDubaiRoot :global(.cta2__btn) {
   width: 100%;
                     justify-content: center
 }
@@ -2843,6 +2849,6 @@ to {
 }
 
 /* scroll-padding-top on <html> does nothing on a wrapper div — offset anchor targets under the fixed navbar */
-:where(.studyInDubaiRoot) :global(section[id]) {
+.studyInDubaiRoot :global(section[id]) {
   scroll-margin-top: var(--landing-nav-offset, 84px);
 }

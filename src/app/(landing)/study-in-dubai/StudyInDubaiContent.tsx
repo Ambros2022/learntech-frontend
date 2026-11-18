@@ -288,7 +288,7 @@ export default function StudyInDubaiContent() {
 
             <div className="filters reveal">
               <div className="pills" data-filter="college" role="group" aria-label="Filter by college">
-                <button className="pill" type="button" data-value="sym" aria-pressed="true">
+                <button className="pill" type="button" data-value="sym" aria-pressed="false">
                   Symbiosis International University Dubai
                 </button>
                 <button className="pill" type="button" data-value="bits" aria-pressed="false">
