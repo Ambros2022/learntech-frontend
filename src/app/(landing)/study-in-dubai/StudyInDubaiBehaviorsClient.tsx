@@ -8,6 +8,8 @@ export default function StudyInDubaiBehaviorsClient() {
     // 1. Mobile navigation
     const navToggle = document.getElementById('navToggle')
     const mainNav = document.getElementById('mainNav')
+    const headerEl = document.querySelector('.header') as HTMLElement | null
+    const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#mainNav .nav__links a'))
 
     const setNavOpen = (open: boolean) => {
       if (!mainNav || !navToggle) return
@@ -40,6 +42,91 @@ export default function StudyInDubaiBehaviorsClient() {
     mainNav?.addEventListener('click', handleNavClick)
     window.addEventListener('keydown', handleKeyDown)
     mql.addEventListener('change', handleMediaChange)
+
+    // 1b. In-page smooth scrolling & active link tracking (like online-degree-courses-in-india)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let activeNavId: string | null = null
+    let lockSpyUntil = 0
+
+    const markActive = (id: string | null) => {
+      if (!id || id === activeNavId) return
+      activeNavId = id
+      navLinks.forEach((item) => {
+        const itemHref = item.getAttribute('href')?.replace(/^#/, '')
+        const isActive = itemHref === id
+        item.classList.toggle('is-active', isActive)
+        item.classList.toggle('active', isActive)
+      })
+    }
+
+    const scrollToId = (id: string) => {
+      const behavior: ScrollBehavior = reduceMotion ? 'auto' : 'smooth'
+      if (id === 'top') {
+        window.scrollTo({ top: 0, behavior })
+        markActive('top')
+        return true
+      }
+      const el = document.getElementById(id)
+      if (!el) return false
+      el.scrollIntoView({ behavior, block: 'start' })
+      return true
+    }
+
+    const handleInPageClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+      const a = (e.target as Element).closest?.('a[href^="#"]') as HTMLAnchorElement | null
+      if (!a) return
+      const href = a.getAttribute('href') || ''
+      if (href === '#enquire') return // Enquiry modal trigger handles this
+      const id = decodeURIComponent(href.slice(1))
+      if (id && scrollToId(id)) {
+        e.preventDefault()
+        setNavOpen(false)
+        lockSpyUntil = Date.now() + 800
+        markActive(id)
+      }
+    }
+    document.addEventListener('click', handleInPageClick)
+
+    // Deep link support: when arriving via /study-in-dubai#colleges or #courses,
+    // scroll after hydration settles and cleanly strip the hash from URL
+    const initialHash = decodeURIComponent(window.location.hash.slice(1))
+    if (initialHash && initialHash !== 'enquire') {
+      const handleInitialScroll = () => {
+        setTimeout(() => {
+          scrollToId(initialHash)
+          markActive(initialHash)
+          window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search)
+        }, 150)
+      }
+      if (document.readyState === 'complete') handleInitialScroll()
+      else window.addEventListener('load', handleInitialScroll, { once: true })
+    }
+
+    // Scroll listener for header shadow & compact state
+    const handleScroll = () => {
+      const y = window.scrollY
+      if (headerEl) {
+        headerEl.classList.toggle('is-scrolled', y > 12)
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    // Scroll-Spy observer for sections
+    const spySections = Array.from(document.querySelectorAll<HTMLElement>('section[id], main[id]'))
+    const spyObserver = new IntersectionObserver(
+      (entries) => {
+        if (Date.now() < lockSpyUntil) return
+        entries.forEach((en) => {
+          if (en.isIntersecting && en.target.id) {
+            markActive(en.target.id)
+          }
+        })
+      },
+      { rootMargin: '-30% 0px -60% 0px' }
+    )
+    spySections.forEach((sec) => spyObserver.observe(sec))
 
     // 2. Carousel helper: arrows, drag, touch
     const setupCarousel = (track: HTMLElement, prev: HTMLButtonElement, next: HTMLButtonElement) => {
@@ -204,8 +291,8 @@ export default function StudyInDubaiBehaviorsClient() {
     if (courseTrack && prevBtn && nextBtn) {
       carouselControl = setupCarousel(courseTrack, prevBtn, nextBtn)
 
-      // Filter state
-      const state = { college: 'all', level: 'all' }
+      // Filter state: defaults to Symbiosis Dubai so Symbiosis pill is highlighted in white and Symbiosis courses are shown initially
+      const state = { college: 'sym', level: 'all' }
 
       const applyFilters = () => {
         const cards = courseTrack.querySelectorAll<HTMLElement>('.pc')
@@ -362,7 +449,6 @@ export default function StudyInDubaiBehaviorsClient() {
     }
 
     // 6. Scroll reveal
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (!reduceMotion && 'IntersectionObserver' in window) {
       document.documentElement.classList.add('js')
       const revealObserver = new IntersectionObserver(
@@ -385,6 +471,9 @@ export default function StudyInDubaiBehaviorsClient() {
       mainNav?.removeEventListener('click', handleNavClick)
       window.removeEventListener('keydown', handleKeyDown)
       mql.removeEventListener('change', handleMediaChange)
+      document.removeEventListener('click', handleInPageClick)
+      window.removeEventListener('scroll', handleScroll)
+      spyObserver.disconnect()
       carouselControl?.cleanup()
       autoplayControl?.cleanup()
       storiesAutoplay?.cleanup()
