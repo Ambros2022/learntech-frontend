@@ -1839,15 +1839,15 @@
             padding: 0 14px;
             border: 1px solid #e1e9fa;
             border-radius: 10px;
-            background-color: #eef3fd;
+            background-color: #eef3fd !important;
             font: inherit;
             font-size: .9rem !important;
-            color: var(--ink);
+            color: var(--ink) !important;
             transition: border-color .3s, box-shadow .3s, background-color .3s
 }
 
 .studyInDubaiRoot :global(.lm__f input)::placeholder {
-  color: var(--ink-3)
+  color: var(--ink-3) !important
 }
 
 .studyInDubaiRoot :global(.lm__f select) {
@@ -1855,18 +1855,28 @@
             -webkit-appearance: none;
             padding-right: 40px;
             cursor: pointer;
+            background-color: #eef3fd !important;
+            color: var(--ink) !important;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23566079' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 14px center;
             background-size: 16px
 }
 
-.studyInDubaiRoot :global(.lm__f select:required:invalid) {
-  color: var(--ink-3)
+.studyInDubaiRoot :global(.lm__f select:required:invalid),
+.studyInDubaiRoot :global(.lm__f select:has(option[value=""]:checked)) {
+  color: var(--ink-3) !important
 }
 
 .studyInDubaiRoot :global(.lm__f select option) {
-  color: var(--ink)
+  color: var(--ink) !important;
+  background-color: #ffffff !important
+}
+
+.studyInDubaiRoot :global(.lm__f select optgroup) {
+  color: var(--ink) !important;
+  background-color: #ffffff !important;
+  font-weight: 600 !important
 }
 
 .studyInDubaiRoot :global(.lm__f input:focus),
