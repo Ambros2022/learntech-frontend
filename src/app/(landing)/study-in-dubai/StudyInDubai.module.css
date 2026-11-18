@@ -152,7 +152,9 @@
             color: #fff;
             font-size: .9rem !important;
             font-weight: 500;
-            transition: transform .4s var(--ease), box-shadow .4s var(--ease), background .3s
+            transition: transform .4s var(--ease), box-shadow .4s var(--ease), background .3s;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
 }
 
 .studyInDubaiRoot :global(.btn:hover) {
@@ -198,7 +200,9 @@
 .studyInDubaiRoot :global(.btn--sm) {
   height: 42px;
             padding: 0 20px;
-            font-size: .84rem !important
+            font-size: .84rem !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
 }
 
 .studyInDubaiRoot :global(.link) {
@@ -240,7 +244,8 @@
             font-size: 1.3rem !important;
             font-weight: 600;
             letter-spacing: -.02em;
-            color: var(--blue)
+            color: var(--blue);
+            flex-shrink: 0 !important;
 }
 
 .studyInDubaiRoot :global(.brand svg) {
@@ -258,22 +263,19 @@
   font-size: 0.96rem !important;
             font-weight: 400;
             color: var(--ink) !important;
-            transition: color .3s, background-color .3s;
-            white-space: nowrap;
-            padding: 6px 14px;
-            border-radius: 99px;
+            transition: color .3s;
+            white-space: nowrap !important;
+            text-decoration: none !important;
 }
 
 .studyInDubaiRoot :global(.nav__links a:not(.btn):hover) {
   color: var(--blue) !important;
-  background-color: rgba(39, 72, 150, 0.06);
 }
 
 .studyInDubaiRoot :global(.nav__links a:not(.btn).is-active),
 .studyInDubaiRoot :global(.nav__links a:not(.btn).active) {
   color: var(--blue) !important;
-  font-weight: 600 !important;
-  background-color: #EAF0FD !important;
+  font-weight: 500 !important;
 }
 
 .studyInDubaiRoot :global(.header.is-scrolled) {
@@ -2864,6 +2866,7 @@ to {
 }
 
 /* scroll-padding-top on <html> does nothing on a wrapper div — offset anchor targets under the fixed navbar */
-.studyInDubaiRoot :global(section[id]) {
-  scroll-margin-top: var(--landing-nav-offset, 84px);
+.studyInDubaiRoot :global(section[id]),
+.studyInDubaiRoot :global(main[id]) {
+  scroll-margin-top: var(--landing-nav-offset, 88px) !important;
 }
