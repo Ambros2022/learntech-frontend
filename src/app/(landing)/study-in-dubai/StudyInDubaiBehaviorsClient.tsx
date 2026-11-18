@@ -16,6 +16,9 @@ export default function StudyInDubaiBehaviorsClient() {
       mainNav.classList.toggle('open', open)
       navToggle.setAttribute('aria-expanded', String(open))
       navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu')
+      if (typeof document !== 'undefined' && document.body) {
+        document.body.style.overflow = open ? 'hidden' : ''
+      }
     }
 
     const handleToggleClick = () => {
@@ -87,6 +90,11 @@ export default function StudyInDubaiBehaviorsClient() {
       }
     }
     document.addEventListener('click', handleInPageClick)
+
+    // Deep link support for opening mobile menu: ?menu=open
+    if (window.location.search.includes('menu=open')) {
+      setNavOpen(true)
+    }
 
     // Deep link support: when arriving via /study-in-dubai#colleges or #courses,
     // scroll after hydration settles and cleanly strip the hash from URL
@@ -467,6 +475,9 @@ export default function StudyInDubaiBehaviorsClient() {
 
     // Cleanup
     return () => {
+      if (typeof document !== 'undefined' && document.body) {
+        document.body.style.overflow = ''
+      }
       navToggle?.removeEventListener('click', handleToggleClick)
       mainNav?.removeEventListener('click', handleNavClick)
       window.removeEventListener('keydown', handleKeyDown)
