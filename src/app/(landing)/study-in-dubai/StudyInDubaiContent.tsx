@@ -201,8 +201,7 @@ export default function StudyInDubaiContent() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/study-in-dubai/Why-choose-icons/close-aicon.gif"
-                      alt=""
-                      aria-hidden="true"
+                      alt="Easy Accessibility icon"
                       loading="lazy"
                     />
                   </div>
@@ -219,8 +218,7 @@ export default function StudyInDubaiContent() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/study-in-dubai/Why-choose-icons/Globe-aicon.gif"
-                      alt=""
-                      aria-hidden="true"
+                      alt="Global exposure icon"
                       loading="lazy"
                     />
                   </div>
@@ -237,8 +235,7 @@ export default function StudyInDubaiContent() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/study-in-dubai/Why-choose-icons/academic-aicon.gif"
-                      alt=""
-                      aria-hidden="true"
+                      alt="Familiar Academic Foundations icon"
                       loading="lazy"
                     />
                   </div>
@@ -255,8 +252,7 @@ export default function StudyInDubaiContent() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/study-in-dubai/Why-choose-icons/safety-aicon.gif"
-                      alt=""
-                      aria-hidden="true"
+                      alt="Supportive Student Environment icon"
                       loading="lazy"
                     />
                   </div>
@@ -692,28 +688,28 @@ export default function StudyInDubaiContent() {
                 <div className="lw__item reveal">
                   <span className="lw__icon">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/study-in-dubai/why-icons/Icon_01.webp" alt="" />
+                    <img src="/images/study-in-dubai/why-icons/Icon_01.webp" alt="1,00,000+ Students Guided icon" />
                   </span>
                   <span>1,00,000+ Students Guided</span>
                 </div>
                 <div className="lw__item reveal">
                   <span className="lw__icon">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/study-in-dubai/why-icons/Icon_02.webp" alt="" />
+                    <img src="/images/study-in-dubai/why-icons/Icon_02.webp" alt="Guiding Families Since 1994 icon" />
                   </span>
                   <span>Guiding Families Since 1994</span>
                 </div>
                 <div className="lw__item reveal">
                   <span className="lw__icon">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/study-in-dubai/why-icons/Icon_03.webp" alt="" />
+                    <img src="/images/study-in-dubai/why-icons/Icon_03.webp" alt="2 Partner Campuses in Dubai icon" />
                   </span>
                   <span>2 Partner Campuses in Dubai</span>
                 </div>
                 <div className="lw__item reveal">
                   <span className="lw__icon">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/study-in-dubai/why-icons/Icon_04.webp" alt="" />
+                    <img src="/images/study-in-dubai/why-icons/Icon_04.webp" alt="Counsellors Across India and the UAE icon" />
                   </span>
                   <span>Counsellors Across India and the UAE</span>
                 </div>
@@ -742,28 +738,28 @@ export default function StudyInDubaiContent() {
                 <div className="lw__item reveal">
                   <span className="lw__icon">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/study-in-dubai/why-icons/Icon_05.webp" alt="" />
+                    <img src="/images/study-in-dubai/why-icons/Icon_05.webp" alt="Course Shortlisting That Fits Your Goals icon" />
                   </span>
                   <span>Course Shortlisting That Fits Your Goals</span>
                 </div>
                 <div className="lw__item reveal">
                   <span className="lw__icon">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/study-in-dubai/why-icons/Icon_06.webp" alt="" />
+                    <img src="/images/study-in-dubai/why-icons/Icon_06.webp" alt="Transparent Cost Breakdown icon" />
                   </span>
                   <span>Transparent Cost Breakdown</span>
                 </div>
                 <div className="lw__item reveal">
                   <span className="lw__icon">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/study-in-dubai/why-icons/Icon_07.webp" alt="" />
+                    <img src="/images/study-in-dubai/why-icons/Icon_07.webp" alt="Education Loan Assistance icon" />
                   </span>
                   <span>Education Loan Assistance</span>
                 </div>
                 <div className="lw__item reveal">
                   <span className="lw__icon">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/study-in-dubai/why-icons/Icon_08.webp" alt="" />
+                    <img src="/images/study-in-dubai/why-icons/Icon_08.webp" alt="Visa Guidance at Every Step icon" />
                   </span>
                   <span>Visa Guidance at Every Step</span>
                 </div>

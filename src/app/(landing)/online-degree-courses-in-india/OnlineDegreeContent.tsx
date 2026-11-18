@@ -150,7 +150,7 @@ export default function OnlineDegreeContent() {
           <div className="pcard px" style={{ '--s': 0.55, left: '5%', top: '24%' } as React.CSSProperties}>
             <div className="who">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://i.pravatar.cc/100?img=47" alt="" width={34} height={34} />
+              <img src="https://i.pravatar.cc/100?img=47" alt="Aarav - Working Professional" width={34} height={34} />
               <div>
                 <b>Aarav</b>
                 <small>Working Professional</small>
@@ -164,7 +164,7 @@ export default function OnlineDegreeContent() {
           <div className="pcard px" style={{ '--s': -0.5, right: '5%', top: '56%' } as React.CSSProperties}>
             <div className="who">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://i.pravatar.cc/100?img=12" alt="" width={34} height={34} />
+              <img src="https://i.pravatar.cc/100?img=12" alt="Priya - Commerce Graduate" width={34} height={34} />
               <div>
                 <b>Priya</b>
                 <small>Commerce Graduate</small>
@@ -178,19 +178,19 @@ export default function OnlineDegreeContent() {
           {/* Avatars */}
           <div className="fav px" style={{ '--s': -1.15, left: '1%', top: '15%' } as React.CSSProperties}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://i.pravatar.cc/100?img=11" alt="" width={38} height={38} />
+            <img src="https://i.pravatar.cc/100?img=11" alt="Student profile avatar" width={38} height={38} />
           </div>
           <div className="fav px" style={{ '--s': 0.9, right: '4%', top: '17%' } as React.CSSProperties}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://i.pravatar.cc/100?img=32" alt="" width={38} height={38} />
+            <img src="https://i.pravatar.cc/100?img=32" alt="Student profile avatar" width={38} height={38} />
           </div>
           <div className="fav px" style={{ '--s': 1.35, left: '9%', bottom: '13%' } as React.CSSProperties}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://i.pravatar.cc/100?img=44" alt="" width={38} height={38} />
+            <img src="https://i.pravatar.cc/100?img=44" alt="Student profile avatar" width={38} height={38} />
           </div>
           <div className="fav px" style={{ '--s': -1.25, right: '9%', bottom: '15%' } as React.CSSProperties}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://i.pravatar.cc/100?img=5" alt="" width={38} height={38} />
+            <img src="https://i.pravatar.cc/100?img=5" alt="Student profile avatar" width={38} height={38} />
           </div>
 
           {/* Course pop-ups */}
@@ -721,7 +721,7 @@ export default function OnlineDegreeContent() {
                     {[...PLACEMENTS_ROW1, ...PLACEMENTS_ROW1].map((c, i) => (
                       <div className="lt" key={i} aria-hidden={i >= PLACEMENTS_ROW1.length || undefined}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={c.img} alt={i >= PLACEMENTS_ROW1.length ? '' : c.name} loading="lazy" />
+                        <img src={c.img} alt={c.name} loading="lazy" />
                       </div>
                     ))}
                   </div>
@@ -731,7 +731,7 @@ export default function OnlineDegreeContent() {
                     {[...PLACEMENTS_ROW2, ...PLACEMENTS_ROW2].map((c, i) => (
                       <div className="lt" key={i} aria-hidden={i >= PLACEMENTS_ROW2.length || undefined}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={c.img} alt={i >= PLACEMENTS_ROW2.length ? '' : c.name} loading="lazy" />
+                        <img src={c.img} alt={c.name} loading="lazy" />
                       </div>
                     ))}
                   </div>
