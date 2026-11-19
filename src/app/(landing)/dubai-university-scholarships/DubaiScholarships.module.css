@@ -3761,3 +3761,40 @@ to {
   animation: tkm var(--tk-t, 30s) linear infinite !important;
   will-change: transform !important;
 }
+
+/* ── Active navigation link styling (matching study-in-dubai) ── */
+.dubaiScholarshipsRoot :global(header:not(.solid) .nav nav > a:not(.b).is-active),
+.dubaiScholarshipsRoot :global(header:not(.solid) .nav nav > a:not(.b).active),
+.dubaiScholarshipsRoot :global(header:not(.solid) .dd.is-active .nb),
+.dubaiScholarshipsRoot :global(header:not(.solid) .nb.is-active) {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 16px rgba(255, 255, 255, 0.6) !important;
+}
+
+.dubaiScholarshipsRoot :global(header.solid .nav nav > a:not(.b).is-active),
+.dubaiScholarshipsRoot :global(header.solid .nav nav > a:not(.b).active),
+.dubaiScholarshipsRoot :global(header.solid .dd.is-active .nb),
+.dubaiScholarshipsRoot :global(header.solid .nb.is-active) {
+  color: var(--blue) !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+.dubaiScholarshipsRoot :global(.nav nav .dd-m a.is-active),
+.dubaiScholarshipsRoot :global(.nav nav .dd-m a.active) {
+  color: var(--blue) !important;
+  background-color: var(--blue-50) !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 900px) {
+  .dubaiScholarshipsRoot :global(.nav.open nav a.is-active),
+  .dubaiScholarshipsRoot :global(.nav.open nav a.active),
+  .dubaiScholarshipsRoot :global(.nav.open nav .dd.is-active .nb),
+  .dubaiScholarshipsRoot :global(.nav.open nav .nb.is-active) {
+    color: var(--blue) !important;
+    font-weight: 600 !important;
+  }
+}

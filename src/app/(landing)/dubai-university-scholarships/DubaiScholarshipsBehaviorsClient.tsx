@@ -77,27 +77,139 @@ export default function DubaiScholarshipsBehaviorsClient() {
     const nv = document.getElementById('nv')
     const navContainer = nv?.parentElement
 
+    const setNavOpen = (open: boolean) => {
+      if (!navContainer || !mb) return
+      navContainer.classList.toggle('open', open)
+      mb.setAttribute('aria-expanded', String(open))
+      document.body.style.overflow = open ? 'hidden' : ''
+    }
+
     const toggleNav = () => {
       if (!navContainer) return
-      const isOpen = navContainer.classList.toggle('open')
-      mb?.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
-      document.body.style.overflow = isOpen ? 'hidden' : ''
+      setNavOpen(!navContainer.classList.contains('open'))
     }
 
     const closeNav = () => {
       if (!navContainer || !navContainer.classList.contains('open')) return
-      navContainer.classList.remove('open')
-      mb?.setAttribute('aria-expanded', 'false')
-      document.body.style.overflow = ''
+      setNavOpen(false)
     }
 
     mb?.addEventListener('click', toggleNav)
 
-    // Close when clicking nav links
-    const navLinks = nv?.querySelectorAll('a')
-    navLinks?.forEach((a) => {
-      a.addEventListener('click', closeNav)
-    })
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeNav()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+
+    const mql = window.matchMedia('(min-width: 901px)')
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      if (e.matches) closeNav()
+    }
+    mql.addEventListener('change', handleMediaChange)
+
+    // ── In-page smooth scrolling WITHOUT hash in URL & Active link tracking (matching study-in-dubai) ──
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let activeNavId: string | null = null
+    let lockSpyUntil = 0
+
+    const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#nv a, .dd-m a, .nav a.logo'))
+    const dropdownDd = document.querySelector('.dd')
+    const dropdownNb = document.querySelector('.nb')
+
+    const markActive = (id: string | null) => {
+      if (!id || id === activeNavId) return
+      activeNavId = id
+
+      let isDropdownActive = false
+
+      navLinks.forEach((item) => {
+        const itemHref = item.getAttribute('href')?.replace(/^#/, '')
+        const isActive = itemHref === id
+        item.classList.toggle('is-active', isActive)
+        item.classList.toggle('active', isActive)
+
+        if (isActive && (id === 'by-college' || id === 'by-course')) {
+          isDropdownActive = true
+        }
+      })
+
+      if (dropdownDd) {
+        dropdownDd.classList.toggle('is-active', isDropdownActive)
+        dropdownDd.classList.toggle('active', isDropdownActive)
+      }
+      if (dropdownNb) {
+        dropdownNb.classList.toggle('is-active', isDropdownActive)
+        dropdownNb.classList.toggle('active', isDropdownActive)
+      }
+    }
+
+    const scrollToId = (id: string) => {
+      const behavior: ScrollBehavior = reduceMotion ? 'auto' : 'smooth'
+      if (id === 'top') {
+        window.scrollTo({ top: 0, behavior })
+        markActive('top')
+        return true
+      }
+      const el = document.getElementById(id)
+      if (!el) return false
+      el.scrollIntoView({ behavior, block: 'start' })
+      return true
+    }
+
+    const handleInPageClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+      const a = (e.target as Element).closest?.('a[href^="#"]') as HTMLAnchorElement | null
+      if (!a) return
+
+      const href = a.getAttribute('href') || ''
+      // Skip modal popup triggers (handled by DubaiScholarshipsEnquiryTriggerClient)
+      if (
+        a.classList.contains('open-popup') ||
+        a.hasAttribute('data-open-popup') ||
+        (href === '#apply' && a.classList.contains('cs-cta')) ||
+        (href === '#predictor' && a.classList.contains('open-popup'))
+      ) {
+        return
+      }
+
+      const id = decodeURIComponent(href.slice(1))
+      if (id && scrollToId(id)) {
+        e.preventDefault()
+        closeNav()
+        lockSpyUntil = Date.now() + 800
+        markActive(id)
+      }
+    }
+    document.addEventListener('click', handleInPageClick)
+
+    // Deep link support: clean any arriving #hash from URL without leaving # in address bar
+    const initialHash = decodeURIComponent(window.location.hash.slice(1))
+    if (initialHash) {
+      const handleInitialScroll = () => {
+        setTimeout(() => {
+          scrollToId(initialHash)
+          markActive(initialHash)
+          window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search)
+        }, 150)
+      }
+      if (document.readyState === 'complete') handleInitialScroll()
+      else window.addEventListener('load', handleInitialScroll, { once: true })
+    }
+
+    // Scroll-Spy observer for sections
+    const spySections = Array.from(document.querySelectorAll<HTMLElement>('section[id], header[id]'))
+    const spyObserver = new IntersectionObserver(
+      (entries) => {
+        if (Date.now() < lockSpyUntil) return
+        entries.forEach((en) => {
+          if (en.isIntersecting && en.target.id) {
+            markActive(en.target.id)
+          }
+        })
+      },
+      { rootMargin: '-25% 0px -55% 0px' }
+    )
+    spySections.forEach((sec) => spyObserver.observe(sec))
 
     // 3. Marks Estimator Strip
     const inp = document.getElementById('me-in') as HTMLInputElement | null
@@ -249,7 +361,7 @@ export default function DubaiScholarshipsBehaviorsClient() {
       let timer: ReturnType<typeof setInterval> | null = null
       let paused = false
       let inView = false
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const reduceCarouselMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
       const step = () => {
         if (!track) return
@@ -271,7 +383,7 @@ export default function DubaiScholarshipsBehaviorsClient() {
 
       const startAutoplay = () => {
         stopAutoplay()
-        if (reduceMotion || paused || !inView || document.hidden) return
+        if (reduceCarouselMotion || paused || !inView || document.hidden) return
         timer = setInterval(step, DELAY)
       }
 
@@ -604,6 +716,10 @@ export default function DubaiScholarshipsBehaviorsClient() {
     // Cleanup on unmount
     return () => {
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('keydown', handleKeyDown)
+      mql.removeEventListener('change', handleMediaChange)
+      document.removeEventListener('click', handleInPageClick)
+      spyObserver.disconnect()
       document.body.style.overflow = ''
     }
   }, [])
