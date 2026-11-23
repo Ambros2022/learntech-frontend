@@ -188,7 +188,7 @@ export default function StudyInDubaiEnquiryModalClient({ open, initialCourse = '
           <img
             className="lm__img"
             src="/images/study-in-dubai/media/young-female-student-front-laptop-library.jpg"
-            alt=""
+            alt="Student studying with laptop in library"
             loading="lazy"
           />
           <span className="lm__tag">Study in Dubai</span>
