@@ -2884,3 +2884,60 @@ to {
 .studyInDubaiRoot :global(main[id]) {
   scroll-margin-top: var(--landing-nav-offset, 88px) !important;
 }
+
+/* ── FLOAT BUTTONS ───────────────────────── */
+.studyInDubaiRoot :global(.whatsapp-float) {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 36px;
+  z-index: 90;
+  background-color: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s ease;
+  text-decoration: none;
+}
+
+.studyInDubaiRoot :global(.whatsapp-float:hover) {
+  transform: scale(1.1);
+}
+
+.studyInDubaiRoot :global(.whatsapp-float i) {
+  color: white;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.studyInDubaiRoot :global(.phone-float) {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 90;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--red, #E93C47);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(233, 60, 71, 0.45);
+  transition: transform 0.3s ease;
+  text-decoration: none;
+}
+
+.studyInDubaiRoot :global(.phone-float:hover) {
+  transform: scale(1.1);
+}
+
+.studyInDubaiRoot :global(.phone-float i) {
+  color: white;
+  font-size: 25px;
+  line-height: 1;
+}
