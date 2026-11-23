@@ -273,7 +273,45 @@ if (initial) {
 
 The navbar's own click handler (close mobile menu, set active link) still runs, because it is registered on the link itself.
 
-### 7.3 Popup delegation (`TriggerClient`)
+### 7.3 Mobile navigation drawer & active link tracking (Scroll-Spy)
+
+Mobile navigation must visually and functionally match the design on all viewport heights (down to 485px):
+
+1. **Positioning & Solid Background**:
+   - The mobile menu drawer `.nav` must be anchored directly under the header with `position: fixed !important; top: var(--nav, 64px) !important; left: 0 !important; right: 0 !important; width: 100% !important; z-index: 99 !important;`.
+   - **Solid background is mandatory**: Always use `background: #ffffff !important;` (not transparent or low-opacity `rgba`), so hero headline text does not bleed through.
+   - Max height & smooth slide:
+     ```css
+     .nav {
+       max-height: 0 !important;
+       overflow: hidden !important;
+       visibility: hidden !important;
+       transition: max-height .35s var(--ease), visibility 0s .35s;
+     }
+     .nav.open {
+       max-height: calc(100dvh - var(--nav, 64px)) !important;
+       overflow-y: auto !important;
+       -webkit-overflow-scrolling: touch !important;
+       visibility: visible !important;
+       transition: max-height .35s var(--ease);
+     }
+     ```
+2. **Full-width dividers & item layout**:
+   - The list `.nav__links`, each `li`, and each `a:not(.btn)` must be `display: block !important; width: 100% !important; box-sizing: border-box !important;`.
+   - Under each link, add full horizontal divider lines: `border-bottom: 1px solid var(--line, #E6EAF3) !important;`. Set `border-bottom: none !important;` on the last item.
+3. **Viewport height budgeting**:
+   - On small screens (e.g. 425x485px), total available height below a 64px navbar is ~421px. Budget item padding (e.g. `padding: 12px 0 !important;` and `.nav__links` padding `4px var(--gutter) 20px !important;`) so that all items (7+ links) fit on screen simultaneously without the last item (`FAQs`) being pushed below the fold.
+4. **Body scroll lock**:
+   - On open: `document.body.style.overflow = 'hidden'`.
+   - On close & unmount cleanup: `document.body.style.overflow = ''`.
+5. **Scroll-Spy & active link highlighting**:
+   - Observe `section[id], main[id]` with an `IntersectionObserver` (`rootMargin: '-30% 0px -60% 0px'`).
+   - When intersecting, toggle `.is-active` and `.active` on the corresponding `#mainNav .nav__links a` element.
+   - Lock spy observer during programmatic in-page smooth scrolls (`lockSpyUntil = Date.now() + 800`) so intermediate sections don't flicker active while scrolling.
+6. **Watch out for duplicate media queries from older drafts**:
+   - Design handoffs often contain an older `@media (max-width: 767px)` block (e.g. an early horizontally-scrolling nav bar with `.header__inner { flex-wrap: wrap; height: auto; }` and `.nav { order: 3; }`) before the hamburger drawer was added. Always remove the obsolete block so it doesn't break header height or drawer placement.
+
+### 7.4 Popup delegation (`TriggerClient`)
 
 ```tsx
 const TRIGGER = '[data-enquiry-trigger], [data-enq], .open-enquiry-popup, a[href="#cta"], a[href="#get-free-counselling"]'
@@ -290,7 +328,10 @@ const handleClick = (e: React.MouseEvent) => {
 
 ## 8. Images & fonts
 
-- Assets: `/images/<assets>/…`, with descriptive `alt`. Decorative images and marquee clones get `alt=""` and `aria-hidden`.
+- **Every image must have a descriptive `alt` attribute**:
+  - Always provide meaningful `alt` text on `<img>` tags (e.g. `alt="Dubai skyline"`, `alt="Easy Accessibility icon"`, `alt="Symbiosis International University Dubai campus"`, `alt="Aarav - Working Professional"`).
+  - **Never leave `alt` empty (`alt=""`) or omit it** on content, feature icons, logos, campus cards, avatars, or banner graphics. Good alt attributes are essential for SEO indexing, image search, and accessibility compliance.
+  - Assets live under `/images/<assets>/…`.
 - Plain `<img>` with `width`/`height` is fine where the handoff CSS sizes the image (logos, card thumbnails); add `// eslint-disable-next-line @next/next/no-img-element`. Use `next/image` for large raster photos that benefit from resizing.
 - Fonts: §5.3. Never add a Google Fonts `<link>`.
 
@@ -308,6 +349,7 @@ Run every step and report actual results.
 6. **Behaviour**, desktop + mobile:
    - nav links scroll to the right section, the URL stays clean, the active link updates;
    - mobile menu opens/closes with scroll lock;
+   - mobile menu has solid white background `#fff`, full-width dividers, and all nav items fit within 485px screen height;
    - `/<slug>#section` deep link scrolls there and the hash is removed;
    - sliders, filters, dropdowns (mouse + keyboard), accordion, back-to-top, marquee drag;
    - popup opens from every CTA, the right course is pre-selected, and it closes via ×, overlay and `Esc`.
@@ -328,9 +370,14 @@ Run every step and report actual results.
 | Words run together in a headline | JSX whitespace (§6) |
 | Paragraph margin/line-height differs | your new class name already existed in `style.css` |
 | Navbar missing on phones | globals.css `header { display: none !important }` |
+| Mobile drawer hero text bleeding through | drawer has semi-transparent background — use `background: #ffffff !important` |
+| Mobile drawer dividers missing or partial width | drawer links missing `display: block !important; width: 100% !important; border-bottom: 1px solid var(--line) !important` |
+| Mobile drawer links cut off / FAQs hidden | excessive vertical padding pushing items below 485px viewport — budget padding (`12px 0`) |
+| Header height blown out / nav misaligned on mobile | obsolete `@media (max-width: 767px)` block from earlier draft handoffs overriding `.header__inner` |
 | Popup dropdown text invisible | globals.css `select { color: white !important }` |
 | Sticky stack doesn't stick | wrapper `overflow-x: hidden` — use `clip` |
 | Anchor jumps hide the heading under the navbar | `scroll-padding-top` on html — use `scroll-margin-top` |
 | URL gains `#section` on every click | missing §7.2 interception |
 | Deep link `#section` lands at top | NProgressBar scroll-to-top, or hash stripped before parent effects ran |
 | Popup asset 404 | `url()` rewritten twice — generator rewrites relative URLs only |
+| Images missing alt / empty `alt=""` | must always provide descriptive alt text for accessibility and SEO |

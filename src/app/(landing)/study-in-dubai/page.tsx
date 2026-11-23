@@ -9,18 +9,18 @@ const PAGE_PATH = '/study-in-dubai'
 const CANONICAL_URL = `${BASE_URL}${PAGE_PATH}`
 
 export const metadata = {
-  title: 'Study in Dubai: Top Universities, Courses, Fees & Visa | Learntech',
+  title: 'Study in Dubai: Universities, Courses & Fees | Learntech',
   description:
-    'Explore top universities in Dubai including Symbiosis International University Dubai & BITS Pilani Dubai. Compare BBA, MBA, B.Tech, BCA courses, fees, scholarships & get expert admission guidance.',
+    'Explore top Dubai universities, including Symbiosis and BITS Pilani. Compare BBA, MBA, B.Tech and BCA courses, fees and scholarships. Get admission guidance.',
   keywords:
     'Study in Dubai, Study Abroad Dubai, Universities in Dubai for Indian Students, Symbiosis International University Dubai, BITS Pilani Dubai, MBA in Dubai, BBA in Dubai, BTech in Dubai, Dubai Student Visa, Study in UAE, Learntech Edu Solutions',
   alternates: {
     canonical: CANONICAL_URL,
   },
   openGraph: {
-    title: 'Study in Dubai: Top Universities, Courses, Fees & Visa | Learntech',
+    title: 'Study in Dubai: Universities, Courses & Fees | Learntech',
     description:
-      'Explore top universities in Dubai including Symbiosis International University Dubai & BITS Pilani Dubai. Compare BBA, MBA, B.Tech, BCA courses, fees, scholarships & get expert admission guidance.',
+      'Explore top Dubai universities, including Symbiosis and BITS Pilani. Compare BBA, MBA, B.Tech and BCA courses, fees and scholarships. Get admission guidance.',
     url: CANONICAL_URL,
     siteName: 'Learntech Edu Solutions',
     locale: 'en_IN',
@@ -36,9 +36,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Study in Dubai: Top Universities, Courses, Fees & Visa | Learntech',
+    title: 'Study in Dubai: Universities, Courses & Fees | Learntech',
     description:
-      'Explore top universities in Dubai including Symbiosis International University Dubai & BITS Pilani Dubai. Compare BBA, MBA, B.Tech, BCA courses, fees, scholarships & get expert admission guidance.',
+      'Explore top Dubai universities, including Symbiosis and BITS Pilani. Compare BBA, MBA, B.Tech and BCA courses, fees and scholarships. Get admission guidance.',
     images: [`${BASE_URL}/images/icons/learntech-logo.png`],
   },
   robots: {
@@ -86,9 +86,9 @@ export default function StudyInDubaiLandingPage() {
   const webPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Study in Dubai: Top Universities, Courses, Fees & Visa | Learntech',
+    name: 'Study in Dubai: Universities, Courses & Fees | Learntech',
     description:
-      'Explore top universities in Dubai including Symbiosis International University Dubai & BITS Pilani Dubai. Compare BBA, MBA, B.Tech, BCA courses, fees, scholarships & get expert admission guidance.',
+      'Explore top Dubai universities, including Symbiosis and BITS Pilani. Compare BBA, MBA, B.Tech and BCA courses, fees and scholarships. Get admission guidance.',
     url: CANONICAL_URL,
     publisher: organizationSchema,
   }

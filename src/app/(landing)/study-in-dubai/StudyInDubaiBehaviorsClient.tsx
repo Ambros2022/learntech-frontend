@@ -406,7 +406,7 @@ export default function StudyInDubaiBehaviorsClient() {
           .slice(0, 2)
           .join('')
           .toUpperCase()
-        const av = t.photo ? `<img src="${t.photo}" alt="" loading="lazy">` : ini
+        const av = t.photo ? `<img src="${t.photo}" alt="${t.name}" loading="lazy">` : ini
 
         tvStage.innerHTML = `
           <span class="tv__mark"><svg aria-hidden="true"><use href="#i-quote"/></svg></span>
