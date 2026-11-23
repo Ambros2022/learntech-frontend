@@ -390,10 +390,11 @@ from {
             flex-shrink: 0;
 }
 
-.dubaiScholarshipsRoot :global(.icon-wrapper svg) {
+.dubaiScholarshipsRoot :global(.icon-wrapper svg),
+.dubaiScholarshipsRoot :global(.icon-wrapper svg path) {
   width: 18px;
-            height: 18px;
-            fill: #e63946;
+  height: 18px;
+  fill: #e63946 !important;
 }
 
 .dubaiScholarshipsRoot :global(.status-dot) {
@@ -443,9 +444,11 @@ from {
                 height: 30px;
 }
 
-.dubaiScholarshipsRoot :global(.icon-wrapper svg) {
+.dubaiScholarshipsRoot :global(.icon-wrapper svg),
+.dubaiScholarshipsRoot :global(.icon-wrapper svg path) {
   width: 15px;
-                height: 15px;
+  height: 15px;
+  fill: #e63946 !important;
 }
 
 .dubaiScholarshipsRoot :global(.text-main) {
