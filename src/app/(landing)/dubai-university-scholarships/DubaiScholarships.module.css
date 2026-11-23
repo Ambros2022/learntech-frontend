@@ -1477,20 +1477,22 @@ to {
 
 .dubaiScholarshipsRoot :global(.cs-top) {
   display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 4px;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 4px;
+  min-height: 74px;
 }
 
 .dubaiScholarshipsRoot :global(.cs-ic) {
   flex: none;
-            display: grid;
-            place-items: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: var(--cs-soft);
-            color: var(--cs-a);
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--cs-soft);
+  color: var(--cs-a);
+  margin-top: 2px;
 }
 
 .dubaiScholarshipsRoot :global(.cs-ic svg) {
@@ -1498,33 +1500,45 @@ to {
             height: 22px;
 }
 
+.dubaiScholarshipsRoot :global(.cs-tt) {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .dubaiScholarshipsRoot :global(.cs-tt h4) {
   margin: 0;
-            font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 1.05rem !important;
   line-height: 1.35;
-            color: var(--ink);
+  color: var(--ink);
+  min-height: 2.7em;
 }
 
 .dubaiScholarshipsRoot :global(.cs-tt small) {
   display: block;
-            margin-top: 2px;
-            color: var(--mut);
-            font-size: .72rem !important;
+  margin-top: 2px;
+  color: var(--mut);
+  font-size: .72rem !important;
+  line-height: 1.35;
+  min-height: 2.7em;
 }
 
 .dubaiScholarshipsRoot :global(.cs-sch) {
   display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin: 16px 0 12px;
-            padding: 12px 16px;
-            border-radius: var(--r-md);
-            background: var(--cs-soft);
-            border: 1px solid color-mix(in srgb, var(--cs-a) 18%, transparent);
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0 12px;
+  padding: 12px 16px;
+  border-radius: var(--r-md);
+  background: var(--cs-soft);
+  border: 1px solid color-mix(in srgb, var(--cs-a) 18%, transparent);
+  min-height: 58px;
+  box-sizing: border-box;
 }
 
 .dubaiScholarshipsRoot :global(.cs-lbl) {
@@ -1586,13 +1600,15 @@ to {
 
 .dubaiScholarshipsRoot :global(.cs-meta>div) {
   display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            width: 100%;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--line);
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  box-sizing: border-box;
 }
 
 .dubaiScholarshipsRoot :global(.cs-meta>div:first-child) {

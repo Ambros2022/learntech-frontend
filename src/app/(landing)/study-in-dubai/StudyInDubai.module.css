@@ -737,17 +737,17 @@
 
 .studyInDubaiRoot :global(.band__box h2) {
   font-size: clamp(1.5rem, 2.8vw, 2.1rem) !important;
-            font-weight: 500;
-            letter-spacing: -.03em;
-            line-height: 1.2;
-            margin-bottom: 8px;
-            max-width: 30ch
+  font-weight: 600 !important;
+  letter-spacing: -.03em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  max-width: 30ch;
 }
 
 .studyInDubaiRoot :global(.band__box h2 em) {
   font-style: normal;
-            font-weight: 300;
-            color: #FF8A92
+  font-weight: 600 !important;
+  color: #FF8A92;
 }
 
 .studyInDubaiRoot :global(.band__box p) {
@@ -1880,11 +1880,23 @@
 }
 
 .studyInDubaiRoot :global(.lm__f input:focus),
-.studyInDubaiRoot :global(.lm__f select:focus) {
-  outline: 0;
-            border-color: var(--blue);
-            background-color: #fff;
-            box-shadow: 0 0 0 4px rgba(39, 72, 150, .12)
+.studyInDubaiRoot :global(.lm__f select:focus),
+.studyInDubaiRoot :global(.lm__f input:active),
+.studyInDubaiRoot :global(.lm__f select:active),
+.studyInDubaiRoot :global(.lm__f input:not(:placeholder-shown)) {
+  outline: 0 !important;
+  border-color: var(--blue) !important;
+  background-color: #ffffff !important;
+  color: var(--ink) !important;
+  box-shadow: 0 0 0 4px rgba(39, 72, 150, .12) !important;
+}
+
+.studyInDubaiRoot :global(.lm__f input:-webkit-autofill),
+.studyInDubaiRoot :global(.lm__f input:-webkit-autofill:hover),
+.studyInDubaiRoot :global(.lm__f input:-webkit-autofill:focus) {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: var(--ink) !important;
 }
 
 .studyInDubaiRoot :global(.lm__f [aria-invalid=true]) {
