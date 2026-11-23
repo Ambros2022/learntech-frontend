@@ -19,6 +19,16 @@ module.exports = {
     ],
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/dubai-university-scholarships',
+        destination: '/study-abroad-scholarship',
+        permanent: true,
+      },
+    ]
+  },
+
   async rewrites() {
     return [
       {
