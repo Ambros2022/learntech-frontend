@@ -404,7 +404,7 @@
 
 
   .innerCollege input,
-  select {
+  .innerCollege select {
     background-color: transparent !important;
     color: white !important;
   }
@@ -414,7 +414,7 @@
   }
 
   .innerCollege input,
-  select:focus {
+  .innerCollege select:focus {
     border-color: white !important;
   }
 
