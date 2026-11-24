@@ -1062,8 +1062,15 @@ to {
 
 .dubaiScholarshipsRoot :global(.college-card .b) {
   max-width: fit-content;
-            padding: 15px 24px;
-            font-size: .95rem !important;
+  padding: 15px 24px;
+  font-size: .95rem !important;
+  margin-top: 24px !important;
+}
+
+@media (max-width: 640px) {
+  .dubaiScholarshipsRoot :global(.college-card .b) {
+    margin-top: 15px !important;
+  }
 }
 
 .dubaiScholarshipsRoot :global(#estimator) {
@@ -1814,53 +1821,66 @@ to {
             display: block;
 }
 
-.dubaiScholarshipsRoot :global(.sent select),
+.dubaiScholarshipsRoot :global(.sent select) {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: var(--font-poppins), 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 1.05rem !important;
+  color: var(--blue) !important;
+  background: var(--blue-50) !important;
+  border: 1.5px solid transparent !important;
+  border-radius: 8px !important;
+  padding: 6px 30px 6px 14px !important;
+  margin: 0 4px !important;
+  cursor: pointer;
+  transition: border-color .18s, background .18s, box-shadow .18s;
+  line-height: 1.3;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23274896' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 12px !important;
+  width: auto;
+  max-width: 100%;
+  field-sizing: content;
+}
+
 .dubaiScholarshipsRoot :global(.sent input) {
   display: inline-block;
-            vertical-align: middle;
-            font-family: var(--font-poppins), 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 1.1rem !important;
-            color: var(--blue) !important;
-            background: var(--blue-50) !important;
-            border: 2px solid transparent;
-            border-radius: 10px;
-            padding: 6px 30px 6px 14px;
-            margin: 0 4px;
-            cursor: pointer;
-            transition: border-color .18s, background .18s, box-shadow .18s;
-            line-height: 1.3;
-            -webkit-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23274896' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            width: auto;
-            max-width: 100%;
-            field-sizing: content;
+  vertical-align: middle;
+  font-family: var(--font-poppins), 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 1.05rem !important;
+  color: var(--blue) !important;
+  background: var(--blue-50) !important;
+  border: 1.5px solid transparent !important;
+  border-radius: 8px !important;
+  padding: 6px 10px !important;
+  margin: 0 4px !important;
+  cursor: text;
+  transition: border-color .18s, background .18s, box-shadow .18s;
+  line-height: 1.3;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5.4ch;
+  text-align: center;
+  -moz-appearance: textfield;
 }
 
 .dubaiScholarshipsRoot :global(.sent select:hover),
 .dubaiScholarshipsRoot :global(.sent input:hover) {
   border-color: var(--line-2) !important;
-            background-color: #fff !important;
+  background-color: #fff !important;
 }
 
 .dubaiScholarshipsRoot :global(.sent select:focus),
 .dubaiScholarshipsRoot :global(.sent input:focus) {
   outline: none;
-            border-color: var(--blue) !important;
-            background-color: #fff !important;
-            box-shadow: 0 0 0 4px rgba(39, 72, 150, .14);
-}
-
-.dubaiScholarshipsRoot :global(.sent input) {
-  width: 5.4ch;
-            padding: 6px 10px;
-            text-align: center;
-            cursor: text;
-            background-image: none;
-            -moz-appearance: textfield;
+  border-color: var(--blue) !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 0 4px rgba(39, 72, 150, .14);
 }
 
 .dubaiScholarshipsRoot :global(.sent input)::-webkit-outer-spin-button,
@@ -2685,25 +2705,26 @@ to {
 
 .dubaiScholarshipsRoot :global(.st)::before {
   content: counter(s);
-            display: grid;
-            place-items: center;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--red), #F2797F);
-            color: #fff;
-            font-family: var(--font-poppins), 'Poppins', sans-serif;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--red), #F2797F);
+  color: #fff;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-weight: 800;
   font-size: 1.2rem !important;
+  margin-bottom: 22px !important;
 }
 
 .dubaiScholarshipsRoot :global(.st h3) {
   font-size: 1.3rem !important;
-            font-weight: 500;
-            margin: 18px 0 8px;
-            color: #fff;
-            line-height: 1.35;
-            min-height: 2.7em;
+  font-weight: 500;
+  margin: 0 0 8px !important;
+  color: #fff;
+  line-height: 1.35;
+  min-height: 2.7em;
 }
 
 .dubaiScholarshipsRoot :global(.st p) {

@@ -809,7 +809,7 @@ export default function DubaiScholarshipsContent() {
 
     <div className="edge-contact" id="edge-contact" role="complementary" aria-label="Contact Learntech">
         <a className="edge-contact__tab edge-contact__tab--wa"
-            href="https://wa.me/971504955123?text=Hi%20Learntech%2C%20I%27d%20like%20to%20know%20about%20Dubai%20university%20scholarships."
+            href="https://wa.me/971504955123"
             target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
             <span className="edge-contact__icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
