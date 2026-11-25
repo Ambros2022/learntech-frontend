@@ -176,6 +176,7 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === overlayRef.current) {
+      e.stopPropagation()
       onClose()
     }
   }
@@ -185,39 +186,39 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
   return (
     <div
       ref={overlayRef}
-      className="enquiry-modal-overlay active"
+      className="popup-overlay active"
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
       aria-labelledby="formTitle"
     >
-      <div className="popup-card-dialog">
+      <div className="popup-box" onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
-          className="popup-close-btn"
-          onClick={onClose}
+          className="close-popup"
+          onClick={(e) => {
+            e.stopPropagation()
+            onClose()
+          }}
           aria-label="Close modal"
         >
           &times;
         </button>
 
         {/* LEFT BANNER */}
-        <div className="popup-banner-panel">
-          <div className="banner-content-box">
-            <span className="banner-tag">STUDY ONLINE, YOUR WAY</span>
-            <h2>
-              Choose the right <br />
-              <em>online degree.</em>
-            </h2>
-            <p className="banner-highlight">Learn on your own schedule.</p>
-            <p className="banner-desc">
-              Compare online UG and PG programmes from leading universities and get clear, honest guidance
-              from our counsellors before you apply.
-            </p>
-            <div className="banner-points">
-              <span>Course Guidance</span>
-              <span>Expert Support</span>
-            </div>
+        <div className="popup-banner">
+          <span className="banner-tag">STUDY ONLINE, YOUR WAY</span>
+          <h2>
+            Choose the right <br />
+            <span>online degree.</span>
+          </h2>
+          <p>
+            Compare online UG and PG programmes from leading universities and get clear, honest guidance
+            from our counsellors before you apply.
+          </p>
+          <div className="banner-points">
+            <span>Course Guidance</span>
+            <span>Expert Support</span>
           </div>
         </div>
 

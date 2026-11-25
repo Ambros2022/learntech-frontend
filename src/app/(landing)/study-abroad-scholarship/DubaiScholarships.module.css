@@ -746,6 +746,12 @@
 }
 
 @media (max-width: 768px) {
+  .dubaiScholarshipsRoot :global(.hero-enquire) {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
   .dubaiScholarshipsRoot :global(.hero) {
     background-image: url("/images/dubai-scholarships/Media/Mobi_01.webp");
     background-position: center;

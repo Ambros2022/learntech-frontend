@@ -46,7 +46,7 @@ export const PROGRAMMES: Programme[] = [
   { title: 'BA in Media and Communication (Hons)', level: 'UG', scholarship: 'Up to 40%', college: 's', degree: 'Bachelor of Arts (Honors)', icon: 'pen', duration: '4 years', fee: FEE_SY_UG, eligibility: ELIG_SY_UG },
   { title: 'B.Com (Hons) with ACCA Preparation', level: 'UG', scholarship: 'Up to 40%', college: 's', degree: 'Bachelor of Commerce (Honors)', icon: 'calc', duration: '4 years', fee: FEE_SY_UG, eligibility: ELIG_SY_UG },
   { title: 'B.Sc (Hons) in Psychology', level: 'UG', scholarship: 'Up to 40%', college: 's', degree: 'Bachelor of Science (Honors)', icon: 'mind', duration: '4 years', fee: FEE_SY_UG, eligibility: ELIG_SY_UG },
-  { title: 'B.Tech in Computer Engineering', level: 'UG', scholarship: 'Up to 40%', college: 's', degree: 'Bachelor of Technology', icon: 'cog', duration: '', fee: 'AED 53,550 / year', eligibility: '' },
+  { title: 'B.Tech in Computer Engineering', level: 'UG', scholarship: 'Up to 40%', college: 's', degree: 'Bachelor of Technology', icon: 'cog', duration: '4 years', fee: 'AED 53,550 / year', eligibility: '' },
   { title: 'MBA', level: 'PG', scholarship: 'Up to 35%', college: 's', degree: 'Master of Business Administration', icon: 'biz', duration: '2 years', fee: 'AED 45,000 / year', eligibility: '' },
 
   { title: 'B.E. Architectural & Urban Engineering', level: 'UG', scholarship: 'Up to 50%', college: 'b', degree: 'Bachelor of Engineering', icon: 'cog', duration: '4 years', fee: 'AED 27,750 / semester', eligibility: 'From 60% in Class 12' },
