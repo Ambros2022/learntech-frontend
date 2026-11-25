@@ -26,6 +26,9 @@ export default function StudyInDubaiEnquiryModalClient({ open, initialCourse = '
     state: '',
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [focusedField, setFocusedField] = useState<string | null>(null)
+
+  const isFieldActive = (field: keyof typeof formData) => focusedField === field || Boolean(formData[field])
 
   // Format course option values nicely
   const getCourseValue = (c: typeof COURSES[number]) => `${COLLEGES[c.c].short} – ${c.name}`
@@ -226,6 +229,10 @@ export default function StudyInDubaiEnquiryModalClient({ open, initialCourse = '
                 required
                 value={formData.name}
                 onChange={handleChange}
+                onFocus={() => setFocusedField('name')}
+                onBlur={() => setFocusedField(null)}
+                className={isFieldActive('name') ? 'is-typing has-value' : ''}
+                style={isFieldActive('name') ? { backgroundColor: '#ffffff' } : undefined}
                 aria-invalid={!!errors.name}
               />
               {errors.name && <span className="lm__err">{errors.name}</span>}
@@ -246,6 +253,10 @@ export default function StudyInDubaiEnquiryModalClient({ open, initialCourse = '
                 required
                 value={formData.phone}
                 onChange={handleChange}
+                onFocus={() => setFocusedField('phone')}
+                onBlur={() => setFocusedField(null)}
+                className={isFieldActive('phone') ? 'is-typing has-value' : ''}
+                style={isFieldActive('phone') ? { backgroundColor: '#ffffff' } : undefined}
                 aria-invalid={!!errors.phone}
               />
               {errors.phone && <span className="lm__err">{errors.phone}</span>}
@@ -264,6 +275,10 @@ export default function StudyInDubaiEnquiryModalClient({ open, initialCourse = '
                 required
                 value={formData.email}
                 onChange={handleChange}
+                onFocus={() => setFocusedField('email')}
+                onBlur={() => setFocusedField(null)}
+                className={isFieldActive('email') ? 'is-typing has-value' : ''}
+                style={isFieldActive('email') ? { backgroundColor: '#ffffff' } : undefined}
                 aria-invalid={!!errors.email}
               />
               {errors.email && <span className="lm__err">{errors.email}</span>}
@@ -279,6 +294,10 @@ export default function StudyInDubaiEnquiryModalClient({ open, initialCourse = '
                 required
                 value={formData.course}
                 onChange={handleChange}
+                onFocus={() => setFocusedField('course')}
+                onBlur={() => setFocusedField(null)}
+                className={isFieldActive('course') ? 'is-typing has-value' : ''}
+                style={isFieldActive('course') ? { backgroundColor: '#ffffff' } : undefined}
                 aria-invalid={!!errors.course}
               >
                 <option value="">Select a course</option>
@@ -317,6 +336,10 @@ export default function StudyInDubaiEnquiryModalClient({ open, initialCourse = '
                 required
                 value={formData.state}
                 onChange={handleChange}
+                onFocus={() => setFocusedField('state')}
+                onBlur={() => setFocusedField(null)}
+                className={isFieldActive('state') ? 'is-typing has-value' : ''}
+                style={isFieldActive('state') ? { backgroundColor: '#ffffff' } : undefined}
                 aria-invalid={!!errors.state}
               >
                 <option value="">Select your state</option>

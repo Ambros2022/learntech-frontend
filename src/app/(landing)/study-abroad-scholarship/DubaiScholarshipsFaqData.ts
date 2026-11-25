@@ -18,7 +18,7 @@ export const DUBAI_SCHOLARSHIPS_FAQS: FaqItem[] = [
   },
   {
     q: 'Does the scholarship apply to every course?',
-    a: "Percentages are set by university and level. At Symbiosis Dubai, Bachelor's courses get 40% in year 1 and 30% on the remaining years. At BITS Pilani Dubai the offer depends on your course and marks, up to 50% of first-year tuition.",
+    a: "Percentages are set by university and level. At Symbiosis Dubai, Bachelor's courses get 40% in 1st year and 30% on the remaining years. At BITS Pilani Dubai, the offer depends on your course and marks, up to 50% of first-year tuition.",
   },
   {
     q: 'Are the scholarships guaranteed?',
