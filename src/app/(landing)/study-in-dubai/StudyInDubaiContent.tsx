@@ -538,7 +538,7 @@ export default function StudyInDubaiContent() {
           <div className="container">
             <div className="band__box reveal">
               <div>
-                <h2>Confused about the right <em>course</em> for you?</h2>
+                <h2 style={{ fontWeight: 600 }}>Confused about the right <em style={{ fontWeight: 600 }}>course</em> for you?</h2>
                 <p>
                   Share your academic record, career aspirations and financial plan, and our counsellors will help you
                   find the best-fit programme at the university of your choice.

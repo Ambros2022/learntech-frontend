@@ -5,22 +5,22 @@ import { DUBAI_SCHOLARSHIPS_FAQS } from './DubaiScholarshipsFaqData'
 import { PROGRAMMES, SIU_NAME, BITS_NAME } from './DubaiScholarshipsData'
 
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://learntechww.com'
-const PAGE_PATH = '/dubai-university-scholarships'
+const PAGE_PATH = '/study-abroad-scholarship'
 const CANONICAL_URL = `${BASE_URL}${PAGE_PATH}`
 
 export const metadata = {
-  title: 'Dubai University Scholarships 2026: Up to 50% Merit Scholarships | Learntech',
+  title: 'Study Abroad Scholarships – Up to 50% | Study in Dubai',
   description:
-    'Apply for merit-based scholarships up to 50% for top Dubai university campuses including Symbiosis International University Dubai and BITS Pilani Dubai. Check eligibility and fees.',
+    'Explore study abroad scholarship opportunities with Learntech. Get up to 50% scholarships for selected universities in Dubai. Enquire today!',
   keywords:
-    'Dubai University Scholarships, Scholarships in Dubai, Study in Dubai Scholarship, Symbiosis Dubai Scholarship, BITS Pilani Dubai Scholarship, UAE Scholarships for Indian Students, Merit Scholarship Dubai, Learntech Edu Solutions',
+    'Study Abroad Scholarships, Dubai University Scholarships, Scholarships in Dubai, Study in Dubai Scholarship, Symbiosis Dubai Scholarship, BITS Pilani Dubai Scholarship, UAE Scholarships for Indian Students, Merit Scholarship Dubai, Learntech Edu Solutions',
   alternates: {
     canonical: CANONICAL_URL,
   },
   openGraph: {
-    title: 'Dubai University Scholarships 2026: Up to 50% Merit Scholarships | Learntech',
+    title: 'Study Abroad Scholarships – Up to 50% | Study in Dubai',
     description:
-      'Apply for merit-based scholarships up to 50% for top Dubai university campuses including Symbiosis International University Dubai and BITS Pilani Dubai. Check eligibility and fees.',
+      'Explore study abroad scholarship opportunities with Learntech. Get up to 50% scholarships for selected universities in Dubai. Enquire today!',
     url: CANONICAL_URL,
     siteName: 'Learntech Edu Solutions',
     locale: 'en_IN',
@@ -30,15 +30,15 @@ export const metadata = {
         url: `${BASE_URL}/images/icons/learntech-logo.png`,
         width: 1200,
         height: 630,
-        alt: 'Dubai University Scholarships | Learntech Edu Solutions',
+        alt: 'Study Abroad Scholarships | Learntech Edu Solutions',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dubai University Scholarships 2026: Up to 50% Merit Scholarships | Learntech',
+    title: 'Study Abroad Scholarships – Up to 50% | Study in Dubai',
     description:
-      'Apply for merit-based scholarships up to 50% for top Dubai university campuses including Symbiosis International University Dubai and BITS Pilani Dubai.',
+      'Explore study abroad scholarship opportunities with Learntech. Get up to 50% scholarships for selected universities in Dubai. Enquire today!',
     images: [`${BASE_URL}/images/icons/learntech-logo.png`],
   },
   robots: {
@@ -86,9 +86,9 @@ export default function DubaiScholarshipsLandingPage() {
   const webPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Dubai University Scholarships 2026: Up to 50% Merit Scholarships | Learntech',
+    name: 'Study Abroad Scholarships – Up to 50% | Study in Dubai',
     description:
-      'Explore merit-based scholarships up to 50% for top Dubai university campuses including Symbiosis International University Dubai and BITS Pilani Dubai.',
+      'Explore study abroad scholarship opportunities with Learntech. Get up to 50% scholarships for selected universities in Dubai. Enquire today!',
     url: CANONICAL_URL,
     publisher: organizationSchema,
   }

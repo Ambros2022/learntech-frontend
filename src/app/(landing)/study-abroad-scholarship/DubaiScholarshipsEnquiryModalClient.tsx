@@ -130,7 +130,7 @@ export default function DubaiScholarshipsEnquiryModalClient({
       )
       fd.append('current_url', typeof window !== 'undefined' ? window.location.href : '')
       fd.append('Source', 'Google Ads')
-      fd.append('SourceCampaign', 'dubai-university-scholarships')
+      fd.append('SourceCampaign', 'study-abroad-scholarship')
 
       const res = await fetch(`${API_URI}/api/website/landingpage/enquiry`, {
         method: 'POST',

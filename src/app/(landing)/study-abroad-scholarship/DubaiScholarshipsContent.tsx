@@ -348,7 +348,7 @@ export default function DubaiScholarshipsContent() {
                             <optgroup label="BITS Pilani Dubai">
                                 <option value="b|B.E. Architectural & Urban Engineering">B.E. Architectural & Urban Engineering</option>
                                 <option value="b|B.E. Chemical Engineering">B.E. Chemical Engineering</option>
-                                <option value="b|B.E. Chemical Engineering (Energy & Sustainability)">B.E. Chemical Engineering (Energy & Sustainability)</option>
+                                <option value="b|B.E. Chemical Engineering (Energy, Environment & Sustainability)">B.E. Chemical Engineering (Energy, Environment & Sustainability)</option>
                                 <option value="b|B.E. Civil Engineering">B.E. Civil Engineering</option>
                                 <option value="b|B.E. Computer Science">B.E. Computer Science</option>
                                 <option value="b|B.E. Electrical & Electronics Engineering">B.E. Electrical & Electronics Engineering</option>
@@ -366,8 +366,7 @@ export default function DubaiScholarshipsContent() {
                         and I scored
                         <input id="em" type="number" min="0" max="100" step="0.1" inputMode="decimal" placeholder="__"
                             aria-label="Marks in percent" />
-                        % in
-                        <span id="eml">Class 12</span>.
+                        % in <span id="eml">Class 12</span>.
                     </p>
                     <div id="res" aria-live="polite">
                         <div className="ur">
@@ -575,7 +574,7 @@ export default function DubaiScholarshipsContent() {
                     <details>
                         <summary>Does the scholarship apply to every course?</summary>
                         <p>Percentages are set by university and level. At Symbiosis Dubai, Bachelor's courses get 40%
-                            in year 1 and 30% on the remaining years. At BITS Pilani Dubai the offer depends on your
+                            in 1st year and 30% on the remaining years. At BITS Pilani Dubai, the offer depends on your
                             course and marks, up to 50% of first-year tuition.</p>
                     </details>
                     <details>
@@ -809,7 +808,7 @@ export default function DubaiScholarshipsContent() {
 
     <div className="edge-contact" id="edge-contact" role="complementary" aria-label="Contact Learntech">
         <a className="edge-contact__tab edge-contact__tab--wa"
-            href="https://wa.me/971504955123?text=Hi%20Learntech%2C%20I%27d%20like%20to%20know%20about%20Dubai%20university%20scholarships."
+            href="https://wa.me/971504955123"
             target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
             <span className="edge-contact__icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
