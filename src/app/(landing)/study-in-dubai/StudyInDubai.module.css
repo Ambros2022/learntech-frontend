@@ -1835,57 +1835,66 @@
 .studyInDubaiRoot :global(.lm__f input),
 .studyInDubaiRoot :global(.lm__f select) {
   width: 100%;
-            height: 46px;
-            padding: 0 14px;
-            border: 1px solid #e1e9fa;
-            border-radius: 10px;
-            background-color: #eef3fd !important;
-            font: inherit;
-            font-size: .9rem !important;
-            color: var(--ink) !important;
-            transition: border-color .3s, box-shadow .3s, background-color .3s
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid #e1e9fa;
+  border-radius: 10px;
+  background-color: #eef3fd;
+  font: inherit;
+  font-size: .9rem !important;
+  color: var(--ink) !important;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color .18s, box-shadow .18s;
 }
 
 .studyInDubaiRoot :global(.lm__f input)::placeholder {
-  color: var(--ink-3) !important
+  color: var(--ink-3) !important;
 }
 
 .studyInDubaiRoot :global(.lm__f select) {
   appearance: none;
-            -webkit-appearance: none;
-            padding-right: 40px;
-            cursor: pointer;
-            background-color: #eef3fd !important;
-            color: var(--ink) !important;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23566079' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 14px center;
-            background-size: 16px
+  -webkit-appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+  background-color: #eef3fd;
+  color: var(--ink) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23566079' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
 }
 
 .studyInDubaiRoot :global(.lm__f select:required:invalid),
 .studyInDubaiRoot :global(.lm__f select:has(option[value=""]:checked)) {
-  color: var(--ink-3) !important
+  color: var(--ink-3) !important;
 }
 
 .studyInDubaiRoot :global(.lm__f select option) {
   color: var(--ink) !important;
-  background-color: #ffffff !important
+  background-color: #ffffff !important;
 }
 
 .studyInDubaiRoot :global(.lm__f select optgroup) {
   color: var(--ink) !important;
   background-color: #ffffff !important;
-  font-weight: 600 !important
+  font-weight: 600 !important;
 }
 
 .studyInDubaiRoot :global(.lm__f input:focus),
 .studyInDubaiRoot :global(.lm__f select:focus),
 .studyInDubaiRoot :global(.lm__f input:active),
 .studyInDubaiRoot :global(.lm__f select:active),
+.studyInDubaiRoot :global(.lm__f input:focus-visible),
+.studyInDubaiRoot :global(.lm__f select:focus-visible),
+.studyInDubaiRoot :global(.lm__f input.is-typing),
+.studyInDubaiRoot :global(.lm__f select.is-typing),
+.studyInDubaiRoot :global(.lm__f input.has-value),
+.studyInDubaiRoot :global(.lm__f select.has-value),
 .studyInDubaiRoot :global(.lm__f input:not(:placeholder-shown)) {
   outline: 0 !important;
   border-color: var(--blue) !important;
+  background: #ffffff !important;
   background-color: #ffffff !important;
   color: var(--ink) !important;
   box-shadow: 0 0 0 4px rgba(39, 72, 150, .12) !important;

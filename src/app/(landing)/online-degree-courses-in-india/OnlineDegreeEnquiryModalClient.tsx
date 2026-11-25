@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { INDIAN_STATES } from './OnlineDegreeData'
 
 const COURSE_OPTIONS = [
   { value: 'Online BBA', label: 'Online BBA (Bachelor of Business Administration)' },
@@ -149,23 +150,23 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
         fd.append('Source', 'Google Ads')
         fd.append('SourceCampaign', 'Online Degree Courses in India')
 
-        const res = await fetch(`${API_URI}/api/website/landingpage/enquiry`, {
+        const res = await fetch(`${API_URI}/wp-json/custom/v1/enquiry/`, {
           method: 'POST',
           body: fd,
         })
 
-        toast.dismiss('enquiry-toast')
-        if (res.ok) {
-          toast.success('Thank you! A Learntech counsellor will contact you shortly.')
+        const data = await res.json().catch(() => ({}))
+
+        if (res.ok && data?.status !== 'error') {
+          toast.success('Thank you! Our expert counsellor will reach out shortly.', { id: 'enquiry-toast' })
+          setFormData({ fullName: '', phone: '', email: '', course: '', state: '' })
           onClose()
           router.push('/thank-you')
         } else {
-          toast.error('Submission failed. Please try again or call our toll-free number.')
+          toast.error(data?.message || 'Submission failed. Please try again.', { id: 'enquiry-toast' })
         }
       } catch (err) {
-        toast.dismiss('enquiry-toast')
-        toast.error('Connection error. Please try again.')
-        console.error('Enquiry submission error:', err)
+        toast.error('Something went wrong. Please check your connection and retry.', { id: 'enquiry-toast' })
       } finally {
         setIsSubmitting(false)
       }
@@ -173,43 +174,46 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
     [formData, isSubmitting, onClose, router]
   )
 
-  // Always mounted so the design's fade/scale transition runs; `visibility: hidden` keeps it out of the tab order when closed
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === overlayRef.current) {
+      onClose()
+    }
+  }
+
+  if (!open) return null
+
   return (
     <div
       ref={overlayRef}
-      className={`popup-overlay${open ? ' active' : ''}`}
-      id="popupOverlay"
-      aria-hidden={!open}
-      onClick={(e) => {
-        if (e.target === overlayRef.current) onClose()
-      }}
+      className="enquiry-modal-overlay active"
+      onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="formTitle"
     >
-      <div className="popup-box" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+      <div className="popup-card-dialog">
         <button
           type="button"
-          className="close-popup"
-          id="closePopup"
-          aria-label="Close popup"
+          className="popup-close-btn"
           onClick={onClose}
+          aria-label="Close modal"
         >
           &times;
         </button>
 
         {/* LEFT BANNER */}
-        <div className="popup-banner" id="popupBanner">
-          <div className="banner-tag">STUDY ONLINE, YOUR WAY</div>
-
-          <div>
+        <div className="popup-banner-panel">
+          <div className="banner-content-box">
+            <span className="banner-tag">STUDY ONLINE, YOUR WAY</span>
             <h2>
-              Choose the right online degree.<br />
-              <span>Learn on your own schedule.</span>
+              Choose the right <br />
+              <em>online degree.</em>
             </h2>
-
-            <p>
+            <p className="banner-highlight">Learn on your own schedule.</p>
+            <p className="banner-desc">
               Compare online UG and PG programmes from leading universities and get clear, honest guidance
               from our counsellors before you apply.
             </p>
-
             <div className="banner-points">
               <span>Course Guidance</span>
               <span>Expert Support</span>
@@ -309,25 +313,11 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
                 onChange={handleChange}
               >
                 <option value="" disabled>Select your state</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Assam">Assam</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Goa">Goa</option>
-                <option value="Gujarat">Gujarat</option>
-                <option value="Haryana">Haryana</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Odisha">Odisha</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="West Bengal">West Bengal</option>
-                <option value="Other">Other</option>
+                {INDIAN_STATES.map((s) => (
+                  <option value={s} key={s}>
+                    {s}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -345,4 +335,3 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
     </div>
   )
 }
-
