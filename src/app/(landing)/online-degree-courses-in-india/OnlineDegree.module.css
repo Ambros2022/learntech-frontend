@@ -5579,7 +5579,7 @@
 :where(.onlineDegreeRoot) :global(#backToTop) {
   position: fixed;
     right: 28px;
-    bottom: 28px;
+    bottom: 85px;
     width: 48px;
     height: 48px;
     display: grid;
@@ -5622,8 +5622,86 @@
   width: 42px;
         height: 42px;
         right: 16px;
-        bottom: 18px;
+        bottom: 72px;
 }
+}
+
+/* ── FLOAT BUTTONS (Call & WhatsApp) ───────────────────────── */
+:where(.onlineDegreeRoot) :global(.whatsapp-float) {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 12px;
+  right: 12px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 36px;
+  z-index: 1059;
+  background-color: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s ease;
+  text-decoration: none !important;
+}
+
+:where(.onlineDegreeRoot) :global(.whatsapp-float:hover) {
+  transform: scale(1.1);
+}
+
+:where(.onlineDegreeRoot) :global(.whatsapp-float i) {
+  color: white;
+  font-size: 32px;
+  line-height: 1;
+}
+
+:where(.onlineDegreeRoot) :global(.phone-float) {
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  z-index: 1059;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--red, #e93c47);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(233, 60, 71, 0.4);
+  transition: transform 0.3s ease;
+  text-decoration: none !important;
+}
+
+:where(.onlineDegreeRoot) :global(.phone-float:hover) {
+  transform: scale(1.1);
+}
+
+:where(.onlineDegreeRoot) :global(.phone-float i) {
+  color: white;
+  font-size: 25px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  :where(.onlineDegreeRoot) :global(.whatsapp-float),
+  :where(.onlineDegreeRoot) :global(.phone-float) {
+    width: 50px;
+    height: 50px;
+    bottom: 10px;
+  }
+  :where(.onlineDegreeRoot) :global(.whatsapp-float) {
+    right: 10px;
+  }
+  :where(.onlineDegreeRoot) :global(.phone-float) {
+    left: 10px;
+  }
+  :where(.onlineDegreeRoot) :global(.whatsapp-float i) {
+    font-size: 27px;
+  }
+  :where(.onlineDegreeRoot) :global(.phone-float i) {
+    font-size: 21px;
+  }
 }
 
 :where(.onlineDegreeRoot) :global(dialog.enq) {

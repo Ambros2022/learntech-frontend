@@ -137,6 +137,24 @@ export default function OnlineDegreeContent() {
         </div>
       </header>
 
+      {/* Float Buttons */}
+      <a
+        href="https://wa.me/+919606949066"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="whatsapp-float"
+        aria-label="Chat on WhatsApp"
+      >
+        <i className="bi bi-whatsapp" />
+      </a>
+      <a
+        href="tel:+919606949066"
+        className="phone-float"
+        aria-label="Call us"
+      >
+        <i className="bi bi-telephone-fill" />
+      </a>
+
       <main>
       {/* ============================================================
            HERO

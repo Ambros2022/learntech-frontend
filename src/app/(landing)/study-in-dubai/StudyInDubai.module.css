@@ -185,15 +185,17 @@
 
 .studyInDubaiRoot :global(.btn--light) {
   background: var(--blue);
-            color: #fff;
-            border: 1px solid transparent;
+  color: #fff;
+  border: 1px solid transparent;
 }
 
-.studyInDubaiRoot :global(.btn--light:hover) {
+.studyInDubaiRoot :global(.btn--light:hover),
+.studyInDubaiRoot :global(.btn--light:focus),
+.studyInDubaiRoot :global(.btn--light:active) {
   background: #fff;
-            color: var(--blue-dark);
-            border-color: var(--blue-dark);
-            box-shadow: 0 14px 28px -12px rgba(0, 0, 0, .4)
+  color: #274896 !important;
+  border-color: #274896 !important;
+  box-shadow: 0 14px 28px -12px rgba(0, 0, 0, .4);
 }
 
 .studyInDubaiRoot :global(.btn--glass) {
@@ -2030,7 +2032,7 @@
 }
 
 .studyInDubaiRoot :global(.lm__side .lm__img) {
-  object-position: center 10% !important;
+  object-position: center 28% !important;
 }
 
 .studyInDubaiRoot :global(.lm__tag) {
