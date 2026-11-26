@@ -146,27 +146,31 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
         fd.append('location', formData.state)
         fd.append('course_in_mind', formData.course)
         fd.append('description', `Enquiry for ${formData.course} from state ${formData.state}`)
-        fd.append('current_url', window.location.href)
+        fd.append('current_url', typeof window !== 'undefined' ? window.location.href : '')
         fd.append('Source', 'Google Ads')
         fd.append('SourceCampaign', 'Online Degree Courses in India')
 
-        const res = await fetch(`${API_URI}/wp-json/custom/v1/enquiry/`, {
+        const res = await fetch(`${API_URI}/api/website/landingpage/enquiry`, {
           method: 'POST',
           body: fd,
         })
 
+        toast.dismiss('enquiry-toast')
+
         const data = await res.json().catch(() => ({}))
 
         if (res.ok && data?.status !== 'error') {
-          toast.success('Thank you! Our expert counsellor will reach out shortly.', { id: 'enquiry-toast' })
+          toast.success('Thank you! Our expert counsellor will reach out shortly.')
           setFormData({ fullName: '', phone: '', email: '', course: '', state: '' })
           onClose()
           router.push('/thank-you')
         } else {
-          toast.error(data?.message || 'Submission failed. Please try again.', { id: 'enquiry-toast' })
+          toast.error(data?.message || 'Submission failed. Please try again.')
         }
       } catch (err) {
-        toast.error('Something went wrong. Please check your connection and retry.', { id: 'enquiry-toast' })
+        toast.dismiss('enquiry-toast')
+        toast.error('Something went wrong. Please check your connection and retry.')
+        console.error('Enquiry submission error:', err)
       } finally {
         setIsSubmitting(false)
       }
