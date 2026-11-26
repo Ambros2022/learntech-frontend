@@ -207,18 +207,23 @@ export default function OnlineDegreeEnquiryModalClient({ open, initialCourse = '
 
         {/* LEFT BANNER */}
         <div className="popup-banner">
-          <span className="banner-tag">STUDY ONLINE, YOUR WAY</span>
-          <h2>
-            Choose the right <br />
-            <span>online degree.</span>
-          </h2>
-          <p>
-            Compare online UG and PG programmes from leading universities and get clear, honest guidance
-            from our counsellors before you apply.
-          </p>
-          <div className="banner-points">
-            <span>Course Guidance</span>
-            <span>Expert Support</span>
+          <div className="banner-tag">STUDY ONLINE, YOUR WAY</div>
+
+          <div>
+            <h2>
+              Choose the right Online Degree.<br />
+              <span>Learn on your own schedule.</span>
+            </h2>
+
+            <p>
+              Compare online UG and PG programmes from leading universities and get clear, honest guidance
+              from our counsellors before you apply.
+            </p>
+
+            <div className="banner-points">
+              <span>Course Guidance</span>
+              <span>Expert Support</span>
+            </div>
           </div>
         </div>
 
