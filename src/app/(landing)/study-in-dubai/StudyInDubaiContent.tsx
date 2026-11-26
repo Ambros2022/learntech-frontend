@@ -865,7 +865,7 @@ export default function StudyInDubaiContent() {
             </div>
             <div className="dc-grid">
               <div className="dc-block reveal">
-                <h4 className="dc-block__title"><span>Checklist :</span> Before You Fly</h4>
+                <h4 className="dc-block__title"><span>Checklist:</span> Before You Fly</h4>
                 <ul className="dc-rows" id="visaBefore">
                   {VISA_BEFORE.map((item) => (
                     <li key={item}>
@@ -878,7 +878,7 @@ export default function StudyInDubaiContent() {
                 </ul>
               </div>
               <div className="dc-block dc-block--red reveal">
-                <h4 className="dc-block__title"><span>Checklist :</span> After You Land</h4>
+                <h4 className="dc-block__title"><span>Checklist:</span> After You Land</h4>
                 <ul className="dc-rows dc-rows--red" id="visaAfter">
                   {VISA_AFTER.map((item) => (
                     <li key={item}>

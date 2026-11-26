@@ -1036,9 +1036,10 @@ export default function OnlineDegreeBehaviorsClient() {
         $$('[data-c]', tr).forEach((e) => e.remove())
         const g = parseFloat(getComputedStyle(tr).columnGap) || 0
         set = orig.reduce((a, e) => a + e.offsetWidth + g, 0)
+        if (set <= 0) return
         let tot = set
         let i = 0
-        while (tot < m.offsetWidth + set) {
+        while (tot < m.offsetWidth + set && i < 100) {
           const c = orig[i % orig.length].cloneNode(true) as HTMLElement
           c.setAttribute('data-c', '')
           c.setAttribute('aria-hidden', 'true')
