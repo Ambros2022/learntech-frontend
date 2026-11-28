@@ -25,7 +25,7 @@ const CareerSec = () => {
                   <img src='/images/icons/phoneAbout2.png' className='img-fluid' width={30} height={30} alt='office phone icon' />
                 </div>
                 <div className='align-self-center'>
-                  <h6 className='ms-3 text-white my-auto'><Link href='tel:08022454991'>080-22454991</Link>, <Link href='tel:26631169'>26631169</Link></h6>
+                  <h6 className='ms-3 text-white my-auto'><Link href='tel:+919606833296'>+91 9606833296</Link>, <Link href='tel:+919090165050'>+91 9090165050</Link></h6>
                 </div>
               </div>
               <div className="d-flex mb-3">

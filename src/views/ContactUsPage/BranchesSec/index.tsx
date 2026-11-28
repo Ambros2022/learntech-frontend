@@ -4,7 +4,7 @@ const branchData = [
   {
     name: 'Bangalore (Headquarters)',
     address: `#80 (4), 'D' Main Rd, East End, 9th Block, Jayanagar, Bangalore, Karnataka - 560041`,
-    phone: '+91 9036020016, +91 9036020005',
+    phone: '+91 9606833296, +91 9090165050',
     addressUrl: 'https://maps.app.goo.gl/m4Fu8fGQQEs6q1Cf6',
     mapUrl:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.827772809437!2d77.59573057356702!3d12.918788516036988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15064e759943%3A0x60dcac77858f6b5e!2sLearntech%20Edu%20Solutions%20Pvt%20Ltd%20-%20Study%20Abroad%20Counselor!5e0!3m2!1sen!2sin!4v1718369620720!5m2!1sen!2sin',
