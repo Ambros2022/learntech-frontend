@@ -48,11 +48,14 @@ export default function BranchesMapClient({ branches }: BranchesMapClientProps) 
                     <span className="fw-bold">Address: </span> {branch.address}
                   </button>
                 </h6>
-                <h6 className='d-flex align-items-center ms-lg-2'>
+                <h6 className='d-flex align-items-center ms-lg-2 flex-wrap'>
                   <i className='bi bi-telephone-fill text-blue me-1'></i>
-                  <a href={`tel:${branch.phone.replace(/ /g, '')}`}>
-                    {branch.phone}
-                  </a>
+                  {branch.phone.split(',').map((num, idx) => (
+                    <span key={idx}>
+                      {idx > 0 && <span className="me-1">, </span>}
+                      <a href={`tel:${num.replace(/[\s\-]/g, '')}`}>{num.trim()}</a>
+                    </span>
+                  ))}
                 </h6>
               </div>
             </div>

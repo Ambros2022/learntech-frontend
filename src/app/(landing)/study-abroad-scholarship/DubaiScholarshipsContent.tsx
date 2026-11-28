@@ -733,8 +733,8 @@ export default function DubaiScholarshipsContent() {
                 <div className="footer-links">
                     <h4>Partners</h4>
                     <ul>
-                        <li><a href="#">Symbiosis International University Dubai</a></li>
-                        <li><a href="#">BITS Pilani Dubai</a></li>
+                        <li><a href="#symbiosis">Symbiosis International University Dubai</a></li>
+                        <li><a href="#bits">BITS Pilani Dubai</a></li>
                     </ul>
                 </div>
 
